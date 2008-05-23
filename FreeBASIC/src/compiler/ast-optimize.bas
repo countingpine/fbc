@@ -226,6 +226,26 @@ private sub hConvDataType _
 		    end if
 		end select
 
+	case FB_DATATYPE_BOOL8, FB_DATATYPE_BOOL32
+
+		select case as const vdtype
+		case FB_DATATYPE_LONGINT, FB_DATATYPE_ULONGINT
+			v->int = cbool( v->long )
+
+		case FB_DATATYPE_SINGLE, FB_DATATYPE_DOUBLE
+			v->int = cbool( v->float )
+
+		case FB_DATATYPE_LONG, FB_DATATYPE_ULONG
+			if( FB_LONGSIZE = len( integer ) ) then
+				v->int = cbool( v->int )
+			else
+				v->int = cbool( v->long )
+			end if
+
+		case else
+				v->int = cbool( v->int )
+		end select
+
 	case else
 
 		select case as const vdtype
@@ -1133,7 +1153,7 @@ private function hOptFieldsCalc _
 	    	'' don't touch assignments though, they'll be handled in
 	    	'' LoadASSIGN... this feels hackish
 	    	if( iif( parent, parent->class <> AST_NODECLASS_ASSIGN, FALSE ) ) then
-	    		astUpdateBitfieldAccess( l )
+	    		astUpdateFieldAccess( l )
 	    	end if
 	    	
     		astDelNode( n )
