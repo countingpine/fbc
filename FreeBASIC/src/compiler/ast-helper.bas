@@ -44,43 +44,75 @@ private function astSetBitField _
 	s = l->subtype
 
 	'' remap type
-	astGetFullType( l ) = symbGetFullType( s )
-	l->subtype = NULL
+
+	'' boolean bitfield? - do a bool conversion before the bitfield store
+	select case s->bitfld.typ
+	case FB_DATATYPE_BOOL8, FB_DATATYPE_BOOL32
+		astGetFullType( l ) = typeJoin( symbGetFullType( s ), FB_DATATYPE_UINT )
+		l->subtype = NULL
+
+		if( r->class <> AST_NODECLASS_CONV ) then
+			r = astNewCONV( FB_DATATYPE_BOOL32, NULL, r )
+			astGetCASTDoConv( r ) = FALSE
+		end if
+		r = astNewCONV( FB_DATATYPE_UINT, NULL, r )
+
+		r = astNewBOP( AST_OP_AND, r, _
+					   astNewCONSTi( (ast_bitmaskTB(s->bitfld.bits) shl s->bitfld.bitpos), _
+									 FB_DATATYPE_UINT ) )
+
+	case else
+		astGetFullType( l ) = symbGetFullType( s )
+		l->subtype = NULL
+
+		'' make sure result will fit in destination...
+		r = astNewBOP( AST_OP_AND, r, _
+					   astNewCONSTi( ast_bitmaskTB(s->bitfld.bits), FB_DATATYPE_UINT ) )
+		
+		if( s->bitfld.bitpos > 0 ) then
+			r = astNewBOP( AST_OP_SHL, r, _
+				   		   astNewCONSTi( s->bitfld.bitpos, FB_DATATYPE_UINT ) )
+		end if
+
+	end select
 
 	l = astNewBOP( AST_OP_AND, astCloneTree( l ), _
 				   astNewCONSTi( not (ast_bitmaskTB(s->bitfld.bits) shl s->bitfld.bitpos), _
 				   				 FB_DATATYPE_UINT ) )
 
-	'' make sure result will fit in destination...
-	r = astNewBOP( AST_OP_AND, r, _
-				   astNewCONSTi( ast_bitmaskTB(s->bitfld.bits), FB_DATATYPE_UINT ) )
-	
-	if( s->bitfld.bitpos > 0 ) then
-		r = astNewBOP( AST_OP_SHL, r, _
-				   	   astNewCONSTi( s->bitfld.bitpos, FB_DATATYPE_UINT ) )
-	end if
 
 	function = astNewBOP( AST_OP_OR, l, r )
 
 end function
 
 '':::::
-sub astUpdateBitfieldAssignment _
+sub astUpdateFieldAssignment _
 	( _
 		byref l as ASTNODE ptr, _
 		byref r as ASTNODE ptr _
 	)
 
 	'' handle bitfields..
-	if( l->class = AST_NODECLASS_FIELD ) then
-		if( astGetDataType( astGetLeft( l ) ) = FB_DATATYPE_BITFIELD ) then
-			'' l is a field node, use its left child instead
-			r = astSetBitField( astGetLeft( l ), r )
-			'' the field node can be removed
-			astDelNode( l )
-			l = astGetLeft( l )
-		end if
+
+	if( l->class <> AST_NODECLASS_FIELD ) then
+		exit sub
 	end if
+
+	select case astGetDataType( astGetLeft( l ) )
+	case FB_DATATYPE_BITFIELD
+
+		'' l is a field node, use its left child instead
+		r = astSetBitField( astGetLeft( l ), r )
+
+		'' the field node can be removed
+		astDelNode( l )
+		l = astGetLeft( l )
+
+	case FB_DATATYPE_BOOL8, FB_DATATYPE_BOOL32
+		'' $$JRM
+		r = astNewCONV( astGetFullType( l ), NULL, r )
+
+	end select
 	
 end sub
 	

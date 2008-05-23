@@ -57,6 +57,7 @@ declare function hVregToStr _
 	dim shared dtypeTB(0 to FB_DATATYPES-1) as DTYPEINFO => _
 	{ _
 		( FB_DATACLASS_INTEGER, 0 			    , "void"  ), _				'' void
+		( FB_DATACLASS_INTEGER, 1			    , "bool8"  ), _				'' boolean byte
 		( FB_DATACLASS_INTEGER, 1			    , "byte"  ), _				'' byte
 		( FB_DATACLASS_INTEGER, 1			    , "ubyte"  ), _				'' ubyte
 		( FB_DATACLASS_INTEGER, 1               , "char"  ), _				'' char
@@ -65,6 +66,7 @@ declare function hVregToStr _
 		( FB_DATACLASS_INTEGER, 2  				, "short" ), _				'' wchar
 		( FB_DATACLASS_INTEGER, FB_INTEGERSIZE  , "integer" ), _			'' int
 		( FB_DATACLASS_INTEGER, FB_INTEGERSIZE  , "uinteger" ), _   		'' uint
+		( FB_DATACLASS_INTEGER, 4			    , "bool32"   ), _			'' boolean int
 		( FB_DATACLASS_INTEGER, FB_INTEGERSIZE  , "int" ), _				'' enum
 		( FB_DATACLASS_INTEGER, FB_INTEGERSIZE  , "int" ), _				'' bitfield
 		( FB_DATACLASS_INTEGER, FB_LONGSIZE  	, "long" ), _				'' long
@@ -158,6 +160,8 @@ private sub hEmitHeader( )
 	hWriteLine( "typedef float single" )
 	hWriteLine( "typedef struct _string { char *data; int len; int size; } string" )
 	hWriteLine( "typedef char fixstr" )
+	hWriteLine( "typedef char bool8" )
+	hWriteLine( "typedef int bool32" )
 
 
 end sub
@@ -858,6 +862,7 @@ private sub _emitBopEx _
 			hWriteLine( hVregToStr( vr ) & " = ~" & _
 						hVregToStr( v1 ) & "^" & hVregToStr( v2 ) )
 		end if
+
 
 	case AST_OP_ATAN2
 		'' mark C's atan2() as used

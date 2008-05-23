@@ -55,6 +55,7 @@ function symbAddBitField _
 
     sym->bitfld.bitpos = bitpos
     sym->bitfld.bits = bits
+	sym->bitfld.typ = dtype
     sym->lgt = lgt
 
 	function = sym
