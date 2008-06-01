@@ -178,9 +178,9 @@ function astFieldUpdate _
 
 	function = tree
 
-    if( ast.typeinicnt <= 0 ) then
-    	exit function
-    end if
+	'' $$JRM
+	'' !!!WRITEME!!! - do all special field access here
+	'' bitfields, booleans, etc.
 
 	'' walk
 	expr = tree->l
@@ -212,5 +212,3 @@ function astLoadFIELD _
 	astDelNode( l )
 
 end function
-
-
