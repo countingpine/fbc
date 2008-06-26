@@ -348,15 +348,15 @@ type PMM_DLL_INITIALIZE as function DDKAPI(byval as PUNICODE_STRING) as NTSTATUS
 type PMM_DLL_UNLOAD as function DDKAPI() as NTSTATUS
 type PDRIVER_ENTRY as function DDKAPI(byval as PDRIVER_OBJECT, byval as PUNICODE_STRING) as NTSTATUS
 type PDRIVER_INITIALIZE as function DDKAPI(byval as PDRIVER_OBJECT, byval as PUNICODE_STRING) as NTSTATUS
-type PKSERVICE_ROUTINE as function DDKAPI(byval as PKINTERRUPT, byval as PVOID) as BOOLEAN
+type PKSERVICE_ROUTINE as function DDKAPI(byval as PKINTERRUPT, byval as PVOID) as BOOLEAN_
 type PIO_TIMER_ROUTINE as sub DDKAPI(byval as PDEVICE_OBJECT, byval as PVOID)
 type PDRIVER_REINITIALIZE as sub DDKAPI(byval as PDRIVER_OBJECT, byval as PVOID, byval as ULONG)
 type PDRIVER_STARTIO as function DDKAPI(byval as PDEVICE_OBJECT, byval as PIRP) as NTSTATUS
-type PKSYNCHRONIZE_ROUTINE as function DDKAPI(byval as PVOID) as BOOLEAN
+type PKSYNCHRONIZE_ROUTINE as function DDKAPI(byval as PVOID) as BOOLEAN_
 type PDRIVER_UNLOAD as sub DDKAPI(byval as PDRIVER_OBJECT)
 type PINTERFACE_REFERENCE as sub DDKAPI(byval as PVOID)
 type PINTERFACE_DEREFERENCE as sub DDKAPI(byval as PVOID)
-type PTRANSLATE_BUS_ADDRESS as function DDKAPI(byval as PVOID, byval as PHYSICAL_ADDRESS, byval as ULONG, byval as PULONG, byval as PPHYSICAL_ADDRESS) as BOOLEAN
+type PTRANSLATE_BUS_ADDRESS as function DDKAPI(byval as PVOID, byval as PHYSICAL_ADDRESS, byval as ULONG, byval as PULONG, byval as PPHYSICAL_ADDRESS) as BOOLEAN_
 type PGET_DMA_ADAPTER as function DDKAPI(byval as PVOID, byval as PDEVICE_DESCRIPTION, byval as PULONG) as PDMA_ADAPTER
 type PGET_SET_DEVICE_DATA as function DDKAPI(byval as PVOID, byval as ULONG, byval as PVOID, byval as ULONG, byval as ULONG) as ULONG
 type PDEVICE_CHANGE_COMPLETE_CALLBACK as sub DDKAPI(byval as PVOID)
@@ -365,7 +365,7 @@ type PDRIVER_NOTIFICATION_CALLBACK_ROUTINE as function DDKAPI(byval as PVOID, by
 type PKNORMAL_ROUTINE as sub DDKAPI(byval as PVOID, byval as PVOID, byval as PVOID)
 type PKKERNEL_ROUTINE as sub DDKAPI(byval as PKAPC, byval as PKNORMAL_ROUTINE ptr, byval as PVOID ptr, byval as PVOID ptr, byval as PVOID ptr)
 type PKRUNDOWN_ROUTINE as sub DDKAPI(byval as PKAPC)
-type PKTRANSFER_ROUTINE as function DDKAPI() as BOOLEAN
+type PKTRANSFER_ROUTINE as function DDKAPI() as BOOLEAN_
 
 type _BUS_INTERFACE_STANDARD
 	Size as USHORT
@@ -565,7 +565,7 @@ type _KAPC
 	SystemArgument2 as PVOID
 	ApcStateIndex as CCHAR
 	ApcMode as KPROCESSOR_MODE
-	Inserted as BOOLEAN
+	Inserted as BOOLEAN_
 end type
 
 type _KDEVICE_QUEUE
@@ -573,7 +573,7 @@ type _KDEVICE_QUEUE
 	Size as _CSHORT
 	DeviceListHead as LIST_ENTRY
 	Lock as KSPIN_LOCK
-	Busy as BOOLEAN
+	Busy as BOOLEAN_
 end type
 
 type KDEVICE_QUEUE as _KDEVICE_QUEUE
@@ -583,7 +583,7 @@ type PRKDEVICE_QUEUE as _KDEVICE_QUEUE ptr
 type _KDEVICE_QUEUE_ENTRY
 	DeviceListEntry as LIST_ENTRY
 	SortKey as ULONG
-	Inserted as BOOLEAN
+	Inserted as BOOLEAN_
 end type
 
 type KDEVICE_QUEUE_ENTRY as _KDEVICE_QUEUE_ENTRY
@@ -712,7 +712,7 @@ type _KMUTANT
 	Header as DISPATCHER_HEADER
 	MutantListEntry as LIST_ENTRY
 	OwnerThread as PKTHREAD
-	Abandoned as BOOLEAN
+	Abandoned as BOOLEAN_
 	ApcDisable as UCHAR
 end type
 
@@ -804,10 +804,10 @@ type _IRP
 	ThreadListEntry as LIST_ENTRY
 	IoStatus as IO_STATUS_BLOCK
 	RequestorMode as KPROCESSOR_MODE
-	PendingReturned as BOOLEAN
+	PendingReturned as BOOLEAN_
 	StackCount as CHAR
 	CurrentLocation as CHAR
-	Cancel as BOOLEAN
+	Cancel as BOOLEAN_
 	CancelIrql as KIRQL
 	ApcEnvironment as CCHAR
 	AllocationFlags as UCHAR
@@ -878,8 +878,8 @@ type PDRIVE_LAYOUT_INFORMATION_GPT as _DRIVE_LAYOUT_INFORMATION_GPT ptr
 
 type _PARTITION_INFORMATION_MBR
 	PartitionType as UCHAR
-	BootIndicator as BOOLEAN
-	RecognizedPartition as BOOLEAN
+	BootIndicator as BOOLEAN_
+	RecognizedPartition as BOOLEAN_
 	HiddenSectors as ULONG
 end type
 
@@ -903,8 +903,8 @@ type _BOOTDISK_INFORMATION_EX
 	SystemDeviceSignature as ULONG
 	BootDeviceGuid as GUID
 	SystemDeviceGuid as GUID
-	BootDeviceIsGpt as BOOLEAN
-	SystemDeviceIsGpt as BOOLEAN
+	BootDeviceIsGpt as BOOLEAN_
+	SystemDeviceIsGpt as BOOLEAN_
 end type
 
 type BOOTDISK_INFORMATION_EX as _BOOTDISK_INFORMATION_EX
@@ -1478,14 +1478,14 @@ type PDMA_SPEED as _DMA_SPEED
 
 type _DEVICE_DESCRIPTION
 	Version as ULONG
-	Master as BOOLEAN
-	ScatterGather as BOOLEAN
-	DemandMode as BOOLEAN
-	AutoInitialize as BOOLEAN
-	Dma32BitAddresses as BOOLEAN
-	IgnoreCount as BOOLEAN
-	Reserved1 as BOOLEAN
-	Dma64BitAddresses as BOOLEAN
+	Master as BOOLEAN_
+	ScatterGather as BOOLEAN_
+	DemandMode as BOOLEAN_
+	AutoInitialize as BOOLEAN_
+	Dma32BitAddresses as BOOLEAN_
+	IgnoreCount as BOOLEAN_
+	Reserved1 as BOOLEAN_
+	Dma64BitAddresses as BOOLEAN_
 	BusNumber as ULONG
 	DmaChannel as ULONG
 	InterfaceType as INTERFACE_TYPE
@@ -1705,19 +1705,19 @@ end type
 #define MDL_ALLOCATED_MUST_SUCCEED &h4000
 
 type PPUT_DMA_ADAPTER as sub DDKAPI(byval as PDMA_ADAPTER)
-type PALLOCATE_COMMON_BUFFER as function DDKAPI(byval as PDMA_ADAPTER, byval as ULONG, byval as PPHYSICAL_ADDRESS, byval as BOOLEAN) as PVOID
-type PFREE_COMMON_BUFFER as sub DDKAPI(byval as PDMA_ADAPTER, byval as ULONG, byval as PHYSICAL_ADDRESS, byval as PVOID, byval as BOOLEAN)
+type PALLOCATE_COMMON_BUFFER as function DDKAPI(byval as PDMA_ADAPTER, byval as ULONG, byval as PPHYSICAL_ADDRESS, byval as BOOLEAN_) as PVOID
+type PFREE_COMMON_BUFFER as sub DDKAPI(byval as PDMA_ADAPTER, byval as ULONG, byval as PHYSICAL_ADDRESS, byval as PVOID, byval as BOOLEAN_)
 type PALLOCATE_ADAPTER_CHANNEL as function DDKAPI(byval as PDMA_ADAPTER, byval as PDEVICE_OBJECT, byval as ULONG, byval as PDRIVER_CONTROL, byval as PVOID) as NTSTATUS
-type PFLUSH_ADAPTER_BUFFERS as function DDKAPI(byval as PDMA_ADAPTER, byval as PMDL, byval as PVOID, byval as PVOID, byval as ULONG, byval as BOOLEAN) as BOOLEAN
+type PFLUSH_ADAPTER_BUFFERS as function DDKAPI(byval as PDMA_ADAPTER, byval as PMDL, byval as PVOID, byval as PVOID, byval as ULONG, byval as BOOLEAN_) as BOOLEAN_
 type PFREE_ADAPTER_CHANNEL as sub DDKAPI(byval as PDMA_ADAPTER)
 type PFREE_MAP_REGISTERS as sub DDKAPI(byval as PDMA_ADAPTER, byval as PVOID, byval as ULONG)
-type PMAP_TRANSFER as function DDKAPI(byval as PDMA_ADAPTER, byval as PMDL, byval as PVOID, byval as PVOID, byval as PULONG, byval as BOOLEAN) as PHYSICAL_ADDRESS
+type PMAP_TRANSFER as function DDKAPI(byval as PDMA_ADAPTER, byval as PMDL, byval as PVOID, byval as PVOID, byval as PULONG, byval as BOOLEAN_) as PHYSICAL_ADDRESS
 type PGET_DMA_ALIGNMENT as function DDKAPI(byval as PDMA_ADAPTER) as ULONG
 type PREAD_DMA_COUNTER as function DDKAPI(byval as PDMA_ADAPTER) as ULONG
-type PGET_SCATTER_GATHER_LIST as function DDKAPI(byval as PDMA_ADAPTER, byval as PDEVICE_OBJECT, byval as PMDL, byval as PVOID, byval as ULONG, byval as PDRIVER_LIST_CONTROL, byval as PVOID, byval as BOOLEAN) as NTSTATUS
-type PPUT_SCATTER_GATHER_LIST as sub DDKAPI(byval as PDMA_ADAPTER, byval as PSCATTER_GATHER_LIST, byval as BOOLEAN)
+type PGET_SCATTER_GATHER_LIST as function DDKAPI(byval as PDMA_ADAPTER, byval as PDEVICE_OBJECT, byval as PMDL, byval as PVOID, byval as ULONG, byval as PDRIVER_LIST_CONTROL, byval as PVOID, byval as BOOLEAN_) as NTSTATUS
+type PPUT_SCATTER_GATHER_LIST as sub DDKAPI(byval as PDMA_ADAPTER, byval as PSCATTER_GATHER_LIST, byval as BOOLEAN_)
 type PCALCULATE_SCATTER_GATHER_LIST_SIZE as function DDKAPI(byval as PDMA_ADAPTER, byval as PMDL, byval as PVOID, byval as ULONG, byval as PULONG, byval as PULONG) as NTSTATUS
-type PBUILD_SCATTER_GATHER_LIST as function DDKAPI(byval as PDMA_ADAPTER, byval as PDEVICE_OBJECT, byval as PMDL, byval as PVOID, byval as ULONG, byval as PDRIVER_LIST_CONTROL, byval as PVOID, byval as BOOLEAN, byval as PVOID, byval as ULONG) as NTSTATUS
+type PBUILD_SCATTER_GATHER_LIST as function DDKAPI(byval as PDMA_ADAPTER, byval as PDEVICE_OBJECT, byval as PMDL, byval as PVOID, byval as ULONG, byval as PDRIVER_LIST_CONTROL, byval as PVOID, byval as BOOLEAN_, byval as PVOID, byval as ULONG) as NTSTATUS
 type PBUILD_MDL_FROM_SCATTER_GATHER_LIST as function DDKAPI(byval as PDMA_ADAPTER, byval as PSCATTER_GATHER_LIST, byval as PMDL, byval as PMDL ptr) as NTSTATUS
 
 type _DMA_OPERATIONS
@@ -1833,8 +1833,8 @@ type _FILE_STANDARD_INFORMATION
 	AllocationSize as LARGE_INTEGER
 	EndOfFile as LARGE_INTEGER
 	NumberOfLinks as ULONG
-	DeletePending as BOOLEAN
-	Directory as BOOLEAN
+	DeletePending as BOOLEAN_
+	Directory as BOOLEAN_
 end type
 
 type FILE_STANDARD_INFORMATION as _FILE_STANDARD_INFORMATION
@@ -1862,7 +1862,7 @@ type FILE_ATTRIBUTE_TAG_INFORMATION as _FILE_ATTRIBUTE_TAG_INFORMATION
 type PFILE_ATTRIBUTE_TAG_INFORMATION as _FILE_ATTRIBUTE_TAG_INFORMATION ptr
 
 type _FILE_DISPOSITION_INFORMATION
-	DoDeleteFile as BOOLEAN
+	DoDeleteFile as BOOLEAN_
 end type
 
 type FILE_DISPOSITION_INFORMATION as _FILE_DISPOSITION_INFORMATION
@@ -1974,30 +1974,30 @@ end type
 
 type DRIVER_EXTENSION as _DRIVER_EXTENSION
 type PDRIVER_EXTENSION as _DRIVER_EXTENSION ptr
-type PFAST_IO_CHECK_IF_POSSIBLE as function DDKAPI(byval as PFILE_OBJECT, byval as PLARGE_INTEGER, byval as ULONG, byval as BOOLEAN, byval as ULONG, byval as BOOLEAN, byval as PIO_STATUS_BLOCK, byval as PDEVICE_OBJECT) as BOOLEAN
-type PFAST_IO_READ as function DDKAPI(byval as PFILE_OBJECT, byval as PLARGE_INTEGER, byval as ULONG, byval as BOOLEAN, byval as ULONG, byval as PVOID, byval as PIO_STATUS_BLOCK, byval as PDEVICE_OBJECT) as BOOLEAN
-type PFAST_IO_WRITE as function DDKAPI(byval as PFILE_OBJECT, byval as PLARGE_INTEGER, byval as ULONG, byval as BOOLEAN, byval as ULONG, byval as PVOID, byval as PIO_STATUS_BLOCK, byval as PDEVICE_OBJECT) as BOOLEAN
-type PFAST_IO_QUERY_BASIC_INFO as function DDKAPI(byval as PFILE_OBJECT, byval as BOOLEAN, byval as PFILE_BASIC_INFORMATION, byval as PIO_STATUS_BLOCK, byval as PDEVICE_OBJECT) as BOOLEAN
-type PFAST_IO_QUERY_STANDARD_INFO as function DDKAPI(byval as PFILE_OBJECT, byval as BOOLEAN, byval as PFILE_STANDARD_INFORMATION, byval as PIO_STATUS_BLOCK, byval as PDEVICE_OBJECT) as BOOLEAN
-type PFAST_IO_LOCK as function DDKAPI(byval as PFILE_OBJECT, byval as PLARGE_INTEGER, byval as PLARGE_INTEGER, byval as PEPROCESS, byval as ULONG, byval as BOOLEAN, byval as BOOLEAN, byval as PIO_STATUS_BLOCK, byval as PDEVICE_OBJECT) as BOOLEAN
-type PFAST_IO_UNLOCK_SINGLE as function DDKAPI(byval as PFILE_OBJECT, byval as PLARGE_INTEGER, byval as PLARGE_INTEGER, byval as PEPROCESS, byval as ULONG, byval as PIO_STATUS_BLOCK, byval as PDEVICE_OBJECT) as BOOLEAN
-type PFAST_IO_UNLOCK_ALL as function DDKAPI(byval as PFILE_OBJECT, byval as PEPROCESS, byval as PIO_STATUS_BLOCK, byval as PDEVICE_OBJECT) as BOOLEAN
-type PFAST_IO_UNLOCK_ALL_BY_KEY as function DDKAPI(byval as PFILE_OBJECT, byval as PVOID, byval as ULONG, byval as PIO_STATUS_BLOCK, byval as PDEVICE_OBJECT) as BOOLEAN
-type PFAST_IO_DEVICE_CONTROL as function DDKAPI(byval as PFILE_OBJECT, byval as BOOLEAN, byval as PVOID, byval as ULONG, byval as PVOID, byval as ULONG, byval as ULONG, byval as PIO_STATUS_BLOCK, byval as PDEVICE_OBJECT) as BOOLEAN
+type PFAST_IO_CHECK_IF_POSSIBLE as function DDKAPI(byval as PFILE_OBJECT, byval as PLARGE_INTEGER, byval as ULONG, byval as BOOLEAN_, byval as ULONG, byval as BOOLEAN_, byval as PIO_STATUS_BLOCK, byval as PDEVICE_OBJECT) as BOOLEAN_
+type PFAST_IO_READ as function DDKAPI(byval as PFILE_OBJECT, byval as PLARGE_INTEGER, byval as ULONG, byval as BOOLEAN_, byval as ULONG, byval as PVOID, byval as PIO_STATUS_BLOCK, byval as PDEVICE_OBJECT) as BOOLEAN_
+type PFAST_IO_WRITE as function DDKAPI(byval as PFILE_OBJECT, byval as PLARGE_INTEGER, byval as ULONG, byval as BOOLEAN_, byval as ULONG, byval as PVOID, byval as PIO_STATUS_BLOCK, byval as PDEVICE_OBJECT) as BOOLEAN_
+type PFAST_IO_QUERY_BASIC_INFO as function DDKAPI(byval as PFILE_OBJECT, byval as BOOLEAN_, byval as PFILE_BASIC_INFORMATION, byval as PIO_STATUS_BLOCK, byval as PDEVICE_OBJECT) as BOOLEAN_
+type PFAST_IO_QUERY_STANDARD_INFO as function DDKAPI(byval as PFILE_OBJECT, byval as BOOLEAN_, byval as PFILE_STANDARD_INFORMATION, byval as PIO_STATUS_BLOCK, byval as PDEVICE_OBJECT) as BOOLEAN_
+type PFAST_IO_LOCK as function DDKAPI(byval as PFILE_OBJECT, byval as PLARGE_INTEGER, byval as PLARGE_INTEGER, byval as PEPROCESS, byval as ULONG, byval as BOOLEAN_, byval as BOOLEAN_, byval as PIO_STATUS_BLOCK, byval as PDEVICE_OBJECT) as BOOLEAN_
+type PFAST_IO_UNLOCK_SINGLE as function DDKAPI(byval as PFILE_OBJECT, byval as PLARGE_INTEGER, byval as PLARGE_INTEGER, byval as PEPROCESS, byval as ULONG, byval as PIO_STATUS_BLOCK, byval as PDEVICE_OBJECT) as BOOLEAN_
+type PFAST_IO_UNLOCK_ALL as function DDKAPI(byval as PFILE_OBJECT, byval as PEPROCESS, byval as PIO_STATUS_BLOCK, byval as PDEVICE_OBJECT) as BOOLEAN_
+type PFAST_IO_UNLOCK_ALL_BY_KEY as function DDKAPI(byval as PFILE_OBJECT, byval as PVOID, byval as ULONG, byval as PIO_STATUS_BLOCK, byval as PDEVICE_OBJECT) as BOOLEAN_
+type PFAST_IO_DEVICE_CONTROL as function DDKAPI(byval as PFILE_OBJECT, byval as BOOLEAN_, byval as PVOID, byval as ULONG, byval as PVOID, byval as ULONG, byval as ULONG, byval as PIO_STATUS_BLOCK, byval as PDEVICE_OBJECT) as BOOLEAN_
 type PFAST_IO_ACQUIRE_FILE as sub DDKAPI(byval as PFILE_OBJECT)
 type PFAST_IO_RELEASE_FILE as sub DDKAPI(byval as PFILE_OBJECT)
 type PFAST_IO_DETACH_DEVICE as sub DDKAPI(byval as PDEVICE_OBJECT, byval as PDEVICE_OBJECT)
-type PFAST_IO_QUERY_NETWORK_OPEN_INFO as function DDKAPI(byval as PFILE_OBJECT, byval as BOOLEAN, byval as _FILE_NETWORK_OPEN_INFORMATION ptr, byval as _IO_STATUS_BLOCK ptr, byval as PDEVICE_OBJECT) as BOOLEAN
+type PFAST_IO_QUERY_NETWORK_OPEN_INFO as function DDKAPI(byval as PFILE_OBJECT, byval as BOOLEAN_, byval as _FILE_NETWORK_OPEN_INFORMATION ptr, byval as _IO_STATUS_BLOCK ptr, byval as PDEVICE_OBJECT) as BOOLEAN_
 type PFAST_IO_ACQUIRE_FOR_MOD_WRITE as function DDKAPI(byval as PFILE_OBJECT, byval as PLARGE_INTEGER, byval as _ERESOURCE ptr ptr, byval as PDEVICE_OBJECT) as NTSTATUS
-type PFAST_IO_MDL_READ as function DDKAPI(byval as PFILE_OBJECT, byval as PLARGE_INTEGER, byval as ULONG, byval as ULONG, byval as PMDL ptr, byval as PIO_STATUS_BLOCK, byval as PDEVICE_OBJECT) as BOOLEAN
-type PFAST_IO_MDL_READ_COMPLETE as function DDKAPI(byval as PFILE_OBJECT, byval as PMDL, byval as PDEVICE_OBJECT) as BOOLEAN
-type PFAST_IO_PREPARE_MDL_WRITE as function DDKAPI(byval as PFILE_OBJECT, byval as PLARGE_INTEGER, byval as ULONG, byval as ULONG, byval as PMDL ptr, byval as PIO_STATUS_BLOCK, byval as PDEVICE_OBJECT) as BOOLEAN
-type PFAST_IO_MDL_WRITE_COMPLETE as function DDKAPI(byval as PFILE_OBJECT, byval as PLARGE_INTEGER, byval as PMDL, byval as PDEVICE_OBJECT) as BOOLEAN
-type PFAST_IO_READ_COMPRESSED as function DDKAPI(byval as PFILE_OBJECT, byval as PLARGE_INTEGER, byval as ULONG, byval as ULONG, byval as PVOID, byval as PMDL ptr, byval as PIO_STATUS_BLOCK, byval as PCOMPRESSED_DATA_INFO, byval as ULONG, byval as PDEVICE_OBJECT) as BOOLEAN
-type PFAST_IO_WRITE_COMPRESSED as function DDKAPI(byval as PFILE_OBJECT, byval as PLARGE_INTEGER, byval as ULONG, byval as ULONG, byval as PVOID, byval as PMDL ptr, byval as PIO_STATUS_BLOCK, byval as PCOMPRESSED_DATA_INFO, byval as ULONG, byval as PDEVICE_OBJECT) as BOOLEAN
-type PFAST_IO_MDL_READ_COMPLETE_COMPRESSED as function DDKAPI(byval as PFILE_OBJECT, byval as PMDL, byval as PDEVICE_OBJECT) as BOOLEAN
-type PFAST_IO_MDL_WRITE_COMPLETE_COMPRESSED as function DDKAPI(byval as PFILE_OBJECT, byval as PLARGE_INTEGER, byval as PMDL, byval as PDEVICE_OBJECT) as BOOLEAN
-type PFAST_IO_QUERY_OPEN as function DDKAPI(byval as PIRP, byval as PFILE_NETWORK_OPEN_INFORMATION, byval as PDEVICE_OBJECT) as BOOLEAN
+type PFAST_IO_MDL_READ as function DDKAPI(byval as PFILE_OBJECT, byval as PLARGE_INTEGER, byval as ULONG, byval as ULONG, byval as PMDL ptr, byval as PIO_STATUS_BLOCK, byval as PDEVICE_OBJECT) as BOOLEAN_
+type PFAST_IO_MDL_READ_COMPLETE as function DDKAPI(byval as PFILE_OBJECT, byval as PMDL, byval as PDEVICE_OBJECT) as BOOLEAN_
+type PFAST_IO_PREPARE_MDL_WRITE as function DDKAPI(byval as PFILE_OBJECT, byval as PLARGE_INTEGER, byval as ULONG, byval as ULONG, byval as PMDL ptr, byval as PIO_STATUS_BLOCK, byval as PDEVICE_OBJECT) as BOOLEAN_
+type PFAST_IO_MDL_WRITE_COMPLETE as function DDKAPI(byval as PFILE_OBJECT, byval as PLARGE_INTEGER, byval as PMDL, byval as PDEVICE_OBJECT) as BOOLEAN_
+type PFAST_IO_READ_COMPRESSED as function DDKAPI(byval as PFILE_OBJECT, byval as PLARGE_INTEGER, byval as ULONG, byval as ULONG, byval as PVOID, byval as PMDL ptr, byval as PIO_STATUS_BLOCK, byval as PCOMPRESSED_DATA_INFO, byval as ULONG, byval as PDEVICE_OBJECT) as BOOLEAN_
+type PFAST_IO_WRITE_COMPRESSED as function DDKAPI(byval as PFILE_OBJECT, byval as PLARGE_INTEGER, byval as ULONG, byval as ULONG, byval as PVOID, byval as PMDL ptr, byval as PIO_STATUS_BLOCK, byval as PCOMPRESSED_DATA_INFO, byval as ULONG, byval as PDEVICE_OBJECT) as BOOLEAN_
+type PFAST_IO_MDL_READ_COMPLETE_COMPRESSED as function DDKAPI(byval as PFILE_OBJECT, byval as PMDL, byval as PDEVICE_OBJECT) as BOOLEAN_
+type PFAST_IO_MDL_WRITE_COMPLETE_COMPRESSED as function DDKAPI(byval as PFILE_OBJECT, byval as PLARGE_INTEGER, byval as PMDL, byval as PDEVICE_OBJECT) as BOOLEAN_
+type PFAST_IO_QUERY_OPEN as function DDKAPI(byval as PIRP, byval as PFILE_NETWORK_OPEN_INFORMATION, byval as PDEVICE_OBJECT) as BOOLEAN_
 type PFAST_IO_RELEASE_FOR_MOD_WRITE as function DDKAPI(byval as PFILE_OBJECT, byval as _ERESOURCE ptr, byval as PDEVICE_OBJECT) as NTSTATUS
 type PFAST_IO_ACQUIRE_FOR_CCFLUSH as function DDKAPI(byval as PFILE_OBJECT, byval as PDEVICE_OBJECT) as NTSTATUS
 type PFAST_IO_RELEASE_FOR_CCFLUSH as function DDKAPI(byval as PFILE_OBJECT, byval as PDEVICE_OBJECT) as NTSTATUS
@@ -2108,14 +2108,14 @@ type _FILE_OBJECT
 	PrivateCacheMap as PVOID
 	FinalStatus as NTSTATUS
 	RelatedFileObject as PFILE_OBJECT
-	LockOperation as BOOLEAN
-	DeletePending as BOOLEAN
-	ReadAccess as BOOLEAN
-	WriteAccess as BOOLEAN
-	DeleteAccess as BOOLEAN
-	SharedRead as BOOLEAN
-	SharedWrite as BOOLEAN
-	SharedDelete as BOOLEAN
+	LockOperation as BOOLEAN_
+	DeletePending as BOOLEAN_
+	ReadAccess as BOOLEAN_
+	WriteAccess as BOOLEAN_
+	DeleteAccess as BOOLEAN_
+	SharedRead as BOOLEAN_
+	SharedWrite as BOOLEAN_
+	SharedDelete as BOOLEAN_
 	Flags as ULONG
 	FileName as UNICODE_STRING
 	CurrentByteOffset as LARGE_INTEGER
@@ -2168,10 +2168,10 @@ end union
 
 type _ACCESS_STATE
 	OperationID as LUID
-	SecurityEvaluated as BOOLEAN
-	GenerateAudit as BOOLEAN
-	GenerateOnClose as BOOLEAN
-	PrivilegesAllocated as BOOLEAN
+	SecurityEvaluated as BOOLEAN_
+	GenerateAudit as BOOLEAN_
+	GenerateOnClose as BOOLEAN_
+	PrivilegesAllocated as BOOLEAN_
 	Flags as ULONG
 	RemainingDesiredAccess as ACCESS_MASK
 	PreviouslyGrantedAccess as ACCESS_MASK
@@ -2179,7 +2179,7 @@ type _ACCESS_STATE
 	SubjectSecurityContext as SECURITY_SUBJECT_CONTEXT
 	SecurityDescriptor as PSECURITY_DESCRIPTOR
 	AuxData as PVOID
-	AuditPrivileges as BOOLEAN
+	AuditPrivileges as BOOLEAN_
 	ObjectName as UNICODE_STRING
 	ObjectTypeName as UNICODE_STRING
 	Privileges as ACCESS_STATE__Privileges
@@ -2263,8 +2263,8 @@ type IO_STACK_LOCATION__Parameters__WaitWake
 end type
 
 type IO_STACK_LOCATION__Parameters__UsageNotification
-	InPath as BOOLEAN
-	Reserved(0 to 3-1) as BOOLEAN
+	InPath as BOOLEAN_
+	Reserved(0 to 3-1) as BOOLEAN_
 	Type as DEVICE_USAGE_NOTIFICATION_TYPE
 end type
 
@@ -2278,7 +2278,7 @@ type IO_STACK_LOCATION__Parameters__QueryId
 end type
 
 type IO_STACK_LOCATION__Parameters__SetLock
-	Lock as BOOLEAN
+	Lock as BOOLEAN_
 end type
 
 type IO_STACK_LOCATION__Parameters__ReadWriteConfig
@@ -2345,8 +2345,8 @@ type IO_STACK_LOCATION__Parameters__QueryVolume
 end type
 
 type IO_STACK_LOCATION__N_Parameters__SetFile__N_u__N__s
-	ReplaceIfExists as BOOLEAN
-	AdvanceOnly as BOOLEAN
+	ReplaceIfExists as BOOLEAN_
+	AdvanceOnly as BOOLEAN_
 end type
 
 union IO_STACK_LOCATION__Parameters__SetFile__N_u
@@ -3029,8 +3029,8 @@ type PRKWAIT_BLOCK as _KWAIT_BLOCK ptr
 type PIO_REMOVE_LOCK_TRACKING_BLOCK as _IO_REMOVE_LOCK_TRACKING_BLOCK ptr
 
 type _IO_REMOVE_LOCK_COMMON_BLOCK
-	Removed as BOOLEAN
-	Reserved(0 to 3-1) as BOOLEAN
+	Removed as BOOLEAN_
+	Reserved(0 to 3-1) as BOOLEAN_
 	IoCount as LONG
 	RemoveEvent as KEVENT
 end type
@@ -3128,8 +3128,8 @@ type _CONFIGURATION_INFORMATION
 	ScsiPortCount as ULONG
 	SerialCount as ULONG
 	ParallelCount as ULONG
-	AtDiskPrimaryAddressClaimed as BOOLEAN
-	AtDiskSecondaryAddressClaimed as BOOLEAN
+	AtDiskPrimaryAddressClaimed as BOOLEAN_
+	AtDiskSecondaryAddressClaimed as BOOLEAN_
 	Version as ULONG
 	MediumChangerCount as ULONG
 end type
@@ -3294,8 +3294,8 @@ end type
 type CLIENT_ID as _CLIENT_ID
 type PCLIENT_ID as _CLIENT_ID ptr
 type PKSTART_ROUTINE as sub DDKAPI(byval as PVOID)
-type PCREATE_PROCESS_NOTIFY_ROUTINE as sub DDKAPI(byval as HANDLE, byval as HANDLE, byval as BOOLEAN)
-type PCREATE_THREAD_NOTIFY_ROUTINE as sub DDKAPI(byval as HANDLE, byval as HANDLE, byval as BOOLEAN)
+type PCREATE_PROCESS_NOTIFY_ROUTINE as sub DDKAPI(byval as HANDLE, byval as HANDLE, byval as BOOLEAN_)
+type PCREATE_THREAD_NOTIFY_ROUTINE as sub DDKAPI(byval as HANDLE, byval as HANDLE, byval as BOOLEAN_)
 
 type IMAGE_INFO__u__s
 	ImageAddressingMode:8 as ULONG
@@ -3547,7 +3547,7 @@ end type
 
 type RTL_RANGE_LIST_ITERATOR as _RANGE_LIST_ITERATOR
 type PRTL_RANGE_LIST_ITERATOR as _RANGE_LIST_ITERATOR ptr
-type PRTL_CONFLICT_RANGE_CALLBACK as function DDKAPI(byval as PVOID, byval as PRTL_RANGE) as BOOLEAN
+type PRTL_CONFLICT_RANGE_CALLBACK as function DDKAPI(byval as PVOID, byval as PRTL_RANGE) as BOOLEAN_
 
 #define HASH_STRING_ALGORITHM_DEFAULT 0
 #define HASH_STRING_ALGORITHM_X65599 1
@@ -3744,11 +3744,11 @@ declare function RemoveHeadList DDKAPI alias "RemoveHeadList" (byval ListHead as
 declare function RemoveTailList DDKAPI alias "RemoveTailList" (byval ListHead as PLIST_ENTRY) as PLIST_ENTRY
 declare function RtlAnsiStringToUnicodeSize DDKAPI alias "RtlAnsiStringToUnicodeSize" (byval AnsiString as PANSI_STRING) as ULONG
 declare function RtlAddRange DDKAPI alias "RtlAddRange" (byval RangeList as PRTL_RANGE_LIST, byval Start as ULONGLONG, byval End as ULONGLONG, byval Attributes as UCHAR, byval Flags as ULONG, byval UserData as PVOID, byval Owner as PVOID) as NTSTATUS
-declare function RtlAnsiStringToUnicodeString DDKAPI alias "RtlAnsiStringToUnicodeString" (byval DestinationString as PUNICODE_STRING, byval SourceString as PANSI_STRING, byval AllocateDestinationString as BOOLEAN) as NTSTATUS
+declare function RtlAnsiStringToUnicodeString DDKAPI alias "RtlAnsiStringToUnicodeString" (byval DestinationString as PUNICODE_STRING, byval SourceString as PANSI_STRING, byval AllocateDestinationString as BOOLEAN_) as NTSTATUS
 declare function RtlAppendUnicodeStringToString DDKAPI alias "RtlAppendUnicodeStringToString" (byval Destination as PUNICODE_STRING, byval Source as PUNICODE_STRING) as NTSTATUS
 declare function RtlAppendUnicodeToString DDKAPI alias "RtlAppendUnicodeToString" (byval Destination as PUNICODE_STRING, byval Source as PCWSTR) as NTSTATUS
-declare function RtlAreBitsClear DDKAPI alias "RtlAreBitsClear" (byval BitMapHeader as PRTL_BITMAP, byval StartingIndex as ULONG, byval Length as ULONG) as BOOLEAN
-declare function RtlAreBitsSet DDKAPI alias "RtlAreBitsSet" (byval BitMapHeader as PRTL_BITMAP, byval StartingIndex as ULONG, byval Length as ULONG) as BOOLEAN
+declare function RtlAreBitsClear DDKAPI alias "RtlAreBitsClear" (byval BitMapHeader as PRTL_BITMAP, byval StartingIndex as ULONG, byval Length as ULONG) as BOOLEAN_
+declare function RtlAreBitsSet DDKAPI alias "RtlAreBitsSet" (byval BitMapHeader as PRTL_BITMAP, byval StartingIndex as ULONG, byval Length as ULONG) as BOOLEAN_
 declare function RtlCharToInteger DDKAPI alias "RtlCharToInteger" (byval pString as PCSZ, byval lBase as ULONG, byval Value as PULONG) as NTSTATUS
 declare function RtlCheckBit DDKAPI alias "RtlCheckBit" (byval BitMapHeader as PRTL_BITMAP, byval BitPosition as ULONG) as ULONG
 declare function RtlCheckRegistryKey DDKAPI alias "RtlCheckRegistryKey" (byval RelativeTo as ULONG, byval Path as PWSTR) as NTSTATUS
@@ -3756,8 +3756,8 @@ declare sub RtlClearAllBits DDKAPI alias "RtlClearAllBits" (byval BitMapHeader a
 declare sub RtlClearBit DDKAPI alias "RtlClearBit" (byval BitMapHeader as PRTL_BITMAP, byval BitNumber as ULONG)
 declare sub RtlClearBits DDKAPI alias "RtlClearBits" (byval BitMapHeader as PRTL_BITMAP, byval StartingIndex as ULONG, byval NumberToClear as ULONG)
 declare function RtlCompareMemory DDKAPI alias "RtlCompareMemory" (byval Source1 as any ptr, byval Source2 as any ptr, byval Length as SIZE_T) as SIZE_T
-declare function RtlCompareString DDKAPI alias "RtlCompareString" (byval String1 as PSTRING, byval String2 as PSTRING, byval CaseInSensitive as BOOLEAN) as LONG
-declare function RtlCompareUnicodeString DDKAPI alias "RtlCompareUnicodeString" (byval String1 as PUNICODE_STRING, byval String2 as PUNICODE_STRING, byval CaseInSensitive as BOOLEAN) as LONG
+declare function RtlCompareString DDKAPI alias "RtlCompareString" (byval String1 as PSTRING, byval String2 as PSTRING, byval CaseInSensitive as BOOLEAN_) as LONG
+declare function RtlCompareUnicodeString DDKAPI alias "RtlCompareUnicodeString" (byval String1 as PUNICODE_STRING, byval String2 as PUNICODE_STRING, byval CaseInSensitive as BOOLEAN_) as LONG
 declare function RtlConvertLongToLargeInteger DDKAPI alias "RtlConvertLongToLargeInteger" (byval SignedInteger as LONG) as LARGE_INTEGER
 declare function RtlConvertLongToLuid DDKAPI alias "RtlConvertLongToLuid" (byval Long as LONG) as LUID
 declare function RtlConvertUlongToLargeInteger DDKAPI alias "RtlConvertUlongToLargeInteger" (byval UnsignedInteger as ULONG) as LARGE_INTEGER
@@ -3772,11 +3772,11 @@ declare function RtlDeleteOwnersRanges DDKAPI alias "RtlDeleteOwnersRanges" (byv
 declare function RtlDeleteRange DDKAPI alias "RtlDeleteRange" (byval RangeList as PRTL_RANGE_LIST, byval Start as ULONGLONG, byval End as ULONGLONG, byval Owner as PVOID) as NTSTATUS
 declare function RtlDeleteRegistryValue DDKAPI alias "RtlDeleteRegistryValue" (byval RelativeTo as ULONG, byval Path as PCWSTR, byval ValueName as PCWSTR) as NTSTATUS
 declare function RtlDosPathNameToNtPathName_U DDKAPI alias "RtlDosPathNameToNtPathName_U" (byval DosPathName as PCWSTR, byval NtPathName as PUNICODE_STRING, byval NtFileNamePart as PCWSTR ptr, byval DirectoryInfo as any ptr) as BOOL
-declare function RtlEqualString DDKAPI alias "RtlEqualString" (byval String1 as PSTRING, byval String2 as PSTRING, byval CaseInSensitive as BOOLEAN) as BOOLEAN
-declare function RtlEqualUnicodeString DDKAPI alias "RtlEqualUnicodeString" (byval String1 as UNICODE_STRING ptr, byval String2 as UNICODE_STRING ptr, byval CaseInSensitive as BOOLEAN) as BOOLEAN
+declare function RtlEqualString DDKAPI alias "RtlEqualString" (byval String1 as PSTRING, byval String2 as PSTRING, byval CaseInSensitive as BOOLEAN_) as BOOLEAN_
+declare function RtlEqualUnicodeString DDKAPI alias "RtlEqualUnicodeString" (byval String1 as UNICODE_STRING ptr, byval String2 as UNICODE_STRING ptr, byval CaseInSensitive as BOOLEAN_) as BOOLEAN_
 declare function RtlFindClearBits DDKAPI alias "RtlFindClearBits" (byval BitMapHeader as PRTL_BITMAP, byval NumberToFind as ULONG, byval HintIndex as ULONG) as ULONG
 declare function RtlFindClearBitsAndSet DDKAPI alias "RtlFindClearBitsAndSet" (byval BitMapHeader as PRTL_BITMAP, byval NumberToFind as ULONG, byval HintIndex as ULONG) as ULONG
-declare function RtlFindClearRuns DDKAPI alias "RtlFindClearRuns" (byval BitMapHeader as PRTL_BITMAP, byval RunArray as PRTL_BITMAP_RUN, byval SizeOfRunArray as ULONG, byval LocateLongestRuns as BOOLEAN) as ULONG
+declare function RtlFindClearRuns DDKAPI alias "RtlFindClearRuns" (byval BitMapHeader as PRTL_BITMAP, byval RunArray as PRTL_BITMAP_RUN, byval SizeOfRunArray as ULONG, byval LocateLongestRuns as BOOLEAN_) as ULONG
 declare function RtlFindFirstRunClear DDKAPI alias "RtlFindFirstRunClear" (byval BitMapHeader as PRTL_BITMAP, byval StartingIndex as PULONG) as ULONG
 declare function RtlFindLastBackwardRunClear DDKAPI alias "RtlFindLastBackwardRunClear" (byval BitMapHeader as PRTL_BITMAP, byval FromIndex as ULONG, byval StartingRunIndex as PULONG) as ULONG
 declare function RtlFindLeastSignificantBit DDKAPI alias "RtlFindLeastSignificantBit" (byval Set as ULONGLONG) as CCHAR
@@ -3792,9 +3792,9 @@ declare sub RtlFreeUnicodeString DDKAPI alias "RtlFreeUnicodeString" (byval Unic
 declare sub RtlGetCallersAddress DDKAPI alias "RtlGetCallersAddress" (byval CallersAddress as PVOID ptr, byval CallersCaller as PVOID ptr)
 declare function RtlGetVersion DDKAPI alias "RtlGetVersion" (byval lpVersionInformation as PRTL_OSVERSIONINFOW) as NTSTATUS
 declare function RtlGetFirstRange DDKAPI alias "RtlGetFirstRange" (byval RangeList as PRTL_RANGE_LIST, byval Iterator as PRTL_RANGE_LIST_ITERATOR, byval Range as PRTL_RANGE ptr) as NTSTATUS
-declare function RtlGetNextRange DDKAPI alias "RtlGetNextRange" (byval Iterator as PRTL_RANGE_LIST_ITERATOR, byval Range as PRTL_RANGE ptr, byval MoveForwards as BOOLEAN) as NTSTATUS
+declare function RtlGetNextRange DDKAPI alias "RtlGetNextRange" (byval Iterator as PRTL_RANGE_LIST_ITERATOR, byval Range as PRTL_RANGE ptr, byval MoveForwards as BOOLEAN_) as NTSTATUS
 declare function RtlGUIDFromString DDKAPI alias "RtlGUIDFromString" (byval GuidString as PUNICODE_STRING, byval Guid as GUID ptr) as NTSTATUS
-declare function RtlHashUnicodeString DDKAPI alias "RtlHashUnicodeString" (byval String as UNICODE_STRING ptr, byval CaseInSensitive as BOOLEAN, byval HashAlgorithm as ULONG, byval HashValue as PULONG) as NTSTATUS
+declare function RtlHashUnicodeString DDKAPI alias "RtlHashUnicodeString" (byval String as UNICODE_STRING ptr, byval CaseInSensitive as BOOLEAN_, byval HashAlgorithm as ULONG, byval HashValue as PULONG) as NTSTATUS
 declare sub RtlInitAnsiString DDKAPI alias "RtlInitAnsiString" (byval DestinationString as PANSI_STRING, byval SourceString as PCSZ)
 declare sub RtlInitializeBitMap DDKAPI alias "RtlInitializeBitMap" (byval BitMapHeader as PRTL_BITMAP, byval BitMapBuffer as PULONG, byval SizeOfBitMap as ULONG)
 declare sub RtlInitializeRangeList DDKAPI alias "RtlInitializeRangeList" (byval RangeList as PRTL_RANGE_LIST)
@@ -3811,34 +3811,34 @@ declare function RtlMergeRangeLists DDKAPI alias "RtlMergeRangeLists" (byval Mer
 declare function RtlNumberOfClearBits DDKAPI alias "RtlNumberOfClearBits" (byval BitMapHeader as PRTL_BITMAP) as ULONG
 declare function RtlNumberOfSetBits DDKAPI alias "RtlNumberOfSetBits" (byval BitMapHeader as PRTL_BITMAP) as ULONG
 declare sub RtlPrefetchMemoryNonTemporal DDKAPI alias "RtlPrefetchMemoryNonTemporal" (byval Source as PVOID, byval Length as SIZE_T)
-declare function RtlPrefixUnicodeString DDKAPI alias "RtlPrefixUnicodeString" (byval String1 as PUNICODE_STRING, byval String2 as PUNICODE_STRING, byval CaseInSensitive as BOOLEAN) as BOOLEAN
+declare function RtlPrefixUnicodeString DDKAPI alias "RtlPrefixUnicodeString" (byval String1 as PUNICODE_STRING, byval String2 as PUNICODE_STRING, byval CaseInSensitive as BOOLEAN_) as BOOLEAN_
 declare function RtlQueryRegistryValues DDKAPI alias "RtlQueryRegistryValues" (byval RelativeTo as ULONG, byval Path as PCWSTR, byval QueryTable as PRTL_QUERY_REGISTRY_TABLE, byval Context as PVOID, byval Environment as PVOID) as NTSTATUS
 declare sub RtlRetrieveUlong DDKAPI alias "RtlRetrieveUlong" (byval DestinationAddress as PULONG, byval SourceAddress as PULONG)
 declare sub RtlRetrieveUshort DDKAPI alias "RtlRetrieveUshort" (byval DestinationAddress as PUSHORT, byval SourceAddress as PUSHORT)
 declare sub RtlSetAllBits DDKAPI alias "RtlSetAllBits" (byval BitMapHeader as PRTL_BITMAP)
 declare sub RtlSetBit DDKAPI alias "RtlSetBit" (byval BitMapHeader as PRTL_BITMAP, byval BitNumber as ULONG)
 declare sub RtlSetBits DDKAPI alias "RtlSetBits" (byval BitMapHeader as PRTL_BITMAP, byval StartingIndex as ULONG, byval NumberToSet as ULONG)
-declare function RtlSetDaclSecurityDescriptor DDKAPI alias "RtlSetDaclSecurityDescriptor" (byval SecurityDescriptor as PSECURITY_DESCRIPTOR, byval DaclPresent as BOOLEAN, byval Dacl as PACL, byval DaclDefaulted as BOOLEAN) as NTSTATUS
+declare function RtlSetDaclSecurityDescriptor DDKAPI alias "RtlSetDaclSecurityDescriptor" (byval SecurityDescriptor as PSECURITY_DESCRIPTOR, byval DaclPresent as BOOLEAN_, byval Dacl as PACL, byval DaclDefaulted as BOOLEAN_) as NTSTATUS
 declare sub RtlStoreUlong DDKAPI alias "RtlStoreUlong" (byval Address as PULONG, byval Value as ULONG)
 declare sub RtlStoreUlonglong DDKAPI alias "RtlStoreUlonglong" (byval Address as PULONGLONG, byval Value as ULONGLONG)
 declare sub RtlStoreUlongPtr DDKAPI alias "RtlStoreUlongPtr" (byval Address as PULONG_PTR, byval Value as ULONG_PTR)
 declare sub RtlStoreUshort DDKAPI alias "RtlStoreUshort" (byval Address as PUSHORT, byval Value as USHORT)
 declare function RtlStringFromGUID DDKAPI alias "RtlStringFromGUID" (byval Guid as GUID ptr, byval GuidString as PUNICODE_STRING) as NTSTATUS
-declare function RtlTestBit DDKAPI alias "RtlTestBit" (byval BitMapHeader as PRTL_BITMAP, byval BitNumber as ULONG) as BOOLEAN
-declare function RtlTimeFieldsToTime DDKAPI alias "RtlTimeFieldsToTime" (byval TimeFields as PTIME_FIELDS, byval Time as PLARGE_INTEGER) as BOOLEAN
+declare function RtlTestBit DDKAPI alias "RtlTestBit" (byval BitMapHeader as PRTL_BITMAP, byval BitNumber as ULONG) as BOOLEAN_
+declare function RtlTimeFieldsToTime DDKAPI alias "RtlTimeFieldsToTime" (byval TimeFields as PTIME_FIELDS, byval Time as PLARGE_INTEGER) as BOOLEAN_
 declare sub RtlTimeToTimeFields DDKAPI alias "RtlTimeToTimeFields" (byval Time as PLARGE_INTEGER, byval TimeFields as PTIME_FIELDS)
 declare function RtlUlongByteSwap DDKAPI alias "RtlUlongByteSwap" (byval Source as ULONG) as ULONG
 declare function RtlUlonglongByteSwap DDKAPI alias "RtlUlonglongByteSwap" (byval Source as ULONGLONG) as ULONGLONG
 declare function RtlUnicodeStringToAnsiSize DDKAPI alias "RtlUnicodeStringToAnsiSize" (byval UnicodeString as PUNICODE_STRING) as ULONG
-declare function RtlUnicodeStringToAnsiString DDKAPI alias "RtlUnicodeStringToAnsiString" (byval DestinationString as PANSI_STRING, byval SourceString as PUNICODE_STRING, byval AllocateDestinationString as BOOLEAN) as NTSTATUS
+declare function RtlUnicodeStringToAnsiString DDKAPI alias "RtlUnicodeStringToAnsiString" (byval DestinationString as PANSI_STRING, byval SourceString as PUNICODE_STRING, byval AllocateDestinationString as BOOLEAN_) as NTSTATUS
 declare function RtlUnicodeStringToInteger DDKAPI alias "RtlUnicodeStringToInteger" (byval String as PUNICODE_STRING, byval Base as ULONG, byval Value as PULONG) as NTSTATUS
 declare function RtlUpcaseUnicodeChar DDKAPI alias "RtlUpcaseUnicodeChar" (byval SourceCharacter as WCHAR) as WCHAR
-declare function RtlUpcaseUnicodeString DDKAPI alias "RtlUpcaseUnicodeString" (byval DestinationString as PUNICODE_STRING, byval SourceString as PCUNICODE_STRING, byval AllocateDestinationString as BOOLEAN) as NTSTATUS
+declare function RtlUpcaseUnicodeString DDKAPI alias "RtlUpcaseUnicodeString" (byval DestinationString as PUNICODE_STRING, byval SourceString as PCUNICODE_STRING, byval AllocateDestinationString as BOOLEAN_) as NTSTATUS
 declare function RtlUpperChar DDKAPI alias "RtlUpperChar" (byval Character as CHAR) as CHAR
 declare sub RtlUpperString DDKAPI alias "RtlUpperString" (byval DestinationString as PSTRING, byval SourceString as PSTRING)
 declare function RtlUshortByteSwap DDKAPI alias "RtlUshortByteSwap" (byval Source as USHORT) as USHORT
-declare function RtlValidRelativeSecurityDescriptor DDKAPI alias "RtlValidRelativeSecurityDescriptor" (byval SecurityDescriptorInput as PSECURITY_DESCRIPTOR, byval SecurityDescriptorLength as ULONG, byval RequiredInformation as SECURITY_INFORMATION) as BOOLEAN
-declare function RtlValidSecurityDescriptor DDKAPI alias "RtlValidSecurityDescriptor" (byval SecurityDescriptor as PSECURITY_DESCRIPTOR) as BOOLEAN
+declare function RtlValidRelativeSecurityDescriptor DDKAPI alias "RtlValidRelativeSecurityDescriptor" (byval SecurityDescriptorInput as PSECURITY_DESCRIPTOR, byval SecurityDescriptorLength as ULONG, byval RequiredInformation as SECURITY_INFORMATION) as BOOLEAN_
+declare function RtlValidSecurityDescriptor DDKAPI alias "RtlValidSecurityDescriptor" (byval SecurityDescriptor as PSECURITY_DESCRIPTOR) as BOOLEAN_
 declare function RtlVerifyVersionInfo DDKAPI alias "RtlVerifyVersionInfo" (byval VersionInfo as PRTL_OSVERSIONINFOEXW, byval TypeMask as ULONG, byval ConditionMask as ULONGLONG) as NTSTATUS
 declare function RtlVolumeDeviceToDosName DDKAPI alias "RtlVolumeDeviceToDosName" (byval VolumeDeviceObject as PVOID, byval DosName as PUNICODE_STRING) as NTSTATUS
 declare function RtlWalkFrameChain DDKAPI alias "RtlWalkFrameChain" (byval Callers as PVOID ptr, byval Count as ULONG, byval Flags as ULONG) as ULONG
@@ -3846,10 +3846,10 @@ declare function RtlWriteRegistryValue DDKAPI alias "RtlWriteRegistryValue" (byv
 declare function RtlxUnicodeStringToAnsiSize DDKAPI alias "RtlxUnicodeStringToAnsiSize" (byval UnicodeString as PUNICODE_STRING) as ULONG
 declare sub ExAcquireFastMutex DDKAPI alias "ExAcquireFastMutex" (byval FastMutex as PFAST_MUTEX)
 declare sub ExAcquireFastMutexUnsafe DDKAPI alias "ExAcquireFastMutexUnsafe" (byval FastMutex as PFAST_MUTEX)
-declare function ExAcquireResourceExclusiveLite DDKAPI alias "ExAcquireResourceExclusiveLite" (byval Resource as PERESOURCE, byval Wait as BOOLEAN) as BOOLEAN
-declare function ExAcquireResourceSharedLite DDKAPI alias "ExAcquireResourceSharedLite" (byval Resource as PERESOURCE, byval Wait as BOOLEAN) as BOOLEAN
-declare function ExAcquireSharedStarveExclusive DDKAPI alias "ExAcquireSharedStarveExclusive" (byval Resource as PERESOURCE, byval Wait as BOOLEAN) as BOOLEAN
-declare function ExAcquireSharedWaitForExclusive DDKAPI alias "ExAcquireSharedWaitForExclusive" (byval Resource as PERESOURCE, byval Wait as BOOLEAN) as BOOLEAN
+declare function ExAcquireResourceExclusiveLite DDKAPI alias "ExAcquireResourceExclusiveLite" (byval Resource as PERESOURCE, byval Wait as BOOLEAN_) as BOOLEAN_
+declare function ExAcquireResourceSharedLite DDKAPI alias "ExAcquireResourceSharedLite" (byval Resource as PERESOURCE, byval Wait as BOOLEAN_) as BOOLEAN_
+declare function ExAcquireSharedStarveExclusive DDKAPI alias "ExAcquireSharedStarveExclusive" (byval Resource as PERESOURCE, byval Wait as BOOLEAN_) as BOOLEAN_
+declare function ExAcquireSharedWaitForExclusive DDKAPI alias "ExAcquireSharedWaitForExclusive" (byval Resource as PERESOURCE, byval Wait as BOOLEAN_) as BOOLEAN_
 declare function ExInterlockedPopEntrySList DDKAPI alias "ExInterlockedPopEntrySList" (byval ListHead as PSLIST_HEADER, byval Lock as PKSPIN_LOCK) as PSINGLE_LIST_ENTRY
 declare function ExInterlockedPushEntrySList DDKAPI alias "ExInterlockedPushEntrySList" (byval ListHead as PSLIST_HEADER, byval ListEntry as PSINGLE_LIST_ENTRY, byval Lock as PKSPIN_LOCK) as PSINGLE_LIST_ENTRY
 declare function ExAllocateFromNPagedLookasideList DDKAPI alias "ExAllocateFromNPagedLookasideList" (byval Lookaside as PNPAGED_LOOKASIDE_LIST) as PVOID
@@ -3862,7 +3862,7 @@ declare function ExAllocatePool DDKAPI alias "ExAllocatePool" (byval PoolType as
 declare function ExAllocatePoolWithQuota DDKAPI alias "ExAllocatePoolWithQuota" (byval PoolType as POOL_TYPE, byval NumberOfBytes as SIZE_T) as PVOID
 declare function ExAllocatePoolWithTagPriority DDKAPI alias "ExAllocatePoolWithTagPriority" (byval PoolType as POOL_TYPE, byval NumberOfBytes as SIZE_T, byval Tag as ULONG, byval Priority as EX_POOL_PRIORITY) as PVOID
 declare sub ExConvertExclusiveToSharedLite DDKAPI alias "ExConvertExclusiveToSharedLite" (byval Resource as PERESOURCE)
-declare function ExCreateCallback DDKAPI alias "ExCreateCallback" (byval CallbackObject as PCALLBACK_OBJECT ptr, byval ObjectAttributes as POBJECT_ATTRIBUTES, byval Create as BOOLEAN, byval AllowMultipleCallbacks as BOOLEAN) as NTSTATUS
+declare function ExCreateCallback DDKAPI alias "ExCreateCallback" (byval CallbackObject as PCALLBACK_OBJECT ptr, byval ObjectAttributes as POBJECT_ATTRIBUTES, byval Create as BOOLEAN_, byval AllowMultipleCallbacks as BOOLEAN_) as NTSTATUS
 declare sub ExDeleteNPagedLookasideList DDKAPI alias "ExDeleteNPagedLookasideList" (byval Lookaside as PNPAGED_LOOKASIDE_LIST)
 declare sub ExDeletePagedLookasideList DDKAPI alias "ExDeletePagedLookasideList" (byval Lookaside as PPAGED_LOOKASIDE_LIST)
 declare function ExDeleteResourceLite DDKAPI alias "ExDeleteResourceLite" (byval Resource as PERESOURCE) as NTSTATUS
@@ -3871,7 +3871,7 @@ declare sub ExFreePoolWithTag DDKAPI alias "ExFreePoolWithTag" (byval P as PVOID
 declare function ExGetExclusiveWaiterCount DDKAPI alias "ExGetExclusiveWaiterCount" (byval Resource as PERESOURCE) as ULONG
 declare function ExGetPreviousMode DDKAPI alias "ExGetPreviousMode" () as KPROCESSOR_MODE
 declare function ExGetSharedWaiterCount DDKAPI alias "ExGetSharedWaiterCount" (byval Resource as PERESOURCE) as ULONG
-declare sub KeInitializeEvent DDKAPI alias "KeInitializeEvent" (byval Event as PRKEVENT, byval Type as EVENT_TYPE, byval State as BOOLEAN)
+declare sub KeInitializeEvent DDKAPI alias "KeInitializeEvent" (byval Event as PRKEVENT, byval Type as EVENT_TYPE, byval State as BOOLEAN_)
 declare sub ExInitializeNPagedLookasideList DDKAPI alias "ExInitializeNPagedLookasideList" (byval Lookaside as PNPAGED_LOOKASIDE_LIST, byval Allocate as PALLOCATE_FUNCTION, byval Free as PFREE_FUNCTION, byval Flags as ULONG, byval Size as SIZE_T, byval Tag as ULONG, byval Depth as USHORT)
 declare sub ExInitializePagedLookasideList DDKAPI alias "ExInitializePagedLookasideList" (byval Lookaside as PPAGED_LOOKASIDE_LIST, byval Allocate as PALLOCATE_FUNCTION, byval Free as PFREE_FUNCTION, byval Flags as ULONG, byval Size as SIZE_T, byval Tag as ULONG, byval Depth as USHORT)
 declare function ExInitializeResourceLite DDKAPI alias "ExInitializeResourceLite" (byval Resource as PERESOURCE) as NTSTATUS
@@ -3891,8 +3891,8 @@ declare function ExInterlockedPushEntryList DDKAPI alias "ExInterlockedPushEntry
 declare function ExfInterlockedPushEntryList DDKAPI alias "ExfInterlockedPushEntryList" (byval ListHead as PSINGLE_LIST_ENTRY, byval ListEntry as PSINGLE_LIST_ENTRY, byval Lock as PKSPIN_LOCK) as PSINGLE_LIST_ENTRY
 declare function ExInterlockedRemoveHeadList DDKAPI alias "ExInterlockedRemoveHeadList" (byval ListHead as PLIST_ENTRY, byval Lock as PKSPIN_LOCK) as PLIST_ENTRY
 declare function ExfInterlockedRemoveHeadList DDKAPI alias "ExfInterlockedRemoveHeadList" (byval ListHead as PLIST_ENTRY, byval Lock as PKSPIN_LOCK) as PLIST_ENTRY
-declare function ExIsProcessorFeaturePresent DDKAPI alias "ExIsProcessorFeaturePresent" (byval ProcessorFeature as ULONG) as BOOLEAN
-declare function ExIsResourceAcquiredExclusiveLite DDKAPI alias "ExIsResourceAcquiredExclusiveLite" (byval Resource as PERESOURCE) as BOOLEAN
+declare function ExIsProcessorFeaturePresent DDKAPI alias "ExIsProcessorFeaturePresent" (byval ProcessorFeature as ULONG) as BOOLEAN_
+declare function ExIsResourceAcquiredExclusiveLite DDKAPI alias "ExIsResourceAcquiredExclusiveLite" (byval Resource as PERESOURCE) as BOOLEAN_
 declare function ExIsResourceAcquiredLite DDKAPI alias "ExIsResourceAcquiredLite" (byval Resource as PERESOURCE) as USHORT
 declare function ExIsResourceAcquiredSharedLite DDKAPI alias "ExIsResourceAcquiredSharedLite" (byval Resource as PERESOURCE) as USHORT
 declare sub ExLocalTimeToSystemTime DDKAPI alias "ExLocalTimeToSystemTime" (byval LocalTime as PLARGE_INTEGER, byval SystemTime as PLARGE_INTEGER)
@@ -3907,18 +3907,18 @@ declare sub ExReleaseFastMutexUnsafe DDKAPI alias "ExReleaseFastMutexUnsafe" (by
 declare sub ExReleaseResourceForThreadLite DDKAPI alias "ExReleaseResourceForThreadLite" (byval Resource as PERESOURCE, byval ResourceThreadId as ERESOURCE_THREAD)
 declare sub ExReleaseResourceLite DDKAPI alias "ExReleaseResourceLite" (byval Resource as PERESOURCE)
 declare sub ExSetResourceOwnerPointer DDKAPI alias "ExSetResourceOwnerPointer" (byval Resource as PERESOURCE, byval OwnerPointer as PVOID)
-declare function ExSetTimerResolution DDKAPI alias "ExSetTimerResolution" (byval DesiredTime as ULONG, byval SetResolution as BOOLEAN) as ULONG
+declare function ExSetTimerResolution DDKAPI alias "ExSetTimerResolution" (byval DesiredTime as ULONG, byval SetResolution as BOOLEAN_) as ULONG
 declare sub ExSystemTimeToLocalTime DDKAPI alias "ExSystemTimeToLocalTime" (byval SystemTime as PLARGE_INTEGER, byval LocalTime as PLARGE_INTEGER)
-declare function ExTryToAcquireFastMutex DDKAPI alias "ExTryToAcquireFastMutex" (byval FastMutex as PFAST_MUTEX) as BOOLEAN
-declare function ExTryToAcquireResourceExclusiveLite DDKAPI alias "ExTryToAcquireResourceExclusiveLite" (byval Resource as PERESOURCE) as BOOLEAN
+declare function ExTryToAcquireFastMutex DDKAPI alias "ExTryToAcquireFastMutex" (byval FastMutex as PFAST_MUTEX) as BOOLEAN_
+declare function ExTryToAcquireResourceExclusiveLite DDKAPI alias "ExTryToAcquireResourceExclusiveLite" (byval Resource as PERESOURCE) as BOOLEAN_
 declare sub ExUnregisterCallback DDKAPI alias "ExUnregisterCallback" (byval CbRegistration as PVOID)
 declare function ExUuidCreate DDKAPI alias "ExUuidCreate" (byval Uuid as UUID ptr) as NTSTATUS
-declare function ExVerifySuite DDKAPI alias "ExVerifySuite" (byval SuiteType as SUITE_TYPE) as BOOLEAN
+declare function ExVerifySuite DDKAPI alias "ExVerifySuite" (byval SuiteType as SUITE_TYPE) as BOOLEAN_
 declare sub ProbeForRead DDKAPI alias "ProbeForRead" (byval Address as any ptr, byval Length as ULONG, byval Alignment as ULONG)
 declare sub ProbeForWrite DDKAPI alias "ProbeForWrite" (byval Address as any ptr, byval Length as ULONG, byval Alignment as ULONG)
 declare function CmRegisterCallback DDKAPI alias "CmRegisterCallback" (byval Function as PEX_CALLBACK_FUNCTION, byval Context as PVOID, byval Cookie as PLARGE_INTEGER) as NTSTATUS
 declare function CmUnRegisterCallback DDKAPI alias "CmUnRegisterCallback" (byval Cookie as LARGE_INTEGER) as NTSTATUS
-declare function FsRtlIsTotalDeviceFailure DDKAPI alias "FsRtlIsTotalDeviceFailure" (byval Status as NTSTATUS) as BOOLEAN
+declare function FsRtlIsTotalDeviceFailure DDKAPI alias "FsRtlIsTotalDeviceFailure" (byval Status as NTSTATUS) as BOOLEAN_
 declare sub HalExamineMBR DDKAPI alias "HalExamineMBR" (byval DeviceObject as PDEVICE_OBJECT, byval SectorSize as ULONG, byval MBRTypeIdentifier as ULONG, byval Buffer as PVOID)
 declare sub READ_PORT_BUFFER_UCHAR DDKAPI alias "READ_PORT_BUFFER_UCHAR" (byval Port as PUCHAR, byval Buffer as PUCHAR, byval Count as ULONG)
 declare sub READ_PORT_BUFFER_ULONG DDKAPI alias "READ_PORT_BUFFER_ULONG" (byval Port as PULONG, byval Buffer as PULONG, byval Count as ULONG)
@@ -3949,23 +3949,23 @@ declare function IoAcquireRemoveLockEx DDKAPI alias "IoAcquireRemoveLockEx" (byv
 declare sub IoAllocateController DDKAPI alias "IoAllocateController" (byval ControllerObject as PCONTROLLER_OBJECT, byval DeviceObject as PDEVICE_OBJECT, byval ExecutionRoutine as PDRIVER_CONTROL, byval Context as PVOID)
 declare function IoAllocateDriverObjectExtension DDKAPI alias "IoAllocateDriverObjectExtension" (byval DriverObject as PDRIVER_OBJECT, byval ClientIdentificationAddress as PVOID, byval DriverObjectExtensionSize as ULONG, byval DriverObjectExtension as PVOID ptr) as NTSTATUS
 declare function IoAllocateErrorLogEntry DDKAPI alias "IoAllocateErrorLogEntry" (byval IoObject as PVOID, byval EntrySize as UCHAR) as PVOID
-declare function IoAllocateIrp DDKAPI alias "IoAllocateIrp" (byval StackSize as CCHAR, byval ChargeQuota as BOOLEAN) as PIRP
-declare function IoAllocateMdl DDKAPI alias "IoAllocateMdl" (byval VirtualAddress as PVOID, byval Length as ULONG, byval SecondaryBuffer as BOOLEAN, byval ChargeQuota as BOOLEAN, byval Irp as PIRP) as PMDL
+declare function IoAllocateIrp DDKAPI alias "IoAllocateIrp" (byval StackSize as CCHAR, byval ChargeQuota as BOOLEAN_) as PIRP
+declare function IoAllocateMdl DDKAPI alias "IoAllocateMdl" (byval VirtualAddress as PVOID, byval Length as ULONG, byval SecondaryBuffer as BOOLEAN_, byval ChargeQuota as BOOLEAN_, byval Irp as PIRP) as PMDL
 declare function IoAllocateWorkItem DDKAPI alias "IoAllocateWorkItem" (byval DeviceObject as PDEVICE_OBJECT) as PIO_WORKITEM
 declare function IoAttachDevice DDKAPI alias "IoAttachDevice" (byval SourceDevice as PDEVICE_OBJECT, byval TargetDevice as PUNICODE_STRING, byval AttachedDevice as PDEVICE_OBJECT ptr) as NTSTATUS
 declare function IoAttachDeviceToDeviceStack DDKAPI alias "IoAttachDeviceToDeviceStack" (byval SourceDevice as PDEVICE_OBJECT, byval TargetDevice as PDEVICE_OBJECT) as PDEVICE_OBJECT
 declare function IoBuildAsynchronousFsdRequest DDKAPI alias "IoBuildAsynchronousFsdRequest" (byval MajorFunction as ULONG, byval DeviceObject as PDEVICE_OBJECT, byval Buffer as PVOID, byval Length as ULONG, byval StartingOffset as PLARGE_INTEGER, byval IoStatusBlock as PIO_STATUS_BLOCK) as PIRP
-declare function IoBuildDeviceIoControlRequest DDKAPI alias "IoBuildDeviceIoControlRequest" (byval IoControlCode as ULONG, byval DeviceObject as PDEVICE_OBJECT, byval InputBuffer as PVOID, byval InputBufferLength as ULONG, byval OutputBuffer as PVOID, byval OutputBufferLength as ULONG, byval InternalDeviceIoControl as BOOLEAN, byval Event as PKEVENT, byval IoStatusBlock as PIO_STATUS_BLOCK) as PIRP
+declare function IoBuildDeviceIoControlRequest DDKAPI alias "IoBuildDeviceIoControlRequest" (byval IoControlCode as ULONG, byval DeviceObject as PDEVICE_OBJECT, byval InputBuffer as PVOID, byval InputBufferLength as ULONG, byval OutputBuffer as PVOID, byval OutputBufferLength as ULONG, byval InternalDeviceIoControl as BOOLEAN_, byval Event as PKEVENT, byval IoStatusBlock as PIO_STATUS_BLOCK) as PIRP
 declare sub IoBuildPartialMdl DDKAPI alias "IoBuildPartialMdl" (byval SourceMdl as PMDL, byval TargetMdl as PMDL, byval VirtualAddress as PVOID, byval Length as ULONG)
 declare function IoBuildSynchronousFsdRequest DDKAPI alias "IoBuildSynchronousFsdRequest" (byval MajorFunction as ULONG, byval DeviceObject as PDEVICE_OBJECT, byval Buffer as PVOID, byval Length as ULONG, byval StartingOffset as PLARGE_INTEGER, byval Event as PKEVENT, byval IoStatusBlock as PIO_STATUS_BLOCK) as PIRP
 declare function IofCallDriver DDKAPI alias "IofCallDriver" (byval DeviceObject as PDEVICE_OBJECT, byval Irp as PIRP) as NTSTATUS
 declare sub IoCancelFileOpen DDKAPI alias "IoCancelFileOpen" (byval DeviceObject as PDEVICE_OBJECT, byval FileObject as PFILE_OBJECT)
-declare function IoCancelIrp DDKAPI alias "IoCancelIrp" (byval Irp as PIRP) as BOOLEAN
-declare function IoCheckShareAccess DDKAPI alias "IoCheckShareAccess" (byval DesiredAccess as ACCESS_MASK, byval DesiredShareAccess as ULONG, byval FileObject as PFILE_OBJECT, byval ShareAccess as PSHARE_ACCESS, byval Update as BOOLEAN) as NTSTATUS
+declare function IoCancelIrp DDKAPI alias "IoCancelIrp" (byval Irp as PIRP) as BOOLEAN_
+declare function IoCheckShareAccess DDKAPI alias "IoCheckShareAccess" (byval DesiredAccess as ACCESS_MASK, byval DesiredShareAccess as ULONG, byval FileObject as PFILE_OBJECT, byval ShareAccess as PSHARE_ACCESS, byval Update as BOOLEAN_) as NTSTATUS
 declare sub IofCompleteRequest DDKAPI alias "IofCompleteRequest" (byval Irp as PIRP, byval PriorityBoost as CCHAR)
-declare function IoConnectInterrupt DDKAPI alias "IoConnectInterrupt" (byval InterruptObject as PKINTERRUPT ptr, byval ServiceRoutine as PKSERVICE_ROUTINE, byval ServiceContext as PVOID, byval SpinLock as PKSPIN_LOCK, byval Vector as ULONG, byval Irql as KIRQL, byval SynchronizeIrql as KIRQL, byval InterruptMode as KINTERRUPT_MODE, byval ShareVector as BOOLEAN, byval ProcessorEnableMask as KAFFINITY, byval FloatingSave as BOOLEAN) as NTSTATUS
+declare function IoConnectInterrupt DDKAPI alias "IoConnectInterrupt" (byval InterruptObject as PKINTERRUPT ptr, byval ServiceRoutine as PKSERVICE_ROUTINE, byval ServiceContext as PVOID, byval SpinLock as PKSPIN_LOCK, byval Vector as ULONG, byval Irql as KIRQL, byval SynchronizeIrql as KIRQL, byval InterruptMode as KINTERRUPT_MODE, byval ShareVector as BOOLEAN_, byval ProcessorEnableMask as KAFFINITY, byval FloatingSave as BOOLEAN_) as NTSTATUS
 declare function IoCreateController DDKAPI alias "IoCreateController" (byval Size as ULONG) as PCONTROLLER_OBJECT
-declare function IoCreateDevice DDKAPI alias "IoCreateDevice" (byval DriverObject as PDRIVER_OBJECT, byval DeviceExtensionSize as ULONG, byval DeviceName as PUNICODE_STRING, byval DeviceType as ULONG, byval DeviceCharacteristics as ULONG, byval Exclusive as BOOLEAN, byval DeviceObject as PDEVICE_OBJECT ptr) as NTSTATUS
+declare function IoCreateDevice DDKAPI alias "IoCreateDevice" (byval DriverObject as PDRIVER_OBJECT, byval DeviceExtensionSize as ULONG, byval DeviceName as PUNICODE_STRING, byval DeviceType as ULONG, byval DeviceCharacteristics as ULONG, byval Exclusive as BOOLEAN_, byval DeviceObject as PDEVICE_OBJECT ptr) as NTSTATUS
 declare function IoCreateDisk DDKAPI alias "IoCreateDisk" (byval DeviceObject as PDEVICE_OBJECT, byval Disk as PCREATE_DISK) as NTSTATUS
 declare function IoCreateFile DDKAPI alias "IoCreateFile" (byval FileHandle as PHANDLE, byval DesiredAccess as ACCESS_MASK, byval ObjectAttributes as POBJECT_ATTRIBUTES, byval IoStatusBlock as PIO_STATUS_BLOCK, byval AllocationSize as PLARGE_INTEGER, byval FileAttributes as ULONG, byval ShareAccess as ULONG, byval Disposition as ULONG, byval CreateOptions as ULONG, byval EaBuffer as PVOID, byval EaLength as ULONG, byval CreateFileType as CREATE_FILE_TYPE, byval ExtraCreateParameters as PVOID, byval Options as ULONG) as NTSTATUS
 declare function IoCreateNotificationEvent DDKAPI alias "IoCreateNotificationEvent" (byval EventName as PUNICODE_STRING, byval EventHandle as PHANDLE) as PKEVENT
@@ -3981,7 +3981,7 @@ declare sub IoDeleteDevice DDKAPI alias "IoDeleteDevice" (byval DeviceObject as 
 declare function IoDeleteSymbolicLink DDKAPI alias "IoDeleteSymbolicLink" (byval SymbolicLinkName as PUNICODE_STRING) as NTSTATUS
 declare sub IoDetachDevice DDKAPI alias "IoDetachDevice" (byval TargetDevice as PDEVICE_OBJECT)
 declare sub IoDisconnectInterrupt DDKAPI alias "IoDisconnectInterrupt" (byval InterruptObject as PKINTERRUPT)
-declare function IoForwardIrpSynchronously DDKAPI alias "IoForwardIrpSynchronously" (byval DeviceObject as PDEVICE_OBJECT, byval Irp as PIRP) as BOOLEAN
+declare function IoForwardIrpSynchronously DDKAPI alias "IoForwardIrpSynchronously" (byval DeviceObject as PDEVICE_OBJECT, byval Irp as PIRP) as BOOLEAN_
 declare sub IoFreeController DDKAPI alias "IoFreeController" (byval ControllerObject as PCONTROLLER_OBJECT)
 declare sub IoFreeErrorLogEntry DDKAPI alias "IoFreeErrorLogEntry" (byval ElEntry as PVOID)
 declare sub IoFreeIrp DDKAPI alias "IoFreeIrp" (byval Irp as PIRP)
@@ -4010,15 +4010,15 @@ declare sub IoInitializeRemoveLockEx DDKAPI alias "IoInitializeRemoveLockEx" (by
 declare function IoInitializeTimer DDKAPI alias "IoInitializeTimer" (byval DeviceObject as PDEVICE_OBJECT, byval TimerRoutine as PIO_TIMER_ROUTINE, byval Context as PVOID) as NTSTATUS
 declare sub IoInvalidateDeviceRelations DDKAPI alias "IoInvalidateDeviceRelations" (byval DeviceObject as PDEVICE_OBJECT, byval Type as DEVICE_RELATION_TYPE)
 declare sub IoInvalidateDeviceState DDKAPI alias "IoInvalidateDeviceState" (byval PhysicalDeviceObject as PDEVICE_OBJECT)
-declare function IoIs32bitProcess DDKAPI alias "IoIs32bitProcess" (byval Irp as PIRP) as BOOLEAN
-declare function IoIsWdmVersionAvailable DDKAPI alias "IoIsWdmVersionAvailable" (byval MajorVersion as UCHAR, byval MinorVersion as UCHAR) as BOOLEAN
+declare function IoIs32bitProcess DDKAPI alias "IoIs32bitProcess" (byval Irp as PIRP) as BOOLEAN_
+declare function IoIsWdmVersionAvailable DDKAPI alias "IoIsWdmVersionAvailable" (byval MajorVersion as UCHAR, byval MinorVersion as UCHAR) as BOOLEAN_
 declare function IoMakeAssociatedIrp DDKAPI alias "IoMakeAssociatedIrp" (byval Irp as PIRP, byval StackSize as CCHAR) as PIRP
 declare function IoOpenDeviceInterfaceRegistryKey DDKAPI alias "IoOpenDeviceInterfaceRegistryKey" (byval SymbolicLinkName as PUNICODE_STRING, byval DesiredAccess as ACCESS_MASK, byval DeviceInterfaceKey as PHANDLE) as NTSTATUS
 declare function IoOpenDeviceRegistryKey DDKAPI alias "IoOpenDeviceRegistryKey" (byval DeviceObject as PDEVICE_OBJECT, byval DevInstKeyType as ULONG, byval DesiredAccess as ACCESS_MASK, byval DevInstRegKey as PHANDLE) as NTSTATUS
 declare function IoQueryDeviceDescription DDKAPI alias "IoQueryDeviceDescription" (byval BusType as PINTERFACE_TYPE, byval BusNumber as PULONG, byval ControllerType as PCONFIGURATION_TYPE, byval ControllerNumber as PULONG, byval PeripheralType as PCONFIGURATION_TYPE, byval PeripheralNumber as PULONG, byval CalloutRoutine as PIO_QUERY_DEVICE_ROUTINE, byval Context as PVOID) as NTSTATUS
 declare sub IoQueueWorkItem DDKAPI alias "IoQueueWorkItem" (byval pIOWorkItem as PIO_WORKITEM, byval Routine as PIO_WORKITEM_ROUTINE, byval QueueType as WORK_QUEUE_TYPE, byval Context as PVOID)
 declare sub IoRaiseHardError DDKAPI alias "IoRaiseHardError" (byval Irp as PIRP, byval Vpb as PVPB, byval RealDeviceObject as PDEVICE_OBJECT)
-declare function IoRaiseInformationalHardError DDKAPI alias "IoRaiseInformationalHardError" (byval ErrorStatus as NTSTATUS, byval String as PUNICODE_STRING, byval Thread as PKTHREAD) as BOOLEAN
+declare function IoRaiseInformationalHardError DDKAPI alias "IoRaiseInformationalHardError" (byval ErrorStatus as NTSTATUS, byval String as PUNICODE_STRING, byval Thread as PKTHREAD) as BOOLEAN_
 declare function IoReadDiskSignature DDKAPI alias "IoReadDiskSignature" (byval DeviceObject as PDEVICE_OBJECT, byval BytesPerSector as ULONG, byval Signature as PDISK_SIGNATURE) as NTSTATUS
 declare function IoReadPartitionTableEx DDKAPI alias "IoReadPartitionTableEx" (byval DeviceObject as PDEVICE_OBJECT, byval PartitionBuffer as PDRIVE_LAYOUT_INFORMATION_EX ptr) as NTSTATUS
 declare sub IoRegisterBootDriverReinitialization DDKAPI alias "IoRegisterBootDriverReinitialization" (byval DriverObject as PDRIVER_OBJECT, byval DriverReinitializationRoutine as PDRIVER_REINITIALIZE, byval Context as PVOID)
@@ -4030,30 +4030,30 @@ declare sub IoReleaseCancelSpinLock DDKAPI alias "IoReleaseCancelSpinLock" (byva
 declare sub IoReleaseRemoveLockAndWaitEx DDKAPI alias "IoReleaseRemoveLockAndWaitEx" (byval RemoveLock as PIO_REMOVE_LOCK, byval Tag as PVOID, byval RemlockSize as ULONG)
 declare sub IoReleaseRemoveLockEx DDKAPI alias "IoReleaseRemoveLockEx" (byval RemoveLock as PIO_REMOVE_LOCK, byval Tag as PVOID, byval RemlockSize as ULONG)
 declare sub IoRemoveShareAccess DDKAPI alias "IoRemoveShareAccess" (byval FileObject as PFILE_OBJECT, byval ShareAccess as PSHARE_ACCESS)
-declare function IoReportDetectedDevice DDKAPI alias "IoReportDetectedDevice" (byval DriverObject as PDRIVER_OBJECT, byval LegacyBusType as INTERFACE_TYPE, byval BusNumber as ULONG, byval SlotNumber as ULONG, byval ResourceList as PCM_RESOURCE_LIST, byval ResourceRequirements as PIO_RESOURCE_REQUIREMENTS_LIST, byval ResourceAssigned as BOOLEAN, byval DeviceObject as PDEVICE_OBJECT ptr) as NTSTATUS
+declare function IoReportDetectedDevice DDKAPI alias "IoReportDetectedDevice" (byval DriverObject as PDRIVER_OBJECT, byval LegacyBusType as INTERFACE_TYPE, byval BusNumber as ULONG, byval SlotNumber as ULONG, byval ResourceList as PCM_RESOURCE_LIST, byval ResourceRequirements as PIO_RESOURCE_REQUIREMENTS_LIST, byval ResourceAssigned as BOOLEAN_, byval DeviceObject as PDEVICE_OBJECT ptr) as NTSTATUS
 declare function IoReportResourceForDetection DDKAPI alias "IoReportResourceForDetection" (byval DriverObject as PDRIVER_OBJECT, byval DriverList as PCM_RESOURCE_LIST, byval DriverListSize as ULONG, byval DeviceObject as PDEVICE_OBJECT, byval DeviceList as PCM_RESOURCE_LIST, byval DeviceListSize as ULONG, byval ConflictDetected as PBOOLEAN) as NTSTATUS
-declare function IoReportResourceUsage DDKAPI alias "IoReportResourceUsage" (byval DriverClassName as PUNICODE_STRING, byval DriverObject as PDRIVER_OBJECT, byval DriverList as PCM_RESOURCE_LIST, byval DriverListSize as ULONG, byval DeviceObject as PDEVICE_OBJECT, byval DeviceList as PCM_RESOURCE_LIST, byval DeviceListSize as ULONG, byval OverrideConflict as BOOLEAN, byval ConflictDetected as PBOOLEAN) as NTSTATUS
+declare function IoReportResourceUsage DDKAPI alias "IoReportResourceUsage" (byval DriverClassName as PUNICODE_STRING, byval DriverObject as PDRIVER_OBJECT, byval DriverList as PCM_RESOURCE_LIST, byval DriverListSize as ULONG, byval DeviceObject as PDEVICE_OBJECT, byval DeviceList as PCM_RESOURCE_LIST, byval DeviceListSize as ULONG, byval OverrideConflict as BOOLEAN_, byval ConflictDetected as PBOOLEAN) as NTSTATUS
 declare function IoReportTargetDeviceChange DDKAPI alias "IoReportTargetDeviceChange" (byval PhysicalDeviceObject as PDEVICE_OBJECT, byval NotificationStructure as PVOID) as NTSTATUS
 declare function IoReportTargetDeviceChangeAsynchronous DDKAPI alias "IoReportTargetDeviceChangeAsynchronous" (byval PhysicalDeviceObject as PDEVICE_OBJECT, byval NotificationStructure as PVOID, byval Callback as PDEVICE_CHANGE_COMPLETE_CALLBACK, byval Context as PVOID) as NTSTATUS
 declare sub IoRequestDeviceEject DDKAPI alias "IoRequestDeviceEject" (byval PhysicalDeviceObject as PDEVICE_OBJECT)
 declare sub IoReuseIrp DDKAPI alias "IoReuseIrp" (byval Irp as PIRP, byval Status as NTSTATUS)
-declare sub IoSetCompletionRoutineEx DDKAPI alias "IoSetCompletionRoutineEx" (byval DeviceObject as PDEVICE_OBJECT, byval Irp as PIRP, byval CompletionRoutine as PIO_COMPLETION_ROUTINE, byval Context as PVOID, byval InvokeOnSuccess as BOOLEAN, byval InvokeOnError as BOOLEAN, byval InvokeOnCancel as BOOLEAN)
-declare function IoSetDeviceInterfaceState DDKAPI alias "IoSetDeviceInterfaceState" (byval SymbolicLinkName as PUNICODE_STRING, byval Enable as BOOLEAN) as NTSTATUS
+declare sub IoSetCompletionRoutineEx DDKAPI alias "IoSetCompletionRoutineEx" (byval DeviceObject as PDEVICE_OBJECT, byval Irp as PIRP, byval CompletionRoutine as PIO_COMPLETION_ROUTINE, byval Context as PVOID, byval InvokeOnSuccess as BOOLEAN_, byval InvokeOnError as BOOLEAN_, byval InvokeOnCancel as BOOLEAN_)
+declare function IoSetDeviceInterfaceState DDKAPI alias "IoSetDeviceInterfaceState" (byval SymbolicLinkName as PUNICODE_STRING, byval Enable as BOOLEAN_) as NTSTATUS
 declare sub IoSetHardErrorOrVerifyDevice DDKAPI alias "IoSetHardErrorOrVerifyDevice" (byval Irp as PIRP, byval DeviceObject as PDEVICE_OBJECT)
 declare function IoSetPartitionInformationEx DDKAPI alias "IoSetPartitionInformationEx" (byval DeviceObject as PDEVICE_OBJECT, byval PartitionNumber as ULONG, byval PartitionInfo as PSET_PARTITION_INFORMATION_EX) as NTSTATUS
 declare sub IoSetShareAccess DDKAPI alias "IoSetShareAccess" (byval DesiredAccess as ACCESS_MASK, byval DesiredShareAccess as ULONG, byval FileObject as PFILE_OBJECT, byval ShareAccess as PSHARE_ACCESS)
-declare sub IoSetStartIoAttributes DDKAPI alias "IoSetStartIoAttributes" (byval DeviceObject as PDEVICE_OBJECT, byval DeferredStartIo as BOOLEAN, byval NonCancelable as BOOLEAN)
+declare sub IoSetStartIoAttributes DDKAPI alias "IoSetStartIoAttributes" (byval DeviceObject as PDEVICE_OBJECT, byval DeferredStartIo as BOOLEAN_, byval NonCancelable as BOOLEAN_)
 declare function IoSetSystemPartition DDKAPI alias "IoSetSystemPartition" (byval VolumeNameString as PUNICODE_STRING) as NTSTATUS
-declare function IoSetThreadHardErrorMode DDKAPI alias "IoSetThreadHardErrorMode" (byval EnableHardErrors as BOOLEAN) as BOOLEAN
-declare sub IoStartNextPacket DDKAPI alias "IoStartNextPacket" (byval DeviceObject as PDEVICE_OBJECT, byval Cancelable as BOOLEAN)
-declare sub IoStartNextPacketByKey DDKAPI alias "IoStartNextPacketByKey" (byval DeviceObject as PDEVICE_OBJECT, byval Cancelable as BOOLEAN, byval Key as ULONG)
+declare function IoSetThreadHardErrorMode DDKAPI alias "IoSetThreadHardErrorMode" (byval EnableHardErrors as BOOLEAN_) as BOOLEAN_
+declare sub IoStartNextPacket DDKAPI alias "IoStartNextPacket" (byval DeviceObject as PDEVICE_OBJECT, byval Cancelable as BOOLEAN_)
+declare sub IoStartNextPacketByKey DDKAPI alias "IoStartNextPacketByKey" (byval DeviceObject as PDEVICE_OBJECT, byval Cancelable as BOOLEAN_, byval Key as ULONG)
 declare sub IoStartPacket DDKAPI alias "IoStartPacket" (byval DeviceObject as PDEVICE_OBJECT, byval Irp as PIRP, byval Key as PULONG, byval CancelFunction as PDRIVER_CANCEL)
 declare sub IoStartTimer DDKAPI alias "IoStartTimer" (byval DeviceObject as PDEVICE_OBJECT)
 declare sub IoStopTimer DDKAPI alias "IoStopTimer" (byval DeviceObject as PDEVICE_OBJECT)
 declare function IoUnregisterPlugPlayNotification DDKAPI alias "IoUnregisterPlugPlayNotification" (byval NotificationEntry as PVOID) as NTSTATUS
 declare sub IoUnregisterShutdownNotification DDKAPI alias "IoUnregisterShutdownNotification" (byval DeviceObject as PDEVICE_OBJECT)
 declare sub IoUpdateShareAccess DDKAPI alias "IoUpdateShareAccess" (byval FileObject as PFILE_OBJECT, byval ShareAccess as PSHARE_ACCESS)
-declare function IoVerifyPartitionTable DDKAPI alias "IoVerifyPartitionTable" (byval DeviceObject as PDEVICE_OBJECT, byval FixErrors as BOOLEAN) as NTSTATUS
+declare function IoVerifyPartitionTable DDKAPI alias "IoVerifyPartitionTable" (byval DeviceObject as PDEVICE_OBJECT, byval FixErrors as BOOLEAN_) as NTSTATUS
 declare function IoVolumeDeviceToDosName DDKAPI alias "IoVolumeDeviceToDosName" (byval VolumeDeviceObject as PVOID, byval DosName as PUNICODE_STRING) as NTSTATUS
 declare function IoWMIAllocateInstanceIds DDKAPI alias "IoWMIAllocateInstanceIds" (byval Guid as GUID ptr, byval InstanceCount as ULONG, byval FirstInstanceId as ULONG ptr) as NTSTATUS
 declare function IoWMIDeviceObjectToProviderId DDKAPI alias "IoWMIDeviceObjectToProviderId" (byval DeviceObject as PDEVICE_OBJECT) as ULONG
@@ -4069,7 +4069,7 @@ declare function IoWMIRegistrationControl DDKAPI alias "IoWMIRegistrationControl
 declare function IoWMISetNotificationCallback DDKAPI alias "IoWMISetNotificationCallback" (byval Object as PVOID, byval Callback as WMI_NOTIFICATION_CALLBACK, byval Context as PVOID) as NTSTATUS
 declare function IoWMISetSingleInstance DDKAPI alias "IoWMISetSingleInstance" (byval DataBlockObject as PVOID, byval InstanceName as PUNICODE_STRING, byval Version as ULONG, byval ValueBufferSize as ULONG, byval ValueBuffer as PVOID) as NTSTATUS
 declare function IoWMISetSingleItem DDKAPI alias "IoWMISetSingleItem" (byval DataBlockObject as PVOID, byval InstanceName as PUNICODE_STRING, byval DataItemId as ULONG, byval Version as ULONG, byval ValueBufferSize as ULONG, byval ValueBuffer as PVOID) as NTSTATUS
-declare function IoWMISuggestInstanceName DDKAPI alias "IoWMISuggestInstanceName" (byval PhysicalDeviceObject as PDEVICE_OBJECT, byval SymbolicLinkName as PUNICODE_STRING, byval CombineNames as BOOLEAN, byval SuggestedInstanceName as PUNICODE_STRING) as NTSTATUS
+declare function IoWMISuggestInstanceName DDKAPI alias "IoWMISuggestInstanceName" (byval PhysicalDeviceObject as PDEVICE_OBJECT, byval SymbolicLinkName as PUNICODE_STRING, byval CombineNames as BOOLEAN_, byval SuggestedInstanceName as PUNICODE_STRING) as NTSTATUS
 declare function IoWMIWriteEvent DDKAPI alias "IoWMIWriteEvent" (byval WnodeEventItem as PVOID) as NTSTATUS
 declare sub IoWriteErrorLogEntry DDKAPI alias "IoWriteErrorLogEntry" (byval ElEntry as PVOID)
 declare function IoWritePartitionTableEx DDKAPI alias "IoWritePartitionTableEx" (byval DeviceObject as PDEVICE_OBJECT, byval PartitionBuffer as PDRIVE_LAYOUT_INFORMATION_EX) as NTSTATUS
@@ -4077,15 +4077,15 @@ declare sub KeAcquireInStackQueuedSpinLock DDKAPI alias "KeAcquireInStackQueuedS
 declare sub KeAcquireInStackQueuedSpinLockAtDpcLevel DDKAPI alias "KeAcquireInStackQueuedSpinLockAtDpcLevel" (byval SpinLock as PKSPIN_LOCK, byval LockHandle as PKLOCK_QUEUE_HANDLE)
 declare function KeAcquireInterruptSpinLock DDKAPI alias "KeAcquireInterruptSpinLock" (byval Interrupt as PKINTERRUPT) as KIRQL
 declare sub KeAcquireSpinLock DDKAPI alias "KeAcquireSpinLock" (byval SpinLock as PKSPIN_LOCK, byval OldIrql as PKIRQL)
-declare function KeAddSystemServiceTable DDKAPI alias "KeAddSystemServiceTable" (byval SSDT as PSSDT, byval ServiceCounterTable as PULONG, byval NumberOfServices as ULONG, byval SSPT as PSSPT, byval TableIndex as ULONG) as BOOLEAN
-declare function KeAreApcsDisabled DDKAPI alias "KeAreApcsDisabled" () as BOOLEAN
+declare function KeAddSystemServiceTable DDKAPI alias "KeAddSystemServiceTable" (byval SSDT as PSSDT, byval ServiceCounterTable as PULONG, byval NumberOfServices as ULONG, byval SSPT as PSSPT, byval TableIndex as ULONG) as BOOLEAN_
+declare function KeAreApcsDisabled DDKAPI alias "KeAreApcsDisabled" () as BOOLEAN_
 declare sub KeAttachProcess DDKAPI alias "KeAttachProcess" (byval Process as PEPROCESS)
 declare sub KeBugCheck DDKAPI alias "KeBugCheck" (byval BugCheckCode as ULONG)
 declare sub KeBugCheckEx DDKAPI alias "KeBugCheckEx" (byval BugCheckCode as ULONG, byval BugCheckParameter1 as ULONG_PTR, byval BugCheckParameter2 as ULONG_PTR, byval BugCheckParameter3 as ULONG_PTR, byval BugCheckParameter4 as ULONG_PTR)
-declare function KeCancelTimer DDKAPI alias "KeCancelTimer" (byval Timer as PKTIMER) as BOOLEAN
+declare function KeCancelTimer DDKAPI alias "KeCancelTimer" (byval Timer as PKTIMER) as BOOLEAN_
 declare sub KeClearEvent DDKAPI alias "KeClearEvent" (byval Event as PRKEVENT)
-declare function KeDelayExecutionThread DDKAPI alias "KeDelayExecutionThread" (byval WaitMode as KPROCESSOR_MODE, byval Alertable as BOOLEAN, byval Interval as PLARGE_INTEGER) as NTSTATUS
-declare function KeDeregisterBugCheckCallback DDKAPI alias "KeDeregisterBugCheckCallback" (byval CallbackRecord as PKBUGCHECK_CALLBACK_RECORD) as BOOLEAN
+declare function KeDelayExecutionThread DDKAPI alias "KeDelayExecutionThread" (byval WaitMode as KPROCESSOR_MODE, byval Alertable as BOOLEAN_, byval Interval as PLARGE_INTEGER) as NTSTATUS
+declare function KeDeregisterBugCheckCallback DDKAPI alias "KeDeregisterBugCheckCallback" (byval CallbackRecord as PKBUGCHECK_CALLBACK_RECORD) as BOOLEAN_
 declare sub KeDetachProcess DDKAPI alias "KeDetachProcess" ()
 declare sub KeEnterCriticalRegion DDKAPI alias "KeEnterCriticalRegion" ()
 declare function KeGetCurrentThread DDKAPI alias "KeGetCurrentThread" () as PRKTHREAD
@@ -4098,11 +4098,11 @@ declare sub KeInitializeSemaphore DDKAPI alias "KeInitializeSemaphore" (byval Se
 declare sub KeInitializeSpinLock DDKAPI alias "KeInitializeSpinLock" (byval SpinLock as PKSPIN_LOCK)
 declare sub KeInitializeTimer DDKAPI alias "KeInitializeTimer" (byval Timer as PKTIMER)
 declare sub KeInitializeTimerEx DDKAPI alias "KeInitializeTimerEx" (byval Timer as PKTIMER, byval Type as TIMER_TYPE)
-declare function KeInsertByKeyDeviceQueue DDKAPI alias "KeInsertByKeyDeviceQueue" (byval DeviceQueue as PKDEVICE_QUEUE, byval DeviceQueueEntry as PKDEVICE_QUEUE_ENTRY, byval SortKey as ULONG) as BOOLEAN
-declare function KeInsertDeviceQueue DDKAPI alias "KeInsertDeviceQueue" (byval DeviceQueue as PKDEVICE_QUEUE, byval DeviceQueueEntry as PKDEVICE_QUEUE_ENTRY) as BOOLEAN
-declare function KeInsertQueueDpc DDKAPI alias "KeInsertQueueDpc" (byval Dpc as PRKDPC, byval SystemArgument1 as PVOID, byval SystemArgument2 as PVOID) as BOOLEAN
+declare function KeInsertByKeyDeviceQueue DDKAPI alias "KeInsertByKeyDeviceQueue" (byval DeviceQueue as PKDEVICE_QUEUE, byval DeviceQueueEntry as PKDEVICE_QUEUE_ENTRY, byval SortKey as ULONG) as BOOLEAN_
+declare function KeInsertDeviceQueue DDKAPI alias "KeInsertDeviceQueue" (byval DeviceQueue as PKDEVICE_QUEUE, byval DeviceQueueEntry as PKDEVICE_QUEUE_ENTRY) as BOOLEAN_
+declare function KeInsertQueueDpc DDKAPI alias "KeInsertQueueDpc" (byval Dpc as PRKDPC, byval SystemArgument1 as PVOID, byval SystemArgument2 as PVOID) as BOOLEAN_
 declare sub KeLeaveCriticalRegion DDKAPI alias "KeLeaveCriticalRegion" ()
-declare function KePulseEvent DDKAPI alias "KePulseEvent" (byval Event as PRKEVENT, byval Increment as KPRIORITY, byval Wait as BOOLEAN) as NTSTATUS
+declare function KePulseEvent DDKAPI alias "KePulseEvent" (byval Event as PRKEVENT, byval Increment as KPRIORITY, byval Wait as BOOLEAN_) as NTSTATUS
 declare function KeQueryInterruptTime DDKAPI alias "KeQueryInterruptTime" () as ULONGLONG
 declare function KeQueryPerformanceCounter DDKAPI alias "KeQueryPerformanceCounter" (byval PerformanceFrequency as PLARGE_INTEGER) as LARGE_INTEGER
 declare function KeQueryPriorityThread DDKAPI alias "KeQueryPriorityThread" (byval Thread as PRKTHREAD) as KPRIORITY
@@ -4112,34 +4112,34 @@ declare function KeQueryTimeIncrement DDKAPI alias "KeQueryTimeIncrement" () as 
 declare function KeReadStateEvent DDKAPI alias "KeReadStateEvent" (byval Event as PRKEVENT) as LONG
 declare function KeReadStateMutex DDKAPI alias "KeReadStateMutex" (byval Mutex as PRKMUTEX) as LONG
 declare function KeReadStateSemaphore DDKAPI alias "KeReadStateSemaphore" (byval Semaphore as PRKSEMAPHORE) as LONG
-declare function KeReadStateTimer DDKAPI alias "KeReadStateTimer" (byval Timer as PKTIMER) as BOOLEAN
-declare function KeRegisterBugCheckCallback DDKAPI alias "KeRegisterBugCheckCallback" (byval CallbackRecord as PKBUGCHECK_CALLBACK_RECORD, byval CallbackRoutine as PKBUGCHECK_CALLBACK_ROUTINE, byval Buffer as PVOID, byval Length as ULONG, byval Component as PUCHAR) as BOOLEAN
+declare function KeReadStateTimer DDKAPI alias "KeReadStateTimer" (byval Timer as PKTIMER) as BOOLEAN_
+declare function KeRegisterBugCheckCallback DDKAPI alias "KeRegisterBugCheckCallback" (byval CallbackRecord as PKBUGCHECK_CALLBACK_RECORD, byval CallbackRoutine as PKBUGCHECK_CALLBACK_ROUTINE, byval Buffer as PVOID, byval Length as ULONG, byval Component as PUCHAR) as BOOLEAN_
 declare sub KeReleaseInStackQueuedSpinLock DDKAPI alias "KeReleaseInStackQueuedSpinLock" (byval LockHandle as PKLOCK_QUEUE_HANDLE)
 declare sub KeReleaseInStackQueuedSpinLockFromDpcLevel DDKAPI alias "KeReleaseInStackQueuedSpinLockFromDpcLevel" (byval LockHandle as PKLOCK_QUEUE_HANDLE)
 declare sub KeReleaseInterruptSpinLock DDKAPI alias "KeReleaseInterruptSpinLock" (byval Interrupt as PKINTERRUPT, byval OldIrql as KIRQL)
-declare function KeReleaseMutex DDKAPI alias "KeReleaseMutex" (byval Mutex as PRKMUTEX, byval Wait as BOOLEAN) as LONG
-declare function KeReleaseSemaphore DDKAPI alias "KeReleaseSemaphore" (byval Semaphore as PRKSEMAPHORE, byval Increment as KPRIORITY, byval Adjustment as LONG, byval Wait as BOOLEAN) as LONG
+declare function KeReleaseMutex DDKAPI alias "KeReleaseMutex" (byval Mutex as PRKMUTEX, byval Wait as BOOLEAN_) as LONG
+declare function KeReleaseSemaphore DDKAPI alias "KeReleaseSemaphore" (byval Semaphore as PRKSEMAPHORE, byval Increment as KPRIORITY, byval Adjustment as LONG, byval Wait as BOOLEAN_) as LONG
 declare sub KeReleaseSpinLock DDKAPI alias "KeReleaseSpinLock" (byval SpinLock as PKSPIN_LOCK, byval NewIrql as KIRQL)
 declare function KeRemoveByKeyDeviceQueue DDKAPI alias "KeRemoveByKeyDeviceQueue" (byval DeviceQueue as PKDEVICE_QUEUE, byval SortKey as ULONG) as PKDEVICE_QUEUE_ENTRY
 declare function KeRemoveDeviceQueue DDKAPI alias "KeRemoveDeviceQueue" (byval DeviceQueue as PKDEVICE_QUEUE) as PKDEVICE_QUEUE_ENTRY
-declare function KeRemoveEntryDeviceQueue DDKAPI alias "KeRemoveEntryDeviceQueue" (byval DeviceQueue as PKDEVICE_QUEUE, byval DeviceQueueEntry as PKDEVICE_QUEUE_ENTRY) as BOOLEAN
-declare function KeRemoveQueueDpc DDKAPI alias "KeRemoveQueueDpc" (byval Dpc as PRKDPC) as BOOLEAN
+declare function KeRemoveEntryDeviceQueue DDKAPI alias "KeRemoveEntryDeviceQueue" (byval DeviceQueue as PKDEVICE_QUEUE, byval DeviceQueueEntry as PKDEVICE_QUEUE_ENTRY) as BOOLEAN_
+declare function KeRemoveQueueDpc DDKAPI alias "KeRemoveQueueDpc" (byval Dpc as PRKDPC) as BOOLEAN_
 declare function KeResetEvent DDKAPI alias "KeResetEvent" (byval Event as PRKEVENT) as LONG
 declare function KeRestoreFloatingPointState DDKAPI alias "KeRestoreFloatingPointState" (byval FloatSave as PKFLOATING_SAVE) as NTSTATUS
 declare function KeSaveFloatingPointState DDKAPI alias "KeSaveFloatingPointState" (byval FloatSave as PKFLOATING_SAVE) as NTSTATUS
 declare function KeSetBasePriorityThread DDKAPI alias "KeSetBasePriorityThread" (byval Thread as PRKTHREAD, byval Increment as LONG) as LONG
-declare function KeSetEvent DDKAPI alias "KeSetEvent" (byval Event as PRKEVENT, byval Increment as KPRIORITY, byval Wait as BOOLEAN) as LONG
+declare function KeSetEvent DDKAPI alias "KeSetEvent" (byval Event as PRKEVENT, byval Increment as KPRIORITY, byval Wait as BOOLEAN_) as LONG
 declare sub KeSetImportanceDpc DDKAPI alias "KeSetImportanceDpc" (byval Dpc as PRKDPC, byval Importance as KDPC_IMPORTANCE)
 declare function KeSetPriorityThread DDKAPI alias "KeSetPriorityThread" (byval Thread as PKTHREAD, byval Priority as KPRIORITY) as KPRIORITY
 declare sub KeSetTargetProcessorDpc DDKAPI alias "KeSetTargetProcessorDpc" (byval Dpc as PRKDPC, byval Number as CCHAR)
-declare function KeSetTimer DDKAPI alias "KeSetTimer" (byval Timer as PKTIMER, byval DueTime as LARGE_INTEGER, byval Dpc as PKDPC) as BOOLEAN
-declare function KeSetTimerEx DDKAPI alias "KeSetTimerEx" (byval Timer as PKTIMER, byval DueTime as LARGE_INTEGER, byval Period as LONG, byval Dpc as PKDPC) as BOOLEAN
+declare function KeSetTimer DDKAPI alias "KeSetTimer" (byval Timer as PKTIMER, byval DueTime as LARGE_INTEGER, byval Dpc as PKDPC) as BOOLEAN_
+declare function KeSetTimerEx DDKAPI alias "KeSetTimerEx" (byval Timer as PKTIMER, byval DueTime as LARGE_INTEGER, byval Period as LONG, byval Dpc as PKDPC) as BOOLEAN_
 declare sub KeSetTimeUpdateNotifyRoutine DDKAPI alias "KeSetTimeUpdateNotifyRoutine" (byval NotifyRoutine as PTIME_UPDATE_NOTIFY_ROUTINE)
 declare sub KeStallExecutionProcessor DDKAPI alias "KeStallExecutionProcessor" (byval MicroSeconds as ULONG)
-declare function KeSynchronizeExecution DDKAPI alias "KeSynchronizeExecution" (byval Interrupt as PKINTERRUPT, byval SynchronizeRoutine as PKSYNCHRONIZE_ROUTINE, byval SynchronizeContext as PVOID) as BOOLEAN
-declare function KeWaitForMultipleObjects DDKAPI alias "KeWaitForMultipleObjects" (byval Count as ULONG, byval Object as PVOID ptr, byval WaitType as WAIT_TYPE, byval WaitReason as KWAIT_REASON, byval WaitMode as KPROCESSOR_MODE, byval Alertable as BOOLEAN, byval Timeout as PLARGE_INTEGER, byval WaitBlockArray as PKWAIT_BLOCK) as NTSTATUS
-declare function KeWaitForMutexObject DDKAPI alias "KeWaitForMutexObject" (byval Mutex as PRKMUTEX, byval WaitReason as KWAIT_REASON, byval WaitMode as KPROCESSOR_MODE, byval Alertable as BOOLEAN, byval Timeout as PLARGE_INTEGER) as NTSTATUS
-declare function KeWaitForSingleObject DDKAPI alias "KeWaitForSingleObject" (byval Object as PVOID, byval WaitReason as KWAIT_REASON, byval WaitMode as KPROCESSOR_MODE, byval Alertable as BOOLEAN, byval Timeout as PLARGE_INTEGER) as NTSTATUS
+declare function KeSynchronizeExecution DDKAPI alias "KeSynchronizeExecution" (byval Interrupt as PKINTERRUPT, byval SynchronizeRoutine as PKSYNCHRONIZE_ROUTINE, byval SynchronizeContext as PVOID) as BOOLEAN_
+declare function KeWaitForMultipleObjects DDKAPI alias "KeWaitForMultipleObjects" (byval Count as ULONG, byval Object as PVOID ptr, byval WaitType as WAIT_TYPE, byval WaitReason as KWAIT_REASON, byval WaitMode as KPROCESSOR_MODE, byval Alertable as BOOLEAN_, byval Timeout as PLARGE_INTEGER, byval WaitBlockArray as PKWAIT_BLOCK) as NTSTATUS
+declare function KeWaitForMutexObject DDKAPI alias "KeWaitForMutexObject" (byval Mutex as PRKMUTEX, byval WaitReason as KWAIT_REASON, byval WaitMode as KPROCESSOR_MODE, byval Alertable as BOOLEAN_, byval Timeout as PLARGE_INTEGER) as NTSTATUS
+declare function KeWaitForSingleObject DDKAPI alias "KeWaitForSingleObject" (byval Object as PVOID, byval WaitReason as KWAIT_REASON, byval WaitMode as KPROCESSOR_MODE, byval Alertable as BOOLEAN_, byval Timeout as PLARGE_INTEGER) as NTSTATUS
 declare sub KfLowerIrql DDKAPI alias "KfLowerIrql" (byval NewIrql as KIRQL)
 declare function KfRaiseIrql DDKAPI alias "KfRaiseIrql" (byval NewIrql as KIRQL) as KIRQL
 declare function KeRaiseIrqlToDpcLevel DDKAPI alias "KeRaiseIrqlToDpcLevel" () as KIRQL
@@ -4151,7 +4151,7 @@ declare function MmAllocateNonCachedMemory DDKAPI alias "MmAllocateNonCachedMemo
 declare function MmAllocatePagesForMdl DDKAPI alias "MmAllocatePagesForMdl" (byval LowAddress as PHYSICAL_ADDRESS, byval HighAddress as PHYSICAL_ADDRESS, byval SkipBytes as PHYSICAL_ADDRESS, byval TotalBytes as SIZE_T) as PMDL
 declare sub MmBuildMdlForNonPagedPool DDKAPI alias "MmBuildMdlForNonPagedPool" (byval MemoryDescriptorList as PMDL)
 declare function MmCreateSection DDKAPI alias "MmCreateSection" (byval SectionObject as PSECTION_OBJECT ptr, byval DesiredAccess as ACCESS_MASK, byval ObjectAttributes as POBJECT_ATTRIBUTES, byval MaximumSize as PLARGE_INTEGER, byval SectionPageProtection as ULONG, byval AllocationAttributes as ULONG, byval FileHandle as HANDLE, byval File as PFILE_OBJECT) as NTSTATUS
-declare function MmFlushImageSection DDKAPI alias "MmFlushImageSection" (byval SectionObjectPointer as PSECTION_OBJECT_POINTERS, byval FlushType as MMFLUSH_TYPE) as BOOLEAN
+declare function MmFlushImageSection DDKAPI alias "MmFlushImageSection" (byval SectionObjectPointer as PSECTION_OBJECT_POINTERS, byval FlushType as MMFLUSH_TYPE) as BOOLEAN_
 declare sub MmFreeContiguousMemory DDKAPI alias "MmFreeContiguousMemory" (byval BaseAddress as PVOID)
 declare sub MmFreeContiguousMemorySpecifyCache DDKAPI alias "MmFreeContiguousMemorySpecifyCache" (byval BaseAddress as PVOID, byval NumberOfBytes as SIZE_T, byval CacheType as MEMORY_CACHING_TYPE)
 declare sub MmFreeMappingAddress DDKAPI alias "MmFreeMappingAddress" (byval BaseAddress as PVOID, byval PoolTag as ULONG)
@@ -4169,9 +4169,9 @@ declare function MmMapViewInSystemSpace DDKAPI alias "MmMapViewInSystemSpace" (b
 declare function MmMarkPhysicalMemoryAsBad DDKAPI alias "MmMarkPhysicalMemoryAsBad" (byval StartAddress as PPHYSICAL_ADDRESS, byval NumberOfBytes as PLARGE_INTEGER) as NTSTATUS
 declare function MmMarkPhysicalMemoryAsGood DDKAPI alias "MmMarkPhysicalMemoryAsGood" (byval StartAddress as PPHYSICAL_ADDRESS, byval NumberOfBytes as PLARGE_INTEGER) as NTSTATUS
 declare function MmGetSystemRoutineAddress DDKAPI alias "MmGetSystemRoutineAddress" (byval SystemRoutineName as PUNICODE_STRING) as PVOID
-declare function MmIsAddressValid DDKAPI alias "MmIsAddressValid" (byval VirtualAddress as PVOID) as BOOLEAN
+declare function MmIsAddressValid DDKAPI alias "MmIsAddressValid" (byval VirtualAddress as PVOID) as BOOLEAN_
 declare function MmIsDriverVerifying DDKAPI alias "MmIsDriverVerifying" (byval DriverObject as PDRIVER_OBJECT) as LOGICAL
-declare function MmIsThisAnNtAsSystem DDKAPI alias "MmIsThisAnNtAsSystem" () as BOOLEAN
+declare function MmIsThisAnNtAsSystem DDKAPI alias "MmIsThisAnNtAsSystem" () as BOOLEAN_
 declare function MmIsVerifierEnabled DDKAPI alias "MmIsVerifierEnabled" (byval VerifierFlags as PULONG) as NTSTATUS
 declare function MmLockPagableDataSection DDKAPI alias "MmLockPagableDataSection" (byval AddressWithinSection as PVOID) as PVOID
 declare function MmLockPagableImageSection DDKAPI alias "MmLockPagableImageSection" (byval AddressWithinSection as PVOID) as PVOID
@@ -4211,32 +4211,32 @@ declare function ObReferenceObjectByHandle DDKAPI alias "ObReferenceObjectByHand
 declare function ObReferenceObjectByName DDKAPI alias "ObReferenceObjectByName" (byval ObjectPath as PUNICODE_STRING, byval Attributes as ULONG, byval PassedAccessState as PACCESS_STATE, byval DesiredAccess as ACCESS_MASK, byval ObjectType as POBJECT_TYPE, byval AccessMode as KPROCESSOR_MODE, byval ParseContext as PVOID, byval Object as PVOID ptr) as NTSTATUS
 declare function ObReferenceObjectByPointer DDKAPI alias "ObReferenceObjectByPointer" (byval Object as PVOID, byval DesiredAccess as ACCESS_MASK, byval ObjectType as POBJECT_TYPE, byval AccessMode as KPROCESSOR_MODE) as NTSTATUS
 declare sub ObReferenceSecurityDescriptor DDKAPI alias "ObReferenceSecurityDescriptor" (byval SecurityDescriptor as PSECURITY_DESCRIPTOR, byval Count as ULONG)
-declare sub ObReleaseObjectSecurity DDKAPI alias "ObReleaseObjectSecurity" (byval SecurityDescriptor as PSECURITY_DESCRIPTOR, byval MemoryAllocated as BOOLEAN)
+declare sub ObReleaseObjectSecurity DDKAPI alias "ObReleaseObjectSecurity" (byval SecurityDescriptor as PSECURITY_DESCRIPTOR, byval MemoryAllocated as BOOLEAN_)
 declare function PsCreateSystemProcess DDKAPI alias "PsCreateSystemProcess" (byval ProcessHandle as PHANDLE, byval DesiredAccess as ACCESS_MASK, byval ObjectAttributes as POBJECT_ATTRIBUTES) as NTSTATUS
 declare function PsCreateSystemThread DDKAPI alias "PsCreateSystemThread" (byval ThreadHandle as PHANDLE, byval DesiredAccess as ULONG, byval ObjectAttributes as POBJECT_ATTRIBUTES, byval ProcessHandle as HANDLE, byval ClientId as PCLIENT_ID, byval StartRoutine as PKSTART_ROUTINE, byval StartContext as PVOID) as NTSTATUS
 declare function PsGetCurrentProcessId DDKAPI alias "PsGetCurrentProcessId" () as HANDLE
 declare function PsGetCurrentThreadId DDKAPI alias "PsGetCurrentThreadId" () as HANDLE
-declare function PsGetVersion DDKAPI alias "PsGetVersion" (byval MajorVersion as PULONG, byval MinorVersion as PULONG, byval BuildNumber as PULONG, byval CSDVersion as PUNICODE_STRING) as BOOLEAN
+declare function PsGetVersion DDKAPI alias "PsGetVersion" (byval MajorVersion as PULONG, byval MinorVersion as PULONG, byval BuildNumber as PULONG, byval CSDVersion as PUNICODE_STRING) as BOOLEAN_
 declare function PsRemoveCreateThreadNotifyRoutine DDKAPI alias "PsRemoveCreateThreadNotifyRoutine" (byval NotifyRoutine as PCREATE_THREAD_NOTIFY_ROUTINE) as NTSTATUS
 declare function PsRemoveLoadImageNotifyRoutine DDKAPI alias "PsRemoveLoadImageNotifyRoutine" (byval NotifyRoutine as PLOAD_IMAGE_NOTIFY_ROUTINE) as NTSTATUS
-declare function PsSetCreateProcessNotifyRoutine DDKAPI alias "PsSetCreateProcessNotifyRoutine" (byval NotifyRoutine as PCREATE_PROCESS_NOTIFY_ROUTINE, byval Remove as BOOLEAN) as NTSTATUS
+declare function PsSetCreateProcessNotifyRoutine DDKAPI alias "PsSetCreateProcessNotifyRoutine" (byval NotifyRoutine as PCREATE_PROCESS_NOTIFY_ROUTINE, byval Remove as BOOLEAN_) as NTSTATUS
 declare function PsSetCreateThreadNotifyRoutine DDKAPI alias "PsSetCreateThreadNotifyRoutine" (byval NotifyRoutine as PCREATE_THREAD_NOTIFY_ROUTINE) as NTSTATUS
 declare function PsSetLoadImageNotifyRoutine DDKAPI alias "PsSetLoadImageNotifyRoutine" (byval NotifyRoutine as PLOAD_IMAGE_NOTIFY_ROUTINE) as NTSTATUS
 declare function PsTerminateSystemThread DDKAPI alias "PsTerminateSystemThread" (byval ExitStatus as NTSTATUS) as NTSTATUS
-declare function SeAccessCheck DDKAPI alias "SeAccessCheck" (byval SecurityDescriptor as PSECURITY_DESCRIPTOR, byval SubjectSecurityContext as PSECURITY_SUBJECT_CONTEXT, byval SubjectContextLocked as BOOLEAN, byval DesiredAccess as ACCESS_MASK, byval PreviouslyGrantedAccess as ACCESS_MASK, byval Privileges as PPRIVILEGE_SET ptr, byval GenericMapping as PGENERIC_MAPPING, byval AccessMode as KPROCESSOR_MODE, byval GrantedAccess as PACCESS_MASK, byval AccessStatus as PNTSTATUS) as BOOLEAN
-declare function SeAssignSecurity DDKAPI alias "SeAssignSecurity" (byval ParentDescriptor as PSECURITY_DESCRIPTOR, byval ExplicitDescriptor as PSECURITY_DESCRIPTOR, byval NewDescriptor as PSECURITY_DESCRIPTOR ptr, byval IsDirectoryObject as BOOLEAN, byval SubjectContext as PSECURITY_SUBJECT_CONTEXT, byval GenericMapping as PGENERIC_MAPPING, byval PoolType as POOL_TYPE) as NTSTATUS
-declare function SeAssignSecurityEx DDKAPI alias "SeAssignSecurityEx" (byval ParentDescriptor as PSECURITY_DESCRIPTOR, byval ExplicitDescriptor as PSECURITY_DESCRIPTOR, byval NewDescriptor as PSECURITY_DESCRIPTOR ptr, byval ObjectType as GUID ptr, byval IsDirectoryObject as BOOLEAN, byval AutoInheritFlags as ULONG, byval SubjectContext as PSECURITY_SUBJECT_CONTEXT, byval GenericMapping as PGENERIC_MAPPING, byval PoolType as POOL_TYPE) as NTSTATUS
+declare function SeAccessCheck DDKAPI alias "SeAccessCheck" (byval SecurityDescriptor as PSECURITY_DESCRIPTOR, byval SubjectSecurityContext as PSECURITY_SUBJECT_CONTEXT, byval SubjectContextLocked as BOOLEAN_, byval DesiredAccess as ACCESS_MASK, byval PreviouslyGrantedAccess as ACCESS_MASK, byval Privileges as PPRIVILEGE_SET ptr, byval GenericMapping as PGENERIC_MAPPING, byval AccessMode as KPROCESSOR_MODE, byval GrantedAccess as PACCESS_MASK, byval AccessStatus as PNTSTATUS) as BOOLEAN_
+declare function SeAssignSecurity DDKAPI alias "SeAssignSecurity" (byval ParentDescriptor as PSECURITY_DESCRIPTOR, byval ExplicitDescriptor as PSECURITY_DESCRIPTOR, byval NewDescriptor as PSECURITY_DESCRIPTOR ptr, byval IsDirectoryObject as BOOLEAN_, byval SubjectContext as PSECURITY_SUBJECT_CONTEXT, byval GenericMapping as PGENERIC_MAPPING, byval PoolType as POOL_TYPE) as NTSTATUS
+declare function SeAssignSecurityEx DDKAPI alias "SeAssignSecurityEx" (byval ParentDescriptor as PSECURITY_DESCRIPTOR, byval ExplicitDescriptor as PSECURITY_DESCRIPTOR, byval NewDescriptor as PSECURITY_DESCRIPTOR ptr, byval ObjectType as GUID ptr, byval IsDirectoryObject as BOOLEAN_, byval AutoInheritFlags as ULONG, byval SubjectContext as PSECURITY_SUBJECT_CONTEXT, byval GenericMapping as PGENERIC_MAPPING, byval PoolType as POOL_TYPE) as NTSTATUS
 declare function SeDeassignSecurity DDKAPI alias "SeDeassignSecurity" (byval SecurityDescriptor as PSECURITY_DESCRIPTOR ptr) as NTSTATUS
-declare function SeSinglePrivilegeCheck DDKAPI alias "SeSinglePrivilegeCheck" (byval PrivilegeValue as LUID, byval PreviousMode as KPROCESSOR_MODE) as BOOLEAN
-declare function SeValidSecurityDescriptor DDKAPI alias "SeValidSecurityDescriptor" (byval Length as ULONG, byval SecurityDescriptor as PSECURITY_DESCRIPTOR) as BOOLEAN
+declare function SeSinglePrivilegeCheck DDKAPI alias "SeSinglePrivilegeCheck" (byval PrivilegeValue as LUID, byval PreviousMode as KPROCESSOR_MODE) as BOOLEAN_
+declare function SeValidSecurityDescriptor DDKAPI alias "SeValidSecurityDescriptor" (byval Length as ULONG, byval SecurityDescriptor as PSECURITY_DESCRIPTOR) as BOOLEAN_
 declare function NtOpenProcess DDKAPI alias "NtOpenProcess" (byval ProcessHandle as PHANDLE, byval DesiredAccess as ACCESS_MASK, byval ObjectAttributes as POBJECT_ATTRIBUTES, byval ClientId as PCLIENT_ID) as NTSTATUS
 declare function NtQueryInformationProcess DDKAPI alias "NtQueryInformationProcess" (byval ProcessHandle as HANDLE, byval ProcessInformationClass as PROCESSINFOCLASS, byval ProcessInformation as PVOID, byval ProcessInformationLength as ULONG, byval ReturnLength as PULONG) as NTSTATUS
 declare function ZwCancelTimer DDKAPI alias "ZwCancelTimer" (byval TimerHandle as HANDLE, byval CurrentState as PBOOLEAN) as NTSTATUS
 declare function NtClose DDKAPI alias "NtClose" (byval Handle as HANDLE) as NTSTATUS
 declare function ZwClose DDKAPI alias "ZwClose" (byval Handle as HANDLE) as NTSTATUS
 declare function ZwCreateDirectoryObject DDKAPI alias "ZwCreateDirectoryObject" (byval DirectoryHandle as PHANDLE, byval DesiredAccess as ACCESS_MASK, byval ObjectAttributes as POBJECT_ATTRIBUTES) as NTSTATUS
-declare function NtCreateEvent DDKAPI alias "NtCreateEvent" (byval EventHandle as PHANDLE, byval DesiredAccess as ACCESS_MASK, byval ObjectAttributes as POBJECT_ATTRIBUTES, byval ManualReset as BOOLEAN, byval InitialState as BOOLEAN) as NTSTATUS
-declare function ZwCreateEvent DDKAPI alias "ZwCreateEvent" (byval EventHandle as PHANDLE, byval DesiredAccess as ACCESS_MASK, byval ObjectAttributes as POBJECT_ATTRIBUTES, byval ManualReset as BOOLEAN, byval InitialState as BOOLEAN) as NTSTATUS
+declare function NtCreateEvent DDKAPI alias "NtCreateEvent" (byval EventHandle as PHANDLE, byval DesiredAccess as ACCESS_MASK, byval ObjectAttributes as POBJECT_ATTRIBUTES, byval ManualReset as BOOLEAN_, byval InitialState as BOOLEAN_) as NTSTATUS
+declare function ZwCreateEvent DDKAPI alias "ZwCreateEvent" (byval EventHandle as PHANDLE, byval DesiredAccess as ACCESS_MASK, byval ObjectAttributes as POBJECT_ATTRIBUTES, byval ManualReset as BOOLEAN_, byval InitialState as BOOLEAN_) as NTSTATUS
 declare function ZwCreateFile DDKAPI alias "ZwCreateFile" (byval FileHandle as PHANDLE, byval DesiredAccess as ACCESS_MASK, byval ObjectAttributes as POBJECT_ATTRIBUTES, byval IoStatusBlock as PIO_STATUS_BLOCK, byval AllocationSize as PLARGE_INTEGER, byval FileAttributes as ULONG, byval ShareAccess as ULONG, byval CreateDisposition as ULONG, byval CreateOptions as ULONG, byval EaBuffer as PVOID, byval EaLength as ULONG) as NTSTATUS
 declare function ZwCreateKey DDKAPI alias "ZwCreateKey" (byval KeyHandle as PHANDLE, byval DesiredAccess as ACCESS_MASK, byval ObjectAttributes as POBJECT_ATTRIBUTES, byval TitleIndex as ULONG, byval Class as PUNICODE_STRING, byval CreateOptions as ULONG, byval Disposition as PULONG) as NTSTATUS
 declare function ZwCreateTimer DDKAPI alias "ZwCreateTimer" (byval TimerHandle as PHANDLE, byval DesiredAccess as ACCESS_MASK, byval ObjectAttributes as POBJECT_ATTRIBUTES, byval TimerType as TIMER_TYPE) as NTSTATUS
@@ -4266,12 +4266,12 @@ declare function NtSetEvent DDKAPI alias "NtSetEvent" (byval EventHandle as HAND
 declare function ZwSetEvent DDKAPI alias "ZwSetEvent" (byval EventHandle as HANDLE, byval NumberOfThreadsReleased as PULONG) as NTSTATUS
 declare function ZwSetInformationFile DDKAPI alias "ZwSetInformationFile" (byval FileHandle as HANDLE, byval IoStatusBlock as PIO_STATUS_BLOCK, byval FileInformation as PVOID, byval Length as ULONG, byval FileInformationClass as FILE_INFORMATION_CLASS) as NTSTATUS
 declare function ZwSetInformationThread DDKAPI alias "ZwSetInformationThread" (byval ThreadHandle as HANDLE, byval ThreadInformationClass as THREADINFOCLASS, byval ThreadInformation as PVOID, byval ThreadInformationLength as ULONG) as NTSTATUS
-declare function ZwSetTimer DDKAPI alias "ZwSetTimer" (byval TimerHandle as HANDLE, byval DueTime as PLARGE_INTEGER, byval TimerApcRoutine as PTIMER_APC_ROUTINE, byval TimerContext as PVOID, byval WakeTimer as BOOLEAN, byval Period as LONG, byval PreviousState as PBOOLEAN) as NTSTATUS
+declare function ZwSetTimer DDKAPI alias "ZwSetTimer" (byval TimerHandle as HANDLE, byval DueTime as PLARGE_INTEGER, byval TimerApcRoutine as PTIMER_APC_ROUTINE, byval TimerContext as PVOID, byval WakeTimer as BOOLEAN_, byval Period as LONG, byval PreviousState as PBOOLEAN) as NTSTATUS
 declare function ZwSetValueKey DDKAPI alias "ZwSetValueKey" (byval KeyHandle as HANDLE, byval ValueName as PUNICODE_STRING, byval TitleIndex as ULONG, byval Type as ULONG, byval Data as PVOID, byval DataSize as ULONG) as NTSTATUS
 declare function NtUnmapViewOfSection DDKAPI alias "NtUnmapViewOfSection" (byval ProcessHandle as HANDLE, byval BaseAddress as PVOID) as NTSTATUS
 declare function ZwUnmapViewOfSection DDKAPI alias "ZwUnmapViewOfSection" (byval ProcessHandle as HANDLE, byval BaseAddress as PVOID) as NTSTATUS
-declare function NtWaitForSingleObject DDKAPI alias "NtWaitForSingleObject" (byval Object as HANDLE, byval Alertable as BOOLEAN, byval Time as PLARGE_INTEGER) as NTSTATUS
-declare function ZwWaitForSingleObject DDKAPI alias "ZwWaitForSingleObject" (byval Object as HANDLE, byval Alertable as BOOLEAN, byval Time as PLARGE_INTEGER) as NTSTATUS
+declare function NtWaitForSingleObject DDKAPI alias "NtWaitForSingleObject" (byval Object as HANDLE, byval Alertable as BOOLEAN_, byval Time as PLARGE_INTEGER) as NTSTATUS
+declare function ZwWaitForSingleObject DDKAPI alias "ZwWaitForSingleObject" (byval Object as HANDLE, byval Alertable as BOOLEAN_, byval Time as PLARGE_INTEGER) as NTSTATUS
 declare function NtWriteFile DDKAPI alias "NtWriteFile" (byval FileHandle as HANDLE, byval Event as HANDLE, byval ApcRoutine as PIO_APC_ROUTINE, byval ApcContext as PVOID, byval IoStatusBlock as PIO_STATUS_BLOCK, byval Buffer as PVOID, byval Length as ULONG, byval ByteOffset as PLARGE_INTEGER, byval Key as PULONG) as NTSTATUS
 declare function ZwWriteFile DDKAPI alias "ZwWriteFile" (byval FileHandle as HANDLE, byval Event as HANDLE, byval ApcRoutine as PIO_APC_ROUTINE, byval ApcContext as PVOID, byval IoStatusBlock as PIO_STATUS_BLOCK, byval Buffer as PVOID, byval Length as ULONG, byval ByteOffset as PLARGE_INTEGER, byval Key as PULONG) as NTSTATUS
 declare function PoCallDriver DDKAPI alias "PoCallDriver" (byval DeviceObject as PDEVICE_OBJECT, byval Irp as PIRP) as NTSTATUS
@@ -4297,7 +4297,7 @@ declare function DbgPrint cdecl alias "DbgPrint" (byval Format as PCH, ...) as U
 declare function DbgPrintEx cdecl alias "DbgPrintEx" (byval ComponentId as ULONG, byval Level as ULONG, byval Format as PCH, ...) as ULONG
 declare function DbgPrintReturnControlC cdecl alias "DbgPrintReturnControlC" (byval Format as PCH, ...) as ULONG
 declare function DbgQueryDebugFilterState DDKAPI alias "DbgQueryDebugFilterState" (byval ComponentId as ULONG, byval Level as ULONG) as NTSTATUS
-declare function DbgSetDebugFilterState DDKAPI alias "DbgSetDebugFilterState" (byval ComponentId as ULONG, byval Level as ULONG, byval State as BOOLEAN) as NTSTATUS
+declare function DbgSetDebugFilterState DDKAPI alias "DbgSetDebugFilterState" (byval ComponentId as ULONG, byval Level as ULONG, byval State as BOOLEAN_) as NTSTATUS
 declare function KeGetCurrentKPCR DDKAPI alias "KeGetCurrentKPCR" () as _KPCR ptr
 #ifndef VerSetConditionMask 
 declare function VerSetConditionMask DDKAPI alias "VerSetConditionMask" (byval ConditionMask as ULONGLONG, byval TypeMask as ULONG, byval Condition as UCHAR) as ULONGLONG

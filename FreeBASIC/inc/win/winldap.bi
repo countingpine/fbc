@@ -286,7 +286,7 @@ type PLDAPAPIFeatureInfoW as LDAPAPIFeatureInfoW ptr
 type LDAPControlA
 	ldctl_oid as PCHAR
 	ldctl_value as BerValue
-	ldctl_iscritical as BOOLEAN
+	ldctl_iscritical as BOOLEAN_
 end type
 
 type PLDAPControlA as LDAPControlA ptr
@@ -295,7 +295,7 @@ type PLDAPControlA as LDAPControlA ptr
 type LDAPControlW
 	ldctl_oid as PWCHAR
 	ldctl_value as BerValue
-	ldctl_iscritical as BOOLEAN
+	ldctl_iscritical as BOOLEAN_
 end type
 
 type PLDAPControlW as LDAPControlW ptr
@@ -339,7 +339,7 @@ type PLDAPSearch as LDAPSearch ptr
 type LDAPSortKeyA
 	sk_attrtype as PCHAR
 	sk_matchruleoid as PCHAR
-	sk_reverseorder as BOOLEAN
+	sk_reverseorder as BOOLEAN_
 end type
 
 type PLDAPSortKeyA as LDAPSortKeyA ptr
@@ -348,16 +348,16 @@ type PLDAPSortKeyA as LDAPSortKeyA ptr
 type LDAPSortKeyW
 	sk_attrtype as PWCHAR
 	sk_matchruleoid as PWCHAR
-	sk_reverseorder as BOOLEAN
+	sk_reverseorder as BOOLEAN_
 end type
 
 type PLDAPSortKeyW as LDAPSortKeyW ptr
 #endif
 
 type QUERYFORCONNECTION as ULONG
-type NOTIFYOFNEWCONNECTION as BOOLEAN
+type NOTIFYOFNEWCONNECTION as BOOLEAN_
 type DEREFERENCECONNECTION as ULONG
-type QUERYCLIENTCERT as BOOLEAN
+type QUERYCLIENTCERT as BOOLEAN_
 
 type LDAP_REFERRAL_CALLBACK
 	SizeOfCallbacks as ULONG
@@ -380,7 +380,7 @@ type LDAPVLVInfo
 end type
 
 declare function ldap_connect alias "ldap_connect" (byval as LDAP ptr, byval as LDAP_TIMEVAL ptr) as ULONG
-declare function ldap_stop_tls_s alias "ldap_stop_tls_s" (byval as LDAP ptr) as BOOLEAN
+declare function ldap_stop_tls_s alias "ldap_stop_tls_s" (byval as LDAP ptr) as BOOLEAN_
 declare function ldap_unbind alias "ldap_unbind" (byval as LDAP ptr) as ULONG
 declare function ldap_unbind_s alias "ldap_unbind_s" (byval as LDAP ptr) as ULONG
 declare function ldap_close_extended_op alias "ldap_close_extended_op" (byval as LDAP ptr, byval as ULONG) as ULONG
@@ -452,8 +452,8 @@ declare function ldap_delete alias "ldap_deleteW" (byval as LDAP ptr, byval as P
 declare function ldap_delete_s alias "ldap_delete_sW" (byval as LDAP ptr, byval as PWCHAR) as ULONG
 declare function ldap_extended_operation alias "ldap_extended_operationW" (byval as LDAP ptr, byval as PWCHAR, byval as berval ptr, byval as PLDAPControlW ptr, byval as PLDAPControlW ptr, byval as ULONG ptr) as ULONG
 declare function ldap_extended_operation_s alias "ldap_extended_operation_sW" (byval as LDAP ptr, byval as PWCHAR, byval as berval ptr, byval as PLDAPControlW ptr, byval as PLDAPControlW ptr, byval as PWCHAR ptr, byval as berval ptr ptr) as ULONG
-declare function ldap_parse_result alias "ldap_parse_resultW" (byval as LDAP ptr, byval as LDAPMessage ptr, byval as ULONG ptr, byval as PWCHAR ptr, byval as PWCHAR ptr, byval as PWCHAR ptr ptr, byval as PLDAPControlW ptr ptr, byval as BOOLEAN) as ULONG
-declare function ldap_parse_extended_result alias "ldap_parse_extended_resultW" (byval as LDAP, byval as LDAPMessage ptr, byval as PWCHAR ptr, byval as berval ptr ptr, byval as BOOLEAN) as ULONG
+declare function ldap_parse_result alias "ldap_parse_resultW" (byval as LDAP ptr, byval as LDAPMessage ptr, byval as ULONG ptr, byval as PWCHAR ptr, byval as PWCHAR ptr, byval as PWCHAR ptr ptr, byval as PLDAPControlW ptr ptr, byval as BOOLEAN_) as ULONG
+declare function ldap_parse_extended_result alias "ldap_parse_extended_resultW" (byval as LDAP, byval as LDAPMessage ptr, byval as PWCHAR ptr, byval as berval ptr ptr, byval as BOOLEAN_) as ULONG
 declare function ldap_err2string alias "ldap_err2stringW" (byval as ULONG) as PWCHAR
 declare function ldap_first_attribute alias "ldap_first_attributeW" (byval as LDAP ptr, byval as LDAPMessage ptr, byval as BerElement ptr ptr) as PWCHAR
 declare function ldap_next_attribute alias "ldap_next_attributeW" (byval as LDAP ptr, byval as LDAPMessage ptr, byval as BerElement ptr) as PWCHAR
@@ -471,7 +471,7 @@ declare function ldap_check_filter alias "ldap_check_filterW" (byval as LDAP ptr
 declare function ldap_create_page_control alias "ldap_create_page_controlW" (byval as PLDAP, byval as ULONG, byval as berval ptr, byval as UCHAR, byval as PLDAPControlW ptr) as ULONG
 declare function ldap_create_sort_control alias "ldap_create_sort_controlW" (byval as PLDAP, byval as PLDAPSortKeyW ptr, byval as UCHAR, byval as PLDAPControlW ptr) as ULONG
 declare function ldap_create_vlv_control alias "ldap_create_vlv_controlW" (byval as LDAP ptr, byval as LDAPVLVInfo ptr, byval as UCHAR, byval as LDAPControlW ptr ptr) as INT_
-declare function ldap_encode_sort_control alias "ldap_encode_sort_controlW" (byval as PLDAP, byval as PLDAPSortKeyW ptr, byval as PLDAPControlW, byval as BOOLEAN) as ULONG
+declare function ldap_encode_sort_control alias "ldap_encode_sort_controlW" (byval as PLDAP, byval as PLDAPSortKeyW ptr, byval as PLDAPControlW, byval as BOOLEAN_) as ULONG
 declare function ldap_escape_filter_element alias "ldap_escape_filter_elementW" (byval as PWCHAR, byval as ULONG, byval as PWCHAR, byval as ULONG) as ULONG
 declare function ldap_parse_page_control alias "ldap_parse_page_controlW" (byval as PLDAP, byval as PLDAPControlW ptr, byval as ULONG ptr, byval as berval ptr ptr) as ULONG
 declare function ldap_parse_sort_control alias "ldap_parse_sort_controlW" (byval as PLDAP, byval as PLDAPControlW ptr, byval as ULONG ptr, byval as PWCHAR ptr) as ULONG
@@ -524,8 +524,8 @@ declare function ldap_delete alias "ldap_deleteA" (byval as LDAP ptr, byval as P
 declare function ldap_delete_s alias "ldap_delete_sA" (byval as LDAP ptr, byval as PCHAR) as ULONG
 declare function ldap_extended_operation alias "ldap_extended_operationA" (byval as LDAP ptr, byval as PCHAR, byval as berval ptr, byval as PLDAPControlA ptr, byval as PLDAPControlA ptr, byval as ULONG ptr) as ULONG
 declare function ldap_extended_operation_s alias "ldap_extended_operation_sA" (byval as LDAP ptr, byval as PCHAR, byval as berval ptr, byval as PLDAPControlA ptr, byval as PLDAPControlA ptr, byval as PCHAR ptr, byval as berval ptr ptr) as ULONG
-declare function ldap_parse_result alias "ldap_parse_resultA" (byval as LDAP ptr, byval as LDAPMessage ptr, byval as ULONG ptr, byval as PCHAR ptr, byval as PCHAR ptr, byval as PCHAR ptr ptr, byval as PLDAPControlA ptr ptr, byval as BOOLEAN) as ULONG
-declare function ldap_parse_extended_result alias "ldap_parse_extended_resultA" (byval as LDAP, byval as LDAPMessage ptr, byval as PCHAR ptr, byval as berval ptr ptr, byval as BOOLEAN) as ULONG
+declare function ldap_parse_result alias "ldap_parse_resultA" (byval as LDAP ptr, byval as LDAPMessage ptr, byval as ULONG ptr, byval as PCHAR ptr, byval as PCHAR ptr, byval as PCHAR ptr ptr, byval as PLDAPControlA ptr ptr, byval as BOOLEAN_) as ULONG
+declare function ldap_parse_extended_result alias "ldap_parse_extended_resultA" (byval as LDAP, byval as LDAPMessage ptr, byval as PCHAR ptr, byval as berval ptr ptr, byval as BOOLEAN_) as ULONG
 declare function ldap_err2string alias "ldap_err2stringA" (byval as ULONG) as PCHAR
 declare function ldap_first_attribute alias "ldap_first_attributeA" (byval as LDAP ptr, byval as LDAPMessage ptr, byval as BerElement ptr ptr) as PCHAR
 declare function ldap_next_attribute alias "ldap_next_attributeA" (byval as LDAP ptr, byval as LDAPMessage ptr, byval as BerElement ptr) as PCHAR
@@ -543,7 +543,7 @@ declare function ldap_check_filter alias "ldap_check_filterA" (byval as LDAP ptr
 declare function ldap_create_page_control alias "ldap_create_page_controlA" (byval as PLDAP, byval as ULONG, byval as berval ptr, byval as UCHAR, byval as PLDAPControlA ptr) as ULONG
 declare function ldap_create_sort_control alias "ldap_create_sort_controlA" (byval as PLDAP, byval as PLDAPSortKeyA ptr, byval as UCHAR, byval as PLDAPControlA ptr) as ULONG
 declare function ldap_create_vlv_control alias "ldap_create_vlv_controlA" (byval as LDAP ptr, byval as LDAPVLVInfo ptr, byval as UCHAR, byval as LDAPControlA ptr ptr) as INT_
-declare function ldap_encode_sort_control alias "ldap_encode_sort_controlA" (byval as PLDAP, byval as PLDAPSortKeyA ptr, byval as PLDAPControlA, byval as BOOLEAN) as ULONG
+declare function ldap_encode_sort_control alias "ldap_encode_sort_controlA" (byval as PLDAP, byval as PLDAPSortKeyA ptr, byval as PLDAPControlA, byval as BOOLEAN_) as ULONG
 declare function ldap_escape_filter_element alias "ldap_escape_filter_elementA" (byval as PCHAR, byval as ULONG, byval as PCHAR, byval as ULONG) as ULONG
 declare function ldap_parse_page_control alias "ldap_parse_page_controlA" (byval as PLDAP, byval as PLDAPControlA ptr, byval as ULONG ptr, byval as berval ptr ptr) as ULONG
 declare function ldap_parse_sort_control alias "ldap_parse_sort_controlA" (byval as PLDAP, byval as PLDAPControlA ptr, byval as ULONG ptr, byval as PCHAR ptr) as ULONG

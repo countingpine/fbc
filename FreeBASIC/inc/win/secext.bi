@@ -23,13 +23,13 @@ enum EXTENDED_NAME_FORMAT
 end enum
 
 #ifdef UNICODE
-declare function GetComputerObjectName alias "GetComputerObjectNameW" (byval as EXTENDED_NAME_FORMAT, byval as LPWSTR, byval as PULONG) as BOOLEAN
-declare function GetUserNameEx alias "GetUserNameExW" (byval as EXTENDED_NAME_FORMAT, byval as LPWSTR, byval as PULONG) as BOOLEAN
-declare function TranslateName alias "TranslateNameW" (byval as LPCWSTR, byval as EXTENDED_NAME_FORMAT, byval as EXTENDED_NAME_FORMAT, byval as LPWSTR, byval as PULONG) as BOOLEAN
+declare function GetComputerObjectName alias "GetComputerObjectNameW" (byval as EXTENDED_NAME_FORMAT, byval as LPWSTR, byval as PULONG) as BOOLEAN_
+declare function GetUserNameEx alias "GetUserNameExW" (byval as EXTENDED_NAME_FORMAT, byval as LPWSTR, byval as PULONG) as BOOLEAN_
+declare function TranslateName alias "TranslateNameW" (byval as LPCWSTR, byval as EXTENDED_NAME_FORMAT, byval as EXTENDED_NAME_FORMAT, byval as LPWSTR, byval as PULONG) as BOOLEAN_
 #else ''UNICODE
-declare function GetComputerObjectName alias "GetComputerObjectNameA" (byval as EXTENDED_NAME_FORMAT, byval as LPSTR, byval as PULONG) as BOOLEAN
-declare function GetUserNameEx alias "GetUserNameExA" (byval as EXTENDED_NAME_FORMAT, byval as LPSTR, byval as PULONG) as BOOLEAN
-declare function TranslateName alias "TranslateNameA" (byval as LPCSTR, byval as EXTENDED_NAME_FORMAT, byval as EXTENDED_NAME_FORMAT, byval as LPSTR, byval as PULONG) as BOOLEAN
+declare function GetComputerObjectName alias "GetComputerObjectNameA" (byval as EXTENDED_NAME_FORMAT, byval as LPSTR, byval as PULONG) as BOOLEAN_
+declare function GetUserNameEx alias "GetUserNameExA" (byval as EXTENDED_NAME_FORMAT, byval as LPSTR, byval as PULONG) as BOOLEAN_
+declare function TranslateName alias "TranslateNameA" (byval as LPCSTR, byval as EXTENDED_NAME_FORMAT, byval as EXTENDED_NAME_FORMAT, byval as LPSTR, byval as PULONG) as BOOLEAN_
 #endif ''UNICODE
 
 #endif

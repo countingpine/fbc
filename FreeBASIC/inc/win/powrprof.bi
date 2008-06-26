@@ -94,8 +94,8 @@ type USER_POWER_POLICY
 	VideoTimeoutDc as ULONG
 	SpindownTimeoutAc as ULONG
 	SpindownTimeoutDc as ULONG
-	OptimizeForPowerAc as BOOLEAN
-	OptimizeForPowerDc as BOOLEAN
+	OptimizeForPowerAc as BOOLEAN_
+	OptimizeForPowerDc as BOOLEAN_
 	FanThrottleToleranceAc as UCHAR
 	FanThrottleToleranceDc as UCHAR
 	ForcedThrottleAc as UCHAR
@@ -111,29 +111,29 @@ end type
 
 type PPOWER_POLICY as POWER_POLICY ptr
 
-type PWRSCHEMESENUMPROC as function (byval as UINT, byval as DWORD, byval as LPTSTR, byval as DWORD, byval as LPTSTR, byval as PPOWER_POLICY, byval as LPARAM) as BOOLEAN
-type PFNNTINITIATEPWRACTION as function (byval as POWER_ACTION, byval as SYSTEM_POWER_STATE, byval as ULONG, byval as BOOLEAN) as BOOLEAN
+type PWRSCHEMESENUMPROC as function (byval as UINT, byval as DWORD, byval as LPTSTR, byval as DWORD, byval as LPTSTR, byval as PPOWER_POLICY, byval as LPARAM) as BOOLEAN_
+type PFNNTINITIATEPWRACTION as function (byval as POWER_ACTION, byval as SYSTEM_POWER_STATE, byval as ULONG, byval as BOOLEAN_) as BOOLEAN_
 
 declare function CallNtPowerInformation alias "CallNtPowerInformation" (byval as POWER_INFORMATION_LEVEL, byval as PVOID, byval as ULONG, byval as PVOID, byval as ULONG) as NTSTATUS
-declare function CanUserWritePwrScheme alias "CanUserWritePwrScheme" () as BOOLEAN
-declare function DeletePwrScheme alias "DeletePwrScheme" (byval as UINT) as BOOLEAN
-declare function EnumPwrSchemes alias "EnumPwrSchemes" (byval as PWRSCHEMESENUMPROC, byval as LPARAM) as BOOLEAN
-declare function GetActivePwrScheme alias "GetActivePwrScheme" (byval as PUINT) as BOOLEAN
-declare function GetCurrentPowerPolicies alias "GetCurrentPowerPolicies" (byval as PGLOBAL_POWER_POLICY, byval as PPOWER_POLICY) as BOOLEAN
-declare function GetPwrCapabilities alias "GetPwrCapabilities" (byval as PSYSTEM_POWER_CAPABILITIES) as BOOLEAN
-declare function GetPwrDiskSpindownRange alias "GetPwrDiskSpindownRange" (byval as PUINT, byval as PUINT) as BOOLEAN
-declare function IsAdminOverrideActive alias "IsAdminOverrideActive" (byval as PADMINISTRATOR_POWER_POLICY) as BOOLEAN
-declare function IsPwrHibernateAllowed alias "IsPwrHibernateAllowed" () as BOOLEAN
-declare function IsPwrShutdownAllowed alias "IsPwrShutdownAllowed" () as BOOLEAN
-declare function IsPwrSuspendAllowed alias "IsPwrSuspendAllowed" () as BOOLEAN
-declare function ReadGlobalPwrPolicy alias "ReadGlobalPwrPolicy" (byval as PGLOBAL_POWER_POLICY) as BOOLEAN
-declare function ReadProcessorPwrScheme alias "ReadProcessorPwrScheme" (byval as UINT, byval as PMACHINE_PROCESSOR_POWER_POLICY) as BOOLEAN
-declare function ReadPwrScheme alias "ReadPwrScheme" (byval as UINT, byval as PPOWER_POLICY) as BOOLEAN
-declare function SetActivePwrScheme alias "SetActivePwrScheme" (byval as UINT, byval as PGLOBAL_POWER_POLICY, byval as PPOWER_POLICY) as BOOLEAN
-declare function SetSuspendState alias "SetSuspendState" (byval as BOOLEAN, byval as BOOLEAN, byval as BOOLEAN) as BOOLEAN
-declare function WriteGlobalPwrPolicy alias "WriteGlobalPwrPolicy" (byval as PGLOBAL_POWER_POLICY) as BOOLEAN
-declare function WriteProcessorPwrScheme alias "WriteProcessorPwrScheme" (byval as UINT, byval as PMACHINE_PROCESSOR_POWER_POLICY) as BOOLEAN
-declare function ValidatePowerPolicies alias "ValidatePowerPolicies" (byval as PGLOBAL_POWER_POLICY, byval as PPOWER_POLICY) as BOOLEAN
-declare function WritePwrScheme alias "WritePwrScheme" (byval as PUINT, byval as LPTSTR, byval as LPTSTR, byval as PPOWER_POLICY) as BOOLEAN
+declare function CanUserWritePwrScheme alias "CanUserWritePwrScheme" () as BOOLEAN_
+declare function DeletePwrScheme alias "DeletePwrScheme" (byval as UINT) as BOOLEAN_
+declare function EnumPwrSchemes alias "EnumPwrSchemes" (byval as PWRSCHEMESENUMPROC, byval as LPARAM) as BOOLEAN_
+declare function GetActivePwrScheme alias "GetActivePwrScheme" (byval as PUINT) as BOOLEAN_
+declare function GetCurrentPowerPolicies alias "GetCurrentPowerPolicies" (byval as PGLOBAL_POWER_POLICY, byval as PPOWER_POLICY) as BOOLEAN_
+declare function GetPwrCapabilities alias "GetPwrCapabilities" (byval as PSYSTEM_POWER_CAPABILITIES) as BOOLEAN_
+declare function GetPwrDiskSpindownRange alias "GetPwrDiskSpindownRange" (byval as PUINT, byval as PUINT) as BOOLEAN_
+declare function IsAdminOverrideActive alias "IsAdminOverrideActive" (byval as PADMINISTRATOR_POWER_POLICY) as BOOLEAN_
+declare function IsPwrHibernateAllowed alias "IsPwrHibernateAllowed" () as BOOLEAN_
+declare function IsPwrShutdownAllowed alias "IsPwrShutdownAllowed" () as BOOLEAN_
+declare function IsPwrSuspendAllowed alias "IsPwrSuspendAllowed" () as BOOLEAN_
+declare function ReadGlobalPwrPolicy alias "ReadGlobalPwrPolicy" (byval as PGLOBAL_POWER_POLICY) as BOOLEAN_
+declare function ReadProcessorPwrScheme alias "ReadProcessorPwrScheme" (byval as UINT, byval as PMACHINE_PROCESSOR_POWER_POLICY) as BOOLEAN_
+declare function ReadPwrScheme alias "ReadPwrScheme" (byval as UINT, byval as PPOWER_POLICY) as BOOLEAN_
+declare function SetActivePwrScheme alias "SetActivePwrScheme" (byval as UINT, byval as PGLOBAL_POWER_POLICY, byval as PPOWER_POLICY) as BOOLEAN_
+declare function SetSuspendState alias "SetSuspendState" (byval as BOOLEAN_, byval as BOOLEAN_, byval as BOOLEAN_) as BOOLEAN_
+declare function WriteGlobalPwrPolicy alias "WriteGlobalPwrPolicy" (byval as PGLOBAL_POWER_POLICY) as BOOLEAN_
+declare function WriteProcessorPwrScheme alias "WriteProcessorPwrScheme" (byval as UINT, byval as PMACHINE_PROCESSOR_POWER_POLICY) as BOOLEAN_
+declare function ValidatePowerPolicies alias "ValidatePowerPolicies" (byval as PGLOBAL_POWER_POLICY, byval as PPOWER_POLICY) as BOOLEAN_
+declare function WritePwrScheme alias "WritePwrScheme" (byval as PUINT, byval as LPTSTR, byval as LPTSTR, byval as PPOWER_POLICY) as BOOLEAN_
 
 #endif

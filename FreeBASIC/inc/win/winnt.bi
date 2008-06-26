@@ -112,7 +112,7 @@ type USN as LONGLONG
 #define ANSI_NULL 0
 #define UNICODE_NULL 0
 
-type BOOLEAN as UBYTE
+type BOOLEAN_ as UBYTE
 type PBOOLEAN as UBYTE ptr
 type FCHAR as UBYTE
 type FSHORT as WORD
@@ -1475,14 +1475,14 @@ enum SECURITY_IMPERSONATION_LEVEL
 end enum
 
 type PSECURITY_IMPERSONATION_LEVEL as SECURITY_IMPERSONATION_LEVEL
-type SECURITY_CONTEXT_TRACKING_MODE as BOOLEAN
-type PSECURITY_CONTEXT_TRACKING_MODE as BOOLEAN ptr
+type SECURITY_CONTEXT_TRACKING_MODE as BOOLEAN_
+type PSECURITY_CONTEXT_TRACKING_MODE as BOOLEAN_ ptr
 
 type SECURITY_QUALITY_OF_SERVICE
 	Length as DWORD
 	ImpersonationLevel as SECURITY_IMPERSONATION_LEVEL
 	ContextTrackingMode as SECURITY_CONTEXT_TRACKING_MODE
-	EffectiveOnly as BOOLEAN
+	EffectiveOnly as BOOLEAN_
 end type
 
 type PSECURITY_QUALITY_OF_SERVICE as SECURITY_QUALITY_OF_SERVICE ptr
@@ -1490,8 +1490,8 @@ type PACCESS_TOKEN as PVOID
 
 type SE_IMPERSONATION_STATE
 	Token as PACCESS_TOKEN
-	CopyOnOpen as BOOLEAN
-	EffectiveOnly as BOOLEAN
+	CopyOnOpen as BOOLEAN_
+	EffectiveOnly as BOOLEAN_
 	Level as SECURITY_IMPERSONATION_LEVEL
 end type
 
@@ -1684,16 +1684,16 @@ type PFILE_NOTIFY_INFORMATION as FILE_NOTIFY_INFORMATION ptr
 
 type TAPE_ERASE
 	Type as DWORD
-	Immediate as BOOLEAN
+	Immediate as BOOLEAN_
 end type
 
 type PTAPE_ERASE as TAPE_ERASE ptr
 
 type TAPE_GET_DRIVE_PARAMETERS
-	ECC as BOOLEAN
-	Compression as BOOLEAN
-	DataPadding as BOOLEAN
-	ReportSetmarks as BOOLEAN
+	ECC as BOOLEAN_
+	Compression as BOOLEAN_
+	DataPadding as BOOLEAN_
+	ReportSetmarks as BOOLEAN_
 	DefaultBlockSize as DWORD
 	MaximumBlockSize as DWORD
 	MinimumBlockSize as DWORD
@@ -1710,7 +1710,7 @@ type TAPE_GET_MEDIA_PARAMETERS
 	Remaining as LARGE_INTEGER
 	BlockSize as DWORD
 	PartitionCount as DWORD
-	WriteProtected as BOOLEAN
+	WriteProtected as BOOLEAN_
 end type
 
 type PTAPE_GET_MEDIA_PARAMETERS as TAPE_GET_MEDIA_PARAMETERS ptr
@@ -1726,16 +1726,16 @@ type PTAPE_GET_POSITION as TAPE_GET_POSITION ptr
 
 type TAPE_PREPARE
 	Operation as DWORD
-	Immediate as BOOLEAN
+	Immediate as BOOLEAN_
 end type
 
 type PTAPE_PREPARE as TAPE_PREPARE ptr
 
 type TAPE_SET_DRIVE_PARAMETERS
-	ECC as BOOLEAN
-	Compression as BOOLEAN
-	DataPadding as BOOLEAN
-	ReportSetmarks as BOOLEAN
+	ECC as BOOLEAN_
+	Compression as BOOLEAN_
+	DataPadding as BOOLEAN_
+	ReportSetmarks as BOOLEAN_
 	EOTWarningZoneSize as ULONG
 end type
 
@@ -1751,7 +1751,7 @@ type TAPE_SET_POSITION
 	Method as DWORD
 	Partition as DWORD
 	Offset as LARGE_INTEGER
-	Immediate as BOOLEAN
+	Immediate as BOOLEAN_
 end type
 
 type PTAPE_SET_POSITION as TAPE_SET_POSITION ptr
@@ -1759,7 +1759,7 @@ type PTAPE_SET_POSITION as TAPE_SET_POSITION ptr
 type TAPE_WRITE_MARKS
 	Type as DWORD
 	Count as DWORD
-	Immediate as BOOLEAN
+	Immediate as BOOLEAN_
 end type
 
 type PTAPE_WRITE_MARKS as TAPE_WRITE_MARKS ptr
@@ -2494,7 +2494,7 @@ type PFPO_DATA as FPO_DATA ptr
 type IMAGE_DEBUG_MISC
 	DataType as DWORD
 	Length as DWORD
-	Unicode_ as BOOLEAN
+	Unicode_ as BOOLEAN_
 	Reserved(0 to 3-1) as UBYTE
 	Data(0 to 1-1) as UBYTE
 end type
@@ -2859,7 +2859,7 @@ type PPOWER_ACTION_POLICY as POWER_ACTION_POLICY ptr
 #define PO_THROTTLE_MAXIMUM 4
 
 type SYSTEM_POWER_LEVEL
-	Enable as BOOLEAN
+	Enable as BOOLEAN_
 	Spare(0 to 3-1) as UCHAR
 	BatteryLevel as ULONG
 	PowerPolicy as POWER_ACTION_POLICY
@@ -2889,10 +2889,10 @@ type SYSTEM_POWER_POLICY
 	BroadcastCapacityResolution as ULONG
 	DischargePolicy(0 to 4-1) as SYSTEM_POWER_LEVEL
 	VideoTimeout as ULONG
-	VideoDimDisplay as BOOLEAN
+	VideoDimDisplay as BOOLEAN_
 	VideoReserved(0 to 3-1) as ULONG
 	SpindownTimeout as ULONG
-	OptimizeForPower as BOOLEAN
+	OptimizeForPower as BOOLEAN_
 	FanThrottleTolerance as UCHAR
 	ForcedThrottle as UCHAR
 	MinThrottle as UCHAR
@@ -2902,28 +2902,28 @@ end type
 type PSYSTEM_POWER_POLICY as SYSTEM_POWER_POLICY ptr
 
 type SYSTEM_POWER_CAPABILITIES
-	PowerButtonPresent as BOOLEAN
-	SleepButtonPresent as BOOLEAN
-	LidPresent as BOOLEAN
-	SystemS1 as BOOLEAN
-	SystemS2 as BOOLEAN
-	SystemS3 as BOOLEAN
-	SystemS4 as BOOLEAN
-	SystemS5 as BOOLEAN
-	HiberFilePresent as BOOLEAN
-	FullWake as BOOLEAN
-	VideoDimPresent as BOOLEAN
-	ApmPresent as BOOLEAN
-	UpsPresent as BOOLEAN
-	ThermalControl as BOOLEAN
-	ProcessorThrottle as BOOLEAN
+	PowerButtonPresent as BOOLEAN_
+	SleepButtonPresent as BOOLEAN_
+	LidPresent as BOOLEAN_
+	SystemS1 as BOOLEAN_
+	SystemS2 as BOOLEAN_
+	SystemS3 as BOOLEAN_
+	SystemS4 as BOOLEAN_
+	SystemS5 as BOOLEAN_
+	HiberFilePresent as BOOLEAN_
+	FullWake as BOOLEAN_
+	VideoDimPresent as BOOLEAN_
+	ApmPresent as BOOLEAN_
+	UpsPresent as BOOLEAN_
+	ThermalControl as BOOLEAN_
+	ProcessorThrottle as BOOLEAN_
 	ProcessorMinThrottle as UCHAR
 	ProcessorMaxThrottle as UCHAR
 	spare2(0 to 4-1) as UCHAR
-	DiskSpinDown as BOOLEAN
+	DiskSpinDown as BOOLEAN_
 	spare3(0 to 8-1) as UCHAR
-	SystemBatteriesPresent as BOOLEAN
-	BatteriesAreShortTerm as BOOLEAN
+	SystemBatteriesPresent as BOOLEAN_
+	BatteriesAreShortTerm as BOOLEAN_
 	BatteryScale(0 to 3-1) as BATTERY_REPORTING_SCALE
 	AcOnLineWake as SYSTEM_POWER_STATE
 	SoftLidWake as SYSTEM_POWER_STATE
@@ -2935,11 +2935,11 @@ end type
 type PSYSTEM_POWER_CAPABILITIES as SYSTEM_POWER_CAPABILITIES ptr
 
 type SYSTEM_BATTERY_STATE
-	AcOnLine as BOOLEAN
-	BatteryPresent as BOOLEAN
-	Charging as BOOLEAN
-	Discharging as BOOLEAN
-	Spare1(0 to 4-1) as BOOLEAN
+	AcOnLine as BOOLEAN_
+	BatteryPresent as BOOLEAN_
+	Charging as BOOLEAN_
+	Discharging as BOOLEAN_
+	Spare1(0 to 4-1) as BOOLEAN_
 	MaxCapacity as ULONG
 	RemainingCapacity as ULONG
 	Rate as ULONG
@@ -3095,7 +3095,7 @@ end type
 
 type PADMINISTRATOR_POWER_POLICY as ADMINISTRATOR_POWER_POLICY ptr
 
-type WAITORTIMERCALLBACKFUNC as sub (byval as PVOID, byval as BOOLEAN)
+type WAITORTIMERCALLBACKFUNC as sub (byval as PVOID, byval as BOOLEAN_)
 
 #ifdef UNICODE
 type OSVERSIONINFO as OSVERSIONINFOW

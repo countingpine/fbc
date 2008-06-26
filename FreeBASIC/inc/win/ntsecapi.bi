@@ -468,14 +468,14 @@ type MSV1_0_CHANGEPASSWORD_REQUEST
 	AccountName as UNICODE_STRING
 	OldPassword as UNICODE_STRING
 	NewPassword as UNICODE_STRING
-	Impersonating as BOOLEAN
+	Impersonating as BOOLEAN_
 end type
 
 type PMSV1_0_CHANGEPASSWORD_REQUEST as MSV1_0_CHANGEPASSWORD_REQUEST ptr
 
 type MSV1_0_CHANGEPASSWORD_RESPONSE
 	MessageType as MSV1_0_PROTOCOL_MESSAGE_TYPE
-	PasswordInfoValid as BOOLEAN
+	PasswordInfoValid as BOOLEAN_
 	DomainPasswordInfo as DOMAIN_PASSWORD_INFORMATION
 end type
 
@@ -531,7 +531,7 @@ type POLICY_AUDIT_LOG_INFO
 	AuditLogPercentFull as ULONG
 	MaximumLogSize as ULONG
 	AuditRetentionPeriod as LARGE_INTEGER
-	AuditLogFullShutdownInProgress as BOOLEAN
+	AuditLogFullShutdownInProgress as BOOLEAN_
 	TimeToShutdown as LARGE_INTEGER
 	NextAuditRecordId as ULONG
 end type
@@ -539,7 +539,7 @@ end type
 type PPOLICY_AUDIT_LOG_INFO as POLICY_AUDIT_LOG_INFO ptr
 
 type POLICY_AUDIT_EVENTS_INFO
-	AuditingMode as BOOLEAN
+	AuditingMode as BOOLEAN_
 	EventAuditingOptions as PPOLICY_AUDIT_EVENT_OPTIONS
 	MaximumAuditEventCount as ULONG
 end type
@@ -603,14 +603,14 @@ end type
 type PPOLICY_MODIFICATION_INFO as POLICY_MODIFICATION_INFO ptr
 
 type POLICY_AUDIT_FULL_SET_INFO
-	ShutDownOnFull as BOOLEAN
+	ShutDownOnFull as BOOLEAN_
 end type
 
 type PPOLICY_AUDIT_FULL_SET_INFO as POLICY_AUDIT_FULL_SET_INFO ptr
 
 type POLICY_AUDIT_FULL_QUERY_INFO
-	ShutDownOnFull as BOOLEAN
-	LogIsFull as BOOLEAN
+	ShutDownOnFull as BOOLEAN_
+	LogIsFull as BOOLEAN_
 end type
 
 type PPOLICY_AUDIT_FULL_QUERY_INFO as POLICY_AUDIT_FULL_QUERY_INFO ptr
@@ -778,7 +778,7 @@ declare function LsaQueryLocalInformationPolicy alias "LsaQueryLocalInformationP
 declare function LsaQueryTrustedDomainInfo alias "LsaQueryTrustedDomainInfo" (byval as LSA_HANDLE, byval as PSID, byval as TRUSTED_INFORMATION_CLASS, byval as PVOID ptr) as NTSTATUS
 declare function LsaQueryTrustedDomainInfoByName alias "LsaQueryTrustedDomainInfoByName" (byval as LSA_HANDLE, byval as PLSA_UNICODE_STRING, byval as TRUSTED_INFORMATION_CLASS, byval as PVOID ptr) as NTSTATUS
 declare function LsaRegisterLogonProcess alias "LsaRegisterLogonProcess" (byval as PLSA_STRING, byval as PHANDLE, byval as PLSA_OPERATIONAL_MODE) as NTSTATUS
-declare function LsaRemoveAccountRights alias "LsaRemoveAccountRights" (byval as LSA_HANDLE, byval as PSID, byval as BOOLEAN, byval as PLSA_UNICODE_STRING, byval as ULONG) as NTSTATUS
+declare function LsaRemoveAccountRights alias "LsaRemoveAccountRights" (byval as LSA_HANDLE, byval as PSID, byval as BOOLEAN_, byval as PLSA_UNICODE_STRING, byval as ULONG) as NTSTATUS
 declare function LsaRetrievePrivateData alias "LsaRetrievePrivateData" (byval as LSA_HANDLE, byval as PLSA_UNICODE_STRING, byval as PLSA_UNICODE_STRING ptr) as NTSTATUS
 declare function LsaSetDomainInformationPolicy alias "LsaSetDomainInformationPolicy" (byval as LSA_HANDLE, byval as POLICY_DOMAIN_INFORMATION_CLASS, byval as PVOID) as NTSTATUS
 declare function LsaSetInformationPolicy alias "LsaSetInformationPolicy" (byval as LSA_HANDLE, byval as POLICY_INFORMATION_CLASS, byval as PVOID) as NTSTATUS
@@ -788,7 +788,7 @@ declare function LsaSetTrustedDomainInfoByName alias "LsaSetTrustedDomainInfoByN
 declare function LsaStorePrivateData alias "LsaStorePrivateData" (byval as LSA_HANDLE, byval as PLSA_UNICODE_STRING, byval as PLSA_UNICODE_STRING) as NTSTATUS
 
 type PSAM_PASSWORD_NOTIFICATION_ROUTINE as function (byval as PUNICODE_STRING, byval as ULONG, byval as PUNICODE_STRING) as NTSTATUS
-type PSAM_INIT_NOTIFICATION_ROUTINE as function () as BOOLEAN
-type PSAM_PASSWORD_FILTER_ROUTINE as function (byval as PUNICODE_STRING, byval as PUNICODE_STRING, byval as PUNICODE_STRING, byval as BOOLEAN) as BOOLEAN
+type PSAM_INIT_NOTIFICATION_ROUTINE as function () as BOOLEAN_
+type PSAM_PASSWORD_FILTER_ROUTINE as function (byval as PUNICODE_STRING, byval as PUNICODE_STRING, byval as PUNICODE_STRING, byval as BOOLEAN_) as BOOLEAN_
 
 #endif

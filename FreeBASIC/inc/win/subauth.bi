@@ -186,10 +186,10 @@ type USER_ALL_INFORMATION
 	LogonCount as USHORT
 	CountryCode as USHORT
 	CodePage as USHORT
-	LmPasswordPresent as BOOLEAN
-	NtPasswordPresent as BOOLEAN
-	PasswordExpired as BOOLEAN
-	PrivateDataSensitive as BOOLEAN
+	LmPasswordPresent as BOOLEAN_
+	NtPasswordPresent as BOOLEAN_
+	PasswordExpired as BOOLEAN_
+	PrivateDataSensitive as BOOLEAN_
 end type
 
 type PUSER_ALL_INFORMATION as USER_ALL_INFORMATION ptr
@@ -200,7 +200,7 @@ type MSV1_0_VALIDATION_INFO
 	LogonServer as UNICODE_STRING
 	LogonDomainName as UNICODE_STRING
 	SessionKey as USER_SESSION_KEY
-	Authoritative as BOOLEAN
+	Authoritative as BOOLEAN_
 	UserFlags as ULONG
 	WhichFields as ULONG
 	UserId as ULONG
