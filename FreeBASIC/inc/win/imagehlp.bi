@@ -89,8 +89,8 @@ type LOADED_IMAGE
 	NumberOfSections as ULONG
 	Sections as PIMAGE_SECTION_HEADER
 	Characteristics as ULONG
-	fSystemImage as BOOLEAN
-	fDOSImage as BOOLEAN
+	fSystemImage as BOOLEAN_
+	fDOSImage as BOOLEAN_
 	Links as LIST_ENTRY
 	SizeOfImage as ULONG
 end type
@@ -243,7 +243,7 @@ type IMAGEHLP_DEFERRED_SYMBOL_LOAD
 	CheckSum as DWORD
 	TimeDateStamp as DWORD
 	FileName as zstring * 260
-	Reparse as BOOLEAN
+	Reparse as BOOLEAN_
 end type
 
 type PIMAGEHLP_DEFERRED_SYMBOL_LOAD as IMAGEHLP_DEFERRED_SYMBOL_LOAD ptr
@@ -273,7 +273,7 @@ declare function ReBaseImage alias "ReBaseImage" (byval as LPSTR, byval as LPSTR
 declare function ImageLoad alias "ImageLoad" (byval as LPSTR, byval as LPSTR) as PLOADED_IMAGE
 declare function ImageUnload alias "ImageUnload" (byval as PLOADED_IMAGE) as BOOL
 declare function ImageNtHeader alias "ImageNtHeader" (byval as PVOID) as PIMAGE_NT_HEADERS
-declare function ImageDirectoryEntryToData alias "ImageDirectoryEntryToData" (byval as PVOID, byval as BOOLEAN, byval as USHORT, byval as PULONG) as PVOID
+declare function ImageDirectoryEntryToData alias "ImageDirectoryEntryToData" (byval as PVOID, byval as BOOLEAN_, byval as USHORT, byval as PULONG) as PVOID
 declare function ImageRvaToSection alias "ImageRvaToSection" (byval as PIMAGE_NT_HEADERS, byval as PVOID, byval as ULONG) as PIMAGE_SECTION_HEADER
 declare function ImageRvaToVa alias "ImageRvaToVa" (byval as PIMAGE_NT_HEADERS, byval as PVOID, byval as ULONG, byval as PIMAGE_SECTION_HEADER ptr) as PVOID
 declare function MapAndLoad alias "MapAndLoad" (byval as LPSTR, byval as LPSTR, byval as PLOADED_IMAGE, byval as BOOL, byval as BOOL) as BOOL

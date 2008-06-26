@@ -264,13 +264,13 @@ type DISK_CACHE_INFORMATION_BlockPrefetch
 end type
 
 type DISK_CACHE_INFORMATION
-	ParametersSavable as BOOLEAN
-	ReadCacheEnabled as BOOLEAN
-	WriteCacheEnabled as BOOLEAN
+	ParametersSavable as BOOLEAN_
+	ReadCacheEnabled as BOOLEAN_
+	WriteCacheEnabled as BOOLEAN_
 	ReadRetentionPriority as DISK_CACHE_RETENTION_PRIORITY
 	WriteRetentionPriority as DISK_CACHE_RETENTION_PRIORITY
 	DisablePrefetchTransferLength as WORD
-	PrefetchScalar as BOOLEAN
+	PrefetchScalar as BOOLEAN_
   	union
     	ScalarPrefetch as DISK_CACHE_INFORMATION_ScalarPrefetch
     	BlockPrefetch as DISK_CACHE_INFORMATION_BlockPrefetch
@@ -411,7 +411,7 @@ type DISK_RECORD
 	VirtualAddress as PVOID
 	NumberOfBytes as DWORD
 	DeviceNumber as UBYTE
-	ReadRequest as BOOLEAN
+	ReadRequest as BOOLEAN_
 end type
 
 type PDISK_RECORD as DISK_RECORD ptr
@@ -503,9 +503,9 @@ type PARTITION_INFORMATION
 	HiddenSectors as DWORD
 	PartitionNumber as DWORD
 	PartitionType as UBYTE
-	BootIndicator as BOOLEAN
-	RecognizedPartition as BOOLEAN
-	RewritePartition as BOOLEAN
+	BootIndicator as BOOLEAN_
+	RecognizedPartition as BOOLEAN_
+	RewritePartition as BOOLEAN_
 end type
 
 type PPARTITION_INFORMATION as PARTITION_INFORMATION ptr
@@ -535,8 +535,8 @@ type PDRIVE_LAYOUT_INFORMATION_MBR as DRIVE_LAYOUT_INFORMATION_MBR ptr
 
 type PARTITION_INFORMATION_MBR
 	PartitionType as UBYTE
-	BootIndicator as BOOLEAN
-	RecognizedPartition as BOOLEAN
+	BootIndicator as BOOLEAN_
+	RecognizedPartition as BOOLEAN_
 	HiddenSectors as DWORD
 end type
 
@@ -552,7 +552,7 @@ type PARTITION_INFORMATION_EX
 	StartingOffset as LARGE_INTEGER
 	PartitionLength as LARGE_INTEGER
 	PartitionNumber as DWORD
-	RewritePartition as BOOLEAN
+	RewritePartition as BOOLEAN_
   	union
     	Mbr as PARTITION_INFORMATION_MBR 
     	Gpt as PARTITION_INFORMATION_GPT
@@ -589,7 +589,7 @@ end type
 type PPERF_BIN as PERF_BIN ptr
 
 type PREVENT_MEDIA_REMOVAL
-	PreventMediaRemoval as BOOLEAN
+	PreventMediaRemoval as BOOLEAN_
 end type
 
 type PPREVENT_MEDIA_REMOVAL as PREVENT_MEDIA_REMOVAL ptr
