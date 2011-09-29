@@ -46,6 +46,16 @@ const INVALID               = -1
 ''
 const FB_VERSION            = FB_VER_MAJOR & "." & FB_VER_MINOR & "." & FB_VER_PATCH
 const FB_BUILD_DATE         = __DATE__
+
+#ifdef __DATE_ISO__
+const FB_BUILD_DATE_ISO     = __DATE_ISO__
+#else '' compiler precedes __DATE_ISO__?
+const FB_BUILD_DATE_ISO     = _
+	chr( asc(__DATE__, 7), asc(FB_BUILD_DATE, 8), asc(FB_BUILD_DATE, 9), asc(FB_BUILD_DATE, 10) ) _
+	& "-" & chr( asc(FB_BUILD_DATE, 1), asc(FB_BUILD_DATE, 2) ) _ '' FB doesn't have constant substring expressions :(
+	& "-" & chr( asc(FB_BUILD_DATE, 4), asc(FB_BUILD_DATE, 5) )
+#endif
+
 const FB_SIGN               = "FreeBASIC " &  FB_VERSION
 const FB_VER_STR_MAJOR    	= str( FB_VER_MAJOR )
 const FB_VER_STR_MINOR    	= str( FB_VER_MINOR )
