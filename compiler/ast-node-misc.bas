@@ -479,7 +479,7 @@ dim shared dbg_astNodeOpNames( 0 to AST_OPCODES - 1 ) as NameInfo = _
 }
 
 '':::::
-private function hAstNodeOpToStr _
+public function hAstNodeOpToStr _
 	( _
 		byval op as AST_OP _
 	) as string
@@ -522,39 +522,57 @@ private function hSymbToStr _
 end function
 
 '':::::
+private function hAstNodeTypeToStr _
+	( _
+	byval n as ASTNODE ptr _
+	) as zstring ptr
+
+	if( n = NULL ) then return NULL
+
+	return symbTypeToStr( n->dtype, n->subtype )
+
+end function
+
+'':::::
 private function hAstNodeToStr _
 	( _
 		byval n as ASTNODE ptr _
 	) as string
 
+#if 0
+	#define TYPE_ ( " (" & *hAstNodeTypeToStr( n ) & ")" )
+#else
+	#define TYPE_ ""
+#endif
+
 	select case as const n->class
 	case AST_NODECLASS_BOP
-		return hAstNodeOpToStr( n->op.op ) & " =-= " & hSymbToStr( n->op.ex )
+		return hAstNodeOpToStr( n->op.op ) & " =-= " & hSymbToStr( n->op.ex ) & TYPE_
 
 	case AST_NODECLASS_UOP
-		return hAstNodeOpToStr( n->op.op )
+		return hAstNodeOpToStr( n->op.op ) & TYPE_
 
 	case AST_NODECLASS_CONST
 		select case as const astGetDataType( n )
 		case FB_DATATYPE_LONGINT, FB_DATATYPE_ULONGINT
-			return str( n->con.val.long )
+			return str( n->con.val.long ) & TYPE_
 
 		case FB_DATATYPE_SINGLE, FB_DATATYPE_DOUBLE
-			return str( n->con.val.float )
+			return str( n->con.val.float ) & TYPE_
 
 		case FB_DATATYPE_LONG, FB_DATATYPE_ULONG
 			if( FB_LONGSIZE = len( integer ) ) then
-				return str( n->con.val.int )
+				return str( n->con.val.int ) & TYPE_
 			else
-				return str( n->con.val.long )
+				return str( n->con.val.long ) & TYPE_
 			end if
 
 		case else
-            return str( n->con.val.int )
+            return str( n->con.val.int ) & TYPE_
 		end select
 
 	case AST_NODECLASS_VAR
-		return """" & *symbGetName( n->sym ) & """"
+		return """" & *symbGetName( n->sym ) & """" & TYPE_
 
 	case AST_NODECLASS_LABEL
 		return "LABEL: " & hSymbToStr( n->sym )
@@ -564,6 +582,65 @@ private function hAstNodeToStr _
 
 	case AST_NODECLASS_SCOPEBEGIN
 		return "SCOPEBEGIN: " & hSymbToStr( n->sym )
+
+	case else
+		return hAstNodeClassToStr( n->class ) & TYPE_
+	end select
+
+end function
+
+'':::::
+private function hAstExprToStr _
+	( _
+		byval n as ASTNODE ptr _
+	) as string
+
+	if( n = NULL ) then return ""
+
+	select case as const n->class
+	case AST_NODECLASS_BOP
+		return "(" & hAstExprToStr(n->l) & " " & hAstNodeOpToStr( n->op.op ) & " " & hAstExprToStr(n->r) & ")"		
+		'return "(" & hAstNodeOpToStr( n->op.op ) & " " & hAstExprToStr(n->l) & " " & hAstExprToStr(n->r) & ")"
+
+	case AST_NODECLASS_UOP
+		return hAstNodeOpToStr( n->op.op ) & "( " & hAstExprToStr(n->l) & " )"
+		'return "(" & hAstNodeOpToStr( n->op.op ) & hAstExprToStr(n->l) & ")"
+
+	case AST_NODECLASS_CONST
+		select case as const astGetDataType( n )
+		case FB_DATATYPE_LONGINT, FB_DATATYPE_ULONGINT
+			return str( n->con.val.long ) & "ll"
+
+		case FB_DATATYPE_SINGLE
+			return str( n->con.val.float ) & "!"
+		case FB_DATATYPE_DOUBLE
+			return str( n->con.val.float ) & "#"
+
+		case FB_DATATYPE_LONG, FB_DATATYPE_ULONG
+			if( FB_LONGSIZE = len( integer ) ) then
+				return str( n->con.val.int )
+			else
+				return str( n->con.val.long ) & "ll"
+			end if
+
+		case else
+            return str( n->con.val.int )
+		end select
+
+	case AST_NODECLASS_VAR
+		return *symbGetName( n->sym )
+
+	case AST_NODECLASS_LABEL
+		return "[LABEL: " & hSymbToStr( n->sym ) & "]"
+
+	case AST_NODECLASS_BRANCH
+		return "[BRANCH: " & hAstNodeOpToStr( n->op.op ) & " " & hSymbToStr( n->op.ex ) & "]"
+
+	case AST_NODECLASS_SCOPEBEGIN
+		return "[SCOPEBEGIN: " & hSymbToStr( n->sym ) & "]"
+
+	case AST_NODECLASS_IDX
+		return "[IDX: " & "ofs=" & n->idx.ofs & " mult=" & n->idx.mult & " l=" & hAstExprToStr(n->l) & "]"
 
 	case else
 		return hAstNodeClassToStr( n->class )
@@ -617,7 +694,8 @@ sub astDumpTree _
 		byval col as integer _
 	)
 
-	astDumpTreeEx( n, col, -1, 0 )
+	''astDumpTreeEx( n, col, -1, 0 )
+	print hAstExprToStr( n )
 
 end sub
 
