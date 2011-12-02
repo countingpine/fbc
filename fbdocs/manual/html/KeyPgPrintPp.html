@@ -11,27 +11,27 @@
 </div> 
 <div id="fb_pg_wrapper">
 <div id="fb_pg_body">
-	Writes a list of values to a file or device<br \>
+	Ecrit une liste de valeurs dans un fichier ou un p&eacute;riph&eacute;rique<br \>
 <br \>
-<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<div class="fb_sect_title">Syntaxe</div><div class="fb_sect_cont"><tt><br \>
 <b>Print #</b> <i>filenum</i><b>,</b> [ <i>expressionlist</i> ] [ <b>,</b> | <b>;</b> ]<br \>
 </tt><br \>
-</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Param&egrave;tres</div><div class="fb_sect_cont"><br \>
 <tt><i>filenum</i></tt><br \>
-<div class="fb_indent">The file number of a file or device opened for <tt><a href="KeyPgOutput.html">Output</a></tt> or <tt><a href="KeyPgAppend.html">Append</a></tt>.<br \>
+<div class="fb_indent">Le num&eacute;ro de fichier d'un fichier ou un p&eacute;riph&eacute;rique ouvert pour <tt><a href="KeyPgOutput.html">Output</a></tt> ou <tt><a href="KeyPgAppend.html">Append</a></tt>.<br \>
 </div><tt><i>expressionlist</i></tt><br \>
-<div class="fb_indent">List of values to write.<br \>
+<div class="fb_indent">Liste des valeurs &agrave; &eacute;crire.<br \>
 <br \>
 </div></div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
-<tt><b>Print #</b></tt> outputs a list of values to a text file or device. Numeric values are converted to their string representation, with left padding for the sign. Objects of user-defined types must overload <tt>Operator Cast () As String</tt>.<br \>
+<tt><b>Print #</b></tt> sort une liste de valeurs vers un fichier texte ou un p&eacute;riph&eacute;rique. Les valeurs num&eacute;riques sont converties vers leur repr&eacute;sentation sous forme de cha&icirc;ne, avec remplissage &agrave; gauche pour le signe. Les objets de types d&eacute;finis par l'utilisateur doivent surcharger <tt>Operator Cast () As String</tt>.<br \>
 <br \>
-Consecutive values in the expression list are separated either by a comma (<tt>,</tt>) or semicolon (<tt>;</tt>). A comma indicates printing should take place at the next 14 column boundary, while a semicolon indicates values are printed with no space between them.<br \>
+Les valeurs cons&eacute;cutives dans la liste d'expressions sont s&eacute;par&eacute;es par une virgule (<tt>,</tt>) ou un point-virgule (<tt>;</tt>). Une virgule indique que l'&eacute;criture devrait avoir lieu au d&eacute;but d'une colonne multiplt de 14 octets, alors qu'un point-virgule indique que les valeurs sont &eacute;crites sans espace entre elles.<br \>
 <br \>
-A new-line character is printed after the values in the expression list unless the expression list is followed by a comma or semicolon.<br \>
+Un caract&egrave;re de nouvelle ligne est imprim&eacute; apr&egrave;s les valeurs de la liste des expressions &agrave; moins que la liste des expressions ne soit suivie par une virgule ou point-virgule.<br \>
 <br \>
-Note that the comma (<tt>,</tt>) immediately following the file number is still necessary, even the expression list is empty.  In this case a new-line is printed, just as with a normal expression list that doesn't have a comma or semicolon at the end.<br \>
+Notez que la virgule (<tt>,</tt>) imm&eacute;diatement apr&egrave;s le num&eacute;ro de fichier est obligatoire, m&ecirc;me la liste d'expressions est vide. Dans ce cas une nouvelle ligne est &eacute;crite, tout comme une liste d'expressions normale qui n'a pas une virgule ou un point-virgule &agrave; la fin.<br \>
 <br \>
-</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Exemple</div><div class="fb_sect_cont"><br \>
 <tt><div class="freebasic">
 <span class="key">Open</span>&nbsp;<span class="quo">"bleh.dat"</span>&nbsp;&nbsp;<span class="key">For</span>&nbsp;<span class="key">Output</span>&nbsp;<span class="key">As</span>&nbsp;<span class="oth">#</span><span class="num">1</span><br />
 &nbsp;&nbsp;&nbsp;&nbsp;<br />
@@ -41,15 +41,15 @@ Note that the comma (<tt>,</tt>) immediately following the file number is still 
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Close</span>&nbsp;<span class="oth">#</span><span class="num">1</span><br />
 </div></tt><br />
 <br \>
-</div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
-<ul><li> In the <i><a href="CompilerOptlang.html">-lang qb</a></i> dialect, an extra space is printed after numbers.<br \>
+</div><div class="fb_sect_title">Diff&eacute;rences de dialecte</div><div class="fb_sect_cont"><br \>
+<ul><li> Dans le dialecte <i><a href="CompilerOptlang.html">-lang qb</a></i>, un espace suppl&eacute;mentaire est &eacute;crit apr&egrave;s les nombres.<br \>
 <br \>
-</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
-<ul><li> None, when using QBASIC's variable types in <i><a href="CompilerOptlang.html">-lang qb</a></i>.<br \>
-<li> Unsigned numbers are printed without a space before them.<br \>
-<li> QB did not support casting for UDTs, so didn't allow them to be <tt><b>Print</b></tt>ed.<br \>
+</ul></div><div class="fb_sect_title">Diff&eacute;rences avec QB</div><div class="fb_sect_cont"><br \>
+<ul><li> Aucune, en utilisant les types de variables QBASIC dans <i><a href="CompilerOptlang.html">-lang qb</a></i>.<br \>
+<li> Les nombres non sign&eacute;s sont &eacute;crits sans espace devant eux.<br \>
+<li> QB ne supporte pas le "casting" des types d&eacute;finis par l'utilisateur, donc ne peut les <tt><b>Print</b></tt>er.<br \>
 <br \>
-</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+</ul></div><div class="fb_sect_title">Voir aussi</div><div class="fb_sect_cont"><br \>
 <ul><li> <tt><a href="KeyPgPrintusingPp.html">Print # Using</a></tt><br \>
 <li> <tt><a href="KeyPgPrint.html">Print</a></tt><br \>
 <li> <tt><a href="KeyPgWrite.html">Write #</a></tt><br \>

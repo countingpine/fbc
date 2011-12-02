@@ -6,50 +6,52 @@
 <body>
 <div id="fb_body_wrapper">
 <div id="fb_tab">
-<div id="fb_tab_l">Variable and Procedure Linkage</div>
+<div id="fb_tab_l">Linkage (Liens) des variables et proc&eacute;dures</div>
 <div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
 </div> 
 <div id="fb_pg_wrapper">
 <div id="fb_pg_body">
-	Name visibility within and between modules<br \>
+	Visibilit&eacute; des noms &agrave; l'int&eacute;rieur et entre les modules<br \>
 <br \>
-<i>Linkage</i> refers to the visibility of the name of a variable, object or procedure between one or more modules of a program. In other words, a linkage dictates how a name is shared between modules. There are two main types of linkage a name can have: <i>internal</i> and <i>external</i>.<br \>
+<i>Linkage (Liens)</i> fait r&eacute;f&eacute;rence &agrave; la visibilit&eacute; du nom d'une variable, d'un objet ou d'une proc&eacute;dure entre un ou plusieurs modules d'un programme. In other words, a linkage dictates how a name is shared between modules. Il existe deux principaux types de liaison d'un nom: <i>internal (interne)</i> et <i>external (externe)</i>.<br \>
 <br \>
-<div class="fb_sect_title">Internal linkage</div><div class="fb_sect_cont"><br \>
+<div class="fb_sect_title">Internal linkage (Liaison interne)</div><div class="fb_sect_cont"><br \>
 <br \>
-Names with <i>internal linkage</i> only refer to variables, objects or procedures defined within their own module; they are not outwardly visible to other modules. This means that two or more modules can refer to different things using the same name. Note that linkage only refers to visibility of a name, and depending on storage class and lifetime, a variable, object or procedure with internal linkage may be shared between modules using its address.<br \>
+Les noms avec "<i>internal linkage</i>" (liaison interne) font seulement r&eacute;f&eacute;rence &agrave; des variables, des objets ou des proc&eacute;dures d&eacute;finis au sein de leur propre module; ils ne sont pas visibles de l'ext&eacute;rieur par d'autres modules. Cela signifie que deux ou plusieurs modules peuvent se r&eacute;f&eacute;rer &agrave; des choses diff&eacute;rentes en utilisant le m&ecirc;me nom. Notez que "linkage (Liens)" se r&eacute;f&egrave;re uniquement &agrave; la visibilit&eacute; d'un nom, et selon sa classe de stockage et sa dur&eacute;e de vie, une variable, un objet ou une proc&eacute;dure avec "<i>internal linkage</i>" (liaison interne) peut &ecirc;tre partag&eacute; entre les modules en utilisant son adresse.<br \>
 <br \>
-<div class="fb_sect_title">Module-scope declarations</div><br \>
+<div class="fb_sect_title">D&eacute;clarations de port&eacute;e module</div><br \>
 <br \>
-<div class="fb_indent">Variable and object names declared at module-scope have internal linkage unless otherwise declared with <tt><a href="KeyPgExtern.html">Extern</a></tt> or <tt><a href="KeyPgCommon.html">Common</a></tt>. For example, variable names first introduced with <tt><a href="KeyPgDim.html">Dim</a></tt> or <tt><a href="KeyPgStatic.html">Static</a></tt> have internal linkage, and those variables can only be referred to by name within the module in which they are defined. Note that using <tt><a href="KeyPgShared.html">Shared</a></tt> only allows name visibility within the module's procedures, and does not contribute to the name's linkage.<br \>
+<div class="fb_indent">Les noms de variables et d'objets d&eacute;clar&eacute;s au niveau de port&eacute;e-module ont un "<i>internal linkage</i>" (liaison interne) sauf s'ils sont d&eacute;clar&eacute;s avec <tt><a href="KeyPgExtern.html">Extern</a></tt> ou <tt><a href="KeyPgCommon.html">Common</a></tt>. Par exemple, les noms de variables d&eacute;clar&eacute;s la premi&egrave;re fois avec <tt><a href="KeyPgDim.html">Dim</a></tt> ou <tt><a href="KeyPgStatic.html">Static</a></tt> ont un "<i>internal linkage</i>" (liaison interne) et ces variables peuvent seulement &ecirc;tre d&eacute;sign&eacute;es par leur nom dans le module dans lequel elles sont d&eacute;finies. Notez que l'utilisation de <tt><a href="KeyPgShared.html">Shared</a></tt> ne permet que la visibilit&eacute; de nom dans les proc&eacute;dures du module et ne contribue pas &agrave; la liaison de nom.<br \>
 <br \>
-Procedure names declared with <tt><a href="KeyPgPrivate.html">Private</a></tt> have internal linkage.<br \>
+Les noms de proc&eacute;dure d&eacute;clar&eacute;es avec <tt><a href="KeyPgPrivate.html">Private</a></tt> ont un "<i>internal linkage</i>" (liaison interne).<br \>
 <br \>
-</div><div class="fb_sect_title">Local-scope declarations</div><br \>
+</div><div class="fb_sect_title">D&eacute;clarations de port&eacute;e locale</div><br \>
 <br \>
-<div class="fb_indent">All variable and object names declared at local-scope (in a <tt><a href="KeyPgDo.html">Do</a></tt> loop, or procedure body, for instance) have internal linkage.<br \>
+<div class="fb_indent">Tous les noms de variables et d'objets d&eacute;clar&eacute;s de port&eacute;e locale (dans une boucle <tt><a href="KeyPgDo.html">Do</a></tt> ou dans le corps d'une proc&eacute;dure, par exemple) ont un "<i>internal linkage</i>" (liaison interne).<br \>
 <br \>
-</div></div><div class="fb_sect_title">External linkage</div><div class="fb_sect_cont"><br \>
+</div></div><div class="fb_sect_title">External linkage (Liaison externe)</div><div class="fb_sect_cont"><br \>
 <br \>
-Names with <i>external linkage</i> may refer to variables, objects or procedures defined within their module or in another module. Having external linkage means that a name is outwardly visible to other modules, and all modules that use that same external name all refer to the same variable, object or procedure. Thus, only one module may define an external name (the compiler will complain about a duplicated definition if it finds an additional definition of a name with external linkage).<br \>
+Les noms avec un "<i>external linkage</i>" (liaison externe) peuvent faire r&eacute;f&eacute;rence &agrave; des variables, des objets ou des proc&eacute;dures d&eacute;finis au sein de leur propre module ou dans un autre module. Avoir un "<i>external linkage</i>" (liaison externe) signifie que le nom est visible vers l'ext&eacute;rieur &agrave; d'autres moduleset tous les modules qui utilisent ce m&ecirc;me nom externe se r&eacute;f&egrave;rent tous &agrave; la m&ecirc;me variable, au m&ecirc;me objet ou &agrave; la m&ecirc;me proc&eacute;dure. Ainsi, un seul module peut d&eacute;finir un nom externe (le compilateur se plaindra d'une d&eacute;finition en double s'il constate une d&eacute;finition suppl&eacute;mentaire d'un nom avec "<i>external linkage</i>" (liaison externe)).<br \>
 <br \>
-<div class="fb_sect_title">Module-scope declarations</div><br \>
+<div class="fb_sect_title">D&eacute;clarations de port&eacute;e module</div><br \>
 <br \>
-<div class="fb_indent">Variable and object names declared at module-scope are declared to have external linkage with <tt><a href="KeyPgExtern.html">Extern</a></tt> or <tt><a href="KeyPgCommon.html">Common</a></tt>. <br \>
+<div class="fb_indent">Les noms de variables et d'objets d&eacute;clar&eacute;s au niveau de port&eacute;e-module pour avoir un "<i>external linkage</i>" (liaison externe) sont d&eacute;clar&eacute;es avec <tt><a href="KeyPgExtern.html">Extern</a></tt> ou <tt><a href="KeyPgCommon.html">Common</a></tt>. <br \>
 <br \>
-<tt><a href="KeyPgExtern.html">Extern</a></tt> declares the variable having external linkage, but does not define it.  This external declaration must come before any definition of the same name (a declaration without <tt><a href="KeyPgExtern.html">Extern</a></tt> specifies internal linkage, and currently, any further external declarations of that name signify a duplicated definition).  Variable and object names with external linkage declared using <tt><a href="KeyPgExtern.html">Extern</a></tt> are always in the shared scope, and so can be referred to within procedure bodies.<br \>
+<tt><a href="KeyPgExtern.html">Extern</a></tt> d&eacute;clare que la variable a un "<i>external linkage</i>" (liaison externe), mais ne la d&eacute;finit pas.  Cette d&eacute;claration externe doit passer avant toute d&eacute;finition du m&ecirc;me nom (une d&eacute;claration sans <tt><a href="KeyPgExtern.html">Extern</a></tt> sp&eacute;cifie un "<i>internal linkage</i>" (liaison interne), et actuellement, les d&eacute;clarations ult&eacute;rieures externes de ce nom signifient une d&eacute;finition double).  Les noms de variables et d'objets avec "<i>external linkage</i>" (liaison externe) d&eacute;clar&eacute;s &agrave; l'aide de <tt><a href="KeyPgExtern.html">Extern</a></tt> sont toujours dans la port&eacute;e partag&eacute;e (shared scope), et on peut donc se r&eacute;f&eacute;rer &agrave; eux dans les corps de proc&eacute;dure.<br \>
 <br \>
-<tt><a href="KeyPgCommon.html">Common</a></tt> declares the variable having external linkage as well as defining the variable.  But, it is different from <tt><a href="KeyPgExtern.html">Extern</a></tt> in that the <tt><a href="KeyPgCommon.html">Common</a></tt> definition of the variable may appear in more than one module.  When used with arrays, only variable-length arrays without subscripts may be declared, and the array must be sized at run-time using <tt><a href="KeyPgDim.html">Dim</a></tt> or <tt><a href="KeyPgRedim.html">ReDim</a></tt> before it can be used.  Variable and object names with external linkage declared using <tt><a href="KeyPgCommon.html">Common</a></tt> are only in the shared scope if the <tt><a href="KeyPgShared.html">Shared</a></tt> scope specifier is also given.  Shared variables can be referred to within procedure bodies.<br \>
+<tt><a href="KeyPgCommon.html">Common</a></tt> d&eacute;clare que la variable a un "<i>external linkage</i>" (liaison externe) ainsi qu'il d&eacute;finit la variable.  Mais, il est diff&eacute;rent de <tt><a href="KeyPgExtern.html">Extern</a></tt> par le fait que la d&eacute;finition <tt><a href="KeyPgCommon.html">Common</a></tt>  de la variable peut apparaître dans plus d'un module.  Lorsqu'il est utilis&eacute; avec des tableaux, seuls des tableaux de longueur variable, sans indices peuvent &ecirc;tre d&eacute;clar&eacute;s, et le tableau doit &ecirc;tre dimensionn&eacute; de moment de l'ex&eacute;cution &agrave; l'aide de <tt><a href="KeyPgDim.html">Dim</a></tt> ou <tt><a href="KeyPgRedim.html">ReDim</a></tt> avant qu'il puisse &ecirc;tre utilis&eacute;.  Les noms de variables et d'objets avec un "<i>external linkage</i>" (liaison externe) d&eacute;clar&eacute;s &agrave; l'aide de <tt><a href="KeyPgCommon.html">Common</a></tt> ne sont que dans la port&eacute;e partag&eacute;e si le sp&eacute;cificateur de port&eacute;e <tt><a href="KeyPgShared.html">Shared</a></tt> est aussi utilis&eacute;.  On peut se r&eacute;f&eacute;rer aux variables partag&eacute;es dans les corps de proc&eacute;dures.<br \>
 <br \>
-When both <tt><a href="KeyPgExtern.html">Extern</a></tt> and <tt><a href="KeyPgCommon.html">Common</a></tt> are both used to declare and define a variable, the effect is that the meaning of <tt><a href="KeyPgCommon.html">Common</a></tt> statement is altered to behave as though it were a <tt><a href="KeyPgDim.html">Dim</a></tt> declaration.  So it is generally, not recommended to mix <tt><a href="KeyPgExtern.html">Extern</a></tt> and <tt><a href="KeyPgCommon.html">Common</a></tt> on the same variable in the same module.  However, variables may be declared and defined with <tt><a href="KeyPgCommon.html">Common</a></tt> in one module and then referenced with <tt><a href="KeyPgExtern.html">Extern</a></tt> in another module without confusion.<br \>
+Quand <tt><a href="KeyPgExtern.html">Extern</a></tt> et <tt><a href="KeyPgCommon.html">Common</a></tt> sont utilis&eacute;s les deux ensemble pour d&eacute;clarer et d&eacute;finir une variable, l'effet est que le sens de la d&eacute;claration <tt><a href="KeyPgCommon.html">Common</a></tt> est modifi&eacute; de façon &agrave; se comporter comme s'il s'agissait d'une d&eacute;claration <tt><a href="KeyPgDim.html">Dim</a></tt>.  Il est donc g&eacute;n&eacute;ralement pas recommand&eacute; de m&eacute;langer <tt><a href="KeyPgExtern.html">Extern</a></tt> et <tt><a href="KeyPgCommon.html">Common</a></tt> sur la m&ecirc;me variable dans le m&ecirc;me module.  Toutefois, les variables peuvent &ecirc;tre d&eacute;clar&eacute;es et d&eacute;finies avec <tt><a href="KeyPgCommon.html">Common</a></tt> dans un module et puis r&eacute;f&eacute;renc&eacute;es avec <tt><a href="KeyPgExtern.html">Extern</a></tt> dans un autre module, sans confusion.<br \>
 <br \>
-Procedure names are declared to have external linkage by default. Declarations using <tt><a href="KeyPgPublic.html">Public</a></tt> explicitly specify external linkage.<br \>
+Les noms de proc&eacute;dure sont d&eacute;clar&eacute;s comme ayant un "<i>external linkage</i>" (liaison externe) par d&eacute;faut. Les d&eacute;clarations utilisant explicitement <tt><a href="KeyPgPublic.html">Public</a></tt> signifient "<i>external linkage</i>" (liaison externe).<br \>
 <br \>
-</div><div class="fb_sect_title">Local-scope declarations</div><br \>
+</div><div class="fb_sect_title">Les d&eacute;clarations de port&eacute;e locale</div><br \>
 <br \>
-<div class="fb_indent">Currently, names declared at local-scope cannot have external linkage.<br \>
+<div class="fb_indent">Actuellement, les noms d&eacute;clar&eacute;s de port&eacute;e locale ne peuvent pas avoir un "<i>external linkage</i>" (liaison externe).<br \>
 <br \>
-</div></div>
+</div><br \>
+   <br \>
+</div>
 </div>
 </div> 
 </div> 

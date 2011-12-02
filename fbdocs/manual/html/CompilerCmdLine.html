@@ -6,170 +6,170 @@
 <body>
 <div id="fb_body_wrapper">
 <div id="fb_tab">
-<div id="fb_tab_l">fbc command-line</div>
+<div id="fb_tab_l">La ligne de commande fbc</div>
 <div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
 </div> 
 <div id="fb_pg_wrapper">
 <div id="fb_pg_body">
-	Using the <b>fbc</b> command-line.<br \>
+	Utilisation de la ligne de commande <b>fbc</b>.<br \>
 <br \>
-<div class="fb_indent">The official FreeBASIC distribution comes with <b>fbc</b>, FreeBASIC's flagship compiler. <b>fbc</b> is a command line compiler, and can be launched from the console - from DOS, the Windows command prompt or a Linux shell. Running <b>fbc</b> from the console without any arguments displays a list of available options, or command-line switches, that can be used to adjust the behavior of the compiler.<br \>
+<div class="fb_indent">La distribution officielle FreeBASIC est livr&eacute;e avec <b>fbc</b>, le compilateur phare de FreeBASIC. <b>fbc</b> est un compilateur en ligne de commande et peut &ecirc;tre lanc&eacute; depuis la console - depuis la console de DOS, l'invite de commande Windows ou un shell Linux. Ex&eacute;cuter <b>fbc</b> &agrave; partir de la console sans argument affiche une liste des options disponibles ou les commutateurs de ligne de commande qui peuvent &ecirc;tre utilis&eacute;s pour ajuster le comportement du compilateur.<br \>
 <br \>
-At it's simplest, <b>fbc</b> takes a source file as a command-line argument and produces an executable file. It does this by compiling the source file (.bas) into an assembly (.asm) file, then compiling this into an object file (.o) using GAS and finally linking using LD this object file to other object files and libraries it needs to run, producing the final executable file. The assembly and compiled object files are deleted at this point by default. For example, the following command,<br \>
+Au plus simple, <b>fbc</b> prend un fichier source comme argument de ligne de commande et produit un fichier ex&eacute;cutable. Il le fait en compilant le fichier source (.bas) en un fichier assembleur (.asm), puis en compilant les r&eacute;sultats dans un fichier objet (.o) en utilisant GAS et enfin en liant, &agrave; l'aide LD, ce fichier objet aux autres fichiers objet et biblioth&egrave;ques dont il a besoin pour fonctionner, produisant le fichier ex&eacute;cutable final. Les fichiers objets assembl&eacute;s et compil&eacute;s sont supprim&eacute;s &agrave; ce stade par d&eacute;faut. Par exemple, la commande suivante,<br \>
 <br \>
 <div class="fb_indent"><tt>fbc foo.bas</tt><br \>
 <br \>
-</div>produces the executable <tt>foo.exe</tt> in DOS and Windows, and <tt>./foo</tt> in Linux. <b>fbc</b> can accept multiple source files at once, compile and link them all into one executable. For example, the following command,<br \>
+</div>produit l'ex&eacute;cutable <tt>foo.exe</tt> sous DOS et Windows, et <tt>./foo</tt> sous Linux. <b>fbc</b> peut accepter en une fois plusieurs fichiers source, les compiler et les lier en un seul ex&eacute;cutable. Par exemple, la commande suivante,<br \>
 <br \>
 <div class="fb_indent"><tt>fbc foo.bas bar.bas baz.bas</tt><br \>
 <br \>
-</div>produces the executable <tt>foo.exe</tt> in DOS and Windows, and <tt>./foo</tt> in Linux. Since <tt>foo.bas</tt> was listed first, it will be the main entry point into the executable, and also provide its name. To specify a different entry point or executable name, use the "-m" and "-x" switches, respectively. To have, for example, <tt>baz.bas</tt> provide the main entry point into an executable called <tt>foobar.exe</tt>, you would use<br \>
+</div>produit l'ex&eacute;cutable <tt>foo.exe</tt> sous DOS et Windows, et <tt>./foo</tt> sous Linux. Comme <tt>foo.bas</tt> a &eacute;t&eacute; r&eacute;pertori&eacute; en premier, il sera le point d'entr&eacute;e principal de l'ex&eacute;cutable et fournira &eacute;galement son nom. Pour sp&eacute;cifier un point d'entr&eacute;e diff&eacute;rent ou un autre nom de l'ex&eacute;cutable, utilisez respectivement les options "-m" et "-x". Pour avoir, par exemple, <tt>baz.bas</tt> comme principal point d'entr&eacute;e dans un ex&eacute;cutable appel&eacute; <tt>foobar.exe</tt>, vous utiliserez:<br \>
 <br \>
 <div class="fb_indent"><tt>fbc -x foobar.exe -m baz foo.bas bar.bas baz.bas</tt><br \>
 <br \>
-</div>The "-x" switch names the executable verbatim, so in Linux, the executable produced from the above command would be called <tt>./foobar.exe</tt>.<br \>
+</div>L'option "-x" nomme textuellement l'ex&eacute;cutable, donc sous Linux, l'ex&eacute;cutable produit &agrave; partir de la commande ci-dessus serait appel&eacute; <tt>./foobar.exe</tt>.<br \>
 <br \>
-</div><div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Syntaxe</div><div class="fb_sect_cont"><br \>
 <div class="fb_indent"><tt>fbc [ <i>options</i> ] [ <i>input_list</i> ]</tt><br \>
 <br \>
-Where <i>input_list</i> is a list of filenames. Accepted files are:<br \>
+Where <i>input_list</i> est une liste de noms de fichiers. Les fichiers accept&eacute;s sont:<br \>
 <br \>
-<div class="fb_indent"><div class="fb_table"><table><tr><td>File extension</td><td>Description</td></tr><tr><td>.bas</td><td>FreeBASIC source file</td></tr><tr><td>.a</td><td>Library</td></tr><tr><td>.o</td><td>Object file</td></tr><tr><td>.rc</td><td>Resource script (Windows only)</td></tr><tr><td>.res</td><td>Compiled resource (Windows only)</td></tr><tr><td>.xpm</td><td>X icon pixmap (Linux only)</td></tr></table></div><br \>
+<div class="fb_indent"><div class="fb_table"><table><tr><td>Extension fichier</td><td>Description</td></tr><tr><td>.bas</td><td>Fichier source FreeBASIC</td></tr><tr><td>.a</td><td>Biblioth&egrave;que</td></tr><tr><td>.o</td><td>Fichier objet</td></tr><tr><td>.rc</td><td>Script de ressources (Windows seulement)</td></tr><tr><td>.res</td><td>Fichier ressources compil&eacute; (Windows seulement)</td></tr><tr><td>.xpm</td><td>Ic&ocirc;ne pixmap X (Linux uniquement)</td></tr></table></div><br \>
 <br \>
-</div></div><table class="fb_box"><tr><td><b><u>Source code</u></b><br \>
+</div></div><table class="fb_box"><tr><td><b><u>Code source</u></b><br \>
 <div class="fb_indent"><b><a href="CompilerOptb.html">-b &lt; name &gt;</a></b><br \>
-<div class="fb_indent">Add a source file to compilation<br \>
+<div class="fb_indent">Ajouter un fichier source &agrave; la compilation<br \>
 </div><b><a href="CompilerOpti.html">-i &lt; name &gt;</a></b><br \>
-<div class="fb_indent">Add a path to search for include files<br \>
+<div class="fb_indent">Ajouter un chemin de recherche pour les fichiers &agrave; inclure<br \>
 </div><b><a href="CompilerOptinclude.html">-include &lt; name &gt;</a></b><br \>
-<div class="fb_indent">Include a header file on each source compiled<br \>
+<div class="fb_indent">Inclure un fichier en-t&ecirc;te dans chaque source compil&eacute;<br \>
 </div><b><a href="CompilerOptd.html">-d &lt; name=val &gt;</a></b><br \>
-<div class="fb_indent">Add a preprocessor's define<br \>
+<div class="fb_indent">Ajouter une d&eacute;finition pr&eacute;processeur<br \>
 </div><b><a href="CompilerOptlang.html">-lang &lt; name &gt;</a></b><br \>
-<div class="fb_indent">Select language mode: <tt>fb</tt>, <tt>fblite</tt>, <tt>qb</tt>, <tt>deprecated</tt><br \>
+<div class="fb_indent">S&eacute;lection du mode de langage: <tt>fb</tt>, <tt>fblite</tt>, <tt>qb</tt>, <tt>deprecated</tt><br \>
 </div><b><a href="CompilerOptforcelang.html">-forcelang &lt; name &gt;</a></b><br \>
-<div class="fb_indent">Select language mode: <tt>fb</tt>, <tt>fblite</tt>, <tt>qb</tt>, <tt>deprecated</tt> (overides statements in code)<br \>
+<div class="fb_indent">S&eacute;lection du mode de langage: <tt>fb</tt>, <tt>fblite</tt>, <tt>qb</tt>, <tt>deprecated</tt> (modifie les d&eacute;clarations dans le code)<br \>
 <br \>
-</div></div><b><u>Code generation</u></b><br \>
+</div></div><b><u>G&eacute;n&eacute;ration du code</u></b><br \>
 <div class="fb_indent"><b><a href="CompilerOpttarget.html">-target &lt; platform &gt;</a></b><br \>
-<div class="fb_indent">Set the target platform for cross compilation<br \>
+<div class="fb_indent">R&egrave;gle la plate-forme cible pour la compilation crois&eacute;e<br \>
 </div><b><a href="CompilerOptgen.html">-gen &lt; backend &gt;</a></b><br \>
-<div class="fb_indent">Sets the compiler backend (default is 'gas').<br \>
+<div class="fb_indent">R&egrave;gle le compilateur "backend" (par d&eacute;faut 'gas').<br \>
 </div><b><a href="CompilerOptarch.html">-arch &lt; type &gt;</a></b><br \>
-<div class="fb_indent">Set target architecture (default: <tt>486</tt>)<br \>
+<div class="fb_indent">R&egrave;gle l'architecture cible (par d&eacute;faut: <tt>486</tt>)<br \>
 </div><b><a href="CompilerOptoptimization.html">-O &lt; level &gt;</a></b><br \>
-<div class="fb_indent">Set the optimization level (-gen gcc).<br \>
+<div class="fb_indent">R&egrave;gle le niveau d'optimisation (-gen gcc).<br \>
 </div><b><a href="CompilerOptvec.html">-vec &lt; level &gt;</a></b><br \>
-<div class="fb_indent">Set level of vector optimizations enabled by the compiler (default: <tt>0</tt>)<br \>
+<div class="fb_indent">R&egrave;gle le niveau du vecteur d'optimisations activ&eacute; par le compilateur (par d&eacute;faut: <tt>0</tt>)<br \>
 </div><b><a href="CompilerOptfpu.html">-fpu &lt; type &gt;</a></b><br \>
-<div class="fb_indent">Set the floating point arithmetics unit (default: <tt>FPU</tt>)<br \>
+<div class="fb_indent">R&egrave;gle l'unit&eacute; d'arithm&eacute;tique en virgule flottante (par d&eacute;faut: <tt>FPU</tt>)<br \>
 </div><b><a href="compileroptfpmode.html">-fpmode &lt; type &gt;</a></b><br \>
-<div class="fb_indent">Select between fast and accurate floating-point operations (default: <tt>PRECISE</tt>)<br \>
+<div class="fb_indent">Choix entre rapide et pr&eacute;cise pour les op&eacute;rations en virgule flottante (par d&eacute;faut: <tt>PRECISE</tt>)<br \>
 </div><b><a href="CompilerOptz.html">-z &lt; value &gt;</a></b><br \>
-<div class="fb_indent">Sets miscellaneous or experimental options.<br \>
+<div class="fb_indent">D&eacute;finition des options diverses ou exp&eacute;rimentales.<br \>
 <br \>
 </div></div><b><u>Compilation</u></b><br \>
 <div class="fb_indent"><b><a href="CompilerOptm.html">-m &lt; name &gt;</a></b><br \>
-<div class="fb_indent">Main file without extension, the entry point (default is the first .bas file on the command line)<br \>
+<div class="fb_indent">Fichier principal sans extension, le point d'entr&eacute;e (par d&eacute;faut c'est le premier fichier .bas de la ligne de commande)<br \>
 </div><b><a href="CompilerOptg.html">-g</a></b><br \>
-<div class="fb_indent">Add debug info<br \>
+<div class="fb_indent">Ajouter les informations de d&eacute;bogage<br \>
 </div><b><a href="CompilerOptprofile.html">-profile</a></b><br \>
-<div class="fb_indent">Enable function profiling<br \>
+<div class="fb_indent">Valide la fonction de profilage<br \>
 </div><b><a href="CompilerOpte.html">-e</a></b><br \>
-<div class="fb_indent">Add error checking<br \>
+<div class="fb_indent">Valide la recherche des erreurs<br \>
 </div><b><a href="CompilerOptex.html">-ex</a></b><br \>
-<div class="fb_indent">Add error checking with RESUME support<br \>
+<div class="fb_indent">Valide la recherche des erreurs avec utilisation de RESUME<br \>
 </div><b><a href="CompilerOptexx.html">-exx</a></b><br \>
-<div class="fb_indent">Same as <tt>-ex</tt> plus array bounds and null-pointer checking<br \>
+<div class="fb_indent">Comme <tt>-ex</tt> avec en plus la recherche des bornes de tableaux et des pointeurs nuls<br \>
 </div><b><a href="CompilerOptWa.html">-Wa &lt; opt &gt;</a></b><br \>
-<div class="fb_indent">Pass options to GAS (separated by commas)<br \>
+<div class="fb_indent">Passe des options &agrave; GAS (s&eacute;par&eacute;es par des virgules)<br \>
 </div><b><a href="CompilerOptWc.html">-Wc &lt; opt &gt;</a></b><br \>
-<div class="fb_indent">Pass options to GCC (separated by commas)<br \>
+<div class="fb_indent">Passe des options &agrave; GCC (s&eacute;par&eacute;es par des virgules)<br \>
 </div><b><a href="CompilerOpto.html">-o &lt; name &gt;</a></b><br \>
-<div class="fb_indent">Set object file path/name (must be passed after the .bas file)<br \>
+<div class="fb_indent">D&eacute;termine chemin/nom pour le fichier objet (doit &ecirc;tre pass&eacute; apr&egrave;s le fichier .bas)<br \>
 <br \>
-</div></div></td><td><b><u>Linking</u></b><br \>
+</div></div></td><td><b><u>Liens</u></b><br \>
 <div class="fb_indent"><b><a href="CompilerOpta.html">-a &lt; name &gt;</a></b><br \>
-<div class="fb_indent">Add an object file to linker's list<br \>
+<div class="fb_indent">Ajouter un fichier objet &agrave; la liste &eacute;diteur de liens<br \>
 </div><b><a href="CompilerOptl.html">-l &lt; name &gt;</a></b><br \>
-<div class="fb_indent">Add a library file to linker's list<br \>
+<div class="fb_indent">Ajouter un fichier biblioth&egrave;que &agrave; la liste &eacute;diteur de liens<br \>
 </div><b><a href="CompilerOptp.html">-p &lt; name &gt;</a></b><br \>
-<div class="fb_indent">Add a path to search for libraries<br \>
+<div class="fb_indent">Ajouter un chemin de recherche pour les biblioth&egrave;ques<br \>
 </div><b><a href="CompilerOptmt.html">-mt</a></b><br \>
-<div class="fb_indent">Link with thread-safe runtime library<br \>
+<div class="fb_indent">Lien avec la biblioth&egrave;que d'ex&eacute;cution "thread-safe"<br \>
 </div><b><a href="CompilerOptnodeflibs.html">-nodeflibs</a></b><br \>
-<div class="fb_indent">Do not include the default libraries<br \>
+<div class="fb_indent">Ne pas inclure les biblioth&egrave;ques par d&eacute;faut<br \>
 </div><b><a href="CompilerOptmap.html">-map &lt; name &gt;</a></b><br \>
-<div class="fb_indent">Save the linking map to file name<br \>
+<div class="fb_indent">Enregistrer la carte de liaison sous le nom de fichier<br \>
 </div><b><a href="CompilerOptWl.html">-Wl &lt; opt &gt;</a></b><br \>
-<div class="fb_indent">Pass options to LD (separated by commas)<br \>
+<div class="fb_indent">Passe des options &agrave; LD (s&eacute;par&eacute;es par des virgules)<br \>
 </div><b><a href="CompilerOptexport.html">-export</a></b><br \>
-<div class="fb_indent">Export symbols for dynamic linkage<br \>
+<div class="fb_indent">Exporte les symboles pour une liaison dynamique<br \>
 </div><b><a href="CompilerOptlib.html">-lib</a></b><br \>
-<div class="fb_indent">Create a static library<br \>
+<div class="fb_indent">Cr&eacute;e une librairie statique<br \>
 </div><b><a href="CompilerOptdylib.html">-dylib</a></b><br \>
-<div class="fb_indent">Create a DLL, including the import library<br \>
+<div class="fb_indent">Cr&eacute;e une DLL, y compris la biblioth&egrave;que d'importation<br \>
 </div><b><a href="CompilerOptdll.html">-dll</a></b><br \>
-<div class="fb_indent">Create a DLL, including the import library.  (Same as <tt>-dylib</tt>)<br \>
+<div class="fb_indent">Cr&eacute;e une DLL, y compris la biblioth&egrave;que d'importation.  (Comme <tt>-dylib</tt>)<br \>
 </div><b><a href="CompilerOptx.html">-x &lt; name &gt;</a></b><br \>
-<div class="fb_indent">Set executable/library path/name<br \>
+<div class="fb_indent">D&eacute;termine ex&eacute;cutable/biblioth&egrave;que chemin/nom<br \>
 <br \>
-</div></div><b><u>Behaviour</u></b><br \>
+</div></div><b><u>Comportement</u></b><br \>
 <div class="fb_indent"><b><a href="CompilerOptprefix.html">-prefix &lt; path &gt;</a></b><br \>
-<div class="fb_indent">Set the compiler prefix path<br \>
+<div class="fb_indent">R&eacute;gler le chemin du pr&eacute;fixe du compilateur<br \>
 </div><b><a href="CompilerOptversion.html">-version</a></b><br \>
-<div class="fb_indent">Show compiler version on the command line, do not compile or link.<br \>
+<div class="fb_indent">Affiche la version du compilateur sur la ligne de commande, ne compile ni ne lie.<br \>
 </div><b><a href="CompilerOptv.html">-v</a></b><br \>
-<div class="fb_indent">Be verbose<br \>
+<div class="fb_indent">Mode bavard<br \>
 </div><b><a href="CompilerOptpp.html">-pp</a></b><br \>
-<div class="fb_indent">Emit the preprocessed input file only, do not compile<br \>
+<div class="fb_indent">Emet le le fichier d'entr&eacute;e pr&eacute;proc&eacute;d&eacute; seulement, ne compile pas<br \>
 </div><b><a href="CompilerOptr.html">-r</a></b><br \>
-<div class="fb_indent">Compile into asm file(s) only, do not assemble or link<br \>
+<div class="fb_indent">Compile en fichier(s) asm seulement, n'assemble pas ne lie pas<br \>
 </div><b><a href="CompilerOptc.html">-c</a></b><br \>
-<div class="fb_indent">Compile and assemble source file only, do not link<br \>
+<div class="fb_indent">Compile et assemble le fichier source seulement, ne lie pas<br \>
 </div><b><a href="CompilerOptrupp.html">-R</a></b><br \>
-<div class="fb_indent">Do not delete the asm file(s)<br \>
+<div class="fb_indent">Ne d&eacute;truit pas le(s) fichier(s) asm<br \>
 </div><b><a href="CompilerOptcupp.html">-C</a></b><br \>
-<div class="fb_indent">Do not delete the object file(s)<br \>
+<div class="fb_indent">Ne d&eacute;truit pas le(s) fichier(s) objet<br \>
 </div><b><a href="CompilerOptw.html">-w &lt; value &gt;</a></b><br \>
-<div class="fb_indent">Set min warning level: <tt>all</tt>, <tt>pedantic</tt>, <tt>next</tt> or a value<br \>
+<div class="fb_indent">D&eacute;termine le niveau d'alarme minimum: <tt>all</tt>, <tt>pedantic</tt>, <tt>next</tt> ou une valeur<br \>
 </div><b><a href="CompilerOptmaxerr.html">-maxerr &lt; val &gt;</a></b><br \>
-<div class="fb_indent">Only stop parsing if &lt;val&gt; errors occurred<br \>
+<div class="fb_indent">Arr&ecirc;te l'analyse seulement si surviennent &lt;val&gt; erreurs<br \>
 </div><b><a href="CompilerOptnoerrline.html">-noerrline</a></b><br \>
-<div class="fb_indent">Do not show source line where error occurred<br \>
+<div class="fb_indent">N'affiche pas la ligne o&ucirc; une erreur a lieu<br \>
 <br \>
-</div></div><b><u>Target specific</u></b><br \>
+</div></div><b><u>Sp&eacute;cifique &agrave; la cible </u></b><br \>
 <div class="fb_indent"><b><a href="CompilerOpts.html">-s &lt; name &gt;</a></b><br \>
-<div class="fb_indent">Set subsystem (<tt>gui</tt>, <tt>console</tt>)<br \>
+<div class="fb_indent">Choix du subsyst&egrave;me (<tt>gui</tt>, <tt>console</tt>)<br \>
 </div><b><a href="CompilerOptt.html">-t &lt; value &gt;</a></b><br \>
-<div class="fb_indent">Set stack size in kbytes (default: 1M)<br \>
+<div class="fb_indent">R&eacute;gler la taille de la pile en kilo-octets (par d&eacute;faut: 1M)<br \>
 <br \>
-</div></div><b><u>Meta</u></b><br \>
+</div></div><b><u>M&eacute;ta</u></b><br \>
 <div class="fb_indent"><b><a href="CompilerOptoptfile.html">@&lt; file &gt;</a></b><br \>
-<div class="fb_indent">Read (additional) command-line options from a file<br \>
+<div class="fb_indent">Lire (suppl&eacute;mentaire) des options de la ligne de commande depuis un fichier<br \>
 <br \>
 </div></div></td></tr></table><div style="clear:both">&nbsp;</div><br \>
-</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Exemple</div><div class="fb_sect_cont"><br \>
 <div class="fb_indent"><tt>fbc myfile.bas</tt><br \>
-<div class="fb_indent"><i>(With DOS version of FBC, compile and link a DOS executable <tt>MYFILE.EXE</tt>.)</i><br \>
+<div class="fb_indent"><i>(Avec la version DOS de FBC, compile et lie un ex&eacute;cutable DOS <tt>MYFILE.EXE</tt>.)</i><br \>
 <br \>
 </div><tt>fbc -s gui myfile.bas</tt><br \>
-<div class="fb_indent"><i>(With Windows version of FBC, compile and link a Windows executable <tt>myfile.exe</tt>. Running the program will not show the console window ("MS-DOS Prompt"))</i><br \>
+<div class="fb_indent"><i>(Avec la version Windows de FBC, compile et lie un ex&eacute;cutable Windows <tt>myfile.exe</tt>. L'ex&eacute;cution du programme n'affiche pas la fen&ecirc;tre de la console ("Invite MS-DOS"))</i><br \>
 <br \>
 </div><tt>fbc -lib module1.bas module2.bas module3.bas -x libmylib.a</tt><br \>
-<div class="fb_indent"><i>(Compile and link a static library <tt>libmylib.a</tt> from the three source files)</i><br \>
+<div class="fb_indent"><i>(Compile et lie une biblioth&egrave;que statique <tt>libmylib.a</tt> &agrave; partir des trois fichiers source)</i><br \>
 <br \>
 </div><tt>fbc -m main_module -c main_module.bas</tt><br \>
-<div class="fb_indent"><i>(Compile an object file <tt>main_module.o</tt> and mark it as an entry point)</i><br \>
+<div class="fb_indent"><i>(Compile un fichier objet <tt>main_module.o</tt> et le marquer comme point d'entr&eacute;e)</i><br \>
 </div><tt>fbc -c sub_module.bas</tt><br \>
-<div class="fb_indent"><i>(Compile an object file <tt>sub_module.o</tt>)</i><br \>
+<div class="fb_indent"><i>(Compile un fichier objet <tt>sub_module.o</tt>)</i><br \>
 </div><tt>fbc -x application.exe main_module.o sub_module.o</tt><br \>
-<div class="fb_indent"><i>(Link an executable <tt>application.exe</tt>)</i><br \>
+<div class="fb_indent"><i>(Lier un ex&eacute;cutable <tt>application.exe</tt>)</i><br \>
 <br \>
-</div></div></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
-<ul><li> <a href="CatPgCompOpt.html">Compiler Options</a><br \>
-<li> <a href="CompilerInstalling.html">Installing FreeBASIC</a><br \>
-<li> <a href="CompilerRunning.html">Invoking the FreeBASIC compiler</a><br \>
+</div></div></div><div class="fb_sect_title">Voir aussi</div><div class="fb_sect_cont"><br \>
+<ul><li> <a href="CatPgCompOpt.html">Options du compilateur</a><br \>
+<li> <a href="CompilerInstalling.html">Installation de FreeBASIC</a><br \>
+<li> <a href="CompilerRunning.html">Appeler le compilateur FreeBASIC</a><br \>
 <br \>
 </ul></div>
 </div>

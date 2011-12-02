@@ -6,18 +6,18 @@
 <body>
 <div id="fb_body_wrapper">
 <div id="fb_tab">
-<div id="fb_tab_l">Pointers</div>
+<div id="fb_tab_l">Les pointeurs</div>
 <div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
 </div> 
 <div id="fb_pg_wrapper">
 <div id="fb_pg_body">
-	Data types whose values are addresses in memory.<br \>
+	Des types de donn&eacute;es dont les valeurs sont des adresses en m&eacute;moire.<br \>
 <br \>
-<div class="fb_sect_title">Declaration</div><div class="fb_sect_cont"><br \>
-Pointers are <a href="ProPgVariables.html">Variables</a> whose values are addresses in memory, and they are said to 'point' to this memory. The type of data that is pointed to depends on the type of pointer (an <tt><a href="KeyPgInteger.html">Integer</a> <a href="KeyPgPointer.html">Pointer</a></tt> points to <tt><a href="KeyPgInteger.html">Integer</a></tt> data). Pointers are declared like any other variable, with the suffix "<tt>pointer</tt>" or "<tt>ptr</tt>" following the type name.<br \>
+<div class="fb_sect_title">D&eacute;claration</div><div class="fb_sect_cont"><br \>
+Les pointeurs sont des <a href="ProPgVariables.html">variables</a> dont les valeurs sont des adresses en m&eacute;moire et on dit qu'ils "pointent" vers cette m&eacute;moire. Le type de donn&eacute;e qui est point&eacute; d&eacute;pend du type de pointeur (un <tt><a href="KeyPgInteger.html">Integer</a> <a href="KeyPgPointer.html">Pointer</a></tt> pointe vers une donn&eacute;e <tt><a href="KeyPgInteger.html">Integer</a></tt>). Les pointeurs sont d&eacute;clar&eacute;s comme toute autre variable, avec le suffixe "<tt>pointer</tt>" ou "<tt>ptr</tt>" suivant le nom du type.<br \>
 <br \>
-</div><div class="fb_sect_title">Accessing pointed to data</div><div class="fb_sect_cont"><br \>
-The data pointed to by a pointer can be accessed with <tt><a href="KeyPgOpValueOf.html">Operator *</a></tt> (Value of). This operator returns a reference to the data that its operand points to. The following,<br \>
+</div><div class="fb_sect_title">Acc&egrave;s aux donn&eacute;es point&eacute;es</div><div class="fb_sect_cont"><br \>
+Les donn&eacute;es point&eacute;es par un pointeur peuvent &ecirc;tre consult&eacute;es avec <tt><a href="KeyPgOpValueOf.html">Operator *</a></tt> (Valeur de). Cet op&eacute;rateur renvoie une r&eacute;f&eacute;rence aux donn&eacute;es que pointe son op&eacute;rande. Ce qui suit,<br \>
 <br \>
 <tt><div class="freebasic">
 <span class="key">Dim</span>&nbsp;<span class="wrd">myInteger</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">10</span><br />
@@ -25,10 +25,10 @@ The data pointed to by a pointer can be accessed with <tt><a href="KeyPgOpValueO
 <span class="oth">*</span><span class="wrd">myPointer</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">20</span><br />
 <span class="key">Print</span>&nbsp;<span class="wrd">myInteger</span><br />
 </div></tt><br />
-defines an <tt><a href="KeyPgInteger.html">Integer</a></tt> variable called <tt>myInteger</tt> and an <tt><a href="KeyPgInteger.html">Integer</a></tt> pointer called <tt>myPointer</tt> that points to the location in memory where <tt>myInteger</tt> is stored. <tt><a href="KeyPgOpAt.html">Operator @</a></tt> (Address of) is used to retrieve the address of <tt>myInteger</tt>. The value of <tt>20</tt> is assigned to the location at which <tt>myPointer</tt> points - the address of <tt>myInteger</tt>, or <tt>@myInteger</tt>. Changes to <tt>*myPointer</tt> directly affect the value of <tt>myInteger</tt> (the expression "<tt>*myPointer</tt>" is the same thing as "<tt>myInteger</tt>").<br \>
+d&eacute;finit une variable <tt><a href="KeyPgInteger.html">Integer</a></tt> appel&eacute;e <tt><i>myInteger</i></tt> et un pointeur d'<tt><a href="KeyPgInteger.html">Integer</a></tt> appel&eacute; <tt><i>myPointer</i></tt> qui pointe vers l'emplacement de la m&eacute;moire o&ugrave; est stock&eacute; <tt><i>myInteger</i></tt>. L'<tt><a href="KeyPgOpAt.html">Operator @</a></tt> (Adresse de) est utilis&eacute; pour r&eacute;cup&eacute;rer l'adresse de <tt><i>myInteger</i></tt>. La valeur de <tt><i>20</i></tt> est attribu&eacute;e &agrave; l'emplacement vers laquel pointe <tt><i>myPointer</i></tt> - l'adresse de <tt><i>myInteger</i></tt>, ou <tt><i>@myInteger</i></tt>. Les modifications apport&eacute;es &agrave; <tt><i>*myPointer</i></tt> affectent directement la valeur de <tt><i>myInteger</i></tt> (l'expression "<tt><i>*myPointer</i></tt>" est &eacute;quivalente &agrave; "<tt><i>myInteger</i></tt>").<br \>
 <br \>
-</div><div class="fb_sect_title">Pointers to user-defined types</div><div class="fb_sect_cont"><br \>
-Pointers to user-defined types are defined and used like all other pointers. Accessing a member of a <a href="KeyPgType.html">Type</a> or <a href="KeyPgClass.html">Class</a> requires one of the following two methods:<br \>
+</div><div class="fb_sect_title">Pointeurs vers des types d&eacute;finis par l'utilisateur</div><div class="fb_sect_cont"><br \>
+Les pointeurs vers des types d&eacute;finis par l'utilisateur sont d&eacute;finis et utilis&eacute;s comme tous les autres pointeurs. L'acc&egrave;s &agrave; un membre d'un <a href="KeyPgType.html">Type</a> ou d'une <a href="KeyPgClass.html">Class</a> requiert l'une des deux m&eacute;thodes suivantes:<br \>
 <br \>
 <tt><div class="freebasic">
 <span class="key">Type</span>&nbsp;<span class="wrd">myType</span><br />
@@ -47,15 +47,15 @@ Pointers to user-defined types are defined and used like all other pointers. Acc
 <span class="key">Print</span>&nbsp;<span class="wrd">p</span><span class="oth">-&gt;</span><span class="wrd">a</span><br />
 <span class="key">Print</span>&nbsp;<span class="wrd">p</span><span class="oth">-&gt;</span><span class="wrd">b</span><br />
 </div></tt><br />
-The first method uses <tt><a href="KeyPgOpMemberAccess.html">Operator . (Member Access)</a></tt>. This operator accesses members from references, so the pointer is dereferenced first. The member access operator has higher priority over the dereference operator, so parenthesis are needed to dereference the pointer before using it with the member access operator.<br \>
+La premi&egrave;re m&eacute;thode utilise <tt><a href="KeyPgOpMemberAccess.html">Operator . (Acc&egrave;s membre)</a></tt>. Cet op&eacute;rateur acc&egrave;de aux membres &agrave; partir de r&eacute;f&eacute;rences, par cons&eacute;quent, en premier, le pointeur est d&eacute;r&eacute;f&eacute;renc&eacute;. L'op&eacute;rateur d'acc&egrave;s membre a une plus grande priorit&eacute; que l'op&eacute;rateur de d&eacute;r&eacute;f&eacute;rencement, donc des parenth&egrave;ses sont n&eacute;cessaires pour d&eacute;r&eacute;f&eacute;rencer le pointeur avant de l'utiliser avec l'op&eacute;rateur d'acc&egrave;s membre.<br \>
 <br \>
-The second method uses <tt><a href="KeyPgOpPtrMemberAccess.html">Operator -&gt; (Pointer To Member Access)</a></tt>. This operator accesses members from pointers, which are automatically dereferenced. This can make code a little clearer, although both forms produce identical results.<br \>
+La deuxi&egrave;me m&eacute;thode utilise <tt><a href="KeyPgOpPtrMemberAccess.html">Operator -&gt; (Acc&egrave;s membre par pointeur)</a></tt>. Cet op&eacute;rateur acc&egrave;de aux membres &agrave; partir de pointeurs qui sont automatiquement d&eacute;r&eacute;f&eacute;renc&eacute;s. Cela peut rendre le code un peu plus clair, bien que les deux formes produisent des r&eacute;sultats identiques.<br \>
 <br \>
-</div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
-<ul><li> <tt><a href="KeyPgOpAt.html">Operator @ (Address Of)</a></tt><br \>
-<li> <tt><a href="KeyPgOpValueOf.html">Operator * (Value Of)</a></tt><br \>
-<li> <tt><a href="KeyPgOpMemberAccess.html">Operator . (Member Access)</a></tt><br \>
-<li> <tt><a href="KeyPgOpPtrMemberAccess.html">Operator -&gt; (Pointer To Member Access)</a></tt><br \>
+</div><div class="fb_sect_title">Voir aussi</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgOpAt.html">Operator @ (Adresse de)</a></tt><br \>
+<li> <tt><a href="KeyPgOpValueOf.html">Operator * (Valeur de)</a></tt><br \>
+<li> <tt><a href="KeyPgOpMemberAccess.html">Operator . (Acc&egrave;s membre)</a></tt><br \>
+<li> <tt><a href="KeyPgOpPtrMemberAccess.html">Operator -&gt; (Acc&egrave;s membre par pointeur)</a></tt><br \>
 <li> <tt><a href="KeyPgOpVarptr.html">VarPtr</a></tt><br \>
 <li> <tt><a href="KeyPgOpStrptr.html">StrPtr</a></tt><br \>
 <li> <tt><a href="KeyPgOpProcptr.html">ProcPtr</a></tt><br \>

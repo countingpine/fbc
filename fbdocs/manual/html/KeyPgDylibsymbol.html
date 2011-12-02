@@ -11,37 +11,37 @@
 </div> 
 <div id="fb_pg_wrapper">
 <div id="fb_pg_body">
-	Returns the address of a function or variable in a dll<br \>
+	Renvoie l'adresse d'une fonction ou d'une variable dans une dll<br \>
 <br \>
-<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<div class="fb_sect_title">Syntaxe</div><div class="fb_sect_cont"><tt><br \>
 <a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgFunction.html">Function</a> <b>DyLibSymbol</b> ( <a href="KeyPgByval.html">ByVal</a> <i>library</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgAny.html">Any</a> <a href="KeyPgPtr.html">Ptr</a>, <a href="KeyPgByref.html">ByRef</a> <i>symbol</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgString.html">String</a> ) <a href="KeyPgAs.html">As</a> <a href="KeyPgAny.html">Any</a> <a href="KeyPgPtr.html">Ptr</a><br \>
 <a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgFunction.html">Function</a> <b>DyLibSymbol</b> ( <a href="KeyPgByval.html">ByVal</a> <i>library</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgAny.html">Any</a> <a href="KeyPgPtr.html">Ptr</a>, <a href="KeyPgByval.html">ByVal</a> <i>symbol</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgShort.html">Short</a> ) <a href="KeyPgAs.html">As</a> <a href="KeyPgAny.html">Any</a> <a href="KeyPgPtr.html">Ptr</a><br \>
 </tt><br \>
 </div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
 <i>result</i> = <b>DyLibSymbol</b> ( <i>library</i>, <i>symbol</i> )<br \>
 </tt><br \>
-</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Param&egrave;tres</div><div class="fb_sect_cont"><br \>
 <tt><i>library</i></tt><br \>
-<div class="fb_indent">The <a href="KeyPgAny.html">Any</a> <a href="KeyPgPtr.html">Ptr</a> handle of a DLL returned by <tt><a href="KeyPgDylibload.html">DyLibLoad</a></tt><br \>
+<div class="fb_indent">Le <a href="KeyPgAny.html">Any</a> <a href="KeyPgPtr.html">Ptr</a> de prise en charge de la DLL retourn&eacute; par <tt><a href="KeyPgDylibload.html">DyLibLoad</a></tt><br \>
 </div><tt><i>symbol</i></tt><br \>
-<div class="fb_indent">A <a href="KeyPgString.html">String</a> containing name of the function, or variable in the library to return the address of.  In Windows only, can also be a <tt><a href="KeyPgShort.html">Short</a></tt> containing the ordinal of the function/variable.<br \>
+<div class="fb_indent">Une <a href="KeyPgString.html">String = Cha&icirc;ne</a> contenant le nom de la fonction, ou de la variable dans la librairie pour laquelle on retourne l'adresse.  Sous Windows seulement, peut aussi &ecirc;tre un <tt><a href="KeyPgShort.html">Short</a></tt> contenant l'ordinal de la fonction/variable.<br \>
 <br \>
-</div></div><div class="fb_sect_title">Return Value</div><div class="fb_sect_cont"><br \>
-A <tt><a href="KeyPgPtr.html">Pointer</a></tt> to the function or variable in the library.<br \>
+</div></div><div class="fb_sect_title">Valeur retourn&eacute;e</div><div class="fb_sect_cont"><br \>
+Un <tt><a href="KeyPgPtr.html">Pointer</a></tt> vers la fonction ou la variable dans la librairie.<br \>
 <br \>
-If the function fails, the return value is 0.<br \>
+Si la fonction &eacute;choue, la valeur retourn&eacute;e est 0.<br \>
 <br \>
 </div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
-<tt><b>DyLibSymbol</b></tt> returns a pointer to the variable or function named <tt><i>symbol</i></tt> , in the dll pointed by <tt><i>libhandle</i></tt>. <tt><i>libhandle</i></tt> is obtained by loading the dll with <tt><a href="KeyPgDylibload.html">DyLibLoad</a></tt>. The symbol must have been <tt><a href="KeyPgExport.html">Export</a></tt>ed in the dll.<br \>
-If <tt><i>libhandle</i></tt> is 0, the symbol is searched in the current executable or dll.<br \>
+<tt><b>DyLibSymbol</b></tt> renvoie un pointeur sur la variable ou une fonction appel&eacute;e <tt><i>symbol</i></tt> , dans la dll point&eacute;e par <tt><i>libhandle</i></tt>. <tt><i>libhandle</i></tt> est obtenu en chargeant la dll avec <tt><a href="KeyPgDylibload.html">DyLibLoad</a></tt>. Le symbole doit avoir &eacute;t&eacute; <tt><a href="KeyPgExport.html">Export</a></tt>&eacute; dans la DLL.<br \>
+Si <tt><i>libhandle</i></tt> est 0, le symbole est recherch&eacute; dans l'ex&eacute;cutable ou la dll courant.<br \>
 <br \>
-If using <tt><a href="KeyPgCdecl.html">cdecl</a></tt> functions, only the name of the procedure needs to be specified. If dynamically linking to a function created using STDCALL (default in windows), then the function must be decorated. To decorate a function, use its name, '@', then the number of bytes passed as arguments. For instance if the function <tt>FOO</tt> takes 3 integer arguments, the decorated function would be 'FOO@12'. Remember, without an explicit <tt><a href="KeyPgAlias.html">Alias</a></tt>, the procedure name will be uppercase.<br \>
+Si on utilise les fonctions <tt><a href="KeyPgCdecl.html">cdecl</a></tt>, seule le nom de la proc&eacute;dure n&eacute;cessite d'&ecirc;tre sp&eacute;cifi&eacute;. Si lien dynamique &agrave; une fonction en utilisant STDCALL (par d&eacute;faut dans Windows), alors la fonction doit &ecirc;tre "decorated". Pour "decorate" une fonction, utilisez son nom, '@', puis le nombre d'octets pass&eacute; comme arguments. Par exemple, si la fonction <tt>FOO</tt> prend 3 arguments entiers, la fonction "decorated" serait 'FOO@12'. Rappelez-vous, sans un <tt><a href="KeyPgAlias.html">Alias</a></tt> explicite, le nom de la proc&eacute;dure sera en majuscules.<br \>
 <br \>
-If linking to a dll created in Visual C++(tm), decoration need not be used. For GCC, decoration is needed.<br \>
+Si lien vers une dll cr&eacute;&eacute;e dans Visual C++(tm), "decoration" ne doit pas &ecirc;tre utilis&eacute;. Pour GCC, "decoration" est n&eacute;cessaire.<br \>
 <br \>
-<b>Note:</b> The dylibsymbol, if failing, will attempt to automatically decorate the procedure, from @0 to @256, in 4 byte increments.<br \>
+<b>Note:</b> Le dylibsymbol, si &eacute;chec, essaiera automatiquement de "decorate" la proc&eacute;dure, de @0 &agrave; @256, en incr&eacute;ments de 4 octets.<br \>
 <br \>
-</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Exemple</div><div class="fb_sect_cont"><br \>
 <tt><div class="freebasic">
 <span class="com">''&nbsp;mydll.dll</span><br />
 <br />
@@ -78,17 +78,17 @@ If linking to a dll created in Visual C++(tm), decoration need not be used. For 
 <span class="key">Sleep</span><br />
 </div></tt><br />
 <br \>
-</div><div class="fb_sect_title">Platform Differences</div><div class="fb_sect_cont"><br \>
-<ul><li> Dynamic link libraries are not available in DOS ,as the OS doesn't support them.<br \>
-<li> Ordinals are not supported on Linux, 0 is always returned.<br \>
+</div><div class="fb_sect_title">Diff&eacute;rences de plate-forme</div><div class="fb_sect_cont"><br \>
+<ul><li> Les biblioth&egrave;ques de liens dynamiques ne sont pas disponibles sous DOS, car l'OS ne les supporte pas.<br \>
+<li> Ordinaux ne sont pas pris en charge sur Linux, 0 est toujours retourn&eacute;.<br \>
 <br \>
-</ul></div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
-<ul><li> Not available in the <i><a href="CompilerOptlang.html">-lang qb</a></i> dialect unless referenced with the alias <tt><b>__Dylibsymbol</b></tt>.<br \>
+</ul></div><div class="fb_sect_title">Diff&eacute;rences de dialecte</div><div class="fb_sect_cont"><br \>
+<ul><li> Non disponible dans le dialecte <i><a href="CompilerOptlang.html">-lang qb</a></i> sauf si r&eacute;f&eacute;renc&eacute; avec l'alias <tt><b>__Dylibsymbol</b></tt>.<br \>
 <br \>
-</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
-<ul><li> New to FreeBASIC<br \>
+</ul></div><div class="fb_sect_title">Diff&eacute;rences avec QB</div><div class="fb_sect_cont"><br \>
+<ul><li> Nouveau pour FreeBASIC<br \>
 <br \>
-</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+</ul></div><div class="fb_sect_title">Voir aussi</div><div class="fb_sect_cont"><br \>
 <ul><li> <tt><a href="KeyPgDylibload.html">DyLibLoad</a></tt><br \>
 <li> <tt><a href="KeyPgExport.html">Export</a></tt><br \>
 <br \>

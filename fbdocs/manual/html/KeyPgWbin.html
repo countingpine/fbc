@@ -11,9 +11,9 @@
 </div> 
 <div id="fb_pg_wrapper">
 <div id="fb_pg_body">
-	Returns the binary wstring (Unicode) representation of a number<br \>
+	Retourne la  "wstring" (Unicode) binaire repr&eacute;sentant un nombre<br \>
 <br \>
-<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<div class="fb_sect_title">Syntaxe</div><div class="fb_sect_cont"><tt><br \>
 <a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgFunction.html">Function</a> <b>WBin</b> <a href="KeyPgOverload.html">Overload</a> ( <a href="KeyPgByval.html">ByVal</a> <i>number</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgByte.html">Byte</a> ) <a href="KeyPgAs.html">As</a> <a href="KeyPgWstring.html">WString</a><br \>
 <a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgFunction.html">Function</a> <b>WBin</b> ( <a href="KeyPgByval.html">ByVal</a> <i>number</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgByte.html">Byte</a>, <a href="KeyPgByval.html">ByVal</a> <i>digits</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a> ) <a href="KeyPgAs.html">As</a> <a href="KeyPgWstring.html">WString</a><br \>
 <br \>
@@ -31,47 +31,49 @@
 </tt><br \>
 </div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
 <tt><i>number</i></tt><br \>
-<div class="fb_indent">A whole number or expression evaluating to a whole number.<br \>
+<div class="fb_indent">Un nombre entier ou expression &agrave; &eacute;valuer.<br \>
 </div><tt><i>digits</i></tt><br \>
-<div class="fb_indent">Optional number of digits to return.<br \>
+<div class="fb_indent">Facultatif: nombre de chiffres de la cha&icirc;ne &agrave; retourner.<br \>
 <br \>
-</div></div><div class="fb_sect_title">Return Value</div><div class="fb_sect_cont"><br \>
-Returns a binary <a href="KeyPgString.html">String</a> representation of <i>number</i>.<br \>
+</div></div><div class="fb_sect_title">Valeur retourn&eacute;e</div><div class="fb_sect_cont"><br \>
+Retourne une <a href="KeyPgString.html">String (cha&icirc;ne)</a> binaire repr&eacute;sentant un <i>number</i>.<br \>
 <br \>
 </div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
-Returns a <tt>[[KeyPgWstring wstring]}</tt> (Unicode) representing the binary value of the integer <tt><i>expression</i></tt>. Binary digits range from 0 to 1.<br \>
+Retourne <tt>[[KeyPgWstring wstring]}</tt> (Unicode) repr&eacute;sentant la valeur binaire de l'entier <tt><i>expression</i></tt>. Chiffres binaires de 0 &agrave; 1.<br \>
 <br \>
-If you specify <tt><i>digits</i></tt> &gt; 0, the result wstring will be exactly that length.  It will be truncated or padded with zeros on the left, if necessary.<br \>
+Si vous sp&eacute;cifiez <tt><i>digits</i></tt> &gt; 0, le r&eacute;sultat <tt><i>wstring</i></tt> aura exactement cette longueur.  Il sera tronqu&eacute; ou compl&eacute;t&eacute; avec des z&eacute;ros sur la gauche, si n&eacute;cessaire.<br \>
 <br \>
-The length of the <tt>[[KeyPgWstring wstring]}</tt> will not go longer than the maximum number of digits required for the type of <tt><i>expression</i></tt> (32 for an integer, 64 for floating point or longint)<br \>
+La longueur de <tt>[[KeyPgWstring wstring]}</tt> ne sera pas plus grande que le nombre maximum de bits requis pour le type de <tt><i>expression</i></tt> (32 pour un entier, 64 pour un nombre &agrave; virgule flottante ou un entier long)<br \>
 <br \>
-</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Exemple</div><div class="fb_sect_cont"><br \>
 <tt><div class="freebasic">
 <span class="key">Print</span>&nbsp;<span class="key">WBin</span><span class="oth">(</span><span class="num">54321</span><span class="oth">)</span><br />
 <span class="key">Print</span>&nbsp;<span class="key">WBin</span><span class="oth">(</span><span class="num">54321</span><span class="oth">,</span>&nbsp;<span class="num">5</span><span class="oth">)</span><br />
 <span class="key">Print</span>&nbsp;<span class="key">WBin</span><span class="oth">(</span><span class="num">54321</span><span class="oth">,</span>&nbsp;<span class="num">20</span><span class="oth">)</span><br />
 </div></tt><br />
-will produce the output:<br \>
+produira la sortie:<br \>
 <br \>
 <pre class="fb_pre">1101010000110001
 10001
 00001101010000110001
-</pre></div><div class="fb_sect_title">Platform Differences</div><div class="fb_sect_cont"><br \>
-<ul><li> Unicode (w)strings are not supported in the DOS port of FreeBASIC.<br \>
+</pre></div><div class="fb_sect_title">Diff&eacute;rences de plate-forme</div><div class="fb_sect_cont"><br \>
+<ul><li> (w)strings Unicode ne sont pas support&eacute;es par le portage DOS de FreeBASIC.<br \>
 <br \>
 <br \>
-</ul></div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
-<ul><li> Not available in the <i><a href="CompilerOptlang.html">-lang qb</a></i> dialect unless referenced with the alias <tt><b>__Wbin</b></tt>.<br \>
+</ul></div><div class="fb_sect_title">Diff&eacute;rences de dialecte</div><div class="fb_sect_cont"><br \>
+<ul><li> Non disponible dans le dialecte <i><a href="CompilerOptlang.html">-lang qb</a></i> sauf si r&eacute;f&eacute;renc&eacute; avec l'alias <tt><b>__WBin</b></tt>.<br \>
 <br \>
-</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
-<ul><li> New to FreeBASIC<br \>
+</ul></div><div class="fb_sect_title">Diff&eacute;rences avec QB</div><div class="fb_sect_cont"><br \>
+<ul><li> Nouveau pour Freebasic<br \>
 <br \>
-</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+</ul></div><div class="fb_sect_title">Voir aussi</div><div class="fb_sect_cont"><br \>
 <ul><li> <tt><a href="KeyPgBin.html">Bin</a></tt><br \>
 <li> <tt><a href="KeyPgWhex.html">WHex</a></tt><br \>
 <li> <tt><a href="KeyPgWoct.html">WOct</a></tt><br \>
 <br \>
-</ul></div>
+</ul><br \>
+   <br \>
+</div>
 </div>
 </div> 
 </div> 

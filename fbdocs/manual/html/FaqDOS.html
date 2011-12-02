@@ -225,9 +225,10 @@ If the mouse control is "unprecise", the arrow "jumps" , then you either have a 
 <div class="fb_indent">No, it's not a bug in FreeBASIC and it's not really DOS specific, see also <a href="CompilerFAQ.html">Compiler FAQ</a>. For a beginner, the easy solution is to use <tt><a href="KeyPgShared.html">Shared</a></tt> for arrays. More advanced users could consider using memory management functions like <tt><a href="KeyPgAllocate.html">Allocate</a></tt>. This is even more important in DOS, since it allows the application to run on low memory PCs (and still edit at least small texts for example), as well as to use all huge RAM if available (and edit huge texts for example).  <br \>
 <br \>
 </div><a name="item23"></a><b>23. Threading functions are disallowed in DOS? Help!</b><br \>
-<div class="fb_indent">The <a href="CatPgThreading.html">Threading Support Functions</a> are not supported for DOS target, and most likely won't be soon/ever. The reason is simple: neither the DOS kernel, nor the DPMI host/standard, nor "GO32" DOS Extender support threading, unlike the Win32 or Linux kernel. However nothing is impossible in DOS: you can set up your threading on the top of DPMI. There are multiple possibilities, two of which are: <br \>
+<div class="fb_indent">The <a href="CatPgThreading.html">Threading Support Functions</a> are not supported for DOS target by now, and most likely won't be soon/ever. The reason is simple: neither the DOS kernel, nor the DPMI host/standard, nor "GO32" DOS Extender do support them, unlike the Win32 or Linux kernel. As usual, DOS won't help you here, OTOH nothing is impossible in DOS: you can set up your threading on the top of DPMI, there are multiple possibilities: <br \>
 </div><ul><ul><li> Set up an ISR, see "ISR_TIMER.BAS" example. This is not a "full" replacement, but sufficient in some cases.<br \>
 <li> There is a <b>pthreads</b> library for DJGPP allowing to "emulate" Linux-like threading to some degree. It works acceptably for [P]7-ZIP DJGPP port (written in C+ + ), no tests with FB yet.<br \>
+
 <br \>
 </ul></ul><a name="item24"></a><b>24. Executables made with FB DOS are bloated!</b><br \>
 <div class="fb_indent">This is true but there is no easy/fast way to fix. FB is a 32-bit HLL compiler, and most of the size is imported from DJGPP. !writeme! ( see forum: <a href="http://freebasic.net/forum/viewtopic.php?t=11757">freebasic.net/forum/viewtopic.php?t=11757</a> )<br \>
@@ -266,7 +267,9 @@ Both indeed can happen, nevertheless, DOS is no way predestined to be slow, the 
 <li> <a href="FaqPgrtlib.html">FB Runtime Library FAQ</a>.<br \>
 <li> <a href="FaqPggfxlib2.html">Frequently Asked FreeBASIC Graphics Library Questions</a><br \>
 <br \>
-</ul></div>
+</ul><br \>
+   <br \>
+</div>
 </div>
 </div> 
 </div> 

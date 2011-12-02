@@ -6,26 +6,26 @@
 <body>
 <div id="fb_body_wrapper">
 <div id="fb_tab">
-<div id="fb_tab_l">So Biff wants to have a high score table in his game </div>
+<div id="fb_tab_l">Biff veut avoir un tableau des meilleurs scores dans son jeu </div>
 <div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
 </div> 
 <div id="fb_pg_wrapper">
 <div id="fb_pg_body">
-	Written by Lachie Dazdarian (September, 2007)<br \>
+	Ecrit par Lachie Dazdarian (Septembre, 2007)<br \>
 <br \>
 <b>Introduction</b><br \>
 <br \>
-On more than one occasion I was inquired by a programming newbie about a set of routines that load a high score table from an external file, input a new high score properly, and then save the modified high scores table.<br \>
-Using the same set of routines for high scores since the days of Ball Blazing Fantasy, I decided to write a tutorial on them and implement some lacking flexibility (plus few fixes) there, something that was long needed to be done but wasn't due the fact the routines did their job perfectly.<br \>
-The tutorial will also point you out to some useful (for high scores table managing) additional routines, like the name inputting and file encryption ones, not written by me.<br \>
+À plus d'une occasion, des novices en programmation m'ont interrog&eacute; sur un ensemble de routines qui chargent un tableau des meilleurs scores &agrave; partir d'un fichier externe, entrent correctement un nouveau meilleur score, puis enregistrent le tableau modifi&eacute; des scores les plus &eacute;lev&eacute;s.<br \>
+Utilisant le m&ecirc;me ensemble de routines pour les scores les plus &eacute;lev&eacute;s depuis la cr&eacute;ation de "Ball Blazing Fantasy", j'ai d&eacute;cid&eacute; d'&eacute;crire un tutoriel sur cela et de mettre en oeuvre une certaine souplesse manquante (ainsi que quelques corrections), quelque chose qui avait besoin d'&ecirc;tre fait depuis longtemps, mais parce que ces routines ne faisaient pas leur travail parfaitement.<br \>
+Le tutoriel vous rappellera un certain nombre des routines suppl&eacute;mentaires utiles (pour la gestion de la table des scores les plus &eacute;lev&eacute;s), comme la saisie du nom et le cryptage de fichiers, mais que je n'ai pas &eacute;crites moi-m&ecirc;me.<br \>
 <br \>
 <br \>
-<b>Let's do it!</b><br \>
+<b>Faisons-le!</b><br \>
 <br \>
-It's fairly obvious we'll need two separate subroutines, one for loading/reading our high score table, and one for writing/modifying it.<br \>
-We'll start with loading/reading of a high score table, as that part is easier and a logical start.<br \>
-The subroutine for reading a high score table should work relatively simple. It will open a file which contains name and score entries, storing them in appropriate variables and then printing them on the screen, this part being most dependent on the developer's wishes and needs (the method of printing, position of the high score table, its formatting, etc.).<br \>
-First, we should create a text file containing our name and score entries. Create a file named 'high_scores.dat', open it with Notepad and input this:<br \>
+Il est assez &eacute;vident que nous aurons besoin de deux sous-programmes distincts, un pour le chargement/la lecture et un autre pour l'&eacute;criture/la modification de notre tableau des meilleurs scores.<br \>
+Nous allons commencer avec le chargement/la lecture d'un tableau de scores &eacute;lev&eacute;s, car cette partie est la plus facile et un d&eacute;part logique.<br \>
+Le sous-programme pour lire un tableau des meilleurs scores devraient fonctionner relativement simplement. Il va ouvrir un fichier qui contient les entr&eacute;es de noms et le score, les stocker dans des variables appropri&eacute;es et ensuite les afficher sur l'&eacute;cran, cette partie &eacute;tant plus d&eacute;pendante des souhaits du d&eacute;veloppeur et des besoins (la m&eacute;thode d'affichage, la position de la table des scores &eacute;lev&eacute;s, son formatage, etc.)<br \>
+Premi&egrave;rement, nous devons cr&eacute;er un fichier texte contenant notre nom et les entr&eacute;es de score. Cr&eacute;ez un fichier nomm&eacute; 'high_scores.dat', ouvrez-le avec "Notepad" et entrez ce qui suit:<br \>
 <br \>
 <tt><div class="freebasic">
 <span class="wrd">FRED</span><br />
@@ -50,11 +50,11 @@ First, we should create a text file containing our name and score entries. Creat
 <span class="num">1000</span><br />
 </div></tt><br />
 <br \>
-It contains 10 high score entries, formatted with name followed by the accompanying score. I find this formatting the most suitable for editing, although you can pick one where all the names all listed first, and then followed by all the scores. Still, no important benefits from any type of these two formattings, so we'll work with the one I stared with.<br \>
+Il contient 10 entr&eacute;es de scores &eacute;lev&eacute;s, format&eacute; avec le nom suivi par le score correspondant. Je trouve cette mise en forme la plus adapt&eacute;e pour l'&eacute;dition, m&ecirc;me si vous pouvez en choisir un o&ugrave; tous les noms sont r&eacute;pertori&eacute;s en premier, puis suivis de tous les scores. Cependant, aucun de ces deux types de formatage n'a d'avantages plus importants, nous allons donc travailler sur celui avec lequel j'ai commenc&eacute;.<br \>
 <br \>
-This file will be used with the following 'ReadHighScore' subroutine.<br \>
+Ce fichier sera utilis&eacute; avec le sous-programme "ReadHighScore" suivant.<br \>
 <br \>
-Let's start our main program with some needed initiation statements:<br \>
+Commen&ccedil;ons notre programme principal avec quelques d&eacute;clarations d'initialisation n&eacute;cessaires:<br \>
 <br \>
 <tt><div class="freebasic">
 <span class="def">#include&nbsp;"fbgfx.bi"<br />
@@ -63,17 +63,17 @@ Let's start our main program with some needed initiation statements:<br \>
 <span class="key">Const</span>&nbsp;<span class="wrd">num_of_entries</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">10</span><br />
 </div></tt><br />
 <br \>
-'num_of_entries' will flag the number of score entries (names or scores in the high score table), and should correspond with the number of entries in the 'high_score.dat' file (not lines, but high score ENTRIES!).<br \>
+"num_of_entries" sera le nombre d'entr&eacute;es score (noms ou des scores dans le tableau des meilleurs scores), et doit correspondre au nombre d'entr&eacute;es dans le fichier "high_score.dat" (pas les lignes, mais les ENTREES de score &eacute;lev&eacute;!).<br \>
 <br \>
-We should now declare our subroutine with:<br \>
+Nous devons maintenant d&eacute;clarer notre sous-programme avec:<br \>
 <br \>
 <tt><div class="freebasic">
 <span class="key">Declare</span>&nbsp;<span class="key">Sub</span>&nbsp;<span class="wrd">ReadHighScore</span>&nbsp;<span class="oth">(</span><span class="wrd">highscore_file</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span><span class="oth">)</span><br />
 </div></tt><br />
 <br \>
-The 'highscore_file' variable will flag the file you want for the 'ReadHighScore' subroutine to open. Not necessary to declare the subroutine like this, but this adds some flexibility to it.<br \>
+La variable "highscore_file" indiquera le nom du fichier que le sous-programme "ReadHighScore" ouvrira. Il n'est pas n&eacute;cessaire de d&eacute;clarer le sous-programme de cette fa&ccedil;on, mais cela ajoute une certaine souplesse d'utilisation.<br \>
 <br \>
-After this, we should declare the following variables:<br \>
+Apr&egrave;s cela, nous devons d&eacute;clarer les variables suivantes:<br \>
 <br \>
 <tt><div class="freebasic">
 <span class="key">Dim</span>&nbsp;<span class="key">Shared</span>&nbsp;<span class="wrd">workpage</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
@@ -81,16 +81,16 @@ After this, we should declare the following variables:<br \>
 <span class="key">Dim</span>&nbsp;<span class="key">Shared</span>&nbsp;<span class="wrd">hscore</span><span class="oth">(</span><span class="wrd">num_of_entries</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span><br />
 </div></tt><br />
 <br \>
-'workpage' variable is not related to this tutorial and will be used to swap screen work pages inside the loop where the high score table will be drawn. 'hname' array will hold the name entries, while 'hscore' array will hold the score entries from the high score table.<br \>
+La variable "workpage" n'est pas li&eacute;e &agrave; ce tutoriel et sera utilis&eacute;e pour &eacute;changer des pages d'&eacute;cran de travail &agrave; l'int&eacute;rieur de la boucle o&ugrave; le tableau des meilleurs scores sera affich&eacute;. Le tableau "hname" contiendra les entr&eacute;es nom, tandis que le tableau "hscore" contiendra les entr&eacute;es de la table de pointage score &eacute;lev&eacute;.<br \>
 <br \>
-Finally, let's initialize our screen and work/visible pages with:<br \>
+Enfin, nous allons initialiser notre &eacute;cran et les pages de travail/visibles avec:<br \>
 <br \>
 <tt><div class="freebasic">
 <span class="key">ScreenRes</span>&nbsp;<span class="num">640</span><span class="oth">,</span>&nbsp;<span class="num">480</span><span class="oth">,</span>&nbsp;<span class="num">32</span><span class="oth">,</span>&nbsp;<span class="num">2</span><span class="oth">,</span>&nbsp;<span class="wrd">GFX_ALPHA_PRIMITIVES</span><span class="oth">+</span><span class="wrd">GFX_WINDOWED</span><br />
 <span class="key">ScreenSet</span>&nbsp;<span class="num">1</span><span class="oth">,</span>&nbsp;<span class="num">0</span><br />
 </div></tt><br />
 <br \>
-Following this code we should place this:<br \>
+Suite &agrave; ce code, il faut placer celui-ci:<br \>
 <br \>
 <tt><div class="freebasic">
 <span class="wrd">ReadHighScore</span>&nbsp;<span class="quo">"high_scores.dat"</span><br />
@@ -101,10 +101,10 @@ Following this code we should place this:<br \>
 <span class="key">End</span>&nbsp;<span class="key">Sub</span><br />
 </div></tt><br />
 <br \>
-You can compile this code, but nothing will happen as the 'ReadHighScore' subroutine is empty. Let's fill it up!<br \>
-We need to start it by opening the 'high_scores.dat' file and reading the needed data from it. Please refer to FreeBASIC's OPEN statement for info on file opening in FreeBASIC if not familiar with it.<br \>
+Vous pouvez compiler ce code, mais rien ne se passera car le sous-programme "ReadHighScore" est vide. Remplissons-le!<br \> 
+Nous le d&eacute;marrons en ouvrant le fichier "high_scores.dat" et en y lisant les donn&eacute;es n&eacute;cessaires. S'il vous pla&icirc;t r&eacute;f&eacute;rez-vous &agrave; l'instruction OPEN de FreeBasic pour des infos sur l'ouverture de fichiers dans FreeBasic si cela ne vous est pas familier.<br \>
 <br \>
-As we want to open the file using a FREE file handle, we need to dimension a variable that will hold this information and pass it into it. Use this code:<br \>
+Comme nous voulons ouvrir le fichier en utilisant un identificateur de fichier FREE, nous avons besoin de dimensionner une variable qui va contenir cette information et la transmettre. Utilisez ce code:<br \>
 <br \>
 <tt><div class="freebasic">
 <span class="key">Dim</span>&nbsp;<span class="wrd">free_filehandle</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
@@ -112,13 +112,13 @@ As we want to open the file using a FREE file handle, we need to dimension a var
 <span class="wrd">free_filehandle</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">FreeFile</span><br />
 </div></tt><br />
 <br \>
-We should now open the high score file with:<br \>
+Nous devons maintenant ouvrir le fichier de scores &eacute;lev&eacute;s avec:<br \>
 <br \>
 <tt><div class="freebasic">
 <span class="key">Open</span>&nbsp;<span class="wrd">highscore_file</span>&nbsp;<span class="key">For</span>&nbsp;<span class="key">Input</span>&nbsp;<span class="key">As</span>&nbsp;<span class="oth">#</span><span class="wrd">free_filehandle</span><br />
 </div></tt><br />
 <br \>
-After the file is opened for reading (FOR INPUT), let's use a for loop to retrieve all the data from it and store it in our 'hname' and 'hscore' variables:<br \>
+Une fois le fichier ouvert en lecture (FOR INPUT), nous allons utiliser une boucle pour r&eacute;cup&eacute;rer toutes les donn&eacute;es qu'il contient et les stocker dans nos variables "hname" et "hscore":<br \>
 <br \>
 <tt><div class="freebasic">
 <span class="key">For</span>&nbsp;<span class="wrd">count_entry</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">1</span>&nbsp;<span class="key">To</span>&nbsp;<span class="wrd">num_of_entries</span><br />
@@ -129,15 +129,15 @@ After the file is opened for reading (FOR INPUT), let's use a for loop to retrie
 <span class="key">Next</span>&nbsp;<span class="wrd">count_entry</span><br />
 </div></tt><br />
 <br \>
-Note how the 'count_entry' variable is used and how for each entry the name is stored FOLLOWED by the accompanying score. 'hname(1)' will flag the name with the top score, while 'hscore(1)' the top score. 'hname(num_of_entries)' will flag the name with the lowest score, while 'hscore(num_of_entries)' the lowest score in the high score table.<br \>
+Notez comment la variable "count_entry" est utilis&eacute;e et comment pour chaque entr&eacute;e le nom est stock&eacute; SUIVI du score correspondant. "hname(1)" correspondra au nom avec le meilleur score et "hscore(1)" au plus haut score. "hname(num_of_entries)" correspondra au nom avec le score le plus bas et "hscore(num_of_entries)" le plus petit score dans le tableau des meilleurs scores.<br \>
 <br \>
-Don't forget now to close the file with:<br \>
+N'oubliez pas maintenant de fermer le dossier avec:<br \>
 <br \>
 <tt><div class="freebasic">
 <span class="key">Close</span>&nbsp;<span class="oth">#</span><span class="wrd">free_filehandle</span>&nbsp;<br />
 </div></tt><br />
 <br \>
-All we need now is a loop that will display all these names and scores, nicely arranged in a table.<br \>
+Tout ce dont nous avons besoin maintenant c'est d'une boucle qui permettra d'afficher tous ces noms et scores, joliment dispos&eacute;s dans un tableau.<br \>
 <br \>
 <tt><div class="freebasic">
 <span class="key">Do</span><br />
@@ -164,23 +164,23 @@ All we need now is a loop that will display all these names and scores, nicely a
 <span class="key">Loop</span>&nbsp;<span class="key">Until</span>&nbsp;<span class="key">MultiKey</span><span class="oth">(</span><span class="wrd">SC_ESCAPE</span><span class="oth">)</span><br />
 </div></tt><br />
 <br \>
-A simple DO...LOOP that ends when the user pushes ESCAPE.<br \>
-I used Draw String to print the names and the scores. Another FOR loop is used to loop through the name and score entries, and to display them lower score under the next higher one (note how the Y position of the text to display is connected with the 'count_entry' variable - increase 12 to get more space between scores vertically). I also used a small trick to display each next score with lower translucency (last parameter in the RGBA function).<br \>
+Une simple boucle DO...LOOP qui se terminera quand l'utilisateur appuiera sur ESCAPE.<br \>
+J'ai utilis&eacute; "Draw String" pour afficher les noms et les scores. Une autre boucle FOR est utilis&eacute;e pour parcourir les entr&eacute;es noms et scores et de les afficher en pla&ccedil;ant le score le plus faible en-dessous de celui qui lui est imm&eacute;diatement sup&eacute;rieur (Notez comment la position Y du texte &agrave; afficher est li&eacute;e &agrave; la variable "count_entry" augment&eacute;e de 12 pour obtenir plus d'espace entre les scores verticalement). J'ai aussi utilis&eacute; une petite astuce pour afficher chaque r&eacute;sultat suivant avec moins translucidit&eacute; (dernier param&egrave;tre dans la fonction RGBA).<br \>
 <br \>
-After placing all this code in the 'ReadHighScore' subroutine, you can compile it and the desired result will appear on the screen.<br \>
+Apr&egrave;s avoir plac&eacute; tout ce code dans le sous-programme "ReadHighScore", vous pouvez le compiler et le r&eacute;sultat souhait&eacute; s'affichera sur l'&eacute;cran.<br \>
 <br \>
-Now when we are done with the easy part of the problem, let's move onto writing new entries into our high score table.<br \>
+Maintenant, quand nous avons fini avec la partie facile du probl&egrave;me, nous allons passer &agrave; l'&eacute;criture de nouvelles entr&eacute;es dans notre tableau des meilleurs scores.<br \>
 <br \>
-I constructed the 'WriteHighScore' subroutine like this:<br \>
+J'ai construit le sous-programme "WriteHighScore" comme ceci:<br \>
 <br \>
 <tt><div class="freebasic">
 <span class="key">Sub</span>&nbsp;<span class="wrd">WriteHighScore</span>&nbsp;<span class="oth">(</span><span class="wrd">highscore_file</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span><span class="oth">,</span>&nbsp;<span class="wrd">users_score</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">)</span><br />
 <br />
 </div></tt><br />
 <br \>
-Which means it will be called with a high scores table file and a score we want to input. If this score evaluates to be lower that the lowest in the high score table, no code will be executed.<br \>
+Ce qui signifie qu'il sera appel&eacute; avec un fichier de table des scores &eacute;lev&eacute;s et un score que nous voulons entrer. Si ce score est &eacute;valu&eacute; comme &eacute;tant inf&eacute;rieur au plus faible dans le tableau des meilleurs scores, aucun code sera ex&eacute;cut&eacute;.<br \>
 <br \>
-This subroutine should start with the following code:<br \>
+Ce sous-programme devrait commencer par le code suivant:<br \>
 <br \>
 <tt><div class="freebasic">
 <span class="key">Dim</span>&nbsp;<span class="wrd">free_filehandle</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
@@ -201,8 +201,8 @@ This subroutine should start with the following code:<br \>
 <span class="key">Close</span>&nbsp;<span class="oth">#</span><span class="wrd">free_filehandle</span><br />
 </div></tt><br />
 <br \>
-As you see it starts as the 'ReadHighScore' subroutine. In order to evaluate the user's score and alter the very high score table we need to open the file containing our high score entries and store them in appropriated variables. 'startwrite' variable will flag where the new entry is to be placed inside the high score table (on which position).<br \>
-The code that follows should be opened with an IF clause that will execute the code inside it only if the user's score is higher than the lowest score in the high score table (naturally):<br \>
+Comme vous le voyez il commence par le sous-programme "ReadHighScore". Afin d'&eacute;valuer le score de l'utilisateur et de modifier le tableau des meilleurs scores, nous devons ouvrir le fichier contenant nos entr&eacute;es des scores les plus &eacute;lev&eacute;s et les stocker dans des variables appropri&eacute;es. La variable "startwrite" indiquera o&ugrave; la nouvelle entr&eacute;e doit &ecirc;tre plac&eacute;e &agrave; l'int&eacute;rieur du tableau des meilleurs scores (&agrave; quelle position).<br \>
+Le code qui suit doit &ecirc;tre ouvert avec une clause IF qui va ex&eacute;cuter le code &agrave; l'int&eacute;rieur seulement si le score de l'utilisateur est plus &eacute;lev&eacute; que le plus petit score dans le tableau des meilleurs scores (naturellement):<br \>
 <br \>
 <tt><div class="freebasic">
 <span class="key">If</span>&nbsp;<span class="wrd">users_score</span>&nbsp;<span class="oth">&gt;</span>&nbsp;<span class="wrd">hscore</span><span class="oth">(</span><span class="wrd">num_of_entries</span><span class="oth">)</span>&nbsp;<span class="key">Then</span><br />
@@ -220,11 +220,11 @@ The code that follows should be opened with an IF clause that will execute the c
 <span class="key">Next</span>&nbsp;<span class="wrd">check_score</span><br />
 </div></tt><br />
 <br \>
-The FOR loop 'goes' through the high score entries from the highest to the lowest, and when an entry with a lower score is found this is the place (flagged with 'startwrite' and 'check_score') where our new entry will be recorded. For example, in the first loop the program checks for 'hscore(1)' - the top score in the high score table. If the user's score ends up being higher than it, it's obvious the user's score is the new top score and 'startwrite' needs to be 1. 'InputName' is a subroutine we'll create later, and inside it the user will be...inputting his name. :P<br \>
+La boucle FOR passe en revue les entr&eacute;es scores les plus &eacute;lev&eacute;s de la plus elev&eacute;e &agrave; la plus faible, et quand on trouve une entr&eacute;e avec un score inf&eacute;rieur elle correspond &agrave; la position recherch&eacute;e (marqu&eacute; avec "startwrite" et "check_score" ) o&ugrave; notre nouvelle entr&eacute;e sera enregistr&eacute;e. Par exemple, dans la premi&egrave;re boucle, le programme v&eacute;rifie pour "hscore(1)" - le plus haut score dans le tableau des meilleurs scores. Si le score de l'utilisateur finit par &ecirc;tre plus &eacute;lev&eacute; que lui, il est &eacute;vident que le score de l'utilisateur est le nouveau score sup&eacute;rieur et "startwrite" doit &ecirc;tre 1. "InputName" est un sous-programme, que nous cr&eacute;erons plus tard, et &agrave; l'int&eacute;rieur, l'utilisateur saisiera ... son nom. :P<br \>
 <br \>
-What follows is the 'nexus' of our routine, the code that places the new high score entry on the proper position, and bumps all the lower ones one position down.<br \>
+Ce qui suit est le "nexus" de notre sous-programme, le code qui place l'entr&eacute;e nouveau meilleur score sur la position appropri&eacute;e, et pousse toutes les plus basses d'une position vers le bas.<br \>
 <br \>
-Check the following code:<br \>
+V&eacute;rifiez le code suivant:<br \>
 <br \>
 <tt><div class="freebasic">
 <span class="key">If</span>&nbsp;<span class="wrd">startwrite</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">num_of_entries</span>&nbsp;<span class="key">Then</span><br />
@@ -241,14 +241,14 @@ Check the following code:<br \>
 <span class="key">End</span>&nbsp;<span class="key">If</span><br />
 </div></tt><br />
 <br \>
-First condition checks if the new entry is the lowest (last) in the high score table. If this is the case, we don't need to bump down any entries with a lower score as there are none, but only replace the lowest score entry with the new one.<br \>
-If this is NOT the case, a FOR loop is executed which loops from the lowest high score entry to the new high score entry (flagged with 'startwrite'), meaning, from bottom to top.<br \>
+La premi&egrave;re condition v&eacute;rifie si la nouvelle entr&eacute;e est la plus basse (derni&egrave;re) dans le tableau des meilleurs scores. Si c'est le cas, nous n'avons pas besoin d'examiner vers le bas toutes les entr&eacute;es avec un score inf&eacute;rieur car il n'en existe pas, il suffit donc de remplacer l'entr&eacute;e score le plus bas avec la nouvelle.<br \>
+Si ce N'EST PAS le cas, une boucle FOR est ex&eacute;cut&eacute;e, qui boucle &agrave; partir de l'entr&eacute;e du plus faible score jusqu'&agrave; la nouvelle entr&eacute;e (marqu&eacute;e par "startwrite"), ce qui signifie, du bas vers le haut.<br \>
 <br \>
-For example, if our high score table has 10 entries and the new entry needs to be placed on position 5, the loop goes from 9 to 5. When "write_pos" is 9, values from 'hscore(9)' and 'hname(9)' are passed to 'hscore(9+1)' and 'hname(9+1)'. When 'write_pos' is 8, values from 'hscore(8)' and 'hname(8)' are passed to 'hscore(8+1)' and 'hname(8+1)'. And so on.<br \>
+Par exemple, si notre tableau des meilleurs scores a 10 entr&eacute;es et que la nouvelle entr&eacute;e doit &ecirc;tre plac&eacute;e sur la position 5, la boucle va de 9 &agrave; 5. Quand "write_pos" est de 9, les valeurs de "hscore(9)" et "hname(9)" sont pass&eacute;es &agrave; "hscore(9+1)" et "hname(9+1)". Lorsque "write_pos" est de 8, les valeurs de "hscore(8)" et "hname(8)" sont pass&eacute;es &agrave; "hscore(8+1)" et "hname(8+1)". Et ainsi de suite.<br \>
 <br \>
-After the FOR loop we need to input the new entry on its appropriate position (flagged with 'startwrite'), new entry being set with 'users_score' and 'playername', where 'playername' will be inputted inside the 'InputName' sub.<br \>
+Apr&egrave;s la boucle FOR nous devons saisir la nouvelle entr&eacute;e sur sa position appropri&eacute;e (point&eacute;e par "startwrite"), la nouvelle entr&eacute;e &eacute;tant fix&eacute;e par "users_score" et "nomdujoueur", o&ugrave; "nomdujoueur" sera saisia &agrave; l'int&eacute;rieur du sous-programme "InputName".<br \>
 <br \>
-The last thing in the 'WriteHighScore' sub we need to do is to store the new high score entries back to file:<br \>
+La derni&egrave;re chose que nous devons faire sous "WriteHighScore" est de stocker &agrave; nouveau les nouvelles entr&eacute;es scores &eacute;lev&eacute;s dans le fichier:<br \>
 <br \>
 <tt><div class="freebasic">
 <span class="wrd">free_filehandle</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">FreeFile</span><br />
@@ -261,9 +261,9 @@ The last thing in the 'WriteHighScore' sub we need to do is to store the new hig
 <span class="key">Close</span>&nbsp;<span class="wrd">free_filehandle</span><br />
 </div></tt><br />
 <br \>
-Note how FOR OUTPUT is used and PRINT for writing data into external files.<br \>
-After this I placed a 'ReadHighScore' call and closed with END IF as I find it good that a new high score table should display after a new entry has been inputted in it.<br \>
-All we need now is to create the 'InputName' sub like this:<br \>
+Notez comment FOR OUTPUT est utilis&eacute; et PRINT pour &eacute;crire des donn&eacute;es dans des fichiers externes. <br \>
+Apr&egrave;s cela, j'ai mis un appel &agrave; "ReadHighScore" et ferm&eacute;e avec END IF car je pense que la table des scores doit &ecirc;tre affich&eacute;e apr&egrave;s une nouvelle entr&eacute;e.<br \>
+Ce dont nous avons besoin maintenant est de cr&eacute;er le sous-programme "InputName":<br \>
 <br \>
 <tt><div class="freebasic">
 <span class="key">Sub</span>&nbsp;<span class="wrd">InputName</span><br />
@@ -277,9 +277,9 @@ All we need now is to create the 'InputName' sub like this:<br \>
 <span class="key">End</span>&nbsp;<span class="key">Sub</span><br />
 </div></tt><br />
 <br \>
-Of course, this will look totally different in your game. Perhaps you'll ask the player to input his/her name on a different place in the game (like when he/she starts a new game). Just have in mind you need one.<br \>
+Bien s&ucirc;r, cela va un "look" totalement diff&eacute;rent dans votre jeu. Peut-&ecirc;tre que vous demanderez au joueur d'entrer son nom &agrave; un emplacement diff&eacute;rent dans le jeu (comme quand il/elle commence une nouvelle partie). Ayez &agrave; l'esprit que vous en avez besoin.<br \>
 <br \>
-To test the routines just place...<br \>
+Pour tester les sous-programmes, placez simplement...<br \>
 <br \>
 <tt><div class="freebasic">
 <span class="wrd">ReadHighScore</span>&nbsp;<span class="quo">"high_scores.dat"</span><br />
@@ -287,30 +287,30 @@ To test the routines just place...<br \>
 <span class="key">End</span><br />
 </div></tt><br />
 <br \>
-...after first SCREENSET (outside subroutines). Change the second parameter with 'WriteHighScore' call to input different scores on different locations in the high score table. I'm sure you are aware that when calling 'WriteHighScore' the second parameter mustn't be hard-coded with a static number, but with a variable in which you'll store player's score, whatever that may be in your case (ie. 'Player.Score').<br \>
+...apr&egrave;s le premier SCREENSET (sous-programmes externes). Changer le deuxi&egrave;me param&egrave;tre &agrave; l'appel de "WriteHighScore" pour entrer des scores diff&eacute;rents &agrave; diff&eacute;rents endroits dans la table des meilleurs scores.Je suis s&ucirc;r que vous savez que lorsque vous appelez "WriteHighScore" le second param&egrave;tre ne doit pas &ecirc;tre cod&eacute; en dur avec un nombre statique, mais avec une variable dans laquelle vous allez stocker le score du joueur, quoi qu'il en soit dans votre cas (c'est &agrave; dire "Player.Score").<br \>
 <br \>
-<b>What's next?</b><br \>
+<b>Et ensuite?</b><br \>
 <br \>
-The only other things I wish to share regarding this issue is related to high score encryption and better name inputting routine. As both routines I'm using are not by me, I will only brush off them and provide them in an example program you can easily use for your own needs.<br \>
-Encryption is done using two functions, 'neoENCpass' and 'neodeENCpass'. One for encryption and one for decryption. They are called with a string (high score entry string in our case) and password, password being any string you choose and the same must be used for encrypting and decrypting (of course).<br \>
-Just after you retrieve an string entry from a file you decrypt it like this:<br \>
+Les seules autres choses que je souhaite partager sur cette question sont li&eacute;es &agrave; un cryptage du score le plus &eacute;lev&eacute; et un meilleur sous-programme de saisie du nom. Comme les deux routines utilis&eacute;es ne sont pas de moi, je ne peux que donner des explications sur elles et de les donner dans un exemple de programme que vous pourrez facilement utiliser pour vos propres besoins.<br \>
+Le cryptage est r&eacute;alis&eacute; en utilisant deux fonctions, "neoENCpass" et "neodeENCpass". Une pour le chiffrement et l'autre pour le d&eacute;chiffrement. Elles sont appel&eacute;es avec une cha&icirc;ne de caract&egrave;res (dans notre cas, une cha&icirc;ne du score le plus &eacute;lev&eacute;) et un mot de passe qui est une cha&icirc;ne de caract&egrave;res que vous choisissez; et c'est la m&ecirc;me cha&icirc;ne de caract&egrave;res qui doit &ecirc;tre utilis&eacute;e pour chiffrer et d&eacute;chiffrer (bien s&ucirc;r).<br \>
+Apr&egrave;s r&eacute;cup&eacute;ration d'une cha&icirc;ne &agrave; partir d'un fichier, vous la d&eacute;cryptez comme ceci:<br \>
 <br \>
 <tt><div class="freebasic">
 <span class="key">Input</span>&nbsp;<span class="oth">#</span><span class="wrd">free_filehandle</span><span class="oth">,</span>&nbsp;<span class="wrd">hname</span><span class="oth">(</span><span class="wrd">count_entry</span><span class="oth">)</span><br />
 <span class="wrd">neoENCdepass</span>&nbsp;<span class="key">SAdd</span><span class="oth">(</span><span class="wrd">hname</span><span class="oth">(</span><span class="wrd">count_entry</span><span class="oth">)),</span>&nbsp;<span class="key">Len</span><span class="oth">(</span><span class="wrd">hname</span><span class="oth">(</span><span class="wrd">count_entry</span><span class="oth">)),</span>&nbsp;<span class="quo">"yourpass"</span><br />
 </div></tt><br />
 <br \>
-With 'hscore' variables, being INTEGER, we need to use a temporary STRING variable which has to be decrypted and then pass its value to 'hscore'.<br \>
-The only annoying feature of this method is the fact you need a separate source code to encrypt/decrypt your high score files, as the routines inside a project will work only if the high score file is previously encrypted. I provided a small program which does this encrypting for you. It is recommended you keep a backup of your high score file in a separate folder (I also provided this in the zip downloads), even if not encrypting it.<br \>
-Instead of encryption you can use BINARY files, which I don't know how to use at this moment (don’t have time to learn; I’m submitting the tutorial in the nick of time), and which also AREN'T the same as ENCRYPTION. Encrypted files using these routines  people can only decrypt if they know the password (well, most people), while BINARIES can be read by anyone having your source. Ah yes, when providing your source code to public be sure to change the encryption passwords inside it.<br \>
-Anyway, you might not need or prefer encryption at all. But I personally like having my high score/script files encrypted so than not every Dick and Tom can change/read them with Notepad. Unencrypted high scores might kill the challenge to beat them with some players.<br \>
-Name inputting routine I won't go describing as that's irrelevant. You have to code, read it. It's much better than plain INPUT (you can use it with custom font printing libraries) and allows you to limit the number of characters in the name. The routine was done by 'Ryan Szrama', and all thanks go to him.<br \>
-Download the extended example (with encryption and better name inputting): http://lachie.phatcode.net/Downloads/Managing_A_High_Score_Table.zip<br \>
+Avec les variables "hscore", qui sont des INTEGERs (ENTIERs), nous devons utiliser une variable temporaire STRING qui sera d&eacute;crypt&eacute;e et sa valeur pass&eacute;e &agrave; "hscore".<br \>
+Le seul &eacute;l&eacute;ment g&ecirc;nant de cette m&eacute;thode r&eacute;side dans le fait que vous devez avoir un code source distinct pour crypter/d&eacute;crypter vos fichiers scores &eacute;lev&eacute;s, car les routines &agrave; l'int&eacute;rieur d'un projet ne fonctionneront que si le fichier scores &eacute;lev&eacute;s est pr&eacute;alablement crypt&eacute;. Je fournis un petit programme qui fait ce cryptage pour vous. Il est recommand&eacute; de garder une sauvegarde de votre fichier scores &eacute;lev&eacute;s dans un dossier s&eacute;par&eacute; (Je l'ai &eacute;galement fourni dans le pr&eacute;sent t&eacute;l&eacute;chargement zip), m&ecirc;me s'il n'est pas chiffr&eacute;.<br \>
+Au lieu du cryptage vous pouvez utiliser des fichiers BINARY (binaires), mais je ne sais pas comment les utiliser &agrave; l'heure actuelle (je n'ai pas le temps d'apprendre; soumettant ce tutoriel dans la pr&eacute;cipitation), et ce N'EST PAS &eacute;quivalent pas au CRYPTAGE. Les fichiers crypt&eacute;s qui utilisent ces routines ne peuvent &ecirc;tre d&eacute;crypt&eacute;s que si les personnes ont le mot de passe (ainsi pour la plupart), tandis que les fichiers binaires peuvent &ecirc;tre lus par n'importe qui ayant votre source. Ah oui, en fournissant votre code source au public n'oubliez pas de changer les mots de passe de cryptage &agrave; l'int&eacute;rieur.<br \>
+Quoi qu'il en soit, en fin de compte, vous n'avez pas forc&eacute;ment besoin/pr&eacute;f&egrave;rer le cryptage. Mais personnellement, j'aime avoir mes fichiers de scores &eacute;lev&eacute;s/script crypt&eacute;s de sorte que tous les Dick et Tom ne puissent pas les changer/lire avec "Notepad". Des scores &eacute;lev&eacute;s non-chiffr&eacute;s  pourraient tuer le d&eacute;fi de se battre avec certains joueurs.<br \>
+Je ne vais pas d&eacute;crire la routine de saisie du nom, car c'est sans rapport avec le sujet. Vous avez le code, liez-le. C'est beaucoup mieux qu'un simple INPUT (vous pouvez l'utiliser avec vos propres biblioth&egrave;ques d'affichage de police) et vous permet de limiter le nombre de caract&egrave;res dans le nom. La routine a &eacute;t&eacute; &eacute;crite par Ryan Szrama, et l'en remercions.<br \>
+T&eacute;l&eacute;chargez l'exemple &eacute;tendu (avec cryptage et meilleure saisie du nom): http://lachie.phatcode.net/Downloads/Managing_A_High_Score_Table.zip<br \>
 <br \>
-And that's it for this tutorial.<br \>
-Until next time, have fun!<br \>
+Et c'est tout pour ce tutoriel.<br \>
+Jusqu'&agrave; la prochaine fois, amusez-vous bien!<br \>
 <br \>
-A tutorial written by Lachie D. (mailto CHR$(58) lachie13 CHR$(64) yahoo CHR$(46) com ; http://lachie.phatcode.net - The Maker Of Stuff)<br \>
+Un tutoriel &eacute;crit par Lachie D. (mailto CHR$(58) lachie13 CHR$(64) yahoo CHR$(46) com ; http://lachie.phatcode.net - The Maker Of Stuff)<br \>
 
 </div>
 </div> 

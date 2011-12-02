@@ -6,45 +6,45 @@
 <body>
 <div id="fb_body_wrapper">
 <div id="fb_tab">
-<div id="fb_tab_l">Calling Conventions</div>
+<div id="fb_tab_l">Conventions d'appel</div>
 <div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
 </div> 
 <div id="fb_pg_wrapper">
 <div id="fb_pg_body">
-	Specifying how procedures are called.<br \>
+	Pr&eacute;cise la fa&ccedil;on dont les proc&eacute;dures sont appel&eacute;es.<br \>
 <br \>
-Calling conventions determine how calling code interacts with procedures when called. They specify rules about how parameters are pushed onto the call stack, how values are returned and when the call stack is cleaned up. This information is useful when interacting with code written in other languages, particularly assembly language. In some cases, calling conventions also apply some kind of name decoration to procedure names.<br \>
+Les conventions d'appel d&eacute;terminent comment le code appelant interagit avec les proc&eacute;dures quand elles sont appel&eacute;es. Elles pr&eacute;cisent les r&egrave;gles sur la fa&ccedil;on dont les param&egrave;tres sont charg&eacute;s sur la pile des appels, comment les valeurs sont retourn&eacute;es et quand la pile des appels est nettoy&eacute;e. Cette information est utile lors de l'interaction avec du code &eacute;crit dans d'autres langages, en particulier le langage d'assemblage. Dans certains cas, les conventions d'appel appliquent &eacute;galement une sorte de "d&eacute;coration" de nom pour les noms de proc&eacute;dure.<br \>
 <br \>
-FreeBASIC supports 3 calling conventions: <b>stdcall</b>, <b>cdecl</b> and <b>pascal</b>, specified with <tt><a href="KeyPgStdcall.html">stdcall</a></tt>, <tt><a href="KeyPgCdecl.html">cdecl</a></tt> and <tt><a href="KeyPgPascal.html">pascal</a></tt>, respectively. Calling convention can be specified in either a procedure declaration or definition immediately following the procedure name. The declaration of a procedure must have the same calling convention as the definition. The default convention is <b>stdcall</b> when not specified, or within <tt><a href="KeyPgExternBlock.html">Extern "Windows"</a></tt> and <tt><a href="KeyPgExternBlock.html">Extern "Windows-Ms"</a></tt> blocks.<br \>
+FreeBasic supporte 3 conventions d'appel: <b>stdcall</b>, <b>cdecl</b> et <b>pascal</b>, sp&eacute;cifi&eacute;es respectivement avec <tt><a href="KeyPgStdcall.html">stdcall</a></tt>, <tt><a href="KeyPgCdecl.html">cdecl</a></tt> et <tt><a href="KeyPgPascal.html">pascal</a></tt>. La Convention d'appel peut être sp&eacute;cifi&eacute;e soit dans une d&eacute;claration de proc&eacute;dure soit dans la d&eacute;finition qui suit imm&eacute;diatement le nom de la proc&eacute;dure. La d&eacute;claration d'une proc&eacute;dure doit avoir la même convention de nommage que la d&eacute;finition. La convention par d&eacute;faut est <b>stdcall</b> lorsqu'elle n'est pas sp&eacute;cifi&eacute;e ou dans les blocs <tt><a href="KeyPgExternBlock.html">Extern "Windows"</a></tt> et <tt><a href="KeyPgExternBlock.html">Extern "Windows-Ms"</a></tt> blocks.<br \>
 <br \>
-In all calling conventions, integral procedure return values are returned in the <tt>EAX</tt>(, <tt>EDX</tt>) register(s), and floating-point return values are stored in the <tt>ST(0)</tt> register (the top of the floating-point stack). User-defined type (UDT) values are returned in the <tt>EAX</tt>(, <tt>EDX</tt>) register(s) if eight (8) bytes or less in size, otherwise they are returned in memory by having their address pushed onto the call stack after any parameters.<br \>
+Dans tous les conventions d'appel, l'int&eacute;gralit&eacute; des valeurs de retour de proc&eacute;dure est retourn&eacute;e dans le(s) registre(s) <tt>EAX</tt>(, <tt>EDX</tt>) et les valeurs de retour &agrave; virgule flottante sont stock&eacute;es dans le registre <tt>ST(0)</tt> (le haut de la pile en virgule flottante). Les valeurs de types d&eacute;finis par l'utilisateur sont retourn&eacute;es dans le(s) registre(s) <tt>EAX</tt>(, <tt>EDX</tt>) si elles ont une taille de huit (8) octets ou moins, sinon, elles sont retourn&eacute;es en m&eacute;moire avec leur adresse pouss&eacute;e sur la pile des appels apr&egrave;s les param&egrave;tres.<br \>
 <br \>
 <div class="fb_sect_title">stdcall</div><div class="fb_sect_cont">	<br \>
-In the <b>stdcall</b> convention, procedure parameters are pushed onto the call stack in the reverse order they are declared, that is, from right to left. The procedure is in charge of popping any parameters from the call stack.<br \>
+Dans la convention <b>stdcall</b>, les param&egrave;tres de proc&eacute;dure sont charg&eacute;s sur la pile des appels dans l'ordre oppos&eacute; &agrave; celui de leur d&eacute;claration, c'est &agrave; dire, de la droite vers la gauche. La proc&eacute;dure est charg&eacute;e d'extraire tous les param&egrave;tres de la pile des appels.<br \>
 <br \>
-<b>stdcall</b> is the default calling convention for all FreeBASIC procedures, and those within <tt><a href="KeyPgExternBlock.html">Extern "Windows"</a></tt> and <tt><a href="KeyPgExternBlock.html">Extern "Windows-Ms"</a></tt> blocks. It is also the default convention used in the Windows API.<br \>
+<b>stdcall</b> est la convention d'appel par d&eacute;faut pour toutes les proc&eacute;dures FreeBASIC et celles dans les blocs <tt><a href="KeyPgExternBlock.html">Extern "Windows"</a></tt> et <tt><a href="KeyPgExternBlock.html">Extern "Windows-Ms"</a></tt>. C'est &eacute;galement la convention par d&eacute;faut utilis&eacute;e dans l'API Windows.<br \>
 <br \>
-</div><div class="fb_sect_title">Platform Differences</div><div class="fb_sect_cont"><br \>
-<ul><li> In DOS and Windows platforms, the procedure name is decorated with an "<tt>@<i>N</i></tt>" suffix, where <tt><i>N</i></tt> is the total size, in bytes, of any parameters passed.<br \>
+</div><div class="fb_sect_title">Diff&eacute;rences de plate-forme</div><div class="fb_sect_cont"><br \>
+<ul><li> Dans les plates-formes DOS et Windows, le nom de proc&eacute;dure est "d&eacute;cor&eacute;" d'un suffixe "<tt>@<i>N</i></tt>", o&ugrave; <tt><i>N</i></tt> est la taille totale, en octets, de tous les param&egrave;tres transmis.<br \>
 <br \>
 </ul></div><div class="fb_sect_title">cdecl</div><div class="fb_sect_cont"><br \>
-In the <b>cdecl</b> convention, procedure parameters are pushed onto the call stack in the reverse order they are declared, that is, from right to left. The calling code is in charge of popping parameters from the call stack.<br \>
+Dans la convention <b>cdecl</b>, les param&egrave;tres de proc&eacute;dure sont charg&eacute;s sur la pile des appels dans l'ordre oppos&eacute; &agrave; celui de leur d&eacute;claration, c'est &agrave; dire, de la droite vers la gauche. Le code appelant est charg&eacute; d'extraire tous les param&egrave;tres de la pile des appels.<br \>
 <br \>
-<b>cdecl</b> is the default calling convention for procedures within <tt><a href="KeyPgExternBlock.html">Extern "C"</a></tt> and <tt><a href="KeyPgExternBlock.html">Extern "C++"</a></tt> blocks. It is also the default convention used by most C and C++ compilers.<br \>
+<b>cdecl</b> est la convention d'appel par d&eacute;faut pour les proc&eacute;dures des blocs <tt><a href="KeyPgExternBlock.html">Extern "C"</a></tt> et <tt><a href="KeyPgExternBlock.html">Extern "C++"</a></tt>. C'est &eacute;galement la convention par d&eacute;faut utilis&eacute;e par la plupart des compilateurs C et C++.<br \>
 <br \>
 </div><div class="fb_sect_title">pascal</div><div class="fb_sect_cont"><br \>
-In the <b>pascal</b> convention, procedure parameters are pushed onto the call stack in the order they are declared, that is, from left to right. The procedure is in charge of popping any parameters from the call stack.<br \>
+Dans la convention <b>pascal</b>, les param&egrave;tres de proc&eacute;dure sont charg&eacute;s sur la pile des appels dans l'ordre de leur d&eacute;claration, c'est &agrave; dire, de la gauche vers la droite. La proc&eacute;dure est charg&eacute;e d'extraire tous les param&egrave;tres de la pile des appels.<br \>
 <br \>
-<b>pascal</b> is the default convention used by Pascal and the Microsoft QuickBASIC series of compilers.<br \>
+<b>pascal</b> est la convention par d&eacute;faut utilis&eacute;e par Pascal et la s&eacute;rie des compilateurs Microsoft QuickBASIC.<br \>
 <br \>
-The following table summarizes the differences between the various calling conventions:<br \>
+Le tableau suivant r&eacute;sume les diff&eacute;rences entre les diff&eacute;rentes conventions d'appel:<br \>
 <br \>
-<div class="fb_table"><table><tr><td>Calling convention </td><td> Parameters are pushed onto the call stack from </td><td> Parameters are popped off the call stack by </td></tr><tr><td> stdcall </td><td> right to left </td><td> the procedure </td></tr><tr><td> cdecl </td><td> right to left </td><td> the calling code </td></tr><tr><td> pascal </td><td> left to right </td><td> the procedure</td></tr></table></div><br \>
+<div class="fb_table"><table><tr><td>Convention d'appel </td><td> Les param&egrave;tres de proc&eacute;dure sont charg&eacute;s sur la pile des appels </td><td> Les param&egrave;tres sont extraits de la pile des appels par </td></tr><tr><td> stdcall </td><td> de la droite vers la gauche </td><td> la proc&eacute;dure </td></tr><tr><td> cdecl </td><td> de la droite vers la gauche </td><td> le code appelant </td></tr><tr><td> pascal </td><td> de la gauche vers la droite </td><td> la proc&eacute;dure</td></tr></table></div><br \>
 <br \>
-</div><div class="fb_sect_title">Platform Differences</div><div class="fb_sect_cont"><br \>
-<ul><li> In DOS and Windows platforms, all calling conventions decorate procedure names with an underscore ("_") prefix.<br \>
+</div><div class="fb_sect_title">Diff&eacute;rences de plate-forme</div><div class="fb_sect_cont"><br \>
+<ul><li> Sous DOS et Windows, toutes les conventions d'appel d&eacute;corent les noms de proc&eacute;dure avec le pr&eacute;fixe ("_") trait de soulignement.<br \>
 <br \>
-</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+</ul></div><div class="fb_sect_title">Voir aussi</div><div class="fb_sect_cont"><br \>
 <ul><li> <tt><a href="KeyPgDeclare.html">Declare</a></tt>, <tt><a href="KeyPgSub.html">Sub</a></tt>, <tt><a href="KeyPgFunction.html">Function</a></tt><br \>
 <li> <tt><a href="KeyPgStdcall.html">stdcall</a></tt>, <tt><a href="KeyPgCdecl.html">cdecl</a></tt>, <tt><a href="KeyPgPascal.html">pascal</a></tt><br \>
 <li> <tt><a href="KeyPgExternBlock.html">Extern..End Extern</a></tt><br \>

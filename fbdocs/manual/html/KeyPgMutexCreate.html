@@ -11,28 +11,28 @@
 </div> 
 <div id="fb_pg_wrapper">
 <div id="fb_pg_body">
-	Creates a mutex used for synchronizing the execution of threads<br \>
+	Cr&eacute;e un "mutex" utilis&eacute; pour synchroniser l'ex&eacute;cution des "threads"<br \>
 <br \>
-<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<div class="fb_sect_title">Syntaxe</div><div class="fb_sect_cont"><tt><br \>
 <a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgFunction.html">Function</a> <b>MutexCreate</b> ( ) <a href="KeyPgAs.html">As</a> <a href="KeyPgAny.html">Any</a> <a href="KeyPgPtr.html">Ptr</a><br \>
 </tt><br \>
 </div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
 <i>result</i> = <b>MutexCreate</b><br \>
 </tt><br \>
-</div><div class="fb_sect_title">Return Value</div><div class="fb_sect_cont"><br \>
-The <tt><a href="KeyPgAny.html">Any</a> <a href="KeyPgPtr.html">Ptr</a></tt> handle of the mutex created, or the null pointer (0) on failure.<br \>
+</div><div class="fb_sect_title">Valeur retourn&eacute;e</div><div class="fb_sect_cont"><br \>
+Le <tt><a href="KeyPgAny.html">Any</a> <a href="KeyPgPtr.html">Ptr</a></tt> "handle" du "mutex" cr&eacute;&eacute;, ou le pointeur nul (0) en cas d'&eacute;chec.<br \>
 <br \>
 </div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
-Mutexes, short for "Mutually Exclusive", are a way of synchronizing shared data within threads.  If there is a global variable used by multiple threads (or a local variable used by a single thread, called multiple times), it should be "locked" during its use with a mutex.  This halts all threads using <tt><a href="KeyPgMutexLock.html">MutexLock</a></tt> with that mutex, until it is unlocked with <tt><a href="KeyPgMutexUnlock.html">MutexUnlock</a></tt>.<br \>
+Les "Mutex", abr&eacute;viation de "Mutually Exclusive" (Mutuellement exclusive), sont un moyen de synchroniser les donn&eacute;es partag&eacute;es dans les "threads".  S'il y a une variable globale utilis&eacute;e par plusieurs "threads" (ou une variable locale utilis&eacute;e par un "thread" unique, appel&eacute;e plusieurs fois), elle devrait &ecirc;tre "verrouill&eacute;e" lors de son utilisation avec un "mutex".  Ceci arr&ecirc;te tous les "threads" en utilisant <tt><a href="KeyPgMutexLock.html">MutexLock</a></tt> avec ce "mutex", jusqu'&agrave; ce qu'il soit d&eacute;verrouill&eacute; avec <tt><a href="KeyPgMutexUnlock.html">MutexUnlock</a></tt>.<br \>
 <br \>
-<tt>Mutexcreate</tt> creates a mutex, returning a handle which is to be referred to when locking, unlocking, or destroying the mutex.  Mutexes created with <tt>Mutexcreate</tt> should be destroyed when no longer needed or before the end of the program with <tt><a href="KeyPgMutexDestroy.html">MutexDestroy</a></tt>.<br \>
+<tt>Mutexcreate</tt> cr&eacute;e un "mutex", et retourne un "handle" qui sert de r&eacute;f&eacute;rence lors du verrouillage, du d&eacute;verrouillage ou de la destruction du "mutex".  Les "mutex" cr&eacute;&eacute;s avec <tt>Mutexcreate</tt> doivent &ecirc;tre d&eacute;truits lorsqu'ils ne sont plus n&eacute;cessaires ou avant la fin du programme avec <tt><a href="KeyPgMutexDestroy.html">MutexDestroy</a></tt>.<br \>
 <br \>
-A  mutex is a lock that guarantees three things:<br \>
-1. Atomicity - Locking a mutex is an atomic operation, meaning that the operating system (or threads library) assures you that if you locked a mutex, no other thread succeeded in locking this mutex at the same time.<br \>
-2. Singularity - If a thread managed to lock a mutex, it is assured that no other thread will be able to lock the thread until the original thread releases the lock.<br \>
-3. Non-Busy Wait - If a thread attempts to lock a thread that was locked by a second thread, the first thread will be suspended (and will not consume any CPU resources) until the lock is freed by the second thread. At this time, the first thread will wake up and continue execution, having the mutex locked by it. <br \>
+Un "mutex" est un verrou qui garantit trois choses:<br \>
+1. Atomicit&eacute; - Le verrouillage d'un "mutex" est une op&eacute;ration atomique, ce qui signifie que le syst&egrave;me d'exploitation (ou la biblioth&egrave;que "threads") vous assure que si vous avez verrouill&eacute; un "mutex", aucun autre "thread" r&eacute;ussira &agrave; verrouiller ce "mutex" en m&ecirc;me temps.<br \>
+2. Singularit&eacute; - Si un "thread" a r&eacute;ussi &agrave; verrouiller un "mutex", il est assur&eacute; qu'aucun autre "thread" ne sera en mesure de bloquer le "thread" jusqu'&agrave; ce que le "thread" d'origine ne lib&egrave;re le verrou.<br \>
+3. Attente non-occup&eacute;e - Si un "thread" tente de verrouiller un "thread" qui a &eacute;t&eacute; verrouill&eacute; par un second "thread", le premier "thread" sera suspendu (et ne consommera aucune ressource CPU) jusqu'&agrave; ce que le verrou soit lib&eacute;r&eacute; par le second "thread". A ce moment-l&agrave;, le premier "thread" va se r&eacute;veiller et poursuivre l'ex&eacute;cution, apr&egrave;s avoir lui-m&ecirc;me verrouill&eacute; le "mutex". <br \>
 <br \>
-</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Exemple</div><div class="fb_sect_cont"><br \>
 <tt><div class="freebasic">
 <span class="com">''&nbsp;Threading&nbsp;syncronyzation&nbsp;using&nbsp;Mutexes</span><br />
 <span class="com">''&nbsp;If&nbsp;you&nbsp;comment&nbsp;out&nbsp;the&nbsp;lines&nbsp;containing&nbsp;"MutexLock"&nbsp;and&nbsp;"MutexUnlock",</span><br />
@@ -101,17 +101,17 @@ A  mutex is a lock that guarantees three things:<br \>
 <span class="key">End</span>&nbsp;<span class="key">Sub</span><br />
 </div></tt><br />
 <br \>
-</div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
-<ul><li> Threading is not allowed in the <i><a href="CompilerOptlang.html">-lang qb</a></i> dialect.<br \>
+</div><div class="fb_sect_title">Diff&eacute;rences de dialecte</div><div class="fb_sect_cont"><br \>
+<ul><li> Les "Thread" n'existent pas dans le dialecte <i><a href="CompilerOptlang.html">-lang qb</a></i>.<br \>
 <br \>
-</ul></div><div class="fb_sect_title">Platform Differences</div><div class="fb_sect_cont"><br \>
-<ul><li> The DOS version of FreeBASIC does not allow for threads, as the OS does not support them.<br \>
-<li> In Linux the threads are always started in the order they are created, this can't be assumed in Win32. It's an OS, not a FreeBASIC issue. <br \>
+</ul></div><div class="fb_sect_title">Diff&eacute;rences de plate-forme</div><div class="fb_sect_cont"><br \>
+<ul><li> La version DOS de FreeBASIC ne permet pas les "threads", car l'OS ne les supporte pas.<br \>
+<li> Dans Linux les "threads" sont toujours d&eacute;marr&eacute;s dans l'ordre de leur cr&eacute;ation, ceci n'est pas possible sous Win32. Il s'agit de l'OS, pas une question FreeBasic.<br \>
 <br \>
-</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
-<ul><li> New to FreeBASIC<br \>
+</ul></div><div class="fb_sect_title">Diff&eacute;rences avec QB</div><div class="fb_sect_cont"><br \>
+<ul><li> Nouveau pour FreeBASIC<br \>
 <br \>
-</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+</ul></div><div class="fb_sect_title">Voir aussi</div><div class="fb_sect_cont"><br \>
 <ul><li> <tt><a href="KeyPgMutexDestroy.html">MutexDestroy</a></tt><br \>
 <li> <tt><a href="KeyPgMutexLock.html">MutexLock</a></tt><br \>
 <li> <tt><a href="KeyPgMutexUnlock.html">MutexUnlock</a></tt><br \>

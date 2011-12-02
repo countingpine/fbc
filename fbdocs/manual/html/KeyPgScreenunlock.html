@@ -11,46 +11,50 @@
 </div> 
 <div id="fb_pg_wrapper">
 <div id="fb_pg_body">
-	Unlocks work page's framebuffer<br \>
+	D&eacute;verrouille le tampon de la page de travail<br \>
 <br \>
-<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<div class="fb_sect_title">Syntaxe</div><div class="fb_sect_cont"><tt><br \>
 <a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgSub.html">Sub</a> <b>ScreenUnlock</b> ( <a href="KeyPgByval.html">ByVal</a> <i>startline</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a> = -1, <a href="KeyPgByval.html">ByVal</a> <i>endline</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a> = -1 )<br \>
 </tt><br \>
 </div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
 <b>ScreenUnlock</b> [ <i>start_line</i> ] [, <i>end_line</i> ]<br \>
 </tt><br \>
-</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Param&egrave;tres</div><div class="fb_sect_cont"><br \>
 <tt><i>startline</i></tt><br \>
-<div class="fb_indent">optional argument specifying first screen line to be updated. If omitted, top screen line is assumed.<br \>
+<div class="fb_indent">param&egrave;tre optionnel sp&eacute;cifiant la premi&egrave;re ligne &eacute;cran &agrave; mettre &agrave; jour. Si omis, consid&egrave;re la premi&egrave;re ligne en haut de l'&eacute;cran.<br \>
 </div><tt><i>endline</i></tt><br \>
-<div class="fb_indent">optional argument specifying last screen line to be updated. If omitted, bottom screen line is assumed.<br \>
+<div class="fb_indent">param&egrave;tre optionnel sp&eacute;cifiant la derni&egrave;re ligne &eacute;cran &agrave; mettre &agrave; jour. Si omis, consid&egrave;re la derni&egrave;re ligne en bas de l'&eacute;cran.<br \>
 <br \>
 </div></div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
-<tt><b>ScreenUnlock</b></tt> unlocks the current work page assuming it was previously locked by calling <tt><a href="KeyPgScreenlock.html">ScreenLock</a></tt> and lets the system restart updating the screen regularly. When called with <tt>start_line</tt> and <tt>end_line</tt> , only the screen area between those lines is assumed to have changed, and will be updated. <br \>
+<tt><b>ScreenUnlock</b></tt> d&eacute;verrouille la page de travail courante &agrave; condition qu'elle ait &eacute;t&eacute; verrouill&eacute;e pr&eacute;c&eacute;demment en appelant <tt><a href="KeyPgScreenlock.html">ScreenLock</a></tt> et permet le red&eacute;marrage du syst&egrave;me avec mise &agrave; jour de l'&eacute;cran r&eacute;guli&egrave;rement. Lors d'un appel avec <tt>start_line</tt> et <tt>end_line</tt> , seule la zone comprise entre ces deux lignes est prise en compte pour &ecirc;tre modifi&eacute;e, et sera mise &agrave; jour. <br \>
 <br \>
-An internal counter exists that remembers the screen lock state, thus <tt><b>ScreenUnlock</b></tt> has an effect only on a screen that is locked.  A screen that has not been locked with <tt><b>ScreenLock</b></tt> cannot get unlocked, however <tt><b>ScreenUnlock</b></tt> still will force an update of given area or full screen.   <br \>
+Il existe un compteur interne qui m&eacute;morise l'&eacute;tat du verrouillage de l'&eacute;cran, donc <tt><b>ScreenUnlock</b></tt> n'a d'effet que sur un &eacute;cran verrouill&eacute; pr&eacute;c&eacute;demment.  Un &eacute;cran qui n'a pas &eacute;t&eacute; verrouill&eacute; avec <tt><b>ScreenLock</b></tt> ne peut &ecirc;tre d&eacute;verrouill&eacute;, cependant un nouveau <tt><b>ScreenUnlock</b></tt> forcera la mise &agrave; jour d'une zone donn&eacute;e ou de l'&eacute;cran.   <br \>
 <br \>
-Calls to <tt><b>ScreenUnlock</b></tt> must be paired with matching calls to <tt><b><a href="KeyPgScreenlock.html">ScreenLock</a></b></tt>.  Only the first call to <tt><b><a href="KeyPgScreenlock.html">ScreenLock</a></b></tt> actually performs a locking operation.  Subsequent calls to <tt><b>ScreenLock</b></tt> only increment the lock counter.  Conversely, <tt><b>ScreenUnlock</b></tt> only decrements the lock counter until it reaches zero at which time the actual unlock operation will be performed.  Using <tt><a href="KeyPgScreengraphics.html">Screen</a></tt> or <tt><a href="KeyPgScreenres.html">ScreenRes</a></tt> will release all locks and set the lock counter back to zero before changing screen modes.<br \>
+A un certain nombre d'appels &agrave; <tt><b>ScreenUnlock</b></tt> doit correspondre le m&ecirc;me nombre d'appels &agrave; <tt><b><a href="KeyPgScreenlock.html">ScreenLock</a></b></tt>.  Seul le premier appel &agrave; <tt><b><a href="KeyPgScreenlock.html">ScreenLock</a></b></tt> proc&egrave;de effectivement &agrave; une op&eacute;ration de verrouillage.  Les appels suivants &agrave; <tt><b>ScreenLock</b></tt> incr&eacute;mentent seulement le compteur de verrouillage.  À l'inverse, <tt><b>ScreenUnlock</b></tt> d&eacute;cr&eacute;mente seulement le compteur de verrouillage jusqu'&agrave; ce qu'il atteigne z&eacute;ro, &agrave; ce moment-l&agrave; seulement, l'actuelle op&eacute;ration de d&eacute;verrouillage sera effectu&eacute;e.  L'utilisation de <tt><a href="KeyPgScreengraphics.html">Screen</a></tt> ou <tt><a href="KeyPgScreenres.html">ScreenRes</a></tt> annulera tous les verrouillages et mettra le compteur &agrave; z&eacute;ro avant de changer de mode &eacute;cran.<br \>
 <br \>
-All graphic statements automatically lock the screen before the function call, and unlock the screen afterwards, so you do not need to do this explicitly using <tt><b><a href="KeyPgScreenlock.html">ScreenLock</a></b></tt> and <tt><b>ScreenUnlock</b></tt>. You only need to lock the screen when you wish to access the screen (framebuffer) directly using <tt><a href="KeyPgScreenptr.html">ScreenPtr</a></tt>  or when you wish to group several graphic statements together so their effects appear simultaneously on screen, thus avoiding potential screen flicker during screen updates.<br \>
+Toutes les d&eacute;clarations graphiques verrouillent automatiquement l'&eacute;cran avant l'appel de fonction et d&eacute;verrouillent l'&eacute;cran par la suite, vous n'avez donc pas besoin de faire cela explicitement en utilisant <tt><b><a href="KeyPgScreenlock.html">ScreenLock</a></b></tt> et <tt><b>ScreenUnlock</b></tt>. Vous devez seulement verrouiller l'&eacute;cran lorsque vous d&eacute;sirez acc&eacute;der directement &agrave; l'&eacute;cran (framebuffer) &agrave; l'aide de <tt> <a href="KeyPgScreenptr.html"> ScreenPtr </a> </tt> ou lorsque vous souhaitez regrouper plusieurs d&eacute;clarations graphiques ensemble afin que leurs effets apparaissent simultan&eacute;ment &agrave; l'&eacute;cran, &eacute;vitant ainsi les scintillements pendant les mises &agrave; jour de l'&eacute;cran.<br \>
 <br \>
-Warning (Win32, Linux) : The screen is locked by stopping the thread that processes also the OS' events. This means the screen should be locked only for the short time required to redraw it, and no user input will be received while the screen is locked.<br \>
+Apr&egrave;s l'appel de <tt><b>ScreenUnlock</b></tt>, tous les &eacute;tats graphiques peuvent &ecirc;tre utilis&eacute;s en toute s&eacute;curit&eacute;, d'autre part acc&egrave;der directement au tampon image de la page de travail via <tt><a href="KeyPgScreenptr.html">ScreenPtr</a></tt> peut &ecirc;tre utilis&eacute; seulement apr&egrave;s un nouveau verrouillage de l'&eacute;cran avec <tt><a href="KeyPgScreenlock.html">ScreenLock</a></tt>.<br \>
 <br \>
-</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
-See <tt><a href="KeyPgScreenptr.html">ScreenPtr</a></tt> example.<br \>
+Attention (Win32, Linux) : l'&eacute;cran est verrouill&eacute; par arr&ecirc;t du "thread" qui g&egrave;re aussi les &eacute;v&eacute;nements de l'OS. Cela signifie que l'&eacute;cran ne doit &ecirc;tre verrouill&eacute; que pour un laps de temps le plus court possible pendant lequel il est redessin&eacute;, et aucune entr&eacute;e utilisateur n'est valide pendant que l'&eacute;cran est verrouill&eacute;.<br \>
 <br \>
-</div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
-<ul><li> Not available in the <i><a href="CompilerOptlang.html">-lang qb</a></i> dialect unless referenced with the alias <tt><b>__Screenunlock</b></tt>.<br \>
+</div><div class="fb_sect_title">Exemple</div><div class="fb_sect_cont"><br \>
+Voir l'exemple de <tt><a href="KeyPgScreenptr.html">ScreenPtr</a></tt>.<br \>
 <br \>
-</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
-<ul><li> New to FreeBASIC<br \>
+</div><div class="fb_sect_title">Diff&eacute;rences de dialectes</div><div class="fb_sect_cont"><br \>
+<ul><li> Non disponible en dialecte <i><a href="CompilerOptlang.html">-lang qb</a></i> sauf si r&eacute;f&eacute;renc&eacute; avec l'alias <tt><b>__Screenunlock</b></tt>.<br \>
 <br \>
-</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+</ul></div><div class="fb_sect_title">Diff&eacute;rences avec QB</div><div class="fb_sect_cont"><br \>
+<ul><li> Nouveau pour FreeBASIC<br \>
+<br \>
+</ul></div><div class="fb_sect_title">Voir aussi</div><div class="fb_sect_cont"><br \>
 <ul><li> <tt><a href="KeyPgScreengraphics.html">Screen (Graphics)</a></tt><br \>
 <li> <tt><a href="KeyPgScreenlock.html">ScreenLock</a></tt><br \>
 <li> <tt><a href="KeyPgScreenptr.html">ScreenPtr</a></tt><br \>
 <br \>
-</ul></div>
+</ul><br \>
+   <br \>
+</div>
 </div>
 </div> 
 </div> 

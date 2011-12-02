@@ -11,64 +11,66 @@
 </div> 
 <div id="fb_pg_wrapper">
 <div id="fb_pg_body">
-	Customizes colors in modes with paletted colors<br \>
+	Personnalise les couleurs dans les modes de couleurs palettis&eacute;es<br \>
 <br \>
-<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<div class="fb_sect_title">Syntaxe</div><div class="fb_sect_cont"><tt><br \>
 <b>Palette</b> [Get] [<i>index</i>, <i>color</i>]<br \>
 <b>Palette</b> [Get] [<i>index</i>, <i>r</i>, <i>g</i>, <i>b</i>]<br \>
 <b>Palette</b> [Get] Using <i>arrayname(idx)</i><br \>
 </tt><br \>
-</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Param&egrave;tres</div><div class="fb_sect_cont"><br \>
 <tt>Get</tt><br \>
-<div class="fb_indent">indicates getting palette information rather than setting palette information<br \>
+<div class="fb_indent">indique une demande d'information et non une validation d'information palette<br \>
 </div><tt>Using</tt><br \>
-<div class="fb_indent">indicates using array of color values<br \>
+<div class="fb_indent">indique l'utilisation d'un tableau de valeurs de couleur<br \>
 </div><tt><i>index</i></tt><br \>
-<div class="fb_indent">palette index<br \>
+<div class="fb_indent">indice de la palette<br \>
 </div><tt><i>color</i></tt><br \>
-<div class="fb_indent">color attribute<br \>
+<div class="fb_indent">attribut couleur<br \>
 </div><tt><i>r</i></tt><br \>
-<div class="fb_indent">red color component<br \>
+<div class="fb_indent">composante rouge de couleur<br \>
 </div><tt><i>g</i></tt><br \>
-<div class="fb_indent">green color component<br \>
+<div class="fb_indent">composante vert de couleur<br \>
 </div><tt><i>b</i></tt><br \>
-<div class="fb_indent">blue color component<br \>
+<div class="fb_indent">composante bleu de couleur<br \>
 </div><tt><i>arrayname(idx)</i></tt><br \>
-<div class="fb_indent">array and index to get/set color attributes<br \>
+<div class="fb_indent">tableau et indice pour obtenir/valider les attributs de couleur<br \>
 <br \>
 </div></div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
-The <tt><b>Palette</b></tt> statement is used to retrieve or customize the current palette for graphics modes with a color depth of up to 8bpp; using <tt><b>Palette</b></tt> while in a mode with a higher color depth will have no effect. Calling <tt><b>Palette</b></tt> with no argument restores the default palette for current graphics mode, as set by the <tt><a href="KeyPgScreengraphics.html">Screen (Graphics)</a></tt> statement.<br \>
-The GfxLib sets a <a href="GfxDefPalettes.html">default palette</a> when a <a href="KeyPgScreengraphics.html">Screen</a> mode is initialized.<br \>
+<tt><b>Palette</b></tt> est utilis&eacute; pour r&eacute;cup&eacute;rer ou &eacute;tablir la palette courante pour les modes graphiques avec une profondeur de couleur jusqu'&agrave; 8bpp (8 bits par pixel); l'utilisation de <tt><b>Palette</b></tt> quand on est dans un mode de profondeur de couleur sup&eacute;rieur n'a aucun effet. Appeler <tt><b>Palette</b></tt> sans argument restaure la palette par d&eacute;faut pour le mode graphique courant, comme le fait <tt><a href="KeyPgScreengraphics.html">Screen (Graphique)</a></tt>.<br \>
+La GfxLib valide une <a href="GfxDefPalettes.html">palette par d&eacute;faut</a> quand un mode <a href="KeyPgScreengraphics.html">Screen</a> est initialis&eacute;.<br \>
 <br \>
-<b>First form</b><br \>
-<div class="fb_indent">If you specify index and color, these are dependent on the current mode:<br \>
-<div class="fb_table"><table><tr><td>Screen mode</td><td>index range</td><td>color range</td></tr><tr><td>1</td><td>0-3</td><td>0-15</td></tr><tr><td>2</td><td>0-1</td><td>0-15</td></tr><tr><td>7,8</td><td>0-15</td><td>0-15</td></tr><tr><td>9</td><td>0-15</td><td>0-63</td></tr><tr><td>11</td><td>0-1</td><td>see below</td></tr><tr><td>12</td><td>0-15</td><td>see below</td></tr><tr><td>13 to 21</td><td>0-255</td><td> see below</td></tr></table></div><br \>
-In screen modes 1, 2, 7, 8 and 9 you can assign to each color index one of the colors in the available range. In other screen modes, the color must be specified in the form &hBBGGRR, where BB, GG and RR are the blue, green and red components ranging <tt>&h0</tt>-<tt>&h3F</tt> in hexadecimal (0-63 in decimal). If you don't like hexadecimal form, you can use the following formula to compute the integer value to pass to this parameter:<br \>
+<b>Premi&egrave;re forme</b><br \>
+<div class="fb_indent">Si vous sp&eacute;cifiez <tt><i>index</i></tt> et <tt><i>color</i></tt>, ceux-ci d&eacute;pendent du mode courant:<br \>
+<div class="fb_table"><table><tr><td>Mode &eacute;cran</td><td><tt><i>index</i></tt></td><td><tt><i>color</i></tt></td></tr><tr><td>1</td><td>0-3</td><td>0-15</td></tr><tr><td>2</td><td>0-1</td><td>0-15</td></tr><tr><td>7,8</td><td>0-15</td><td>0-15</td></tr><tr><td>9</td><td>0-15</td><td>0-63</td></tr><tr><td>11</td><td>0-1</td><td>voir ci-dessous</td></tr><tr><td>12</td><td>0-15</td><td>voir ci-dessous</td></tr><tr><td>13 &agrave; 21</td><td>0-255</td><td>voir ci-dessous</td></tr></table></div><br \>
+Dans les modes &eacute;cran 1, 2, 7, 8 et 9 vous assignez &agrave; chaque indice de couleur une des couleurs disponible dans la plage. Dans les autres modes &eacute;cran, la couleur doit &ecirc;tre sp&eacute;cifi&eacute;e dans la forme &hBBVVRR, o&ugrave; BB, VV et RR sont les composantes bleu, vert et rouge dans la plage &h0-&h3F en hexad&eacute;cimal (0-63 en d&eacute;cimal). Si vous n'aimez pas la forme hexad&eacute;cimale, vous pouvez utiliser la formule ci-dessous pour calculer la valeur enti&egrave;re &agrave; passer &agrave; ce param&egrave;tre:<br \>
 <tt>color = red <a href="KeyPgOpOr.html">Or</a> (green <a href="KeyPgOpShiftLeft.html">Shl</a> 8) <a href="KeyPgOpOr.html">Or</a> (blue <a href="KeyPgOpShiftLeft.html">Shl</a> 16)</tt><br \>
-Where red, green and blue must range <tt>0</tt>-<tt>63</tt>. Please note that color values accepted by <tt><b>Palette</b></tt> are <b>not</b> the in the same form as returned by the <tt><a href="KeyPgRgb.html">RGB</a></tt> macro (the red and blue fields are inverted, and the range is different); this is for backward compatibility with QB.<br \>
+O&ugrave; 'red' (rouge), 'green' (vert) et 'blue' (bleu) sont dans la plage 0-63. Notez SVP que les valeurs de couleur accept&eacute;es par <tt><b>Palette</b></tt> <b>ne</b> sont <b>pas</b> de la m&ecirc;me forme que celles retourn&eacute;es par la macro <tt><a href="KeyPgRgb.html">RGB</a></tt> (les champs rouge et bleu sont intervertis, et la plage est diff&eacute;rente); c'est une question de compatibilit&eacute; avec QB.<br \>
 <br \>
-</div><b>Second form</b><br \>
-<div class="fb_indent">In the second form, you specify the red, green and blue components for a palette entry directly, by calling <tt><b>Palette</b></tt> with 4 parameters. In this case <tt><i>r</i></tt>, <tt><i>g</i></tt> and <tt><i>b</i></tt> must be in the range <tt>0</tt>-<tt>255</tt>.<br \>
-</div><b>Third form</b><br \>
-<div class="fb_indent">Calling <tt><b>Palette Using</b></tt> allows to set a list of color values all at once; you should pass an array holding enough elements as the color indices available for your current graphics mode color depth (2 for 1bpp, 4 for 2bpp, 16 for 4bpp or 256 for 8bpp). The array elements must be integer color values in the form described above. The colors stored into <tt><i>arrayname</i></tt> starting with given <tt><i>idx</i></tt> index are then assigned to each palette index, starting with index 0.<br \>
-</div>Form 1 and 3 are for backward compatibility with QB; form 2 is meant to ease palette handling. Any change to the palette is immediately visible on screen.<br \>
+</div><b>Seconde forme</b><br \>
+<div class="fb_indent">Dans la seconde forme, vous pr&eacute;cisez les composantes rouge, vert et bleu directement pour une palette, en appelant <tt><b>Palette</b></tt> avec 4 param&egrave;tres. Dans ce cas <tt><i>r</i></tt>, <tt><i>g</i></tt> et <tt><i>b</i></tt> doivent &ecirc;tre dans la plage <tt>0</tt>-<tt>255</tt>.<br \>
 <br \>
-If the <tt><b>Get</b></tt> option is specified, <tt><b>Palette</b></tt> retrieves instead of setting color values for the current palette. The parameters have the same meaning as specified for the form being used, but in this case color, <tt><i>r</i></tt>, <tt><i>g</i></tt> and <tt><i>b</i></tt> must be variables passed by reference that will hold the color RGB values on function exit.<br \>
+</div><b>Troisi&egrave;me forme</b><br \>
+<div class="fb_indent">Appeler <tt><b>Palette Using</b></tt> permet d'&eacute;tablir en une seule fois une liste de valeurs de couleur; vous devrez passer un tableau ayant autant d'&eacute;l&eacute;ments que les indices de couleur disponibles pour la profondeur de couleur de votre mode graphique courant (2 pour 1bpp, 4 pour 2bpp, 16 pour 4bpp ou 256 pour 8bpp). Les &eacute;l&eacute;ments du tableau doivent &ecirc;tre des valeurs enti&egrave;res de couleur comme d&eacute;crit pr&eacute;c&eacute;demment. Les couleurs stock&eacute;es dans <tt><i>arrayname</i></tt> d&eacute;butent avec l'indice donn&eacute; par <tt><i>idx</i></tt> puis sont assign&eacute;es &agrave; chaque indice de la palette, en commen&ccedil;ant par 0.<br \>
 <br \>
-</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+</div>Les formes 1 et 3 sont pour la compatibilit&eacute; descendante avec QB; la forme 2 facilite la prise en charge de la palette. Chaque modification de la palette est imm&eacute;diatement suivi d'effet &agrave; l'&eacute;cran.<br \>
+<br \>
+Si l'option <tt><b>Get</b></tt> est sp&eacute;cifi&eacute;e, <tt><b>Palette</b></tt> r&eacute;cup&egrave;re au lieu de valider les valeurs de la palette courante. Les param&egrave;tres ont la m&ecirc;me signification pour chaque forme utilis&eacute;e, mais dans ce cas <tt><i>color</i></tt>, <tt><i>r</i></tt>, <tt><i>g</i></tt> et <tt><i>b</i></tt> sont des variables pass&eacute;es par r&eacute;f&eacute;rence qui contiendront les valeurs de couleur RVB &agrave; la sortie de la fonction.<br \>
+<br \>
+</div><div class="fb_sect_title">Exemple</div><div class="fb_sect_cont"><br \>
 <tt><div class="freebasic">
-<span class="com">'&nbsp;Setting&nbsp;a&nbsp;single&nbsp;color,&nbsp;form&nbsp;1.</span><br />
+<span class="com">'&nbsp;Valide&nbsp;une&nbsp;seule&nbsp;couleur,&nbsp;forme&nbsp;1.</span><br />
 <span class="key">Screen</span>&nbsp;<span class="num">15</span><br />
 <span class="key">Locate</span>&nbsp;<span class="num">1</span><span class="oth">,</span><span class="num">1</span><span class="oth">:</span>&nbsp;<span class="key">Color</span>&nbsp;<span class="num">15</span><br />
 <span class="key">Print</span>&nbsp;<span class="quo">"Press&nbsp;any&nbsp;key&nbsp;to&nbsp;change&nbsp;my&nbsp;color!"</span><br />
 <span class="key">Sleep</span><br />
-<span class="com">'&nbsp;Now&nbsp;change&nbsp;color&nbsp;15&nbsp;hues&nbsp;to&nbsp;bright&nbsp;red</span><br />
+<span class="com">'&nbsp;Maintenant&nbsp;change&nbsp;couleur&nbsp;15&nbsp;teintes&nbsp;vers&nbsp;lumineux&nbsp;red</span><br />
 <span class="key">Palette</span>&nbsp;<span class="num">15</span><span class="oth">,</span>&nbsp;<span class="num">&amp;h00003F</span><br />
 <span class="key">Sleep</span><br />
 </div></tt><br />
 <br \>
 <tt><div class="freebasic">
-<span class="com">'&nbsp;Getting&nbsp;a&nbsp;single&nbsp;color,&nbsp;form&nbsp;2.</span><br />
+<span class="com">'&nbsp;Obtient&nbsp;une&nbsp;seule&nbsp;couleur,&nbsp;forme&nbsp;2.</span><br />
 <span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="wrd">r</span><span class="oth">,</span>&nbsp;<span class="wrd">g</span><span class="oth">,</span>&nbsp;<span class="wrd">b</span><br />
 <span class="key">Screen</span>&nbsp;<span class="num">13</span><br />
 <span class="key">Palette</span>&nbsp;<span class="key">Get</span>&nbsp;<span class="num">32</span><span class="oth">,</span>&nbsp;<span class="wrd">r</span><span class="oth">,</span>&nbsp;<span class="wrd">g</span><span class="oth">,</span>&nbsp;<span class="wrd">b</span><br />
@@ -78,7 +80,7 @@ If the <tt><b>Get</b></tt> option is specified, <tt><b>Palette</b></tt> retrieve
 </div></tt><br />
 <br \>
 <tt><div class="freebasic">
-<span class="com">'&nbsp;Getting&nbsp;whole&nbsp;palette,&nbsp;form&nbsp;3.</span><br />
+<span class="com">'&nbsp;Obtient&nbsp;palette&nbsp;entiere,&nbsp;forme&nbsp;3.</span><br />
 <span class="key">Dim</span>&nbsp;<span class="wrd">pal</span><span class="oth">(</span><span class="num">1</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">256</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
 <span class="key">Dim</span>&nbsp;<span class="wrd">i</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
 <span class="key">Screen</span>&nbsp;<span class="num">13</span><br />
@@ -89,14 +91,14 @@ If the <tt><b>Get</b></tt> option is specified, <tt><b>Palette</b></tt> retrieve
 <span class="key">Sleep</span><br />
 </div></tt><br />
 <br \>
-</div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
-<ul><li> QB version did not support palette retrieval.<br \>
+</div><div class="fb_sect_title">Diff&eacute;rences avec QB</div><div class="fb_sect_cont"><br \>
+<ul><li> La version QB ne prend pas en charge la r&eacute;cup&eacute;ration de la palette.<br \>
 <br \>
-</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
-<ul><li> <tt><a href="KeyPgScreengraphics.html">Screen (Graphics)</a></tt><br \>
+</ul></div><div class="fb_sect_title">Voir aussi</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgScreengraphics.html">Screen (Graphique)</a></tt><br \>
 <li> <tt><a href="KeyPgColor.html">Color</a></tt><br \>
 <li> <tt><a href="KeyPgUsing.html">Using</a></tt><br \>
-<li> <tt><a href="GfxInternalFormats.html">Internal Pixel Formats</a></tt><br \>
+<li> <tt><a href="GfxInternalFormats.html">Formats graphiques internes</a></tt><br \>
 <br \>
 </ul></div>
 </div>

@@ -6,23 +6,23 @@
 <body>
 <div id="fb_body_wrapper">
 <div id="fb_tab">
-<div id="fb_tab_l">Pointers to Procedures</div>
+<div id="fb_tab_l">Pointeurs vers des proc&eacute;dures</div>
 <div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
 </div> 
 <div id="fb_pg_wrapper">
 <div id="fb_pg_body">
-	Pointers that point to procedures<br \>
+	Pointeurs qui pointent vers des proc&eacute;dures<br \>
 <br \>
-Just as pointers can be made to point to an <tt><a href="KeyPgInteger.html">Integer</a></tt> or <tt><a href="KeyPgSingle.html">Single</a></tt> type, pointers can also point to procedures, that is, they can store the address of a procedure.<br \>
+Tout comme les pointeurs peuvent &ecirc;tre faits pour pointer vers un type <tt><a href="KeyPgInteger.html">Integer</a></tt> ou <tt><a href="KeyPgSingle.html">Single</a></tt>, les pointeurs peuvent aussi pointer vers des proc&eacute;dures, c'est &agrave; dire qu'ils peuvent stocker l'adresse d'une proc&eacute;dure.<br \>
 <br \>
-<div class="fb_sect_title">Declaration</div><div class="fb_sect_cont"><br \>
-To declare a pointer to procedure, use the <tt><a href="KeyPgSub.html">Sub</a></tt> or <tt><a href="KeyPgFunction.html">Function</a></tt> keywords, followed by any parameters and return value type:<br \>
+<div class="fb_sect_title">D&eacute;claration</div><div class="fb_sect_cont"><br \>
+Pour d&eacute;clarer un pointeur vers une proc&eacute;dure, utilisez les mots-clefs <tt><a href="KeyPgSub.html">Sub</a></tt> ou <tt><a href="KeyPgFunction.html">Function</a></tt>, suivi de param&egrave;tres et du type de la valeur de retour:<br \>
 <br \>
 <tt><div class="freebasic">
-<span class="com">'&nbsp;declares&nbsp;a&nbsp;pointer&nbsp;to&nbsp;sub&nbsp;procedure&nbsp;that&nbsp;takes&nbsp;no&nbsp;arguments</span><br />
+<span class="com">'&nbsp;d&eacute;clare&nbsp;un&nbsp;pointeur&nbsp;vers&nbsp;une&nbsp;proc&eacute;dure&nbsp;Sub&nbsp;qui&nbsp;n'a&nbsp;aucun&nbsp;argument</span><br />
 <span class="key">Dim</span>&nbsp;<span class="wrd">pointerToProcedure</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Sub</span><br />
 </div></tt><br />
-Procedure pointers store procedure addresses, which are retrieved using <tt><a href="KeyPgOpAt.html">Operator @</a></tt> (Address of) or the <tt><a href="KeyPgOpProcptr.html">Procptr Operator</a></tt>:<br \>
+Les pointeurs de proc&eacute;dure stockent l'adresse de la proc&eacute;dure, qui est r&eacute;cup&eacute;r&eacute;e &agrave; l'aide de <tt><a href="KeyPgOpAt.html">Operator @</a></tt> (Adresse de) ou de <tt><a href="KeyPgOpProcptr.html">Procptr Operator</a></tt>:<br \>
 <br \>
 <tt><div class="freebasic">
 <span class="key">Function</span>&nbsp;<span class="wrd">Add</span>&nbsp;<span class="oth">(</span><span class="wrd">a</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">,</span>&nbsp;<span class="wrd">b</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
@@ -32,21 +32,21 @@ Procedure pointers store procedure addresses, which are retrieved using <tt><a h
 <span class="key">Dim</span>&nbsp;<span class="wrd">pFunc</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Function</span>&nbsp;<span class="oth">(</span><span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">,</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="oth">@</span><span class="wrd">Add</span><br />
 </div></tt><br />
 <br \>
-</div><div class="fb_sect_title">Calling a procedure pointer</div><div class="fb_sect_cont"><br \>
-The interesting thing about procedure pointers is that they can be called just like a procedure:<br \>
+</div><div class="fb_sect_title">Appel d'un pointeur de proc&eacute;dure</div><div class="fb_sect_cont"><br \>
+La chose int&eacute;ressante &agrave; propos des pointeurs proc&eacute;dure est qu'ils peuvent &ecirc;tre appel&eacute;s tout comme une proc&eacute;dure:<br \>
 <br \>
 <tt><div class="freebasic">
-<span class="com">''&nbsp;..&nbsp;Add&nbsp;and&nbsp;pFunc&nbsp;as&nbsp;before&nbsp;..</span><br />
+<span class="com">''&nbsp;..&nbsp;Add&nbsp;et&nbsp;pFunc&nbsp;comme&nbsp;avant&nbsp;..</span><br />
 <span class="def">#include&nbsp;once&nbsp;"pfunc.bi"<br />
 </span><br />
 <span class="key">Print</span>&nbsp;<span class="quo">"3&nbsp;+&nbsp;4&nbsp;=&nbsp;"</span>&nbsp;<span class="oth">&amp;</span>&nbsp;<span class="wrd">pFunc</span><span class="oth">(</span><span class="num">3</span><span class="oth">,</span>&nbsp;<span class="num">4</span><span class="oth">)</span><br />
 </div></tt><br />
 <br \>
-</div><div class="fb_sect_title">Passing procedure pointers to procedures</div><div class="fb_sect_cont"><br \>
-Passing procedure pointers to other procedures is similar as well:<br \>
+</div><div class="fb_sect_title">Passage de pointeur de proc&eacute;dure &agrave; d'autres proc&eacute;dures</div><div class="fb_sect_cont"><br \>
+Passage de pointeurs de proc&eacute;dure &agrave; d'autres proc&eacute;dures est similaires &agrave;:<br \>
 <br \>
 <tt><div class="freebasic">
-<span class="com">''&nbsp;..&nbsp;Add&nbsp;and&nbsp;pFunc&nbsp;as&nbsp;before&nbsp;..</span><br />
+<span class="com">''&nbsp;..&nbsp;Add&nbsp;et&nbsp;pFunc&nbsp;comme&nbsp;avant&nbsp;..</span><br />
 <span class="def">#include&nbsp;once&nbsp;"pfunc.bi"<br />
 </span><br />
 <span class="key">Function</span>&nbsp;<span class="wrd">DoOperation</span>&nbsp;<span class="oth">(</span><span class="wrd">a</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">,</span>&nbsp;<span class="wrd">b</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">,</span>&nbsp;<span class="wrd">operation</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Function</span>&nbsp;<span class="oth">(</span><span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">,</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
@@ -55,10 +55,10 @@ Passing procedure pointers to other procedures is similar as well:<br \>
 <br />
 <span class="key">Print</span>&nbsp;<span class="quo">"3&nbsp;+&nbsp;4&nbsp;=&nbsp;"</span>&nbsp;<span class="oth">&amp;</span>&nbsp;<span class="wrd">DoOperation</span><span class="oth">(</span><span class="num">3</span><span class="oth">,</span>&nbsp;<span class="num">4</span><span class="oth">,</span>&nbsp;<span class="oth">@</span><span class="wrd">Add</span><span class="oth">)</span><br />
 </div></tt><br />
-Because procedure pointer declarations can be lengthy, it often helps to create a type alias for the procedure pointer, in an effort to make clearer code:<br \>
+Parce que les d&eacute;clarations de pointeur de proc&eacute;dure peuvent &ecirc;tre longues, il est souvent utile de cr&eacute;er un alias de type pour le pointeur de proc&eacute;dure, dans un effort de clarification du code:<br \>
 <br \>
 <tt><div class="freebasic">
-<span class="com">''&nbsp;..&nbsp;Add&nbsp;and&nbsp;pFunc&nbsp;as&nbsp;before&nbsp;..</span><br />
+<span class="com">''&nbsp;..&nbsp;Add&nbsp;et&nbsp;pFunc&nbsp;comme&nbsp;avant&nbsp;..</span><br />
 <span class="def">#include&nbsp;once&nbsp;"pfunc.bi"<br />
 </span><br />
 <span class="key">Type</span>&nbsp;<span class="wrd">operation</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Function</span>&nbsp;<span class="oth">(</span><span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">,</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
@@ -70,8 +70,8 @@ Because procedure pointer declarations can be lengthy, it often helps to create 
 <span class="key">Print</span>&nbsp;<span class="quo">"3&nbsp;+&nbsp;4&nbsp;=&nbsp;"</span>&nbsp;<span class="oth">&amp;</span>&nbsp;<span class="wrd">DoOperation</span><span class="oth">(</span><span class="num">3</span><span class="oth">,</span>&nbsp;<span class="num">4</span><span class="oth">,</span>&nbsp;<span class="oth">@</span><span class="wrd">Add</span><span class="oth">)</span><br />
 </div></tt><br />
 <br \>
-</div><div class="fb_sect_title">Pointers to procedure pointers</div><div class="fb_sect_cont"><br \>
-Because the syntax of a procedure pointer does not allow declaration of a pointer to procedure pointer, a type alias is used. Notice how it is necessary to surround a dereferenced pointer to procedure pointer by parenthesis when calling the procedure. This is because the function-call operator '()' has higher precedence than <tt><a href="KeyPgOpValueOf.html">Operator *</a></tt> (Value of):<br \>
+</div><div class="fb_sect_title">Pointeurs de pointeurs de proc&eacute;dure</div><div class="fb_sect_cont"><br \>
+Parce que la syntaxe d'un pointeur de proc&eacute;dure ne permet pas de d&eacute;claration d'un pointeur vers un pointeur de proc&eacute;dure, un alias de type est utilis&eacute;. Notez comment il est n&eacute;cessaire d'entourer un pointeur d&eacute;r&eacute;f&eacute;renc&eacute; vers un pointeur de proc&eacute;dure par des parenth&egrave;ses lors de l'appel de la proc&eacute;dure. C'est parce que l'op&eacute;rateur d'appel de fonction "()" a une priorit&eacute; sup&eacute;rieure &agrave; <tt><a href="KeyPgOpValueOf.html">Operator *</a></tt> (Valeur de):<br \>
 <br \>
 <tt><div class="freebasic">
 <span class="key">Sub</span>&nbsp;<span class="wrd">Halve</span>&nbsp;<span class="oth">(</span><span class="key">ByRef</span>&nbsp;<span class="wrd">i</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">)</span><br />
@@ -103,14 +103,16 @@ Because the syntax of a procedure pointer does not allow declaration of a pointe
 <span class="key">Print</span>&nbsp;<span class="quo">"Value&nbsp;of&nbsp;'i'&nbsp;after&nbsp;all&nbsp;operations&nbsp;performed:&nbsp;"</span>&nbsp;<span class="oth">&amp;</span>&nbsp;<span class="wrd">i</span><br />
 </div></tt><br />
 <br \>
-</div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Voir aussi</div><div class="fb_sect_cont"><br \>
 <ul><li> <tt><a href="KeyPgSub.html">Sub</a></tt><br \>
 <li> <tt><a href="KeyPgFunction.html">Function</a></tt><br \>
 <li> <tt><a href="KeyPgPointer.html">Pointer</a></tt><br \>
-<li> <tt><a href="KeyPgOpAt.html">Operator * (Address Of)</a></tt><br \>
+<li> <tt><a href="KeyPgOpAt.html">Op&eacute;rateur * (Adresse de)</a></tt><br \>
 <li> <tt><a href="KeyPgOpProcptr.html">Procptr Operator</a></tt><br \>
 <br \>
 </ul><br \>
+   <br \>
+<br \>
    <br \>
 <br \>
    <br \>

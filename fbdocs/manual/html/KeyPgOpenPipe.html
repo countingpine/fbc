@@ -11,54 +11,55 @@
 </div> 
 <div id="fb_pg_wrapper">
 <div id="fb_pg_body">
-	Opens an external process' standard input (<i>stdin</i>) or output (<i>stdout</i>) stream for file operations.<br \>
+	Ouvre un processus externe de flux d'entr&eacute;e (<i>stdin</i>) ou de sortie (<i>stdout</i>) pour des op&eacute;rations sur les fichier.<br \>
 <br \>
-<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<div class="fb_sect_title">Syntaxe</div><div class="fb_sect_cont"><tt><br \>
 <b>Open Pipe</b> <i>shell_command</i> <b>For</b> <b><a href="KeyPgInputfilemode.html">Input</a></b> <b>As</b> [<b>#</b>]<i>filenumber</i><br \>
 <b>Open Pipe</b> <i>shell_command</i> <b>For</b> <b><a href="KeyPgOutput.html">Output</a></b> <b>As</b> [<b>#</b>]<i>filenumber</i><br \>
 <b>Open Pipe</b> <i>shell_command</i> <b>For</b> <b><a href="KeyPgBinary.html">Binary</a></b> <i>access_type</i> [<b>#</b>]<i>filenumber</i><br \>
 </tt><br \>
 </div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
 <i>result</i> = <b>Open Pipe</b>( <i>command</i>, <b>For</b> {<b><a href="KeyPgInputfilemode.html">Input</a></b>|<b><a href="KeyPgOutput.html">Output</a></b>}, <b>As</b> <i>filenumber</i> )<br \>
-<div class="fb_indent"></tt><i>or,</i><tt><br \>
+<div class="fb_indent"></tt><i>ou,</i><tt><br \>
 </div><i>result</i> = <b>Open Pipe</b>( <i>command</i>, <b>For</b> <b><a href="KeyPgBinary.html">Binary</a></b>, <i>access_type</i>, <b>As</b> <i>filenumber</i> )<br \>
-<div class="fb_indent"></tt><i>(or in the QB-like syntax,)</i><tt><br \>
+<div class="fb_indent"></tt><i>(ou dans la syntaxe QB-like,)</i><tt><br \>
 </div><b>Open Pipe</b> <i>filename</i> <b>For</b> {<b><a href="KeyPgInputfilemode.html">Input</a></b>|<b><a href="KeyPgOutput.html">Output</a></b>} <b>As</b> <i>filenumber</i><br \>
-<div class="fb_indent"></tt><i>(or,)</i><tt><br \>
+<div class="fb_indent"></tt><i>(ou,)</i><tt><br \>
 </div><b>Open Pipe</b> <i>filename</i> <b>For</b> <b><a href="KeyPgBinary.html">Binary</a></b> <i>access_type</i> <b>As</b> <i>filenumber</i><br \>
 </tt><br \>
-</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Param&egrave;tres</div><div class="fb_sect_cont"><br \>
 <tt><i>shell_command</i></tt><br \>
-<div class="fb_indent">The external process to execute in the operating system command shell. Relative file paths are relative to the current directory (see <tt><a href="KeyPgCurdir.html">CurDir</a></tt>).  When opening a pipe for a process that requires double quotes in either its executable path, or its arguments, the entire pipe string should be nested inside of double quotes.<br \>
+<div class="fb_indent">Le processus externe &agrave; ex&eacute;cuter dans le <i>shell</i> de commande du syst&egrave;me d'exploitation. Les chemins relatifs de fichiers sont relatifs au r&eacute;pertoire courant (voir <tt><a href="KeyPgCurdir.html">CurDir</a></tt>).  Lors de l'ouverture d'un <i>pipe</i> pour un processus qui exige des guillemets doubles dans le chemin de son ex&eacute;cutable ou de ses arguments, la cha&icirc;ne compl&egrave;te du <i>pipe</i> doit &ecirc;tre imbriqu&eacute;e &agrave; l'int&eacute;rieur de guillemets doubles.<br \>
 </div><tt><i>access_type</i></tt><br \>
-<div class="fb_indent">The type of read or write access requested by the calling process.<br \>
-</div><ul><ul><ul><li> <tt><a href="KeyPgAccess.html">Access</a></tt> {<tt>Read</tt>|<tt>Write</tt>} <i>(either the </i>stdin<i> or </i>stdout<i> stream of the external process can be opened)</i><br \>
+<div class="fb_indent">Le type d'acc&egrave;s en lecture ou &eacute;criture demand&eacute; par le processus appelant.<br \>
+</div><ul><li> <tt><a href="KeyPgAccess.html">Access</a></tt> {<tt>Read</tt>|<tt>Write</tt>} (le flux <i>stdin</i> ou <i>stdout</i> du processus externe sera ouvert)<br \>
 </ul></ul></ul><tt><i>filenumber</i></tt><br \>
-<div class="fb_indent">An available file number to bind to the external process' <i>stdin</i> or <i>stdout</i> stream.<br \>
+<div class="fb_indent">Un num&eacute;ro de fichier disponible pour se lier au flux <i>stdin</i> ou <i>stdout</i> du processus externe.<br \>
 <br \>
 </div></div><div class="fb_sect_title">Return Value</div><div class="fb_sect_cont"><br \>
-In the first usage, <tt><b>Open Pipe</b></tt> returns zero (0) on success and a non-zero error code otherwise.<br \>
+Dans la premi&egrave;re utilisation, <tt><b>Open Pipe</b></tt> retourne z&eacute;ro (0) si succ&egrave;s et sinon un code d'erreur diff&eacute;rent de z&eacute;ro.<br \>
 <br \>
 </div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
-<tt><b>Open Pipe</b></tt> executes another process in the command shell and opens either its <i>stdin</i> or <i>stdout</i> streams for reading or writing. A <i>file number</i> is bound to the stream, which is used in subsequent file operations, such as <tt><a href="KeyPgInputPp.html">Input #</a></tt>. An available <tt><i>filenumber</i></tt> can be retrieved with <tt><a href="KeyPgFreefile.html">FreeFile</a></tt>. If the external process does not exist, a runtime error is thrown.<br \>
+<tt><b>Open Pipe</b></tt> ex&eacute;cute un autre processus dans le <i>shell</i> de commande et ouvre l'un des deux flux <i>stdin</i> ou <i>stdout</i> pour une lecture ou une &eacute;criture. Un <i>filenumber (= num&eacute;ro de fichier)</i> est li&eacute; au flux et est utilis&eacute; dans les op&eacute;rations de fichier ult&eacute;rieures, telles que <tt><a href="KeyPgInputPp.html">Input #</a></tt>. Un <tt><i>filenumber (= num&eacute;ro de fichier)</i></tt> utilisable peut &ecirc;tre d&eacute;termin&eacute; avec <tt><a href="KeyPgFreefile.html">FreeFile</a></tt>. Si le processus externe n'existe pas, une erreur d'ex&eacute;cution est &eacute;mise.<br \>
 <br \>
-The <tt><a href="KeyPgInputfilemode.html">Input</a></tt> and <tt><a href="KeyPgOutput.html">Output</a></tt> <i>file modes</i> open the external process' <i>stdin</i> and <i>stdout</i> streams, respectively, for sequential text I/O, useful for reading or writing plain text. Characters, words or whole lines can then be read or written using text-mode file operations, such as <tt><a href="KeyPgLineinput.html">Line Input #</a></tt> and <tt><a href="KeyPgPrintPp.html">Print #</a></tt>.<br \>
+Les </tt> <i>file modes</i> <tt><a href="KeyPgInputfilemode.html">Input</a></tt> et <tt><a href="KeyPgOutput.html">Output</a></tt> ouvrent, respectivement, les flux <i>stdin</i> et <i>stdout</i> du processus externe, pour une entr&eacute;e/sortie texte, tr&egrave;s utile pour la lecture ou l'&eacute;criture du texte brut. Les caract&egrave;res, les mots ou lignes de caract&egrave;res peuvent ensuite &ecirc;tre lus ou &eacute;crits &agrave; l'aide des op&eacute;rations en mode texte sur les fichiers, commme <tt><a href="KeyPgLineinput.html">Line Input #</a></tt> et <tt><a href="KeyPgPrintPp.html">Print #</a></tt>.<br \>
 <br \>
-The <tt><a href="KeyPgBinary.html">Binary</a></tt> <i>file mode</i> opens the external process' <i>stdin</i> or <i>stdout</i> streams - depending on the <i>access type</i> specified (see description of the <tt><i>access_type</i></tt> parameter above) - for random-access reading or writing of arbitrarily sized and interpreted raw data. Simple data type values, like <tt><a href="KeyPgByte.html">Byte</a></tt> and <tt><a href="KeyPgLongint.html">LongInt</a></tt>, and whole chunks of memory can be read from or written to the streams with binary-mode file operations like <tt><a href="KeyPgGetfileio.html">Get #</a></tt> and <tt><a href="KeyPgPutfileio.html">Put #</a></tt>.<br \>
-Bidirectional pipes are not supported by FB and must be implemented using the OS' API functions.<br \>
-</div><div class="fb_sect_title">Platform Differences</div><div class="fb_sect_cont"><br \>
-<ul><li> The <tt><a href="KeyPgBinary.html">Binary</a></tt> <i>file mode</i> is not supported on all platforms; <tt><b>Open Pipe</b></tt> will throw an error if it is unable to open the external process' <i>stdin</i> or <i>stdout</i> streams in binary mode.<br \>
+Le <i>file mode</i> <tt><a href="KeyPgBinary.html">Binary</a></tt> ouvre les flux <i>stdin</i> ou <i>stdout</i> du processus externe - en fonction de l'<i>access type (= type d'acc&egrave;s)</i> sp&eacute;cifi&eacute; (voir plus loin la description du param&egrave;tre <tt><i>access_type</i></tt>) - pour des acc&egrave;s-al&eacute;atoires (random-access) en lecture ou &eacute;criture de donn&eacute;es brutes de taille arbitraire. Des valeurs de donn&eacute;es de types simples, comme <tt><a href="KeyPgByte.html">Byte</a></tt> et <tt><a href="KeyPgLongint.html">LongInt</a></tt>, et des pans entiers de la m&eacute;moire peuvent &ecirc;tre lus ou &eacute;crits sur les flux avec des op&eacute;rations de fichier en mode binaire comme <tt><a href="KeyPgGetfileio.html">Get #</a></tt> et <tt><a href="KeyPgPutfileio.html">Put #</a></tt>. <br \>
 <br \>
-<br \>
-<br \>
-</ul><b>Runtime errors:</b><br \>
-    <tt><b>Open Pipe</b></tt> throws one of the following <a href="ProPgErrorHandling.html">runtime errors</a>:<br \>
-<br \>
-<i>(<tt>1</tt>) Illegal function call</i><br \>
-<ul><ul><li> Filenumber was not free at the time. use <tt><a href="KeyPgFreefile.html">FreeFile</a></tt> to ensure that filenumber is free.<br \>
+Les <i>pipes</i> bidirectionnels ne sont pas support&eacute;s par FB et doivent &ecirc;tre impl&eacute;ment&eacute;s en utilisant les fonctions API de l'OS.<br \>
+</div><div class="fb_sect_title">Diff&eacute;rences de plate-forme</div><div class="fb_sect_cont"><br \>
+<ul><li> Le <i>file mode</i> <tt><a href="KeyPgBinary.html">Binary</a></tt> n'est pas support&eacute; par toutes les plates-formes; <tt><b>Open Pipe</b></tt> produira une erreur s'il ne peut pas ouvrir les flux <i>stdin</i> ou <i>stdout</i> du processus externe en mode binaire.<br \>
 <br \>
 <br \>
-</ul></ul></div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<br \>
+</ul><b>Erreurs de fonctionnement:</b><br \>
+    <tt><b>Open Pipe</b></tt> produit l'une des <a href="ProPgErrorHandling.html">erreurs de fonctionnement</a> suivantes:<br \>
+<br \>
+<i>(<tt>1</tt>) Illegal function call : Appel ill&eacute;gal de fonction</i><br \>
+<ul><li><i>filenumber</i> n'est pas libre actuellement. Utilisez <tt><a href="KeyPgFreefile.html">FreeFile</a></tt> pour vous assurer que <i>filenumber</i> est libre.<br \>
+<br \>
+<br \>
+</ul></ul></div><div class="fb_sect_title">Exemple</div><div class="fb_sect_cont"><br \>
 <tt><div class="freebasic">
 <span class="key">Dim</span>&nbsp;<span class="wrd">text</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span><br />
 <span class="key">Open</span>&nbsp;<span class="key">Pipe</span>&nbsp;<span class="quo">"fbc.exe"</span>&nbsp;<span class="key">For</span>&nbsp;<span class="key">Input</span>&nbsp;<span class="key">As</span>&nbsp;<span class="oth">#</span><span class="num">1</span><br />
@@ -70,10 +71,10 @@ Bidirectional pipes are not supported by FB and must be implemented using the OS
 <span class="key">Close</span>&nbsp;<span class="oth">#</span><span class="num">1</span><br />
 </div></tt><br />
 <br \>
-</div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
-<ul><li> New to FreeBASIC<br \>
+</div><div class="fb_sect_title">Diff&eacute;rences avec QB</div><div class="fb_sect_cont"><br \>
+<ul><li> Nouveau pour FreeBASIC<br \>
 <br \>
-</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+</ul></div><div class="fb_sect_title">Voir aussi</div><div class="fb_sect_cont"><br \>
 <ul><li> <tt><a href="KeyPgOpenCons.html">Open Cons</a></tt><br \>
 <li> <tt><a href="KeyPgOpenErr.html">Open Err</a></tt><br \>
 <li> <tt><a href="KeyPgFreefile.html">FreeFile</a></tt><br \>

@@ -6,54 +6,53 @@
 <body>
 <div id="fb_body_wrapper">
 <div id="fb_tab">
-<div id="fb_tab_l">Get (Graphics)</div>
+<div id="fb_tab_l">Get (Graphiques)</div>
 <div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
 </div> 
 <div id="fb_pg_wrapper">
 <div id="fb_pg_body">
-	Gets a copy of a portion of the current work page or an image buffer<br \>
+	Obtient une copie d'une portion de la page courante de travail ou d'un tampon image<br \>
 <br \>
-<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<div class="fb_sect_title">Syntaxe</div><div class="fb_sect_cont"><tt><br \>
 <b>Get</b> [<i>source</i>,] [Step] (<i>x1</i>, <i>y1</i>) - [STEP] (<i>x2</i>, <i>y2</i>), <i>dest</i>]<br \>
 </tt><br \>
-</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Param&egrave;tres</div><div class="fb_sect_cont"><br \>
 <tt><i>source</i></tt><br \>
-<div class="fb_indent">the address of an image buffer.<br \>
+<div class="fb_indent">adresse d'un tampon image.<br \>
 </div><tt>Step</tt><br \>
-<div class="fb_indent">indicates that the following co-ordinates are not absolute co-ordinates.<br \>
+<div class="fb_indent">indique que les coordonn&eacute;es qui suivent ne sont pas absolues.<br \>
 </div><tt><i>x1</i></tt>,  <tt><i>y1</i></tt><br \>
-<div class="fb_indent">co-ordinates of the upper-left corner of the sub-image to copy.<br \>
+<div class="fb_indent">coordonn&eacute;es du coin en haut &agrave; gauche de la sous-image &agrave; copier.<br \>
 </div><tt><i>x2</i></tt>,  <tt><i>y2</i></tt><br \>
-<div class="fb_indent">co-ordinates of the lower-right corner of the sub-image to copy.<br \>
+<div class="fb_indent">coordonn&eacute;es du coin en bas &agrave; droite de la sous-image &agrave; copier.<br \>
 </div><tt><i>dest</i></tt><br \>
-<div class="fb_indent">the address of a previously allocated buffer to store the image data.<br \>
+<div class="fb_indent">adresse du tampon pr&eacute;c&eacute;demment allou&eacute; pour stocker les donn&eacute;es image.<br \>
 <br \>
 </div></div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
-<tt><b>Get</b></tt> copies a rectangular portion of the current work page specified by the co-ordinates (<tt><i>x1</i></tt>,  <tt><i>y1</i></tt>) and (<tt><i>x2</i></tt>,  <tt><i>y2</i></tt>), which represent the upper-left and lower-right corners of the rectangle, respectively. <tt><b>Step</b></tt> specifies that the upper-left co-ordinates are relative to the current graphics pen location, and/or that the lower-right co-ordinates are relative to the upper-left co-ordinates. The new image buffer is formatted to match the current screen mode <a href="GfxInternalFormats.html">pixel format</a>.<br \>
+<tt><b>Get</b></tt> copie une portion rectangulaire de la page de travail courante, sp&eacute;cifi&eacute;e par les coordonn&eacute;es (<tt><i>x1</i></tt>,  <tt><i>y1</i></tt>) et (<tt><i>x2</i></tt>,  <tt><i>y2</i></tt>), qui repr&eacute;sentent respectivement les coins haut-gauche et bas-droite du rectangle. <tt><b>Step</b></tt> pr&eacute;cise que les coordonn&eacute;es sont relatives &agrave; la position du crayon graphique, et/ou les coordonn&eacute;es sont relatives aux coordonn&eacute;es du coin haut-gauche. Le nouveau tampon image est format&eacute; pour correspondre au <a href="GfxInternalFormats.html">format pixel </a>du mode &eacute;cran courant.<br \>
 <br \>
-<tt><i>dest</i></tt> can be an address, an <a href="ProPgArrays.html">array</a>, or a reference to the first element in an <a href="ProPgArrays.html">array</a> that will receive the new image buffer. This memory must be sufficiently allocated to hold the image buffer; the number of bytes required varies with the <a href="CompilerOptlang.html">-lang dialect</a> used to compile the program.<br \>
+<tt><i>dest</i></tt> peut &ecirc;tre une addresse, un <a href="ProPgArrays.html">tableau</a> ou une r&eacute;f&eacute;rence au premier &eacute;l&eacute;ment d'un <a href="ProPgArrays.html">tableau</a> qui recevra le nouveau tampon image. L'allocation m&eacute;moire doit &ecirc;tre suffisante pour recevoir le tampon image; le nombre d'octets varie avec le <a href="CompilerOptlang.html">-lang dialect</a> utilis&eacute; pour compiler le programme.<br \>
 <br \>
-<tt><i>source</i></tt> can be an address, an <a href="ProPgArrays.html">array</a>, or a reference to the first element in an <a href="ProPgArrays.html">array</a> that holds an image buffer to retrieve a portion of. <tt><i>x1</i></tt>,  <tt><i>y1</i></tt>, <tt><i>x2</i></tt>,  <tt><i>y2</i></tt>, <tt><b>Step</b></tt> and <tt><i>dest</i></tt> have the same meaning in this case.<br \>
+<tt><i>source</i></tt> peut &ecirc;tre une addresse, un <a href="ProPgArrays.html">tableau</a> ou une r&eacute;f&eacute;rence au premier &eacute;l&eacute;ment d'un <a href="ProPgArrays.html">tableau</a> qui contient un tampon image pour recevoir la portion de l'image. <tt><i>x1</i></tt>,  <tt><i>y1</i></tt>, <tt><i>x2</i></tt>,  <tt><i>y2</i></tt>, <tt><b>Step</b></tt> et <tt><i>dest</i></tt> ont la m&ecirc;me signification dans ce cas.<br \>
 <br \>
-The co-ordinates of the rectangle are affected by the most recent <tt><a href="KeyPgWindow.html">Window</a></tt> and <tt><a href="KeyPgViewgraphics.html">View (Graphics)</a></tt> statements, and must both be within the current clipping region set by <tt><a href="KeyPgViewgraphics.html">View (Graphics)</a></tt>, otherwise an illegal function call runtime error will be triggered, and the function will have no effect.<br \>
+Les coordonn&eacute;es du rectangle sont modifi&eacute;es par les plus r&eacute;centes d&eacute;clarations de <tt><a href="KeyPgWindow.html">Window</a></tt> et <tt><a href="KeyPgViewgraphics.html">View (Graphics)</a></tt>, et doivent &ecirc;tre toutes les deux dans la r&eacute;gion de d&eacute;coupage courante (clipping region) valid&eacute;e par <tt><a href="KeyPgViewgraphics.html">View (Graphics)</a></tt>, autrement sera &eacute;mise une erreur d'appel ill&eacute;gal &agrave; une fonction, et la fonction n'aura aucun effet.<br \>
 <br \>
-<b>Runtime errors:</b><br \>
-<tt><b>Get</b></tt> throws one of the following <a href="ProPgErrorHandling.html">runtime errors</a>:<br \>
+<b>Erreurs de fonctionnement:</b><br \>
+<tt><b>Get</b></tt> produit une des <a href="ProPgErrorHandling.html">erreurs de fonctionnement</a> suivantes:<br \>
 <br \>
 <i>(<tt>1</tt>) Illegal function call</i><br \>
-<ul><ul><li> <tt><i>dest</i></tt> is an array, but is not big enough to hold the image buffer.<br \>
-<li> The upper-left or lower-right co-ordinates of the rectangle are outside the current clipping region. See <tt><a href="KeyPgViewgraphics.html">View (Graphics)</a></tt>.<br \>
+<ul><ul><li> <tt><i>dest</i></tt> est un tableau, mais il n'est pas assez grand pour contenir le tampon image.<br \>
+<li> Les coordonn&eacute;es du coin en haut &agrave; gauche ou en bas &agrave; droite sont en dehors de la r&eacute;gion de d&eacute;coupage courante (clipping region). Voir <tt><a href="KeyPgViewgraphics.html">View (Graphics)</a></tt>.<br \>
 <br \>
-</ul></ul></div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
-There are 2 types of buffers (details see GfxInternalFormats) depending from FB dialect used:<br \>
-<br \>
-<ul><li> In the <i><a href="CompilerOptlang.html">-lang fb</a></i> dialect, <tt><i>dest</i></tt> receives a new-style image buffer, which consists of a 32-byte image header followed by pixel data which is row-padded to the next paragraph boundary (16 bytes). Use the following formula to calculate the total size, in bytes, required to store the image buffer, where <tt>w</tt> and <tt>h</tt> are the respective width and height of the rectangular portion of the current work page or source image buffer, and <tt>bpp</tt> is the number of bytes per pixel of the current screen mode:<br \>
+</ul></ul></div><div class="fb_sect_title">Diff&eacute;rences de dialecte</div><div class="fb_sect_cont"><br \>
+Il y a 2 types de tampons (voir <a href="GfxInternalFormats.html">Formats graphiques internes</a>) d&eacute;pendant du dialecte FB qui est utilis&eacute;:<br \>
+</div>
+<ul><li> Dans les dialectes <i><a href="CompilerOptlang.html">-lang fb</a></i>, <tt><i>dest</i></tt> re&ccedil;oit un tampon image nouveau-style, consistant en une en-t&ecirc;te image de 32 octets suivi par les donn&eacute;es pixels data qui est "row-padded" jusqu'&agrave; la limite du paragraphe suivant (16 octets). Utilisez la formule suivante pour calculer la taille totale, en octets, n&eacute;cessaire pour stocker le tampon image, o&ugrave; <tt>w</tt> et <tt>h</tt> sont respectivement la largeur et la hauteur de la portion rectangulaire de la page courante de travail ou du tampon image source, et <tt>bpp</tt> est le nombre d'octets par pixel de l'&eacute;cran courant:<br \>
 </ul><div class="fb_indent"><tt>size = 32 + (((w * bpp + &hF) and not &hF) * h)</tt><br \>
-<br \>
-</div><ul><li> In the <i><a href="CompilerOptlang.html">-lang qb</a></i> and <i><a href="CompilerOptlang.html">-lang fblite</a></i> dialects, <tt><i>dest</i></tt> receives a QB-style image buffer, which consists of a 4-byte image header followed by pixel data which is not row-padded. Use the following formula to calculate the total size, in bytes, required to store the image buffer, where <tt>w</tt> and <tt>h</tt> are the respective width and height of the rectangular portion of the current work page or source image buffer, and <tt>bpp</tt> is the number of bytes per pixel of the current screen mode:<br \>
+</div><ul><li> Dans le dialecte <i><a href="CompilerOptlang.html">-lang qb</a></i> et <i><a href="CompilerOptlang.html">-lang fblite</a></i>, <tt><i>dest</i></tt> re&ccedil;oit un tampon image style-QB, qui consiste en une en-t&ecirc;te image de 4 octets suivi par les donn&eacute;es pixel qui ne sont pas "row-padded". Utilisez la formule suivante pour calculer la taille totale, en octets, n&eacute;cessaire pour stocker le tampon image, o&ugrave; <tt>w</tt> et <tt>h</tt> sont respectivement la largeur et la hauteur de la portion rectangulaire de la page courante de travail ou du tampon image source, et <tt>bpp</tt> est le nombre d'octets par pixel du <a href="GfxInternalFormats.html">format pixel</a> du mode &eacute;cran courant:<br \>
 </ul><div class="fb_indent"><tt>size = 4 + (w * h * bpp)</tt><br \>
 <br \>
-</div></div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Exemple</div><div class="fb_sect_cont"><br \>
 <tt><div class="freebasic">
 <span class="def">#include&nbsp;once&nbsp;"fbgfx.bi"<br />
 </span><br />
@@ -102,17 +101,17 @@ There are 2 types of buffers (details see GfxInternalFormats) depending from FB 
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">x</span>&nbsp;<span class="oth">+=</span>&nbsp;<span class="num">10</span><br />
 <span class="key">Wend</span><br />
 </div></tt><br />
+
 <br \>
-</div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Voir aussi</div><div class="fb_sect_cont"><br \>
 <ul><li> <tt><a href="KeyPgPutgraphics.html">Put (Graphics)</a></tt><br \>
 <li> <tt><a href="KeyPgGetfileio.html">Get (File I/O)</a></tt><br \>
 <li> <tt><a href="KeyPgScreengraphics.html">Screen (Graphics)</a></tt><br \>
 <li> <tt><a href="KeyPgWindow.html">Window</a></tt><br \>
 <li> <tt><a href="KeyPgViewgraphics.html">View (Graphics)</a></tt><br \>
-<li> <a href="GfxInternalFormats.html">Internal graphics formats</a><br \>
+<li> <a href="GfxInternalFormats.html">Formats graphiques internes</a><br \>
 <br \>
-</ul><br \>
-</div>
+</ul></div>
 </div>
 </div> 
 </div> 

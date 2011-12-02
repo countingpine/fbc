@@ -11,24 +11,24 @@
 </div> 
 <div id="fb_pg_wrapper">
 <div id="fb_pg_body">
-	Returns the amount of time that has passed since a static reference point.<br \>
+	Retourne le temps &eacute;coul&eacute; par rapport &agrave; un point de r&eacute;f&eacute;rence fixe.<br \>
 <br \>
-<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<div class="fb_sect_title">Syntaxe</div><div class="fb_sect_cont"><tt><br \>
 <a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgFunction.html">Function</a> <b>Timer</b> ( ) <a href="KeyPgAs.html">As</a> <a href="KeyPgDouble.html">Double</a><br \>
 </tt><br \>
 </div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
 <i>result</i> = <b>Timer</b><br \>
 </tt><br \>
-</div><div class="fb_sect_title">Return Value</div><div class="fb_sect_cont"><br \>
-Returns a <tt><a href="KeyPgDouble.html">Double</a></tt> precision result with the time, in seconds, since a static reference point.<br \>
+</div><div class="fb_sect_title">Valeur retourn&eacute;e</div><div class="fb_sect_cont"><br \>
+Retourne un r&eacute;sultat <tt><a href="KeyPgDouble.html">Double</a></tt> pr&eacute;cision avec le temps &eacute;coul&eacute;, en secondes, par rapport &agrave; un point de r&eacute;f&eacute;rence statique.<br \>
 <br \>
 </div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
 <br \>
-The <tt><b>Timer</b></tt> function is useful for finding out how long a section of code takes to run, or for control the timing of your code.  To find out how much time has passed between two points in your program, you can record the value of <tt><b>Timer</b></tt> at the start and end points, and then subtract the start value from the end value.<br \>
+La fonction <tt><b>Timer</b></tt> est utile pour d&eacute;terminer quelle dur&eacute;e de temps s'&eacute;coule lors de l'ex&eacute;cution d'une portion de code, ou pour contr&ocirc;ler le d&eacute;roulement de votre code.  Pour d&eacute;terminer quel temps s'est &eacute;coul&eacute; entre deux points de votre programme, vous pouvez enregistrer la valeur de <tt><b>Timer</b></tt> aux points de d&eacute;part et de fin, et puis soustraire la valeur de d&eacute;part &agrave; celle de fin.<br \>
 <br \>
-On some platforms, the value of <tt><b>Timer</b></tt> resets to zero at midnight (see below), so if the start and end time are on either side of the reset point, the difference will be negative.  This could cause unexpected behavior in some programs.  In those cases, adding <tt>86400</tt> (the number of seconds in 24 hours) to the difference should return the correct result.  If the time taken is longer than a day, then it will be also be necessary to check the number of days that have elapsed.<br \>
+Sur certaine plates-formes, la valeur de <tt><b>Timer</b></tt> est remise &agrave; z&eacute;ro &agrave; minuit (voir ci-dessous), donc si les temps de d&eacute;part et de fin sont de chaque c&ocirc;t&eacute; du point de remise &agrave; z&eacute;ro, la diff&eacute;rence sera n&eacute;gative.  Ce qui peut produire des effets impr&eacute;vus dans certains programmes.  Dans ce cas, ajoutez <tt>86400</tt> (nombre de secondes de 24 heures) &agrave; la diff&eacute;rence pour obtenir le r&eacute;sultat correct.  Si la dur&eacute;e d&eacute;passe un jour, il est alors n&eacute;cessaire de d&eacute;terminer le nombre de jours &eacute;coul&eacute;s.<br \>
 <br \>
-</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Exemple</div><div class="fb_sect_cont"><br \>
 <tt><div class="freebasic">
 <span class="com">''&nbsp;Example&nbsp;of&nbsp;using&nbsp;TIMER&nbsp;function&nbsp;</span><br />
 <span class="com">''&nbsp;Note:&nbsp;see&nbsp;text&nbsp;about&nbsp;correct&nbsp;waiting&nbsp;strategies</span><br />
@@ -41,24 +41,26 @@ On some platforms, the value of <tt><b>Timer</b></tt> resets to zero at midnight
 <span class="key">Print</span>&nbsp;<span class="quo">"Done."</span><br />
 </div></tt><br />
 <br \>
-</div><div class="fb_sect_title">Platform Differences</div><div class="fb_sect_cont"><br \>
-<ul><li> On Win32 and Linux, if the program must wait for periods of 0.1 seconds or more, <tt><a href="KeyPgSleep.html">Sleep</a></tt> should be used, this allows other programs to run during the waiting period. For shorter delays, a loop using TIMER can be more precise.<br \>
-<li> The reference point chosen varies, depending on the platform.  On Windows, the time is measured relative to the point the computer was booted up.  On DOS, the time is measured relative to Jan 1 1970.<br \>
+</div><div class="fb_sect_title">Diff&eacute;rences de plates-formes</div><div class="fb_sect_cont"><br \>
+<ul><li> Sous Win32 et Linux, si le programme doit attendre pour des p&eacute;riodes de 0.1 seconde ou plus, <tt><a href="KeyPgSleep.html">Sleep</a></tt> doit &ecirc;tre utilis&eacute;, ce qui permet aux autres programmes de fonctionner pendant la p&eacute;riode d'attente. Pour des d&eacute;lais plus courts, une boucle utilisant TIMER sera plus pr&eacute;cise.<br \>
+<li> Le point de r&eacute;f&eacute;rence varie en fonction de la plate-forme.  Sous Windows, le temps est mesur&eacute; par rapport au point o&ugrave; l'ordinateur a &eacute;t&eacute; mis en route.  Sous DOS, le temps est mesur&eacute; par rapport au 1er Janvier 1970.<br \>
 <br \>
-</ul><i>Note for DOS users: today, the number of seconds since 1970 is in excess of <tt>10^9</tt>, and is therefore unsuitable for storing in <tt><a href="KeyPgSingle.html">Single</a></tt>-precision variables, also it shouldn't be multiplied (to get 1/10 seconds or so) and stored in 32-bit integer variables then</i><br \>
+</ul><i>Note pour les utilisateurs DOS: actuellement, le nombre de secondes depuis 1970 d&eacute;passe <tt>10^9</tt>, et il est donc impossible de le stocker dans une variable <tt><a href="KeyPgSingle.html">Single (simple)</a></tt>-pr&eacute;cision, il ne peut pas non plus &ecirc;tre multipli&eacute; (pour obtenir les 1/10 de secondes ou plus) et stock&eacute; dans une variable enti&egrave;re, donc</i><br \>
 <br \>
-<ul><li> The precision of TIMER varies, depending on the computer used.  If the processor has a precision timer (as the Performance Counter Pentium processors from Intel have) and the OS uses it, the precision is linked to the processor clock and microseconds can be expected. With older processors (386, 486), and always in DOS, the resolution is 1/18 second.<br \>
+<ul><li> La pr&eacute;cision de TIMER varie, en fonction de l'ordinateur utilis&eacute;.  Si le processeur dispose d'un compteur de pr&eacute;cision (comme les processeurs Performance Counter Pentium d'Intel) et que le syst&egrave;me d'exploitation l'utilise, la pr&eacute;cision est li&eacute;e &agrave; l'horloge du processeur et on peut esp&eacute;rer la micro-seconde. Avec des processeurs plus anciens (386, 486), et toujours sous DOS, la r&eacute;solution est de 1/18 de seconde.<br \>
 <br \>
-<li> Usage of TIMER can cause disk accesses in DOS, see <a href="http://www.freebasic.net/forum/viewtopic.php?t=12985">forum</a> for analysis and solutions<br \>
+<li> L'utilisation de TIMER peut provoquer des acc&egrave;s disque sous DOS, voir <a href="http://www.freebasic.net/forum/viewtopic.php?t=12985">forum</a> pour analyse et solutions<br \>
 <br \>
-</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
-<ul><li> In QB TIMER returned the number of seconds from last midnight, and its accuracy was 1/18 secs<br \>
+</ul></div><div class="fb_sect_title">Diff&eacute;rences avec QB</div><div class="fb_sect_cont"><br \>
+<ul><li> Dans QB, TIMER retourne le nombre de secondes &agrave; partir de minuit, et la pr&eacute;cision est de 1/18 s<br \>
 <br \>
-</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+</ul></div><div class="fb_sect_title">Voir aussi</div><div class="fb_sect_cont"><br \>
 <ul><li> <tt><a href="KeyPgTime.html">Time</a></tt><br \>
 <li> <tt><a href="KeyPgSleep.html">Sleep</a></tt><br \>
 <br \>
-</ul></div>
+</ul><br \>
+   <br \>
+</div>
 </div>
 </div> 
 </div> 

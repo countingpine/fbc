@@ -11,46 +11,46 @@
 </div> 
 <div id="fb_pg_wrapper">
 <div id="fb_pg_body">
-	Opens the console directly for input and output as a file<br \>
+	Ouvre la console directement pour des op&eacute;rations d'entr&eacute;e ou de sortie comme pour un fichier<br \>
 <br \>
-<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<div class="fb_sect_title">Syntaxe</div><div class="fb_sect_cont"><tt><br \>
 <b><a href="KeyPgOpen.html">Open</a> Scrn</b> [for <i>mode</i>] <a href="KeyPgAs.html">As</a> [#]<i>filenum</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a><br \>
 </tt><br \>
 </div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
 <b>Open Scrn</b> [for <i>mode</i>] as [#]<i>filenum</i><br \>
-<div class="fb_indent"><i>or</i><br \>
+<div class="fb_indent"><i>ou</i><br \>
 </div><i>result</i> = <b>Open Scrn</b>( [for <i>mode</i>] as [#]<i>filenum</i> )<br \>
 </tt><br \>
-</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Param&egrave;tres</div><div class="fb_sect_cont"><br \>
 <tt><i>mode</i></tt><br \>
-<div class="fb_indent">Either <tt><a href="KeyPgInputfilemode.html">Input</a></tt> or <tt><a href="KeyPgOutput.html">Output</a></tt>.  If omitted, <tt><a href="KeyPgOutput.html">Output</a></tt> is assumed.<br \>
+<div class="fb_indent">Soit <tt><a href="KeyPgInputfilemode.html">Input</a></tt> ou <tt><a href="KeyPgOutput.html">Output</a></tt>.  Si omis, <tt><a href="KeyPgOutput.html">Output</a></tt> est utilis&eacute;.<br \>
 </div><tt><i>filenum</i></tt><br \>
-<div class="fb_indent">An unused file number.<br \>
+<div class="fb_indent">Un num&eacute;ro de fichier inutilis&eacute;.<br \>
 <br \>
-</div></div><div class="fb_sect_title">Return Value</div><div class="fb_sect_cont"><br \>
-Zero is returned if <tt><b>Open Err</b></tt> completed successfully, otherwise a non-zero value is returned to indicate failure.<br \>
+</div></div><div class="fb_sect_title">Valeur retourn&eacute;e</div><div class="fb_sect_cont"><br \>
+Retourne z&eacute;ro si <tt><b>Open Err</b></tt> s'acheve avec succ&egrave;s, sinon une valeur non nulle est renvoy&eacute;e pour indiquer un &eacute;chec.<br \>
 <br \>
 </div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
-This command opens the console for both input and output as a file, allowing to read/write from/to it with normal file commands.<br \>
+Cette commande ouvre la console en entr&eacute;e ou sortie comme pour un fichier, permettant de lire/&eacute;crire &agrave; partir de/vers celle-ci &agrave; l'aide des commandes normales d'acc&egrave;s fichier.<br \>
 <br \>
-This command may use direct access to the console for speed in some implementations, so  it should not be used when the input / output is required to be redirected or piped with OS commands.    <br \>
+Cette commande peut utiliser l'acc&egrave;s direct &agrave; la console pour plus de vitesse dans certaines impl&eacute;mentations, elle ne doit pas &ecirc;tre utilis&eacute;e lorsque l'entr&eacute;e/sortie doit &ecirc;tre redirig&eacute;e ou <i>pipe</i> par des commandes OS.    <br \>
 <br \>
-The normal console commands, such as <tt><a href="KeyPgColor.html">Color</a></tt> and <tt><a href="KeyPgLocate.html">Locate</a></tt>, do not work in this mode, because they do not accept a file number.<br \>
+Les commandes normales de la console, comme <tt><a href="KeyPgColor.html">Color</a></tt> et <tt><a href="KeyPgLocate.html">Locate</a></tt>, ne fonctionnent pas dans ce mode, parce qu'elles n'acceptent pas un num&eacute;ro de fichier.<br \>
 <br \>
-The <tt>[For Input|Output]</tt> clause is allowed for compatibility, but is ignored.<br \>
+La clause <tt>[For Input|Output]</tt> existe pour la compatibilit&eacute;, mais elle est ignor&eacute;e.<br \>
 <br \>
-<tt><i>filenum</i></tt> is an unused file number.<br \>
+<tt><i>filenum</i></tt> est un num&eacute;ro de fichier inutilis&eacute;.<br \>
 <br \>
-An unused file number can be found using <tt><a href="KeyPgFreefile.html">FreeFile</a></tt>.<br \>
+Un num&eacute;ro de fichier inutilis&eacute; peut &ecirc;tre trouv&eacute; en utilisant <tt><a href="KeyPgFreefile.html">FreeFile</a></tt>.<br \>
 <br \>
 <br \>
-<b>Runtime errors:</b><br \>
-    <tt><b>Open Cons</b></tt> throws one of the following <a href="ProPgErrorHandling.html">runtime errors</a>:<br \>
+</ul><b>Erreurs de fonctionnement:</b><br \>
+    <tt><b>Open Cons</b></tt> produit l'une des <a href="ProPgErrorHandling.html">erreurs de fonctionnement</a> suivantes:<br \>
 <br \>
-<i>(<tt>1</tt>) Illegal function call</i><br \>
-<ul><ul><li> Filenumber was not free at the time. use <tt><a href="KeyPgFreefile.html">FreeFile</a></tt> to ensure that filenumber is free.<br \>
+<i>(<tt>1</tt>) Illegal function call : Appel ill&eacute;gal de fonction</i><br \>
+<ul><li><i>filenumber</i> n'est pas libre actuellement. Utilisez <tt><a href="KeyPgFreefile.html">FreeFile</a></tt> pour vous assurer que <i>filenumber</i> est libre.<br \>
 <br \>
-</ul></ul></div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+</ul></ul></div><div class="fb_sect_title">Exemple</div><div class="fb_sect_cont"><br \>
 <tt><div class="freebasic">
 <span class="key">Dim</span>&nbsp;<span class="wrd">a</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span><br />
 <span class="key">Open</span>&nbsp;<span class="key">Scrn</span>&nbsp;<span class="key">For</span>&nbsp;<span class="key">Input</span>&nbsp;&nbsp;<span class="key">As</span>&nbsp;<span class="oth">#</span><span class="num">1</span><br />
@@ -61,10 +61,10 @@ An unused file number can be found using <tt><a href="KeyPgFreefile.html">FreeFi
 <span class="key">Sleep</span><br />
 </div></tt><br />
 <br \>
-</div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
-<ul><li> QB used OPEN "SCRN:" ...<br \>
+</div><div class="fb_sect_title">Diff&eacute;rences avec QB</div><div class="fb_sect_cont"><br \>
+<ul><li> QB utilise OPEN "SCRN:" ...<br \>
 <br \>
-</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+</ul></div><div class="fb_sect_title">Voir aussi</div><div class="fb_sect_cont"><br \>
 <ul><li> <tt><a href="KeyPgOpenCons.html">Open Cons</a></tt><br \>
 <br \>
 </ul></div>

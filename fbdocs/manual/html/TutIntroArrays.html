@@ -6,247 +6,245 @@
 <body>
 <div id="fb_body_wrapper">
 <div id="fb_tab">
-<div id="fb_tab_l">Introduction To Arrays</div>
-<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+<div id="fb_tab_l">Introduction aux tableaux</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif"></div> 
 </div> 
 <div id="fb_pg_wrapper">
 <div id="fb_pg_body">
-	<i>Written by <a href="WikiRick.html">rdc</a></i><br \>
-<br \>
-Arrays are probably the single most useful programming construct  that is available to you in FreeBasic. Many problems that you will try to solve with a programming solution involve data arranged in tabular format, and arrays are perfect for managing this type of data. Understanding arrays is a crucial skill in becoming a competent programmer.<br \>
-<br \>
-Arrays are contiguous memory segments of a single or composite data type. You can think of an array as a table, with rows and columns of data. An array can have one or more rows, and each row can have one or more columns. The number of rows and columns define the dimensions of the array. FreeBasic uses the row-major scheme for arrays, which means that the first dimension references the row in an array that has more than one dimension. FreeBasic supports up to eight dimensions in an array.<br \>
-<br \>
-<div class="fb_header"> One-Dimensional Arrays </div><br \>
-<br \>
-An array with a single row is called a one-dimensional array. If an array is a single-dimensional array, then the row is not defined in the declaration, only the number of columns in the row. Since an array requires a minimum of one row, the row is understood to exist in this case. The following code snippets create a single-dimension integer array using the different array definition schemes available in FreeBasic.<br \>
-<br \>
+	<i>Ecrit par <a href="WikiRick.html">rdc</a></i><br \="">
+<br \="">Les tableaux sont sans doute la seule construction de programmation la plus utile qui est &agrave; votre disposition dans FreeBasic. Beaucoup de probl&egrave;mes que vous allez essayer de r&eacute;soudre avec une solution de programmation portent sur des donn&eacute;es organis&eacute;es dans un format tabulaire, et les tableaux sont parfaits pour la gestion de ce type de donn&eacute;es. Comprendre les tableaux est une comp&eacute;tence essentielle pour devenir un programmeur comp&eacute;tent.<br \="">
+<br \="">
+Les tableaux sont des segments de m&eacute;moire contigus d'un seul type ou de donn&eacute;es composites. Vous pouvez penser un tableau comme une table, avec des lignes et des colonnes de donn&eacute;es. Un tableau peut avoir une ou plusieurs lignes, et chaque ligne peut avoir une ou plusieurs colonnes. Le nombre de lignes et de colonnes d&eacute;finissent les dimensions du tableau. FreeBasic utilise le sch&eacute;ma de "ligne-majeur" pour les tableaux, ce qui signifie que la premi&egrave;re r&eacute;f&eacute;rence de dimension, est la ligne, dans un tableau qui a plus d'une dimension. FreeBasic prend en charge jusqu'&agrave; huit dimensions dans un tableau.<br \="">
+<br \="">
+<div class="fb_header"> Tableaux uni-dimensionnels </div><br \="">
+<br \="">
+Un tableau avec une seule ligne est appel&eacute; tableau uni-dimensionnel. Si un tableau est uni-dimensionnel, alors la ligne n'est pas d&eacute;finie dans la d&eacute;claration, seulement le nombre de colonnes dans la ligne. Comme un tableau n&eacute;cessite un minimum d'une ligne, la ligne est pr&eacute;sum&eacute;e exister dans ce cas. Les extraits de code suivants cr&eacute;ent un tableau d'entiers &agrave; une seule dimension en utilisant les diff&eacute;rents syst&egrave;mes de d&eacute;finition d'un tableau disponibles dans FreeBasic.<br \="">
+<br \="">
 <tt><div class="freebasic">
-<span class="key">Dim</span>&nbsp;<span class="wrd">myArray</span><span class="oth">(</span><span class="num">10</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
-<br />
-<span class="key">Dim</span>&nbsp;<span class="wrd">myArray</span><span class="oth">(</span><span class="num">1</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">10</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
-</div></tt><br />
-<br \>
-The first method will define an array with a single row and 11 columns, with column indexes (numbers) ranging from 0 to 10. The second method defines the lower and upper bounds using the <tt>To</tt> keyword. Here the indexes will range from 1 to 10.<br \>
-<br \>
-<div class="fb_header"> One-Dimensional Array Indexes </div><br \>
-<br \>
-You access each element of an array using an index value. In the case of a single-dimension array, the index would refer to a column number in the default row. The format is to use the array variable, with the index surrounded by parenthesis.<br \>
-<br \>
+<span class="key">Dim</span>&nbsp;<span class="wrd">myArray</span><span class="oth">(</span><span class="num">10</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br>
+<br>
+<span class="key">Dim</span>&nbsp;<span class="wrd">myArray</span><span class="oth">(</span><span class="num">1</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">10</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br>
+</div></tt><br>
+<br \="">
+La premi&egrave;re m&eacute;thode d&eacute;finira un tableau avec une seule rang&eacute;e et 11 colonnes, avec des indices de colonne (num&eacute;ros) allant de 0 &agrave; 10. La seconde m&eacute;thode d&eacute;finit les limites inf&eacute;rieure et sup&eacute;rieure en utilisant le mot-cl&eacute; <tt><b>To</b></tt>. Ici les indices varieront de 1 &agrave; 10.<br \="">
+<br \="">
+<div class="fb_header"> Les indices des tableaux uni-dimensionnels </div><br \="">
+<br \="">
+Vous pouvez acc&eacute;der &agrave; chaque &eacute;l&eacute;ment d'un tableau en utilisant une valeur d'indice. Dans le cas d'un tableau &agrave; une dimension, l'indice se r&eacute;f&egrave;re &agrave; un num&eacute;ro de colonne dans la ligne par d&eacute;faut. Le format est d'utiliser le nom de la variable tableau suivi de l'indice entre parenth&egrave;ses.<br \="">
+<br \="">
 <tt><div class="freebasic">
-<span class="wrd">myArray</span><span class="oth">(</span><span class="num">5</span><span class="oth">)</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">7</span><br />
-</div></tt><br />
-<br \>
-This would set column 5 in the array to 7.<br \>
-<br \>
+<span class="wrd">myArray</span><span class="oth">(</span><span class="num">5</span><span class="oth">)</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">7</span><br>
+</div></tt><br>
+<br \="">
+Cela mettra la colonne 5 du tableau &agrave; 7.<br \="">
+<br \="">
 <tt><div class="freebasic">
-<span class="wrd">myInt</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">myArray</span><span class="oth">(</span><span class="num">5</span><span class="oth">)</span><br />
-</div></tt><br />
-<br \>
-This will set the value of <tt>myInt</tt> to the current value of column 5 in <tt>myArray</tt>.<br \>
-<br \>
-<div class="fb_header"> Two-Dimensional Arrays </div><br \>
-<br \>
-A two-dimensional array is an array that has more than one row, along with the defined columns. A two-dimensional array is like a table, with a defined number of rows, where each row has a defined number of columns. The following code snippet defines an array using the default method.<br \>
-<br \>
+<span class="wrd">myInt</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">myArray</span><span class="oth">(</span><span class="num">5</span><span class="oth">)</span><br>
+</div></tt><br>
+<br \="">
+<tt><b>myInt</b></tt> sera affect&eacute;e avec la valeur courante de la colonne 5 de <tt><b>myArray</b></tt>.<br \="">
+<br \="">
+<div class="fb_header"> Les tableaux bi-dimensionnels </div><br \="">
+<br \="">
+Un tableau bi-dimensionnel est un tableau qui a plus d'une rang&eacute;e, avec des colonnes d&eacute;finies. Un tableau bi-dimensionnel est comme une table, avec un nombre d&eacute;fini de lignes, o&ugrave; chacune a un nombre d&eacute;fini de colonnes. L'extrait de code suivant d&eacute;finit un tableau en utilisant la m&eacute;thode par d&eacute;faut.<br \="">
+<br \="">
 <tt><div class="freebasic">
-<span class="key">Dim</span>&nbsp;<span class="wrd">myArray</span><span class="oth">(</span><span class="num">2</span><span class="oth">,</span>&nbsp;<span class="num">10</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
-</div></tt><br />
-<br \>
-The first dimension defines the number of rows in the array, while the second dimension defines the number of columns in each row. In this example, the array has 3 rows, numbered 0 to 2, and each row has 11 columns, numbered 0 to 10.<br \>
-<br \>
-You can also define the lower and upper bounds of the array.<br \>
-<br \>
+<span class="key">Dim</span>&nbsp;<span class="wrd">myArray</span><span class="oth">(</span><span class="num">2</span><span class="oth">,</span>&nbsp;<span class="num">10</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br>
+</div></tt><br>
+<br \="">
+La premi&egrave;re dimension d&eacute;finit le nombre de lignes du tableau, alors que la deuxi&egrave;me d&eacute;finit le nombre de colonnes de chaque ligne. Dans cet exemple, le tableau a 3 lignes, num&eacute;rot&eacute;es de 0 &agrave; 2 et chaque ligne a 11 colonnes, num&eacute;rot&eacute;es de 0 &agrave; 10.<br \="">
+<br \="">
+Vous pouvez aussi d&eacute;finir les bornes inf&eacute;rieure et sup&eacute;rieure d'un tableau.<br \="">
+<br \="">
 <tt><div class="freebasic">
-<span class="key">Dim</span>&nbsp;<span class="wrd">myArray</span><span class="oth">(</span><span class="num">1</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">2</span><span class="oth">,</span>&nbsp;<span class="num">1</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">10</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
-</div></tt><br />
-<br \>
-This definition would set the number of rows to 2, numbered 1 to 2 and the number of columns to 10, numbered 1 to 10.<br \>
-<br \>
-<div class="fb_header"> Two-Dimensional Array Indexes </div><br \>
-<br \>
-To access the array elements of a two-dimensional array, you would use two indexes. The first index selects the row, and the second index selects a column within that row.<br \>
-<br \>
+<span class="key">Dim</span>&nbsp;<span class="wrd">myArray</span><span class="oth">(</span><span class="num">1</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">2</span><span class="oth">,</span>&nbsp;<span class="num">1</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">10</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br>
+</div></tt><br>
+<br \="">
+Cette d&eacute;finition positionne le nombre de lignes &agrave; 2, num&eacute;rot&eacute;es de 1 &agrave; 2 et le nombre de colonnes &agrave; 10, num&eacute;rot&eacute;es de 1 &agrave; 10.<br \="">
+<br \="">
+<div class="fb_header"> Les indices des tableaux bi-dimensionnels </div><br \="">
+<br \="">
+Pour acc&eacute;der aux &eacute;l&eacute;ments d'un tableau bi-dimensionnel, vous devez utiliser deux index. Le premier s&eacute;lectionne la ligne et le second la colonne de cette ligne.<br \="">
+<br \="">
 <tt><div class="freebasic">
-<span class="wrd">myArray</span><span class="oth">(</span><span class="num">1</span><span class="oth">,</span>&nbsp;<span class="num">5</span><span class="oth">)</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">7</span><br />
-</div></tt><br />
-<br \>
-This code would set column 5 in row 1 to 7.<br \>
-<br \>
+<span class="wrd">myArray</span><span class="oth">(</span><span class="num">1</span><span class="oth">,</span>&nbsp;<span class="num">5</span><span class="oth">)</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">7</span><br>
+</div></tt><br>
+<br \="">
+Ce code met &agrave; 7 la colonne 5 de la ligne 1.<br \="">
+<br \="">
 <tt><div class="freebasic">
-<span class="wrd">myInt</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">myArray</span><span class="oth">(</span><span class="num">1</span><span class="oth">,</span>&nbsp;<span class="num">5</span><span class="oth">)</span><br />
-</div></tt><br />
-<br \>
-This code would set myInt to the current value contained within column 5 of row 1 of the array.<br \>
-<br \>
-<div class="fb_header"> Multi-Dimensional Arrays </div><br \>
-<br \>
-For arrays of three or more dimensions, you would use the same format as listed above, taking into account the progression of the array dimensions. For a three-dimensional array, the first dimension would be the row, the second the column, the third would be the z-order, or depth, of each column. <br \>
-<br \>
-For example, to define a cube in space, you would use the y,x,z format, where y defines the vertical axis, x defines the horizontal axis and z defines the depth axis. To create an array in this format you could define the array as: <br \>
-<br \>
+<span class="wrd">myInt</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">myArray</span><span class="oth">(</span><span class="num">1</span><span class="oth">,</span>&nbsp;<span class="num">5</span><span class="oth">)</span><br>
+</div></tt><br>
+<br \="">
+<tt><b>myInt</b></tt> sera affect&eacute; avec la valeur courante contenue dans la colonne 5 de la ligne 1 du tableau.<br \="">
+<br \="">
+<div class="fb_header"> Tableaux multi-dimensionnels </div><br \="">
+<br \="">
+Pour les tableaux de trois dimensions ou plus, vous devez utiliser le m&ecirc;me format que ci-dessus, en tenant compte de la progression des dimensions de tableau. Pour un tableau &agrave; trois dimensions, la premi&egrave;re dimension serait la ligne, la deuxi&egrave;me la colonne, la troisi&egrave;me serait l'ordre-z, ou la profondeur, pour chaque colonne. <br \="">
+<br \="">
+Par exemple, pour d&eacute;finir un cube dans l'espace, vous devez utiliser les formats y, x, z, o&ugrave; y d&eacute;finit l'axe vertical, x l'axe horizontal et z l'axe de la profondeur. Pour cr&eacute;er un tableau dans ce format, vous pouvez d&eacute;finir le tableau ainsi: <br \="">
+<br \="">
 <tt><div class="freebasic">
-<span class="key">Dim</span>&nbsp;<span class="wrd">myCube</span><span class="oth">(</span><span class="wrd">y</span><span class="oth">,</span>&nbsp;<span class="wrd">x</span><span class="oth">,</span>&nbsp;<span class="wrd">z</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">Integer.</span>&nbsp;<br />
-</div></tt><br />
-<br \>
-<tt>MyCube(10, 10, 10)</tt> would create a cube with 11 vertical units, 0 to 10, 11 horizontal units, 0 to 10 and 10 depth units, 0 to 10. To access the center of the cube, you would use <tt>iCenter = myCube(5, 5, 5)</tt>. <br \>
-<br \>
-You will probably never need to use arrays of more than three dimensions, unless you are doing some advanced mathematical calculations. However, if you need to use higher-dimensional arrays, the same principles apply.<br \>
-<br \>
-<div class="fb_header"> Dynamic Arrays </div><br \>
-<br \>
-The arrays described above are static arrays; the array size cannot change during program execution. You can also create dynamic arrays that can change size during execution. Dynamic arrays are useful for creating data structures such as stacks or queues.<br \>
-<br \>
-Static arrays, the arrays described above, are kept on the heap, but dynamic arrays are allocated from the computer's pool of memory. The compiler dynamically allocates memory for the array based on the requested dimensions of the array.<br \>
-<br \>
-You specify a dynamic array by using the <tt>ReDim</tt> keyword.<br \>
-<br \>
+<span class="key">Dim</span>&nbsp;<span class="wrd">myCube</span><span class="oth">(</span><span class="wrd">y</span><span class="oth">,</span>&nbsp;<span class="wrd">x</span><span class="oth">,</span>&nbsp;<span class="wrd">z</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">Integer.</span>&nbsp;<br>
+</div></tt><br>
+<br \="">
+<tt><b>MyCube(10, 10, 10)</b></tt> cr&eacute;era un cube de 11 unit&eacute;s verticalement, 0 &agrave; 10, 11  unit&eacute;s horizontalement, 0 &agrave; 10 et 10 unit&eacute;s en profondeur, 0 &agrave; 10. Pour acc&eacute;der au centre du cube, vous pouvez utiliser <tt><b>iCenter = myCube(5, 5, 5)</b></tt>. <br \="">
+<br \="">
+Vous n'aurez probablement jamais besoin d'utiliser des tableaux de plus de trois dimensions, &agrave; moins que vous accomplissiez des calculs math&eacute;matiques avanc&eacute;s. Toutefois, si vous avez besoin d'utiliser des tableaux de dimensions sup&eacute;rieures, les m&ecirc;mes principes s'appliquent.<br \="">
+<br \="">
+<div class="fb_header"> Les tableaux dynamiques </div><br \="">
+<br \="">
+Les tableaux d&eacute;crits ci-dessus sont des tableaux statiques; la taille du tableau ne peut pas changer au cours de l'ex&eacute;cution du programme. Vous pouvez &eacute;galement cr&eacute;er des tableaux dynamiques qui peuvent changer de taille au cours de l'ex&eacute;cution. Les tableaux dynamiques sont utiles pour cr&eacute;er des structures de donn&eacute;es telles que les piles ou les files d'attente.<br \="">
+<br \="">
+Les tableaux statiques, ceux d&eacute;crits ci-dessus, sont conserv&eacute;s sur le tas (heap), alors que les tableaux dynamiques sont attribu&eacute;es partir du stock (pool) de m&eacute;moire de l'ordinateur. Le compilateur alloue dynamiquement la m&eacute;moire pour le tableau sur la base des dimensions demand&eacute;es par le tableau.<br \="">
+<br \="">
+Vous sp&eacute;cifiez un tableau dynamique en utilisant le mot-clef <tt><b>ReDim</b></tt>.<br \="">
+<br \="">
 <tt><div class="freebasic">
-<span class="key">ReDim</span>&nbsp;<span class="wrd">myArray</span><span class="oth">(</span><span class="num">1</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">5</span><span class="oth">,</span>&nbsp;<span class="num">1</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">5</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
-</div></tt><br />
-<br \>
-If you don't know the needed array bounds at the start of the program execution, you can define an array with empty indexes.<br \>
-<br \>
+<span class="key">ReDim</span>&nbsp;<span class="wrd">myArray</span><span class="oth">(</span><span class="num">1</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">5</span><span class="oth">,</span>&nbsp;<span class="num">1</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">5</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br>
+</div></tt><br>
+<br \="">
+Si vous ne connaissez pas les limites du tableau n&eacute;cessaires au d&eacute;but de l'ex&eacute;cution du programme, vous pouvez d&eacute;finir un tableau avec des des indices vides.<br \="">
+<br \="">
 <tt><div class="freebasic">
-<span class="key">Dim</span>&nbsp;<span class="wrd">myArray</span><span class="oth">()</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
-</div></tt><br />
-<br \>
-In this case the compiler sets a default value of 0 for the array size. You can then use the <tt>ReDim</tt> at some point in the program to set the array bounds.<br \>
-<br \>
-<div class="fb_header"> ReDim and ReDim Preserve </div><br \>
-<br \>
-Dynamic arrays can change sizes during execution. <tt>ReDim</tt> will clear the contents of the array to the default data type values, while <tt>ReDim Preserve</tt> will keep intact the existing contents, unless the array size is smaller than the previous size.<br \>
-<br \>
-<div class="fb_header"> Array Functions </div><br \>
-<br \>
-There are a number of <a href="CatPgArray.html">functions</a> that you can use with arrays.<br \>
-<br \>
-<div class="fb_header"> Arrays of Composite Types </div><br \>
-<br \>
-Type definitions allow you to group related data into a single entity, and often you will need more than one instance of a type to fully express the data. Arrays of types allow you create multiple instances of a type definition that can be easily managed using the arrays functions. An example of this usage may be an inventory system for your RPG, a series of document descriptions within an editor, and a set of employee records from a random access database.<br \>
-<br \>
-You create arrays of types just as you would with any of the intrinsic data types. The following code snippet  illustrates the syntax.<br \>
-<br \>
+<span class="key">Dim</span>&nbsp;<span class="wrd">myArray</span><span class="oth">()</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br>
+</div></tt><br>
+<br \="">
+Dans ce cas, le compilateur d&eacute;finit une valeur par d&eacute;faut de 0 pour la taille du tableau. Vous pouvez ensuite utiliser le mot-clef <tt><b>ReDim</b></tt> &agrave; un moment donn&eacute; dans le programme pour d&eacute;finir les limites de tableau.<br \="">
+<br \="">
+<div class="fb_header"> ReDim et ReDim Preserve </div><br \="">
+<br \="">
+Les tableaux dynamiques peuvent changer de taille pendant l'ex&eacute;cution. <tt><b>ReDim</b></tt> efface le contenu du tableau avec les valeurs par d&eacute;faut du type de donn&eacute;es, alors que <tt><b>ReDim Preserve</b></tt> conservera intact le contenu existant, &agrave; moins que la taille du tableau ne soit plus petite que la taille pr&eacute;c&eacute;dente.<br \="">
+<br \="">
+<div class="fb_header"> Fonctions sur les tableaux </div><br \="">
+<br \="">
+Il ya un certain nombre de <a href="CatPgArray.html">fonctions</a> que vous pouvez utiliser avec des tableaux.<br \="">
+<br \="">
+<div class="fb_header"> Tableaux de Types composites </div><br \="">
+<br \="">
+Les d&eacute;finitions de <tt><b>Type</b></tt> vous permettent de regrouper des donn&eacute;es li&eacute;es en une seule entit&eacute;, et souvent vous aurez besoin de plus d'une instance d'un <tt><b>Type</b></tt> pour exprimer pleinement vos donn&eacute;es. Des tableaux de <tt><b>Type</b></tt> vous permettent de cr&eacute;er plusieurs instances d'une d&eacute;finition de <tt><b>Type</b></tt> qui peuvent &ecirc;tre facilement g&eacute;r&eacute;es &agrave; l'aide des fonctions tableaux. Un exemple de cet usage peut &ecirc;tre un syst&egrave;me d'inventaire pour votre RPG (Role Playing Game = Jeu de r&ocirc;les), une s&eacute;rie de descriptions de documents dans un &eacute;diteur et un ensemble de fiches d'employ&eacute;s d'une base de donn&eacute;es &agrave; acc&egrave;s al&eacute;atoire.<br \="">
+<br \="">
+Vous cr&eacute;ez des tableaux de <tt><b>Type</b></tt>s comme vous le feriez avec n'importe quel type de donn&eacute;es intrins&egrave;ques. L'extrait de code suivant illustre la syntaxe.<br \="">
+<br \="">
 <tt><div class="freebasic">
-<span class="key">Type</span>&nbsp;<span class="wrd">myPoint</span><br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">row</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">col</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
-<span class="key">End</span>&nbsp;<span class="key">Type</span><br />
-<br />
-<span class="key">Type</span>&nbsp;<span class="wrd">myLine</span><br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">p1</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">myPoint</span><br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">p2</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">myPoint</span><br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">char</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span>&nbsp;<span class="oth">*</span>&nbsp;<span class="num">1</span><br />
-<span class="key">End</span>&nbsp;<span class="key">Type</span><br />
-<br />
-<span class="key">Dim</span>&nbsp;<span class="wrd">myLineSet</span>&nbsp;<span class="oth">(</span><span class="num">1</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">3</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">myLine</span><br />
-</div></tt><br />
-<br \>
-The code defines a set of 3 lines, with endpoints <tt>p1</tt> and <tt>p2</tt>, where each endpoint is located at row and col. You access the array elements by using a combination of array index and dot operator.<br \>
-<br \>
+<span class="key">Type</span>&nbsp;<span class="wrd">myPoint</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">row</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">col</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br>
+<span class="key">End</span>&nbsp;<span class="key">Type</span><br>
+<br>
+<span class="key">Type</span>&nbsp;<span class="wrd">myLine</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">p1</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">myPoint</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">p2</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">myPoint</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">char</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span>&nbsp;<span class="oth">*</span>&nbsp;<span class="num">1</span><br>
+<span class="key">End</span>&nbsp;<span class="key">Type</span><br>
+<br>
+<span class="key">Dim</span>&nbsp;<span class="wrd">myLineSet</span>&nbsp;<span class="oth">(</span><span class="num">1</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">3</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">myLine</span><br>
+</div></tt><br>
+<br \="">
+Le code d&eacute;finit un ensemble de 3 lignes, avec les points d'extr&eacute;mit&eacute;s <tt><b>p1</b></tt> et <tt><b>p2</b></tt>, o&ugrave; chaque point d'extr&eacute;mit&eacute; se situe &agrave; <tt><b>row</b></tt> et <tt><b>col</b></tt>. Vous pouvez acc&eacute;der aux &eacute;l&eacute;ments du tableau en utilisant une combinaison d'indice de tableau et d'op&eacute;rateur point.<br \="">
+<br \="">
 <tt><div class="freebasic">
-<span class="wrd">myLineSet</span><span class="oth">(</span><span class="num">1</span><span class="oth">).</span><span class="wrd">p1.row</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">1</span><br />
-<span class="wrd">myLineSet</span><span class="oth">(</span><span class="num">1</span><span class="oth">).</span><span class="wrd">p1.col</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">1</span><br />
-<span class="wrd">myLineSet</span><span class="oth">(</span><span class="num">1</span><span class="oth">).</span><span class="wrd">p2.row</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">10</span><br />
-<span class="wrd">myLineSet</span><span class="oth">(</span><span class="num">1</span><span class="oth">).</span><span class="wrd">p2.col</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">10</span><br />
-<span class="wrd">myLineSet</span><span class="oth">(</span><span class="num">1</span><span class="oth">).</span><span class="wrd">char</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">Chr</span><span class="oth">(</span><span class="num">219</span><span class="oth">)</span><br />
-</div></tt><br />
-<br \>
-<div class="fb_header"> Arrays in Types </div><br \>
-<br \>
-Not only can you create an array of a composite type, you can have an array as a field in a composite type. The above example can be written more efficiently by replacing <tt>p1</tt> and <tt>p2</tt> with an array.<br \>
-<br \>
+<span class="wrd">myLineSet</span><span class="oth">(</span><span class="num">1</span><span class="oth">).</span><span class="wrd">p1.row</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">1</span><br>
+<span class="wrd">myLineSet</span><span class="oth">(</span><span class="num">1</span><span class="oth">).</span><span class="wrd">p1.col</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">1</span><br>
+<span class="wrd">myLineSet</span><span class="oth">(</span><span class="num">1</span><span class="oth">).</span><span class="wrd">p2.row</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">10</span><br>
+<span class="wrd">myLineSet</span><span class="oth">(</span><span class="num">1</span><span class="oth">).</span><span class="wrd">p2.col</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">10</span><br>
+<span class="wrd">myLineSet</span><span class="oth">(</span><span class="num">1</span><span class="oth">).</span><span class="wrd">char</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">Chr</span><span class="oth">(</span><span class="num">219</span><span class="oth">)</span><br>
+</div></tt><br>
+<br \="">
+<div class="fb_header"> Les tableaux dans les <tt><b>Type</b></tt>s </div><br \="">
+<br \="">
+Non seulement vous pouvez cr&eacute;er un tableau de <tt><b>Type</b></tt> composite, vous pouvez avoir un tableau comme champ dans un <tt><b>Type</b></tt> composite. L'exemple ci-dessus peut &ecirc;tre &eacute;crit de mani&egrave;re plus efficace en rempla√ßant <tt><b>p1</b></tt> et <tt><b>p2</b></tt> avec un tableau.<br \="">
+<br \="">
 <tt><div class="freebasic">
-<span class="key">Type</span>&nbsp;<span class="wrd">myPoint</span><br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">row</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">col</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
-<span class="key">End</span>&nbsp;<span class="key">Type</span><br />
-<br />
-<span class="key">Type</span>&nbsp;<span class="wrd">myLine</span><br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">pts</span><span class="oth">(</span><span class="num">1</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">2</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">myPoint</span><br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">char</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span>&nbsp;<span class="oth">*</span>&nbsp;<span class="num">1</span><br />
-<span class="key">End</span>&nbsp;<span class="key">Type</span><br />
-<br />
-<span class="key">Dim</span>&nbsp;<span class="wrd">myLineSet</span>&nbsp;<span class="oth">(</span><span class="num">1</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">3</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">myLine</span><br />
-</div></tt><br />
-<br \>
-Here <tt>pts</tt> is an array of <tt>myPoint</tt>. To access this structure you would use a combination of indexes and dot operators.<br \>
-<br \>
+<span class="key">Type</span>&nbsp;<span class="wrd">myPoint</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">row</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">col</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br>
+<span class="key">End</span>&nbsp;<span class="key">Type</span><br>
+<br>
+<span class="key">Type</span>&nbsp;<span class="wrd">myLine</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">pts</span><span class="oth">(</span><span class="num">1</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">2</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">myPoint</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">char</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span>&nbsp;<span class="oth">*</span>&nbsp;<span class="num">1</span><br>
+<span class="key">End</span>&nbsp;<span class="key">Type</span><br>
+<br>
+<span class="key">Dim</span>&nbsp;<span class="wrd">myLineSet</span>&nbsp;<span class="oth">(</span><span class="num">1</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">3</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">myLine</span><br>
+</div></tt><br>
+<br \="">
+Ici <tt><b>pts</b></tt> est un tableau de <tt><b>myPoint</b></tt>. Pour acc&eacute;der &agrave; cette structure vous pouvez utiliser une combinaison d'indices et d'op&eacute;rateurs points.<br \="">
+<br \="">
 <tt><div class="freebasic">
-<span class="wrd">myLineSet</span><span class="oth">(</span><span class="num">1</span><span class="oth">).</span><span class="wrd">pts</span><span class="oth">(</span><span class="num">1</span><span class="oth">).</span><span class="wrd">row</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">1</span><br />
-<span class="wrd">myLineSet</span><span class="oth">(</span><span class="num">1</span><span class="oth">).</span><span class="wrd">pts</span><span class="oth">(</span><span class="num">1</span><span class="oth">).</span><span class="wrd">col</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">1</span><br />
-<span class="wrd">myLineSet</span><span class="oth">(</span><span class="num">1</span><span class="oth">).</span><span class="wrd">pts</span><span class="oth">(</span><span class="num">2</span><span class="oth">).</span><span class="wrd">row</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">10</span><br />
-<span class="wrd">myLineSet</span><span class="oth">(</span><span class="num">1</span><span class="oth">).</span><span class="wrd">pts</span><span class="oth">(</span><span class="num">2</span><span class="oth">).</span><span class="wrd">col</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">10</span><br />
-<span class="wrd">myLineSet</span><span class="oth">(</span><span class="num">1</span><span class="oth">).</span><span class="wrd">char</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">Chr</span><span class="oth">(</span><span class="num">219</span><span class="oth">)</span><br />
-</div></tt><br />
-<br \>
-<tt>myLineSet</tt> is an array, so you use an index value. <tt>pts</tt> is an element of the type, so you need to qualify it with the dot operator. However, <tt>pts</tt> is also an array, so you use an index to select each <tt>pts</tt> array element. <tt>Row</tt> and <tt>col</tt> are elements of the <tt>myPoint</tt> type and are accessed with the dot operator.<br \>
-<br \>
-Using an array for the endpoints enables you to easily extend the line definition to support not only lines, but triangles and squares. The following code snippet shows one possible definition.<br \>
-<br \>
+<span class="wrd">myLineSet</span><span class="oth">(</span><span class="num">1</span><span class="oth">).</span><span class="wrd">pts</span><span class="oth">(</span><span class="num">1</span><span class="oth">).</span><span class="wrd">row</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">1</span><br>
+<span class="wrd">myLineSet</span><span class="oth">(</span><span class="num">1</span><span class="oth">).</span><span class="wrd">pts</span><span class="oth">(</span><span class="num">1</span><span class="oth">).</span><span class="wrd">col</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">1</span><br>
+<span class="wrd">myLineSet</span><span class="oth">(</span><span class="num">1</span><span class="oth">).</span><span class="wrd">pts</span><span class="oth">(</span><span class="num">2</span><span class="oth">).</span><span class="wrd">row</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">10</span><br>
+<span class="wrd">myLineSet</span><span class="oth">(</span><span class="num">1</span><span class="oth">).</span><span class="wrd">pts</span><span class="oth">(</span><span class="num">2</span><span class="oth">).</span><span class="wrd">col</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">10</span><br>
+<span class="wrd">myLineSet</span><span class="oth">(</span><span class="num">1</span><span class="oth">).</span><span class="wrd">char</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">Chr</span><span class="oth">(</span><span class="num">219</span><span class="oth">)</span><br>
+</div></tt><br>
+<br \="">
+<tt><b>myLineSet</b></tt> est un tableau, donc vous utilisez une valeur d'indice. <tt><b>pts</b></tt> est un &eacute;l&eacute;ment du <tt><b>Type</b></tt>, donc vous devez le qualifier avec l'op&eacute;rateur point. Cependant, <tt><b>pts</b></tt> est aussi un tableau, donc vous devez utiliser un indice pour s&eacute;lectionner chaque &eacute;l&eacute;ment <tt><b>pts</b></tt> du tableau. <tt><b>Row</b></tt> et <tt><b>col</b></tt> sont des &eacute;l&eacute;ments du <tt><b>Type</b></tt> "<tt><b>myPoint</b></tt>" et sont accessibles avec l'op&eacute;rateur point.<br \="">
+<br \="">
+Utiliser un tableau pour les points de terminaison vous permet d'&eacute;tendre facilement la d&eacute;finition de la ligne pour supporter autre chose que des lignes, par exemple des triangles et des carr&eacute;s. L'extrait de code suivant montre une d&eacute;finition possible.<br \="">
+<br \="">
 <tt><div class="freebasic">
-<span class="key">Type</span>&nbsp;<span class="wrd">myObj</span><br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">objid</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Union</span><br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">myLine</span><span class="oth">(</span><span class="num">1</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">2</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">myPoint</span><br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">myTriangle</span><span class="oth">(</span><span class="num">1</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">3</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">myPoint</span><br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">mySquare</span><span class="oth">(</span><span class="num">1</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">4</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">myPoint</span><br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">End</span>&nbsp;<span class="key">Union</span><br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">char</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span>&nbsp;<span class="oth">*</span>&nbsp;<span class="num">1</span><br />
-<span class="key">End</span>&nbsp;<span class="key">Type</span><br />
-</div></tt><br />
-<br \>
-The <tt>objid</tt> field would indicate which type of object is contained within the union definition. That is, a 1 may indicate a line, a 2 may indicate a triangle and a 3 may indicate a square. Since the definition defines a single object, a <tt>Union</tt> is used to enclose the endpoint arrays to maximize memory usage. <br \>
-<br \>
-To print the object to the screen, you would examine the objid and then use the Lbound and Ubound on the appropriate endpoint array definition, printing the number of lines that correspond to the type of object. <br \>
-<br \>
-One further enhancement you can make to this program is to add a function pointer to the type definition, and then write print routines that correspond to the type of object being printed. Using this technique will enable you to further extend the usefulness of the code by simplifying the process of adding new objects to the type definition. <br \>
-<br \>
-For example, if you needed to be able to describe a cube, you would simply add an new array to the union, add a cube print function, and the type definition would be able to print a cube by simply adding a few lines of code, while keeping the original functionality intact.<br \>
-<br \>
-<div class="fb_header"> Array Initialization </div><br \>
-<br \>
-You can initialize an array with values when using the <tt>Dim</tt> statement in a manner similar to initializing any of the other intrinsic data types, and type definitions. The following code snippet illustrates the syntax using a one dimensional array.<br \>
-<br \>
+<span class="key">Type</span>&nbsp;<span class="wrd">myObj</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">objid</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Union</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">myLine</span><span class="oth">(</span><span class="num">1</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">2</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">myPoint</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">myTriangle</span><span class="oth">(</span><span class="num">1</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">3</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">myPoint</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">mySquare</span><span class="oth">(</span><span class="num">1</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">4</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">myPoint</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">End</span>&nbsp;<span class="key">Union</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">char</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span>&nbsp;<span class="oth">*</span>&nbsp;<span class="num">1</span><br>
+<span class="key">End</span>&nbsp;<span class="key">Type</span><br>
+</div></tt><br>
+<br \="">
+Le champ <tt><b>objid</b></tt> indique quel <tt><b>Type</b></tt> d'objet est contenu dans la d&eacute;finition de l'<tt><b>Union</b></tt>. C'est &agrave; dire qu' un 1 peut indiquer une ligne, un 2 un triangle et un 3 un carr&eacute;. Puisque la d&eacute;finition d&eacute;finit un objet unique, une <tt><b>Union</b></tt> est utilis&eacute;e pour inclure les tableaux des points d'extr&eacute;mit&eacute;s pour maximiser l'utilisation de la m&eacute;moire. <br \="">
+<br \="">
+Pour afficher l'objet &agrave; l'&eacute;cran, examiner <tt><b>objid</b></tt> puis utiliser <tt><b>objid</b></tt> et <tt><b>Ubound</b></tt> de la d&eacute;finition appropri&eacute;e du tableau des points-extr&eacute;mit&eacute;s, afficher le nombre de lignes qui correspondent au type d'objet. <br \="">
+<br \="">
+L'une des am&eacute;liorations suppl&eacute;mentaires que vous pouvez apporter &agrave; ce programme est d'ajouter un pointeur de fonction vers la d&eacute;finition de type puis &eacute;crire des routines d'affichage qui correspondent au type d'objet affich&eacute;. Cette technique vous permettra d'&eacute;tendre encore l'utilit&eacute; du code en simplifiant le processus d'ajout de nouveaux objets &agrave; la d&eacute;finition de type. <br \="">
+<br \="">
+Par exemple, si vous avez besoin de d&eacute;crire un cube, vous pouvez tout simplement ajouter un nouveau tableau &agrave; l'<tt><b>Union</b></tt>, ajouter une fonction d'affichage de cube, et la d&eacute;finition du type serait en mesure d'afficher un cube en ajoutant simplement quelques lignes de code, tout en conservant la fonctionnalit&eacute; d'origine intacte.<br \="">
+<br \="">
+<div class="fb_header"> Initialisation de tableau </div><br \="">
+<br \="">
+Vous pouvez initialiser un tableau avec des valeurs en utilisant la d&eacute;claration <tt><b>Dim</b></tt> d'une mani&egrave;re similaire &agrave; l'initialisation de tous les autres types de donn&eacute;es intrins&egrave;ques et de d&eacute;finitions de type. L'extrait de code suivant illustre la syntaxe en utilisant un tableau uni-dimensionnel.<br \="">
+<br \="">
 <tt><div class="freebasic">
-<span class="key">Dim</span>&nbsp;<span class="wrd">aArray</span><span class="oth">(</span><span class="num">1</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">5</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="oth">=&gt;</span>&nbsp;<span class="oth">{</span><span class="num">1</span><span class="oth">,</span>&nbsp;<span class="num">2</span><span class="oth">,</span>&nbsp;<span class="num">3</span><span class="oth">,</span>&nbsp;<span class="num">4</span><span class="oth">,</span>&nbsp;<span class="num">5</span><span class="oth">}</span><br />
-</div></tt><br />
-<br \>
-This code snippet dimensions an integer array with 5 elements, then sets the elements to the list contained within the curly brackets. The arrow operator, =&gt; tells the compiler that the list following the <tt>Dim</tt> statement should be used to initialize the array. <br \>
-<br \>
-You can also dimension multidimensional arrays in the same manner, by specifying blocks of data enclosed within curly braces as the following code snippet illustrates.<br \>
-<br \>
+<span class="key">Dim</span>&nbsp;<span class="wrd">aArray</span><span class="oth">(</span><span class="num">1</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">5</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="oth">=&gt;</span>&nbsp;<span class="oth">{</span><span class="num">1</span><span class="oth">,</span>&nbsp;<span class="num">2</span><span class="oth">,</span>&nbsp;<span class="num">3</span><span class="oth">,</span>&nbsp;<span class="num">4</span><span class="oth">,</span>&nbsp;<span class="num">5</span><span class="oth">}</span><br>
+</div></tt><br>
+<br \="">
+Cet extrait de code dimensionne un tableau d'entiers avec 5 &eacute;l&eacute;ments, puis d&eacute;finit les &eacute;l&eacute;ments avec la liste contenue dans les accolades. L'op&eacute;rateur fl&egrave;che, <tt><b>=&gt;</b></tt> indique au compilateur que la liste qui suit l'instruction <tt><b>Dim</b></tt> doit &ecirc;tre utilis&eacute;e pour initialiser le tableau. <br \="">
+<br \="">
+Vous pouvez &eacute;galement dimensionner des tableaux multi-dimensionnels de la m&ecirc;me mani&egrave;re, en sp&eacute;cifiant des blocs de donn&eacute;es figurant dans des accolades comme l'extrait de code suivant l'illustre.<br \="">
+<br \="">
 <tt><div class="freebasic">
-<span class="key">Dim</span>&nbsp;<span class="wrd">bArray</span><span class="oth">(</span><span class="num">1</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">2</span><span class="oth">,</span>&nbsp;<span class="num">1</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">5</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="oth">=&gt;</span>&nbsp;<span class="oth">{{</span><span class="num">1</span><span class="oth">,</span>&nbsp;<span class="num">2</span><span class="oth">,</span>&nbsp;<span class="num">3</span><span class="oth">,</span>&nbsp;<span class="num">4</span><span class="oth">,</span>&nbsp;<span class="num">5</span><span class="oth">},{</span><span class="num">6</span><span class="oth">,</span>&nbsp;<span class="num">7</span><span class="oth">,</span>&nbsp;<span class="num">8</span><span class="oth">,</span>&nbsp;<span class="num">9</span><span class="oth">,</span>&nbsp;<span class="num">10</span><span class="oth">}}</span><br />
-</div></tt><br />
-<br \>
-In this example, the first block, <tt>{1, 2, 3, 4, 5}</tt>, corresponds to row 1, and the second block, <tt>{6, 7, 8, 9, 10}</tt>, corresponds to row 2. Remember that FreeBasic arrays are row-major, so the row is specified before the column. When you initialize an array in this manner, you must be sure that the number of elements defined will fit into the array.<br \>
-<br \>
-<div class="fb_header"> Type Array Initialization </div><br \>
-<br \>
-Not only can you initialize an array of simple data types, you can also initialize an array with composite types. The following code snippet illustrates a type array that contains an array as an element of the type.<br \>
-<br \>
+<span class="key">Dim</span>&nbsp;<span class="wrd">bArray</span><span class="oth">(</span><span class="num">1</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">2</span><span class="oth">,</span>&nbsp;<span class="num">1</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">5</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="oth">=&gt;</span>&nbsp;<span class="oth">{{</span><span class="num">1</span><span class="oth">,</span>&nbsp;<span class="num">2</span><span class="oth">,</span>&nbsp;<span class="num">3</span><span class="oth">,</span>&nbsp;<span class="num">4</span><span class="oth">,</span>&nbsp;<span class="num">5</span><span class="oth">},{</span><span class="num">6</span><span class="oth">,</span>&nbsp;<span class="num">7</span><span class="oth">,</span>&nbsp;<span class="num">8</span><span class="oth">,</span>&nbsp;<span class="num">9</span><span class="oth">,</span>&nbsp;<span class="num">10</span><span class="oth">}}</span><br>
+</div></tt><br>
+<br \="">
+Dans cet exemple, le premier bloc, <tt><b>{1, 2, 3, 4, 5}</b></tt>, correspond &agrave; la ligne 1, et le deuxi&egrave;me bloc, <tt><b>{6, 7, 8, 9, 10}</b></tt>, correspond &agrave; la ligne 2. Rappelez-vous que les tableaux FreeBasic sont "ligne-majeur", ainsi la ligne est sp&eacute;cifi&eacute;e avant la colonne. Lorsque vous initialisez un tableau de cette mani&egrave;re, vous devez &ecirc;tre s&ucirc;r que le nombre d'&eacute;l&eacute;ments d&eacute;finis s'int&eacute;grera dans le tableau.<br \="">
+<br \="">
+<div class="fb_header"> Initialisation de tableau de <tt><b>Type</b></tt> </div><br \="">
+<br \="">
+Non seulement vous pouvez initialiser un tableau de <tt><b>Type</b></tt>s de donn&eacute;es simples, Vous pouvez &eacute;galement initialiser un tableau avec des <tt><b>Type</b></tt>s composites. L'extrait de code suivant illustre un tableau de <tt><b>Type</b></tt>s qui contient lui-m&ecirc;me un tableau comme un &eacute;l&eacute;ment.<br \="">
+<br \="">
 <tt><div class="freebasic">
-<span class="key">Type</span>&nbsp;<span class="wrd">aType</span><br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">a</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">b</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Byte</span><br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">c</span><span class="oth">(</span><span class="num">1</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">2</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span>&nbsp;<span class="oth">*</span>&nbsp;<span class="num">10</span><br />
-<span class="key">End</span>&nbsp;<span class="key">Type</span><br />
-<br />
-<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">aType</span>&nbsp;<span class="wrd">myType</span><span class="oth">(</span><span class="num">1</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">2</span><span class="oth">)</span>&nbsp;<span class="oth">=&gt;</span>&nbsp;<span class="oth">{</span>&nbsp;<span class="oth">(</span><span class="num">1234</span><span class="oth">,</span>&nbsp;<span class="num">12</span><span class="oth">,</span>&nbsp;<span class="oth">{</span><span class="quo">"Hello"</span><span class="oth">,</span>&nbsp;<span class="quo">"World"</span><span class="oth">}),</span>&nbsp;<span class="oth">(</span><span class="num">5678</span><span class="oth">,</span>&nbsp;<span class="num">24</span><span class="oth">,</span>&nbsp;<span class="oth">{</span><span class="quo">"From"</span><span class="oth">,</span>&nbsp;<span class="quo">"Freebasic"</span><span class="oth">})}</span>&nbsp;<br />
-</div></tt><br />
-<br \>
-The curly brackets signify that this is an array initialization, while the parenthesis indicate the type initialization. Since the type has an embedded array, you use the curly brackets to load the data into the embedded array, just as you would a stand-alone array. If the embedded array was a multidimensional array, then you would need to wrap each row in { and } just as you would a stand-alone array. <br \>
-<br \>
-<div class="fb_header"> Using the -exx Compiler Switch </div><br \>
-<br \>
-The -exx compiler switch will enable error and bounds checking within your program. If you go outside the bounds of an array within your program, the compiler will generate an ìout of boundsî error while the program is running. <br \>
-<br \>
-This is a great help in debugging your program, and finding problems associated with arrays. -exx will also  inform of you of Null pointer assignments, so it is quite useful when working with pointers as well. <br \>
-<br \>
-Using -exx does add quite of bit of additional code to your program, so once your program is functioning correctly, you will want to compile the program without the -exx switch.
+<span class="key">Type</span>&nbsp;<span class="wrd">aType</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">a</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">b</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Byte</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">c</span><span class="oth">(</span><span class="num">1</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">2</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span>&nbsp;<span class="oth">*</span>&nbsp;<span class="num">10</span><br>
+<span class="key">End</span>&nbsp;<span class="key">Type</span><br>
+<br>
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">aType</span>&nbsp;<span class="wrd">myType</span><span class="oth">(</span><span class="num">1</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">2</span><span class="oth">)</span>&nbsp;<span class="oth">=&gt;</span>&nbsp;<span class="oth">{</span>&nbsp;<span class="oth">(</span><span class="num">1234</span><span class="oth">,</span>&nbsp;<span class="num">12</span><span class="oth">,</span>&nbsp;<span class="oth">{</span><span class="quo">"Hello"</span><span class="oth">,</span>&nbsp;<span class="quo">"World"</span><span class="oth">}),</span>&nbsp;<span class="oth">(</span><span class="num">5678</span><span class="oth">,</span>&nbsp;<span class="num">24</span><span class="oth">,</span>&nbsp;<span class="oth">{</span><span class="quo">"From"</span><span class="oth">,</span>&nbsp;<span class="quo">"Freebasic"</span><span class="oth">})}</span>&nbsp;<br>
+</div></tt><br>
+<br \="">
+Les accolades signifient qu'il s'agit d'une initialisation de tableau, tandis que les parenth&egrave;ses indiquent l'initialisation d'un <tt><b>Type</b></tt>. Comme le <tt><b>Type</b></tt> contient un tableau, vous pouvez utiliser les accolades pour charger les donn&eacute;es dans ce tableau incorpor&eacute;, comme vous le feriez avec un tableau autonome. Si le tableau incorpor&eacute; est un tableau multi-dimensionnel, vous aurez alors besoin d'envelopper chaque ligne avec <tt><b>{</b></tt> et <tt><b>}</b></tt> comme vous le feriez pour un tableau autonome. <br \="">
+<br \="">
+<div class="fb_header"> Utilisation du commutateur de compilation -exx </div><br \="">
+<br \="">
+Le commutateur de compilation <tt><b>-exx</b></tt> permettra le contr&ocirc;le des erreurs et la v&eacute;rification des limites de tableau au sein de votre programme. Si vous allez &agrave; l'ext&eacute;rieur des limites d'un tableau dans votre programme, le compilateur g&eacute;n&egrave;re une erreur "<tt><b>out of bounds</b></tt>" lorsque le programme est en cours d'ex&eacute;cution. <br \="">
+<br \="">
+Ceci est une grande aide dans le d&eacute;bogage de votre programme et pour trouver des probl&egrave;mes li&eacute;s aux tableaux. <tt><b>-exx</b></tt> vous informera &eacute;galement des assignations de pointeur NULL, il est donc aussi tr&egrave;s utile lorsque vous travaillez avec des pointeurs. <br \="">
+<br \="">
+Utiliser <tt><b>-exx</b></tt> ajoute un peu de code suppl&eacute;mentaire &agrave; votre programme, donc une fois que votre programme fonctionne correctement, compilez-le sans <tt><b>-exx</b></tt>.
 </div>
 </div> 
 </div> 
-</body>
-</html>
+</body></html>

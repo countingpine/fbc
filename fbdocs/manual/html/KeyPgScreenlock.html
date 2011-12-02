@@ -11,9 +11,9 @@
 </div> 
 <div id="fb_pg_wrapper">
 <div id="fb_pg_body">
-	Locks the working page's framebuffer<br \>
+	Verrouille le tampon image de la page de travail<br \>
 <br \>
-<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<div class="fb_sect_title">Syntaxe</div><div class="fb_sect_cont"><tt><br \>
 <a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgSub.html">Sub</a> <b>ScreenLock</b> ( )<br \>
 </tt><br \>
 </div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
@@ -21,24 +21,24 @@
 </tt><br \>
 </div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
 <br \>
-All of FreeBASIC's Graphics Library functions draw to a framebuffer and an automatic routine copies the framebuffer to the actual screen memory at each draw. If the user program does a lot of drawing, the automatic refreshes may take a significant amount of time.<br \>
+Toutes les fonctions des librairies graphiques &eacute;crivent dans un tampon image (framebuffer) et une "routine" automatique copie le contenu du tampon image vers la m&eacute;moire r&eacute;elle de l'&eacute;cran pour chaque dessin. Si le programme utilisateur effectue de nombreuses &eacute;critures successives, le rafra&icirc;chissement automatique risque de prendre beaucoup de temps.<br \>
 <br \>
-The <tt><b>ScreenLock</b></tt> function locks the automatic refresh, so several drawing operations may be done before the screen refresh is performed, thus increasing the speed of execution, and preventing the user from seeing partial results. <br \>
+La fonction <tt><b>ScreenLock</b></tt> interdit le rafra&icirc;chissement automatique, ainsi plusieurs op&eacute;rations de dessin seront ex&eacute;cut&eacute;es en une seule fois lorsque le rafra&icirc;chissement sera autoris&eacute;, ceci augmentera la vitesse d'ex&eacute;cution, et &eacute;vitera l'affichage de r&eacute;sultats partiels. <br \>
 <br \>
-Framebuffer memory may be freely accessed by using pointers (see <a href="KeyPgScreenptr.html">ScreenPtr</a>) ONLY while the screen is locked. Primitive graphics statements (<tt><a href="KeyPgLinegraphics.html">Line</a></tt>, <tt><a href="KeyPgPset.html">PSet</a></tt>, <tt><a href="KeyPgDrawString.html">Draw String</a></tt>, ...)  may be used at any time.<br \>
+La m&eacute;moire du tampon image est accessible facilement en utilisant des pointeurs (see <a href="KeyPgScreenptr.html">ScreenPtr</a>) SEULEMENT quand l'&eacute;cran est verrouill&eacute;. Les primitives graphiques (<tt><a href="KeyPgLinegraphics.html">Line</a></tt>, <tt><a href="KeyPgPset.html">PSet</a></tt>, <tt><a href="KeyPgDrawString.html">Draw String</a></tt>, ...)  sont utilisables &agrave; n'importe quel moment.<br \>
 <br \>
-The screen refresh remains locked until the use of <tt><a href="KeyPgScreenunlock.html">ScreenUnlock</a></tt> statement, which resumes it.  <br \>
+Le rafra&icirc;chissement de l'&eacute;cran est interdit jusqu'&agrave; l'utilisation de <tt><a href="KeyPgScreenunlock.html">ScreenUnlock</a></tt>, qui l'autorise &agrave; nouveau.  <br \>
 <br \>
-Calls to <tt><b>ScreenLock</b></tt> must be paired with a matching call to <tt><b><a href="KeyPgScreenunlock.html">ScreenUnlock</a></b></tt>.  The graphics driver keeps track of how many times <tt><b>ScreenLock</b></tt> has been called using a counter.  Only the first call to <tt><b>ScreenLock</b></tt> actually performs a locking operation.  Subsequent calls to <tt><b>ScreenLock</b></tt> only increment the counter.  Conversely, <tt><b><a href="KeyPgScreenunlock.html">ScreenUnlock</a></b></tt> only decrements the lock counter until it reaches zero at which time the actual unlock operation will be performed.  Using <tt><a href="KeyPgScreengraphics.html">Screen</a></tt> or <tt><a href="KeyPgScreenres.html">ScreenRes</a></tt> will release all locks and set the lock counter back to zero before changing screen modes.<br \>
+Des appels &agrave; <tt><b>ScreenLock</b></tt> doivent être coupl&eacute;s &agrave; des appels &agrave; <tt><b><a href="KeyPgScreenunlock.html">ScreenUnlock</a></b></tt>.  Le pilote graphique garde la trace du nombre d'appels &agrave; <tt><b>ScreenLock</b></tt> en utilisant un compteur.  Seul le premier appel &agrave; <tt><b>ScreenLock</b></tt> produit r&eacute;ellement une op&eacute;ration de verrouillage.  Les appels suivants &agrave; <tt><b>ScreenLock</b></tt> incr&eacute;mentent seulement le compteur.  Inversement, <tt><b><a href="KeyPgScreenunlock.html">ScreenUnlock</a></b></tt> d&eacute;cr&eacute;mente seulement le compteur jusqu'&agrave; ce qu'il atteigne z&eacute;ro et c'est &agrave; ce moment-l&agrave; que l'op&eacute;ration de d&eacute;verrouillage aura r&eacute;ellement lieu.  L'utilisation de <tt><a href="KeyPgScreengraphics.html">Screen</a></tt> ou <tt><a href="KeyPgScreenres.html">ScreenRes</a></tt> annulera tous les verrouillages et mettra le compteur de verrouillage &agrave; z&eacute;ro avant de changer de mode &eacute;cran.<br \>
 <br \>
-It is strongly recommended that the lock on a page be held for as short a time as possible. Only screen drawing should occur while the screen is locked, input/output and waiting must be avoided. In Win32 and Linux the screen is locked by stopping the thread that processes also the OS' events. If the screen is kept locked for a long time the event queue could overflow and make the system unstable. <br \>
+Il est fortement recommand&eacute; que le verrouillage d'une page soit le plus bref possible. Seul le dessin &agrave; l'&eacute;cran est possible pendant qu'il est verrouill&eacute;, entr&eacute;es/sorties et attentes doivent être &eacute;vit&eacute;es. Sous Win32 et Linux l'&eacute;cran est verrouill&eacute; en stoppant le "thread" qui s'occupe aussi des &eacute;v&eacute;nement de l'OS'. Si l'&eacute;cran est verrouill&eacute; trop longtemps la file d'attente des &eacute;v&eacute;nements va d&eacute;border et rendre le syst&egrave;me instable. <br \>
 <br \>
-The automatic refresh takes place only in the visible page of the framebuffer. <tt><b>ScreenLock</b></tt> has no effect when drawing to pages other than the visible one. 	<br \>
+Le rafra&icirc;chissement automatique n'a lieu que dans la page visible du tampon image. <tt><b>ScreenLock</b></tt> n'a aucun effet pour des dessins sur des pages autres que la page visible. 	<br \>
 <br \>
-</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Exemple</div><div class="fb_sect_cont"><br \>
 <br \>
 <tt><div class="freebasic">
-<span class="com">''&nbsp;Draws&nbsp;a&nbsp;circle&nbsp;on-screen&nbsp;at&nbsp;the&nbsp;mouse&nbsp;cursor</span><br />
+<span class="com">''&nbsp;Dessine&nbsp;un&nbsp;cercle&nbsp;a l'ecran&nbsp;au&nbsp;curseur&nbsp;souris</span><br />
 <span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="wrd">mx</span><span class="oth">,</span>&nbsp;<span class="wrd">my</span><br />
 <span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span>&nbsp;<span class="wrd">key</span><br />
 <br />
@@ -50,7 +50,7 @@ The automatic refresh takes place only in the visible page of the framebuffer. <
 &nbsp;&nbsp;<span class="key">GetMouse</span><span class="oth">(</span><span class="wrd">mx</span><span class="oth">,</span>&nbsp;<span class="wrd">my</span><span class="oth">)</span><br />
 &nbsp;&nbsp;<span class="wrd">key</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">Inkey</span><span class="oth">()</span><br />
 <br />
-&nbsp;&nbsp;<span class="com">'draw</span><br />
+&nbsp;&nbsp;<span class="com">'dessin</span><br />
 &nbsp;&nbsp;<span class="key">ScreenLock</span><span class="oth">()</span><br />
 &nbsp;&nbsp;<span class="key">Cls</span><span class="oth">()</span><br />
 &nbsp;&nbsp;<span class="key">Circle</span>&nbsp;<span class="oth">(</span><span class="wrd">mx</span><span class="oth">,</span>&nbsp;<span class="wrd">my</span><span class="oth">),</span>&nbsp;<span class="num">8</span><span class="oth">,</span>&nbsp;<span class="key">RGB</span><span class="oth">(</span><span class="num">255</span><span class="oth">,</span>&nbsp;<span class="num">255</span><span class="oth">,</span>&nbsp;<span class="num">255</span><span class="oth">)</span><br />
@@ -62,18 +62,18 @@ The automatic refresh takes place only in the visible page of the framebuffer. <
 <span class="key">Loop</span>&nbsp;<span class="key">Until</span>&nbsp;<span class="wrd">key</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">Chr</span><span class="oth">(</span><span class="num">27</span><span class="oth">)</span>&nbsp;<span class="key">Or</span>&nbsp;<span class="wrd">key</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">Chr</span><span class="oth">(</span><span class="num">255</span><span class="oth">,</span>&nbsp;<span class="num">107</span><span class="oth">)</span><br />
 </div></tt><br />
 <br \>
-</div><div class="fb_sect_title">Platform Differences</div><div class="fb_sect_cont"><br \>
-<ul><li> In DOS, the mouse arrow does not react to mouse movements while the screen is locked<br \>
+</div><div class="fb_sect_title">Diff&eacute;rences de plates-formes</div><div class="fb_sect_cont"><br \>
+<ul><li> Sous DOS, la fl&egrave;che souris ne r&eacute;agit pas aux mouvements tant que l'&eacute;cran est verrouill&eacute;<br \>
 <br \>
-</ul></div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
-<ul><li> Not available in the <i><a href="CompilerOptlang.html">-lang qb</a></i> dialect unless referenced with the alias <tt><b>__Screenlock</b></tt>.<br \>
+</ul></div><div class="fb_sect_title">Diff&eacute;rences de dialectes</div><div class="fb_sect_cont"><br \>
+<ul><li> Non disponible dans le dialecte <i><a href="CompilerOptlang.html">-lang qb</a></i> sauf si r&eacute;f&eacute;renc&eacute; avec l'alias <tt><b>__Screenlock</b></tt>.<br \>
 <br \>
-</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
-<ul><li> New to FreeBASIC<br \>
+</ul></div><div class="fb_sect_title">Diff&eacute;rences avec QB</div><div class="fb_sect_cont"><br \>
+<ul><li> Nouveau pour FreeBASIC<br \>
 <br \>
-</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
-<ul><li> <tt><a href="KeyPgScreengraphics.html">Screen (Graphics)</a></tt> - Setting mode<br \>
-<li> <tt><a href="KeyPgScreenres.html">ScreenRes</a></tt> - Setting mode<br \>
+</ul></div><div class="fb_sect_title">Voir aussi</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgScreengraphics.html">Screen (Graphics)</a></tt> - R&eacute;glage du mode<br \>
+<li> <tt><a href="KeyPgScreenres.html">ScreenRes</a></tt> - R&eacute;glage du mode<br \>
 <li> <tt><a href="KeyPgScreenunlock.html">ScreenUnlock</a></tt><br \>
 <li> <tt><a href="KeyPgScreenptr.html">ScreenPtr</a></tt><br \>
 <br \>

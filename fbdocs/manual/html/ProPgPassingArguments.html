@@ -6,17 +6,17 @@
 <body>
 <div id="fb_body_wrapper">
 <div id="fb_tab">
-<div id="fb_tab_l">Passing Arguments to Procedures</div>
+<div id="fb_tab_l">Passage d'arguments aux proc&eacute;dures</div>
 <div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
 </div> 
 <div id="fb_pg_wrapper">
 <div id="fb_pg_body">
-	Passing information to procedures.<br \>
+	Transmettre des informations &agrave; des proc&eacute;dures.<br \>
 <br \>
-<div class="fb_sect_title">Declaring parameters</div><div class="fb_sect_cont"><br \>
-Procedures can get passed information in the form of variables and objects when they are called. In the context of a procedure call, these variables and objects are called arguments. These arguments are then represented as so-called parameters inside the procedure body. Parameters can be used just like any other variable or object.<br \>
+<div class="fb_sect_title">D&eacute;clarer des param&egrave;tres</div><div class="fb_sect_cont"><br \>
+On peut passer des informations sous forme de variables et d'objets, aux proc&eacute;dures lorsqu'elles sont appel&eacute;es. Dans le cadre d'un appel de proc&eacute;dure, ces variables et d'objets sont appel&eacute;es arguments. Ces arguments sont alors repr&eacute;sent&eacute;s en tant que param&egrave;tres &agrave; l'int&eacute;rieur du corps de proc&eacute;dure. Les param&egrave;tres peuvent &ecirc;tre utilis&eacute;e comme n'importe quelle autre variable ou objet.<br \>
 <br \>
-To specify that a procedure should get passed arguments when called, declare the procedure with a parameter list. A parameter list is a list of one or more names and types that the procedure will use when referring to the arguments that are passed to it. Parameter lists are surrounded by parenthesis.<br \>
+Pour sp&eacute;cifier qu'une proc&eacute;dure devrait passer des arguments lorsqu'on l'appelle, il faut d&eacute;clarer la proc&eacute;dure avec une liste de param&egrave;tres. Une liste de param&egrave;tres est une liste d'un ou plusieurs noms et types que la proc&eacute;dure utilisera lorsqu'elle se r&eacute;f&egrave;rera aux arguments qui lui sont pass&eacute;s. Les listes de param&egrave;tres sont entour&eacute;es de parenth&egrave;ses.<br \>
 <br \>
 <tt><div class="freebasic">
 <span class="key">Sub</span>&nbsp;<span class="wrd">Procedure</span>&nbsp;<span class="oth">(</span><span class="wrd">s</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span><span class="oth">,</span>&nbsp;<span class="wrd">n</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">)</span><br />
@@ -25,18 +25,17 @@ To specify that a procedure should get passed arguments when called, declare the
 <br />
 <span class="wrd">Procedure</span>&nbsp;<span class="quo">"abc"</span><span class="oth">,</span>&nbsp;<span class="num">123</span><br />
 </div></tt><br />
-will produce the following output:<br \>
+produira le r&eacute;sultat suivant:<br \>
 <br \>
-<pre class="fb_pre">
-The parameters have the values: abc and 123
-</pre>There are two ways to pass arguments to procedures: by value and by reference. By default, arguments are passed by value unless otherwise specified.<br \>
+<pre class="fb_pre">The parameters have the values: abc and 123</pre>
+Il y a deux fa&ccedil;ons de passer des arguments aux proc&eacute;dures: par valeur et par r&eacute;f&eacute;rence. Par d&eacute;faut, les arguments sont pass&eacute;s par valeur, sauf indication contraire.<br \>
 <br \>
-</div><div class="fb_sect_title">Passing arguments by value</div><div class="fb_sect_cont"><br \>
-Arguments that are passed by value are not actually passed to procedures; a copy of the argument is made and passed instead. This allows the procedure to modify the copy, and the original variable or object remains unchanged.<br \>
+</div><div class="fb_sect_title">Passage d'arguments par valeur</div><div class="fb_sect_cont"><br \>
+Les arguments qui sont pass&eacute;s par valeur ne sont pas r&eacute;ellement pass&eacute;s aux proc&eacute;dures; au lieu de cela une copie de l'argument est faite et pass&eacute;e. Cela permet &agrave; la proc&eacute;dure de modifier la copie et la variable ou l'objet d'origine restent inchang&eacute;s.<br \>
 <br \>
-When passing objects to procedures by value, the copy is made by calling the copy constructor of the <tt><a href="KeyPgType.html">Type</a></tt> or <tt><a href="KeyPgClass.html">Class</a></tt>.<br \>
+Lors du passage d'objets aux proc&eacute;dures par valeur, la copie est faite en appelant le constructeur de copie du <tt><a href="KeyPgType.html">Type</a></tt> ou de la <tt><a href="KeyPgClass.html">Class</a></tt>.<br \>
 <br \>
-To specify that an argument should be passed by value, precede the parameter name in the procedure declaration with the <tt><a href="KeyPgByval.html">ByVal</a></tt> keyword:<br \>
+Pour sp&eacute;cifier qu'un argument doit &ecirc;tre pass&eacute; par valeur, faire pr&eacute;c&eacute;der le nom du param&egrave;tre de la d&eacute;claration de proc&eacute;dure du mot-cl&eacute; <tt><a href="KeyPgByval.html">ByVal</a></tt>:<br \>
 <br \>
 <tt><div class="freebasic">
 <span class="key">Sub</span>&nbsp;<span class="wrd">Procedure</span>&nbsp;<span class="oth">(</span><span class="key">ByVal</span>&nbsp;<span class="wrd">param</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">)</span><br />
@@ -49,20 +48,20 @@ To specify that an argument should be passed by value, precede the parameter nam
 <span class="wrd">Procedure</span><span class="oth">(</span><span class="wrd">arg</span><span class="oth">)</span><br />
 <span class="key">Print</span>&nbsp;<span class="quo">"The&nbsp;variable&nbsp;'arg'&nbsp;after&nbsp;the&nbsp;call&nbsp;=&nbsp;"</span>&nbsp;<span class="oth">&amp;</span>&nbsp;<span class="wrd">arg</span><br />
 </div></tt><br />
-will produce the following output:<br \>
+produira le r&eacute;sultat suivant:<br \>
 <br \>
 <pre class="fb_pre">
 The variable 'arg' before the call = 10
 The parameter 'param' = 20
 The variable 'arg' after the call = 10
-</pre>Notice how parenthesis surround the arguments - in this case only one, <tt><i>arg</i></tt> - in the procedure call. These parenthesis are optional, but are a common convention to signify a procedure call.<br \>
+</pre>Remarquez comment les parenth&egrave;ses entourent les arguments - dans ce cas, un seul, <tt><i>arg</i></tt> - dans l'appel de proc&eacute;dure. Ces parenth&egrave;ses sont facultatives, mais sont une convention commune pour signifier un appel de proc&eacute;dure.<br \>
 <br \>
-</div><div class="fb_sect_title">Passing arguments by reference</div><div class="fb_sect_cont"><br \>
-Unlike arguments that are passed by value, arguments that are passed to procedures by reference really do get passed; no copy is made. This allows the procedure to modify the original variable or object that was passed to it.<br \>
+</div><div class="fb_sect_title">Passage d'arguments par r&eacute;f&eacute;rence</div><div class="fb_sect_cont"><br \>
+Contrairement aux arguments qui sont pass&eacute;s par valeur, les arguments qui sont pass&eacute;s aux proc&eacute;dures par r&eacute;f&eacute;rence sont vraiment pass&eacute;s; aucune copie n'est faite. Cela permet &agrave; la proc&eacute;dure de modifier la variable ou objet d'origine qui lui a &eacute;t&eacute; pass&eacute;.<br \>
 <br \>
-A reference is like an alias for a variable or object. Whenever you refer to a reference, you're referring to the actual variable or object that it aliases. In other words, you can think of a reference parameter of a procedure as the argument that is passed to it; any changes made to the reference parameter are actually changes to the argument it represents.<br \>
+Une r&eacute;f&eacute;rence est comme un alias pour une variable ou un objet. Chaque fois que vous faites appel &agrave; une r&eacute;f&eacute;rence, vous faites allusion &agrave; la variable ou &agrave; l'objet r&eacute;el(le) dont elle est l'alias. En d'autres termes, vous pouvez imaginer une r&eacute;f&eacute;rence &agrave; un param&egrave;tre d'une proc&eacute;dure comme &eacute;tant l'argument qui lui est pass&eacute;; les modifications apport&eacute;es &agrave; la r&eacute;f&eacute;rence du param&egrave;tre sont en fait des changements &agrave; l'argument qu'il repr&eacute;sente.<br \>
 <br \>
-To specify that an argument should be passed by reference, precede the parameter name in the procedure declaration with the <tt><a href="KeyPgByref.html">ByRef</a></tt> keyword:<br \>
+Pour sp&eacute;cifier qu'un argument doit &ecirc;tre pass&eacute; par r&eacute;f&eacute;rence, faire pr&eacute;c&eacute;der le nom du param&egrave;tre dans la d&eacute;claration de proc&eacute;dure avec le mot-cl&eacute; <tt><a href="KeyPgByref.html">ByRef</a></tt>:<br \>
 <br \>
 <tt><div class="freebasic">
 <span class="key">Sub</span>&nbsp;<span class="wrd">Procedure</span>&nbsp;<span class="oth">(</span><span class="key">ByRef</span>&nbsp;<span class="wrd">param</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">)</span><br />
@@ -75,16 +74,16 @@ To specify that an argument should be passed by reference, precede the parameter
 <span class="wrd">Procedure</span><span class="oth">(</span><span class="wrd">arg</span><span class="oth">)</span><br />
 <span class="key">Print</span>&nbsp;<span class="quo">"The&nbsp;variable&nbsp;'arg'&nbsp;after&nbsp;the&nbsp;call&nbsp;=&nbsp;"</span>&nbsp;<span class="oth">&amp;</span>&nbsp;<span class="wrd">arg</span><br />
 </div></tt><br />
-will produce the following output:<br \>
+produira le r&eacute;sultat suivant::<br \>
 <br \>
 <pre class="fb_pre">
 The variable 'arg' before the call = 10
 The parameter 'param' = 20
 The variable 'arg' after the call = 20
 </pre><br \>
-</div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
-<ul><li> <a href="ProPgProcedures.html">Procedures Overview</a><br \>
-<li> <a href="ProPgReturnValue.html">Returning a Value</a><br \>
+</div><div class="fb_sect_title">Voir aussi</div><div class="fb_sect_cont"><br \>
+<ul><li> <a href="ProPgProcedures.html">Vue d'ensemble des proc&eacute;dures</a><br \>
+<li> <a href="ProPgReturnValue.html">Retourner une valeur</a><br \>
 <li> <tt><a href="KeyPgDeclare.html">Declare</a></tt><br \>
 <li> <tt><a href="KeyPgSub.html">Sub</a></tt><br \>
 <li> <tt><a href="KeyPgFunction.html">Function</a></tt><br \>

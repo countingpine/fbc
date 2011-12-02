@@ -11,41 +11,41 @@
 </div> 
 <div id="fb_pg_wrapper">
 <div id="fb_pg_body">
-	Sets or gets the number of rows and columns of the display<br \>
+	Fixe ou retourne le nombre de lignes et colonnes d'affichage de la console<br \>
 <br \>
-<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<div class="fb_sect_title">Syntaxe</div><div class="fb_sect_cont"><tt><br \>
 <b>Width</b> [<i>columns</i>] [, <i>rows</i>]<br \>
 <b>Width</b> <b>LPrint</b> <i>columns</i><br \>
 <b>Width</b> {#<i>filenum</i> | <i>devicename</i> }, <i>columns</i><br \>
 <i>result</i> = <b>Width</b> ( )<br \>
 </tt><br \>
-</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Param&egrave;tres</div><div class="fb_sect_cont"><br \>
 <tt><i>columns</i></tt><br \>
-<div class="fb_indent">columns (in characters) for output<br \>
+<div class="fb_indent">colonnes (en caract&egrave;res) pour l'affichage<br \>
 </div><tt><i>rows</i></tt><br \>
-<div class="fb_indent">rows (in characters) for output<br \>
+<div class="fb_indent">lignes (en caract&egrave;res) pour l'affichage<br \>
 </div><tt><i>filenum</i></tt><br \>
-<div class="fb_indent">file number to apply to<br \>
+<div class="fb_indent">num&eacute;ro du fichier sur lequel on op&egrave;re<br \>
 </div><tt><i>devicename</i></tt><br \>
-<div class="fb_indent">device name to apply to<br \>
+<div class="fb_indent">nom du p&eacute;riph&eacute;rique sur lequel on op&egrave;re<br \>
 <br \>
-</div></div><div class="fb_sect_title">Return Value</div><div class="fb_sect_cont"><br \>
-Returns a 32 bit <tt><a href="KeyPgInteger.html">Integer</a></tt> where the <a href="KeyPgHiword.html">High Word</a> is the number of rows and the <a href="KeyPgLoWord.html">Low Word</a> is the number of columns currently set.<br \>
+</div></div><div class="fb_sect_title">Valeur retourn&eacute;e</div><div class="fb_sect_cont"><br \>
+Retourne un <tt><a href="KeyPgInteger.html">Integer = entier</a></tt> 32 bit o&ugrave; le <a href="KeyPgHiword.html">High Word = Mot fort</a> est le nombre de lignes et le <a href="KeyPgLoWord.html">Low Word = Mot faible</a> est le nombre de colonnes fix&eacute; actuellement.<br \>
 <br \>
 </div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
-Sets the maximum number of columns of characters of an output device (console, printer or text file). If text sent to the device reaches the width an automatic carriage return is generated.  <br \>
+Valide le nombre maximum de colonnes de caract&egrave;res d'un p&eacute;riph&eacute;rique de sortie (console, imprimante ou fichier texte). Si le texte envoy&eacute; au p&eacute;riph&eacute;rique atteint la largeur prescrite un retour chariot sera automatiquement g&eacute;n&eacute;r&eacute;.  <br \>
 <br \>
-If the device is the console a second argument specifying maximum number of rows is allowed. On a Windows any values &gt; 0 can be used in windowed mode. On DOS or Windows full-screen console, the valid dimensions depend on the capabilities of the hardware. Linux doesn't allow applications to change the console size.<br \>
+Si le p&eacute;riph&eacute;rique est la console un second argument sp&eacute;cifie le nombre maximum de lignes qui sont allou&eacute;es. Dans Windows toute valeur &gt; 0 peut &ecirc;tre utilis&eacute;e en mode fen&ecirc;tr&eacute;. Sous DOS ou Windows en mode console plein-&eacute;cran, les dimensions valides d&eacute;pendent des possibilit&eacute;s du "hardware". Linux ne permet pas aux applications de changer la taille de la console.<br \>
 <br \>
-Using <tt><b>Width</b></tt> as a function returns the current console width in the low word and the current height in the high word.<br \>
+L'utilisation de <tt><b>Width</b></tt> comme une fonction retourne la largeur courante de la console dans le mot de poids faible et la hauteur courante dans le mot de poids fort.<br \>
 <br \>
-In graphics modes <tt><b>Width</b></tt> is used to indirectly select the font size by setting one of the height * width pairs allowed (See <tt><a href="KeyPgScreengraphics.html">Screen (Graphics)</a></tt>). If  <tt><i>rows</i></tt> * <tt><i>cols</i></tt> is an invalid combination, no changes are made to the screen display.<br \>
+Dans les modes graphiques, <tt><b>Width</b></tt> est utilis&eacute; pour s&eacute;lectionner indirectement la taille de la police de caract&egrave;res en validant une des paires hauteur * largeur possibles (Voir <tt><a href="KeyPgScreengraphics.html">Screen (Graphics)</a></tt>). Si  <tt><i>rows (lignes)</i></tt> * <tt><i>cols (colonnes)</i></tt> est une combinaison invalide, il n'y aura aucun changement de l'affichage &eacute;cran.<br \>
 <br \>
-Valid font heights are 8 pixels, 14 pixels and 16 pixels.  The fonts all have a fixed width of 8 pixels.<br \>
+Les hauteurs valides de polices de caract&egrave;res sont 8 pixels, 14 pixels et 16 pixels.  Toutes les polices de caract&egrave;res ayant une largeur fixe de 8 pixels.<br \>
 <br \>
-Using the <tt><b>Width</b></tt> command forces a screen clear (<tt><a href="KeyPgCls.html">Cls</a></tt>) <br \>
+L'utilisation de la commande <tt><b>Width</b></tt> force une initialisation de l'&eacute;cran (<tt><a href="KeyPgCls.html">Cls</a></tt>) <br \>
 <br \>
-</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Exemple</div><div class="fb_sect_cont"><br \>
 <br \>
 <tt><div class="freebasic">
 <span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="wrd">w</span><br />
@@ -97,10 +97,10 @@ Using the <tt><b>Width</b></tt> command forces a screen clear (<tt><a href="KeyP
 <span class="key">Sleep</span><br />
 </div></tt><br />
 <br \>
-</div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
-<ul><li> <tt><i>columns</i></tt> was limited to <tt>40</tt> or <tt>80</tt>, while <tt><i>rows</i></tt> could be <tt>25</tt>, <tt>30</tt>, <tt>43</tt>, <tt>50</tt> or <tt>60</tt>, depending on the graphics hardware and screen mode being used.<br \>
+</div><div class="fb_sect_title">Diff&eacute;rences avec QB</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><i>columns</i></tt> &eacute;tait limit&eacute; &agrave; <tt>40</tt> ou <tt>80</tt>, alors que <tt><i>rows</i></tt> pouvait &ecirc;tre <tt>25</tt>, <tt>30</tt>, <tt>43</tt>, <tt>50</tt> ou <tt>60</tt>, en fonction du "hardware" graphique et du mode &eacute;cran utilis&eacute;.<br \>
 <br \>
-</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+</ul></div><div class="fb_sect_title">Voir aussi</div><div class="fb_sect_cont"><br \>
 <ul><li> <tt><a href="KeyPgLoWord.html">LoWord</a></tt><br \>
 <li> <tt><a href="KeyPgHiword.html">HiWord</a></tt><br \>
 <li> <tt><a href="KeyPgCsrlin.html">CsrLin</a></tt><br \>

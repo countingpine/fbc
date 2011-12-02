@@ -11,13 +11,13 @@
 </div> 
 <div id="fb_pg_wrapper">
 <div id="fb_pg_body">
-	Pre-defined structure(UDT) used by <a href="KeyPgScreenevent.html">ScreenEvent</a> to return event data <br \>
+	Structure pr&eacute;d&eacute;finie (UDT) utilis&eacute;e par <a href="KeyPgScreenevent.html">ScreenEvent</a> pour retourner les donn&eacute;es d'&eacute;v&eacute;nements <br \>
 <br \>
-<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<div class="fb_sect_title">Syntaxe</div><div class="fb_sect_cont"><tt><br \>
 <a href="KeyPgDim.html">Dim</a> <i>variable</i> <a href="KeyPgAs.html">As</a> <b>Event</b><br \>
 </tt><br \>
 </div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
- Here we report the <tt>EVENT</tt> structure for clarity:<br \>
+ Ici, nous d&eacute;crivons la structure <tt>EVENT</tt> pour plus de clart&eacute;:<br \>
 <tt><div class="freebasic">
 <span class="key">Type</span>&nbsp;<span class="wrd">EVENT</span>&nbsp;<span class="key">Field</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">1</span><br />
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Type</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
@@ -39,36 +39,36 @@
 <span class="key">End</span>&nbsp;<span class="key">Type</span><br />
 </div></tt><br />
 <br \>
-The <tt>Type Field</tt> will contain the event type ID, while the remaining 4 integers will hold sensitive data to the event type. <br \>
+<tt>Type Field</tt> contiendra l'ID de type d'&eacute;v&eacute;nement, tandis que les 4 entiers restants stockeront les donn&eacute;es sensibles du type d'&eacute;v&eacute;nement. <br \>
 <br \>
-<u>Event types</u><br \>
-<div class="fb_indent">The event type is identified by an ID number returned into the first integer of the <tt><i>event</i></tt> buffer (the <tt>.type</tt> field in the <tt>EVENT</tt> structure). Known event type IDs - and their values at time of writing - are:<br \>
+<u>Les types d'&eacute;v&eacute;nements</u><br \>
+<div class="fb_indent">Le type d'&eacute;v&eacute;nement est identifi&eacute; par un num&eacute;ro d'identification (ID) retourn&eacute; dans le premier entier de la m&eacute;moire tampon des &eacute;v&eacute;nements (le champ <tt>.type</tt> de la structure <tt>EVENT</tt>). Les ID de type d'&eacute;v&eacute;nement connus - et leurs valeurs au moment de l'&eacute;criture - sont les suivants:<br \>
 <br \>
-</div><ul><li> <tt>EVENT_KEY_PRESS</tt> (<tt>1</tt>) A key was pressed on the keyboard. The <tt>.scancode</tt> field contains the platform independent scancode value for the key; if the key has an ascii representation, it is held into the <tt>.ascii</tt> field, which otherwise has a value of 0.<br \>
-<li> <tt>EVENT_KEY_RELEASE</tt> (<tt>2</tt>) A key was released on the keyboard. The <tt>.scancode</tt> and <tt>.ascii</tt> fields have the same meaning as with the <tt>EVENT_KEY_PRESS</tt> event.<br \>
-<li> <tt>EVENT_KEY_REPEAT</tt> (<tt>3</tt>) A key is being held down repeatedly. The <tt>.scancode</tt> and <tt>.ascii</tt> fields have the same meaning as with the <tt>EVENT_KEY_PRESS</tt> event.<br \>
-<li> <tt>EVENT_MOUSE_MOVE</tt> (<tt>4</tt>) The mouse was moved while it was on the program window. The <tt>.x</tt> and <tt>.y</tt> fields contain the new mouse position relative to the upper-left corner of the screen, while the <tt>.dx</tt> and <tt>.dy</tt> fields contain the motion deltas.<br \>
-<li> <tt>EVENT_MOUSE_BUTTON_PRESS</tt> (<tt>5</tt>) One of the mouse buttons was pressed. The <tt>.button</tt> field has one bit set identifying the button that was pressed; bit 0 identifies the left mouse button, bit 1 the right mouse button and bit 2 the middle mouse button.<br \>
-<li> <tt>EVENT_MOUSE_BUTTON_RELEASE</tt> (<tt>6</tt>) One of the mouse buttons was released. The <tt>.button</tt> field has the same meaning as with the <tt>EVENT_MOUSE_BUTTON_PRESS</tt> event.<br \>
-<li> <tt>EVENT_MOUSE_DOUBLE_CLICK</tt> (<tt>7</tt>)  One of the mouse buttons was double clicked. The <tt>.button</tt> field has the same meaning as with the <tt>EVENT_MOUSE_BUTTON_PRESS</tt> event.<br \>
-<li> <tt>EVENT_MOUSE_WHEEL</tt> (<tt>8</tt>) The mouse wheel was used; the new wheel position is returned into the <tt>.z</tt> field.<br \>
-<li> <tt>EVENT_MOUSE_ENTER</tt> (<tt>9</tt>) The mouse was moved into the program window.<br \>
-<li> <tt>EVENT_MOUSE_EXIT</tt> (<tt>10</tt>) The mouse was moved out of the program window.<br \>
-<li> <tt>EVENT_WINDOW_GOT_FOCUS</tt> (<tt>11</tt>) The program window has got focus.<br \>
-<li> <tt>EVENT_WINDOW_LOST_FOCUS</tt> (<tt>12</tt>) The program window has lost focus.<br \>
-<li> <tt>EVENT_WINDOW_CLOSE</tt> (<tt>13</tt>) The user attempted to close the program window.<br \>
-<li> <tt>EVENT_MOUSE_HWHEEL</tt> (<tt>14</tt>) The horizontal mouse wheel was used; the new horizontal wheel position is returned into the <tt>.w</tt> field. (Note: currently implemented on Windows only)<br \>
-<br \>
-<br \>
-</ul>The <tt>fbgfx.bi</tt> header file contains a definition of the <tt>EVENT</tt> user data type.<br \>
-</div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
-<ul><li> In <i><a href="CompilerDialects.html">lang fb</a></i>, the structure and constants are stored in the <tt>FB</tt> <tt><a href="KeyPgNamespace.html">Namespace</a></tt>.<br \>
+</div><ul><li> <tt>EVENT_KEY_PRESS</tt> (<tt>1</tt>) Une touche du clavier a &eacute;t&eacute; appuy&eacute;e. Le champ <tt>.scancode</tt> contient la valeur du "scancode" ind&eacute;pendante de la plate-forme pour la touche; si la touche a une repr&eacute;sentation ascii, elle est stock&eacute;e dans le champ <tt>.ascii</tt>, qui sinon a une valeur de 0.<br \>
+<li> <tt>EVENT_KEY_RELEASE</tt> (<tt>2</tt>) Une touche du clavier a &eacute;t&eacute; relach&eacute;e. Les champs <tt>.scancode</tt> et <tt>.ascii</tt> ont la m&ecirc;me signification que pour l'&eacute;v&eacute;nement <tt>EVENT_KEY_PRESS</tt>.<br \>
+<li> <tt>EVENT_KEY_REPEAT</tt> (<tt>3</tt>) Une touche est appuy&eacute;e r&eacute;p&eacute;titivement. Les champs <tt>.scancode</tt> et <tt>.ascii</tt> ont la m&ecirc;me signification que pour l'&eacute;v&eacute;nement <tt>EVENT_KEY_PRESS</tt>.<br \>
+<li> <tt>EVENT_MOUSE_MOVE</tt> (<tt>4</tt>) La souris a &eacute;t&eacute; d&eacute;plac&eacute;e alors qu'elle &eacute;tait sur la fen&ecirc;tre du programme. Les champs <tt>.x</tt> et <tt>.y</tt> contiennent la nouvelle position de la souris par rapport au coin sup&eacute;rieur gauche de l'&eacute;cran, tandis que les champs <tt>.dx</tt> et <tt>.dy</tt> contiennent les valeurs (deltas) des d&eacute;placements.<br \>
+<li> <tt>EVENT_MOUSE_BUTTON_PRESS</tt> (<tt>5</tt>) L'un des boutons de la souris a &eacute;t&eacute; appuy&eacute;. Le champ <tt>.button</tt> voit un de ses bits passer &agrave; 1, identifiant ainsi le bouton appuy&eacute;; le bit 0 identifie le bouton gauche de la souris, le bit 1 le bouton droit et le bit 2 le bouton du milieu.<br \>
+<li> <tt>EVENT_MOUSE_BUTTON_RELEASE</tt> (<tt>6</tt>) L'un des boutons de la souris a &eacute;t&eacute; relach&eacute;. Le champ <tt>.button</tt> a la m&ecirc;me signification que pour l'&eacute;v&eacute;nement <tt>EVENT_MOUSE_BUTTON_PRESS</tt>.<br \>
+<li> <tt>EVENT_MOUSE_DOUBLE_CLICK</tt> (<tt>7</tt>)  L'un des boutons de la souris a &eacute;t&eacute; double-cliqu&eacute;. Le champ <tt>.button</tt> a la m&ecirc;me signification que pour l'&eacute;v&eacute;nement <tt>EVENT_MOUSE_BUTTON_PRESS</tt>.<br \>
+<li> <tt>EVENT_MOUSE_WHEEL</tt> (<tt>8</tt>) La molette de la souris a &eacute;t&eacute; utilis&eacute;e; la nouvelle position de la molette est retourn&eacute;e dans le champ <tt>.z</tt>.<br \>
+<li> <tt>EVENT_MOUSE_ENTER</tt> (<tt>9</tt>) La souris a &eacute;t&eacute; d&eacute;plac&eacute;e dans la fen&ecirc;tre du programme.<br \>
+<li> <tt>EVENT_MOUSE_EXIT</tt> (<tt>10</tt>) La souris a &eacute;t&eacute; d&eacute;plac&eacute;e en dehors de la fen&ecirc;tre du programme.<br \>
+<li> <tt>EVENT_WINDOW_GOT_FOCUS</tt> (<tt>11</tt>) La fen&ecirc;tre du programme a eu le "focus" (le curseur est sur la fen&ecirc;tre)<br \>
+<li> <tt>EVENT_WINDOW_LOST_FOCUS</tt> (<tt>12</tt>) La fen&ecirc;tre du programme a perdu le "focus" (le curseur est sorti de la fen&ecirc;tre)<br \>
+<li> <tt>EVENT_WINDOW_CLOSE</tt> (<tt>13</tt>) L'utilisateur a tent&eacute; de fermer la fen&ecirc;tre du programme.<br \>
+<li> <tt>EVENT_MOUSE_HWHEEL</tt> (<tt>14</tt>) La molette horizontale de la souris a &eacute;t&eacute; utilis&eacute;e; la nouvelle position horizontale de la molette est stock&eacute;e dans le champ <tt>.w</tt>. (Note: actuellement mis en oeuvre uniquement sous Windows)<br \>
 <br \>
 <br \>
-</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
-<ul><li> New to FreeBASIC<br \>
+</ul>Le fichier en-t&ecirc;te <tt>fbgfx.bi</tt> contient une d&eacute;finition du type de donn&eacute;e utilisateur <tt>EVENT</tt>.<br \>
+</div><div class="fb_sect_title">Diff&eacute;rences de dialectes</div><div class="fb_sect_cont"><br \>
+<ul><li> Dans <i><a href="CompilerDialects.html">lang fb</a></i>, la structure et les constantes sont stock&eacute;es dans le <tt><a href="KeyPgNamespace.html">Namespace</a></tt> <tt>FB</tt>.<br \>
 <br \>
-</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<br \>
+</ul></div><div class="fb_sect_title">Diff&eacute;rences pour QB</div><div class="fb_sect_cont"><br \>
+<ul><li> Nouveau pour FreeBASIC<br \>
+<br \>
+</ul></div><div class="fb_sect_title">Voir aussi</div><div class="fb_sect_cont"><br \>
 <ul><li> <tt><a href="KeyPgScreenEvent.html">ScreenEvent</a></tt><br \>
 <br \>
 </ul></div>

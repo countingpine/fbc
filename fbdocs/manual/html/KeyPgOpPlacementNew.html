@@ -6,47 +6,47 @@
 <body>
 <div id="fb_body_wrapper">
 <div id="fb_tab">
-<div id="fb_tab_l">Operator Placement New</div>
+<div id="fb_tab_l">Op&eacute;rateur  New (Emplacement m&eacute;moire)</div>
 <div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
 </div> 
 <div id="fb_pg_wrapper">
 <div id="fb_pg_body">
-	Operator to construct an object at a specified memory address.<br \>
+	Op&eacute;rateur pour construire un object &agrave; l'adresse m&eacute;moire sp&eacute;cifi&eacute;e.<br \>
 <br \>
-<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<div class="fb_sect_title">Syntaxe</div><div class="fb_sect_cont"><tt><br \>
 <i>result</i> = <b>New(<i>address</i>)</b> <i><a href="DataType.html">datatype</a></i><br \>
-<div class="fb_indent"><i>or</i><br \>
+<div class="fb_indent"><i>ou</i><br \>
 </div><i>result</i> = <b>New(<i>address</i>)</b> <i><a href="DataType.html">datatype</a></i> ( <i>initializers</i>, ... )<br \>
-<div class="fb_indent"><i>or</i><br \>
+<div class="fb_indent"><i>ou</i><br \>
 </div><i>result</i> = <b>New(<i>address</i>)</b> <i><a href="DataType.html">datatype</a></i><b>[</b> <i>count</i> <b>]</b><br \>
 </tt><br \>
-</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Param&egrave;tres</div><div class="fb_sect_cont"><br \>
 <tt><i>address</i></tt> <br \>
-<div class="fb_indent">the location in memory to construct. the parenthesis are <b>not</b> optional.<br \>
+<div class="fb_indent">La position m&eacute;moire o&ugrave; construire. Les parenth&egrave;ses <b>ne sont pas</b> facultatives.<br \>
 </div><tt><i>size</i></tt> <br \>
-<div class="fb_indent">number of bytes to allocate.<br \>
+<div class="fb_indent">Le nombre d'octets &agrave; allouer.<br \>
 </div><tt><i>initializers</i></tt><br \>
-<div class="fb_indent">Initial value(s) for the variable.<br \>
+<div class="fb_indent">La valeur initiale de la variable.<br \>
 </div><tt><i>datatype</i></tt><br \>
-<div class="fb_indent">name of the data type to create.<br \>
+<div class="fb_indent">Le nom du type de donn&eacute;e &agrave; cr&eacute;er.<br \>
 </div><tt><i>count</i></tt><br \>
-<div class="fb_indent">Number of elements to allocate.<br \>
+<div class="fb_indent">Le nombre d'&eacute;l&eacute;ments &agrave; allouer.<br \>
 <br \>
-</div></div><div class="fb_sect_title">Return Value</div><div class="fb_sect_cont"><br \>
-A pointer of type <a href="DataType.html">datatype</a> to the newly allocated data.<br \>
+</div></div><div class="fb_sect_title">Valeur retourn&eacute;e</div><div class="fb_sect_cont"><br \>
+Un pointeur du type <a href="DataType.html">datatype</a> vers la nouvelle donn&eacute;e allou&eacute;e.<br \>
 <br \>
 </div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
-The <tt><b>Placement New</b></tt> operator constructs a specified data type at the specified memory location. <br \>
+L'op&eacute;rateur <tt><b>New (Emplacement m&eacute;moire)</b></tt> construit un type de donn&eacute;e sp&eacute;cifique &agrave; l'emplacement m&eacute;moire sp&eacute;cifi&eacute;. <br \>
 <br \>
-For simple types, like integers, an initial value can be given. For types without constructors, initial values can be specified for each field. Types that have constructors can have their constructors called by <tt><b>Placement New</b></tt> as well. If no initializers are given, the default values for those types will be set.<br \>
+Pour des types simples, comme les entiers, une valeur initiale peut &ecirc;tre donn&eacute;e. Pour des types sans constructeur, des valeurs initiales peuvent &ecirc;tre sp&eacute;cifi&eacute;es pour chacun des champs. Pour les types ayant des constructeurs ceux-ci peuvent &ecirc;tre appel&eacute;s par <tt><b>New (Emplacement m&eacute;moire)</b></tt>. Si aucun initialiseur n'est fourni, les valeurs par d&eacute;faut seront utilis&eacute;es.<br \>
 <br \>
-Memory is <b>not</b> allocated when using the <tt><b>Placement New</b></tt> operator. Instead, the memory at the specified <tt><i>address</i></tt> is used.  It is incorrect to call <tt><a href="KeyPgOpDelete.html">Delete</a></tt> on the address. See examples below for proper <i>placement new</i> usage.<br \>
+La m&eacute;moire <b>n'est pas</b> allou&eacute;e quand on utilise l'op&eacute;rateur <tt><b>Placement New</b></tt>. Au lieu de cela, la m&eacute;moire &agrave; l'<tt><i>address</i></tt>e sp&eacute;cifi&eacute;e est utilis&eacute;e.  Il est incorrect d'appeler <tt><a href="KeyPgOpDelete.html">Delete</a></tt> pour cette adresse. Voir les exemples ci-dssous pour utiliser correctement <i>new (emplacement m&eacute;moire)</i>.<br \>
 <br \>
-Specifying an initial value of <tt><a href="KeyPgAny.html">Any</a></tt>, as in <tt>new(address) datatype(any)</tt> will not initialize the data.  This is only valid on data types that do not have constructors.<br \>
+Sp&eacute;cifier une valeur initiale <tt><a href="KeyPgAny.html">Any</a></tt>, comme dans <tt>new(address) datatype(any)</tt> n'initialisera pas les donn&eacute;es.  Ceci n'est valide que pour des types de donn&eacute;e n'ayant pas de constructeur.<br \>
 <br \>
-Specifying an initial value of <tt><a href="KeyPgAny.html">Any</a></tt>, as in <tt>new(address) datatype[count]{any}</tt> will not initialize the data.  This is only valid on data types that do not have constructors.<br \>
+Sp&eacute;cifier une valeur initiale <tt><a href="KeyPgAny.html">Any</a></tt>, comme dans <tt>new(address) datatype[count]{any}</tt> n'initialisera pas les donn&eacute;es.  Ceci n'est valide que pour des types de donn&eacute;e n'ayant pas de constructeur.<br \>
 <br \>
-</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Exemple</div><div class="fb_sect_cont"><br \>
 <tt><div class="freebasic">
 <span class="com">''&nbsp;"placement&nbsp;new"&nbsp;example</span><br />
 <br />
@@ -77,17 +77,19 @@ Specifying an initial value of <tt><a href="KeyPgAny.html">Any</a></tt>, as in <
 <br />
 <span class="key">End</span>&nbsp;<span class="key">Scope</span><br />
 </div></tt><br />
-</div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
-<ul><li> Only available in the <i><a href="CompilerOptlang.html">-lang fb</a></i> dialect.<br \>
+</div><div class="fb_sect_title">Diff&eacute;rences de dialecte</div><div class="fb_sect_cont"><br \>
+<ul><li> Utilisable seulement dans le dialecte <i><a href="CompilerOptlang.html">-lang fb</a></i>.<br \>
 <br \>
-</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
-<ul><li> New to FreeBASIC<br \>
+</ul></div><div class="fb_sect_title">Diff&eacute;rences avec QB</div><div class="fb_sect_cont"><br \>
+<ul><li> Nouveau pour FreeBASIC<br \>
 <br \>
-</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+</ul></div><div class="fb_sect_title">Voir aussi</div><div class="fb_sect_cont"><br \>
 <ul><li> <tt><a href="KeyPgOpDelete.html">Delete</a></tt><br \>
 <li> <tt><a href="KeyPgOpNew.html">New</a></tt><br \>
 <br \>
-</ul></div>
+</ul><br \>
+   <br \>
+</div>
 </div>
 </div> 
 </div> 

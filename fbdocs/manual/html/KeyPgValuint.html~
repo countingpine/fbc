@@ -1,0 +1,73 @@
+<html>
+<head>
+<title>ValUInt</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">ValUInt</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Conversion d'une cha&icirc;ne en nombre entier<br \>
+<br \>
+<div class="fb_sect_title">Syntaxe</div><div class="fb_sect_cont"><tt><br \>
+<a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgFunction.html">Function</a> <b>ValUInt</b> <a href="KeyPgOverload.html">Overload</a> ( <a href="KeyPgByref.html">ByRef</a> <i>strnum</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgConstQualifier.html">Const</a> <a href="KeyPgString.html">String</a> ) <a href="KeyPgAs.html">As</a> <a href="KeyPgUinteger.html">UInteger</a><br \>
+<a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgFunction.html">Function</a> <b>ValUInt</b> ( <a href="KeyPgByval.html">ByVal</a> <i>strnum</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgConstQualifier.html">Const</a> <a href="KeyPgWstring.html">WString</a> <a href="KeyPgPtr.html">Ptr</a> ) <a href="KeyPgAs.html">As</a> <a href="KeyPgUinteger.html">UInteger</a><br \>
+</tt><br \>
+</div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
+<i>result</i> = <b>ValUInt</b> ( <i>strnum</i> )<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Paramètres</div><div class="fb_sect_cont"><br \>
+<tt><i>strnum</i></tt><br \>
+<div class="fb_indent">la cha&icirc;ne &agrave; convertir<br \>
+<br \>
+</div></div><div class="fb_sect_title">Valeur retourn&eacute;e</div><div class="fb_sect_cont"><br \>
+Retourne un <tt><a href="KeyPgUinteger.html">UInteger (entier non-sign&eacute;)</a></tt> de la cha&icirc;ne convertie<br \>
+<br \>
+Si le premier caract&egrave;re de la cha&icirc;ne n'est pas valide, <tt><b>ValUInt</b></tt> retournera <tt>0</tt>.<br \>
+<br \>
+</div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+Par exemple, <tt><b>ValUInt</b>("10")</tt> retournera <tt>10</tt>, et <tt><b>ValUInt</b>("10.60")</tt> retournera <tt>10</tt>. La fonction analyse la cha&icirc;ne &agrave; partir de la gauche, en sautant tout espace blanc, et retourne le plus long nombre qu'elle peut lire, s'arr&ecirc;tant au premier caract&egrave;re non-appropri&eacute;, qu'elle trouve.  Tout caract&egrave;re non-num&eacute;rique, inclus les points d&eacute;cimaux et les sp&eacute;cificateurs d'exposant, sont consid&eacute;r&eacute;s comme non-appropri&eacute;s. Par exemple, <tt><b>ValUInt</b>("23.1E+6")</tt> retournera seulement <tt>23</tt>.<br \>
+<br \>
+<tt><b>ValUInt</b></tt> peut convertir des nombres entiers en format <a href="KeyPgBin.html">Binaire</a> / <a href="KeyPgOct.html">Octal</a> / <a href="KeyPgHex.html">Hexad&eacute;cimal</a>, s'il y a devant l'identificateur pertinent (<tt>"&B"</tt> / <tt>"&O"</tt> / <tt>"&H"</tt>), par exemple: <tt><b>ValUInt</b>("&HFF")</tt> retourne <tt>255</tt>.<br \>
+<br \>
+Si vous voulez convertir un nombre en une cha&icirc;ne, utilisez la fonction <tt><a href="KeyPgStr.html">Str</a></tt>.<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="key">Dim</span>&nbsp;<span class="wrd">a</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span><span class="oth">,</span>&nbsp;<span class="wrd">b</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">UInteger</span><br />
+<span class="wrd">a</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="quo">"20xa211"</span><br />
+<span class="wrd">b</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">ValUInt</span><span class="oth">(</span><span class="wrd">a</span><span class="oth">)</span><br />
+<span class="key">Print</span>&nbsp;<span class="wrd">a</span><span class="oth">,</span>&nbsp;<span class="wrd">b</span><br />
+</div></tt><br />
+<br \>
+<pre class="fb_pre">
+20xa211   20
+</pre><br \>
+<br \>
+</div><div class="fb_sect_title">Diff&eacute;rences de dialectes</div><div class="fb_sect_cont"><br \>
+<ul><li> Non disponible dans le dialecte <i><a href="CompilerOptlang.html">-lang qb</a></i> sauf si r&eacute;f&eacute;renc&eacute; avec l'alias <tt><b>__Valuint</b></tt>.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">Diff&eacute;rences avec QB</div><div class="fb_sect_cont"><br \>
+<ul><li> Nouveau pour FreeBASIC<br \>
+<br \>
+</ul></div><div class="fb_sect_title">Voir aussi</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgVal.html">Val</a></tt><br \>
+<li> <tt><a href="KeyPgValint.html">ValInt</a></tt><br \>
+<li> <tt><a href="KeyPgValulng.html">ValULng</a></tt><br \>
+<li> <tt><a href="KeyPgCuint.html">CUInt</a></tt><br \>
+<li> <tt><a href="KeyPgStr.html">Str</a></tt><br \>
+<li> <tt><a href="KeyPgChr.html">Chr</a></tt><br \>
+<li> <tt><a href="KeyPgAsc.html">Asc</a></tt><br \>
+<br \>
+</ul><br \>
+   <br \>
+</div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

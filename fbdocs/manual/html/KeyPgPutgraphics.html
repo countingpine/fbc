@@ -1,195 +1,212 @@
-<html>
-<head>
-<title>Put (Graphics)</title>
-<link rel="stylesheet" type="text/css" href="style.css">
-</head>
-<body>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><title>Put (Graphics)</title>
+
+
+
+<link rel="stylesheet" type="text/css" href="style.css"></head><body>
 <div id="fb_body_wrapper">
 <div id="fb_tab">
-<div id="fb_tab_l">Put (Graphics)</div>
-<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+<div id="fb_tab_l">Put (Graphique)</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif"></div> 
 </div> 
 <div id="fb_pg_wrapper">
 <div id="fb_pg_body">
-	Copies an image on to another image or screen<br \>
-<br \>
-<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
-<b>Put</b> [ <i>target</i>, ] [ STEP ] ( <i>x</i>,<i>y</i> ), <i>source</i> [ ,( <i>x1</i>,<i>y1</i> )-[ STEP ]( <i>x2</i>,<i>y2</i> ) ] [ ,<i>method</i> [ ,( <i>alphaval</i>|<i>value</i>|<i>blender</i> [ ,<i>param</i>]) ] ]<br \>
-</tt><br \>
-</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
-<tt><i>target</i></tt><br \>
-<div class="fb_indent">is the address of the buffer where the image is to be drawn. If it's omitted, the image gets blitted to screen. See below.<br \>
-</div><tt>STEP</tt><br \>
-<div class="fb_indent">indicates that <tt>(<i>x</i>,  <i>y</i>)</tt> offsets are relative to the current graphics cursor position.	<br \>
-</div><tt>(<i>x</i>,  <i>y</i>)</tt><br \>
-<div class="fb_indent">specify offsets from the upper-left corner of the destination buffer, or screen, that the image gets drawn to. <br \>
-</div><tt><i>source</i></tt><br \>
-<div class="fb_indent">is the address of the buffer of the image to be drawn. See below.<br \>
-</div><tt>(<i>x1</i>, <i>y1</i>)-[ STEP ](<i>x2</i>, <i>y2</i>)</tt><br \>
-<div class="fb_indent">specify a rectangular area in the source buffer to draw. If omitted, the entire buffer is drawn. <tt>STEP</tt> indicates that <tt><i>x2</i></tt> and <tt><i>y2</i></tt> are relative to <tt><i>x1</i></tt> and <tt><i>y1</i></tt>, respectively.<br \>
-</div><tt><i>method</i></tt><br \>
-<div class="fb_indent">specifies the method used to draw the image to the destination buffer, and can be any one of the following (the default method is <tt>XOR</tt>):<br \>
-<br \>
-Background-independent methods<br \>
-<div class="fb_indent"><tt><a href="KeyPgPsetGfx.html">PSet</a></tt> : Source pixel values are copied without modification.<br \>
-<tt>PRESET</tt> : Source pixel values are 1's-complement negated before being copied.<br \>
-<tt><a href="KeyPgTransGfx.html">Trans</a></tt> : Source pixel values are copied without modification. Does not draw source pixels of mask color. See below.<br \>
-</div>Background-dependent methods<br \>
-<div class="fb_indent"><tt><a href="KeyPgAndGfx.html">And</a></tt> : Destination pixels are bitwise ANDed with source pixels. See below.<br \>
-<tt><a href="KeyPgOrGfx.html">Or</a></tt> : Destination pixels are bitwise ORed with source pixels. See below.<br \>
-<tt><a href="KeyPgXorGfx.html">Xor</a></tt> : Destination pixels are bitwise XORed with source pixels. See below.<br \>
-<tt><a href="KeyPgAlphaGfx.html">Alpha</a></tt> : Source is blended with a transparency factor specified either in the <tt><i>value</i></tt> parameter, or in the image's individual pixels.  See below.<br \>
-<tt><a href="KeyPgAddGfx.html">Add</a></tt>: Source is multiplied by a value and added with saturation to the destination. See below.<br \>
-<tt><a href="KeyPgCustomgfx.html">Custom</a></tt> : Uses a user-defined function to perform blending the source with the destination. See below.<br \>
-<br \>
-</div></div><tt><i>value</i></tt><br \>
-<div class="fb_indent">is a <tt>0..255</tt> value specifying the transparency value for an <tt>ADD</tt> or <tt>ALPHA</tt> method blit.<br \>
-</div><tt><i>blender</i></tt> <br \>
-<div class="fb_indent">specifies the address of a user-defined function to be called in a <tt>CUSTOM</tt> method blit. See below.<br \>
-</div><tt><i>param</i></tt> <br \>
-<div class="fb_indent">specifies a parameter to pass to the custom blender.<br \>
-<br \>
-</div></div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
-The <tt><b>Put</b></tt> statement can be used to draw an image onto another image. The <tt><i>x</i></tt> and <tt><i>y</i></tt> coordinates are affected by the last call to the <tt><a href="KeyPgViewgraphics.html">View</a></tt> and <tt><a href="KeyPgWindow.html">Window</a></tt> statements, and plotted image respects the current clipping region set by last call to the <tt><a href="KeyPgViewgraphics.html">View</a></tt> statement. The source image is clipped if it is drawn outside the destination buffer.<br \>
-<br \>
-<b>Valid Image Buffers</b><br \>
-<div class="fb_indent">The <tt><i>source</i></tt> and <tt><i>target</i></tt> image buffers must be valid image buffers. Valid image buffers are created using the <tt><a href="KeyPgGetgraphics.html">Get</a></tt> or <tt><a href="KeyPgImagecreate.html">ImageCreate</a></tt> statements. Valid image buffers can be specified in a <tt><b>Put</b></tt> statement using an array name with optional index, or a pointer with optional index.<br \>
-<br \>
-</div><b>Drawing methods</b><br \>
-<div class="fb_indent">Depending on the method used, the existing pixel values in the destination buffer are used to calculate the pixel values that are actually drawn. The <tt>PSET</tt>, <tt>PRESET</tt> and <tt>TRANS</tt> methods do not use the destination buffer for calculating final pixel values, while the <tt>AND</tt>, <tt>OR</tt>, <tt>XOR</tt>, <tt>ALPHA</tt> and <tt>ADD</tt> methods do. Images that are drawn with these latter methods will look differently depending on the content of the destination buffer.<br \>
-<br \>
-</div><b>Different pixel formats</b><br \>
-<div class="fb_indent">The pixel format of an image buffer must be compatible with the current graphics mode color depth; that is, if you acquire an image using <tt><a href="KeyPgGetgraphics.html">Get</a></tt> and you later change screen mode via the <tt><a href="KeyPgScreengraphics.html">Screen</a></tt> statement, the image data may not be valid in the new graphics mode, and you may not be able to draw it on the screen. You should note however that you will always be able to draw image buffers onto other image buffers via <tt><b>Put</b></tt> as long as these buffers were created with the same depth.<br \>
-<br \>
-The <tt>AND</tt>, <tt>OR</tt> and <tt>XOR</tt> methods produce different results depending on the current color depth, as pixels are stored in different formats; see <a href="GfxInternalFormats.html">Internal pixel formats</a> for details. <br \>
-<br \>
-</div><b>Mask Color</b><br \>
-<div class="fb_indent">The <tt>TRANS</tt>, <tt>ALPHA</tt> and <tt>ADD</tt> methods do not draw pixels in the source image that use the mask color. The mask color depends on target (being it an image buffer or the screen) depth: in depths up to 8 bpp (paletted modes) it is equal to color index <tt>0</tt>, while in hi/truecolor depths (16 and 32 bpp) it is equal to magenta, which is <tt><a href="KeyPgRgb.html">RGB</a>(255, 0, 255)</tt>. Note that in 32 bpp modes the alpha value of a color does not affect the identification of the transparent color; only the lower 24 bits are used to identify it. See <a href="GfxInternalFormats.html">Internal pixel formats</a> for details. <br \>
-<br \>
-</div><b>Alpha drawing</b><br \>
-<div class="fb_indent">The <tt>ALPHA</tt> method can be used in two modes. If the <tt><i>value</i></tt> parameter is specified, this is used to specify the level of transparency for the whole image to be drawn; a value of 0 will draw a completely transparent image, whereas a value of 255 will draw a completely solid one. This mode works only when drawing onto hi/truecolor targets (16 and 32 bpp).<br \>
-If the <tt><i>value</i></tt> parameter is omitted, the <tt>ALPHA</tt> method will take the alpha level value on a per-pixel basis, allowing to draw images with an alpha channel (certain parts of the image can be made more or less transparent than others). This mode works only with 32 bpp image buffers, as this is the only color depth that allows for an embedded alpha value in each pixel.<br \>
-<br \>
-</div><b>Dealing with the alpha channel</b><br \>
-<div class="fb_indent">Normally <tt><b>Put</b></tt> only allows to draw image buffers onto targets with the same depth, but there is an exception. When drawing an 8 bpp image buffer onto a 32 bpp target and the <tt>ALPHA</tt> method is used, the 8 bpp source image is drawn into the alpha channel of the 32 bpp target. This allows to easily set the whole alpha channel of an image without having to deal with low level access of its pixel data.<br \>
-<br \>
-</div><b>Custom Blend Function</b><br \>
-<div class="fb_indent">The <tt>CUSTOM</tt> method uses a user-defined function to calculate the final pixel values to be drawn to the destination buffer. This function will be called once for every pixel of the source image, and will receive the source and destination pixel values, and a data pointer passed by the <tt><b>Put</b></tt> function. The pixel value returned will be the value used to draw to the destination buffer. The function has the form:<br \>
-<br \>
-<tt><a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgFunction.html">Function</a> <i>identifier</i> ( <a href="KeyPgByval.html">ByVal</a> <i>source_pixel</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgUinteger.html">UInteger</a>, <a href="KeyPgByval.html">ByVal</a> <i>destination_pixel</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgUinteger.html">UInteger</a>, <a href="KeyPgByval.html">ByVal</a> <i>parameter</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgAny.html">Any</a> <a href="KeyPgPtr.html">Ptr</a>) <a href="KeyPgAs.html">As</a> <a href="KeyPgUinteger.html">UInteger</a></tt><br \>
-<br \>
-<div class="fb_indent"><tt><i>identifier</i></tt> is the name of the function. Can be anything.<br \>
-<tt><i>source_pixel</i></tt> is the current pixel value of the source image.<br \>
-<tt><i>destination_pixel</i></tt> is the current pixel value of the destination image.<br \>
-<tt><i>parameter</i></tt> is the parameter that is passed by the <tt><b>Put</b></tt> command.  It should be a data <tt><a href="KeyPgPtr.html">Pointer</a></tt>.  If omitted, its value will be zero.<br \>
-<br \>
-</div></div></div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
-The following program gives a simple example of how to <tt><b>Put</b></tt> an image to the screen, including setting up an image buffer, and freeing its memory after.<br \>
+	Copie une image sur une autre image ou sur l&apos;&eacute;cran<br \="">
+<br \="">
+<div class="fb_sect_title">Syntaxe</div><div class="fb_sect_cont"><tt><br \="">
+<b>Put</b> [ <i>target</i>, ] [ STEP ] ( <i>x</i>,<i>y</i> ), <i>source</i> [ ,( <i>x1</i>,<i>y1</i> )-[ STEP ]( <i>x2</i>,<i>y2</i> ) ] [ ,<i>method</i> [ ,( <i>alphaval</i>|<i>value</i>|<i>blender</i> [ ,<i>param</i>]) ] ]<br \="">
+</tt><br \="">
+</div><div class="fb_sect_title">Param&egrave;tres</div><div class="fb_sect_cont"><br \="">
+<tt><i>target</i></tt><br \="">
+<div class="fb_indent">est l&apos;adresse du tampon o&ugrave; l&apos;image doit &ecirc;tre
+dessin&eacute;e (destination). Si omis, l&apos;image est "blitt&eacute;e" (affich&eacute;e) &agrave;&nbsp;
+l&apos;&eacute;cran. Voir ci-dessous.<br \="">
+</div><tt>STEP</tt><br \="">
+<div class="fb_indent">indique que les coordonn&eacute;es <tt>(<i>x</i>,  <i>y</i>)</tt> sont relatives &agrave;&nbsp; la position courante du curseur graphique.	<br \="">
+</div><tt>(<i>x</i>,  <i>y</i>)</tt><br \="">
+<div class="fb_indent">indique les coordonn&eacute;es par rapport au coin en haut &agrave; gauche du tampon destination ou de l&apos;&eacute;cran, sur lequel l&apos;image est dessin&eacute;e. <br \="">
+</div><tt><i>source</i></tt><br \="">
+<div class="fb_indent">est l&apos;adresse du tampon image sur lequel dessiner. Voir ci-dessous.<br \="">
+</div><tt>(<i>x1</i>, <i>y1</i>)-[ STEP ](<i>x2</i>, <i>y2</i>)</tt><br \="">
+<div class="fb_indent">une zone rectangulaire dans le tampon source, utilis&eacute;e pour le dessin. Si omise, le tampon entier est utilis&eacute; pour le dessin. <tt>STEP</tt> indique que <tt><i>x2</i></tt> et <tt><i>y2</i></tt> sont relatifs respectivement &agrave; <tt><i>x1</i></tt> et <tt><i>y1</i></tt>.<br \="">
+</div><tt><i>method</i></tt><br \="">
+<div class="fb_indent">sp&eacute;cifie la m&eacute;thode utilis&eacute;e pour dessiner l&apos;image sur le tampon destination et peut &ecirc;tre une des m&eacute;thodes suivantes (<tt>XOR</tt> est la m&eacute;thode par d&eacute;faut):<br \="">
+<br \="">
+M&eacute;thodes ind&eacute;pendantes de l&apos;arri&egrave;re-plan<br \="">
+<div class="fb_indent"><tt><a href="KeyPgPsetGfx.html">PSet</a></tt> : Les valeurs pixel sont copi&eacute;es sans modification.<br \="">
+<tt>PRESET</tt> : Les valeurs pixel source sont compl&eacute;ment&eacute;es &agrave;&nbsp; 1 n&eacute;gativement (1&apos;s-complement negated) avant la copie.<br \="">
+<tt><a href="KeyPgTransGfx.html">Trans</a></tt> : Les valeurs pixel source sont copi&eacute;es sans modification. Ne dessine pas les pixels source du masque de couleur. Voir ci-dessous.<br \="">
+</div>M&eacute;thodes d&eacute;pendant de l&apos;arri&egrave;re-plan<br \="">
+<div class="fb_indent"><tt><a href="KeyPgAndGfx.html">And</a></tt> : Les pixels destination subissent un AND avec les pixels source (dest AND source). Voir ci-dessous.<br \="">
+<tt><a href="KeyPgOrGfx.html">Or</a></tt> : Les pixels destination subissent un OR avec les pixels source (dest OR source). Voir ci-dessous.<br \="">
+<tt><a href="KeyPgXorGfx.html">Xor</a></tt> : Les pixels destination subissent un XOR avec les pixels source (dest XOR source). Voir ci-dessous.<br \="">
+<tt><a href="KeyPgAlphaGfx.html">Alpha</a></tt> : Source est m&eacute;lang&eacute;e avec un facteur de transparence sp&eacute;cifi&eacute; soit par le param&egrave;tre <tt><i>value</i></tt>, soit dans les pixels individuels de l&apos;image.  Voir ci-dessous.<br \="">
+<tt><a href="KeyPgAddGfx.html">Add</a></tt>: Source est multipli&eacute; par une valeur et ajout&eacute;e avec saturation &agrave;&nbsp; la destination. Voir ci-dessous.<br \="">
+<tt><a href="KeyPgCustomgfx.html">Custom</a></tt> : Utilise une fonction d&eacute;finie par l&apos;utilisateur pour effectuer le m&eacute;lange de la source avec la destination. Voir ci-dessous.<br \="">
+<br \="">
+</div></div><tt><i>value</i></tt><br \="">
+<div class="fb_indent">est une valeur de <tt>0 &agrave; 255</tt> sp&eacute;cifiant la valeur de la transparence pour l&apos;une des m&eacute;thodes de transformation <tt>ADD</tt> ou <tt>ALPHA</tt>.<br \="">
+</div><tt><i>blender</i></tt> <br \="">
+<div class="fb_indent">sp&eacute;cifie l&apos;adresse de la fonction utilisateur &agrave; appeler pour la m&eacute;thode de transformation <tt>CUSTOM</tt>. Voir ci-dessous.<br \="">
+</div><tt><i>param</i></tt> <br \="">
+<div class="fb_indent">indique le param&egrave;tre &agrave; passer &agrave; la fonction de transformation utilisateur.<br \="">
+<br \="">
+</div></div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \="">
+<tt><b>Put</b></tt> peut &ecirc;tre utilis&eacute; pour dessiner une image sur une autre image. Les coordonn&eacute;es <tt><i>x</i></tt> et <tt><i>y</i></tt> sont affect&eacute;es par le dernier appel &agrave;&nbsp; <tt><a href="KeyPgViewgraphics.html">View</a></tt> et <tt><a href="KeyPgWindow.html">Window</a></tt>, et l&apos;image plac&eacute;e respecte la r&eacute;gion de d&eacute;coupage courante valid&eacute;e par le dernier appel &agrave;&nbsp; <tt><a href="KeyPgViewgraphics.html">View</a></tt>. L&apos;image est tronqu&eacute;e si elle est dessin&eacute;e en-dehors du tampon destination.<br \="">
+<br \="">
+<b>Tampons Image Valides</b><br \="">
+<div class="fb_indent">Les tampons image <tt><i>source</i></tt> et <tt><i>target</i></tt> doivent &ecirc;tre des tampons image valides. Des tampons image valides sont cr&eacute;&eacute;s par <tt><a href="KeyPgGetgraphics.html">Get</a></tt> ou <tt><a href="KeyPgImagecreate.html">ImageCreate</a></tt>. Des tampons image valides peuvent &ecirc;tre sp&eacute;cifi&eacute;s dans <tt><b>Put</b></tt> utilisant un tableau avec un index optionnel ou un pointeur avec un index optionnel.<br \="">
+<br \="">
+</div><b>M&eacute;thodes de dessin</b><br \="">
+<div class="fb_indent">D&eacute;pendant de la m&eacute;thode utilis&eacute;e, les valeurs pixel dans le tampon destination sont utilis&eacute;es pour calculer les valeurs pixel qui seront dessin&eacute;es. Les m&eacute;thodes <tt>PSET</tt>, <tt>PRESET</tt> et <tt>TRANS</tt> n&apos;utilisent pas le tampon destination pour calculer les valeurs finales, au contraire des m&eacute;thodes <tt>AND</tt>, <tt>OR</tt>, <tt>XOR</tt>, <tt>ALPHA</tt> et <tt>ADD</tt>. Les images qui sont dessin&eacute;es par ces derni&egrave;res m&eacute;thodes seront diff&eacute;rentes en fonction du contenu du tampon destination.<br \="">
+<br \="">
+</div><b>Diff&eacute;rent formats de pixel</b><br \="">
+<div class="fb_indent">Le format de pixel d&apos;un tampon image doit &ecirc;tre compatible avec la profondeur de couleur du mode de graphique courant; autrement dit, si vous faites l&apos;acquisition d&apos;une image en utilisant <tt><a href="KeyPgGetgraphics.html">Get</a></tt> et que plus tard vous changez de mode &eacute;cran avec <tt><a href="KeyPgScreengraphics.html">Screen</a></tt>, les donn&eacute;es image ne seront peut &ecirc;tre pas valides dans ce nouveau mode graphique, et vous ne pourrez peut &ecirc;tre pas l&apos;afficher &agrave;&nbsp; l&apos;&eacute;cran. Vous noterez cependant que vous pourrez toujours dessiner un tampon image sur un autre tampon image via <tt><b>Put</b></tt> tant que ces tampons auront &eacute;t&eacute; cr&eacute;&eacute;s avec la m&ecirc;me profondeur.<br \="">
+<br \="">
+Les m&eacute;thodes <tt>AND</tt>, <tt>OR</tt> et <tt>XOR</tt> donnent des r&eacute;sultats diff&eacute;rents en fonction de la pofondeur de couleur courante, car les pixels sont stock&eacute;s dans diff&eacute;rents formats; voir <a href="GfxInternalFormats.html">Formats internes des pixels</a> pour des d&eacute;tails. <br \="">
+<br \="">
+</div><b>Masque de couleur</b><br \="">
+<div class="fb_indent">Les m&eacute;thodes <tt>TRANS</tt>, <tt>ALPHA</tt> et <tt>ADD</tt> ne dessinent pas les pixels de l'image source qui utilisent le masque de couleur. Le masque de couleur d&eacute;pend de la profondeur de la cible (un tampon image ou l&apos;&eacute;cran): pour des profondeurs jusqu&apos;&agrave;&nbsp; 8 bpp (modes avec palette) c&apos;est la couleur d&apos;indice <tt>0</tt>, alors qu&apos;en profondeur &apos;hi/truecolor&apos; (16 et 32 bpp) il correspond &agrave;&nbsp; magenta, c&apos;est &agrave;&nbsp; dire <tt><a href="KeyPgRgb.html">RGB</a>(255, 0, 255)</tt>. Notez que dans les modes 32 bpp la valeur alpha d&apos;une couleur n&apos;affecte pas l&apos;identification de la couleur transparente; seuls les 24 bits de poids faibles sont utilis&eacute;s pour l&apos;identifier. Voir <a href="GfxInternalFormats.html">Formats internes des pixels </a> pour plus de d&eacute;tails. <br \="">
+<br \="">
+</div><b>Dessin de la transparence (Alpha drawing)</b>
+<div class="fb_indent">La m&eacute;thode <tt>ALPHA</tt> est utilisable dans deux modes. Si le param&egrave;tre <tt><i>value</i></tt> est sp&eacute;cifi&eacute;, il est utilis&eacute; pour sp&eacute;cifier le niveau de transparence pour l&apos;image enti&egrave;re &agrave;&nbsp; dessiner; une valeur de 0 dessinera une image compl&egrave;tement transparente, alors qu&apos;une valeur de 255 en dessinera une sans aucune transparence. Ce mode ne fonctionne qu&apos;avec des cibles &apos;hi/truecolor&apos; (16 et 32 bpp).<br \="">
+Si le param&egrave;tre <tt><i>value</i></tt> est omis, la m&eacute;thode <tt>ALPHA</tt> prendra la valeur du niveau alpha sur une base par-pixel, permettant de dessiner des images avec un canal alpha (certaines parties de l&apos;image pourront &eacute;tre plus ou moins transparentes que d&apos;autres). Ce mode ne fonctionne qu&apos;avec des tampons image de 32 bpp, car c&apos;est la seule profondeur de couleur permettant d&apos;inclure la valeur alpha dans chaque pixel.<br \="">
+<br \="">
+</div>
+<b>Jouer avec le canal "alpha"</b>
+<div class="fb_indent">Normalement <tt><b>Put</b></tt> ne permet d&apos;&eacute;crire des tampons image que sur des cibles de m&ecirc;me profondeur, mais il y a une exception. Quand vous dessinez un tampon image de 8 bpp sur une cible de 32 bpp et que la m&eacute;thode <tt>ALPHA</tt> est utilis&eacute;e, l&apos;image source de 8 bpp est dessin&eacute;e dans le canal alpha de la cible 32 bpp. Cela permet de valider facilement la totalit&eacute; du canal alpha d&apos;une image sans &eacute;tre oblig&eacute; de manier individuellement ses donn&eacute;es pixels.<br \="">
+<br \="">
+</div>
+<b>M&eacute;thode CUSTOM de Modification des pixels</b>
+<div class="fb_indent">La m&eacute;thode <tt>CUSTOM</tt> utilise une fonction d&eacute;finie par l&apos;utilisateur pour calculer les valeurs finales des pixels &agrave; dessiner dans le tampon destination. Cette fonction sera appel&eacute;e pour chaque pixel de l&apos;image source, et recevra les valeurs des pixels source et destination et un pointeur de donn&eacute;es pass&eacute; par la fonction <tt><b>Put</b></tt>. La valeur du pixel renvoy&eacute;e sera celle utilis&eacute;e pour dessiner sur le tampon destination. La fonction est de la forme:<br \="">
+<br \="">
+<tt><a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgFunction.html">Function</a> <i>identifier</i> ( <a href="KeyPgByval.html">ByVal</a> <i>source_pixel</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgUinteger.html">UInteger</a>, <a href="KeyPgByval.html">ByVal</a> <i>destination_pixel</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgUinteger.html">UInteger</a>, <a href="KeyPgByval.html">ByVal</a> <i>parameter</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgAny.html">Any</a> <a href="KeyPgPtr.html">Ptr</a>) <a href="KeyPgAs.html">As</a> <a href="KeyPgUinteger.html">UInteger</a></tt><br \="">
+<br \="">
+<div class="fb_indent"><tt><i>identifier</i></tt> est le nom de la fonction. Selon vos d&eacute;sirs.<br \="">
+<tt><i>source_pixel</i></tt> est la valeur du pixel courant de l&apos;image source.<br \="">
+<tt><i>destination_pixel</i></tt> est la valeur du pixel courant de l&apos;image destination.<br \="">
+<tt><i>parameter</i></tt> c&apos;est le param&egrave;tre pass&eacute; par la commande <tt><b>Put</b></tt>. Ce doit &ecirc;tre un <tt><a href="KeyPgPtr.html">Pointeur</a></tt> de donn&eacute;es.  S&apos;il est omis, sa valeur sera z&eacute;ro.<br \="">
+<br \="">
+</div>
+</div>
+</div>
+<div class="fb_sect_title">Exemple</div>
+<div class="fb_sect_cont"><br \="">
+Le programme ci-dessous donne un exemple simple de la fa&ccedil;on d&apos;utiliser <tt><b>Put</b></tt> pour placer une image &agrave; l&apos;&eacute;cran, incluant la cr&eacute;ation d&apos;un tampon image et la lib&eacute;ration de la m&eacute;moire apr&eacute;s utilisation.<br \="">
 <tt><div class="freebasic">
-<span class="com">''&nbsp;set&nbsp;up&nbsp;the&nbsp;screen&nbsp;and&nbsp;fill&nbsp;the&nbsp;background&nbsp;with&nbsp;a&nbsp;color</span><br />
-<span class="key">ScreenRes</span>&nbsp;<span class="num">320</span><span class="oth">,</span>&nbsp;<span class="num">200</span><span class="oth">,</span>&nbsp;<span class="num">32</span><br />
-<span class="key">Paint</span>&nbsp;<span class="oth">(</span><span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">0</span><span class="oth">),</span>&nbsp;<span class="key">RGB</span><span class="oth">(</span><span class="num">64</span><span class="oth">,</span>&nbsp;<span class="num">128</span><span class="oth">,</span>&nbsp;<span class="num">255</span><span class="oth">)</span><br />
-<br />
-<span class="com">''&nbsp;set&nbsp;up&nbsp;an&nbsp;image&nbsp;and&nbsp;draw&nbsp;something&nbsp;in&nbsp;it</span><br />
-<span class="key">Dim</span>&nbsp;<span class="wrd">img</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Any</span>&nbsp;<span class="key">Ptr</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">ImageCreate</span><span class="oth">(</span>&nbsp;<span class="num">32</span><span class="oth">,</span>&nbsp;<span class="num">32</span><span class="oth">,</span>&nbsp;<span class="key">RGB</span><span class="oth">(</span><span class="num">255</span><span class="oth">,</span>&nbsp;<span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">255</span><span class="oth">)</span>&nbsp;<span class="oth">)</span><br />
-<span class="key">Circle</span>&nbsp;<span class="wrd">img</span><span class="oth">,</span>&nbsp;<span class="oth">(</span><span class="num">16</span><span class="oth">,</span>&nbsp;<span class="num">16</span><span class="oth">),</span>&nbsp;<span class="num">15</span><span class="oth">,</span>&nbsp;<span class="key">RGB</span><span class="oth">(</span><span class="num">255</span><span class="oth">,</span>&nbsp;<span class="num">255</span><span class="oth">,</span>&nbsp;<span class="num">0</span><span class="oth">),</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">,</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">,</span>&nbsp;<span class="num">1</span><span class="oth">,</span>&nbsp;<span class="wrd">f</span><br />
-<span class="key">Circle</span>&nbsp;<span class="wrd">img</span><span class="oth">,</span>&nbsp;<span class="oth">(</span><span class="num">10</span><span class="oth">,</span>&nbsp;<span class="num">10</span><span class="oth">),</span>&nbsp;<span class="num">3</span><span class="oth">,</span>&nbsp;&nbsp;<span class="key">RGB</span><span class="oth">(</span>&nbsp;&nbsp;<span class="num">0</span><span class="oth">,</span>&nbsp;&nbsp;&nbsp;<span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">0</span><span class="oth">),</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">,</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">,</span>&nbsp;<span class="num">2</span><span class="oth">,</span>&nbsp;<span class="wrd">f</span><br />
-<span class="key">Circle</span>&nbsp;<span class="wrd">img</span><span class="oth">,</span>&nbsp;<span class="oth">(</span><span class="num">23</span><span class="oth">,</span>&nbsp;<span class="num">10</span><span class="oth">),</span>&nbsp;<span class="num">3</span><span class="oth">,</span>&nbsp;&nbsp;<span class="key">RGB</span><span class="oth">(</span>&nbsp;&nbsp;<span class="num">0</span><span class="oth">,</span>&nbsp;&nbsp;&nbsp;<span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">0</span><span class="oth">),</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">,</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">,</span>&nbsp;<span class="num">2</span><span class="oth">,</span>&nbsp;<span class="wrd">f</span><br />
-<span class="key">Circle</span>&nbsp;<span class="wrd">img</span><span class="oth">,</span>&nbsp;<span class="oth">(</span><span class="num">16</span><span class="oth">,</span>&nbsp;<span class="num">18</span><span class="oth">),</span>&nbsp;<span class="num">10</span><span class="oth">,</span>&nbsp;<span class="key">RGB</span><span class="oth">(</span>&nbsp;&nbsp;<span class="num">0</span><span class="oth">,</span>&nbsp;&nbsp;&nbsp;<span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">0</span><span class="oth">),</span>&nbsp;<span class="num">3.14</span><span class="oth">,</span>&nbsp;<span class="num">6.28</span><br />
-<br />
-<span class="com">''&nbsp;PUT&nbsp;the&nbsp;image&nbsp;in&nbsp;the&nbsp;center&nbsp;of&nbsp;the&nbsp;screen</span><br />
-<span class="key">Put</span>&nbsp;<span class="oth">(</span><span class="num">160</span>&nbsp;<span class="oth">-</span>&nbsp;<span class="num">16</span><span class="oth">,</span>&nbsp;<span class="num">100</span>&nbsp;<span class="oth">-</span>&nbsp;<span class="num">16</span><span class="oth">),</span>&nbsp;<span class="wrd">img</span><span class="oth">,</span>&nbsp;<span class="key">Trans</span><br />
-<br />
-<span class="com">''&nbsp;free&nbsp;the&nbsp;image&nbsp;memory</span><br />
-<span class="key">ImageDestroy</span>&nbsp;<span class="wrd">img</span><br />
-<br />
-<span class="com">''&nbsp;wait&nbsp;for&nbsp;a&nbsp;keypress</span><br />
-<span class="key">Sleep</span><br />
-</div></tt><br />
-<br \>
-<div class="fb_img"><img src="images/putgfx1.png" /></div><br \>
-<br \>
-The following example shows how to allocate memory for an image, draw that image using various methods, including a custom blender, and free the memory for the image:<br \>
+<span class="com">&apos;&apos;&nbsp;Valide&nbsp;ecran&nbsp;et&nbsp;remplit&nbsp;avec&nbsp;couleur&nbsp;arriere-plan</span><br>
+<span class="key">ScreenRes</span>&nbsp;<span class="num">320</span><span class="oth">,</span>&nbsp;<span class="num">200</span><span class="oth">,</span>&nbsp;<span class="num">32</span><br>
+<span class="key">Paint</span>&nbsp;<span class="oth">(</span><span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">0</span><span class="oth">),</span>&nbsp;<span class="key">RGB</span><span class="oth">(</span><span class="num">64</span><span class="oth">,</span>&nbsp;<span class="num">128</span><span class="oth">,</span>&nbsp;<span class="num">255</span><span class="oth">)</span><br>
+<br>
+<span class="com">&apos;&apos;&nbsp;Valide&nbsp;une&nbsp;image&nbsp;et&nbsp;dessine&nbsp;quelque&nbsp;chose&nbsp;dedans</span><br>
+<span class="key">Dim</span>&nbsp;<span class="wrd">img</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Any</span>&nbsp;<span class="key">Ptr</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">ImageCreate</span><span class="oth">(</span>&nbsp;<span class="num">32</span><span class="oth">,</span>&nbsp;<span class="num">32</span><span class="oth">,</span>&nbsp;<span class="key">RGB</span><span class="oth">(</span><span class="num">255</span><span class="oth">,</span>&nbsp;<span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">255</span><span class="oth">)</span>&nbsp;<span class="oth">)</span><br>
+<span class="key">Circle</span>&nbsp;<span class="wrd">img</span><span class="oth">,</span>&nbsp;<span class="oth">(</span><span class="num">16</span><span class="oth">,</span>&nbsp;<span class="num">16</span><span class="oth">),</span>&nbsp;<span class="num">15</span><span class="oth">,</span>&nbsp;<span class="key">RGB</span><span class="oth">(</span><span class="num">255</span><span class="oth">,</span>&nbsp;<span class="num">255</span><span class="oth">,</span>&nbsp;<span class="num">0</span><span class="oth">),</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">,</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">,</span>&nbsp;<span class="num">1</span><span class="oth">,</span>&nbsp;<span class="wrd">f</span><br>
+<span class="key">Circle</span>&nbsp;<span class="wrd">img</span><span class="oth">,</span>&nbsp;<span class="oth">(</span><span class="num">10</span><span class="oth">,</span>&nbsp;<span class="num">10</span><span class="oth">),</span>&nbsp;<span class="num">3</span><span class="oth">,</span>&nbsp;&nbsp;<span class="key">RGB</span><span class="oth">(</span>&nbsp;&nbsp;<span class="num">0</span><span class="oth">,</span>&nbsp;&nbsp;&nbsp;<span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">0</span><span class="oth">),</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">,</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">,</span>&nbsp;<span class="num">2</span><span class="oth">,</span>&nbsp;<span class="wrd">f</span><br>
+<span class="key">Circle</span>&nbsp;<span class="wrd">img</span><span class="oth">,</span>&nbsp;<span class="oth">(</span><span class="num">23</span><span class="oth">,</span>&nbsp;<span class="num">10</span><span class="oth">),</span>&nbsp;<span class="num">3</span><span class="oth">,</span>&nbsp;&nbsp;<span class="key">RGB</span><span class="oth">(</span>&nbsp;&nbsp;<span class="num">0</span><span class="oth">,</span>&nbsp;&nbsp;&nbsp;<span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">0</span><span class="oth">),</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">,</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">,</span>&nbsp;<span class="num">2</span><span class="oth">,</span>&nbsp;<span class="wrd">f</span><br>
+<span class="key">Circle</span>&nbsp;<span class="wrd">img</span><span class="oth">,</span>&nbsp;<span class="oth">(</span><span class="num">16</span><span class="oth">,</span>&nbsp;<span class="num">18</span><span class="oth">),</span>&nbsp;<span class="num">10</span><span class="oth">,</span>&nbsp;<span class="key">RGB</span><span class="oth">(</span>&nbsp;&nbsp;<span class="num">0</span><span class="oth">,</span>&nbsp;&nbsp;&nbsp;<span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">0</span><span class="oth">),</span>&nbsp;<span class="num">3.14</span><span class="oth">,</span>&nbsp;<span class="num">6.28</span><br>
+<br>
+<span class="com">&apos;&apos;&nbsp;PUT&nbsp;image&nbsp;au&nbsp;centre&nbsp;ecran</span><br>
+<span class="key">Put</span>&nbsp;<span class="oth">(</span><span class="num">160</span>&nbsp;<span class="oth">-</span>&nbsp;<span class="num">16</span><span class="oth">,</span>&nbsp;<span class="num">100</span>&nbsp;<span class="oth">-</span>&nbsp;<span class="num">16</span><span class="oth">),</span>&nbsp;<span class="wrd">img</span><span class="oth">,</span>&nbsp;<span class="key">Trans</span><br>
+<br>
+<span class="com">&apos;&apos;&nbsp;Libere&nbsp;memoire&nbsp;image</span><br>
+<span class="key">ImageDestroy</span>&nbsp;<span class="wrd">img</span><br>
+<br>
+<span class="com">&apos;&apos;&nbsp;Attend&nbsp;touche&nbsp;appuyee</span><br>
+<span class="key">Sleep</span><br>
+</div></tt><br>
+<br \="">
+<div class="fb_img"><img src="images/putgfx1.png"></div><br \="">
+<br \="">
+L&apos;exemple ci-dessous montre comment allouer de la m&eacute;moire pour une image, puis dessiner celle-ci en utilisant diff&eacute;rentes m&eacute;thodes, y compris en utilisant une fonction personnelle, puis comment lib&eacute;rer la m&eacute;moire utilis&eacute;e:<br \="">
 <tt><div class="freebasic">
-<span class="key">Declare</span>&nbsp;<span class="key">Function</span>&nbsp;<span class="wrd">checkered_blend</span><span class="oth">(</span>&nbsp;<span class="key">ByVal</span>&nbsp;<span class="wrd">src</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">UInteger</span><span class="oth">,</span>&nbsp;<span class="key">ByVal</span>&nbsp;<span class="wrd">dest</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">UInteger</span><span class="oth">,</span>&nbsp;<span class="key">ByVal</span>&nbsp;<span class="wrd">param</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Any</span>&nbsp;<span class="key">Ptr</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">UInteger</span><br />
-<br />
-&nbsp;&nbsp;&nbsp;<span class="key">Screen</span>&nbsp;<span class="num">14</span><span class="oth">,</span>&nbsp;<span class="num">32</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;set&nbsp;320*240*32&nbsp;gfx&nbsp;mode</span><br />
-&nbsp;&nbsp;&nbsp;<br />
-&nbsp;&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Any</span>&nbsp;<span class="key">Ptr</span>&nbsp;<span class="wrd">sprite</span><br />
-&nbsp;&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="wrd">counter</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span><br />
-&nbsp;&nbsp;&nbsp;<br />
-&nbsp;&nbsp;&nbsp;<span class="wrd">sprite</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">ImageCreate</span><span class="oth">(</span>&nbsp;<span class="num">32</span><span class="oth">,</span>&nbsp;<span class="num">32</span>&nbsp;<span class="oth">)</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;allocate&nbsp;memory&nbsp;for&nbsp;32x32&nbsp;sprite</span><br />
-&nbsp;&nbsp;&nbsp;<br />
-&nbsp;&nbsp;&nbsp;<span class="key">Line</span>&nbsp;<span class="wrd">sprite</span><span class="oth">,</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">0</span>&nbsp;<span class="oth">)-(</span>&nbsp;<span class="num">31</span><span class="oth">,</span>&nbsp;<span class="num">31</span>&nbsp;<span class="oth">),</span>&nbsp;<span class="key">RGBA</span><span class="oth">(</span><span class="num">255</span><span class="oth">,</span>&nbsp;<span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">64</span><span class="oth">),</span>&nbsp;<span class="wrd">bf</span>&nbsp;&nbsp;<span class="com">''&nbsp;draw&nbsp;a&nbsp;sprite&nbsp;...</span><br />
-&nbsp;&nbsp;&nbsp;<span class="key">Line</span>&nbsp;<span class="wrd">sprite</span><span class="oth">,</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="num">4</span><span class="oth">,</span>&nbsp;<span class="num">4</span>&nbsp;<span class="oth">)-(</span>&nbsp;<span class="num">27</span><span class="oth">,</span>&nbsp;<span class="num">27</span>&nbsp;<span class="oth">),</span>&nbsp;<span class="key">RGBA</span><span class="oth">(</span><span class="num">255</span><span class="oth">,</span>&nbsp;<span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">192</span><span class="oth">),</span>&nbsp;<span class="wrd">bf</span><br />
-&nbsp;&nbsp;&nbsp;<span class="key">Line</span>&nbsp;<span class="wrd">sprite</span><span class="oth">,</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">0</span>&nbsp;<span class="oth">)-(</span>&nbsp;<span class="num">31</span><span class="oth">,</span>&nbsp;<span class="num">31</span>&nbsp;<span class="oth">),</span>&nbsp;<span class="key">RGB</span><span class="oth">(</span><span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">255</span><span class="oth">,</span>&nbsp;<span class="num">0</span><span class="oth">),</span>&nbsp;<span class="wrd">b</span><br />
-&nbsp;&nbsp;&nbsp;<span class="key">Line</span>&nbsp;<span class="wrd">sprite</span><span class="oth">,</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="num">8</span><span class="oth">,</span>&nbsp;<span class="num">8</span>&nbsp;<span class="oth">)-(</span>&nbsp;<span class="num">23</span><span class="oth">,</span>&nbsp;<span class="num">23</span>&nbsp;<span class="oth">),</span>&nbsp;<span class="key">RGBA</span><span class="oth">(</span><span class="num">255</span><span class="oth">,</span>&nbsp;<span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">255</span><span class="oth">,</span>&nbsp;<span class="num">64</span><span class="oth">),</span>&nbsp;<span class="wrd">bf</span><br />
-&nbsp;&nbsp;&nbsp;<span class="key">Line</span>&nbsp;<span class="wrd">sprite</span><span class="oth">,</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="num">1</span><span class="oth">,</span>&nbsp;<span class="num">1</span>&nbsp;<span class="oth">)-(</span>&nbsp;<span class="num">30</span><span class="oth">,</span>&nbsp;<span class="num">30</span>&nbsp;<span class="oth">),</span>&nbsp;<span class="key">RGBA</span><span class="oth">(</span><span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">255</span><span class="oth">,</span>&nbsp;<span class="num">192</span><span class="oth">)</span><br />
-&nbsp;&nbsp;&nbsp;<span class="key">Line</span>&nbsp;<span class="wrd">sprite</span><span class="oth">,</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="num">30</span><span class="oth">,</span>&nbsp;<span class="num">1</span>&nbsp;<span class="oth">)-(</span>&nbsp;<span class="num">1</span><span class="oth">,</span>&nbsp;<span class="num">30</span>&nbsp;<span class="oth">),</span>&nbsp;<span class="key">RGBA</span><span class="oth">(</span><span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">255</span><span class="oth">,</span>&nbsp;<span class="num">192</span><span class="oth">)</span><br />
-&nbsp;&nbsp;&nbsp;<br />
-&nbsp;&nbsp;&nbsp;<span class="key">Cls</span><br />
-&nbsp;&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="wrd">i</span>&nbsp;<span class="oth">:</span>&nbsp;<span class="key">For</span>&nbsp;<span class="wrd">i</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">63</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;draw&nbsp;the&nbsp;background</span><br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Line</span><span class="oth">(</span>&nbsp;<span class="wrd">i</span><span class="oth">,</span><span class="num">0</span>&nbsp;<span class="oth">)-(</span>&nbsp;<span class="wrd">i</span><span class="oth">,</span><span class="num">240</span>&nbsp;<span class="oth">),</span>&nbsp;<span class="key">RGB</span><span class="oth">(</span>&nbsp;<span class="wrd">i</span>&nbsp;<span class="oth">*</span>&nbsp;<span class="num">4</span><span class="oth">,</span>&nbsp;<span class="wrd">i</span>&nbsp;<span class="oth">*</span>&nbsp;<span class="num">4</span><span class="oth">,</span>&nbsp;<span class="wrd">i</span>&nbsp;<span class="oth">*</span>&nbsp;<span class="num">4</span>&nbsp;<span class="oth">)</span><br />
-&nbsp;&nbsp;&nbsp;<span class="key">Next</span>&nbsp;<span class="wrd">i</span><br />
-&nbsp;&nbsp;&nbsp;<br />
-&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;demonstrate&nbsp;all&nbsp;drawing&nbsp;methods&nbsp;...</span><br />
-&nbsp;&nbsp;&nbsp;<span class="key">Put</span><span class="oth">(</span>&nbsp;<span class="num">8</span><span class="oth">,</span><span class="num">14</span>&nbsp;<span class="oth">),</span>&nbsp;<span class="wrd">sprite</span><span class="oth">,</span>&nbsp;<span class="key">PSet</span><br />
-&nbsp;&nbsp;&nbsp;<span class="key">Put</span>&nbsp;<span class="key">Step</span><span class="oth">(</span>&nbsp;<span class="num">16</span><span class="oth">,</span><span class="num">20</span>&nbsp;<span class="oth">),</span>&nbsp;<span class="wrd">sprite</span><span class="oth">,</span>&nbsp;<span class="key">PReset</span><br />
-&nbsp;&nbsp;&nbsp;<span class="key">Put</span>&nbsp;<span class="key">Step</span><span class="oth">(</span>&nbsp;<span class="oth">-</span><span class="num">16</span><span class="oth">,</span><span class="num">20</span>&nbsp;<span class="oth">),</span>&nbsp;<span class="wrd">sprite</span><span class="oth">,</span>&nbsp;<span class="key">And</span><br />
-&nbsp;&nbsp;&nbsp;<span class="key">Put</span>&nbsp;<span class="key">Step</span><span class="oth">(</span>&nbsp;<span class="num">16</span><span class="oth">,</span><span class="num">20</span>&nbsp;<span class="oth">),</span>&nbsp;<span class="wrd">sprite</span><span class="oth">,</span>&nbsp;<span class="key">Or</span><br />
-&nbsp;&nbsp;&nbsp;<span class="key">Put</span>&nbsp;<span class="key">Step</span><span class="oth">(</span>&nbsp;<span class="oth">-</span><span class="num">16</span><span class="oth">,</span><span class="num">20</span>&nbsp;<span class="oth">),</span>&nbsp;<span class="wrd">sprite</span><span class="oth">,</span>&nbsp;<span class="key">Xor</span><br />
-&nbsp;&nbsp;&nbsp;<span class="key">Put</span>&nbsp;<span class="key">Step</span><span class="oth">(</span>&nbsp;<span class="num">16</span><span class="oth">,</span><span class="num">20</span>&nbsp;<span class="oth">),</span>&nbsp;<span class="wrd">sprite</span><span class="oth">,</span>&nbsp;<span class="key">Trans</span><br />
-&nbsp;&nbsp;&nbsp;<span class="key">Put</span>&nbsp;<span class="key">Step</span><span class="oth">(</span>&nbsp;<span class="oth">-</span><span class="num">16</span><span class="oth">,</span><span class="num">20</span>&nbsp;<span class="oth">),</span>&nbsp;<span class="wrd">sprite</span><span class="oth">,</span>&nbsp;<span class="key">Alpha</span><span class="oth">,</span>&nbsp;<span class="num">96</span><br />
-&nbsp;&nbsp;&nbsp;<span class="key">Put</span>&nbsp;<span class="key">Step</span><span class="oth">(</span>&nbsp;<span class="num">16</span><span class="oth">,</span><span class="num">20</span>&nbsp;<span class="oth">),</span>&nbsp;<span class="wrd">sprite</span><span class="oth">,</span>&nbsp;<span class="key">Alpha</span><br />
-&nbsp;&nbsp;&nbsp;<span class="key">Put</span>&nbsp;<span class="key">Step</span><span class="oth">(</span>&nbsp;<span class="oth">-</span><span class="num">16</span><span class="oth">,</span><span class="num">20</span>&nbsp;<span class="oth">),</span>&nbsp;<span class="wrd">sprite</span><span class="oth">,</span>&nbsp;<span class="wrd">add</span><span class="oth">,</span>&nbsp;<span class="num">192</span><br />
-&nbsp;&nbsp;&nbsp;<span class="key">Put</span>&nbsp;<span class="key">Step</span><span class="oth">(</span>&nbsp;<span class="num">16</span><span class="oth">,</span><span class="num">20</span>&nbsp;<span class="oth">),</span>&nbsp;<span class="wrd">sprite</span><span class="oth">,</span>&nbsp;<span class="key">Custom</span><span class="oth">,</span>&nbsp;<span class="oth">@</span><span class="wrd">checkered_blend</span><span class="oth">,</span>&nbsp;<span class="oth">@</span><span class="wrd">counter</span><br />
-&nbsp;&nbsp;&nbsp;<br />
-&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;print&nbsp;a&nbsp;description&nbsp;near&nbsp;each&nbsp;demo</span><br />
-&nbsp;&nbsp;&nbsp;<span class="key">Draw</span>&nbsp;<span class="key">String</span>&nbsp;<span class="oth">(</span><span class="num">100</span><span class="oth">,</span>&nbsp;<span class="num">26</span><span class="oth">),</span>&nbsp;<span class="quo">"&lt;-&nbsp;pset"</span><br />
-&nbsp;&nbsp;&nbsp;<span class="key">Draw</span>&nbsp;<span class="key">String</span>&nbsp;<span class="key">Step</span>&nbsp;<span class="oth">(</span><span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">20</span><span class="oth">),</span>&nbsp;<span class="quo">"&lt;-&nbsp;preset"</span><br />
-&nbsp;&nbsp;&nbsp;<span class="key">Draw</span>&nbsp;<span class="key">String</span>&nbsp;<span class="key">Step</span>&nbsp;<span class="oth">(</span><span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">20</span><span class="oth">),</span>&nbsp;<span class="quo">"&lt;-&nbsp;and"</span><br />
-&nbsp;&nbsp;&nbsp;<span class="key">Draw</span>&nbsp;<span class="key">String</span>&nbsp;<span class="key">Step</span>&nbsp;<span class="oth">(</span><span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">20</span><span class="oth">),</span>&nbsp;<span class="quo">"&lt;-&nbsp;or"</span><br />
-&nbsp;&nbsp;&nbsp;<span class="key">Draw</span>&nbsp;<span class="key">String</span>&nbsp;<span class="key">Step</span>&nbsp;<span class="oth">(</span><span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">20</span><span class="oth">),</span>&nbsp;<span class="quo">"&lt;-&nbsp;xor"</span><br />
-&nbsp;&nbsp;&nbsp;<span class="key">Draw</span>&nbsp;<span class="key">String</span>&nbsp;<span class="key">Step</span>&nbsp;<span class="oth">(</span><span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">20</span><span class="oth">),</span>&nbsp;<span class="quo">"&lt;-&nbsp;trans"</span><br />
-&nbsp;&nbsp;&nbsp;<span class="key">Draw</span>&nbsp;<span class="key">String</span>&nbsp;<span class="key">Step</span>&nbsp;<span class="oth">(</span><span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">20</span><span class="oth">),</span>&nbsp;<span class="quo">"&lt;-&nbsp;alpha&nbsp;(uniform)"</span><br />
-&nbsp;&nbsp;&nbsp;<span class="key">Draw</span>&nbsp;<span class="key">String</span>&nbsp;<span class="key">Step</span>&nbsp;<span class="oth">(</span><span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">20</span><span class="oth">),</span>&nbsp;<span class="quo">"&lt;-&nbsp;alpha&nbsp;(per&nbsp;pixel)"</span><br />
-&nbsp;&nbsp;&nbsp;<span class="key">Draw</span>&nbsp;<span class="key">String</span>&nbsp;<span class="key">Step</span>&nbsp;<span class="oth">(</span><span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">20</span><span class="oth">),</span>&nbsp;<span class="quo">"&lt;-&nbsp;add"</span><br />
-&nbsp;&nbsp;&nbsp;<span class="key">Draw</span>&nbsp;<span class="key">String</span>&nbsp;<span class="key">Step</span>&nbsp;<span class="oth">(</span><span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">20</span><span class="oth">),</span>&nbsp;<span class="quo">"&lt;-&nbsp;custom"</span><br />
-&nbsp;&nbsp;&nbsp;<br />
-&nbsp;&nbsp;&nbsp;<span class="key">ImageDestroy</span><span class="oth">(</span>&nbsp;<span class="wrd">sprite</span>&nbsp;<span class="oth">)</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;free&nbsp;allocated&nbsp;memory&nbsp;for&nbsp;sprite</span><br />
-&nbsp;&nbsp;&nbsp;<span class="key">Sleep</span>&nbsp;<span class="oth">:</span>&nbsp;<span class="key">End</span>&nbsp;<span class="num">0</span><br />
-<br />
-<span class="com">''&nbsp;custom&nbsp;blender&nbsp;function:&nbsp;chequered&nbsp;put</span><br />
-<span class="key">Function</span>&nbsp;<span class="wrd">checkered_blend</span><span class="oth">(</span>&nbsp;<span class="key">ByVal</span>&nbsp;<span class="wrd">src</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">UInteger</span><span class="oth">,</span>&nbsp;<span class="key">ByVal</span>&nbsp;<span class="wrd">dest</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">UInteger</span><span class="oth">,</span>&nbsp;<span class="key">ByVal</span>&nbsp;<span class="wrd">param</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Any</span>&nbsp;<span class="key">Ptr</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">UInteger</span><br />
-&nbsp;&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="key">Ptr</span>&nbsp;<span class="wrd">counter</span><br />
-&nbsp;&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">UInteger</span>&nbsp;<span class="wrd">pixel</span><br />
-&nbsp;&nbsp;&nbsp;<br />
-&nbsp;&nbsp;&nbsp;<span class="wrd">counter</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">Cast</span><span class="oth">(</span><span class="key">Integer</span>&nbsp;<span class="key">Ptr</span><span class="oth">,</span>&nbsp;<span class="wrd">param</span><span class="oth">)</span><br />
-&nbsp;&nbsp;&nbsp;<span class="wrd">pixel</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">IIf</span><span class="oth">(((*</span><span class="wrd">counter</span>&nbsp;<span class="key">And</span>&nbsp;<span class="num">4</span><span class="oth">)</span>&nbsp;<span class="key">Shr</span>&nbsp;<span class="num">2</span><span class="oth">)</span>&nbsp;<span class="key">Xor</span>&nbsp;<span class="oth">((*</span><span class="wrd">counter</span>&nbsp;<span class="key">And</span>&nbsp;<span class="num">128</span><span class="oth">)</span>&nbsp;<span class="key">Shr</span>&nbsp;<span class="num">7</span><span class="oth">),</span>&nbsp;<span class="wrd">src</span><span class="oth">,</span>&nbsp;<span class="wrd">dest</span><span class="oth">)</span><br />
-&nbsp;&nbsp;&nbsp;<span class="oth">*</span><span class="wrd">counter</span>&nbsp;<span class="oth">+=</span>&nbsp;<span class="num">1</span><br />
-&nbsp;&nbsp;&nbsp;<span class="key">Return</span>&nbsp;<span class="wrd">pixel</span><br />
-<span class="key">End</span>&nbsp;<span class="key">Function</span><br />
-</div></tt><br />
-<br \>
-<div class="fb_img"><img src="images/putgfx2.png" /></div><br \>
-<br \>
-</div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
-<ul><li> <tt><i>target</i></tt> is new to FreeBASIC<br \>
-<li> The <tt>TRANS</tt>, <tt>ALPHA</tt>, <tt>ADD</tt> and <tt>CUSTOM</tt> methods are new to FreeBASIC<br \>
-<li> FB uses a different image format internally, which is unsupported by QB<br \>
-<li> QB throws a run-time error instead of clipping out-of-bounds images<br \>
-<li> In QB, only arrays can be specified as source images<br \>
-<br \>
-</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
-<ul><li> <tt><a href="KeyPgPutfileio.html">Put (File I/O)</a></tt><br \>
-<li> <tt><a href="KeyPgGetgraphics.html">Get (Graphics)</a></tt><br \>
-<li> <tt><a href="KeyPgImagecreate.html">ImageCreate</a></tt><br \>
-<li> <tt><a href="KeyPgAlphaGfx.html">Alpha</a></tt><br \>
-<li> <a href="GfxInternalFormats.html">Internal pixel formats</a><br \>
-<br \>
+<span class="key">Declare</span>&nbsp;<span class="key">Function</span>&nbsp;<span class="wrd">checkered_blend</span><span class="oth">(</span>&nbsp;<span class="key">ByVal</span>&nbsp;<span class="wrd">src</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">UInteger</span><span class="oth">,</span>&nbsp;<span class="key">ByVal</span>&nbsp;<span class="wrd">dest</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">UInteger</span><span class="oth">,</span>&nbsp;<span class="key">ByVal</span>&nbsp;<span class="wrd">param</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Any</span>&nbsp;<span class="key">Ptr</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">UInteger</span><br>
+<br>
+&nbsp;&nbsp;&nbsp;<span class="key">Screen</span>&nbsp;<span class="num">14</span><span class="oth">,</span>&nbsp;<span class="num">32</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">&apos;&apos;&nbsp;valide&nbsp;320*240*32&nbsp;mode&nbsp;gfx</span><br>
+&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Any</span>&nbsp;<span class="key">Ptr</span>&nbsp;<span class="wrd">sprite</span><br>
+&nbsp;&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="wrd">counter</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span><br>
+&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;<span class="wrd">sprite</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">ImageCreate</span><span class="oth">(</span>&nbsp;<span class="num">32</span><span class="oth">,</span>&nbsp;<span class="num">32</span>&nbsp;<span class="oth">)</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">&apos;&apos;&nbsp;alloue&nbsp;memoire&nbsp;pour&nbsp;sprite&nbsp;32x32</span><br>
+&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;<span class="key">Line</span>&nbsp;<span class="wrd">sprite</span><span class="oth">,</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">0</span>&nbsp;<span class="oth">)-(</span>&nbsp;<span class="num">31</span><span class="oth">,</span>&nbsp;<span class="num">31</span>&nbsp;<span class="oth">),</span>&nbsp;<span class="key">RGBA</span><span class="oth">(</span><span class="num">255</span><span class="oth">,</span>&nbsp;<span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">64</span><span class="oth">),</span>&nbsp;<span class="wrd">bf</span>&nbsp;&nbsp;<span class="com">&apos;&apos;&nbsp;dessine&nbsp;un&nbsp;sprite&nbsp;...</span><br>
+&nbsp;&nbsp;&nbsp;<span class="key">Line</span>&nbsp;<span class="wrd">sprite</span><span class="oth">,</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="num">4</span><span class="oth">,</span>&nbsp;<span class="num">4</span>&nbsp;<span class="oth">)-(</span>&nbsp;<span class="num">27</span><span class="oth">,</span>&nbsp;<span class="num">27</span>&nbsp;<span class="oth">),</span>&nbsp;<span class="key">RGBA</span><span class="oth">(</span><span class="num">255</span><span class="oth">,</span>&nbsp;<span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">192</span><span class="oth">),</span>&nbsp;<span class="wrd">bf</span><br>
+&nbsp;&nbsp;&nbsp;<span class="key">Line</span>&nbsp;<span class="wrd">sprite</span><span class="oth">,</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">0</span>&nbsp;<span class="oth">)-(</span>&nbsp;<span class="num">31</span><span class="oth">,</span>&nbsp;<span class="num">31</span>&nbsp;<span class="oth">),</span>&nbsp;<span class="key">RGB</span><span class="oth">(</span><span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">255</span><span class="oth">,</span>&nbsp;<span class="num">0</span><span class="oth">),</span>&nbsp;<span class="wrd">b</span><br>
+&nbsp;&nbsp;&nbsp;<span class="key">Line</span>&nbsp;<span class="wrd">sprite</span><span class="oth">,</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="num">8</span><span class="oth">,</span>&nbsp;<span class="num">8</span>&nbsp;<span class="oth">)-(</span>&nbsp;<span class="num">23</span><span class="oth">,</span>&nbsp;<span class="num">23</span>&nbsp;<span class="oth">),</span>&nbsp;<span class="key">RGBA</span><span class="oth">(</span><span class="num">255</span><span class="oth">,</span>&nbsp;<span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">255</span><span class="oth">,</span>&nbsp;<span class="num">64</span><span class="oth">),</span>&nbsp;<span class="wrd">bf</span><br>
+&nbsp;&nbsp;&nbsp;<span class="key">Line</span>&nbsp;<span class="wrd">sprite</span><span class="oth">,</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="num">1</span><span class="oth">,</span>&nbsp;<span class="num">1</span>&nbsp;<span class="oth">)-(</span>&nbsp;<span class="num">30</span><span class="oth">,</span>&nbsp;<span class="num">30</span>&nbsp;<span class="oth">),</span>&nbsp;<span class="key">RGBA</span><span class="oth">(</span><span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">255</span><span class="oth">,</span>&nbsp;<span class="num">192</span><span class="oth">)</span><br>
+&nbsp;&nbsp;&nbsp;<span class="key">Line</span>&nbsp;<span class="wrd">sprite</span><span class="oth">,</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="num">30</span><span class="oth">,</span>&nbsp;<span class="num">1</span>&nbsp;<span class="oth">)-(</span>&nbsp;<span class="num">1</span><span class="oth">,</span>&nbsp;<span class="num">30</span>&nbsp;<span class="oth">),</span>&nbsp;<span class="key">RGBA</span><span class="oth">(</span><span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">255</span><span class="oth">,</span>&nbsp;<span class="num">192</span><span class="oth">)</span><br>
+&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;<span class="key">Cls</span><br>
+&nbsp;&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="wrd">i</span>&nbsp;<span class="oth">:</span>&nbsp;<span class="key">For</span>&nbsp;<span class="wrd">i</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">63</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">&apos;&apos;&nbsp;draw&nbsp;l'&nbsp;arriere-plan</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Line</span><span class="oth">(</span>&nbsp;<span class="wrd">i</span><span class="oth">,</span><span class="num">0</span>&nbsp;<span class="oth">)-(</span>&nbsp;<span class="wrd">i</span><span class="oth">,</span><span class="num">240</span>&nbsp;<span class="oth">),</span>&nbsp;<span class="key">RGB</span><span class="oth">(</span>&nbsp;<span class="wrd">i</span>&nbsp;<span class="oth">*</span>&nbsp;<span class="num">4</span><span class="oth">,</span>&nbsp;<span class="wrd">i</span>&nbsp;<span class="oth">*</span>&nbsp;<span class="num">4</span><span class="oth">,</span>&nbsp;<span class="wrd">i</span>&nbsp;<span class="oth">*</span>&nbsp;<span class="num">4</span>&nbsp;<span class="oth">)</span><br>
+&nbsp;&nbsp;&nbsp;<span class="key">Next</span>&nbsp;<span class="wrd">i</span><br>
+&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;<span class="com">&apos;&apos;&nbsp;Demonstration&nbsp;toutes&nbsp;methodes&nbsp;dessin&nbsp;...</span><br>
+&nbsp;&nbsp;&nbsp;<span class="key">Put</span><span class="oth">(</span>&nbsp;<span class="num">8</span><span class="oth">,</span><span class="num">14</span>&nbsp;<span class="oth">),</span>&nbsp;<span class="wrd">sprite</span><span class="oth">,</span>&nbsp;<span class="key">PSet</span><br>
+&nbsp;&nbsp;&nbsp;<span class="key">Put</span>&nbsp;<span class="key">Step</span><span class="oth">(</span>&nbsp;<span class="num">16</span><span class="oth">,</span><span class="num">20</span>&nbsp;<span class="oth">),</span>&nbsp;<span class="wrd">sprite</span><span class="oth">,</span>&nbsp;<span class="key">PReset</span><br>
+&nbsp;&nbsp;&nbsp;<span class="key">Put</span>&nbsp;<span class="key">Step</span><span class="oth">(</span>&nbsp;<span class="oth">-</span><span class="num">16</span><span class="oth">,</span><span class="num">20</span>&nbsp;<span class="oth">),</span>&nbsp;<span class="wrd">sprite</span><span class="oth">,</span>&nbsp;<span class="key">And</span><br>
+&nbsp;&nbsp;&nbsp;<span class="key">Put</span>&nbsp;<span class="key">Step</span><span class="oth">(</span>&nbsp;<span class="num">16</span><span class="oth">,</span><span class="num">20</span>&nbsp;<span class="oth">),</span>&nbsp;<span class="wrd">sprite</span><span class="oth">,</span>&nbsp;<span class="key">Or</span><br>
+&nbsp;&nbsp;&nbsp;<span class="key">Put</span>&nbsp;<span class="key">Step</span><span class="oth">(</span>&nbsp;<span class="oth">-</span><span class="num">16</span><span class="oth">,</span><span class="num">20</span>&nbsp;<span class="oth">),</span>&nbsp;<span class="wrd">sprite</span><span class="oth">,</span>&nbsp;<span class="key">Xor</span><br>
+
+&nbsp;&nbsp;&nbsp;<span class="key">Put</span>&nbsp;<span class="key">Step</span><span class="oth">(</span>&nbsp;<span class="num">16</span><span class="oth">,</span><span class="num">20</span>&nbsp;<span class="oth">),</span>&nbsp;<span class="wrd">sprite</span><span class="oth">,</span>&nbsp;<span class="key">Trans</span><br>
+&nbsp;&nbsp;&nbsp;<span class="key">Put</span>&nbsp;<span class="key">Step</span><span class="oth">(</span>&nbsp;<span class="oth">-</span><span class="num">16</span><span class="oth">,</span><span class="num">20</span>&nbsp;<span class="oth">),</span>&nbsp;<span class="wrd">sprite</span><span class="oth">,</span>&nbsp;<span class="key">Alpha</span><span class="oth">,</span>&nbsp;<span class="num">96</span><br>
+&nbsp;&nbsp;&nbsp;<span class="key">Put</span>&nbsp;<span class="key">Step</span><span class="oth">(</span>&nbsp;<span class="num">16</span><span class="oth">,</span><span class="num">20</span>&nbsp;<span class="oth">),</span>&nbsp;<span class="wrd">sprite</span><span class="oth">,</span>&nbsp;<span class="key">Alpha</span><br>
+&nbsp;&nbsp;&nbsp;<span class="key">Put</span>&nbsp;<span class="key">Step</span><span class="oth">(</span>&nbsp;<span class="oth">-</span><span class="num">16</span><span class="oth">,</span><span class="num">20</span>&nbsp;<span class="oth">),</span>&nbsp;<span class="wrd">sprite</span><span class="oth">,</span>&nbsp;<span class="wrd">add</span><span class="oth">,</span>&nbsp;<span class="num">192</span><br>
+&nbsp;&nbsp;&nbsp;<span class="key">Put</span>&nbsp;<span class="key">Step</span><span class="oth">(</span>&nbsp;<span class="num">16</span><span class="oth">,</span><span class="num">20</span>&nbsp;<span class="oth">),</span>&nbsp;<span class="wrd">sprite</span><span class="oth">,</span>&nbsp;<span class="key">Custom</span><span class="oth">,</span>&nbsp;<span class="oth">@</span><span class="wrd">checkered_blend</span><span class="oth">,</span>&nbsp;<span class="oth">@</span><span class="wrd">counter</span><br>
+&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;<span class="com">&apos;&apos;&nbsp;Affiche&nbsp;une&nbsp;description&nbsp;a&nbsp;cote&nbsp;chaque&nbsp;demo</span><br>
+&nbsp;&nbsp;&nbsp;<span class="key">Draw</span>&nbsp;<span class="key">String</span>&nbsp;<span class="oth">(</span><span class="num">100</span><span class="oth">,</span>&nbsp;<span class="num">26</span><span class="oth">),</span>&nbsp;<span class="quo">"&lt;-&nbsp;pset"</span><br>
+&nbsp;&nbsp;&nbsp;<span class="key">Draw</span>&nbsp;<span class="key">String</span>&nbsp;<span class="key">Step</span>&nbsp;<span class="oth">(</span><span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">20</span><span class="oth">),</span>&nbsp;<span class="quo">"&lt;-&nbsp;preset"</span><br>
+&nbsp;&nbsp;&nbsp;<span class="key">Draw</span>&nbsp;<span class="key">String</span>&nbsp;<span class="key">Step</span>&nbsp;<span class="oth">(</span><span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">20</span><span class="oth">),</span>&nbsp;<span class="quo">"&lt;-&nbsp;and"</span><br>
+&nbsp;&nbsp;&nbsp;<span class="key">Draw</span>&nbsp;<span class="key">String</span>&nbsp;<span class="key">Step</span>&nbsp;<span class="oth">(</span><span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">20</span><span class="oth">),</span>&nbsp;<span class="quo">"&lt;-&nbsp;or"</span><br>
+&nbsp;&nbsp;&nbsp;<span class="key">Draw</span>&nbsp;<span class="key">String</span>&nbsp;<span class="key">Step</span>&nbsp;<span class="oth">(</span><span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">20</span><span class="oth">),</span>&nbsp;<span class="quo">"&lt;-&nbsp;xor"</span><br>
+&nbsp;&nbsp;&nbsp;<span class="key">Draw</span>&nbsp;<span class="key">String</span>&nbsp;<span class="key">Step</span>&nbsp;<span class="oth">(</span><span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">20</span><span class="oth">),</span>&nbsp;<span class="quo">"&lt;-&nbsp;trans"</span><br>
+&nbsp;&nbsp;&nbsp;<span class="key">Draw</span>&nbsp;<span class="key">String</span>&nbsp;<span class="key">Step</span>&nbsp;<span class="oth">(</span><span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">20</span><span class="oth">),</span>&nbsp;<span class="quo">"&lt;-&nbsp;alpha&nbsp;(uniform)"</span><br>
+&nbsp;&nbsp;&nbsp;<span class="key">Draw</span>&nbsp;<span class="key">String</span>&nbsp;<span class="key">Step</span>&nbsp;<span class="oth">(</span><span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">20</span><span class="oth">),</span>&nbsp;<span class="quo">"&lt;-&nbsp;alpha&nbsp;(per&nbsp;pixel)"</span><br>
+&nbsp;&nbsp;&nbsp;<span class="key">Draw</span>&nbsp;<span class="key">String</span>&nbsp;<span class="key">Step</span>&nbsp;<span class="oth">(</span><span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">20</span><span class="oth">),</span>&nbsp;<span class="quo">"&lt;-&nbsp;add"</span><br>
+&nbsp;&nbsp;&nbsp;<span class="key">Draw</span>&nbsp;<span class="key">String</span>&nbsp;<span class="key">Step</span>&nbsp;<span class="oth">(</span><span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">20</span><span class="oth">),</span>&nbsp;<span class="quo">"&lt;-&nbsp;custom"</span><br>
+&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;<span class="key">ImageDestroy</span><span class="oth">(</span>&nbsp;<span class="wrd">sprite</span>&nbsp;<span class="oth">)</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">&apos;&apos;&nbsp;libere&nbsp;memoire&nbsp;sprite</span><br>
+&nbsp;&nbsp;&nbsp;<span class="key">Sleep</span>&nbsp;<span class="oth">:</span>&nbsp;<span class="key">End</span>&nbsp;<span class="num">0</span><br>
+<br>
+<span class="com">&apos;&apos;&nbsp;Fonction&nbsp;blender&nbsp;perso/span><br>
+<span class="key">Function</span>&nbsp;<span class="wrd">checkered_blend</span><span class="oth">(</span>&nbsp;<span class="key">ByVal</span>&nbsp;<span class="wrd">src</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">UInteger</span><span class="oth">,</span>&nbsp;<span class="key">ByVal</span>&nbsp;<span class="wrd">dest</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">UInteger</span><span class="oth">,</span>&nbsp;<span class="key">ByVal</span>&nbsp;<span class="wrd">param</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Any</span>&nbsp;<span class="key">Ptr</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">UInteger</span><br>
+&nbsp;&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="key">Ptr</span>&nbsp;<span class="wrd">counter</span><br>
+&nbsp;&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">UInteger</span>&nbsp;<span class="wrd">pixel</span><br>
+&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;<span class="wrd">counter</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">Cast</span><span class="oth">(</span><span class="key">Integer</span>&nbsp;<span class="key">Ptr</span><span class="oth">,</span>&nbsp;<span class="wrd">param</span><span class="oth">)</span><br>
+&nbsp;&nbsp;&nbsp;<span class="wrd">pixel</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">IIf</span><span class="oth">(((*</span><span class="wrd">counter</span>&nbsp;<span class="key">And</span>&nbsp;<span class="num">4</span><span class="oth">)</span>&nbsp;<span class="key">Shr</span>&nbsp;<span class="num">2</span><span class="oth">)</span>&nbsp;<span class="key">Xor</span>&nbsp;<span class="oth">((*</span><span class="wrd">counter</span>&nbsp;<span class="key">And</span>&nbsp;<span class="num">128</span><span class="oth">)</span>&nbsp;<span class="key">Shr</span>&nbsp;<span class="num">7</span><span class="oth">),</span>&nbsp;<span class="wrd">src</span><span class="oth">,</span>&nbsp;<span class="wrd">dest</span><span class="oth">)</span><br>
+&nbsp;&nbsp;&nbsp;<span class="oth">*</span><span class="wrd">counter</span>&nbsp;<span class="oth">+=</span>&nbsp;<span class="num">1</span><br>
+&nbsp;&nbsp;&nbsp;<span class="key">Return</span>&nbsp;<span class="wrd">pixel</span><br>
+<span class="key">End</span>&nbsp;<span class="key">Function</span><br>
+</div></tt><br>
+<br \="">
+<div class="fb_img"><img src="images/putgfx2.png"></div><br \="">
+<br \="">
+</div>
+<div class="fb_sect_title">Diff&eacute;rences avec QB</div>
+<div class="fb_sect_cont"><br \="">
+<ul>
+  <li> <tt><i>target</i></tt> est nouveau pour FreeBASIC<br \>
+  <li> Les m&eacute;thodes <tt>TRANS</tt>, <tt>ALPHA</tt>, <tt>ADD</tt> et <tt>CUSTOM</tt> sont nouvelles pour FreeBASIC.<br \="">
+  </li>
+  <li> Dans QB, la destination est toujours l&apos;&eacute;cran.<br \="">
+  </li>
+  <li> QB produit une erreur de fonctionnement en cas d&apos;&eacute;criture en dehors des limites de l&apos;image.<br \="">
+  </li>
+  <li> Dans QB, seuls des tableaux (arrays) peuvent &ecirc;tre sp&eacute;cifi&eacute;s comme images source.<br \="">
+<br \="">
+  </li>
 </ul></div>
+<div class="fb_sect_title">Voir aussi</div>
+<div class="fb_sect_cont"><br \="">
+<ul><li> <tt><a href="KeyPgPutfileio.html">Put (File Entr&eacute;/Sortie)</a></tt><br \="">
+</li><li> <tt><a href="KeyPgGetgraphics.html">Get (Graphique)</a></tt><br \="">
+</li><li> <tt><a href="KeyPgImagecreate.html">ImageCreate</a></tt><br \="">
+</li><li> <tt><a href="KeyPgAlphaGfx.html">Alpha</a></tt><br \="">
+</li><li> <a href="GfxInternalFormats.html">Formats graphiques internes</a><br \="">
+<br \="">
+</li></ul></div>
 </div>
 </div> 
 </div> 
-</body>
-</html>
+</body></html>

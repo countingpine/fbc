@@ -11,9 +11,9 @@
 </div> 
 <div id="fb_pg_wrapper">
 <div id="fb_pg_body">
-	Converts a number to octal representation<br \>
+	Conversion d'un nombre dans sa repr&eacute;sentation octale<br \>
 <br \>
-<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<div class="fb_sect_title">Syntaxe</div><div class="fb_sect_cont"><tt><br \>
 <a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgFunction.html">Function</a> <b>Oct</b>( <a href="KeyPgByval.html">ByVal</a> <i>number</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgByte.html">Byte</a> ) <a href="KeyPgAs.html">As</a> <a href="KeyPgString.html">String</a><br \>
 <a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgFunction.html">Function</a> <b>Oct</b>( <a href="KeyPgByval.html">ByVal</a> <i>number</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgByte.html">Byte</a>, <a href="KeyPgByval.html">ByVal</a> <i>digits</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a> ) <a href="KeyPgAs.html">As</a> <a href="KeyPgString.html">String</a><br \>
 <br \>
@@ -29,45 +29,45 @@
 </div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
 <i>result</i> = <b>Oct</b>[$]( <i>number</i> [, <i>digits</i> ] )<br \>
 </tt><br \>
-</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Param&egrave;tres</div><div class="fb_sect_cont"><br \>
 <tt><i>number</i></tt><br \>
-<div class="fb_indent">A number or expression evaluating to a number.  A floating-point number will be converted to a <tt><a href="KeyPgLongint.html">LongInt</a></tt>.<br \>
+<div class="fb_indent">Un nombre ou une expression num&eacute;rique repr&eacute;sentant un nombre.  Un nombre &agrave; virgule flottante sera converti en <tt><a href="KeyPgLongint.html">LongInt (entier long)</a></tt>.<br \>
 </div><tt><i>digits</i></tt><br \>
-<div class="fb_indent">Desired number of digits in the returned string.<br \>
+<div class="fb_indent">Nombre de chiffres d&eacute;sir&eacute;s pour la cha&icirc;ne retourn&eacute;e.<br \>
 <br \>
-</div></div><div class="fb_sect_title">Return Value</div><div class="fb_sect_cont"><br \>
-A string containing the unsigned octal representation of <tt><i>number</i></tt>.<br \>
+</div></div><div class="fb_sect_title">Valeur retourn&eacute;e</div><div class="fb_sect_cont"><br \>
+Une cha&icirc;ne contenant la repr&eacute;sentation octale non-sign&eacute;e de <tt><i>number</i></tt>.<br \>
 <br \>
 </div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
-Returns the unsigned octal string representation of <tt><i>number</i></tt>. Octal digits range from 0 to 7.<br \>
+Retourne la repr&eacute;sentation octale non-sign&eacute;e de <tt><i>number</i></tt>. Chiffres octals de 0 &agrave; 7.<br \>
 <br \>
-If you specify <tt><i>digits</i></tt> &gt; 0, the result string will be exactly that length.  It will be truncated or padded with zeros on the left, if necessary.<br \>
+Si vous sp&eacute;cifiez <tt><i>digits</i></tt> &gt; 0, la cha&icirc;ne r&eacute;sultat aura exactement cette longueur.  Elle sera tronqu&eacute;e ou compl&eacute;t&eacute;e avec des z&eacute;ros sur la gauche, si n&eacute;cessaire.<br \>
 <br \>
-The length of the returned string will not be longer than the maximum number of digits required for the type of <tt><i>number</i></tt> (3 characters for <tt><a href="KeyPgByte.html">Byte</a></tt>, 6 for <tt><a href="KeyPgShort.html">Short</a></tt>, 11 for <tt><a href="KeyPgInteger.html">Integer</a></tt>, and 22 for <tt><a href="KeyPgLongint.html">LongInt</a></tt>)<br \>
+La longueur de la cha&icirc;ne ne d&eacute;passera pas le nombre de bits maximum requis pour le type de <tt><i>number</i></tt> (3 caract&egrave;res pour <tt><a href="KeyPgByte.html">Byte (octet)</a></tt>, 6 pour <tt><a href="KeyPgShort.html">Short (entier court)</a></tt>, 11 pour <tt><a href="KeyPgInteger.html">Integer (entier)</a></tt>, et 22 pour <tt><a href="KeyPgLongint.html">LongInt (entier long)</a></tt>)<br \>
 <br \>
-If you want to do the opposite, i.e. convert an octal string back into a number, the easiest way to do it is to prepend the string with <tt>"&O"</tt>, and convert it using <tt><a href="KeyPgValint.html">ValInt</a></tt> or <tt><a href="KeyPgVallng.html">ValLng</a></tt>, similarly to a normal numeric string.  E.g. <tt><a href="KeyPgValint.html">ValInt</a>("&O77")</tt><br \>
+Si vous d&eacute;sirez l'oppos&eacute;, par exemple convertir une cha&icirc;ne octale vers un nombre, la meilleure fa&ccedil;on de le faire est d'ajouter <tt>"&O"</tt>, au d&eacute;but de la cha&icirc;ne, et la convertir en utilisant <tt><a href="KeyPgValint.html">ValInt</a></tt> ou <tt><a href="KeyPgVallng.html">ValLng</a></tt>, de fa&ccedil;on similaire &agrave; une cha&icirc;ne num&eacute;rique normale. Par exemple <tt><a href="KeyPgValint.html">ValInt</a>("&O77")</tt><br \>
 <br \>
-</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Exemple</div><div class="fb_sect_cont"><br \>
 <tt><div class="freebasic">
 <span class="key">Print</span>&nbsp;<span class="key">Oct</span><span class="oth">(</span><span class="num">54321</span><span class="oth">)</span><br />
 <span class="key">Print</span>&nbsp;<span class="key">Oct</span><span class="oth">(</span><span class="num">54321</span><span class="oth">,</span>&nbsp;<span class="num">4</span><span class="oth">)</span><br />
 <span class="key">Print</span>&nbsp;<span class="key">Oct</span><span class="oth">(</span><span class="num">54321</span><span class="oth">,</span>&nbsp;<span class="num">8</span><span class="oth">)</span><br />
 </div></tt><br />
-will produce the output:<br \>
+produira la sortie:<br \>
 <br \>
 <pre class="fb_pre">152061
 2061
 00152061
 </pre><br \>
-</div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
-<ul><li> The string type suffix <tt>"$"</tt> is obligatory in the <i><a href="CompilerOptlang.html">-lang qb</a></i> dialect.<br \>
-<li> The string type suffix <tt>"$"</tt> is optional in the <i><a href="CompilerOptlang.html">-lang fblite</a></i> and <i><a href="CompilerOptlang.html">-lang fb</a></i> dialects.<br \>
+</div><div class="fb_sect_title">Diff&eacute;rences de dialectes</div><div class="fb_sect_cont"><br \>
+<ul><li> Le suffixe de type cha&icirc;ne <tt>"$"</tt> est obligatoire dans le dialecte <i><a href="CompilerOptlang.html">-lang qb</a></i>.<br \>
+<li> Le suffixe de type cha&icirc;ne <tt>"$"</tt> est facultatif dans les dialectes <i><a href="CompilerOptlang.html">-lang fblite</a></i> et <i><a href="CompilerOptlang.html">-lang fb</a></i>.<br \>
 <br \>
-</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
-<ul><li> In QBASIC, there was no way to specify the number of digits returned.<br \>
-<li> The size of the string returned was limited to 32 bits, or 11 octal digits.<br \>
+</ul></div><div class="fb_sect_title">Diff&eacute;rences avec QB</div><div class="fb_sect_cont"><br \>
+<ul><li> Dans QBASIC, il n'y avait aucun moyen de sp&eacute;cifier le nombre de chiffres retourn&eacute;s.<br \>
+<li> La taille de la cha&icirc;ne retourn&eacute;e &eacute;tait limit&eacute;e &agrave; 32 bits, ou 11 chiffres octals.<br \>
 <br \>
-</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+</ul></div><div class="fb_sect_title">Voir aussi</div><div class="fb_sect_cont"><br \>
 <ul><li> <tt><a href="KeyPgBin.html">Bin</a></tt><br \>
 <li> <tt><a href="KeyPgHex.html">Hex</a></tt><br \>
 <li> <tt><a href="KeyPgValint.html">ValInt</a></tt><br \>

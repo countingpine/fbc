@@ -11,9 +11,9 @@
 </div> 
 <div id="fb_pg_wrapper">
 <div id="fb_pg_body">
-	Write functions without prolog/epilog code<br \>
+	Ecrire des fonctions sans code prologue / &eacute;pilogue<br \>
 <br \>
-<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<div class="fb_sect_title">Syntaxe</div><div class="fb_sect_cont"><tt><br \>
 <a href="KeyPgSub.html">Sub</a> <i>identifier</i> <b>Naked</b> [<i>calling_convention</i>] ( <i>param_list</i> )<br \>
 <div class="fb_indent"><i>asm_statements</i><br \>
 </div><a href="KeyPgEndblock.html">End</a> <a href="KeyPgSub.html">Sub</a><br \>
@@ -21,17 +21,17 @@
 <div class="fb_indent"><i>asm_statements</i><br \>
 </div><a href="KeyPgEndblock.html">End</a> <a href="KeyPgFunction.html">Function</a><br \>
 </tt><br \>
-</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
-<tt><i>identifier</i></tt> - name of the procedure.<br \>
-<tt><i>calling_convention</i></tt> - calling convention of the procedure - can be <tt><a href="KeyPgCdecl.html">cdecl</a></tt>, <tt><a href="KeyPgPascal.html">pascal</a></tt>, or <tt><a href="KeyPgStdcall.html">stdcall</a></tt><br \>
-<tt><i>asm_statements</i></tt> - the code in the procedure body.  The code for handling parameters and returning values must all be done manually.  Note that the methods for doing these can change, depending on the calling convention.<br \>
-<tt><i>param_list</i></tt> - parameters to be passed to the procedure.<br \>
-<tt><i>data_type</i></tt> - the <a href="DataType.html">data type</a> of the function.<br \>
+</div><div class="fb_sect_title">Param&egrave;tres</div><div class="fb_sect_cont"><br \>
+<tt><i>identifier</i></tt> <div class="fb_indent"> nom de la proc&eacute;dure.<br \></div>
+<tt><i>calling_convention</i></tt> <div class="fb_indent"> convention d'appel de la proc&eacute;dure - peut &ecirc;tre <tt><a href="KeyPgCdecl.html">cdecl</a></tt>, <tt><a href="KeyPgPascal.html">pascal</a></tt> ou <tt><a href="KeyPgStdcall.html">stdcall</a></tt><br \></div>
+<tt><i>asm_statements</i></tt> <div class="fb_indent"> le code dans le corps de la proc&eacute;dure.   Le code pour g&eacute;rer les param&egrave;tres et retourner les valeurs doit &ecirc;tre fait enti&egrave;rement manuellement.  Notez que les m&eacute;thodes pour faire ceci peuvent changeer en fonction de la convention d'appel.<br \></div>
+<tt><i>param_list</i></tt> <div class="fb_indent"> param&egrave;tres &agrave; passer &agrave; la proc&eacute;dure.<br \></div>
+<tt><i>data_type</i></tt> <div class="fb_indent"> le <a href="DataType.html">data type</a> de la fonction.<br \></div>
 <br \>
 </div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
-<tt><b>Naked</b></tt> allows the programmer to write procedures without the compiler generating any prolog/epilog code.  This is useful when writing small, fast functions in <tt><a href="KeyPgAsm.html">Asm</a></tt> without any unnecessary overhead.<br \>
+<tt><b>Naked</b></tt> permet au programmeur d'&eacute;crire des proc&eacute;dures sans que le compilateur g&eacute;n&eacute;re de code prologue / &eacute;pilogue.  Ceci est utile lors de l'&eacute;criture de petites fonctions rapides en <tt><a href="KeyPgAsm.html">Asm</a></tt> sans surcharge inutile.<br \>
 <br \>
-</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Exemple</div><div class="fb_sect_cont"><br \>
 <tt><div class="freebasic">
 <span class="com">''&nbsp;Naked&nbsp;cdecl&nbsp;function</span><br />
 <span class="key">Function</span>&nbsp;<span class="wrd">add</span>&nbsp;<span class="wrd">naked</span>&nbsp;<span class="key">cdecl</span>&nbsp;<span class="wrd">_</span><br />
@@ -50,13 +50,13 @@
 <br />
 <span class="key">Print</span>&nbsp;<span class="wrd">add</span><span class="oth">(</span>&nbsp;<span class="num">1</span><span class="oth">,</span>&nbsp;<span class="num">5</span>&nbsp;<span class="oth">)</span></div></tt><br />
 <br \>
-</div><div class="fb_sect_title">Platform Differences</div><div class="fb_sect_cont"><br \>
-<ul><li> The default calling convention can change depending on the platform used.  Additionally, <tt><a href="KeyPgStdcall.html">stdcall</a></tt> does not behave the same on all platforms - on Linux, it behaves like <tt><a href="KeyPgCdecl.html">cdecl</a></tt>.  It may be necessary to check the <a href="CatPgDddefines.html">Intrinsic Defines</a> (such as <tt><a href="KeyPgDdfbwin32.html">__FB_WIN32__</a></tt>), and write different code depending on them.<br \>
+</div><div class="fb_sect_title">Diff&eacute;rences de plate-forme</div><div class="fb_sect_cont"><br \>
+<ul><li> La convention d'appel par d&eacute;faut peut changer en fonction de la plate-forme utilis&eacute;e.  En outre, <tt><a href="KeyPgStdcall.html">stdcall</a></tt> ne se comporte pas de la m&ecirc;me fa&ccedil;on sur toutes les plateformes - sur Linux, il se comporte comme <tt><a href="KeyPgCdecl.html">cdecl</a></tt>.  Il peut &ecirc;tre n&eacute;cessaire de v&eacute;rifier <a href="CatPgDddefines.html">les d&eacute;finitions intrins&egrave;ques</a> ((comme <tt><a href="KeyPgDdfbwin32.html">__FB_WIN32__</a></tt>) et d'&eacute;crire du code diff&eacute;rent en fonction d'elles.<br \>
 <br \>
-</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
-<ul><li> New to FreeBASIC<br \>
+</ul></div><div class="fb_sect_title">Diff&eacute;rences avec QB</div><div class="fb_sect_cont"><br \>
+<ul><li> Nouveau pour FreeBASIC<br \>
 <br \>
-</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+</ul></div><div class="fb_sect_title">Voir aussi</div><div class="fb_sect_cont"><br \>
 <ul><li> <tt><a href="KeyPgAsm.html">Asm</a></tt><br \>
 <li> <tt><a href="KeyPgFunction.html">Function</a></tt><br \>
 <li> <tt><a href="KeyPgSub.html">Sub</a></tt><br \>
@@ -64,7 +64,9 @@
 <li> <tt><a href="KeyPgPascal.html">pascal</a></tt><br \>
 <li> <tt><a href="KeyPgStdcall.html">stdcall</a></tt><br \>
 <br \>
-</ul></div>
+</ul><br \>
+   <br \>
+</div>
 </div>
 </div> 
 </div> 

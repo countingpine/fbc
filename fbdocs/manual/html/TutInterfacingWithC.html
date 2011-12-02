@@ -6,37 +6,37 @@
 <body>
 <div id="fb_body_wrapper">
 <div id="fb_tab">
-<div id="fb_tab_l">Interfacing with C</div>
+<div id="fb_tab_l">L'interfa&ccedil;age avec le langage C</div>
 <div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
 </div> 
 <div id="fb_pg_wrapper">
 <div id="fb_pg_body">
-	NOTE! Have to do some spell checking, verify text, code and filenames.<br \>
+	REMARQUE! Faites quelques v&eacute;rifications orthographique, de v&eacute;rification du texte, du code et des noms de fichiers.
 <br \>
-<div class="fb_header">Foreword</div><br \>
-This is a tiny basic tutorial on how to write a simple library in C and then use it in FreeBASIC. The tutorial should be possible to follow without to much knowledge of C or FreeBASIC. After doing this tutorial you should be able to compile a static and a dynamically linked C library. Translate the necessary header files to FreeBASIC header files and understand how to use the libraries in a FreeBASIC project.<br \>
-<br \>
-<br \>
-<div class="fb_header">What is a library</div><br \>
-<br \>
-<div class="fb_header">Prerequisite</div><br \>
-This tutorial was written and tested with FreeBASIC 0.16b and the latest Current release of MinGW32 at the time. As a note Dev-cpp uses MinGW32 as it's compiler tool chain. You also  get code::blocks with a mingw32 bundle.<br \>
+<div class="fb_header">Avant-propos</div><br \>
+Ceci est un mini tutoriel de base sur la fa&ccedil;on d'&eacute;crire une simple biblioth&egrave;que en C et ensuite de l'utiliser dans FreeBASIC. Il devrait &ecirc;tre possible de suivre le tutoriel sans pour autant avoir de grandes connaissances du C ou du FreeBASIC. Apr&egrave;s avoir essay&eacute; ce tutoriel, vous devriez &ecirc;tre en mesure de compiler une biblioth&egrave;que C statique ou dynamique. Traduire les fichiers d'ent&ecirc;te n&eacute;cessaires pour les fichiers d'ent&ecirc;te FreeBASIC et de comprendre comment utiliser les biblioth&egrave;ques dans un projet FreeBASIC.<br \>
 <br \>
 <br \>
-<div class="fb_header">Formal description of the task at hand</div><br \>
-To demonstrate usage of a C library in FreeBASIC we need to create the simplest possible library with a few functions. A test file in C to demonstrate that our library works as intended. Then we have to translate the library header file to a FreeBASIC header file (*.bi) and finally create a test project in FreeBASIC using the library.<br \>
+<div class="fb_header">Qu'est-ce qu'une biblioth&egrave;que</div><br \>
 <br \>
-<div class="fb_header">Creating the files</div><br \>
-So our file list will look like this:<br \>
-myClib.c:           C file implementing our library.<br \>
-myClib.h:           C header file describing the libraries interface.<br \>
-myClibCTest.c:     C file implementing our test program in C.<br \>
-myClib.bi:          FreeBASIC header file. A translation of myClib.h.<br \>
-myClibFBTest.bas:  FreeBASIC<br \>
-make.cmd:         A sample shell script compiling the library and test files.<br \>
+<div class="fb_header">Condition pr&eacute;alable</div><br \>
+Ce tutoriel a &eacute;t&eacute; &eacute;crit et test&eacute; avec FreeBASIC 0.16b et la derni&egrave;re version actuelle de MinGW32 (&agrave; l'&eacute;poque). Comme une note Dev-cpp utilise MinGW32 que c'est la cha&icirc;ne d'outils du compilateur. Vous pouvez &eacute;galement obtenir Code::Blocks avec un paquet MinGW32.<br \>
 <br \>
 <br \>
-<b>The C file to become a static library. myClib.c </b><br \>
+<div class="fb_header">Description formelle de la tâche &agrave; accomplir</div><br \>
+Pour d&eacute;montrer l'utilisation d'une biblioth&egrave;que C en FreeBASIC nous avons besoin pour cr&eacute;er la biblioth&egrave;que la plus simple possible avec peu de fonctions. Un fichier de test en C pour d&eacute;montrer que notre biblioth&egrave;que fonctionne comme pr&eacute;vu. Ensuite, nous devons traduire le fichier en-t&ecirc;te biblioth&egrave;que vers un fichier d'en-t&ecirc;te FreeBASIC (*.bi) et enfin de cr&eacute;er un projet de test dans FreeBASIC utilisant la biblioth&egrave;que..<br \>
+<br \>
+<div class="fb_header">Cr&eacute;ation des fichiers</div><br \>
+Donc, notre liste de fichiers devrait ressembler &agrave; ceci:<br \>
+myClib.c: Fichier C mise en œuvre de notre biblioth&egrave;que.<br \>
+myClib.h: Fichier d'ent&ecirc;te C d&eacute;crivant l'interface des biblioth&egrave;ques.<br \>
+myClibCTest.c: Mise en oeuvre notre fichier C programme d'essai de C.<br \>
+myClib.bi: Fichier d'en-t&ecirc;te FreeBASIC. Une traduction de myClib.h.<br \>
+myClibFBTest.bas:  Test FreeBASIC<br \>
+make.cmd: Un script shell pour compiler la biblioth&egrave;que et les fichiers de test.<br \>
+<br \>
+<br \>
+<b>Le fichier C pour fabriquer la biblioth&egrave;que statique. myClib.c </b><br \>
 <pre class="fb_pre">(C)
 /* A function adding two integers and returning the result */
 #include "myClib.h"
@@ -59,13 +59,13 @@ int SampleFunction2()
 
 	return 10;
 }
-</pre><b>The header file myClib.h</b><br \>
+</pre><b>Le fichier en-t&ecirc;te myClib.h</b><br \>
 <pre class="fb_pre">(C)
 int  SampleAddInt(int i1, int i2);
 void SampleFunction1();
 int  SampleFunction2();
 </pre><br \>
-<b>A C test project to verify that the static lib is C compatible. myClibCTest.c:</b><br \>
+<b>Projet de test C pour v&eacute;rifier que la lib statique est compatible C. myClibCTest.c:</b><br \>
 <pre class="fb_pre">(C)
 #include <stdio.h>
 #include <stdlib.h>
@@ -78,8 +78,8 @@ int main(int argc, char *argv[])
 }
 </pre><br \>
 <br \>
-<b>Translating the C header file to a FreeBASIC header file</b><br \>
-myClib.bi: To interface the static library and automatically include it (#inclib "myClib" ) i have this file.<br \>
+<b>Traduire le fichier d'en-t&ecirc;te C dans un fichier en-t&ecirc;te FreeBASIC</b><br \>
+myClib.bi: Pour interfacer la biblioth&egrave;que statique et l'inclure automatiquement (# inclib "myClib") j'ai ce fichier.<br \>
 <tt><div class="freebasic">
 <span class="com">''include&nbsp;file&nbsp;for&nbsp;libmyClib.a</span><br />
 <span class="def">#ifndef&nbsp;__myClib_bi__<br />
@@ -93,7 +93,7 @@ myClib.bi: To interface the static library and automatically include it (#inclib
 </span></div></tt><br />
 <br \>
 <br \>
-<b>And finally the FreeBASIC file using the library</b><br \>
+<b>Et enfin le fichier en utilisant la biblioth&egrave;que FreeBASIC</b><br \>
 myClibFBTest.bas:<br \>
 <tt><div class="freebasic">
 <span class="com">''Testing&nbsp;functions&nbsp;in&nbsp;myClib.bi</span><br />
@@ -107,8 +107,8 @@ myClibFBTest.bas:<br \>
 </div></tt><br />
 <br \>
 <br \>
-<b>The make file: make.cmd</b><br \>
-I have created a batch file to compile all the files. Including a sample in C using the static library. Note the config lines at the top which has to be modified to suite your setup.<br \>
+<b>Le fichier make: make.cmd</b><br \>
+J'ai cr&eacute;&eacute; un fichier "batch" pour compiler tous les fichiers. Y compris un &eacute;chantillon en C en utilisant la biblioth&egrave;que statique. Notez les lignes de configuration au d&eacute;but qui doit &ecirc;tre modifi&eacute; pour correspondre &agrave; votre configuration.<br \>
 <pre class="fb_pre">(cmd)
 @REM TODO: Set PATH's for this session.
 SET PATH=C:\mingw32\bin;c:\mingw32\mingw32\bin
@@ -164,9 +164,9 @@ myClibFBTest.exe
 @pause
 </pre><br \>
 <br \>
-<div class="fb_header">Encountered error messages and their solutions</div><br \>
+<div class="fb_header">Messages d'erreur rencontr&eacute;es et leurs solutions</div><br \>
 <b>undefined reference to</b><br \>
-Trying to link against the static C library without using the cdecl alias "functionname" in the FreeBASIC header file results in errors like this.<br \>
+Essai de liaison &agrave; la biblioth&egrave;que statique C sans utiliser l'alias cdecl "functionname" dans le fichier en-t&ecirc;te FreeBASIC  r&eacute;sultat d'erreurs de ce genre.<br \>
 <pre class="fb_pre">(cmd)
 C:\code>"C:\FreeBasic16b\fbc.exe"     "myClibFBTest.bas"
 myClibFBTest.o:fake:(.text+0x3d): undefined reference to `SAMPLEADDINT@8'
@@ -174,22 +174,22 @@ myClibFBTest.o:fake:(.text+0x4a): undefined reference to `SAMPLEFUNCTION1@0'
 myClibFBTest.o:fake:(.text+0x67): undefined reference to `SAMPLEFUNCTION2@0'
 Press any key to continue . . .
 </pre><br \>
-To resolve this you will have to locate function declarations in a *.bi file that look like this:<br \>
+Pour r&eacute;soudre cela, vous devrez localiser les d&eacute;clarations de fonctions dans un fichier *.bi qui ressemble &agrave; ceci:<br \>
 <tt><div class="freebasic">
 <span class="key">Declare</span>&nbsp;<span class="key">Function</span>&nbsp;<span class="wrd">SampleAddInt</span><span class="oth">(</span><span class="key">ByVal</span>&nbsp;<span class="wrd">i1</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">,</span>&nbsp;<span class="key">ByVal</span>&nbsp;<span class="wrd">i2</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
 </div></tt><br />
-And change it to something like this:<br \>
+Et le remplacer par ceci:<br \>
 <tt><div class="freebasic">
 <span class="key">Declare</span>&nbsp;<span class="key">Function</span>&nbsp;<span class="wrd">SampleAddInt</span>&nbsp;<span class="key">cdecl</span>&nbsp;<span class="key">Alias</span>&nbsp;<span class="quo">"SampleAddInt"</span>&nbsp;<span class="oth">(</span><span class="key">ByVal</span>&nbsp;<span class="wrd">i1</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">,</span>&nbsp;<span class="key">ByVal</span>&nbsp;<span class="wrd">i2</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
 </div></tt><br />
 <br \>
 <br \>
-<div class="fb_header">Appendix A: links</div><br \>
-The basis for this tutorial is several threads in the forum.<br \>
-When it evolves and can stand alone the links to the threads might be removed.<br \>
-Some interesting links containing information on interfacing libraries created in FreeBASIC and used by other languages or visa versa.<br \>
+<div class="fb_header">Annexe A: liens</div><br \>
+La base de ce tutoriel vient de plusieurs "threads" dans le forum.<br \>
+Quand il &eacute;volue et peut &ecirc;tre autonome les liens vers les "threads" doivent &ecirc;tre supprim&eacute;s.<br \>
+Quelques liens int&eacute;ressants contenant des informations sur l'interfa&ccedil;age des biblioth&egrave;ques cr&eacute;&eacute;es en FreeBASIC et utilis&eacute;es par d'autres langages ou vice-versa.<br \>
 <br \>
-<a href="http://www.freebasic.net/forum/viewtopic.php?t=6515">How do I compile a C project as a static lib for inclusion..</a><br \>
+<a href="http://www.freebasic.net/forum/viewtopic.php?t=6515">Comment compiler un projet C comme une lib statique pour l'inclusion.</a><br \>
 
 </div>
 </div> 

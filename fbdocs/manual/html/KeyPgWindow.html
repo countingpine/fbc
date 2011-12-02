@@ -11,40 +11,40 @@
 </div> 
 <div id="fb_pg_wrapper">
 <div id="fb_pg_body">
-	Sets new view coordinates mapping for current viewport<br \>
+	Valide la nouvelle cartographie des coordonn&eacute;es de la zone de visualisation graphique courante<br \>
 <br \>
-<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<div class="fb_sect_title">Syntaxe</div><div class="fb_sect_cont"><tt><br \>
 <b>Window</b> [ [<b>Screen</b>] ( <i>x1</i>, <i>y1</i> )-( <i>x2</i>, <i>y2</i> ) ]<br \>
 </tt><br \>
-</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Param&egrave;tres</div><div class="fb_sect_cont"><br \>
 <tt><b>Screen</b></tt><br \>
-<div class="fb_indent">Optional argument specifying y coordinates increase from top to bottom.<br \>
+<div class="fb_indent">Argument facultatif specifiant les coordonn&eacute;es <i>y1</i> augmentant du haut vers le bas.<br \>
 </div><tt>( <i>x1</i>, <i>y1</i> )-( <i>x2</i>, <i>y2</i> )</tt><br \>
-<div class="fb_indent">New floating point values corresponding to the opposite corners of the current viewport.  If omitted, the <tt><b>Window</b></tt> coordinate mapping is removed.<br \>
+<div class="fb_indent">Les nouvelles valeurs (en virgule flottante) correspondent &agrave; des coins oppos&eacute;s de la fen&ecirc;tre actuelle.  S'il est omis, la cartographie des coordonn&eacute;es de la fen&ecirc;tre graphique est supprim&eacute;e.<br \>
 <br \>
 </div></div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
-<tt><b>Window</b></tt> is used to define a new coordinates system. <tt>(<i>x1</i>, <i>y1</i>)</tt> and <tt>(<i>x2</i>, <i>y2</i>)</tt> are the new coordinates to be mapped to the opposite corners of the current viewport; all future coordinates passed to graphics primitive statements will be affected by this new mapping. If <tt><b>Screen</b></tt> is omitted, the new coordinates system will be Cartesian, that is, with y coordinates increasing from bottom to top. Call <tt><b>Window</b></tt> with no argument to disable the coordinates transformation.<br \>
+<tt><b>Window</b></tt> est utilis&eacute; pour d&eacute;finir un nouveau syst&egrave;me de coordonn&eacute;es. <tt>(<i>x1</i>, <i>y1</i>)</tt> et <tt>(<i>x2</i>, <i>y2</i>)</tt> sont les nouvelles coordonn&eacute;es, &agrave; cartographier, des deux coins oppos&eacute;s de la zone de visualisation graphique courante; toutes les futures utilisations de coordonn&eacute;es pass&eacute;es aux fonctions graphiques seront affect&eacute;es par cette nouvelle cartographie, &agrave; partir de ce moment-l&agrave;. Si <tt><b>Screen</b></tt> est omis, le nouveau syst&egrave;me de coordonn&eacute;es est Cartesien, c'est &agrave; dire, avec des coordonn&eacute;es <i>y</i> augmentant du bas vers le haut. Appeler <tt><b>Window</b></tt> sans argument pour annuler la transformation des coordonn&eacute;es.<br \>
 <br \>
-FreeBASIC's current behavior is to keep track of the corners of the <tt><b>Window</b></tt>, rather than a specific coordinate mapping.  This means that the coordinate mapping can change after calls to <tt><a href="KeyPgViewgraphics.html">View</a></tt>.<br \>
-The <tt><b>Window</b></tt> corners are also currently taken into account when working on image buffers, so when a <tt><b>Window</b></tt> is in effect, the cooridnate mapping will be different from image to image.<br \>
+Le comportement actuel de FreeBasic est de pr&eacute;server les coordonn&eacute;es des coins de <tt><b>Window</b></tt>, plut&ocirc;t que celles sp&eacute;cifiques de la cartographie.  Ceci signifie que la cartographie des coordonn&eacute;es peut changer apr&egrave;s des appels &agrave; <tt><a href="KeyPgViewgraphics.html">View</a></tt>.
+Les coins de <tt><b>Window</b></tt> sont actuellement pris en compte lorsque l'on travaille sur les tampons d'image, donc quand un <tt><b>Window</b></tt> est vakide, la cartographie des coordonn&eacute;es pourra &ecirc;tre diff&eacute;rente d'une image &agrave; une autre.<br \>
 <br \>
-When there is no <tt><b>Window</b></tt> in effect, there is no coordinate mapping in effect, so the effective coordinate system is constant, independent of image buffer sizes or <tt><a href="KeyPgViewgraphics.html">View</a></tt> coordinates (if any).<br \>
+Quand il n'y a pas de <tt><b>Window</b></tt> en cours, il n'y a pas de cartographie valide, ainsi le syst&egrave;me de coordonn&eacute;es effectif est, ind&eacute;pendent de la taille du tampon image ou des coordonn&eacute;es <tt><a href="KeyPgViewgraphics.html">View</a></tt> coordinates (s'il y en a).<br \>
 <br \>
-</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Exemple</div><div class="fb_sect_cont"><br \>
 <tt><div class="freebasic">
 <span class="key">Screen</span>&nbsp;<span class="num">13</span><br />
 <br />
-<span class="com">''&nbsp;define&nbsp;clipping&nbsp;area</span><br />
+<span class="com">''&nbsp;definition&nbsp;zone&nbsp;clipping</span><br />
 <span class="key">View</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="num">10</span><span class="oth">,</span>&nbsp;<span class="num">10</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="oth">-</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="num">310</span><span class="oth">,</span>&nbsp;<span class="num">150</span>&nbsp;<span class="oth">),</span>&nbsp;<span class="num">1</span><span class="oth">,</span>&nbsp;<span class="num">15</span>&nbsp;&nbsp;&nbsp;&nbsp;<br />
 <br />
-<span class="com">''&nbsp;set&nbsp;view&nbsp;coordinates</span><br />
+<span class="com">''&nbsp;coordonn&eacute;es&nbsp;vue</span><br />
 <span class="key">Window</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="oth">-</span><span class="num">1</span><span class="oth">,</span>&nbsp;<span class="oth">-</span><span class="num">1</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="oth">-</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="num">1</span><span class="oth">,</span>&nbsp;<span class="num">1</span>&nbsp;<span class="oth">)</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
 <br />
-<span class="com">''&nbsp;Draw&nbsp;X&nbsp;axis</span><br />
+<span class="com">''&nbsp;Dessin&nbsp;axe&nbsp;X</span><br />
 <span class="key">Line</span>&nbsp;<span class="oth">(-</span><span class="num">1</span><span class="oth">,</span><span class="num">0</span><span class="oth">)-(</span><span class="num">1</span><span class="oth">,</span><span class="num">0</span><span class="oth">),</span><span class="num">7</span><br />
 <span class="key">Draw</span>&nbsp;<span class="key">String</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="num">0.8</span><span class="oth">,</span>&nbsp;<span class="oth">-</span><span class="num">0.1</span>&nbsp;<span class="oth">),</span>&nbsp;<span class="quo">"X"</span><br />
 <br />
-<span class="com">''&nbsp;Draw&nbsp;Y&nbsp;axis</span><br />
+<span class="com">''&nbsp;Dessin&nbsp;axe&nbsp;Y</span><br />
 <span class="key">Line</span>&nbsp;<span class="oth">(</span><span class="num">0</span><span class="oth">,-</span><span class="num">1</span><span class="oth">)-(</span><span class="num">0</span><span class="oth">,</span><span class="num">1</span><span class="oth">),</span><span class="num">7</span><br />
 <span class="key">Draw</span>&nbsp;<span class="key">String</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="num">0.1</span><span class="oth">,</span>&nbsp;<span class="num">0.8</span>&nbsp;<span class="oth">),</span>&nbsp;<span class="quo">"Y"</span><br />
 <br />
@@ -53,19 +53,19 @@ When there is no <tt><b>Window</b></tt> in effect, there is no coordinate mappin
 <span class="com">''&nbsp;compute&nbsp;step&nbsp;size</span><br />
 <span class="wrd">s</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">2</span>&nbsp;<span class="oth">/</span>&nbsp;<span class="key">PMap</span><span class="oth">(</span>&nbsp;<span class="num">1</span><span class="oth">,</span>&nbsp;<span class="num">0</span>&nbsp;<span class="oth">)</span><br />
 <br />
-<span class="com">''&nbsp;plot&nbsp;the&nbsp;function</span><br />
+<span class="com">''&nbsp;graphique&nbsp;de&nbsp;la&nbsp;function</span><br />
 <span class="key">For</span>&nbsp;<span class="wrd">x</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="oth">-</span><span class="num">1</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">1</span>&nbsp;<span class="key">Step</span>&nbsp;<span class="wrd">s</span><br />
 &nbsp;&nbsp;<span class="wrd">y</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">x</span>&nbsp;<span class="oth">^</span>&nbsp;<span class="num">3</span><br />
 &nbsp;&nbsp;<span class="key">PSet</span><span class="oth">(</span>&nbsp;<span class="wrd">x</span><span class="oth">,</span>&nbsp;<span class="wrd">y</span>&nbsp;<span class="oth">),</span>&nbsp;<span class="num">14</span><br />
 <span class="key">Next</span>&nbsp;<span class="wrd">x</span><br />
 <br />
-<span class="com">''&nbsp;revert&nbsp;to&nbsp;screen&nbsp;coordinates</span><br />
+<span class="com">''&nbsp;retour&nbsp;aux&nbsp;coordonn&eacute;es&nbsp;ecran</span><br />
 <span class="key">Window</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
 <br />
-<span class="com">''&nbsp;remove&nbsp;the&nbsp;clipping&nbsp;area</span><br />
+<span class="com">''&nbsp;annule&nbsp;zone&nbsp;clipping</span><br />
 <span class="key">View</span>&nbsp;<span class="key">Screen</span>&nbsp;&nbsp;<br />
 <br />
-<span class="com">''&nbsp;draw&nbsp;title</span><br />
+<span class="com">''&nbsp;dessin&nbsp;titre</span><br />
 <span class="key">Draw</span>&nbsp;<span class="key">String</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="num">120</span><span class="oth">,</span>&nbsp;<span class="num">160</span>&nbsp;<span class="oth">),</span>&nbsp;<span class="quo">"Y&nbsp;=&nbsp;X&nbsp;^&nbsp;3"</span><br />
 <br />
 <span class="key">Sleep</span><br />
@@ -73,16 +73,18 @@ When there is no <tt><b>Window</b></tt> in effect, there is no coordinate mappin
 <br \>
 <div class="fb_img"><img src="images/window.png" /></div><br \>
 <br \>
-</div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
-<ul><li> QBASIC preserves the coordinate mapping after subsequent calls to VIEW.<br \>
-<li> FreeBASIC's current behavior is to preserve the WINDOW coordinates after calls to VIEW, or when working on images, meaning that the coordinate mapping may undergo scaling/translations. (If a WINDOW hasn't been set, there is no coordinate mapping, and so it doesn't change after calls to VIEW.)  The behavior may change in future, but consistent behavior can be be assured over inconstent viewport coordinates by re-calling WINDOW when you change the VIEW.<br \>
+</div><div class="fb_sect_title">Diff&eacute;rences avec QB</div><div class="fb_sect_cont"><br \>
+<ul><li> QBASIC pr&eacute;serve la cartographie des coordonn&eacute;es apr&egrave;s des appels successifs &agrave; VIEW.<br \>
+<li> Actuellement FreeBASIC pr&eacute;serve les coordonn&eacute;es WINDOW apr&egrave;s des appels successifs &agrave; VIEW, ou lors d'un travail sur des images, ce qui signifie que les coordonn&eacute;es de cartographie peuvent faire l'objet de mise &agrave; &eacute;chelle/translations. (Si un WINDOW n'a pas &eacute;t&eacute; valid&eacute;, il n'existe pas de cartographie des coordonn&eacute;es, et ainsi elle ne peut changer apr&egrave;s des appels &agrave; VIEW.)  Ce comportement peut changer &agrave; l'avenir, mais un comportement coh&eacute;rent peut &ecirc;tre assur&eacute; au cours de la visualisation de coordonn&eacute;es inconsistantes de la zone de visualisation graphique par un rappel de <tt>WINDOW</tt> lorsque vous changez <tt>VIEW</tt>.<br \>
 <br \>
-</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+</ul></div><div class="fb_sect_title">Voir aussi</div><div class="fb_sect_cont"><br \>
 <ul><li> <tt><a href="KeyPgScreengraphics.html">Screen (Graphics)</a></tt><br \>
 <li> <tt><a href="KeyPgViewgraphics.html">View (Graphics)</a></tt><br \>
 <li> <tt><a href="KeyPgPmap.html">PMap</a></tt><br \>
 <br \>
-</ul></div>
+</ul><br \>
+   <br \>
+</div>
 </div>
 </div> 
 </div> 

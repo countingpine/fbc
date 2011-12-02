@@ -6,36 +6,36 @@
 <body>
 <div id="fb_body_wrapper">
 <div id="fb_tab">
-<div id="fb_tab_l">Const (Qualifier)</div>
+<div id="fb_tab_l">Const (Qualificateur)</div>
 <div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
 </div> 
 <div id="fb_pg_wrapper">
 <div id="fb_pg_body">
-	Specifies that a data type or pointer data type is read only.<br \>
+	Indique que le type de donn&eacute;es ou un pointeur de type de donn&eacute;es est en lecture seule.<br \>
 <br \>
-<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<div class="fb_sect_title">Syntaxe</div><div class="fb_sect_cont"><tt><br \>
 ... <a href="KeyPgAs.html">As</a> [<b>Const</b>] <i><a href="DataType.html">datatype</a></i> [ [<b>Const</b>] <a href="KeyPgPtr.html">Ptr</a> ... ]<br \>
 </tt><br \>
-</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Param&egrave;tres</div><div class="fb_sect_cont"><br \>
 <tt><i>datatype</i></tt><br \>
-<div class="fb_indent">Name of a standard or user defined data type.<br \>
+<div class="fb_indent">Nom d'un type de donn&eacute;es standard ou d'un type de donn&eacute;es d&eacute;fini par l'utilisateur.<br \>
 <br \>
 </div></div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
-Specifies that the <tt><i>datatype</i></tt> or <tt><a href="KeyPgPtr.html">Ptr</a></tt> immediately to the right of the <tt><b>Const</b></tt> qualifier is to be considered as read only.  Read-only (<tt><b>Const</b></tt>) declarations are a measure of type safety that can be read as 'promises not to change.'  The compiler uses the const declarations to check operations on variables and parameters and generate an error at compile time if their data could potentially change.  There is no runtime overhead for using <tt><b>Const</b></tt> qualifiers since all of the checks are made at compile time.<br \>
+Indique que le <tt><i>datatype (= type de donn&eacute;es)</i></tt> ou <tt><a href="KeyPgPtr.html">Ptr</a></tt> imm&eacute;diatement &agrave; la droite du qualificateur <tt><b>Const</b></tt> doit &ecirc;tre consid&eacute;r&eacute; comme &eacute;tant en lecture seule.  Les d&eacute;clarations en lecture seule (<tt><b>Const</b></tt>) sont une mesure de s&eacute;curit&eacute; de type qui peut &ecirc;tre comprise comme "<i>promesse de ne pas changer</i>".  Le compilateur utilise les d&eacute;clarations <tt><b>Const</b></tt> pour v&eacute;rifier les op&eacute;rations sur les variables et param&egrave;tres et g&eacute;n&eacute;rer une erreur lors de la compilation si leurs donn&eacute;es pourraient changer.  Il n'y a pas d'annulation d'ex&eacute;cution pour l'utilisation du qualificateur <tt><b>Const</b></tt> puisque tous les contr&ocirc;les sont effectu&eacute;s au moment de la compilation.<br \>
 <br \>
-<tt><b>Const</b></tt> can be used anywhere data type declarations are made.  This includes variables, parameters, function return results, user defined type fields, type aliases, and casting.  The <tt><i>datatype</i></tt> can be any built-in standard data type or user defined type.<br \>
+<tt><b>Const</b></tt> peut &ecirc;tre utilis&eacute; partout o&ugrave; des d&eacute;clarations de type de donn&eacute;es sont pr&eacute;sentes.  Cela inclut les variables, les param&egrave;tres, les r&eacute;sultats de retour de fonction, des champs de type d&eacute;fini par l'utilisateur, alias de type et <tt><i>casting</i></tt>.  Le <tt><i>datatype (= type de donn&eacute;es)</i></tt> peut &ecirc;tre n'importe quel type int&eacute;gr&eacute; de donn&eacute;es standard ou de type d&eacute;fini par l'utilisateur.<br \>
 <br \>
-Read-only variables must have an initializer since modifying a read-only variable through an assignment will generate a compiler error.  The initializer may appear after the declaration of the variable.<br \>
+Les variables en lecture seule doivent avoir un initialisateur sinon la modification d'une variable en lecture seule par le biais d'une allocation g&eacute;n&eacute;rera une erreur de compilation.  L'initialisation peut appara&icirc;tre apr&egrave;s la d&eacute;claration de la variable.<br \>
 <br \>
-Both non-const and const variables may be passed to a procedure expecting a const parameter.  However, a const variable may not be passed to a procedure taking a non-const parameter, and will generate a compile error.<br \>
+Des variables <tt><b>Const</b></tt> et non-<tt><b>Const</b></tt> peuvent &ecirc;tre transmises &agrave; une proc&eacute;dure qui attend un param&egrave;tre <tt><b>Const</b></tt>.  Toutefois, une variable <tt><b>Const</b></tt> ne peut pas &ecirc;tre pass&eacute;e &agrave; une proc&eacute;dure exigeant un param&egrave;tre non-<tt><b>Const</b></tt>, cela g&eacute;n&eacute;rera une erreur de compilation.<br \>
 <br \>
-Procedures can be overloaded based on the const-ness of parameters.  For example a procedure can be overloaded where one version of the procedure takes a <tt>'byref foo as bar'</tt> parameter and another version of the procedure takes a <tt>'byref foo as const bar'</tt> parameter.<br \>
+Les proc&eacute;dures peuvent &ecirc;tre surcharg&eacute;es sur la base <tt><b>Const</b></tt> des param&egrave;tres.  Par exemple, une proc&eacute;dure peut &ecirc;tre surcharg&eacute;e, une version de la proc&eacute;dure ayant un param&egrave;tre '<tt><i>foo byref as bar</i></tt>' et l'autre version de la proc&eacute;dure ayant un param&egrave;tre '<tt><i>foo bar byref as const</i></tt>'.<br \>
 <br \>
-With pointer declarations, <tt><b>Const</b></tt> can be used to indicate which part of the pointer declaration is read-only (all other parts are by default read-write).  The read-only portion of the pointer data type could be the pointer itself (the address), what the pointer points to (the data), or both.  In a declaration with more than one level of <tt><a href="KeyPgPtr.html">Ptr</a></tt> indirection, the right most <tt><a href="KeyPgPtr.html">Ptr</a></tt> indicates the highest order level of indirection and is therefore dereferenced first.<br \>
+Avec une d&eacute;claration de pointeur, <tt><b>Const</b></tt> peut &ecirc;tre utilis&eacute; pour indiquer quelle partie de la d&eacute;claration de pointeur est en lecture seule (toutes les autres parties sont par d&eacute;faut en lecture-&eacute;criture).  L'&eacute;l&eacute;ment en lecture seule du type de pointeur de donn&eacute;es peut &ecirc;tre le pointeur lui-m&ecirc;me (l'adresse), ce que le pointeur pointe (les donn&eacute;es), ou les deux.  Dans une d&eacute;claration avec plus d'un niveau d'indirection de <tt><a href="KeyPgPtr.html">Ptr</a></tt>, le <tt><a href="KeyPgPtr.html">Ptr</a></tt> le plus &agrave; droite indique le niveau le plus &eacute;lev&eacute; d'indirection et est donc d&eacute;r&eacute;f&eacute;renc&eacute; en premier.<br \>
 <br \>
-The compiler has an internal hard-limit of eight (8) levels of pointer indirection with respect to const qualifiers and the behavior of using <tt><b>Const</b></tt> with <tt><a href="KeyPgPtr.html">Ptr</a></tt> data types having greater than eight (8) levels of indirection is undefined.<br \>
+Le compilateur a une limite '<tt><i>hard</i></tt>' interne de huit (8) niveaux d'indirection pointeur en ce qui concerne les qualificateurs <tt><b>Const</b></tt> et le comportement de <tt><b>Const</b></tt> avec l'utilisation des types de donn&eacute;es <tt><a href="KeyPgPtr.html">Ptr</a></tt> ayant plus de huit (8) niveaux d'indirection est ind&eacute;fini.<br \>
 <br \>
-</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Exemple</div><div class="fb_sect_cont"><br \>
 <tt><div class="freebasic">
 <span class="com">''&nbsp;Const&nbsp;Variables</span><br />
 <br />
@@ -154,10 +154,10 @@ The compiler has an internal hard-limit of eight (8) levels of pointer indirecti
 <span class="com">''&nbsp;called&nbsp;'foo(&nbsp;byref&nbsp;n&nbsp;as&nbsp;integer&nbsp;)'</span><br />
 <span class="com">''&nbsp;called&nbsp;'foo(&nbsp;byref&nbsp;n&nbsp;as&nbsp;const&nbsp;integer&nbsp;)'</span><br />
 </div></tt><br />
-</div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
-<ul><li> New to FreeBASIC<br \>
+</div><div class="fb_sect_title">Diff&eacute;rences avec QB</div><div class="fb_sect_cont"><br \>
+<ul><li> Nouveau pour FreeBASIC<br \>
 <br \>
-</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+</ul></div><div class="fb_sect_title">Voir aussi</div><div class="fb_sect_cont"><br \>
 <ul><li> <tt><a href="KeyPgConst.html">Const</a></tt><br \>
 <li> <tt><a href="KeyPgConstMember.html">Const (Member)</a></tt><br \>
 <li> <tt><a href="KeyPgDim.html">Dim</a></tt><br \>

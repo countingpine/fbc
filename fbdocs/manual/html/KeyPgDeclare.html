@@ -11,9 +11,9 @@
 </div> 
 <div id="fb_pg_wrapper">
 <div id="fb_pg_body">
-	Declares a module-level or member procedure<br \>
+	D&eacute;clare une proc&eacute;dure au niveau module ou un membre de proc&eacute;dure<br \>
 <br \>
-<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<div class="fb_sect_title">Syntaxe</div><div class="fb_sect_cont"><tt><br \>
 <b>Declare</b> <a href="KeyPgSub.html">Sub</a> <i>name</i> [ <i>param_list</i> ] [ <a href="KeyPgModuleConstructor.html">Constructor</a> | <a href="KeyPgModuleDestructor.html">Destructor</a> ]<br \>
 <b>Declare</b> <a href="KeyPgFunction.html">Function</a> <i>name</i> [ <i>param_list</i> ] <a href="KeyPgAs.html">As</a> <i>return_type</i><br \>
 <b>Declare</b> <a href="KeyPgOperator.html">Operator</a> <i>op_symbol</i> <i>param_list</i> [ <a href="KeyPgAs.html">As</a> <i>return_type</i> ]<br \>
@@ -27,30 +27,30 @@ Type <i>T</i><br \>
 <b>Declare</b> <a href="KeyPgProperty.html">Property</a> <i>name</i> [ ( [ <i>param_list</i> ] ) ] [ <a href="KeyPgAs.html">As</a> <i>return_type</i> ]<br \>
 </div>End Type<br \>
 </tt><br \>
-</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Param&egrave;tres</div><div class="fb_sect_cont"><br \>
 <tt><i>param_list</i></tt><br \>
-<div class="fb_indent">Parenthesized comma-separated list of parameters.<br \>
+<div class="fb_indent">Liste entre parenth&egrave;ses de param&egrave;tres s&eacute;par&eacute;s par des virgules.<br \>
 </div><tt><i>return_type</i></tt><br \>
-<div class="fb_indent">The return type of a <tt><a href="KeyPgFunction.html">Function</a></tt>, <tt><a href="KeyPgOperator.html">Operator</a></tt>, or <tt><a href="KeyPgProperty.html">Property</a></tt> procedure.<br \>
+<div class="fb_indent">Le type de retour d'une proc&eacute;dure <tt><a href="KeyPgFunction.html">Function</a></tt>, <tt><a href="KeyPgOperator.html">Operator</a></tt>, ou <tt><a href="KeyPgProperty.html">Property</a></tt>.<br \>
 </div><tt><i>name</i></tt><br \>
-<div class="fb_indent">The name or symbol of the routine.<br \>
+<div class="fb_indent">Le nom ou le symbole de la routine.<br \>
 </div><tt><i>op_symbol</i></tt><br \>
-<div class="fb_indent">The name or symbol of an operator.<br \>
+<div class="fb_indent">Le nom ou le symbole d'un op&eacute;rateur.<br \>
 </div><tt><i>T</i></tt><br \>
-<div class="fb_indent">The name of a new user-defined type.<br \>
+<div class="fb_indent">Le nom d'un nouveau type d&eacute;fini par l'utilisateur.<br \>
 <br \>
 </div></div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
-The <tt><b>Declare</b></tt> statement declares a <tt><a href="KeyPgSub.html">Sub</a></tt>, <tt><a href="KeyPgFunction.html">Function</a></tt>, <tt><a href="KeyPgOperator.html">Operator</a></tt>, <tt><a href="KeyPgConstructor.html">Constructor</a></tt>, or <tt><a href="KeyPgDestructor.html">Destructor</a></tt>. We will refer to one of these as a routine. <br \>
-The routine can be referred to in code without seeing its definition, although it must be defined somewhere. Essentially, the <tt><b>Declare</b></tt> statement introduces a routine, and states that its definition is elsewhere. For example, a function can be declared at the top of a source module, called, then defined at the bottom of the source file, as shown below the example.<br \>
+L'instruction <tt><b>Declare</b></tt> d&eacute;clare un(e) <tt><a href="KeyPgSub.html">Sub</a></tt>, <tt><a href="KeyPgFunction.html">Function</a></tt>, <tt><a href="KeyPgOperator.html">Operator</a></tt>, <tt><a href="KeyPgConstructor.html">Constructor</a></tt>, ou <tt><a href="KeyPgDestructor.html">Destructor</a></tt>. Nous ferons r&eacute;f&eacute;rence &agrave; l'un d'entre eux comme une routine.<br \>
+La routine peut &ecirc;tre mentionn&eacute;e dans le code sans voir sa d&eacute;finition, cependant elle doit &ecirc;tre d&eacute;finie quelque part. Essentiellement, l'instruction <tt><b>Declare</b></tt> introduit une routine, et d&eacute;clare que sa d&eacute;finition est ailleurs. Par exemple, une fonction peut &ecirc;tre d&eacute;clar&eacute;e en haut d'un module source, appel&eacute;e, puis d&eacute;finie &agrave; la fin du fichier source, comme le montre l'exemple ci-dessous.<br \>
 <br \>
-A routine's declaration is almost identical to the first line of its definition, except the declaration is preceded by the <tt><b>Declare</b></tt> keyword and has no body. Also, attributes such as <a href="KeyPgExport.html">Export</a> are left off the declaration.<br \>
+Une d&eacute;claration de routine est presque identique &agrave; la premi&egrave;re ligne de sa d&eacute;finition, sauf que la d&eacute;claration est pr&eacute;c&eacute;d&eacute;e par le mot-cl&eacute; <tt><b>Declare</b></tt> et n'a pas de corps. De plus, des attributs tels que <a href="KeyPgExport.html">Export</a> sont laiss&eacute;s hors de la d&eacute;claration.<br \>
 <br \>
-FreeBASIC, as QB, does not require the declaration of the functions unless they are defined in a different source file or in the same file past the point where they are called. This is no longer true for routines declared inside a <a href="KeyPgType.html">Type</a> body, which must <b>always</b> be declared first in the <a href="KeyPgType.html">Type</a>'s body before use. If you do not declare <a href="KeyPgType.html">Type</a> routines you will receive an error.<br \>
+FreeBASIC, comme QB, n'exige pas la d&eacute;claration des fonctions &agrave; moins qu'elles soient d&eacute;finies dans un fichier source diff&eacute;rent ou dans le m&ecirc;me fichier apr&egrave;s le point o&ugrave; elles sont appel&eacute;es. Ce n'est pas vrai pour les routines d&eacute;clar&eacute;es &agrave; l'int&eacute;rieur d'un corps de <a href="KeyPgType.html">Type</a>, qui doivent <b>toujours</b> &ecirc;tre d&eacute;clar&eacute;es en premier dans le corps du <a href="KeyPgType.html">Type</a> avant de les utiliser. Si vous ne d&eacute;clarez pas les routines <a href="KeyPgType.html">Type</a> vous recevrez un message d'erreur.<br \>
 <br \>
- As every file using a function must have its declaration, declarations are usually kept in one or more <i>include files</i> to allow usage of the function by any module that needs it using the <tt><a href="KeyPgInclude.html">#include</a></tt> statement. <br \>
+ Comme chaque fichier utilisant une fonction doit avoir sa d&eacute;claration, les d&eacute;clarations sont habituellement group&eacute;e dans un ou plusieurs <i>fichiers include</i> pour permettre l'utilisation de la fonction par un module quelconque qui en a besoin en utilisant l'instruction <tt><a href="KeyPgInclude.html">#include</a></tt>.<br \>
 <br \>
-</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
-Module-level Function:<br \>
+</div><div class="fb_sect_title">Exemple</div><div class="fb_sect_cont"><br \>
+Fonction niveau module:<br \>
 <tt><div class="freebasic">
 <span class="com">''&nbsp;declare&nbsp;the&nbsp;function&nbsp;sum&nbsp;which&nbsp;takes&nbsp;two&nbsp;integers&nbsp;and&nbsp;returns&nbsp;an&nbsp;integer</span><br />
 <span class="key">Declare</span>&nbsp;<span class="key">Function</span>&nbsp;<span class="wrd">sum</span><span class="oth">(</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">,</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
@@ -63,7 +63,7 @@ Module-level Function:<br \>
 <span class="key">End</span>&nbsp;<span class="key">Function</span><br />
 </div></tt><br />
 <br \>
-Type-level Sub:<br \>
+Niveau type Sub:<br \>
 <tt><div class="freebasic">
 <span class="key">Type</span>&nbsp;<span class="wrd">my_type</span><br />
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">my_data</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
@@ -82,15 +82,15 @@ Type-level Sub:<br \>
 <br />
 <span class="key">Print</span>&nbsp;<span class="wrd">an_instance.my_data</span><br />
 </div></tt><br />
-</div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
-<ul><li> In the <i><a href="CompilerOptlang.html">-lang fb</a></i> dialect, <tt><b>ByVal</b></tt> is the default parameter passing convention.<br \>
-<li> In the <i><a href="CompilerOptlang.html">-lang qb</a></i> and <i><a href="CompilerOptlang.html">-lang deprecated</a></i> dialects, <tt><b>ByRef</b></tt> is the default parameter passing convention.<br \>
-<li> Type-level <tt><a href="KeyPgSub.html">Sub</a></tt>/<tt><a href="KeyPgFunction.html">Function</a></tt>/<tt><a href="KeyPgOperator.html">Operator</a></tt>/<tt><a href="KeyPgConstructor.html">Constructor</a></tt>/<tt><a href="KeyPgDestructor.html">Destructor</a></tt>'s are only allowed in <i><a href="CompilerOptlang.html">-lang fb</a></i><br \>
+</div><div class="fb_sect_title">Diff&eacute;rences de dialecte</div><div class="fb_sect_cont"><br \>
+<ul><li> Dans le dialecte <i><a href="CompilerOptlang.html">-lang fb</a></i>, <tt><b>ByVal</b></tt> est la convention par d&eacute;faut de passage de param&egrave;tre.<br \>
+<li> Dans les dialectes <i><a href="CompilerOptlang.html">-lang qb</a></i> et <i><a href="CompilerOptlang.html">-lang deprecated</a></i>, <tt><b>ByRef</b></tt> est la convention par d&eacute;faut de passage de param&egrave;tre.<br \>
+<li> Niveaux type <tt><a href="KeyPgSub.html">Sub</a></tt>/<tt><a href="KeyPgFunction.html">Function</a></tt>/<tt><a href="KeyPgOperator.html">Operator</a></tt>/<tt><a href="KeyPgConstructor.html">Constructor</a></tt>/<tt><a href="KeyPgDestructor.html">Destructor</a></tt> ne sont permis qu'en <i><a href="CompilerOptlang.html">-lang fb</a></i><br \>
 <br \>
-</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
-<ul><li> In FreeBASIC, the parameter names are optional.<br \>
+</ul></div><div class="fb_sect_title">Diff&eacute;rences avec QB</div><div class="fb_sect_cont"><br \>
+<ul><li> Dans FreeBASIC, les noms de param&egrave;tres sont facultatifs.<br \>
 <br \>
-</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+</ul></div><div class="fb_sect_title">Voir aussi</div><div class="fb_sect_cont"><br \>
 <ul><li> <tt><a href="KeyPgSub.html">Sub</a></tt><br \>
 <li> <tt><a href="KeyPgFunction.html">Function</a></tt><br \>
 <li> <tt><a href="KeyPgOperator.html">Operator</a></tt><br \>

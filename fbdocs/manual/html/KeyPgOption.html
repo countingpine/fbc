@@ -11,42 +11,42 @@
 </div> 
 <div id="fb_pg_wrapper">
 <div id="fb_pg_body">
-	Specifies additional attributes and/or characteristics of symbols.<br \>
+	Sp&eacute;cifie des attributs et/ou des caract&eacute;ristiques  additionnels de symboles.<br \>
 <br \>
-<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<div class="fb_sect_title">Syntaxe</div><div class="fb_sect_cont"><tt><br \>
 <b>Option</b>( "<i>literal-text</i>" )<br \>
 </tt><br \>
-</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Param&egrave;tres</div><div class="fb_sect_cont"><br \>
 <tt><i>literal-text</i></tt><br \>
-<div class="fb_indent">The literal text specifying the option. See description.<br \>
+<div class="fb_indent">Le texte litt&eacute;ral sp&eacute;cifiant l'option. Voir description.<br \>
 <br \>
 </div></div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
-<tt><b>Option()</b></tt> allows the programmer to specify additional attributes or characteristics.  Enclosing the string into quotes and parentheses is required in the syntax.  Unrecognized options are ignored.<br \>
+<tt><b>Option()</b></tt> permet au programmeur de pr&eacute;ciser des attributs ou caract&eacute;ristiques suppl&eacute;mentaires.  Dans cette syntaxe la cha&icirc;ne doit &ecirc;tre encadr&eacute;e par des guillemets (").  Les options inconnues seront ignor&eacute;es.<br \>
 <br \>
-<tt><b>Option</b></tt> can also be used as a statement to specify other compile time options.  See <a href="CatPgCompilerSwitches.html">Compiler Switches</a>.<br \>
+<tt><b>Option</b></tt> peut &eacute;galement &ecirc;tre utilis&eacute; comme instruction pour pr&eacute;ciser d'autres options de compilation.  Voir <a href="CatPgCompilerSwitches.html">Commutateurs du compilateur</a>.<br \>
 <br \>
-Individual options are explained below.<br \>
+Les options individuelles sont expliqu&eacute;es ci-dessous.<br \>
 <br \>
 <div class="fb_sect_title">SSE</div><br \>
-<tt><b>Option("SSE")</b></tt> indicates that a floating point value (<tt><a href="KeyPgSingle.html">Single</a></tt> or <tt><a href="KeyPgDouble.html">Double</a></tt>) returned from a function is stored in the <tt>xmm0</tt> register.  <tt><a href="KeyPgOption.html">Option("Sse")</a></tt> is ignored unless the source is compiled with the <a href="CompilerOptfpu.html">-fpu SSE</a> command line option.  This option may be used immediately after the return type in a function declaration or function definition.  This option is an optimization only and not required to compile programs using the <a href="CompilerOptfpu.html">-fpu SSE</a> command line option.<br \>
+<tt><b>Option("SSE")</b></tt> indique qu'une valeur &agrave; virgule flottante (<tt><a href="KeyPgSingle.html">Single</a></tt> ou <tt><a href="KeyPgDouble.html">Double</a></tt>) retourn&eacute;e par une fonction est charg&eacute;e dans le registre <tt>xmm0</tt>.  <tt><a href="KeyPgOption.html">Option("Sse")</a></tt> est ignor&eacute;e tant que le code source n'est pas compil&eacute; avec l'option de ligne de commande <a href="CompilerOptfpu.html">-fpu SSE</a>.  Cette option peut &ecirc;tre utilis&eacute;e imm&eacute;diatement apr&egrave;s le retour dans une d&eacute;claration de fonction ou une d&eacute;finition de fonction. Cette option est une optimisation et n'est pas requise pour compiler des programmes utilisant l'option de ligne de commande <a href="CompilerOptfpu.html">-fpu SSE</a>.<br \>
 <br \>
 <tt><div class="freebasic">
 <span class="key">Declare</span>&nbsp;<span class="key">Function</span>&nbsp;<span class="wrd">ValueInXmm0</span>&nbsp;<span class="oth">()</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Double</span>&nbsp;<span class="key">Option</span><span class="oth">(</span><span class="quo">"sse"</span><span class="oth">)</span><br />
 </div></tt><br />
 <br \>
 <div class="fb_sect_title">FPU</div><br \>
-<tt><b>Option("FPU")</b></tt> indicates that a floating point value (<tt><a href="KeyPgSingle.html">Single</a></tt> or <tt><a href="KeyPgDouble.html">Double</a></tt>) returned from a function is stored in the <tt>st(0)</tt> register.  This option may be used immediately after the return type in a function declaration or function definition.<br \>
+<tt><b>Option("FPU")</b></tt> indique qu'une valeur &agrave; virgule flottante (<tt><a href="KeyPgSingle.html">Single</a></tt> ou <tt><a href="KeyPgDouble.html">Double</a></tt>) retourn&eacute;e par une fonction est charg&eacute;e dans le registre <tt>st(0)</tt>.  Cette option peut &ecirc;tre utilis&eacute;e imm&eacute;diatement apr&egrave;s le retour dans une d&eacute;claration de fonction ou une d&eacute;finition de fonction.<br \>
 <br \>
 <tt><div class="freebasic">
 <span class="key">Declare</span>&nbsp;<span class="key">Function</span>&nbsp;<span class="wrd">ValueInStZero</span>&nbsp;<span class="oth">()</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Double</span>&nbsp;<span class="key">Option</span><span class="oth">(</span><span class="quo">"fpu"</span><span class="oth">)</span><br />
 </div></tt><br />
 <br \>
-</div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
-<ul><li> New to FreeBASIC<br \>
+</div><div class="fb_sect_title">Diff&eacute;rences avec QB</div><div class="fb_sect_cont"><br \>
+<ul><li> Nouveau pour FreeBASIC<br \>
 <br \>
-</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
-<ul><li> <a href="CompilerOptfpu.html">Compiler Option: -fpu</a><br \>
-<li> <a href="CatPgCompilerSwitches.html">Compiler Switches</a><br \>
+</ul></div><div class="fb_sect_title">Voir aussi</div><div class="fb_sect_cont"><br \>
+<ul><li> <a href="CompilerOptfpu.html">Option du compilateur : -fpu</a><br \>
+<li> <a href="CatPgCompilerSwitches.html">Commutateurs du compilateur</a><br \>
 <br \>
 </ul></div>
 </div>

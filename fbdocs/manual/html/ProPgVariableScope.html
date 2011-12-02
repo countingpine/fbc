@@ -6,122 +6,123 @@
 <body>
 <div id="fb_body_wrapper">
 <div id="fb_tab">
-<div id="fb_tab_l">Variable Scope</div>
+<div id="fb_tab_l">Port&eacute;e des variables</div>
 <div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
 </div> 
 <div id="fb_pg_wrapper">
 <div id="fb_pg_body">
-	Visibility and access rules for variables and objects<br \>
+	R&egrave;gles de visibilit&eacute; et d'acc&egrave;s pour les variables et objets<br \>
 <br \>
-A variable's scope refers to its visibility in a program. A variable is not visible (cannot be accessed) outside the scope in which it was declared. Where and how a variable is declared determines its scope.<br \>
+La port&eacute;e d'une variable se r&eacute;f&egrave;re &agrave; sa visibilit&eacute; dans le programme. Une variable n'est pas visible (n'est pas accessible) en dehors de la port&eacute;e pour laquelle elle a &eacute;t&eacute; d&eacute;clar&eacute;e. O&ugrave; et comment une variable est d&eacute;clar&eacute;e d&eacute;termine son champ d'application.<br \>
 <br \>
-In FreeBASIC, there are 4 categories of scope: <b><i>local</i></b>, <b><i>shared</i></b>, <b><i>common</i></b> and <b><i>common shared</i></b>. Each of these scopes has different visibility rules, which are detailed below.<br \>
+En FreeBasic, il ya 4 cat&eacute;gories de port&eacute;e: <b><i>local</i></b>, <b><i>shared</i></b>, <b><i>common</i></b> et <b><i>common shared</i></b>. Chacune de ces port&eacute;es a des r&egrave;gles de visibilit&eacute; diff&eacute;rentes qui sont d&eacute;taill&eacute;es ci-dessous.<br \>
 <br \>
-<div class="fb_sect_title">Local Scope</div><div class="fb_sect_cont"><br \>
+<div class="fb_sect_title">Port&eacute;e locale (local)</div><div class="fb_sect_cont"><br \>
 <br \>
-Variables declared in the local scope are visible only in the most local instance of the IF, FOR, SCOPE, function, or module block in which they are declared.<br \>
+Les variables d&eacute;clar&eacute;es dans la port&eacute;e locale sont visibles uniquement dans l'instance la plus locale d'une fonction IF, FOR, SCOPE ou du bloc module o&ugrave; elles ont &eacute;t&eacute; d&eacute;clar&eacute;es.<br \>
 <br \>
-<ul><li> <tt><a href="KeyPgSub.html">Sub</a></tt>, <tt><a href="KeyPgFunction.html">Function</a></tt>, the main body, and each compound statement implicitly define a new local scope block. <br \>
-<li> Explicitly declared variables using <tt><a href="KeyPgDim.html">Dim</a></tt> or <tt><a href="KeyPgRedim.html">ReDim</a></tt> take the scope of the local most block in which they are declared. <br \>
-<li> Implicit variables take the scope of the the local most <tt><a href="KeyPgScope.html">Scope...End Scope</a></tt> block in which they are first used, otherwise take the scope of the <tt><a href="KeyPgSub.html">Sub</a></tt>, <tt><a href="KeyPgFunction.html">Function</a></tt>, or main body in which they are used. <br \>
+<ul><li> <tt><a href="KeyPgSub.html">Sub</a></tt>, <tt><a href="KeyPgFunction.html">Function</a></tt>, le corps principal du programme et chaque instruction compos&eacute;e d&eacute;finissent implicitement des blocs de nouvelles port&eacute;es locales. <br \>
+<li> Les variables d&eacute;clar&eacute;es explicitement en utilisant <tt><a href="KeyPgDim.html">Dim</a></tt> ou <tt><a href="KeyPgRedim.html">ReDim</a></tt> prennent la port&eacute;e du bloc le plus local dans lequel sont d&eacute;clar&eacute;es. <br \>
+<li> Les variables implicites prennent la port&eacute;e du bloc le plus local <tt><a href="KeyPgScope.html">Scope...End Scope</a></tt> dans lequel elles ont &eacute;t&eacute; utilis&eacute;es en premier, autrement elles ont la port&eacute;e de <tt><a href="KeyPgSub.html">Sub</a></tt>, <tt><a href="KeyPgFunction.html">Function</a></tt> ou du corps principal o&ugrave; elles sont utilis&eacute;es. <br \>
 <br \>
-</ul>In the local scope, there is no visibility between module-level code and function level code. Furthermore, variables dimensioned within a block decision or loop statement will only be visible within the block in which they are dimensioned. Variables declared in the local scope of a module are not visible in any of the functions within that module. Similarly, local variables declared inside functions are not visible in the module-level code, nor any other function within the module.<br \>
+</ul>Dans la port&eacute;e locale il n'y a pas de visibilit&eacute; entre le code au niveau du module et le code au niveau de la fonction. En outre, les variables dimensionn&eacute;es dans un bloc de d&eacute;cision ou une instruction de boucle ne seront visibles que dans le bloc dans lequel ont &eacute;t&eacute; dimensionn&eacute;es. Les variables d&eacute;clar&eacute;es dans port&eacute;e locale d'un module ne sont pas visibles dans l'une quelconque des fonctions au sein de ce module. De même, les variables locales d&eacute;clar&eacute;es &agrave; l'int&eacute;rieur des fonctions ne sont pas visibles dans la code au niveau du module, ni aucune autre fonction au sein du module.<br \>
 <br \>
-Variables declared inside <tt><a href="KeyPgScope.html">Scope</a></tt> blocks may only be declared of local scope, and are not visible outside the block. <tt><a href="KeyPgScope.html">Scope</a></tt> blocks, however, inherit the surrounding scope, so local variables declared outside the <tt><a href="KeyPgScope.html">Scope</a></tt> block will be visible inside (<i>see example program</i>).<br \>
+Les variables d&eacute;clar&eacute;es &agrave; l'int&eacute;rieur de blocs <tt><a href="KeyPgScope.html">Scope</a></tt> ne peuvent être d&eacute;clar&eacute;es que de port&eacute;e locale et ne sont pas visibles &agrave; l'ext&eacute;rieur du bloc. Les blocs <tt><a href="KeyPgScope.html">Scope</a></tt>, cependant, h&eacute;ritent de la port&eacute;e environnante, ainsi les variables locales d&eacute;clar&eacute;es en dehors du bloc <tt><a href="KeyPgScope.html">Scope</a></tt> seront visibles &agrave; l'int&eacute;rieur de celui-ci (<i>voir exemple de programme</i>).<br \>
 <br \>
-You can declare a variable to be of local scope explicitly by using the <tt><a href="KeyPgDim.html">Dim</a></tt> statement, or implicitly by simply introducing the variable (<i>see <a href="ProPgImplicitdeclarations.html">Implicit Declarations</a></i>). The example program <tt><b>local.bas</b></tt> demonstrates visibility rules for the local scope.<br \>
+Vous pouvez d&eacute;clarer une variable comme &eacute;tant de port&eacute;e locale explicitement en utilisant l'instruction <tt><a href="KeyPgDim.html">Dim</a></tt> ou implicitement par simple introduction de la variable (<i>voir <a href="ProPgImplicitdeclarations.html">Les d&eacute;clarations implicites</a></i>). L'exemple de programme <tt><b>local.bas</b></tt> d&eacute;montre les r&egrave;gles de visibilit&eacute; pour la port&eacute;e locale.<br \>
 <br \>
 <b>local.bas</b><br \>
 <tt><div class="freebasic">
-<span class="com">''&nbsp;visible&nbsp;only&nbsp;in&nbsp;this&nbsp;module</span><br />
+<span class="com">''&nbsp;visible&nbsp;seulement&nbsp;dans&nbsp;ce&nbsp;module</span><br />
 <span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="wrd">local_moduleLevel1</span><br />
 <br />
 <span class="com">''&nbsp;OK.</span><br />
 <span class="key">Print</span>&nbsp;<span class="wrd">local_moduleLevel1</span><br />
 <br />
 <span class="key">Scope</span><br />
-&nbsp;&nbsp;<span class="com">''&nbsp;OK;&nbsp;SCOPE&nbsp;Blocks&nbsp;inherit&nbsp;outer&nbsp;scope</span><br />
+&nbsp;&nbsp;<span class="com">''&nbsp;OK;&nbsp;Blocs&nbsp;SCOPE&nbsp;heritent&nbsp;port&eacute;e&nbsp;environnante</span><br />
 &nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="wrd">local_moduleLevel1</span><br />
 &nbsp;&nbsp;<br />
-&nbsp;&nbsp;<span class="com">''&nbsp;visible&nbsp;only&nbsp;in&nbsp;this&nbsp;SCOPE&nbsp;Block</span><br />
+&nbsp;&nbsp;<span class="com">''&nbsp;visible&nbsp;seulement&nbsp;dans&nbsp;ce&nbsp;Bloc&nbsp;SCOPE</span><br />
 &nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="wrd">local_moduleLevel2</span><br />
 <br />
 &nbsp;&nbsp;<span class="com">''&nbsp;OK.</span><br />
 &nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="wrd">local_moduleLevel2</span><br />
 <span class="key">End</span>&nbsp;<span class="key">Scope</span><br />
 <br />
-<span class="com">''&nbsp;Error;&nbsp;can't&nbsp;see&nbsp;inner-SCOPE&nbsp;vars</span><br />
+<span class="com">''&nbsp;Error;&nbsp;impossible&nbsp;voir&nbsp;variables&nbsp;SCOPE-interieure</span><br />
 <span class="com">''&nbsp;print&nbsp;local_moduleLevel2</span><br />
 <br />
 <span class="key">Function</span>&nbsp;<span class="wrd">some_function</span><span class="oth">(</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
-&nbsp;&nbsp;<span class="com">''&nbsp;visible&nbsp;only&nbsp;in&nbsp;this&nbsp;function</span><br />
+&nbsp;&nbsp;<span class="com">''&nbsp;visible&nbsp;seulement&nbsp;dans&nbsp;cette&nbsp;fonction</span><br />
 &nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="wrd">local_functionLevel</span><br />
 <br />
 &nbsp;&nbsp;<span class="com">''&nbsp;OK.</span><br />
 &nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="wrd">local_functionLevel</span><br />
 <br />
-&nbsp;&nbsp;<span class="com">''&nbsp;Error;&nbsp;can't&nbsp;see&nbsp;local&nbsp;module-level&nbsp;vars&nbsp;&nbsp;</span><br />
+&nbsp;&nbsp;<span class="com">''&nbsp;Error;&nbsp;impossible&nbsp;voir&nbsp;variables&nbsp;niveau-module&nbsp;local&nbsp;&nbsp;</span><br />
 &nbsp;&nbsp;<span class="com">''&nbsp;print&nbsp;local_moduleLevel1</span><br />
 <br />
-&nbsp;&nbsp;<span class="com">''&nbsp;Error;&nbsp;can't&nbsp;see&nbsp;local&nbsp;module-level&nbsp;vars</span><br />
+&nbsp;&nbsp;<span class="com">''&nbsp;Error;&nbsp;impossible&nbsp;voir&nbsp;variables&nbsp;niveau-module&nbsp;local</span><br />
 &nbsp;&nbsp;<span class="com">''&nbsp;print&nbsp;local_moduleLevel2</span><br />
 <br />
 &nbsp;&nbsp;<span class="key">Function</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span><br />
 <br />
 <span class="key">End</span>&nbsp;<span class="key">Function</span><br />
 <br />
-<span class="com">''&nbsp;print&nbsp;local_functionLevel&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;''&nbsp;Error;&nbsp;can't&nbsp;see&nbsp;function_level&nbsp;vars</span><br />
+<span class="com">''&nbsp;print&nbsp;local_functionLevel&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+''&nbsp;Error;&nbsp;impossible&nbsp;voir&nbsp;variables&nbsp;niveau_fonction</span><br />
 <span class="key">End</span>&nbsp;<span class="num">0</span><br />
 </div></tt><br />
 <br \>
-</div><div class="fb_sect_title">Shared Scope</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Port&eacute;e partag&eacute;e (Shared Scope)</div><div class="fb_sect_cont"><br \>
 <br \>
-Variables declared in the shared scope of a module are visible to both the module and all functions of that module.<br \>
+Les variables d&eacute;clar&eacute;es de port&eacute;e partag&eacute;e (shared scope) dans un module sont visibles dans tout le module ainsi que toutes les fonctions de celui-ci.<br \>
 <br \>
-Unlike the local scope, the shared scope makes module-level variables visible to functions of that module. In other words, the module <i>shares</i> its declarations with its functions.<br \>
+Contrairement &agrave; la port&eacute;e locale, la port&eacute;e partag&eacute;e (shared scope) rend les variables de niveau module visibles &agrave; toutes les fonctions de ce module. En d'autres termes le module <i>partage</i> ses d&eacute;clarations avec ses fonctions.<br \>
 <br \>
-Variables can only be declared to be of shared scope at the module-level. Ie., only modules can share variables. Neither functions nor <tt><a href="KeyPgScope.html">Scope</a></tt> blocks can declare variables in the shared scope, thus variables declared there can only be local to that function or block.<br \>
+Les variables peuvent seulement être d&eacute;clar&eacute;es de port&eacute;e partag&eacute;e au niveau du module. C'est &agrave; dire, seuls les modules peuvent partager des variables. Ni les fonctions, ni les blocs <tt><a href="KeyPgScope.html">Scope</a></tt> ne peuvent d&eacute;clarer des variables de port&eacute;e partag&eacute;e, donc les variables d&eacute;clar&eacute;es peuvent seulement être locales &agrave; cette fonction ou bloc.<br \>
 <br \>
-You can declare a variable to be of shared scope by using the DIM statement with the <tt><a href="KeyPgShared.html">Shared</a></tt> keyword. The example program <tt><b>shared_scope.bas</b></tt> demonstrates visibility rules for the shared scope.<br \>
+Vous pouvez d&eacute;clarer une variable comme &eacute;tant de port&eacute;e partag&eacute;e en utilisant l'instruction DIM avec mot-cl&eacute; <tt><a href="KeyPgShared.html">Shared</a></tt>. L'exemple de programme <tt><b>shared_scope.bas</b></tt> d&eacute;montre les r&egrave;gles de visibilit&eacute; pour la port&eacute;e partag&eacute;e.<br \>
 <br \>
 <tt><b>shared.bas</b></tt><br \>
 <tt><div class="freebasic">
-<span class="com">''&nbsp;visible&nbsp;throughout&nbsp;this&nbsp;module</span><br />
+<span class="com">''&nbsp;visible&nbsp;dans&nbsp;tout&nbsp;le&nbsp;module</span><br />
 <span class="key">Dim</span>&nbsp;<span class="key">Shared</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="wrd">shared_moduleLevel1</span><br />
 <br />
 <span class="com">''&nbsp;OK.</span><br />
 <span class="key">Print</span>&nbsp;<span class="wrd">shared_moduleLevel1</span><br />
 <br />
 <span class="key">Scope</span><br />
-&nbsp;&nbsp;<span class="com">''&nbsp;OK;&nbsp;can&nbsp;see&nbsp;outer-scope&nbsp;vars</span><br />
+&nbsp;&nbsp;<span class="com">''&nbsp;OK;&nbsp;peut&nbsp;voir&nbsp;variables&nbsp;portee-environnante</span><br />
 &nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="wrd">shared_moduleLevel1</span><br />
 &nbsp;&nbsp;<br />
-&nbsp;&nbsp;<span class="com">''&nbsp;Error;&nbsp;SCOPE-level&nbsp;vars&nbsp;cannot&nbsp;be&nbsp;shared</span><br />
+&nbsp;&nbsp;<span class="com">''&nbsp;Error;&nbsp;variables&nbsp;niveau-SCOPE&nbsp;impossible&nbsp;etre&nbsp;partagees</span><br />
 &nbsp;&nbsp;<span class="com">''&nbsp;dim&nbsp;shared&nbsp;as&nbsp;integer&nbsp;shared_ModuleLevel2</span><br />
 <span class="key">End</span>&nbsp;<span class="key">Scope</span><br />
 <br />
 <span class="key">End</span>&nbsp;<span class="num">0</span><br />
 <br />
 <span class="key">Function</span>&nbsp;<span class="wrd">some_function</span><span class="oth">(</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
-&nbsp;&nbsp;<span class="com">''&nbsp;OK;&nbsp;can&nbsp;see&nbsp;shared&nbsp;module-level&nbsp;vars</span><br />
+&nbsp;&nbsp;<span class="com">''&nbsp;OK;&nbsp;peut&nbsp;voir&nbsp;variables&nbsp;niveau-module&nbsp;partagees</span><br />
 &nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="wrd">shared_moduleLevel1</span><br />
 <br />
-&nbsp;&nbsp;<span class="com">''&nbsp;Error;&nbsp;function-level&nbsp;vars&nbsp;cannot&nbsp;be&nbsp;shared&nbsp;&nbsp;</span><br />
+&nbsp;&nbsp;<span class="com">''&nbsp;Error;&nbsp;variables&nbsp;niveau-fonction&nbsp;impossible&nbsp;etre&nbsp;partagees&nbsp;&nbsp;</span><br />
 &nbsp;&nbsp;<span class="com">''&nbsp;dim&nbsp;shared&nbsp;as&nbsp;integer&nbsp;sharedFunctionLevel</span><br />
 <br />
 &nbsp;&nbsp;<span class="key">Function</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span><br />
 <span class="key">End</span>&nbsp;<span class="key">Function</span><br />
 </div></tt><br />
 <br \>
-</div><div class="fb_sect_title">Common Scope</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Port&eacute;e commune (Common Scope)</div><div class="fb_sect_cont"><br \>
 <br \>
-Variables declared in the common scope are visible to all modules.<br \>
+Les variables d&eacute;clar&eacute;es de port&eacute;e commune (Common Scope) sont visibles pour tous les modules.<br \>
 <br \>
-Variables declared with <tt><a href="KeyPgCommon.html">Common</a></tt> are visible to other modules with a matching <tt><a href="KeyPgCommon.html">Common</a></tt> variable declaration.  The variable name declared must match from between modules.<br \>
+Les variables d&eacute;clar&eacute;es avec <tt><a href="KeyPgCommon.html">Common</a></tt> sont visibles &agrave; d'autres modules avec une d&eacute;claration de variable <tt><a href="KeyPgCommon.html">Common</a></tt> correspondant.  Le nom de la variable d&eacute;clar&eacute;e doit correspondre aux modules entre eux.<br \>
 <br \>
 <tt><b>module1.bas</b></tt><br \>
 <tt><div class="freebasic">
-<span class="com">''&nbsp;compile&nbsp;with:</span><br />
+<span class="com">''&nbsp;compiler&nbsp;avec:</span><br />
 <span class="com">''&nbsp;&nbsp;&nbsp;&nbsp;fbc&nbsp;-lang&nbsp;qb&nbsp;module1.bas&nbsp;module2.bas</span><br />
 <br />
 <span class="com">'$lang:&nbsp;"qb"</span><br />
@@ -129,12 +130,12 @@ Variables declared with <tt><a href="KeyPgCommon.html">Common</a></tt> are visib
 <span class="key">Declare</span>&nbsp;<span class="key">Sub</span>&nbsp;<span class="wrd">Print_Values</span><span class="oth">()</span><br />
 <span class="key">Common</span>&nbsp;<span class="wrd">m1</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
 <span class="key">Common</span>&nbsp;<span class="wrd">m2</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">'&nbsp;This&nbsp;is&nbsp;executed&nbsp;after&nbsp;all&nbsp;other&nbsp;modules</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">'&nbsp;Ceci&nbsp;est&nbsp;execute&nbsp;apres&nbsp;tous&nbsp;autres&nbsp;modules</span><br />
 <span class="wrd">m1</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">1</span><br />
 <br />
 <span class="key">Print</span>&nbsp;<span class="quo">"Module1"</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
-<span class="key">Print</span>&nbsp;<span class="quo">"m1&nbsp;=&nbsp;"</span><span class="oth">;</span>&nbsp;<span class="wrd">m1</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">'&nbsp;m1&nbsp;=&nbsp;1&nbsp;as&nbsp;set&nbsp;in&nbsp;this&nbsp;module</span><br />
-<span class="key">Print</span>&nbsp;<span class="quo">"m2&nbsp;=&nbsp;"</span><span class="oth">;</span>&nbsp;<span class="wrd">m2</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">'&nbsp;m2&nbsp;=&nbsp;2&nbsp;as&nbsp;set&nbsp;in&nbsp;module2</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"m1&nbsp;=&nbsp;"</span><span class="oth">;</span>&nbsp;<span class="wrd">m1</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">'&nbsp;m1&nbsp;=&nbsp;1&nbsp;comme&nbsp;defini&nbsp;dans&nbsp;ce&nbsp;module</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"m2&nbsp;=&nbsp;"</span><span class="oth">;</span>&nbsp;<span class="wrd">m2</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">'&nbsp;m2&nbsp;=&nbsp;2&nbsp;comme&nbsp;defini&nbsp;dans&nbsp;module2</span><br />
 <br />
 <span class="wrd">Print_Values</span><br />
 </div></tt><br />
@@ -146,18 +147,18 @@ Variables declared with <tt><a href="KeyPgCommon.html">Common</a></tt> are visib
 <br />
 <span class="wrd">m2</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">2</span><br />
 <br />
-<span class="key">Print</span>&nbsp;<span class="quo">"Module2"</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">'&nbsp;This&nbsp;is&nbsp;executed&nbsp;first</span><br />
-<span class="key">Print</span>&nbsp;<span class="quo">"m1&nbsp;=&nbsp;"</span><span class="oth">;</span>&nbsp;<span class="wrd">m1</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">'&nbsp;m1&nbsp;=&nbsp;0&nbsp;(by&nbsp;default)</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"Module2"</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">'&nbsp;Ceci&nbsp;est&nbsp;execute&nbsp;en&nbsp;premier</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"m1&nbsp;=&nbsp;"</span><span class="oth">;</span>&nbsp;<span class="wrd">m1</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">'&nbsp;m1&nbsp;=&nbsp;0&nbsp;(par&nbsp;defaut)</span><br />
 <span class="key">Print</span>&nbsp;<span class="quo">"m2&nbsp;=&nbsp;"</span><span class="oth">;</span>&nbsp;<span class="wrd">m2</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">'&nbsp;m2&nbsp;=&nbsp;2</span><br />
 <br />
 <span class="key">Sub</span>&nbsp;<span class="wrd">Print_Values</span><span class="oth">()</span><br />
 &nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"Module2.Print_Values"</span><br />
-&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"m1&nbsp;=&nbsp;"</span><span class="oth">;</span>&nbsp;<span class="wrd">m1</span>&nbsp;&nbsp;&nbsp;<span class="com">'&nbsp;Implicit&nbsp;variable&nbsp;=&nbsp;0&nbsp;&nbsp;&nbsp;&nbsp;</span><br />
-&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"m2&nbsp;=&nbsp;"</span><span class="oth">;</span>&nbsp;<span class="wrd">m2</span>&nbsp;&nbsp;&nbsp;<span class="com">'&nbsp;Implicit&nbsp;variable&nbsp;=&nbsp;0&nbsp;&nbsp;</span><br />
+&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"m1&nbsp;=&nbsp;"</span><span class="oth">;</span>&nbsp;<span class="wrd">m1</span>&nbsp;&nbsp;&nbsp;<span class="com">'&nbsp;Variable&nbsp;implicite&nbsp;=&nbsp;0&nbsp;&nbsp;&nbsp;&nbsp;</span><br />
+&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"m2&nbsp;=&nbsp;"</span><span class="oth">;</span>&nbsp;<span class="wrd">m2</span>&nbsp;&nbsp;&nbsp;<span class="com">'&nbsp;Variable&nbsp;implicite&nbsp;=&nbsp;0&nbsp;&nbsp;</span><br />
 <span class="key">End</span>&nbsp;<span class="key">Sub</span><br />
 </div></tt><br />
 <br \>
-<b>Output:</b><br \>
+<b>Affichage:</b><br \>
 <pre class="fb_pre">
   Module2
   m1 = 0
@@ -169,11 +170,11 @@ Variables declared with <tt><a href="KeyPgCommon.html">Common</a></tt> are visib
   m1 = 0
   m2 = 0
 </pre><br \>
-</div><div class="fb_sect_title">Common Shared Scope</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Port&eacute;e commune partag&eacute;e (Common Shared Scope)</div><div class="fb_sect_cont"><br \>
 <br \>
-Variables declared in the common shared scope are visible to all modules and all functions of those modules.<br \>
+Les variables d&eacute;clar&eacute;es de port&eacute;e commune partag&eacute;e (Common Shared Scope) sont visibles &agrave; tous les modules et toutes leurs fonctions.<br \>
 <br \>
-Variables declared with <tt><a href="KeyPgCommon.html">Common</a></tt> are visible to other modules with a matching <tt><a href="KeyPgCommon.html">Common</a></tt> variable declaration.  The variable name declared must match from between modules.  Within a module the <tt><a href="KeyPgShared.html">Shared</a></tt> declaration modifier gives the variable module scope and makes the variable visible to all subs and functions.<br \>
+Les variables d&eacute;clar&eacute;es avec <tt><a href="KeyPgCommon.html">Common</a></tt> sont visibles aux autres modules avec une d&eacute;claration de variable <tt><a href="KeyPgCommon.html">Common</a></tt> correspondant.  Le nom de la variable d&eacute;clar&eacute;e doit correspondre aux modules entre eux.  Dans un module le modificateur de d&eacute;claration <tt><a href="KeyPgShared.html">Shared</a></tt> donne &agrave; la variable la port&eacute;e niveau-module et la rend visible &agrave; tous les "sub" et fonctions.<br \>
 <br \>
 <i><b><tt>module3.bas</tt></b></i><br \>
 <tt><div class="freebasic">
@@ -224,16 +225,16 @@ Variables declared with <tt><a href="KeyPgCommon.html">Common</a></tt> are visib
   m1 = 1
   m2 = 2
 </pre><br \>
-</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
-See examples above.<br \>
+</div><div class="fb_sect_title">Exemple</div><div class="fb_sect_cont"><br \>
+Voir les exemples ci-dessus.<br \>
 <br \>
-</div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Voir aussi</div><div class="fb_sect_cont"><br \>
 <ul><li> <tt><a href="KeyPgScope.html">Scope</a></tt><br \>
 <li> <tt><a href="KeyPgDim.html">Dim</a></tt><br \>
 <li> <tt><a href="KeyPgCommon.html">Common</a></tt><br \>
 <li> <tt><a href="KeyPgShared.html">Shared</a></tt><br \>
 <li> <a href="ProPgVariables.html">Variables</a><br \>
-<li> <a href="ProPgImplicitdeclarations.html">Implicit Declarations</a><br \>
+<li> <a href="ProPgImplicitdeclarations.html">Les d&eacute;clarations implicites</a><br \>
 <br \>
 </ul><br \>
    <br \>

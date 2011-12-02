@@ -11,9 +11,9 @@
 </div> 
 <div id="fb_pg_wrapper">
 <div id="fb_pg_body">
-	Defines a procedure<br \>
+	D&eacute;finit une proc&eacute;dure<br \>
 <br \>
-<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<div class="fb_sect_title">Syntaxe</div><div class="fb_sect_cont"><tt><br \>
 [<a href="KeyPgPublic.html">Public</a>|<a href="KeyPgPrivate.html">Private</a>] <b>Sub</b> <i>identifier</i> [<a href="KeyPgCdecl.html">cdecl</a>|<a href="KeyPgPascal.html">pascal</a>|<a href="KeyPgStdcall.html">stdcall</a>] [<a href="KeyPgOverload.html">Overload</a>] [<a href="KeyPgAlias.html">Alias</a> <i>external_identifier</i>] [( [<i>parameter_list</i>] )] [<a href="KeyPgStatic.html">Static</a>]<br \>
 <div class="fb_indent"><i>statements</i><br \>
 ...<br \>
@@ -28,34 +28,34 @@
 ...<br \>
 </div><a href="KeyPgEndblock.html">End</a> Sub<br \>
 </tt><br \>
-</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
-<div class="fb_indent"><tt><i>identifier</i></tt>: the name of the subroutine<br \>
-<tt><i>external_identifier</i></tt>: externally visible (to the linker) name enclosed in quotes<br \>
+</div><div class="fb_sect_title">Param&egrave;tres</div><div class="fb_sect_cont"><br \>
+<div class="fb_indent"><tt><i>identifier</i></tt>: le nom du sous-programme<br \>
+<tt><i>external_identifier</i></tt>: nom visible de l'ext&eacute;rieur (&agrave; l'&eacute;diteur de liens) entre guillemets<br \>
 <tt><i>parameter_list</i></tt>: parameter[, parameter[, ...]]<br \>
 <tt><i>parameter</i></tt>: <tt>[<a href="KeyPgByref.html">ByRef</a>|<a href="KeyPgByval.html">ByVal</a>] <i>identifier</i> [<a href="KeyPgAs.html">As</a> <i>type</i>] [= <i>default_value</i>]</tt><br \>
-<div class="fb_indent"><tt><i>identifier</i></tt>: the name of the variable referenced in the subroutine<br \>
-<tt><i>type</i></tt>: the type of variable<br \>
-<tt><i>default_value</i></tt>: the value of the argument if none is specified in the call<br \>
-</div><tt><i>statements</i></tt>: one or more statements that make up the subroutine body<br \>
+<div class="fb_indent"><tt><i>identifier</i></tt>: le nom de la variable r&eacute;f&eacute;renc&eacute;e dans la sous-routine<br \>
+<tt><i>type</i></tt>: le type de la variable<br \>
+<tt><i>default_value</i></tt>: la valeur de l'argument si rien n'est sp&eacute;cifi&eacute; dans l'appel<br \>
+</div><tt><i>statements</i></tt>: une ou plusieurs d&eacute;clarations qui composent le corps du sous-programme<br \>
 <br \>
 </div></div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
-A subroutine is a block of code which may be called at any time from a program.  This code may need to be executed multiple times, and subroutines provide an invaluable means to simplify code by replacing these blocks of code with a single subroutine call.  A subroutine also serves to allow a user to extend the FreeBASIC language to provide custom commands.  Many of the functions built into FreeBASIC are merely subroutines part of a "runtime library" linked to by default.<br \>
+Un sous-programme est un bloc de code qui peut &ecirc;tre appel&eacute; &agrave; tout moment &agrave; partir d'un programme.  Ce code peut &ecirc;tre ex&eacute;cut&eacute; plusieurs fois, et les sous-programmes fournissent un pr&eacute;cieux moyen de simplifier le code en rempla&ccedil;ant ces blocs de code par un unique sous-programme.  Un sous-programme permet aussi &agrave; un utilisateur d'&eacute;tendre le langage FreeBasic en lui fournissant des commandes personnalis&eacute;es.  Beaucoup de fonctions int&eacute;gr&eacute;es dans FreeBASIC sont simplement des sous-programmes faisant partie d'une "biblioth&egrave;que d'ex&eacute;cution" li&eacute;e par d&eacute;faut.<br \>
 <br \>
-The <tt><b>Sub</b></tt> keyword marks the beginning of a subroutine, and its end is marked by <tt><b>End Sub</b></tt>.  The "name" parameter is the name by which this subroutine is called.  For instance, if the declaration is "<tt><b>Sub</b>...<b>End Sub</b></tt>", the user can execute the code in between "<tt><b>Sub</b> foo</tt>" and "<tt><b>End Sub</b></tt>" by using "<tt>foo</tt>" as a statement.  This code is executed separate from the code which calls the subroutine, so any variable names, unless they are shared, are not available to the subroutine.  Values can, however, be passed using parameters.<br \>
+Le mot-clef <tt><b>Sub</b></tt> marque le d&eacute;but d'un sous-programme et sa fin est marqu&eacute;e par <tt><b>End Sub</b></tt>.  Le param&egrave;tre "name = nom" est le nom sous lequel ce sous-programme est appel&eacute;.  Par exemple, si la d&eacute;claration est "<tt><b>Sub</b>...<b>End Sub</b></tt>", l'utilisateur peut ex&eacute;cuter le code entre "<tt><b>Sub</b> foo</tt>" et "<tt><b>End Sub</b></tt>" en utilisant "<tt>foo</tt>" comme une d&eacute;claration.  Ce code est ex&eacute;cut&eacute; est ind&eacute;pendamment du code qui appelle le sous-programme, de sorte que tous les noms de variables, sauf si elles sont partag&eacute;es (shared), ne sont pas disponibles pour le sous-programme.  Des valeurs peuvent, toutefois, &ecirc;tre pass&eacute;es en utilisant des param&egrave;tres.<br \>
 <br \>
-Parameters are the arguments passed to any statement.  For instance, if a user executes a statement as "<tt><a href="KeyPgPrint.html">Print</a> 4</tt>", the value "4" is passed to the function "<tt><a href="KeyPgPrint.html">Print</a></tt>".  Parameters that need to be passed to a subroutine are supplied by one or more parameter arguments in the "<tt><b>Sub</b></tt>" keyword.  Creating a subroutine with "<tt><b>Sub</b> mysub(foo, bar)...<b>End Sub</b></tt>", allows the code in between "<tt><b>Sub</b></tt>" and "<tt><b>End Sub</b></tt>" to refer to the first passed argument as "foo" and the second passed argument as "bar".  If a parameter is given a default value, that parameter is optional.<br \>
+Les param&egrave;tres sont les arguments pass&eacute;s &agrave; une d&eacute;claration.  Par exemple, si un utilisateur ex&eacute;cute une instruction comme "<tt><a href="KeyPgPrint.html">Print</a> 4</tt>", la valeur "4" est pass&eacute;e &agrave; la fonction "<tt><a href="KeyPgPrint.html">Print</a></tt>".  Les param&egrave;tres qui doivent &ecirc;tre transmis &agrave; un sous-programme sont fournis par un ou plusieurs arguments param&egrave;tres dans le mot-cl&eacute; "<tt><b>Sub</b></tt>".  Cr&eacute;er un sous-programme avec "<tt><b>Sub</b> mysub(foo, bar)...<b>End Sub</b></tt>", permet au code entre "<tt><b>Sub</b></tt>" et "<tt><b>End Sub</b></tt>" de d&eacute;signer le premier argument pass&eacute; en tant que "foo" et le deuxi&egrave;me argument pass&eacute; en tant que "bar".  Si un param&egrave;tre est donn&eacute; avec une valeur par d&eacute;faut, ce param&egrave;tre est facultatif.<br \>
 <br \>
-Parameters must also have a supplied type, in the form "<tt><i>parameter</i> as <i>type</i></tt>".  If this is omitted, <tt><i>type</i></tt> is assumed to be <tt><a href="KeyPgInteger.html">Integer</a></tt>.  A passed value MUST be of the type specified.<br \>
+Les param&egrave;tres doivent &eacute;galement avoir un type, de la forme "<tt><i>parameter</i> As <i>type</i></tt>".  S'il est omis, <tt><i>type</i></tt> sera <tt><a href="KeyPgInteger.html">Integer</a></tt>.  Une valeur pass&eacute;e DOIT &ecirc;tre du type sp&eacute;cifi&eacute;.<br \>
 <br \>
-A subroutine can also specify how parameters are passed, either as "<tt><a href="KeyPgByref.html">ByRef</a></tt>" or "<tt><a href="KeyPgByval.html">ByVal</a></tt>", as shown in the syntax definition.  If a parameter is "<tt><a href="KeyPgByref.html">ByRef</a></tt>", the parameter name literally becomes a reference to the original variable passed to the subroutine.  Any changes made to that variable will be reflected outside of the subroutine.  If a parameter is passed "<tt><a href="KeyPgByval.html">ByVal</a></tt>", however, the value of any passed variable is copied into a new variable, and any changes made to it will not affect the original.  (Note: this does not currently apply to <tt><a href="KeyPgString.html">String</a></tt>s, and "<tt><a href="KeyPgByval.html">ByVal</a></tt>" should be avoided with them for the time being.)<br \>
+Un sous-programme peut &eacute;galement sp&eacute;cifier la mani&egrave;re dont les param&egrave;tres sont pass&eacute;s, soit "<tt><a href="KeyPgByref.html">ByRef = par ref&eacute;rence</a></tt>", soit "<tt><a href="KeyPgByval.html">ByVal = par valeur</a></tt>", comme indiqu&eacute; dans la d&eacute;finition de syntaxe.  Si un param&egrave;tre est "<tt><a href="KeyPgByref.html">ByRef</a></tt>", le nom du param&egrave;tre devient litt&eacute;ralement une r&eacute;f&eacute;rence &agrave; la variable d'origine transmise au sous-programme.  Toutes les modifications apport&eacute;es &agrave; cette variable seront refl&eacute;t&eacute;es &agrave; l'ext&eacute;rieur du sous-programme.  Si un param&egrave;tre est pass&eacute; "<tt><a href="KeyPgByval.html">ByVal</a></tt>", toutefois, la valeur d'une variable pass&eacute;e est copi&eacute;e dans une nouvelle variable et toute modification apport&eacute;e &agrave; celle-ci n'affectera pas l'original.  (Note: cela ne s'applique pas actuellement aux <tt><a href="KeyPgString.html">String</a></tt>s et "<tt><a href="KeyPgByval.html">ByVal</a></tt>" doit &ecirc;tre &eacute;vit&eacute;e avec elles pour le moment.)<br \>
 <br \>
-The <tt><a href="KeyPgStatic.html">Static</a></tt> specifier indicates that the values of all local variables defined in the sub should be preserved between calls.  To specify individual local variables as static see the <tt><a href="KeyPgStatic.html">Static</a></tt> keyword.<br \>
+Le sp&eacute;cificateur <tt><a href="KeyPgStatic.html">Static</a></tt> indique que les valeurs de toutes les variables locales d&eacute;finies dans le sous-programme doivent &ecirc;tre pr&eacute;serv&eacute;es entre les appels.  Pour sp&eacute;cifier des variables locales statiques voir le mot-cl&eacute; <tt><a href="KeyPgStatic.html">Static</a></tt>.<br \>
 <br \>
-Sub is the same as <tt><a href="KeyPgFunction.html">Function</a></tt>, except it does not allow a value to be returned.<br \>
+Sub est identique &agrave; <tt><a href="KeyPgFunction.html">Function</a></tt>, sauf qu'il ne permet pas de retourner une valeur.<br \>
 <br \>
-The second syntax defines either a constructor or destructor using the <tt><a href="KeyPgModuleConstructor.html">Constructor</a></tt> and <tt><a href="KeyPgModuleDestructor.html">Destructor</a></tt> keywords, respectively.  Constructor subroutines are executed before the first line of code in the module, while destructors execute on module exit. Note the public access specifier and empty parameter list for both constructors and destructors.<br \>
+La seconde syntaxe d&eacute;finit soit un constructeur, soit destructeur en utilisant les mots-clefs <tt><a href="KeyPgModuleConstructor.html">Constructor</a></tt> et <tt><a href="KeyPgModuleDestructor.html">Destructor</a></tt>, respectivement.  Les constructeurs de sous-programmes sont ex&eacute;cut&eacute;s avant la premi&egrave;re ligne de code du module, tandis que les destructeurs sont ex&eacute;cut&eacute;s &agrave; la sortie du module. Notez le sp&eacute;cificateur d'acc&egrave;s public et la liste des param&egrave;tres vide pour les constructeurs et destructeurs.<br \>
 <br \>
-</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Exemple</div><div class="fb_sect_cont"><br \>
 <tt><div class="freebasic">
 <span class="com">''&nbsp;Example&nbsp;of&nbsp;writing&nbsp;colored&nbsp;text&nbsp;using&nbsp;a&nbsp;sub:</span><br />
 <br />
@@ -85,15 +85,15 @@ The second syntax defines either a constructor or destructor using the <tt><a hr
 <span class="wrd">TestSub</span><br />
 </div></tt><br />
 <br \>
-</div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
-<ul><li> The <i><a href="CompilerOptlang.html">-lang qb</a></i> and <i><a href="CompilerOptlang.html">-lang fblite</a></i> dialects keep the QB convention: parameters are <tt><a href="KeyPgByref.html">ByRef</a></tt> by default.<br \>
-<li> In the <i><a href="CompilerOptlang.html">-lang fb</a></i> dialect, numeric parameters are passed <tt><a href="KeyPgByval.html">ByVal</a></tt> by default.  <tt><a href="KeyPgString.html">String</a></tt>s and UDTs are passed <tt><a href="KeyPgByref.html">ByRef</a></tt> by default.<br \>
+</div><div class="fb_sect_title">Diff&eacute;rences de dialecte</div><div class="fb_sect_cont"><br \>
+<ul><li> Les dialectes <i><a href="CompilerOptlang.html">-lang qb</a></i> et <i><a href="CompilerOptlang.html">-lang fblite</a></i> conservent &agrave; la Convention QB: les param&egrave;tres sont <tt><a href="KeyPgByref.html">ByRef</a></tt> par d&eacute;faut.<br \>
+<li> Dans le dialecte <i><a href="CompilerOptlang.html">-lang fb</a></i>, les param&egrave;tres num&eacute;riques sont pass&eacute;s <tt><a href="KeyPgByval.html">ByVal</a></tt> par d&eacute;faut.  Les <tt><a href="KeyPgString.html">String</a></tt>s et types d&eacute;finis par l'utilisateur sont pass&eacute;s <tt><a href="KeyPgByref.html">ByRef</a></tt> par d&eacute;faut.<br \>
 <br \>
-</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
-<ul><li> Public and Private access specifiers are new to FreeBASIC.<br \>
-<li> Constructor subroutines are new to FreeBASIC.<br \>
+</ul></div><div class="fb_sect_title">Diff&eacute;rences avec QB</div><div class="fb_sect_cont"><br \>
+<ul><li> Les sp&eacute;cificateurs d'acc&egrave;s "Public" et "Private" sont nouveaux pour FreeBASIC.<br \>
+<li> Les constructeurs de sous-programmes sont nouveaux pour FreeBASIC.<br \>
 <br \>
-</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+</ul></div><div class="fb_sect_title">Voir aussi</div><div class="fb_sect_cont"><br \>
 <ul><li> <tt><a href="KeyPgDeclare.html">Declare</a></tt><br \>
 <li> <tt><a href="KeyPgFunction.html">Function</a></tt><br \>
 <li> <tt><a href="KeyPgExit.html">Exit</a></tt><br \>

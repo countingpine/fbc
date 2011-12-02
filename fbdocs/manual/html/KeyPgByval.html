@@ -11,24 +11,24 @@
 </div> 
 <div id="fb_pg_wrapper">
 <div id="fb_pg_body">
-	Declaration specifier to explicitly pass a parameter by value<br \>
+	Sp&eacute;cificateur de d&eacute;claration pour passer explicitement un param&egrave;tre par valeur<br \>
 <br \>
-<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<div class="fb_sect_title">Syntaxe</div><div class="fb_sect_cont"><tt><br \>
 <b>ByVal</b> <i>param</i> <a href="KeyPgAs.html">As</a> <a href="DataType.html">datatype</a><br \>
 </tt><br \>
 </div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
 [ <a href="KeyPgDeclare.html">Declare</a> ] { <a href="KeyPgSub.html">Sub</a> | <a href="KeyPgFunction.html">Function</a> } <i>proc_name</i> ( <b>ByVal</b> <i>param</i> <a href="KeyPgAs.html">As</a> <a href="DataType.html">datatype</a>  )<br \>
 </tt><br \>
 </div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
-<tt><b>ByVal</b></tt> in a parameter list of a declare statement causes a copy of the variable to be passed to the procedure (for example, a sub or function) by its value.<br \>
+<tt><b>ByVal</b></tt> dans une liste de param&egrave;tres d'une instruction de d&eacute;claration provoque une copie de la variable &agrave; passer par sa valeur &agrave; la proc&eacute;dure (par exemple, un sous-programme ou une fonction).<br \>
 <br \>
-This means that if the value of the variable <i><tt>x</tt></i> is passed, then the original variable <i><tt>x</tt></i> will not be modified in any way; however, if the variable were passed <tt><a href="KeyPgByref.html">ByRef</a></tt>, the value of the original variable <i><tt>x</tt></i> could be modified by the called function.<br \>
+Cela signifie que si la valeur de la variable <i><tt>x</tt></i> est pass&eacute;e, alors la variable d'origine <i><tt>x</tt></i> ne sera en aucune fa&ccedil;on modifi&eacute;e; toutefois, si la variable a &eacute;t&eacute; pass&eacute;e <tt><a href="KeyPgByref.html">ByRef</a></tt>, la valeur de la variable d'origine <i><tt>x</tt></i> peut &ecirc;tre modifi&eacute;e par la fonction appel&eacute;e.<br \>
 <br \>
-Note: For string arguments, <tt><b>ByVal</b></tt> currently has a different meaning: instead of passing a copy of the string, it passes a <tt><a href="KeyPgZstring.html">ZString</a></tt> pointer to the string data, while <tt><a href="KeyPgByref.html">ByRef</a></tt> passes a pointer to the FreeBASIC string descriptor. This behavior allows passing a <tt><b>ByVal</b></tt> <tt><a href="KeyPgString.html">String</a></tt> directly to C procedures. The string passed this way should not be changed by the <tt><a href="KeyPgSub.html">Sub</a></tt>/<tt><a href="KeyPgFunction.html">Function</a></tt>, as the string descriptor would not be updated. The meaning of passing a <tt><a href="KeyPgString.html">String</a></tt> <tt><b>ByVal</b></tt> might change in the future; therefore, passing a <tt><a href="KeyPgString.html">String</a></tt> <tt><b>ByVal</b></tt> should be avoided.  <tt><a href="KeyPgZstring.html">ZString</a></tt> is more suited for the purpose of passing zero-terminated strings to C functions.<br \>
+Note: Pour arguments de cha&icirc;ne, <tt><b>ByVal</b></tt> a actuellement un sens diff&eacute;rent: au lieu de passer une copie de la cha&icirc;ne, il passe un pointeur <tt><a href="KeyPgZstring.html">ZString</a></tt> vers la cha&icirc;ne de donn&eacute;es, alors que <tt><a href="KeyPgByref.html">ByRef</a></tt> passe un pointeur vers le descripteur de cha&icirc;ne FreeBASIC. Ce comportement permet de passer <tt><b>ByVal</b></tt> <tt><a href="KeyPgString.html">String</a></tt> directement aux proc&eacute;dures C. La cha&icirc;ne pass&eacute;e de cette mani&egrave;re ne sera pas chang&eacute;e par <tt><a href="KeyPgSub.html">Sub</a></tt>/<tt><a href="KeyPgFunction.html">Function</a></tt>, et le descripteur de cha&icirc;ne ne sera pas mis &agrave; jour. La signification du passage d'une <tt><a href="KeyPgString.html">String</a></tt> <tt><b>ByVal</b></tt> pourrait changer dans le futur; par cons&eacute;quent, passer <tt><a href="KeyPgString.html">String</a></tt> <tt><b>ByVal</b></tt> doit &ecirc;tre &eacute;vit&eacute;.  <tt><a href="KeyPgZstring.html">ZString</a></tt> est plus adapt&eacute; dans le but de passer des "cha&icirc;nes termin&eacute;es par z&eacute;ro" (ZString) aux fonctions C.<br \>
 <br \>
-Opposite of <tt><a href="KeyPgByref.html">ByRef</a></tt>.<br \>
+L'oppos&eacute; de <tt><a href="KeyPgByref.html">ByRef</a></tt>.<br \>
 <br \>
-</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Exemple</div><div class="fb_sect_cont"><br \>
 <tt><div class="freebasic">
 <span class="key">Sub</span>&nbsp;<span class="wrd">MySub</span><span class="oth">(</span><span class="key">ByVal</span>&nbsp;<span class="wrd">value</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">)</span><br />
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">value</span>&nbsp;<span class="oth">+=</span>&nbsp;<span class="num">1</span><br />
@@ -44,19 +44,21 @@ Opposite of <tt><a href="KeyPgByref.html">ByRef</a></tt>.<br \>
 <span class="key">End</span><br />
 </div></tt><br />
 <br \>
-</div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
-<ul><li> In the <i><a href="CompilerOptlang.html">-lang fb</a></i> dialect, <tt><b>ByVal</b></tt> is the default parameter passing convention for all built-in types except <tt><a href="KeyPgString.html">String</a></tt>; String and user-defined <tt><a href="KeyPgType.html">Type</a></tt>s are passed <tt><a href="KeyPgByref.html">ByRef</a></tt> by default.<br \>
-<li> In <i><a href="CompilerOptlang.html">-lang qb</a></i> and <i><a href="CompilerOptlang.html">-lang fblite</a></i> dialects, <tt><b>ByRef</b></tt> is the default parameter passing convention.<br \>
+</ul></div><div class="fb_sect_title">Diff&eacute;rences de dialecte</div><div class="fb_sect_cont"><br \>
+<ul><li> Dans le dialecte <i><a href="CompilerOptlang.html">-lang fb</a></i>, <tt><b>ByVal</b></tt> est la convention de passage de param&egrave;tre par d&eacute;faut pour tous les types int&eacute;gr&eacute;s &agrave; l'exception de <tt><a href="KeyPgString.html">String</a></tt>; Cha&icirc;ne (String) et les <tt><a href="KeyPgType.html">Type</a></tt>s d&eacute;finis par l'utilisateur sont pass&eacute;s <tt><a href="KeyPgByref.html">ByRef</a></tt> par d&eacute;faut.<br \>
+<li> Dans les dialectes <i><a href="CompilerOptlang.html">-lang qb</a></i> et <i><a href="CompilerOptlang.html">-lang fblite</a></i>, <tt><b>ByRef</b></tt> est la convention de passage des param&egrave;tres.<br \>
 <br \>
-</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
-<ul><li> QB only used <tt><b>ByVal</b></tt> in declarations to non-Basic subroutines<br \>
+</ul></div><div class="fb_sect_title">Diff&eacute;rences avec QB</div><div class="fb_sect_cont"><br \>
+<ul><li> QB utilise seulement <tt><b>ByVal</b></tt> dans les d&eacute;clarations aux sous-routines non-Basic<br \>
 <br \>
-</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
-<ul><li> <a href="ProPgPassingArguments.html">Passing Arguments to Procedures</a><br \>
+</ul></div><div class="fb_sect_title">Voir aussi</div><div class="fb_sect_cont"><br \>
+<ul><li> <a href="ProPgPassingArguments.html">Passer des arguments aux proc&eacute;dures</a><br \>
 <li> <tt><a href="KeyPgDeclare.html">Declare</a></tt><br \>
 <li> <tt><a href="KeyPgByref.html">ByRef</a></tt><br \>
 <br \>
-</ul></div>
+</ul><br \>
+   <br \>
+</div>
 </div>
 </div> 
 </div> 

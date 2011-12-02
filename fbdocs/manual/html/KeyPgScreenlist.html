@@ -11,33 +11,31 @@
 </div> 
 <div id="fb_pg_wrapper">
 <div id="fb_pg_body">
-	Finds available fullscreen video modes<br \>
+	D&eacute;termine les modes plein &eacute;cran valides<br \>
 <br \>
-<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<div class="fb_sect_title">Syntaxe</div><div class="fb_sect_cont"><tt><br \>
 <a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgFunction.html">Function</a> <b>ScreenList</b> ( <a href="KeyPgByval.html">ByVal</a> <i>depth</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a> = 0 ) <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a><br \>
 </tt><br \>
 </div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
 <i>result</i> = <b>ScreenList</b>( [ <i>depth</i> ] )<br \>
 </tt><br \>
-</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Param&egrave;tres</div><div class="fb_sect_cont"><br \>
 <tt><i>depth</i></tt><br \>
-<div class="fb_indent">the color depth for which the list of modes is requested  (supported depths are 8, 15, 16, 24 and 32)<br \>
+<div class="fb_indent">la profondeur de couleur pour laquelle on d&eacute;termine la liste de modes (les profondeurs support&eacute;es sont 8, 15, 16, 24 and 32)<br \>
 <br \>
-</div></div><div class="fb_sect_title">Return Value</div><div class="fb_sect_cont"><br \>
-returns 0, when there are no more resolutions to read.<br \>
+</div></div><div class="fb_sect_title">Valeur retourn&eacute;e</div><div class="fb_sect_cont"><br \>retourne 0, s&apos;il n&apos;y a aucune r&eacute;solution &agrave; lire.<br \>
 <br \>
-</div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
-It works like the <tt><a href="KeyPgDir.html">Dir</a></tt> function: the first call to the function requires the <tt><i>depth</i></tt> parameter to be specified, it  returns the lowest supported resolution for the requested depth. Further calls to <tt><b>ScreenList</b></tt> without arguments returns the next resolutions. When no more resolutions are available, <tt><a href="KeyPgScreenlist.html">ScreenList</a></tt> returns 0.<br \>
+Fonctionnement identique &agrave; celui de la fonction <tt><a  href="KeyPgDir.html">Dir</a></tt> : au premier appel de la fonction le param&egrave;tre <tt><i>depth</i></tt> est obligatoire, la fonction renvoie la r&eacute;solution la plus basse support&eacute;e par cette profondeur de couleur. Les appels suivants &agrave;  <tt><b>ScreenList</b></tt> sans argument renvoie les r&eacute;solutions suivantes. Quand il n&apos;y a plus de r&eacute;solution valable, <tt><a href="KeyPgScreenlist.html">ScreenList</a></tt> retourne 0.<br \>
 <br \>
-The result of <tt><a href="KeyPgScreenlist.html">ScreenList</a></tt> is encoded in an integer with the  screen width as the high word and height and the height as the low word respectively.<br \>
+Le r&eacute;sultat de <tt><a href="KeyPgScreenlist.html">ScreenList</a></tt> est encod&eacute; dans un entier, la largeur d&apos;&eacute;cran dans le mot de poids fort et la hauteur d&apos;&eacute;cran dans le mot de poids faible.<br \>
 <br \>
-Resolutions are returned from lowest to highest supported ones. <br \>
+Les r&eacute;solutions support&eacute;es sont renvoy&eacute;es de la plus faible &agrave; la plus forte. <br \>
 <br \>
-It is safe to call this function before any graphics mode has been set.<br \>
+Il est pr&eacute;f&eacute;rable d&apos;appeler cette fonction avant qu&apos;un mode graphique soit valid&eacute;.<br \>
 <br \>
 <tt><div class="freebasic">
 <span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="wrd">mode</span><span class="oth">,</span>&nbsp;<span class="wrd">w</span><span class="oth">,</span>&nbsp;<span class="wrd">h</span><br />
-<span class="com">''&nbsp;Find&nbsp;which&nbsp;8bit&nbsp;resolutions&nbsp;are&nbsp;supported</span><br />
+<span class="com">&apos;&apos;&nbsp;Cherche&nbsp;quelles&nbsp;resolutions&nbsp;8bit&nbsp;sont&nbsp;supportees</span><br />
 <span class="wrd">mode</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">ScreenList</span><span class="oth">(</span><span class="num">8</span><span class="oth">)</span><br />
 <span class="key">While</span>&nbsp;<span class="oth">(</span><span class="wrd">mode</span><span class="oth">)</span><br />
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">w</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">HiWord</span><span class="oth">(</span><span class="wrd">mode</span><span class="oth">)</span><br />
@@ -48,11 +46,11 @@ It is safe to call this function before any graphics mode has been set.<br \>
 </div></tt><br />
 <br \>
 <br \>
-</div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Diff&eacute;rences de Dialecte</div><div class="fb_sect_cont"><br \>
 <ul><li> Not available in the <i><a href="CompilerOptlang.html">-lang qb</a></i> dialect unless referenced with the alias <tt><b>__Screenlist</b></tt>.<br \>
 <br \>
-</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
-<ul><li> New to FreeBASIC<br \>
+</ul></div><div class="fb_sect_title">Diff&eacute;rences avec QB</div><div class="fb_sect_cont"><br \>
+<ul><li> Nouveaut&eacute; FreeBASIC<br \>
 <br \>
 </ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
 <ul><li> <tt><a href="KeyPgScreengraphics.html">Screen</a></tt><br \>

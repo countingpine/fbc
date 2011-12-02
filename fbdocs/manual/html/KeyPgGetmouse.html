@@ -11,49 +11,49 @@
 </div> 
 <div id="fb_pg_wrapper">
 <div id="fb_pg_body">
-	Retrieves the status of the mouse pointing device<br \>
+	R&eacute;cup&egrave;re l'&eacute;tat du dispositif de pointage de la souris<br \>
 <br \>
-<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<div class="fb_sect_title">Syntaxe</div><div class="fb_sect_cont"><tt><br \>
 <a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgFunction.html">Function</a> <b>GetMouse</b> ( <a href="KeyPgByref.html">ByRef</a> <i>x</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a>, <a href="KeyPgByref.html">ByRef</a> <i>y</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a>, <a href="KeyPgByref.html">ByRef</a> <i>wheel</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a> = 0, <a href="KeyPgByref.html">ByRef</a> <i>buttons</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a> = 0, <a href="KeyPgByref.html">ByRef</a> <i>clip</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a> = 0 ) <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a><br \>
 </tt><br \>
 </div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
 <i>result</i> = <b>GetMouse</b> (<i>x</i>, <i>y</i> [, [ <i>wheel</i> ] [, [ <i>buttons</i> ] [, [ <i>clip</i> ]]]])<br \>
 </tt><br \>
-</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Param&egrave;tres</div><div class="fb_sect_cont"><br \>
 <tt><i>x</i></tt><br \>
-<div class="fb_indent">x coordinate value<br \>
+<div class="fb_indent">valeur de la coordonn&eacute;e x<br \>
 </div><tt><i>y</i></tt><br \>
-<div class="fb_indent">y coordinate value<br \>
+<div class="fb_indent">valeur de la coordonn&eacute;e y<br \>
 </div><tt><i>wheel</i></tt><br \>
-<div class="fb_indent">scroll wheel value<br \>
+<div class="fb_indent">valeur de la molette<br \>
 </div><tt><i>buttons</i></tt><br \>
-<div class="fb_indent">button status<br \>
+<div class="fb_indent">&eacute;tat des boutons<br \>
 </div><tt><i>clip</i></tt><br \>
-<div class="fb_indent">clip status<br \>
+<div class="fb_indent">&eacute;tat "clip"<br \>
 <br \>
-</div></div><div class="fb_sect_title">Return Value</div><div class="fb_sect_cont"><br \>
-<tt>0</tt> on success or <tt>1</tt> on failure.<br \>
+</div></div><div class="fb_sect_title">Valeur retourn&eacute;e</div><div class="fb_sect_cont"><br \>
+<tt>0</tt> si succ&egrave;s ou <tt>1</tt> si &eacute;chec.<br \>
 <br \>
 </div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
-<tt><b>GetMouse</b></tt> retrieves the mouse position and buttons status; information is returned in the variables passed to this function by reference. If a mouse is not available, all variables will contain the <tt>-1</tt> value. <br \>
+<tt><b>GetMouse</b></tt> d&eacute;termine la position de la souris et l'&eacute;tat des boutons; l'information est retourn&eacute;e dans les variables pass&eacute;es par r&eacute;f&eacute;rence &agrave; la fonction. Si aucune souris n'est disponible, toutes les variables contiendront la valeur <tt>-1</tt>. <br \>
 <br \>
-If in console mode, the <tt><i>x</i></tt> and <tt><i>y</i></tt> coordinates are the character cell coordinates the mouse is currently on; the upper left corner of the screen is at coordinates <tt>0, 0</tt>. If the mouse moves out of the console window, <tt><b>GetMouse</b></tt> returns the last coordinate on the window that the mouse was on. <br \>
+En mode console, les coordonn&eacute;es <tt><i>x</i></tt> et <tt><i>y</i></tt> sont les coordonn&eacute;es de la cellule caract&egrave;re o&ugrave; se trouve la souris; le coin en haut &agrave; gauche de l'&eacute;cran  a les coordonn&eacute;es <tt>0,0</tt>.. Si la souris sort de la fen&ecirc;tre console, <tt><b>GetMouse</b></tt> renvoie les derni&egrave;res coordonn&eacute;es lorsque la souris &eacute;tait encore sur la fen&ecirc;tre. <br \>
 <br \>
-If in graphics mode, <tt><i>x</i></tt> and <tt><i>y</i></tt> will always be returned in pixel coordinates still relative to the upper left corner of the screen, which is at 0,0 in this case; custom coordinates system set via <tt><a href="KeyPgViewgraphics.html">View</a></tt> or <tt><a href="KeyPgWindow.html">Window</a></tt> do not affect the coordinates returned by <tt><b>GetMouse</b></tt>. If the mouse runs off the window, all values are set to <tt>-1</tt>.<br \>
+En mode graphique, <tt><i>x</i></tt> et <tt><i>y</i></tt> retournent toujours les coordonn&eacute;es en pixels relatives au coin en haut &agrave; gauche de l'&eacute;cran, qui lui a les coordonn&eacute;es 0,0; un syst&egrave;me de coordonn&eacute;es personnel &eacute;tabli via <tt><a href="KeyPgViewgraphics.html">View</a></tt> ou <tt><a href="KeyPgWindow.html">Window</a></tt> n'affectera pas les coordonn&eacute;es retourn&eacute;es par <tt><b>GetMouse</b></tt>. Si la souris sort de la fen&ecirc;tre, toutes les valeurs seront mises &agrave; <tt>-1</tt>.<br \>
 <br \>
-<tt><i>Wheel</i></tt> is the mouse wheel counter; rotating the wheel away from you makes the count to increase, rotating the wheel toward you makes it to decrease. At program startup or when a new graphics mode is set via <tt><a href="KeyPgScreengraphics.html">Screen</a></tt>, wheel position is reset to 0. FreeBASIC may not always support mouse wheels for a given platform, in which case 0 is always returned.<br \>
+<tt><i>Wheel</i></tt> est le compteur de la molette souris; actionner la molette vers l'avant augmentera la valeur du compteur, une rotation vers l'arri&egrave;re diminuera la valeur du compteur. Au d&eacute;part du programme ou quand un nouveau mode graphique est valid&eacute; via <tt><a href="KeyPgScreengraphics.html">Screen</a></tt>, la position de la molette est remise &agrave; 0. FreeBASIC ne g&egrave;re pas toujours la molette pour certaines plates-formes, dans ce cas une valeur 0 est toujours renvoy&eacute;e.<br \>
 <br \>
-<tt><i>Buttons</i></tt> stores the buttons status as a bitmask: bit 0 is set if left mouse button is down; bit 1 is set if right mouse button is down; bit 2 is set if middle mouse button / wheel is down.<br \>
+<tt><i>Buttons</i></tt> stocke l'&eacute;tat des boutons sous la forme d'un masque de bits: le bit 0 est valide (&agrave; 1) si le bouton gauche est appuy&eacute;; le bit 1 est valide si le bouton droit est appuy&eacute;; le bit 2 est valide si le bouton central / molette est appuy&eacute;.<br \>
 <br \>
-<tt><i>Clip</i></tt> stores the mouse clipping status; if <tt>1</tt>, the mouse is currently clipped to the graphics window; if <tt>0</tt>, the mouse is not clipped.<br \>
+<tt><i>Clip</i></tt> stocke l'&eacute;tat de "clipping"; si &agrave; <tt>1</tt>, la souris est "clipp&eacute;e" &agrave; la fen&ecirc;tre graphique; si &agrave; <tt>0</tt>, la souris n'est pas "clipp&eacute;e".<br \>
 <br \>
-</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Exemple</div><div class="fb_sect_cont"><br \>
 <tt><div class="freebasic">
 <span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="wrd">x</span><span class="oth">,</span>&nbsp;<span class="wrd">y</span><span class="oth">,</span>&nbsp;<span class="wrd">buttons</span><span class="oth">,</span>&nbsp;<span class="wrd">res</span>&nbsp;<br />
 <span class="com">'&nbsp;Set&nbsp;video&nbsp;mode&nbsp;and&nbsp;enter&nbsp;loop</span><br />
 <span class="key">ScreenRes</span>&nbsp;<span class="num">640</span><span class="oth">,</span>&nbsp;<span class="num">480</span><span class="oth">,</span>&nbsp;<span class="num">8</span><br />
 <span class="key">Do</span><br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">'&nbsp;Get&nbsp;mouse&nbsp;x,&nbsp;y&nbsp;and&nbsp;buttons.&nbsp;Discard&nbsp;wheel&nbsp;position.</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">'&nbsp;Recupere&nbsp;x,&nbsp;y&nbsp;souris&nbsp;et&nbsp;boutons.&nbsp;Discard&nbsp;wheel&nbsp;position.</span><br />
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">res</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">GetMouse</span>&nbsp;<span class="oth">(</span><span class="wrd">x</span><span class="oth">,</span>&nbsp;<span class="wrd">y</span><span class="oth">,</span>&nbsp;<span class="oth">,</span>&nbsp;<span class="wrd">buttons</span><span class="oth">)</span><br />
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Locate</span>&nbsp;<span class="num">1</span><span class="oth">,</span>&nbsp;<span class="num">1</span><br />
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="key">If</span>&nbsp;<span class="wrd">res</span>&nbsp;<span class="oth">&lt;&gt;</span>&nbsp;<span class="num">0</span>&nbsp;<span class="key">Then</span>&nbsp;<span class="com">''&nbsp;Failure</span><br />
@@ -101,20 +101,17 @@ If in graphics mode, <tt><i>x</i></tt> and <tt><i>y</i></tt> will always be retu
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Sleep</span>&nbsp;<span class="num">10</span><span class="oth">,</span>&nbsp;<span class="num">1</span><br />
 <span class="key">Loop</span>&nbsp;<span class="key">While</span>&nbsp;<span class="key">Inkey</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="quo">""</span><br />
 </div></tt><br />
+
 <br \>
-</div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
-<ul><li> Not available in the <i><a href="CompilerOptlang.html">-lang qb</a></i> dialect unless referenced with the alias <tt><b>__Getmouse</b></tt>.  The variables passed must also be of type <tt><a href="KeyPgLong.html">Long</a></tt> instead of <tt><a href="KeyPgInteger.html">Integer</a></tt>.<br \>
+</div><div class="fb_sect_title">Diff&eacute;rences de dialecte</div><div class="fb_sect_cont"><br \>
+<ul><li> Non disponible dans le dialecte <i><a href="CompilerOptlang.html">-lang qb</a></i> sauf si r&eacute;f&eacute;renc&eacute; avec l'alias <tt><b>__Getmouse</b></tt>.  Les variables pass&eacute;es doivent aussi &ecirc;tre du type <tt><a href="KeyPgLong.html">Long</a></tt> au lieu de <tt><a href="KeyPgInteger.html">Integer (Entier)</a></tt>.<br \>
 <br \>
-</ul></div><div class="fb_sect_title">Platform Differences</div><div class="fb_sect_cont"><br \>
-<ul><li> On Win32, scroll wheel changes are not guaranteed to be detected in full-screen console mode. <br \>
-<li> In DOS, the "clip" value has no relevance.  Additionally the wheel and middle button will not work unless supported and enabled by the mouse driver. See also FaqDOS.<br \>
+</ul></div><div class="fb_sect_title">Diff&eacute;rences avec QB</div><div class="fb_sect_cont"><br \>
+<ul><li> Nouveau pour FreeBASIC<br \>
 <br \>
-</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
-<ul><li> New to FreeBASIC<br \>
-<br \>
-</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
-<ul><li> <tt><a href="KeyPgScreenres.html">ScreenRes</a></tt> setting graph mode by resolution<br \>
-<li> <tt><a href="KeyPgScreengraphics.html">Screen (Graphics)</a></tt> setting mode the QB-like way<br \>
+</ul></div><div class="fb_sect_title">Voir aussi</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgScreenres.html">ScreenRes</a></tt> valide le mode graphique par r&eacute;solution<br \>
+<li> <tt><a href="KeyPgScreengraphics.html">Screen (Graphiques)</a></tt> valide le mode graphique m&eacute;thode QB<br \>
 <li> <tt><a href="KeyPgSetmouse.html">SetMouse</a></tt><br \>
 <li> <tt><a href="KeyPgMultikey.html">MultiKey</a></tt><br \>
 <li> <tt><a href="KeyPgGetjoystick.html">GetJoystick</a></tt><br \>

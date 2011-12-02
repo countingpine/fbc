@@ -11,36 +11,35 @@
 </div> 
 <div id="fb_pg_wrapper">
 <div id="fb_pg_body">
-	Seeds the random number generator<br \>
+	Alimente le g&eacute;n&eacute;rateur de nombres al&eacute;atoires<br \>
 <br \>
-<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<div class="fb_sect_title">Syntaxe</div><div class="fb_sect_cont"><tt><br \>
 <a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgSub.html">Sub</a> <b>Randomize</b> ( <a href="KeyPgByval.html">ByVal</a> <i>seed</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgDouble.html">Double</a> = -1.0,  <a href="KeyPgByval.html">ByVal</a> <i>algorithm</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a> = 0 )<br \>
 </tt><br \>
 </div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
 <b>Randomize</b> [ <i>seed</i> ][, <i>algorithm</i> ]<br \>
 </tt><br \>
-</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Param&egrave;tres</div><div class="fb_sect_cont"><br \>
 <tt><i>seed</i></tt><br \>
-<div class="fb_indent">A <tt><a href="KeyPgDouble.html">Double</a></tt> seed value for the random number generator.  If omitted, a value based on <tt><a href="KeyPgTimer.html">Timer</a></tt> will be used instead.<br \>
+<div class="fb_indent">Une valeur <tt><a href="KeyPgDouble.html">Double</a></tt> pour alimenter le g&eacute;n&eacute;rateur de nombres al&eacute;atoires.  Si omise, une valeur bas&eacute;e sur <tt><a href="KeyPgTimer.html">Timer</a></tt> sera utilis&eacute;e &agrave; la place.<br \>
 </div><tt><i>algorithm</i></tt><br \>
-<div class="fb_indent">An <tt><a href="KeyPgInteger.html">Integer</a></tt> value to select the algorithm used.  If omitted, the default algorithm for the current <a href="CompilerDialects.html">language dialect</a> is used.<br \>
+<div class="fb_indent">Une valeur <tt><a href="KeyPgInteger.html">Integer</a></tt> pour s&eacute;lectionner l'algorithme utilis&eacute;.  Si omise, l'algorithme par d&eacute;faut pour le <a href="CompilerDialects.html">dialecte du langage</a> est utilis&eacute;.<br \>
 <br \>
 </div></div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
-Sets the random seed that helps <tt><a href="KeyPgRnd.html">Rnd</a></tt> generate random numbers, and selects the algorithm to use. Valid values for <tt><i>algorithm</i></tt> are:<br \>
+D&eacute;finit la valeur de d&eacute;part al&eacute;atoire qui permet &agrave; <tt><a href="KeyPgRnd.html">Rnd</a></tt> de g&eacute;n&eacute;rer des nombres al&eacute;atoires et s&eacute;lectionne l'algorithme &agrave; utiliser. Les valeurs valides pour <tt><i>algorithm</i></tt> sont:<br \>
 <br \>
-<div class="fb_indent"><tt><b>0</b></tt> - Default for current <a href="CompilerDialects.html">language dialect</a>. This is algorithm <tt><b>3</b></tt> in the <i><a href="CompilerOptlang.html">-lang fb</a></i> dialect, <tt><b>4</b></tt> in the <i><a href="CompilerOptlang.html">-lang qb</a></i> dialect and <tt><b>1</b></tt> in the <i><a href="CompilerOptlang.html">-lang fblite</a></i> dialect.<br \>
-<tt><b>1</b></tt> - Uses the C runtime library's <tt>rand()</tt> function. This will give different results depending on the platform.<br \>
-<tt><b>2</b></tt> - Uses a fast implementation. This should be stable across all platforms, and provides 32-bit granularity, reasonable degree of randomness.<br \>
-<tt><b>3</b></tt> - Uses the Mersenne Twister. This should be stable across all platforms, provides 32-bit granularity, and gives a high degree of randomness.<br \>
-<tt><b>4</b></tt> - Uses a function that is designed to give the same random number sequences as QBASIC. This should be stable across all platforms, and provides 24-bit precision, with a low degree of randomness.<br \>
+<div class="fb_indent"><tt><b>0</b></tt> - Valeur par d&eacute;faut pour le <a href="CompilerDialects.html">dialecte du langage</a>. C'est l'algorithme <tt><b>3</b></tt> dans le dialecte <i><a href="CompilerOptlang.html">-lang fb</a></i>, <tt><b>4</b></tt> dans le dialecte <i><a href="CompilerOptlang.html">-lang qb</a></i> et <tt><b>1</b></tt> en dialecte <i><a href="CompilerOptlang.html">-lang fblite</a></i>.<br \>
+<tt><b>1</b></tt> - Utilise la fonction <tt>rand()</tt> de la biblioth&egrave;que du langage C. Vous obtiendrez des r&eacute;sultats diff&eacute;rents selon la plate-forme.<br \>
+<tt><b>2</b></tt> - Utilise une mise en &oelig;uvre rapide. Ce devrait &ecirc;tre stable sur toutes les plates-formes et offre une granularit&eacute; 32-bit, un degr&eacute; raisonnable de hasard.<br \>
+<tt><b>3</b></tt> - Utilise "Mersenne Twister". Ce devrait &ecirc;tre stable sur toutes les plates-formes, offre une granularit&eacute; 32-bit et donne un degr&eacute; &eacute;lev&eacute; de hasard.<br \>
+<tt><b>4</b></tt> - Utilise une fonction qui est con&ccedil;ue pour donner les m&ecirc;mes s&eacute;quences de nombres al&eacute;atoires que QBASIC. Ce devrait &ecirc;tre stable sur toutes les plates-formes et offre une pr&eacute;cision 24-bit, avec un faible degr&eacute; de l'al&eacute;atoire.<br \>
 <br \>
-For any given seed, each algorithm will produce a specific, deterministic sequence of numbers for that seed.  If you want each call to <tt><b>Randomize</b></tt> to produce a different sequence of numbers, a seed that is not quite predictable should be used - for example, the value returned from <tt><a href="KeyPgTimer.html">Timer</a></tt>.  Omitting the <tt><i>seed</i></tt> parameter will use a value based on this.<br \>
-Note: using the <tt><a href="KeyPgTimer.html">Timer</a></tt> value directly as a parameter will produce the same seed if used more than once in the same second.  However, it is generally not worth calling <tt><b>Randomize</b></tt> twice with unpredictable seeds anyway, because the second sequence will be no more random than the first.  In most cases, the Mersenne twister should provide a sufficiently random sequence of numbers, without requiring reseeding between <tt><a href="KeyPgRnd.html">Rnd</a></tt> calls.<br \>
+Pour toute semence donn&eacute;e, chaque algorithme produit une s&eacute;quence pr&eacute;cise, d&eacute;terministe de nombres pour cette semence.  Si vous voulez que chaque appel &agrave; <tt><b>Randomize</b></tt> produise une s&eacute;quence diff&eacute;rente de nombres, une graine qui n'est pas pr&eacute;visible doit &ecirc;tre utilis&eacute;e - par exemple, la valeur retourn&eacute;e par <tt><a href="KeyPgTimer.html">Timer</a></tt>.  L'omission du param&egrave;tre <tt><i>seed</i></tt> utilise une valeur sur cette base.<br \>
+Note: en utilisant la valeur <tt><a href="KeyPgTimer.html">Timer</a></tt> directement en tant que param&egrave;tre va produire la semence m&ecirc;me si elle est utilis&eacute;e plus d'une fois dans la m&ecirc;me seconde.  Toutefois, il n'est g&eacute;n&eacute;ralement pas louable d'appeler <tt><b>Randomize</b></tt> deux fois avec des graines impr&eacute;visibles de toute fa&ccedil;on, parce que la deuxi&egrave;me s&eacute;quence ne sera pas plus al&eacute;atoire que la premi&egrave;re.  Dans la plupart des cas, "Mersenne twister" procurera une s&eacute;quence de nombres suffisante, sans n&eacute;cessiter de r&eacute;ensemencement entre les appels &agrave; <tt><a href="KeyPgRnd.html">Rnd</a></tt>.<br \>
 <br \>
+Lorsque vous appelez <tt><b>Randomize</b></tt> avec l'algorithme QB compatible, une partie de l'ancienne graine est retenue.  Cela signifie que si vous appelez <tt><b>Randomize</b></tt> plusieurs fois avec la m&ecirc;me graine, vous <tt><b>n'</b></tt>obtiendrez <tt><b>pas</b></tt> la m&ecirc;me s&eacute;quence &agrave; chaque fois.  Pour obtenir une s&eacute;quence sp&eacute;cifique au mode compatible QB, fixez la semence en appelant <tt><a href="KeyPgRnd.html">Rnd</a></tt> avec un param&egrave;tre n&eacute;gatif.<br \>
 <br \>
-When you call <tt><b>Randomize</b></tt> with the QB compatible algorithm, part of the old seed is retained.  This means that if you call <tt><b>Randomize</b></tt> several times with the same seed, you will <b>not</b> get the same sequence each time.  To get a specific sequence in QB compatible mode, set the seed by calling <tt><a href="KeyPgRnd.html">Rnd</a></tt> with a negative parameter.<br \>
-<br \>
-</div></div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+</div></div><div class="fb_sect_title">Exemple</div><div class="fb_sect_cont"><br \>
 <tt><div class="freebasic">
 <span class="com">''&nbsp;Seed&nbsp;the&nbsp;RNG&nbsp;to&nbsp;the&nbsp;method&nbsp;using&nbsp;C's&nbsp;rand()</span><br />
 <span class="key">Randomize</span>&nbsp;<span class="oth">,</span>&nbsp;<span class="num">1</span><br />
@@ -51,19 +50,19 @@ When you call <tt><b>Randomize</b></tt> with the QB compatible algorithm, part o
 <span class="key">Next</span><br />
 </div></tt><br />
 <br \>
-</div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
-The default algorithm used depends on the current dialect in use:<br \>
-<ul><ul><li> With the <i><a href="CompilerOptlang.html">-lang fb</a></i> dialect, a 32 bit Mersenne Twister function with a granularity of 32 bits is used.<br \>
-<li> With the <i><a href="CompilerOptlang.html">-lang qb</a></i> dialect, a function giving the same output as <tt><b>Rnd</b></tt> in QB is used. The granularity is 24 bits.<br \>
-<li> With the <i><a href="CompilerOptlang.html">-lang deprecated</a></i> and <i><a href="CompilerOptlang.html">-lang fblite</a></i> dialects, the function in the C runtime available in the system is used. The function has a granularity of 15 bits in Win32, and 32 bits in Linux and DOS.<br \>
+</div><div class="fb_sect_title">Diff&eacute;rences de dialecte</div><div class="fb_sect_cont"><br \>
+L'algorithme utilis&eacute; par d&eacute;faut d&eacute;pend du dialecte en usage:
+<ul><li> Avec le dialecte <i><a href="CompilerOptlang.html">-lang fb</a></i>, une fonction "Mersenne Twister" 32 bits avec une granularit&eacute; de 32 bits est utilis&eacute;e.<br \>
+<li> Avec le dialecte <i><a href="CompilerOptlang.html">-lang qb</a></i>, une fonction donnant le m&ecirc;me r&eacute;sultat que <tt><b>Rnd</b></tt> dans QB est utilis&eacute;e. La granularit&eacute; est de 24 bits.<br \>
+<li> Avec les dialectes <i><a href="CompilerOptlang.html">-lang deprecated</a></i> et <i><a href="CompilerOptlang.html">-lang fblite</a></i>, la fonction C disponible dans le syst&egrave;me est utilis&eacute;e. La fonction a une granularit&eacute; de 15 bits dans Win32, et 32 bits sous Linux et DOS.<br \>
 <br \>
-</ul></ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
-<ul><li> The <tt><i>algorithm</i></tt> parameter is new to FreeBASIC.<br \>
-<li> QBASIC only had one algorithm (replicated in FB in algorithm number <tt><b>4</b></tt>, and set as the default in the <i><a href="CompilerOptlang.html">-lang qb</a></i> dialect).<br \>
+</ul></ul></div><div class="fb_sect_title">Diff&eacute;rences avec QB</div><div class="fb_sect_cont"><br \>
+<ul><li> Le param&egrave;tre <tt><i>algorithm</i></tt> est nouveau pour FreeBASIC.<br \>
+<li> QBASIC n'avait qu'un seul algorithme (reproduit dans FB en algorithme num&eacute;ro <tt><b>4</b></tt> et d&eacute;fini par d&eacute;faut dans le dialecte <i><a href="CompilerOptlang.html">-lang qb</a></i>).<br \>
 <br \>
-</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+</ul></div><div class="fb_sect_title">Voir aussi</div><div class="fb_sect_cont"><br \>
 <ul><li> <tt><a href="KeyPgRnd.html">Rnd</a></tt><br \>
-<li> <a href="CompilerDialects.html">Language dialects</a><br \>
+<li> <a href="CompilerDialects.html">Les dialectes du FreeBasic</a><br \>
 <br \>
 </ul></div>
 </div>

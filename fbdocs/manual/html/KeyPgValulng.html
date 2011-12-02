@@ -11,32 +11,32 @@
 </div> 
 <div id="fb_pg_wrapper">
 <div id="fb_pg_body">
-	Converts a string to a unsigned long integer<br \>
+	Conversion d'une cha&icirc;ne en nombre entier long non-sign&eacute;<br \>
 <br \>
-<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<div class="fb_sect_title">Syntaxe</div><div class="fb_sect_cont"><tt><br \>
 <a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgFunction.html">Function</a> <b>ValULng</b> <a href="KeyPgOverload.html">Overload</a> ( <a href="KeyPgByref.html">ByRef</a> <i>strnum</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgConstQualifier.html">Const</a> <a href="KeyPgString.html">String</a> ) <a href="KeyPgAs.html">As</a> <a href="KeyPgUlongint.html">ULongInt</a><br \>
 <a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgFunction.html">Function</a> <b>ValULng</b> ( <a href="KeyPgByval.html">ByVal</a> <i>strnum</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgConstQualifier.html">Const</a> <a href="KeyPgWstring.html">WString</a> <a href="KeyPgPtr.html">Ptr</a> ) <a href="KeyPgAs.html">As</a> <a href="KeyPgUlongint.html">ULongInt</a><br \>
 </tt><br \>
 </div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
 <i>result</i> = <b>ValULng</b> ( <i>strnum</i> )<br \>
 </tt><br \>
-</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Param&egrave;tres</div><div class="fb_sect_cont"><br \>
 <tt><i>strnum</i></tt><br \>
-<div class="fb_indent">the string to convert<br \>
+<div class="fb_indent">la cha&icirc;ne &agrave; convertir<br \>
 <br \>
-</div></div><div class="fb_sect_title">Return Value</div><div class="fb_sect_cont"><br \>
-Returns a <tt><a href="KeyPgUlongint.html">ULongInt</a></tt> of the converted string<br \>
+</div></div><div class="fb_sect_title">Valeur retourn&eacute;e</div><div class="fb_sect_cont"><br \>
+Retourne un <tt><a href="KeyPgUlongint.html">ULongInt (entier long non-sign&eacute;)</a></tt> de la cha&icirc;ne convertie<br \>
 <br \>
-If the first character of the string is invalid, <tt><b>ValULng</b></tt> will return <tt>0</tt>.<br \>
+Si le premier caract&egrave;re de la cha&icirc;ne n'est pas valide, <tt><b>ValULng</b></tt> retournera <tt>0</tt>.<br \>
 <br \>
 </div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
-For example, <tt><b>ValULng</b>("10")</tt> will return <tt>10</tt>, and <tt><b>ValULng</b>("10.60")</tt> will return <tt>10</tt> as well. The function parses the string from the left, skipping any white space, and returns the longest number it can read, stopping at the first non-suitable character it finds.  Any non-numeric characters, including decimal points and exponent specifiers, are considered non-suitable, for example, <tt><b>ValULng</b>("23.1E+6")</tt> will just return <tt>23</tt>.<br \>
+Par exemple, <tt><b>ValULng</b>("10")</tt> retournera <tt>10</tt>, et <tt><b>ValULng</b>("10.60")</tt> retournera <tt>10</tt>. La fonction analyse la cha&icirc;ne &agrave; partir de la gauche, en sautant tout espace blanc, et retourne le plus long nombre qu'elle peut lire, s'arr&ecirc;tant au premier caract&egrave;re non-appropri&eacute;, qu'elle trouve.  Tout caract&egrave;re non-num&eacute;rique, inclus les points d&eacute;cimaux et les sp&eacute;cificateurs d'exposant, sont consid&eacute;r&eacute;s comme non-appropri&eacute;s. Par exemple, <tt><b>ValULng</b>("23.1E+6")</tt> retournera seulement <tt>23</tt>.<br \>
 <br \>
-<tt><b>ValULng</b></tt> can be used to convert integer numbers in <a href="KeyPgBin.html">Binary</a> / <a href="KeyPgOct.html">Octal</a> / <a href="KeyPgHex.html">Hexadecimal</a> format, if they have the relevant identifier (<tt>"&B"</tt> / <tt>"&O"</tt> / <tt>"&H"</tt>) prefixed, for example: <tt><b>ValULng</b>("&HFF")</tt> returns <tt>255</tt>.<br \>
+<tt><b>ValULng</b></tt> peut convertir des nombres entiers en format <a href="KeyPgBin.html">Binaire</a> / <a href="KeyPgOct.html">Octal</a> / <a href="KeyPgHex.html">Hexad&eacute;cimal</a>, s'il y a devant l'identificateur pertinent (<tt>"&B"</tt> / <tt>"&O"</tt> / <tt>"&H"</tt>), par exemple: <tt><b>ValULng</b>("&HFF")</tt> retourne <tt>255</tt>.<br \>
 <br \>
-If you want to convert a number into string format, use the <tt><a href="KeyPgStr.html">Str</a></tt> function.<br \>
+Si vous voulez convertir un nombre en une cha&icirc;ne, utilisez la fonction <tt><a href="KeyPgStr.html">Str</a></tt>.<br \>
 <br \>
-</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Exemple</div><div class="fb_sect_cont"><br \>
 <tt><div class="freebasic">
 <span class="key">Dim</span>&nbsp;<span class="wrd">a</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span><span class="oth">,</span>&nbsp;<span class="wrd">b</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">ULongInt</span><br />
 <span class="wrd">a</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="quo">"20xa211"</span><br />
@@ -48,13 +48,13 @@ If you want to convert a number into string format, use the <tt><a href="KeyPgSt
 20xa211   20
 </pre><br \>
 <br \>
-</div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
-<ul><li> Not available in the <i><a href="CompilerOptlang.html">-lang qb</a></i> dialect unless referenced with the alias <tt><b>__Valulng</b></tt>.<br \>
+</div><div class="fb_sect_title">Diff&eacute;rences de dialectes</div><div class="fb_sect_cont"><br \>
+<ul><li> Non disponible dans le dialecte <i><a href="CompilerOptlang.html">-lang qb</a></i> sauf si r&eacute;f&eacute;renc&eacute; avec l'alias <tt><b>__Valulng</b></tt>.<br \>
 <br \>
-</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
-<ul><li> New to FreeBASIC<br \>
+</ul></div><div class="fb_sect_title">Diff&eacute;rences avec QB</div><div class="fb_sect_cont"><br \>
+<ul><li> Nouveau pour FreeBASIC<br \>
 <br \>
-</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+</ul></div><div class="fb_sect_title">Voir aussi</div><div class="fb_sect_cont"><br \>
 <ul><li> <tt><a href="KeyPgCulngint.html">CULngInt</a></tt><br \>
 <li> <tt><a href="KeyPgVal.html">Val</a></tt><br \>
 <li> <tt><a href="KeyPgValuint.html">ValUInt</a></tt><br \>

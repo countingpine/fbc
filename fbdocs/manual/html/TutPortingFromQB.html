@@ -6,121 +6,121 @@
 <body>
 <div id="fb_body_wrapper">
 <div id="fb_tab">
-<div id="fb_tab_l">Compiling a Big QB program in FB</div>
+<div id="fb_tab_l">Compiler sous FB un tr&egrave;s gros programme QB</div>
 <div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
 </div> 
 <div id="fb_pg_wrapper">
 <div id="fb_pg_body">
 	<br \>
-Let's try to compile a big (4000+ lines) graphical QB program in FreeBasic, to see how compatible FB is with QB.<br \>
-As an example I will use Jark's TCRay a great raytracer with quadric, cubic and quadratic shapes, perlin noise programmed in 2004. You can get TCRay.zip from<br \>
+Essayons de compiler un grand (4000 + lignes) programme QB graphique dans FreeBasic, pour voir comment FB est compatible avec QB.<br \>
+AComme exemple je vais utiliser TCRay de Jark un raytraceur puissant, programm&eacute; en 2004, avec quadrique, formes cubiques et quadratiques, bruit "perlin". Vous pouvez t&eacute;l&eacute;charger TCRay.zip depuis<br \>
 http://www.mandelbrot-dazibao.com/Programs/Programs.htm<br \>
 <br \>
-Notice TCRay is a QB4.5 interpreted program, Jark never had the patience to compile his work,<br \>
-he just tested it interpreted and went on adding features.<br \>
+Notez que TCRay est un programme interpr&eacute;t&eacute; QB4.5, Jark n'a jamais eu la patience de compiler son travail,<br \>
+il a juste test&eacute; une version interpr&eacute;t&eacute;e et a ajout&eacute; des fonctionnalit&eacute;s.<br \>
 <br \>
 <br \>
-The program is made of has 3 files:<br \>
+Le programme est compos&eacute; de 3 fichiers:<br \>
 <br \>
-<div class="fb_indent">TcRay21C.bas - The Main file.<br \>
-TcLib17L.bas - The SVGA graphics library.<br \>
-Tclib17.bi - The include file for the library.<br \>
+<div class="fb_indent">TcRay21C.bas - Le fichier Main.<br \>
+TcLib17L.bas - La biblioth&egrave;que graphique SVGA.<br \>
+Tclib17.bi - Le fichier &agrave; inclure pour la biblioth&egrave;que.<br \>
 <br \>
-</div><b>Porting TCLib17.bas</b><br \>
+</div><b>Portage de TCLib17.bas</b><br \>
 <br \>
-<b>In TCLib17.bas</b><br \>
-It is a "pure QB" SVGA library. Most of its functions are obsoleted by FB as they are implemented as QB-style keywords.  I had my share in developing that lib so you can trust me for this part ;)<br \>
+<b>Dans TCLib17.bas</b><br \>
+Il s'agit d'une biblioth&egrave;que SVGA "pure QB". La plupart de ses fonctions sont rendues obsol&egrave;tes par FB car elles sont mises en oeuvre comme mots-cl&eacute;s de style QB. J'ai eu ma part dans le d&eacute;veloppement de ces biblioth&egrave;ques de sorte que vous pouvez me faire confiance pour cette partie ;)<br \>
 <br \>
-Comment out the contents of the ClearScreen sub and add this<br \>
+Commentez le contenu du sous-programme ClearScreen et ajoutez ceci:<br \>
 <tt>CLS</tt><br \>
 <br \>
-Comment out the contents of the Point24 sub and add this:<br \>
+Commentez le contenu du sous-programme Point24 et ajoutez ceci:<br \>
 <tt>a& = Point(x%,y%)<br \>
 red% = a& Shr 16<br \>
 green% = (a& Shr 8) And 255<br \>
 blue% = a& And 255</tt> 	<br \>
 <br \>
-Comment out the contents of the Pset24 sub and add this:<br \>
+Commentez le contenu du sous-programme Pset24 et ajoutez ceci:<br \>
 <tt>PSet (x%,y%), red% Shl 16 Or green Shl 8 Or blue</tt><br \>
 <br \>
-Comment out the contents of the Screenshot sub and add this:<br \>
+Commentez le contenu du sous-programme Screenshot et ajoutez ceci:<br \>
 <tt>BSave Name$+".bmp"</tt><br \>
 <br \>
-Comment out the contents of the SelectVga sub, we will work with a fixed size most pc's will support.  Comment out the contents of the SetText sub, we are able to output text in HiRes graphics so mode switching is not required.<br \>
+Commentez le contenu du sous-programme SelectVga, nous allons fonctionner avec une taille fixe support&eacute;e par la plupart des PC.  Commentez le contenu du sous-programme SetText, nous sommes capables d'afficher du texte en mode de haute r&eacute;solution (HiRes) donc la commutation de mode n'est pas n&eacute;cessaire.<br \>
 <br \>
-Comment out the contents of the SetVGA Sub excluding the Powers of two calculation at the end and add these four lines:<br \>
+Commentez le contenu du sous-programme SetVGA en excluant le calcul des puissances de deux &agrave; la fin et ajouter ces quatre lignes:<br \>
 <tt>Screen 20,32 '1024x768, 32 bits<br \>
 scrheight=768<br \>
 scrwidth=1024<br \>
 Fullscreen</tt><br \>
 <br \>
 <br \>
-<b>In TCRay17.bas</b><br \>
-Add a SetSVGA as the first line in the Menu sub (we are not switching modes so mode must be set before outputting text),<br \>
+<b>Dans TCRay17.bas</b><br \>
+Ajouter SetSVGA comme premi&egrave;re ligne du sous-programme Menu (nous ne commutatons pas les modes de sorte que cela doit &ecirc;tre r&eacute;gl&eacute; avant la sortie de texte,<br \>
 <br \>
-<b>Compiling</b><br \>
-Ok, stop trusting me, now you can start trying to compile.  You'll receive some errors.<br \>
+<b>Compilation</b><br \>
+Ok, arr&ecirc;tez de me faire confiance, vous pouvez maintenant commencer &agrave; essayer de compiler. Vous aurez quelques erreurs.<br \>
 <br \>
-Compile with:  <i>fbc -s gui -w 1 -lang qb TcRay21C.bas TcLib17L.bas</i><br \>
+Compilez avec:  <i>fbc -s gui -w 1 -lang qb TcRay21C.bas TcLib17L.bas</i><br \>
 <br \>
-I warn you all changes required except two come from a couple of (wise) limitations in the FB syntax:<br \>
-<ul><li> A variable name can't be a keyword plus a type suffix<br \>
-<li> A simple variable can't have the same name as an array<br \>
+Je vous pr&eacute;viens que tous les changements n&eacute;cessaires, sauf deux viennent d'un couple de (sages) limitations dans la syntaxe FB:<br \>
+<ul><li> Un nom de variable ne peut pas &ecirc;tre un mot-cl&eacute; plus un suffixe de type<br \>
+<li>Une simple variable ne peut pas avoir le m&ecirc;me nom qu'un tableau<br \>
 <br \>
 </ul><b>In TCLib17.bi</b><br \>
-ERROR: Duplicated definition, found 'RGB' (<a href="KeyPgRgb.html">RGB</a> is a keyword in FB)<br \>
-Add:<br \>
+ERROR: Duplicated definition, found 'RGB' (<a href="KeyPgRgb.html">RGB</a> est un mot-cl&eacute; de FB)<br \>
+Ajoutez:<br \>
 <tt> #undefine RGB</tt><br \>
-Before the line giving the error.<br \>
+Avant la ligne qui a donn&eacute; l'erreur.<br \>
 <br \>
-ERROR: Duplicated definition, found 'ScreenRes' (<a href="KeyPgScreenres.html">ScreenRes</a> is a keyword in FB)<br \>
-Add:<br \>
+ERROR: Duplicated definition, found 'ScreenRes' (<a href="KeyPgScreenres.html">ScreenRes</a> est un mot-cl&eacute; de FB)<br \>
+Ajoutez:<br \>
 <tt> #undefine ScreenRes</tt><br \>
-Before the line giving the error.<br \>
+Avant la ligne qui a donn&eacute; l'erreur.<br \>
 <br \>
-ERROR: Duplicated definition, found 'Name' (<a href="KeyPgName.html">Name</a> is a keyword in QB)<br \>
-Add<br \>
+ERROR: Duplicated definition, found 'Name' (<a href="KeyPgName.html">Name</a> est un mot-cl&eacute; de QB)<br \>
+Ajoutez<br \>
 <tt> #undefine Name</tt><br \>
-Before the line giving the error.<br \>
+Avant la ligne qui a donn&eacute; l'erreur.<br \>
 <br \>
 <b>In TCRay17.bas</b><br \>
-ERROR: Duplicated definition, found 'Acos' (<a href="KeyPgAcos.html">Acos</a> is a keyword in QB)<br \>
-Add<br \>
+ERROR: Duplicated definition, found 'Acos' (<a href="KeyPgAcos.html">Acos</a> est un mot-cl&eacute; de QB)<br \>
+Ajoutez<br \>
 <tt> #undefine Acos</tt><br \>
-Before the line giving the error.<br \>
+Avant la ligne qui a donn&eacute; l'erreur.<br \>
 <br \>
-ERROR: Argument count mismatch Clear (<a href="KeyPgClear.html">Clear</a> is not required in FB, the keyword has been reused (not a clever decision?))<br \>
-'comment out CLEAR<br \>
+ERROR: Argument count mismatch Clear (<a href="KeyPgClear.html">Clear</a> n'est pas n&eacute;cessaire dans FB, le mot-cl&eacute; a &eacute;t&eacute; r&eacute;utilis&eacute; (non une d&eacute;cision intelligente?))<br \>
+'commenter CLEAR<br \>
 <br \>
-ERROR: Illegal specification, at parameter 2 (Type) of Init.Cubic() (<a href="KeyPgType.html">Type</a> is a keyword in QB)<br \>
-We can undefine it so search and replace <tt>type$</tt> to <tt>_type$</tt><br \>
+ERROR: Illegal specification, at parameter 2 (Type) of Init.Cubic() (<a href="KeyPgType.html">Type</a> est un mot-cl&eacute; de QB)<br \>
+Nous pouvons annuler sa d&eacute;finition pour cela rechercher et remplacer <tt>type$</tt> par <tt>_type$</tt><br \>
 <br \>
 ERROR: Expected 'END IF', found 'END' END FUNCTION<br \>
-This is an error caused by a quirk introduced in FB. Single line <a href="KeyPgIfthen.html">If</a>'s having a colon after THEN require an ENDIF, it has to do with macros...  What reason had Jark to put colons past his THEN's escapes me. QB does not require them at all and FB behaves as expected without them.  Remove all colons after THEN keywords. Search and Replace <i>THEN :</i> to <i>THEN</i><br \>
+Ceci est une erreur provoqu&eacute;e par une bizarrerie introduite dans FB. Une unique ligne <a href="KeyPgIfthen.html">If</a> termin&eacute;e par deux-points (:) apr&egrave;s le THEN n&eacute;cessite un ENDIF, il a &agrave; faire avec des macros...  Quelle raison avait Jark de mettre deux points apr&egrave;s son THEN m'&eacute;chappe. QB n'en a pas besoin du tout et FB se comporte comme pr&eacute;vu sans eux. Retirez tous les deux-points apr&egrave;s les mots-cl&eacute;s THEN. Recherchez et remplacez <i>THEN :</i> par <i>THEN</i><br \>
 <br \>
 ERROR: Array access, index expected, before '=' xn = x * x - y * y + zx0<br \>
-We have an array names xn, and a variable named xn.  Substitute xn with _xn in the lines which error when you try to compile.<br \>
+Nous avons un tableau et une variable nomm&eacute;s xn. Remplacez xn par _xn dans les lignes qui provoquent une erreur lorsque vous essayez de compiler.<br \>
 <br \>
-The same error with x0, we have an array called x0.<br \>
-Substitute xo with _xo in the lines which error when you try to compile.<br \>
+M&ecirc;me erreur avec x0, nous avons un tableau nomm&eacute; x0.<br \>
+Remplacez xo par _xo dans les lignes qui provoquent une erreur lorsque vous essayez de compiler.<br \>
 <br \>
 ERROR: Array access, index expected, before '*' dadY = Amplitude * dAdR * drdY. Same problem with Amplitude.<br \>
-Substitute Amplitude with _Amplitude in the lines which error when you try to compile.<br \>
+Remplacez Amplitude par _Amplitude dans les lignes qui provoquent une erreur lorsque vous essayez de compiler.<br \>
 <br \>
-Ok. At this point all modules compile. We're now going to fix a few linker errors.<br \>
+Ok. A ce stade, tous les modules se compilent. Nous allons maintenant corriger quelques erreurs de l'&eacute;diteur de liens.<br \>
 <br \>
-<b>Linker Errors</b><br \>
-After compiling the linker ties together all the modules with a runtime library, finds the final addresses of every sub/function and substitutes the labels in the calls with these addresses.  If a sub/function is called in the code and its nowhere to be found, the linker complains and gives us the name of the offending function. It can't give us the line numbers (the linker doesn't work with the source) so we will have to do a text search to find where the problem occurs.  Notice the linker gives us "mangled" function names (an ampersand and the size of the parameters passed is added to the end), just ignore the ampersand and what's after.<br \>
+<b>Erreurs de l'&eacute;diteur de liens</b><br \>
+Apr&egrave;s compilation l'&eacute;diteur de liens lie ensemble tous les modules avec une biblioth&egrave;que d'ex&eacute;cution, d&eacute;termine l'adresse finale de tous les sous-programmes et fonctions (sub/function) et remplace les &eacute;tiquettes des appels par ces adresses. Si un/une sous-programme/fonction est appel&eacute;(e) dans le code et est introuvable, l'&eacute;diteur de liens se plaint et nous donne le nom de la fonction incrimin&eacute;e. Il ne peut pas nous donner les num&eacute;ros de ligne ( l'&eacute;diteur de liens ne trvaille pas avec le source) nous aurons donc &agrave; faire une recherche de texte pour trouver où le probl&egrave;me est apparu.  Notez que l'&eacute;diteur de liens nous donne des noms de fonction modifi&eacute;s (un esperluette (&amp;) et la taille des param&egrave;tres pass&eacute;s sont ajout&eacute;s &agrave; la fin),  ignorez simplement l'esperluette et ce qui est apr&egrave;s.<br \>
 <br \>
 TcRay21C.o:fake:(.text+0x174d): undefined reference to `LINE24@20'<br \>
-A call to an undefined Line24 sub is made in the program, you can find this call inside Draw.Axis, in TCRay21.bas, a sub that's it's never called (you can do a search to confirrm it)<br \>
-Probably the QB4.5 compiler would complain too about this. (Remember: this program never compiled in QB4.5) Just comment out the contents of the sub Draw.Axis <br \>
+Un appel &agrave; un sous-programme ind&eacute;fini Line24 a lieu dans le programme, vous pouvez trouver cet appel &agrave; l'int&eacute;rieur de Draw.Axis, dans TCRay21.bas, un sous-programme qui n'est jamais appel&eacute; (vous pouvez faire une recherche pour le confirmer)<br \>
+Probablement que le compilateur QB4.5 se plaindrait aussi &agrave; ce sujet. (Rappelez-vous: ce programme n'a jamais &eacute;t&eacute; compil&eacute; en QB4.5) Commentez simplement le contenu de Draw.Axis <br \>
 <br \>
 TcRay21C.o:fake:(.text+0x181b3): undefined reference to `FFIX@0'<br \>
-Ffix was that useful v1ctor's floating point patch for QB 4.5.  It's not needed in FreeBASIC.  Just comment out the line calling it just after the declarations in tcray21c.bas<br \>
+Ffix &eacute;tait ce patch v1ctor virgule flottante pour QB 4.5.  Il n'est pas n&eacute;cessaire avec FreeBASIC. Commentez simplement les lignes qui l'appellent juste apr&egrave;s les d&eacute;clarations dans tcray21c.bas<br \>
 <br \>
-And that's all, the program compiles and works. Not a lot of changes for 4000+ lines...<br \>
-Enjoy!<br \>
+Et c'est tout, le programme se compile et fonctionne. Pas beaucoup de changements pour + de 4000 lignes...<br \>
+Amusez-vous!<br \>
 
 </div>
 </div> 

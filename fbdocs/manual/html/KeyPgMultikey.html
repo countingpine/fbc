@@ -11,30 +11,30 @@
 </div> 
 <div id="fb_pg_wrapper">
 <div id="fb_pg_body">
-	Detects the status of keys by keyboard scancode.<br \>
+	D&eacute;tecte l'&eacute;tat des touches par scancode du clavier.<br \>
 <br \>
-<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<div class="fb_sect_title">Syntaxe</div><div class="fb_sect_cont"><tt><br \>
 <a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgFunction.html">Function</a> <b>MultiKey</b> ( <a href="KeyPgByval.html">ByVal</a> <i>scancode</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a> ) <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a><br \>
 </tt><br \>
 </div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
 <i>result</i> = <b>MultiKey</b>(<i>scancode</i>)<br \>
 </tt><br \>
-</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Param&egrave;tres</div><div class="fb_sect_cont"><br \>
 <tt><i>scancode</i></tt><br \>
-<div class="fb_indent">The <a href="GfxScancodes.html">scan code</a> of the key to check.<br \>
+<div class="fb_indent">Le <a href="GfxScancodes.html">scan code</a> de la touche &agrave; d&eacute;tecter.<br \>
 <br \>
-</div></div><div class="fb_sect_title">Return Value</div><div class="fb_sect_cont"><br \>
-Returns <tt>-1</tt> if the key for the specified <a href="GfxScancodes.html">scan code</a> is pressed, otherwise returns <tt>0</tt>.<br \>
+</div></div><div class="fb_sect_title">Valeur renvoy&eacute;e</div><div class="fb_sect_cont"><br \>
+Retourne <tt>-1</tt> si la touche correspondant au <a href="GfxScancodes.html">scan code</a> est appuy&eacute;e, autrement retourne <tt>0</tt>.<br \>
 <br \>
 </div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
-<tt><b>MultiKey</b></tt> is a function which will detect the status of any key, determined by scancode, at any time. It will return <tt>-1</tt> if the key is pressed, otherwise it will return <tt>0</tt>. The keyboard input buffer is not disabled while you use <tt><b>MultiKey</b></tt>; that is, pressed keys will be stored and subsequently returned by your next call to <tt><a href="KeyPgInkey.html">Inkey</a></tt>. This means you have to empty <tt><a href="KeyPgInkey.html">Inkey</a></tt> manually when you finish using <tt><b>MultiKey</b></tt>, using something like the following method:<br \>
+<tt><b>MultiKey</b></tt> est une fonction qui d&eacute;tecte l'&eacute;tat de n'importe quelle touche, d&eacute;termin&eacute; par scancode, &agrave; n'importe quel moment. Retournera <tt>-1</tt> si la touche est appuy&eacute;e, autrement retournera <tt>0</tt>. Le tampon d'entr&eacute;e clavier n'est pas d&eacute;sactiv&eacute; lorsque vous utilisez <tt><b>MultiKey</b></tt>; les touches appuy&eacute;es seront stock&eacute;es et ensuite retourn&eacute;es par votre prochain appel &agrave; <tt><a href="KeyPgInkey.html">Inkey</a></tt>. Ceci signifie que vous devez vider manuellement <tt><a href="KeyPgInkey.html">Inkey</a></tt> quand vous avez fini d'utiliser <tt><b>MultiKey</b></tt>, en utilisant quelque chose de semblable &agrave; la m&eacute;thode ci-dessous:<br \>
 <tt><div class="freebasic">
-<span class="key">While</span>&nbsp;<span class="key">Inkey</span>&nbsp;<span class="oth">&lt;&gt;</span>&nbsp;<span class="quo">""</span><span class="oth">:</span>&nbsp;<span class="key">Wend</span>&nbsp;<span class="com">''&nbsp;loop&nbsp;until&nbsp;the&nbsp;Inkey&nbsp;buffer&nbsp;is&nbsp;empty</span><br />
+<span class="key">While</span>&nbsp;<span class="key">Inkey</span>&nbsp;<span class="oth">&lt;&gt;</span>&nbsp;<span class="quo">""</span><span class="oth">:</span>&nbsp;<span class="key">Wend</span>&nbsp;<span class="com">''&nbsp;boucle&nbsp;tant&nbsp;que&nbsp;le&nbsp;tampon&nbsp;inkey&nbsp;est&nbsp;vide</span><br />
 </div></tt><br />
-Keeping <tt><a href="KeyPgInkey.html">Inkey</a></tt> to work while you use <tt><b>MultiKey</b></tt> allows more flexibility and can be useful to detect <tt><a href="KeyPgChr.html">Chr</a>(255)+"k"</tt> combo returned on window close button click, if a windowed graphics mode has been set via the <tt><a href="KeyPgScreengraphics.html">Screen</a></tt> statement. For a list of accepted scancodes, see <a href="GfxScancodes.html">DOS keyboard scancodes</a>; these are guaranteed to be valid for all FreeBASIC supported platforms.<br \>
-<tt><b>MultiKey</b></tt> should always work in graphics mode, as long as the screen is <a href="KeyPgScreenunlock.html">Unlocked</a>. Support in the console depends on the platform the program is run on though, and cannot be guaranteed.<br \>
+Garder <tt><a href="KeyPgInkey.html">Inkey</a></tt> au travail pendant l'utilisation de <tt><b>MultiKey</b></tt> vous donne plus de flexibilit&eacute; et peut &ecirc;tre tr&egrave;s utile pour d&eacute;tecter une combinaison <tt><a href="KeyPgChr.html">Chr</a>(255)+"k"</tt> renvoy&eacute;e par le clic sur le bouton de fermeture d'une fen&ecirc;tre, si un mode graphique fen&ecirc;tr&eacute; a &eacute;t&eacute; valid&eacute; par <tt><a href="KeyPgScreengraphics.html">Screen</a></tt>. Pour une liste des scancodes accept&eacute;s, voir <a href="GfxScancodes.html">Scancodes clavier DOS</a>; ceci garantit la validit&eacute; pour toutes les plates-formes support&eacute;es par FreeBASIC.<br \>
+<tt><b>MultiKey</b></tt> devrait toujours fonctionner en mode graphique, aussi longtemps que l'&eacute;cran est <a href="KeyPgScreenunlock.html">Unlock</a>&eacute;. Le fonctionnement en console d&eacute;pend de la plate-forme sur laquelle fonctionne le programme, et ne peut &ecirc;tre garanti.<br \>
 <br \>
-</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Exemple</div><div class="fb_sect_cont"><br \>
 <tt><div class="freebasic">
 <span class="def">#include&nbsp;"fbgfx.bi"<br />
 #if&nbsp;__FB_LANG__&nbsp;=&nbsp;"fb"<br />
@@ -49,23 +49,23 @@ Keeping <tt><a href="KeyPgInkey.html">Inkey</a></tt> to work while you use <tt><
 <br />
 <span class="wrd">x</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">320</span><span class="oth">:</span>&nbsp;<span class="wrd">y</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">240</span><br />
 <span class="key">Do</span><br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">'&nbsp;Check&nbsp;arrow&nbsp;keys&nbsp;and&nbsp;update&nbsp;the&nbsp;(x,&nbsp;y)&nbsp;position&nbsp;accordingly</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">'&nbsp;Surveille&nbsp;touches&nbsp;fleches&nbsp;et&nbsp;met a jour&nbsp;position&nbsp;(x,&nbsp;y)&nbsp;</span><br />
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="key">If</span>&nbsp;<span class="key">MultiKey</span><span class="oth">(</span><span class="wrd">SC_LEFT</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="key">And</span>&nbsp;<span class="wrd">x</span>&nbsp;<span class="oth">&gt;</span>&nbsp;&nbsp;&nbsp;<span class="num">0</span>&nbsp;<span class="key">Then</span>&nbsp;<span class="wrd">x</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">x</span>&nbsp;<span class="oth">-</span>&nbsp;<span class="num">1</span><br />
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="key">If</span>&nbsp;<span class="key">MultiKey</span><span class="oth">(</span><span class="wrd">SC_RIGHT</span><span class="oth">)</span>&nbsp;<span class="key">And</span>&nbsp;<span class="wrd">x</span>&nbsp;<span class="oth">&lt;</span>&nbsp;<span class="num">639</span>&nbsp;<span class="key">Then</span>&nbsp;<span class="wrd">x</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">x</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="num">1</span><br />
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="key">If</span>&nbsp;<span class="key">MultiKey</span><span class="oth">(</span><span class="wrd">SC_UP</span>&nbsp;&nbsp;&nbsp;<span class="oth">)</span>&nbsp;<span class="key">And</span>&nbsp;<span class="wrd">y</span>&nbsp;<span class="oth">&gt;</span>&nbsp;&nbsp;&nbsp;<span class="num">0</span>&nbsp;<span class="key">Then</span>&nbsp;<span class="wrd">y</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">y</span>&nbsp;<span class="oth">-</span>&nbsp;<span class="num">1</span><br />
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="key">If</span>&nbsp;<span class="key">MultiKey</span><span class="oth">(</span><span class="wrd">SC_DOWN</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="key">And</span>&nbsp;<span class="wrd">y</span>&nbsp;<span class="oth">&lt;</span>&nbsp;<span class="num">479</span>&nbsp;<span class="key">Then</span>&nbsp;<span class="wrd">y</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">y</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="num">1</span><br />
 &nbsp;&nbsp;&nbsp;&nbsp;<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">'&nbsp;Lock&nbsp;the&nbsp;page&nbsp;while&nbsp;we&nbsp;work&nbsp;on&nbsp;it</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">'&nbsp;Verouille&nbsp;page&nbsp;pendante&nbsp;travail&nbsp;sur&nbsp;elle</span><br />
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="key">ScreenLock</span><br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">'&nbsp;Clear&nbsp;the&nbsp;screen&nbsp;and&nbsp;draw&nbsp;a&nbsp;circle&nbsp;at&nbsp;the&nbsp;position&nbsp;(x,&nbsp;y)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">'&nbsp;Efface&nbsp;ecran&nbsp;et&nbsp;trace&nbsp;cercle&nbsp;a&nbsp;la&nbsp;position&nbsp;(x,&nbsp;y)</span><br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Cls</span><br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Circle</span><span class="oth">(</span><span class="wrd">x</span><span class="oth">,</span>&nbsp;<span class="wrd">y</span><span class="oth">),</span>&nbsp;<span class="num">30</span><span class="oth">,</span>&nbsp;<span class="oth">,</span>&nbsp;<span class="oth">,</span>&nbsp;<span class="oth">,</span>&nbsp;<span class="oth">,</span><span class="wrd">F</span><br />
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="key">ScreenUnlock</span><br />
 &nbsp;&nbsp;&nbsp;&nbsp;<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">'&nbsp;Run&nbsp;loop&nbsp;until&nbsp;user&nbsp;presses&nbsp;Escape</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">'&nbsp;Boucle&nbsp;jusqu'a&nbsp;Echappement&nbsp;appuye</span><br />
 <span class="key">Loop</span>&nbsp;<span class="key">Until</span>&nbsp;<span class="key">MultiKey</span><span class="oth">(</span><span class="wrd">SC_ESCAPE</span><span class="oth">)</span><br />
 <br />
-<span class="com">'&nbsp;Clear&nbsp;Inkey&nbsp;buffer</span><br />
+<span class="com">'&nbsp;Vide&nbsp;tampon&nbsp;Inkey</span><br />
 <span class="key">While</span>&nbsp;<span class="key">Inkey</span>&nbsp;<span class="oth">&lt;&gt;</span>&nbsp;<span class="quo">""</span><span class="oth">:</span>&nbsp;<span class="key">Wend</span><br />
 <br />
 <br />
@@ -74,23 +74,23 @@ Keeping <tt><a href="KeyPgInkey.html">Inkey</a></tt> to work while you use <tt><
 <span class="key">Do</span><br />
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Sleep</span>&nbsp;<span class="num">25</span><br />
 &nbsp;&nbsp;&nbsp;&nbsp;<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;Stay&nbsp;in&nbsp;loop&nbsp;until&nbsp;user&nbsp;holds&nbsp;down&nbsp;CTRL&nbsp;and&nbsp;H&nbsp;at&nbsp;the&nbsp;same&nbsp;time</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;Boucle&nbsp;jusqu'a&nbsp;appui&nbsp;sur&nbsp;CTRL&nbsp;et&nbsp;H&nbsp;ensemble</span><br />
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="key">If</span>&nbsp;<span class="key">MultiKey</span><span class="oth">(</span><span class="wrd">SC_CONTROL</span><span class="oth">)</span>&nbsp;<span class="key">And</span>&nbsp;<span class="key">MultiKey</span><span class="oth">(</span><span class="wrd">SC_H</span><span class="oth">)</span>&nbsp;<span class="key">Then</span>&nbsp;<span class="key">Exit</span>&nbsp;<span class="key">Do</span><br />
 <span class="key">Loop</span><br />
 </div></tt><br />
 <br \>
 <br \>
-</div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
-<ul><li> Not available in the <i><a href="CompilerOptlang.html">-lang qb</a></i> dialect unless referenced with the alias <tt><b>__Multikey</b></tt>.<br \>
+</div><div class="fb_sect_title">Diff&eacute;rences de dialectes</div><div class="fb_sect_cont"><br \>
+<ul><li> Non disponible dans le dialecte <i><a href="CompilerOptlang.html">-lang qb</a></i> sauf si r&eacute;f&eacute;renc&eacute; avec l'alias <tt><b>__Multikey</b></tt>.<br \>
 <br \>
-</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
-<ul><li> New to FreeBASIC<br \>
+</ul></div><div class="fb_sect_title">Diff&eacute;rences avec QB</div><div class="fb_sect_cont"><br \>
+<ul><li> Nouveau pour FreeBASIC<br \>
 <br \>
-</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
-<ul><li> <a href="GfxScancodes.html">Keyboard scancodes</a><br \>
+</ul></div><div class="fb_sect_title">Voir aussi</div><div class="fb_sect_cont"><br \>
+<ul><li> <a href="GfxScancodes.html">Scancodes clavier</a><br \>
 <li> <tt><a href="KeyPgGetmouse.html">GetMouse</a></tt><br \>
 <li> <tt><a href="KeyPgGetjoystick.html">GetJoystick</a></tt><br \>
-<li> <tt><a href="KeyPgScreengraphics.html">Screen (Graphics)</a></tt><br \>
+<li> <tt><a href="KeyPgScreengraphics.html">Screen (Graphique)</a></tt><br \>
 <li> <tt><a href="KeyPgInkey.html">Inkey</a></tt><br \>
 <br \>
 </ul></div>

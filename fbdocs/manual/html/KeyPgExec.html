@@ -11,27 +11,27 @@
 </div> 
 <div id="fb_pg_wrapper">
 <div id="fb_pg_body">
-	Temporarily transfers execution to an external program<br \>
+	Transf&egrave;re temporairement l'ex&eacute;cution &agrave; un programme externe<br \>
 <br \>
-<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<div class="fb_sect_title">Syntaxe</div><div class="fb_sect_cont"><tt><br \>
 <a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgSub.html">Function</a> <b>Exec</b> ( <a href="KeyPgByref.html">ByRef</a> <i>program</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgConstQualifier.html">Const</a> <a href="KeyPgString.html">String</a>, <a href="KeyPgByref.html">ByRef</a> <i>arguments</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgConstQualifier.html">Const</a> <a href="KeyPgString.html">String</a> ) <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a><br \>
 </tt><br \>
 </div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
 <i>result</i> = <b>Exec</b>( <i>program</i>, <i>arguments</i> )<br \>
 </tt><br \>
-</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Param&egrave;tres</div><div class="fb_sect_cont"><br \>
 <tt><i>program</i></tt><br \>
-<div class="fb_indent">The file name (including file path) of the program (executable) to transfer control to.<br \>
+<div class="fb_indent">Le nom de fichier (avec le chemin du fichier) du programme (ex&eacute;cutable) auquel on transf&egrave;re le contr&ocirc;le.<br \>
 </div><tt><i>arguments</i></tt><br \>
-<div class="fb_indent">The command-line arguments to be passed to the program.<br \>
+<div class="fb_indent">Les arguments de la ligne de commande &agrave; passer au programme.<br \>
 <br \>
-</div></div><div class="fb_sect_title">Return Value</div><div class="fb_sect_cont"><br \>
-The exit status of the program, or negative one (-1) if the program could not be executed.<br \>
+</div></div><div class="fb_sect_title">Valeur retourn&eacute;e</div><div class="fb_sect_cont"><br \>
+L'&eacute;tat de sortie du programme, ou une valeur negative (-1) si le programme ne peut pas être ex&eacute;cut&eacute;.<br \>
 <br \>
 </div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
-Transfers control over to an external program. When the program exits, execution resumes immediately after the call to <tt><b>Exec</b></tt>.<br \>
+Transf&egrave;re le contr&ocirc;le &agrave; un programme externe. Lorsque le programme se termine, l'ex&eacute;cution reprend imm&eacute;diatement apr&egrave;s l'appel &agrave; <tt><b>Exec</b></tt>.<br \>
 <br \>
-</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Exemple</div><div class="fb_sect_cont"><br \>
 <tt><div class="freebasic">
 <span class="com">'A&nbsp;Windows&nbsp;based&nbsp;example&nbsp;but&nbsp;the&nbsp;same&nbsp;idea&nbsp;applies&nbsp;to&nbsp;Linux</span><br />
 <span class="key">Const</span>&nbsp;<span class="wrd">exename</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="quo">"NoSuchProgram.exe"</span><br />
@@ -44,21 +44,21 @@ Transfers control over to an external program. When the program exits, execution
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"Exit&nbsp;code:"</span><span class="oth">;</span>&nbsp;<span class="wrd">result</span><br />
 <span class="key">End</span>&nbsp;<span class="key">If</span><br />
 </div></tt><br />
-</div><div class="fb_sect_title">Platform Differences</div><div class="fb_sect_cont"><br \>
-<ul><li> Linux requires the <i>program</i> case matches the real name of the file. Windows and DOS  are case insensitive. The program being executed may be case sensitive for its command line parameters.<br \>
-<li> Path separators in Linux are forward slashes / . Windows uses backward slashes \ but it allows for forward slashes .  DOS uses backward  \ slashes. <br \>
-<li> Exit code is limited to 8 bits in DOS.<br \>
+</div><div class="fb_sect_title">Diff&eacute;rences de plate-forme</div><div class="fb_sect_cont"><br \>
+<ul><li> Linux n&eacute;cessite que la casse de <i>program</i> corresponde au nom r&eacute;el du fichier. Windows et DOS ne sont pas sensibles &agrave; la casse. Le programme en cours d'ex&eacute;cution peut &ecirc;tre sensible &agrave; la casse pour ses param&egrave;tres de ligne de commande.<br \>
+<li> Les s&eacute;parateurs de chemin de Linux sont des barres obliques /. Windows utilise des barres obliques vers l'arri&egrave;re \ mais il admet des barres obliques .  DOS utilise des barres obliques en arri&egrave;re \. <br \>
+<li> Le code de sortie est limit&eacute; &agrave; 8 bits sous DOS.<br \>
 <br \>
-</ul></div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
-<ul><li> Not available in the <i><a href="CompilerOptlang.html">-lang qb</a></i> dialect unless referenced with the alias <tt><b>__Exec</b></tt>.<br \>
+</ul></div><div class="fb_sect_title">Diff&eacute;rences de dialecte</div><div class="fb_sect_cont"><br \>
+<ul><li> Non disponible dans le dialecte <i><a href="CompilerOptlang.html">-lang qb</a></i> sauf si r&eacute;f&eacute;renc&eacute; avec l'alias <tt><b>__Exec</b></tt>.<br \>
 <br \>
-</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
-<ul><li> New to FreeBASIC<br \>
+</ul></div><div class="fb_sect_title">Diff&eacute;rences avec QB</div><div class="fb_sect_cont"><br \>
+<ul><li> Nouveau pour FreeBASIC<br \>
 <br \>
-</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
-<ul><li> <tt><a href="KeyPgChain.html">Chain</a></tt> transfer temporarily, without arguments<br \>
-<li> <tt><a href="KeyPgRun.html">Run</a></tt> one-way transfer<br \>
-<li> <tt><a href="KeyPgCommand.html">Command</a></tt> pick arguments<br \>
+</ul></div><div class="fb_sect_title">Voir aussi</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgChain.html">Chain</a></tt> transf&egrave;re temporairement, sans argument<br \>
+<li> <tt><a href="KeyPgRun.html">Run</a></tt> transfert une-voie<br \>
+<li> <tt><a href="KeyPgCommand.html">Command</a></tt> chercher des arguments<br \>
 <br \>
 </ul></div>
 </div>

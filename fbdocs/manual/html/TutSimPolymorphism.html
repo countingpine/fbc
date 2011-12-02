@@ -6,22 +6,23 @@
 <body>
 <div id="fb_body_wrapper">
 <div id="fb_tab">
-<div id="fb_tab_l">Simulating Polymorphism</div>
+<div id="fb_tab_l">Simulation du Polymorphisme</div>
 <div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
 </div> 
 <div id="fb_pg_wrapper">
 <div id="fb_pg_body">
-	<i>Written by <a href="WikiRick.html">rdc</a></i><br \>
+	<i>Ecrit par <a href="WikiRick.html">rdc</a></i><br \>
 <br \>
 <div class="fb_header"> Introduction</div><br \>
 <br \>
-Polymorphism is a powerful tool in object-oriented program. A polymorphic method (Sub or Function) behaves differently depending on the definition of the object. For example, an animal object may have a speak method that will issue a bark for a dog and a meow for a cat. FreeBasic doesn’t yet support true polymorphism; this will be added when classes are implemented. However, you can simulate polymorphic methods using method pointers. <br \>
+Le polymorphisme est un outil puissant dans les programmes orient&eacute;s-objet. Une m&eacute;thode polymorphe (Sub ou Function) se comporte diff&eacute;remment selon la d&eacute;finition de l'objet. Par exemple, un objet "animal" peut avoir une m&eacute;thode "parler" qui &eacute;mettra un aboiement pour un chien et un miaulement d'un chat. FreeBASIC ne supporte pas encore le vrai polymorphisme, il sera ajout&eacute; lorsque les classes seront impl&eacute;ment&eacute;es. Cependant, vous pouvez simuler les m&eacute;thodes polymorphes en utilisant les m&eacute;thodes pointeurs. <br \>
 <br \>
-<div class="fb_header"> Polymorphism</div><br \>
+<div class="fb_header"> Polymorphisme</div><br \>
 <br \>
-Polymorphic methods are subroutines or functions that have the same type and parameter list, but behave differently when bound to different objects. An animal object may have a Speak method that will issue a bark for a dog and a meow for a cat. Since FreeBasic doesn’t yet have classes, you cannot implement true polymorphic methods, but you can simulate the behavior by using method pointers.<br \>
+Les m&eacute;thodes polymorphes sont des "Sub" ou des "Function" qui ont le type et la m&ecirc;me liste des param&egrave;tres, mais qui se comportent diff&eacute;remment lorsqu'elles sont li&eacute;es &agrave; des objets diff&eacute;rents. Un objet "animal" peut avoir une m&eacute;thode "parler" qui &eacute;mettra un aboiement pour un chien et un miaulement d'un chat.
+Comme FreeBASIC ne conna&icirc;t pas encore les classes, vous ne pouvez impl&eacute;menter de vraies m&eacute;thodes polymorphes,  you cannot implement true polymorphic methods, mais vous pouvez simuler leur comportement en utilisant des m&eacute;thodes pointeurs.<br \>
 <br \>
-The following listing shows a couple of defines and an extended type declaration:<br \>
+Le listing suivant montre un couple de "#define" et une d&eacute;claration de type &eacute;tendu:<br \>
 <tt><div class="freebasic">
 <span class="def">#define&nbsp;isdog&nbsp;1<br />
 #define&nbsp;iscat&nbsp;2<br />
@@ -32,7 +33,7 @@ The following listing shows a couple of defines and an extended type declaration
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Constructor</span>&nbsp;<span class="oth">(</span><span class="wrd">anid</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">)</span>&nbsp;&nbsp;&nbsp;&nbsp;<br />
 <span class="key">End</span>&nbsp;<span class="key">Type</span><br />
 </div></tt><br />
-The #defines are passed to the Constructor to signal what type of object is being created. The speak As Sub()definition defines the method pointer. As you will see, the address of two different subroutines will be passed to the speak method pointer. The following listing shows the different speak subroutines and the Constructor method:<br \>
+Les "#define" sont pass&eacute;s au constructeur (Constructor) pour lui signaler quel type d'objet sera cr&eacute;&eacute;. La d&eacute;finition "speak As Sub()" d&eacute;finit la m&eacute;thode pointeur. Comme vousle voyez, l'adresse de deux sous-programmes diff&eacute;rents sera pass&eacute;e &agrave; la m&eacute;thode pointeur "speak". Le listing suivant montre les sous-programmes speak diff&eacute;rents et la m&eacute;thode Constructor:<br \>
 <tt><div class="freebasic">
 <span class="com">'Speak&nbsp;method&nbsp;for&nbsp;dog&nbsp;object</span><br />
 <span class="key">Sub</span>&nbsp;<span class="wrd">Bark</span><span class="oth">()</span><br />
@@ -40,7 +41,7 @@ The #defines are passed to the Constructor to signal what type of object is bein
 <span class="key">End</span>&nbsp;<span class="key">Sub</span><br />
 <br />
 <span class="com">'Speak&nbsp;method&nbsp;for&nbsp;cat&nbsp;object</span><br />
-<span class="key">Sub</span>&nbsp;<span class="wrd">Meow</span><span class="oth">()</span><br />
+<span class="key">Sub</span>&nbsp;<span class="wrd"ttt>Meow</span><span class="oth">()</span><br />
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"Meow!"</span><br />
 <span class="key">End</span>&nbsp;<span class="key">Sub</span><br />
 <br />
@@ -53,19 +54,20 @@ The #defines are passed to the Constructor to signal what type of object is bein
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="key">End</span>&nbsp;<span class="key">If</span><br />
 <span class="key">End</span>&nbsp;<span class="key">Constructor</span><br />
 </div></tt><br />
-The Bark subroutine will be called if the object is a dog and the Meow subroutine will be called if the object is a cat. You may be wondering why you can’t just overload the method? For overloaded methods, the type and parameter list must be unique, where in a polymorphic method, the type and parameter list must be the same. Since Bark and Meow have the same parameter list, that is no parameters, you cannot overload the method.<br \>
+Le sous-programmes "Bark" sera appel&eacute; si l'objet est un chien et "Meow" si c'est un chat. Vous vous demandez pourquoi on n'a pas surcharg&eacute; la m&eacute;thode? Pour surcharger une m&eacute;thode, le type et la liste de param&egrave;tres doivent &ecirc;tre uniques, o&ugrave; dans une m&eacute;thode polymorphe, le type et le param&egrave;tre doivent &ecirc;tre le m&ecirc;me. Comme "Bark" et "Meow" ont la m&ecirc;me liste de param&egrave;tres, c'est &agrave; dire aucun param&egrave;tre, vous ne pouvez pas surcharger cette m&eacute;thode.<br \>
 <br \>
-The Constructor code is where the program decides what method call to use. If anid is equal to isdog, then the Speak method pointer will be set to the address of the Bark subroutine. If anid is equal to iscat then Speak will be set to the address of the Meow subroutine. The addressof operator @ is used to pass the address of Bark and Meow to the Speak pointer. <br \>
+C'est dans le code du Constructor que se d&eacute;cide quelle m&eacute;thode &agrave; appeler pour l'utiliser. Si "anid" est &eacute;gal &agrave; "isdog", alors la m&eacute;thode pointeur "Speak" sera fix&eacute;e sur l'adresse du sous-programme "Bark". Si "anid" est &eacute;gal &agrave; "iscat",  alors la m&eacute;thode pointeur "Speak" sera fix&eacute;e sur l'adresse du sous-programme "Meow". L'op&eacute;rateur @ (adresse de) est utilis&eacute; pour passer l'adresse de "Bark" et "Meow" au pointeur "Speak". <br \>
 <br \>
-The <i>this</i> object reference is a hidden parameter that is passed to the Constructor that references the type, which in this case is animal. You can use this to reference the internal variables within the type.<br \>
+La r&eacute;f&eacute;rence objet <i>this</i> est un param&egrave;tre cach&eacute; qui est pass&eacute; au constructeur et qui fait r&eacute;f&eacute;rence au type, qui dans ce cas est "animal". Vous pouvez l'utiliser pour r&eacute;f&eacute;rencer les variables internes au sein du type.
 <br \>
-The only thing left to do is to create and initialize the object:<br \>
+<br \>
+La seule chose qui reste &agrave; faire est de cr&eacute;er et d'initialiser l'objet:<br \>
 <tt><div class="freebasic">
 <span class="com">'Create&nbsp;a&nbsp;dog&nbsp;and&nbsp;cat&nbsp;object</span><br />
 <span class="key">Dim</span>&nbsp;<span class="wrd">myDog</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">animal</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">isdog</span><br />
 <span class="key">Dim</span>&nbsp;<span class="wrd">mycat</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">animal</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">iscat</span><br />
 </div></tt><br />
-Here myDog and myCat are created with the appropriate flags passed to the Constructor so that the proper references can be set up. Once the object are created you can call the speak method of each object.<br \>
+Ici "myDog" et "myCat" sont cr&eacute;&eacute;s avec les indicateurs appropri&eacute;s pass&eacute;s au constructeur ainsi les r&eacute;f&eacute;rences appropri&eacute;es peuvent &ecirc;tre mises en place. D&egrave;s que les objets sont cr&eacute;&eacute;s vous pouvez appeler la m&eacute;thode "speak" de chaque objet.<br \>
 <tt><div class="freebasic">
 <span class="com">'Have&nbsp;the&nbsp;animals&nbsp;speak</span><br />
 <span class="key">Print</span>&nbsp;<span class="quo">"My&nbsp;dog&nbsp;says&nbsp;"</span><span class="oth">;</span><br />
@@ -73,18 +75,18 @@ Here myDog and myCat are created with the appropriate flags passed to the Constr
 <span class="key">Print</span>&nbsp;<span class="quo">"My&nbsp;cat&nbsp;says&nbsp;"</span><span class="oth">;</span><br />
 <span class="wrd">myCat.speak</span><span class="oth">()</span><br />
 </div></tt><br />
-Notice that you are calling the same speak method, yet the output is different:<br \>
+Notez que vous appelez la m&ecirc;me m&eacute;thode "speak", cependant les r&eacute;ponses sont diff&eacute;rentes:<br \>
 <tt><div class="freebasic">
 <span class="wrd">My</span>&nbsp;<span class="wrd">dog</span>&nbsp;<span class="wrd">says</span>&nbsp;<span class="wrd">Woof!</span><br />
 <span class="wrd">My</span>&nbsp;<span class="wrd">cat</span>&nbsp;<span class="wrd">says</span>&nbsp;<span class="wrd">Meow!</span><br />
 </div></tt><br />
-This is the essence of polymorphic methods. <br \>
+C'est l'essence m&ecirc;me des m&eacute;thodes polymorphes. <br \>
 <br \>
-Here is the complete program listing:<br \>
+Voici le listing du programme complet:<br \>
 <tt><div class="freebasic">
 <span class="com">'Simulated&nbsp;Polymorphism&nbsp;Using&nbsp;Method&nbsp;Pointers</span><br />
 <span class="com">'Richard&nbsp;D.&nbsp;Clark</span><br />
-<span class="com">'Requires&nbsp;the&nbsp;CVS&nbsp;version&nbsp;of&nbsp;FreeBasic</span><br />
+<span class="com">'Requires&nbsp;the&nbsp;CVS&nbsp;version&nbsp;of&nbsp;FreeBASIC</span><br />
 <span class="com">'**********************************************</span><br />
 <br />
 <span class="def">#define&nbsp;isdog&nbsp;1<br />

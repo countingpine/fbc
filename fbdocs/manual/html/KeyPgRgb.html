@@ -11,46 +11,46 @@
 </div> 
 <div id="fb_pg_wrapper">
 <div id="fb_pg_body">
-	Computes a valid color value for hi/truecolor modes<br \>
+	Calcule une valeur de couleur valide pour les modes "hi/truecolor"<br \>
 <br \>
-<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<div class="fb_sect_title">Syntaxe</div><div class="fb_sect_cont"><tt><br \>
 <a href="KeyPgPpdefine.html">#define</a> <b>RGB</b>(<i>r</i>,<i>g</i>,<i>b</i>) ((<a href="KeyPgCuint.html">CUInt</a>(r) <a href="KeyPgOpShiftLeft.html">Shl</a> 16) <a href="KeyPgOpOr.html">Or</a> (<a href="KeyPgCuint.html">CUInt</a>(g) <a href="KeyPgOpShiftLeft.html">Shl</a> 8) <a href="KeyPgOpOr.html">Or</a> <a href="KeyPgCuint.html">CUInt</a>(b) <a href="KeyPgOpOr.html">Or</a> &hFF000000)<br \>
 </tt><br \>
 </div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
 <i>result</i> = <b>RGB</b>(<i>red</i>, <i>green</i>, <i>blue</i>)<br \>
 </tt><br \>
-</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Param&egrave;tres</div><div class="fb_sect_cont"><br \>
 <tt><i>red</i></tt><br \>
-<div class="fb_indent">red color component value<br \>
+<div class="fb_indent">valeur de la composante de couleur rouge<br \>
 </div><tt><i>green</i></tt><br \>
-<div class="fb_indent">green color component value<br \>
+<div class="fb_indent">valeur de la composante de couleur vert<br \>
 </div><tt><i>blue</i></tt><br \>
-<div class="fb_indent">blue color component value<br \>
+<div class="fb_indent">valeur de la composante de couleur bleu<br \>
 <br \>
-</div></div><div class="fb_sect_title">Return Value</div><div class="fb_sect_cont"><br \>
-The combined color.<br \>
+</div></div><div class="fb_sect_title">Valeur renvoy&eacute;e</div><div class="fb_sect_cont"><br \>
+La couleur correspondant &agrave; la combinaison.<br \>
 <br \>
 </div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
-<tt><i>red</i></tt>, <tt><i>green</i></tt> and <tt><i>blue</i></tt> are components ranging <tt>0</tt>..<tt>255</tt>.<br \>
+<tt><i>red</i></tt>, <tt><i>green</i></tt> et <tt><i>blue</i></tt> sont les composantes de la couleur - valeurs de <tt>0</tt> &agrave; <tt>255</tt>.<br \>
 <br \>
-The <tt><b>RGB</b></tt> function can be used to compute a valid color value for use while in hi/truecolor modes. It returns an unsigned integer  in the format <tt>&hAARRGGBB</tt>, where <tt>RR</tt>, <tt>GG</tt> and <tt>BB</tt> equal the values passed to this function, in hexadecimal format. <tt>AA</tt> is the implicit alpha value and is automatically set to <tt>&hFF</tt> (opaque).<br \>
-It is possible to retrieve the red, green, blue and alpha values from a color value, by using a combination of <tt><a href="KeyPgOpAnd.html">And</a></tt> and <tt><a href="KeyPgOpShiftRight.html">Shr</a></tt>.  The second example below shows how to <tt><a href="KeyPgPpdefine.html">#define</a></tt> and use macros to do this.<br \>
+La fonction <tt><b>RGB</b></tt> est utilis&eacute;e pour calculer une valeur de couleur valide pour les modes "hi/truecolor". Elle renvoie un entier non sign&eacute; dans le format <tt>&hAARRVVBB</tt>, o&ugrave; <tt>RR</tt>, <tt>VV</tt> et <tt>BB</tt> sont &eacute;gales aux valeurs pass&eacute;es &agrave; la fonction, dans le format hexad&eacute;cimal. <tt>AA</tt> est la valeur implicite de la transparence qui est automatiquement mise &agrave; <tt>&hFF</tt> (opaque).<br \>
+Il est possible de r&eacute;cup&eacute;rer les valeurs rouge, vert, bleu et alpha &agrave; partir d'une valeur de couleur, en utilisant une combinaision de <tt><a href="KeyPgOpAnd.html">And</a></tt> et <tt><a href="KeyPgOpShiftRight.html">Shr</a></tt>.  Le second exemple ci-dessous montre comment <tt><a href="KeyPgPpdefine.html">#define</a></tt> et l'utilisation de macros permettent cela.<br \>
 <br \>
-<b>Note for Windows API programmers</b>: The macro named <tt>RGB</tt> in the Windows references has been renamed <tt>BGR</tt> in the FB headers for Windows to avoid collisions. <br \>
+<b>Note pour les programmeurs d'API Windows</b>: La macro nomm&eacute;e <tt>RGB</tt> dans les r&eacute;f&eacute;rences Windows a &eacute;t&eacute; renomm&eacute;e <tt>BGR</tt> dans les en-t&ecirc;tes FB pour Windows pour &eacute;viter des collisions. <br \>
 <br \>
-</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
-See <tt><a href="KeyPgPutgraphics.html">Put (Graphics)</a></tt> example in addition.<br \>
+</div><div class="fb_sect_title">Exemple</div><div class="fb_sect_cont"><br \>
+Voir aussi l'exemple de <tt><a href="KeyPgPutgraphics.html">Put (Graphique)</a></tt>.<br \>
 <br \>
 <tt><div class="freebasic">
-<span class="key">ScreenRes</span>&nbsp;<span class="num">640</span><span class="oth">,</span><span class="num">480</span><span class="oth">,</span><span class="num">32</span>&nbsp;&nbsp;<span class="com">'32&nbsp;bit&nbsp;color</span><br />
-<span class="key">Line</span><span class="oth">(</span><span class="num">0</span><span class="oth">,</span><span class="num">0</span><span class="oth">)-(</span><span class="num">319</span><span class="oth">,</span><span class="num">479</span><span class="oth">),</span>&nbsp;<span class="key">RGB</span><span class="oth">(</span><span class="num">255</span><span class="oth">,</span><span class="num">0</span><span class="oth">,</span><span class="num">0</span><span class="oth">)</span>&nbsp;<span class="com">'draws&nbsp;a&nbsp;bright&nbsp;red&nbsp;box&nbsp;on&nbsp;the&nbsp;left&nbsp;side&nbsp;of&nbsp;the&nbsp;window</span><br />
-<span class="key">Line</span><span class="oth">(</span><span class="num">639</span><span class="oth">,</span><span class="num">0</span><span class="oth">)-(</span><span class="num">320</span><span class="oth">,</span><span class="num">479</span><span class="oth">),</span>&nbsp;<span class="key">RGB</span><span class="oth">(</span><span class="num">0</span><span class="oth">,</span><span class="num">0</span><span class="oth">,</span><span class="num">255</span><span class="oth">)</span>&nbsp;<span class="com">'draws&nbsp;a&nbsp;bright&nbsp;blue&nbsp;box&nbsp;on&nbsp;the&nbsp;right&nbsp;side&nbsp;of&nbsp;the&nbsp;window</span><br />
+<span class="key">ScreenRes</span>&nbsp;<span class="num">640</span><span class="oth">,</span><span class="num">480</span><span class="oth">,</span><span class="num">32</span>&nbsp;&nbsp;<span class="com">'couleur&nbsp;32&nbsp;bits</span><br />
+<span class="key">Line</span><span class="oth">(</span><span class="num">0</span><span class="oth">,</span><span class="num">0</span><span class="oth">)-(</span><span class="num">319</span><span class="oth">,</span><span class="num">479</span><span class="oth">),</span>&nbsp;<span class="key">RGB</span><span class="oth">(</span><span class="num">255</span><span class="oth">,</span><span class="num">0</span><span class="oth">,</span><span class="num">0</span><span class="oth">)</span>&nbsp;<span class="com">'dessine&nbsp;une&nbsp;boite&nbsp;rouge&nbsp;vif&nbsp;sur&nbsp;le&nbsp;cote&nbsp;gauche&nbsp;de&nbsp;la&nbsp;fenetre</span><br />
+<span class="key">Line</span><span class="oth">(</span><span class="num">639</span><span class="oth">,</span><span class="num">0</span><span class="oth">)-(</span><span class="num">320</span><span class="oth">,</span><span class="num">479</span><span class="oth">),</span>&nbsp;<span class="key">RGB</span><span class="oth">(</span><span class="num">0</span><span class="oth">,</span><span class="num">0</span><span class="oth">,</span><span class="num">255</span><span class="oth">)</span>&nbsp;<span class="com">'dessine&nbsp;une&nbsp;boite&nbsp;bleu&nbsp;vif&nbsp;sur&nbsp;le&nbsp;cote&nbsp;droit&nbsp;de&nbsp;la&nbsp;fenetre</span><br />
 <br />
-<span class="key">Sleep</span>&nbsp;<span class="com">'wait&nbsp;before&nbsp;exiting</span><br />
+<span class="key">Sleep</span>&nbsp;<span class="com">'attend&nbsp;avant&nbsp;sortie</span><br />
 </div></tt><br />
 <br \>
 <tt><div class="freebasic">
-<span class="com">''&nbsp;setting&nbsp;and&nbsp;retrieving&nbsp;Red,&nbsp;Green,&nbsp;Blue&nbsp;and&nbsp;Alpha&nbsp;values</span><br />
+<span class="com">''&nbsp;Valide&nbsp;et&nbsp;recupere&nbsp;&nbsp;valeurs;Rouge,&nbsp;Vert,&nbsp;Bleu&nbsp;et&nbsp;Alpha</span><br />
 <br />
 <span class="def">#define&nbsp;RGBA_R(&nbsp;c&nbsp;)&nbsp;(&nbsp;CUInt(&nbsp;c&nbsp;)&nbsp;Shr&nbsp;16&nbsp;And&nbsp;255&nbsp;)<br />
 #define&nbsp;RGBA_G(&nbsp;c&nbsp;)&nbsp;(&nbsp;CUInt(&nbsp;c&nbsp;)&nbsp;Shr&nbsp;&nbsp;8&nbsp;And&nbsp;255&nbsp;)<br />
@@ -75,20 +75,18 @@ See <tt><a href="KeyPgPutgraphics.html">Put (Graphics)</a></tt> example in addit
 <span class="key">Print</span>&nbsp;<span class="key">Using</span>&nbsp;<span class="quo">"Alpha:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_&amp;H\\&nbsp;=&nbsp;###"</span><span class="oth">;</span>&nbsp;<span class="key">Hex</span><span class="oth">(</span><span class="wrd">a</span><span class="oth">,</span>&nbsp;<span class="num">2</span><span class="oth">);</span>&nbsp;<span class="wrd">a</span><br />
 </div></tt><br />
 <br \>
-</div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
-<ul><li> Not available in the <i><a href="CompilerOptlang.html">-lang qb</a></i> dialect.<br \>
+</div><div class="fb_sect_title">Diff&eacute;rences de dialectes</div><div class="fb_sect_cont"><br \>
+<ul><li> Non disponible dans le dialecte <i><a href="CompilerOptlang.html">-lang qb</a></i>.<br \>
 <br \>
-</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
-<ul><li> New to FreeBASIC<br \>
+</ul></div><div class="fb_sect_title">Diff&eacute;rences avec QB</div><div class="fb_sect_cont"><br \>
+<ul><li> Nouveau pour FreeBASIC<br \>
 <br \>
-</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+</ul></div><div class="fb_sect_title">Voir aussi</div><div class="fb_sect_cont"><br \>
 <ul><li> <tt><a href="KeyPgRgba.html">RGBA</a></tt><br \>
 <li> <tt><a href="KeyPgColor.html">Color</a></tt><br \>
 <li> <tt><a href="KeyPgPpdefine.html">#define</a></tt><br \>
 <br \>
 </ul><br \>
-   <br \>
-<br \>
    <br \>
 </div>
 </div>

@@ -6,27 +6,27 @@
 <body>
 <div id="fb_body_wrapper">
 <div id="fb_tab">
-<div id="fb_tab_l">Type Aliases</div>
+<div id="fb_tab_l">Alias de type</div>
 <div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
 </div> 
 <div id="fb_pg_wrapper">
 <div id="fb_pg_body">
-	Additional names for variable or object types<br \>
+	D'autres noms pour les types de variable ou d'objet<br \>
 <br \>
-<b><a href="#OVERVIEW">Overview</a></b><br \>
-<b><a href="#DECL">Declaration</a></b><br \>
-<b><a href="#OVERLOAD">Overload resolution</a></b><br \>
-<b><a href="#PROCPTRPTR">Pointers to procedure pointers</a></b><br \>
-<b><a href="#TYPEFORWARD">Type forwarding</a></b><br \>
-<b><a href="#INCTYPES">Incomplete types</a></b><br \>
+<b><a href="#OVERVIEW">Vue d'ensemble</a></b><br \>
+<b><a href="#DECL">D&eacute;claration</a></b><br \>
+<b><a href="#OVERLOAD">R&eacute;solution de la surcharge</a></b><br \>
+<b><a href="#PROCPTRPTR">Pointeurs de pointeurs de proc&eacute;dure</a></b><br \>
+<b><a href="#TYPEFORWARD">Transmission de type</a></b><br \>
+<b><a href="#INCTYPES">Types incomplets</a></b><br \>
 <br \>
-<a name="OVERVIEW"></a><div class="fb_sect_title">Overview</div><div class="fb_sect_cont"><br \>
-Type aliases are alternative names for a type. They can be used to facilitate a mass change from one type to another, save typing, or make circular dependency possible.<br \>
+<a name="OVERVIEW"></a><div class="fb_sect_title">Vue d'ensemble</div><div class="fb_sect_cont"><br \>
+Les alias de type sont d'autres noms pour un type. Ils peuvent &ecirc;tre utilis&eacute;s pour faciliter un changement en masse d'un type &agrave; un autre, en diminuant la frappe ou rendre possible une d&eacute;pendance circulaire.<br \>
 <br \>
-<a name="DECL"></a></div><div class="fb_sect_title">Declaration</div><div class="fb_sect_cont"><br \>
-Type aliases are declared using the <tt><a href="KeyPgTypeAlias.html">Type</a></tt> keyword much like declaring variables or objects with <a href="KeyPgExtern.html">Extern</a> or <a href="KeyPgDim.html">Dim</a>.<br \>
+<a name="DECL"></a></div><div class="fb_sect_title">D&eacute;claration</div><div class="fb_sect_cont"><br \>
+Les alias de type sont d&eacute;clar&eacute;s en utilisant le mot-cl&eacute; <tt><a href="KeyPgTypeAlias.html">Type</a></tt> un peu comme la d&eacute;claration de variables ou d'objects avec <a href="KeyPgExtern.html">Extern</a> ou <a href="KeyPgDim.html">Dim</a>.<br \>
 <br \>
-The following example declares a type alias to <tt><a href="KeyPgSingle.html">Single</a></tt> called "<tt><i>float</i></tt>", a procedure, and defines and initializes two variables of that type:<br \>
+L'exemple suivant d&eacute;clare un alias de type <tt><a href="KeyPgSingle.html">Single</a></tt> appel&eacute; "<tt><i>float</i></tt>", une proc&eacute;dure et d&eacute;finit et initialise deux variables de ce type:<br \>
 <br \>
 <tt><div class="freebasic">
 <span class="key">Type</span>&nbsp;<span class="wrd">float</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Single</span><br />
@@ -37,7 +37,7 @@ The following example declares a type alias to <tt><a href="KeyPgSingle.html">Si
 <span class="key">Dim</span>&nbsp;<span class="wrd">bar</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">float</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="oth">-</span><span class="num">4.56</span><br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div></tt><br />
 <br \>
-Procedure pointer type aliases are declared in the same fashion, as shown in the following example:<br \>
+Les alias de type de pointeur de proc&eacute;dure sont d&eacute;clar&eacute;s de la m&ecirc;me fa&ccedil;on, comme le montre l'exemple suivant:<br \>
 <br \>
 <tt><div class="freebasic">
 <span class="key">Declare</span>&nbsp;<span class="key">Function</span>&nbsp;<span class="wrd">f</span>&nbsp;<span class="oth">(</span><span class="key">ByRef</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
@@ -51,10 +51,10 @@ Procedure pointer type aliases are declared in the same fashion, as shown in the
 <span class="key">End</span>&nbsp;<span class="key">Function</span><br />
 </div></tt><br />
 <br \>
-<a name="OVERLOAD"></a></div><div class="fb_sect_title">Overload resolution</div><div class="fb_sect_cont"><br \>
-Type aliases are just that - aliases. For all intents and purposes, a type alias <b>is</b> the type it aliases. So as far as procedure overload resolution is concerned, a procedure declared with a parameter of type "<tt><i>alias_to_T</i></tt>" is the same as a procedure declared with a parameter of type "<tt><i>T</i></tt>" (the same applies to overloading member procedures as well).<br \>
+<a name="OVERLOAD"></a></div><div class="fb_sect_title">R&eacute;solution de la surcharge</div><div class="fb_sect_cont"><br \>
+Les alias de type ne sont que cela - des alias. A toutes fins utiles, un alias de type <b>est</b> du type qu'il remplace. Ainsi dans le cas o&ugrave; la r&eacute;solution de la surcharge de proc&eacute;dure est concern&eacute;e, une proc&eacute;dure d&eacute;clar&eacute;e avec un param&egrave;tre de type "<tt><i>alias_vers_T</i></tt>" est la m&ecirc;me qu'une proc&eacute;dure d&eacute;clar&eacute;e avec un param&egrave;tre de type "<tt><i>T</i></tt>" (la m&ecirc;me chose s'applique ainsi &agrave; la surcharge membres des proc&eacute;dures).<br \>
 <br \>
-In other words, it is an error - duplicated definition - to declare a procedure where parameters differ only in a type and its alias, as the following example shows:<br \>
+En d'autres termes, c'est une erreur -double d&eacute;finition- de d&eacute;clarer une proc&eacute;dure o&ugrave; les param&egrave;tres ne diff&egrave;rent que par un type et son alias, comme l'exemple suivant le montre:<br \>
 <br \>
 <tt><div class="freebasic">
 <span class="key">Type</span>&nbsp;<span class="wrd">float</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Single</span><br />
@@ -65,10 +65,10 @@ In other words, it is an error - duplicated definition - to declare a procedure 
 <span class="com">''&nbsp;Declare&nbsp;Sub&nbsp;f&nbsp;(a&nbsp;As&nbsp;float)</span><br />
 </div></tt><br />
 <br \>
-<a name="PROCPTRPTR"></a></div><div class="fb_sect_title">Pointers to procedure pointers</div><div class="fb_sect_cont"><br \>
-Pointers to procedure pointers are just like any other pointer type, except they point to procedure pointers. Because the syntax for declaring procedure pointers doesn't allow directly creating a pointer to procedure pointer, a type alias is used.<br \>
+<a name="PROCPTRPTR"></a></div><div class="fb_sect_title">Pointeurs de pointeurs de proc&eacute;dure</div><div class="fb_sect_cont"><br \>
+Les pointeurs de pointeurs de proc&eacute;dure sont comme n'importe quel autre type de pointeur, sauf qu'ils pointent vers des pointeurs de proc&eacute;dure. Parce que la syntaxe pour d&eacute;clarer des pointeurs de proc&eacute;dure ne permet pas de cr&eacute;er directement un pointeur sur pointeur de proc&eacute;dure, un alias de type est utilis&eacute;.<br \>
 <br \>
-The following example declares a pointer to a procedure returning an integer pointer, and then a pointer to a pointer to a procedure returning an integer:<br \>
+L'exemple suivant d&eacute;clare un pointeur vers une de proc&eacute;dure retournant un pointeur d'entier, puis un pointeur vers un pointeur vers une de proc&eacute;dure retournant un entier:<br \>
 <br \>
 <tt><div class="freebasic">
 <span class="key">Dim</span>&nbsp;<span class="wrd">pf</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Function</span><span class="oth">()</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="key">Ptr</span><br />
@@ -77,8 +77,8 @@ The following example declares a pointer to a procedure returning an integer poi
 <span class="key">Dim</span>&nbsp;<span class="wrd">ppf</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">pf_t</span>&nbsp;<span class="key">Ptr</span><br />
 &nbsp;&nbsp;&nbsp;&nbsp;</div></tt><br />
 <br \>
-<a name="TYPEFORWARD"></a></div><div class="fb_sect_title">Type forwarding</div><div class="fb_sect_cont"><br \>
-Type aliases can be forward referencing: an alias can refer to some other type not yet fully defined.<br \>
+<a name="TYPEFORWARD"></a></div><div class="fb_sect_title">Transmission de type</div><div class="fb_sect_cont"><br \>
+Des alias de type peuvent &ecirc;tre avant le r&eacute;f&eacute;rencement: un alias peut faire r&eacute;f&eacute;rence &agrave; un autre type qui n'est pas encore enti&egrave;rement d&eacute;fini.<br \>
 <br \>
 <tt><div class="freebasic">
 <span class="key">Type</span>&nbsp;<span class="wrd">foo</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">bar</span><br />
@@ -93,7 +93,7 @@ Type aliases can be forward referencing: an alias can refer to some other type n
 <span class="key">End</span>&nbsp;<span class="key">Type</span><br />
 &nbsp;&nbsp;&nbsp;&nbsp;</div></tt><br />
 <br \>
-Using a type alias and forward referencing allows circular dependencies between types.<br \>
+En utilisant un alias de type et un r&eacute;f&eacute;rencement pr&eacute;coce permet des d&eacute;pendances circulaires entre les types.<br \>
 <br \>
 <tt><div class="freebasic">
 <span class="key">Type</span>&nbsp;<span class="wrd">list</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">list_</span><br />
@@ -109,10 +109,10 @@ Using a type alias and forward referencing allows circular dependencies between 
 <span class="key">End</span>&nbsp;<span class="key">Type</span><br />
 &nbsp;&nbsp;&nbsp;&nbsp;</div></tt><br />
 <br \>
-<a name="INCTYPES"></a></div><div class="fb_sect_title">Incomplete types</div><div class="fb_sect_cont"><br \>
- A type is considered incomplete until the size of it, that is the number of bytes it would need to occupy in memory is known, and the offsets of all of its fields are known.  It is not possible to allocate space for an incomplete type.  It is not possible to declare a variable having the data type of an incomplete type, pass an incomplete type as a parameter, or access the members of an incomplete type.<br \>
+<a name="INCTYPES"></a></div><div class="fb_sect_title">Types incomplets</div><div class="fb_sect_cont"><br \>
+ Un type est consid&eacute;r&eacute; comme incomplet jusqu'&agrave; ce que la taille de celui-ci (c'est le nombre d'octets qui lui sont n&eacute;cessaires en m&eacute;moire) soit connue ainsi que les positions de tous ses champs.  Il n'est pas possible d'allouer de l'espace m&eacute;moire pour un type incomplet.  Il n'est pas possible de d&eacute;clarer une variable ayant un type de donn&eacute;es incomplet, de passer un type incomplet comme param&egrave;tre ou d'acc&eacute;der aux membres d'un type incomplet.<br \>
 <br \>
-However, pointers to incomplete types may be allocated, declared as members in other types, or passed as parameters to a procedures since the size of a pointer is known.<br \>
+Toutefois, des pointeurs vers des types incomplets peuvent &ecirc;tre attribu&eacute;s, d&eacute;clar&eacute;s comme membres dans d'autres types ou pass&eacute;s comme param&egrave;tres &agrave; une proc&eacute;dure, d&egrave;s lors que la taille d'un pointeur est connue.<br \>
 <br \>
 <tt><div class="freebasic">
 <span class="key">Type</span>&nbsp;<span class="wrd">sometype</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">sometype_</span><br />

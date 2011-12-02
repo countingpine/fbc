@@ -11,9 +11,9 @@
 </div> 
 <div id="fb_pg_wrapper">
 <div id="fb_pg_body">
-	Specifies a <i>cdecl</i>-style calling convention in a procedure declaration<br \>
+	Sp&eacute;cifie une convention de style-<i>cdecl</i> &agrave; l'appel d'une d&eacute;claration de proc&eacute;dure<br \>
 <br \>
-<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<div class="fb_sect_title">Syntaxe</div><div class="fb_sect_cont"><tt><br \>
 <a href="KeyPgDeclare.html">Declare</a> [<a href="KeyPgStatic.html">Static</a>] <a href="KeyPgSub.html">Sub</a> <i>procedure_name</i> [<a href="KeyPgOverload.html">Overload</a>] <b>cdecl</b> [<a href="KeyPgAlias.html">Alias</a> <i>"external_name"</i>] [([<i>parameter_list</i>])] [<a href="KeyPgModuleConstructor.html">Constructor</a> [<i>priority</i>]] [<a href="KeyPgStatic.html">Static</a>] [<a href="KeyPgExport.html">Export</a>]<br \>
 <br \>
 <a href="KeyPgDeclare.html">Declare</a> [<a href="KeyPgStatic.html">Static</a>] <a href="KeyPgFunction.html">Function</a> <i>procedure_name</i> [<a href="KeyPgOverload.html">Overload</a>] <b>cdecl</b> [<a href="KeyPgAlias.html">Alias</a> <i>"external_name"</i>] [([<i>parameter_list</i>])] <a href="KeyPgAs.html">As</a> <i>return_type</i> [<a href="KeyPgStatic.html">Static</a>] [<a href="KeyPgExport.html">Export</a>]<br \>
@@ -27,20 +27,20 @@
 </div><a href="KeyPgEnd.html">End</a> <a href="KeyPgFunction.html">Function</a><br \>
 </tt><br \>
 </div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
-In procedure declarations, <tt><b>cdecl</b></tt> specifies that a procedure will use the <tt><b>cdecl</b></tt> calling convention. In the <tt><b>cdecl</b></tt> calling convention, any parameters are to be passed (pushed onto the stack) in the reverse order in which they are listed, that is, from right to left. The procedures need not preserve the <tt>EAX</tt>, <tt>ECX</tt> or <tt>EDX</tt> registers, and must not clean up the stack (pop any parameters) before it returns - that is left to the calling code.<br \>
+Dans les d&eacute;clarations de proc&eacute;dure, <tt><b>cdecl</b></tt> pr&eacute;cise que la proc&eacute;dure va utiliser la convention d'appel <tt><b>cdecl</b></tt>. Dans la convention d'appel <tt><b>cdecl</b></tt>, tous les param&egrave;tres pass&eacute;s (push = pouss&eacute;s sur la pile) dans l'ordre inverse dans lequel ils sont list&eacute;s, donc, de droite &agrave; gauche. Les proc&eacute;dures ne doivent pas pr&eacute;server les registres <tt>EAX</tt>, <tt>ECX</tt> ou <tt>EDX</tt>, et ne doivent pas nettoyer la pile (pop = sortir tous les param&egrave;tres) avant retour - ce qui est le travail du code appelant.<br \>
 <br \>
-<i>cdecl</i> is the default calling convention on Linux, the *BSDs, and DOS, unless another calling convention is explicitly specified or implied by one of the <a href="KeyPgExternBlock.html">Extern Blocks</a>. <tt><b>cdecl</b></tt> is typically the default calling convention for C compilers, and it's used almost exclusively on Unix-like systems.<br \>
+<tt><b>cdecl</b></tt> est la convention d'appel par d&eacute;faut des proc&eacute;dures sous Linux, *BSD et DOS, sauf si une autre convention d'appel est explicitement ou implicitement sp&eacute;cifi&eacute;e par l'un des <a href="KeyPgExternBlock.html">Extern Blocks</a>. <tt><b>cdecl</b></tt> est aussi g&eacute;n&eacute;ralement la convention d'appel par d&eacute;faut pour de nombreux compilateurs C et est utilis&eacute;e presque exclusivement sur les syst&egrave;mes Unix.<br \>
 <br \>
-</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Exemple</div><div class="fb_sect_cont"><br \>
 <tt><div class="freebasic">
 <span class="com">'&nbsp;declaring&nbsp;'strcpy'&nbsp;from&nbsp;the&nbsp;standard&nbsp;C&nbsp;library</span><br />
 <span class="key">Declare</span>&nbsp;<span class="key">Function</span>&nbsp;<span class="wrd">strcpy</span>&nbsp;<span class="key">cdecl</span>&nbsp;<span class="key">Alias</span>&nbsp;<span class="quo">"strcpy"</span>&nbsp;<span class="oth">(</span><span class="key">ByVal</span>&nbsp;<span class="wrd">dest</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">ZString</span>&nbsp;<span class="key">Ptr</span><span class="oth">,</span>&nbsp;<span class="key">ByVal</span>&nbsp;<span class="wrd">src</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">ZString</span>&nbsp;<span class="key">Ptr</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">ZString</span>&nbsp;<span class="key">Ptr</span><br />
 </div></tt><br />
 <br \>
-</div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
-<ul><li> New to FreeBASIC<br \>
+</ul></div><div class="fb_sect_title">Diff&eacute;rences avec QB</div><div class="fb_sect_cont"><br \>
+<ul><li> Nouveau pour FreeBASIC<br \>
 <br \>
-</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+</ul></div><div class="fb_sect_title">Voir aussi</div><div class="fb_sect_cont"><br \>
 <ul><li> <a href="KeyPgPascal.html">pascal</a>, <a href="KeyPgStdcall.html">stdcall</a><br \>
 <li> <a href="KeyPgDeclare.html">Declare</a><br \>
 <li> <a href="KeyPgSub.html">Sub</a>, <a href="KeyPgFunction.html">Function</a><br \>

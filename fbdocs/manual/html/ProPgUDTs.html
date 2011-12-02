@@ -6,18 +6,18 @@
 <body>
 <div id="fb_body_wrapper">
 <div id="fb_tab">
-<div id="fb_tab_l">User Defined Types</div>
+<div id="fb_tab_l">Types d&eacute;finis par l'utilisateur</div>
 <div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
 </div> 
 <div id="fb_pg_wrapper">
 <div id="fb_pg_body">
-	Custom types.<br \>
+	Types personnalis&eacute;s.<br \>
 <br \>
-<div class="fb_sect_title">Overview</div><div class="fb_sect_cont"><br \>
-<i>User-Defined Types</i> are special kinds of <a href="ProPgVariables.html">variables</a> which can be created by the programmer.  A User-Defined Type (UDT) is really just a container that contains a bunch of other variables, like an <a href="ProPgArrays.html">array</a>, but unlike arrays UDTs can hold <i>different</i> variable types (whereas arrays always hold many variables of the <i>same</i> type).  In fact, UDTs can even have <a href="ProPgProcedures.html">procedures</a> inside of them!<br \>
+<div class="fb_sect_title">Vue d'ensemble</div><div class="fb_sect_cont"><br \>
+<i>Les types d&eacute;finis par l'utilisateur</i> sont des types particuliers de <a href="ProPgVariables.html">variables</a> qui peuvent &ecirc;tre cr&eacute;&eacute;s par le programmeur.  Un type d&eacute;fini par l'utilisateur (User-Defined Type = UDT) est r&eacute;ellement juste un conteneur qui contient un tas d'autres variables, comme un <a href="ProPgArrays.html">tableau</a>, mais au contraire des tableaux les types d&eacute;finis par l'utilisateur peuvent contenir <i>diff&eacute;rents</i> types de variables (alors que les tableaux contiennent toujours de nombreuses variables du <i>m&ecirc;me</i> de type).  En fait, les types d&eacute;finis par l'utilisateur peuvent m&ecirc;me avoir des <a href="ProPgProcedures.html">proc&eacute;dures</a> &agrave; l'int&eacute;rieur d'eux!<br \>
 <br \>
-</div><div class="fb_sect_title">Members</div><div class="fb_sect_cont"><br \>
-The different variables and/or procedures stored inside a UDT are called "members", or more generally, items.  Members can be variables of just about any type, including numerical types, strings, <a href="ProPgPointers.html">pointers</a>, <a href="KeyPgEnum.html">Enums</a>, and even arrays (the only exception being <a href="ProPgVarLenArrays.html">variable-length arrays</a> declared using <a href="KeyPgRedim.html">ReDim</a>, which cannot be used in UDTs because of the way they are used internally.  Variables are created in UDTs much the same way variables are created 	normally, except that the Dim keyword is optional.  UDT members are accessed via the <a href="KeyPgOpMemberAccess.html">. Operator</a>, so for example if you created a variable called someVar in a UDT you would access it with the name of the UDT variable followed by ".someVar".  Here is an example:<br \>
+</div><div class="fb_sect_title">Membres</div><div class="fb_sect_cont"><br \>
+Les diff&eacute;rentes variables et/ou proc&eacute;dures stock&eacute;es dans un type d&eacute;fini par l'utilisateur sont appel&eacute;es "membres", ou, plus g&eacute;n&eacute;ralement, les &eacute;l&eacute;ments.  Les membres peuvent &ecirc;tre des variables de n'importe quel type, y compris les types num&eacute;riques, les cha&icirc;nes, les <a href="ProPgPointers.html">pointeurs</a>, <a href="KeyPgEnum.html">les Enums</a>, et, m&ecirc;me, les tableaux (la seule exception &eacute;tant <a href="ProPgVarLenArrays.html">les tableaux de longueur variable</a> d&eacute;clar&eacute;s avec <a href="KeyPgRedim.html">ReDim</a>, qui ne peuvent &ecirc;tre utilis&eacute;s dans les types d&eacute;finis par l'utilisateur en raison de le fa&ccedil;on dont ils sont utilis&eacute;s en interne).  Les variables sont cr&eacute;&eacute;es dans les types d&eacute;finis par l'utilisateur de la m&ecirc;me fa&ccedil;on que les variables sont cr&eacute;&eacute;es normalement, sauf que le mot cl&eacute; <a href="KeyPgDim.html">Dim</a> est facultatif.  Les membres d'un type d&eacute;fini par l'utilisateur sont accessibles via <a href="KeyPgOpMemberAccess.html">. Operator</a>, ainsi, par exemple si vous avez cr&eacute;&eacute; une variable appel&eacute;e <i>someVar</i> dans un type d&eacute;fini par l'utilisateur vous pouvez y acc&eacute;der avec le nom de votre variable de type d&eacute;fini par l'utilisateur suivi de ".someVar".  Voici un exemple:<br \>
 <br \>
 <tt><div class="freebasic">
 <span class="com">'Define&nbsp;a&nbsp;UDT&nbsp;called&nbsp;myType,&nbsp;with&nbsp;an&nbsp;Integer&nbsp;member&nbsp;named&nbsp;someVar</span><br />
@@ -33,10 +33,10 @@ The different variables and/or procedures stored inside a UDT are called "member
 <span class="key">Print</span>&nbsp;<span class="wrd">myUDT.someVar</span><br />
 </div></tt><br />
 <br \>
-Notice that the <a href="KeyPgType.html">Type...End Type</a> does not actually create a variable of that type, it only defines what variables of that type contain.  You must create a variable of that type to actually use it!<br \>
+Notez que <a href="KeyPgType.html">Type...End Type</a> ne cr&eacute;e pas r&eacute;ellement une variable de ce type, il d&eacute;finit seulement ce que contiennent les variables de ce type.  Vous devez cr&eacute;er une variable de ce type pour l'utiliser effectivement!<br \>
 <br \>
-</div><div class="fb_sect_title">UDT Pointers</div><div class="fb_sect_cont"><br \>
-UDT Pointers are, as the name implies, pointers to UDTs.  They are created like regular pointers, but there is a special way to use them.  To access the member of a UDT pointed to by a pointer, you use the <a href="KeyPgOpPtrMemberAccess.html">-&gt; Operator</a>.  For example, if myUDTPtr is a pointer to a UDT which has a member someVar, you would access the member as myUDTPtr-&gt;someVar, which is a much cleaner shorthand for the equally valid *(myUDTPtr).someVar.<br \>
+</div><div class="fb_sect_title">Pointeurs de types d&eacute;finis par l'utilisateur</div><div class="fb_sect_cont"><br \>
+Les pointeurs de types d&eacute;finis par l'utilisateur sont, comme leur nom l'indique, des pointeurs vers des types d&eacute;finis par l'utilisateur.  Ils sont cr&eacute;&eacute;s comme des pointeurs habituels, mais il y a une fa&ccedil;on particuli&egrave;re de les utiliser.  Pour acc&eacute;der &agrave; un membre d'un type d&eacute;fini par l'utilisateur point&eacute; par un pointeur, vous devez utiliser <a href="KeyPgOpPtrMemberAccess.html">-&gt; Operator</a>.  Par exemple, si <i>myUDTPtr</i> est un pointeur vers un type d&eacute;fini par l'utilisateur qui a un membre <i>someVar</i>, vous acc&eacute;der &agrave; celui-ci comme cela <i><b>myUDTPtr-&gt;someVar</b></i>, qui est un raccourci bien plus clair que <i>*(myUDTPtr).someVar</i>.<br \>
 <br \>
 <tt><div class="freebasic">
 <span class="key">Type</span>&nbsp;<span class="wrd">rect</span><br />
@@ -55,13 +55,13 @@ UDT Pointers are, as the name implies, pointers to UDTs.  They are created like 
 </div></tt><br />
 <br \>
 <br \>
-</div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
-<ul><li> <a href="ProPgTypeAliases.html">Type Aliases</a><br \>
-<li> <a href="KeyPgTypeTemp.html">Temporary Types</a><br \>
-<li> <a href="ProPgCtorsDtors.html">Constructors and Destructors</a><br \>
-<li> <a href="ProPgMemberProcedures.html">Member Procedures</a><br \>
-<li> <a href="ProPgMemberAccessRights.html">Member Access Rights</a><br \>
-<li> <a href="ProPgOperatorOverloading.html">Operator Overloading</a><br \>
+</div><div class="fb_sect_title">Voir aussi</div><div class="fb_sect_cont"><br \>
+<ul><li> <a href="ProPgTypeAliases.html">Alias de type</a><br \>
+<li> <a href="KeyPgTypeTemp.html">Types temporaire</a><br \>
+<li> <a href="ProPgCtorsDtors.html">Constructeurs et destructeurs</a><br \>
+<li> <a href="ProPgMemberProcedures.html">Membres des proc&eacute;dures</a><br \>
+<li> <a href="ProPgMemberAccessRights.html">Droits d'acc&egrave;s aux membres</a><br \>
+<li> <a href="ProPgOperatorOverloading.html">Surcharge d'op&eacute;rateur</a><br \>
 <br \>
 <br \>
 </ul></div>

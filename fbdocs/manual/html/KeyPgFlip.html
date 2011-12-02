@@ -1,67 +1,90 @@
-<html>
-<head>
-<title>Flip</title>
-<link rel="stylesheet" type="text/css" href="style.css">
-</head>
-<body>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><title>Flip</title>
+
+
+
+<link rel="stylesheet" type="text/css" href="style.css"></head><body>
 <div id="fb_body_wrapper">
 <div id="fb_tab">
 <div id="fb_tab_l">Flip</div>
-<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif"></div> 
 </div> 
 <div id="fb_pg_wrapper">
 <div id="fb_pg_body">
-	Changes the current video display page<br \>
-<br \>
-<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
-<a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgSub.html">Sub</a> <b>Flip</b> ( <a href="KeyPgByval.html">ByVal</a> <i>frompage</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a> = -1, <a href="KeyPgByval.html">ByVal</a> <i>topage</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a> = -1 )<br \>
-</tt><br \>
-</div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
-<b>Flip</b> [ <i>frompage</i> ] [, <i>topage</i> ]<br \>
-</tt><br \>
-</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
-<tt><i>frompage</i></tt><br \>
-<div class="fb_indent">previous page<br \>
-</div><tt><i>topage</i></tt><br \>
-<div class="fb_indent">new page to display<br \>
-<br \>
-</div></div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
-In normal graphics mode, <tt><b>Flip</b></tt> is an alias for <tt><a href="KeyPgPcopy.html">PCopy</a></tt> and <tt><a href="KeyPgScreencopy.html">ScreenCopy</a></tt>. See <tt><a href="KeyPgScreencopy.html">ScreenCopy</a></tt> for details.<br \>
-<br \>
-In OpenGL mode, <tt><b>Flip</b></tt> does a hardware page flip and displays the contents of the backbuffer. It is recommended that you call <tt><b>Flip</b></tt> regularly while in OpenGL mode, otherwise your app may also become unresponsive.<br \>
-<br \>
-</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+	Change la page courante de l'affichage vid&eacute;o<br \="">
+<br \="">
+<div class="fb_sect_title">Syntaxe</div><div class="fb_sect_cont"><tt><br \="">
+<a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgSub.html">Sub</a> <b>Flip</b> ( <a href="KeyPgByval.html">ByVal</a> <i>frompage</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a> = -1, <a href="KeyPgByval.html">ByVal</a> <i>topage</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a> = -1 )<br \="">
+
+</tt><br \="">
+</div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \="">
+<b>Flip</b> [ <i>frompage</i> ] [, <i>topage</i> ]<br \="">
+</tt><br \="">
+</div>
+<div class="fb_sect_title">Param&egrave;tres</div>
+<div class="fb_sect_cont"><br \="">
+<tt><i>frompage</i></tt><br \="">
+<div class="fb_indent">page pr&eacute;c&eacute;dente<br \="">
+</div>
+<tt><i>topage</i></tt><br \="">
+<div class="fb_indent">nouvelle page &agrave; afficher<br \="">
+<br \="">
+</div>
+</div><div class="fb_sect_title">Description</div>
+<div class="fb_sect_cont"><br \="">En mode graphique normal, <tt><b>Flip</b></tt> est un alias de <tt><a href="KeyPgPcopy.html">PCopy</a></tt> et <tt><a href="KeyPgScreencopy.html">ScreenCopy</a></tt>. Voir <tt><a href="KeyPgScreencopy.html">ScreenCopy</a></tt> pour les d&eacute;tails.<br \="">
+
+<br \="">
+En mode OpenGL, <tt><b>Flip</b></tt> change la page "hardware" et affiche le contenu du "backbuffer". Il est recommand&eacute; d'appeler <tt><b>Flip</b></tt> reguli&egrave;rement en mode OpenGL, autrement votre application risque de devenir instable.<br \="">
+
+
+
+
+
+
+<br \="">
+</div>
+<div class="fb_sect_title">Exemple</div><div class="fb_sect_cont"><br \="">
 <tt><div class="freebasic">
-<span class="key">ScreenRes</span>&nbsp;<span class="num">320</span><span class="oth">,</span>&nbsp;<span class="num">240</span><span class="oth">,</span>&nbsp;<span class="num">32</span><span class="oth">,</span>&nbsp;<span class="num">2</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">'Sets&nbsp;up&nbsp;the&nbsp;screen&nbsp;to&nbsp;be&nbsp;320x240&nbsp;in&nbsp;32-bit&nbsp;color&nbsp;with&nbsp;2&nbsp;video&nbsp;pages.</span><br />
-<br />
-<br />
-<span class="key">For</span>&nbsp;<span class="wrd">n</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">50</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">270</span><br />
-<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">ScreenSet</span>&nbsp;<span class="num">2</span><span class="oth">,</span><span class="num">1</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">'Sets&nbsp;the&nbsp;working&nbsp;page&nbsp;to&nbsp;2&nbsp;and&nbsp;the&nbsp;displayed&nbsp;page&nbsp;to&nbsp;1</span><br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Cls</span><br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Circle</span>&nbsp;<span class="oth">(</span><span class="wrd">n</span><span class="oth">,</span>&nbsp;<span class="num">50</span><span class="oth">),</span><span class="num">50</span>&nbsp;<span class="oth">,</span><span class="key">RGB</span><span class="oth">(</span><span class="num">255</span><span class="oth">,</span><span class="num">255</span><span class="oth">,</span><span class="num">0</span><span class="oth">)</span>&nbsp;<span class="com">'Draws&nbsp;a&nbsp;circle&nbsp;with&nbsp;a&nbsp;50&nbsp;pixel&nbsp;radius&nbsp;in&nbsp;yellow&nbsp;on&nbsp;page&nbsp;2</span><br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">ScreenSet</span>&nbsp;<span class="num">1</span><span class="oth">,</span><span class="num">1</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">'Sets&nbsp;the&nbsp;working&nbsp;page&nbsp;to&nbsp;1&nbsp;and&nbsp;the&nbsp;displayed&nbsp;page&nbsp;to&nbsp;1</span><br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">ScreenSync</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">'Waits&nbsp;for&nbsp;vertical&nbsp;refresh</span><br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Flip</span>&nbsp;<span class="num">2</span><span class="oth">,</span><span class="num">1</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">'Copies&nbsp;our&nbsp;circle&nbsp;from&nbsp;page&nbsp;2&nbsp;to&nbsp;page&nbsp;1</span><br />
-<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Sleep</span>&nbsp;<span class="num">25</span><br />
-<span class="key">Next</span><br />
-<br />
-<span class="key">Print</span>&nbsp;<span class="quo">"Now&nbsp;wasn't&nbsp;that&nbsp;neat!"</span><br />
-<span class="key">Print</span>&nbsp;<span class="quo">"Push&nbsp;any&nbsp;key."</span><br />
-<span class="key">Sleep</span><br />
-</div></tt><br />
-<br \>
-<br \>
-</div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
-<ul><li> Not available in the <i><a href="CompilerOptlang.html">-lang qb</a></i> dialect unless referenced with the alias <tt><b>__Flip</b></tt>.<br \>
-<br \>
-</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
-<ul><li> New to FreeBASIC<br \>
-<br \>
-</ul></div>
+<span class="key">ScreenRes</span>&nbsp;<span class="num">320</span><span class="oth">,</span>&nbsp;<span class="num">240</span><span class="oth">,</span>&nbsp;<span class="num">32</span><span class="oth">,</span>&nbsp;<span class="num">2</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">'Valide&nbsp;ecran&nbsp;320x240&nbsp;en&nbsp;32-bit&nbsp;couleur&nbsp;avec&nbsp;2&nbsp;pages&nbsp;video.</span><br>
+
+<br>
+<br>
+<span class="key">For</span>&nbsp;<span class="wrd">n</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">50</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">270</span><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">ScreenSet</span>&nbsp;<span class="num">2</span><span class="oth">,</span><span class="num">1</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">'Valide&nbsp;la&nbsp;page&nbsp;travail&nbsp;a&nbsp;2&nbsp;et&nbsp;la&nbsp;page&nbsp;affichage&nbsp;a&nbsp;1</span><br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Cls</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Circle</span>&nbsp;<span class="oth">(</span><span class="wrd">n</span><span class="oth">,</span>&nbsp;<span class="num">50</span><span class="oth">),</span><span class="num">50</span>&nbsp;<span class="oth">,</span><span class="key">RGB</span><span class="oth">(</span><span class="num">255</span><span class="oth">,</span><span class="num">255</span><span class="oth">,</span><span class="num">0</span><span class="oth">)</span>&nbsp;<span class="com">'Dessine&nbsp;un&nbsp;cercle&nbsp;avec&nbsp;rayon&nbsp;de&nbsp;50&nbsp;pixels&nbsp;en&nbsp;jaune&nbsp;sur&nbsp;page&nbsp;2</span><br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">ScreenSet</span>&nbsp;<span class="num">1</span><span class="oth">,</span><span class="num">1</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">'Valide&nbsp;la&nbsp;page&nbsp;travail&nbsp;a&nbsp;1&nbsp;et&nbsp;la&nbsp;page&nbsp;affichee&nbsp;a&nbsp;1</span><br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">ScreenSync</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">'Attend&nbsp;rafraichissement&nbsp;vertical</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Flip</span>&nbsp;<span class="num">2</span><span class="oth">,</span><span class="num">1</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">'Copie&nbsp;du&nbsp;cercle&nbsp;de&nbsp;page&nbsp;2&nbsp;vers&nbsp;page&nbsp;1</span><br>
+
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Sleep</span>&nbsp;<span class="num">25</span><br>
+<span class="key">Next</span><br>
+<br>
+<span class="key">Print</span>&nbsp;<span class="quo">"Now&nbsp;wasn't&nbsp;that&nbsp;neat!"</span><br>
+<span class="key">Print</span>&nbsp;<span class="quo">"Push&nbsp;any&nbsp;key."</span><br>
+
+<span class="key">Sleep</span><br>
+</div></tt><br>
+<br \="">
+<br \="">
+</div>
+<div class="fb_sect_title">Diff&eacute;rences de dialecte</div>
+<div class="fb_sect_cont"><br \="">
+<ul>
+  <li> Non disponible dans le dialecte <i><a href="CompilerOptlang.html">-lang qb</a></i> sauf si r&eacute;f&eacute;renc&eacute; avec l'alias <tt><b>__Flip</b></tt>.<br \="">
+<br \="">
+  </li>
+</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \="">
+
+<ul><li> Nouveau pour FreeBASIC<br \="">
+<br \="">
+</li></ul></div>
 </div>
 </div> 
 </div> 
-</body>
-</html>
+</body></html>

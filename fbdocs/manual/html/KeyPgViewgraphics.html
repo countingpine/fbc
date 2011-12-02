@@ -11,35 +11,35 @@
 </div> 
 <div id="fb_pg_wrapper">
 <div id="fb_pg_body">
-	Sets new physical coordinate mapping and clipping region<br \>
+	Valide la "cartographie" des nouvelles coordonn&eacute;es physiques et de la zone de visualisation graphique (clipping region)<br \>
 <br \>
-<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<div class="fb_sect_title">Syntaxe</div><div class="fb_sect_cont"><tt><br \>
 <b>View</b><br \>
 <b>View</b> ( <i>x1</i>, <i>y1</i> )-( <i>x2</i>, <i>y2</i> ) [ [, <i>fill_color</i> ] [, <i>border_color</i> ] ]<br \>
 <b>View Screen</b> ( <i>x1</i>, <i>y1</i> )-( <i>x2</i>, <i>y2</i> ) [ [, <i>fill_color</i> ] [, <i>border_color</i> ] ]<br \>
 </tt><br \>
-</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Param&egrave;tres</div><div class="fb_sect_cont"><br \>
 <tt><i>x1</i></tt> <tt><a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a></tt>, <tt><i>y1</i></tt> <tt><a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a></tt><br \>
-<div class="fb_indent">The horizontal and vertical offsets, in pixels, of one corner of the viewport relative to the top-left corner of the screen.<br \>
+<div class="fb_indent">Coordonn&eacute;es horizontales et verticales, en pixels, relatives au coin en haut &agrave; gauche de l'&eacute;cran, d'un coin de la zone de visualisation graphique (viewport).<br \>
 </div><tt><i>x2</i></tt> <tt><a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a></tt>, <tt><i>y2</i></tt> <tt><a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a></tt><br \>
-<div class="fb_indent">The horizontal and vertical offsets, in pixels, of the opposite corner of the viewport relative to the top-left corner of the screen.<br \>
+<div class="fb_indent">Coordonn&eacute;es horizontales et verticales, en pixels, relatives au coin en haut &agrave; gauche de l'&eacute;cran, du coin oppos&eacute; de la zone de visualisation graphique (viewport).<br \>
 </div><tt><i>fill_color</i></tt> <tt><a href="KeyPgAs.html">As</a> <a href="KeyPgUinteger.html">UInteger</a></tt><br \>
-<div class="fb_indent">The color to fill the new viewport.<br \>
+<div class="fb_indent">Couleur de remplissage de la nouvelle zone de visualisation graphique.<br \>
 </div><tt><i>border_color</i></tt> <tt><a href="KeyPgAs.html">As</a> <a href="KeyPgUinteger.html">UInteger</a></tt><br \>
-<div class="fb_indent">The color of the border to draw around the new viewport.<br \>
+<div class="fb_indent">Couleur des bords &agrave; tracer autour de la nouvelle zone de visualisation graphique.<br \>
 <br \>
 </div></div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
-The <i>viewport</i>, or clipping region, is a rectangular area of the graphics screen, outside of which no drawing will be done. That is, only drawing done within this area will be shown. A graphics screen must be created with <tt><a href="KeyPgScreengraphics.html">Screen</a></tt> or <tt><a href="KeyPgScreenres.html">ScreenRes</a></tt> before calling <tt><b>View</b></tt> or <tt><b>View Screen</b></tt>.<br \>
+La <i>viewport</i>, ou "clipping region" (zone de visualisation graphique), est une zone rectangulaire de l'&eacute;cran graphique, en-dehors de laquelle aucun trac&eacute; n'est possible. That is, only drawing done within this area will be shown. Un &eacute;cran graphique doit avoir &eacute;t&eacute; cr&eacute;&eacute; avec  <tt><a href="KeyPgScreengraphics.html">Screen</a></tt> ou <tt><a href="KeyPgScreenres.html">ScreenRes</a></tt> avant d'appeler <tt><b>View</b></tt> ou <tt><b>View Screen</b></tt>.<br \>
 <br \>
-The first statement sets the viewport to encompass the entire screen, which is the default viewport for a new graphics screen.<br \>
+La premi&egrave;re d&eacute;claration d&eacute;finit la fen&ecirc;tre pour englober la totalit&eacute; de l'&eacute;cran, c'est la valeur par d&eacute;faut de la zone de visualisation graphique pour un nouvel &eacute;cran graphique.<br \>
 <br \>
-The second and third statements both allow a new viewport to be defined. The corners of the viewport are specified by the <tt><i>x1</i></tt>, <tt><i>y1</i></tt>, <tt><i>x2</i></tt> and <tt><i>y2</i></tt> parameters. <tt><i>fill_color</i></tt> and <tt><i>border_color</i></tt> are both in the format accepted by <tt><a href="KeyPgColor.html">Color</a></tt>. The indicated effects for each parameter only occur if that parameter is specified.<br \>
+Les deuxi&egrave;me et troisi&egrave;me d&eacute;clarations permettent, toutes les deux, une nouvelle zone de visualisation graphique &agrave; d&eacute;finir. Les coins de la zone de visualisation graphique sont donn&eacute;s par les param&egrave;tres <tt><i>x1</i></tt>, <tt><i>y1</i></tt>, <tt><i>x2</i></tt> et <tt><i>y2</i></tt>. <tt><i>fill_color</i></tt> et <tt><i>border_color</i></tt> sont tous les deux dans un format valide pour <tt><a href="KeyPgColor.html">Color</a></tt>. Les effets indiqu&eacute;s pour chaque param&egrave;tre ne se produisent que si celui-ci est sp&eacute;cifi&eacute;.<br \>
 <br \>
-The second statement modifies the co-ordinate mapping of the graphics screen such that co-ordinates specified for drawing statements and procedures are relative to the top-left corner of the viewport.<br \>
+La seconde d&eacute;claration modifie la cartographie des coordonn&eacute;es de l'&eacute;cran graphique de fa&ccedil;on &agrave; ce que les coordonn&eacute;es sp&eacute;cifi&eacute;es pour les op&eacute;rations de dessin soient relatives au en haut &agrave; gauche de la zone de visualisation graphique.<br \>
 <br \>
-The third statement modifies the co-ordinate mapping of the graphics screen such that co-ordinates specified for drawing statements and procedures are relative to the top-left corner of the screen.<br \>
+La troisi&egrave;me d&eacute;claration modifie la cartographie des coordonn&eacute;es de l'&eacute;cran graphique de fa&ccedil;on &agrave; ce que les coordonn&eacute;es sp&eacute;cifi&eacute;es pour les op&eacute;rations de dessin soient relatives au en haut &agrave; gauche de la zone de visualisation graphique.<br \>
 <br \>
-</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Exemple</div><div class="fb_sect_cont"><br \>
 <tt><div class="freebasic">
 <span class="key">Screen</span>&nbsp;<span class="num">12</span><br />
 <span class="key">Dim</span>&nbsp;<span class="wrd">ip</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="key">Ptr</span><br />
@@ -53,7 +53,7 @@ The third statement modifies the co-ordinate mapping of the graphics screen such
 <span class="key">Line</span>&nbsp;<span class="oth">(</span><span class="num">215</span><span class="oth">,</span><span class="num">135</span><span class="oth">)-(</span><span class="num">425</span><span class="oth">,</span><span class="num">345</span><span class="oth">),</span><span class="num">1</span><span class="oth">,</span><span class="wrd">bf</span><br />
 <span class="key">View</span>&nbsp;&nbsp;<span class="oth">(</span><span class="num">220</span><span class="oth">,</span><span class="num">140</span><span class="oth">)-(</span><span class="num">420</span><span class="oth">,</span><span class="num">340</span><span class="oth">)</span><br />
 <span class="wrd">k</span><span class="oth">=</span><span class="num">0</span><br />
-<span class="com">'move&nbsp;sprite</span><br />
+<span class="com">'deplace&nbsp;sprite</span><br />
 <span class="key">Do</span><br />
 &nbsp;&nbsp;<span class="wrd">i</span><span class="oth">=</span><span class="num">100</span><span class="oth">*</span><span class="key">Sin</span><span class="oth">(</span><span class="wrd">k</span><span class="oth">*</span><span class="num">.02</span><span class="oth">)+</span><span class="num">50</span><span class="oth">:</span>&nbsp;&nbsp;<span class="wrd">j</span><span class="oth">=</span><span class="num">100</span><span class="oth">*</span>&nbsp;<span class="key">Sin</span><span class="oth">(</span><span class="wrd">k</span><span class="oth">*</span><span class="num">.027</span><span class="oth">)+</span><span class="num">50</span><br />
 &nbsp;&nbsp;<span class="key">ScreenSync</span><br />
@@ -66,11 +66,11 @@ The third statement modifies the co-ordinate mapping of the graphics screen such
 <br />
 </div></tt><br />
 <br \>
-</div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
-<ul><li> QBASIC preserves the <tt>WINDOW</tt> coordinate mapping after subsequent calls to <tt>VIEW</tt>.<br \>
-<li> FreeBASIC's current behavior is to preserve the <tt>WINDOW</tt> coordinates after calls to <tt>VIEW</tt>, or when working on images, meaning that the coordinate mapping may undergo scaling/translations if the viewport changes. (If a <tt>WINDOW</tt> hasn't been set, there is no coordinate mapping, and so it doesn't change after calls to <tt>VIEW</tt>.)  The behavior may change in future, but consistent behavior can be assured over inconstent viewport coordinates by re-calling <tt>WINDOW</tt> whenever you change the <tt>VIEW</tt>.<br \>
+</div><div class="fb_sect_title">Diff&eacute;rences avec QB</div><div class="fb_sect_cont"><br \>
+<ul><li> QBASIC conserve la cartographie des coordonn&eacute;es de <tt>WINDOW</tt> apr&egrave;s des appels successifs &agrave; <tt>VIEW</tt>.<br \>
+<li> Le comportement actuel de FreeBASIC est conserver les coordonn&eacute;esde <tt>WINDOW</tt> apr&egrave;s des appels &agrave; <tt>VIEW</tt>, ou lors d'une t&acirc;che sur une image, ce qui signifie que les coordonn&eacute;es de cartographie peuvent faire l'objet "mise-&agrave;-l'&eacute;chelle/d&eacute;placements" si la zone de visualisation graphique change. (Si une <tt>WINDOW</tt> a &eacute;t&eacute; d&eacute;finie, il n'y a pas de cartographie des coordonn&eacute;es, et ainsi pas de changements apr&egrave;s des appels &agrave; <tt>VIEW</tt>.)  Ce comportement peut changer &agrave; l'avenir, mais un comportement coh&eacute;rent peut &ecirc;tre assur&eacute; au cours de la visualisation de coordonn&eacute;es inconsistantes de la zone de visualisation graphique par un rappel de <tt>WINDOW</tt> lorsque vous changez <tt>VIEW</tt>.<br \>
 <br \>
-</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+</ul></div><div class="fb_sect_title">Voir aussi</div><div class="fb_sect_cont"><br \>
 <ul><li> <tt><a href="KeyPgViewtext.html">View Print</a></tt><br \>
 <li> <tt><a href="KeyPgScreengraphics.html">Screen (Graphics)</a></tt><br \>
 <li> <tt><a href="KeyPgWindow.html">Window</a></tt><br \>

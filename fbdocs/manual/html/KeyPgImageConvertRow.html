@@ -1,134 +1,190 @@
-<html>
-<head>
-<title>ImageConvertRow</title>
-<link rel="stylesheet" type="text/css" href="style.css">
-</head>
-<body>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><title>ImageConvertRow</title>
+
+
+<link rel="stylesheet" type="text/css" href="style.css"></head><body>
 <div id="fb_body_wrapper">
 <div id="fb_tab">
 <div id="fb_tab_l">ImageConvertRow</div>
-<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif"></div> 
 </div> 
 <div id="fb_pg_wrapper">
 <div id="fb_pg_body">
-	Converts a row of image data into another color depth<br \>
-<br \>
-<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
-<a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgSub.html">Sub</a> <b>ImageConvertRow</b> ( <a href="KeyPgByval.html">ByVal</a> <i>src</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgAny.html">Any</a>  <a href="KeyPgPtr.html">Ptr</a>, <a href="KeyPgByval.html">ByVal</a> <i>src_bpp</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a>, <a href="KeyPgByval.html">ByVal</a> <i>dst</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgAny.html">Any</a>  <a href="KeyPgPtr.html">Ptr</a>, <a href="KeyPgByval.html">ByVal</a> <i>dst_bpp</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a>, <a href="KeyPgByval.html">ByVal</a> <i>width</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a>, <a href="KeyPgByval.html">ByVal</a> <i>isrgb</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a> = 1 )<br \>
-</tt><br \>
-</div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
-<b>ImageConvertRow</b>( <i>src</i>, <i>src_bpp</i>, <i>dst</i>, <i>dst_bpp</i>, <i>width</i> [, <i>isrgb</i> ] )<br \>
-</tt><br \>
-</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
-<tt><i>src</i></tt><br \>
-<div class="fb_indent">The address of the start of the source row.  The source can either be a full-color image with a bit depth of 24 or 32 bits per pixel, or a paletted image with a bit depth of 1-8 bits per pixel.  Converting a paletted image will only work properly if you are in a screen mode that is using the correct palette for the image when you do the conversion.<br \>
-</div><tt><i>src_bpp</i></tt><br \>
-<div class="fb_indent">The number of bits per pixel in the source row.  1-8, 24 and 32.<br \>
-</div><tt><i>dst</i></tt><br \>
-<div class="fb_indent">The address of the start of the destination row.  The image can be a full-color image of 16 or 32 bits per pixel.  If the source is a paletted image, the destination can also be a paletted image of 1 to 8 bits per pixel.<br \>
-</div><tt><i>dst_bpp</i></tt><br \>
-<div class="fb_indent">The number of bits per pixel in the destination row.  Valid values for this are 1-8, 16 and 32.<br \>
-</div><tt><i>width</i></tt><br \>
-<div class="fb_indent">The length of the row in pixels.<br \>
-</div><tt><i>isrgb</i></tt><br \>
-<div class="fb_indent">A value of zero indicates that the Red and Blue channels are the other way round in the source image.  Use this switch if you want the Red and Blue channels to be swapped in the conversion.<br \>
-<br \>
-</div></div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
-Copies the row of an image from one memory location to another, converting the color information in each pixel to match the destination image.<br \>
-<br \>
-</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+	Convertit une ligne de donn&eacute;es image dans une autre profondeur de couleur<br \="">
+<br \="">
+<div class="fb_sect_title">Syntaxe</div>
+<div class="fb_sect_cont"><tt><br \="">
+<a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgSub.html">Sub</a> <b>ImageConvertRow</b> ( <a href="KeyPgByval.html">ByVal</a> <i>src</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgAny.html">Any</a>  <a href="KeyPgPtr.html">Ptr</a>, <a href="KeyPgByval.html">ByVal</a> <i>src_bpp</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a>, <a href="KeyPgByval.html">ByVal</a> <i>dst</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgAny.html">Any</a>  <a href="KeyPgPtr.html">Ptr</a>, <a href="KeyPgByval.html">ByVal</a> <i>dst_bpp</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a>, <a href="KeyPgByval.html">ByVal</a> <i>width</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a>, <a href="KeyPgByval.html">ByVal</a> <i>isrgb</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a> = 1 )<br \="">
+
+</tt><br \="">
+</div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \="">
+<b>ImageConvertRow</b>( <i>src</i>, <i>src_bpp</i>, <i>dst</i>, <i>dst_bpp</i>, <i>width</i> [, <i>isrgb</i> ] )<br \="">
+
+</tt><br \="">
+</div>
+<div class="fb_sect_title">Param&egrave;tres</div>
+<div class="fb_sect_cont"><br \="">
+<tt><i>src</i></tt><br \="">
+<div class="fb_indent">L'adresse de d&eacute;part de la ligne source. La
+source est soit une image pleine couleur (full-color) avec une
+profondeur de couleur de 24 ou 32 bits par pixel, soit une image avec
+palette d'une profondeur de 1-8 bits par pixel. Convertir une image
+avec palette ne fonctionnera correctement que si vous &ecirc;tes dans un mode
+&eacute;cran utilisant la palette correcte pour l'image lors de la conversion.<br \="">
+</div>
+<tt><i>src_bpp</i></tt><br \="">
+<div class="fb_indent">Le nombre de bits par pixel dans la ligne source.  1-8, 24 et 32.<br \="">
+</div>
+<tt><i>dst</i></tt><br \="">
+<div class="fb_indent">L'adresse du d&eacute;but de la ligne destination.
+L'image peut &ecirc;tre une image pleine couleur de 16 ou 32 bits par pixel.
+Si la source est une image avec palette, la destination peut aussi &ecirc;tre
+une image avec palette de 1 &agrave; 8 bits par pixel.<br \="">
+</div>
+<tt><i>dst_bpp</i></tt><br \="">
+<div class="fb_indent">Le nombre de bits par pixel dans la ligne destination.  Valeurs valides: 1-8, 16 et 32.<br \="">
+</div>
+<tt><i>width</i></tt><br \="">
+<div class="fb_indent">La longueur de la ligne en pixels.<br \="">
+</div>
+<tt><i>isrgb</i></tt><br \="">
+<div class="fb_indent">Une valeur de z&eacute;ro indique que les canaux Rouge
+et Bleu sont l'autre voie dans l'image source. Utilisez cet indicateur
+si vous voulez que les canaux Rouge et Bleu doivent &ecirc;tre permut&eacute;s
+pendant la conversion.<br \="">
+<br \="">
+</div>
+</div><div class="fb_sect_title">Description</div>
+<div class="fb_sect_cont"><br \="">Copie une ligne d'une image d'une
+position m&eacute;moire vers une autre, convertit l'information couleur de
+chaque pixel pour correspondre &agrave; l'image destination.<br \="">
+<br \="">
+</div>
+<div class="fb_sect_title">Exemple</div>
+<div class="fb_sect_cont"><br \="">
+
 <tt><div class="freebasic">
-<span class="def">#include&nbsp;"fbgfx.bi"<br />
-#if&nbsp;__FB_LANG__&nbsp;=&nbsp;"fb"<br />
-</span><span class="key">Using</span>&nbsp;<span class="wrd">FB</span><br />
-<span class="def">#endif<br />
-</span><br />
-<span class="key">Const</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="wrd">w</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">64</span><span class="oth">,</span>&nbsp;<span class="wrd">h</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">64</span><br />
-<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">IMAGE</span>&nbsp;<span class="key">Ptr</span>&nbsp;<span class="wrd">img8</span><span class="oth">,</span>&nbsp;<span class="wrd">img32</span><br />
-<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="wrd">x</span><span class="oth">,</span>&nbsp;<span class="wrd">y</span><br />
-<br />
-<br />
-<span class="com">''&nbsp;create&nbsp;a&nbsp;32-bit&nbsp;image,&nbsp;size&nbsp;w*h:</span><br />
-<span class="key">ScreenRes</span>&nbsp;<span class="num">1</span><span class="oth">,</span>&nbsp;<span class="num">1</span><span class="oth">,</span>&nbsp;<span class="num">32</span><span class="oth">,</span>&nbsp;<span class="oth">,</span>&nbsp;<span class="wrd">GFX_NULL</span><br />
-<span class="wrd">img32</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">ImageCreate</span><span class="oth">(</span><span class="wrd">w</span><span class="oth">,</span>&nbsp;<span class="wrd">h</span><span class="oth">)</span><br />
-<br />
-<span class="key">If</span>&nbsp;<span class="wrd">img32</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span>&nbsp;<span class="key">Then</span>&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"Imagecreate&nbsp;failed&nbsp;on&nbsp;img32!"</span><span class="oth">:</span>&nbsp;<span class="key">Sleep</span><span class="oth">:</span>&nbsp;<span class="key">End</span><br />
-<br />
-<br />
-<span class="com">''&nbsp;create&nbsp;an&nbsp;8-bit&nbsp;image,&nbsp;size&nbsp;w*h:</span><br />
-<span class="key">ScreenRes</span>&nbsp;<span class="num">1</span><span class="oth">,</span>&nbsp;<span class="num">1</span><span class="oth">,</span>&nbsp;<span class="num">8</span><span class="oth">,</span>&nbsp;<span class="oth">,</span>&nbsp;<span class="wrd">GFX_NULL</span><br />
-<span class="wrd">img8</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">ImageCreate</span><span class="oth">(</span><span class="wrd">w</span><span class="oth">,</span>&nbsp;<span class="wrd">h</span><span class="oth">)</span><br />
-<br />
-<span class="key">If</span>&nbsp;<span class="wrd">img8</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span>&nbsp;<span class="key">Then</span>&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"Imagecreate&nbsp;failed&nbsp;on&nbsp;img8!"</span><span class="oth">:</span>&nbsp;<span class="key">Sleep</span><span class="oth">:</span>&nbsp;<span class="key">End</span><br />
-<br />
-<br />
-<span class="com">''&nbsp;fill&nbsp;8-bit&nbsp;image&nbsp;with&nbsp;a&nbsp;pattern</span><br />
-<span class="key">For</span>&nbsp;<span class="wrd">y</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span>&nbsp;<span class="key">To</span>&nbsp;<span class="wrd">h</span>&nbsp;<span class="oth">-</span>&nbsp;<span class="num">1</span><br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">For</span>&nbsp;<span class="wrd">x</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span>&nbsp;<span class="key">To</span>&nbsp;<span class="wrd">w</span>&nbsp;<span class="oth">-</span>&nbsp;<span class="num">1</span><br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">PSet</span>&nbsp;<span class="wrd">img8</span><span class="oth">,</span>&nbsp;<span class="oth">(</span><span class="wrd">x</span><span class="oth">,</span>&nbsp;<span class="wrd">y</span><span class="oth">),</span>&nbsp;<span class="num">56</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="oth">(</span><span class="wrd">x</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="wrd">y</span><span class="oth">)</span>&nbsp;<span class="key">Mod</span>&nbsp;<span class="num">24</span><br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Next</span>&nbsp;<span class="wrd">x</span><br />
-<span class="key">Next</span>&nbsp;<span class="wrd">y</span><br />
-<br />
-<br />
-<span class="com">''&nbsp;open&nbsp;a&nbsp;graphics&nbsp;window&nbsp;in&nbsp;8-bit&nbsp;mode,&nbsp;and&nbsp;PUT&nbsp;the&nbsp;image&nbsp;into&nbsp;it:</span><br />
-<span class="key">ScreenRes</span>&nbsp;<span class="num">320</span><span class="oth">,</span>&nbsp;<span class="num">200</span><span class="oth">,</span>&nbsp;<span class="num">8</span><br />
-<span class="key">WindowTitle</span>&nbsp;<span class="quo">"8-bit&nbsp;color&nbsp;mode"</span><br />
-<span class="key">Put</span>&nbsp;<span class="oth">(</span><span class="num">10</span><span class="oth">,</span>&nbsp;<span class="num">10</span><span class="oth">),</span>&nbsp;<span class="wrd">img8</span><br />
-<br />
-<span class="key">Sleep</span><br />
-<br />
-<br />
-<span class="com">''&nbsp;copy&nbsp;the&nbsp;image&nbsp;data&nbsp;into&nbsp;a&nbsp;32-bit&nbsp;image</span><br />
-<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Byte</span>&nbsp;<span class="key">Ptr</span>&nbsp;<span class="wrd">p8</span><span class="oth">,</span>&nbsp;<span class="wrd">p32</span><br />
-<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="wrd">pitch8</span><span class="oth">,</span>&nbsp;<span class="wrd">pitch32</span><br />
-<br />
-<span class="def">#ifndef&nbsp;ImageInfo&nbsp;''&nbsp;older&nbsp;versions&nbsp;of&nbsp;FB&nbsp;don't&nbsp;have&nbsp;the&nbsp;ImageInfo&nbsp;feature<br />
-#define&nbsp;GETPITCH(img_)&nbsp;IIf(img_-&gt;Type=PUT_HEADER_NEW,img_-&gt;pitch,img_-&gt;old.width*img_-&gt;old.bpp)<br />
-#define&nbsp;GETP(img_)&nbsp;CPtr(Byte&nbsp;Ptr,img_)+IIf(img_-&gt;Type=PUT_HEADER_NEW,SizeOf(PUT_HEADER),SizeOf(_OLD_HEADER))<br />
-</span><span class="wrd">pitch8</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">GETPITCH</span><span class="oth">(</span><span class="wrd">img8</span><span class="oth">):</span>&nbsp;<span class="wrd">p8</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">GETP</span><span class="oth">(</span><span class="wrd">img8</span><span class="oth">)</span><br />
-<span class="wrd">pitch32</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">GETPITCH</span><span class="oth">(</span><span class="wrd">img32</span><span class="oth">):</span>&nbsp;<span class="wrd">p32</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">GETP</span><span class="oth">(</span><span class="wrd">img32</span><span class="oth">)</span><br />
-<span class="def">#else<br />
-</span><span class="key">ImageInfo</span><span class="oth">(</span>&nbsp;<span class="wrd">img8</span><span class="oth">,</span>&nbsp;&nbsp;<span class="oth">,</span>&nbsp;<span class="oth">,</span>&nbsp;<span class="oth">,</span>&nbsp;<span class="wrd">pitch8</span><span class="oth">,</span>&nbsp;&nbsp;<span class="wrd">p8</span>&nbsp;&nbsp;<span class="oth">)</span><br />
-<span class="key">ImageInfo</span><span class="oth">(</span>&nbsp;<span class="wrd">img32</span><span class="oth">,</span>&nbsp;<span class="oth">,</span>&nbsp;<span class="oth">,</span>&nbsp;<span class="oth">,</span>&nbsp;<span class="wrd">pitch32</span><span class="oth">,</span>&nbsp;<span class="wrd">p32</span>&nbsp;<span class="oth">)</span><br />
-<span class="def">#endif<br />
-</span><br />
-<span class="key">For</span>&nbsp;<span class="wrd">y</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span>&nbsp;<span class="key">To</span>&nbsp;<span class="wrd">h</span>&nbsp;<span class="oth">-</span>&nbsp;<span class="num">1</span><br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">ImageConvertRow</span><span class="oth">(@</span><span class="wrd">p8</span>&nbsp;<span class="oth">[</span>&nbsp;<span class="wrd">y</span>&nbsp;<span class="oth">*</span>&nbsp;<span class="wrd">pitch8</span>&nbsp;<span class="oth">],</span>&nbsp;&nbsp;<span class="num">8</span><span class="oth">,</span>&nbsp;<span class="wrd">_</span><br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">@</span><span class="wrd">p32</span><span class="oth">[</span>&nbsp;<span class="wrd">y</span>&nbsp;<span class="oth">*</span>&nbsp;<span class="wrd">pitch32</span><span class="oth">],</span>&nbsp;<span class="num">32</span><span class="oth">,</span>&nbsp;<span class="wrd">_</span><br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">w</span><span class="oth">)</span><br />
-<span class="key">Next</span>&nbsp;<span class="wrd">y</span><br />
-<br />
-<br />
-<span class="com">''&nbsp;open&nbsp;a&nbsp;graphics&nbsp;window&nbsp;in&nbsp;32-bit&nbsp;mode&nbsp;and&nbsp;PUT&nbsp;the&nbsp;image&nbsp;into&nbsp;it:</span><br />
-<span class="key">ScreenRes</span>&nbsp;<span class="num">320</span><span class="oth">,</span>&nbsp;<span class="num">200</span><span class="oth">,</span>&nbsp;<span class="num">32</span><br />
-<span class="key">WindowTitle</span>&nbsp;<span class="quo">"32-bit&nbsp;color&nbsp;mode"</span><br />
-<span class="key">Put</span>&nbsp;<span class="oth">(</span><span class="num">10</span><span class="oth">,</span>&nbsp;<span class="num">10</span><span class="oth">),</span>&nbsp;<span class="wrd">img32</span><br />
-<br />
-<span class="key">Sleep</span><br />
-<br />
-<br />
-<span class="com">''&nbsp;free&nbsp;the&nbsp;images&nbsp;from&nbsp;memory:</span><br />
-<span class="key">ImageDestroy</span>&nbsp;<span class="wrd">img8</span><br />
-<span class="key">ImageDestroy</span>&nbsp;<span class="wrd">img32</span><br />
-</div></tt><br />
-<br \>
-</div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
-<ul><li> Not available in the <i><a href="CompilerOptlang.html">-lang qb</a></i> dialect unless referenced with the alias <tt><b>__ImageConvertRow</b></tt>.<br \>
-<br \>
-</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
-<ul><li> New to FreeBASIC<br \>
-<br \>
-</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
-<ul><li> <tt><a href="KeyPgScreenres.html">ScreenRes</a></tt><br \>
-<li> <tt><a href="KeyPgGetgraphics.html">Get (Graphics)</a></tt><br \>
-<li> <tt><a href="KeyPgPutgraphics.html">Put (Graphics)</a></tt><br \>
-<li> <tt><a href="KeyPgImagecreate.html">ImageCreate</a></tt><br \>
-<li> <tt><a href="KeyPgImageDestroy.html">ImageDestroy</a></tt><br \>
-<li> <tt><a href="KeyPgImageInfo.html">ImageInfo</a></tt><br \>
-<br \>
+<span class="def">#include&nbsp;"fbgfx.bi"<br>
+#if&nbsp;__FB_LANG__&nbsp;=&nbsp;"fb"<br>
+</span><span class="key">Using</span>&nbsp;<span class="wrd">FB</span><br>
+<span class="def">#endif<br>
+</span><br>
+<span class="key">Const</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="wrd">w</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">64</span><span class="oth">,</span>&nbsp;<span class="wrd">h</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">64</span><br>
+
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">IMAGE</span>&nbsp;<span class="key">Ptr</span>&nbsp;<span class="wrd">img8</span><span class="oth">,</span>&nbsp;<span class="wrd">img32</span><br>
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="wrd">x</span><span class="oth">,</span>&nbsp;<span class="wrd">y</span><br>
+<br>
+<br>
+
+<span class="com">''&nbsp;Cree&nbsp;une&nbsp;image&nbsp;32-bit,&nbsp;taille&nbsp;w*h:</span><br>
+<span class="key">ScreenRes</span>&nbsp;<span class="num">1</span><span class="oth">,</span>&nbsp;<span class="num">1</span><span class="oth">,</span>&nbsp;<span class="num">32</span><span class="oth">,</span>&nbsp;<span class="oth">,</span>&nbsp;<span class="wrd">GFX_NULL</span><br>
+
+<span class="wrd">img32</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">ImageCreate</span><span class="oth">(</span><span class="wrd">w</span><span class="oth">,</span>&nbsp;<span class="wrd">h</span><span class="oth">)</span><br>
+<br>
+<span class="key">If</span>&nbsp;<span class="wrd">img32</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span>&nbsp;<span class="key">Then</span>&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"Imagecreate&nbsp;failed&nbsp;on&nbsp;img32!"</span><span class="oth">:</span>&nbsp;<span class="key">Sleep</span><span class="oth">:</span>&nbsp;<span class="key">End</span><br>
+
+<br>
+<br>
+<span class="com">''&nbsp;Cree&nbsp;une&nbsp;image&nbsp;8-bit,&nbsp;taille&nbsp;w*h:</span><br>
+<span class="key">ScreenRes</span>&nbsp;<span class="num">1</span><span class="oth">,</span>&nbsp;<span class="num">1</span><span class="oth">,</span>&nbsp;<span class="num">8</span><span class="oth">,</span>&nbsp;<span class="oth">,</span>&nbsp;<span class="wrd">GFX_NULL</span><br>
+
+<span class="wrd">img8</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">ImageCreate</span><span class="oth">(</span><span class="wrd">w</span><span class="oth">,</span>&nbsp;<span class="wrd">h</span><span class="oth">)</span><br>
+<br>
+<span class="key">If</span>&nbsp;<span class="wrd">img8</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span>&nbsp;<span class="key">Then</span>&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"Imagecreate&nbsp;failed&nbsp;on&nbsp;img8!"</span><span class="oth">:</span>&nbsp;<span class="key">Sleep</span><span class="oth">:</span>&nbsp;<span class="key">End</span><br>
+
+<br>
+<br>
+<span class="com">''&nbsp;Remplit&nbsp;image&nbsp;8-bit&nbsp;avec&nbsp;un&nbsp;motif</span><br>
+<span class="key">For</span>&nbsp;<span class="wrd">y</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span>&nbsp;<span class="key">To</span>&nbsp;<span class="wrd">h</span>&nbsp;<span class="oth">-</span>&nbsp;<span class="num">1</span><br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">For</span>&nbsp;<span class="wrd">x</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span>&nbsp;<span class="key">To</span>&nbsp;<span class="wrd">w</span>&nbsp;<span class="oth">-</span>&nbsp;<span class="num">1</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">PSet</span>&nbsp;<span class="wrd">img8</span><span class="oth">,</span>&nbsp;<span class="oth">(</span><span class="wrd">x</span><span class="oth">,</span>&nbsp;<span class="wrd">y</span><span class="oth">),</span>&nbsp;<span class="num">56</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="oth">(</span><span class="wrd">x</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="wrd">y</span><span class="oth">)</span>&nbsp;<span class="key">Mod</span>&nbsp;<span class="num">24</span><br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Next</span>&nbsp;<span class="wrd">x</span><br>
+<span class="key">Next</span>&nbsp;<span class="wrd">y</span><br>
+<br>
+<br>
+<span class="com">''&nbsp;Ouvre&nbsp;une&nbsp;fenetre&nbsp;graphique&nbsp;en&nbsp;mode&nbsp;8-bit,&nbsp;et&nbsp;PUT&nbsp;l'&nbsp;image&nbsp;dans&nbsp;celle-ci:</span><br>
+
+<span class="key">ScreenRes</span>&nbsp;<span class="num">320</span><span class="oth">,</span>&nbsp;<span class="num">200</span><span class="oth">,</span>&nbsp;<span class="num">8</span><br>
+<span class="key">WindowTitle</span>&nbsp;<span class="quo">"8-bit&nbsp;color&nbsp;mode"</span><br>
+<span class="key">Put</span>&nbsp;<span class="oth">(</span><span class="num">10</span><span class="oth">,</span>&nbsp;<span class="num">10</span><span class="oth">),</span>&nbsp;<span class="wrd">img8</span><br>
+
+<br>
+<span class="key">Sleep</span><br>
+<br>
+<br>
+<span class="com">''&nbsp;Copie&nbsp;les&nbsp;donnees&nbsp;image&nbsp;dans&nbsp;une&nbsp;image&nbsp;32-bit</span><br>
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Byte</span>&nbsp;<span class="key">Ptr</span>&nbsp;<span class="wrd">p8</span><span class="oth">,</span>&nbsp;<span class="wrd">p32</span><br>
+
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="wrd">pitch8</span><span class="oth">,</span>&nbsp;<span class="wrd">pitch32</span><br>
+<br>
+<span class="def">#ifndef&nbsp;ImageInfo&nbsp;''&nbsp;older&nbsp;versions&nbsp;of&nbsp;FB&nbsp;don't&nbsp;have&nbsp;the&nbsp;ImageInfo&nbsp;feature<br>
+
+#define&nbsp;GETPITCH(img_)&nbsp;IIf(img_-&gt;Type=PUT_HEADER_NEW,img_-&gt;pitch,img_-&gt;old.width*img_-&gt;old.bpp)<br>
+#define&nbsp;GETP(img_)&nbsp;CPtr(Byte&nbsp;Ptr,img_)+IIf(img_-&gt;Type=PUT_HEADER_NEW,SizeOf(PUT_HEADER),SizeOf(_OLD_HEADER))<br>
+</span><span class="wrd">pitch8</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">GETPITCH</span><span class="oth">(</span><span class="wrd">img8</span><span class="oth">):</span>&nbsp;<span class="wrd">p8</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">GETP</span><span class="oth">(</span><span class="wrd">img8</span><span class="oth">)</span><br>
+
+<span class="wrd">pitch32</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">GETPITCH</span><span class="oth">(</span><span class="wrd">img32</span><span class="oth">):</span>&nbsp;<span class="wrd">p32</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">GETP</span><span class="oth">(</span><span class="wrd">img32</span><span class="oth">)</span><br>
+<span class="def">#else<br>
+</span><span class="key">ImageInfo</span><span class="oth">(</span>&nbsp;<span class="wrd">img8</span><span class="oth">,</span>&nbsp;&nbsp;<span class="oth">,</span>&nbsp;<span class="oth">,</span>&nbsp;<span class="oth">,</span>&nbsp;<span class="wrd">pitch8</span><span class="oth">,</span>&nbsp;&nbsp;<span class="wrd">p8</span>&nbsp;&nbsp;<span class="oth">)</span><br>
+
+<span class="key">ImageInfo</span><span class="oth">(</span>&nbsp;<span class="wrd">img32</span><span class="oth">,</span>&nbsp;<span class="oth">,</span>&nbsp;<span class="oth">,</span>&nbsp;<span class="oth">,</span>&nbsp;<span class="wrd">pitch32</span><span class="oth">,</span>&nbsp;<span class="wrd">p32</span>&nbsp;<span class="oth">)</span><br>
+<span class="def">#endif<br>
+</span><br>
+<span class="key">For</span>&nbsp;<span class="wrd">y</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span>&nbsp;<span class="key">To</span>&nbsp;<span class="wrd">h</span>&nbsp;<span class="oth">-</span>&nbsp;<span class="num">1</span><br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">ImageConvertRow</span><span class="oth">(@</span><span class="wrd">p8</span>&nbsp;<span class="oth">[</span>&nbsp;<span class="wrd">y</span>&nbsp;<span class="oth">*</span>&nbsp;<span class="wrd">pitch8</span>&nbsp;<span class="oth">],</span>&nbsp;&nbsp;<span class="num">8</span><span class="oth">,</span>&nbsp;<span class="wrd">_</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">@</span><span class="wrd">p32</span><span class="oth">[</span>&nbsp;<span class="wrd">y</span>&nbsp;<span class="oth">*</span>&nbsp;<span class="wrd">pitch32</span><span class="oth">],</span>&nbsp;<span class="num">32</span><span class="oth">,</span>&nbsp;<span class="wrd">_</span><br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">w</span><span class="oth">)</span><br>
+<span class="key">Next</span>&nbsp;<span class="wrd">y</span><br>
+<br>
+<br>
+<span class="com">''&nbsp;Ouvre&nbsp;une&nbsp;fenetre&nbsp;graphique&nbsp;en&nbsp;mode&nbsp;32-bit&nbsp;et&nbsp;PUT&nbsp;l'&nbsp;image&nbsp;sur&nbsp;celle-ci:</span><br>
+
+<span class="key">ScreenRes</span>&nbsp;<span class="num">320</span><span class="oth">,</span>&nbsp;<span class="num">200</span><span class="oth">,</span>&nbsp;<span class="num">32</span><br>
+<span class="key">WindowTitle</span>&nbsp;<span class="quo">"32-bit&nbsp;color&nbsp;mode"</span><br>
+<span class="key">Put</span>&nbsp;<span class="oth">(</span><span class="num">10</span><span class="oth">,</span>&nbsp;<span class="num">10</span><span class="oth">),</span>&nbsp;<span class="wrd">img32</span><br>
+
+<br>
+<span class="key">Sleep</span><br>
+<br>
+<br>
+<span class="com">''&nbsp;Libere&nbsp;la&nbsp;memoire&nbsp;des&nbsp;images:</span><br>
+<span class="key">ImageDestroy</span>&nbsp;<span class="wrd">img8</span><br>
+<span class="key">ImageDestroy</span>&nbsp;<span class="wrd">img32</span><br>
+
+</div></tt><br>
+<br \="">
+</div>
+<div class="fb_sect_title">Diff&eacute;rences de dialecte</div>
+<div class="fb_sect_cont"><br \="">
+<ul>
+  <li> Non disponible dans le dialecte <i><a href="CompilerOptlang.html">-lang qb</a></i> sauf si r&eacute;f&eacute;renc&eacute; avec l'alias <tt><b>__ImageConvertRow</b></tt>.<br \="">
+<br \="">
+  </li>
 </ul></div>
+<div class="fb_sect_title">Diff&eacute;rences avec QB</div>
+<div class="fb_sect_cont"><br \="">
+<ul>
+  <li> Nouveau pour FreeBASIC<br \="">
+
+<br \="">
+  </li>
+</ul></div>
+<div class="fb_sect_title">Voir aussi</div>
+<div class="fb_sect_cont"><br \="">
+<ul><li> <tt><a href="KeyPgScreenres.html">ScreenRes</a></tt><br \="">
+</li><li> <tt><a href="KeyPgGetgraphics.html">Get (Graphique)</a></tt><br \="">
+</li><li> <tt><a href="KeyPgPutgraphics.html">Put (Graphique)</a></tt><br \="">
+</li><li> <tt><a href="KeyPgImagecreate.html">ImageCreate</a></tt><br \="">
+</li><li> <tt><a href="KeyPgImageDestroy.html">ImageDestroy</a></tt><br \="">
+
+</li><li> <tt><a href="KeyPgImageInfo.html">ImageInfo</a></tt><br \="">
+<br \="">
+</li></ul></div>
 </div>
 </div> 
-</div> 
-</body>
-</html>
+</div>
+</body></html>

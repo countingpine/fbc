@@ -6,18 +6,18 @@
 <body>
 <div id="fb_body_wrapper">
 <div id="fb_tab">
-<div id="fb_tab_l">Variable-length Arrays</div>
+<div id="fb_tab_l">Tableaux de longueur variable</div>
 <div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
 </div> 
 <div id="fb_pg_wrapper">
 <div id="fb_pg_body">
-	Resizable homogeneous data structures.<br \>
+	Structures redimensionnables de donn&eacute;es homog&egrave;nes.<br \>
 <br \>
-<div class="fb_sect_title">Overview</div><div class="fb_sect_cont"><br \>
-Variable-length arrays are <a href="ProPgArrays.html">arrays</a> that can, during program execution, either be resized to hold more or less elements, or have their dimension[s] use a different subscript range. The memory used by a variable-length array to store its elements is allocated at runtime, in the free store (the heap), as opposed to fixed-length arrays whose data is either allocated on the program stack or in the <tt>.BSS</tt> or <tt>.DATA</tt> sections of the executable, depending on whether they were defined with <tt><a href="KeyPgStatic.html">Static</a></tt>.<br \>
+<div class="fb_sect_title">Vue d'ensemble</div><div class="fb_sect_cont"><br \>
+Les tableaux de longueur variable sont des <a href="ProPgArrays.html">tableaux</a> qui peuvent, au cours de l'ex&eacute;cution du programme, &ecirc;tre redimensionn&eacute;s pour contenir plus ou moins d'&eacute;l&eacute;ments, ou voir leur(s) dimension(s) utiliser une plage d'indices diff&eacute;rente. La m&eacute;moire utilis&eacute;e par un tableau de longueur variable pour stocker ses &eacute;l&eacute;ments est attribu&eacute;e &agrave; l'ex&eacute;cution, dans le stock libre (le tas), par opposition aux tableaux de longueur fixe dont les donn&eacute;es sont soit stock&eacute;es sur la pile du programme ou dans les sections <tt>.BSS</tt> ou <tt>.DATA</tt> de l'ex&eacute;cutable, selon qu'ils ont &eacute;t&eacute; d&eacute;finis ou non avec <tt><a href="KeyPgStatic.html">Static</a></tt>.<br \>
 <br \>
-</div><div class="fb_sect_title">Declaration and definition</div><div class="fb_sect_cont"><br \>
-A variable-length array is declared with the <tt><a href="KeyPgExtern.html">Extern</a></tt> keyword, followed by a variable identifier, a parenthesized list of zero (0) or more subscript ranges and an element <a href="CatPgStdDataTypes.html">datatype</a>. For an array to be declared variable-length, either an empty subscript range list can be used, or one or more of the subscript ranges must have non-constant values - that is, the ranges must be specified by variables or objects convertible to <tt><a href="KeyPgInteger.html">Integer</a></tt>.<br \>
+</div><div class="fb_sect_title">D&eacute;claration et d&eacute;finition</div><div class="fb_sect_cont"><br \>
+Un tableau de longueur variable est d&eacute;clar&eacute; avec le mot-cl&eacute; <tt><a href="KeyPgExtern.html">Extern</a></tt>, suivi par un identifiant de variable, une liste entre parenth&egrave;ses de z&eacute;ro (0) ou plusieurs plages d'indices un &eacute;l&eacute;ment d'un certain <a href="CatPgStdDataTypes.html">type de donn&eacute;e</a>. Pour d&eacute;clarer un tableau de longueur variable, soit on peut utiliser une liste de plage avec des indices vides, soit un ou plusieurs indices doivent avoir des valeurs non-constantes - c'est &agrave; dire, que les plages doivent &ecirc;tre sp&eacute;cifi&eacute;es par des variables ou des objects convertibles en <tt><a href="KeyPgInteger.html">Integer</a></tt>.<br \>
 <br \>
 <tt><div class="freebasic">
 <span class="key">Dim</span>&nbsp;<span class="wrd">maxLowerBound</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="oth">-</span><span class="num">5</span><br />
@@ -29,17 +29,17 @@ A variable-length array is declared with the <tt><a href="KeyPgExtern.html">Exte
 <span class="com">''&nbsp;Declares&nbsp;a&nbsp;one-dimensional&nbsp;variable-length&nbsp;array&nbsp;of&nbsp;elements&nbsp;of&nbsp;type&nbsp;BYTE..</span><br />
 <span class="key">Extern</span>&nbsp;<span class="wrd">arrayOfBytes</span><span class="oth">()</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Byte</span><br />
 </div></tt><br />
-A variable-length array is defined with either the <tt><a href="KeyPgDim.html">Dim</a></tt> or <tt><a href="KeyPgRedim.html">ReDim</a></tt> keywords, following the same form as declaration. The <tt><a href="KeyPgRedim.html">ReDim</a></tt> keyword always defines variable-length arrays, whether the subscript ranges are constant or not. Variable-length arrays cannot be defined with static storage using <tt><a href="KeyPgStatic.html">Static</a></tt>.<br \>
+Un tableau de longueur variable est d&eacute;fini avec l'un ou l'autre des mots-clefs <tt><a href="KeyPgDim.html">Dim</a></tt> ou <tt><a href="KeyPgRedim.html">ReDim</a></tt>, en suivant la m&ecirc;me forme de d&eacute;claration. Le mot-clef <tt><a href="KeyPgRedim.html">ReDim</a></tt> d&eacute;finit toujours un tableau de longueur variable,que l'intervalle des indices soit constant ou non. Les tableaux de longueur variable ne peuvent pas &ecirc;tre d&eacute;finis avec un stockage statique en utilisant <tt><a href="KeyPgStatic.html">Static</a></tt>.<br \>
 <br \>
 <tt><div class="freebasic">
 <span class="com">''&nbsp;Defines&nbsp;one-dimensional&nbsp;variable-length&nbsp;arrays&nbsp;of&nbsp;type&nbsp;SHORT&nbsp;and&nbsp;INTEGER..</span><br />
 <span class="key">Dim</span>&nbsp;<span class="wrd">arrayOfShorts</span><span class="oth">()</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Short</span><br />
 <span class="key">ReDim</span>&nbsp;<span class="wrd">arrayOfIntegers</span><span class="oth">(</span><span class="num">9</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
 </div></tt><br />
-Since the memory for variable-length arrays is allocated at runtime, when they are defined, the elements of variable-length arrays declared with <tt><a href="KeyPgExtern.html">Extern</a></tt> cannot be accessed until the array is defined. Similarly, variable-length arrays defined with empty subscript range lists have zero size - they hold zero elements - so they too must be resized before any elements can be accessed.<br \>
+Comme la m&eacute;moire des tableaux de longueur variable est allou&eacute;e lors de l'ex&eacute;cution, quand ils sont d&eacute;finis, les &eacute;l&eacute;ments de tableaux de longueur variable d&eacute;clar&eacute;s avec <tt><a href="KeyPgExtern.html">Extern</a></tt> ne sont pas accessibles jusqu'&agrave; ce que le tableau soit d&eacute;fini. De m&ecirc;me, les tableaux de longueur variable d&eacute;finis avec une liste de plage avec des indices vides ont une taille de z&eacute;ro - ils ont z&eacute;ro &eacute;l&eacute;ments - de sorte qu'eux aussi doivent &ecirc;tre redimensionn&eacute;es avant que les &eacute;l&eacute;ments puissent &ecirc;tre consult&eacute;s.<br \>
 <br \>
-</div><div class="fb_sect_title">Resizing</div><div class="fb_sect_cont"><br \>
-Resizing a variable-length array refers to "redefining" the array with different values for its subscript range[s], allowing the array to grow or shrink. Elements outside the new subscript range[s] are erased; object elements will be destroyed. If the array is resized to a larger size, new elements are added initialized with a zero or <i>null</i> value; object elements are default-constructed. Variable-length arrays are resized using the <tt><a href="KeyPgRedim.html">ReDim</a></tt> keyword following the same form as definition.<br \>
+</div><div class="fb_sect_title">Redimensionnement</div><div class="fb_sect_cont"><br \>
+Redimensionner un tableau de longueur variable se r&eacute;f&egrave;re &agrave; "red&eacute;finir" le tableau avec des valeurs diff&eacute;rentes pour sa plage d'indice(s), permettant au tableau d' augmenter ou de diminuer. Les &eacute;l&eacute;ments en dehors de la nouvelle gamme d'indice(s) sont effac&eacute;s; les &eacute;l&eacute;ments objets seront d&eacute;truits. Si le tableau est redimensionn&eacute; &agrave; une taille plus grande, de nouveaux &eacute;l&eacute;ments sont ajout&eacute;s initialis&eacute;s avec un z&eacute;ro ou une valeur <i>nulle</i>; les &eacute;l&eacute;ments objets auront leur valeur de construction par d&eacute;faut. Les tableaux de longueur variable sont redimensionn&eacute;s &agrave; l'aide du mot-clef <tt><a href="KeyPgRedim.html">ReDim</a></tt> en suivant la m&ecirc;me forme que la d&eacute;finition.<br \>
 <br \>
 <tt><div class="freebasic">
 <span class="com">''&nbsp;Define&nbsp;an&nbsp;empty&nbsp;variable-length&nbsp;array&nbsp;of&nbsp;SINGLE&nbsp;elements..</span><br />
@@ -48,7 +48,7 @@ Resizing a variable-length array refers to "redefining" the array with different
 <span class="com">''&nbsp;Resize&nbsp;the&nbsp;array&nbsp;to&nbsp;hold&nbsp;ten&nbsp;(10)&nbsp;SINGLE&nbsp;elements..</span><br />
 <span class="key">ReDim</span>&nbsp;<span class="wrd">array</span><span class="oth">(</span><span class="num">9</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Single</span><br />
 </div></tt><br />
-By default, element values of a variable-length array are lost when resized - the array will contain zero or more elements initialized to a zero or <i>null</i> value, or if the elements are objects, they will be default-constructed. To retain the previous element values during a resize, use the <tt><a href="KeyPgPreserve.html">Preserve</a></tt> keyword.<br \>
+Par d&eacute;faut, Par d&eacute;faut, les valeurs des &eacute;l&eacute;ments d'un tableau de longueur variable sont perdus lors d'un redimensionnement - e tableau contiendra z&eacute;ro ou plusieurs &eacute;l&eacute;ments initialis&eacute;s &agrave; une valeur z&eacute;ro ou <i>nulle</i>, ou si les &eacute;l&eacute;ments sont des objets, ils auront leur valeur de construction par d&eacute;faut. Pour conserver les valeurs pr&eacute;c&eacute;dentes des &eacute;l&eacute;ments au cours d'un redimensionnement, utilisez le mot-clef <tt><a href="KeyPgPreserve.html">Preserve</a></tt>.<br \>
 <br \>
 </div>
 </div>

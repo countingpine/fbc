@@ -11,23 +11,23 @@
 </div> 
 <div id="fb_pg_wrapper">
 <div id="fb_pg_body">
-	Statement block to allow implicit access to fields in a user defined type variable<br \>
+	Bloc d'instructions pour permettre un acc&egrave;s implicite &agrave; des champs dans une variable de type d&eacute;fini par l'utilisateur<br \>
 <br \>
-<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<div class="fb_sect_title">Syntaxe</div><div class="fb_sect_cont"><tt><br \>
 <b>With</b> <i>user_defined_var</i><br \>
 <div class="fb_indent"><i>statements</i><br \>
 </div><b>End With</b><br \>
 </tt><br \>
 </div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
-The <tt><b>With...End With</b></tt> block allows the omission of the name of a variable of a user-defined <tt><a href="KeyPgType.html">Type</a></tt> when referring to its fields. The fields may then be accessed with just a single period (<tt>.</tt>) before them, e.g. if the <tt><a href="KeyPgType.html">Type</a></tt> contains an field element called "<i><tt>element</tt></i>", then it could be accessed within the <tt><b>With</b></tt> block as "<tt><i>.element</i></tt>".<br \>
+Le bloc <tt><b>With...End With</b></tt> permet l'omission du nom d'une variable d'un <tt><a href="KeyPgType.html">Type</a></tt> d&eacute;fini par l'utilisateur quand on se r&eacute;f&eacute;re &agrave; ses champs. Les champs peuvent &ecirc;tre accessibles avec seulement un point (<tt>.</tt>)plac&eacute; devant, par exemple si le <tt><a href="KeyPgType.html">Type</a></tt> contient un &eacute;l&eacute;ment champ appel&eacute; "<i><tt>element</tt></i>", on peut y acc&eacute;der dans le bloc <tt><b>With</b></tt> par "<tt><i>.element</i></tt>".<br \>
 <br \>
-It can be used as a shorthand to save typing and avoid cluttering the source. <tt><b>With</b></tt> can also be used with dereferenced pointers, as the second example shows.<br \>
+Il peut &ecirc;tre utilis&eacute; comme un raccourci pour &eacute;viter de taper beaucoup de texte et ainsi ne pas encombrer le fichier source. <tt><b>With</b></tt> peut &eacute;galement &ecirc;tre utilis&eacute; avec des pointeurs d&eacute;r&eacute;f&eacute;renc&eacute;s, comme le montre le second exemple.<br \>
 <br \>
-<tt><b>With</b></tt> blocks may be nested.  In this case, only the innermost <tt><b>With</b></tt> block is active, and any outer ones are ignored until the inner one is closed again.  See the third example for an illustration of this.<br \>
+Les blocs <tt><b>With</b></tt>peuvent &ecirc;tre imbriqu&eacute;s.  Dans ce cas, seul le bloc <tt><b>With</b></tt> le plus interne avec est actif, et tous les blocs externes sont ignor&eacute;es jusqu'&agrave; ce que celui de l'int&eacute;rieur soit de nouveau ferm&eacute;.  Voir le troisi&egrave;me exemple pour une illustration de cela.<br \>
 <br \>
-Internally, a reference to the variable is taken at the start of the <tt><b>With</b></tt> block, and then is used to calculate any element accesses within the block.  Note that this means that <tt><a href="KeyPgGoto.html">Goto</a></tt> should not be used to jump into a <tt><b>With</b></tt> block, otherwise the reference will not have been set, and the results of trying to access it will be undefined.<br \>
+En interne, une r&eacute;f&eacute;rence &agrave; la variable est prise au d&eacute;but du bloc <tt><b>With</b></tt>, et est ensuite utilis&eacute;e pour calculer tous les acc&egrave;s aux &eacute;l&eacute;ments dans le bloc.  Notez que cela signifie que <tt><a href="KeyPgGoto.html">Goto</a></tt> ne doit pas &ecirc;tre utilis&eacute; pour entrer dans un bloc <tt><b>With</b></tt>, sinon la r&eacute;f&eacute;rence n'aura pas &eacute;t&eacute; r&eacute;gl&eacute;e, et les r&eacute;sultats pour essayer d'y acc&eacute;der seront ind&eacute;finis.<br \>
 <br \>
-</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Exemple</div><div class="fb_sect_cont"><br \>
 <tt><div class="freebasic">
 <span class="key">Type</span>&nbsp;<span class="wrd">rect_type</span><br />
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">x</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Single</span><br />
@@ -96,13 +96,13 @@ Internally, a reference to the variable is taken at the start of the <tt><b>With
 <span class="key">Print</span>&nbsp;<span class="wrd">rect2.x</span><span class="oth">,</span>&nbsp;<span class="wrd">rect2.y</span>&nbsp;<span class="com">''&nbsp;3,&nbsp;&nbsp;4</span><br />
 </div></tt><br />
 <br \>
-</div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
-<ul><li> Not available in the <i><a href="CompilerOptlang.html">-lang qb</a></i> dialect unless referenced with the alias <tt><b>__With</b></tt>.<br \>
+</div><div class="fb_sect_title">Diff&eacute;rences dialecte</div><div class="fb_sect_cont"><br \>
+<ul><li> Non disponible dans le dialecte <i><a href="CompilerOptlang.html">-lang qb</a></i> sauf si r&eacute;f&eacute;renc&eacute; avec l'alias <tt><b>__With</b></tt>.<br \>
 <br \>
-</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
-<ul><li> New to FreeBASIC<br \>
+</div><div class="fb_sect_title">Diff&eacute;rences avec QB</div><div class="fb_sect_cont"><br \>
+<ul><li> Nouveau pour FreeBASIC<br \>
 <br \>
-</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+</ul></div><div class="fb_sect_title">Voir aussi</div><div class="fb_sect_cont"><br \>
 <ul><li> <tt><a href="KeyPgType.html">Type</a></tt><br \>
 <br \>
 </ul></div>

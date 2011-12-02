@@ -11,44 +11,44 @@
 </div> 
 <div id="fb_pg_wrapper">
 <div id="fb_pg_body">
-	Clears the screen in both text modes and graphics modes<br \>
+	Efface l&apos;&eacute;cran, aussi bien dans le mode texte que le mode graphique<br \>
 <br \>
-<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<div class="fb_sect_title">Syntaxe</div><div class="fb_sect_cont"><tt><br \>
 <a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgSub.html">Sub</a> <b>Cls</b> ( <a href="KeyPgByval.html">ByVal</a> <i>mode</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a> = 1 )<br \>
 </tt><br \>
 </div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
 <b>Cls</b> <i>mode</i><br \>
 </tt><br \>
-</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Param&egrave;tres</div><div class="fb_sect_cont"><br \>
 <tt><i>mode</i></tt><br \>
-<div class="fb_indent">A optional numeric variable with a value from <tt>0</tt> to <tt>2</tt>.  If omitted, it defaults to <tt>1</tt>.<br \>
+<div class="fb_indent">Une variable num&eacute;rique facultative d&apos;une valeur de 0 &agrave; 2. Si omise, 1 par d&eacute;faut.<br \>
 <br \>
 </div></div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
-An optional <tt><i>mode</i></tt> parameter may be given,<br \>
+Un param&egrave;tre facultatif <tt><i>mode</i></tt> peut &ecirc;tre fourni,<br \>
 <br \>
-<div class="fb_indent">If omitted, <tt><b>Cls</b></tt> clears either the text or graphics viewport.  If a graphics viewport has been defined using the <tt><a href="KeyPgViewgraphics.html">View (Graphics)</a></tt> statement, the graphics viewport is cleared.  Otherwise, the text viewport, defined by <tt><a href="KeyPgViewtext.html">View Print</a></tt>, is cleared.  (If there is no explicit text viewport defined, the entire screen is cleared.)<br \>
+<div class="fb_indent">S&apos;il est omis, <tt><b>Cls</b></tt> efface le texte ainsi que les graphiques de la fen&ecirc;tre.  Si une fen&ecirc;tre graphique a &eacute;t&eacute; d&eacute;finie en utilisant <tt><a href="KeyPgViewgraphics.html">View (Graphics)</a></tt>, cette fen&ecirc;tre est effac&eacute;e. Autrement, la fen&ecirc;tre texte d&eacute;finie par <tt><a href="KeyPgViewtext.html">View Print</a></tt>, est nettoy&eacute;e.  (S'il n'y a pas de fen&ecirc;tre texte explicitement d&eacute;finie, l'&eacute;cran entier est nettoy&eacute;.).<br \>
 <br \>
-If <tt>0</tt>, clears the entire screen<br \>
+Si &agrave; <tt>0</tt>, efface l&apos;&eacute;cran entier.<br \>
 <br \>
-If <tt>1</tt>, clears the graphics viewport if defined.  Otherwise, clears the text viewport<br \>
+Si &agrave; <tt>1</tt>, efface la fen&ecirc;tre graphique si elle a &eacute;t&eacute; d&eacute;finie. Autrement, efface la fen&ecirc;tre texte.<br \>
 <br \>
-If <tt>2</tt>, clears the text viewport<br \>
+Si &agrave; <tt>2</tt>, efface le fen&ecirc;tre texte.<br \>
 <br \>
 <br \>
-</div></div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+</div></div><div class="fb_sect_title">Exemple</div><div class="fb_sect_cont"><br \>
 <tt><div class="freebasic">
-<span class="com">''&nbsp;set&nbsp;the&nbsp;color&nbsp;to&nbsp;light&nbsp;grey&nbsp;text&nbsp;on&nbsp;a&nbsp;blue&nbsp;background</span><br />
+<span class="com">''&nbsp;Valide &nbsp;couleur&nbsp;texte&nbsp;:&nbsp;gris&nbsp;clair&nbsp;et&nbsp;arrire-plan&nbsp;bleu</span><br />
 <span class="key">Color</span>&nbsp;<span class="num">7</span><span class="oth">,</span>&nbsp;<span class="num">1</span><br />
 <br />
-<span class="com">''&nbsp;clear&nbsp;the&nbsp;screen&nbsp;to&nbsp;the&nbsp;background&nbsp;color</span><br />
+<span class="com">''&nbsp;efface&nbsp;ecran&nbsp;avec&nbsp;couleur&nbsp;arriere-plan</span><br />
 <span class="key">Cls</span><br />
 <br />
-<span class="com">''&nbsp;print&nbsp;text&nbsp;in&nbsp;the&nbsp;center&nbsp;of&nbsp;the&nbsp;screen</span><br />
+<span class="com">''&nbsp;ecris&nbsp;texte&nbsp;au&nbsp;centre&nbsp;ecran</span><br />
 <span class="key">Locate</span>&nbsp;<span class="num">12</span><span class="oth">,</span>&nbsp;<span class="num">33</span><br />
 <span class="key">Print</span>&nbsp;<span class="quo">"Hello&nbsp;Universe!"</span><br />
 </div></tt><br />
 <br \>
-In graphics modes, if you want to clear the entire screen to color <tt>0</tt>, it can be faster using  <tt><a href="KeyPgClear.html">Clear</a></tt> to write zeroes to the screen memory than calling <tt><b>Cls</b></tt>.<br \>
+Dans les modes graphiques, si vous voulez effacer enti&egrave;rement l'&eacute;cran avec la couleur <tt>0</tt>, il est plus rapide d'utiliser <tt><a href="KeyPgClear.html">Clear</a></tt> pour &eacute;crire des z&eacute;ros dans la m&eacute;moire &eacute;cran que d'appeler <tt><b>Cls</b></tt>.<br \>
 <br \>
 <tt><div class="freebasic">
 <span class="key">Dim</span>&nbsp;<span class="wrd">scrbuf</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Byte</span>&nbsp;<span class="key">Ptr</span><span class="oth">,</span>&nbsp;<span class="wrd">scrsize</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
@@ -63,31 +63,30 @@ In graphics modes, if you want to clear the entire screen to color <tt>0</tt>, i
 <br />
 <span class="key">Do</span><br />
 &nbsp;&nbsp;&nbsp;&nbsp;<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;lock&nbsp;the&nbsp;screen&nbsp;(must&nbsp;do&nbsp;this&nbsp;while&nbsp;working&nbsp;directly&nbsp;on&nbsp;screenbuffer)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;verouille&nbsp;ecran&nbsp;(obligatoire&nbsp;pendant&nbsp;travail&nbsp;directement&nbsp;dans&nbsp;tampon&nbsp;ecran)</span><br />
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="key">ScreenLock</span><br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;clear&nbsp;the&nbsp;screen&nbsp;(could&nbsp;use&nbsp;Cls&nbsp;here):</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;efface&nbsp;ecran&nbsp;(possible&nbsp;utiliser&nbsp;Cls&nbsp;ici):</span><br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Clear</span>&nbsp;<span class="oth">*</span><span class="wrd">scrbuf</span><span class="oth">,</span>&nbsp;<span class="num">0</span><span class="oth">,</span>&nbsp;<span class="wrd">scrsize</span><br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;draw&nbsp;circle</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;dessine&nbsp;cercle</span><br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Circle</span>&nbsp;<span class="oth">(</span><span class="num">320</span><span class="oth">,</span>&nbsp;<span class="num">240</span><span class="oth">),</span>&nbsp;<span class="wrd">r</span><br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="key">ScreenUnlock</span><br />
 &nbsp;&nbsp;&nbsp;&nbsp;<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;grow/shrink&nbsp;circle&nbsp;radius</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;augment/diminue&nbsp;rayon&nbsp;cercle</span><br />
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">r</span>&nbsp;<span class="oth">+=</span>&nbsp;<span class="wrd">dr</span><br />
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="key">If</span>&nbsp;<span class="wrd">r</span>&nbsp;<span class="oth">&lt;=</span>&nbsp;<span class="num">0</span>&nbsp;<span class="key">Then</span>&nbsp;<span class="wrd">dr</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">1</span>&nbsp;<span class="key">Else</span>&nbsp;<span class="key">If</span>&nbsp;<span class="wrd">r</span>&nbsp;<span class="oth">&gt;=</span>&nbsp;<span class="num">100</span>&nbsp;<span class="key">Then</span>&nbsp;<span class="wrd">dr</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="oth">-</span><span class="num">1</span><br />
 &nbsp;&nbsp;&nbsp;&nbsp;<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;short&nbsp;pause&nbsp;in&nbsp;each&nbsp;frame&nbsp;(prevents&nbsp;hogging&nbsp;the&nbsp;CPU)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;courte&nbsp;pause&nbsp;pour&nbsp;chaque&nbsp;image&nbsp;(previent&nbsp;saturation&nbsp;CPU)</span><br />
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Sleep</span>&nbsp;<span class="num">1</span><span class="oth">,</span>&nbsp;<span class="num">1</span><br />
-&nbsp;&nbsp;&nbsp;&nbsp;<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;run&nbsp;loop&nbsp;until&nbsp;user&nbsp;presses&nbsp;a&nbsp;key</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />touche&nbsp;appuyee</span><br />
 <span class="key">Loop</span>&nbsp;<span class="key">Until</span>&nbsp;<span class="key">Len</span><span class="oth">(</span><span class="key">Inkey</span><span class="oth">)</span>&nbsp;<span class="oth">&gt;</span>&nbsp;<span class="num">0</span></div></tt><br />
 <br \>
-</div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
-<ul><li> None<br \>
+</div><div class="fb_sect_title">Diff&eacute;rences par rapport &agrave; QB</div><div class="fb_sect_cont"><br \>
+<ul><li> Aucune<br \>
 <br \>
-</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+</ul></div><div class="fb_sect_title">Voir aussi</div><div class="fb_sect_cont"><br \>
 <ul><li> <tt><a href="KeyPgColor.html">Color</a></tt><br \>
 <li> <tt><a href="KeyPgLocate.html">Locate</a></tt><br \>
 <li> <tt><a href="KeyPgPrint.html">Print</a></tt><br \>

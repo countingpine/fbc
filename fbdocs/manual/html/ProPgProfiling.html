@@ -6,72 +6,72 @@
 <body>
 <div id="fb_body_wrapper">
 <div id="fb_tab">
-<div id="fb_tab_l">Profiling</div>
+<div id="fb_tab_l">Profilage</div>
 <div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
 </div> 
 <div id="fb_pg_wrapper">
 <div id="fb_pg_body">
-	Profiling can be used to analyze the performance of an application.<br \>
+	Le profilage peut &ecirc;tre utilis&eacute; pour analyser les performances d'une application.<br \>
 <br \>
-The performance of an application might be measured by how many times functions are called, how much time is spent executing those functions, and which functions are calling other functions.  This can help to identify functions that might be taking too long to execute or executed too many times and that might be worth reviewing for optimization.<br \>
+Les performances d'une application peuvent &ecirc;tre mesur&eacute;es par le nombre de fois que les fonctions sont appel&eacute;es, combien de temps est consacr&eacute; &agrave; l'ex&eacute;cution de ces fonctions et quelles sont les fonctions qui appellent d'autres fonctions. Cela peut aider &agrave; identifier les fonctions susceptibles de prendre trop de temps &agrave; l'ex&eacute;cution ou ex&eacute;cut&eacute;es trop de fois et qui pourraient m&eacute;riter d'&ecirc;tre examin&eacute;es pour une optimisation.<br \>
 <br \>
-FreeBASIC uses GPROF for analyzing the execution of an application.  The profiler information is collected while the program is running, and GPROF is used to report on the collected data afterward.<br \>
+FreeBASIC utilise GPROF pour analyser l'ex&eacute;cution d'une application.  Les informations de profilage sont collect&eacute;es pendant que le programme est en cours d'ex&eacute;cution et GPROF est utilis&eacute; par la suite pour le rapport sur les donn&eacute;es recueillies.<br \>
 <br \>
-The three basic steps to profiling a program are:<br \>
-<ul><li> 1) Prepare the program for profiling by compiling source with the <i><a href="CompilerOptprofile.html">-profile</a></i> option.<br \>
-<li> 2) Run the program to collection information ( stored in <tt>gmon.out</tt> ).<br \>
-<li> 3) Analyze the information collected using GPROF.<br \>
+Les trois &eacute;tapes de base pour le profilage d'un programme sont:<br \>
+<ul><li> 1) Pr&eacute;parer le programme pour le profilage en compilant le source avec l'option <i><a href="CompilerOptprofile.html">-profile</a></i>.<br \>
+<li> 2) Ex&eacute;cuter le programme de collecte d'informations (stock&eacute;es dans <tt>gmon.out</tt>).<br \>
+<li> 3) Analyser les informations recueillies &agrave; l'aide de GPROF.<br \>
 <br \>
-</ul>Full documentation on GPROF is available here: <a href="http://www.gnu.org/software/binutils/manual/gprof-2.9.1/gprof.html">http://www.gnu.org/software/binutils/manual/gprof-2.9.1/gprof.html</a>.  If the documentation has moved from that location, simply search the web for "GNU GPROF" and a relevant link should be returned.<br \>
+</ul>Une documentation compl&egrave;te sur GPROF est disponible ici: <a href="http://www.gnu.org/software/binutils/manual/gprof-2.9.1/gprof.html">http://www.gnu.org/software/binutils/manual/gprof-2.9.1/gprof.html</a>.  Si la documentation s'est d&eacute;plac&eacute;e de cet endroit, il suffit de rechercher sur le web pour "GNU GPROF" et un lien pertinent devrait &ecirc;tre retourn&eacute;.<br \>
 <br \>
-FreeBASIC supports function profiling; not basic-block or line-by-line profiling.<br \>
+FreeBASIC prend en charge le profilage des fonctions; pas de profilage bloc-de-base et ligne-par-ligne.<br \>
 <br \>
-<div class="fb_sect_title">Preparing a Program for Profiling</div><div class="fb_sect_cont"><br \>
-Only code that is compiled with the <i><a href="CompilerOptprofile.html">-profile</a></i> command line option can be profiled.  Pass the <i><a href="CompilerOptprofile.html">-profile</a></i> option to the FreeBASIC compiler to prepare the program to be profiled.  This will tell the compiler to insert special startup code at the beginning of the application as well as at the beginning of each function.<br \>
+<div class="fb_sect_title">Pr&eacute;parer un programme pour le profilage</div><div class="fb_sect_cont"><br \>
+Seul le code qui est compil&eacute; avec l'option de ligne de commande <i><a href="CompilerOptprofile.html">-profile</a></i> peut &ecirc;tre profil&eacute;.  Passer l'option <i><a href="CompilerOptprofile.html">-profile</a></i> pour le compilateur FreeBASIC pour pr&eacute;parer le programme au profilage.  Ceci indique au compilateur d'ins&eacute;rer du code de d&eacute;marrage sp&eacute;cial au d&eacute;but de l'application ainsi qu'au d&eacute;but de chaque fonction.<br \>
 <pre class="fb_pre">
 fbc program.bas -profile
 </pre><br \>
-</div><div class="fb_sect_title">Profiling the Program</div><div class="fb_sect_cont"><br \>
-The information needed to analyze execution of the program is gathered while the program is running.  Run the program to begin collecting the function call information.  This information is automatically stored in a file named <tt>gmon.out</tt> in the same directory as the program.<br \>
+</div><div class="fb_sect_title">Le profilage du programme</div><div class="fb_sect_cont"><br \>
+Les informations n&eacute;cessaires pour analyser l'ex&eacute;cution du programme sont recueillies lorsque le programme est en cours d'ex&eacute;cution.  Ex&eacute;cutez le programme pour commencer &agrave; collecter les informations d'appel de fonctions.  Ces informations sont automatiquement stock&eacute;es dans un fichier nomm&eacute; <tt>gmon.out</tt> dans le m&ecirc;me r&eacute;pertoire que le programme.<br \>
 <br \>
-</div><div class="fb_sect_title">Analyzing the Program's Output</div><div class="fb_sect_cont"><br \>
-Use GPROF to analyze the output.  The default report for GPROF includes descriptions on what each of the columns of values mean.  If you are new to using GPROF, you may want to first run the default report and read through the descriptions.  The output from GPROF can be saved to a file by redirection.<br \>
+</div><div class="fb_sect_title">Analyse des r&eacute;sultats du programme</div><div class="fb_sect_cont"><br \>
+Utiliser GPROF pour analyser les r&eacute;sultats.  Le rapport par d&eacute;faut de GPROF inclut des descriptions de ce que signifie chacune des colonnes de valeurs.  Si vous &ecirc;tes nouvel utilisateur de GPROF, vous pouvez d'abord ex&eacute;cuter le rapport par d&eacute;faut et lire les descriptions.  La sortie de GPROF peut &ecirc;tre sauvegard&eacute;e dans un fichier de redirection.<br \>
 <br \>
-Save output from GPROF to <tt>profile.txt</tt>:<br \>
+Enregistrer la sortie de GPROF dans <tt>profile.txt</tt>:<br \>
 <pre class="fb_pre">
 gprof program[.exe] > profile.txt
 </pre><br \>
-Show just the flat report with no descriptions:<br \>
+Afficher uniquement le rapport simple sans les descriptions:<br \>
 <pre class="fb_pre">
 gprof program[.exe] --brief --flat-profile > profile.txt
 </pre><br \>
-</div><div class="fb_sect_title">Combining the Results of More than One Session</div><div class="fb_sect_cont"><br \>
-GPROF also has a '--sum' option for conveniently combining results from multiple execution sessions.  Here is an example of usable:<br \>
-<ul><li> Run your program once. This will create <tt>gmon.out</tt>.<br \>
-<li> Use the command :<br \>
+</div><div class="fb_sect_title">Combiner les r&eacute;sultats de plusieurs sessions</div><div class="fb_sect_cont"><br \>
+GPROF a aussi une option '--sum' pour combiner commod&eacute;ment les r&eacute;sultats de plusieurs sessions d'ex&eacute;cutions.  Voici un exemple utilisable:<br \>
+<ul><li> Ex&eacute;cutez votre programme une fois. Cela cr&eacute;era <tt>gmon.out</tt>.<br \>
+<li> Utilisez la commande:<br \>
 </ul><div class="fb_indent"><tt>mv gmon.out gmon.sum</tt> <br \>
-or <br \>
+ou <br \>
 <tt>rename gmon.out gmon.sum</tt>.<br \>
-</div><ul><li> Run your program again.  This will create new data in <tt>gmon.out</tt>.<br \>
-<li> Merge the new data in <tt>gmon.out</tt> into <tt>gmon.sum</tt> using the command: <br \>
+</div><ul><li> Ex&eacute;cutez &agrave; nouveau votre programme.  Cela cr&eacute;era de nouvelles donn&eacute;es dans <tt>gmon.out</tt>.<br \>
+<li> Fusionnez les nouvelles donn&eacute;es dans <tt>gmon.out</tt> dans <tt>gmon.sum</tt> en utilisant la commande: <br \>
 </ul><div class="fb_indent"><tt>gprof --sum program[.exe] gmon.out gmon.sum</tt><br \>
-</div><ul><li> Repeat the last two steps as often as needed. <br \>
-<li> Analyze the summary data using the command: <br \>
+</div><ul><li> R&eacute;p&eacute;tez les deux derni&egrave;res &eacute;tapes autant de fois que n&eacute;cessaire. <br \>
+<li> Analysez les donn&eacute;es de synth&egrave;se &agrave; l'aide de la commande: <br \>
 </ul><div class="fb_indent"><tt>gprof program[.exe] gmon.sum &gt; profile.txt</tt><br \>
 <br \>
-</div></div><div class="fb_sect_title">FreeBASIC Profiling Internals</div><div class="fb_sect_cont"><br \>
-When the '-profile' option is enabled, one or more bits of code are added to the program.<br \>
-<ul><li> Call to <tt>"_monstartup()"</tt> at the beginning of the implicit main to initialize the profiling library.<br \>
-<li> Call to <tt>"mcount()"</tt> at the beginning of each procedure.  This is how the profiling library keeps track of what function is being and by which other function.<br \>
-<li> Linking of additional program startup object code.  (e.g. <tt>gcrt?.o</tt> )<br \>
+</div></div><div class="fb_sect_title">Fonctionnement interne du profilage FreeBASIC</div><div class="fb_sect_cont"><br \>
+Quand l'option '-profile' est valid&eacute;e, un ou plusieurs morceaux de code sont ajout&eacute;s au programme.<br \>
+<ul><li> L'appel &agrave; <tt>"_monstartup()"</tt> au d&eacute;but du code principal implicite initialise la biblioth&egrave;que de profilage.<br \>
+<li> Un appel &agrave; <tt>"mcount()"</tt> au d&eacute;but de chaque proc&eacute;dure.  C'est ainsi que la biblioth&egrave;que de profilage garde la trace de ce que fait la fonction en cours et aussi les autres fonctions.<br \>
+<li> Lier du code de programmation suppl&eacute;mentaire de d&eacute;marrage.  (par exemple, <tt>gcrt?.o</tt> )<br \>
 <br \>
-</ul>The profiling library itself may be in a separate library or part of the C runtime library.<br \>
-<ul><li> mingw will require <tt>gcrt2.o</tt> and <tt>libgmon.a </tt><br \>
-<li> cygwin will require gcrt0.o and <tt>libgmon.a</tt><br \>
-<li> dos will require <tt>gcrt0.o</tt> (profiler code is in <tt>libc.a</tt>) <br \>
-<li> linux will require <tt>gcrt1.o</tt> (profiler code is in <tt>libc.a</tt>) <br \>
+</ul>La biblioth&egrave;que de profilage peut &ecirc;tre elle-m&ecirc;me dans une biblioth&egrave;que s&eacute;par&eacute;e ou &ecirc;tre une partie de la biblioth&egrave;que d'ex&eacute;cution C.<br \>
+<ul><li> mingw n&eacute;cessitera <tt>gcrt2.o</tt> et <tt>libgmon.a </tt><br \>
+<li> cygwin n&eacute;cessitera gcrt0.o et <tt>libgmon.a</tt><br \>
+<li> dos n&eacute;cessitera <tt>gcrt0.o</tt> (le code de profilage est dans <tt>libc.a</tt>) <br \>
+<li> linux n&eacute;cessitera <tt>gcrt1.o</tt> (le code de profilage est dans <tt>libc.a</tt>) <br \>
 <br \>
-</ul>The details may vary from one port of FreeBASIC to the next, but source code built for profiling with FreeBASIC should be compatible with other languages also supporting GPROF.<br \>
+</ul>Les d&eacute;tails peuvent varier d'un portage de FreeBasic &agrave; l'autre, mais le code source construit pour le profilage avec FreeBasic devrait &ecirc;tre compatible avec d'autres langages qui supportent GPROF.<br \>
 <br \>
 </div>
 </div>

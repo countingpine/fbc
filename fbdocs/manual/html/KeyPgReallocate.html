@@ -11,35 +11,35 @@
 </div> 
 <div id="fb_pg_wrapper">
 <div id="fb_pg_body">
-	Reallocates storage for an existing reserved block of memory<br \>
+	R&eacute;affecte au stockage un bloc existant et r&eacute;serv&eacute; de la m&eacute;moire<br \>
 <br \>
-<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<div class="fb_sect_title">Syntaxe</div><div class="fb_sect_cont"><tt><br \>
 <a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgFunction.html">Function</a> <b>Reallocate</b> <a href="KeyPgCdecl.html">cdecl</a> ( <a href="KeyPgByval.html">ByVal</a> <i>pointer</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgAny.html">Any</a> <a href="KeyPgPtr.html">Ptr</a>, <a href="KeyPgByval.html">ByVal</a> <i>count</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a> ) <a href="KeyPgAs.html">As</a> <a href="KeyPgAny.html">Any</a> <a href="KeyPgPtr.html">Ptr</a><br \>
 </tt><br \>
 </div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
 <div class="fb_indent"><i>result</i> = <b>Reallocate</b>( <i>pointer</i>, <i>count</i> )<br \>
 </div></tt><br \>
-</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Param&egrave;tres</div><div class="fb_sect_cont"><br \>
 <tt><i>pointer</i></tt><br \>
-<div class="fb_indent">The address of allocated memory to be reallocated.<br \>
+<div class="fb_indent">L'adresse de m&eacute;moire allou&eacute;e qui doit &ecirc;tre r&eacute;affect&eacute;e.<br \>
 </div><tt><i>count</i></tt><br \>
-<div class="fb_indent">The number of bytes, in total, to be reallocated.<br \>
+<div class="fb_indent">Le nombre total d'octets qui doivent &ecirc;tre r&eacute;affect&eacute;s.<br \>
 <br \>
-</div></div><div class="fb_sect_title">Return Value</div><div class="fb_sect_cont"><br \>
-The address of the reallocated memory. A null (<tt>0</tt>) pointer is returned if reallocation was unsuccessful, and the original memory pointed to by <tt><i>pointer</i></tt> remains unchanged.<br \>
+</div></div><div class="fb_sect_title">Valeur retourn&eacute;e</div><div class="fb_sect_cont"><br \>
+L'adresse de la m&eacute;moire r&eacute;affect&eacute;e. Un pointeur nul (<tt>0</tt>) est retourn&eacute; si la r&eacute;allocation a &eacute;chou&eacute; et la m&eacute;moire d'origine point&eacute;e par <tt><i>pointer</i></tt> reste inchang&eacute;e.<br \>
 <br \>
 </div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
-Attempts to reallocate, or resize, memory previously allocated with <tt><a href="KeyPgAllocate.html">Allocate</a></tt>. The contents of the buffer are preserved, although if <tt><i>count</i></tt> is less than the original size of the memory block, the buffer will be truncated.<br \>
+Essaye de r&eacute;affecter ou de redimensionner, la m&eacute;moire pr&eacute;c&eacute;demment r&eacute;serv&eacute;e avec <tt><a href="KeyPgAllocate.html">Allocate</a></tt>. Le contenu de la m&eacute;moire tampon est conserv&eacute;, mais si <tt><i>count</i></tt> est inf&eacute;rieur &agrave; la taille d'origine du bloc de m&eacute;moire, la m&eacute;moire tampon sera tronqu&eacute;e.<br \>
 <br \>
-If <tt><i>pointer</i></tt> is null (<tt>0</tt>), then <tt>ReAllocate</tt> behaves identically to <tt><a href="KeyPgAllocate.html">Allocate</a></tt>.<br \>
+Si <tt><i>pointer</i></tt> est nul (<tt>0</tt>), alors le comportement de <tt>ReAllocate</tt> est identique &agrave; celui de <tt><a href="KeyPgAllocate.html">Allocate</a></tt>.<br \>
 <br \>
-Reallocated memory must be deallocated, or freed, with <tt><a href="KeyPgDeallocate.html">Deallocate</a></tt> when no longer needed.<br \>
+La m&eacute;moire r&eacute;allou&eacute;e doit &ecirc;tre d&eacute;sallou&eacute;e ou lib&eacute;r&eacute;e, avec <tt><a href="KeyPgDeallocate.html">Deallocate</a></tt> quand elle n'est plus utilis&eacute;e.<br \>
 <br \>
-This function is not part of the FreeBASIC runtime library, it is an alias for the C runtime library's <tt><i>realloc</i></tt>, so it's not guaranteed to be thread safe in all platforms.<br \>
+Cette fonction ne fait pas partie de la biblioth&egrave;que d'ex&eacute;cution de FreeBASIC, c'est un alias pour <tt><i>realloc</i></tt> de la biblioth&egrave;que d'ex&eacute;cution du langage C, ce n'est donc pas garanti d'&ecirc;tre "thread-safe" sur toutes les plates-formes.<br \>
 <br \>
-<b>NOTE</b>: Reallocating a pointer inside an object function, when that pointer contains the parent object of the function, is undefined, and will likely result in horrible crashes.<br \>
+<b>NOTE</b>: La r&eacute;affectation d'un pointeur dans une fonction d'objet, quand ce pointeur contient l'objet parent de la fonction, est ind&eacute;finie et entraînera probablement dans des accidents horribles.<br \>
 <br \>
-</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Exemple</div><div class="fb_sect_cont"><br \>
 <tt><div class="freebasic">
 <span class="key">Dim</span>&nbsp;<span class="wrd">a</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="key">Ptr</span><span class="oth">,</span>&nbsp;<span class="wrd">b</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="key">Ptr</span><span class="oth">,</span>&nbsp;<span class="wrd">i</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
 <br />
@@ -80,13 +80,13 @@ This function is not part of the FreeBASIC runtime library, it is an alias for t
 <span class="key">Deallocate</span>&nbsp;<span class="wrd">a</span>&nbsp;&nbsp;&nbsp;<span class="com">'&nbsp;Clean&nbsp;up</span><br />
 </div></tt><br />
 <br \>
-</div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
-<ul><li> Not available in the <i><a href="CompilerOptlang.html">-lang qb</a></i> dialect unless referenced with the alias <tt><b>__Reallocate</b></tt>.<br \>
+</div><div class="fb_sect_title">Diff&eacute;rences de dialecte</div><div class="fb_sect_cont"><br \>
+<ul><li> Non disponible dans le dialecte <i><a href="CompilerOptlang.html">-lang qb</a></i> sauf si r&eacute;f&eacute;renc&eacute; avec l'alias <tt><b>__Reallocate</b></tt>.<br \>
 <br \>
-</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
-<ul><li> New to FreeBASIC<br \>
+</div><div class="fb_sect_title">Diff&eacute;rences avec QB</div><div class="fb_sect_cont"><br \>
+<ul><li> Nouveau pour FreeBASIC<br \>
 <br \>
-</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+</ul></div><div class="fb_sect_title">Voir aussi</div><div class="fb_sect_cont"><br \>
 <ul><li> <tt><a href="KeyPgAllocate.html">Allocate</a></tt><br \>
 <li> <tt><a href="KeyPgCallocate.html">CAllocate</a></tt><br \>
 <li> <tt><a href="KeyPgDeallocate.html">Deallocate</a></tt><br \>

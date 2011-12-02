@@ -11,70 +11,70 @@
 </div> 
 <div id="fb_pg_wrapper">
 <div id="fb_pg_body">
-	Plots a single pixel<br \>
+	Place un seul pixel<br \>
 <br \>
-<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<div class="fb_sect_title">Syntaxe</div><div class="fb_sect_cont"><tt><br \>
 <b>PSet</b> [<i>target</i> ,] [STEP] (<i>x</i>, <i>y</i>) [,<i>color</i>]<br \>
 </tt><br \>
-</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Param&egrave;tres</div><div class="fb_sect_cont"><br \>
 <tt><i>target</i></tt><br \>
-<div class="fb_indent">specifies buffer to draw on.  <br \>
+<div class="fb_indent">sp&eacute;cifie le tampon sur lequel on dessine.  <br \>
 </div><tt>STEP</tt><br \>
-<div class="fb_indent">indicates that coordinates are relative<br \>
+<div class="fb_indent">indique que ces coordonn&eacute;es sont relatives<br \>
 </div><tt>(<i>x, y</i>)</tt><br \>
-<div class="fb_indent">coordinates of the pixel.<br \>
+<div class="fb_indent">coordonn&eacute;es du pixel.<br \>
 </div><tt><i>color</i></tt><br \>
-<div class="fb_indent">the color attribute.<br \>
+<div class="fb_indent">l'attribut de couleur.<br \>
 <br \>
 </div></div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
 <br \>
-<tt><i>target</i></tt> specifies buffer to draw on.  <tt><i>target</i></tt> may be an image created with <tt><a href="KeyPgImagecreate.html">ImageCreate</a></tt> or <tt><a href="KeyPgGetgraphics.html">Get (Graphics)</a></tt>.  If omitted, <tt><i>target</i></tt> defaults to the screen's current work page.<br \>
+<tt><i>target</i></tt> sp&eacute;cifie le tampon sur lequel on dessine.  <tt><i>target</i></tt> peut &ecirc;tre une image cr&eacute;&eacute;e avec <tt><a href="KeyPgImagecreate.html">ImageCreate</a></tt> ou <tt><a href="KeyPgGetgraphics.html">Get (Graphique)</a></tt>.  Si omis, <tt><i>target</i></tt> prend par d&eacute;faut la page courante de travail de l'&eacute;cran.<br \>
 <br \>
-<tt>(<i>x, y</i>)</tt> are the coordinates of the pixel.  <tt>STEP</tt> if present, indicates that <tt>(<i>x, y</i>)</tt> coordinates are relative to the graphics cursor position.  If omitted, <tt>(<i>x, y</i>)</tt> are relative to the upper left-hand corner of <tt><i>target</i></tt>.  The x and y coordinates are affected by the last call to the <tt><a href="KeyPgViewgraphics.html">View (Graphics)</a></tt> and <tt><a href="KeyPgWindow.html">Window</a></tt> statements, and respect the current clipping region as set by the <tt><a href="KeyPgViewgraphics.html">View (Graphics)</a></tt> statement.<br \>
+<tt>(<i>x, y</i>)</tt> sont les coordonn&eacute;es du pixel.  <tt>STEP</tt> si pr&eacute;sent, indique que les coordonn&eacute;es<tt>(<i>x, y</i>)</tt> sont relatives &agrave; la position du curseur graphique.  Si omis, <tt>(<i>x, y</i>)</tt> sont relatives au coin en haut &agrave; gauche de <tt><i>target</i></tt>.  Les coordonn&eacute;es x et y sont affect&eacute;es par le dernier appel &agrave; <tt><a href="KeyPgViewgraphics.html">View (Graphique)</a></tt> et <tt><a href="KeyPgWindow.html">Window</a></tt>, et respectent la r&eacute;gion de d&eacute;coupage (clipping region) valid&eacute;e par <tt><a href="KeyPgViewgraphics.html">View (Graphique)</a></tt>.<br \>
 <br \>
-<tt><i>color</i></tt> specifies the color attribute.  If omitted, <tt><i>color</i></tt> defaults to the current foreground color.  See <tt><a href="KeyPgColor.html">Color</a></tt>.  <tt><i>color</i></tt> is graphics mode specific, see <tt><a href="KeyPgColor.html">Color</a></tt> and <tt><a href="KeyPgScreengraphics.html">Screen (Graphics)</a></tt> for details.<br \>
+<tt><i>color</i></tt> sp&eacute;cifie l'attribut de couleur.  Si omis, <tt><i>color</i></tt> prend par d&eacute;faut la couleur courante d'avant-plan.  Voir <tt><a href="KeyPgColor.html">Color</a></tt>.  <tt><i>color</i></tt> d&eacute;pend du mode graphique, voir <tt><a href="KeyPgColor.html">Color</a></tt> et <tt><a href="KeyPgScreengraphics.html">Screen (Graphique)</a></tt> pour plus de d&eacute;tails.<br \>
 <br \>
-Optimization note: while <b>Pset</b> and the opposite <tt><a href="KeyPgPoint.html">Point</a></tt> provide valid results, they are very slow. Much better performance can be achieved by using <tt><a href="KeyPgPoke.html">Poke</a></tt> after calculating the address yourself from values obtained from <tt><a href="KeyPgImageinfo.html">ImageInfo</a></tt> and <tt><a href="KeyPgScreeninfo.html">ScreenInfo</a></tt>, or even more usig inline ASM.<br \>
+Note d'optimisation: bien que <b>Pset</b> et son oppos&eacute; <tt><a href="KeyPgPoint.html">Point</a></tt> donnent des r&eacute;sultats valides, ils sont tr&egrave;s lents. De meilleures performances sont obtenues en utilisant <tt><a href="KeyPgPoke.html">Poke</a></tt> apr&egrave;s avoir calcul&eacute; vous-m&ecirc;me l'adresse &agrave; partir des valeurs obtenues par <tt><a href="KeyPgImageinfo.html">ImageInfo</a></tt> et <tt><a href="KeyPgScreeninfo.html">ScreenInfo</a></tt>, ou m&ecirc;me en utilisant le langage machine avec "inline ASM".<br \>
 <br \>
-</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Exemple</div><div class="fb_sect_cont"><br \>
 <tt><div class="freebasic">
-<span class="com">'&nbsp;Set&nbsp;an&nbsp;appropriate&nbsp;Screen&nbsp;mode.</span><br />
+<span class="com">'&nbsp;Valide&nbsp;un&nbsp;mode&nbsp;ecran&nbsp;approprie.</span><br />
 <span class="key">Screen</span>&nbsp;<span class="num">14</span><br />
 <br />
-<span class="com">'&nbsp;Plot&nbsp;a&nbsp;pixel&nbsp;at&nbsp;the&nbsp;coordinates&nbsp;100,&nbsp;100,&nbsp;Color&nbsp;15.&nbsp;(white)</span><br />
+<span class="com">'&nbsp;Place&nbsp;un&nbsp;pixel&nbsp;aux&nbsp;coordonnees&nbsp;100,&nbsp;100,&nbsp;Couleur&nbsp;15.&nbsp;(blanc)</span><br />
 <span class="key">PSet</span>&nbsp;<span class="oth">(</span><span class="num">100</span><span class="oth">,</span>&nbsp;<span class="num">100</span><span class="oth">),</span>&nbsp;<span class="num">15</span><br />
-<span class="com">'&nbsp;Confirm&nbsp;the&nbsp;operation.</span><br />
+<span class="com">'&nbsp;Confirme&nbsp;l'&nbsp;operation.</span><br />
 <span class="key">Locate</span>&nbsp;<span class="num">1</span><span class="oth">:</span>&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"Pixel&nbsp;plotted&nbsp;at&nbsp;100,&nbsp;100"</span><br />
-<span class="com">'&nbsp;Wait&nbsp;for&nbsp;a&nbsp;keypress.</span><br />
+<span class="com">'&nbsp;Attente&nbsp;touche&nbsp;appuyee.</span><br />
 <span class="key">Sleep</span><br />
 &nbsp;<br />
-<span class="com">'&nbsp;Plot&nbsp;another&nbsp;pixel&nbsp;at&nbsp;the&nbsp;coordinates&nbsp;150,&nbsp;150,&nbsp;Color&nbsp;4.&nbsp;(red)&nbsp;</span><br />
+<span class="com">'&nbsp;Place&nbsp;un&nbsp;autre&nbsp;pixel&nbsp;aux&nbsp;coordonnees&nbsp;150,&nbsp;150,&nbsp;Couleur&nbsp;4.&nbsp;(rouge)&nbsp;</span><br />
 <span class="key">PSet</span>&nbsp;<span class="oth">(</span><span class="num">150</span><span class="oth">,</span>&nbsp;<span class="num">150</span><span class="oth">),</span>&nbsp;<span class="num">4</span><br />
-<span class="com">'&nbsp;Confirm&nbsp;the&nbsp;operation.</span><br />
+<span class="com">'&nbsp;Confirme&nbsp;l'&nbsp;operation.</span><br />
 <span class="key">Locate</span>&nbsp;<span class="num">1</span><span class="oth">:</span>&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"Pixel&nbsp;plotted&nbsp;at&nbsp;150,&nbsp;150"</span><br />
-<span class="com">'&nbsp;Wait&nbsp;for&nbsp;a&nbsp;keypress.</span><br />
+<span class="com">'&nbsp;Attente&nbsp;touche&nbsp;appuyee.</span><br />
 <span class="key">Sleep</span><br />
 &nbsp;<br />
-<span class="com">'&nbsp;Plot&nbsp;a&nbsp;third&nbsp;pixel&nbsp;relative&nbsp;to&nbsp;the&nbsp;second,&nbsp;Color&nbsp;15.&nbsp;(white)</span><br />
-<span class="com">'&nbsp;This&nbsp;pixel&nbsp;is&nbsp;given&nbsp;the&nbsp;coordinates&nbsp;60,&nbsp;60.&nbsp;It&nbsp;will&nbsp;be&nbsp;placed</span><br />
-<span class="com">'&nbsp;at&nbsp;60,&nbsp;60&nbsp;plus&nbsp;the&nbsp;previous&nbsp;coordinates&nbsp;(150,&nbsp;150),&nbsp;thus&nbsp;plotting&nbsp;at&nbsp;210,&nbsp;210.</span><br />
+<span class="com">'&nbsp;Place&nbsp;un&nbsp;3eme&nbsp;pixel&nbsp;relatif&nbsp;au&nbsp;second,&nbsp;Couleur&nbsp;15.&nbsp;(blanc)</span><br />
+<span class="com">'&nbsp;Ce&nbsp;pixel&nbsp;a&nbsp;les&nbsp;coordonnees&nbsp;60,&nbsp;60.&nbsp;Il&nbsp;sera&nbsp;place</span><br />
+<span class="com">'&nbsp;a&nbsp;60,&nbsp;60&nbsp;plus&nbsp;les&nbsp;coordonnees&nbsp;precedentes&nbsp;(150,&nbsp;150),&nbsp;donc&nbsp;place&nbsp;a&nbsp;210,&nbsp;210.</span><br />
 <span class="key">PSet</span>&nbsp;<span class="key">Step</span>&nbsp;<span class="oth">(</span><span class="num">60</span><span class="oth">,</span>&nbsp;<span class="num">60</span><span class="oth">),</span>&nbsp;<span class="num">15</span><br />
-<span class="com">'&nbsp;Confirm&nbsp;the&nbsp;operation.</span><br />
+<span class="com">'&nbsp;Confirme&nbsp;l'&nbsp;operation.</span><br />
 <span class="key">Locate</span>&nbsp;<span class="num">1</span><span class="oth">:</span>&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"Pixel&nbsp;plotted&nbsp;at&nbsp;150&nbsp;+&nbsp;60,&nbsp;150&nbsp;+&nbsp;60"</span><br />
-<span class="com">'&nbsp;Wait&nbsp;for&nbsp;a&nbsp;keypress</span><br />
+<span class="com">'&nbsp;Attente&nbsp;touche&nbsp;appuyee</span><br />
 <span class="key">Sleep</span><br />
 <br />
-<span class="com">'&nbsp;Close&nbsp;the&nbsp;program</span><br />
+<span class="com">'&nbsp;Ferme&nbsp;le&nbsp;programme</span><br />
 <span class="key">End</span><br />
 </div></tt><br />
 <br \>
-</div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
-<ul><li> <tt><i>target</i></tt> is new to FreeBASIC<br \>
+</div><div class="fb_sect_title">Diff&eacute;rences avec QB</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><i>target</i></tt> nouveau pour FreeBASIC<br \>
 <br \>
-</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
-<ul><li> <tt><a href="KeyPgPoint.html">Point</a></tt> - read out pixels <br \>
-<li> <tt><a href="KeyPgPreset.html">PReset</a></tt> <br \>
-<li> <tt><a href="KeyPgViewgraphics.html">View (Graphics)</a></tt><br \>
+</ul></div><div class="fb_sect_title">Voir aussi</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgPoint.html">Point</a></tt> - lecture de pixels <br \>
+<li> <tt><a href="KeyPgPreset.html">PReset</a></tt><br \>
+<li> <tt><a href="KeyPgViewgraphics.html">View (Graphique)</a></tt><br \>
 <li> <tt><a href="KeyPgWindow.html">Window</a></tt><br \>
 <br \>
 </ul></div>

@@ -6,76 +6,76 @@
 <body>
 <div id="fb_body_wrapper">
 <div id="fb_tab">
-<div id="fb_tab_l">Static Libraries</div>
+<div id="fb_tab_l">Biblioth&egrave;ques statiques</div>
 <div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
 </div> 
 <div id="fb_pg_wrapper">
 <div id="fb_pg_body">
-	A static library is compiled code that can be later used when building an executable.<br \>
+	Une biblioth&egrave;que statique est du code compil&eacute; qui peut &ecirc;tre utilis&eacute; plus tard lors de la construction d'un ex&eacute;cutable.<br \>
 <br \>
-When the compiler makes an executable, the basic source files are first turned in to object files.  The object files are then linked together to make an executable.  When we compile source code, we don't necessarily have to make an executable.  We could instead group all of the object files (made from sources) in to a single file called a static library.<br \>
+Lorsque le compilateur g&eacute;n&egrave;re un ex&eacute;cutable, les fichiers sources de base sont d'abord transform&eacute;s en fichiers objets.  Les fichiers objets sont ensuite li&eacute;s ensemble pour cr&eacute;er un ex&eacute;cutable.  Lorsque nous compilons le code source, nous ne le faisons pas n&eacute;cessairement pour cr&eacute;er un ex&eacute;cutable.  Nous pouvons plut&ocirc;t grouper tous les fichiers objets (fabriqu&eacute;s &agrave; partir des sources) en un fichier unique appel&eacute; une biblioth&egrave;que statique.<br \>
 <br \>
-The library is referred to as static, because when the object files which it contains are later linked in to an executable, a copy of all the needed code in the library is added to the executable.<br \>
+La biblioth&egrave;que est appel&eacute;e statique, parce que lorsque les fichiers objets qu'elle contient sont ensuite li&eacute;s dans un fichier ex&eacute;cutable, une copie de tout le code n&eacute;cessaire de la biblioth&egrave;que est ajout&eacute; &agrave; l'ex&eacute;cutable.<br \>
 <br \>
-Once the library is made, we can then use the code that it contains just as if we were compiling the source directly with our program.<br \>
+Une fois que la biblioth&egrave;que est g&eacute;n&eacute;r&eacute;e, Une fois que la biblioth&egrave;que est g&eacute;n&eacute;r&eacute;e, nous pouvons alors utiliser le code qu'elle contient comme si nous avions compil&eacute; les sources directement avec notre programme.<br \>
 <br \>
-Following is a simple example of creating a static library using these three files:<br \>
-<ul><li> <tt>mylib.bas</tt> - the source for the library<br \>
-<li> <tt>mylib.bi</tt> - the header for the library<br \>
-<li> <tt>mytest.bas</tt> - a test program<br \>
+Voici un exemple simple cr&eacute;ant une biblioth&egrave;que statique en utilisant ces trois fichiers:<br \>
+<ul><li> <tt>mylib.bas</tt> - le source de la biblioth&egrave;que<br \>
+<li> <tt>mylib.bi</tt> - l'en-t&ecirc;te pour la biblioth&egrave;que<br \>
+<li> <tt>mytest.bas</tt> - un programme de test<br \>
 <br \>
-</ul>Our library will be a single module providing a single function:<br \>
+</ul>Notre biblioth&egrave;que sera un module unique assurant une fonction unique:<br \>
 <br \>
 <tt><div class="freebasic">
 <span class="com">''&nbsp;mylib.bas</span><br />
-<span class="com">''&nbsp;compile&nbsp;with:&nbsp;fbc&nbsp;-lib&nbsp;mylib.bas</span><br />
+<span class="com">''&nbsp;compiler&nbsp;avec:&nbsp;fbc&nbsp;-lib&nbsp;mylib.bas</span><br />
 <br />
-<span class="com">''&nbsp;Add&nbsp;two&nbsp;numbers&nbsp;together&nbsp;and&nbsp;return&nbsp;the&nbsp;result</span><br />
+<span class="com">''&nbsp;Additionne&nbsp;deux&nbsp;nombres&nbsp;ensemble&nbsp;et&nbsp;retourne&nbsp;le&nbsp;r&eacute;sultat</span><br />
 <span class="key">Public</span>&nbsp;<span class="key">Function</span>&nbsp;<span class="wrd">Add2</span><span class="oth">(</span>&nbsp;<span class="key">ByVal</span>&nbsp;<span class="wrd">x</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">,</span>&nbsp;<span class="key">ByVal</span>&nbsp;<span class="wrd">y</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
 &nbsp;&nbsp;<span class="key">Return</span><span class="oth">(</span>&nbsp;<span class="wrd">x</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="wrd">y</span>&nbsp;<span class="oth">)</span><br />
 <span class="key">End</span>&nbsp;<span class="key">Function</span><br />
 </div></tt><br />
-Compile the library with:<br \>
+Compiler la biblioth&egrave;que avec:<br \>
 <tt>fbc -lib mylib.bas</tt><br \>
 <br \>
-The <i><a href="CompilerOptlib.html">-lib</a></i> option tells the compiler to take the source code, <tt>mylib.bas</tt>, and turn it in to an object file <tt>mylib.o</tt>, then store the object file in to a library file, also called an archive, <tt>libmylib.a</tt>.  A library might contain many modules (source files) each with many functions, but for this simple example, it is just one each.<br \>
+L'option <i><a href="CompilerOptlib.html">-lib</a></i> indique au compilateur de prendre le code source, <tt>mylib.bas</tt>, et de le transformer en un fichier objet <tt>mylib.o</tt>, puis de stocker le fichier objet dans un fichier biblioth&egrave;que, aussi appel&eacute; une archive, <tt>libmylib.a</tt>.  Une biblioth&egrave;que peut contenir de nombreux modules (fichiers source), chacun avec de nombreuses fonctions, mais pour cet exemple simple, il n'y en a simplement qu'un seul.<br \>
 <br \>
-To make use of the library in some other source code, we need some way of telling the compiler what exactly is in the library.  A good way to do this is to put the declarations ( also called an interface, or API ) for the library in to a header file.<br \>
+Pour faire usage de la biblioth&egrave;que dans un autre code source , nous avons besoin d'une certaine fa&ccedil;on de dire au compilateur ce qui est exactement dans la biblioth&egrave;que.  Une bonne fa&ccedil;on pour y parvenir est de mettre les d&eacute;clarations (&eacute;galement appel&eacute;e une interface ou API) de la biblioth&egrave;que dans un fichier d'en-t&ecirc;te.<br \>
 <br \>
 <tt><div class="freebasic">
 <span class="com">''&nbsp;mylib.bi</span><br />
 <span class="def">#inclib&nbsp;"mylib"<br />
 </span><span class="key">Declare</span>&nbsp;<span class="key">Function</span>&nbsp;<span class="wrd">Add2</span><span class="oth">(</span>&nbsp;<span class="key">ByVal</span>&nbsp;<span class="wrd">x</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">,</span>&nbsp;<span class="key">ByVal</span>&nbsp;<span class="wrd">y</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
 </div></tt><br />
-There is no need to compile the header.  We want this in its source form so it can be included with other source files.  The <tt><a href="KeyPgInclib.html">#inclib</a></tt> statement will tell the compiler the name of a static library that we need to link with when eventually making an executable.<br \>
+Il n'est pas n&eacute;cessaire de compiler l'en-t&ecirc;te.  Nous le voulons dans sa forme source, comme cela il peut &ecirc;tre inclus avec les autres fichiers source.  L'instruction  <tt><a href="KeyPgInclib.html">#inclib</a></tt> dira au compilateur le nom de la biblioth&egrave;que statique que nous voulons lier lorsque, &eacute;ventuellement, nous d&eacute;sirerons g&eacute;n&eacute;rer un ex&eacute;cutable.<br \>
 <br \>
-With our library (.a file) and a header (.bi file) we can try them out in a test program:<br \>
+Gr&acirc;ce &agrave; notre biblioth&egrave;que (un fichier .a) et un fichier d'en-t&ecirc;te (.bi file) nous pouvons les essayer dans un programme de test:<br \>
 <br \>
 <tt><div class="freebasic">
 <span class="com">''&nbsp;mytest.bas</span><br />
-<span class="com">''&nbsp;compile&nbsp;with:&nbsp;fbc&nbsp;mytest.bas</span><br />
+<span class="com">''&nbsp;compiler&nbsp;avec:&nbsp;fbc&nbsp;mytest.bas</span><br />
 <span class="def">#include&nbsp;once&nbsp;"mylib.bi"<br />
 </span><span class="key">Print</span>&nbsp;<span class="wrd">Add2</span><span class="oth">(</span><span class="num">1</span><span class="oth">,</span><span class="num">2</span><span class="oth">)</span><br />
 </div></tt><br />
-The <tt><a href="KeyPgInclude.html">#include</a></tt> statement tells the compiler to include the source code from <tt>mylib.bi</tt> just as if we had typed it in to the original source.  With the way we have written our include file, it tells the compiler everything it needs to know about the library.<br \>
+L'instruction <tt><a href="KeyPgInclude.html">#include</a></tt> indique au compilateur d'inclure le code source de <tt>mylib.bi</tt> comme si nous l'avions tap&eacute; dans le source original.  Avec la mani&egrave;re dont nous avons &eacute;crit notre fichier d'inclusion, il indique au compilateur tout ce qu'il doit savoir sur la biblioth&egrave;que.<br \>
 <br \>
-We compile this with:<br \>
+Nous compilons ceci avec:<br \>
 <tt>fbc mytest.bas</tt><br \>
 <br \>
-Then when we run the <tt>mytest</tt> executable, we should get the result of:<br \>
+Puis, quand nous lancerons l'ex&eacute;cutable <tt>mytest</tt>, nous devrions obtenir ce r&eacute;sultat:<br \>
 <tt>3</tt><br \>
 <br \>
-More than one source module can be used when making a library.  And basic programs can use more than one library by including each needed header.  Some libraries are so large that they might use several headers.  On very large projects, making libraries out of some code modules that seldom change can improve compile times dramatically.<br \>
+Plus d'un module source peut &ecirc;tre utilis&eacute; lors de la fabrication de la biblioth&egrave;que.  Et les programmes de base peuvent utiliser plus d'une biblioth&egrave;que en incluant les fichiers d'en-t&ecirc;te n&eacute;cessaires.  Certaines biblioth&egrave;ques sont si importantes qu'elles peuvent utiliser plusieurs en-t&ecirc;tes.  Pour de tr&egrave;s grands projets, la cr&eacute;ation de biblioth&egrave;ques avec certains modules de code qui ne changent que rarement peut am&eacute;liorer consid&eacute;rablement les temps de compilation.<br \>
 <br \>
-Libraries can optionally contain debugging information specified with the <i><a href="CompilerOptg.html">-g</a></i> command line option.<br \>
+Les biblioth&egrave;ques peuvent &eacute;ventuellement contenir des informations de d&eacute;bogage sp&eacute;cifi&eacute;es avec l'option de ligne de commande <i><a href="CompilerOptg.html">-g</a></i>.<br \>
 <br \>
-Object files, and therefore libraries, are platform specific and in some cases specific to a particular version of the compiler and FreeBASIC runtime library.<br \>
+Les fichiers objets, et donc les biblioth&egrave;ques, sont d&eacute;pendants de la plate-forme et dans certains cas d&eacute;pendants d'une version particuli&egrave;re du compilateur et de la biblioth&egrave;que d'ex&eacute;cution FreeBasic.<br \>
 <br \>
-<div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
-<ul><li> <a href="ProPgSharedLibraries.html">Shared Libraries</a><br \>
+<div class="fb_sect_title">Voir aussi</div><div class="fb_sect_cont"><br \>
+<ul><li> <a href="ProPgSharedLibraries.html">Biblioth&egrave;ques partag&eacute;es</a><br \>
 <li> <tt><a href="KeyPgInclib.html">#inclib</a></tt><br \>
 <li> <tt><a href="KeyPgInclude.html">#include</a></tt><br \>
-<li> <a href="CompilerOptlib.html">Compiler Option: -lib</a><br \>
+<li> <a href="CompilerOptlib.html">Option du compilateur: -lib</a><br \>
 <br \>
 </ul></div>
 </div>

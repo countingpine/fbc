@@ -6,115 +6,115 @@
 <body>
 <div id="fb_body_wrapper">
 <div id="fb_tab">
-<div id="fb_tab_l">Shared Libraries</div>
+<div id="fb_tab_l">Biblioth&egrave;ques partag&eacute;es</div>
 <div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
 </div> 
 <div id="fb_pg_wrapper">
 <div id="fb_pg_body">
-	A shared library is compiled code that can loaded and used later used when running an executable.<br \>
+	Une biblioth&egrave;que partag&eacute;e c'est du code compil&eacute; qui pourra &ecirc;tre charg&eacute; et utilis&eacute; plus tard lors de l'ex&eacute;cution d'un ex&eacute;cutable.<br \>
 <br \>
-When the compiler makes an executable, the basic source files are first turned in to object files.  The object files are then linked together to make an executable.  A shared library is much like a static library in that it contains object files.  But a shared library is also like an executable in that it only gets loaded when the executable is running.  <br \>
+Lorsque le compilateur g&eacute;n&egrave;re un ex&eacute;cutable, les fichiers sources de base sont d'abord transform&eacute;s en fichiers objets.  Les fichiers objets sont ensuite li&eacute;s ensemble pour cr&eacute;er un ex&eacute;cutable.  Une biblioth&egrave;que partag&eacute;e c'est un peu comme une biblioth&egrave;que statique en ce qu'elle contient des fichiers objet.  Mais une biblioth&egrave;que partag&eacute;e est aussi comme un fichier ex&eacute;cutable en ce qu'elle est charg&eacute;e uniquement lorsque l'ex&eacute;cutable est en cours d'ex&eacute;cution.  <br \>
 <br \>
-The library is referred to as shared, because the code in the library is loaded by an executable at runtime and can be loaded by more than one executable, even though there might only be one copy of the shared library.<br \>
+La biblioth&egrave;que est d&eacute;nomm&eacute;e partag&eacute;e, parce que le code dans la biblioth&egrave;que est charg&eacute; par un fichier ex&eacute;cutable &agrave; l'ex&eacute;cution et peut &ecirc;tre charg&eacute; par plus d'un ex&eacute;cutable, m&ecirc;me s'il peut n'y avoir qu'une seule copie de la biblioth&egrave;que partag&eacute;e.<br \>
 <br \>
-Once the library is made, we can then use the code that it contains just as if we were compiling the source directly with our program.<br \>
+Une fois que la biblioth&egrave;que est g&eacute;n&eacute;r&eacute;e, on peut alors utiliser le code qu'elle contient comme si nous avions compil&eacute; les sources directement avec notre programme.<br \>
 <br \>
-<div class="fb_sect_title">Shared Library Example</div><div class="fb_sect_cont"><br \>
-Following is a simple example of creating a shared library using these three files:<br \>
-<ul><li> <tt>mylib.bas</tt> - the source for the library<br \>
-<li> <tt>mylib.bi</tt> - the header for the library<br \>
-<li> <tt>mytest.bas</tt> - a test program<br \>
+<div class="fb_sect_title">Exemple de biblioth&egrave;que partag&eacute;e</div><div class="fb_sect_cont"><br \>
+Voici un exemple simple de cr&eacute;ation d'une biblioth&egrave;que partag&eacute;e en utilisant ces trois fichiers:<br \>
+<ul><li> <tt>mylib.bas</tt> - le source de la biblioth&egrave;que<br \>
+<li> <tt>mylib.bi</tt> - l'en-t&ecirc;te de la biblioth&egrave;que<br \>
+<li> <tt>mytest.bas</tt> - un programme de test<br \>
 <br \>
-</ul>Our library will be a single module providing a single function:<br \>
+</ul>Notre biblioth&egrave;que aura un module unique assurant une fonction unique:<br \>
 <br \>
 <tt><div class="freebasic">
 <span class="com">''&nbsp;mylib.bas</span><br />
-<span class="com">''&nbsp;compile&nbsp;with:&nbsp;fbc&nbsp;-dll&nbsp;mylib.bas</span><br />
+<span class="com">''&nbsp;compiler&nbsp;avec:&nbsp;fbc&nbsp;-dll&nbsp;mylib.bas</span><br />
 <br />
-<span class="com">''&nbsp;Add&nbsp;two&nbsp;numbers&nbsp;together&nbsp;and&nbsp;return&nbsp;the&nbsp;result</span><br />
+<span class="com">''&nbsp;Additionne&nbsp;deux&nbsp;nombres&nbsp;ensemble&nbsp;et&nbsp;retourne&nbsp;le&nbsp;r&eacute;sultat</span><br />
 <span class="key">Public</span>&nbsp;<span class="key">Function</span>&nbsp;<span class="wrd">Add2</span><span class="oth">(</span>&nbsp;<span class="key">ByVal</span>&nbsp;<span class="wrd">x</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">,</span>&nbsp;<span class="key">ByVal</span>&nbsp;<span class="wrd">y</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="key">Export</span><br />
 &nbsp;&nbsp;<span class="key">Return</span><span class="oth">(</span>&nbsp;<span class="wrd">x</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="wrd">y</span>&nbsp;<span class="oth">)</span><br />
 <span class="key">End</span>&nbsp;<span class="key">Function</span><br />
 </div></tt><br />
-Compile the library with:<br \>
+Compiler la biblioth&egrave;que avec:<br \>
 <tt>fbc -dll mylib.bas</tt><br \>
 <br \>
-The <tt>-dll</tt> option tells the compiler to take the source code, <tt>mylib.bas</tt>, and turn it in to an object file <tt>mylib.o</tt>, then store the object file in to a shared library.  The name of the shared library will have a <tt>.so</tt> extension or <tt>.dll</tt> extension depending on if the platform is the linux or windows version. A library might contain many modules (source files) each with many functions, but for this simple example, it is just one each.<br \>
+L'option <tt>-dll</tt> indique au compilateur de prendre le code source, <tt>mylib.bas</tt>, et de le transformer en un fichier objet <tt>mylib.o</tt>, puis stocker le fichier objet dans une biblioth&egrave;que partag&eacute;e.  Le nom de la biblioth&egrave;que partag&eacute;e aura l' extension <tt>.so</tt> ou <tt>.dll</tt> selon que la plate-forme est la version Linux ou Windows. Une biblioth&egrave;que peut contenir de nombreux modules (fichiers source), chacun avec de nombreuses fonctions, mais pour cet exemple simple, il n'y en a simplement qu'un seul.<br \>
 <br \>
-Making a shared library is almost identical to making a static library except for the addition of <tt><a href="KeyPgExport.html">Export</a></tt> declaration specifier.  <tt><b>Export</b></tt> tells the compiler to make the function visible to other executables loading the shared library.<br \>
+Cr&eacute;er une biblioth&egrave;que partag&eacute;e est presque identique &agrave; cr&eacute;er une biblioth&egrave;que statique &agrave; l'exception de l'ajout de sp&eacute;cificateur de d&eacute;claration <tt><a href="KeyPgExport.html">Export</a></tt>.  <tt><b>Export</b></tt> indique au compilateur de rendre la fonction visible aux autres ex&eacute;cutables chargeant la biblioth&egrave;que partag&eacute;e.<br \>
 <br \>
-To make use of the library in some other source code, we need some way of telling the compiler what exactly is in the library.  A good way to do this is to put the declarations ( also called an interface, or API ) for the library in to a header file.<br \>
+Pour faire usage de la biblioth&egrave;que dans un autre code source, nous avons besoin d'une certaine fa&ccedil;on de dire au compilateur ce qui est exactement dans la biblioth&egrave;que.  Une bonne fa&ccedil;on pour y parvenir est de mettre les d&eacute;clarations (&eacute;galement appel&eacute;e une interface ou API) de la biblioth&egrave;que dans un fichier d'en-t&ecirc;te.<br \>
 <br \>
 <tt><div class="freebasic">
 <span class="com">''&nbsp;mylib.bi</span><br />
 <span class="def">#inclib&nbsp;"mylib"<br />
 </span><span class="key">Declare</span>&nbsp;<span class="key">Function</span>&nbsp;<span class="wrd">Add2</span><span class="oth">(</span>&nbsp;<span class="key">ByVal</span>&nbsp;<span class="wrd">x</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">,</span>&nbsp;<span class="key">ByVal</span>&nbsp;<span class="wrd">y</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
 </div></tt><br />
-There is no need to compile the header.  We want this in its source form so it can be included with other source files.  The <tt><a href="KeyPgInclib.html">#inclib</a></tt> statement will tell the compiler the name of a shared library that we need to link with at runtime running an executable that needs it.<br \>
+Il n'est pas n&eacute;cessaire de compiler le fichier d'en-t&ecirc;te.  Nous le souhaitons sous sa forme de source pour qu'il puisse &ecirc;tre inclus avec les autres fichiers source.  L' instruction <tt><a href="KeyPgInclib.html">#inclib</a></tt> donnera au compilateur le nom de la biblioth&egrave;que partag&eacute;e que nous devons lier &agrave; l'ex&eacute;cution d'un ex&eacute;cutable qui en a besoin.<br \>
 <br \>
-With our library (.dll / .so file) and a header (.bi file) we can try them out in a test program:<br \>
+Grâce &agrave; notre biblioth&egrave;que (fichier .dll / .so) et un fichier en-t&ecirc;te (.bi file) nous pouvons les essayer dans un programme de test:<br \>
 <br \>
 <tt><div class="freebasic">
 <span class="com">''&nbsp;mytest.bas</span><br />
-<span class="com">''&nbsp;compile&nbsp;with:&nbsp;fbc&nbsp;mytest.bas</span><br />
+<span class="com">''&nbsp;compiler&nbsp;avec:&nbsp;fbc&nbsp;mytest.bas</span><br />
 <span class="def">#include&nbsp;once&nbsp;"mylib.bi"<br />
 </span><span class="key">Print</span>&nbsp;<span class="wrd">Add2</span><span class="oth">(</span><span class="num">1</span><span class="oth">,</span><span class="num">2</span><span class="oth">)</span><br />
 </div></tt><br />
-The <tt><a href="KeyPgInclude.html">#include</a></tt> statement tells the compiler to include the source code from <tt>mylib.bi</tt> just as if we had typed it in to the original source.  With the way we have written our include file, it tells the compiler everything it needs to know about the library.<br \>
+L'instruction <tt><a href="KeyPgInclude.html">#include</a></tt> indique au compilateur d'inclure le code de source &agrave; partir de <tt>mylib.bi</tt> comme si nous l'avions tap&eacute; dans le source original.  De la mani&egrave;re dont nous avons &eacute;crit notre fichier d'inclusion, il indique au compilateurtout ce qu'il doit savoir sur la biblioth&egrave;que.<br \>
 <br \>
-We compile this with:<br \>
+Nous compilons ceci avec:<br \>
 <tt>fbc mytest.bas</tt><br \>
 <br \>
-Then when we run the <tt>mytest</tt> executable, we should get the result of:<br \>
+Puis, quand nous lan&ccedil;ons l'ex&eacute;cutable <tt>mytest</tt>, nous devrions obtenir le r&eacute;sultat:<br \>
 <tt>3</tt><br \>
 <br \>
-More than one source module can be used when making a library.  And basic programs can use more than one library by including each needed header.  Some libraries are so large that they might use several headers.  On very large projects, making shared libraries out of some code modules that seldom change can improve compile times and link times dramatically.<br \>
+Plus d'un module source peut &ecirc;tre utilis&eacute; lors de la compilation de la biblioth&egrave;que.  Et les programmes de base peuvent utiliser plus d'une biblioth&egrave;que en incluant les fichiers en-t&ecirc;te n&eacute;cessaires.  Certaines biblioth&egrave;ques sont si importantes qu'elles peuvent utiliser plusieurs en-t&ecirc;tes.  Pour de tr&egrave;s grands projets, la cr&eacute;ation de biblioth&egrave;ques partag&eacute;es avec certains modules de code qui ne changent que rarement peut am&eacute;liorer consid&eacute;rablement les temps de compilation.<br \>
 <br \>
-Shared libraries can optionally contain debugging information specified with the <i><a href="CompilerOptg.html">-g</a></i> command line option.<br \>
+Les biblioth&egrave;ques partag&eacute;es peut &eacute;ventuellement contenir des informations de d&eacute;bogage sp&eacute;cifi&eacute;es avec l'option de ligne de commande <i><a href="CompilerOptg.html">-g</a></i>.<br \>
 <br \>
-Object files, and therefore shared libraries, are platform specific and in some cases specific to a particular version of the compiler and FreeBASIC runtime library.<br \>
+Les fichiers objets, et donc les biblioth&egrave;ques partag&eacute;es, sont sp&eacute;cifique &agrave; la plate-forme et dans certains cas sp&eacute;cifiques &agrave; une version particuli&egrave;re du compilateur et de la biblioth&egrave;que d'ex&eacute;cution FreeBASIC.<br \>
 <br \>
-</div><div class="fb_sect_title">Using Shared Libraries on Windows</div><div class="fb_sect_cont"><br \>
-On windows, the shared library must be stored in a location where it can be found by the executable that needs it a run-time.  <br \>
+</div><div class="fb_sect_title">Utilisation des biblioth&egrave;ques partag&eacute;es sous Windows</div><div class="fb_sect_cont"><br \>
+Sous Windows, la biblioth&egrave;que partag&eacute;e doit &ecirc;tre stock&eacute;e dans un endroit o&ugrave; elle peut &ecirc;tre trouv&eacute;e par l'ex&eacute;cutable qui en a besoin &agrave; l'ex&eacute;cution.  <br \>
 <br \>
-The operating system may search the following directories:<br \>
-<ul><li> The directory from which the executable was loaded.<br \>
-<li> The current directory.<br \>
-<li> The windows and windows system folder.<br \>
-<li> Directories list in the <tt>PATH</tt> environment variable.<br \>
+Le syst&egrave;me d'exploitation peut rechercher dans les r&eacute;pertoires suivants:<br \>
+<ul><li> Le r&eacute;pertoire &agrave; partir duquel l'ex&eacute;cutable a &eacute;t&eacute; charg&eacute;.<br \>
+<li> Le r&eacute;pertoire courant.<br \>
+<li> Le r&eacute;pertoire Windows et le dossier syst&egrave;me de Windows.<br \>
+<li> La liste des r&eacute;pertoires dans la variable d'environnement <tt>PATH</tt>.<br \>
 <br \>
-</ul>The order in which directories are searched may depend on the Windows version in use, and on what settings that the operating system is configured with.<br \>
+</ul>L'ordre dans lequel les r&eacute;pertoires sont parcourus peut d&eacute;pendre de la version Windows en cours d'utilisation et avec quels param&egrave;tres le syst&egrave;me d'exploitation est configur&eacute;.<br \>
 <br \>
-</div><div class="fb_sect_title">Using Shared Libraries on Linux</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Utilisation des biblioth&egrave;ques partag&eacute;es sous Linux</div><div class="fb_sect_cont"><br \>
 <br \>
-By default, linux will not normally search the current directory or the directory from which the executable was loaded.  You will need to either:<br \>
-<ul><li> copy the .so file to a directory that has shared libraries (e.g. <tt>/usr/lib</tt>) and run <tt>ldconfig</tt> to configure the library.<br \>
-<li> modify the environment variable LD_LIBRARY_PATH to search the current directory or a specific directory for the newly created shared library.<br \>
+Par d&eacute;faut, Linux normalement ne cherchera pas dans le r&eacute;pertoire courant ou dans le r&eacute;pertoire &agrave; partir duquel l'ex&eacute;cutable a &eacute;t&eacute; charg&eacute;.  Vous devrez soit:<br \>
+<ul><li> copier le fichier .so copier le fichier dans un r&eacute;pertoire qui contient les biblioth&egrave;ques partag&eacute;es (par exemple, <tt>/usr/lib</tt>) et lancer <tt>ldconfig</tt> pour configurer la biblioth&egrave;que.<br \>
+<li> modifier la variable d'environnement LD_LIBRARY_PATH pour rechercher le r&eacute;pertoire courant ou dans un r&eacute;pertoire sp&eacute;cifique pour la biblioth&egrave;que partag&eacute;e nouvellement cr&eacute;&eacute;e.<br \>
 <br \>
-</ul>To run the executable <tt>./mytest/</tt> and temporarily tell linux to search the current directory, use the following shell command:<br \>
+</ul>Pour lancer l'ex&eacute;cutable <tt>./mytest/</tt> et dire &agrave; Linux de rechercher temporairement dans le r&eacute;pertoire courant, utilisez la commande suivante:<br \>
 <pre class="fb_pre">
 LD_LIBRARY_PATH=.:$LD_LIBRARY_PATH ./mytest
 </pre><br \>
 </div><div class="fb_sect_title">Executables that export symbols</div><div class="fb_sect_cont"><br \>
-If an executable has symbols that must be available to other shared libraries when those shared libraries are loaded, use the <tt><a href="KeyPgExport.html">Export</a></tt> procedure declaration specifier, and the <i><a href="CompilerOptexport.html">-export</a></i> command line option when making (linking) the executable.<br \>
+Si un fichier ex&eacute;cutable contient des symboles qui doivent &ecirc;tre disponibles pour d'autres biblioth&egrave;ques partag&eacute;es lorsque ces biblioth&egrave;ques partag&eacute;es sont charg&eacute;s, utilisez le sp&eacute;cificateur de d&eacute;claration de proc&eacute;dure <tt><a href="KeyPgExport.html">Export</a></tt> et l'option <i><a href="CompilerOptexport.html">-export</a></i> de la ligne de commande lors de la compilation (linkage) de l'ex&eacute;cutable.<br \>
 <br \>
-The <i><a href="CompilerOptexport.html">-export</a></i> option has no extra effect when used with the <i><a href="CompilerOptdylib.html">-dylib</a></i> or <i><a href="CompilerOptdll.html">-dll</a></i> command line options.<br \>
+L'option <i><a href="CompilerOptexport.html">-export</a></i> n'a aucun effet suppl&eacute;mentaire lorsqu'elle est utilis&eacute;e avec les options de ligne de commande <i><a href="CompilerOptdylib.html">-dylib</a></i> ou <i><a href="CompilerOptdll.html">-dll</a></i>.<br \>
 <br \>
-</div><div class="fb_sect_title">Loading Shared Libraries Dynamically</div><div class="fb_sect_cont"><br \>
-Shared libraries can be loaded and used at run time by dynamically loading the library and its symbols at runtime.<br \>
-<ul><li> <tt><a href="KeyPgDylibload.html">DyLibLoad</a></tt> can be used to load and obtain a handle to a shared library.<br \>
-<li> <tt><a href="KeyPgDylibsymbol.html">DyLibSymbol</a></tt> is used to obtain the address of a symbol in a loaded shared library.<br \>
-<li> <tt><a href="KeyPgDylibfree.html">DyLibFree</a></tt> is used to unload a shared library when it is no longer needed.<br \>
+</div><div class="fb_sect_title">Chargement dynamique des biblioth&egrave;ques partag&eacute;es</div><div class="fb_sect_cont"><br \>
+Les biblioth&egrave;ques partag&eacute;es peuvent &ecirc;tre charg&eacute;es et utilis&eacute;es lors de l'ex&eacute;cution par chargement dynamique de la biblioth&egrave;que et de ses symboles, &agrave; l'ex&eacute;cution.<br \>
+<ul><li> <tt><a href="KeyPgDylibload.html">DyLibLoad</a></tt> peut &ecirc;tre utilis&eacute; pour charger et obtenir un "handle" (identifiant num&eacute;rique) &agrave; une biblioth&egrave;que partag&eacute;e.<br \>
+<li> <tt><a href="KeyPgDylibsymbol.html">DyLibSymbol</a></tt> est utilis&eacute; pour obtenir l'adresse d'un symbole dans une biblioth&egrave;que partag&eacute;e qui a &eacute;t&eacute; charg&eacute;e.<br \>
+<li> <tt><a href="KeyPgDylibfree.html">DyLibFree</a></tt> est utilis&eacute; pour d&eacute;charger une biblioth&egrave;que partag&eacute;e quand elle n'est plus n&eacute;cessaire.<br \>
 <br \>
-</ul>Procedures in the shared library must use the <tt><a href="KeyPgExport.html">Export</a></tt> specifier to ensure that the symbols name is placed in the shared library's export table.<br \>
+</ul>Les proc&eacute;dures dans une biblioth&egrave;que partag&eacute;e doivent utiliser le sp&eacute;cificateur <tt><a href="KeyPgExport.html">Export</a></tt> afin de s'assurer que le nom des symboles est plac&eacute; dans le tableau des exportations de la librairie partag&eacute;e.<br \>
 <br \>
-</div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
-<ul><li> <a href="ProPgStaticLibraries.html">Static Libraries</a><br \>
+</div><div class="fb_sect_title">Voir aussi</div><div class="fb_sect_cont"><br \>
+<ul><li> <a href="ProPgStaticLibraries.html">Biblioth&egrave;ques statiques</a><br \>
 <li> <tt><a href="KeyPgInclib.html">#inclib</a></tt><br \>
 <li> <tt><a href="KeyPgInclude.html">#include</a></tt><br \>
-<li> <a href="CompilerOptdll.html">Compiler Option: -dll</a><br \>
-<li> <a href="CompilerOptexport.html">Compiler Option: -export</a><br \>
-<li> <a href="CompilerOptdylib.html">Compiler Option: -dylib</a><br \>
+<li> <a href="CompilerOptdll.html">Option du compilateur: -dll</a><br \>
+<li> <a href="CompilerOptexport.html">Option du compilateur: -export</a><br \>
+<li> <a href="CompilerOptdylib.html">Option du compilateur: -dylib</a><br \>
 <br \>
 </ul><br \>
 </div>

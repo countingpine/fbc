@@ -11,53 +11,53 @@
 </div> 
 <div id="fb_pg_wrapper">
 <div id="fb_pg_body">
-	Sets current work and visible pages<br \>
+	Valide la page de travail et la page visible<br \>
 <br \>
-<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<div class="fb_sect_title">Syntaxe</div><div class="fb_sect_cont"><tt><br \>
 <a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgSub.html">Sub</a> <b>ScreenSet</b> ( <a href="KeyPgByval.html">ByVal</a> <i>work_page</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a> = -1, <a href="KeyPgByval.html">ByVal</a> <i>visible_page</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a> = -1 )<br \>
 </tt><br \>
 </div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
 <b>ScreenSet</b> [ <i>work_page</i> ] [, <i>visible_page</i> ]<br \>
 </tt><br \>
-</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Param&egrave;tres</div><div class="fb_sect_cont"><br \>
 <tt><i>work_page</i></tt><br \>
-<div class="fb_indent">index to working page<br \>
+<div class="fb_indent">indice de la page de travail<br \>
 </div><tt><i>visible_page</i></tt><br \>
-<div class="fb_indent">index to visible page<br \>
+<div class="fb_indent">indice de la page visible<br \>
 <br \>
 </div></div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
-<tt><b>ScreenSet</b></tt> allows to set the current working page and the current visible page. Page numbers range from  0 to the num_pages specified when setting the graphics mode minus 1 . You can use this function to achieve page-flipping or double-buffering.  If you omit <tt><i>work_page</i></tt> but not <tt><i>visible_page</i></tt>, only visible page is changed. If you omit <tt><i>visible_page</i></tt> but not <tt><i>work_page</i></tt>, only work page is changed. If you omit both arguments, both work page and visible page are reset to page 0.<br \>
+<tt><b>ScreenSet</b></tt> permet de d&eacute;terminer la page courante de travail ainsi que la page visible. Les num&eacute;ros de page vont de 0 &agrave; num_pages sp&eacute;cifi&eacute; lors de la validation du mode graphique moins 1. Vous pouvez utiliser cette fonction pour utiliser les techniques de la "permutation de page" (page-flipping) ou du "double tampon" (double-buffering).  Si vous omettez <tt><i>work_page</i></tt> mais pas <tt><i>visible_page</i></tt>, seule la page visible changera. Si vous omettez les deux arguments, les deux pages, de travail et visible, correspondront &agrave; la page 0.<br \>
 <br \>
-</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Exemple</div><div class="fb_sect_cont"><br \>
 <tt><div class="freebasic">
-<span class="com">'&nbsp;Set&nbsp;good&nbsp;old&nbsp;320x200&nbsp;in&nbsp;8bpp&nbsp;mode,&nbsp;but&nbsp;with&nbsp;2&nbsp;pages</span><br />
+<span class="com">'&nbsp;Valide&nbsp;bon&nbsp;vieux&nbsp;mode,&nbsp;320x200&nbsp;en&nbsp;8bpp&nbsp;mais&nbsp;avec&nbsp;2&nbsp;pages</span><br />
 <span class="key">Screen</span>&nbsp;<span class="num">13</span><span class="oth">,</span>&nbsp;<span class="oth">,</span><span class="num">2</span><br />
 <span class="key">Color</span>&nbsp;<span class="oth">,</span><span class="num">15</span><br />
 <span class="key">Dim</span>&nbsp;<span class="wrd">x</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
 <span class="wrd">x</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="oth">-</span><span class="num">40</span><br />
-<span class="com">'&nbsp;Let's&nbsp;work&nbsp;on&nbsp;page&nbsp;1&nbsp;while&nbsp;we&nbsp;display&nbsp;page&nbsp;0</span><br />
+<span class="com">'&nbsp;Travail&nbsp;sur&nbsp;page&nbsp;1&nbsp;pendant&nbsp;nous&nbsp;affichons&nbsp;page&nbsp;0</span><br />
 <span class="key">ScreenSet</span>&nbsp;<span class="num">1</span><span class="oth">,</span>&nbsp;<span class="num">0</span><br />
 <span class="key">Do</span><br />
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Cls</span><br />
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Line</span>&nbsp;<span class="oth">(</span><span class="wrd">x</span><span class="oth">,</span>&nbsp;<span class="num">80</span><span class="oth">)-(</span><span class="wrd">x</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="num">39</span><span class="oth">,</span>&nbsp;<span class="num">119</span><span class="oth">),</span>&nbsp;<span class="num">4</span><span class="oth">,</span>&nbsp;<span class="wrd">BF</span><br />
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">x</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">x</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="num">1</span><br />
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="key">If</span>&nbsp;<span class="oth">(</span><span class="wrd">x</span>&nbsp;<span class="oth">&gt;</span>&nbsp;<span class="num">319</span><span class="oth">)</span>&nbsp;<span class="key">Then</span>&nbsp;<span class="wrd">x</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="oth">-</span><span class="num">40</span><br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">'&nbsp;Wait&nbsp;for&nbsp;vertical&nbsp;sync</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">'&nbsp;Attente&nbsp;syncro&nbsp;verticale</span><br />
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Wait</span>&nbsp;<span class="num">&amp;h3DA</span><span class="oth">,</span>&nbsp;<span class="num">8</span><br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">'&nbsp;Copy&nbsp;work&nbsp;page&nbsp;to&nbsp;visible&nbsp;page</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">'&nbsp;Copy&nbsp;page&nbsp;travail&nbsp;vers&nbsp;page&nbsp;visible</span><br />
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="key">ScreenCopy</span><br />
 <span class="key">Loop</span>&nbsp;<span class="key">While</span>&nbsp;<span class="key">Inkey</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="quo">""</span><br />
 <br />
 </div></tt><br />
 <br \>
 <br \>
-</div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
-<ul><li> Not available in the <i><a href="CompilerOptlang.html">-lang qb</a></i> dialect unless referenced with the alias <tt><b>__Screenset</b></tt>.<br \>
+</div><div class="fb_sect_title">Diff&eacute;rences de dialectes</div><div class="fb_sect_cont"><br \>
+<ul><li> Non disponible en dialecte <i><a href="CompilerOptlang.html">-lang qb</a></i> sauf si r&eacute;f&eacute;renc&eacute; avec l'alias <tt><b>__Screenset</b></tt>.<br \>
 <br \>
-</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
-<ul><li> New to FreeBASIC<br \>
+</ul></div><div class="fb_sect_title">Diff&eacute;rences avec QB</div><div class="fb_sect_cont"><br \>
+<ul><li> Nouveau pour FreeBASIC<br \>
 <br \>
-</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+</ul></div><div class="fb_sect_title">Voir aussi</div><div class="fb_sect_cont"><br \>
 <ul><li> <tt><a href="KeyPgScreengraphics.html">Screen (Graphics)</a></tt><br \>
 <li> <tt><a href="KeyPgScreenres.html">ScreenRes</a></tt><br \>
 <li> <tt><a href="KeyPgScreencopy.html">ScreenCopy</a></tt><br \>

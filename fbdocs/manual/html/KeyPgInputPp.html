@@ -11,28 +11,28 @@
 </div> 
 <div id="fb_pg_wrapper">
 <div id="fb_pg_body">
-	Reads a list of values from a text file<br \>
+	Lit une liste de valeurs &agrave; partir d'un fichier texte<br \>
 <br \>
-<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<div class="fb_sect_title">Syntaxe</div><div class="fb_sect_cont"><tt><br \>
 <b>Input</b> # <i>filenum</i>, <i>variable_list</i><br \>
 </tt><br \>
-</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Param&egrave;tres</div><div class="fb_sect_cont"><br \>
 <tt><i>filenum</i></tt><br \>
-<div class="fb_indent">a file number of a file or device opened for <tt><a href="KeyPgInputfilemode.html">Input</a></tt><br \>
+<div class="fb_indent">un num&eacute;ro de fichier d'un fichier ou d'un dispositif ouvert avec <tt><a href="KeyPgInputfilemode.html">Input</a></tt><br \>
 </div><tt><i>variable_list</i></tt><br \>
-<div class="fb_indent">a list of variables used to hold the values read<br \>
+<div class="fb_indent">une liste des variables utilis&eacute;es pour stocker les valeurs lues<br \>
 <br \>
 </div></div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
-Reads from a text file through a bound file number a delimiter-separated set of values and writes them in reading order into the variables in <tt><i>variable_list</i></tt>. If a variable is numeric the read value is converted from its string representation into the corresponding type.<br \>
+Lit &agrave; partir d'un fichier texte par l'interm&eacute;diaire d'un num&eacute;ro de fichier un ensemble de valeurs s&eacute;par&eacute;es par un d&eacute;limiteur et les &eacute;crit dans l'ordre de la lecture dans les variables de <tt><i>variable_list</i></tt>. Si une variable est num&eacute;rique la valeur lue est convertie &agrave; partir de sa repr&eacute;sentation sous forme de cha&icirc;ne dans son type correspondant.<br \>
 <br \>
-Numeric values are converted in a similar way to the procedures <tt><a href="KeyPgVal.html">Val</a></tt> and <tt><a href="KeyPgVallng.html">ValLng</a></tt>, using the most appropriate function for the number format.<br \>
+Les valeurs num&eacute;riques sont converties de la m&ecirc;me fa&ccedil;on que les proc&eacute;dures <tt><a href="KeyPgVal.html">Val</a></tt> et <tt><a href="KeyPgVallng.html">ValLng</a></tt>, en utilisant la fonction la plus appropri&eacute;e pour le format du nombre.<br \>
 <br \>
-Delimiters may be commas or line breaks. Whitespace is also treated as a separator after numbers. A string including a comma or a whitespace must be surrounded by double quotes. <br \>
+Les d&eacute;limiteurs peuvent &ecirc;tre des virgules ou des sauts de ligne. Un espace blanc est consid&eacute;r&eacute; comme s&eacute;parateur apr&egrave;s les nombres. Une cha&icirc;ne contenant des virgules ou espaces blancs doit &ecirc;tre encadr&eacute;e par des guillemts doubles. <br \>
 <br \>
-To read an entire line into a string, use <tt><a href="KeyPgLineinputPp.html">Line Input</a></tt> instead.<br \>
-<a href="KeyPgWritePp.html">Write #</a> can be used to create a file readable with <tt><b>Input #</b></tt>.<br \>
+Pour lire une ligne enti&egrave;re dans une cha&icirc;ne, utilisez plut&ocirc;t <tt><a href="KeyPgLineinputPp.html">Line Input</a></tt>.<br \>
+<a href="KeyPgWritePp.html">Write #</a> peut &ecirc;tre utilis&eacute; pour cr&eacute;er un fichier lisible avec <tt><b>Input #</b></tt>.<br \>
 <br \>
-</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Exemple</div><div class="fb_sect_cont"><br \>
 <tt><div class="freebasic">
 <span class="key">Dim</span>&nbsp;<span class="wrd">a</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
 <span class="key">Dim</span>&nbsp;<span class="wrd">b</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span><br />
@@ -48,17 +48,19 @@ To read an entire line into a string, use <tt><a href="KeyPgLineinputPp.html">Li
 <span class="key">Print</span>&nbsp;<span class="wrd">a</span><span class="oth">,</span>&nbsp;<span class="wrd">b</span><span class="oth">,</span>&nbsp;<span class="wrd">c</span><br />
 </div></tt><br />
 <br \>
-</div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
-<ul><li> QB has a bug in INPUT # that causes it to read past the end of the line if it does not find a matching end-quote when reading a string. If you are porting QB code that relies upon this bug, you may need to edit your data files to remove newlines from inside quoted strings, or to use a custom function to piece back together the multiline string.<br \>
+</ul></div><div class="fb_sect_title">Diff&eacute;rences avec QB</div><div class="fb_sect_cont"><br \>
+<ul><li> QB a un "bug" dans INPUT # qui l'am&egrave;ne &agrave; lire au-del&agrave; de la fin de la ligne s'il ne trouve pas des guillemets de fin quand il lit une cha&icirc;ne. Si vous avez du code QB qui repose sur ce bug, vous devez &eacute;diter vos fichiers de donn&eacute;es pour supprimer les cha&icirc;nes multi-lignes &agrave; l'int&eacute;rieur des guillemets ou utiliser une fonction personnalis&eacute;e qui rassemble sur une seule ligne les &eacute;l&eacute;ments d'une cha&icirc;ne multi-lignes.<br \>
 <br \>
-</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+</ul></div><div class="fb_sect_title">Voir aussi</div><div class="fb_sect_cont"><br \>
 <ul><li> <tt><a href="KeyPgInput.html">Input</a></tt><br \>
 <li> <tt><a href="KeyPgLineinputPp.html">Line Input #</a></tt><br \>
 <li> <tt><a href="KeyPgWritePp.html">Write #</a></tt><br \>
 <li> <tt><a href="KeyPgOpen.html">Open</a></tt><br \>
-<li> <tt><a href="KeyPgInputfilemode.html">Input (File Mode)</a></tt><br \>
+<li> <tt><a href="KeyPgInputfilemode.html">Input (Mode fichier)</a></tt><br \>
 <br \>
-</ul></div>
+</ul><br \>
+   <br \>
+</div>
 </div>
 </div> 
 </div> 

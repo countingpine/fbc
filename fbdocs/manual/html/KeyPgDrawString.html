@@ -1,161 +1,194 @@
-<html>
-<head>
-<title>Draw String</title>
-<link rel="stylesheet" type="text/css" href="style.css">
-</head>
-<body>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+  <title>Draw String</title>
+
+  
+  
+  <link rel="stylesheet" type="text/css" href="style.css">
+
+</head><body>
 <div id="fb_body_wrapper">
 <div id="fb_tab">
 <div id="fb_tab_l">Draw String</div>
-<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
-</div> 
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif"></div>
+</div>
 <div id="fb_pg_wrapper">
-<div id="fb_pg_body">
-	Graphics statement to render text to an image or screen.<br \>
-<br \>
-<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
-<b>Draw String</b> [<i>buffer</i>,] [STEP] (<i>x</i>, <i>y</i>), <i>text</i> [,<i>color</i> [, <i>font</i> [, <i>method</i> [, (<i>alpha</i>|<i>blender</i>) [, <i>parameter</i>] ] ] ] ]<br \>
-</tt><br \>
-</div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
+<div id="fb_pg_body"> D&eacute;claration graphique pour afficher un texte sur
+une image ou &agrave; l'&eacute;cran.<br \="">
+<br \="">
+<div class="fb_sect_title">Syntaxe</div>
+<div class="fb_sect_cont"><tt><br \="">
+<b>Draw String</b> [<i>buffer</i>,] [STEP] (<i>x</i>, <i>y</i>), <i>text</i>[,<i>color</i> [, <i>font</i> [, <i>method</i> [, (<i>alpha</i>|<i>blender</i>)] ] ] ]<br \="">
+</tt><br \=""></div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
 <b>Draw String</b> [<i>buffer</i>,] [STEP] (<i>x</i>, <i>y</i>), <i>text</i> [, <i>color</i>]<br \>
 <b>Draw String</b> [<i>buffer</i>,] [STEP] (<i>x</i>, <i>y</i>), <i>text</i> , , <i>font</i> [, <i>method</i> [, <i>alpha</i> ] ]<br \>
 <b>Draw String</b> [<i>buffer</i>,] [STEP] (<i>x</i>, <i>y</i>), <i>text</i> , , <i>font</i>, <a href="KeyPgCustomgfx.html">Custom</a>, <i>blender</i> [, <i>parameter</i>]<br \>
 </tt><br \>
-</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
-<tt><i>buffer</i></tt><br \>
-<div class="fb_indent">the sprite to draw the string on. If this is not supplied, it will be drawn to the screen.<br \>
-</div><tt>STEP</tt><br \>
-<div class="fb_indent">use relative coordinates. If <tt>STEP</tt> is added, the x and y coordinates are translated relative to the last drawn point.<br \>
-</div><tt><i>x</i></tt>, <tt><i>y</i></tt><br \>
-<div class="fb_indent">the horizontal / vertical position to draw to, relative to the top left hand corner of the screen (unless <tt>STEP</tt> is used - see above).  The top left corner of the text will be drawn at this position.<br \>
-</div><tt><i>text</i></tt><br \>
-<div class="fb_indent">the string containing the text to draw<br \>
-</div><tt><i>color</i></tt><br \>
-<div class="fb_indent">if no font is supplied, this allows you to choose the color of the text.  If omitted, the default foreground <tt><a href="KeyPgColor.html">Color</a></tt> is used.<br \>
-If a font is supplied, <tt><i>color</i></tt> is ignored, and the font itself specifies the color for each pixel.<br \>
-</div><tt><i>font</i></tt><br \>
-<div class="fb_indent">an image buffer containing a custom font. If no font is supplied, the standard font for the current text resolution is used, and the following parameters are ignored.<br \>
-</div><tt><i>method</i></tt> | <tt><b>Custom</b></tt><br \>
-<div class="fb_indent">specifies how the font characters are drawn on top of the target surface. The same methods as found for the <tt><a href="KeyPgPutgraphics.html">Put</a></tt> statement are allowed, with the only difference that the default method is <tt><a href="KeyPgTransGfx.html">Trans</a></tt> for this function.  This parameter only applies to custom fonts.<br \>
-</div><tt><i>alpha</i></tt><br \>
-<div class="fb_indent">alpha value, ranging 0-255.  This parameter only applies to the <tt><a href="KeyPgAddGfx.html">Add</a></tt> or <tt><a href="KeyPgAlphaGfx.html">Alpha</a></tt> methods.<br \>
-</div><tt><i>blender</i></tt><br \>
-<div class="fb_indent">custom blender function for the <tt><a href="KeyPgCustomgfx.html">Custom</a></tt> drawing method; see <tt><a href="KeyPgPutgraphics.html">Put (Graphics)</a></tt> statement description for details.  This parameter only applies to the <tt><a href="KeyPgCustomgfx.html">Custom</a></tt> method.<br \>
-</div><tt><i>parameter</i></tt><br \>
-<div class="fb_indent">optional <tt><a href="KeyPgPointer.html">Pointer</a></tt> to be passed to the custom blender function; if omitted, the default value is zero (<tt>0</tt>).<br \>
-<br \>
-</div></div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
-This graphics keyword prints a string to the screen with pixel positioning, transparent background, and can use an user-supplied font. <b><tt>Draw String</tt></b> does not update any text or graphics cursor.  It doesn't wrap at the end of line.  Tabs, carriage returns and other special characters have no special behavior in <b><tt>Draw String</tt></b>, and are treated as normal characters.<br \>
-<br \>
-In graphics mode, this function provides a flexible alternative to <tt><a href="KeyPgPrint.html">Print</a></tt>.  It has several key advantages:<br \>
-    - <tt><b>Draw String</b></tt> can print text to any coordinate on the screen, while <tt><a href="KeyPgPrint.html">Print</a></tt> is constrained to the character grid accessible by <tt><a href="KeyPgLocate.html">Locate</a></tt>.<br \>
-    - <tt><a href="KeyPgPrint.html">Print</a></tt> will override the background behind the text with the current background color.  <tt><b>Draw String</b></tt> does not do this: it leaves the pixels in the background untouched.<br \>
-    - Like <tt><a href="KeyPgPutgraphics.html">Put</a></tt>, <tt><b>Draw String</b></tt> has several different methods for printing text, such as <tt><a href="KeyPgAlphaGfx.html">Alpha</a></tt> and <tt><a href="KeyPgCustomgfx.html">Custom</a></tt>.<br \>
-    - <tt><b>Draw String</b></tt> isn't limited to a single character set: it is possible to supply a custom font to be used instead.<br \>
-<br \>
-Note: If a custom font isn't supplied, <b><tt>Draw String</tt></b> will default to the standard font, as used by <tt><a href="KeyPgPrint.html">Print</a></tt>, with character size dictated by <tt><a href="KeyPgWidth.html">Width</a></tt>.  <tt><i>method</i></tt> - if passed - will be ignored, and the text will be drawn using the color supplied, with a transparent background.<br \>
-<br \>
-<b>The custom font format:</b><br \>
-The font is stored in a standard <tt><a href="KeyPgGetgraphics.html">Get</a></tt>/<tt><a href="KeyPgPutgraphics.html">Put</a></tt> buffer; the font has to be stored in a buffer using the same depth as the current color depth, otherwise <b><tt>Draw String</tt></b> will bump out with an illegal function call runtime error.<br \>
-<br \>
-The first line of pixels in the font buffer holds the header of the font, on a byte (<b>not</b> pixel) basis. The very first byte identifies the font header version; currently this must be <tt>0</tt>. The second byte gives the ascii code of the first supported character in the font; the third byte gives the ascii code of the last supported character. So if the font supports the full range 0-255, <tt>0</tt> and <tt>255</tt> will be the contents of these two bytes.<br \>
-Next comes the width of each of the supported characters, each in a byte. Supposing the font holds 96 characters, ranging from 32 to 127 (inclusive), the header would have the first three bytes holding <tt>0</tt>, <tt>32</tt> and <tt>127</tt>, followed by 96 bytes giving the widths of the corresponding chars.<br \>
-<br \>
-The font height is obtained by subtracting 1 from the buffer height, that is, while the first buffer line of pixels acts as a font header, the remaining lines define the glyphs' layout. The buffer must be as wide as necessary to hold all the supported character sprites in the same row, one after another.<br \>
-<br \>
-</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
-This gives an example of basic <tt><b>Draw String</b></tt> usage: it uses it to print <tt>"Hello world"</tt> in the center of the screen:<br \>
-<tt><div class="freebasic">
-<span class="key">Const</span>&nbsp;<span class="wrd">w</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">320</span><span class="oth">,</span>&nbsp;<span class="wrd">h</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">200</span>&nbsp;<span class="com">''&nbsp;screen&nbsp;dimensions</span><br />
-<br />
-<span class="key">Dim</span>&nbsp;<span class="wrd">x</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">,</span>&nbsp;<span class="wrd">y</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">,</span>&nbsp;<span class="wrd">s</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span><br />
-<br />
-<span class="com">''&nbsp;Open&nbsp;a&nbsp;graphics&nbsp;window</span><br />
-<span class="key">ScreenRes</span>&nbsp;<span class="wrd">w</span><span class="oth">,</span>&nbsp;<span class="wrd">h</span><br />
-<br />
-<span class="com">''&nbsp;Draw&nbsp;a&nbsp;string&nbsp;in&nbsp;the&nbsp;centre&nbsp;of&nbsp;the&nbsp;screen:</span><br />
-<br />
-<span class="wrd">s</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="quo">"Hello&nbsp;world"</span><br />
-<span class="wrd">x</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="oth">(</span><span class="wrd">w</span>&nbsp;<span class="oth">-</span>&nbsp;<span class="key">Len</span><span class="oth">(</span><span class="wrd">s</span><span class="oth">)</span>&nbsp;<span class="oth">*</span>&nbsp;<span class="num">8</span><span class="oth">)</span>&nbsp;<span class="oth">\</span>&nbsp;<span class="num">2</span><br />
-<span class="wrd">y</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="oth">(</span><span class="wrd">h</span>&nbsp;<span class="oth">-</span>&nbsp;<span class="num">1</span>&nbsp;<span class="oth">*</span>&nbsp;<span class="num">8</span><span class="oth">)</span>&nbsp;<span class="oth">\</span>&nbsp;<span class="num">2</span><br />
-<br />
-<span class="key">Draw</span>&nbsp;<span class="key">String</span>&nbsp;<span class="oth">(</span><span class="wrd">x</span><span class="oth">,</span>&nbsp;<span class="wrd">y</span><span class="oth">),</span>&nbsp;<span class="wrd">s</span><br />
-<br />
-<span class="com">''&nbsp;Wait&nbsp;for&nbsp;a&nbsp;keypress&nbsp;before&nbsp;ending&nbsp;the&nbsp;program</span><br />
-<span class="key">Sleep</span><br />
-</div></tt><br />
-<div class="fb_img"><img src="images/drawstr1.png" /></div><br \>
-<br \>
-This example shows you how to create and use your own custom font.  For simplicity, it uses <tt><b>Draw String</b></tt> with the default font to create the glyphs.<br \>
-<tt><div class="freebasic">
-<span class="com">''&nbsp;Define&nbsp;character&nbsp;range</span><br />
-<span class="key">Const</span>&nbsp;<span class="wrd">FIRSTCHAR</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">32</span><span class="oth">,</span>&nbsp;<span class="wrd">LASTCHAR</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">127</span><br />
-<br />
-<span class="key">Const</span>&nbsp;<span class="wrd">NUMCHARS</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="oth">(</span><span class="wrd">LASTCHAR</span>&nbsp;<span class="oth">-</span>&nbsp;<span class="wrd">FIRSTCHAR</span><span class="oth">)</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="num">1</span><br />
-<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">UByte</span>&nbsp;<span class="key">Ptr</span>&nbsp;<span class="wrd">p</span><span class="oth">,</span>&nbsp;<span class="wrd">myFont</span><br />
-<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="wrd">i</span><br />
-<br />
-<span class="com">''&nbsp;Open&nbsp;a&nbsp;256&nbsp;color&nbsp;graphics&nbsp;screen&nbsp;(320*200)</span><br />
-<span class="key">ScreenRes</span>&nbsp;<span class="num">320</span><span class="oth">,</span>&nbsp;<span class="num">200</span><span class="oth">,</span>&nbsp;<span class="num">8</span><br />
-<br />
-<span class="com">''&nbsp;Create&nbsp;custom&nbsp;font&nbsp;into&nbsp;PUT&nbsp;buffer</span><br />
-<br />
-<span class="wrd">myFont</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">ImageCreate</span><span class="oth">(</span><span class="wrd">NUMCHARS</span>&nbsp;<span class="oth">*</span>&nbsp;<span class="num">8</span><span class="oth">,</span>&nbsp;<span class="num">9</span><span class="oth">)</span><br />
-<br />
-&nbsp;<span class="com">''&nbsp;Put&nbsp;font&nbsp;header&nbsp;at&nbsp;start&nbsp;of&nbsp;pixel&nbsp;data</span><br />
-<br />
-<span class="def">#ifndef&nbsp;ImageInfo&nbsp;''&nbsp;older&nbsp;versions&nbsp;of&nbsp;FB&nbsp;don't&nbsp;have&nbsp;the&nbsp;ImageInfo&nbsp;feature<br />
-</span><span class="wrd">p</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">myFont</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="key">IIf</span><span class="oth">(</span><span class="wrd">myFont</span><span class="oth">[</span><span class="num">0</span><span class="oth">]</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">7</span><span class="oth">,</span>&nbsp;<span class="num">32</span><span class="oth">,</span>&nbsp;<span class="num">4</span><span class="oth">)</span><br />
-<span class="def">#else<br />
-</span><span class="key">ImageInfo</span><span class="oth">(</span>&nbsp;<span class="wrd">myFont</span><span class="oth">,</span>&nbsp;<span class="oth">,</span>&nbsp;<span class="oth">,</span>&nbsp;<span class="oth">,</span>&nbsp;<span class="oth">,</span>&nbsp;<span class="wrd">p</span>&nbsp;<span class="oth">)</span><br />
-<span class="def">#endif<br />
-</span><br />
-<span class="wrd">p</span><span class="oth">[</span><span class="num">0</span><span class="oth">]</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span><br />
-<span class="wrd">p</span><span class="oth">[</span><span class="num">1</span><span class="oth">]</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">FIRSTCHAR</span><br />
-<span class="wrd">p</span><span class="oth">[</span><span class="num">2</span><span class="oth">]</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">LASTCHAR</span><br />
-<br />
-&nbsp;<span class="com">''&nbsp;PUT&nbsp;each&nbsp;character&nbsp;into&nbsp;the&nbsp;font&nbsp;and&nbsp;update&nbsp;width&nbsp;information</span><br />
-<span class="key">For</span>&nbsp;<span class="wrd">i</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">FIRSTCHAR</span>&nbsp;<span class="key">To</span>&nbsp;<span class="wrd">LASTCHAR</span><br />
-&nbsp;&nbsp;&nbsp;&nbsp;<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;Here&nbsp;we&nbsp;could&nbsp;define&nbsp;a&nbsp;custom&nbsp;width&nbsp;for&nbsp;each&nbsp;letter,&nbsp;but&nbsp;for&nbsp;simplicity&nbsp;we&nbsp;use</span><br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;a&nbsp;fixed&nbsp;width&nbsp;of&nbsp;8&nbsp;since&nbsp;we&nbsp;are&nbsp;reusing&nbsp;the&nbsp;default&nbsp;font&nbsp;glyphs</span><br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">p</span><span class="oth">[</span><span class="num">3</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="wrd">i</span>&nbsp;<span class="oth">-</span>&nbsp;<span class="wrd">FIRSTCHAR</span><span class="oth">]</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">8</span><br />
-&nbsp;&nbsp;&nbsp;&nbsp;<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;Create&nbsp;character&nbsp;onto&nbsp;custom&nbsp;font&nbsp;buffer&nbsp;by&nbsp;drawing&nbsp;using&nbsp;default&nbsp;font</span><br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Draw</span>&nbsp;<span class="key">String</span>&nbsp;<span class="wrd">myFont</span><span class="oth">,</span>&nbsp;<span class="oth">((</span><span class="wrd">i</span>&nbsp;<span class="oth">-</span>&nbsp;<span class="wrd">FIRSTCHAR</span><span class="oth">)</span>&nbsp;<span class="oth">*</span>&nbsp;<span class="num">8</span><span class="oth">,</span>&nbsp;<span class="num">1</span><span class="oth">),</span>&nbsp;<span class="key">Chr</span><span class="oth">(</span><span class="wrd">i</span><span class="oth">),</span>&nbsp;<span class="num">32</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="oth">(</span><span class="wrd">i</span>&nbsp;<span class="key">Mod</span>&nbsp;<span class="num">24</span><span class="oth">)</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="num">24</span><br />
-&nbsp;&nbsp;&nbsp;&nbsp;<br />
-<span class="key">Next</span>&nbsp;<span class="wrd">i</span><br />
-<br />
-<span class="com">''&nbsp;Now&nbsp;the&nbsp;font&nbsp;buffer&nbsp;is&nbsp;ready;&nbsp;we&nbsp;could&nbsp;save&nbsp;it&nbsp;using&nbsp;BSAVE&nbsp;for&nbsp;later&nbsp;use</span><br />
-<span class="key">Rem</span>&nbsp;<span class="key">BSave</span>&nbsp;<span class="quo">"myfont.bmp"</span><span class="oth">,</span>&nbsp;<span class="wrd">myFont</span><br />
-<br />
-<span class="com">''&nbsp;Here&nbsp;we&nbsp;draw&nbsp;a&nbsp;string&nbsp;using&nbsp;the&nbsp;custom&nbsp;font</span><br />
-<span class="key">Draw</span>&nbsp;<span class="key">String</span>&nbsp;<span class="oth">(</span><span class="num">10</span><span class="oth">,</span>&nbsp;<span class="num">10</span><span class="oth">),</span>&nbsp;<span class="quo">"ABCDEFGHIJKLMNOPQRSTUVWXYZ"</span><span class="oth">,</span>&nbsp;<span class="oth">,</span>&nbsp;<span class="wrd">myFont</span><br />
-<span class="key">Draw</span>&nbsp;<span class="key">String</span>&nbsp;<span class="oth">(</span><span class="num">10</span><span class="oth">,</span>&nbsp;<span class="num">26</span><span class="oth">),</span>&nbsp;<span class="quo">"abcdefghijklmnopqrstuvwxyz"</span><span class="oth">,</span>&nbsp;<span class="oth">,</span>&nbsp;<span class="wrd">myFont</span><br />
-<span class="key">Draw</span>&nbsp;<span class="key">String</span>&nbsp;<span class="oth">(</span><span class="num">66</span><span class="oth">,</span>&nbsp;<span class="num">58</span><span class="oth">),</span>&nbsp;<span class="quo">"Hello&nbsp;world!"</span><span class="oth">,</span>&nbsp;<span class="oth">,</span>&nbsp;<span class="wrd">myFont</span><br />
-<br />
-<span class="com">''&nbsp;Free&nbsp;the&nbsp;font&nbsp;from&nbsp;memory,&nbsp;now&nbsp;we&nbsp;are&nbsp;done&nbsp;with&nbsp;it</span><br />
-<span class="key">ImageDestroy</span>&nbsp;<span class="wrd">myFont</span><br />
-<br />
-<span class="key">Sleep</span><br />
-</div></tt><br />
-<div class="fb_img"><img src="images/drawstr2.png" /></div><br \>
-<br \>
-</div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
-<ul><li> New to FreeBASIC<br \>
-<br \>
-</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
-<ul><li> <tt><a href="KeyPgPrint.html">Print</a></tt><br \>
-<li> <tt><a href="KeyPgDraw.html">Draw</a></tt><br \>
-<li> <tt><a href="KeyPgImagecreate.html">ImageCreate</a></tt><br \>
-<li> <tt><a href="KeyPgImageDestroy.html">ImageDestroy</a></tt><br \>
-<li> <tt><a href="KeyPgImageInfo.html">ImageInfo</a></tt><br \>
-<li> <tt><a href="KeyPgPutgraphics.html">Put (Graphics)</a></tt><br \>
-<li> <tt><a href="KeyPgWidth.html">Width</a></tt><br \>
-<br \>
-</ul></div>
 </div>
-</div> 
-</div> 
-</body>
-</html>
+<div class="fb_sect_title">Param&egrave;tres</div>
+<div class="fb_sect_cont"><br \="">
+<tt><i>buffer</i></tt><br \="">
+<div class="fb_indent">le <span style="font-style: italic;">sprite</span> sur lequel &eacute;crire la cha&icirc;ne. S'il n'est pas pr&eacute;cis&eacute;, l'&eacute;criture se fera &agrave; l'&eacute;cran.<br \="">
+</div>
+<tt>STEP</tt><br \="">
+<div class="fb_indent">utilise des coordonn&eacute;es relatives. Si <tt>STEP</tt> est ajout&eacute;, les coordonn&eacute;es x et y sont calcul&eacute;es par rapport au dernier point trac&eacute;.<br \="">
+</div>
+<tt><i>x</i></tt>, <tt><i>y</i></tt><br \="">
+<div class="fb_indent">les coordonn&eacute;es horizontales / verticales o&ugrave; dessiner, par rapport au coin en haut &agrave; gauche de l'&eacute;cran (sauf si <tt>STEP</tt> est utilis&eacute; - voir au-dessus). Le coin en haut &agrave; gauche du texte sera dessin&eacute; &agrave; cette position.<br \="">
+</div>
+<tt><i>text</i></tt><br \="">
+<div class="fb_indent">la cha&icirc;ne contenant le texte &agrave; dessiner<br \="">
+</div>
+<tt><i>color</i></tt><br \="">
+<div class="fb_indent">si aucune police n'a &eacute;t&eacute; pr&eacute;cis&eacute;e, ceci vous permet de choisir la couleur du texte. Si omis, la <tt><a href="KeyPgColor.html">Color</a></tt> d'arri&egrave;re-plan est utilis&eacute;e par d&eacute;faut.<br \="">
+</div>
+<tt><i>font</i></tt><br \="">
+<div class="fb_indent">un tampon image contenant une police personnalis&eacute;e. Si aucune police n'est fournie, la police standard dans la r&eacute;solution du texte actuel est utilis&eacute;e, et les param&eacute;tres suivants sont ignor&eacute;s.<br \="">
+</div>
+<tt><i>method</i></tt><br \="">
+<div class="fb_indent">sp&eacute;cifie comment les caract&egrave;res de la police sont dessin&eacute;s sur la surface cible. Les m&ecirc;mes m&eacute;thodes utilis&eacute;es pour la d&eacute;claration <tt><a href="KeyPgPutgraphics.html">Put</a></tt> sont permises, avec la seule diff&eacute;rence que la m&eacute;thode par d&eacute;faut est la fonction <tt>TRANS</tt>.<br \="">
+</div>
+<tt><i>alpha</i></tt><br \="">
+<div class="fb_indent">valeur alpha, de 0 &agrave; 255. Ce param&egrave;tre s'applique seulement aux m&eacute;thodes <tt><a href="KeyPgAddGfx.html">Add</a></tt> ou <tt><a href="KeyPgAlphaGfx.html">Alpha</a></tt>.<br \="">
+</div>
+<tt><i>blender</i></tt><br \="">
+<div class="fb_indent">fonction <em>blender</em> personnelle pour la m&eacute;thode de dessin <tt><a href="KeyPgCustomgfx.html">Custom</a></tt>; voir la description de la m&eacute;thode <tt><a href="KeyPgPutgraphics.html">Put (Graphique)</a></tt> pour plus de d&eacute;tails. Ce param&egrave;tre s'applique seulement &agrave; la m&eacute;thode <tt><a href="KeyPgCustomgfx.html">Custom</a></tt>.<br \="">
+</div><tt><i>parameter</i></tt><br \>
+<div class="fb_indent"><tt><a href="KeyPgPointer.html">Pointeur</a></tt> facultatif pass&eacute; &agrave; la fonction <em>blender</em> personnelle; si omis, la valeur par d&eacute;faut est (<tt>0</tt>).<br \>
+<br \="">
+</div>
+</div>
+<div class="fb_sect_title">Description</div>
+<div class="fb_sect_cont"><br \="">Ce mot-clef graphique affiche une cha&icirc;ne &agrave; l'&eacute;cran avec positionnement des pixels, un arri&egrave;re-plan transparent et peut utiliser une police personnelle. <b><tt>Draw String</tt></b> ne met pas &agrave; jour le curseur texte ou graphique. Il ne coupe pas en fin de ligne. Tabulations, retours chariot et autres caract&egrave;res sp&eacute;ciaux n'ont pas de comportement sp&eacute;cial dans <b><tt>Draw String</tt></b>, et sont tra&icirc;t&eacute;s comme des caract&egrave;res normaux.<br \="">
+<br \="">
+En mode graphique, cette fonction procure une alternative flexible &agrave; <tt><a href="KeyPgPrint.html">Print</a></tt>. Elle a plusieurs avantages:<br \=""> - <tt><b>Draw String</b></tt> peut afficher un texte &agrave; n'importe quelle position de l'&eacute;cran , alors que <tt><a href="KeyPgPrint.html">Print</a></tt> est oblig&eacute; de respecter la grille de caract&egrave;res accessibles par <tt><a href="KeyPgLocate.html">Locate</a></tt>.<br \=""> - <tt><a href="KeyPgPrint.html">Print</a></tt> remplace l'arri&egrave;re-plan derri&egrave;re le texte avec la couleur courante d'arri&egrave;re-plan. <tt><b>Draw String</b></tt> ne fait pas cela et laisse les pixels de l'arri&egrave;re-plan intacts.<br \=""> - Comme <tt><a href="KeyPgPutgraphics.html">Put</a></tt>, <tt><b>Draw String</b></tt> a diff&eacute;rentes m&eacute;thodes pour afficher un texte, comme <tt><a href="KeyPgAlphaGfx.html">Alpha</a></tt> et <tt><a href="KeyPgCustomgfx.html">Custom</a></tt>.<br \=""> - <tt><b>Draw String</b></tt> ne se limite pas &agrave; un seul jeu de caract&egrave;res: il est possible de fournir une police personnelle en remplacement.<br \="">
+<br \="">
+Note: Si aucune police n'est fournie, <b><tt>Draw String</tt></b> utilise par d&eacute;faut la police standard, comme pour <tt><a href="KeyPgPrint.html">Print</a></tt>, avec la taille de caract&egrave;res indiqu&eacute;e par <tt><a href="KeyPgWidth.html">Width</a></tt>. <tt><i>method</i></tt> - s'il est donn&eacute; - sera ignor&eacute;, et le texte sera dans la couleur s&eacute;cifi&eacute;e, avec un arri&egrave;re-plan transparent.<br \="">
+<br \="">
+<b>Format de la police personnelle:</b><br \="">
+La police est stock&eacute;e dans un tampon <tt><a href="KeyPgGetgraphics.html">Get</a></tt>/<tt><a href="KeyPgPutgraphics.html">Put</a></tt> standard; la police doit &ecirc;tre stock&eacute;e dans un tampon utilisant la m&ecirc;me profondeur que la profondeur de couleur courante, autrement <b><tt>Draw String</tt></b> provoquera une erreur d'appel ill&eacute;gal &agrave; une fonction.<br \="">
+<br \="">
+La premi&egrave;re ligne de pixels dans le tampon de la police contient l'en-t&ecirc;te de la police, sur la base d'un octet (<b>not</b> pixel). Le premier octet identifie la version en-t&ecirc;te de la police; actuellement, ce doit &ecirc;tre 0. Le second octet donne le code ASCII du premier caract&egrave;re pris en charge par la police; le troisi&egrave;me octet donne le code ASCII du dernier caract&egrave;re pris en charge. Ainsi si la police prend en charge de 0 &agrave; 255, <tt>0</tt> et <tt>255</tt> seront le contenu de ces deux octets.<br \="">
+Puis vient la largeur de chacun des caract&egrave;res pris en charge, chacune dans un octet. Supposons que la police prenne en charge 96 caract&egrave;res, de 32 &agrave; 127 (inclus), les trois premiers octets de l'en-t&ecirc;te contiendront <tt>0</tt>, <tt>32</tt> et <tt>127</tt>, suivis de 96 octets donnant les largeurs des caract&egrave;res correspondants.<br \="">
+<br \="">La hauteur de la police est obtenue en soustrayant 1 de la hauteur du tampon, ceci &eacute;tant, tandis que la premi&egrave;re ligne de pixels du tampon agit comme un en-t&ecirc;te de la police, les lignes restantes d&eacute;finissent les glyphes. Le tampon doit &ecirc;tre assez large pour contenir tous les dessins des caract&egrave;res support&eacute;s dans la m&ecirc;me ligne, l'un apr&egrave;s l'autre.<br \="">
+<br \="">
+</div>
+<div class="fb_sect_title">Exemple</div>
+<div class="fb_sect_cont"><br \="">
+Ceci est un exemple de l'usage basic de <tt><b>Draw String</b></tt> : on l'utilise pour &eacute;crire <tt>"Hello world"</tt> au centre de l'&eacute;cran:<br \="">
+<tt>
+<div class="freebasic"><span class="key">Const</span>&nbsp;<span class="wrd">w</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">320</span><span class="oth">,</span>&nbsp;<span class="wrd">h</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">200</span>&nbsp;<span class="com">''dimensions&nbsp;ecran</span><br>
+<br>
+<span class="key">Dim</span>&nbsp;<span class="wrd">x</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">,</span>&nbsp;<span class="wrd">y</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">,</span>&nbsp;<span class="wrd">s</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span><br>
+<br>
+<span class="com">''&nbsp;Ouvre&nbsp;une&nbsp;fenetre&nbsp;graphique</span><br>
+<span class="key">ScreenRes</span>&nbsp;<span class="wrd">w</span><span class="oth">,</span>&nbsp;<span class="wrd">h</span><br>
+<br>
+<span class="com">''&nbsp;Affiche&nbsp;une&nbsp;chaine&nbsp;au&nbsp;centre&nbsp;de&nbsp;l'&nbsp;ecran:</span><br>
+<br>
+<span class="wrd">s</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="quo">"Hello&nbsp;world"</span><br>
+<span class="wrd">x</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="oth">(</span><span class="wrd">w</span>&nbsp;<span class="oth">-</span>&nbsp;<span class="key">Len</span><span class="oth">(</span><span class="wrd">s</span><span class="oth">)</span>&nbsp;<span class="oth">*</span>&nbsp;<span class="num">8</span><span class="oth">)</span>&nbsp;<span class="oth">\</span>&nbsp;<span class="num">2</span><br>
+<span class="wrd">y</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="oth">(</span><span class="wrd">h</span>&nbsp;<span class="oth">-</span>&nbsp;<span class="num">1</span>&nbsp;<span class="oth">*</span>&nbsp;<span class="num">8</span><span class="oth">)</span>&nbsp;<span class="oth">\</span>&nbsp;<span class="num">2</span><br>
+<br>
+<span class="key">Draw</span>&nbsp;<span class="key">String</span>&nbsp;<span class="oth">(</span><span class="wrd">x</span><span class="oth">,</span>&nbsp;<span class="wrd">y</span><span class="oth">),</span>&nbsp;<span class="wrd">s</span><br>
+<br>
+<span class="com">''&nbsp;Attente&nbsp;d'une&nbsp;touche&nbsp;appuyee&nbsp;avant&nbsp;sortie&nbsp;du&nbsp;programme</span><br>
+<span class="key">Sleep</span><br>
+</div>
+</tt><br>
+<div class="fb_img"><img src="images/drawstr1.png"></div>
+<br \="">
+<br \="">
+Cet exemple montre comment vous pouvez cr&eacute;er et utiser votre propre
+police. Pour plus de simplicit&eacute;, on utilise <tt><b>Draw String</b></tt>
+avec la police par d&eacute;faut pour cr&eacute;er les glyphes.<br \="">
+<tt>
+<div class="freebasic"><span class="com">''&nbsp;Definition&nbsp;espace&nbsp;caracteres</span><br>
+<span class="key">Const</span>&nbsp;<span class="wrd">FIRSTCHAR</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">32</span><span class="oth">,</span>&nbsp;<span class="wrd">LASTCHAR</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">127</span><br>
+<br>
+<span class="key">Const</span>&nbsp;<span class="wrd">NUMCHARS</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="oth">(</span><span class="wrd">LASTCHAR</span>&nbsp;<span class="oth">-</span>&nbsp;<span class="wrd">FIRSTCHAR</span><span class="oth">)</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="num">1</span><br>
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">UByte</span>&nbsp;<span class="key">Ptr</span>&nbsp;<span class="wrd">p</span><span class="oth">,</span>&nbsp;<span class="wrd">myFont</span><br>
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="wrd">i</span><br>
+<br>
+<span class="com">''&nbsp;Ouvrir&nbsp;un&nbsp;ecran&nbsp;256&nbsp;couleurs&nbsp;(320*200)</span><br>
+<span class="key">ScreenRes</span>&nbsp;<span class="num">320</span><span class="oth">,</span>&nbsp;<span class="num">200</span><span class="oth">,</span>&nbsp;<span class="num">8</span><br>
+<br>
+<span class="com">''&nbsp;Creer&nbsp;police&nbsp;personnelle&nbsp;dans&nbsp;tampon&nbsp;PUT</span><br>
+<br>
+<span class="wrd">myFont</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">ImageCreate</span><span class="oth">(</span><span class="wrd">NUMCHARS</span>&nbsp;<span class="oth">*</span>&nbsp;<span class="num">8</span><span class="oth">,</span>&nbsp;<span class="num">9</span><span class="oth">)</span><br>
+<br>
+&nbsp;<span class="com">''&nbsp;Place&nbsp;entete&nbsp;police&nbsp;au&nbsp;debut&nbsp;des&nbsp;donnees&nbsp;pixel</span><br>
+<br>
+<span class="def">#ifndef&nbsp;ImageInfo&nbsp;''&nbsp;older&nbsp;versions&nbsp;of&nbsp;FB&nbsp;don't&nbsp;have&nbsp;the&nbsp;ImageInfo&nbsp;feature<br>
+</span><span class="wrd">p</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">myFont</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="key">IIf</span><span class="oth">(</span><span class="wrd">myFont</span><span class="oth">[</span><span class="num">0</span><span class="oth">]</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">7</span><span class="oth">,</span>&nbsp;<span class="num">32</span><span class="oth">,</span>&nbsp;<span class="num">4</span><span class="oth">)</span><br>
+<span class="def">#else<br>
+</span><span class="key">ImageInfo</span><span class="oth">(</span>&nbsp;<span class="wrd">myFont</span><span class="oth">,</span>&nbsp;<span class="oth">,</span>&nbsp;<span class="oth">,</span>&nbsp;<span class="oth">,</span>&nbsp;<span class="oth">,</span>&nbsp;<span class="wrd">p</span>&nbsp;<span class="oth">)</span><br>
+<span class="def">#endif<br>
+</span><br>
+<span class="wrd">p</span><span class="oth">[</span><span class="num">0</span><span class="oth">]</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span><br>
+<span class="wrd">p</span><span class="oth">[</span><span class="num">1</span><span class="oth">]</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">FIRSTCHAR</span><br>
+<span class="wrd">p</span><span class="oth">[</span><span class="num">2</span><span class="oth">]</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">LASTCHAR</span><br>
+<br>
+&nbsp;<span class="com">''&nbsp;PUT&nbsp;chaque&nbsp;caractere&nbsp;dans&nbsp;la&nbsp;police&nbsp;et&nbsp;mise-a-jour&nbsp;information&nbsp;longueur</span><br>
+<span class="key">For</span>&nbsp;<span class="wrd">i</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">FIRSTCHAR</span>&nbsp;<span class="key">To</span>&nbsp;<span class="wrd">LASTCHAR</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;Ici&nbsp;nous&nbsp;pouvons&nbsp;definir&nbsp;une&nbsp;largeur&nbsp;utilisateur&nbsp;pour&nbsp;chaque&nbsp;lettre,&nbsp;mais&nbsp;par&nbsp;simplicite&nbsp;nous&nbsp;utilisons</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;une&nbsp;largeur&nbsp;fixe&nbsp;de&nbsp;8&nbsp;puisque&nbsp;nous&nbsp;re-utilisons&nbsp;les&nbsp;glyphes&nbsp;par&nbsp;defaut&nbsp;de&nbsp;police</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">p</span><span class="oth">[</span><span class="num">3</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="wrd">i</span>&nbsp;<span class="oth">-</span>&nbsp;<span class="wrd">FIRSTCHAR</span><span class="oth">]</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">8</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;Creer&nbsp;un&nbsp;caractere&nbsp;dans&nbsp;tampon&nbsp;police&nbsp;utilisateur&nbsp;en&nbsp;dessinant&nbsp;avec&nbsp;police&nbsp;defaut</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Draw</span>&nbsp;<span class="key">String</span>&nbsp;<span class="wrd">myFont</span><span class="oth">,</span>&nbsp;<span class="oth">((</span><span class="wrd">i</span>&nbsp;<span class="oth">-</span>&nbsp;<span class="wrd">FIRSTCHAR</span><span class="oth">)</span>&nbsp;<span class="oth">*</span>&nbsp;<span class="num">8</span><span class="oth">,</span>&nbsp;<span class="num">1</span><span class="oth">),</span>&nbsp;<span class="key">Chr</span><span class="oth">(</span><span class="wrd">i</span><span class="oth">),</span>&nbsp;<span class="num">32</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="oth">(</span><span class="wrd">i</span>&nbsp;<span class="key">Mod</span>&nbsp;<span class="num">24</span><span class="oth">)</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="num">24</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+<span class="key">Next</span>&nbsp;<span class="wrd">i</span><br>
+<br>
+<span class="com">''&nbsp;Maintenant&nbsp;le&nbsp;tampon&nbsp;police&nbsp;est&nbsp;pret;&nbsp;nous&nbsp;pouvons&nbsp;le&nbsp;sauver&nbsp;avec&nbsp;BSAVE&nbsp;pour&nbsp;utilisation&nbsp;ulterieur</span><br>
+<span class="key">Rem</span>&nbsp;<span class="key">BSave</span>&nbsp;<span class="quo">"myfont.bmp"</span><span class="oth">,</span>&nbsp;<span class="wrd">myFont</span><br>
+<br>
+<span class="com">''&nbsp;Ici&nbsp;nous&nbsp;affichons&nbsp;une&nbsp;chaine&nbsp;avec&nbsp;la&nbsp;police&nbsp;personelle</span><br>
+<span class="key">Draw</span>&nbsp;<span class="key">String</span>&nbsp;<span class="oth">(</span><span class="num">10</span><span class="oth">,</span>&nbsp;<span class="num">10</span><span class="oth">),</span>&nbsp;<span class="quo">"ABCDEFGHIJKLMNOPQRSTUVWXYZ"</span><span class="oth">,</span>&nbsp;<span class="oth">,</span>&nbsp;<span class="wrd">myFont</span><br>
+<span class="key">Draw</span>&nbsp;<span class="key">String</span>&nbsp;<span class="oth">(</span><span class="num">10</span><span class="oth">,</span>&nbsp;<span class="num">26</span><span class="oth">),</span>&nbsp;<span class="quo">"abcdefghijklmnopqrstuvwxyz"</span><span class="oth">,</span>&nbsp;<span class="oth">,</span>&nbsp;<span class="wrd">myFont</span><br>
+<span class="key">Draw</span>&nbsp;<span class="key">String</span>&nbsp;<span class="oth">(</span><span class="num">66</span><span class="oth">,</span>&nbsp;<span class="num">58</span><span class="oth">),</span>&nbsp;<span class="quo">"Hello&nbsp;world!"</span><span class="oth">,</span>&nbsp;<span class="oth">,</span>&nbsp;<span class="wrd">myFont</span><br>
+<br>
+<span class="com">''&nbsp;Libere&nbsp;la&nbsp;police&nbsp;de la&nbsp;memoire,&nbsp;maintenant&nbsp;que&nbsp;nous&nbsp;en&nbsp;avons&nbsp;fini</span><br>
+<span class="key">ImageDestroy</span>&nbsp;<span class="wrd">myFont</span><br>
+<br>
+<span class="key">Sleep</span><br>
+</div>
+</tt><br>
+<div class="fb_img"><img src="images/drawstr2.png"></div>
+<br \="">
+<br \="">
+</div>
+<div class="fb_sect_title">Diff&eacute;rences avec QB</div>
+<div class="fb_sect_cont"><br \="">
+<ul>
+  <li> Nouveau pour FreeBASIC<br \="">
+    <br \="">
+  </li>
+</ul>
+</div>
+<div class="fb_sect_title">Voir aussi</div>
+<div class="fb_sect_cont"><br \="">
+<ul>
+  <li> <tt><a href="KeyPgPrint.html">Print</a></tt><br \="">
+  </li>
+  <li> <tt><a href="KeyPgDraw.html">Draw</a></tt><br \="">
+  </li>
+  <li> <tt><a href="KeyPgImagecreate.html">ImageCreate</a></tt><br \="">
+  </li>
+  <li> <tt><a href="KeyPgImageDestroy.html">ImageDestroy</a></tt><br \="">
+  </li>
+  <li> <tt><a href="KeyPgImageInfo.html">ImageInfo</a></tt><br \="">
+  </li>
+  <li> <tt><a href="KeyPgPutgraphics.html">Put (Graphique)</a></tt><br \="">
+  </li>
+  <li> <tt><a href="KeyPgWidth.html">Width</a></tt><br \="">
+    <br \="">
+  </li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+</body></html>

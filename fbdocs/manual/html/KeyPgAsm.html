@@ -11,59 +11,59 @@
 </div> 
 <div id="fb_pg_wrapper">
 <div id="fb_pg_body">
-	Code block that allows the use of architecture-specific instructions.<br \>
+	Bloc de code qui permet l'utilisation d'instructions spécifiques à l'architecture.<br \>
 <br \>
-<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<div class="fb_sect_title">Syntaxe</div><div class="fb_sect_cont"><tt><br \>
 <b>Asm</b><br \>
 <div class="fb_indent"><i>architecture-dependent instructions</i><br \>
 </div>End <b>Asm</b><br \>
 <br \>
-<div class="fb_indent"></tt><i>Or</i><tt><br \>
+<div class="fb_indent"></tt><i>Ou</i><tt><br \>
 <br \>
 </div><b>Asm</b> <i>architecture-dependent instructions</i><br \>
 </tt><br \>
 </div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
-The <tt>Asm</tt> block is used to insert specific machine-code instructions in a program in order to perform operations that cannot be carried out using the features of the language or to hand-optimize performance-sensitive sections of code.<br \>
+Le bloc <tt>Asm</tt> est utilisé pour insérer dans le programme des instructions en code machine afin d'effectuer des opérations qui ne peuvent l'être en utilisant les caractéristiques du langage ou d'optimiser à la main les performances de sections de code sensibles.<br \>
 <br \>
-The current FreeBASIC compiler currently only produces code for Intel <a href="x86.html">80x86</a>-based machines; however, in the future, the compiler might be ported to a platform which does not support the same instruction set.  Therefore, <tt>Asm</tt> blocks should only be used when necessary, and a FreeBASIC-only alternative should be provided if possible.<br \>
+Le compilateur FreeBasic actuellement ne produit du code que pour les machines Intel basées sur <a href="x86.html">80x86</a>; toutefois, à l'avenir, le compilateur sera peut être porté sur une plate-forme qui ne supporte pas le même jeu d'instructions.  Par conséquent, les blocs <tt>Asm</tt> ne devraient être utilisés que lorsque cela est nécessaire et seule une alternative FreeBasic devrait être fournie, si possible.<br \>
 <br \>
-The return value of a function may be set by using the <tt><a href="KeyPgFunction.html">Function</a></tt> keyword within brackets as shown in the example below.<br \>
+La valeur retournée par une fonction peut être définie en utilisant le mot-clef <tt><a href="KeyPgFunction.html">Function</a></tt> entre parenthèses tel qu'illustré dans l'exemple ci-dessous.<br \>
 <br \>
-<tt>Asm</tt> block comments have the same syntax as usual FreeBASIC <a href="KeyPgRem.html">Comments</a>  - use FreeBASIC-like " <tt>'</tt> " comments, not " <tt>;</tt> " as usual in ASM. <br \>
+Les blocs de commentaires <tt>Asm</tt> ont la syntaxe habituelle des <a href="KeyPgRem.html">Commentaires</a> du FreeBasic FreeBASIC <a href="KeyPgRem.html">Comments</a>  - utilisez les commentaires FreeBASIC " <tt>'</tt> ", et non les commentaires " <tt>;</tt> " comme d'habitude en ASM. <br \>
 <br \>
-<b>x86 Specific:</b><br \>
+<b> Specificités x86:</b><br \>
 <br \>
-<div class="fb_indent"><b>Syntax</b><br \>
-<div class="fb_indent">The syntax of the inline assembler is a simplified form of Intel syntax.  Intel syntax is used by the majority of x86 assemblers, such as MASM, TASM, NASM, YASM and FASM. In general, the destination of an instruction is placed first, followed by the source. Variables and functions defined by a program may be referenced in an Asm block.  The assembler used by FreeBASIC is GAS, using the <tt>.intel_syntax noprefix</tt> directive, and ASM blocks are passed through unmodified, except for the substitution of local variable names for stack frame references, and commenting removal.<br \>
+<div class="fb_indent"><b>Syntaxe</b><br \>
+<div class="fb_indent">La syntaxe de l'assembleur en ligne est une forme simplifiée de la syntaxe Intel.  La syntaxe Intel est utilisée par la majorité des assembleurs x86, tels que MASM, TASM, NASM, YASM et FASM. En général, la destination d'une instruction est placée en premier, suivie par la source. Les variables et fonctions définies par un programme doivent être référencées dans un bloc Asm.  L'assembleur est utilisé par FreeBASIC est GAS, utilisant la directive <tt>.intel_syntax noprefix</tt>, et les blocs ASM sont passés non modifiés, sauf pour la substitution des noms de variables locales pour le cadre de la pile références et en commentant l'enlèvement.<br \>
 <br \>
-Instruction syntax is mostly the same as FASM uses, one important difference is that GAS requires size settings to be followed by the word "ptr".<br \>
-<br \>
+La syntaxe d'instructions est essentiellement le même que celle qu'utilise FASM, une différence importante est que GAS nécessite des paramètres de taille à suivre par le mot "ptr".<br \>
 <tt><div class="freebasic">
 <span class="com">'&nbsp;Assuming&nbsp;"blah"&nbsp;is&nbsp;a&nbsp;FB&nbsp;global&nbsp;or&nbsp;local&nbsp;UINTEGER&nbsp;variable</span><br />
 <span class="wrd">mov</span>&nbsp;&nbsp;<span class="wrd">eax</span><span class="oth">,</span>&nbsp;<span class="oth">[</span><span class="wrd">blah</span><span class="oth">]</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">'&nbsp;OK:&nbsp;size&nbsp;is&nbsp;apparent&nbsp;from&nbsp;eax</span><br />
 <span class="wrd">inc</span>&nbsp;&nbsp;<span class="oth">[</span><span class="wrd">blah</span><span class="oth">]</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">'&nbsp;Not&nbsp;OK:&nbsp;size&nbsp;is&nbsp;not&nbsp;given</span><br />
 <span class="wrd">inc</span>&nbsp;&nbsp;<span class="wrd">dword</span>&nbsp;<span class="oth">[</span><span class="wrd">blah</span><span class="oth">]</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">'&nbsp;Not&nbsp;OK:&nbsp;size&nbsp;given,&nbsp;but&nbsp;still&nbsp;not&nbsp;accepted&nbsp;by&nbsp;GAS</span><br />
-<span class="wrd">inc</span>&nbsp;&nbsp;<span class="wrd">dword</span>&nbsp;<span class="key">Ptr</span>&nbsp;<span class="oth">[</span><span class="wrd">blah</span><span class="oth">]</span>&nbsp;&nbsp;&nbsp;<span class="com">'&nbsp;OK:&nbsp;"ptr"&nbsp;is&nbsp;needed&nbsp;by&nbsp;GAS&nbsp;here</span></div></tt><br />
+<span class="wrd">inc</span>&nbsp;&nbsp;<span class="wrd">dword</span>&nbsp;<span class="key">Ptr</span>&nbsp;<span class="oth">[</span><span class="wrd">blah</span><span class="oth">]</span>&nbsp;&nbsp;&nbsp;<span class="com">'&nbsp;OK:&nbsp;"ptr"&nbsp;is&nbsp;needed&nbsp;by&nbsp;GAS&nbsp;here</span><br />
+</div></tt><br />
 <br \>
-</div><b>Register Preservation</b><br \>
-<div class="fb_indent">When an ASM block is opened, the registers <tt>ebx</tt>, <tt>esi</tt>, and <tt>edi</tt> are pushed to the stack, when the block is closed, these registers are popped back from the stack.  This is because these registers are required to be preserved by most or all OS's using the x86 CPU.  You can therefore use these registers without explicitly preserving them yourself. You should not change <tt>esp</tt> and <tt>ebp</tt>, since they are usually used to address local variables. <br \>
+</div><b>Préservation des registres</b><br \>
+<div class="fb_indent">Quand un bloc ASM est ouvert, les registres <tt>ebx</tt>, <tt>esi</tt> et <tt>edi</tt> sont poussés sur la pile, quand le bloc est fermé, ces registres sont récupérés sur la pile.  C'est parce que ces registres doivent être préservés par la plupart ou la totalité des systèmes d'exploitation utilisant le processeur x86.  Vous pouvez donc utiliser ces registres sans les préserver explicitement, vous-même. Vous ne devez pas modifier  <tt>esp</tt> et <tt>ebp</tt>, car ils sont généralement utilisés pour traiter les variables locales. <br \>
 <br \>
-</div><b>Register Names</b><br \>
-<div class="fb_indent">The names of the registers for the x86 architecture are written as follows in an <tt>Asm</tt> block:<br \>
-</div></div><ul><ul><ul><li> 4-byte integer registers: <tt>eax</tt>, <tt>ebx</tt>, <tt>ecx</tt>, <tt>edx,</tt> <tt>ebp</tt>, <tt>esp</tt>, <tt>edi</tt>, <tt>esi</tt><br \>
-<li> 2-byte integer registers: <tt>ax</tt>, <tt>bx</tt>, <tt>cx</tt>, <tt>dx</tt>, <tt>bp</tt>, <tt>sp</tt>, <tt>di</tt>, <tt>si</tt> (low words of 4-byte <tt>e</tt>- registers)<br \>
-<li> 1-byte integer registers: <tt>al</tt>, <tt>ah</tt>, <tt>bl</tt>, <tt>bh</tt>, <tt>cl</tt>, <tt>ch</tt>, <tt>dl</tt>, <tt>dh</tt> (low and high bytes of 2-byte -<tt>x</tt> registers)<br \>
-<li> Floating-point registers: <tt>st(0)</tt>, <tt>st(1)</tt>, <tt>st(2)</tt>, <tt>st(3)</tt>, <tt>st(4)</tt>, <tt>st(5)</tt>, <tt>st(6)</tt>, <tt>st(7)</tt><br \>
-<li> MMX registers (aliased onto floating-point registers): <tt>mm0</tt>, <tt>mm1</tt>, <tt>mm2</tt>, <tt>mm3</tt>, <tt>mm4</tt>, <tt>mm5</tt>, <tt>mm6</tt>, <tt>mm7</tt><br \>
-<li> SSE registers: <tt>xmm0</tt>, <tt>xmm1</tt>, <tt>xmm2</tt>, <tt>xmm3</tt>, <tt>xmm4</tt>, <tt>xmm5</tt>, <tt>xmm6</tt>, <tt>xmm7</tt><br \>
-</ul></ul></ul><div class="fb_indent"><b>Instruction Set</b><br \>
+</div><b>Noms des registres</b><br \>
+<div class="fb_indent">Les noms des registres pour l'architecture x86 sont rédigés comme suit dans un bloc <tt>Asm</tt>:<br \>
+</div></div><ul><ul><ul><li> registres entiers de 4 octets: <tt>eax</tt>, <tt>ebx</tt>, <tt>ecx</tt>, <tt>edx,</tt> <tt>ebp</tt>, <tt>esp</tt>, <tt>edi</tt>, <tt>esi</tt><br \>
+<li> registres entiers de 2 octets: <tt>ax</tt>, <tt>bx</tt>, <tt>cx</tt>, <tt>dx</tt>, <tt>bp</tt>, <tt>sp</tt>, <tt>di</tt>, <tt>si</tt> (low words of 4-byte <tt>e</tt>- registers)<br \>
+<li> registres entiers de 1 octets: <tt>al</tt>, <tt>ah</tt>, <tt>bl</tt>, <tt>bh</tt>, <tt>cl</tt>, <tt>ch</tt>, <tt>dl</tt>, <tt>dh</tt> (low and high bytes of 2-byte -<tt>x</tt> registers)<br \>
+<li> registres à virgule flottante: <tt>st(0)</tt>, <tt>st(1)</tt>, <tt>st(2)</tt>, <tt>st(3)</tt>, <tt>st(4)</tt>, <tt>st(5)</tt>, <tt>st(6)</tt>, <tt>st(7)</tt><br \>
+<li> registres MMX (alias sur les registres à virgule flottante): <tt>mm0</tt>, <tt>mm1</tt>, <tt>mm2</tt>, <tt>mm3</tt>, <tt>mm4</tt>, <tt>mm5</tt>, <tt>mm6</tt>, <tt>mm7</tt><br \>
+<li> registres SSE: <tt>xmm0</tt>, <tt>xmm1</tt>, <tt>xmm2</tt>, <tt>xmm3</tt>, <tt>xmm4</tt>, <tt>xmm5</tt>, <tt>xmm6</tt>, <tt>xmm7</tt><br \>
+</ul></ul></ul><div class="fb_indent"><b>Ensemble des instructions</b><br \>
 <br \>
-See these external references:<br \>
+Voir ces références externes:<br \>
 </div><ul><ul><ul><li> <a href="http://board.flatassembler.net/download.php?id=3093">Original Intel 80386 manual from 1986</a><br \>
 <li> <a href="http://developer.intel.com/design/Pentium4/documentation.htm">Latest Intel Pentium 4 manuals</a><br \>
-<li> <a href="http://home.comcast.net/~fbkotler/nasmdocb.html">NASM x86 Instruction Reference</a> (Please note that NASM is not the assembler used by FreeBASIC, but this page provides a good overview of x86 instructions)<br \>
-</ul></ul></ul><div class="fb_indent"><b>Unsafe instructions</b><br \>
-<div class="fb_indent">Note that the FreeBASIC compiler produces 32-bit protected-mode code for the x86 which usually runs in an unprivileged user level; therefore, privileged and sensitive instructions will assemble fine, but possibly won't work correctly or cause a runtime "General Protection Fault", "Illegal instruction", or SIGILL error. The following are the privileged and sensitive instructions as of the Intel Pentium 4 and Xeon:<br \>
+<li> <a href="http://home.comcast.net/~fbkotler/nasmdocb.html">NASM x86 Instruction Reference</a> (S'il vous plaît notez que NASM n'est pas l'assembleur utilisé par FreeBasic, mais cette page donne un bon aperçu des instructions x86)<br \>
+</ul></ul></ul><div class="fb_indent"><b>Instructions à risque</b><br \>
+<br \><div class="fb_indent">Notez que le compilateur FreeBASIC produit du code 32-bit en mode protégé pour les architectures x86 qui fonctionne habituellement dans un niveau utilisateur non privilégié; cependant, les instructions privilégiés et sensibles seront assemblées correctement, mais ne fonctionneront peut-être pas correctement ou provoqueront une ereur du type "General Protection Fault", "Illegal instruction" ou SIGILL. Voici les instructions privilégiées et sensibles des processeurs Intel Pentium 4 et Xeon:<br \>
 </div></div><ul><ul><ul><li> <tt>cli</tt> *1<br \>
 <li> <tt>clts</tt><br \>
 <li> <tt>hlt</tt><br \>
@@ -78,7 +78,7 @@ See these external references:<br \>
 <li> <tt>lldt</tt><br \>
 <li> <tt>lmsw</tt><br \>
 <li> <tt>ltr</tt><br \>
-<li> <tt>mov</tt> to/from <tt>CR</tt>n, <tt>DR</tt>n, <tt>TR</tt>n<br \>
+<li> <tt>mov</tt> vers/depuis <tt>CR</tt>n, <tt>DR</tt>n, <tt>TR</tt>n<br \>
 <li> <tt>out</tt> *1<br \>
 <li> <tt>outs</tt> *1<br \>
 <li> <tt>rdmsr</tt><br \>
@@ -90,14 +90,14 @@ See these external references:<br \>
 <li> <tt>wrmsr</tt><br \>
 <li> all SSE2 and higher instructions *2<br \>
 <br \>
-</ul></ul></ul><div class="fb_indent"><div class="fb_indent"> *1: sensitive to IOPL, fine in DOS <br \>
- *2: sensitive to permission bits in CR4, see below<br \>
-</div></div>The privileged instructions will work "correctly" in DOS when running on a Ring 0 DPMI kernel, like the (non-default) Ring 0 version of CWSDPMI, WDOSX or D3X, nevertheless most of them are not really useful and dangerous when executed from DPMI code. RDTSC (Read Time Stamp Counter) has been shown to be allowed by most, or all OS'es.<br \>
-However the usefulness of RDTSC has been diminished with the advent of multi-core and hibernating CPUs. SSE2 and higher instructions are disabled "by default" after CPU initialization, Windows and Linux usually do enable them, in DOS it is business of the DPMI host: HDPMI32 will enable them, CWSDPMI won't. The INT instruction is usable in the DOS version/target only, note that it works slightly differently from real mode DOS, see also FaqDOS.<br \>
-The segment registers (<tt>cs</tt>, <tt>ds</tt>, <tt>es</tt>, <tt>fs</tt>, <tt>gs</tt>) should not be changed from an <tt>Asm</tt> block, except in certain cases with the DOS port (note that they do NOT work the same way as in real-mode DOS, see also FaqDOS). The operating system or DPMI host is responsible for memory management; the meaning of segments (selectors) in protected mode is very different from real-mode memory addressing.<br \>
-Note that those "unsafe" instructions are not guaranteed to raise a "visible" crash even when ran with insufficient privilege - the OS or DPMI host can decide to "emulate" them, either functionally (reading from some CRx works under HDPMI32), or "dummy" (nothing happens, instruction will pass silently, like a NOP).<br \>
+</ul></ul></ul><div class="fb_indent"><div class="fb_indent"> *1: sensible à IOPL, très bien sous DOS <br \>
+ *2: sensible aux bits d'autorisation dans CR4, voir ci-dessous<br \>
+</div></div>Les instructions privilégiées fonctionnent "correctement" sous DOS lors de l'exécution sur un "noyau Ring 0 DPMI", comme la (non-défaut) version Ring 0 de CWSDPMI, WDOSX ou D3X, cependant la plupart d'entre eux ne sont pas vraiment utiles et dangereux lorsqu'ils sont exécutés à partir de code DPMI. RDTSC (Read Time Stamp Counter) a été exposé à être autorisé par la plupart ou la totalité OS.<br \>
+Cependant l'utilité de RDTSC a été diminué avec l'avènement du multi-core et des processeurs à hibernation. SSE2 et instructions supérieures sont désactivées "par défaut" après l'initialisation du CPU, Windows et Linux en général les permettent, sous DOS, c'est l'affaire de l'hôte DPMI: HDPMI32 les permettra, CWSDPMI ne le permettra pas. L'instruction INT est utilisable sous DOS version/cible uniquement, noter qu'il fonctionne un peu différemment du mode réel DOS, voir aussi FaqDOS.<br \>
+Les registres de segment (<tt>cs</tt>, <tt>ds</tt>, <tt>es</tt>, <tt>fs</tt>, <tt>gs</tt>) ne devrait pas être modifiés à partir d'un bloc <tt>Asm</tt>, sauf dans certains cas de portage DOS, (notez qu'ils NE fonctionnent PAS de la m&ecirc;me fa&ccedil;on qu'en mode r&eacute;el DOS, voir aussi FaqDOS). Le syst&egrave;me op&eacute;ratoire ou l'h“te DPMI est responsable de la gestion de la m&eacute;moire; la signification des s&egrave;gments (s&eacute;lecteurs) en mode prot&eacute;g&eacute; est tr&egrave;s diff&eacute;rente du mode d'adressage r&eacute;el de la m&eacute;moire.<br \>
+Notez que ces instructions "dangereuses" ne sont pas garanties pour faire apparaŒtre un crash "visible" m&ecirc;me quand a fonctionn&eacute; avec les privil&egrave;ges suffisants - l'OS ou l'h“te DPMI peut d&eacute;cider de les "&eacute;muler", soit fonctionnellement (en lisant &agrave; partir de certains CRx sous HDPMI32), ou "factices" (rien ne se passe, l'instruction passera en silence, comme un NOP).<br \>
 <br \>
-</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Exemple</div><div class="fb_sect_cont"><br \>
 <tt><div class="freebasic">
 <span class="com">''&nbsp;This&nbsp;is&nbsp;an&nbsp;example&nbsp;for&nbsp;the&nbsp;x86&nbsp;architecture.</span><br />
 <span class="key">Function</span>&nbsp;<span class="wrd">AddFive</span><span class="oth">(</span><span class="key">ByVal</span>&nbsp;<span class="wrd">num</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
@@ -115,17 +115,17 @@ Note that those "unsafe" instructions are not guaranteed to raise a "visible" cr
 <br \>
 <tt><pre class="fb_pre">4 + 5 = 9</pre></tt><br \>
 <br \>
-FreeBASIC's Assembler is AS / GAS, the assembler of GCC, so an external program. Some quirks apply:<br \>
-<ul><ul><li> The error lines  returned by FBC for ASM blocks are not related the FB source file. As FBC simply displays the errors returned by AS , the lines are related to the assembly file. To make FreeBASIC preserve them, the compiler must be invoked with the <i><a href="CompilerOptrupp.html">-R</a></i> option ("don't delete ASM files").<br \>
-<li> The label names are case sensitive inside ASM blocks.<br \>
+L'assembleur de FreeBASIC's est AS / GAS, l'assembleur de GCC, donc un programme externe. Certaines bizarreries s'appliquent:<br \>
+<ul><li> Les lignes d'erreur renvoy&eacute;es par FBC pour les blocs ASM ne sont pas li&eacute;s au fichier source FB. Comme FBC affiche simplement les erreurs renvoy&eacute;es par AS, les lignes sont li&eacute;es au fichier assembleur. Pour que FreeBASIC les pr&eacute;serve, le compilateur doit &ecirc;tre appel&eacute; avec l'option <i><a href="CompilerOptrupp.html">-R</a></i> ("ne pas supprimer les fichiers ASM").<br \>
+<li> Les noms d'&eacute;tiquettes sont sensibles &agrave; la casse &agrave; l'int&eacute;rieur des blocs ASM.<br \>
 <br \>
 </ul></ul></div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
 <ul><li> Not available in the <i><a href="CompilerOptlang.html">-lang qb</a></i> dialect unless referenced with the alias <tt><b>__Asm</b></tt>.<br \>
 <br \>
-</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
-<ul><li> New to FreeBASIC<br \>
+</div><div class="fb_sect_title">Diff&eacute;rences de dialecte</div><div class="fb_sect_cont"><br \>
+<ul><li> Nouveau pour FreeBASIC<br \>
 <br \>
-</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+</ul></div><div class="fb_sect_title">Voir aussi</div><div class="fb_sect_cont"><br \>
 <ul><li> <tt><a href="KeyPgFunction.html">Function</a></tt><br \>
 <br \>
 </ul></div>

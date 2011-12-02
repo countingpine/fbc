@@ -6,49 +6,49 @@
 <body>
 <div id="fb_body_wrapper">
 <div id="fb_tab">
-<div id="fb_tab_l">Input (File Mode)</div>
+<div id="fb_tab_l">Input (Entr&eacute;e/Sortie fichiers)</div>
 <div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
 </div> 
 <div id="fb_pg_wrapper">
 <div id="fb_pg_body">
-	Specifies text file to be opened for input mode<br \>
+	Sp&eacute;cifie un fichier texte &agrave; ouvrir en mode entr&eacute;e<br \>
 <br \>
-<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<div class="fb_sect_title">Syntaxe</div><div class="fb_sect_cont"><tt><br \>
 <a href="KeyPgOpen.html">Open</a> <i>filename</i> for <b>Input</b> [<a href="KeyPgEncoding.html">Encoding</a> <i>encoding_type</i>] [<a href="KeyPgLock.html">Lock</a> <i>lock_type</i>] as [#]<i>filenum</i> <br \>
 </tt><br \>
-</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Param&egrave;tres</div><div class="fb_sect_cont"><br \>
 <tt><i>filename</i></tt><br \>
-<div class="fb_indent">file name to open for input<br \>
+<div class="fb_indent">nom de fichier &agrave; ouvrir en entr&eacute;e<br \>
 </div><tt><i>encoding_type</i></tt><br \>
-<div class="fb_indent">indicates encoding type for the file<br \>
+<div class="fb_indent">indique le type d'encodage du fichier<br \>
 </div><tt><i>lock_type</i></tt><br \>
-<div class="fb_indent">locking to be used while the file is open<br \>
+<div class="fb_indent">verrouillage &agrave; utiliser pendant que le fichier est ouvert<br \>
 </div><tt><i>filenum</i></tt><br \>
-<div class="fb_indent">unused file number to associate with the open file<br \>
+<div class="fb_indent">num&eacute;ro de fichier &agrave; associer au fichier ouvert<br \>
 <br \>
 </div></div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
-A file mode used with <tt><a href="KeyPgOpen.html">Open</a></tt> to open a text file for reading.<br \>
+Un mode fichier utilis&eacute; avec <tt><a href="KeyPgOpen.html">Open</a></tt> pour ouvrir un fichier texte en lecture.<br \>
 <br \>
-This mode allows to read sequentially lines of text with <tt><a href="KeyPgLineinputPp.html">Line Input #</a></tt>, or to read comma separated values with <tt><a href="KeyPgInputPp.html">Input #</a></tt>. <br \>
+Ce mode permet de lire s&eacute;quentiellement les lignes de texte avec <tt><a href="KeyPgLineinputPp.html">Line Input #</a></tt>, ou de lire des valeurs s&eacute;par&eacute;es par des virgules avec <tt><a href="KeyPgInputPp.html">Input #</a></tt>. <br \>
 <br \>
-Text files can't be simultaneously read and written in FreeBASIC, so if both functions are required on the same file, it must be opened twice.<br \>
+Les fichiers texte ne peuvent pas &ecirc;tre simultan&eacute;ment en lecture et en &eacute;criture dans FreeBASIC, donc si les deux fonctions sont n&eacute;cessaires sur le m&ecirc;me fichier, il doit &ecirc;tre ouvert deux fois.<br \>
 <br \>
-<tt><i>filename</i></tt> must be a string expression resulting in a legal file name in the target OS, without wildcards. The file will be sought for in the present directory, unless the <tt><i>filename</i></tt> contains a path . If the file does not exist, an error is issued. The pointer is set at the first character of the file.<br \>
+<tt><i>filename</i></tt> doit &ecirc;tre une expression cha&icirc;ne contenant un nom de fichier acceptable dans l'OS cible, sans joker de remplacement. Le fichier sera recherch&eacute; dans le r&eacute;pertoire courant, sauf si <tt><i>filename</i></tt> contient un chemin. Si le fichier n'existe pas, une erreur est &eacute;mise. Le pointeur est plac&eacute; sur le premier caract&egrave;re du fichier.<br \>
 <br \>
-<tt><i>Encoding_type</i></tt> indicates the Unicode <tt><a href="KeyPgEncoding.html">Encoding</a></tt> of the file, so characters are correctly read. If omitted, "ascii" encoding is defaulted. Only little endian character encodings are supported at the moment. <br \>
+<tt><i>Encoding_type</i></tt> indique l'<tt><a href="KeyPgEncoding.html">Encoding (= encodage)</a></tt> Unicode du fichier, ainsi les caract&egrave;res sont correctement lus. Si omis, l'encodage "ascii" est employ&eacute; par d&eacute;faut. Seuls, les caract&egrave;res encod&eacute;s "little endian" sont pris en charge pour le moment. <br \>
 <ul><ul><li><tt>"utf8"</tt>, <br \>
 <li><tt>"utf16"</tt> <br \>
 <li><tt>"utf32" </tt><br \>
-<li><tt>"ascii"</tt> (the default)<br \>
+<li><tt>"ascii"</tt> (par d&eacute;faut)<br \>
 <br \>
-</ul></ul><tt><i>Lock_type</i></tt> indicates the way the file is locked  for other processes, it is one of:<br \>
-<ul><ul><li> <tt><b>Read</b></tt> - the file can be opened simultaneously by other processes, but not for reading<br \>
-<li> <tt><b>Write</b></tt> - the file can be opened simultaneously by other processes, but not for writing<br \>
-<li> <tt><b>Read Write</b></tt> - the file cannot be opened simultaneously by other processes (the default)<br \>
+</ul></ul><tt><i>Lock_type</i></tt> indique la fa&ccedil;on dont le fichier est verrouill&eacute; pour d'autres processus:<br \>
+<ul><ul><li> <tt><b>Read</b></tt> - le fichier peut &ecirc;tre ouvert simultan&eacute;ment par d'autres processus, mais pas pour la lecture<br \>
+<li> <tt><b>Write</b></tt> - le fichier peut &ecirc;tre ouvert simultan&eacute;ment par d'autres processus, mais pas pour l'&eacute;criture<br \>
+<li> <tt><b>Read Write</b></tt> - le fichier ne peut pas &ecirc;tre ouvert simultan&eacute;ment par d'autres processus (par d&eacute;faut)<br \>
 <br \>
-</ul></ul><tt><i>filenum</i></tt> is a valid FreeBASIC file number (in the range <tt>1..255</tt>) not being used for any other file presently open. The file number identifies the file for the rest of file operations. A free file number can be found using the <tt><a href="KeyPgFreefile.html">FreeFile</a></tt> function.<br \>
+</ul></ul><tt><i>filenum</i></tt> est un num&eacute;ro de fichier valide FreeBASIC (dans la plage <tt>1..255</tt>) non utilis&eacute; actuellement par un autre fichier ouvert. Le num&eacute;ro de fichier identifie le fichier pour le reste des op&eacute;rations. Un num&eacute;ro de fichier libre peut &ecirc;tre trouv&eacute; par la fonction <tt><a href="KeyPgFreefile.html">FreeFile</a></tt>.<br \>
 <br \>
-</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Exemple</div><div class="fb_sect_cont"><br \>
 <tt><div class="freebasic">
 <span class="key">Dim</span>&nbsp;<span class="wrd">ff</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">UByte</span><br />
 <span class="key">Dim</span>&nbsp;<span class="wrd">randomvar</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
@@ -77,10 +77,10 @@ Text files can't be simultaneously read and written in FreeBASIC, so if both fun
 <span class="com">'minus&nbsp;the&nbsp;comment&nbsp;of&nbsp;course:</span><br />
 <span class="com">'23,"Your&nbsp;Name",19</span><br />
 </div></tt><br />
-</div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Diff&eacute;rences avec QB</div><div class="fb_sect_cont"><br \>
 <br \>
 <br \>
-</div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Voir aussi</div><div class="fb_sect_cont"><br \>
 <ul><li> <tt><a href="KeyPgAppend.html">Append</a></tt><br \>
 <li> <tt><a href="KeyPgOpen.html">Open</a></tt><br \>
 <li> <tt><a href="KeyPgOutput.html">Output</a></tt><br \>

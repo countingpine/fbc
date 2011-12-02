@@ -11,27 +11,27 @@
 </div> 
 <div id="fb_pg_wrapper">
 <div id="fb_pg_body">
-	Checks to see if the end of an open file has been reached<br \>
+	V&eacute;rifie si la fin d'un fichier ouvert a &eacute;t&eacute; atteinte<br \>
 <br \>
-<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<div class="fb_sect_title">Syntaxe</div><div class="fb_sect_cont"><tt><br \>
 <a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgFunction.html">Function</a> <b>EOF</b> ( <a href="KeyPgByval.html">ByVal</a> <i>filenum</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a> ) <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a><br \>
 </tt><br \>
 </div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
 <i>result</i> = <b>EOF</b>( <i>filenum</i> )<br \>
 </tt><br \>
-</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Param&egrave;tres</div><div class="fb_sect_cont"><br \>
 <tt><i>filenum</i></tt><br \>
-<div class="fb_indent">An <tt><a href="KeyPgInteger.html">Integer</a></tt> file number of an open file.<br \>
+<div class="fb_indent">Un <tt><a href="KeyPgInteger.html">Integer</a></tt> num&eacute;ro d'un fichier ouvert.<br \>
 <br \>
-</div></div><div class="fb_sect_title">Return Value</div><div class="fb_sect_cont"><br \>
-Returns true (-1) if end-of-file has been reached, zero (0) otherwise.<br \>
+</div></div><div class="fb_sect_title">Valeur retourn&eacute;e</div><div class="fb_sect_cont"><br \>
+Retourne vrai (true) (-1) si la fin du fichier (End Of File) a &eacute;t&eacute; atteinte, autrement z&eacute;ro (0).<br \>
 <br \>
 </div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
-When reading from files opened for <tt><a href="KeyPgInputfilemode.html">Input (File Mode)</a></tt>, it is useful to know when the end of the file has been reached, thus avoiding errors caused by reading past the ends of files. Use EOF to determine this. EOF expects a valid file number from an already opened file. Use <tt><a href="KeyPgFreefile.html">FreeFile</a></tt> to retrieve an available file file number.<br \>
+Lors d'une lecture de fichier ouvert avec <tt><a href="KeyPgInputfilemode.html">Input (File Mode)</a></tt>, il est utile de savoir quand la fin du fichier est atteinte, ceci &eacute;vite d'avoir une erreur caus&eacute;e par un essai de lecture apr&egrave;s la fin du fichier. L'utilisation de <tt><b>EOF</b></tt> permet de d&eacute;terminer quand on a atteint la fin. <tt><b>EOF</b></tt> attend un num&eacute;ro valide de fichier d&eacute;j&agrave; ouvert. Utilisez <tt><a href="KeyPgFreefile.html">FreeFile</a></tt> pour r&eacute;cup&eacute;rer un num&eacute;ro de fichier disponible.<br \>
 <br \>
-For file numbers bound to files opened for <tt><a href="KeyPgOutput.html">Output</a></tt>, EOF always returns 0.<br \>
+Pour les num&eacute;ros de fichiers li&eacute;s aux fichiers ouverts pour <tt><a href="KeyPgOutput.html">Output</a></tt>, EOF retourne toujours 0.<br \>
 <br \>
-</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Exemple</div><div class="fb_sect_cont"><br \>
 <tt><div class="freebasic">
 <span class="com">''&nbsp;This&nbsp;code&nbsp;finds&nbsp;a&nbsp;free&nbsp;file&nbsp;number&nbsp;to&nbsp;use&nbsp;and&nbsp;attempts&nbsp;to&nbsp;open&nbsp;the&nbsp;file</span><br />
 <span class="com">''&nbsp;"file.ext"&nbsp;and&nbsp;if&nbsp;successful,&nbsp;binds&nbsp;our&nbsp;file&nbsp;number&nbsp;to&nbsp;the&nbsp;opened&nbsp;file.&nbsp;It</span><br />
@@ -61,13 +61,13 @@ For file numbers bound to files opened for <tt><a href="KeyPgOutput.html">Output
 <span class="key">End</span>&nbsp;<span class="num">0</span><br />
 </div></tt><br />
 <br \>
-Because of underlying differences in the libraries used by the compiler on different platforms, the EOF function can be unreliable when reading text files created in Linux (with LF line endings) in the Windows version of the compiler. The DOS and Linux compilers do not have this problem. One solution is to open the file for Binary access instead of for Input. Line Input# and EOF can still be used as in the above example, and the EOF function will work reliably. This solution will not detect the end of file character, but this is only used to mark the end of text streams that are not disk files.<br \>
+En raison des diff&eacute;rences sous-jacentes dans les librairies utilis&eacute;es par le compilateur sur les diff&eacute;rentes plates-formes, la fonction <tt><b>EOF</b></tt> peut &ecirc;tre peu fiable lors de la lecture de fichiers texte cr&eacute;&eacute;s dans Linux (avec des fins de ligne indiqu&eacute;es par LF) dans la version Windows du compilateur. Les compilateur DOS et Linux n'ont pas ce probl&egrave;me. Une solution consiste &agrave; ouvrir le fichier pour un acc&egrave;s <a href="KeyPgBinary.html">Binary</a> au lieu d'un <a href="KeyPgInputfilemode.html">Input</a>. <a href="KeyPgLineinputPp.html">Line Input#</a> et <tt><b>EOF</b></tt> peuvent encore &ecirc;tre utilis&eacute;s comme dans l'exemple ci-dessus, et la fonction EOF sera fiable. Cette solution ne d&eacute;tecte pas le caract&egrave;re de fin de fichier, mais ceci n'est utilis&eacute; que pour marquer la fin des flux de texte qui ne sont pas des fichiers sur le disque.<br \>
 <br \>
-</div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
-<ul><li> In QB the comm port signaled an EOF when there were no chars waiting to be read.<br \>
-<li> In QB, for files opened in RANDOM or BINARY mode, EOF returned non-zero only after a read past the end of file has been attempted.  In FreeBASIC, EOF returns true after the last item is read.<br \>
+</div><div class="fb_sect_title">Diff&eacute;rences avec QB</div><div class="fb_sect_cont"><br \>
+<ul><li> Dans QB le port COM signale un EOF quand il n'y a aucun caract&egrave;re en attente de lecture.<br \>
+<li> Dans QB, pour les fichiers ouverts en mode RANDOM ou BINARY, EOF retourne une valeur diff&eacute;rente de z&eacute;ro seulement apr&egrave;s une lecture une fois la fin du fichier atteinte.  Dans FreeBASIC, EOF retourne "true" (vrai) apr&egrave;s la lecture du dernier item.<br \>
 <br \>
-</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+</ul></div><div class="fb_sect_title">Voir aussi</div><div class="fb_sect_cont"><br \>
 <ul><li> <tt><a href="KeyPgLof.html">LOF</a></tt><br \>
 <li> <tt><a href="KeyPgLoc.html">LOC</a></tt><br \>
 <li> <tt><a href="KeyPgFreefile.html">FreeFile</a></tt><br \>

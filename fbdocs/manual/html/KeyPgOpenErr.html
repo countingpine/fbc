@@ -11,41 +11,41 @@
 </div> 
 <div id="fb_pg_wrapper">
 <div id="fb_pg_body">
-	Opens both the standard input (<i>stdin</i>) and standard error (<i>stderr</i>) streams for file operations.<br \>
+	Ouvre le flux d'entr&eacute;e standard (<i>stdin</i>) et le flux d'erreur standard (<i>stderr</i>) pour des op&eacute;rations sur les fichiers.<br \>
 <br \>
-<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<div class="fb_sect_title">Syntaxe</div><div class="fb_sect_cont"><tt><br \>
 <b><a href="KeyPgOpen.html">Open</a> Err</b> [for <i>mode</i>] <a href="KeyPgAs.html">As</a> [#]<i>filenum</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a><br \>
 </tt><br \>
 </div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
 <b>Open Err</b> [for <i>mode</i>] as [#]<i>filenum</i><br \>
-<div class="fb_indent"><i>or</i><br \>
+<div class="fb_indent"><i>ou</i><br \>
 </div><i>result</i> = <b>Open Err</b>( [for <i>mode</i>] as [#]<i>filenum</i> )<br \>
 </tt><br \>
-</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Param&egrave;tres</div><div class="fb_sect_cont"><br \>
 <tt><i>mode</i></tt><br \>
-<div class="fb_indent">Ignored.<br \>
+<div class="fb_indent">Ignor&eacute;.<br \>
 </div><tt><i>filenum</i></tt><br \>
-<div class="fb_indent">An unused file number.<br \>
+<div class="fb_indent">Un num&eacute;ro de fichier inutilis&eacute;.<br \>
 <br \>
-</div></div><div class="fb_sect_title">Return Value</div><div class="fb_sect_cont"><br \>
-Zero is returned if <tt><b>Open Err</b></tt> completed successfully, otherwise a non-zero value is returned to indicate failure.<br \>
+</div></div><div class="fb_sect_title">Valeur retourn&eacute;e</div><div class="fb_sect_cont"><br \>
+Z&eacute;ro est retourn&eacute; si <tt><b>Open Err</b></tt> a fonctionn&eacute; avec succ&egrave;s, sinon une valeur non nulle est renvoy&eacute;e pour indiquer un &eacute;chec.<br \>
 <br \>
 </div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
-This command opens <tt>stdin</tt> to read from and <tt>stderr</tt> to write to the console allowing read and write operations with normal file commands.<br \>
+Cette commande ouvre <tt><i>stdin</i></tt> pour une op&eacute;ration de lecture et <tt>stderr</tt> pour une op&eacute;ration d'&eacute;criture sur la console permettant des op&eacute;rations de lecture et d'&eacute;criture avec des commandes de fichiers normales.<br \>
 <br \>
-<tt>stderr</tt> is an output stream different from <tt>stdout</tt> allowing error messages to be redirected separately from the main console output.<br \>
+<tt><i>stderr</i></tt> est un flux de sortie diff&eacute;rent de <tt><i>stdout</i></tt> permettant la redirection s&eacute;par&eacute;e des messages d'erreur &agrave; partir de la sortie principale de la console.<br \>
 <br \>
-The normal console commands, such as <tt><a href="KeyPgColor.html">Color</a></tt> and <tt><a href="KeyPgLocate.html">Locate</a></tt>, do not work in this mode, because they do not accept a file number.<br \>
+Les commandes de la console normales, comme <tt><a href="KeyPgColor.html">Color</a></tt> et <tt><a href="KeyPgLocate.html">Locate</a></tt>, ne fonctionnent pas dans ce mode, parce qu'ells n'acceptent pas un num&eacute;ro de fichier.<br \>
 <br \>
-The <tt>[For Input|Output]</tt> <tt><i>mode</i></tt> is allowed for compatibility, but is ignored.<br \>
+Le <tt><i>mode</i></tt> <tt>[For Input|Output]</tt> n'existe que pour la compatibilit&eacute;, mais il est ignor&eacute;.<br \>
 <br \>
-<b>Runtime errors:</b><br \>
-    <tt><b>Open Err</b></tt> throws one of the following <a href="ProPgErrorHandling.html">runtime errors</a>:<br \>
+<b>Erreurs de fonctionnement:</b><br \>
+    <tt><b>Open Err</b></tt> produit l'une des <a href="ProPgErrorHandling.html">erreurs de fonctionnement</a> suivantes:<br \>
 <br \>
-<i>(<tt>1</tt>) Illegal function call</i><br \>
-<ul><ul><li> Filenumber was not free at the time. use <tt><a href="KeyPgFreefile.html">FreeFile</a></tt> to ensure that filenumber is free.<br \>
+<i>(<tt>1</tt>) Illegal function call : Appel ill&eacute;gal de fonction</i><br \>
+<ul><li><i>filenumber</i> n'est pas libre actuellement. Utilisez <tt><a href="KeyPgFreefile.html">FreeFile</a></tt> pour vous assurer que <i>filenumber</i> est libre.<br \>
 <br \>
-</ul></ul></div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+</ul></ul></div><div class="fb_sect_title">Exemple</div><div class="fb_sect_cont"><br \>
 <tt><div class="freebasic">
 <span class="key">Dim</span>&nbsp;<span class="wrd">a</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span><br />
 <span class="key">Open</span>&nbsp;<span class="key">Err</span>&nbsp;<span class="key">For</span>&nbsp;<span class="key">Input</span>&nbsp;&nbsp;<span class="key">As</span>&nbsp;<span class="oth">#</span><span class="num">1</span><br />
@@ -56,13 +56,15 @@ The <tt>[For Input|Output]</tt> <tt><i>mode</i></tt> is allowed for compatibilit
 <span class="key">Sleep</span><br />
 </div></tt><br />
 <br \>
-</div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
-<ul><li> New to FreeBASIC<br \>
+</div><div class="fb_sect_title">Diff&eacute;rences avec QB</div><div class="fb_sect_cont"><br \>
+<ul><li> Nouveau pour FreeBASIC<br \>
 <br \>
-</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+</ul></div><div class="fb_sect_title">Voir aussi</div><div class="fb_sect_cont"><br \>
 <ul><li> <tt><a href="KeyPgOpen.html">Open</a></tt><br \>
 <br \>
-</ul></div>
+</ul><br \>
+   <br \>
+</div>
 </div>
 </div> 
 </div> 

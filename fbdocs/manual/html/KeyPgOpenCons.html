@@ -11,9 +11,9 @@
 </div> 
 <div id="fb_pg_wrapper">
 <div id="fb_pg_body">
-	Opens the console's standard input (<i>stdin</i>) or output (<i>stdout</i>) streams for use in file operations.<br \>
+	Ouvre le flux d'entr&eacute;e (<i>stdin</i>) ou de sortie (<i>stdout</i>) standard de la console pour une utilisation dans des op&eacute;rations sur les fichiers.<br \>
 <br \>
-<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<div class="fb_sect_title">Syntaxe</div><div class="fb_sect_cont"><tt><br \>
 <b>Open Cons</b> <b>As</b> [<b>#</b>]<i>filenumber</i><br \>
 <b>Open Cons</b> <b>For</b> <a href="KeyPgInputfilemode.html">Input</a> <b>As</b> [<b>#</b>]<i>filenumber</i><br \>
 <b>Open Cons</b> <b>For</b> <a href="KeyPgOutput.html">Output</a> <b>As</b> [<b>#</b>]<i>filenumber</i><br \>
@@ -23,29 +23,29 @@
 <div class="fb_indent"></tt><i>(or using the QB-like syntax</i>,)<tt><br \>
 </div><b>Open Cons</b> [<b>For</b> {<b><a href="KeyPgInputfilemode.html">Input</a></b>|<b><a href="KeyPgOutput.html">Output</a></b>}] <b>As</b> <i>filenumber</i><br \>
 </tt><br \>
-</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Param&egrave;tres</div><div class="fb_sect_cont"><br \>
 <tt><i>filenumber</i></tt><br \>
-<div class="fb_indent">An available <i>file number</i> to bind to the <i>stdin</i> or <i>stdout</i> stream, which can be found with <tt><a href="KeyPgFreefile.html">FreeFile</a></tt>.<br \>
+<div class="fb_indent">Un <i>num&eacute;ro de fichier</i> disponible pour communiquer avec les flux <i>stdin</i> ou <i>stdout</i>, qui peut &ecirc;tre trouv&eacute; avec <tt><a href="KeyPgFreefile.html">FreeFile</a></tt>.<br \>
 <br \>
-</div></div><div class="fb_sect_title">Return Value</div><div class="fb_sect_cont"><br \>
-In the first usage, <tt><b>Open Cons</b></tt> returns zero (0) on success and a non-zero error code otherwise.<br \>
+</div></div><div class="fb_sect_title">Valeur retourn&eacute;e</div><div class="fb_sect_cont"><br \>
+Dans le premier usage, <tt><b>Open Cons</b></tt> retourne z&eacute;ro (0) en cas de succ&egrave;s et sinon un code erreur diff&eacute;rent de z&eacute;ro.<br \>
 <br \>
 </div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
-<tt><b>Open Cons</b></tt> opens the console's <i>stdin</i> or <i>stdout</i> streams for reading or writing. A <i>file number</i> is bound to the stream, which is used in subsequent file operations, such as <tt><a href="KeyPgInputPp.html">Input #</a></tt>. An available <i>file number</i> can be retrieved with <tt><a href="KeyPgFreefile.html">FreeFile</a></tt>.<br \>
+<tt><b>Open Cons</b></tt> ouvre les flux console <i>stdin</i> ou <i>stdout</i> pour une op&eacute;ration de lecture ou d'&eacute;criture. Un <i>num&eacute;ro de fichier</i> est li&eacute; au flux, qui est utilis&eacute; dans des op&eacute;rations de fichier ult&eacute;rieures, telles que <tt><a href="KeyPgInputPp.html">Input #</a></tt>.  Un <i>num&eacute;ro de fichier</i> disponible peut &ecirc;tre r&eacute;cup&eacute;r&eacute; avec <tt><a href="KeyPgFreefile.html">FreeFile</a></tt>.<br \>
 <br \>
-The <tt><a href="KeyPgInputfilemode.html">Input</a></tt> <i>file mode</i> opens the <i>stdin</i> stream for reading file operations, such as <tt><a href="KeyPgInputPp.html">Line Input #</a></tt>, while the <tt><a href="KeyPgOutput.html">Output</a></tt> <i>file mode</i> opens the <i>stdout</i> stream for writing file operations, such as <tt><a href="KeyPgPrintPp.html">Print #</a></tt>. The <tt><a href="KeyPgOutput.html">Output</a></tt> <i>file mode</i> is the default if not specified.<br \>
+<tt><a href="KeyPgInputfilemode.html">Input</a></tt> <i>file mode</i> ouvre le flux <i>stdin</i> pour des op&eacute;rations de lecture de fichier, comme <tt><a href="KeyPgInputPp.html">Line Input #</a></tt>, alors que <tt><a href="KeyPgOutput.html">Output</a></tt> <i>file mode</i> ouvre le flux <i>stdout</i> pour des op&eacute;rations d'&eacute;criture de fichier, comme <tt><a href="KeyPgPrintPp.html">Print #</a></tt>. Le <i>file mode</i> est <tt><a href="KeyPgOutput.html">Output</a></tt> par d&eacute;faut s'il n'a pas &eacute;t&eacute; sp&eacute;cifi&eacute;.<br \>
 <br \>
-The <i>stdin</i> and <i>stdout</i> streams are the ones used when the calling process' input or output is redirected (piped) by OS commands, or when it is opened with <tt><a href="KeyPgOpenPipe.html">Open Pipe</a></tt>.<br \>
+Les flux <i>stdin</i> et <i>stdout</i> sont ceux utilis&eacute;s lorsque le processus d'appel d'entr&eacute;e/sortie est redirig&eacute; par les commandes du syst&egrave;me d'exploitation, ou quand il est ouvert avec <tt><a href="KeyPgOpenPipe.html">Open Pipe</a></tt>.<br \>
 <br \>
-To open both the <i>stdin</i> and <i>stdout</i> streams for file operations, a process must use multiple <i>file numbers</i>.<br \>
+Pour ouvrir &agrave; la fois <i>stdin</i> et <i>stdout</i> pour des op&eacute;rations sur les fichiers, un processus doit utiliser plusieurs <i>num&eacute;ros de fichier</i>s.<br \>
 <br \>
 <br \>
-<b>Runtime errors:</b><br \>
-    <tt><b>Open Cons</b></tt> throws one of the following <a href="ProPgErrorHandling.html">runtime errors</a>:<br \>
+<b>Erreurs de fonctionnement:</b><br \>
+    <tt><b>Open Cons</b></tt> produit l'une des <a href="ProPgErrorHandling.html">erreurs de fonctionnement</a> suivantes:<br \>
 <br \>
-<i>(<tt>1</tt>) Illegal function call</i><br \>
-<ul><ul><li> Filenumber was not free at the time. use <tt><a href="KeyPgFreefile.html">FreeFile</a></tt> to ensure that filenumber is free.<br \>
-</ul></ul></div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<i>(<tt>1</tt>) Illegal function call : Appel ill&eacute;gal de fonction</i><br \>
+<ul><li><i>filenumber</i> n'est pas libre actuellement. Utilisez <tt><a href="KeyPgFreefile.html">FreeFile</a></tt> pour vous assurer que <i>filenumber</i> est libre.<br \>
+</ul></ul></div><div class="fb_sect_title">Exemple</div><div class="fb_sect_cont"><br \>
 <tt><div class="freebasic">
 <span class="key">Dim</span>&nbsp;<span class="wrd">a</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span><br />
 <br />
@@ -60,10 +60,10 @@ To open both the <i>stdin</i> and <i>stdout</i> streams for file operations, a p
 <span class="key">Sleep</span><br />
 </div></tt><br />
 <br \>
-</div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
-<ul><li> In QB the syntax was <tt>OPEN "CON:" FOR INPUT|OUTPUT AS [#] <i>filenum</i></tt><br \>
+</div><div class="fb_sect_title">Diff&eacute;rences avec QB</div><div class="fb_sect_cont"><br \>
+<ul><li> Dans QB la syntaxe est <tt>OPEN "CON:" FOR INPUT|OUTPUT AS [#] <i>filenum</i></tt><br \>
 <br \>
-</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+</ul></div><div class="fb_sect_title">Voir aussi</div><div class="fb_sect_cont"><br \>
 <ul><li> <tt><a href="KeyPgOpenScrn.html">Open Scrn</a></tt><br \>
 <li> <tt><a href="KeyPgOpenErr.html">Open Err</a></tt><br \>
 <li> <tt><a href="KeyPgFreefile.html">FreeFile</a></tt><br \>

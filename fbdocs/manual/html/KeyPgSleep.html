@@ -11,33 +11,32 @@
 </div> 
 <div id="fb_pg_wrapper">
 <div id="fb_pg_body">
-	Waits until a specified time has elapsed, or a key is pressed.<br \>
+	Attend jusqu'&agrave; ce qu'un certain d&eacute;lai soit &eacute;coul&eacute; ouqu'une touche soit appuy&eacute;e.<br \>
 <br \>
-<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<div class="fb_sect_title">Syntaxe</div><div class="fb_sect_cont"><tt><br \>
 <a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgFunction.html">Function</a> <b>Sleep</b> <a href="KeyPgOverload.html">Overload</a> ( <a href="KeyPgByval.html">ByVal</a> <i>amount</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a> = -1 ) <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a><br \>
 <a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgFunction.html">Function</a> <b>Sleep</b> ( <a href="KeyPgByval.html">ByVal</a> <i>amount</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a> , <a href="KeyPgByval.html">ByVal</a> <i>keyflag</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a> ) <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a><br \>
 </tt><br \>
 </div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
 <b>Sleep</b> [ <i>amount</i> [, <i>keyflag</i> ]]<br \>
 </tt><br \>
-</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Param&egrave;tres</div><div class="fb_sect_cont"><br \>
 <tt><i>amount</i></tt><br \>
-<div class="fb_indent">Optional number of milliseconds to wait (default is to wait for a key press).<br \>
+<div class="fb_indent">Nombre facultatif de millisecondes &agrave; attendre (par d&eacute;faut on attend qu'une touche soit appuy&eacute;e).<br \>
 </div><tt><i>keyflag</i></tt><br \>
-<div class="fb_indent">Optional flag; give it a value of 1 to specify that the wait cannot be interrupted by a key press.<br \>
+<div class="fb_indent">Drapeau optionnel; lui donner une valeur de 1 sert &agrave; pr&eacute;ciser que l'attente ne peut &ecirc;tre interrompue par une touche.<br \>
 <br \>
 </div></div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
-<tt><b>Sleep</b></tt> will wait until <tt><i>amount</i></tt> milliseconds (can be seconds in <i><a href="CompilerOptlang.html">-lang qb</a></i>, see below) given elapsed (if any value was passed) or until the user presses a key. If <tt><i>amount</i></tt> is below 100 ms then <tt><b>Sleep</b></tt> will always wait the full requested amount (key presses are ignored).<br \>
+<tt><b>Sleep</b></tt> attendra jusqu'&agrave; ce que <tt><i>amount</i></tt> millisecondes (peut &ecirc;tre en secondes dans <i><a href="CompilerOptlang.html">-lang qb</a></i>, voir plus loin) soit &eacute;coul&eacute; (si une valeur a &eacute;t&eacute; pass&eacute;e) ou jusqu'&agrave; ce que l'utilisateur appuie sur une touche. Si <tt><i>amount</i></tt> est inf&eacute;rieur &agrave; 100 ms, alors <tt><b>Sleep</b></tt> attendra toujours le temps demand&eacute; au complet (appui sur touche ignor&eacute;).<br \>
+<br \>Inclure le second param&egrave;tre, <tt>1</tt>, pour un «profond» du sommeil, qui ne peut &ecirc;tre interrompu en appuyant sur une touche.<br \>
 <br \>
-Include the second parameter, <tt>1</tt>, for a "deep" sleep, which cannot be interrupted by pressing a key.<br \>
+La pr&eacute;cision de <tt><b>Sleep</b></tt> est variable en fonction de la dur&eacute;e du cycle du syst&egrave;me d'exploitation (Windows NT/2K/XP: 15 ms, 9x/Me: 50 ms, Linux 10ms, DOS 55 ms).<br \>
 <br \>
-The accuracy of <tt><b>Sleep</b></tt> is variable depending on the OS cycle time (Windows NT/2K/XP: 15 ms, 9x/Me: 50 ms, Linux 10ms, DOS 55 ms).<br \>
+Appeler <tt><b>Sleep</b></tt> avec 25ms ou moins pour r&eacute;aliser un d&eacute;coupage du temps lors de l'attente d'une entr&eacute;e utilisateur ou d'une boucle dans un "thread".  Cela permettra d'&eacute;viter que le programme monopolise inutilement le CPU.<br \>
 <br \>
-Call <tt><b>Sleep</b></tt> with 25ms or less to release time-slice when waiting for user input or looping inside a thread.  This will prevent the program from unnecessarily hogging the CPU.<br \>
+<tt><b>Sleep</b></tt> n'efface pas la m&eacute;moire tampon du clavier et les touches press&eacute;es lors d'un appel &agrave; <tt><b>Sleep</b></tt> sont conserv&eacute;e et peuvent &ecirc;tre lues avec <tt><a href="KeyPgInkey.html">Inkey</a></tt>.  Afin d'attendre l'appui sur une touche et retirer la cl&eacute; du tampon m&eacute;moire, <tt><a href="KeyPgGetkey.html">GetKey</a></tt> peut &ecirc;tre utilis&eacute; &agrave; la place.<br \>
 <br \>
-<tt><b>Sleep</b></tt> does not clear the keyboard buffer and any keys pressed during a call to <tt><b>Sleep</b></tt> are retained and can be read using <tt><a href="KeyPgInkey.html">Inkey</a></tt>.  In order to wait for a key press, and remove the key from the buffer, <tt><a href="KeyPgGetkey.html">GetKey</a></tt> can be used instead.<br \>
-<br \>
-</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Exemple</div><div class="fb_sect_cont"><br \>
 <tt><div class="freebasic">
 <span class="key">Print</span>&nbsp;<span class="quo">"press&nbsp;a&nbsp;key"</span><br />
 <span class="key">Sleep</span><br />
@@ -46,15 +45,15 @@ Call <tt><b>Sleep</b></tt> with 25ms or less to release time-slice when waiting 
 <span class="key">Sleep</span>&nbsp;<span class="num">500</span><br />
 </div></tt><br />
 <br \>
-</div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
-<ul><li> In the <i><a href="CompilerOptlang.html">-lang fb</a></i> and <i><a href="CompilerOptlang.html">-lang fblite</a></i> dialects, the <tt><i>amount</i></tt> value is in <b>milliseconds</b>.<br \>
-<li> In the <i><a href="CompilerOptlang.html">-lang qb</a></i> dialect, the <tt><i>amount</i></tt> value is in <b>seconds</b> as in QB. If the second parameter <tt><i>keyflag</i></tt> is given, or the keyword is written as <tt><b>__Sleep</b></tt>  the value is expected to be in <b>milliseconds</b>.<br \>
+</div><div class="fb_sect_title">Diff&eacute;rences de dialecte</div><div class="fb_sect_cont"><br \>
+<ul><li> Dans les dialectes <i><a href="CompilerOptlang.html">-lang fb</a></i> et <i><a href="CompilerOptlang.html">-lang fblite</a></i>, la valeur de <tt><i>amount</i></tt> est en <b>millisecondes</b>.<br \>
+<li> Dans le dialecte <i><a href="CompilerOptlang.html">-lang qb</a></i>, la valeur de <tt><i>amount</i></tt> est en <b>secondes</b> comme dans QB. Si le deuxi&egrave;me param&egrave;tre <tt><i>keyflag</i></tt> est donn&eacute;, ou le mot-cl&eacute; <tt><b>__Sleep</b></tt> est donn&eacute;, la valeur est attendue en <b>millisecondes</b>.<br \>
 <br \>
-</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
-<ul><li> None in the <i><a href="CompilerOptlang.html">-lang qb</a></i> dialect.<br \>
-<li> In QB, the delay was given in whole seconds only and did not support the <tt><i>keyflag</i></tt> parameter.<br \>
+</ul></div><div class="fb_sect_title">Diff&eacute;rences avec QB</div><div class="fb_sect_cont"><br \>
+<ul><li> Aucune dans le dialecte <i><a href="CompilerOptlang.html">-lang qb</a></i>.<br \>
+<li> Dans QB, le d&eacute;lai est donn&eacute; secondes et le param&egrave;tre <tt><i>keyflag</i></tt> n'est pas support&eacute;.<br \>
 <br \>
-</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+</ul></div><div class="fb_sect_title">Voir aussi</div><div class="fb_sect_cont"><br \>
 <ul><li> <tt><a href="KeyPgTimer.html">Timer</a></tt><br \>
 <li> <tt><a href="KeyPgInkey.html">Inkey</a></tt><br \>
 <br \>

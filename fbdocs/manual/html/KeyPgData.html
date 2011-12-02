@@ -11,26 +11,26 @@
 </div> 
 <div id="fb_pg_wrapper">
 <div id="fb_pg_body">
-	Statement to store data at compile time.<br \>
+	D&eacute;claration pour stocker des donn&eacute;es lors de la compilation.<br \>
 <br \>
-<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<div class="fb_sect_title">Syntaxe</div><div class="fb_sect_cont"><tt><br \>
 <b>Data</b> <i>constant_expression1</i> [,<i>constant_expression2</i>]...<br \>
 </tt><br \>
 </div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
-<tt>Data</tt> stores a list of constant numeric or alphabetical expressions that are evaluated at compile time (except with <i><a href="CompilerOptlang.html">-lang qb</a></i>) and stored as constants that can be read into variables by using <tt><a href="KeyPgRead.html">Read</a></tt>.<br \>
+<tt>Data</tt> stocke une liste d'expressions constantes num&eacute;riques ou alphab&eacute;tiques qui sont &eacute;valu&eacute;es au moment de la compilation (except&eacute; avec <i><a href="CompilerOptlang.html">-lang qb</a></i>) et stock&eacute;es sous forme de constantes qui peuvent &ecirc;tre lues dans des variables en utilisant <tt><a href="KeyPgRead.html">Read</a></tt>.<br \>
 <br \>
-All the <tt><b>Data</b></tt> statements in the program behave as a single chained list; after the last element of one <tt><b>Data</b></tt> statement is read, the first element of the following <tt><b>Data</b></tt> statement will be read.<br \>
-The program should not attempt to <tt><a href="KeyPgRead.html">Read</a></tt> after the last <tt><b>Data</b></tt> element.  The results are (in all dialects) undefined,  and the program may crash (Page Fault).<br \>
+Toutes les d&eacute;clarations de <tt><b>Data</b></tt>s dans le programme se comportent comme une liste unique encha&icirc;n&eacute;e; apr&egrave;s la lecture du dernier &eacute;l&eacute;ment d'une d&eacute;claration de <tt><b>Data</b></tt>, le premier &eacute;l&eacute;ment de la d&eacute;claration suivante <tt><b>Data</b></tt> sera lu.<br \>
+Le programme ne doit pas tenter un <tt><a href="KeyPgRead.html">Read</a></tt> apr&egrave;s le dernier &eacute;l&eacute;ment <tt><b>Data</b></tt>.  Les r&eacute;sultats sont (dans tous les dialectes) ind&eacute;finis et le programme peut se bloquer (Page Fault = Erreur de page).<br \>
 <br \>
-<tt><b>Data</b></tt> statements are only visible from within the module in which they are defined.<br \>
+Les d&eacute;clarations <tt><b>Data</b></tt> ne sont visibles que depuis le module dans lequel ells sont d&eacute;finies.<br \>
 <br \>
-<tt><b>Data</b></tt> constants can only be of simple types (numeric or string).  A numeric value can be read as a numeric literal into a string. A string read into a numeric variable will be evaluated by the <tt><a href="KeyPgVal.html">Val</a></tt> function.  <tt><a href="KeyPgConst.html">Const</a></tt>s can be used as items of data except in the <i><a href="CompilerOptlang.html">-lang qb</a></i> dialect, where their names are considered as normal text.<br \>
+Les constantes <tt><b>Data</b></tt> ne peuvent &ecirc;tre que des types simples (num&eacute;riques ou cha&icirc;nes).  Une valeur num&eacute;rique peut &ecirc;tre lue comme un litt&eacute;ral num&eacute;rique dans une cha&icirc;ne. Une cha&icirc;ne lue dans une variable num&eacute;rique sera &eacute;valu&eacute;e par la fonction <tt><a href="KeyPgVal.html">Val</a></tt>.  Les <tt><a href="KeyPgConst.html">Const</a></tt>s peuvent &ecirc;tre utilis&eacute;es comme &eacute;l&eacute;ments de donn&eacute;es, sauf dans le dialecte <i><a href="CompilerOptlang.html">-lang qb</a></i>, o&ugrave; leurs noms sont consid&eacute;r&eacute;s comme du texte normal.<br \>
 <br \>
-The "<tt><b><a href="KeyPgRestore.html">Restore</a></b> <i>label</i></tt>" statement makes the first <tt><b>Data</b></tt> item after the <tt><i>label</i></tt> the next item to be read, allowing the user to choose specific sections of data to read.<br \>
+<i>label</i></tt> de la d&eacute;claration <tt><b><a href="KeyPgRestore.html">Restore</a></b></tt> fait que le premier item de <tt><b>Data</b></tt> apr&egrave;s <tt><i>label</i></tt> sera le suivant &agrave; lire, permettant &agrave; l'utilisateur de choisir des sections sp&eacute;cifiques de donn&eacute;es &agrave; lire.<br \>
 <br \>
-<tt><b>Data</b></tt> is normally used to initialize variables. FreeBASIC also allows the initialization of static variables when they are <tt><a href="KeyPgDim.html">Dim</a></tt>ensioned - see <a href="ProPgInitialization.html">Variable Initializers</a> for more information.<br \>
+<tt><b>Data</b></tt> est normalement utilis&eacute; pour initialiser les variables. FreeBasic permet aussi l'initialisation de variables statiques quand elles sont <tt><a href="KeyPgDim.html">Dim</a></tt>ensionn&eacute;es -  Voir <a href="ProPgInitialization.html">Initialiseurs de variables</a> pour plus d'informations.<br \>
 <br \>
-</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Exemple</div><div class="fb_sect_cont"><br \>
 <tt><div class="freebasic">
 <span class="com">'&nbsp;Create&nbsp;an&nbsp;array&nbsp;of&nbsp;5&nbsp;integers&nbsp;and&nbsp;a&nbsp;string&nbsp;to&nbsp;hold&nbsp;the&nbsp;data.</span><br />
 <span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="wrd">h</span><span class="oth">(</span><span class="num">4</span><span class="oth">)</span><br />
@@ -67,15 +67,15 @@ The "<tt><b><a href="KeyPgRestore.html">Restore</a></b> <i>label</i></tt>" state
 <span class="key">Data</span>&nbsp;<span class="num">3</span><span class="oth">,</span>&nbsp;<span class="num">234</span><span class="oth">,</span>&nbsp;<span class="num">435</span><span class="oth">/</span><span class="num">4</span><span class="oth">,</span>&nbsp;<span class="num">23</span><span class="oth">+</span><span class="num">433</span><span class="oth">,</span>&nbsp;<span class="num">87643</span><span class="oth">,</span>&nbsp;<span class="quo">"Good"</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="quo">"Bye!"</span><br />
 </div></tt><br />
 <br \>
-</div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
-<ul><li> <i><a href="CompilerOptlang.html">-lang fb</a></i> and <i><a href="CompilerOptlang.html">-lang fblite</a></i> considers data items as constant expressions that are evaluated during compilation and its result stored in the program.<br \>
-<li> <i><a href="CompilerOptlang.html">-lang qb</a></i> considers unquoted words, including names of variables and constants, as literal strings, and stores them without change, as in QBASIC.  Unquoted strings are delimited by commas, and a colon or a line-break signifies the end of the <tt><b>Data</b></tt> statement.  Unquoted strings are trimmed of whitespace at the beginning and end.<br \>
+</div><div class="fb_sect_title">Diff&eacute;rences de dialecte</div><div class="fb_sect_cont"><br \>
+<ul><li> <i><a href="CompilerOptlang.html">-lang fb</a></i> et <i><a href="CompilerOptlang.html">-lang fblite</a></i> consid&egrave;rent les items de <tt><b>Data</b></tt> comme des expressions constantes qui sont &eacute;valu&eacute;es pendant la compilation et leur r&eacute;sultat stock&eacute; dans le programme.<br \>
+<li> <i><a href="CompilerOptlang.html">-lang qb</a></i> consid&egrave;re les mots non-comment&eacute;s, inclus les noms de variables et constantes, comme des cha&icirc;nes litt&eacute;rales, et les stocke sans changement, comme dans QBASIC.  Les cha&icirc;nes non-comment&eacute;es sont d&eacute;limit&eacute;es par des virgules, et deux-points (:) ou un fin de ligne signifie la fin de la d&eacute;claration <tt><b>Data</b></tt>.  Dans les cha&icirc;nes non-comment&eacute;es les espaces sont &eacute;limin&eacute;s au d&eacute;but et &agrave; la fin.<br \>
 <br \>
-</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
-<ul><li> Outside of the <i><a href="CompilerOptlang.html">-lang qb</a></i> dialect, alphabetic string literals must be enclosed within quotation marks, in QBASIC this was optional.<br \>
-<li> In QBASIC empty items evaluated to number <tt>0</tt> or to empty strings, in FreeBASIC they give a compile error. In QBASIC a comma at the end of the statement made an additional, empty item, evaluated to <tt>0</tt> or an empty string. In FreeBASIC they give a compile error.<br \>
+</ul></div><div class="fb_sect_title">Diff&eacute;rences avec QB</div><div class="fb_sect_cont"><br \>
+<ul><li> En dehors du dialecte <i><a href="CompilerOptlang.html">-lang qb</a></i> les cha&icirc;nes de litt&eacute;raux alphab&eacute;tiques doivent &ecirc;tre entre guillemets, dans QBASIC cette utilisation est facultative.<br \>
+<li> Dans QBASIC les items vides sont &eacute;valu&eacute;s au nombre <tt>0</tt> ou &agrave; des cha&icirc;nes vides, dans FreeBASIC ils donnent une erreur de compilation. Dans QBASIC une virgule &agrave; la fin de la d&eacute;claration am&egrave;ne un item suppl&eacute;mentaire, vide, &eacute;valu&eacute; &agrave; <tt>0</tt> ou une cha&icirc;ne vide. Dans FreeBASIC ils donnent une erreur de compilation.<br \>
 <br \>
-</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+</ul></div><div class="fb_sect_title">Voir aussi</div><div class="fb_sect_cont"><br \>
 <ul><li> <tt><a href="KeyPgRead.html">Read</a></tt><br \>
 <li> <tt><a href="KeyPgRestore.html">Restore</a></tt><br \>
 <br \>

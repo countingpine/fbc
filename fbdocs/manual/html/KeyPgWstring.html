@@ -11,26 +11,26 @@
 </div> 
 <div id="fb_pg_wrapper">
 <div id="fb_pg_body">
-	Standard data type: wide character string<br \>
+	Type de donn&eacute;es standard : cha&icirc;nes de caract&egrave;res larges (2 octets)<br \>
 <br \>
-<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<div class="fb_sect_title">Syntaxe</div><div class="fb_sect_cont"><tt><br \>
 <a href="KeyPgDim.html">Dim</a> <i>variable</i> <a href="KeyPgAs.html">As</a> <b>WString</b> * <i>size</i><br \>
 <a href="KeyPgDim.html">Dim</a> <i>variable</i> <a href="KeyPgAs.html">As</a> <b>WString</b> <a href="KeyPgPtr.html">Ptr</a><br \>
 </tt><br \>
 </div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
-A <tt><b>WString</b></tt> is a fixed-size array of wide-chars that never overflows if the size is known at compile-time. It has no descriptor, and does never resize unless it's a pointer and <tt><a href="KeyPgAllocate.html">Allocate</a></tt>/<tt><a href="KeyPgReallocate.html">Reallocate</a></tt>/<tt><a href="KeyPgDeallocate.html">Deallocate</a></tt> are used directly.<br \>
+Une <tt><b>WString</b></tt> est un tableau &agrave; taille fixe de caract&egrave;res larges qui ne d&eacute;borde jamais si la taille est connue au moment de la compilation. Il n'y a pas de descripteur, et ne peut être redimensionn&eacute; sauf si c'est un pointeur et que <tt><a href="KeyPgAllocate.html">Allocate</a></tt>/<tt><a href="KeyPgReallocate.html">Reallocate</a></tt>/<tt><a href="KeyPgDeallocate.html">Deallocate</a></tt> sont utilis&eacute;s directement.<br \>
 <br \>
-The end of the string is marked by the character 0, so that character must never be part of a <tt><b>WString</b></tt> or the content will be truncated.<br \>
+La fin de la cha&icirc;ne est marqu&eacute;e avec le caract&egrave;re 0, donc ce caract&egrave;re ne doit jamais faire partie du contenu de <tt><b>WString</b></tt> ou ce contenu sera tronqu&eacute;.<br \>
 <br \>
-This type is provided for support non-Latin based alphabets. Any intrinsic string function like <tt><a href="KeyPgLeft.html">Left</a></tt> will work with <tt><b>WString</b></tt>s too, as will any string operator.<br \>
+Ce type existe pour supporter les alphabets avec une base non-Latin. Toutes les fonctions intrins&egrave;ques de cha&icirc;nes comme <tt><a href="KeyPgLeft.html">Left</a></tt> , ainsi que tout op&eacute;rateur de cha&icirc;ne, fontionnent aussi avec <tt><b>WString</b></tt>.<br \>
 <br \>
-Besides ASCII files with Unicode escape sequences (\u), FreeBASIC can parse UTF-8, UTF-16LE, UTF-16BE, UTF-32LE and UTF-32BE source files.<br \>
+En plus des fichiers ASCII avec des s&eacute;quences d'&eacute;chappement Unicode (\u), FreeBasic peut analyser les fichiers source UTF-8, UTF-16LE, UTF-16BE, UTF-32LE et UTF-32BE.<br \>
 <br \>
-The FreeBASIC text file functions can read and write Unicode files in different encodings, provided the <tt><a href="KeyPgEncoding.html">Encoding</a></tt> is specified when the file is opened. The text is automatically converted to the internal encoding at read and converted back to the file encoding at write. <br \>
+Les fonctions de fichier texte de FreeBasic peuvent lire et &eacute;crire des fichiers Unicode dans des codages diff&eacute;rents, &agrave; condition que le codage = <tt><a href="KeyPgEncoding.html">Encoding</a></tt> soit sp&eacute;cifi&eacute; lorsque le fichier est ouvert. Le texte est automatiquement converti dans le codage interne &agrave; la lecture et reconverti dans le codage du fichier lors de l'&eacute;criture. <br \>
 <br \>
-<tt><a href="KeyPgSizeof.html">SizeOf</a></tt>( <tt><b>WString</b></tt> ) returns the number of bytes used by a <tt><b>WString</b></tt> character in the current platform.<br \>
+<tt><a href="KeyPgSizeof.html">SizeOf</a></tt>( <tt><b>WString</b></tt> ) retourne le nombre d'octets utilis&eacute;s par <tt><b>WString</b></tt> dans la plate-forme courante.<br \>
 <br \>
-</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Exemple</div><div class="fb_sect_cont"><br \>
 <tt><div class="freebasic">
 <span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">WString</span>&nbsp;<span class="oth">*</span>&nbsp;<span class="num">14</span>&nbsp;<span class="wrd">str1</span>&nbsp;<span class="oth">=&gt;</span>&nbsp;<span class="quo">"hello,&nbsp;world"</span><br />
 <span class="key">Print</span>&nbsp;<span class="wrd">str1</span><br />
@@ -46,19 +46,19 @@ The FreeBASIC text file functions can read and write Unicode files in different 
 <span class="key">Print</span>&nbsp;<span class="key">Len</span><span class="oth">(*</span><span class="wrd">str2</span><span class="oth">)</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">'returns&nbsp;12,&nbsp;the&nbsp;length&nbsp;of&nbsp;the&nbsp;string&nbsp;it&nbsp;points&nbsp;to</span><br />
 </div></tt><br />
 <br \>
-</div><div class="fb_sect_title">Platform Differences</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Diff&eacute;rences de plate-forme</div><div class="fb_sect_cont"><br \>
 Support for wstrings relies in the C runtime library available in the platform and the internal format may vary.<br \>
-<ul><ul><li> Unicode is not supported in the DOS port of FreeBASIC. In this port a character takes up always 1 byte and <tt><a href="KeyPgWstring.html">Wstrings</a></tt> will behave as standard ASCII <tt><a href="KeyPgZstring.html">Zstrings</a></tt><br \>
-<li> On Win32 wstrings are encoded in UCS-2 (UTF-16 LE) and a character takes up 2 bytes.<br \>
-<li> On Linux wstrings are encoded in UCS-4 and a character takes up 4 bytes.<br \>
+<ul><li> Unicode n'est pas support&eacute; dans le portage DOS de FreeBASIC. Dans ce portage un caract&egrave;re vaut toujours 1 octet et <tt><a href="KeyPgWstring.html">Wstrings</a></tt> va se comporter en tant que norme ASCII <tt><a href="KeyPgZstring.html">Zstrings</a></tt><br \>
+<li> Sous Win32 wstrings sont encod&eacute;es en UCS-2 (UTF-16 LE) et un caract&egrave;re vaut 2 octets.<br \>
+<li> Sous Linux wstrings sont encod&eacute;es en UCS-4 et un caract&egrave;re vaut 4 octets.<br \>
 <br \>
-</ul></ul></div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
-<ul><li> Not available in the <i><a href="CompilerOptlang.html">-lang qb</a></i> dialect unless referenced with the alias <tt><b>__Wstring</b></tt>.<br \>
+</ul></ul></div><div class="fb_sect_title">Diff&eacute;rences de dialectes</div><div class="fb_sect_cont"><br \>
+<ul><li> Non disponible dans le dialecte <i><a href="CompilerOptlang.html">-lang qb</a></i> sauf si r&eacute;f&eacute;renc&eacute; avec l'alias <tt><b>__Wstring</b></tt>.<br \>
 <br \>
-</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
-<ul><li> New to FreeBASIC<br \>
+</ul></div><div class="fb_sect_title">Diff&eacute;rences avec QB</div><div class="fb_sect_cont"><br \>
+<ul><li> Nouveau pour FreeBASIC<br \>
 <br \>
-</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+</ul></div><div class="fb_sect_title">Voir aussi</div><div class="fb_sect_cont"><br \>
 <ul><li> <tt><a href="KeyPgString.html">String</a></tt> (data type)<br \>
 <li> <tt><a href="KeyPgZstring.html">ZString</a></tt> (data type)<br \>
 <li> <tt><a href="KeyPgWstring.html">WString</a></tt> (data type)<br \>

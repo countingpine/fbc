@@ -11,28 +11,28 @@
 </div> 
 <div id="fb_pg_wrapper">
 <div id="fb_pg_body">
-	Debugging macro that halts program execution if an expression is evaluated to <tt>0</tt> (false).<br \>
+	Macro de d&eacute;bogage qui arr&ecirc;te l'ex&eacute;cution du programme si une expression est &eacute;valu&eacute;e &agrave; <tt>0</tt> (false = faux).<br \>
 <br \>
-<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<div class="fb_sect_title">Syntaxe</div><div class="fb_sect_cont"><tt><br \>
 <a href="KeyPgPpdefine.html">#define</a> <b>Assert</b>(<i>expression</i>) <a href="KeyPgIfthen.html">If</a> (expression) = 0 <a href="KeyPgThen.html">Then</a> : fb_Assert( <a href="KeyPgDdfile.html">__FILE__</a>, <a href="KeyPgDdline.html">__LINE__</a>, <a href="KeyPgDdfunction.html">__FUNCTION__</a>, <a href="KeyPgOpPpStringize.html">#</a>expression ) : <a href="KeyPgEndif.html">End If</a><br \>
 </tt><br \>
 </div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
 <b>Assert</b>( <i>expression</i> )<br \>
 </tt><br \>
-</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Param&egrave;tres</div><div class="fb_sect_cont"><br \>
 <tt><i>expression</i></tt><br \>
-<div class="fb_indent">Any valid conditional/numeric expression.  If <tt><i>expression</i></tt> evaluates to <tt>0</tt> (i.e. "false"), execution is halted.<br \>
+<div class="fb_indent">Toute expression conditionnelle/num&eacute;rique valide.  Si <tt><i>expression</i></tt> est &eacute;valu&eacute;e &agrave; <tt>0</tt> (par exemple "false"), l'ex&eacute;cution est interrompue.<br \>
 <br \>
 </div></div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
-The <tt><b>Assert</b></tt> macro is intended for use in debugging and works only if the <tt>-g</tt> option is selected in the FBC command line. In this case it prints an error message and stops the program execution if <tt><i>expression</i></tt> evaluates to <tt>0</tt>.<br \>
+La macro <tt><b>Assert</b></tt> est pr&eacute;vue pour &ecirc;tre utilis&eacute;e lors du d&eacute;bogage et ne fonctionne que si l'option <tt>-g</tt> est s&eacute;lectionn&eacute;e dans la ligne de commande de FBC. Dans ce cas, elle affiche un message d'erreur et arr&ecirc;te l'ex&eacute;cution du programme si <tt><i>expression</i></tt> est &eacute;valu&eacute;e &agrave; <tt>0</tt>.<br \>
 <br \>
-Its normal use is to check the correct value of the variables during debugging.<br \>
+Son utilisation normale est de v&eacute;rifier la valeur correcte des variables pendant le d&eacute;bogage.<br \>
 <br \>
-If <tt>-g</tt> is not passed to fbc, the macro does not generate any code, and has no effect.<br \>
+Si <tt><i>-g</i></tt> n'est pas pass&eacute; &agrave; fbc, la macro ne g&eacute;n&egrave;re pas de code, et n'a aucun effet.<br \>
 <br \>
-Note: If an <tt><b>Assert</b></tt> fails while the program is in a graphics <tt><a href="KeyPgScreengraphics.html">Screen</a></tt>, the error message will not be visible as it will be printed to the graphics screen, which will be closed immediately after.<br \>
+Note: Si un <tt><b>Assert</b></tt> &eacute;choue lorsque le programme est dans un <tt><a href="KeyPgScreengraphics.html">Screen</a></tt> graphique, le message d'erreur ne sera pas visible car il sera affich&eacute; sur l'&eacute;cran graphique, qui sera ferm&eacute; imm&eacute;diatement apr&egrave;s.<br \>
 <br \>
-</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Exemple</div><div class="fb_sect_cont"><br \>
 <tt><div class="freebasic">
 <span class="key">Sub</span>&nbsp;<span class="wrd">foo</span><br />
 &nbsp;<span class="key">Dim</span>&nbsp;<span class="wrd">a</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
@@ -45,16 +45,18 @@ Note: If an <tt><b>Assert</b></tt> fails while the program is in a graphics <tt>
 <span class="com">''&nbsp;If&nbsp;-g&nbsp;is&nbsp;used&nbsp;this&nbsp;code&nbsp;stops&nbsp;with:&nbsp;test.bas(3):&nbsp;assertion&nbsp;failed&nbsp;at&nbsp;FOO:&nbsp;a=1&nbsp;</span><br />
 </div></tt><br />
 <br \>
-</div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
-<ul><li> Not available in the <i><a href="CompilerOptlang.html">-lang qb</a></i> dialect unless referenced with the alias <tt><b>__ASSERT</b></tt>.<br \>
+</div><div class="fb_sect_title">Diff&eacute;rences de dialecte</div><div class="fb_sect_cont"><br \>
+<ul><li> Non disponible dans le dialecte <i><a href="CompilerOptlang.html">-lang qb</a></i> sauf si r&eacute;f&eacute;renc&eacute; avec l'alias <tt><b>__ASSERT</b></tt>.<br \>
 <br \>
-</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
-<ul><li> New to FreeBASIC<br \>
+</ul></div><div class="fb_sect_title">Diff&eacute;rences avec QB</div><div class="fb_sect_cont"><br \>
+<ul><li> Nouveau pour FreeBASIC<br \>
 <br \>
-</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+</ul></div><div class="fb_sect_title">Voir aussi</div><div class="fb_sect_cont"><br \>
 <ul><li> <tt><a href="KeyPgAssertwarn.html">AssertWarn</a></tt><br \>
 <br \>
-</ul></div>
+</ul><br \>
+   <br \>
+</div>
 </div>
 </div> 
 </div> 

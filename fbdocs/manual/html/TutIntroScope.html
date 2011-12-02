@@ -6,108 +6,108 @@
 <body>
 <div id="fb_body_wrapper">
 <div id="fb_tab">
-<div id="fb_tab_l">Introduction to Variable Scope</div>
+<div id="fb_tab_l">Introduction &agrave; la port&eacute;e des variables</div>
 <div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
 </div> 
 <div id="fb_pg_wrapper">
 <div id="fb_pg_body">
-	<i>Written by <a href="WikiRick.html">rdc</a></i><br \>
+	<i>Ecrit par <a href="WikiRick.html">rdc</a></i><br \>
 <br \>
 <div class="fb_header"> Variable Scope </div><br \>
 <br \>
-Scope refers to the visibility of a variable, where you can access a variable within a program. Before you can understand the different levels of scope, you need to understand the structure of a program in FreeBasic.<br \>
+<tt><b>Scope = port&eacute;e</b></tt> fait r&eacute;f&eacute;rence &agrave; la visibilit&eacute; d'une variable, o&ugrave; vous pouvez acc&eacute;der &agrave; une variable dans un programme. Avant de pouvoir comprendre les diff&eacute;rents niveaux de port&eacute;e, vous devez comprendre la structure d'un programme en FreeBasic.<br \>
 <br \>
-<b> Program Structure </b><br \>
+<b> Structure d'un programme </b><br \>
 <br \>
-A complete program is composed of one or more .bas files, called modules. Each module can contain both module level code, and code contained within subroutines and functions. Module level code is code that is <i>not</i> contained within a subroutine or function. The following snippet illustrates the various parts of a module.<br \>
+Un programme complet est compos&eacute; d'un ou plusieurs fichiers <b>.bas</b>, appel&eacute;s modules. Chaque module peut contenir, &agrave; la fois, du code de niveau module et du code contenu dans les sous-routines et fonctions. Du code de niveau module est du code qui <i><b>n'est pas</b></i> contenu dans une sous-routine ou une fonction. L'extrait suivant illustre les diff&eacute;rentes parties d'un module.<br \>
 <br \>
 <tt><div class="freebasic">
-<span class="key">Dim</span>&nbsp;<span class="wrd">aInt</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="com">'Variable&nbsp;declared&nbsp;at&nbsp;module&nbsp;level</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">aInt</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="com">'Variable&nbsp;d&eacute;clar&eacute;e&nbsp;au&nbsp;niveau&nbsp;module</span><br />
 <br />
 <span class="key">Sub</span>&nbsp;<span class="wrd">DoSomething</span><br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="wrd">aInt</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="com">'Variable&nbsp;declared&nbsp;at&nbsp;sub&nbsp;level</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="wrd">aInt</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="com">'Variable&nbsp;d&eacute;clar&eacute;e&nbsp;au&nbsp;niveau&nbsp;sous-routine</span><br />
 &nbsp;&nbsp;&nbsp;&nbsp;<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">...</span>&nbsp;<span class="com">'This&nbsp;code&nbsp;is&nbsp;local&nbsp;to&nbsp;sub</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">...</span>&nbsp;<span class="com">'Ce&nbsp;code&nbsp;est&nbsp;local&nbsp;&agrave;&nbsp;Sub</span><br />
 <span class="key">End</span>&nbsp;<span class="key">Sub</span><br />
 <br />
 <span class="key">Function</span>&nbsp;<span class="wrd">DoSomethingElse</span><span class="oth">()</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="wrd">aInt</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="com">'Variable&nbsp;declared&nbsp;at&nbsp;func&nbsp;level</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="wrd">aInt</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="com">'Variable&nbsp;d&eacute;clar&eacute;e&nbsp;au&nbsp;niveau&nbsp;fonction</span><br />
 &nbsp;&nbsp;&nbsp;&nbsp;<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">...</span>&nbsp;<span class="com">'This&nbsp;code&nbsp;is&nbsp;local&nbsp;to&nbsp;func</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">...</span>&nbsp;<span class="com">'Ce&nbsp;code&nbsp;est&nbsp;local&nbsp;&agrave;&nbsp;Function</span><br />
 <span class="key">End</span>&nbsp;<span class="key">Function</span><br />
 <br />
-<span class="com">'Module&nbsp;level&nbsp;code</span><br />
+<span class="com">'Code&nbsp;niveau&nbsp;module</span><br />
 <span class="wrd">aInt</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">5</span><br />
 <span class="wrd">DoSomething</span><br />
 <span class="wrd">aInt</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">DoSomethingElse</span><span class="oth">()</span><br />
 </div></tt><br />
 <br \>
-<b> Local Variables </b><br \>
+<b> Variables locales </b><br \>
 <br \>
-If you define a variable at the module level (and not using <tt>Shared</tt>), the variable is said to have local module level scope. It is visible to the module level code, but not to any subroutine or function within the module. In the example above the module variable <tt>aInt</tt> is only visible to the module level code. <br \>
+Si vous d&eacute;finissez une variable au niveau du module (et n'utilisez pas <tt><b>Shared</b></tt>), la variable est dite avoir une port&eacute;e au niveau du module local. Elle est visible par le code au niveau du module, mais pas des sous-routines ou fonctions au sein du module. Dans l'exemple ci-dessus la variable du module <tt><b>aInt</b></tt> est visible uniquement pour le code de niveau module. <br \>
 <br \>
-Variables defined within a subroutine or function are local to the subroutine or function and are not visible to module level code or any other subroutine or function.<br \>
+Les variables d&eacute;finies dans une sous-routine ou une fonction sont locales &agrave; la sous-routine ou fonction et ne sont pas visibles du code de niveau module ou de toute autre sous-programme ou fonction.<br \>
 <br \>
-<b> Variables Defined Within Control Structures </b><br \>
+<b> Variables d&eacute;finies au sein de structures de contr&ocirc;le </b><br \>
 <br \>
-Variables that are defined within If, For-Next, While-Wend and Do-Loop constructs are local to the control structure block code. That is, they are not visible outside the bounds of the begin and end of the control block, just like a variable declared within a subroutine or function. <br \>
+Les variables qui sont d&eacute;finies dans des constructions <tt><b>If</b></tt>, <tt><b>For-Next</b></tt>, <tt><b>While-Wend</b></tt> et <tt><b>Do-Loop</b></tt> sont locales au code de la structure du bloc de contr&ocirc;le. Autrement dit, ils ne sont pas visibles &agrave; l'ext&eacute;rieur des limites du d&eacute;but et de fin du bloc de contr&ocirc;le, tout comme une variable d&eacute;clar&eacute;e dans une sous-routine ou une fonction. <br \>
 <br \>
-<b> Shared Variables </b><br \>
+<b> Les variables partag&eacute;es (Shared) </b><br \>
 <br \>
-In the example, if you wanted <tt>aInt</tt> to be visible within the subroutine or function, you would need to declare the variable as <tt>Shared</tt> and then not declare a variable with the same name within any subroutine, function or control block. <tt>Shared</tt> variables are visible to module level code, subroutine or function level code and within control structure blocks.<br \>
+Dans l'exemple, si vous voulez que <tt><b>aInt</b></tt> soit visible au sein de la sous-routine ou de la fonction, vous devez d&eacute;clarer la variable comme &eacute;tant <tt><b>Shared</b></tt> et ensuite ne pas d&eacute;clarer une variable avec le m&ecirc;me nom dans des sous-routine, fonction ou bloc de contr&ocirc;le. Les variables <tt><b>Shared</b></tt> sont visibles par le code de niveau module, celui de niveau sous-routines ou fonctions et au sein des structures de contr&ocirc;le.<br \>
 <br \>
-<b> Scope Conflicts </b><br \>
+<b> Les conflits de port&eacute;e</b><br \>
 <br \>
-In the code snippet above, if <tt>aInt</tt> were declared as <tt>Shared</tt>, and each subroutine and function declared <tt>aInt</tt>, there would be a scope conflict, since there is one variable name used for different levels of scope.<br \>
+Dans l'extrait de code ci-dessus, si <tt><b>aInt</b></tt> est d&eacute;clar&eacute;e <tt><b>Shared</b></tt> et que chaque sous-routine et fonction d&eacute;clare <tt><b>aInt</b></tt>, il y aurait un conflit une port&eacute;e, car il y aurait m&ecirc;me un nom de variable utilis&eacute; pour diff&eacute;rents niveaux de port&eacute;e.<br \>
 <br \>
-The compiler resolves this by taking the current scope into account and mapping the variable within that scope. Since subroutines and functions have a lower level of scope than the module, <tt>aInt</tt> would refer to the variable declared within the sub or func, and not the one declared at the module level, even though it is declared as a shared variable.<br \>
+Le compilateur r&eacute;sout cela en prenant la port&eacute;e courante en compte et planifie la variable avec cette port&eacute;e. Comme les sous-routines et fonctions ont un niveau de port&eacute;e inf&eacute;rieur &agrave; celui d'un module, <tt><b>aInt</b></tt> fait r&eacute;f&eacute;rence soit &agrave; la variable d&eacute;clar&eacute;e dans la sous-routine ou la fonction, et non pas &agrave; celle qui a &eacute;t&eacute; d&eacute;clar&eacute;e au niveau d'un module, m&ecirc;me si elle a &eacute;t&eacute; d&eacute;clar&eacute;e comme une variable partag&eacute;e.<br \>
 <br \>
-<b> Multiple Modules </b><br \>
+<b> Plusieurs modules </b><br \>
 <br \>
-Scope is limited to a single module, that is a single .bas file. However, it is sometimes necessary to extend the scope from one module to another. You would use the <tt>Common</tt> statement when you declare a variable that needs to be shared among modules.<br \>
+La port&eacute;e est limit&eacute;e &agrave; un seul module, c'est &agrave; dire un unique fichier <tt><b>.bas</b></tt>. Cependant, il est parfois n&eacute;cessaire d'&eacute;tendre la port&eacute;e d'un module &agrave; un autre. Vous devez utiliser la d&eacute;claration <tt><b>Common</b></tt> lorsque vous d&eacute;clarez une variable qui doit &ecirc;tre partag&eacute;e entre plusieurs modules.<br \>
 <br \>
-Each module must have the same <tt>Common</tt> declaration in order for the compiler to match up the common variables. If you declare a variable in module1 as <tt>Common aInt as Integer</tt> then module2 must also have <tt>Common aInt as Integer</tt>. Without the common declaration <tt>aInt</tt> would not be visible within module2.<br \>
+Chaque d'un module doit avoir la m&ecirc;me d&eacute;claration <tt><b>Common</b></tt> pour que le compilateur de fasse correspondre les variables communes. Si vous d&eacute;clarez une variable <tt><b>Common aInt as Integer</b></tt> dans module1 alors le module2 doit aussi avoir <tt><b>Common aInt as Integer</b></tt>. Sans cette d&eacute;claration commune <tt><b>aInt</b></tt> ne serait pas visible dans le module2.<br \>
 <br \>
-You can add the <tt>Shared</tt> attribute to <tt>Common</tt>, that is <tt>Common Shared</tt> to not only extend scope to multiple modules, but to extend scope within a module. <tt>Common Shared</tt> operates the same as <tt>Shared</tt> within a single module. As with <tt>Common</tt>, you need to have matching declarations in each module that needs access to the variable.<br \>
+Vous pouvez ajouter l'attribut <tt><b>Shared</b></tt> &agrave; <tt><b>Common</b></tt>, c'est &agrave; dire <tt><b>Common Shared</b></tt> non seulement pour &eacute;tendre la port&eacute;e &agrave; plusieurs modules, mais pour &eacute;tendre la port&eacute;e au sein d'un module. <tt><b>Common Shared</b></tt> fonctionne comme <tt><b>Shared</b></tt> dans un seul module. Comme avec <tt><b>Common</b></tt>, vous avez besoin d'apparier les d&eacute;clarations dans chaque module qui doit avoir acc&egrave;s &agrave; la variable.<br \>
 <br \>
 <div class="fb_header"> Scope...End Scope </div><br \>
 <br \>
-You can create a temporary scope block by using the <tt>Scope</tt>, <tt>End Scope</tt> keywords. The scope block is very useful when creating multi-line macros where you may need to create some temporary working variables but do not want to introduce name conflicts in the program. The following snippet illustrates how to create a scope block.<br \>
+Vous pouvez cr&eacute;er un bloc de port&eacute;e temporaire en utilisant les mots-cl&eacute;s <tt><b>Scope</b></tt> et <tt><b>End Scope</b></tt>. Le bloc de port&eacute;e est tr&egrave;s utile lors de la cr&eacute;ation de macros multi-ligne o&ugrave; vous pouvez avoir besoin de cr&eacute;er des variables de travail temporaires mais en &eacute;vitant de cr&eacute;er des conflits de nom dans le programme. L'extrait suivant montre comment cr&eacute;er un bloc de port&eacute;e.<br \>
 <br \>
 <tt><div class="freebasic">
 <span class="key">Scope</span><br />
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="wrd">tmp</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">...</span>&nbsp;<span class="com">'Some&nbsp;code</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">...</span>&nbsp;<span class="com">'Du&nbsp;code</span><br />
 <span class="key">End</span>&nbsp;<span class="key">Scope</span><br />
 </div></tt><br />
 <br \>
-The scope of any variable created within a scope block is limited to the block itself. However, the scope block inherits the visibility of the surrounding scope so that variables created at the same scope as the scope block are visible within the block.<br \>
+La port&eacute;e d'une variable cr&eacute;&eacute;e dans un bloc de port&eacute;e est limit&eacute;e au bloc lui-m&ecirc;me. Cependant, le bloc de port&eacute;e h&eacute;rite de la visibilit&eacute; de la port&eacute;e environnante, afin que les variables cr&eacute;&eacute;es avec la m&ecirc;me port&eacute;e que le bloc de port&eacute;e soient visibles dans le bloc.<br \>
 <br \>
-For example, if you have aInt which is at module level scope, and the scope block is at module level scope, then <tt>aInt</tt> would be visible inside the scope block. Unless of course there is a scope conflict, in which case the variable inside the scope block would override the variable with the same name outside the scope block.<br \>
+Par exemple, si vous avez <tt><b>aInt</b></tt> qui est de port&eacute;e niveau module et le bloc de port&eacute;e qui est de port&eacute;e niveau module, alors <tt><b>aInt</b></tt>serait visible &agrave; l'int&eacute;rieur du bloc de port&eacute;e. À moins bien s&ucirc;r qu'il n'y ait un conflit de port&eacute;e, auquel cas la variable &agrave; l'int&eacute;rieur du bloc de port&eacute;e aurait pr&eacute;s&eacute;ance sur la variable avec le m&ecirc;me nom mais en dehors du bloc port&eacute;e.<br \>
 <br \>
-<div class="fb_header"> Variable Lifetime </div><br \>
+<div class="fb_header"> Dur&eacute;e de vie d'une variable </div><br \>
 <br \>
-Not only does scope set the visibility of a variable, it also determines the lifetime of a variable. A variable goes through several stages in its lifetime; creation, initialization, access and destruction. When this occurs depends on the scope of a variable, that is, where the variable has been defined within the program.<br \>
+La port&eacute;e ne d&eacute;finit pas seulement la visibilit&eacute; d'une variable, elle d&eacute;termine &eacute;galement sa dur&eacute;e de vie. Une variable passe par plusieurs &eacute;tapes dans sa vie; cr&eacute;ation, initialisation, acc&egrave;s et destruction. La port&eacute;e d'une variable d&eacute;pend du moment o&ugrave; cela se produit, c'est &agrave; dire, o&ugrave; la variable a &eacute;t&eacute; d&eacute;finie dans le programme.<br \>
 <br \>
-<b> Module Level Variables </b><br \>
+<b> Variables de niveau module </b><br \>
 <br \>
-Module level variables exist for the life of a program, since they are declared within the main body of the program. Module level code is the main executing code of the program, and terminates when the program ends.<br \>
+Les variables au niveau du module existent pour la dur&eacute;e de vie d'un programme, puisqu'elles sont d&eacute;clar&eacute;es dans le corps principal du programme. Le code de niveau module est le code d'ex&eacute;cution principal du programme et se termine lorsque le programme se termine..<br \>
 <br \>
-<b> Subroutine and Function Level Variables </b><br \>
+<b> Les variables de niveau sous-routine et fonction </b><br \>
 <br \>
-Variables declared within a subroutine and function exist as long as the program is within the body of the subroutine and function. On entering the sub/func, the variable is created, initialized and can be accessed within the sub/func. Once the subroutine or function exits, the variable is destroyed.<br \>
+Les variables d&eacute;clar&eacute;es dans un sous-programme ou une fonction existent aussi longtemps que le programme est dans le corps du sous-programme ou de la fonction. A l'entr&eacute;e dans la <tt><b>Sub/Function</b></tt>, la variable est cr&eacute;&eacute;e, initialis&eacute;e et est accessible dans <tt><b>Sub/Function</b></tt>. D&egrave;s la sortie de <tt><b>Sub/Function</b></tt>, la variable est d&eacute;truite.<br \>
 <br \>
-<b> Static Variables  </b><br \>
+<b> Les variables statiques  </b><br \>
 <br \>
-One exception to the declared sub/func variable is the <tt>Static</tt> variable. <tt>Static</tt> variables maintain their value between calls to the subroutine or function and so have a module level lifespan. <br \>
+Une exception aux variables d&eacute;clar&eacute;es dans <tt><b>Sub/Function</b></tt> c'est la variable <tt><b>Static</b></tt>. Les variables <tt>Static</tt> conservent leur valeur entre les appels &agrave; <tt><b>Sub/Function</b></tt> et ont donc une dur&eacute;e de vie niveau module. <br \>
 <br \>
-<b> Control Block Variables </b><br \>
+<b> Les variables de blocs de contr&ocirc;le </b><br \>
 <br \>
-Variables declared within a control block, such as a For-Next, exist as long as the control block is executing. Upon leaving the control block, the variables are destroyed.<br \>
+Les variables d&eacute;clar&eacute;es dans un bloc de contr&ocirc;le, comme un <tt><b>For-Next</b></tt> existent tant que le bloc de contr&ocirc;le est ex&eacute;cut&eacute;. Au moment de quitter le bloc de contr&ocirc;le, les variables soient d&eacute;truites.<br \>
 <br \>
-<b> Scope...End Scope Variables </b><br \>
+<b>  Variables Scope...End Scope </b><br \>
 <br \>
-Variables declared within a scope block exist as long as the the scope block exists. Once the program leaves the scope block, any variables created within the scope block are destroyed.
+Les variables d&eacute;clar&eacute;es dans un bloc <tt><b>Scope...End Scope</b></tt> existent aussi longtemps que le bloc existe. D&egrave;s que le programme quitte le bloc toutes les variables cr&eacute;&eacute;es dans le bloc sont d&eacute;truites.<br \>
 </div>
 </div> 
 </div> 

@@ -11,26 +11,26 @@
 </div> 
 <div id="fb_pg_wrapper">
 <div id="fb_pg_body">
-	Control flow statement to return from a procedure or <tt><a href="KeyPgGosub.html">GoSub</a></tt>.<br \>
+	D&eacute;claration de contr&ocirc;le de flux pour revenir d'une proc&eacute;dure ou d'un <tt><a href="KeyPgGosub.html">GoSub</a></tt>.<br \>
 <br \>
-<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<div class="fb_sect_title">Syntaxe</div><div class="fb_sect_cont"><tt><br \>
 <b>Return</b> [ <i>expression</i> ]<br \>
-<i>or</i><br \>
+<i>ou</i><br \>
 <b>Return</b> [ <i>label</i> ]<br \>
 <br \>
 </tt><br \>
 </div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
-<tt><b>Return</b></tt> is used to return from a procedure or return from a gosub <tt><a href="KeyPgGosub.html">GoSub</a></tt>.<br \>
+<tt><b>Return</b></tt> est utilis&eacute; pour revenir d'une proc&eacute;dure ou d'un <tt><a href="KeyPgGosub.html">GoSub</a></tt>.<br \>
 <br \>
-Because <tt><a href="KeyPgReturn.html">Return</a></tt> could mean return-from-gosub or return-from-procedure, <tt><a href="KeyPgOptiongosub.html">Option Gosub</a></tt> and <tt><a href="KeyPgOptionnogosub.html">Option Nogosub</a></tt> can be used to enable and disable <tt><a href="KeyPgGosub.html">GoSub</a></tt> support.  When <tt><a href="KeyPgGosub.html">GoSub</a></tt> support is disabled, <tt><a href="KeyPgReturn.html">Return</a></tt> is then recognized as return-from-procedure.  When <tt><a href="KeyPgGosub.html">GoSub</a></tt> support is enabled, <tt><a href="KeyPgReturn.html">Return</a></tt> is then recognized as return-from-gosub.<br \>
+Comme <tt><a href="KeyPgReturn.html">Return</a></tt> signifie retour-d'un-gosub ou retour-d'une-proc&eacute;dure, <tt><a href="KeyPgOptiongosub.html">Option Gosub</a></tt> et <tt><a href="KeyPgOptionnogosub.html">Option Nogosub</a></tt> peuvent &ecirc;tre utilis&eacute;s pour activer et d&eacute;sactiver le support de <tt><a href="KeyPgGosub.html">GoSub</a></tt>.  Quand le support de <tt><a href="KeyPgGosub.html">GoSub</a></tt> est d&eacute;sactiv&eacute;, <tt><a href="KeyPgReturn.html">Return</a></tt> est alors reconnu comme retour-d'une-proc&eacute;dure.  Quand le support de <tt><a href="KeyPgGosub.html">GoSub</a></tt> est activ&eacute;, <tt><a href="KeyPgReturn.html">Return</a></tt> est alors reconnu comme retour-d'un-gosub.<br \>
 <br \>
-<tt><b>Return</b></tt> (from procedure) is used inside a procedure to exit the procedure possibly with a return value. A <tt><a href="KeyPgSub.html">Sub</a></tt> cannot specify a return return value.  In a <tt><a href="KeyPgFunction.html">Function</a></tt>, <tt><b>Return</b></tt> must specify its return value.  <tt><b>Return</b> <i>expression</i></tt> is roughly equivalent to the <tt>Function = <i>expression</i> : <a href="KeyPgExit.html">Exit</a> Function</tt> idiom.<br \>
+<tt><b>Return</b></tt> (d'une proc&eacute;dure) est utilis&eacute; dans une proc&eacute;dure pour sortir de la proc&eacute;dure peut-&ecirc;tre avec une valeur de retour. Un <tt><a href="KeyPgSub.html">Sub</a></tt> ne peut pas sp&eacute;cifier une valeur de retour.  Dans une <tt><a href="KeyPgFunction.html">Function</a></tt>, <tt><b>Return</b></tt> doit pr&eacute;ciser sa valeur de retour.  <tt><b>Return</b> <i>expression</i></tt> est &agrave; peu pr&egrave;s &eacute;quivalent &agrave; <tt>Function = <i>expression</i> : <a href="KeyPgExit.html">Exit</a> Function</tt>.<br \>
 <br \>
-<tt><b>Return</b></tt> (from gosub) is used to return control back to the statement immediately following a previous <tt><a href="KeyPgGosub.html">GoSub</a></tt> call. When used in combination with <tt><a href="KeyPgGosub.html">GoSub</a></tt>, no return value can be specified.  If the optional <tt><i>label</i></tt> is specified, execution continues at the specified label.  If no <tt><a href="KeyPgGosub.html">GoSub</a></tt> was made, a runtime error is generated, and execution continues immediately after <tt><b>Return</b></tt>.<br \>
+<tt><b>Return</b></tt> (d'un gosub) est utilis&eacute; pour redonner le contr&ocirc;le &agrave; l'instruction qui suit imm&eacute;diatement le dernier appel &agrave; <tt><a href="KeyPgGosub.html">GoSub</a></tt>. Lorsqu'il est utilis&eacute; en combinaison avec <tt><a href="KeyPgGosub.html">GoSub</a></tt>, aucune valeur de retour ne peut &ecirc;tre sp&eacute;cifi&eacute;e.  Si l'option <tt><i>label</i></tt> est sp&eacute;cifi&eacute;e, l'ex&eacute;cution se poursuit &agrave; l'&eacute;tiquette sp&eacute;cifi&eacute;e.  Si aucun <tt><a href="KeyPgGosub.html">GoSub</a></tt> n'avait &eacute;t&eacute; ex&eacute;cut&eacute;, une erreur d'ex&eacute;cution est g&eacute;n&eacute;r&eacute;e et l'ex&eacute;cution continue imm&eacute;diatement apr&egrave;s <tt><b>Return</b></tt>.<br \>
 <br \>
-A <tt><a href="KeyPgGosub.html">GoSub</a></tt> should always have a matching <tt><b>Return</b></tt> statement.  However, if <tt><b>Return</b></tt> (from gosub) is used where no <tt><a href="KeyPgGosub.html">GoSub</a></tt> was made, a run-time error is generated.<br \>
+Un <tt><a href="KeyPgGosub.html">GoSub</a></tt> devrait toujours avoir un <tt><b>Return</b></tt> correspondant.  Toutefois, si <tt><b>Return</b></tt> (depuis un gosub) est utilis&eacute; lorsqu'aucun <tt><a href="KeyPgGosub.html">GoSub</a></tt> n'a &eacute;t&eacute; ex&eacute;cut&eacute;, une erreur d'ex&eacute;cution est g&eacute;n&eacute;r&eacute;e.<br \>
 <br \>
-</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Exemple</div><div class="fb_sect_cont"><br \>
 <tt><div class="freebasic">
 <span class="com">''&nbsp;GOSUB&nbsp;&amp;&nbsp;RETURN&nbsp;example,&nbsp;compile&nbsp;with&nbsp;"-lang&nbsp;qb"&nbsp;or&nbsp;use&nbsp;"$lang"&nbsp;as&nbsp;below</span><br />
 <br />
@@ -79,15 +79,15 @@ A <tt><a href="KeyPgGosub.html">GoSub</a></tt> should always have a matching <tt
 <span class="key">Print</span>&nbsp;<span class="wrd">r2.numerator</span>&nbsp;<span class="oth">&amp;</span>&nbsp;<span class="quo">"/"</span>&nbsp;<span class="oth">&amp;</span>&nbsp;<span class="wrd">r2.denominator</span><span class="oth">;</span>&nbsp;<span class="quo">"&nbsp;=&nbsp;"</span><span class="oth">;</span><br />
 <span class="key">Print</span>&nbsp;<span class="wrd">r3.numerator</span>&nbsp;<span class="oth">&amp;</span>&nbsp;<span class="quo">"/"</span>&nbsp;<span class="oth">&amp;</span>&nbsp;<span class="wrd">r3.denominator</span></div></tt><br />
 <br \>
-</div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
-<ul><li> In the <i><a href="CompilerOptlang.html">-lang fb</a></i> dialect <tt><b>Return</b></tt> always means return-from-procedure.<br \>
-<li> In the <i><a href="CompilerOptlang.html">-lang qb</a></i> dialect, <tt><b>Return</b></tt> means return-from-gosub by default unless changed with <tt><a href="KeyPgOptionnogosub.html">Option Nogosub</a></tt>, in which case the compiler will recognize <tt><b>Return</b></tt> as return-from-procedure.<br \>
-<li> In the <i><a href="CompilerOptlang.html">-lang fblite</a></i> dialect, <tt><b>Return</b></tt> means return-from-procedure by default unless changed with <tt><a href="KeyPgOptiongosub.html">Option Gosub</a></tt>, in which case the compiler will recognize <tt><b>Return</b></tt> as return-from-gosub.<br \>
+</div><div class="fb_sect_title">Diff&eacute;rences de dialecte</div><div class="fb_sect_cont"><br \>
+<ul><li> Dans le dialecte <i><a href="CompilerOptlang.html">-lang fb</a></i> <tt><b>Return</b></tt> signifie toujours retour-d'une-proc&eacute;dure.<br \>
+<li> Dans le dialecte <i><a href="CompilerOptlang.html">-lang qb</a></i>, <tt><b>Return</b></tt> signifie retour-d'un-gosub par d&eacute;faut sauf si cela a &eacute;t&eacute; chang&eacute; avec <tt><a href="KeyPgOptionnogosub.html">Option Nogosub</a></tt>, auquel cas le compilateur reconna&icirc;tra <tt><b>Return</b></tt> comme retour-d'une-proc&eacute;dure.<br \>
+<li> Dans le dialecte <i><a href="CompilerOptlang.html">-lang fblite</a></i>, <tt><b>Return</b></tt> signifie retour-d'une-proc&eacute;dure par d&eacute;faut sauf si cela a &eacute;t&eacute; chang&eacute; avec <tt><a href="KeyPgOptiongosub.html">Option Gosub</a></tt>, auquel cas le compilateur reconna&icirc;tra <tt><b>Return</b></tt> comme retour-d'un-gosub.<br \>
 <br \>
-</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
-<ul><li> None when using the <i><a href="CompilerOptlang.html">-lang qb</a></i> dialect.<br \>
+</ul></div><div class="fb_sect_title">Diff&eacute;rences avec QB</div><div class="fb_sect_cont"><br \>
+<ul><li> Aucune en utilisant le dialecte <i><a href="CompilerOptlang.html">-lang qb</a></i>.<br \>
 <br \>
-</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+</ul></div><div class="fb_sect_title">Voir aussi</div><div class="fb_sect_cont"><br \>
 <ul><li> <tt><a href="KeyPgSub.html">Sub</a></tt><br \>
 <li> <tt><a href="KeyPgFunction.html">Function</a></tt><br \>
 <li> <tt><a href="KeyPgGosub.html">GoSub</a></tt><br \>
@@ -95,6 +95,8 @@ A <tt><a href="KeyPgGosub.html">GoSub</a></tt> should always have a matching <tt
 <li> <tt><a href="KeyPgOptionnogosub.html">Option Nogosub</a></tt><br \>
 <br \>
 </ul><br \>
+<br \>
+   <br \>
 </div>
 </div>
 </div> 

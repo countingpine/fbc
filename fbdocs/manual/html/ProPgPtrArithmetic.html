@@ -6,27 +6,27 @@
 <body>
 <div id="fb_body_wrapper">
 <div id="fb_tab">
-<div id="fb_tab_l">Pointer Arithmetic</div>
+<div id="fb_tab_l">Arithm&eacute;tique des pointeurs</div>
 <div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
 </div> 
 <div id="fb_pg_wrapper">
 <div id="fb_pg_body">
-	Manipulating address values mathematically.<br \>
+	Manipulation des valeurs d'adresse math&eacute;matiquement.<br \>
 <br \>
-<b><a href="#OVERVIEW">Overview</a></b><br \>
-<b><a href="#ADDSUB">Adding and subtracting from pointers</a></b><br \>
-<b><a href="#INCDEC">Incrementing and decrementing pointers</a></b><br \>
-<b><a href="#DISTANCE">Distance between two pointers</a></b><br \>
+<b><a href="#OVERVIEW">Vue d'ensemble</a></b><br \>
+<b><a href="#ADDSUB">Addition et soustraction de pointeurs</a></b><br \>
+<b><a href="#INCDEC">Incr&eacute;mentation et de d&eacute;cr&eacute;mentation des pointeurs</a></b><br \>
+<b><a href="#DISTANCE">Distance entre deux pointeurs</a></b><br \>
 <br \>
-<a name="OVERVIEW"></a><div class="fb_sect_title">Overview</div><div class="fb_sect_cont"><br \>
+<a name="OVERVIEW"></a><div class="fb_sect_title">Vue d'ensemble</div><div class="fb_sect_cont"><br \>
 <br \>
-It is often useful to iterate through memory, from one address to another. Pointers are used to accomplish this. While the type of a pointer determines the type of variable or object retrieved when the pointer is dereferenced (using <tt><a href="KeyPgOpValueOf.html">Operator * (Value Of)</a></tt>), it also determines the <i>distance</i>, in bytes, its particular type takes up in memory. For example, a <tt><a href="KeyPgShort.html">Short</a></tt> takes up two (2) bytes in memory, while a <tt><a href="KeyPgSingle.html">Single</a></tt> needs four (4) bytes.<br \>
+Il est souvent utile de parcourir la m&eacute;moire, d'une adresse &agrave; une autre. Les pointeurs sont utilis&eacute;s pour y parvenir. Bien que le type d'un pointeur d&eacute;termine le type de variable ou d'objet r&eacute;cup&eacute;r&eacute; lorsque le pointeur est d&eacute;r&eacute;f&eacute;renc&eacute; (en utilisant <tt><a href="KeyPgOpValueOf.html">Operator * (Valeur de)</a></tt>), il d&eacute;termine &eacute;galement la <i>longueur</i>, en octets, que son type particulier occupe en m&eacute;moire. Par exemple, un <tt><a href="KeyPgShort.html">Short</a></tt> occupe deux (2) octets en m&eacute;moire, tandis qu'un <tt><a href="KeyPgSingle.html">Single</a></tt> n&eacute;cessite quatre (4) octets.<br \>
 <br \>
-<a name="ADDSUB"></a></div><div class="fb_sect_title">Adding and subtracting from pointers</div><div class="fb_sect_cont"><br \>
+<a name="ADDSUB"></a></div><div class="fb_sect_title">Addition et soustraction de pointeurs</div><div class="fb_sect_cont"><br \>
 <br \>
-Pointers can be added to and subtracted from just like a numeric type. The result of this addition or subtraction is an address, and the type of pointer determines the distance from the original pointer.<br \>
+Les pointeurs peuvent &ecirc;tre ajout&eacute;s et soustraits tout comme des types num&eacute;riques. Le r&eacute;sultat de cette addition ou soustraction est une adresse et le type de le pointeur d&eacute;termine la distance &agrave; partir du pointeur d'origine.<br \>
 <br \>
-For example, the following,<br \>
+Par exemple, le texte suivant,<br \>
 <br \>
 <tt><div class="freebasic">
 <span class="key">Dim</span>&nbsp;<span class="wrd">p</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="key">Ptr</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">New</span>&nbsp;<span class="key">Integer</span><span class="oth">[</span><span class="num">2</span><span class="oth">]</span><br />
@@ -34,13 +34,13 @@ For example, the following,<br \>
 <span class="oth">*</span><span class="wrd">p</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">1</span><br />
 <span class="oth">*(</span><span class="wrd">p</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="num">1</span><span class="oth">)</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">2</span><br />
 </div></tt><br />
-will assign the values "<tt>1</tt>" and "<tt>2</tt>" to each integer in the array pointer to by <tt><i>p</i></tt>. Since <tt><i>p</i></tt> is an <tt><a href="KeyPgInteger.html">Integer</a> <a href="KeyPgPointer.html">Pointer</a></tt>, the expression "<tt>*(p + 1)</tt>" is saying to dereference an <tt><a href="KeyPgInteger.html">Integer</a></tt> four (4) bytes from <tt><i>p</i></tt>; the "<tt>1</tt>" indicates a distance of "<tt>1 * the size of an <a href="KeyPgInteger.html">Integer</a></tt>", or four (4) bytes.<br \>
+attribuera les valeurs "<tt>1</tt>" et "<tt>2</tt>" &agrave; chaque entier dans le tableau point&eacute; par <tt><i>p</i></tt>. Comme <tt><i>p</i></tt> est un <tt><a href="KeyPgInteger.html">Integer</a> <a href="KeyPgPointer.html">Pointer</a></tt>, l'expression "<tt>*(p + 1)</tt>" dit de d&eacute;r&eacute;f&eacute;rencer un <tt><a href="KeyPgInteger.html">Integer</a></tt> de quatre (4) octets &agrave; partir de <tt><i>p</i></tt>; le "<tt>1</tt>" indique une distance de "<tt>1 * taille d'un <a href="KeyPgInteger.html">Integer</a></tt>", ou quatre (4) octets.<br \>
 <br \>
-Subtraction follows the exact same principle. Remember, <i>a</i> - <i>b</i> = <i>a</i> + -<i>b</i>.<br \>
+La soustraction suit exactement le m&ecirc;me principe. Remember, <i>a</i> - <i>b</i> = <i>a</i> + -<i>b</i>.<br \>
 <br \>
-<a name="INCDEC"></a></div><div class="fb_sect_title">Incrementing and decrementing pointers</div><div class="fb_sect_cont"><br \>
+<a name="INCDEC"></a></div><div class="fb_sect_title">Incr&eacute;mentation et de d&eacute;cr&eacute;mentation des pointeurs</div><div class="fb_sect_cont"><br \>
 <br \>
-Sometimes it is more convenient to modify the pointer itself, in which case the combination addition and subtraction operators will work just like above. For example, the following,<br \>
+Parfois il est plus commode de modifier le pointeur lui-m&ecirc;me, dans ce cas, la combinaison de l'addition et de la soustraction des op&eacute;rateurs fonctionne exactement comme ci-dessus. Par exemple, le texte suivant,<br \>
 <br \>
 <tt><div class="freebasic">
 <span class="key">Dim</span>&nbsp;<span class="wrd">array</span><span class="oth">(</span><span class="num">5</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Short</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="oth">{</span>&nbsp;<span class="num">32</span><span class="oth">,</span>&nbsp;<span class="num">43</span><span class="oth">,</span>&nbsp;<span class="num">66</span><span class="oth">,</span>&nbsp;<span class="num">348</span><span class="oth">,</span>&nbsp;<span class="num">112</span><span class="oth">,</span>&nbsp;<span class="num">0</span>&nbsp;<span class="oth">}</span><br />
@@ -51,11 +51,11 @@ Sometimes it is more convenient to modify the pointer itself, in which case the 
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">p</span>&nbsp;<span class="oth">+=</span>&nbsp;<span class="num">1</span><br />
 <span class="key">Wend</span><br />
 </div></tt><br />
-iterates through an array until it finds an element with the value of "<tt>0</tt>". If it finds an element with the value "<tt>66</tt>" it displays a nice message.<br \>
+parcourt un tableau qu'il ne trouve pas l'&eacute;l&eacute;ment avec la valeur "<t>0</t>". S'il trouve un &eacute;l&eacute;ment avec la valeur "<tt>66</tt>" il affiche un message.<br \>
 <br \>
-<a name="DISTANCE"></a></div><div class="fb_sect_title">Distance between two pointers</div><div class="fb_sect_cont"><br \>
+<a name="DISTANCE"></a></div><div class="fb_sect_title">Distance entre deux des pointeurs</div><div class="fb_sect_cont"><br \>
 <br \>
-The distance between two pointers is retrieved with <tt><a href="KeyPgOpSubtract.html">Operator - (Subtract)</a></tt>, and is measured in values, not bytes. For example, the following,<br \>
+La distance entre deux des pointeurs est r&eacute;cup&eacute;r&eacute;e avec <tt><a href="KeyPgOpSubtract.html">Operator - (Subtract)</a></tt> et est mesur&eacute;e en valeur, pas en octets. Par exemple, le texte suivant,<br \>
 <br \>
 <tt><div class="freebasic">
 <span class="key">Type</span>&nbsp;<span class="wrd">T</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Single</span><br />
@@ -68,19 +68,19 @@ The distance between two pointers is retrieved with <tt><a href="KeyPgOpSubtract
 <span class="key">Wend</span><br />
 <span class="key">Print</span>&nbsp;<span class="wrd">p</span>&nbsp;<span class="oth">-</span>&nbsp;<span class="oth">@</span><span class="wrd">array</span><span class="oth">(</span><span class="num">0</span><span class="oth">)</span><br />
 </div></tt><br />
-will output "<tt>5</tt>" regardless of what type <tt><i>T</i></tt> is. This is because there is a five (5) element difference between the first element of <i>array</i> (<tt>32</tt>) and the element pointed to by <tt><i>p</i></tt> (<tt>0</tt>).<br \>
+affichera "<tt>5</tt>" ind&eacute;pendamment du type de <tt><i>T</i></tt>. C'est parce qu'il y a une diff&eacute;rence de cinq &eacute;l&eacute;ments (5) entre le premier &eacute;l&eacute;ment de <i>array</i> (<tt>32</tt>) et l'&eacute;l&eacute;ment point&eacute; par <tt><i>p</i></tt> (<tt>0</tt>).<br \>
 <br \>
-Specifically, if <i>a</i> and <i>b</i> are both pointers of type <i>T</i>, the distance between them is the number of bytes between them, divided by the size, in bytes, of <i>T</i>, or<br \>
+Plus pr&eacute;cis&eacute;ment, si <i>a</i> et <i>b</i> sont deux pointeurs de type <i>T</i>, la distance entre eux est le nombre d'octets entre eux, divis&eacute; par la taille, en octets, de <i>T</i>, ou<br \>
 <tt><br \>
 <div class="fb_indent"><a href="KeyPgAbs.html">Abs</a>(cast(byte ptr, a) - cast(byte ptr, b)) / <a href="KeyPgSizeof.html">SizeOf</a>(T)<br \>
 </div></tt><br \>
 <br \>
-</div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
-<ul><li> <tt><a href="KeyPgOpAdd.html">Operator + (Add)</a></tt><br \>
-<li> <tt><a href="KeyPgOpSubtract.html">Operator - (Subtract)</a></tt><br \>
-<li> <tt><a href="KeyPgOpAt.html">Operator @ (Address Of)</a></tt><br \>
-<li> <tt><a href="KeyPgOpValueOf.html">Operator * (Value Of)</a></tt><br \>
-<li> <a href="CatPgOpPoint.html">Pointer Operators</a><br \>
+</div><div class="fb_sect_title">Voir aussi</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgOpAdd.html">Op&eacute;rateur + (Add)</a></tt><br \>
+<li> <tt><a href="KeyPgOpSubtract.html">Op&eacute;rateur - (Subtract)</a></tt><br \>
+<li> <tt><a href="KeyPgOpAt.html">Op&eacute;rateur @ (Address Of)</a></tt><br \>
+<li> <tt><a href="KeyPgOpValueOf.html">Op&eacute;rateur * (Value Of)</a></tt><br \>
+<li> <a href="CatPgOpPoint.html">Pointer pour les pointeurs</a><br \>
 <br \>
 </ul></div>
 </div>

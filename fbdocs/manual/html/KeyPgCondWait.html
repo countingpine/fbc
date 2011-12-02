@@ -11,41 +11,41 @@
 </div> 
 <div id="fb_pg_wrapper">
 <div id="fb_pg_body">
-	Stops execution of current thread until some condition becomes true<br \>
+	Arr&ecirc;te l'ex&eacute;cution du "thread" courant jusqu'&agrave; ce qu'une condition devienne vraie<br \>
 <br \>
-<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<div class="fb_sect_title">Syntaxe</div><div class="fb_sect_cont"><tt><br \>
 <a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgSub.html">Sub</a> <b>CondWait</b> ( <a href="KeyPgByval.html">ByVal</a> <i>handle</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgAny.html">Any</a> <a href="KeyPgPtr.html">Ptr</a>, <a href="KeyPgByval.html">ByVal</a> <i>mutex</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgAny.html">Any</a> <a href="KeyPgPtr.html">Ptr</a> )<br \>
 </tt><br \>
 </div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
 <b>CondWait</b> ( <i>handle</i>, <i>mutex</i> )<br \>
 </tt><br \>
-</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Param&egrave;tres</div><div class="fb_sect_cont"><br \>
 <tt><i>handle</i></tt><br \>
-<div class="fb_indent">The handle of a conditional variable, or the null pointer (0) on failure.<br \>
+<div class="fb_indent">Le "handle" d'une variable conditionnelle, ou le pointeur nul (0) en cas d'&eacute;chec.<br \>
 </div><tt><i>mutex</i></tt><br \>
-<div class="fb_indent">The mutex associated with this conditional variable, which must be locked when testing the condition and calling <tt><b>CondWait</b></tt><br \>
+<div class="fb_indent">Le "mutex" associ&eacute; &agrave; cette variable conditionnelle, qui doit &ecirc;tre verrouill&eacute; lors de la v&eacute;rification de la condition et l'appel &agrave; <tt><b>CondWait</b></tt><br \>
 <br \>
 </div></div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
-Function that stops the thread where it is called until some other thread  <tt><a href="KeyPgCondSignal.html">CondSignal</a></tt>s or <tt><a href="KeyPgCondBroadcast.html">CondBroadcast</a></tt>s  the handle.<br \>
+Fonction qui arr&ecirc;te le "thread" où elle est appel&eacute;e jusqu'&agrave; ce qu'un autre thread ou <tt><a href="KeyPgCondSignal.html">CondSignal</a></tt>s ou <tt><a href="KeyPgCondBroadcast.html">CondBroadcast</a></tt> le "handle".<br \>
 <br \>
-Once the conditional variable is created with <tt><a href="KeyPgCondCreate.html">CondCreate</a></tt> and the threads are started, one of more of them can be set to <tt><b>CondWait</b></tt> for the conditional; they will be stopped until some other thread <tt><a href="KeyPgCondSignal.html">CondSignal</a></tt>s that the waiting thread can restart. <tt><a href="KeyPgCondBroadcast.html">CondBroadcast</a></tt> can be used to restart all threads waiting for the conditional. At the end of the program <tt><a href="KeyPgCondDestroy.html">CondDestroy</a></tt> must be used to avoid leaking resources in the OS.<br \>
+Une fois que le conditionnel est <tt><a href="KeyPgCondCreate.html">CondCreate</a></tt> et les "threads" d&eacute;marr&eacute;s, l'un (ou plusieurs) d'entre eux peut &ecirc;tre fix&eacute; &agrave; <tt><b>CondWait</b></tt> pour le conditionnel, ils seront arr&ecirc;t&eacute;s jusqu'&agrave; un autre "thread" <tt><a href="KeyPgCondSignal.html">CondSignal</a></tt> que le "thread" en attente puisse red&eacute;marrer. <tt><a href="KeyPgCondBroadcast.html">CondBroadcast</a></tt> peut &ecirc;tre utilis&eacute; pour red&eacute;marrer tous les "threads" qui attendent le conditionnel. A la fin du programme <tt><a href="KeyPgCondDestroy.html">CondDestroy</a></tt> doit &ecirc;tre utilis&eacute; pour &eacute;viter les fuites de ressources dans le syst&egrave;me d'exploitation.<br \>
 <br \>
-When calling <tt><b>CondWait</b></tt>, <tt><i>mutex</i></tt> should already be locked.  An atomic unlock of the mutex and wait on the conditional variable will occur.  When the condition variable becomes signaled, <tt><i>mutex</i></tt> will be locked again and then execution will return to the thread after the <tt><b>CondWait</b></tt> call.<br \>
+A l'appel de <tt><b>CondWait</b></tt>, <tt><i>mutex</i></tt> doit toujours &ecirc;tre verrouill&eacute;.  Un d&eacute;blocage "atomique" des mutex et une veille sur la variable conditionnelle auront lieu. Lorsque la variable de condition est signal&eacute;e, <tt><i>mutex</i></tt> est verrouill&eacute; &agrave; nouveau, puis l'ex&eacute;cution retournera au "thread" apr&egrave;s l'appel de <tt><b>CondWait</b></tt>.<br \>
 <br \>
-</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
-See <tt><a href="KeyPgCondCreate.html">CondCreate</a></tt><br \>
+</div><div class="fb_sect_title">Exemple</div><div class="fb_sect_cont"><br \>
+Voir <tt><a href="KeyPgCondCreate.html">CondCreate</a></tt><br \>
 <br \>
-</div><div class="fb_sect_title">Platform Differences</div><div class="fb_sect_cont"><br \>
-<ul><li> <b>Condwait</b> is not available with the DOS version / target of FreeBASIC, because multithreading is not supported by DOS kernel nor the used extender.<br \>
-<li> In Linux the threads are always started in the order they are created, this can't be assumed in Win32. It's an OS, not a FreeBASIC issue. <br \>
+</div><div class="fb_sect_title">Diff&eacute;rences de plate-forme</div><div class="fb_sect_cont"><br \>
+<ul><li> <b>Condwait</b> n'est pas utilisable avec la version/cible DOS de FreeBASIC, parce que le "multithreading" n'est pas support&eacute; par le noyau DOS, ni l'extension utilis&eacute;e.<br \>
+<li> Sous Linux les "threads" sont toujours d&eacute;marr&eacute;s dans l'ordre de leur cr&eacute;ation, ceci n'est pas vrai sous Win32. C'est une question d'OS, pas de FreeBasic. <br \>
 <br \>
-</ul></div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
-<ul><li> Threading is not allowed in <i><a href="CompilerOptlang.html">-lang qb</a></i><br \>
+</ul></div><div class="fb_sect_title">Diff&eacute;rences de dialecte</div><div class="fb_sect_cont"><br \>
+<ul><li> "Threading" n'est pas utilisable dans le dialecte <i><a href="CompilerOptlang.html">-lang qb</a></i><br \>
 <br \>
-</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
-<ul><li> New to FreeBASIC<br \>
+</ul></div><div class="fb_sect_title">Diff&eacute;rences avec QB</div><div class="fb_sect_cont"><br \>
+<ul><li> Nouveau pour FreeBASIC<br \>
 <br \>
-</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+</ul></div><div class="fb_sect_title">Voir aussi</div><div class="fb_sect_cont"><br \>
 <ul><li> <tt><a href="KeyPgCondCreate.html">CondCreate</a></tt><br \>
 <li> <tt><a href="KeyPgCondDestroy.html">CondDestroy</a></tt><br \>
 <li> <tt><a href="KeyPgCondBroadcast.html">CondBroadcast</a></tt><br \>

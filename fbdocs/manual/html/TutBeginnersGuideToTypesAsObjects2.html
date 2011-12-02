@@ -6,7 +6,7 @@
 <body>
 <div id="fb_body_wrapper">
 <div id="fb_tab">
-<div id="fb_tab_l">Beginners Guide to Types as Objects (Part 2)</div>
+<div id="fb_tab_l">Guide pour d&eacute;butants, de types en tant qu'objets (Partie 2)</div>
 <div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
 </div> 
 <div id="fb_pg_wrapper">
@@ -14,11 +14,11 @@
 	<ul></ul><br \>
 <b>Introduction.</b><br \>
 <br \>
-Welcome to the second part of the tutorial, In this part I assume that you have read through Part 1, tried the examples, and experimented with some tests of your own.  I'll now cover some topics that I didn't include in Part 1.<br \>
+Bienvenue dans la deuxi&egrave;me partie du tutoriel. Dans cette partie je suppose que vous avez lu la Partie 1, essay&eacute; les exemples et exp&eacute;riment&eacute; avec des tests de votre choix.  Je vais maintenant couvrir certains sujets que je n'ai pas inclus dans la Partie 1.<br \>
 <br \>
-<b>Indexed property.</b><br \>
+<b>Property index&eacute;e.</b><br \>
 <br \>
-An indexed property is a property that behaves like an array, except that like in the case of a regular property, a function gets called when you access it.  I'll start with a very short example just to show the syntax.<br \>
+Une <tt><b>Property</b></tt> index&eacute;e est une <tt><b>Property</b></tt> qui se comporte comme un tableau, sauf que comme dans le cas d'une <tt><b>Property</b></tt> ordinaire, une fonction est appel&eacute;e lorsque vous y acc&eacute;dez.  Je vais commencer par un exemple tr&egrave;s court juste pour vous montrer la syntaxe.<br \>
 <br \>
 <tt><div class="freebasic">
 <span class="key">Type</span>&nbsp;<span class="wrd">foo</span><br />
@@ -42,7 +42,7 @@ An indexed property is a property that behaves like an array, except that like i
 <span class="key">Print</span>&nbsp;<span class="wrd">baz.bar</span><span class="oth">(</span><span class="num">0</span><span class="oth">)</span><br />
 </div></tt><br />
 <br \>
-As you can see, the declaration for our indexed property is very similar to a regular one, except this time we add an argument for the index.  I include a dummy integer member, because a type must have at least one data member.  As you can see, the property is then used with (0), to denote we want to get/set the zeroth index, just the same as we would for an ordinary array.  Now I'll show you a slightly more useful example, and I will describe it:<br \>
+Comme vous pouvez le voir la d&eacute;claration de notre <tt><b>Property</b></tt> index&eacute;e est tr&egrave;s similaire &agrave; une <tt><b>Property</b></tt> ordinaire, sauf que cette fois on ajoute un argument pour l'indice.  J'inclus un membre entier factice parce qu'un type doit avoir au moins un membre de donn&eacute;es.  Comme vous pouvez le voir la <tt><b>Property</b></tt> est alors utilis&eacute; avec (0), pour indiquer que nous voulons obtenir/d&eacute;finir l'indice "z&eacute;roi&egrave;me", exactement comme on le ferait pour un tableau ordinaire.  Maintenant, je vais vous montrer un exemple un peu plus utile et je vais le d&eacute;crire:<br \>
 <br \>
 <tt><div class="freebasic">
 <span class="key">Type</span>&nbsp;<span class="wrd">foo</span><br />
@@ -86,11 +86,11 @@ As you can see, the declaration for our indexed property is very similar to a re
 <span class="key">Print</span>&nbsp;<span class="wrd">baz.bar</span><span class="oth">(</span><span class="num">1</span><span class="oth">)</span><br />
 </div></tt><br />
 <br \>
-This time, I've added a constructor and destructor, which will allocate and deallocate a dynamic memory array, x, with the number of elements specified in the constructor.  Then when the property functions are invoked, I check if the index is within the bounds of the array, if it is then I perform the requested get or set.  If the index specified is out of bounds, then 'Error 6' occurs, which is a way to abort the program with FB's 'out of bounds error', you could replace this with your own error handling routines.  Try this out, by changing the code 'baz.bar(1) = 42' to 'baz.bar(10) = 42', and you'll see it in action, as we specified only 10 elements (index 0-9)<br \>
+Cette fois j'ai ajout&eacute; un <tt><b>Constructor</b></tt> et un <tt><b>Destructor</b></tt>, qui allouer et d&eacute;sallouer un tableau dynamique dans la m&eacute;moire, <tt><b>x</b></tt>, avec le nombre d'&eacute;l&eacute;ments sp&eacute;cifi&eacute;s dans le <tt><b>Constructor</b></tt>.  Puis, quand les fonctions de <tt><b>Property</b></tt> sont invoqu&eacute;es, Je v&eacute;rifie si l'indice est dans les limites du tableau, s'il l'est alors j'effectue la demande obtenir/d&eacute;finir.  Si l'index sp&eacute;cifi&eacute; est hors limites, alors <tt><b>'Error 6'</b></tt> se produit, qui est un moyen d'interrompre le programme avec <tt><b>'out of bounds error'</b></tt> de FB, vous pouvez remplacer ceci par votre propre routine de traitement des erreurs.  Essayez ceci en modifiant le code <tt><b>'baz.bar(1) = 42'</b></tt> par <tt><b>'baz.bar(10) = 42'</b></tt>, et vous verrez ceci en action, car nous n'avons pr&eacute;cis&eacute; que 10 &eacute;l&eacute;ments (indice 0-9)<br \>
 <br \>
-<b>Copy constructor.</b><br \>
+<b>"Constructor" de copie.</b><br \>
 <br \>
-A copy constructor is a special type of constructor, that is used to make a copy from an existing object.  When you write code like this:<br \>
+Un <tt><b>Constructor</b></tt> de copie est un type sp&eacute;cial de <tt><b>Constructor</b></tt>, qui est utilis&eacute; pour faire une copie d'un objet existant.  Lorsque vous &eacute;crivez du code comme celui-ci:<br \>
 <br \>
 <tt><div class="freebasic">
 <span class="key">Type</span>&nbsp;<span class="wrd">foo</span><br />
@@ -101,7 +101,7 @@ A copy constructor is a special type of constructor, that is used to make a copy
 <span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">foo</span>&nbsp;<span class="wrd">b</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">a</span><br />
 </div></tt><br />
 <br \>
-What happens is FreeBASIC automatically generates hidden code to construct b, by making a copy of a, this is the default copy constructor, and simply copies the data fields (members) across.  We can define our own copy constructor, here's just a brief snippet to show how we declare it.<br \>
+Ce qui se passe c'est que FreeBasic g&eacute;n&egrave;re automatiquement du code cach&eacute; pour construire <b>b</b>, en faisant une copie de <b>a</b>, c'est le <tt><b>Constructor</b></tt> de copie par d&eacute;faut, et il recopie simplement les champs de donn&eacute;es (membres).  Nous pouvons d&eacute;finir notre propre <tt><b>Constructor</b></tt> de copie; voici juste un bref extrait pour montrer comment on le d&eacute;clare.<br \>
 <br \>
 <tt><div class="freebasic">
 <span class="key">Type</span>&nbsp;<span class="wrd">foo</span><br />
@@ -110,11 +110,11 @@ What happens is FreeBASIC automatically generates hidden code to construct b, by
 <span class="key">End</span>&nbsp;<span class="key">Type</span><br />
 </div></tt><br />
 <br \>
-This will come in very useful for a reason I will now explain.<br \>
+Ce sera tr&egrave;s utile pour une raison que je vais maintenant vous expliquer.<br \>
 <br \>
-<b>Deep/Shallow copy.</b><br \>
+<b>Copie profonde/superficielle.</b><br \>
 <br \>
-In that previous example, where we did the code 'Dim As foo b = a', that was what is known a shallow copy, it just simply copied the data fields across, however sometimes this is not desirable, imagine that one of the members is a pointer, what will happen is that the address that pointer points to will be copied across, so both objects will point to the same memory.  An example of this follows:<br \>
+Dans l'exemple pr&eacute;c&eacute;dent o&ugrave; nous avions le code <tt><b>'Dim As foo b = a'</b></tt>, c'est ce qu'on appelle une copie superficielle, une simple recopie des champs de donn&eacute;es a &eacute;t&eacute; effectu&eacute;e, mais parfois ce n'est pas souhaitable, imaginez que l'un des membres soit un pointeur, ce qui va arriver, c'est que l'adresse vers laquelle pointe le pointeur sera recopi&eacute;e, ainsi les deux objets pointeront vers la m&ecirc;me zone m&eacute;moire.  L'exemple suivant illustre cela:<br \>
 <br \>
 <tt><div class="freebasic">
 <span class="key">Type</span>&nbsp;<span class="wrd">foo</span><br />
@@ -137,7 +137,7 @@ In that previous example, where we did the code 'Dim As foo b = a', that was wha
 <span class="key">Deallocate</span><span class="oth">(</span><span class="wrd">a.x</span><span class="oth">)</span><br />
 </div></tt><br />
 <br \>
-As you see, because they both point to the same memory, changing one affects the other.  As explained in the previous section on the copy constructor, FreeBASIC creates the code to do shallow copies by default.  This is also true if we do an assignment like:<br \>
+Comme vous le voyez,  parce qu'ils pointent tous deux vers la m&ecirc;me m&eacute;moire, changer l'un affecte l'autre.  Comme expliqu&eacute; dans la section pr&eacute;c&eacute;dente sur le <tt><b>Constructor</b></tt> de copie, FreeBASIC cr&eacute;e le code pour faire des copies superficielles par d&eacute;faut. Cela est &eacute;galement vrai si nous faisons une affectation comme:<br \>
 <br \>
 <tt><div class="freebasic">
 <span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">foo</span>&nbsp;<span class="wrd">a</span><span class="oth">,</span>&nbsp;<span class="wrd">b</span><br />
@@ -145,7 +145,7 @@ As you see, because they both point to the same memory, changing one affects the
 <span class="wrd">b</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">a</span><br />
 </div></tt><br />
 <br \>
-In this case also, FreeBASIC creates a default assignment operator (Let) to perform a shallow copy.  In order to do deep copies, we need to define a copy constructor, and an assignment operator, that is overloaded to accept our type.  Here's an example using them.<br \>
+Dans ce cas &eacute;galement FreeBasic cr&eacute;e un op&eacute;rateur d'affectation par d&eacute;faut (Let) pour effectuer une copie superficielle.  Afin de faire des copies compl&egrave;tes nous avons besoin de d&eacute;finir un <tt><b>Constructor</b></tt> de copie et un op&eacute;rateur d'assignation qui est surcharg&eacute; pour accepter notre <tt><b>Type</b></tt>.  Voici un exemple qui les utilise.<br \>
 <br \>
 <tt><div class="freebasic">
 <span class="key">Type</span>&nbsp;<span class="wrd">foo</span><br />
@@ -190,7 +190,7 @@ In this case also, FreeBASIC creates a default assignment operator (Let) to perf
 <span class="key">Print</span>&nbsp;<span class="oth">*</span><span class="wrd">a.x</span><span class="oth">,</span>&nbsp;<span class="oth">*</span><span class="wrd">b.x</span><br />
 </div></tt><br />
 <br \>
-As you can see, the copy constructor gets called on the line 'Dim As foo b = a' and this time, we allocate some memory, and copy the data in the new copy constructor, so that we can adjust x in one object without it affecting the other.  If we change the main code as follows:<br \>
+Comme vous pouvez le voir le <tt><b>Constructor</b></tt> de copie est appel&eacute; sur la ligne '<tt><b>Dim As foo b = a</b></tt>' et cette fois, nous avons allou&eacute; de la m&eacute;moire, et copi&eacute; les donn&eacute;es dans le nouveau <tt><b>Constructor</b></tt> de copie, de sorte que nous pouvons ajuster <b>x</b> dans un objet sans que cela affecte les autres.  Si nous modifions le code principal comme suit:<br \>
 <br \>
 <tt><div class="freebasic">
 <span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">foo</span>&nbsp;<span class="wrd">a</span><span class="oth">,</span>&nbsp;<span class="wrd">b</span><br />
@@ -205,7 +205,7 @@ As you can see, the copy constructor gets called on the line 'Dim As foo b = a' 
 <span class="key">Print</span>&nbsp;<span class="oth">*</span><span class="wrd">a.x</span><span class="oth">,</span>&nbsp;<span class="oth">*</span><span class="wrd">b.x</span><br />
 </div></tt><br />
 <br \>
-Then this time the assignment operator is used. Note that in the assignment operator code, we don't need to allocate any memory because it has already been allocated in the default constructor, we just need to copy the data across.  The line '*x = *obj.x' performs this copy.  If we had something more advanced, like a dynamic memory array, then we would need to reallocate the memory to be the correct size to fit the data being copied.  Here's a more advanced version just to show that.<br \>
+Alors, &agrave; ce moment-l&agrave;, l'op&eacute;rateur d'affectation est utilis&eacute;. Notez que dans le code de l'op&eacute;rateur d'affectation nous n'avons pas besoin d'allouer de la m&eacute;moire car elle a d&eacute;j&agrave; &eacute;t&eacute; allou&eacute;e dans le <tt><b>Constructor</b></tt> par d&eacute;faut, il suffit de copier les donn&eacute;es dedans.  La ligne '<tt><b>*x = *obj.x</b></tt>' effectue cette copie.  Si nous avions quelque chose de plus avanc&eacute; comme un tableau dynamique en m&eacute;moire, nous aurions besoin de r&eacute;allouer de la m&eacute;moire, pour avoir la bonne taille en fonction des donn&eacute;es qui sont copi&eacute;es.  Voici une version plus avanc&eacute;e juste pour montrer cela.<br \>
 <br \>
 <tt><div class="freebasic">
 <span class="key">Type</span>&nbsp;<span class="wrd">foo</span><br />
@@ -265,17 +265,17 @@ Then this time the assignment operator is used. Note that in the assignment oper
 <span class="key">Print</span>&nbsp;<span class="wrd">a.x</span><span class="oth">[</span><span class="num">0</span><span class="oth">],</span>&nbsp;<span class="wrd">a.x</span><span class="oth">[</span><span class="num">1</span><span class="oth">],</span>&nbsp;<span class="wrd">b.x</span><span class="oth">[</span><span class="num">0</span><span class="oth">],</span>&nbsp;<span class="wrd">b.x</span><span class="oth">[</span><span class="num">1</span><span class="oth">]</span><br />
 </div></tt><br />
 <br \>
-This may seem quite complex at first, it's worth just reading through it again, and experimenting with the examples, it's not too tricky once you're used to it.<br \>
+Cela peut paraître assez complexe au premier abord, mais cela vaut la peine d'une relecture, et d'exp&eacute;rimenter avec les exemples, ce n'est pas trop compliqu&eacute; une fois qu'on a l'habitude de l'utiliser.<br \>
 <br \>
-<b>Passing objects to functions ByVal</b><br \>
+<b>Passage d'objets aux fonctions par valeur (ByVal)</b><br \>
 <br \>
-The idea of deep and shallow copies also applies to passing an object to a function by value.  When you pass a reference to an object (ByRef), you can modify the object, and these modifications will persist, however you can also pass by value, which will mean you can modify it without the changes persisting outside of the function.  When an object is passed by value to a function, a new copy is created, and if that object has a copy constructor, then this is invoked, if it doesn't, then the hidden shallow copy is performed.  Once the function ends, the objects destructor is called.<br \>
+L'id&eacute;e de copies profondes et peu profondes s'applique &eacute;galement au passage par valeur d'un objet &agrave; une fonction.  Lorsque vous transmettez une r&eacute;f&eacute;rence &agrave; un objet (ByRef), vous pouvez modifier l'objet, et ces modifications persisteront, mais vous pouvez &eacute;galement le passer par la valeur, ce qui signifie que vous pouvez le modifier sans que les changements persistent en dehors de la fonction.  Quand un objet est pass&eacute; par valeur &agrave; une fonction, une nouvelle copie est cr&eacute;&eacute;e et si cet objet a un <tt><b>Constructor</b></tt> de copie, alors celui-ci est invoqu&eacute;, s'il n'en a pas, alors une copie cach&eacute;e superficielle est effectu&eacute;e.  Une fois que la fonction se termine, le <tt><b>Destructor</b></tt> des objets est appel&eacute;.<br \>
 <br \>
 <b>New/Delete</b><br \>
 <br \>
-New and delete are special operators for dynamically allocating memory, then destroying it.  Because it is used with dynamic memory, it is used with pointers.  In all the examples up until now, we just used Dim to create our objects, this will create them on the stack, but by using new we can create them dynamically, which can allow more flexibility, just like using Allocate/DeAllocate with normal memory.  Another important thing about new, is that you don't need to check if the pointer is NULL after new, like you would if you did allocate.  If new fails, it causes an exception, which will end the program.  In later versions of FreeBASIC, it is likely that some kind of try..catch mechanism will be created to allow better exception handling, but as of the time of writing, this is not yet implemented.  <br \>
+<tt><b>New</b></tt> et <tt><b>Delete</b></tt> sont des op&eacute;rateurs sp&eacute;ciaux d'allocation dynamique de m&eacute;moire, puis ils la d&eacute;truisent.  Parce qu'ils sont utilis&eacute;s avec de la m&eacute;moire dynamique, ils sont utilis&eacute;s avec des pointeurs.  Dans tous les exemples jusqu'&agrave; pr&eacute;sent, nous avons juste utilis&eacute; <tt><b>Dim</b></tt> pour cr&eacute;er nos objets, cela va les cr&eacute;er sur la pile, mais en utilisant <tt><b>New</b></tt> nous pouvons les cr&eacute;er dynamiquement, ce qui peut permettre plus de flexibilit&eacute;, tout comme l'utilisation de <tt><b>Allocate/DeAllocate</b></tt> avec la m&eacute;moire normale.  Une autre chose importante &agrave; propos de <tt><b>New</b></tt>, est que vous n'avez pas besoin de v&eacute;rifier si le pointeur est NULL apr&egrave;s <tt><b>New</b></tt>, comme vous le feriez si vous aviez utilis&eacute; <tt><b>Allocate</b></tt>.  Si <tt><b>New</b></tt> &eacute;choue, il provoque une exception, ce qui terminera le programme.  Dans les versions ult&eacute;rieures de FreeBasic, il est probable qu'un certain type de m&eacute;canisme <tt><b>try..catch</b></tt> sera cr&eacute;&eacute; afin de permettre une meilleure gestion des exceptions, mais au moment o&ugrave; j'&eacute;cris, ce n'est pas encore mis en oeuvre.  <br \>
 <br \>
-There are two different varieties of the new/delete.  The first type, creates just a single element or object, for example:<br \>
+Il existe deux variantes diff&eacute;rentes de <tt><b>New</b></tt>/<tt><b>Delete</b></tt>.  Le premier type, cr&eacute;e seulement un seul &eacute;l&eacute;ment ou objet, par exemple:<br \>
 <br \>
 <tt><div class="freebasic">
 <span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="key">Ptr</span>&nbsp;<span class="wrd">foo</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">New</span>&nbsp;<span class="key">Integer</span><br />
@@ -286,7 +286,7 @@ There are two different varieties of the new/delete.  The first type, creates ju
 <span class="key">Delete</span>&nbsp;<span class="wrd">foo</span><br />
 </div></tt><br />
 <br \>
-This will create a new Integer, then destroy it when we call delete.  Remember I used ptr, because it is dynamic memory.  For simple data types you can also specify a default value, by placing it in parenthesis after the data type, ie:<br \>
+Cela va cr&eacute;er un <tt><b>New Integer</b></tt>, puis le d&eacute;truire quand nous appelons <tt><b>Delete</b></tt>.  Souvenez-vous j'ai utilis&eacute; <tt><b>Ptr</b></tt>, parce que c'est de la m&eacute;moire dynamique.  Pour les types de donn&eacute;es simples vous pouvez &eacute;galement sp&eacute;cifier une valeur par d&eacute;faut, en la pla&ccedil;ant entre parenth&egrave;ses apr&egrave;s le type de donn&eacute;es, &agrave; savoir:<br \>
 <br \>
 <tt><div class="freebasic">
 <span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="key">Ptr</span>&nbsp;<span class="wrd">foo</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">New</span>&nbsp;<span class="key">Integer</span><span class="oth">(</span><span class="num">42</span><span class="oth">)</span><br />
@@ -296,7 +296,7 @@ This will create a new Integer, then destroy it when we call delete.  Remember I
 <span class="key">Delete</span>&nbsp;<span class="wrd">foo</span><br />
 </div></tt><br />
 <br \>
-This also works for UDT's with just simple data fields:<br \>
+Cela fonctionne &eacute;galement pour les types de donn&eacute;es utilisateur avec seulement de simples champs de donn&eacute;es:<br \>
 <br \>
 <tt><div class="freebasic">
 <span class="key">Type</span>&nbsp;<span class="wrd">foo</span><br />
@@ -311,7 +311,7 @@ This also works for UDT's with just simple data fields:<br \>
 <span class="key">Delete</span>&nbsp;<span class="wrd">bar</span><br />
 </div></tt><br />
 <br \>
-This initialization won't work for more complex types involving constructors/destructors etc., however a useful feature is that when using new/delete with objects, it also calls the constructor and destructor, try the following example:<br \>
+Cette initialisation ne fonctionne pas pour les types plus complexes impliquant des <tt><b>Constructor</b></tt>s/<tt><b>Destructor</b></tt>s etc, cependant il y a une fonctionnalit&eacute; utile, c'est que lors de l'utilisation <tt><b>New</b></tt>/<tt><b>Delete</b></tt> avec des objets, il appelle &eacute;galement <tt><b>Constructor</b></tt> et <tt><b>Destructor</b></tt>, essayez l'exemple suivant:<br \>
 <br \>
 <tt><div class="freebasic">
 <span class="key">Type</span>&nbsp;<span class="wrd">foo</span><br />
@@ -334,9 +334,9 @@ This initialization won't work for more complex types involving constructors/des
 <span class="key">Delete</span>&nbsp;<span class="wrd">bar</span><br />
 </div></tt><br />
 <br \>
-You will see that the constructor and destructor for the object are called.<br \>
+Vous verrez que le <tt><b>Constructor</b></tt> et le <tt><b>Destructor</b></tt> de l'objet sont appel&eacute;s.<br \>
 <br \>
-The second type of new/delete is for creating arrays, this time the number of elements is placed after the dataype in square brackets '[]'.  When using the array version, you must also use 'delete[]' instead of 'delete', so that FreeBASIC knows you are deleting an array, here is a simple example using the Integer type:<br \>
+Le deuxi&egrave;me type de <tt><b>New</b></tt>/<tt><b>Delete</b></tt> est pour la cr&eacute;ation de tableaux, cette fois le nombre d'&eacute;l&eacute;ments est plac&eacute; entre crochets '[]', apr&egrave;s le type de donn&eacute;e.  Lorsque vous utilisez la version tableau, vous devez &eacute;galement utiliser '<tt><b>delete[]</b></tt>' au lieu de '<tt><b>delete</b></tt>', de sorte que FreeBasic sait que vous supprimez un tableau, voici un exemple simple utilisant le type <tt><b>Integer</b></tt>:<br \>
 <br \>
 <tt><div class="freebasic">
 <span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="key">Ptr</span>&nbsp;<span class="wrd">foo</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">New</span>&nbsp;<span class="key">Integer</span><span class="oth">[</span><span class="num">20</span><span class="oth">]</span><br />
@@ -347,7 +347,7 @@ The second type of new/delete is for creating arrays, this time the number of el
 <span class="key">Delete</span><span class="oth">[]</span>&nbsp;<span class="wrd">foo</span><br />
 </div></tt><br />
 <br \>
-This will create a dynamic array, with 20 Integer elements.  It should be noted this is different from Allocate, which takes the number of bytes as its argument; using new, you should specify the number of elements.  The array method works just the same for objects:<br \>
+Cela va cr&eacute;er un tableau dynamique, avec 20 &eacute;l&eacute;ments entiers.  Il convient de noter que ceci est diff&eacute;rent de <tt><b>Allocate</b></tt>, qui n&eacute;cessite le nombre d'octets comme argument; en utilisant <tt><b>New</b></tt>, vous devez sp&eacute;cifier le nombre d'&eacute;l&eacute;ments.  La m&eacute;thode tableau fonctionne de la m&ecirc;me fa&ccedil;on pour les objets:<br \>
 <br \>
 <tt><div class="freebasic">
 <span class="key">Type</span>&nbsp;<span class="wrd">foo</span><br />
@@ -370,13 +370,13 @@ This will create a dynamic array, with 20 Integer elements.  It should be noted 
 <span class="key">Delete</span><span class="oth">[]</span>&nbsp;<span class="wrd">bar</span><br />
 </div></tt><br />
 <br \>
-When you run this code, you will see that three constructor/destructor pairs are called, because we created an array of three instances of foo.<br \>
+Lorsque vous ex&eacute;cuterez ce code, vous verrez que trois paires de <tt><b>Constructor</b></tt>/<tt><b>Destructor</b></tt> sont appel&eacute;s, parce que nous avons cr&eacute;&eacute; une gamme de trois instances de "foo".<br \>
 <br \>
-You must remember to call Delete, or Delete[] for any memory allocated with New, or you will cause a memory leak, just like the way you must rememeber to call DeAllocate for any memory you allocate with the Allocate function.<br \>
+Vous devez vous souvenir d'appeler <tt><b>Delete</b></tt> ou <tt><b>Delete[]</b></tt> pour toute m&eacute;moire allou&eacute;e avec <tt><b>New</b></tt>, ou vous provoquerez une perte de m&eacute;moire, tout comme vous devez vous souvenir d'appeler <tt><b>DeAllocate</b></tt> pour toute m&eacute;moire que vous allouez avec la fonction <tt><b>Allocate</b></tt>.<br \>
 <br \>
 <b>Name Mangling</b><br \>
 <br \>
-Name mangling, also known as name decoration, is something that happens behind the scenes, at a lower level, and as such is not essential to know about.  The reason for name mangling is to resolve problems that are involved with more than one function sharing the same name, which happens when functions are overloaded, or are part of a type.  Take for example the overloaded subs shown below:<br \>
+<tt><b>Name mangling</b></tt>, aussi appel&eacute; <tt><b>name decoration</b></tt>, est quelque chose qui se passe en coulisses, &agrave; un niveau inf&eacute;rieur, et en tant que tel n'est pas essentiel &agrave; connaître.  La raison du <tt><b>Name mangling</b></tt> est de r&eacute;soudre les probl&egrave;mes provoqu&eacute;s par le fait que plusieurs fonctions ont le m&ecirc;me nom, ce qui arrive lorsque des fonctions sont surcharg&eacute;es ou font partie d'un type.  Prenez par exemple les <tt><b>sub</b></tt>s surcharg&eacute;es ci-dessous:<br \>
 <br \>
 <tt><div class="freebasic">
 <span class="key">Sub</span>&nbsp;<span class="wrd">foo</span>&nbsp;<span class="key">Overload</span>&nbsp;<span class="oth">()</span><br />
@@ -388,11 +388,11 @@ Name mangling, also known as name decoration, is something that happens behind t
 <span class="key">End</span>&nbsp;<span class="key">Sub</span><br />
 </div></tt><br />
 <br \>
-If we didn't have name mangling, then both might be known at a lower level as FOO, which would cause a name clash, so they have to be decorated in order to know which one should be called when they are used.  For the first sub, the compiler actually creates a sub called _Z3FOOv, and for the second it creates a sub called _Z3FOOi.  The compiler then remembers these, and chooses the appropriate sub to call, depending on how you call it, for example 'foo()' will actually call _Z3FOOv, and 'foo(1)' will actually call _Z3FOOi.  We can spot something from this, that the 'v' stands for void (no argument), and 'i' stands for integer.  The full details of name mangling are quite complex, and vary between compilers, the Microsoft compilers use a different name mangling scheme to GNU compilers, and other compilers may use different schemes as well.  The main thing we need to know, is that FreeBASIC follows the GCC 3.x ABI (Application binary interface), meaning that any overloaded functions, or complex types will only be compatible with other compilers using the same scheme.  This is an unfortunate limitation, but it is not really a FreeBASIC problem, it is common of all the compilers that use advanced features, and even if all the compiler authors agreed on a common name mangling scheme, there are still other issues that would cause incompatability.<br \>
+Si nous n'avions pas le <tt><b>name mangling</b></tt>, alors les deux pourraient &ecirc;tre connues &agrave; un niveau inf&eacute;rieur sous le nom de FOO, ce qui provoquerait un conflit de nom, elles doivent donc &ecirc;tre "d&eacute;cor&eacute;es" pour savoir laquelle doit &ecirc;tre appel&eacute;e quand ils sont utilis&eacute;es.  Pour la premi&egrave;re <tt><b>sub</b></tt>, le compilateur cr&eacute;e en fait une <tt><b>sub</b></tt> appel&eacute;e _Z3FOOv et pour la seconde, il cr&eacute;e une <tt><b>sub</b></tt> appel&eacute;e _Z3FOOi.  Le compilateur se souvient alors de cela et choisit la <tt><b>sub</b></tt> appropri&eacute;e &agrave; appeler, selon la fa&ccedil;on dont vous l'appelez, par exemple 'foo()' appellera effectivement _Z3FOOv, et 'foo(1)' appellera _Z3FOOi.  Nous pouvons deviner quelque chose, que 'v' est utilis&eacute; pour "void" (pas d'argument), et 'i' pour "integer".  Les d&eacute;tails complets de <tt><b>name mangling</b></tt> sont assez complexes et varient entre les compilateurs, les compilateurs Microsoft utilisent un sch&eacute;ma de <tt><b>name mangling</b></tt> diff&eacute;rent de celui des compilateurs GNU et d'autres compilateurs peuvent utiliser des syst&egrave;mes diff&eacute;rents, eux aussi.  La principale chose que nous devons savoir, La principale chose que nous devons savoir, c'est que FreeBasic suit GCC 3.x ABI (Application binary interface), ce qui signifie que toutes les fonctions surcharg&eacute;es, ou des types complexes ne seront compatibles qu'avec d'autres compilateurs utilisant le m&ecirc;me sch&eacute;ma.  Il s'agit d'une limitation malheureuse, mais ce n'est pas vraiment un probl&egrave;me FreeBasic, il est commun &agrave; tous les compilateurs qui utilisent des fonctionnalit&eacute;s avanc&eacute;es, et m&ecirc;me si tous les auteurs compilateur &eacute;taient sur un sch&eacute;ma commun de <tt><b>name mangling</b></tt>, il y aurait d'autres questions qui seraient cause d'incompatibilit&eacute;.<br \>
 <br \>
-<b>Implicit this</b><br \>
+<b>"this" implicite</b><br \>
 <br \>
-This again is not necessary to know about mostly, its something that happens behind the scenes at a lower level.  When you call a member function of an object, what actually happens is a hidden first parameter is passed, so that the function knows which instance of the object is being refered to.  This is also true for the property/constructor/destructor/operator members.  If we look at a very simple example:<br \>
+De nouveau, il n'est pas imp&eacute;ratif de tout connaître sur ce sujet, c'est quelque chose qui se passe en coulisses &agrave; un niveau inf&eacute;rieur.  Lorsque vous appelez une fonction membre d'un objet, ce qui se passe c'est qu'un param&egrave;tre cach&eacute; est pass&eacute;, de sorte que la fonction sait quelle instance de l'objet est vis&eacute;e.  Cela est &eacute;galement vrai pour les membres <tt><b>property/constructor/destructor/operator</b></tt>.  Si nous regardons un exemple tr&egrave;s simple:<br \>
 <br \>
 <tt><div class="freebasic">
 <span class="key">Type</span>&nbsp;<span class="wrd">foo</span><br />
@@ -408,7 +408,7 @@ This again is not necessary to know about mostly, its something that happens beh
 <span class="wrd">baz.bar</span><span class="oth">(</span><span class="num">5</span><span class="oth">)</span><br />
 </div></tt><br />
 <br \>
-What actually happens behind the scenes is something essentially equivalent to this:<br \>
+Ce qui se passe r&eacute;ellement dans les coulisses est quelque chose d'essentiellement &eacute;quivalent &agrave; cela:<br \>
 <br \>
 <tt><div class="freebasic">
 <span class="key">Type</span>&nbsp;<span class="wrd">foo</span><br />
@@ -423,11 +423,11 @@ What actually happens behind the scenes is something essentially equivalent to t
 <span class="wrd">foo_bar</span><span class="oth">(</span><span class="wrd">baz</span><span class="oth">,</span>&nbsp;<span class="num">5</span><span class="oth">)</span><br />
 </div></tt><br />
 <br \>
-This method using an explicit 'this' is often used in languages that do not have facilities to make it easier.  OOP is really just a set of concepts, that can be mostly coded in almost any language, some things are more difficult to implement, such as constructors, you would have to explicitly call a 'create', or 'init' function.  For some things such as private/public distinction, it is even more difficult or impossible because the compiler does not know to enforce them.  The reason for adding OOP features to a language is to hide a lot of this, and add syntactic sugar to make it simpler to do, or more transparent in use, such as the way we can use properties as if they were ordinary data members, rather than functions, which is what they really are.<br \>
+Cette m&eacute;thode utilisant un '<tt><b>this</b></tt>' explicite est souvent utilis&eacute;e dans des langues qui ne disposent pas de moyens pour rendre cela plus facile.  OOP (Programmation Orient&eacute;e Objet) est tout simplement un ensemble de concepts, qui peuvent &ecirc;tre cod&eacute;s dans la plupart des langages, certaines choses sont plus difficiles &agrave; mettre en œuvre, comme les constructeurs, vous auriez &agrave;  appeler explicitement une fonction 'create' ou 'init'.  Pour certaines choses telles que la distinction public / priv&eacute;, c'est encore plus difficile, voire impossible, parce que le compilateur ne sait pas les faire respecter.  La raison de l'ajout de fonctionnalit&eacute;s &agrave; un langage orient&eacute; objet est de cacher beaucoup de cela, et d'ajouter le sucre syntaxique pour rendre cela plus simple &agrave; faire, ou plus transparent dans l'utilisation, comme la fa&ccedil;on dont nous pouvons utiliser les propri&eacute;t&eacute;s comme si elles &eacute;taient membres ordinaires de donn&eacute;es, plut&ocirc;t que des fonctions, qui est ce qu'elles sont vraiment.<br \>
 <br \>
-<b>Hints for debugging/profiling</b><br \>
+<b>Conseils pour le d&eacute;bogage/profilage</b><br \>
 <br \>
-When using GDB or other debuggers, and the gprof profiling tool, the information shown is in the C++ syntax, and all your variable names and other symbols are shown in upper case, here is just a very short overview to help you understand how these are shown:<br \>
+Lorsque vous utilisez <tt><b>GDB</b></tt> ou autres d&eacute;bogueurs, et l'outil de profilage <tt><b>gprof</b></tt>, l'information est pr&eacute;sent&eacute;e dans la syntaxe C++ et tous vos noms de variables et autres symboles sont affich&eacute;s en majuscules, voici juste un tr&egrave;s bref tour d'horizon pour vous aider &agrave; comprendre comment ils sont affich&eacute;s:<br \>
 <br \>
 Here's an example type:<br \>
 <br \>
@@ -445,20 +445,20 @@ Here's an example type:<br \>
 <span class="key">End</span>&nbsp;<span class="key">Type</span><br />
 </div></tt><br />
 <br \>
-When using GDB, these will be shown as follows (note in C++ they use :: where we would use . (dot), '::' is known as the scope resolution operator):<br \>
+Si vous utilisez <tt><b>GDB</b></tt>, ils seront affich&eacute;s comme suit (notez qu'en C++ on utilise :: o&ugrave; on devrait utiliser . (dot), '::' est connu comme l'op&eacute;rateur de r&eacute;solution de port&eacute;e):<br \>
 <br \>
-  BAR::BAR()            - The default constructor<br \>
-  BAR::BAR(BAR&)        - The copy constructor (& in C++ means a reference, like byref)<br \>
-  BAR::BAR(int)         - The constructor taking an integer argument (note there is no special symbol to denote ByVal, as this is the default passing method in C/C++)<br \>
-  BAR::~BAR()           - The destructor<br \>
-  BAR::operator void*() - A cast to Any ptr (void is similar to Any, * means pointer)<br \>
-  BAR::operator=(int)   - The assignment operator (Let), dentoted by '=', in C/C++ '=' is assignment, '==' is equality testing.<br \>
-  BAR::FOO(int)         - Property foo setter, taking an integer argument<br \>
-  BAR::FOO()            - Property foo getter<br \>
+  BAR::BAR()            - Le constructeur par d&eacute;faut<br \>
+  BAR::BAR(BAR&)        - Le constructeur de copie (& en C++ signifie une r&eacute;f&eacute;rence, comme byref)<br \>
+  BAR::BAR(int)         - Le constructeur prenant un argument entier (notez qu'il n'y a aucun symbole sp&eacute;cial pour d&eacute;signer ByVal, car c'est la valeur de passage par d&eacute;faut dans les m&eacute;thodes C/C++)<br \>
+  BAR::~BAR()           - Le destructeur<br \>
+  BAR::operator void*() - Un "cast" vers "Any ptr" (void est similaire &agrave; Any, * signifie pointeur)<br \>
+  BAR::operator=(int)   - L'op&eacute;rateur d'affectation (Let), d&eacute;sign&eacute; par '=', en C/C++ '=' est une affectation, '==' teste l'&eacute;galit&eacute;.<br \>
+  BAR::FOO(int)         - Validateur de Property foo, prenant un argument entier<br \>
+  BAR::FOO()            - R&eacute;cup&eacute;rateur de Property foo<br \>
 <br \>
-Member sub/functions are shown in the same way as properties, indexed properties are shown the same also, just with the extra argument for the index.<br \>
+Les sub/functions membres sont pr&eacute;sent&eacute;s de la m&ecirc;me mani&egrave;re que les propri&eacute;t&eacute;s, les propri&eacute;t&eacute;s index&eacute;es sont indiqu&eacute;es aussi de m&ecirc;me, juste avec un argument suppl&eacute;mentaire pour l'indice.<br \>
 <br \>
-Here is how the FB data types will be shown:<br \>
+Voici comment les types de donn&eacute;es FB seront affich&eacute;s:<br \>
 <br \>
 Any ptr     - void *<br \>
 ZString ptr - char *<br \>
@@ -472,15 +472,17 @@ uinteger    - unsigned int<br \>
 longint     - long long<br \>
 ulongint    - unsigned long long<br \>
 <br \>
-I hope that helps you get started with understanding how things are displayed in GDB/gprof, a little experimentation will always help.<br \>
+J'esp&egrave;re que ceci vous aura aid&eacute; &agrave; comprendre comment les choses sont affich&eacute;es dans GDB / gprof, un peu d'exp&eacute;rimentation facilitera les choses.<br \>
 <br \>
-<b>More reading</b><br \>
+<b>Autres lectures</b><br \>
 <br \>
 http://www.freebasic.net/wiki/wikka.php?wakka=KeyPgOpNew<br \>
 http://www.freebasic.net/wiki/wikka.php?wakka=KeyPgOpDelete<br \>
 http://en.wikipedia.org/wiki/Copy_constructor<br \>
 http://en.wikipedia.org/wiki/Object_copy<br \>
-http://en.wikipedia.org/wiki/Name_mangling
+http://en.wikipedia.org/wiki/Name_mangling<br \>
+   <br \>
+
 </div>
 </div> 
 </div> 

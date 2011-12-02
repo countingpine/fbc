@@ -11,51 +11,51 @@
 </div> 
 <div id="fb_pg_wrapper">
 <div id="fb_pg_body">
-	Parameter to the <tt><a href="KeyPgPutgraphics.html">Put</a></tt> graphics statement which selects transparent background as the blitting method<br \>
+	Param&egrave;tre de la fonction graphique <tt><a href="KeyPgPutgraphics.html">Put</a></tt> qui s&eacute;lectionne l'ari&egrave;re-plan transparent comme m&eacute;thode de "blitting"<br \>
 <br \>
-<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<div class="fb_sect_title">Syntaxe</div><div class="fb_sect_cont"><tt><br \>
 <b>Put</b> [ <i>target</i>, ] [ STEP ] ( <i>x</i>,<i>y</i> ), <i>source</i> [ ,( <i>x1</i>,<i>y1</i> )-( <i>x2</i>,<i>y2</i> ) ], <b>Trans</b><br \>
 </tt><br \>
-</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Param&egrave;tres</div><div class="fb_sect_cont"><br \>
 <tt><b>Trans</b></tt><br \>
-<div class="fb_indent">Required.<br \>
+<div class="fb_indent">Requis.<br \>
 <br \>
 </div></div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
-<tt><b>Trans</b></tt> selects transparent background as the method for blitting an image buffer.  This is similar to the <tt>PSET</tt> method, but pixels containing the mask color are skipped.<br \>
-For 8-bit color images, the mask color is palette index 0.  For 16/32-bit color images, the mask color is Magenta, which is <tt><a href="KeyPgRgb.html">RGB</a>(255, 0, 255)</tt>.  The alpha value is ignored when checking for the mask color in 32-bit images.<br \>
+<tt><b>Trans</b></tt> utilise l'arri&egrave;re-plan transparent comme m&eacute;thode d'&eacute;criture dans un tampon image (blitting).  Similaire &agrave; la m&eacute;thode <tt>PSET</tt>, mais les pixels contenant le masque de couleur sont ignor&eacute;s.<br \>
+Pour les images couleur 8-bit, le masque de couleur est l'indice de palette 0.  Pour les images couleur 16/32-bit, le masque de couleur est Magenta, c'est &agrave; dire <tt><a href="KeyPgRgb.html">RGB</a>(255, 0, 255)</tt>.  La valeur alpha est ignor&eacute;e lors de la v&eacute;rification pour le masque pour les images 32-bit.<br \>
 <br \>
-</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Exemple</div><div class="fb_sect_cont"><br \>
 <tt><div class="freebasic">
-<span class="com">''&nbsp;set&nbsp;up&nbsp;a&nbsp;screen:&nbsp;320&nbsp;*&nbsp;200,&nbsp;16&nbsp;bits&nbsp;per&nbsp;pixel</span><br />
+<span class="com">''&nbsp;ecran:&nbsp;320&nbsp;*&nbsp;200,&nbsp;16&nbsp;bits&nbsp;par&nbsp;pixel</span><br />
 <span class="key">ScreenRes</span>&nbsp;<span class="num">320</span><span class="oth">,</span>&nbsp;<span class="num">200</span><span class="oth">,</span>&nbsp;<span class="num">16</span><br />
 <br />
-<span class="com">''&nbsp;set&nbsp;up&nbsp;an&nbsp;image&nbsp;with&nbsp;the&nbsp;mask&nbsp;color&nbsp;as&nbsp;the&nbsp;background.</span><br />
+<span class="com">''&nbsp;image&nbsp;avec&nbsp;le&nbsp;masque&nbsp;couleur&nbsp;comme&nbsp;arriere-plan.</span><br />
 <span class="key">Dim</span>&nbsp;<span class="wrd">img</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Any</span>&nbsp;<span class="key">Ptr</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">ImageCreate</span><span class="oth">(</span>&nbsp;<span class="num">32</span><span class="oth">,</span>&nbsp;<span class="num">32</span><span class="oth">,</span>&nbsp;<span class="key">RGB</span><span class="oth">(</span><span class="num">255</span><span class="oth">,</span>&nbsp;<span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">255</span><span class="oth">)</span>&nbsp;<span class="oth">)</span><br />
 <span class="key">Circle</span>&nbsp;<span class="wrd">img</span><span class="oth">,</span>&nbsp;<span class="oth">(</span><span class="num">16</span><span class="oth">,</span>&nbsp;<span class="num">16</span><span class="oth">),</span>&nbsp;<span class="num">15</span><span class="oth">,</span>&nbsp;<span class="key">RGB</span><span class="oth">(</span><span class="num">255</span><span class="oth">,</span>&nbsp;<span class="num">255</span><span class="oth">,</span>&nbsp;<span class="num">0</span><span class="oth">),</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">,</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">,</span>&nbsp;<span class="num">1</span><span class="oth">,</span>&nbsp;<span class="wrd">f</span><br />
 <span class="key">Circle</span>&nbsp;<span class="wrd">img</span><span class="oth">,</span>&nbsp;<span class="oth">(</span><span class="num">10</span><span class="oth">,</span>&nbsp;<span class="num">10</span><span class="oth">),</span>&nbsp;<span class="num">3</span><span class="oth">,</span>&nbsp;&nbsp;<span class="key">RGB</span><span class="oth">(</span>&nbsp;&nbsp;<span class="num">0</span><span class="oth">,</span>&nbsp;&nbsp;&nbsp;<span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">0</span><span class="oth">),</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">,</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">,</span>&nbsp;<span class="num">2</span><span class="oth">,</span>&nbsp;<span class="wrd">f</span><br />
 <span class="key">Circle</span>&nbsp;<span class="wrd">img</span><span class="oth">,</span>&nbsp;<span class="oth">(</span><span class="num">23</span><span class="oth">,</span>&nbsp;<span class="num">10</span><span class="oth">),</span>&nbsp;<span class="num">3</span><span class="oth">,</span>&nbsp;&nbsp;<span class="key">RGB</span><span class="oth">(</span>&nbsp;&nbsp;<span class="num">0</span><span class="oth">,</span>&nbsp;&nbsp;&nbsp;<span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">0</span><span class="oth">),</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">,</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">,</span>&nbsp;<span class="num">2</span><span class="oth">,</span>&nbsp;<span class="wrd">f</span><br />
 <span class="key">Circle</span>&nbsp;<span class="wrd">img</span><span class="oth">,</span>&nbsp;<span class="oth">(</span><span class="num">16</span><span class="oth">,</span>&nbsp;<span class="num">18</span><span class="oth">),</span>&nbsp;<span class="num">10</span><span class="oth">,</span>&nbsp;<span class="key">RGB</span><span class="oth">(</span>&nbsp;&nbsp;<span class="num">0</span><span class="oth">,</span>&nbsp;&nbsp;&nbsp;<span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">0</span><span class="oth">),</span>&nbsp;<span class="num">3.14</span><span class="oth">,</span>&nbsp;<span class="num">6.28</span><br />
 <br />
-<span class="com">''&nbsp;Put&nbsp;the&nbsp;image&nbsp;with&nbsp;PSET&nbsp;(gives&nbsp;the&nbsp;exact&nbsp;contents&nbsp;of&nbsp;the&nbsp;image&nbsp;buffer)</span><br />
+<span class="com">''&nbsp;Put&nbsp;l'image&nbsp;avec&nbsp;PSET&nbsp;(donne&nbsp;le&nbsp;contenu&nbsp;exact&nbsp;du&nbsp;tampon&nbsp;image)</span><br />
 <span class="key">Draw</span>&nbsp;<span class="key">String</span>&nbsp;<span class="oth">(</span><span class="num">110</span><span class="oth">,</span>&nbsp;<span class="num">50</span>&nbsp;<span class="oth">-</span>&nbsp;<span class="num">4</span><span class="oth">),</span>&nbsp;<span class="quo">"Image&nbsp;put&nbsp;with&nbsp;PSET"</span><br />
 <span class="key">Put</span>&nbsp;<span class="oth">(</span><span class="num">60</span>&nbsp;<span class="oth">-</span>&nbsp;<span class="num">16</span><span class="oth">,</span>&nbsp;<span class="num">50</span>&nbsp;<span class="oth">-</span>&nbsp;<span class="num">16</span><span class="oth">),</span>&nbsp;<span class="wrd">img</span><span class="oth">,</span>&nbsp;<span class="key">PSet</span><br />
 <br />
-<span class="com">''&nbsp;Put&nbsp;the&nbsp;image&nbsp;with&nbsp;TRANS</span><br />
+<span class="com">''&nbsp;Put&nbsp;l'image&nbsp;avec&nbsp;TRANS</span><br />
 <span class="key">Draw</span>&nbsp;<span class="key">String</span>&nbsp;<span class="oth">(</span><span class="num">110</span><span class="oth">,</span>&nbsp;<span class="num">150</span>&nbsp;<span class="oth">-</span>&nbsp;<span class="num">4</span><span class="oth">),</span>&nbsp;<span class="quo">"Image&nbsp;put&nbsp;with&nbsp;TRANS"</span><br />
 <span class="key">Put</span>&nbsp;<span class="oth">(</span><span class="num">60</span>&nbsp;<span class="oth">-</span>&nbsp;<span class="num">16</span><span class="oth">,</span>&nbsp;<span class="num">150</span>&nbsp;<span class="oth">-</span>&nbsp;<span class="num">16</span><span class="oth">),</span>&nbsp;<span class="wrd">img</span><span class="oth">,</span>&nbsp;<span class="key">Trans</span><br />
 <br />
-<span class="com">''&nbsp;free&nbsp;the&nbsp;image&nbsp;memory</span><br />
+<span class="com">''&nbsp;libere&nbsp;memoire&nbsp;image</span><br />
 <span class="key">ImageDestroy</span>&nbsp;<span class="wrd">img</span><br />
 <br />
-<span class="com">''&nbsp;wait&nbsp;for&nbsp;a&nbsp;keypress</span><br />
+<span class="com">''&nbsp;attend&nbsp;touche&nbsp;appuyee</span><br />
 <span class="key">Sleep</span><br />
 </div></tt><br />
 <div class="fb_img"><img src="images/trans.png" /></div><br \>
 <br \>
-</div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
-<ul><li> New to FreeBASIC<br \>
+</div><div class="fb_sect_title">Diff&eacute;rences avec QB</div><div class="fb_sect_cont"><br \>
+<ul><li> Nouveau pour FreeBASIC<br \>
 <br \>
-</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+</ul></div><div class="fb_sect_title">Voir aussi</div><div class="fb_sect_cont"><br \>
 <ul><li> <tt><a href="KeyPgPutgraphics.html">Put (Graphics)</a></tt><br \>
 <br \>
 </ul></div>

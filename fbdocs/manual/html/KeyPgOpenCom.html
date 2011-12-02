@@ -11,88 +11,88 @@
 </div> 
 <div id="fb_pg_wrapper">
 <div id="fb_pg_body">
-	Opens a serial port for input and output<br \>
+	Ouvre un port s&eacute;rie en entr&eacute;e et sortie<br \>
 <br \>
-<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<div class="fb_sect_title">Syntaxe</div><div class="fb_sect_cont"><tt><br \>
 <a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgFunction.html">Function</a> <b>Open Com</b> ( byref <i>options</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgString.html">String</a>, <b>As</b> <i>filenum</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a> ) <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a><br \>
 </tt><br \>
 </div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
 <i>result</i> = <b>Open Com</b>( <i>options</i>, <b>As</b>[#] <i>filenum</i> )<br \>
 </tt><br \>
-</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Param&egrave;tres</div><div class="fb_sect_cont"><br \>
 <tt><i>options</i></tt><br \>
-<div class="fb_indent">A <a href="KeyPgString.html">String</a> containing options used in controlling the port.<br \>
+<div class="fb_indent">A <a href="KeyPgString.html">String</a> contenant les options de contr&ocirc;le du port.<br \>
 </div><tt><i>filenum</i></tt><br \>
-<div class="fb_indent">The file number to bind to the port.<br \>
+<div class="fb_indent">Le num&eacute;ro de fichier &agrave; associer au port.<br \>
 <br \>
-</div></div><div class="fb_sect_title">Return Value</div><div class="fb_sect_cont"><br \>
-Returns zero (0) on success and a non-zero error code otherwise.<br \>
+</div></div><div class="fb_sect_title">Valeur retourn&eacute;e</div><div class="fb_sect_cont"><br \>
+Retourne z&eacute;ro (0) si succ&egrave;s et autrement un code d'erreur diff&eacute;rent de z&eacute;ro.<br \>
 <br \>
 </div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
-This command opens a serial port of the PC, allowing to send and receive data by using the normal file commands as PRINT #, INPUT#, GET #,...<br \>
+Cette commande ouvre un port s&eacute;rie du PC, ce qui permet d'envoyer et de recevoir des donn&eacute;es en utilisant les commandes de fichiers normales comme PRINT #, INPUT #, GET #,...<br \>
 <br \>
-The main parameter is a <a href="KeyPgString.html">String</a> that describes, at the very least, which communications port to open. It has the format:<br \>
+Le param&egrave;tre principal est une <a href="KeyPgString.html">String</a> qui d&eacute;crit, &agrave; tout le moins, le port de communication &agrave; ouvrir. Elle a le format:<br \>
 <br \>
 <div class="fb_indent"><tt>"<b>Com</b><i>n</i><b>:</b> [ <i>baudrate</i> ][ , [ <i>parity</i> ][ , [ <i>data_bits</i> ][ , [ <i>stop_bits</i> ][ , [ <i>extended_options</i> ]]]]]"</tt><br \>
 <br \>
-</div>where,<br \>
+</div>o&ugrave;,<br \>
 <tt><i>n</i></tt><br \>
-<div class="fb_indent">Com port to open. "1", "2", "3", "4", etc.  Some platforms will support more serial ports depending on how the operating system is configured.  Where <tt><i>n</i></tt> is not given, "COM:" will map to "COM1:", except on Linux where "COM:" maps to "/dev/modem"<br \>
+<div class="fb_indent">Port Com &agrave; ouvrir. "1", "2", "3", "4", etc.  Certaines plates-formes ont plus de ports s&eacute;rie selon la fa&ccedil;on dont le syst&egrave;me d'exploitation est configur&eacute;.  Si <tt><i>n</i></tt> est absent, "COM:" sera "COM1:", sauf sous Linux o&ugrave; "COM:" sera "/dev/modem"<br \>
 </div><tt><i>baudrate</i></tt><br \>
-<div class="fb_indent">"300" (default), "1200", ..., etc.<br \>
+<div class="fb_indent">"300" (par d&eacute;faut), "1200", ..., etc.<br \>
 </div><tt><i>parity</i></tt><br \>
-<div class="fb_indent">"N" (none), "E" (even, default), "O" (odd), "S" (space), "M" (mark), "PE" (QB-quirk: checked, even parity)<br \>
+<div class="fb_indent">"N" (none=aucune), "E" (even=paire, par d&eacute;faut), "O" (odd=impaire), "S" (space=espace), "M" (mark=marque), "PE" (QB-quirk: checked, even parity)<br \>
 </div><tt><i>data_bits</i></tt><br \>
-<div class="fb_indent">"5", "6", "7" (default) or "8".<br \>
+<div class="fb_indent">"5", "6", "7" (par d&eacute;faut) or "8".<br \>
 </div><tt><i>stop_bits</i></tt><br \>
-<div class="fb_indent">"1", "1.5" or "2". <i>(default value depends on baud rate and data bits, see table below)</i><br \>
+<div class="fb_indent">"1", "1.5" or "2". <i>(la valeur par d&eacute;faut d&eacute;pend de "baud rate" et "data bits", voir table ci-dessous)</i><br \>
 <br \>
-<div class="fb_indent"><div class="fb_table"><table><tr><td>Condition</td><td>Default number of stop bits</td></tr><tr><td>baud rate &lt;= 110 and data bits = 5</td><td>1.5</td></tr><tr><td>baud rate &lt;= 110 and data bits &gt;= 6</td><td>2</td></tr><tr><td>baud rate &gt; 110</td><td>1</td></tr></table></div><br \>
+<div class="fb_indent"><div class="fb_table"><table><tr><td>Condition</td><td>Nombre de bits d'arr&ecirc;t par d&eacute;faut</td></tr><tr><td>baud rate &lt;= 110 et data bits = 5</td><td>1.5</td></tr><tr><td>baud rate &lt;= 110 et data bits &gt;= 6</td><td>2</td></tr><tr><td>baud rate &gt; 110</td><td>1</td></tr></table></div><br \>
 </div></div><tt><i>extended_options</i></tt><br \>
-<div class="fb_indent">Miscellaneous options. <i>(See table below)</i><br \>
+<div class="fb_indent">Options diverses. <i>(Voir table ci-dessous)</i><br \>
 <br \>
-<div class="fb_indent"><div class="fb_table"><table><tr><td>Option</td><td>Action</td></tr><tr><td>'CSn'</td><td>Set the CTS duration (in ms) (n&gt;=0), 0 = turn off, default = 1000</td></tr><tr><td>'DSn'</td><td>Set the DSR duration (in ms) (n&gt;=0), 0 = turn off, default = 1000</td></tr><tr><td>'CDn'</td><td>Set the Carrier Detect duration (in ms) (n&gt;=0), 0 = turn off</td></tr><tr><td>'OPn'</td><td>Set the 'Open Timeout' (in ms) (n&gt;=0), 0 = turn off</td></tr><tr><td>'TBn'</td><td>Set the 'Transmit Buffer' size (n&gt;=0), 0 = default, depends on platform</td></tr><tr><td>'RBn'</td><td>Set the 'Receive Buffer' size (n&gt;=0), 0 = default, depends on platform</td></tr><tr><td>'RS'</td><td>Suppress RTS detection</td></tr><tr><td>'LF'</td><td>Communicate in ASCII mode (add LF to every CR) - Win32 doesn't support this one</td></tr><tr><td>'ASC'</td><td>same as 'LF'</td></tr><tr><td>'BIN'</td><td>The opposite of LF and it'll always work</td></tr><tr><td>'PE'</td><td>Enable 'Parity' check</td></tr><tr><td>'DT'</td><td>Keep DTR enabled after CLOSE</td></tr><tr><td>'FE'</td><td>Discard invalid character on error</td></tr><tr><td>'ME'</td><td>Ignore all errors</td></tr><tr><td>'IRn'</td><td>IRQ number for COM (only supported (?) on DOS)</td></tr></table></div><br \>
+<div class="fb_indent"><div class="fb_table"><table><tr><td>Option</td><td>Action</td></tr><tr><td>'CSn'</td><td>&Eacute;tablit la dur&eacute;e de CTS (en ms) (n&gt;=0), 0 = arr&ecirc;ter, par d&eacute;faut = 1000</td></tr><tr><td>'DSn'</td><td>&Eacute;tablit la dur&eacute;e de DSR (en ms) (n&gt;=0), 0 = arr&ecirc;ter, par d&eacute;faut = 1000</td></tr><tr><td>'CDn'</td><td>&Eacute;tablit la dur&eacute;e de Carrier Detect (en ms) (n&gt;=0), 0 = arr&ecirc;ter</td></tr><tr><td>'OPn'</td><td>&Eacute;tablit 'Open Timeout' (en ms) (n&gt;=0), 0 = arr&ecirc;ter</td></tr><tr><td>'TBn'</td><td>&Eacute;tablit la taille de 'Transmit Buffer' (n&gt;=0), 0 = par d&eacute;faut, d&eacute;pend de la plate-forme </td></tr><tr><td>'RBn'</td><td>&Eacute;tablit la taille de 'Receive Buffer' (n&gt;=0), 0 = par d&eacute;faut, d&eacute;pend de la plate-forme</td></tr><tr><td>'RS'</td><td>Supprime la d&eacute;tection de RTS</td></tr><tr><td>'LF'</td><td>Communique en mode ASCII (ajoute LF &agrave; chaque CR) - Win32 ne permet pas</td></tr><tr><td>'ASC'</td><td>comme 'LF'</td></tr><tr><td>'BIN'</td><td>L'oppos&eacute; de LF et fonctionnera toujours</td></tr><tr><td>'PE'</td><td>Valide recherche de 'Parity'</td></tr><tr><td>'DT'</td><td>Conserve DTR valide apr&egrave;s CLOSE</td></tr><tr><td>'FE'</td><td>Rejeter caract&egrave;re non valide en cas d'erreur</td></tr><tr><td>'ME'</td><td>Ignorer toutes les erreurs</td></tr><tr><td>'IRn'</td><td>num&eacute;ro d'IRQ pour COM (support&eacute; seulement (?) sous DOS)</td></tr></table></div><br \>
 <br \>
-</div></div>All items except for the COM port are optional. The order of <tt><i>baudrate</i></tt>, <tt><i>parity</i></tt>, <tt><i>data_bits</i></tt>, <tt><i>stop_bits</i></tt> is fixed. Any skipped fixed item ( <tt><i>baudrate</i></tt>, etc...) must be empty.<br \>
+</div></div>Tous les items sont facultatifs, sauf pour le port COM. L'ordre de <tt><i>baudrate</i></tt>, <tt><i>parity</i></tt>, <tt><i>data_bits</i></tt>, <tt><i>stop_bits</i></tt> est fix&eacute;. Tout &eacute;l&eacute;ment fixe saut&eacute; ( <tt><i>baudrate</i></tt>, etc...) doit &ecirc;tre vide.<br \>
 <br \>
-</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Exemple</div><div class="fb_sect_cont"><br \>
 <tt><div class="freebasic">
 <span class="key">Open</span>&nbsp;<span class="key">Com</span>&nbsp;<span class="quo">"COM1:9600,N,,2"</span>&nbsp;<span class="key">As</span>&nbsp;<span class="num">1</span><br />
 </div></tt><br />
-Opens COM1 with 9600 baud, no parity, 7 data bits and 2 stop bits.<br \>
+Ouvre COM1 avec 9600 baud, no parity, 7 data bits et 2 stop bits.<br \>
 <br \>
 <tt><div class="freebasic">
 <span class="key">Open</span>&nbsp;<span class="key">Com</span>&nbsp;<span class="quo">"COM1:115200"</span>&nbsp;<span class="key">As</span>&nbsp;<span class="num">1</span><br />
 </div></tt><br />
-Opens COM1 with 115200 baud, "even" parity, 7 data bits and 1 stop bits. <br \>
+Ouvre COM1 avec 115200 baud, "even" parity, 7 data bits et 1 stop bits. <br \>
 <br \>
-</div><div class="fb_sect_title">Platform Differences</div><div class="fb_sect_cont"><br \>
-<ul><li> On the Windows platform <tt>"COM:"</tt> maps to <tt>"COM1:"</tt><br \>
-<li> On the Linux platform<br \>
-</ul><div class="fb_indent"><tt>"COM:"</tt> maps to <tt>"/dev/modem"</tt><br \>
-<tt>"COM1:"</tt> maps to <tt>"/dev/ttyS0"</tt><br \>
-<tt>"COM2:"</tt> maps to <tt>"/dev/ttyS1"</tt>, etc <br \>
-<tt>"/dev/xyz:"</tt> maps to <tt>"/dev/xyz"</tt>, etc<br \>
-</div><ul><li> The DOS serial driver is experimental and can access COM ports 1 to 4 <br \>
-</ul><div class="fb_indent">It uses the following base io and IRQ's as default: <br \>
+</div><div class="fb_sect_title">Diff&eacute;rences de plates-formes</div><div class="fb_sect_cont"><br \>
+<li> Sur les plates-formes Windows <tt>"COM:"</tt> est <tt>"COM1:"</tt><br \><br \>
+<li> Sur les plates-formes Linux<br \>
+<div class="fb_indent"><tt>"COM:"</tt> est <tt>"/dev/modem"</tt><br \>
+<tt>"COM1:"</tt> est <tt>"/dev/ttyS0"</tt><br \>
+<tt>"COM2:"</tt> est <tt>"/dev/ttyS1"</tt>, etc <br \>
+<tt>"/dev/xyz:"</tt> est <tt>"/dev/xyz"</tt>, etc<br \><br \>
+</div><li>Le pilote s&eacute;rie DOS est exp&eacute;rimental et peut acc&eacute;der aux ports COM 1 &agrave; 4 <br \>
+<div class="fb_indent">Il utilise la base suivante I/O et IRQ par d&eacute;faut: <br \>
 COM1 - &h3f8 - IRQ4 <br \>
 COM2 - &h2f8 - IRQ3 <br \>
 COM3 - &h3e8 - IRQ4 <br \>
 COM4 - &h2e8 - IRQ3 <br \>
-Since fbc-0.18.4, an alternate IRQ can be specified using the the "IRn" protocol option where "n" is 3 through 7.<br \>
-Currently not supported: IRQ's on the slave PIC, alternate base I/O addresses, Timeouts and most errors as detected in QB, hardware flow control, FIFO's.<br \>
-<tt>"COM:"</tt> maps to <tt>"COM1:"</tt><br \>
-</div></div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
-<ul><li> In the <i><a href="CompilerOptlang.html">-lang qb</a></i> dialect the old syntax <tt>OPEN "COMx:...</tt> is supported. <br \>
+Depuis fbc-0.18.4, une alternative IRQ peut &ecirc;tre sp&eacute;cifi&eacute;e en utilisant l'option du "IRn" protocole o&ugrave; "n" va de 3 &agrave; 7.<br \>
+&Aacute; l'heure actuelle pas pris en charge: IRQ sur le PIC esclave, base alternative adresses I / O, D&eacute;lais d'attente et la plupart des erreurs d&eacute;tect&eacute;es dans QB, contr&ocirc;le de flux mat&eacute;riel, FIFO.<br \>
+<tt>"COM:"</tt> est <tt>"COM1:"</tt><br \>
+</div></div><div class="fb_sect_title">Diff&eacute;rences de dialecte</div><div class="fb_sect_cont"><br \>
+<li> dans le dialecte <i><a href="CompilerOptlang.html">-lang qb</a></i> l'ancienne syntaxe <tt>OPEN "COMx:...</tt> est admise. <br \>
 <br \>
-</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
-<ul><li> In QB the syntax was <tt>OPEN  "COMx:[baudrate] [,parity, [data_bits, [stop_bits, [extended_options]]]]"  FOR INPUT|OUTPUT|RANDOM AS [#] n</tt><br \>
-<li> In QB, only <tt>"COM1:"</tt> and <tt>"COM2:"</tt> are supported.  In FreeBASIC, any correctly configured serial port may be used.<br \>
+</div><div class="fb_sect_title">Diff&eacute;rences avec QB</div><div class="fb_sect_cont"><br \>
+<li>Dans la syntaxe QB il y avait <tt>OPEN  "COMx:[baudrate] [,parity, [data_bits, [stop_bits, [extended_options]]]]"  FOR INPUT|OUTPUT|RANDOM AS [#] n</tt><br \>
+<li> Dans QB, seulement <tt>"COM1:"</tt> et <tt>"COM2:"</tt> sont support&eacute;s.  Dans FreeBASIC, tout port s&eacute;rie correctement configur&eacute; peut &ecirc;tre utilis&eacute;.<br \>
 <br \>
-</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
-<ul><li> <tt><a href="KeyPgOpen.html">Open</a></tt><br \>
+</div><div class="fb_sect_title">Voir aussi</div><div class="fb_sect_cont"><br \>
+<li> <tt><a href="KeyPgOpen.html">Open</a></tt><br \>
 <br \>
-</ul></div>
+</div>
 </div>
 </div> 
 </div> 

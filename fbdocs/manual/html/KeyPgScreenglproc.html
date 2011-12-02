@@ -11,51 +11,51 @@
 </div> 
 <div id="fb_pg_wrapper">
 <div id="fb_pg_body">
-	Gets the address of an OpenGL procedure<br \>
+	Obtient l'adresse d'une proc&eacute;dure OpenGL<br \>
 <br \>
-<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<div class="fb_sect_title">Syntaxe</div><div class="fb_sect_cont"><tt><br \>
 <a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgFunction.html">Function</a> <b>ScreenGLProc</b> ( <a href="KeyPgByref.html">ByRef</a> procname <a href="KeyPgAs.html">As</a> <a href="KeyPgConstQualifier.html">Const</a> <a href="KeyPgString.html">String</a> ) <a href="KeyPgAs.html">As</a> <a href="KeyPgAny.html">Any</a> <a href="KeyPgPtr.html">Ptr</a><br \>
 </tt><br \>
-</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Param&egrave;tres</div><div class="fb_sect_cont"><br \>
 <tt><i>procname</i></tt><br \>
-<div class="fb_indent">name of the procedure to retrieve the address of<br \>
+<div class="fb_indent">nom de la proc&eacute;dure dont on cherche &agrave; d&eacute;terminer l'adresse<br \>
 <br \>
 </div></div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
-This function can be used to get the address of any OpenGL procedure, to be used to retrieve the pointers to new functions associated with OpenGL extensions. If given procedure named <tt><i>procname</i></tt> cannot be found, <tt><b>ScreenGLProc</b></tt> will return NULL (0).<br \>
+Cette fonction peut &ecirc;tre utilis&eacute;e pour obtenir l'adresse de n'importe quelle proc&eacute;dure OpenGL, pour d&eacute;terminer les pointeurs de nouvelles fonctions associ&eacute;es avec des extensions OpenGL. Si la proc&eacute;dure nomm&eacute;e <tt><i>procname</i></tt> ne peut &ecirc;tre trouv&eacute;e, <tt><b>ScreenGLProc</b></tt> retournera NULL (0).<br \>
 <br \>
-</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Exemple</div><div class="fb_sect_cont"><br \>
 <tt><div class="freebasic">
-<span class="com">''&nbsp;include&nbsp;fbgfx.bi&nbsp;for&nbsp;some&nbsp;useful&nbsp;definitions</span><br />
+<span class="com">''&nbsp;include&nbsp;fbgfx.bi&nbsp;pour&nbsp;des&nbsp;definitions&nbsp;utiles</span><br />
 <span class="def">#include&nbsp;"fbgfx.bi"<br />
 </span><br />
 <span class="key">Dim</span>&nbsp;<span class="wrd">SwapInterval</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Function</span><span class="oth">(</span><span class="key">ByVal</span>&nbsp;<span class="wrd">interval</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
 <span class="key">Dim</span>&nbsp;<span class="wrd">extensions</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span><br />
 <br />
-<span class="com">''&nbsp;Setup&nbsp;OpenGL&nbsp;and&nbsp;retrieve&nbsp;supported&nbsp;extensions</span><br />
+<span class="com">''&nbsp;Initialise&nbsp;OpenGL&nbsp;et&nbsp;determine&nbsp;extensions&nbsp;supportees</span><br />
 <span class="key">ScreenRes</span>&nbsp;<span class="num">640</span><span class="oth">,</span>&nbsp;<span class="num">480</span><span class="oth">,</span>&nbsp;<span class="num">32</span><span class="oth">,,</span>&nbsp;<span class="wrd">FB.GFX_OPENGL</span><br />
 <span class="key">ScreenControl</span>&nbsp;<span class="wrd">FB.GET_GL_EXTENSIONS</span><span class="oth">,</span>&nbsp;<span class="wrd">extensions</span><br />
 <br />
 <span class="key">If</span>&nbsp;<span class="oth">(</span><span class="key">InStr</span><span class="oth">(</span><span class="wrd">extensions</span><span class="oth">,</span>&nbsp;<span class="quo">"WGL_EXT_swap_control"</span><span class="oth">)</span>&nbsp;<span class="oth">&lt;&gt;</span>&nbsp;<span class="num">0</span><span class="oth">)</span>&nbsp;<span class="key">Then</span><br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;extension&nbsp;supported,&nbsp;retrieve&nbsp;proc&nbsp;address</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;extension&nbsp;supportees,&nbsp;determine&nbsp;adresse&nbsp;procedure</span><br />
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">SwapInterval</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">ScreenGLProc</span><span class="oth">(</span><span class="quo">"wglSwapIntervalEXT"</span><span class="oth">)</span><br />
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="key">If</span>&nbsp;<span class="oth">(</span><span class="wrd">SwapInterval</span>&nbsp;<span class="oth">&lt;&gt;</span>&nbsp;<span class="num">0</span><span class="oth">)</span>&nbsp;<span class="key">Then</span><br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;Ok,&nbsp;we&nbsp;got&nbsp;it.&nbsp;Set&nbsp;OpenGL&nbsp;to&nbsp;wait&nbsp;for&nbsp;vertical&nbsp;sync&nbsp;on&nbsp;buffer&nbsp;swaps</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;Ok,&nbsp;nous&nbsp;l'avons&nbsp;recupere.&nbsp;Valide&nbsp;OpenGL&nbsp;pour&nbsp;attendre&nbsp;for&nbsp;syncro&nbsp;verticale&nbsp;pour&nbsp;buffer&nbsp;swaps</span><br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">SwapInterval</span><span class="oth">(</span><span class="num">1</span><span class="oth">)</span><br />
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="key">End</span>&nbsp;<span class="key">If</span><br />
 <span class="key">End</span>&nbsp;<span class="key">If</span><br />
 </div></tt><br />
 <br \>
 <br \>
-</div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
-<ul><li> Not available in the <i><a href="CompilerOptlang.html">-lang qb</a></i> dialect unless referenced with the alias <tt><b>__Screenglproc</b></tt>.<br \>
+</div><div class="fb_sect_title">Diff&eacute;rences de dialectes</div><div class="fb_sect_cont"><br \>
+<ul><li> Non disponible dans le dialecte <i><a href="CompilerOptlang.html">-lang qb</a></i> sauf si r&eacute;f&eacute;renc&eacute; avec l'alias <tt><b>__Screenglproc</b></tt>.<br \>
 <br \>
-</ul></div><div class="fb_sect_title">Platform Differences</div><div class="fb_sect_cont"><br \>
-<ul><li> Not available for DOS target.<br \>
+</ul></div><div class="fb_sect_title">Diff&eacute;rences de plates-formes</div><div class="fb_sect_cont"><br \>
+<ul><li> Non disponible pour cible DOS.<br \>
 <br \>
-</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
-<ul><li> New to FreeBASIC<br \>
+</ul></div><div class="fb_sect_title">Diff&eacute;rences avec QB</div><div class="fb_sect_cont"><br \>
+<ul><li> Nouveau pour FreeBASIC<br \>
 <br \>
-</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+</ul></div><div class="fb_sect_title">Voir aussi</div><div class="fb_sect_cont"><br \>
 <ul><li> <tt><a href="KeyPgScreengraphics.html">Screen (Graphics)</a></tt><br \>
 <li> <tt><a href="KeyPgScreencontrol.html">ScreenControl</a></tt><br \>
 <br \>

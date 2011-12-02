@@ -11,40 +11,41 @@
 </div> 
 <div id="fb_pg_wrapper">
 <div id="fb_pg_body">
-	Defines or resizes a variable-length array<br \>
+	D&eacute;finit ou redimensionne un tableau de longueur-variable<br \>
 <br \>
-<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<div class="fb_sect_title">Syntaxe</div><div class="fb_sect_cont"><tt><br \>
 <b>ReDim</b> [ <a href="KeyPgShared.html">Shared</a> ] [ <a href="KeyPgPreserve.html">Preserve</a> ] <i>symbolname</i>([<i>subscript</i> [, ...]]) As <a href="DataType.html">datatype</a> [, ...]<br \>
 <b>ReDim</b> [ <a href="KeyPgShared.html">Shared</a> ] [ <a href="KeyPgPreserve.html">Preserve</a> ] As <a href="DataType.html">datatype</a> <i>symbolname</i>([<i>subscript</i> [, ...]]) [, ...]<br \>
 </tt><br \>
-</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Param&egrave;tres</div><div class="fb_sect_cont"><br \>
 <tt><a href="KeyPgShared.html">Shared</a></tt><br \>
-<div class="fb_indent">Specifies shared (file-scope) access to the array throughout the module.<br \>
+<div class="fb_indent">Sp&eacute;cifie un acc&egrave;s partag&eacute; au tableau (pour la port&eacute;e du fichier) &agrave; travers le module.<br \>
 </div><tt><a href="KeyPgPreserve.html">Preserve</a></tt><br \>
-<div class="fb_indent">When used with an existing array, the contents of the array will be preserved during the resize. Note that <tt><a href="KeyPgPreserve.html">Preserve</a></tt> will not work properly in all cases.<br \>
+<div class="fb_indent">Lors de l'utilisation avec un tableau existant, le contenu de ce tableau sera pr&eacute;serv&eacute; pendant le redimensinnement. Notez que <tt><a href="KeyPgPreserve.html">Preserve</a></tt> ne fonctionnera pas correctement dans tous les cas.<br \>
 </div><tt><i>symbolname</i></tt><br \>
-<div class="fb_indent">A new or existing array id.<br \>
+<div class="fb_indent">Un identificateur (id) de tableau, nouveau ou existant d&eacute;j&agrave;.<br \>
 </div><tt><i>subscript</i></tt>: [ <tt><i>lowerbound</i> To</tt> ] <tt><i>upperbound</i></tt><br \>
-<div class="fb_indent">The lower and upper bound range for a dimension of the array. Lower bound defaults to zero (<tt>0</tt>), or the default <tt><a href="KeyPgOptionbase.html">Base</a></tt>, if not specified.<br \>
+<div class="fb_indent">Les limites inf&eacute;rieure et sup&eacute;rieure pour une dimension du tableau. La limite inf&eacute;rieure &agrave; z&eacute;ro (<tt>0</tt>) par d&eacute;faut ou la <tt><a href="KeyPgOptionbase.html">Base</a></tt> par d&eacute;faut, si non sp&eacute;cifi&eacute;.<br \>
 </div><tt><a href="DataType.html">datatype</a></tt><br \>
-<div class="fb_indent">The type of elements contained in the array.<br \>
+<div class="fb_indent">Le type des &eacute;l&eacute;ments contenus dans le tableau.<br \>
 <br \>
 </div></div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
-<tt><b>ReDim</b></tt> can be used to define new variable-length arrays, or resize existing variable-length arrays. <tt><b>ReDim</b></tt> always produces variable-length arrays, so, unlike <tt><a href="KeyPgDim.html">Dim</a></tt>, variable-length arrays can be defined with constant subscripts.<br \>
+<tt><b>ReDim</b></tt> peut &ecirc;tre utilis&eacute; pour d&eacute;finir de nouveaux tableaux de longueur variable ou pour redimensionner des tableaux de longueur variable. <tt><b>ReDim</b></tt> produit toujours des tableaux de longueur variable, ainsi, contrairement &agrave; <tt><a href="KeyPgDim.html">Dim</a></tt>, des tableaux de longueur variable peuvent &ecirc;tre d&eacute;finis avec des indices constants.<br \>
 <br \>
-When defining a new variable-length array, its elements are default constructed. For simple data types like <tt><a href="KeyPgInteger.html">Integer</a></tt> or <tt><a href="KeyPgDouble.html">Double</a></tt>, the elements are initialized to zero (<tt>0</tt>). For user-defined types with a default constructor, that will be called.<br \>
+Lorsque vous d&eacute;finissez un nouveau tableau de longueur variable, ses &eacute;l&eacute;ments sont construits par d&eacute;faut. Pour des types de donn&eacute;es simples comme <tt><a href="KeyPgInteger.html">Integer</a></tt> ou <tt><a href="KeyPgDouble.html">Double</a></tt>, les &eacute;l&eacute;ments sont initialis&eacute;s &agrave; z&eacute;ro (<tt>0</tt>). Pour des types d&eacute;finis par l'utilisateur avec un constructeur par d&eacute;faut, celui-ci sera appel&eacute;.<br \>
 <br \>
 <b>NOTES</b>: <br \>
-<ul><li> <tt><b>ReDim</b> <a href="KeyPgPreserve.html">Preserve</a></tt> may not work as expected in all cases:<br \>
-</ul><div class="fb_indent"><tt><a href="KeyPgPreserve.html">Preserve</a></tt>'s current behavior is to keep the original data contiguous in memory, and only expand or truncate the size of the memory.<br \>
-Its behavior (with a single dimension) is well-defined only when the upper bound is changed.  If the lower bound is changed, the current result is that the data is in effect shifted to start at the new lower bound.<br \>
-With multiple dimensions, only the upper bound of only the first dimension may be safely increased.  If the first dimension is reduced, the existing mappable data may be lost. If lower-order dimensions are resized at all, the effects can be hard to predict.<br \>
+<ul><li> <tt><b>ReDim</b> <a href="KeyPgPreserve.html">Preserve</a></tt> ne donnera pas le r&eacute;sultat escompt&eacute; dans les cas suivants:<br \>
+</ul><div class="fb_indent">Le comportement normal de <tt><a href="KeyPgPreserve.html">Preserve</a></tt> est de conserver les donn&eacute;es originales contigu&euml;s dans la m&eacute;moire, et seulement augmenter ou diminuer la taille de la m&eacute;moire.<br \>
+Son comportement (avec une seule dimension) n'est bien d&eacute;fini que lorsque la borne sup&eacute;rieure est chang&eacute;e. Si la borne inf&eacute;rieure est modifi&eacute;e, le r&eacute;sultat est que les donn&eacute;es sont en effet d&eacute;plac&eacute;es pour commencer &agrave; la nouvelle limite inf&eacute;rieure.<br \>
 <br \>
-</div><ul><li> <tt><b>ReDim</b></tt> cannot be used on fixed-size arrays - i.e. arrays with constant bounds made with <tt><a href="KeyPgDim.html">Dim</a></tt>.  This includes arrays contained in UDTs (user-defined <tt><a href="KeyPgType.html">Type</a></tt>s), because currently only fixed-size arrays are supported in UDTs.  This also includes fixed-length arrays passed as parameters in a function.  FreeBASIC cannot prevent you trying this at compile-time, but the results at run-time will be undefined.<br \>
+Avec des dimensions multiples, seule la limite sup&eacute;rieure de la premi&egrave;re dimension peut &ecirc;tre augment&eacute;e en toute s&eacute;curit&eacute;. Si la premi&egrave;re dimension est r&eacute;duite, les donn&eacute;es existantes cartographiables peuvent &ecirc;tre perdues. Si les dimensions d'ordre inf&eacute;rieur sont toutes redimensionn&eacute;es, les effets sont impr&eacute;visibles.<br \>
 <br \>
-<li> Using <tt><b>ReDim</b></tt> within a member procedure with an array that contains an instance of the object class is undefined, and will [hopefully] result in horrible crashes.<br \>
+</div><ul><li> <tt><b>ReDim</b></tt> ne peut pas &ecirc;tre utilis&eacute; sur des tableaux de taille fixe - c'est &agrave; dire avec des tableaux avec des limites constantes produits par <tt><a href="KeyPgDim.html">Dim</a></tt>.  Ceci inclut les tableaux contenus dans les <tt><a href="KeyPgType.html">Type</a></tt>s d&eacute;finis par l'utilisateur, car seuls des tableaux &agrave; taille fix&eacute;e sont support&eacute;s par les types d&eacute;finis par l'utilisateur.  Ceci inclut aussi les tableaux de longueur fix&eacute;e pass&eacute;s comme param&egrave;tres d'une fonction.  FreeBASIC ne pourra vous emp&ecirc;cher d'essayer cela au moment de la compilation, mais les r&eacute;sultats au moment du fonctionnement seront impr&eacute;visibles.<br \>
 <br \>
-</ul></div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<li> L'utilisation de <tt><b>ReDim</b></tt> dans un membre d'une proc&eacute;dure avec un tableau qui contient une instance de la classe objet est ind&eacute;finie et entra&icirc;nera d'horribles crashes.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">Exemple</div><div class="fb_sect_cont"><br \>
 <tt><div class="freebasic">
 <span class="com">''&nbsp;Define&nbsp;a&nbsp;variable-length&nbsp;array&nbsp;with&nbsp;5&nbsp;elements</span><br />
 <span class="com">''</span><br />
@@ -63,7 +64,7 @@ With multiple dimensions, only the upper bound of only the first dimension may b
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="wrd">index</span><span class="oth">,</span>&nbsp;<span class="wrd">array</span><span class="oth">(</span><span class="wrd">index</span><span class="oth">)</span><br />
 <span class="key">Next</span><br />
 </div></tt><br />
-This program will produce the following output:<br \>
+Ce programme produira la sortie suivante:<br \>
 <br \>
 <pre class="fb_pre">index         value
  0             0
@@ -128,7 +129,7 @@ This program will produce the following output:<br \>
 <span class="key">Next</span><br />
 <span class="key">Print</span><br />
 </div></tt><br />
-This program will produce the following output:<br \>
+Ce programme produira la sortie suivante:<br \>
 <br \>
 <pre class="fb_pre">3 * 4:
 
@@ -148,11 +149,11 @@ This program will produce the following output:<br \>
  1   2   3   4
  5   6   7   8
 
-</pre></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
-<ul><li> <tt><a href="KeyPgPreserve.html">Preserve</a></tt> was in Visual Basic, but not in QBASIC.<br \>
-<li> Multi-dimensional arrays in FreeBASIC are in row-major order, rather than column-major order.<br \>
+</pre></div><div class="fb_sect_title">Diff&eacute;rences avec QB</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgPreserve.html">Preserve</a></tt> existe dans Visual Basic, mais pas dans QBASIC.<br \>
+<li> Les tableaux multi-dimensionnels de FreeBasic sont d'ordre ligne-majeur, plut&ocirc;t que d'ordre colonne-majeur.<br \>
 <br \>
-</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+</ul></div><div class="fb_sect_title">Voir aussi</div><div class="fb_sect_cont"><br \>
 <ul><li> <tt><a href="KeyPgCommon.html">Common</a></tt><br \>
 <li> <tt><a href="KeyPgDim.html">Dim</a></tt><br \>
 <li> <tt><a href="KeyPgErase.html">Erase</a></tt><br \>
@@ -165,7 +166,9 @@ This program will produce the following output:<br \>
 <li> <tt><a href="KeyPgUbound.html">UBound</a></tt><br \>
 <li> <tt><a href="KeyPgVar.html">Var</a></tt><br \>
 <br \>
-</ul></div>
+</ul><br \>
+   <br \>
+</div>
 </div>
 </div> 
 </div> 

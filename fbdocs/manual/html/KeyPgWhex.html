@@ -11,9 +11,9 @@
 </div> 
 <div id="fb_pg_wrapper">
 <div id="fb_pg_body">
-	Returns the hexadecimal wstring (Unicode) representation of a number<br \>
+	Retourne la <b>wstring</b> (Unicode) hexad&eacute;cimale representation d'un nombre<br \>
 <br \>
-<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<div class="fb_sect_title">Syntaxe</div><div class="fb_sect_cont"><tt><br \>
 <a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgFunction.html">Function</a> <b>WHex</b> <a href="KeyPgOverload.html">Overload</a> ( <a href="KeyPgByval.html">ByVal</a> <i>number</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgByte.html">Byte</a> ) <a href="KeyPgAs.html">As</a> <a href="KeyPgWstring.html">WString</a><br \>
 <a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgFunction.html">Function</a> <b>WHex</b> ( <a href="KeyPgByval.html">ByVal</a> <i>number</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgByte.html">Byte</a>, <a href="KeyPgByval.html">ByVal</a> <i>digits</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a> ) <a href="KeyPgAs.html">As</a> <a href="KeyPgWstring.html">WString</a><br \>
 <br \>
@@ -29,45 +29,45 @@
 </div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
 <i>result</i> = <b>WHex</b>( <i>number</i> [, <i>digits</i> ] )<br \>
 </tt><br \>
-</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Param&egrave;tres</div><div class="fb_sect_cont"><br \>
 <tt><i>number</i></tt><br \>
-<div class="fb_indent">A whole number or expression evaluating to a whole number.<br \>
+<div class="fb_indent">Un nombre ou une expression num&eacute;rique repr&eacute;sentant un nombre.<br \>
 </div><tt><i>digits</i></tt><br \>
-<div class="fb_indent">Optional number of digits to return.<br \>
+<div class="fb_indent">Facultatif: nombre de chiffres &agrave; retourner.<br \>
 <br \>
-</div></div><div class="fb_sect_title">Return Value</div><div class="fb_sect_cont"><br \>
-Returns a hexadecimal <a href="KeyPgString.html">String</a> representation of <i>number</i>.<br \>
+</div></div><div class="fb_sect_title">Valeur retourn&eacute;e</div><div class="fb_sect_cont"><br \>
+Retourne une <a href="KeyPgString.html">String</a> hexad&eacute;cimale repr&eacute;sentation de <i>number</i>.<br \>
 <br \>
 </div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
-Hexadecimal digits range from 0-9, or A-F.<br \>
+Chiffres hexad&eacute;cimaux de 0 &agrave; 9, ou A &agrave; F.<br \>
 <br \>
-If you specify <tt><i>digits</i></tt> &gt; 0, the resulting <tt><a href="KeyPgWstring.html">WString</a></tt> will be exactly that length.  It will be truncated or padded with zeros on the left, if necessary.<br \>
+Si vous sp&eacute;cifiez <tt><i>digits</i></tt> &gt; 0, la <tt><a href="KeyPgWstring.html">WString</a></tt> r&eacute;sultat aura exactement cette longueur.  Elle sera tronqu&eacute;e ou compl&eacute;t&eacute;e avec des z&eacute;ros sur la gauche, si n&eacute;cessaire.<br \>
 <br \>
-The length of the wstring will not go longer than the maximum number of digits required for the type of <tt><i>expression</i></tt> (8 for an integer, 16 for floating point or longint)<br \>
+La longueur de la <b>wstring</b> ne d&eacute;passera pas le nombre de bits maximum requis pour le type de <tt><i>expression</i></tt> (8 pour un entier, 16 pour un nombre &agrave; virgule flottante ou un entier long)<br \>
 <br \>
-</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Exemple</div><div class="fb_sect_cont"><br \>
 <tt><div class="freebasic">
 <span class="key">Print</span>&nbsp;<span class="key">Hex</span><span class="oth">(</span><span class="num">54321</span><span class="oth">)</span><br />
 <span class="key">Print</span>&nbsp;<span class="key">Hex</span><span class="oth">(</span><span class="num">54321</span><span class="oth">,</span>&nbsp;<span class="num">2</span><span class="oth">)</span><br />
 <span class="key">Print</span>&nbsp;<span class="key">Hex</span><span class="oth">(</span><span class="num">54321</span><span class="oth">,</span>&nbsp;<span class="num">5</span><span class="oth">)</span><br />
 </div></tt><br />
-will produce the output:<br \>
+produira la sortie:<br \>
 <br \>
 <pre class="fb_pre">D431
 31
 0D431
 </pre><br \>
-</div><div class="fb_sect_title">Platform Differences</div><div class="fb_sect_cont"><br \>
-<ul><li> Unicode (w)strings are not supported in the DOS port of FreeBASIC.<br \>
+</div><div class="fb_sect_title">Diff&eacute;rences de plate-forme</div><div class="fb_sect_cont"><br \>
+<ul><li> Les (w)strings Unicode ne sont pas support&eacute;es dans le portage DOS de FreeBASIC.<br \>
 <br \>
 <br \>
-</ul></div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
-<ul><li> Not available in the <i><a href="CompilerOptlang.html">-lang qb</a></i> dialect unless referenced with the alias <tt><b>__Whex</b></tt>.<br \>
+</ul></div><div class="fb_sect_title">Diff&eacute;rences de dialectes</div><div class="fb_sect_cont"><br \>
+<ul><li> Non disponible dans le dialecte <i><a href="CompilerOptlang.html">-lang qb</a></i> sauf si r&eacute;f&eacute;renc&eacute; avec l'alias <tt><b>__Whex</b></tt>.<br \>
 <br \>
-</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
-<ul><li> New to FreeBASIC.<br \>
+</ul></div><div class="fb_sect_title">Diff&eacute;rences avec QB</div><div class="fb_sect_cont"><br \>
+<ul><li> Nouveau pour FreeBASIC.<br \>
 <br \>
-</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+</ul></div><div class="fb_sect_title">Voir aussi</div><div class="fb_sect_cont"><br \>
 <ul><li> <tt><a href="KeyPgHex.html">Hex</a></tt><br \>
 <li> <tt><a href="KeyPgWbin.html">WBin</a></tt><br \>
 <li> <tt><a href="KeyPgWoct.html">WOct</a></tt><br \>

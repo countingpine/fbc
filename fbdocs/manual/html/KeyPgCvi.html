@@ -11,29 +11,28 @@
 </div> 
 <div id="fb_pg_wrapper">
 <div id="fb_pg_body">
-	Converts an four byte string to an integer variable<br \>
+	Conversion d'une cha&icirc;ne de 4 octets en une variable enti&egrave;re<br \>
 <br \>
-<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<div class="fb_sect_title">Syntaxe</div><div class="fb_sect_cont"><tt><br \>
 <a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgFunction.html">Function</a> <b>CVI</b> ( <a href="KeyPgByref.html">ByRef</a> <i>str</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgConstQualifier.html">Const</a> <a href="KeyPgString.html">String</a> ) <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a><br \>
 </tt><br \>
 </div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
 <i>result</i> = <b>CVI</b>( <i>str</i> )<br \>
 </tt><br \>
-</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Param&egrave;tres</div><div class="fb_sect_cont"><br \>
 <tt><i>str</i></tt><br \>
-<div class="fb_indent">A <a href="KeyPgString.html">String</a> exactly four bytes in length with a binary copy of an integer variable stored in it.<br \>
-<br \>
-</div></div><div class="fb_sect_title">Return Value</div><div class="fb_sect_cont"><br \>
-An <a href="KeyPgInteger.html">Integer</a> variable to copy the binary copy of a integer to.<br \>
+<div class="fb_indent">Une cha&icirc;ne (<a href="KeyPgString.html">String</a>) ayant exactement 4 octets de longueur, copie d'une variable enti&egrave;re.<br \>
+<br \></div></div><div class="fb_sect_title">Valeur retourn&eacute;e</div><div class="fb_sect_cont"><br \>
+Une variable enti&egrave;re (<a href="KeyPgInteger.html">Integer</a>) pour contenir la copie binaire d'un ENTIER.<br \>
 <br \>
 </div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
-Returns a 32 bit <tt><a href="KeyPgInteger.html">Integer</a></tt> value using the binary data contained in a string that is <b>exactly</b> four bytes in length.  An integer value of zero (0) is returned if the string is not exactly four bytes in length.<br \>
+Retourne une valeur enti&egrave;re (<tt><a href="KeyPgInteger.html">Integer</a></tt>) 32 bits en utilisant les donn&eacute;es contenues dans une cha&icirc;ne qui a <b>exactement</b> 4 octets de longueur. Une valeur enti&egrave;re z&eacute;ro (0) est retourn&eacute;e si la cha&icirc;ne n'a pas exactement 4 octets de longueur.<br \>
 <br \>
-<tt><b>CVI</b></tt> is used to convert 4-byte-strings created with <tt><a href="KeyPgMki.html">MKI</a></tt>.<br \>
+<tt><b>CVI</b></tt> est utilis&eacute; pour convertir des cha&icirc;nes-4-octets cr&eacute;es avec <tt><a href="KeyPgMki.html">MKI</a></tt>.<br \>
 <br \>
-This function can also be used to convert 32 bit integer values from a memory or file buffer without the need for a <tt>[[KeyPgType ]]</tt> structure.  However, just as with the type structure, special care should be taken when using <tt><b>CVI</b></tt> to convert strings that have been read from a buffer.  The <tt><a href="KeyPgCvi.html">CVI</a></tt> and <tt><a href="KeyPgMki.html">MKI</a></tt> functions are processor dependent.  That is, they will return different results depending on the endianness of the processor.<br \>
+Cette fonction peut aussi convertir des valeurs enti&egrave;res 32 bits &agrave; partir de la m&eacute;moire ou d'un tampon fichier sans l'utilisation d'une structure <tt><a href="KeyPgType.html">Type</a></tt>. Cependant, tout comme avec la structure type, une attention particuli&egrave;re doit &ecirc;tre prise lors de l'utilisation <tt><b>CVI</b></tt> pour convertir des cha&icirc;nes qui ont &eacute;t&eacute; lues &agrave; partir d'un tampon. Les fonctions <tt><a href="KeyPgCvi.html">CVI</a></tt> et <tt><a href="KeyPgMki.html">MKI</a></tt> sont d&eacute;pendantes du processeur. Elles retourneront des r&eacute;sultats diff&eacute;rents d&eacute;pendant de l'<i>endian</i> du processeur.<br \>
 <br \>
-</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Exemple</div><div class="fb_sect_cont"><br \>
 <tt><div class="freebasic">
 <span class="key">Dim</span>&nbsp;<span class="wrd">a</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">,</span>&nbsp;<span class="wrd">b</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span><br />
 <span class="wrd">a</span><span class="oth">=</span><span class="num">4534</span><br />
@@ -42,13 +41,13 @@ This function can also be used to convert 32 bit integer values from a memory or
 <span class="key">Sleep</span><br />
 </div></tt><br />
 <br \>
-</div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
-<ul><li> In the <i><a href="CompilerOptlang.html">-lang qb</a></i> dialect, <tt><b>CVI</b></tt> expects a 2-byte-string, since a QB integer is only 16 bits.  Only the first two bytes of the string are used, even if the string happens to be longer than two bytes.<br \>
+</div><div class="fb_sect_title">Diff&eacute;rences de dialectes</div><div class="fb_sect_cont"><br \>
+<ul><li> Dans le dialecte <i><a href="CompilerOptlang.html">-lang qb</a></i>, <tt><b>CVI</b></tt> attend des cha&icirc;nes-2-octets, car un entier QB integer n'a que 16 bits.  Seuls les deux premiers octets de la cha&icirc;ne sont utilis&eacute;s, m&ecirc;me si la cha&icirc;ne &agrave; une longueur sup&eacute;rieure &agrave; 2 octets.<br \>
 <br \>
-</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
-<ul><li> In QB an error occurs if the string passed is less than two bytes in length.<br \>
+</ul></div><div class="fb_sect_title">Diff&eacute;rences avec QB</div><div class="fb_sect_cont"><br \>
+<ul><li> Dans QB une erreur appara&icirc;t si la cha&icirc;ne pass&eacute;e a une longueur sup&eacute;rieure &agrave; 2 octets.<br \>
 <br \>
-</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+</ul></div><div class="fb_sect_title">Voir aussi</div><div class="fb_sect_cont"><br \>
 <ul><li> <tt><a href="KeyPgMki.html">MKI</a></tt><br \>
 <br \>
 </ul></div>

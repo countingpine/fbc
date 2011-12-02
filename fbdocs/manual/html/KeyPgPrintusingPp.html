@@ -11,41 +11,41 @@
 </div> 
 <div id="fb_pg_wrapper">
 <div id="fb_pg_body">
-	Outputs formatted text to a file or device<br \>
+	Sort un texte format&eacute; vers un fichier ou un p&eacute;riph&eacute;rique<br \>
 <br \>
-<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<div class="fb_sect_title">Syntaxe</div><div class="fb_sect_cont"><tt><br \>
 <b>Print #</b> <i>filenum</i> <b>,</b> <b>Using</b> <i>formatstring</i> <b>;</b> [ <i>expressionlist</i> ]<br \>
 </tt><br \>
-</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Param&egrave;tres</div><div class="fb_sect_cont"><br \>
 <tt><i>filenum</i></tt><br \>
-<div class="fb_indent">The file number of a file or device opened for <tt><a href="KeyPgOutput.html">Output</a></tt> or <tt><a href="KeyPgAppend.html">Append</a></tt>.<br \>
+<div class="fb_indent">Le num&eacute;ro de fichier d'un fichier ou d'un p&eacute;riph&eacute;rique ouvert avec <tt><a href="KeyPgOutput.html">Output</a></tt> ou <tt><a href="KeyPgAppend.html">Append</a></tt>.<br \>
 </div><tt><i>formatstring</i></tt><br \>
-<div class="fb_indent">Format string to use.<br \>
+<div class="fb_indent">La cha&icirc;ne format&eacute;e &agrave; utiliser.<br \>
 </div><tt><i>expressionlist</i></tt><br \>
-<div class="fb_indent">List of items to print, separated by semi-colons.<br \>
+<div class="fb_indent">Liste des &eacute;l&eacute;ments &agrave; imprimer, s&eacute;par&eacute;s par des points-virgules.<br \>
 <br \>
 </div></div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
-Output various expressions to a text file or device using a format determined by the <tt><i>formatstring</i></tt> parameter. Internally, <tt><b>Print Using</b></tt> uses a buffer size of 2048 bytes: while it is highly unlikely that this buffer would be filled, it should be noted that output would be truncated should this limit be reached.<br \>
+Sort des expressions diverses dans un fichier texte ou un p&eacute;riph&eacute;rique en utilisant un format d&eacute;termin&eacute; par le param&egrave;tre <tt><i>formatstring</i></tt>. En interne, <tt><b>Print Using</b></tt> utilise un buffer de 2048 octets: alors qu'il est tr&egrave;s peu probable que ce tampon soit rempli, il convient de noter que la sortie serait tronqu&eacute;e si cette limite &eacute;tait atteinte.<br \>
 <br \>
-If no expression list is given, the format string will be printed up to the first special marker.  Note that the semi-colon after the format string is still necessary, even if no expression list is given.<br \>
+Si aucune <tt><i>expressionlist</i></tt> n'est donn&eacute;e, la <tt><i>formatstring</i></tt> sera &eacute;crite jusqu'&agrave; la premi&egrave;re borne sp&eacute;ciale.  Notez que le point-virgule apr&egrave;s la cha&icirc;ne format&eacute;e est toujours n&eacute;cessaire, m&ecirc;me si aucune liste d'expressions est donn&eacute;e.<br \>
 <br \>
-The format string dictates how the expressions are to be formatted when output to the screen, indicated by the use of special marker characters. There are markers for formatting both string and numeric output:<br \>
+La cha&icirc;ne de format d&eacute;termine la fa&ccedil;on dont les expressions sont &agrave; mettre en forme pour une sortie &agrave; l'&eacute;cran, ceci est indiqu&eacute; par l'utilisation de caract&egrave;res marqueurs sp&eacute;ciaux. Il y a deux sortes de marqueurs, pour le formatage de cha&icirc;ne ou de sortie num&eacute;rique:<br \>
 <br \>
-</div><div class="fb_sect_title">String formatting</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Le formatage de cha&icirc;ne</div><div class="fb_sect_cont"><br \>
 <br \>
-<div class="fb_indent"><div class="fb_table"><table><tr><td>Marker</td><td>Formatting</td></tr><tr><td>!</td><td>prints the first character of a string</td></tr><tr><td>\   \</td><td>prints as many characters of a string as occuppied between the pair \ \</td></tr><tr><td>&amp;</td><td>prints the entire string</td></tr></table></div><br \>
+<div class="fb_indent"><div class="fb_table"><table><tr><td>Marqueur</td><td>Formatage</td></tr><tr><td>!</td><td>&eacute;crit le premier caract&egrave;re d'une cha&icirc;ne</td></tr><tr><td>\   \</td><td>&eacute;crit autant de caract&egrave;res d'une cha&icirc;ne qu'il y en a entre la paire de \ \</td></tr><tr><td>&amp;</td><td>&eacute;crit la cha&icirc;ne enti&egrave;re</td></tr></table></div><br \>
 <br \>
-</div></div><div class="fb_sect_title">Numeric formatting</div><div class="fb_sect_cont"><br \>
+</div></div><div class="fb_sect_title">Le formatage num&eacute;rique</div><div class="fb_sect_cont"><br \>
 <br \>
-<div class="fb_indent"><div class="fb_table"><table><tr><td>Marker</td><td>Formatting</td></tr><tr><td>#</td><td>placeholder for a digit</td></tr><tr><td>,</td><td> placed after integer digit indicates groups of 3 digits should be separated by commas</td></tr><tr><td>.</td><td> placed near # indicates place for the decimal point</td></tr><tr><td>+</td><td>prints the sign of the number when placed to the left of numeric formatting</td></tr><tr><td>^^^^</td><td>prints exponential notation when placed to the right of numeric formatting</td></tr><tr><td>&amp;</td><td>prints a number intelligently, using the exact number of digits required (new to version 0.21.0b)</td></tr></table></div><br \>
+<div class="fb_indent"><div class="fb_table"><table><tr><td>Marqueur</td><td>Formatage</td></tr><tr><td>#</td><td>espace r&eacute;serv&eacute; pour un chiffre</td></tr><tr><td>,</td><td> plac&eacute; apr&egrave;s un chiffre d'un nombre entier indique que les groupes de 3 chiffres doivent &ecirc;tre s&eacute;par&eacute;s par des virgules</td></tr><tr><td>.</td><td> plac&eacute; &agrave; proximit&eacute; de # indique la place pour le point d&eacute;cimal</td></tr><tr><td>+</td><td>&eacute;crit le signe du nombre lorsqu'il est plac&eacute; &agrave; la gauche d'une mise en forme num&eacute;rique</td></tr><tr><td>^^^^</td><td>plac&eacute; &agrave; droite de mise en forme num&eacute;rique implique la notation scientifique</td></tr><tr><td>&amp;</td><td>imprime un nombre intelligemment, en utilisant le nombre exact de chiffres requis (nouveau pour la version 0.21.0b)</td></tr></table></div><br \>
 <br \>
-</div>All of the special marker characters can be escaped, or preceded, with the underscore character <tt>"_"</tt>, allowing them to be printed directly.  For example, <tt>"_!"</tt> is printed as <tt>"!"</tt>.<br \>
+</div>Tous les caract&egrave;res sp&eacute;ciaux de marqueurs peuvent &ecirc;tre pr&eacute;c&eacute;d&eacute;s d'un caract&egrave;re d'&eacute;chappement, ou pr&eacute;c&eacute;d&eacute;s, avec le caract&egrave;re de soulignement <tt>"_"</tt>, leur permettant d'&ecirc;tre affich&eacute;s directement.  Par exemple, <tt>"_!"</tt> est affich&eacute; <tt>"!"</tt>.<br \>
 <br \>
-If a numerical value doesn't fit in the form indicated by the format string, the formatting is ignored and the number is printed preceded by the percent <tt>"%"</tt> character. E.g., the number <tt>1234</tt> with a <tt><i>formatstring</i></tt> of <tt>"##.##"</tt> would be printed as <tt>"%1234.00"</tt>.<br \>
+Si une valeur num&eacute;rique ne correspond pas &agrave; la forme indiqu&eacute;e par la cha&icirc;ne de format, la mise en forme est ignor&eacute;e et le nombre est imprim&eacute; pr&eacute;c&eacute;d&eacute; par le caract&egrave;re pour cent <tt>"%"</tt>. Par exemple, le nombre <tt>1234</tt> avec une <tt><i>formatstring</i></tt> de <tt>"##.##"</tt> sera affich&eacute; <tt>"%1234.00"</tt>.<br \>
 <br \>
-All other characters within the format string are printed as they appear.<br \>
+Tous les autres caract&egrave;res de la cha&icirc;ne de format sont &eacute;crits tels qu'ils apparaissent.<br \>
 <br \>
-</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Exemple</div><div class="fb_sect_cont"><br \>
 <br \>
 <tt><div class="freebasic">
 <span class="key">Const</span>&nbsp;<span class="wrd">filename</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="quo">"file.txt"</span><br />
@@ -63,16 +63,16 @@ All other characters within the format string are printed as they appear.<br \>
 <br />
 <span class="key">Close</span><span class="oth">(</span><span class="wrd">filenum</span><span class="oth">)</span><br />
 </div></tt><br />
-will produce the file:<br \>
+produira le fichier:<br \>
 <pre class="fb_pre">
 This file is called 'file.txt'
 Some numerical values are:
 '123', '-123.456'
 </pre><br \>
-</div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
-<ul><li> QB didn't allow <tt>"&"</tt> to be used for printing numbers.<br \>
+</div><div class="fb_sect_title">Diff&eacute;rences avec QB</div><div class="fb_sect_cont"><br \>
+<ul><li> QB ne permettait pas d'utiliser <tt>"&"</tt> pour l'impression de nombres.<br \>
 <br \>
-</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+</ul></div><div class="fb_sect_title">Voir aussi</div><div class="fb_sect_cont"><br \>
 <ul><li> <tt><a href="KeyPgPrintPp.html">Print #</a></tt><br \>
 <li> <tt><a href="KeyPgPrintusing.html">Print Using</a></tt><br \>
 <li> <tt><a href="KeyPgFormat.html">Format</a></tt><br \>

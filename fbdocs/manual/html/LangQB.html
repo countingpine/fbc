@@ -6,58 +6,58 @@
 <body>
 <div id="fb_body_wrapper">
 <div id="fb_tab">
-<div id="fb_tab_l">Differences from QB</div>
+<div id="fb_tab_l">Diff&eacute;rences avec QB</div>
 <div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
 </div> 
 <div id="fb_pg_wrapper">
 <div id="fb_pg_body">
-	Since version 0.17, FreeBASIC introduced a -lang command-line option, that is used to change the language compatibility mode. Use the -lang qb option when compiling to select the most QB compatible parser. All differences listed below assume that -lang qb was used.<br \>
+	Depuis la version 0.17, FreeBASIC introduit une option -lang de ligne de commande, qui est utilis&eacute;e pour changer le mode de compatibilit&eacute; de langue. Utilisez l'option qb-lang lors de la compilation pour s&eacute;lectionner l'analyseur plus compatible QB. Toutes les diff&eacute;rences mentionn&eacute;es ci-dessous supposent que qb-lang a &eacute;t&eacute; utilis&eacute;.<br \>
 <br \>
-<b>Architecture/Platform incompatibilities</b><br \>
-<ul><li> FreeBASIC is written for 32-bit operating systems and a 32 bit DOS extender, and cannot utilize code which depends on 16-bit DOS, 16 bit assembly or memory model (segment & offset, XMS/EMS, ...). 	<br \>
-<li> DEF SEG is no longer necessary and will not work - any code which POKEs to video memory this way will no longer function, however, for DOS it can be easily rewritten using DPMI features. <br \>
-<li> CALL INTERRUPT no longer functions, as it relies on 16-bit DOS. DOS interrupts can be called in the DOS32 version by using the DPMI library, but they might work slowly because of the 32bit-16bit-32bit  mode changes the processor will have to perform. <br \>
+<b>Incompatibilit&eacute;s architecture/plate-forme</b><br \>
+<ul><li> FreeBasic est &eacute;crit pour les syst&egrave;mes d'exploitation 32-bit et une extension DOS 32 bits, et ne peut pas utiliser le code qui d&eacute;pend du DOS 16-bits, ou de l'assembleur 16 bits, ou du mod&egrave;le de m&eacute;moire (segment & offset, XMS / EMS, ...).<br \>
+<li> DEF SEG n'est plus n&eacute;cessaire et ne fonctionnera pas - tout code qui POKE dans la m&eacute;moire vid&eacute;o de cette mani&egrave;re ne fonctionnera plus, cependant, pour DOS, il peut facilement &ecirc;tre r&eacute;&eacute;crit en utilisant les caract&eacute;ristiques DPMI.<br \>
+<li> CALL INTERRUPT ne fonctionne plus, car il repose sur DOS 16-bit. Les interruptions DOS peuvent &ecirc;tre appel&eacute;es dans la version Dos32 en utilisant la biblioth&egrave;que DPMI, mais elles pourraient travailler lentement en raison des changements de mode 32bit-16bit-32bit que le processeur aura &agrave; effectuer.<br \>
 <br \>
-</ul><b>Changed due to ambiguity</b><br \>
-<ul><li> A scalar variable and an array with the same name and suffix can no longer share the same name.<br \>
-<li> SHARED can't be used inside a SUB or FUNCTION as it resulted in shared variables not defined in the main program. A proper DIM SHARED in the main program must be used.<br \>
-<li> COMMON declarations do not depend on the order they are made, variables are matched by name and for that reason named COMMON is no longer supported. All COMMON arrays are variable-length arrays in FB.<br \>
-<li> If a single line <a href="KeyPgIfthen.html">If</a> has an (unnecessary) colon directly after the THEN, it has to be terminated by an <a href="KeyPgEndif.html">End If</a> in FB. If that unneeded colon is removed, FB will behave as QB.<br \>
+</ul><b>Changement en raison d'ambigu&iuml;t&eacute;s</b><br \>
+<ul><li> Une variable scalaire et un tableau avec le m&ecirc;me nom et suffixe ne peuvent plus partager le m&ecirc;me nom.<br \>
+<li> SHARED ne peut pas &ecirc;tre utilis&eacute; dans SUB ou FUNCTION car il en r&eacute;sultait des variables partag&eacute;es non-d&eacute;finies dans le programme principal. Un DIM SHARED appropri&eacute; dans le programme principal doit &ecirc;tre utilis&eacute;.<br \>
+<li> Les d&eacute;clarations COMMON ne d&eacute;pendent pas de l'ordre dans lequel elles sont faites, les variables sont reconnues par leur nom et pour cette raison utiliser COMMON n'est plus support&eacute;. Tous les tableaux COMMON sont des tableaux de longueur variable dans FB.<br \>
+<li> Si une ligne unique <a href="KeyPgIfthen.html">If</a> a un signe deux-points (:) inutile directement apr&egrave;s THEN, il doit &ecirc;tre termin&eacute; par un <a href="KeyPgEndif.html">End If</a> dans FB. Si ce signe deux-points (:) inutile est enlev&eacute;, FB se comportera comme QB.<br \>
 <br \>
-</ul><b>Design differences</b><br \>
-<ul><li> Graphics support was internally redesigned, see <a href="GfxLib.html">GfxLib overview</a><br \>
-<li> CLEAR is no longer used to reset all variables and set the stack. Variables must be reset one by one, and stack size can be changed in the compiler command line. The keyword CLEAR is used to do memory fills in FB.<br \>
-<li> String DATA items must be enclosed in quotes in FB, in QB this was optional<br \>
-<li> All functions must have been declared, even with a CALL in FreeBASIC. With CALL it was possible to invoke prototype-less functions in QuickBASIC. (to be supported in future with -lang qb)<br \>
-<li> In FreeBASIC all arrays must be explicitly declared. (Interpreted QuickBASIC arrays are automatically created with up to 10 indices.)<br \>
-<li> Strings use a null (char 0) terminator to be compatible with C libraries and the Windows API, fixed-length strings can't contain chr$(0) chars for now.<br \>
-<li> When INKEY[$] reads an extended key (Num Pad, Arrows...) it returns a two character string. In FB the first character is CHR[$](255), while in QB this first char is CHR$(0). <br \>
-<li> With fixed length strings FreeBASIC gives the real length as <a href="KeyPgLen.html">Len</a> plus one (null-char), even on <a href="KeyPgType.html">Type</a> fields.<br \>
-<li> In FreeBASIC, unused characters of fixed-length strings are set to 0, regardless of what "-lang" compiler option is used. In QB, unused characters are set to 32 (space, or " ", in ASCII).<br \>
-<li> When a fixed-length string is declared, but still not initialized, all characters are set to 0, both in FreeBASIC and QB.<br \>
-<li> The arrays are stored in row-major order in FB, they were stored in column-major order in QB by default. Row major order: data with the same  last index are contiguous. Column-major order: data wih the same first index are contiguous.  For example, if you have DIM A(1 TO 3, 1 TO 8), in row-major order the elements are stored such that A(3,5) is followed in memory by A(3,6); in column-major order A(3,5) is followed in memory by A(4,5).<br \>
-<li> Programs don't stop anymore on runtime errors unless <i><a href="CompilerOpte.html">-e</a></i> or <i><a href="CompilerOptex.html">-ex</a></i> option is used in the command line. Using these options allow the use of QB style error handling (ON ERROR, RESUME...).<br \>
-<li> Octal numbers are written "&o...", whereas in QB they could be written as "&o..." or "&...".<br \>
-<li> PRINT requires the USING clause, if used, to be the first argument. QB allowed PRINT to have not-to be-formatted arguments before USING. <br \>
-<li> In FB FOR loops in subs/functions do not accept arguments received byref as counters. A local variable must be used. <br \>
-<li> FB's <a href="KeyPgLocate.html">Locate</a> does not respect the fourth and fifth arguments for cursor shape.<br \>
-<li> FB's <a href="KeyPgScreenCons.html">Screen</a> does not allow switching the visible or the work-page. Use <a href="KeyPgScreenset.html">ScreenSet</a> instead.<br \>
-<li> FB's <a href="KeyPgColor.html">Color</a> does not allow a third argument for border color.<br \>
-<li> FB's <a href="KeyPgTimer.html">Timer</a> returns the number of seconds since the computer started, while QB's TIMER returns the number of seconds since midnight. (Win32 and Linux only: No more wrapping at midnight! :))<br \>
-<li> In QB a chr$(13) inside a string did a CR+LF when PRINT'ed. In FB the CHR(13) prints just at what it is, a CR.<br \>
-<li> EOF can no longer be used to detect an empty comms buffer. Empty buffer should be tested comparing LOC with 0 in FB. Also, for files opened in RANDOM or BINARY mode, EOF returns non-zero already after reading exactly the file size, see <tt><a href="KeyPgEof.html">EOF</a></tt>. <br \>
-<li> Integer variables do not signal overflow errors in FB, even with the <i><a href="CompilerOptex.html">-ex</a></i> option on. Any QB code relying in catching integer overflow errors will not work in FB. <br \>
+</ul><b>Diff&eacute;rences de conception</b><br \>
+<ul><li> Le support graphique a &eacute;t&eacute; remani&eacute; en interne, voir <a href="GfxLib.html">Vue d'ensemble de GfxLib</a><br \>
+<li> CLEAR n'est plus utilis&eacute; pour r&eacute;initialiser toutes les variables et d&eacute;finir la pile. Les variables doivent &ecirc;tre remis &agrave; z&eacute;ro, une par une et la taille de la pile peut &ecirc;tre modifi&eacute;e dans la ligne de commande du compilateur. Le mot-cl&eacute; CLEAR est utilis&eacute; dans FB pour remplir la m&eacute;moire avec une valeur.<br \>
+<li> Les &eacute;l&eacute;ments Cha&icirc;ne DATA doivent &ecirc;tre entre guillemets dans FB, dans QB c'&eacute;tait facultatif.<br \>
+<li> Toutes les fonctions doivent avoir &eacute;t&eacute; d&eacute;clar&eacute;es, m&ecirc;me avec un CALL sous FreeBASIC. Avec CALL il &eacute;tait possible d'invoquer des prototypes des fonctions sous QuickBASIC. (pourra &ecirc;tre support&eacute; dans qb-lang avec l'avenir)<br \>
+<li> En FreeBasic tous les tableaux doivent &ecirc;tre d&eacute;clar&eacute;s explicitement. (Les tableaux interpr&eacute;t&eacute;s sous QuickBASIC sont automatiquement cr&eacute;&eacute;s avec 10 indices.)<br \>
+<li> Les cha&icirc;nes utilisent terminateur nul (char 0) pour &ecirc;tre compatibles avec les biblioth&egrave;ques C et l'API Windows, cha&icirc;nes de longueur fixe ne peuvent pas contenir de caract&egrave;re chr$(0) pour l'instant.<br \>
+<li> Lorsque INKEY[$] lit une touche &eacute;tendue (du pav&eacute; num&eacute;rique, fl&egrave;ches ...), il renvoie une cha&icirc;ne de deux caract&egrave;res. Dans FB le premier caract&egrave;re est CHR[$](255), alors que dans QB ce premier caract&egrave;re est CHR$(0). <br \>
+<li> Avec les cha&icirc;nes de longueur fixe FreeBasic donne la longueur r&eacute;elle comme <a href="KeyPgLen.html">Len</a> plus un (caract&egrave;re nul), m&ecirc;me sur les champs de <a href="KeyPgType.html">Type</a>.<br \>
+<li> Dans FreeBASIC,les caract&egrave;res inutilis&eacute;s des cha&icirc;nes de longueur fixe sont mis &agrave; 0, ind&eacute;pendamment de l'option "-lang" du compilateur qui est utilis&eacute;e. Dans QB, les caract&egrave;res non utilis&eacute;s sont mis &agrave; 32 (l'espace, ou "", en ASCII).<br \>
+<li>Quand une cha&icirc;ne de longueur fixe est d&eacute;clar&eacute;e, mais pas encore initialis&eacute;e, tous les caract&egrave;res sont mis &agrave; 0, tant en FreeBasic qu'en QB.<br \>
+<li> Les tableaux sont stock&eacute;s dans l'ordre majeur des lignes dans FB, ils &eacute;taient stock&eacute;s dans l'ordre majeur des colonnes par d&eacute;faut dans QB. Ordre majeur des lignes: les donn&eacute;es avec le m&ecirc;me dernier indice sont contigu&euml;s. Ordre majeur des colonnes: les donn&eacute;es avec le m&ecirc;me premier indice sont contigu&euml;s.  Par exemple, si vous avez DIM A(1 TO 3, 1 TO 8), dans l'ordre majeur des lignes les &eacute;l&eacute;ments sont stock&eacute;s de telle sorte que A(3,5) est suivie dans la m&eacute;moire par A(3,6); dans l'ordre majeur des colonnes A(3,5) est suivie dans la m&eacute;moire par A(4,5).<br \>
+<li> Les programmes ne s'arr&ecirc;tent plus sur les erreurs d'ex&eacute;cution sauf si l'option <i><a href="CompilerOpte.html">-e</a></i> ou <i><a href="CompilerOptex.html">-ex</a></i> est utilis&eacute;e dans la ligne de commande. L'utilisation de ces options permet l'utilisation du traitement d'erreur style QB (ON ERROR, RESUME...).<br \>
+<li> Les nombres octals sont &eacute;crits "&o...", alors que dans QB ils pouvaient &ecirc;tre &eacute;crits "&o..." ou "&...".<br \>
+<li> PRINT exige, si la clause USING est utilis&eacute;e, qu'elle soit le premier argument. QB permet que PRINT ait des arguments USING. <br \>
+<li> Dans FB les boucles FOR dans des subs/functions n'acceptent pas les arguments re&ccedil;us byref (par r&eacute;f&eacute;rence) comme compteurs. Une variable locale doit &ecirc;tre utilis&eacute;e. <br \>
+<li> Dans FB <a href="KeyPgLocate.html">Locate</a> ne respecte pas les quatri&egrave;me et cinqui&egrave;me arguments pour la forme du curseur.<br \>
+<li> Dans FB <a href="KeyPgScreenCons.html">Screen</a> ne permet pas de commutation entre page visible ou de travail. Utilisez <a href="KeyPgScreenset.html">ScreenSet</a> &agrave; la place.<br \>
+<li> Dans FB <a href="KeyPgColor.html">Color</a> ne permet pas un troisi&egrave;me argument pour la couleur de bordure.<br \>
+<li> Dans FB <a href="KeyPgTimer.html">Timer</a> renvoie le nombre de secondes depuis le d&eacute;marrage de l'ordinateur, tandis que TIMER de QB retourne le nombre de secondes depuis minuit. (Win32 et Linux uniquement:  Pas plus &agrave; minuit! :))<br \>
+<li> Dans QB un chr$(13) dans une cha&icirc;ne faisait un CR+LF lors d'un PRINT. Dans FB un CHR(13) imprime juste &agrave; ce qu'il est, un CR.<br \>
+<li> EOF ne peut plus &ecirc;tre utilis&eacute; pour d&eacute;tecter un tampon vide. Les tampons vides doivent &ecirc;tre test&eacute;s en comparant LOC avec 0 dans FB. En outre, pour les fichiers ouverts en mode RANDOM ou BINARY, EOF retourne non-nul d&eacute;j&agrave; apr&egrave;s avoir lu exactement la taille du fichier, voir <tt><a href="KeyPgEof.html">EOF</a></tt>. <br \>
+<li> Les variables enti&egrave;res ne signalent pas les erreurs de d&eacute;bordement dans FB, meme si l'option <i><a href="CompilerOptex.html">-ex</a></i> est valide. Tout code QB s'appuyant sur l'interception des erreurs de d&eacute;bordement d'entier ne fonctionne pas dans FB. <br \>
 <br \>
-</ul><b>Archaic commands</b><br \>
-<ul><li> BSAVE and BLOAD can be used in FB only to save and retrieve screens or graphic buffers. They will work only if gfxlib is linked, this is,  if a graphics screen mode is requested somewhere in the program. The console can't be saved with BSAVE or retrieved with BLOAD. The other use of BSAVE-BLOAD, saving and loading full arrays, can be achieved easily with GET and PUT.<br \>
-<li> FIELD statement (for record definition at runtime) has been left aside. The keyword FIELD is used in FB to specify field alignment in <a href="KeyPgType.html">Type</a> variables.<br \>
-<li> PC Speaker commands no longer function: Any references to SOUND or PLAY statements will result in an error message. There is a third party library available to emulate this functionality, but it's not included with FreeBASIC.<br \>
-<li> Fake event-driven programming (ON KEY, ON PEN, ON STRIG, ON TIMER) no longer works. They could be emulated by a separate library.<br \>
+</ul><b>Commandes archa&iuml;ques</b><br \>
+<ul><li> BSAVE et BLOAD peuvent &ecirc;tre utilis&eacute;s dans FB seulement pour enregistrer et r&eacute;cup&eacute;rer des &eacute;crans ou tampons graphiques. Cela ne fonctionnera que si gfxlib est li&eacute;e, c'est &agrave; dire, si un mode d'&eacute;cran graphique est valid&eacute; quelque part dans le programme. La console ne peut pas &ecirc;tre enregistr&eacute;e avec BSAVE ou r&eacute;cup&eacute;r&eacute;e avec BLOAD. L'autre utilisation de BSAVE-BLOAD, la sauvegarde et le chargement complet de tableaux, ce qui peut &ecirc;tre atteint facilement avec GET et PUT.<br \>
+<li> La d&eacute;claration FIELD (pour la d&eacute;finition d'enregistrement lors de l'ex&eacute;cution) a &eacute;t&eacute; laiss&eacute;e de c&ocirc;t&eacute;. Le mot-cl&eacute; FIELD est utilis&eacute; dans FB pour sp&eacute;cifier l'alignement les variables <a href="KeyPgType.html">Type</a>.<br \>
+<li> Les commandes haut-parleur PC ne fonctionnent plus: Toute r&eacute;f&eacute;rence &agrave; des d&eacute;clarations ou SOUND PLAY se traduira par un message d'erreur. Il y a une biblioth&egrave;que tierce partie disponible pour &eacute;muler cette fonctionnalit&eacute;, mais elle n'est pas incluse avec FreeBASIC.<br \>
+<li> La fausse programmation &eacute;v&eacute;nementielle (ON KEY, ON PEN, ON STRIG, ON TIMER) ne fonctionne plus. Ils pourraient &ecirc;tre &eacute;mul&eacute;s par une biblioth&egrave;que s&eacute;par&eacute;e.<br \>
 <li> MKSMBF$ and all the MKxMBF$ commands supporting the pre-QB4.0 Microsoft proprietary floating point format (MBF) are not implemented.<br \>
-<li> The use of parenthesis in the arguments passed to a function to emulate by-value passing is not permitted. The CALL quirk resulting in all arguments being passed by value, no longer works. The proper <a href="KeyPgByval.html">ByVal</a> and <a href="KeyPgByref.html">ByRef</a> keywords must be used.<br \>
-<li> FILES is not implemented. Instead, PDS 7.1-compatible <a href="KeyPgDir.html">Dir</a>[$] can be used.<br \>
-<li> IOCTL, ERRDEV and ERRDEV$, low level functions to access hardware are not implemented as they were OS-dependent. <br \>
-<li> CALL ABSOLUTE to run inline machine code is no longer supported. Instead you can use <a href="KeyPgAsm.html">Asm</a>...END ASM blocks to insert inline assembler commands. Or use the ASM... one line command.<br \>
+<li> L'utilisation de parenth&egrave;ses dans les arguments pass&eacute;s &agrave; une fonction pour &eacute;muler un passage par valeur n'est pas autoris&eacute;e. Le CALL bizarre r&eacute;sultant dans tous les arguments sont pass&eacute;s par valeur, ne fonctionne plus. Les mots cl&eacute;s corrects <a href="KeyPgByval.html">ByVal</a> et <a href="KeyPgByref.html">ByRef</a> doivent &ecirc;tre utilis&eacute;s.<br \>
+<li> FILES n'est pas mis en œuvre. Au lieu de cela, <a href="KeyPgDir.html">Dir</a>[$] PDS 7.1-compatible peut &ecirc;tre utilis&eacute;.<br \>
+<li> IOCTL, ERRDEV and ERRDEV$, fonctions de bas niveau pour acc&eacute;der au mat&eacute;riel ne sont pas impl&eacute;ment&eacute;es car elles d&eacute;pendent de l'OS. <br \>
+<li> CALL ABSOLUTE pour ex&eacute;cuter du code machine en ligne n'est plus support&eacute;. Au lieu de cela vous pouvez utiliser des blocs <a href="KeyPgAsm.html">Asm</a>...END ASM pour ins&eacute;rer du code assembleur. Vous pouvez &eacute;galement utiliser la commande en ligne ASM ... .<br \>
 <br \>
 </ul>
 </div>

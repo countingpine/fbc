@@ -11,9 +11,9 @@
 </div> 
 <div id="fb_pg_wrapper">
 <div id="fb_pg_body">
-	Returns a binary (base 2) string representation of an integer<br \>
+	Retourne une cha&icirc;ne binaire (base 2) repr&eacute;sentation d'un entier<br \>
 <br \>
-<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<div class="fb_sect_title">Syntaxe</div><div class="fb_sect_cont"><tt><br \>
 <a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgFunction.html">Function</a> <b>Bin</b> <a href="KeyPgOverload.html">Overload</a> ( <a href="KeyPgByval.html">ByVal</a> <i>number</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgByte.html">Byte</a> ) <a href="KeyPgAs.html">As</a> <a href="KeyPgString.html">String</a><br \>
 <br \>
 <a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgFunction.html">Function</a> <b>Bin</b> ( <a href="KeyPgByval.html">ByVal</a> <i>number</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgShort.html">Short</a> ) <a href="KeyPgAs.html">As</a> <a href="KeyPgString.html">String</a><br \>
@@ -27,42 +27,42 @@
 </div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
 <i>result</i> = <b>Bin</b>[$]( <i>number</i> [, <i>digits</i> ] )<br \>
 </tt><br \>
-</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Param&egrave;tres</div><div class="fb_sect_cont"><br \>
 <tt><i>number</i></tt><br \>
-<div class="fb_indent">A number or expression evaluating to a number.  A floating-point number will be converted to a <tt><a href="KeyPgLongint.html">LongInt</a></tt>.<br \>
+<div class="fb_indent">Un nombre ou une expression transform&eacute; en nombre. Un nombre en virgule flottante sera converti en <tt><a href="KeyPgLongint.html">LongInt</a></tt>.<br \>
 </div><tt><i>digits</i></tt><br \>
-<div class="fb_indent">Desired number of digits in the returned string.<br \>
+<div class="fb_indent">Nombre de chiffres de la cha&icirc;ne renvoy&eacute;e.<br \>
 <br \>
-</div></div><div class="fb_sect_title">Return Value</div><div class="fb_sect_cont"><br \>
-A string containing the unsigned binary representation of <tt><i>number</i></tt>.<br \>
+</div></div><div class="fb_sect_title">Valeur retourn&eacute;e</div><div class="fb_sect_cont"><br \>
+Une cha&icirc;ne contenant la repr&eacute;sentation binaire non-sign&eacute;e de <tt><i>number</i></tt>.<br \>
 <br \>
 </div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
-Returns a string representing the unsigned binary value of the integer <tt><i>number</i></tt>. Binary digits range from 0 to 1.<br \>
+Retourne une cha&icirc;ne binaire repr&eacute;sentation de la valeur binaire non-sign&eacute;e de l'entier <tt><i>number</i></tt>. Chiffres binaires de 0 &agrave; 1.<br \>
 <br \>
-If you specify <tt><i>digits</i></tt> &gt; 0, the result string will be exactly that length.  It will be truncated or padded with zeros on the left, if necessary.<br \>
+Si vous sp&eacute;cifiez <tt><i>digits</i></tt> &gt; 0, la cha&icirc;ne r&eacute;sultat aura exactement cette longueur.  Elle sera tronqu&eacute;e ou compl&egrave;t&eacute;e par des z&eacute;ros sur la gauche, si n&eacute;cessaire.<br \>
 <br \>
-The length of the string will not go longer than the maximum number of digits required for the type of <tt><i>number</i></tt> (32 for an <tt><a href="KeyPgInteger.html">Integer</a></tt>, 64 for a <tt><a href="KeyPgLongint.html">LongInt</a>)</tt>.<br \>
+La longueur de la cha&icirc;ne ne d&eacute;passera pas le nombre de bits maximum requis pour le type de <tt><i>number</i></tt> (32 pour un <tt><a href="KeyPgInteger.html">Integer (entier)</a></tt>, 64 pour un <tt><a href="KeyPgLongint.html">LongInt (entier long)</a>)</tt>.<br \>
 <br \>
-If you want to do the opposite, i.e. convert an binary string back into a number, the easiest way to do it is to prepend the string with <tt>"&B"</tt>, and convert it using <tt><a href="KeyPgValint.html">ValInt</a></tt> or <tt><a href="KeyPgVallng.html">ValLng</a></tt>, similarly to a normal numeric string.  E.g. <tt><a href="KeyPgValint.html">ValInt</a>("&B101")</tt><br \>
+Si vous d&eacute;sirez l'oppos&eacute;, par exemple convertir une cha&icirc;ne binaire vers un nombre, la meilleure fa&ccedil;on de le faire est d'ajouter <tt>"&B"</tt> au d&eacute;but de la cha&icirc;ne, et la convertir en utilisant <tt><a href="KeyPgValint.html">ValInt</a></tt> ou <tt><a href="KeyPgVallng.html">ValLng</a></tt>, de fa&ccedil;on similaire &agrave; une cha&icirc;ne num&eacute;rique normale.  Par exemple <tt><a href="KeyPgValint.html">ValInt</a>("&B101")</tt><br \>
 <br \>
-</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Exemple</div><div class="fb_sect_cont"><br \>
 <tt><div class="freebasic">
 <span class="key">Print</span>&nbsp;<span class="key">Bin</span><span class="oth">(</span><span class="num">54321</span><span class="oth">)</span><br />
 <span class="key">Print</span>&nbsp;<span class="key">Bin</span><span class="oth">(</span><span class="num">54321</span><span class="oth">,</span>&nbsp;<span class="num">5</span><span class="oth">)</span><br />
 <span class="key">Print</span>&nbsp;<span class="key">Bin</span><span class="oth">(</span><span class="num">54321</span><span class="oth">,</span>&nbsp;<span class="num">20</span><span class="oth">)</span><br />
 </div></tt><br />
-will produce the output:<br \>
+produira la sortie:<br \>
 <br \>
 <pre class="fb_pre">1101010000110001
 10001
 00001101010000110001
-</pre></div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
-<ul><li> Not available in the <i><a href="CompilerOptlang.html">-lang qb</a></i> dialect unless referenced with the alias <tt><b>__Bin</b></tt>.<br \>
+</pre></div><div class="fb_sect_title">Diff&eacute;rences de dialecte</div><div class="fb_sect_cont"><br \>
+<ul><li> Non disponible dans le dialecte <i><a href="CompilerOptlang.html">-lang qb</a></i> sauf si r&eacute;f&eacute;renc&eacute; avec l'alias <tt><b>__Bin</b></tt>.<br \>
 <br \>
-</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
-<ul><li> New to FreeBASIC<br \>
+</ul></div><div class="fb_sect_title">Diff&eacute;rences avec QB</div><div class="fb_sect_cont"><br \>
+<ul><li> Nouveau pour Freebasic<br \>
 <br \>
-</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+</ul></div><div class="fb_sect_title">Voir aussi</div><div class="fb_sect_cont"><br \>
 <ul><li> <tt><a href="KeyPgOct.html">Oct</a></tt><br \>
 <li> <tt><a href="KeyPgHex.html">Hex</a></tt><br \>
 <li> <tt><a href="KeyPgValint.html">ValInt</a></tt><br \>

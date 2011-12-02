@@ -6,17 +6,17 @@
 <body>
 <div id="fb_body_wrapper">
 <div id="fb_tab">
-<div id="fb_tab_l">Conditional Compilation And You</div>
+<div id="fb_tab_l">La compilation conditionnelle et vous</div>
 <div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
 </div> 
 <div id="fb_pg_wrapper">
 <div id="fb_pg_body">
 	<br \>
-<i>Written by aetherFox for <a href="http://petesqbsite.com/sections/express/issue9/index.html#compilation">QB Express Issue #9</a></i><br \>
+<i>Ecrit par aetherFox pour <a href="http://petesqbsite.com/sections/express/issue9/index.html#compilation">QB Express Issue #9</a></i><br \>
 <br \>
-Conditional Compilation is one of those parts of programming that sit in the dusty corners of the knowledge banks of programmers world-over, yet is one of the most ingenious additions to any language. Usually something that was reserved for C programmers, with the power of freeBASIC's new preprocessor, you can now use conditional compilation to help your program. <br \>
+La compilation conditionnelle est une de ces parties de la programmation qui sont oubli&eacute;es dans les coins poussi&eacute;reux des banques de connaissances des programmeurs du monde fini, mais c'est encore l'un des ajouts les plus ing&eacute;nieux pour n'importe quelle langage. Habituellement r&eacute;serv&eacute;e aux programmeurs C, avec la puissance du nouveau pr&eacute;processeur FreeBASIC, vous pouvez maintenant utiliser la compilation conditionnelle pour am&eacute;liorer votre programme.<br \>
 <br \>
-The preprocessor allows you flexibility in changing the way code is generated through the use of conditional compilation. Take this scenario: you are debugging the code in your program, and you want to add some extra code to output a few variables, but remove them in the final version. The code would be something like this: <br \>
+Le pr&eacute;processeur permet de la flexibilit&eacute; en changeant la fa&ccedil;on dont le code est g&eacute;n&eacute;r&eacute; par l'utilisation de la compilation conditionnelle. Prenez ce sc&eacute;nario: vous d&eacute;bogguez du code dans votre programme et vous voulez ajouter du code suppl&eacute;mentaire pour afficher quelques variables, mais celles-ci seront supprim&eacute;es dans la version finale. Le code ressemblerait &agrave; ceci:<br \>
 <br \>
 <tt><tt><div class="freebasic">
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="def">#define&nbsp;DEBUG<br />
@@ -27,9 +27,9 @@ The preprocessor allows you flexibility in changing the way code is generated th
 </span></div></tt><br />
 </tt><br \>
 <br \>
-<b>Note</b> you do not need the comment after the <tt><a href="KeyPgEndif.html">#endif</a></tt>, but is it good practice.<br \>
+<b>Notez</b> que le commentaire apr&egrave;s <tt><a href="KeyPgEndif.html">#endif</a></tt> n'est pas obligatoire, mais c'est une bonne habitude.<br \>
 <br \>
-Basically, the above code checks to see whether <tt>DEBUG</tt> has been defined, and if it has, then the code between the <tt><a href="KeyPgPpifdef.html">#ifdef</a>...<a href="KeyPgPpendif.html">#endif</a></tt> will be executed. While this may seem silly, the uses this has are amazing. If you simply remove one line at the top of your program (<tt><a href="KeyPgPpdefine.html">#define</a> DEBUG</tt>), then all the 'debug code' that you've added won't be sent to the compiler -- the preprocessor removes it, reducing the bloat of the final executable.<br \>
+Fondamentalement, le code ci-dessus v&eacute;rifie si <tt>DEBUG</tt> a &eacute;t&eacute; d&eacute;fini, et si c'est le cas, alors le code entre les <tt><a href="KeyPgPpifdef.html">#ifdef</a>...<a href="KeyPgPpendif.html">#endif</a></tt> sera ex&eacute;cut&eacute;. M&ecirc;me si cela peut sembler idiot, les utilisations de ceci sont &eacute;tonnantes. Si vous enlevez simplement une ligne en haut de votre programme (<tt><a href="KeyPgPpdefine.html">#define</a> DEBUG</tt>), alors tout le code de d&eacute;boggage que vous avez ajout&eacute; ne sera pas envoy&eacute; au compilateur -- le pr&eacute;processeur le supprimera --, r&eacute;duisant ainsi l'expansion exag&eacute;r&eacute;e de l'ex&eacute;cutable final.<br \>
 <br \>
 <tt><tt><div class="freebasic">
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="com">'Turn&nbsp;on&nbsp;debugging</span><br />
@@ -40,7 +40,7 @@ Basically, the above code checks to see whether <tt>DEBUG</tt> has been defined,
 </span></div></tt><br />
 </tt><br \>
 <br \>
-The <tt><a href="KeyPgPpundef.html">#undef</a></tt> directive is a way of 'undefining' something, in this case <tt>DEBUG</tt>. While it is strictly not needed (just commenting out the line '<tt><a href="KeyPgPpdefine.html">#define</a> DEBUG</tt>' is enough), it makes the code much clearer, and has other uses:<br \>
+La directive <tt><a href="KeyPgPpundef.html">#undef</a></tt> est une fa&ccedil;on de "d&eacute;-d&eacute;finir" quelque chose, dans ce cas, DEBUG. Alors qu'elle est strictement inutile (il suffit de commenter la ligne <tt><a href="KeyPgPpdefine.html">#define</a> DEBUG</tt>), elle rend le code plus clair, et a d'autres usages:<br \>
 <br \>
 <tt><tt><div class="freebasic">
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="def">#ifndef&nbsp;DEBUG<br />
@@ -49,9 +49,9 @@ The <tt><a href="KeyPgPpundef.html">#undef</a></tt> directive is a way of 'undef
 </span></div></tt><br />
 </tt><br \>
 <br \>
-While not the most useful example, this demonstrates the use of another directive: <tt><a href="KeyPgPpifndef.html">#ifndef</a></tt>. This directive will cause the code to be compiled if the symbol is not defined. <br \>
+Bien que n'&eacute;tant pas l'exemple le plus utile, ceci d&eacute;montre l'utilisation d'une autre directive: <tt><a href="KeyPgPpifndef.html">#ifndef</a></tt>. Cette directive va provoquer la compilation du code si le symbole n'est pas d&eacute;fini.<br \>
 <br \>
-Much like a normal programming language, the sense of the conditional can be reversed using a variant of else, <tt><a href="KeyPgElse.html">#else</a></tt>:<br \>
+Tout comme dans un langage de programmation normale, le sens du conditionnel peut &ecirc;tre invers&eacute; en utilisant une variante de "else", <tt><a href="KeyPgElse.html">#else</a></tt>:<br \>
 <br \>
 <tt><tt><div class="freebasic">
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="def">#ifdef&nbsp;DEBUG<br />
@@ -62,7 +62,7 @@ Much like a normal programming language, the sense of the conditional can be rev
 </span></div></tt><br />
 </tt><br \>
 <br \>
-Of course, there are many applications to this. Who says you need to do this on debug code only? You could actually check the effect of a new piece of code, or some test routines by simply defining a name like <tt>TESTCODE</tt> and using the preprocessor directives to encompass your code for conditional compilation:<br \>
+Bien s&ucirc;r, il existe de nombreuses applications &agrave; cela. Qui a dit que vous avez besoin pour ce faire sur le code de d&eacute;bogage uniquement? Vous pouvez effectivement v&eacute;rifier l'effet d'un nouveau morceau de code ou de quelques routines de test en d&eacute;finissant simplement un nom comme <tt>TESTCODE</tt> et l'utilisation des directives du pr&eacute;processeur pour inclure votre code pour la compilation conditionnelle:<br \>
 <br \>
 <tt><tt><div class="freebasic">
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="def">#define&nbsp;TESTCODE<br />
@@ -74,7 +74,7 @@ Of course, there are many applications to this. Who says you need to do this on 
 </span></div></tt><br />
 </tt><br \>
 <br \>
-The scope of this tutorial is a limited one, but this method is used by professionals. It makes life easy when programming. I have used this method in my own code. To see this code in action, view the source <a href="http://avinash.apeshell.net/stuff/ship/flyaround.bas">here</a>.<br \>
+La port&eacute;e de ce tutoriel est limit&eacute;e, mais cette m&eacute;thode est utilis&eacute;e par les professionnels. Elle rend la vie plus facile lors de la programmation. J'ai utilis&eacute; cette m&eacute;thode dans mon propre code. Pour voir ce code en action, afficher la source <a href="http://avinash.apeshell.net/stuff/ship/flyaround.bas">ici</a>.<br \>
 <br \>
 Avinash 'aetherFox' Vora <br \>
 <b>avinashvora</b> [at] <b>gmail</b> [dot] <b>com</b>.<br \>

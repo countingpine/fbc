@@ -6,14 +6,14 @@
 <body>
 <div id="fb_body_wrapper">
 <div id="fb_tab">
-<div id="fb_tab_l">Get (File I/O)</div>
+<div id="fb_tab_l">Get (Entr&eacute;e/Sortie fichiers)</div>
 <div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
 </div> 
 <div id="fb_pg_wrapper">
 <div id="fb_pg_body">
-	Reads data from a file to a buffer<br \>
+	Lit les donn&eacute;es d'un fichier vers un tampon<br \>
 <br \>
-<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<div class="fb_sect_title">Syntaxe</div><div class="fb_sect_cont"><tt><br \>
 <b>Get</b> #<i>filenum</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a>, [<i>position</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgLongint.html">LongInt</a>], <a href="KeyPgByref.html">ByRef</a> <i>data</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgAny.html">Any</a> [, [<i>amount</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a>] [, <a href="KeyPgByref.html">ByRef</a> <i>bytesread</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgUinteger.html">UInteger</a>] ]<br \>
 <b>Get</b> #<i>filenum</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a>, [<i>position</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgLongint.html">LongInt</a>], <i>data</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgString.html">String</a> [, , <a href="KeyPgByref.html">ByRef</a> <i>bytesread</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgUinteger.html">UInteger</a> ]<br \>
 <b>Get</b> #<i>filenum</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a>, [<i>position</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgLongint.html">LongInt</a>], <i>data()</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgAny.html">Any</a> [, , <a href="KeyPgByref.html">ByRef</a> <i>bytesread</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgUinteger.html">UInteger</a> ]<br \>
@@ -22,33 +22,33 @@
 <b>Get</b> #<i>filenum</i>, <i>position</i>, <i>data</i> [, [<i>amount</i>] [, <i>bytesread</i> ] ]<br \>
 varres = <b>Get</b> (#<i>filenum</i>, <i>position</i>, <i>data</i> [, [<i>amount</i>] [, <i>bytesread</i> ] ] )<br \>
 </tt><br \>
-</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Param&egrave;tres</div><div class="fb_sect_cont"><br \>
 <tt><i>filenum</i></tt><br \>
-<div class="fb_indent">The value passed to <tt><a href="KeyPgOpen.html">Open</a></tt> when the file was opened.<br \>
+<div class="fb_indent"> La valeur pass&eacute;e &agrave; <tt><a href="KeyPgOpen.html">Open</a></tt> quand le fichier a &eacute;t&eacute; ouvert.<br \>
 </div><tt><i>position</i></tt><br \>
-<div class="fb_indent">The position where the read must start. If the file was opened <tt><a href="KeyPgRandom.html">For Random</a></tt>, the position is in records; otherwise, it is in bytes. If omitted, reading starts at the present file pointer position.  The position is 1-based: i.e. first record or byte of a file is at position <tt>1</tt>.<br \>
-If <tt><i>position</i></tt> is omitted or zero (<tt>0</tt>), file reading will start from the current file position.<br \>
+<div class="fb_indent">La position o&ugrave; la lecture doit commencer. Si le fichier a &eacute;t&eacute; ouvert <tt><a href="KeyPgRandom.html">For Random</a></tt>, la position est en enregistrements; autrement, elle est en octets. Si omise, la lecture commence &agrave; la position actuelle du pointeur.  La position est bas&eacute;e sur 1: c'est &agrave; dire que le premier enregistrement ou octet est &agrave; la position <tt>1</tt>.<br \>
+Si <tt><i>position</i></tt> est omise ou z&eacute;ro (<tt>0</tt>), la lecture du fichier commencera &agrave; la position courante dans le fichier.<br \>
 </div><tt><i>data</i></tt><br \>
-<div class="fb_indent">The buffer where data is written. It can be a numeric variable, a string, an array, a user defined type or a dereferenced pointer. The read operation will try to fill completely the variable, unless the <tt><a href="KeyPgEof.html">EOF</a></tt> is reached.<br \>
-When getting arrays, <tt><i>data</i></tt> should be followed by an empty pair of brackets: "<tt>()</tt>".  <tt><b>Get</b></tt> will read data for all of the values in the array.  <tt><i>amount</i></tt> is not allowed.<br \>
-When getting <tt><a href="KeyPgString.html">String</a></tt>s, the number of bytes read is the same as the number of bytes in the string data. <tt><i>amount</i></tt> is not allowed.<br \>
-Note: If you want to read values into a buffer, you should NOT pass a pointer to the buffer; instead you should pass the first variable in the buffer. (This can be done by dereferencing the pointer with <tt><a href="KeyPgOpValueOf.html">Operator * (Value Of)</a></tt>.) If you pass a pointer directly, then <tt><b>Get</b></tt> will overwrite the pointer variable, not the memory it points to.<br \>
+<div class="fb_indent">Le tampon o&ugrave; les donn&eacute;es sont &eacute;crites. Il peut &ecirc;tre une variable num&eacute;rique, une cha&icirc;ne, un tableau, un type d&eacute;fini par l'utilisateur ou un pointeur d&eacute;r&eacute;f&eacute;renc&eacute;. L'op&eacute;ration de lecture va essayer de remplir compl&egrave;tement la variable, &agrave; moins que <tt><a href="KeyPgEof.html">EOF</a></tt> ne soit atteint.<br \>
+Lors de l'utilisation de tableaux, <tt><i>data</i></tt> doit &ecirc;tre suivi par une paire de parenth&egrave;ses vides: "<tt>()</tt>".  <tt><b>Get</b></tt> lira les donn&eacute;es pour toutes les valeurs dans le tableau.  <tt><i>amount</i></tt> (quantit&eacute;) n'est pas autoris&eacute;.<br \>
+Lors de l'utilisation de <tt><a href="KeyPgString.html">String</a></tt>s, le nombre d'octets lus est le m&ecirc;me que le nombre d'octets dans les donn&eacute;es de cha&icirc;ne. <tt><i>amount</i></tt> (quantit&eacute;) n'est pas autoris&eacute;.<br \>
+Note: Si vous voulez lire des valeurs dans une m&eacute;moire tampon, vous NE devez PAS passer un pointeur vers la m&eacute;moire tampon; au lieu de cela vous devez passer la premi&egrave;re variable dans la m&eacute;moire tampon.  (Cela peut &ecirc;tre fait par le d&eacute;r&eacute;f&eacute;rencement du pointeur avec <tt><a href="KeyPgOpValueOf.html">Operator * (Value Of)</a></tt>.)  <tt><b>Get</b></tt>  comprendra automatiquement que le reste de la m&eacute;moire tampon se poursuit apr&egrave;s la premi&egrave;re variable..  Si vous passez un pointeur directement, alors <tt><b>Get</b></tt> &eacute;crira sur la variable et non &agrave; l'emplacement m&eacute;moire vers lequel elle pointe.<br \>
 </div><tt><i>amount</i></tt><br \>
-<div class="fb_indent">Makes <tt><b>Get</b></tt> read <tt><i>amount</i></tt> consecutive variables from file to memory, i.e. it reads <tt>(<i>amount</i> * <a href="KeyPgSizeof.html">SizeOf</a>(<i>data</i>) )</tt> bytes of data from file into the memory starting at <tt><i>data</i></tt>'s memory location.  If <tt><i>amount</i></tt> is omitted it defaults to <tt>1</tt>, meaning that <tt><b>Get</b></tt> just reads a single variable.<br \>
+<div class="fb_indent"><tt><b>Get</b></tt> lit <tt><i>amount</i></tt> variables cons&eacute;cutives du fichier vers la m&eacute;moire, c'est &agrave; dire qu'il lit <tt>(<i>amount</i> * <a href="KeyPgSizeof.html">SizeOf</a>(<i>data</i>) )</tt> octets ou donn&eacute;es depuis le fichier vers la m&eacute;moire commen&ccedil;ant &agrave; la position <tt><i>data</i></tt>.  Si <tt><i>amount</i></tt> est omis il sera de <tt>1</tt> par d&eacute;faut, ce qui signifie que <tt><b>Get</b></tt> ne lira qu'une seule variable.<br \>
 </div><tt><i>bytesread</i></tt><br \>
-<div class="fb_indent">An unsigned integer variable to accept the result of the number of bytes read successfully from the file.<br \>
+<div class="fb_indent">Une variable enti&egrave;re non sign&eacute;e qui contiendra le nombre d'octets lus avec succ&egrave;s &agrave; partir du fichier.<br \>
 <br \>
-</div></div><div class="fb_sect_title">Return Value</div><div class="fb_sect_cont"><br \>
-Zero (<tt>0</tt>) on success; non-zero on error. Note: if <tt><a href="KeyPgEof.html">EOF</a></tt> (end of file) is reached while reading, <tt><b>Get</b></tt> will return success.  The amount of bytes actually read can be checked by passing a <tt><i>bytesread</i></tt> variable.<br \>
+</div></div><div class="fb_sect_title">Valeur retourn&eacute;e</div><div class="fb_sect_cont"><br \>
+Z&eacute;ro (<tt>0</tt>) si succ&egrave;s; non-z&eacute;ro si erreur. Note: Si <tt><a href="KeyPgEof.html">EOF</a></tt> (End Of File) est atteint pendant la lecture, <tt><b>Get</b></tt> retournera "succ&egrave;s".  La quantit&eacute; d'octets r&eacute;ellement lus peut &ecirc;tre v&eacute;rifi&eacute;e en passant une variable <tt><i>bytesread</i></tt>.<br \>
 <br \>
 </div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
-Reads binary data from a file to a buffer variable<br \>
+Lit les donn&eacute;es binaires &agrave; partir d'un fichier vers une variable tampon<br \>
 <br \>
-<tt><b>Get</b></tt> can be used as a function, and will return <tt>0</tt> on success or an error code on failure.	<br \>
+<tt><b>Get</b></tt> peut &ecirc;tre utilis&eacute; comme une fonction, et retournera <tt>0</tt> si succ&egrave;s ou un code d'erreur si &eacute;chec.<br \>
 <br \>
-For files opened in <tt><a href="KeyPgRandom.html">Random</a></tt> mode, the size in bytes of the data to read must match the specified record size.<br \>
+Pour les fichiers ouverts en mode <tt><a href="KeyPgRandom.html">Random</a></tt>, la taille en octets des donn&eacute;es &agrave; lire doit correspondre &agrave; la taille d'enregistrement sp&eacute;cifi&eacute;e.<br \>
 <br \>
-</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Exemple</div><div class="fb_sect_cont"><br \>
 <tt><div class="freebasic">
 <span class="key">Dim</span>&nbsp;<span class="key">Shared</span>&nbsp;<span class="wrd">f</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
 <br />
@@ -147,20 +147,20 @@ For files opened in <tt><a href="KeyPgRandom.html">Random</a></tt> mode, the siz
 <span class="key">Print</span>&nbsp;<span class="wrd">ExampleStr</span><br />
 </div></tt><br />
 <br \>
-</div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
-<ul><li> <tt><b>Get</b></tt> in FB can read full arrays as in VB or, alternatively, read a multiple of the data size into the memory.<br \>
-<li> <tt><b>Get</b></tt> can be used as a function in FB, to find the success/error code returned without having to use error handling procedures.<br \>
-<li> FB allows the <tt><i>bytesread</i></tt> parameter, to check how many bytes have been successfully read in.<br \>
+</ul></div><div class="fb_sect_title">Diff&eacute;rences avec QB</div><div class="fb_sect_cont"><br \>
+<ul><li>Dans FB, <tt><b>Get</b></tt> peut lire des tableaux pleins comme dans VB ou, alternativement, lire un multiple de la taille des donn&eacute;es dans la m&eacute;moire.<br \>
+<li> <tt><b>Get</b></tt> peut &ecirc;tre utilis&eacute; comme une fonction dans FB, pour obtenir le code succ&egrave;s/erreur renvoy&eacute; sans avoir &agrave; utiliser les proc&eacute;dures de gestion des erreurs.<br \>
+<li> FB permet le param&egrave;tre <tt><i>bytesread</i></tt>, pour v&eacute;rifier combien d'octets ont &eacute;t&eacute; lus avec succ&egrave;s.<br \>
 <br \>
-</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
-<ul><li> <tt><a href="KeyPgGetgraphics.html">Get (Graphics)</a></tt> different usage of same keyword <br \>
-<li> <tt><a href="KeyPgPutfileio.html">Put (File I/O)</a></tt><br \>
+</ul></div><div class="fb_sect_title">Voir aussi</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgGetgraphics.html">Get (Graphiques)</a></tt> utilisation diff&eacute;rente du m&ecirc;me mot-cl&eacute; <br \>
+<li> <tt><a href="KeyPgPutfileio.html">Put (Entr&eacute;e/sortie fichiers)</a></tt><br \>
 <li> <tt><a href="KeyPgOpen.html">Open</a></tt><br \>
 <li> <tt><a href="KeyPgClose.html">Close</a></tt><br \>
 <li> <tt><a href="KeyPgBinary.html">Binary</a></tt><br \>
 <li> <tt><a href="KeyPgRandom.html">Random</a></tt><br \>
 <li> <tt><a href="KeyPgFreefile.html">FreeFile</a></tt><br \>
-<li> <tt><a href="ProPgFileIO.html">File I/O methods comparison</a></tt><br \>
+<li> <tt><a href="ProPgFileIO.html">Comparaison des m&eacute;thodes d'entr&eacute;e/sortie des fichiers</a></tt><br \>
 <br \>
 </ul></div>
 </div>

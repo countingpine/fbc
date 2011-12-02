@@ -6,55 +6,54 @@
 <body>
 <div id="fb_body_wrapper">
 <div id="fb_tab">
-<div id="fb_tab_l">Add</div>
+<div id="fb_tab_l">Add (Param&egrave;tre Put graphique)</div>
 <div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
 </div> 
 <div id="fb_pg_wrapper">
 <div id="fb_pg_body">
-	Parameter to the <tt><a href="KeyPgPutgraphics.html">Put</a></tt> graphics statement which selects addition as the blitting method<br \>
+	Param&egrave;tre de la d&eacute;claration graphique <tt><a href="KeyPgPutgraphics.html">Put</a></tt> qui choisit l&apos;addition comme m&eacute;thode de transformation<br \>
 <br \>
-<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<div class="fb_sect_title">Syntaxe</div><div class="fb_sect_cont"><tt><br \>
 <b>Put</b> [ <i>target</i>, ] [ STEP ] ( <i>x</i>,<i>y</i> ), <i>source</i> [ ,( <i>x1</i>,<i>y1</i> )-( <i>x2</i>,<i>y2</i> ) ], <b>Add</b>[ ,<i>multiplier</i> ]<br \>
 </tt><br \>
-</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Param&egrave;tres</div><div class="fb_sect_cont"><br \>
 <tt><b>Add</b></tt><br \>
-<div class="fb_indent">Required.<br \>
+<div class="fb_indent">Obligatoire.<br \>
 </div><tt><i>multiplier</i></tt><br \>
-<div class="fb_indent">Optional value between 0 and 255.  The source pixels are premultiplied by <tt>(<i>multiplier</i> / 256)</tt> before being added.  If omitted, this value defaults to 255.<br \>
+<div class="fb_indent">Valeur facultative entre 0 et 255. Les pixels source sont multipli&eacute;s par <tt>(<i>multiplier</i> / 256)</tt> avant d&apos;&ecirc;tre additionn&eacute;s.  Si omise, la valeur par d&eacute;faut est 255.<br \>
 <br \>
 </div></div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
-<tt><b>Add</b></tt> selects addition as the method for blitting an image buffer.  For each source and target pixel, the values of each respective component are added together to produce the result.<br \>
-The addition is saturated - i.e. if the sum of the two values is 256 or more, then it will be cropped down to 255.<br \>
+<tt><b>Add</b></tt> s&eacute;lectionne l&apos;addition comme m&eacute;thode de transformation d&apos;un buffer image.  Pour chaque pixel source et cible, les valeurs respectives de chaque composant sont additionn&eacute;es pour donner le r&eacute;sultat.<br \>
+L&apos;addition est satur&eacute;e - par exemple, si la somme des 2 valeurs d&eacute;passe 255, elle est ramen&eacute;e &agrave; cette valeur de 255.<br \>
+<br \>Cette m&eacute;thode fonctionne dans tous les modes de couleur. Les masques de couleur (color 0 pour les images index&eacute;es, magenta (<tt><a href="KeyPgRgb.html">RGB</a>(255, 0, 255)</tt>) pour les images pleine couleur) seront &eacute;cart&eacute;s, cependant des valeurs 0 en pleine couleur (<tt><a href="KeyPgRgba.html">RGBA</a>(0, 0, 0, 0)</tt>) n&apos;auront aussi aucun effet.<br \>
 <br \>
-This method will work in all color modes.  Mask colors (color 0 for indexed images, magenta (<tt><a href="KeyPgRgb.html">RGB</a>(255, 0, 255)</tt>) for full color images) will be skipped, though full color values of 0 (<tt><a href="KeyPgRgba.html">RGBA</a>(0, 0, 0, 0)</tt>) will have also have no effect.<br \>
-<br \>
-</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Exemple</div><div class="fb_sect_cont"><br \>
 <tt><div class="freebasic">
-<span class="com">''open&nbsp;a&nbsp;graphics&nbsp;window</span><br />
+<span class="com">&apos;&apos;ouvre&nbsp;une&nbsp;fenetre&nbsp;graphique</span><br />
 <span class="key">ScreenRes</span>&nbsp;<span class="num">320</span><span class="oth">,</span>&nbsp;<span class="num">200</span><span class="oth">,</span>&nbsp;<span class="num">16</span><br />
 <br />
-<span class="com">''create&nbsp;a&nbsp;sprite&nbsp;containing&nbsp;a&nbsp;circle</span><br />
+<span class="com">&apos;&apos;cree&nbsp;un&nbsp;sprite&nbsp;contenant&nbsp;un&nbsp;cercle</span><br />
 <span class="key">Const</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="wrd">r</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">32</span><br />
 <span class="key">Dim</span>&nbsp;<span class="wrd">c</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Any</span>&nbsp;<span class="key">Ptr</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">ImageCreate</span><span class="oth">(</span><span class="wrd">r</span>&nbsp;<span class="oth">*</span>&nbsp;<span class="num">2</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="num">1</span><span class="oth">,</span>&nbsp;<span class="wrd">r</span>&nbsp;<span class="oth">*</span>&nbsp;<span class="num">2</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="num">1</span><span class="oth">,</span>&nbsp;<span class="num">0</span><span class="oth">)</span><br />
 <span class="key">Circle</span>&nbsp;<span class="wrd">c</span><span class="oth">,</span>&nbsp;<span class="oth">(</span><span class="wrd">r</span><span class="oth">,</span>&nbsp;<span class="wrd">r</span><span class="oth">),</span>&nbsp;<span class="wrd">r</span><span class="oth">,</span>&nbsp;<span class="key">RGB</span><span class="oth">(</span><span class="num">255</span><span class="oth">,</span>&nbsp;<span class="num">255</span><span class="oth">,</span>&nbsp;<span class="num">192</span><span class="oth">),</span>&nbsp;<span class="oth">,</span>&nbsp;<span class="oth">,</span>&nbsp;<span class="num">1</span><span class="oth">,</span>&nbsp;<span class="wrd">f</span><br />
 <br />
-<span class="com">''put&nbsp;the&nbsp;sprite&nbsp;at&nbsp;three&nbsp;different&nbsp;multipier</span><br />
-<span class="com">''levels,&nbsp;overlapping&nbsp;each&nbsp;other&nbsp;in&nbsp;the&nbsp;middle</span><br />
+<span class="com">&apos;&apos;place&nbsp;le&nbsp;sprite&nbsp;avec&nbsp;trois&nbsp;niveaux&nbsp;differents&nbsp;de&nbsp;multiplieurs</span><br />
+<span class="com">&apos;&apos;se recouvrant&nbsp;au&nbsp;milieu</span><br />
 <span class="key">Put</span>&nbsp;<span class="oth">(</span><span class="num">146</span>&nbsp;<span class="oth">-</span>&nbsp;<span class="wrd">r</span><span class="oth">,</span>&nbsp;<span class="num">108</span>&nbsp;<span class="oth">-</span>&nbsp;<span class="wrd">r</span><span class="oth">),</span>&nbsp;<span class="wrd">c</span><span class="oth">,</span>&nbsp;<span class="wrd">add</span><span class="oth">,</span>&nbsp;&nbsp;<span class="num">64</span><br />
 <span class="key">Put</span>&nbsp;<span class="oth">(</span><span class="num">174</span>&nbsp;<span class="oth">-</span>&nbsp;<span class="wrd">r</span><span class="oth">,</span>&nbsp;<span class="num">108</span>&nbsp;<span class="oth">-</span>&nbsp;<span class="wrd">r</span><span class="oth">),</span>&nbsp;<span class="wrd">c</span><span class="oth">,</span>&nbsp;<span class="wrd">add</span><span class="oth">,</span>&nbsp;<span class="num">128</span><br />
 <span class="key">Put</span>&nbsp;<span class="oth">(</span><span class="num">160</span>&nbsp;<span class="oth">-</span>&nbsp;<span class="wrd">r</span><span class="oth">,</span>&nbsp;&nbsp;<span class="num">84</span>&nbsp;<span class="oth">-</span>&nbsp;<span class="wrd">r</span><span class="oth">),</span>&nbsp;<span class="wrd">c</span><span class="oth">,</span>&nbsp;<span class="wrd">add</span><span class="oth">,</span>&nbsp;<span class="num">192</span><br />
 <br />
-<span class="com">''free&nbsp;the&nbsp;memory&nbsp;used&nbsp;by&nbsp;the&nbsp;sprite</span><br />
+<span class="com">&apos;&apos;libere&nbsp;la&nbsp;memoire&nbsp;utilisee&nbsp;par&nbsp;le&nbsp;sprite</span><br />
 <span class="key">ImageDestroy</span>&nbsp;<span class="wrd">c</span><br />
 <br />
-<span class="com">''pause&nbsp;the&nbsp;program&nbsp;before&nbsp;closing</span><br />
+<span class="com">&apos;&apos;pause&nbsp;du&nbsp;programme&nbsp;avant&nbsp;fermeture</span><br />
 <span class="key">Sleep</span><br />
 </div></tt><br />
 <div class="fb_img"><img src="images/add.png" /></div><br \>
-</div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
-<ul><li> New to FreeBASIC<br \>
+</div><div class="fb_sect_title">Diff&eacute;rences avec QB</div><div class="fb_sect_cont"><br \>
+<ul><li> Nouveaut&eacute; FreeBASIC<br \>
 <br \>
-</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+</ul></div><div class="fb_sect_title">Voir aussi</div><div class="fb_sect_cont"><br \>
 <ul><li><tt><a href="KeyPgTransGfx.html">Trans</a></tt><br \>
 <li><tt><a href="KeyPgAlphaGfx.html">Alpha</a></tt><br \>
 <li><tt><a href="KeyPgCustomgfx.html">Custom</a></tt><br \>

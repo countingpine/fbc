@@ -11,30 +11,30 @@
 </div> 
 <div id="fb_pg_wrapper">
 <div id="fb_pg_body">
-	Error handling statement to set the current error handler<br \>
+	Instruction de gestion des erreurs pour d&eacute;finir le gestionnaire d'erreur courant<br \>
 <br \>
-<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<div class="fb_sect_title">Syntaxe</div><div class="fb_sect_cont"><tt><br \>
 <b>On [Local] Error Goto</b> <i>label</i><br \>
 </tt><br \>
 </div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
 <b>On [Local] Error Goto</b> <i>label</i><br \>
 </tt><br \>
-</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Param&egrave;tres</div><div class="fb_sect_cont"><br \>
 <tt><i>label</i></tt><br \>
-<div class="fb_indent">label to jump to when error occurs<br \>
+<div class="fb_indent">label o&ugrave; sauter en cas d'erreur<br \>
 <br \>
 </div></div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
-<tt><a href="KeyPgOnerror.html">On Error</a></tt> triggers a jump to an error handler when an error occurs. <br \>
+<tt><a href="KeyPgOnerror.html">On Error</a></tt> d&eacute;clenche un saut vers un gestionnaire d'erreur lorsqu'une erreur se produit. <br \>
 <br \>
-If <tt><a href="KeyPgLocal.html">Local</a></tt> is not used the handler must be in the main part of the module. Using <tt><a href="KeyPgLocal.html">Local</a></tt> allows to have the error handler inside the <tt><a href="KeyPgSub.html">Sub</a></tt>/<tt><a href="KeyPgFunction.html">Function</a></tt> where the <tt><b>On Error</b></tt> is located.<br \>
+Si <tt><a href="KeyPgLocal.html">Local</a></tt> n'est pas utilis&eacute; le gestionnaire doit &ecirc;tre dans la partie principale du module. L'utilisation de <tt><a href="KeyPgLocal.html">Local</a></tt> permet d'avoir un gestionnaire d'erreur dans <tt><a href="KeyPgSub.html">Sub</a></tt>/<tt><a href="KeyPgFunction.html">Function</a></tt> o&ugrave; <tt><b>On Error</b></tt> est situ&eacute;.<br \>
 <br \>
-<tt><b>On Error GOTO 0</b></tt> deactivates the current error handler.<br \>
+<tt><b>On Error GOTO 0</b></tt> d&eacute;sactive le gestionnaire d'erreur courant.<br \>
 <br \>
-The use of QB-like error handling requires compilation with switch <i><a href="CompilerOpte.html">-e</a></i>, <i><a href="CompilerOptex.html">-ex</a></i> or <i><a href="CompilerOptexx.html">-exx</a></i> activated.<br \>
+L'utilisation d'un gestionnaire d'erreur de type QB n&eacute;cessite une compilation avec le commutateur <i><a href="CompilerOpte.html">-e</a></i>, <i><a href="CompilerOptex.html">-ex</a></i> ou <i><a href="CompilerOptexx.html">-exx</a></i> activ&eacute;.<br \>
 <br \>
-See <a href="TblRuntimeErrors.html">Runtime Error Codes</a> for a listing of runtime error numbers and their associated meaning.<br \>
+Voir <a href="TblRuntimeErrors.html">Codes des erreurs de fonctionnement</a> pour une liste des erreurs de fonctionnement et de leurs num&eacute;ros, ainsi que de leur signification.<br \>
 <br \>
-</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Exemple</div><div class="fb_sect_cont"><br \>
 <tt><div class="freebasic">
 <span class="com">''&nbsp;Compile&nbsp;with&nbsp;QB&nbsp;(-lang&nbsp;qb)&nbsp;dialect</span><br />
 <br />
@@ -49,8 +49,8 @@ See <a href="TblRuntimeErrors.html">Runtime Error Codes</a> for a listing of run
 <span class="key">End</span><br />
 </div></tt><br />
 <br \>
-</div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
-<ul><li> ON ERROR is supported in the <i><a href="CompilerOptlang.html">-lang qb</a></i> dialect only. In the <i><a href="CompilerOptlang.html">-lang fb</a></i> dialect, statements can be used in function form to return an error code<br \>
+</div><div class="fb_sect_title">Diff&eacute;rences de dialecte</div><div class="fb_sect_cont"><br \>
+<ul><li> ON ERROR n'est utilisable que dans le dialecte <i><a href="CompilerOptlang.html">-lang qb</a></i>. Dans le dialecte <i><a href="CompilerOptlang.html">-lang fb</a></i>, des d&eacute;clarations peuvent &ecirc;tre utilis&eacute;es sous forme de fonction pour retourner un code d'erreur.<br \>
 </ul><tt><div class="freebasic">
 <span class="com">''&nbsp;Compile&nbsp;with&nbsp;FB&nbsp;default&nbsp;(-lang&nbsp;fb)&nbsp;dialect&nbsp;</span><br />
 <span class="key">If</span>&nbsp;<span class="key">Open</span><span class="oth">(</span>&nbsp;<span class="quo">"text"</span>&nbsp;<span class="key">For</span>&nbsp;<span class="key">Input</span>&nbsp;<span class="key">As</span>&nbsp;<span class="oth">#</span><span class="num">1</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="oth">&lt;&gt;</span>&nbsp;<span class="num">0</span>&nbsp;<span class="key">Then</span><br />
@@ -59,14 +59,14 @@ See <a href="TblRuntimeErrors.html">Runtime Error Codes</a> for a listing of run
 <br />
 </div></tt><br />
 <br \>
-</div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
-<ul><li> QB has no LOCAL clause and requires the label to be in the main part of the module. <br \>
+</div><div class="fb_sect_title">Diff&eacute;rences avec QB</div><div class="fb_sect_cont"><br \>
+<ul><li> QB n'a pas de clause LOCAL et n&eacute;cessite que le label soit dans la partie principale du module. <br \>
 <br \>
-</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+</ul></div><div class="fb_sect_title">Voir aussi</div><div class="fb_sect_cont"><br \>
 <ul><li> <tt><a href="KeyPgError.html">Error</a></tt><br \>
 <li> <tt><a href="KeyPgLocal.html">Local</a></tt><br \>
 <li> <tt><a href="KeyPgErr.html">Err</a></tt><br \>
-<li> <a href="TblRuntimeErrors.html">Runtime Error Codes</a><br \>
+<li> <a href="TblRuntimeErrors.html">Codes des erreur de fonctionnement</a><br \>
 <br \>
 </ul></div>
 </div>

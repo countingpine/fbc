@@ -10,65 +10,64 @@
 <div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
 </div> 
 <div id="fb_pg_wrapper">
-<div id="fb_pg_body">
-	Saves an array of arbitrary data and palette information to a file on disk<br \>
+<div id="fb_pg_body">Sauve un espace de donn&eacute;es arbitraires et d&apos;information palette dans un fichier sur le disque<br \>
 <br \>
-<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<div class="fb_sect_title">Syntaxe</div><div class="fb_sect_cont"><tt><br \>
 <a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgFunction.html">Function</a> <b>BSave</b> ( <a href="KeyPgByref.html">ByRef</a> <i>filename</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgConstQualifier.html">Const</a> <a href="KeyPgString.html">String</a>, <a href="KeyPgByval.html">ByVal</a> <i>source</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgAny.html">Any</a> <a href="KeyPgPtr.html">Ptr</a>, <a href="KeyPgByval.html">ByVal</a> <i>size</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a> = 0, <a href="KeyPgByval.html">ByVal</a> <i>pal</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgAny.html">Any</a> <a href="KeyPgPtr.html">Ptr</a> = 0 ) <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a><br \>
 </tt><br \>
 </div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
 <i>result</i> = <b>BSave</b>( <i>filename</i>, <i>source</i> [,[ <i>size</i> ][, <i>pal</i> ]] )<br \>
 </tt><br \>
-</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Param&egrave;tres</div><div class="fb_sect_cont"><br \>
 <tt><i>filename</i></tt><br \>
-<div class="fb_indent">the name of the file to create for storing the pixel and palette data.<br \>
+<div class="fb_indent">le nom du fichier &agrave; cr&eacute;er pour stocker les donn&eacute;es pixels et palette.<br \>
 </div><tt><i>source</i></tt><br \>
-<div class="fb_indent">the address of the data to store, or null (<tt>0</tt>) to store pixel data from the current screen work page.<br \>
+<div class="fb_indent">L&apos;adresse des donn&eacute;es &agrave; stocker, ou nul (<tt>0</tt>) pour stocker les donn&eacute;es &agrave; partir de la page &eacute;cran active.<br \>
 </div><tt><i>size</i></tt><br \>
-<div class="fb_indent">the total number of bytes of data to store.<br \>
+<div class="fb_indent">le nombre total d&apos;octets &agrave; stocker.<br \>
 </div><tt><i>pal</i></tt><br \>
-<div class="fb_indent">the address of a buffer holding palette information, or null (<tt>0</tt>) to use the current screen palette.<br \>
+<div class="fb_indent">l&apos;adresse du buffer contenant l&apos;information palette, ou nul (<tt>0</tt>) pour utiliser la palette de l&apos;&eacute;cran.<br \>
 <br \>
-</div></div><div class="fb_sect_title">Return Value</div><div class="fb_sect_cont"><br \>
-Returns zero (<tt>0</tt>) if successful, or a non-zero error code to indicate a failure. <i><a href="ProPgErrorHandling.html">(throws a runtime error)</a></i><br \>
+</div></div><div class="fb_sect_title">Valeur retourn&eacute;e</div><div class="fb_sect_cont"><br \>
+Retourne z&eacute;ro (<tt>0</tt>) si r&eacute;ussite, ou un code d'erreur non-z&eacute;ro pour indiquer un &eacute;chec. <i><a href="ProPgErrorHandling.html">(&eacute;mission d'une erreur de fonctionnement)</a></i><br \>
 <br \>
 </div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
-<tt><b>BSave</b></tt> is used for saving arbitrary data from memory into a file, using a file format specific to FB, or saving images into a standard BMP image file, replacing an existing file if necessary.<br \>
+<tt><b>BSave</b></tt> est utilis&eacute; pour sauver, dans un fichier, des donn&eacute;es en m&eacute;moire, en utilisant un format sp&eacute;cifique &agrave; FB, ou sauver des images dans un format standard de fichier image BMP, en rempla&ccedil;ant un fichier existant si n&eacute;cessaire.<br \>
 <br \>
-<tt><b>BSave</b></tt> outputs a <u>total</u> of <tt><i>size</i></tt> bytes of arbitrary data located at <tt><i>source</i></tt> to a specified file. If <tt><i>source</i></tt> is null (<tt>0</tt>), then <tt><b>BSave</b></tt> outputs a <u>maximum</u> of <tt><i>size</i></tt> bytes from the current work page's pixel buffer, which is structured in the current screen mode's internal pixel format. Palette information is obtained from <tt><i>pal</i></tt> if non-null, or if null (<tt>0</tt>), from the current screen palette.<br \>
+<tt><b>BSave</b></tt> extrait un nombre <u>total</u> de <tt><i>size</i></tt> octets de donn&eacute;es situ&eacute;es dans <tt><i>source</i></tt> vers le fichier sp&eacute;cifi&eacute;. Si <tt><i>source</i></tt> est nul (<tt>0</tt>), alors <tt><b>BSave</b></tt> extrait un nombre <u>maximum</u> de <tt><i>size</i></tt> octets &agrave; partir du tampon pixels de la page active, structur&eacute;e dans le format de pixel du mode &eacute;cran. L&apos;information palette est obtenue &agrave; partir de <tt><i>pal</i></tt> si non nul, ou si nul (<tt>0</tt>), &agrave; partir de la palette &eacute;cran courante.<br \>
 <br \>
-A BMP image file can be created if <tt><i>filename</i></tt> has a file extension of "BMP". <tt><i>source</i></tt> is assumed to point to a valid image buffer whose entire pixel data will be stored in the BMP file. If <tt><i>source</i></tt> is null (<tt>0</tt>), the entire current work page will be stored instead. Palette information is obtained from <tt><i>pal</i></tt> if non-null, or if null (<tt>0</tt>), from the current screen palette. The <tt><i>size</i></tt> parameter is ignored when saving BMP files.<br \>
+Un fichier image BMP est cr&eacute;&eacute; si <tt><i>filename</i></tt> a l&apos;extension "BMP". <tt><i>source</i></tt> est suppos&eacute; pointer vers un buffer image valide dont toutes les donn&eacute;es pixel seront charg&eacute;es dans le fichier BMP. Si <tt><i>source</i></tt> est nul (<tt>0</tt>), la page courante valide sera enti&egrave;rement charg&eacute;e dans le fichier. L&apos;information palette est obtenue &agrave; partir de <tt><i>pal</i></tt> si non-nul, ou si nul (<tt>0</tt>), &agrave; partir de la palette courante de l&apos;&eacute;cran. Le param&egrave;tre <tt><i>size</i></tt> est ignor&eacute; quand on sauvegarde des fichiers BMP.<br \>
 <br \>
-<b>Runtime errors:</b><br \>
-<tt><b>BSave</b></tt> throws one of the following <a href="ProPgErrorHandling.html">runtime errors</a>:<br \>
+<b>Erreurs de foncionnement:</b><br \>
+<tt><b>BSave</b></tt> produit une des <a href="ProPgErrorHandling.html">erreurs de foncionnement</a> suivantes :<br \>
 <br \>
 <i>(<tt>2</tt>) File not found</i><br \>
-<ul><ul><li> The file could not be created.<br \>
-<li> <tt><i>size</i></tt> is less than zero (<tt>0</tt>), or <tt><i>size</i></tt> is zero and <tt><i>source</i></tt> is non-null.<br \>
+<ul><ul><li> Le fichier ne peut &ecirc;tre cr&eacute;&eacute;.<br \>
+<li> <tt><i>size</i></tt> est inf&eacute;rieur &agrave; z&eacute;ro (<tt>0</tt>), ou <tt><i>size</i></tt> est z&eacute;ro et <tt><i>source</i></tt> est non-nul.<br \>
 </ul></ul><i>(<tt>3</tt>) File I/O error</i><br \>
-<ul><ul><li> The file could not be written to.<br \>
+<ul><ul><li> Ne peut &eacute;crire dans le fichier.<br \>
 <br \>
-</ul></ul></div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+</ul></ul></div><div class="fb_sect_title">Exemple</div><div class="fb_sect_cont"><br \>
 <tt><div class="freebasic">
-<span class="com">'&nbsp;Set&nbsp;gfx&nbsp;mode</span><br />
+<span class="com">&apos;&nbsp;Valide&nbsp;mode&nbsp;gfx</span><br />
 <span class="key">ScreenRes</span>&nbsp;<span class="num">320</span><span class="oth">,</span>&nbsp;<span class="num">200</span><span class="oth">,</span>&nbsp;<span class="num">32</span><br />
 <br />
-<span class="com">'&nbsp;Clear&nbsp;with&nbsp;black&nbsp;on&nbsp;white</span><br />
+<span class="com">&apos;&nbsp;Efface&nbsp;avec&nbsp;noir&nbsp;sur&nbsp;blanc</span><br />
 <span class="key">Color</span>&nbsp;<span class="key">RGB</span><span class="oth">(</span><span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">0</span><span class="oth">),</span>&nbsp;<span class="key">RGB</span><span class="oth">(</span><span class="num">255</span><span class="oth">,</span>&nbsp;<span class="num">255</span><span class="oth">,</span>&nbsp;<span class="num">255</span><span class="oth">)</span><br />
 <span class="key">Cls</span><br />
 <br />
 <span class="key">Locate</span>&nbsp;<span class="num">13</span><span class="oth">,</span>&nbsp;<span class="num">15</span><span class="oth">:</span>&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"Hello&nbsp;world!"</span><br />
 <br />
-<span class="com">'&nbsp;Save&nbsp;as&nbsp;BMP</span><br />
+<span class="com">&apos;&nbsp;Sauve&nbsp;comme&nbsp;BMP</span><br />
 <span class="key">BSave</span>&nbsp;<span class="quo">"hello.bmp"</span><span class="oth">,</span>&nbsp;<span class="num">0</span><br />
 </div></tt><br />
 <br \>
-</div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
-<ul><li> Support for saving more than 64KiB of arbitrary data is new to FreeBASIC.<br \>
-<li> Support for saving BMP files is new to FreeBASIC.<br \>
-<li> QB cannot use <tt><a href="KeyPgBload.html">BLoad</a></tt> to load files created with <tt><b>BSave</b></tt> in FreeBASIC, but FreeBASIC can use <tt><a href="KeyPgBload.html">BLoad</a></tt> to load files created with <tt><b>BSave</b></tt> in QB<br \>
+</div><div class="fb_sect_title">Diff&eacute;rences avec QB</div><div class="fb_sect_cont"><br \>
+<ul><li> La possibilit&eacute; de sauvegarder plus de 64KiB de donn&eacute;es est nouvelle pour FreeBASIC.<br \>
+<li> La possibilit&eacute; de sauvegarder des fichiers BMP est nouvelle pour FreeBASIC.<br \>
+<li> QB ne peut utiliser <tt><a href="KeyPgBload.html">BLoad</a></tt> pour charger des fichiers cr&eacute;&eacute;s avec <tt><b>BSave</b></tt> dans FreeBASIC, mais FreeBASIC peut utiliser <tt><a href="KeyPgBload.html">BLoad</a></tt> pour charger des fichiers cr&eacute;&eacute;s avec <tt><b>BSave</b></tt> dans QB<br \>
 <br \>
-</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+</ul></div><div class="fb_sect_title">Voir aussi</div><div class="fb_sect_cont"><br \>
 <ul><li> <tt><a href="KeyPgBload.html">BLoad</a></tt><br \>
 <li> <tt><a href="KeyPgPalette.html">Palette</a></tt><br \>
 <br \>

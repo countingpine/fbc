@@ -11,27 +11,27 @@
 </div> 
 <div id="fb_pg_wrapper">
 <div id="fb_pg_body">
-	Allocates a block of memory from the free store<br \>
+	Alloue un bloc de m&eacute;moire &agrave; partir de la m&eacute;moire libre<br \>
 <br \>
-<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<div class="fb_sect_title">Syntaxe</div><div class="fb_sect_cont"><tt><br \>
 <a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgFunction.html">Function</a> <b>Allocate</b> <a href="KeyPgCdecl.html">cdecl</a> ( <a href="KeyPgByval.html">ByVal</a> <i>count</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a> ) <a href="KeyPgAs.html">As</a> <a href="KeyPgAny.html">Any</a> <a href="KeyPgPtr.html">Ptr</a><br \>
 </tt><br \>
 </div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
 <i>result</i> = <b>Allocate</b>( <i>count</i> )<br \>
 </tt><br \>
-</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Param&egrave;tres</div><div class="fb_sect_cont"><br \>
 <tt><i>count</i></tt><br \>
-<div class="fb_indent">The size, in bytes, of the block of memory to allocate.<br \>
+<div class="fb_indent">La taille, en octets du bloc de m&eacute;moire &agrave; allouer.<br \>
 <br \>
-</div></div><div class="fb_sect_title">Return Value</div><div class="fb_sect_cont"><br \>
-If successful, the address of the start of the allocated memory is returned. Otherwise, if the requested block size could not be allocated, or if <tt><i>count</i> &lt; 0</tt>, then the null pointer (<tt>0</tt>) is returned.<br \>
+</div></div><div class="fb_sect_title">Valeur retourn&eacute;e</div><div class="fb_sect_cont"><br \>
+En cas de succ&egrave;s, l'adresse du d&eacute;but de la m&eacute;moire allou&eacute;e est retourn&eacute;e. Sinon, si la taille demand&eacute;e du bloc ne peut &ecirc;tre attribu&eacute;e ou si <tt><i>count</i> &lt; 0</tt>, alors le pointeur (<tt>0</tt>) est retourn&eacute;.<br \>
 <br \>
 </div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
-Attempts to allocate, or reserve, <tt><i>count</i></tt> number of bytes from the free store (heap). The initial value of newly allocated memory is unspecified. The pointer that is returned is an <a href="KeyPgAny.html">Any</a> <a href="KeyPgPtr.html">Ptr</a> and points to the start of the allocated memory. This pointer is guaranteed to be unique, even if <tt><i>count</i></tt> is zero.<br \>
+Tente d'attribuer, ou de r&eacute;server, <tt><i>count</i></tt> octets &agrave; partir de la m&eacute;moire libre (heap = tas). La valeur initiale de la m&eacute;moire nouvellement allou&eacute;e n'est pas sp&eacute;cifi&eacute;e. Le pointeur retourn&eacute; est un <a href="KeyPgAny.html">Any</a> <a href="KeyPgPtr.html">Ptr</a> et pointe sur le d&eacute;but de la m&eacute;moire allou&eacute;e. Ce pointeur est garanti comme &eacute;tant unique, m&ecirc;me si <tt><i>count</i></tt> est z&eacute;ro.<br \>
 <br \>
-Allocated memory must be deallocated, or returned back to the free store, with <tt><a href="KeyPgDeallocate.html">Deallocate</a></tt> when no longer needed. <br \>
+La m&eacute;moire occup&eacute;e doit &ecirc;tre lib&eacute;r&eacute;e, ou retourner au "tas"" libre, avec <tt><a href="KeyPgDeallocate.html">Deallocate</a></tt> quand elle n'est plus utlis&eacute;e. <br \>
 <br \>
-</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Exemple</div><div class="fb_sect_cont"><br \>
 <tt><div class="freebasic">
 <span class="com">''&nbsp;This&nbsp;program&nbsp;uses&nbsp;the&nbsp;ALLOCATE(...)&nbsp;function&nbsp;to&nbsp;create&nbsp;a&nbsp;buffer&nbsp;of&nbsp;15&nbsp;integers&nbsp;that&nbsp;is</span><br />
 <span class="com">''&nbsp;then&nbsp;filled&nbsp;with&nbsp;the&nbsp;first&nbsp;15&nbsp;numbers&nbsp;of&nbsp;the&nbsp;Fibonacci&nbsp;Sequence,&nbsp;then&nbsp;output&nbsp;to&nbsp;the</span><br />
@@ -66,9 +66,9 @@ Allocated memory must be deallocated, or returned back to the free store, with <
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Deallocate</span><span class="oth">(</span><span class="wrd">buffer</span><span class="oth">)</span><br />
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="key">End</span>&nbsp;<span class="num">0</span><br />
 </div></tt><br />
-Output is:<br \>
+Affichage:<br \>
 <table class="fb_box"><tr><td><tt> 0 1 1 2 3 5 8 13 21 34 55 89 144 233 377</tt></td></tr></table><div style="clear:both">&nbsp;</div><br \>
-It is important to free allocated memory if it's not going to be used anymore. Unused memory that isn't freed is simply wasting memory, and if the address of that memory is somehow overwritten or forgotten, that memory can never be freed. This condition is known as a memory leak, and should be avoided at all costs. Note that leaked memory is always completely freed when the application terminates, either by an "ordinary" exit or crash, so the leak "persists" only as long as the application runs, nevertheless it's a good habit to free any allocated memory inside your application. The following example demonstrates a function with a memory leak, where the address of allocated memory is lost and isn't and can't be freed anymore. If such a function is called frequently, the total amount of memory wasted can add up quickly.<br \>
+Il est important de lib&eacute;rer la m&eacute;moire allou&eacute;e si elle ne sera plus utilis&eacute;e. La m&eacute;moire non utilis&eacute;e non-lib&eacute;r&eacute;e est simplement une perte de m&eacute;moire, et si son adresse est d'une certaine fa&ccedil;on &eacute;cras&eacute;e ou oubli&eacute;e, cette m&eacute;moire ne pourra jamais &ecirc;tre lib&eacute;r&eacute;e. Ceci est une perte de m&eacute;moire et doit &ecirc;tre &eacute;vit&eacute; &agrave; tout prix. Notez que la m&eacute;moire perdue est toujours enti&egrave;rement lib&eacute;r&eacute;e lorsque l'application se termine, soit par une sortie "ordinaire" ou un "crash", donc la fuite "persiste" tant que l'application s'ex&eacute;cute; malgr&eacute; tout c'est une bonne habitude de lib&eacute;rer toute la m&eacute;moire allou&eacute;e &agrave; l'int&eacute;rieur de votre application . L'exemple suivant montre une fonction avec une fuite de m&eacute;moire, où l'adresse de m&eacute;moire allou&eacute;e est perdue et n'est pas et ne peut pas &ecirc;tre lib&eacute;r&eacute;e. Si une telle fonction est appel&eacute;e souvent, le montant total de la m&eacute;moire perdue peut augmenter rapidement.<br \>
 <br \>
 <tt><div class="freebasic">
 <span class="com">''&nbsp;Bad&nbsp;example&nbsp;of&nbsp;Allocate&nbsp;usage,&nbsp;causing&nbsp;memory&nbsp;leaks</span><br />
@@ -94,16 +94,16 @@ It is important to free allocated memory if it's not going to be used anymore. U
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="key">End</span><br />
 </div></tt><br />
 <br \>
-</td></tr></table></div><div class="fb_sect_title">Platform Differences</div><div class="fb_sect_cont"><br \>
-<ul><li> This procedure is not guaranteed to be thread-safe.<br \>
+</td></tr></table></div><div class="fb_sect_title">Diff&eacute;rences de plate-forme</div><div class="fb_sect_cont"><br \>
+<ul><li> Cette proc&eacute;dure n'est pas garantie d'&ecirc;tre "thread-safe".<br \>
 <br \>
-</ul></div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
-<ul><li> Not available in the <i><a href="CompilerOptlang.html">-lang qb</a></i> dialect unless referenced with the alias <tt><b>__Allocate</b></tt> <br \>
+</ul></div><div class="fb_sect_title">Diff&eacute;rences de dialecte</div><div class="fb_sect_cont"><br \>
+<ul><li> Non disponible dans le dialecte <i><a href="CompilerOptlang.html">-lang qb</a></i> sauf si r&eacute;f&eacute;renc&eacute; avec l'alias <tt><b>__Allocate</b></tt> <br \>
 <br \>
-</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
-<ul><li> New to FreeBASIC<br \>
+</ul></ul></div><div class="fb_sect_title">Diff&eacute;rences avec QB</div><div class="fb_sect_cont"><br \>
+<ul><li> Nouveau pour FreeBASIC<br \>
 <br \>
-</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+</ul></div><div class="fb_sect_title">Voir aussi</div><div class="fb_sect_cont"><br \>
 <ul><li> <tt><a href="KeyPgCallocate.html">CAllocate</a></tt><br \>
 <li> <tt><a href="KeyPgReallocate.html">Reallocate</a></tt><br \>
 <li> <tt><a href="KeyPgDeallocate.html">Deallocate</a></tt><br \>

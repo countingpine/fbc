@@ -1,53 +1,66 @@
-<html>
-<head>
-<title>ImageCreate</title>
-<link rel="stylesheet" type="text/css" href="style.css">
-</head>
-<body>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><title>ImageCreate</title>
+
+
+<link rel="stylesheet" type="text/css" href="style.css"></head><body>
 <div id="fb_body_wrapper">
 <div id="fb_tab">
 <div id="fb_tab_l">ImageCreate</div>
-<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif"></div> 
 </div> 
 <div id="fb_pg_wrapper">
 <div id="fb_pg_body">
-	Allocates and initializes storage for an image<br \>
-<br \>
-<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+	Alloue et initialise une image (stockage en m&eacute;moire)<br \="">
+<br \="">
+<div class="fb_sect_title">Syntaxe</div><div class="fb_sect_cont"><tt><br \="">
 <a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgFunction.html">Function</a> <b>ImageCreate</b> <a href="KeyPgOverload.html">Overload</a> ( <a href="KeyPgByval.html">ByVal</a> <i>width</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a>, <a href="KeyPgByval.html">ByVal</a> <i>height</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a>, <a href="KeyPgByval.html">ByVal</a> <i>color</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgUinteger.html">UInteger</a> = <b>transparent_color</b> ) <a href="KeyPgAs.html">As</a> <a href="KeyPgAny.html">Any</a> <a href="KeyPgPtr.html">Ptr</a><br \>
 <a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgFunction.html">Function</a> <b>ImageCreate</b> ( <a href="KeyPgByval.html">ByVal</a> <i>width</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a>, <a href="KeyPgByval.html">ByVal</a> <i>height</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a>, <a href="KeyPgByval.html">ByVal</a> <i>color</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgUinteger.html">UInteger</a> = <b>transparent_color</b>, <a href="KeyPgByval.html">ByVal</a> <i>depth</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a> ) <a href="KeyPgAs.html">As</a> <a href="KeyPgAny.html">Any</a> <a href="KeyPgPtr.html">Ptr</a><br \>
-</tt><br \>
-</div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
+</tt><br \="">
+</div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \="">
 <i>result</i> = <b>ImageCreate</b>( <i>width</i>, <i>height</i> [, [ <i>color</i> ][, <i>depth</i> ]] )<br \>
-</tt><br \>
-</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
-<tt><i>width</i></tt><br \>
-<div class="fb_indent">The desired width, in number of pixels.<br \>
-</div><tt><i>height</i></tt><br \>
-<div class="fb_indent">The desired height, in number of pixels.<br \>
-</div><tt><i>color</i></tt><br \>
-<div class="fb_indent">The pixel value to fill the area of the image.<br \>
-</div><tt><i>depth</i></tt><br \>
-<div class="fb_indent">The desired color depth, in bits per pixel.<br \>
-<br \>
-</div></div><div class="fb_sect_title">Return Value</div><div class="fb_sect_cont"><br \>
-If the image could not be created, NULL (<tt>0</tt>) is returned. Otherwise, the address of the image is returned.<br \>
-<br \>
-</div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
-Both procedures attempt to allocate memory for an image of the specified <tt><i>width</i></tt> and <tt><i>height</i></tt>. If not successful, NULL (<tt>0</tt>) is returned. Otherwise, an image of that size is created and initialized by filling the entire area of pixels with the value <tt><i>color</i></tt>. If not specified, <tt><i>color</i></tt> assumes the value of the transparent color for the current graphics screen, which can be found by calling <tt><a href="KeyPgScreencontrol.html">ScreenControl</a></tt>. In any case, the address of the image is returned, which is then controlled by the user, and must be destroyed using <tt><a href="KeyPgImageDestroy.html">ImageDestroy</a></tt>.<br \>
-<br \>
-The first procedure creates an image with a color depth matching that of the current graphics screen, which can be found by calling <tt><a href="KeyPgScreencontrol.html">ScreenControl</a></tt>. The second procedure creates an image with a color depth of <tt><i>depth</i></tt>, in bits per pixel. For both procedures, the resulting image can be used in drawing procedures while in any screen mode -- and across mode changes -- as long as the color depth of the image matches that of the graphics screen.<br \>
-<br \>
-<tt><b>ImageCreate</b></tt> is the recommended way to allocate memory for new images. The memory layout -- size, structure, etc. -- while documented, may change from version to version, making manual calculation of the sizes involved error-prone. However, <tt><a href="KeyPgImageInfo.html">ImageInfo</a></tt> can be used to retrieve, among other things, the size, in bytes, of an existing image, allowing memory to be manually allocated for a copy of an image, or to be read from or written to a file or device.<br \>
-<br \>
-<tt><a href="KeyPgGetgraphics.html">Get (Graphics)</a></tt> can be used to initialize an image using pre-allocated memory.<br \>
-<br \>
-</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+</tt><br \="">
+</div>
+<div class="fb_sect_title">Param&egrave;tres</div>
+<div class="fb_sect_cont"><br \="">
+<tt><i>width</i></tt><br \="">
+<div class="fb_indent">La largeur d&eacute;sir&eacute;e, en nombre de pixels.<br \="">
+</div>
+<tt><i>height</i></tt><br \="">
+<div class="fb_indent">La hauteur d&eacute;sir&eacute;e, en nombre de pixels.<br \="">
+</div>
+<tt><i>color</i></tt><br \="">
+<div class="fb_indent">Valeur du pixel pour remplir l'image.<br \="">
+</div>
+<tt><i>depth</i></tt><br \="">
+<div class="fb_indent">La profondeur de couleur, en bits par pixel.<br \="">
+<br \="">
+</div>
+</div>
+<div class="fb_sect_title">Valeur renvoy&eacute;e</div>
+<div class="fb_sect_cont"><br \="">
+Si l'image ne peut &ecirc;tre cr&eacute;&eacute;e NULL (<tt>0</tt>) est renvoy&eacute;. Sinon, c'est l'adresse de l'image qui est renvoy&eacute;e.<br \="">
+<br \="">
+</div>
+<div class="fb_sect_title">Description</div>
+<div class="fb_sect_cont"><br \="">
+Les deux proc&eacute;dures essaient d'allouer de la m&eacute;moire pour une image de dimensions: <tt><i>width (largeur)</i></tt> et <tt><i>height(hauteur)</i></tt>. Si &eacute;chec, un NULL (<tt>0</tt>) est renvoy&eacute;. Sinon, une image est cr&eacute;&eacute;e et initialis&eacute;e en la remplissant enti&egrave;rement avec des pixels de valeur <tt><i>color</i></tt>. Si  omis, <tt><i>color</i></tt> prend la valeur de la couleur transparente pour l'&eacute;cran graphique courant, qui peut &ecirc;tre d&eacute;termin&eacute;e en appelant <tt><a href="KeyPgScreencontrol.html">ScreenControl</a></tt>. Dans tous les cas, l'adresse de l'image est retourn&eacute;e, qui est ensuite contr&ocirc;l&eacute;e par l'utilisateur, et peut &ecirc;tre d&eacute;truite en utilisant <tt><a href="KeyPgImageDestroy.html">ImageDestroy</a></tt>.</a></tt>.<br \="">
+<br \="">
+La premi&egrave;re proc&eacute;dure cr&eacute;e une image avec une profondeur de couleur correspondant &agrave; celle de l'&eacute;cran graphique courant, qui peut &ecirc;tre d&eacute;termin&eacute;e en appelant <tt><a href="KeyPgScreencontrol.html">ScreenControl</a></tt>. La seconde proc&eacute;dure cr&eacute;e une image avec une profondeur de couleur <tt><i>depth</i></tt>, en bits par pixel. Pour chaque proc&eacute;dure, l'image obtenue peut &ecirc;tre utilis&eacute;e dans l'&eacute;laboration de proc&eacute;dures dans n'importe quel mode &eacute;cran - et &agrave; travers les changements de mode - tant que la profondeur de couleur de l'image correspond &agrave; celle de l'&eacute;cran graphique.<br \>
+<br \="">
+Les images inutiles seront d&eacute;truites avec <tt><a href="KeyPgImageDestroy.html">ImageDestroy</a></tt>, pour &eacute;viter des probl&egrave;mes de m&eacute;moire.<br \="">
+<br \="">
+<tt><b>ImageCreate</b></tt> est la m&eacute;thode recommand&eacute;e pour allouer de la m&eacute;moire pour de nouvelles images. La disposition de la m&eacute;moire - la taille, structure, etc - bien que document&eacute;e, peut changer d'une version &agrave; une autre, rendant le calcul manuel des tailles difficile et sujet &agrave; erreurs. Cependant, <tt><a href="KeyPgImageInfo.html">ImageInfo</a></tt> peut &ecirc;tre utilis&eacute; pour d&eacute;terminer, entre autres, la taille, en octets, d'une image existant, permettant ainsi d'allouer de la m&eacute;moire manuellement pour une copie d'image, ou pour une lecture ou une &eacute;criture &agrave; partir d'un fichier ou d'un "device".<br \>
+<br \="">
+<tt><a href="KeyPgGetgraphics.html">Get (Graphique)</a></tt> peut &ecirc;tre utilis&eacute; pour initialiser une image en utilisant la m&eacute;moire pr&eacute;-allou&eacute;e.<br \>
+<br \="">
+
+</div>
+<div class="fb_sect_title">Exemple</div><div class="fb_sect_cont"><br \="">
 <tt><div class="freebasic">
-<span class="com">''&nbsp;Create&nbsp;a&nbsp;graphics&nbsp;screen.</span><br />
+<span class="com">''&nbsp;Cree&nbsp;un&nbsp;ecran&nbsp;graphique.</span><br />
 <span class="key">ScreenRes</span>&nbsp;<span class="num">320</span><span class="oth">,</span>&nbsp;<span class="num">200</span><span class="oth">,</span>&nbsp;<span class="num">32</span><br />
 <br />
-<span class="com">''&nbsp;Create&nbsp;a&nbsp;64x64&nbsp;pixel&nbsp;image&nbsp;with&nbsp;a&nbsp;darkish&nbsp;green&nbsp;background.</span><br />
+<span class="com">''&nbsp;Cree&nbsp;une&nbsp;image&nbsp;64x64&nbsp;pixels&nbsp;avec&nbsp;un&nbsp;arriere-plan&nbsp;vert&nbsp;fonce.</span><br />
 <span class="key">Dim</span>&nbsp;<span class="wrd">image</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Any</span>&nbsp;<span class="key">Ptr</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">ImageCreate</span><span class="oth">(</span>&nbsp;<span class="num">64</span><span class="oth">,</span>&nbsp;<span class="num">64</span><span class="oth">,</span>&nbsp;<span class="key">RGB</span><span class="oth">(</span><span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">128</span><span class="oth">,</span>&nbsp;<span class="num">0</span><span class="oth">)</span>&nbsp;<span class="oth">)</span><br />
 <br />
 <span class="key">If</span>&nbsp;<span class="wrd">image</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span>&nbsp;<span class="key">Then</span><br />
@@ -56,36 +69,37 @@ The first procedure creates an image with a color depth matching that of the cur
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="key">End</span>&nbsp;<span class="oth">-</span><span class="num">1</span><br />
 <span class="key">End</span>&nbsp;<span class="key">If</span><br />
 <br />
-<span class="com">''&nbsp;Draw&nbsp;a&nbsp;semi-transparent,&nbsp;red&nbsp;circle&nbsp;in&nbsp;the&nbsp;center&nbsp;of&nbsp;the&nbsp;image.</span><br />
+<span class="com">''&nbsp;Dessine&nbsp;un&nbsp;cercle&nbsp;rouge&nbsp;semi-transparent,&nbsp;au&nbsp;centre&nbsp;de&nbsp;l'image.</span><br />
 <span class="key">Circle</span>&nbsp;<span class="wrd">image</span><span class="oth">,</span>&nbsp;<span class="oth">(</span><span class="num">32</span><span class="oth">,</span>&nbsp;<span class="num">32</span><span class="oth">),</span>&nbsp;<span class="num">28</span><span class="oth">,</span>&nbsp;<span class="key">RGBA</span><span class="oth">(</span><span class="num">255</span><span class="oth">,</span>&nbsp;<span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">128</span><span class="oth">),,,</span>&nbsp;<span class="num">1.0</span><span class="oth">,</span>&nbsp;<span class="wrd">f</span><br />
 <br />
-<span class="com">''&nbsp;Draw&nbsp;the&nbsp;image&nbsp;onto&nbsp;the&nbsp;screen&nbsp;using&nbsp;various&nbsp;blitting&nbsp;methods.</span><br />
+<span class="com">''&nbsp;Dessine&nbsp;l'image&nbsp;sur&nbsp;l'ecran&nbsp;en&nbsp;utilisant&nbsp;differentes&nbsp;methodes.</span><br />
 <span class="key">Put</span>&nbsp;<span class="oth">(</span><span class="num">120</span><span class="oth">,</span>&nbsp;<span class="num">60</span><span class="oth">),</span>&nbsp;<span class="wrd">image</span><span class="oth">,</span>&nbsp;<span class="key">PSet</span><br />
 <span class="key">Put</span>&nbsp;<span class="oth">(</span><span class="num">140</span><span class="oth">,</span>&nbsp;<span class="num">80</span><span class="oth">),</span>&nbsp;<span class="wrd">image</span><span class="oth">,</span>&nbsp;<span class="key">Alpha</span><br />
 <br />
-<span class="com">''&nbsp;Destroy&nbsp;the&nbsp;image.</span><br />
+<span class="com">''&nbsp;Detruit&nbsp;l'image.</span><br />
 <span class="key">ImageDestroy</span>&nbsp;<span class="wrd">image</span><br />
 <br />
 <span class="key">Sleep</span><br />
-</div></tt><br />
-<div class="fb_img"><img src="images/imagecreate.png" /></div><br \>
-<br \>
-<br \>
-</div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
-<ul><li> Not available in the <i><a href="CompilerOptlang.html">-lang qb</a></i> dialect unless referenced with the alias <tt><b>__Imagecreate</b></tt>.<br \>
-<br \>
-</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
-<ul><li> New to FreeBASIC<br \>
-<br \>
-</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
-<ul><li> <tt><a href="KeyPgImageDestroy.html">ImageDestroy</a></tt><br \>
-<li> <tt><a href="KeyPgImageInfo.html">ImageInfo</a></tt><br \>
-<li> <tt><a href="KeyPgGetgraphics.html">Get (Graphics)</a></tt><br \>
-<li> <a href="GfxInternalFormats.html">Internal pixel formats</a><br \>
-<br \>
-</ul></div>
+</div></tt><br>
+<div class="fb_img"><img src="images/imagecreate.png"></div><br \="">
+<br \="">
+<br \="">
+</div><div class="fb_sect_title">Diff&eacute;rences de Dialecte </div><div class="fb_sect_cont"><br \="">
+<ul><li> Non disponible dans le dialecte <i><a href="CompilerOptlang.html">-lang qb</a></i> sauf r&eacute;f&eacute;renc&eacute; avec l'alias <tt><b>__Imagecreate</b></tt>.<br \="">
+
+<br \="">
+</li></ul></div><div class="fb_sect_title">Diff&eacute;rences avec QB</div><div class="fb_sect_cont"><br \="">
+<ul><li> Nouveau pour FreeBASIC<br \="">
+<br \="">
+</li></ul></div><div class="fb_sect_title">Voir aussi</div><div class="fb_sect_cont"><br \="">
+<ul><li> <tt><a href="KeyPgGetgraphics.html">Get (Graphique)</a></tt><br \="">
+</li><li> <tt><a href="KeyPgImageInfo.html">ImageInfo</a></tt><br \="">
+</li><li> <tt><a href="KeyPgImageDestroy.html">ImageDestroy</a></tt><br \="">
+
+</li><li> <a href="GfxInternalFormats.html">Formats graphiques internes</a><br \="">
+<br \="">
+</li></ul></div>
 </div>
 </div> 
 </div> 
-</body>
-</html>
+</body></html>

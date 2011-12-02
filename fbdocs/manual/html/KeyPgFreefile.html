@@ -11,23 +11,25 @@
 </div> 
 <div id="fb_pg_wrapper">
 <div id="fb_pg_body">
-	Returns a free file number<br \>
+	Retourne un num&eacute;ro de fichier libre<br \>
 <br \>
-<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<div class="fb_sect_title">Syntaxe</div><div class="fb_sect_cont"><tt><br \>
 <a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgFunction.html">Function</a> <b>FreeFile</b> ( ) <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a><br \>
 </tt><br \>
 </div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
 <i>result</i> = <b>FreeFile</b><br \>
 </tt><br \>
-</div><div class="fb_sect_title">Return Value</div><div class="fb_sect_cont"><br \>
-The next available file number, if any, otherwise zero (<tt>0</tt>).<br \>
+</div><div class="fb_sect_title">Valeur retourn&eacute;e</div><div class="fb_sect_cont"><br \>
+Le premier num&eacute;ro de fichier libre, s'il existe, sinon z&eacute;ro (<tt>0</tt>).<br \>
 <br \>
 </div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
-Returns the number of the next free file number with valid values <tt>1</tt> to <tt>255</tt>, or <tt>0</tt> if there are already 255 files opened. This value is a required argument to <tt><a href="KeyPgOpen.html">Open</a></tt> a file. <tt><b>FreeFile</b></tt> is useful when opening files in complex programs where the programmer can't keep track of the used file numbers.<br \>
-Make sure to always close files when no longer needed, otherwise you will get a file number leak, and won't be able to open any files anymore after 255 filenumbers are exhausted while your program is running.<br \>
-<tt><b>FreeFile</b></tt> will always return the smallest free file number.  The file number returned by <tt><b>FreeFile</b></tt> will not change until that file number is <tt><a href="KeyPgOpen.html">Open</a></tt>ed, or until a smaller file number is <tt><a href="KeyPgClose.html">Close</a></tt>d.  For this reason, it is wise to use <tt><b>FreeFile</b></tt> immediately before its corresponding <tt><a href="KeyPgOpen.html">Open</a></tt>, to ensure that the file number is not returned and opened elsewhere first.<br \>
+Retourne le num&eacute;ro de fichier libre suivant avec des valeurs valides de <tt>1</tt> &agrave; <tt>255</tt>, ou <tt>0</tt> s'il y a d&eacute;j&agrave; 255 fichiers ouverts. Cette valeur est un argument obligatoire de <tt><a href="KeyPgOpen.html">Open</a></tt> un fichier. <tt><b>FreeFile</b></tt> est utile lors de l'ouverture de fichiers dans des programmes complexes o&ugrave; le programmeur ne peut pas garder une trace des num&eacute;ros de fichiers utilis&eacute;s.<br \>
 <br \>
-</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+Assurez-vous de toujours fermer les fichiers lorsqu'ils ne sont plus n&eacute;cessaires, sinon vous aurez une perte de num&eacute;ros de fichiers, et vous ne serez pas en mesure d'ouvrir des fichiers d&egrave;s que 255 num&eacute;ros de fichiers seront utilis&eacute;s pendant le fonctionnement de votre programme.<br \>
+<br \>
+<tt><b>FreeFile</b></tt> retourne toujours le num&eacute;ro de fichier libre le plus prtit possible. Le num&eacute;ro de fichier retourn&eacute; par <tt><b>FreeFile</b></tt> ne changera pas tant que le fichier correspondant reste <tt><a href="KeyPgOpen.html">ouvert  (Open)</a></tt>, ou jusqu'&agrave; ce qu'un fichier de num&eacute;ros de fichier plus petit soit <tt><a href="KeyPgClose.html">ferm&eacute; (Close)</a></tt>. Pour cette raison, il est sage d'utiliser <tt><b> FreeFile</b></tt>, imm&eacute;diatement avant son <tt><a href="KeyPgOpen.html">Open</a></tt> correspondant, afin de s'assurer que le num&eacute;ro de fichier retourn&eacute; n'a pas &eacute;t&eacute; ouvert ailleurs en premier.
+<br \>
+</div><div class="fb_sect_title">Exemple</div><div class="fb_sect_cont"><br \>
 <tt><div class="freebasic">
 <span class="com">'&nbsp;Create&nbsp;a&nbsp;string&nbsp;and&nbsp;fill&nbsp;it.</span><br />
 <span class="key">Dim</span>&nbsp;<span class="wrd">buffer</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span><span class="oth">,</span>&nbsp;<span class="wrd">f</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
@@ -49,36 +51,36 @@ Make sure to always close files when no longer needed, otherwise you will get a 
 <span class="key">End</span><br />
 </div></tt><br />
 <br \>
-When using multiple <tt><b>FreeFile</b></tt> statements, <tt><b>FreeFile</b></tt> should be used immediately before the <tt><a href="KeyPgOpen.html">Open</a></tt> statement:<br \>
+Lors de l'ouverture de plusieurs <tt><b>FreeFile</b></tt>, <tt><b>FreeFile</b></tt> doit &ecirc;tre utilis&eacute; imm&eacute;diatement avant <tt><a href="KeyPgOpen.html">Open</a></tt>:<br \>
 <tt><div class="freebasic">
 <span class="key">Dim</span>&nbsp;<span class="wrd">fr</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">,</span>&nbsp;<span class="wrd">fs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
-<span class="com">'&nbsp;The&nbsp;CORRECT&nbsp;way:</span><br />
+<span class="com">'&nbsp;The&nbsp;CORRECT&nbsp;WAY:</span><br />
 <span class="wrd">fr</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">FreeFile</span><br />
 <span class="key">Open</span>&nbsp;<span class="quo">"File1"</span>&nbsp;<span class="key">For</span>&nbsp;<span class="key">Input</span>&nbsp;<span class="key">As</span>&nbsp;<span class="oth">#</span><span class="wrd">fr</span><br />
 <br />
 <span class="wrd">fs</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">FreeFile</span><br />
 <span class="key">Open</span>&nbsp;<span class="quo">"File2"</span>&nbsp;<span class="key">For</span>&nbsp;<span class="key">Input</span>&nbsp;<span class="key">As</span>&nbsp;<span class="oth">#</span><span class="wrd">fs</span><br />
 </div></tt><br />
-<br \>
-As opposed to:<br \>
+<br />
+Par opposition &agrave;:<br \>
 <tt><div class="freebasic">
 <span class="key">Dim</span>&nbsp;<span class="wrd">fr</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">,</span>&nbsp;<span class="wrd">fs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
-<span class="com">'&nbsp;The&nbsp;WRONG&nbsp;way:</span><br />
-<span class="wrd">fr</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">FreeFile</span><br />
-<span class="wrd">fs</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">FreeFile</span>&nbsp;<span class="com">''&nbsp;fs&nbsp;has&nbsp;taken&nbsp;the&nbsp;same&nbsp;file&nbsp;number&nbsp;as&nbsp;fr</span><br />
-<br />
+&nbsp;<span class="com">'&nbsp;The&nbsp;WRONG&nbsp;way:</span><br />
 <span class="key">Open</span>&nbsp;<span class="quo">"file1"</span>&nbsp;<span class="key">For</span>&nbsp;<span class="key">Input</span>&nbsp;<span class="key">As</span>&nbsp;<span class="oth">#</span><span class="wrd">fr</span><br />
 <span class="key">Open</span>&nbsp;<span class="quo">"file2"</span>&nbsp;<span class="key">For</span>&nbsp;<span class="key">Input</span>&nbsp;<span class="key">As</span>&nbsp;<span class="oth">#</span><span class="wrd">fs</span>&nbsp;<span class="com">''&nbsp;error:&nbsp;file&nbsp;number&nbsp;already&nbsp;opened</span><br />
+<br />
+<span class="key">Open</span>&nbsp;<span class="quo">"file1"</span>&nbsp;<span class="key">For</span>&nbsp;<span class="key">Input</span>&nbsp;<span class="key">As</span>&nbsp;<span class="oth">#</span><span class="wrd">fr</span><br />
+<span class="key">Open</span>&nbsp;<span class="quo">"file2"</span>&nbsp;<span class="key">For</span>&nbsp;<span class="key">Input</span>&nbsp;<span class="key">As</span>&nbsp;<span class="oth">#</span><span class="wrd">fs</span><br />
 </div></tt><br />
 <br \>
-</div><div class="fb_sect_title">Platform Differences</div><div class="fb_sect_cont"><br \>
-<ul><li> On Windows, a file number used in a dynamic link library is not the same as an identical file number used in the main program.  File numbers can not be passed or returned and then used between a DLL and an executable.<br \>
-<li> Besides FreeBASIC's limit of 255 files per program opened at same time, there is an OS limit of total amount of opened files, but usually you won't touch it except in DOS, where the limit may be as low as 15 files total.<br \>
+</div><div class="fb_sect_title">Diff&eacute;rences de plate-forme</div><div class="fb_sect_cont"><br \>
+<ul><li> Sous Windows, un num&eacute;ro de fichier utilis&eacute; dans une biblioth&egrave;que de liens dynamiques n'est pas identique &agrave; celui utilis&eacute; dans le programme principal.  Les num&eacute;ros de fichier ne peuvent &ecirc;tre pass&eacute;s ou renvoy&eacute;s, puis utilis&eacute;s entre une DLL et un fichier ex&eacute;cutable.<br \>
+<li> Outre la limite FreeBASIC de 255 fichiers ouverts en m&ecirc;me temps par le programme, il y a une limite OS du nombre total de fichiers ouverts, mais g&eacute;n&eacute;ralement vous n'aurez pas le modifier, sauf dans le DOS, o&ugrave; la limite peut &ecirc;tre tr&egrave;s basse (15 fichiers au total).<br \>
 <br \>
-</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
-<ul><li> None<br \>
+</ul></div><div class="fb_sect_title">Diff&eacute;rences avec QB</div><div class="fb_sect_cont"><br \>
+<ul><li> Aucune<br \>
 <br \>
-</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+</ul></div><div class="fb_sect_title">Voir aussi</div><div class="fb_sect_cont"><br \>
 <ul><li> <tt><a href="KeyPgOpen.html">Open</a></tt><br \>
 <li> <tt><a href="KeyPgPutfileio.html">Put (File I/O)</a></tt><br \>
 <li> <tt><a href="KeyPgGetfileio.html">Get (File I/O)</a></tt><br \>

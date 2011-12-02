@@ -11,29 +11,29 @@
 </div> 
 <div id="fb_pg_wrapper">
 <div id="fb_pg_body">
-	Preprocessor statement to include contents of another source file<br \>
+	Directive du pr&eacute;processeur pour inclure le contenu d'un autre fichier source<br \>
 <br \>
-<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<div class="fb_sect_title">Syntaxe</div><div class="fb_sect_cont"><tt><br \>
 <b>#include</b> [once] <i>"file"</i><br \>
 </tt><br \>
 </div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
-<tt><b>#include</b></tt> inserts source code from another file at the point where the <tt><b>#include</b></tt> directive appears.  This has the effect of compiling the source code from the include file as though it were part of the source file that includes it.  Once the compiler has reached the end of the include file, the original source file continues to be compiled.<br \>
+<tt><b>#include</b></tt> ins&egrave;re le code source d'un autre fichier &agrave; l'endroit o&ugrave; la directive <tt><b>#include</b></tt> appara&icirc;t.  Cela revient &agrave; compiler le code source du fichier inclus comme si c'&eacute;tait une partie du fichier source o&ugrave; il est inclus.  D&egrave;s que le compilateur a atteint la fin du fichier inclus, la compilation du fichier source d'origine continue.<br \>
 <br \>
-This is useful to remove code from a file and separate it into more files. It is useful to have a single file with declarations in a program formed by several modules. You may include files within an include file, although avoid including the original file into itself, this will not produce valid results. Typically, include files will have an extension of <tt>.bi</tt> and are mainly used for declaring subs/functions/variables of a library, but any valid source code may be present in an include file.<br \>
+Ceci est utile pour supprimer du code d'un fichier et le s&eacute;parer en plusieurs fichiers. Il est utile d'avoir les d&eacute;clarations dans un seul fichier dans un programme constitu&eacute; de plusieurs modules. Vous pouvez inclure des fichiers dans un "fichier include", afin d'&eacute;viter d'inclure le fichier d'origine en lui-m&ecirc;me, cela pas produira pas des r&eacute;sultats valides. En r&egrave;gle g&eacute;n&eacute;rale, les fichiers "include" ont une extension <tt>.bi</tt> et sont principalement utilis&eacute;s pour d&eacute;clarer des sous-programmes / fonctions / variables d'une librairie, mais n'importe quel code source valide peut &ecirc;tre pr&eacute;sent dans un "fichier include".<br \>
 <br \>
-The <tt><b>once</b></tt> specifier tells the compiler to include the file only once even if it is included several times by the source code.<br \>
+Le sp&eacute;cificateur <tt><b>once</b></tt> indique au compilateur de n'inclure le fichier qu'une seule fois, m&ecirc;me s'il est inclus &agrave; plusieurs reprises dans le code source.<br \>
 <br \>
-<tt><a href="KeyPgMetaInclude.html">$Include</a></tt> is an alternative form of <tt><b>include</b></tt>, existing only for compatibility with QuickBASIC. It is recommended to use <tt><b>#include</b></tt> instead.<br \>
+<tt><a href="KeyPgMetaInclude.html">$Include</a></tt> est une forme alternative pour <tt><b>include</b></tt> qui n'existe que pour la compatibilit&eacute; avec QuickBASIC. Il est recommand&eacute; d'utiliser <tt><b>#include</b></tt> &agrave; la place.<br \>
 <br \>
-The compiler will automatically convert path separator characters ( '<b><tt>/</tt></b>' and '<b><tt>\</tt></b>' ) as needed to properly load the file.  The filename name may be an absolute or relative path.  <br \>
+Le compilateur va automatiquement convertir les caract&egrave;res s&eacute;parateur de chemin ( '<b><tt>/</tt></b>' et '<b><tt>\</tt></b>' ) comme n&eacute;cessaire pour charger correctement le fichier.  Le nom de fichier peut &ecirc;tre un chemin absolu ou relatif.  <br \>
 <br \>
-For relative paths, or where no path is given at all, the include file is search for in the following order:<br \>
-<ul><li> Relative from the directory of the source file<br \>
-<li> Relative from the current working directory<br \>
-<li> Relative from addition directories specified with the <i><a href="CompilerOpti.html">-i</a></i> command line option<br \>
-<li> The include folder of the FreeBASIC installation (<tt><b>FreeBASIC\inc</b></tt>, where <tt><b>FreeBASIC</b></tt> is the folder where the <tt><b>fbc</b></tt> executable is located)<br \>
+Pour les chemins relatifs, ou si aucun chemin d'acc&egrave;s n'est donn&eacute;, le fichier d'inclusion est recherch&eacute; dans l'ordre suivant:<br \>
+<ul><li> Relatif par rapport au r&eacute;pertoire du fichier source<br \>
+<li> Relatif par rapport au r&eacute;pertoire de travail courant<br \>
+<li> Relatif par rapport aux r&eacute;pertoires additionnels specifi&eacute;s avec l'option <i><a href="CompilerOpti.html">-i</a></i> de la ligne de commande<br \>
+<li> Le dossier "include" de l'installation de FreeBASIC (<tt><b>FreeBASIC\inc</b></tt>, o&ugrave; <tt><b>FreeBASIC</b></tt> est le dossier o&ugrave; est situ&eacute; l'ex&eacute;cutable <tt><b>fbc</b></tt>)<br \>
 <br \>
-</ul></div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+</ul></div><div class="fb_sect_title">Exemple</div><div class="fb_sect_cont"><br \>
 <tt><div class="freebasic">
 <span class="com">'&nbsp;header.bi&nbsp;file</span><br />
 <span class="key">Type</span>&nbsp;<span class="wrd">FooType</span><br />
@@ -51,15 +51,17 @@ For relative paths, or where no path is given at all, the include file is search
 <span class="wrd">Foo.Bar</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">1</span><br />
 <span class="wrd">Foo.Barbeque</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">2</span><br />
 </div></tt><br />
-</div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
-<ul><li> New to FreeBASIC<br \>
+</ul></div><div class="fb_sect_title">Diff&eacute;rences avec QB</div><div class="fb_sect_cont"><br \>
+<ul><li> Nouveau pour Freebasic<br \>
 <br \>
-</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+</ul></div><div class="fb_sect_title">Voir aussi</div><div class="fb_sect_cont"><br \>
 <ul><li> <tt><a href="KeyPgPpdefine.html">#define</a></tt><br \>
 <li> <tt><a href="KeyPgInclib.html">#inclib</a></tt><br \>
-<li> <a href="CompilerOpti.html">Compiler Option: -i</a><br \>
+<li> <a href="CompilerOpti.html">Option du compilateur: -i</a><br \>
 <br \>
-</ul></div>
+</ul><br \>
+   <br \>
+</div>
 </div>
 </div> 
 </div> 

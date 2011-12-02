@@ -11,49 +11,51 @@
 </div> 
 <div id="fb_pg_wrapper">
 <div id="fb_pg_body">
-	Copies a file<br \>
+	Copie un fichier<br \>
 <br \>
-<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<div class="fb_sect_title">Syntaxe</div><div class="fb_sect_cont"><tt><br \>
 <a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgFunction.html">Function</a> <b>FileCopy</b> ( <a href="KeyPgByval.html">ByVal</a> <i>source</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgZstring.html">ZString</a> <a href="KeyPgPtr.html">Ptr</a>, <a href="KeyPgByval.html">ByVal</a> <i>destination</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgZstring.html">ZString</a> <a href="KeyPgPtr.html">Ptr</a> ) <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a><br \>
 </tt><br \>
 </div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
 #include "file.bi"<br \>
 <b>FileCopy</b> <i>source</i>, <i>destination</i><br \>
 </tt><br \>
-<i>or</i><br \>
+<i>ou</i><br \>
 <tt><br \>
 #include "file.bi"<br \>
 <i>result</i> = <b>FileCopy</b>( <i>source</i>, <i>destination</i> )<br \>
 </tt><br \>
-</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Param&egrave;tres</div><div class="fb_sect_cont"><br \>
 <tt><i>source</i></tt><br \>
-<div class="fb_indent">A <tt><a href="KeyPgString.html">String</a></tt> argument specifying the filename of the file to copy from.  This file must exist.<br \>
+<div class="fb_indent">Un argument <tt><a href="KeyPgString.html">String (Cha&icirc;ne)</a></tt> sp&eacute;cifiant le nom du fichier à partir duquel on copie.  Ce fichier doit exister.<br \>
 </div><tt><i>destination</i></tt><br \>
-<div class="fb_indent">A <tt><a href="KeyPgString.html">String</a></tt> argument specifying the filename of the file to copy to.  This file will be overwritten if it exists.  This file should not be currently referenced by any open file handles.<br \>
+<div class="fb_indent">Un argument <tt><a href="KeyPgString.html">String (Cha&icirc;ne)</a></tt> sp&eacute;cifiant le nom du fichier vers lequel on copie.  Ce fichier sera &eacute;cras&eacute; s'il existe.  Ce fichier ne doit pas &ecirc;tre actuellement r&eacute;f&eacute;renc&eacute; par un "handle" de fichier ouvert.<br \>
 <br \>
-</div></div><div class="fb_sect_title">Return Value</div><div class="fb_sect_cont"><br \>
-Returns <tt>0</tt> on success, or <tt>1</tt> if an error occurred.<br \>
+</div></div><div class="fb_sect_title">Valeur retourn&eacute;e</div><div class="fb_sect_cont"><br \>
+Retourne <tt>0</tt> si succ&egrave;s, ou <tt>1</tt> en cas d'erreur.<br \>
 <br \>
 </div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
-Copies the contents of the source file into the destination file, overwriting the destination file if it already exists.<br \>
-It is necessary to <tt><a href="KeyPgInclude.html">#include</a></tt> either <tt>"file.bi"</tt> or <tt>"vbcompat.bi"</tt> in order to gain access to this function.<br \>
+Copie le contenu du fichier source dans le fichier destination, &eacute;crasant le fichier destination s'il existe d&eacute;jà.<br \>
+Un <tt><a href="KeyPgInclude.html">#include</a></tt> <tt>"file.bi"</tt> ou <tt>"vbcompat.bi"</tt> est n&eacute;cessaire de fa&ccedil;on à avoir acc&egrave;s à cette fonction.<br \>
 <br \>
-</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Exemple</div><div class="fb_sect_cont"><br \>
 <tt><div class="freebasic">
 <span class="def">#include&nbsp;"file.bi"<br />
 </span><span class="key">FileCopy</span>&nbsp;<span class="quo">"source.txt"</span><span class="oth">,</span>&nbsp;<span class="quo">"destination.txt"</span><br />
 </div></tt><br />
 <br \>
-</div><div class="fb_sect_title">Platform Differences</div><div class="fb_sect_cont"><br \>
-<ul><li> Linux requires the <tt><i>filename</i></tt> case matches the real name of the file. Windows and DOS are case insensitive. <br \>
-<li> Path separators in Linux are forward slashes <tt>/</tt>. Windows uses backward slashes <tt>\</tt> but it allows forward slashes.  DOS uses backward  slashes <tt>\</tt>. <br \>
+</div><div class="fb_sect_title">Diff&eacute;rences de plate-forme</div><div class="fb_sect_cont"><br \>
+<ul><li> Linux n&eacute;cessite que la casse de <tt><i>filename</i></tt> corresponde au nom r&eacute;el du fichier. Windows et DOS ne sont pas sensibles à la casse. <br \>
+<li> Les s&eacute;parateurs de chemin de Linux sont des barres obliques /. Windows utilise des barres obliques vers l'arri&egrave;re \ mais il admet des barres obliques.  DOS utilise des barres obliques en arri&egrave;re \. <br \>
 <br \>
 <br \>
-</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
-<ul><li> New to FreeBASIC.  Existed in Visual Basic.<br \>
+</ul></div><div class="fb_sect_title">Diff&eacute;rences avec QB</div><div class="fb_sect_cont"><br \>
+<ul><li> Nouveau pour FreeBASIC.  Existait dans Visual Basic.<br \>
 <br \>
-</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+</ul></div><div class="fb_sect_title">Voir aussi</div><div class="fb_sect_cont"><br \>
 <br \>
+<br \>
+   <br \>
 </div>
 </div>
 </div> 

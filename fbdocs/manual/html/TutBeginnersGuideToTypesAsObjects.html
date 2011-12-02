@@ -6,7 +6,7 @@
 <body>
 <div id="fb_body_wrapper">
 <div id="fb_tab">
-<div id="fb_tab_l">Beginners Guide to Types as Objects</div>
+<div id="fb_tab_l">Guide pour d&eacute;butants, de types en tant qu'objets (Partie 1)</div>
 <div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
 </div> 
 <div id="fb_pg_wrapper">
@@ -14,7 +14,7 @@
 	<br \>
 <b>Introduction</b><br \>
 <br \>
-  This tutorial is aimed at people who want to know more about the new features added to <tt>Type</tt>, commonly being referred to as 'types as objects', and 'that OOP stuff'.  It aims to walk you through these new features, so is aimed at people who don't really understand it yet, but want to learn.  A <tt>Type</tt> in FreeBASIC is an aggregate data type, like a struct in C, or a record in Pascal.  Here's just a short sample of typical <tt>Type</tt> usage.<br \>
+  Ce tutoriel est destin&eacute; aux personnes qui veulent en savoir plus sur les nouvelles fonctionnalit&eacute;s ajout&eacute;es &agrave; <tt><b>Type</b></tt>, commun&eacute;ment d&eacute;nomm&eacute;es '<i>types comme des objets</i>' et '<i>du genre POO</i>' (Programmation Orient&eacute;e Objets).  Il vise &agrave; vous guider &agrave; travers ces nouvelles fonctionnalit&eacute;s, ainsi est il destin&eacute; aux personnes qui ne comprennent pas vraiment encore, mais qui veulent apprendre.  Un <tt><b>Type</b></tt> en FreeBASIC est un type de donn&eacute;es agr&eacute;g&eacute;es, comme une structure en C ou un '<i>record</i>' en Pascal.  Voici un court exemple d'utilisation typique de <tt><b>Type</b></tt>.<br \>
 <br \>
 <tt><div class="freebasic">
 <span class="key">Type</span>&nbsp;<span class="wrd">person_info</span><br />
@@ -26,11 +26,11 @@
 <span class="key">End</span>&nbsp;<span class="key">Type</span><br />
 </div></tt><br />
 <br \>
-In this usage it's used as a kind of container for related data; in this example it could be as an entry in an address book.  With the new features, however, it can be used more like the class in C++, in that it can do much more than contain just simple fields of data.  It becomes a way to express an idea of an object, and this makes object oriented programming much simpler.  We will now look at these new features.<br \>
+Dans cette utilisation, il est employ&eacute; comme un type de conteneur pour les donn&eacute;es relatives; dans cet exemple, il pourrait &ecirc;tre aussi une entr&eacute;e dans un carnet d'adresses.  Avec les nouvelles fonctionnalit&eacute;s, cependant, il peut &ecirc;tre utilis&eacute; plus comme une classe en C++, car il peut faire beaucoup plus que contenir de simples champs de donn&eacute;es.  Il devient un moyen d'exprimer une id&eacute;e d'un objet, ce qui rend la programmation orient&eacute;e objet beaucoup plus simple.  Nous allons maintenant examiner ces nouvelles fonctionnalit&eacute;s.<br \>
 <br \>
 <b>Property</b><br \>
 <br \>
-We'll start by looking at property.  When you add a property to a <tt>Type</tt>, you access it as if it were an ordinary member, but what happens, is instead of just getting or setting a variable as normal, it calls a function instead.  Take a look at this example:<br \>
+Nous allons commencer par examiner la <tt><b>Property</b></tt> (propri&eacute;t&eacute;).  Quand vous ajoutez une <tt><b>Property</b></tt> &agrave; un <tt><b>Type</b></tt>, vous y acc&eacute;der comme s'il s'agissait d'un membre ordinaire, mais que se passe-t-il, est-ce seulement pour obtenir ou d&eacute;finir une variable comme d'habitude, au lieu de cela il appelle une fonction.  Jetez un oeil &agrave; cet exemple:<br \>
 <br \>
 <tt><div class="freebasic">
 <span class="key">Type</span>&nbsp;<span class="wrd">bar</span><br />
@@ -57,17 +57,17 @@ We'll start by looking at property.  When you add a property to a <tt>Type</tt>,
 <span class="key">Print</span>&nbsp;<span class="wrd">foo.x</span><br />
 </div></tt><br />
 <br \>
-We include in our <tt>Type</tt> some declarations for a <tt>Property</tt>; they are very similar to ordinary function declarations.  The first one declares a getter, the second a setter.  The <tt>p_x</tt> member is just an ordinary <tt>Integer</tt> member.<br \>
+Nous incluons dans notre <tt><b>Type</b></tt> certaines d&eacute;clarations de <tt><b>Property</b></tt>; elles sont tr&egrave;s semblables aux d&eacute;clarations de fonction ordinaires.  La premi&egrave;re d&eacute;clare un procureur (getter), la seconde un fixeur (setter).  Le membre <tt>p_x</tt> est simplement un nombre <tt><b>Integer</b></tt>.<br \>
 <br \>
-Next we write the code for the properties; again, the syntax is very similar to that of normal functions.  Note the way we return a value: instead of <tt>Function = value</tt>, we do <tt>Property = value</tt>.  You can do <tt>Return value</tt> as well.  Also note that you can refer to the member directly as <tt>p_x</tt>; you can also use the keyword <tt>this</tt>, for example <tt>this.p_x = n</tt>; using <tt>this</tt> isn't usually needed, but it can help in some ambiguous circumstances.<br \>
+Ensuite, nous &eacute;crivons le code pour les <tt><b>Property</b></tt>; encore une fois, la syntaxe est tr&egrave;s similaire &agrave; celle des fonctions normales.  Notez la mani&egrave;re dont nous retournons une valeur: au lieu de <tt><b>Function = valeur</b></tt>, nous faisons <tt><b>Property = valeur</b></tt>.  Vous pouvez faire aussi <tt><b>Return valeur</b></tt>.  Notez &eacute;galement que vous pouvez vous r&eacute;f&eacute;rer directement au membre <tt><b>p_x</b></tt>; vous pouvez &eacute;galement utiliser le mot-cl&eacute; <tt><b>this</b></tt>, par exemple <tt><b>this.p_x = n</b></tt>; utiliser <tt><b>this</b></tt> n'est g&eacute;n&eacute;ralement pas n&eacute;cessaire, mais il peut aider dans certaines circonstances ambigu&euml;s.<br \>
 <br \>
-Then follows some testing code; this shows how we can use the property as if it were any ordinary member.  When you run the program it will also print to screen to show that the property get/set code has been called.<br \>
+Vient ensuite un peu de code de test; cela montre comment nous pouvons utiliser <tt><b>Property</b></tt> comme s'il s'agissait d'un membre ordinaire.  Lorsque vous ex&eacute;cutez le programme, il sera &eacute;galement affich&eacute; &agrave; l'&eacute;cran pour montrer quel code de <tt><b>Property</b></tt> "get/set" a &eacute;t&eacute; appel&eacute;.<br \>
 <br \>
-Now this code is fairly trivial, but as you get used to the idea you'll see it can be put to some good uses.  Imagine as an example you are writing a GUI, and the TYPE represents a button on the screen, you could do <tt>button.text = "Hello World!"</tt>, and make the property code update the screen to show the changes.  Or maybe you are using the <tt>Type</tt> to maintain some kind of list; you could do <tt>list.size += 10</tt> and then put some code in your property to make the list larger.<br \>
+Maintenant, ce code est assez trivial, mais comme on s'habitue &agrave; l'id&eacute;e vous verrez qu'il peut &ecirc;tre utilis&eacute; pour certains bons usages.  Imaginez, comme un exemple, que vous &eacute;crivez une interface graphique (GUI) et que le <tt><b>Type</b></tt> repr&eacute;sente un bouton sur l'&eacute;cran, vous pourriez avoir <tt><b>button.text = "Hello World!"</b></tt>, et faire que le code de <tt><b>Property</b></tt> mette &agrave; jour l'&eacute;cran pour montrer les changements.  Ou peut-&ecirc;tre que vous utilisez <tt><b>Type</b></tt> pour maintenir une sorte de liste; vous pouvez avoir <tt><b>list.size += 10</b></tt> et puis mettre un peu de code dans votre <tt><b>Property</b></tt> de rendre la liste plus grande.<br \>
 <br \>
-<b>Constructor/Destructor</b><br \>
+<b>Constructeur/Destructeur</b><br \>
 <br \>
-<tt>Constructor</tt>s are functions that are called when the <tt>Type</tt> gets created - when you use <tt>Dim</tt>, for example.  A <tt>Destructor</tt> is a function that gets called when the <tt>Type</tt> goes out of scope; this could be when the program ends, for a <tt>Type</tt> in the main code, or when a function ends, for a local <tt>Type</tt>.  Look at the following example, expanded from the last.<br \>
+Les <tt><b>Constructor</b></tt>s sont des fonctions qui sont appel&eacute;es quand le <tt><b>Type</b></tt> est cr&eacute;&eacute; - lorsque vous utilisez <tt><b>Dim</b></tt>, par exemple.  Un <tt><b>Destructor</b></tt> est une fonction appel&eacute;e quand <tt><b>Type</b></tt> sort de la port&eacute;e; il peut s'agir de la fin du programme, pour un <tt><b>Type</b></tt> dans le code principal ou quand une fonction se termine, pour un <tt><b>Type</b></tt> local.  Regardez l'exemple suivant, expansion du pr&eacute;c&eacute;dent.<br \>
 <br \>
 <tt><div class="freebasic">
 <span class="key">Type</span>&nbsp;<span class="wrd">bar</span><br />
@@ -108,11 +108,11 @@ Now this code is fairly trivial, but as you get used to the idea you'll see it c
 <span class="key">Print</span>&nbsp;<span class="wrd">foo.x</span><br />
 </div></tt><br />
 <br \>
-Again the syntax is somewhat similar to normal functions.  Note that this time I changed <tt>p_x</tt> to be an <tt>Integer ptr</tt>.  The constructor then <tt>Allocate</tt>s the memory for this when <tt>foo</tt> is created, and gives it a default value; then it <tt>De-Allocate</tt>s this memory once it is destroyed.  So you can use <tt>Constructor</tt>s and <tt>Destructor</tt>s to set things up for you, then clean up once its finished with.  Again a trivial example, but bring back the example of some kind of list, and having it set the list up for you, and clean it up when it's finished with can be quite handy.<br \>
+Encore une fois la syntaxe est quelque peu semblable &agrave; toutes les fonctions normales.  Notez que cette fois j'ai modifi&eacute; <tt><b>p_x</b></tt> pour un <tt><b>Integer ptr</b></tt>.  Le <tt><b>Constructor</b></tt>, ensuite <tt><b>Allocate</b></tt> de la m&eacute;moire pour lui quand <tt><b>foo</b></tt> est cr&eacute;&eacute;, et lui donne une valeur par d&eacute;faut; puis le <tt><b>Destructor</b></tt> <tt><b>Deallocate</b></tt> cette m&eacute;moire.  Ainsi, vous pouvez utiliser <tt><b>Constructor</b></tt>s et <tt><b>Destructor</b></tt>s pour mettre les choses en place pour vous, puis nettoyer une fois termin&eacute;.  Retour sur un exemple trivial, ramenant l'exemple d'une certaine liste, la mettant en place pour vous et la nettoyant lorsque tout est fini, cela peut &ecirc;tre tr&egrave;s pratique.<br \>
 <br \>
-<b>Methods</b><br \>
+<b>M&eacute;thodes</b><br \>
 <br \>
-You can also have regular <tt>Sub</tt>s and <tt>Function</tt>s inside your <tt>Type</tt>; in some terminology, these are referred to as methods.  We'll carry on our example:<br \>
+Vous pouvez &eacute;galement avoir des <tt><b>Sub</b></tt>s et <tt><b>Function</b></tt>s ordinaires dans votre <tt><b>Type</b></tt>; dans une certaine terminologie, ce sont des m&eacute;thodes.  Nous allons poursuivre notre exemple:<br \>
 <br \>
 <tt><div class="freebasic">
 <span class="key">Type</span>&nbsp;<span class="wrd">bar</span><br />
@@ -166,11 +166,11 @@ You can also have regular <tt>Sub</tt>s and <tt>Function</tt>s inside your <tt>T
 <span class="key">Print</span>&nbsp;<span class="quo">"address&nbsp;p_x&nbsp;points&nbsp;to"</span><span class="oth">,</span>&nbsp;<span class="wrd">foo.Addr</span><span class="oth">()</span><br />
 </div></tt><br />
 <br \>
-So this time we added a <tt>Sub</tt>, that multiplies the integer pointed to by <tt>p_x</tt> by five, and a function that gets the memory address that the pointer holds.<br \>
+Alors, cette fois nous avons ajout&eacute; une <tt><b>Sub</b></tt>, qui multiplie par 5 l'entier point&eacute; par <tt><b>p_x</b></tt> et une fonction qui r&eacute;cup&egrave;re l'adresse m&eacute;moire contenue dans ce pointeur.<br \>
 <br \>
 <b>Private/Public</b><br \>
 <br \>
-By default all of the members of the bar type are public; that means that we can read/write or call them.  However, sometimes you might want to make them private.  Take for example our member <tt>p_x</tt>; we can currently do <tt>Print *foo.p_x</tt>, and it will allow us to print the value it points to.  We might want to make it private, so that only the members of the <tt>bar</tt> type (the constructor, destructor, property, and methods) can access it.  That way we can make sure we only deal with <tt>p_x</tt> by the ways we choose.  If for example we did '<tt>DeAllocate(foo.p_x)</tt>' in our main code, then when the destructor runs, it would try to free it again, known as a 'double free'.  Change the <tt>Type</tt> declaration as follows:<br \>
+Par d&eacute;faut, tous les membres du <tt><b>Type bar</b></tt> sont <tt><b>Public</b></tt>; cela signifie que nous pouvons les lire/&eacute;crire ou appeler.  Cependant, parfois, vous voudrez peut-&ecirc;tre les rendre <tt><b>Private</b></tt>.  Prenons l'exemple de notre membre <tt><b>p_x</b></tt>; alors nous pouvons faire <tt><b>Print *foo.p_x</b></tt> et cela nous permettra d'afficher la valeur vers laquelle il pointe.  Nous pourrions vouloir le rendre <tt><b>Private</b></tt>, de sorte que seuls les membres du <tt><b>Type bar</b></tt> (<tt><b>Constructor</b></tt>, <tt><b>Destructor</b></tt>, <tt><b>Property</b></tt> et <tt><b>M&eacute;thodes</b></tt>) peuvent y acc&eacute;der.  De cette fa&ccedil;on, nous pouvons nous assurer que nous ne tra&icirc;tons avec <tt><b>p_x</b></tt> que par les moyens que nous avons choisis.  Si par exemple on '<tt><b>Deallocate(foo.p_x)</b></tt>' dans notre code principal, lorsque le <tt><b>Destructor</b></tt> fonctionnera, il essaiera de le lib&eacute;rer &agrave; nouveau, ce qui est connu sous le nom de "double lib&eacute;ration".  Modifiez la d&eacute;claration de <tt><b>Type</b></tt> comme suit:<br \>
 <br \>
 <tt><div class="freebasic">
 <span class="key">Type</span>&nbsp;<span class="wrd">bar</span><br />
@@ -185,7 +185,7 @@ By default all of the members of the bar type are public; that means that we can
 <span class="key">End</span>&nbsp;<span class="key">Type</span><br />
 </div></tt><br />
 <br \>
-Now try adding <tt>Print *foo.p_x</tt> to the main code and compile it.  You'll get a message from fbc "<tt>error 173: Illegal member access, found 'p_x' in 'Print *foo.p_x'</tt>", showing that indeed the compiler is now enforcing the fact we made <tt>p_x</tt> private.  When you use <tt>private:</tt> or <tt>public:</tt>, any members following that statement follow the rule.  Here's a rather pointless example just to show the syntax:<br \>
+Maintenant, essayez d'ajouter <tt><b>Print *foo.p_x</b></tt> dans le code principal et compilez-le.  Vous recevrez un message de fbc <tt><b>error 173: Illegal member access, found 'p_x' in 'Print *foo.p_x'</b></tt>, montrant bien que le compilateur est maintenant oblig&eacute; de faire respecter le fait que nous avons d&eacute;clar&eacute; <tt><b>p_x Private</b></tt>.  Quand vous utilisez <tt><b>Private:</b></tt> ou <tt><b>Public:</b></tt>, tous les membres suivant cette d&eacute;claration suivent la r&egrave;gle.  Voici un exemple, assez inutile, juste pour montrer la syntaxe:<br \>
 <br \>
 <tt><div class="freebasic">
 <span class="key">Type</span>&nbsp;<span class="wrd">bar</span><br />
@@ -200,11 +200,11 @@ Now try adding <tt>Print *foo.p_x</tt> to the main code and compile it.  You'll 
 <span class="key">End</span>&nbsp;<span class="key">Type</span><br />
 </div></tt><br />
 <br \>
-In the above type, the members <tt>a</tt>, <tt>b</tt>, and <tt>e</tt> are private; <tt>c</tt> and <tt>d</tt> are public.<br \>
+Dans le <tt><b>Type</b></tt> ci-dessus, les membres <tt>a</tt>, <tt>b</tt> et <tt>e</tt> sont <tt><b>Private</b></tt>; <tt>c</tt> et <tt>d</tt> sont <tt><b>Public</b></tt>.<br \>
 <br \>
-<b>Operator overloading</b><br \>
+<b>Surcharge des op&eacute;rateurs</b><br \>
 <br \>
-Operator overloading is a way of telling the compiler what to do in the case where we want to perform some kind of operation involving our <tt>Type</tt>.  Take this example:<br \>
+La surcharge d'op&eacute;rateur est une fa&ccedil;on de dire au compilateur ce qu'il faut faire dans le cas o&ugrave; nous voulons effectuer une certaine sorte d'op&eacute;ration impliquant notre <tt><b>Type</b></tt>.  Prenez cet exemple:<br \>
 <br \>
 <tt><div class="freebasic">
 <span class="key">Type</span>&nbsp;<span class="wrd">bar</span><br />
@@ -216,7 +216,7 @@ Operator overloading is a way of telling the compiler what to do in the case whe
 <span class="wrd">z</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">x</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="wrd">y</span><br />
 </div></tt><br />
 <br \>
-Now normally the compiler will throw an error when it sees this, as it has no idea how to add together two <tt>Type</tt>s, but we can define what we want to happen.  Here's how:<br \>
+Maintenant, normalement le compilateur g&eacute;n&egrave;re une erreur lorsqu'il voit cela, car il n'a aucune id&eacute;e de comment ajouter ensemble deux <tt><b>Type</b></tt>s, mais nous pouvons d&eacute;finir ce que nous voulons qu'il se produise.  Voici comment:<br \>
 <br \>
 <tt><div class="freebasic">
 <span class="key">Type</span>&nbsp;<span class="wrd">bar</span><br />
@@ -235,7 +235,7 @@ Now normally the compiler will throw an error when it sees this, as it has no id
 <span class="key">Print</span>&nbsp;<span class="wrd">z.n</span><br />
 </div></tt><br />
 <br \>
-In this code, I use <tt>lhs</tt> and <tt>rhs</tt> to refer to the left and right hand side operands of the operator.  Note also the expression <tt>type(lhs.n + rhs.n)</tt>; this builds the <tt>Type</tt> that will be returned.  If you had a type like:<br \>
+Dans ce code, j'utilise <tt><b>lhs</b></tt> (left-hand) et <tt><b>rhs</b></tt> (right-hand) pour d&eacute;signer les op&eacute;randes du c&ocirc;t&eacute; gauche et du c&ocirc;t&eacute; droit de l'op&eacute;rateur.  Notez aussi l'expression <tt><b>type(lhs.n + rhs.n)</b></tt>; ceci construit le <tt><b>Type</b></tt> qui sera retourn&eacute;.  Si vous aviez un <tt><b>Type</b></tt> comme:<br \>
 <br \>
 <tt><div class="freebasic">
 <span class="key">Type</span>&nbsp;<span class="wrd">bar</span><br />
@@ -245,13 +245,13 @@ In this code, I use <tt>lhs</tt> and <tt>rhs</tt> to refer to the left and right
 <span class="key">End</span>&nbsp;<span class="key">Type</span><br />
 </div></tt><br />
 <br \>
-Then you would build it like <tt>type(xpart, ypart, zpart)</tt>.<br \>
+Vous l'auriez construit ainsi <tt><b>type(xpart, ypart, zpart)</b></tt>.<br \>
 <br \>
-Most or all operators can be overloaded, and most of them are binary ops, meaning they have two operands like the + example above.  Some are unary ops having only a right hand side, like <tt>Not</tt> and unary minus.  They would be done like '<tt>Operator Not(ByRef rhs As bar) As bar</tt>'.<br \>
+La plupart ou tous les op&eacute;rateurs peuvent &ecirc;tre surcharg&eacute;s, et la plupart d'entre eux sont des op&eacute;rateurs binaires, ce qui signifie qu'ils ont deux op&eacute;randes comme dans l'exemple <b>+</b> ci-dessus.  Certains sont des op&eacute;rateurs unaires ayant seulement le c&ocirc;t&eacute; droit, comme <tt><b>Not</b></tt> et <tt><b>- unaire</b></tt>.  Ils seraient obtenus comme ceci <tt><b>Operator Not(ByRef rhs As bar) As bar</b></tt>.<br \>
 <br \>
-There are some special cases where they have to be declared inside the <tt>Type</tt>; these are the assignment operators and casts.<br \>
+Il y a quelques cas particuliers o&ugrave; ils doivent &ecirc;tre d&eacute;clar&eacute;s &agrave; l'int&eacute;rieur du <tt><b>Type</b></tt>; ce sont les op&eacute;rateurs d'affectation et les "cast".<br \>
 <br \>
-Assignment operators are things like <tt>+= -= mod=</tt> etc, and also <tt>Let</tt>.  <tt>Let</tt> is used when you do an assignment like:<br \>
+Les op&eacute;rateurs d'affectation sont comme ceci <tt><b>+= -= mod=</b></tt> etc, et aussi <tt><b>Let</b></tt>.  <tt><b>Let</b></tt> est utilis&eacute; lorsque vous faites une t&acirc;che d'affectation comme:<br \>
 <br \>
 <tt><div class="freebasic">
 <span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">bar</span>&nbsp;<span class="wrd">foo</span><br />
@@ -259,7 +259,7 @@ Assignment operators are things like <tt>+= -= mod=</tt> etc, and also <tt>Let</
 <span class="wrd">foo</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">x</span><br />
 </div></tt><br />
 <br \>
-And casts are kind of the reverse; they are used when you cast to another datatype like:<br \>
+Et "casts" sont des cas inverses, ils sont utilis&eacute;s lorsque vous "cast" vers un autre type de donn&eacute;es comme ceci:<br \>
 <br \>
 <tt><div class="freebasic">
 <span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">bar</span>&nbsp;<span class="wrd">foo</span><br />
@@ -267,7 +267,7 @@ And casts are kind of the reverse; they are used when you cast to another dataty
 <span class="wrd">x</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">foo</span><br />
 </div></tt><br />
 <br \>
-Heres a short example using <tt>Let</tt> and <tt>Cast</tt>:<br \>
+Voici un court exemple utilisant <tt><b>Let</b></tt> et <tt><b>Cast</b></tt>:<br \>
 <br \>
 <tt><div class="freebasic">
 <span class="key">Type</span>&nbsp;<span class="wrd">bar</span><br />
@@ -301,18 +301,18 @@ Heres a short example using <tt>Let</tt> and <tt>Cast</tt>:<br \>
 <span class="key">Print</span>&nbsp;<span class="wrd">z</span><br />
 </div></tt><br />
 <br \>
-You need to have separate lets and casts for each data type you want to support. The operators that need declaring within the type are known as non-static, and the ones that don't are known as global.  There is a technical reason for this; the non-static ones need to know which instance (in the technical jargon, in our example above, we would say that <tt>x</tt> is an instance of <tt>bar</tt>) of the <tt>Type</tt> they are referring to, and this is accomplished by a hidden '<tt>this</tt>' reference.  This hidden '<tt>this</tt>' reference is how the other members like operators and methods know which instance of the <tt>Type</tt> the call refers to.  Most operators can be overloaded; here's a list of the ones that currently can be:<br \>
+Vous devez avoir s&eacute;par&eacute; les <b>let</b>s et <b>cast</b>s pour chaque type de donn&eacute;es que vous voulez supporter. Les op&eacute;rateurs qui doivent &ecirc;tre d&eacute;clar&eacute;s dans le <tt><b>Type</b></tt> sont connus comme non-statiques et ceux qui ne sont pas connus comme globals.  Il y a une raison technique pour cela; les non-statiques doivent savoir &agrave; quelle instance (dans le jargon technique, dans notre exemple pr&eacute;c&eacute;dent, nous dirions que <tt><b>x</b></tt> est une instance de <tt><b>bar</b></tt>) de <tt><b>Type</b></tt> ils font r&eacute;f&eacute;rence et ceci est accompli par la r&eacute;f&eacute;rence cach&eacute;e <tt><b>this</b></tt>.  Cette r&eacute;f&eacute;rence cach&eacute;e <tt><b>this</b></tt> est le moyen pour que les autres membres comme les op&eacute;rateurs et les m&eacute;thodes sachent &agrave; quelle instance de <tt><b>Type</b></tt> se r&eacute;f&egrave;re l'appel.  La plupart des op&eacute;rateurs peuvent &ecirc;tre surcharg&eacute;s; voici une liste de ceux qui actuellement peuvent l'&ecirc;tre:<br \>
 <br \>
-Assignment ops:<br \>
+op&eacute;rateurs d'affectation:<br \>
   <tt>let</tt>, <tt>+=</tt>, <tt>-=</tt>, <tt>*=</tt>, <tt>/=</tt>, <tt>\=</tt>, <tt>mod=</tt>, <tt>shl=</tt>, <tt>shr=</tt>, <tt>and=</tt>, <tt>or=</tt>, <tt>xor=</tt>, <tt>imp=</tt>, <tt>eqv=</tt>, <tt>^=</tt><br \>
-Unary ops:<br \>
+op&eacute;rateurs unaires:<br \>
   <tt>-</tt>, <tt>not</tt>, <tt>@</tt>, <tt>*</tt>, <tt>-&gt;</tt><br \>
-Binary ops:<br \>
+op&eacute;rateurs binaires:<br \>
   <tt>+</tt>, <tt>-</tt>, <tt>*</tt>, <tt>/</tt>, <tt>\</tt>, <tt>mod</tt>, <tt>shl</tt>, <tt>shr</tt>, <tt>and</tt>, <tt>or</tt>, <tt>xor</tt>, <tt>imp</tt>, <tt>eqv</tt>, <tt>^</tt>, <tt>=</tt>, <tt>&lt;&gt;</tt>, <tt>&lt;</tt>, <tt>&gt;</tt>, <tt>&lt;=</tt>, <tt>&gt;=</tt><br \>
 <br \>
-<b>Overloaded Constructors/Methods</b><br \>
+<b>Constructeurs/M&eacute;thodes surcharg&eacute;s</b><br \>
 <br \>
-As with normal functions, our <tt>Type</tt>'s constructor and methods can be overloaded.  For constructors, this provides a way to specify details on how the instance should be constructed.  Here's a short example:<br \>
+Comme pour les fonctions normales, le <tt><b>Constructor</b></tt> et les m&eacute;thodes de notre <tt><b>Type</b></tt> peuvent &ecirc;tre surcharg&eacute;s.  Pour les <tt><b>Constructor</b></tt>s, cela fournit un moyen de sp&eacute;cifier les d&eacute;tails sur la fa&ccedil;on dont l'instance doit l'&ecirc;tre construite.  Voici un court exemple:<br \>
 <br \>
 <tt><div class="freebasic">
 <span class="key">Type</span>&nbsp;<span class="wrd">bar</span><br />
@@ -336,9 +336,9 @@ As with normal functions, our <tt>Type</tt>'s constructor and methods can be ove
 <span class="key">Print</span>&nbsp;<span class="wrd">baz.x</span><br />
 </div></tt><br />
 <br \>
-The first <tt>Constructor</tt>, that had no arguments, is known as the default constructor.  This sets up <tt>foo.x</tt> to an initial value of 10.  However, we have also specified another constructor that will accept an initial value.  Note the way we ask for this to be called <tt>Dim baz As bar = bar(25)</tt>.  You can also leave out the default constructor, and then you will always have to specify the initial value using the constructor that takes an argument. You can't have an overloaded destructor, because there's no way to manually choose which one would be called.<br \>
+Le premier <tt><b>Constructor</b></tt>, qui n'a aucun argument, est appel&eacute; le <tt><b>Constructor</b></tt> par d&eacute;faut.  Il d&eacute;finit <tt>foo.x</tt> avec une valeur initiale de 10.  Cependant, nous avons aussi sp&eacute;cifi&eacute; un autre <tt><b>Constructor</b></tt> qui accepte une valeur initiale.  Notez la mani&egrave;re avec laquelle nous l'appelons <tt><b>Dim baz As bar = bar(25)</b></tt>.  Vous pouvez &eacute;galement omettre le <tt><b>Constructor</b></tt> par d&eacute;faut et alors vous devrez toujours sp&eacute;cifier une valeur initiale en utilisant le <tt><b>Constructor</b></tt> qui n&eacute;cessite un argument. Vous ne pouvez pas avoir un <tt><b>Destructor</b></tt> surcharg&eacute;, parce qu'il n'existe aucun moyen manuel de choisir celui que vous d&eacute;sirez appeler.<br \>
 <br \>
-Overloaded methods are very similar:<br \>
+Les m&eacute;thodes surcharg&eacute;es sont tr&egrave;s similaires:<br \>
 <br \>
 <tt><div class="freebasic">
 <span class="key">Type</span>&nbsp;<span class="wrd">bar</span><br />
@@ -349,21 +349,21 @@ Overloaded methods are very similar:<br \>
 <span class="key">End</span>&nbsp;<span class="key">Type</span><br />
 </div></tt><br />
 <br \>
-They work just they same as normal overloaded functions.<br \>
+Elles fonctionnent de la m&ecirc;me fa&ccedil;on que les fonctions normales surcharg&eacute;es.<br \>
 <br \>
-<b>Closing</b><br \>
+<b>Cl&ocirc;ture</b><br \>
 <br \>
-I hope this tutorial has been useful for you, although there are still a few things left to learn; if you've got this far, it shouldn't be too hard for you to pick them up.  There is some more information available in the wiki and on the forums, and also in part 2 of this tutorial, available here - <a href="TutBeginnersGuideToTypesAsObjects2.html">Beginners Guide to Types as Objects (Part 2)</a><br \>
+J'esp&egrave;re que ce tutoriel vous a &eacute;t&eacute; utile, mais il y a encore quelques petites choses &agrave; apprendre; si vous avez pu aller jusqu'ici, il ne devrait pas &ecirc;tre trop difficile pour vous de les int&eacute;grer.  Il y a quelques informations disponibles dans le wiki et sur les forums, et aussi dans la partie 2 de ce tutoriel qui est disponible ici - <a href="TutBeginnersGuideToTypesAsObjects2.html">Guide pour d&eacute;butants, de types en tant qu'objets (Partie 2)</a><br \>
 <br \>
-<b>More reading</b><br \>
+<b>Lectures suppl&eacute;mentaires</b><br \>
 <br \>
 <ul><li> <tt><a href="KeyPgProperty.html">Property</a></tt><br \>
 <li> <tt><a href="KeyPgConstructor.html">Constructor</a></tt><br \>
 <li> <tt><a href="KeyPgDestructor.html">Destructor</a></tt><br \>
 <li> <tt><a href="KeyPgOperator.html">Operator</a></tt><br \>
 <li> <tt><a href="KeyPgThis.html">This</a></tt><br \>
-<li> <a href="KeyPgTypeTemp.html">Anonymous Types</a><br \>
-<li> <a href="ProPgTypeObjects.html">Types as Objects</a><br \>
+<li> <a href="KeyPgTypeTemp.html">Types anonymes</a><br \>
+<li> <a href="ProPgTypeObjects.html">Types comme objets</a><br \>
 <li> <tt><a href="KeyPgVisPublic.html">Public:</a></tt><br \>
 <li> <tt><a href="KeyPgVisPrivate.html">Private:</a></tt><br \>
 <li> <tt><a href="KeyPgVisProtected.html">Protected:</a></tt></ul>

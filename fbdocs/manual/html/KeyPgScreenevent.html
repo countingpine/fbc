@@ -11,39 +11,39 @@
 </div> 
 <div id="fb_pg_wrapper">
 <div id="fb_pg_body">
-	Queries for and retrieves system events.<br \>
+	Recherche et r&eacute;cup&egrave;re les &eacute;v&eacute;nements du syst&egrave;me.<br \>
 <br \>
-<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<div class="fb_sect_title">Syntaxe</div><div class="fb_sect_cont"><tt><br \>
 <a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgFunction.html">Function</a> <b>ScreenEvent</b> ( <a href="KeyPgByval.html">ByVal</a> event <a href="KeyPgAs.html">As</a> <a href="KeyPgAny.html">Any</a> <a href="KeyPgPtr.html">Ptr</a> = 0 ) <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a><br \>
 </tt><br \>
 </div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
 <i>result</i> = <b>ScreenEvent</b>( [ <i>event</i> ] )<br \>
 </tt><br \>
-</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Param&egrave;tres</div><div class="fb_sect_cont"><br \>
 <tt><i>event</i></tt><br \>
-<div class="fb_indent">Specifies the buffer where the function should store the event data.<br \>
+<div class="fb_indent">Sp&eacute;cifie le tampon o&ugrave; la fonction stockera les donn&eacute;es &eacute;v&eacute;nements.<br \>
 <br \>
-</div></div><div class="fb_sect_title">Return Value</div><div class="fb_sect_cont"><br \>
-Returns <tt>-1</tt> if there are pending events to be retrieved, <tt>0</tt> otherwise.<br \>
+</div></div><div class="fb_sect_title">Valeur retourn&eacute;e</div><div class="fb_sect_cont"><br \>
+Retourne <tt>-1</tt> s'il existe des &eacute;v&eacute;nements en attente d'&ecirc;tre r&eacute;cup&eacute;r&eacute;s, <tt>0</tt> autrement.<br \>
 <br \>
 </div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
-This function returns the latest available system event from the internal GfxLib events queue. By "event" we mean any mouse or keyboard activity, for example.<br \>
+Cette fonction retourne le dernier &eacute;v&eacute;nement syst&egrave;me disponible dans la file d'attente interne des &eacute;v&eacute;nements GfxLib. Par "&eacute;v&eacute;nement" on d&eacute;signe une activit&eacute; clavier ou souris quelconque.<br \>
 <br \>
-The event data (if available) will be copied into the buffer pointed That should be declared as an  <tt><a href="KeyPgEvent.html">Event</a></tt><br \>
+Les donn&eacute;es &eacute;v&eacute;nement (si disponibles) seront copi&eacute;es dans le tampon point&eacute; par le param&egrave;tre "event" pointed et seront d&eacute;clar&eacute;es comme un <tt><a href="KeyPgEvent.html">Ev&eacute;nement</a></tt><br \>
 <br \>
-<u>Querying for events</u><br \>
-<div class="fb_indent">The function returns <tt>-1</tt> if there are pending events to be retrieved, <tt>0</tt> otherwise. If the <tt><i>event</i></tt> parameter is set to <tt>0</tt> (the default if omitted) <tt><a href="KeyPgScreenevent.html">ScreenEvent</a></tt> will not be able to copy the event data and it will not dequeue it from the internal events queue. Calling the function this way can be useful to check if there are pending events without actually fetching them.<br \>
+<u>Interrogation des &eacute;v&eacute;nements</u><br \>
+<div class="fb_indent">La fonction retourne <tt>-1</tt> s'il y a des &eacute;v&eacute;nements en attente de r&eacute;cup&eacute;ration, <tt>0</tt> autrement. Si le param&egrave;tre <tt><i>event</i></tt> est mis &agrave; <tt>0</tt> (valeur par d&eacute;faut si omis) <tt><a href="KeyPgScreenevent.html">ScreenEvent</a></tt> ne sera pas en mesure de copier les donn&eacute;es d'&eacute;v&eacute;nement et ne va pas les sortir de la file d'attente interne des &eacute;v&eacute;nements. L'appel de la fonction de cette façon peut &ecirc;tre utile pour v&eacute;rifier s'il y a des &eacute;v&eacute;nements disponibles sans les aller chercher.<br \>
 <br \>
 </div><u>Note</u><br \>
-<div class="fb_indent">If you receive a KEY_PRESS, KEY_RELEASE or KEY_REPEAT event, it does not clear the keyboard buffer.  If you need the buffer to be clear after you receive the event, you will need to clear it manually.  See <tt><a href="KeyPgInkey.html">Inkey</a></tt>.<br \>
+<div class="fb_indent">Si vous recevez un &eacute;v&eacute;nement KEY_PRESS, KEY_RELEASE ou KEY_REPEAT, il n'effacera pas le tampon clavier.  Si vous d&eacute;sirez effacer le tampon clavier apr&egrave;s r&eacute;ception d'un &eacute;v&eacute;nement, vous devrez le faire manuellement.  Voir <tt><a href="KeyPgInkey.html">Inkey</a></tt>.<br \>
 <br \>
 <br \>
-</div></div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+</div></div><div class="fb_sect_title">Exemple</div><div class="fb_sect_cont"><br \>
 <tt><div class="freebasic">
-<span class="com">''&nbsp;include&nbsp;fbgfx.bi&nbsp;for&nbsp;some&nbsp;useful&nbsp;definitions</span><br />
+<span class="com">''&nbsp;include&nbsp;fbgfx.bi&nbsp;pour&nbsp;des&nbsp;definitions&nbsp;utiles</span><br />
 <span class="def">#include&nbsp;"fbgfx.bi"<br />
 #if&nbsp;__FB_LANG__&nbsp;=&nbsp;"fb"<br />
-</span><span class="key">Using</span>&nbsp;<span class="wrd">fb</span>&nbsp;<span class="com">''&nbsp;constants&nbsp;and&nbsp;structures&nbsp;are&nbsp;stored&nbsp;in&nbsp;the&nbsp;FB&nbsp;namespace&nbsp;in&nbsp;lang&nbsp;fb</span><br />
+</span><span class="key">Using</span>&nbsp;<span class="wrd">fb</span>&nbsp;<span class="com">''&nbsp;constantes&nbsp;et&nbsp;structures&nbsp;sont&nbsp;charg&eacute;es&nbsp;dans&nbsp;l'espace&nbsp;de nom&nbsp;FB&nbsp;en&nbsp;langue&nbsp;fb</span><br />
 <span class="def">#endif<br />
 </span><br />
 <span class="key">Dim</span>&nbsp;<span class="wrd">e</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">EVENT</span><br />
@@ -124,14 +124,14 @@ The event data (if available) will be copied into the buffer pointed That should
 <span class="key">Loop</span><br />
 </div></tt><br />
 <br \>
-</div><div class="fb_sect_title">Platform Differences</div><div class="fb_sect_cont"><br \>
-<ul><li> <tt><b>ScreenEvent</b></tt> does not return window related events in the DOS version, but does return input events.<br \>
+</div><div class="fb_sect_title">Diff&eacute;rences de plates-formes</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><b>ScreenEvent</b></tt> ne retourne pas les &eacute;v&eacute;nements li&eacute;s &agrave; la fen&ecirc;tre dans la version DOS, mais retourne les &eacute;v&eacute;nements d'entr&eacute;e.<br \>
 <br \>
-</ul></div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
-<ul><li> Not available in the <i><a href="CompilerOptlang.html">-lang qb</a></i> dialect.<br \>
+</ul></div><div class="fb_sect_title">Diff&eacute;rences de dialectes</div><div class="fb_sect_cont"><br \>
+<ul><li> Non disponible dans le dialecte <i><a href="CompilerOptlang.html">-lang qb</a></i>.<br \>
 <br \>
-</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
-<ul><li> New to FreeBASIC<br \>
+</ul></div><div class="fb_sect_title">Diff&eacute;rences avec QB</div><div class="fb_sect_cont"><br \>
+<ul><li> Nouveau pour FreeBASIC<br \>
 <br \>
 </ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
 <ul><li> <tt><a href="KeyPgEvent.html">Event</a></tt><br \>

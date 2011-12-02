@@ -6,177 +6,175 @@
 <body>
 <div id="fb_body_wrapper">
 <div id="fb_tab">
-<div id="fb_tab_l">Using the Mouse in FreeBASIC</div>
-<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+<div id="fb_tab_l">Utilisation de la souris dans FreeBASIC</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif"></div> 
 </div> 
 <div id="fb_pg_wrapper">
 <div id="fb_pg_body">
-	<br \>
-After doing some searches, I quickly noticed that there simply wasn't an official tutorial or technique for manipulating the mouse in a windows console application in FreeBasic. Therefore, I decided to write this technique in order to give such an example to the FreeBasic Community. As you know A Windows Console is already mouse aware by ways of the fact that it is a windows console, which means it's created with the use of the Windows API, which means that the mouse can be accessed from the Console Window. So There's no need to turn the mouse on or off in your code. All you need to do is Get or Set the X and Y coordinates and get the states of the mouse buttons. We will be covering the following subjects in this tutorial.<br \>
-<br \>
-<ul><li>Getting Mouse Coordinates:<br \>
-</ul><div class="fb_indent">  The mouse cursor, when the mouse is moved, continuously updates its position. You can get these values to determine where the pointer currently is on the screen.<br \>
-<br \>
-</div><ul><li>Setting Mouse Coordinates:<br \>
-</ul><div class="fb_indent">  For some reason there may be a need to position the mouse pointer at a different location than where the pointer currently is.<br \>
-<br \>
-</div><ul><li>Getting The Mouse Button Statuses:<br \>
-</ul><div class="fb_indent">  Quite simply, when the user presses a button on the mouse, it returns a value that says that a button is pressed, and which buttons are pressed, too. From these values you can decide what part of your code gets executed.<br \>
-<br \>
-</div>As with most tutorials, this one too can be better explained with the use of an example program. We will be creating a very simple program that acts upon the user's interaction with the mouse and certain areas of the screen. It should provide the bases of code needed to efficiently operate and control the mouse in your own programming projects.<br \>
-<br \>
-IMPORTANT: It is mandatory that you set yourself in a graphic mode in order to use the mouse. the mouse commands will always return -1 for a value if the graphic mode is not set.<br \>
-<br \>
-<b>THE SAMPLE PROGRAM DESCRIPTION</b><br \>
-<br \>
-For the sake of a demonstration program, things will be quite simple and as straightforward as it possibly can. The program will show 3 items at the top of the screen and depending on which one you click a different message will be displayed on the screen. This should give you enough information to know how to work with the mouse in FreeBasic.<br \>
-<br \>
-In FreeBasic, there's basically 2 commands that you need to worry about when trying to handle the mouse in your projects. Here they are with their syntax explained as per the documentation.<br \>
-<br \>
---------------------------------------------------------------------------------<br \>
-<br \>
-<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><br \>
-GETMOUSE x, y[, [wheel][, [buttons]]]<br \>
-<br \>
-</div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
-GETMOUSE retrieves the mouse position and button status. <br \>
-<br \>
-Mouse position is stored in X and Y when the function is called. If the mouse is not in the program window, X and Y will be -1.<br \>
-<br \>
-'wheel' is the mouse wheel counter. Rotating the wheel away from you makes the count to increase, rotating towards you makes it to decrease. If mouse is not present or out of the program window, wheel will hold -1.<br \>
-<br \>
-'buttons' stores the button status. On function termination, this will return a bitmask holding buttons status. Bit 0 is set if left mouse button is down; bit 1 is set if right mouse button is down; bit 2 is set if middle mouse button is down.<br \>
-<br \>
-*GETMOUSE is for use in graphics modes, set using the SCREEEN command ONLY.*<br \>
-<br \>
-<br \>
----------------------------------------------------------------------------------<br \>
-<br \>
-</div><div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><br \>
-SETMOUSE x, y, visibility<br \>
-<br \>
-</div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
-SETMOUSE will set the X,Y coordinates of the mouse pointer, as well as setting it's visibility. <br \>
-<br \>
-Mouse position is set using the X and Y parameters. <br \>
-<br \>
-The mouse will be visible if visibility is set to 1, and invisible if visibility is set to 0.<br \>
-<br \>
-*SETMOUSE is intended for graphics modes initiated using the SCREEN statement only.*<br \>
-<br \>
--------------------------------------------------------------------------------- <br \>
-<br \>
-<b>THE CODING BEGINS</b><br \>
-<br \>
-Here are a set of constants that I declare at the beginning of the module. This is simply to gain a bit of clarity of code in the rest of the programming example.<br \>
+	<br \="">Apr&egrave;s avoir fait quelques recherches, j'ai rapidement remarqu&eacute; qu'il n'y avait tout simplement pas tutoriel ou une technique officielle pour la manipulation de la souris dans une application console Windows dans FreeBasic. Par cons&eacute;quent, j'ai d&eacute;cid&eacute; d'&eacute;crire cette technique afin de donner un tel exemple &agrave; la Communaut&eacute; FreeBasic. Comme vous le savez une console de Windows est toujours inform&eacute;e de la souris par du fait qu'il s'agit d'une fen&ecirc;tre de console, ce qui signifie qu'elle a &eacute;t&eacute; cr&eacute;&eacute;e avec l'utilisation de l'API Windows, ce qui signifie que la souris peut &ecirc;tre accessible &agrave; partir de la fen&ecirc;tre de console. Il n'y a donc pas n&eacute;cessaire d'activer ou de d&eacute;sactiver la souris dans votre code. Tout ce que vous devez faire est de Get ou Set les coordonn&eacute;es X et Y et d'obtenir les &eacute;tats des boutons de la souris. Nous allons couvrir les sujets suivants dans ce tutoriel:<br \="">
+<br \="">
+<ul><li>Obtenir les coordonn&eacute;es de la souris:<br \="">
+</li></ul><div class="fb_indent"> Le curseur de la souris, quand la souris est d&eacute;plac&eacute;e, met &agrave; jour sa position continuellement. Vous pouvez obtenir ces valeurs pour d&eacute;terminer o&ugrave; le pointeur se trouve actuellement &agrave; l'&eacute;cran.<br \="">
+<br \="">
+</div><ul><li>Param&egrave;trer les coordonn&eacute;es de la souris:<br \="">
+</li></ul><div class="fb_indent"> Pour une raison quelconque, il peut &ecirc;tre n&eacute;cessaire pour positionner le pointeur de la souris &agrave; un endroit autre que celui o&ugrave; il se trouve actuellement.<br \="">
+<br \="">
+</div><ul><li>Obtenir les statuts des boutons de la souris:<br \="">
+</li></ul><div class="fb_indent"> Tout simplement, lorsque l'utilisateur appuie sur un bouton de la souris, elle retourne une valeur qui dit qu'un bouton est press&eacute; et aussi lequel est press&eacute;. A partir de ces valeurs, vous pouvez d&eacute;cider quelle partie de votre code sera ex&eacute;cut&eacute;e.<br \="">
+<br \="">
+</div>Comme avec la plupart des tutoriels, celui-l&agrave; aussi peut &ecirc;tre mieux expliqu&eacute; &agrave; l'aide d'un exemple de programme. Nous allons cr&eacute;er un programme tr&egrave;s simple qui agit sur l'interaction de l'utilisateur avec la souris et certaines zones de l'&eacute;cran. Il devrait fournir les bases de code n&eacute;cessaires pour op&eacute;rer efficacement et contr&ocirc;ler la souris dans vos projets personnels de programmation.<br \="">
+<br \="">
+IMPORTANT: Il est imp&eacute;ratif que vous fixiez vous-m&ecirc;me un mode graphique pour utiliser la souris. Les commandes de la souris retournent toujours une valeur de -1 si le mode graphique n'est pas r&eacute;gl&eacute;.<br \="">
+<br \="">
+<b>LA DESCRIPTION DU PROGRAMME EXEMPLE</b><br \="">
+<br \="">
+Dans un souci de programme de d&eacute;monstration, les choses seront, autant que possible, tout &agrave; fait simples et directes. Le programme affiche trois items en haut de l'&eacute;cran et en fonction de celui sur lequel vous cliquez un message diff&eacute;rent s'affiche sur l'&eacute;cran. Cela devrait vous donner suffisamment d'informations pour savoir comment travailler avec la souris en FreeBasic.<br \="">
+<br \="">
+En FreeBasic, il y a essentiellement 2 commandes dont vous devez vous soucier lorsque vous essayez de manipuler la souris dans vos projets. Here they are with their syntax explained as per the documentation.<br \="">
+<br \="">
+--------------------------------------------------------------------------------<br \="">
+<br \="">
+<div class="fb_sect_title">Syntaxe</div><div class="fb_sect_cont"><br \="">
+GETMOUSE x, y[, [wheel][, [buttons]]]<br \="">
+<br \="">
+</div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \="">
+GETMOUSE r&eacute;cup&egrave;re la position de la souris et l'&eacute;tat des boutons. <br \="">
+<br \="">
+La position de la souris est stock&eacute;e dans X et Y lorsque la fonction est appel&eacute;e. Si la souris n'est pas dans la fen&ecirc;tre du programme, X et Y seront &agrave; -1.<br \="">
+<br \="">
+<b>"wheel"</b> est le compteur de la molette de la souris. La rotation de la roue vers l'avant fait augmenter le comptage, vers l'arri&egrave;re le fait diminuer. Si la souris n'est pas pr&eacute;sente ou hors de la fen&ecirc;tre du programme, "wheel" sera &agrave; -1.<br \="">
+<br \="">
+<b>"buttons"</b> stocke l'&eacute;tat des boutons. A la sortie de la fonction, il y aura retour d'un masque binaire indiquant l'&eacute;tat des boutons. Le bit 0 est &agrave; 1 si le bouton de gauche est appuy&eacute;; le bit 1 &agrave; 1 si le bouton de droite est appuy&eacute;; le bit 2 &agrave; 1 si le bouton du milieu est appuy&eacute;.<br \="">
+<br \="">
+*GETMOUSE est utilis&eacute; dans les modes graphiques, d&eacute;finis SEULEMENT &agrave; l'aide de la commande SCREEEN.*<br \="">
+<br \="">
+<br \="">
+---------------------------------------------------------------------------------<br \="">
+<br \="">
+</div><div class="fb_sect_title">Syntaxe</div><div class="fb_sect_cont"><br \="">
+SETMOUSE x, y, visibility<br \="">
+<br \="">
+</div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \="">
+SETMOUSE fixera les coordonn&eacute;es X, Y du pointeur de la souris, ainsi que le r&eacute;glage de sa visibilit&eacute;. <br \="">
+<br \="">
+La position de la souris est r&eacute;gl&eacute;e en utilisant les param&egrave;tres X et Y. <br \="">
+<br \="">
+La souris sera visible si <b>"visibility"</b> est &agrave; 1, et invisible lorsque <b>"visibility"</b> est &agrave; 0.<br \="">
+<br \="">
+*SETMOUSE est destin&eacute; aux modes graphiques lanc&eacute;s en utilisant l'instruction SCREEN uniquement*<br \="">
+<br \="">
+-------------------------------------------------------------------------------- <br \="">
+<br \="">
+<b>LE CODAGE COMMENCE</b><br \="">
+<br \="">
+Voici un ensemble de constantes que je d&eacute;clare au d&eacute;but du module. C'est tout simplement pour gagner un peu de clart&eacute; dans le reste du code de l'exemple de programmation.<br \="">
 <tt><div class="freebasic">
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Const</span>&nbsp;<span class="wrd">LEFTBUTTON</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">1</span>&nbsp;<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Const</span>&nbsp;<span class="wrd">MIDDLEBUTTON</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">4</span>&nbsp;<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Const</span>&nbsp;<span class="wrd">RIGHTBUTTON</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">2</span>&nbsp;<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Const</span>&nbsp;<span class="wrd">SHOWMOUSE</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">1</span><br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Const</span>&nbsp;<span class="wrd">HIDEMOUSE</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span>&nbsp;<br />
-</div></tt><br />
-As a first step in this example, we will be declaring variables that we will be using throughout the example program. Of course you don't have to declare your variables, but me I like to do so because when you do so you know exactly why you're declaring your variables. To me that's good practice.<br \>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Const</span>&nbsp;<span class="wrd">LEFTBUTTON</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">1</span>&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Const</span>&nbsp;<span class="wrd">MIDDLEBUTTON</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">4</span>&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Const</span>&nbsp;<span class="wrd">RIGHTBUTTON</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">2</span>&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Const</span>&nbsp;<span class="wrd">SHOWMOUSE</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">1</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Const</span>&nbsp;<span class="wrd">HIDEMOUSE</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span>&nbsp;<br>
+</div></tt><br>
+Dans une premi&egrave;re &eacute;tape de cet exemple, nous allons d&eacute;clarer des variables que nous allons utiliser tout au long de ce programme. Bien s&ucirc;r, vous n'avez pas &agrave; d&eacute;clarer vos variables, mais moi, je tiens &agrave; le faire parce que quand vous le faites vous savez exactement pourquoi vous d&eacute;clarez ces variables. Pour moi, c'est une bonne pratique.<br \="">
 <tt><div class="freebasic">
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="wrd">CurrentX</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="wrd">CurrentY</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="wrd">MouseButtons</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="wrd">CanExit</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span>&nbsp;<span class="wrd">A</span><span class="oth">,</span><span class="wrd">B</span><span class="oth">,</span><span class="wrd">C</span><br />
-</div></tt><br />
-The idea here is to do everything within a loop so that we can also control how the program exits. So we'll create a loop that will exit when the "Can<b></b><b></b>Exit" variable is equal to 0. In the loop we'll Interrogate the mouse and print some basic values. (This part is extracted from the example provided in the GETMOUSE syntax explanation in the gfxlib.txt file). Don't forget to set your graphics mode as it is a must to get valid return values from the mouse commands. We'll use Screen 12 for our example.<br \>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="wrd">CurrentX</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="wrd">CurrentY</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="wrd">MouseButtons</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="wrd">CanExit</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span>&nbsp;<span class="wrd">A</span><span class="oth">,</span><span class="wrd">B</span><span class="oth">,</span><span class="wrd">C</span><br>
+</div></tt><br>
+L'id&eacute;e ici est de tout faire dans une boucle de telle sorte que nous pouvons &eacute;galement contr&ocirc;ler la façon dont le programme se termine. Nous allons donc cr&eacute;er une boucle qui se terminera lorsque la variable <b>"CanExit"</b> sera &eacute;gale &agrave; 0. Dans du boucle, nous allons Interroger la souris et imprimer certaines valeurs de base. (Cette partie est extraite de l'exemple fourni dans l'explication de la syntaxe de GETMOUSE dans le fichier gfxlib.txt). N'oubliez pas de configurer votre mode graphique car il est indispensable pour obtenir des valeurs de retour valides des commandes de la souris. Nous allons utiliser Screen 12 pour notre exemple.<br \="">
 <tt><div class="freebasic">
-<span class="key">Screen</span>&nbsp;<span class="num">12</span>&nbsp;<br />
-<span class="wrd">CanExit</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">1</span><br />
-&nbsp;<br />
-<span class="key">Do</span>&nbsp;<span class="key">While</span>&nbsp;<span class="wrd">CanExit</span>&nbsp;<span class="oth">&lt;&gt;</span>&nbsp;<span class="num">0</span>&nbsp;<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">GetMouse</span>&nbsp;<span class="wrd">CurrentX</span><span class="oth">,</span>&nbsp;<span class="wrd">CurrentY</span><span class="oth">,</span>&nbsp;<span class="oth">,</span>&nbsp;<span class="wrd">MouseButtons</span>&nbsp;<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">If</span>&nbsp;<span class="wrd">CurrentX</span>&nbsp;<span class="oth">&lt;</span>&nbsp;<span class="num">0</span>&nbsp;<span class="key">Then</span><br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"Mouse&nbsp;is&nbsp;out&nbsp;of&nbsp;context."</span>&nbsp;<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Else</span><br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">If</span>&nbsp;<span class="wrd">MouseButtons</span>&nbsp;<span class="key">And</span>&nbsp;<span class="wrd">LEFTBUTTON</span>&nbsp;<span class="key">Then</span>&nbsp;<span class="wrd">A</span><span class="oth">=</span><span class="quo">"L"</span><br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">If</span>&nbsp;<span class="wrd">MouseButtons</span>&nbsp;<span class="key">And</span>&nbsp;<span class="wrd">MIDDLEBUTTON</span>&nbsp;<span class="key">Then</span>&nbsp;<span class="wrd">B</span><span class="oth">=</span><span class="quo">"M"</span><br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">If</span>&nbsp;<span class="wrd">MouseButtons</span>&nbsp;<span class="key">And</span>&nbsp;<span class="wrd">RIGHTBUTTON</span>&nbsp;<span class="key">Then</span>&nbsp;<span class="wrd">C</span><span class="oth">=</span><span class="quo">"R"</span><br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="key">Using</span>&nbsp;<span class="quo">"Mouse&nbsp;position:&nbsp;###:###&nbsp;Buttons:&nbsp;&amp;&amp;&amp;"</span><span class="oth">;</span>&nbsp;<span class="wrd">CurrentX</span><span class="oth">;</span>&nbsp;<span class="wrd">CurrentY</span><span class="oth">;</span><span class="wrd">A</span><span class="oth">;</span><span class="wrd">B</span><span class="oth">;</span><span class="wrd">C</span>&nbsp;<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">A</span><span class="oth">=</span><span class="quo">""</span><span class="oth">:</span><span class="wrd">B</span><span class="oth">=</span><span class="quo">""</span><span class="oth">:</span><span class="wrd">C</span><span class="oth">=</span><span class="quo">""</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">End</span>&nbsp;<span class="key">If</span>&nbsp;<br />
-<span class="key">Loop</span><br />
-</div></tt><br />
-This sample will basically continuously display information about Where the mouse is, if it's on the program window and which mouse button is pressed if any. The GETMOUSE statement basically puts the current X and Y coordinates in our Current<b></b><b></b>X and Current<b></b><b></b>Y variables and the status of the mouse buttons in our Mouse<b></b><b></b>Buttons variable. The Three If Statements will print L if the left button was pressed, M if the middle button (or the wheel) was pressed and R if the Right button was pressed.<br \>
-<br \>
-For the next step, since we want to control a bit what's happening with the mouse, will display a few extra things at the beginning of the program and control what happens with them afterwards, in the loop. This is regular text being displayed, this could be replaced by a series of line commands or something to draw a button for the different options. But that is outside the scope of this tutorial. So far, by getting rid of the unwanted print statements from the code above, the loop should now look like this:<br \>
+<span class="key">Screen</span>&nbsp;<span class="num">12</span>&nbsp;<br>
+<span class="wrd">CanExit</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">1</span><br>
+&nbsp;<br>
+<span class="key">Do</span>&nbsp;<span class="key">While</span>&nbsp;<span class="wrd">CanExit</span>&nbsp;<span class="oth">&lt;&gt;</span>&nbsp;<span class="num">0</span>&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">GetMouse</span>&nbsp;<span class="wrd">CurrentX</span><span class="oth">,</span>&nbsp;<span class="wrd">CurrentY</span><span class="oth">,</span>&nbsp;<span class="oth">,</span>&nbsp;<span class="wrd">MouseButtons</span>&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">If</span>&nbsp;<span class="wrd">CurrentX</span>&nbsp;<span class="oth">&lt;</span>&nbsp;<span class="num">0</span>&nbsp;<span class="key">Then</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"La&nbsp;souris&nbsp;est&nbsp;hors&nbsp;contexte."</span>&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Else</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">If</span>&nbsp;<span class="wrd">MouseButtons</span>&nbsp;<span class="key">And</span>&nbsp;<span class="wrd">LEFTBUTTON</span>&nbsp;<span class="key">Then</span>&nbsp;<span class="wrd">A</span><span class="oth">=</span><span class="quo">"L"</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">If</span>&nbsp;<span class="wrd">MouseButtons</span>&nbsp;<span class="key">And</span>&nbsp;<span class="wrd">MIDDLEBUTTON</span>&nbsp;<span class="key">Then</span>&nbsp;<span class="wrd">B</span><span class="oth">=</span><span class="quo">"M"</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">If</span>&nbsp;<span class="wrd">MouseButtons</span>&nbsp;<span class="key">And</span>&nbsp;<span class="wrd">RIGHTBUTTON</span>&nbsp;<span class="key">Then</span>&nbsp;<span class="wrd">C</span><span class="oth">=</span><span class="quo">"R"</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="key">Using</span>&nbsp;<span class="quo">"Position&nbsp;de la souris:&nbsp;###:###&nbsp;Boutons:&nbsp;&amp;&amp;&amp;"</span><span class="oth">;</span>&nbsp;<span class="wrd">CurrentX</span><span class="oth">;</span>&nbsp;<span class="wrd">CurrentY</span><span class="oth">;</span><span class="wrd">A</span><span class="oth">;</span><span class="wrd">B</span><span class="oth">;</span><span class="wrd">C</span>&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">A</span><span class="oth">=</span><span class="quo">""</span><span class="oth">:</span><span class="wrd">B</span><span class="oth">=</span><span class="quo">""</span><span class="oth">:</span><span class="wrd">C</span><span class="oth">=</span><span class="quo">""</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">End</span>&nbsp;<span class="key">If</span>&nbsp;<br>
+<span class="key">Loop</span><br>
+</div></tt><br>
+Cet exemple affichera en permanence essentiellement des informations sur l'endroit o&ugrave; se trouve la souris, si elle est sur la fen&ecirc;tre du programme et le cas &eacute;ch&eacute;ant quel bouton la souris est appuy&eacute;. L'instruction GETMOUSE basiquement place les coordonn&eacute;es X et Y courantes dans nos variables <b>CurrentX</b> et <b>CurrentY</b> et l'&eacute;tat des boutons de la souris dans notre variable <b>Buttons</b>. Les trois instructions If afficheront L si le bouton gauche a &eacute;t&eacute; appuy&eacute;, M si le bouton du milieu (ou la molette) a &eacute;t&eacute; appuy&eacute; et R si le bouton droit a &eacute;t&eacute; appuy&eacute;.<br \="">
+<br \="">
+Pour l'&eacute;tape suivante, comme nous voulons contr&ocirc;ler un peu ce qui se passe avec la souris, nous afficherons quelques choses suppl&eacute;mentaires au d&eacute;but du programme et contr&ocirc;lerons ce qui se passe par la suite, dans la boucle. C'est un texte ordinaire qui est affich&eacute;, cela pourrait &ecirc;tre remplac&eacute; par une s&eacute;rie de commandes en ligne ou quelque chose pour dessiner un bouton pour les diff&eacute;rentes options. Mais c'est en dehors du champ d'application de ce tutoriel. En se d&eacute;barrassant des d&eacute;clarations d'impression non d&eacute;sir&eacute;es du code ci-dessus, la boucle doit maintenant ressembler &agrave; ceci:<br \="">
 <tt><div class="freebasic">
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Screen</span>&nbsp;<span class="num">12</span>&nbsp;<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">SetMouse</span>&nbsp;<span class="num">1</span><span class="oth">,</span>&nbsp;<span class="num">1</span><span class="oth">,</span>&nbsp;<span class="num">1</span><br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">CanExit</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">1</span><br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Locate</span>&nbsp;<span class="num">1</span><span class="oth">,</span><span class="num">1</span><br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"&nbsp;|&nbsp;FIRST&nbsp;|&nbsp;SECOND&nbsp;|&nbsp;THIRD&nbsp;|&nbsp;EXIT&nbsp;|&nbsp;"</span><br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Do</span>&nbsp;<span class="key">While</span>&nbsp;<span class="wrd">CanExit</span>&nbsp;<span class="oth">&lt;&gt;</span>&nbsp;<span class="num">0</span><br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Locate</span>&nbsp;<span class="num">1</span><span class="oth">,</span><span class="num">1</span><br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">GetMouse</span>&nbsp;<span class="wrd">CurrentX</span><span class="oth">,</span>&nbsp;<span class="wrd">CurrentY</span><span class="oth">,</span>&nbsp;<span class="oth">,</span>&nbsp;<span class="wrd">MouseButtons</span><br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Loop</span>&nbsp;<br />
-</div></tt><br />
-Basically we print the line that has " | FIRST | SECOND | THIRD | EXIT | " at the top of the screen. And we go into the loop that interrogates the mouse. Of course, right now nothing will happen if you press a button because there is no code for it. In our example, we'll add code that simple prints which option was selected. If the user selects the EXIT option, we'll print the Option and we'll exit the loop. We'll also add a print statement outside the loop with a sleep to tell the use that we are truely outside the loop and therefore the program is ended. With all this, the code should now look like this. I am putting the whole source file here so you can cut and paste it easily.<br \>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Screen</span>&nbsp;<span class="num">12</span>&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">SetMouse</span>&nbsp;<span class="num">1</span><span class="oth">,</span>&nbsp;<span class="num">1</span><span class="oth">,</span>&nbsp;<span class="num">1</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">CanExit</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">1</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Locate</span>&nbsp;<span class="num">1</span><span class="oth">,</span><span class="num">1</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"&nbsp;|&nbsp;FIRST&nbsp;|&nbsp;SECOND&nbsp;|&nbsp;THIRD&nbsp;|&nbsp;EXIT&nbsp;|&nbsp;"</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Do</span>&nbsp;<span class="key">While</span>&nbsp;<span class="wrd">CanExit</span>&nbsp;<span class="oth">&lt;&gt;</span>&nbsp;<span class="num">0</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Locate</span>&nbsp;<span class="num">1</span><span class="oth">,</span><span class="num">1</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">GetMouse</span>&nbsp;<span class="wrd">CurrentX</span><span class="oth">,</span>&nbsp;<span class="wrd">CurrentY</span><span class="oth">,</span>&nbsp;<span class="oth">,</span>&nbsp;<span class="wrd">MouseButtons</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Loop</span>&nbsp;<br>
+</div></tt><br>
+Essentiellement nous affichons la ligne qui contient " | FIRST | SECOND | THIRD | EXIT | " en haut de l'&eacute;cran. Et nous entrons dans la boucle qui interroge la souris. Bien s&ucirc;r, en ce moment rien ne se passera si vous appuyez sur un bouton, car il n'y a pas de code pour lui. Dans notre exemple, nous allons ajouter du code qui affiche simplement l'option qui a &eacute;t&eacute; s&eacute;lectionn&eacute;e. Si l'utilisateur s&eacute;lectionne l'option EXIT, nous imprimerons l'option et nous sortirons de la boucle. Nous allons &eacute;galement ajouter une instruction d'affichage en dehors de la boucle avec un SLEEP pour dire &agrave; l'utilisateur que nous sommes vraiment en dehors de la boucle et donc que le programme est termin&eacute;. Avec tout cela, la code devrait maintenant ressembler &agrave; ceci. Je mets le fichier source complet ici, donc vous pouvez le copier et le coller facilement.<br \="">
 <tt><div class="freebasic">
-<span class="key">Const</span>&nbsp;<span class="wrd">LEFTBUTTON</span>&nbsp;&nbsp;&nbsp;<span class="oth">=</span>&nbsp;<span class="num">1</span><br />
-<span class="key">Const</span>&nbsp;<span class="wrd">MIDDLEBUTTON</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">4</span>&nbsp;&nbsp;&nbsp;<span class="com">'&nbsp;UNUSED&nbsp;IN&nbsp;THIS&nbsp;DEMO</span><br />
-<span class="key">Const</span>&nbsp;<span class="wrd">RIGHTBUTTON</span>&nbsp;&nbsp;<span class="oth">=</span>&nbsp;<span class="num">2</span>&nbsp;&nbsp;&nbsp;<span class="com">'&nbsp;UNUSED&nbsp;IN&nbsp;THIS&nbsp;DEMO</span><br />
-<span class="key">Const</span>&nbsp;<span class="wrd">SHOWMOUSE</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">=</span>&nbsp;<span class="num">1</span><br />
-<span class="key">Const</span>&nbsp;<span class="wrd">HIDEMOUSE</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span><br />
-<br />
-<span class="key">Dim</span>&nbsp;<span class="wrd">CurrentX</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
-<span class="key">Dim</span>&nbsp;<span class="wrd">CurrentY</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
-<span class="key">Dim</span>&nbsp;<span class="wrd">MouseButtons</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
-<span class="key">Dim</span>&nbsp;<span class="wrd">CanExit</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
-<br />
-<span class="key">Screen</span>&nbsp;<span class="num">12</span><br />
-<span class="key">SetMouse</span>&nbsp;<span class="num">1</span><span class="oth">,</span>&nbsp;<span class="num">1</span><span class="oth">,</span>&nbsp;<span class="wrd">SHOWMOUSE</span><br />
-<span class="wrd">CanExit</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">1</span><br />
-<span class="key">Locate</span>&nbsp;<span class="num">1</span><span class="oth">,</span><span class="num">1</span><br />
-<span class="key">Print</span>&nbsp;<span class="quo">"&nbsp;|&nbsp;FIRST&nbsp;|&nbsp;SECOND&nbsp;|&nbsp;THIRD&nbsp;|&nbsp;EXIT&nbsp;|&nbsp;"</span><br />
-<br />
-<span class="key">Do</span><br />
-&nbsp;&nbsp;&nbsp;<span class="key">GetMouse</span>&nbsp;<span class="wrd">CurrentX</span><span class="oth">,</span>&nbsp;<span class="wrd">CurrentY</span><span class="oth">,</span>&nbsp;<span class="oth">,</span>&nbsp;<span class="wrd">MouseButtons</span><br />
-&nbsp;&nbsp;&nbsp;<span class="key">If</span>&nbsp;<span class="wrd">MouseButtons</span>&nbsp;<span class="key">And</span>&nbsp;<span class="wrd">LEFTBUTTON</span>&nbsp;<span class="key">Then</span><br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">If</span>&nbsp;<span class="wrd">CurrentY</span>&nbsp;<span class="oth">&lt;=</span>&nbsp;<span class="num">12</span>&nbsp;<span class="key">Then</span><br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">If</span>&nbsp;<span class="wrd">CurrentX</span>&nbsp;<span class="oth">&gt;=</span>&nbsp;<span class="num">0</span>&nbsp;<span class="key">And</span>&nbsp;<span class="wrd">CurrentX</span>&nbsp;<span class="oth">&lt;=</span><span class="num">75</span>&nbsp;<span class="key">Then</span><br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Locate</span>&nbsp;<span class="num">12</span><span class="oth">,</span>&nbsp;<span class="num">1</span><br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"First&nbsp;Option&nbsp;Selected&nbsp;"</span><span class="oth">;</span><br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">ElseIf</span>&nbsp;<span class="wrd">CurrentX</span>&nbsp;<span class="oth">&gt;=</span>&nbsp;<span class="num">76</span>&nbsp;<span class="key">And</span>&nbsp;<span class="wrd">CurrentX</span>&nbsp;<span class="oth">&lt;=</span>&nbsp;<span class="num">147</span>&nbsp;<span class="key">Then</span><br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Locate</span>&nbsp;<span class="num">12</span><span class="oth">,</span>&nbsp;<span class="num">1</span><br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"Second&nbsp;Option&nbsp;Selected"</span><span class="oth">;</span><br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">ElseIf</span>&nbsp;<span class="wrd">CurrentX</span>&nbsp;<span class="oth">&gt;=</span>&nbsp;<span class="num">148</span>&nbsp;<span class="key">And</span>&nbsp;<span class="wrd">CurrentX</span>&nbsp;<span class="oth">&lt;=</span><span class="num">212</span>&nbsp;<span class="key">Then</span><br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Locate</span>&nbsp;<span class="num">12</span><span class="oth">,</span>&nbsp;<span class="num">1</span><br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"Third&nbsp;Option&nbsp;Selected&nbsp;"</span><span class="oth">;</span><br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">ElseIf</span>&nbsp;<span class="wrd">CurrentX</span>&nbsp;<span class="oth">&gt;=</span>&nbsp;<span class="num">213</span>&nbsp;<span class="key">And</span>&nbsp;<span class="wrd">CurrentX</span>&nbsp;<span class="oth">&lt;=</span><span class="num">268</span>&nbsp;<span class="key">Then</span><br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Locate</span>&nbsp;<span class="num">12</span><span class="oth">,</span>&nbsp;<span class="num">1</span><br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"Last&nbsp;Option&nbsp;Selected&nbsp;&nbsp;"</span><span class="oth">;</span><br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Exit</span>&nbsp;<span class="key">Do</span><br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">End</span>&nbsp;<span class="key">If</span><br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">End</span>&nbsp;<span class="key">If</span><br />
-&nbsp;&nbsp;&nbsp;<span class="key">End</span>&nbsp;<span class="key">If</span><br />
-<span class="key">Loop</span>&nbsp;<span class="key">While</span>&nbsp;<span class="key">Inkey$</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="quo">""</span><br />
-<br />
-<span class="key">SetMouse</span>&nbsp;<span class="num">1</span><span class="oth">,</span>&nbsp;<span class="num">1</span><span class="oth">,</span>&nbsp;<span class="wrd">HIDEMOUSE</span><br />
-<span class="key">Print</span><br />
-<span class="key">Print</span>&nbsp;<span class="quo">"AND&nbsp;NOW&nbsp;WE'RE&nbsp;OUT&nbsp;OF&nbsp;THE&nbsp;LOOP"</span><br />
-<span class="key">Sleep</span><br />
-</div></tt><br />
-<br \>
-You can see the many IF statements in this last piece of code. The numbers that are there have been measured as per SCREEN 12 returned coordinates. They should work in all graphics mode however because a pixel is a pixel in a Console Graphics Window. Each if represents where the different options are written on the screen. If you would have used a graphics button routine you could simply use the same width and height as you did to draw the button in these if statements to know which button was clicked.<br \>
-<br \>
-<b>IN CONCLUSION</b><br \>
-<br \>
-As you can see, using the mouse has been made very simple in FreeBasic. You can use simple statement like the print command to draw your screens or you can use graphics command like LINE to draw your screens graphically. No matter which way you choose to draw your screens with, the SETMOUSE and GETMOUSE statement will work the same way and return the very same values. All you have to do is get that information and make your programs do what you want them to do if they press a button, select an option, or even in the case of a game, you could easily make the main character move towards the location where you clicked on the screen as well. The choice is up to you.<br \>
-<br \>
-As always, if you have any questions regarding this tutorial or any other I've written, feel free to email me and we'll see what we can do about solving your particular problem.<br \>
-<br \>
-<br \>
-MystikShadows<br \>
-St�phane Richard<br \>
+<span class="key">Const</span>&nbsp;<span class="wrd">LEFTBUTTON</span>&nbsp;&nbsp;&nbsp;<span class="oth">=</span>&nbsp;<span class="num">1</span><br>
+<span class="key">Const</span>&nbsp;<span class="wrd">MIDDLEBUTTON</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">4</span>&nbsp;&nbsp;&nbsp;<span class="com">'&nbsp;UNUSED&nbsp;IN&nbsp;THIS&nbsp;DEMO</span><br>
+<span class="key">Const</span>&nbsp;<span class="wrd">RIGHTBUTTON</span>&nbsp;&nbsp;<span class="oth">=</span>&nbsp;<span class="num">2</span>&nbsp;&nbsp;&nbsp;<span class="com">'&nbsp;UNUSED&nbsp;IN&nbsp;THIS&nbsp;DEMO</span><br>
+<span class="key">Const</span>&nbsp;<span class="wrd">SHOWMOUSE</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">=</span>&nbsp;<span class="num">1</span><br>
+<span class="key">Const</span>&nbsp;<span class="wrd">HIDEMOUSE</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span><br>
+<br>
+<span class="key">Dim</span>&nbsp;<span class="wrd">CurrentX</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br>
+<span class="key">Dim</span>&nbsp;<span class="wrd">CurrentY</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br>
+<span class="key">Dim</span>&nbsp;<span class="wrd">MouseButtons</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br>
+<span class="key">Dim</span>&nbsp;<span class="wrd">CanExit</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br>
+<br>
+<span class="key">Screen</span>&nbsp;<span class="num">12</span><br>
+<span class="key">SetMouse</span>&nbsp;<span class="num">1</span><span class="oth">,</span>&nbsp;<span class="num">1</span><span class="oth">,</span>&nbsp;<span class="wrd">SHOWMOUSE</span><br>
+<span class="wrd">CanExit</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">1</span><br>
+<span class="key">Locate</span>&nbsp;<span class="num">1</span><span class="oth">,</span><span class="num">1</span><br>
+<span class="key">Print</span>&nbsp;<span class="quo">"&nbsp;|&nbsp;FIRST&nbsp;|&nbsp;SECOND&nbsp;|&nbsp;THIRD&nbsp;|&nbsp;EXIT&nbsp;|&nbsp;"</span><br>
+<br>
+<span class="key">Do</span><br>
+&nbsp;&nbsp;&nbsp;<span class="key">GetMouse</span>&nbsp;<span class="wrd">CurrentX</span><span class="oth">,</span>&nbsp;<span class="wrd">CurrentY</span><span class="oth">,</span>&nbsp;<span class="oth">,</span>&nbsp;<span class="wrd">MouseButtons</span><br>
+&nbsp;&nbsp;&nbsp;<span class="key">If</span>&nbsp;<span class="wrd">MouseButtons</span>&nbsp;<span class="key">And</span>&nbsp;<span class="wrd">LEFTBUTTON</span>&nbsp;<span class="key">Then</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">If</span>&nbsp;<span class="wrd">CurrentY</span>&nbsp;<span class="oth">&lt;=</span>&nbsp;<span class="num">12</span>&nbsp;<span class="key">Then</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">If</span>&nbsp;<span class="wrd">CurrentX</span>&nbsp;<span class="oth">&gt;=</span>&nbsp;<span class="num">0</span>&nbsp;<span class="key">And</span>&nbsp;<span class="wrd">CurrentX</span>&nbsp;<span class="oth">&lt;=</span><span class="num">75</span>&nbsp;<span class="key">Then</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Locate</span>&nbsp;<span class="num">12</span><span class="oth">,</span>&nbsp;<span class="num">1</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"FIRST&nbsp;Option&nbsp;selectionnee&nbsp;"</span><span class="oth">;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">ElseIf</span>&nbsp;<span class="wrd">CurrentX</span>&nbsp;<span class="oth">&gt;=</span>&nbsp;<span class="num">76</span>&nbsp;<span class="key">And</span>&nbsp;<span class="wrd">CurrentX</span>&nbsp;<span class="oth">&lt;=</span>&nbsp;<span class="num">147</span>&nbsp;<span class="key">Then</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Locate</span>&nbsp;<span class="num">12</span><span class="oth">,</span>&nbsp;<span class="num">1</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"SECOND&nbsp;Option&nbsp;selectionnee"</span><span class="oth">;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">ElseIf</span>&nbsp;<span class="wrd">CurrentX</span>&nbsp;<span class="oth">&gt;=</span>&nbsp;<span class="num">148</span>&nbsp;<span class="key">And</span>&nbsp;<span class="wrd">CurrentX</span>&nbsp;<span class="oth">&lt;=</span><span class="num">212</span>&nbsp;<span class="key">Then</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Locate</span>&nbsp;<span class="num">12</span><span class="oth">,</span>&nbsp;<span class="num">1</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"THIRD&nbsp;Option&nbsp;selectionnee&nbsp;"</span><span class="oth">;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">ElseIf</span>&nbsp;<span class="wrd">CurrentX</span>&nbsp;<span class="oth">&gt;=</span>&nbsp;<span class="num">213</span>&nbsp;<span class="key">And</span>&nbsp;<span class="wrd">CurrentX</span>&nbsp;<span class="oth">&lt;=</span><span class="num">268</span>&nbsp;<span class="key">Then</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Locate</span>&nbsp;<span class="num">12</span><span class="oth">,</span>&nbsp;<span class="num">1</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"Derniere&nbsp;Option&nbsp;selectionnee&nbsp;&nbsp;"</span><span class="oth">;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Exit</span>&nbsp;<span class="key">Do</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">End</span>&nbsp;<span class="key">If</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">End</span>&nbsp;<span class="key">If</span><br>
+&nbsp;&nbsp;&nbsp;<span class="key">End</span>&nbsp;<span class="key">If</span><br>
+<span class="key">Loop</span>&nbsp;<span class="key">While</span>&nbsp;<span class="key">Inkey$</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="quo">""</span><br>
+<br>
+<span class="key">SetMouse</span>&nbsp;<span class="num">1</span><span class="oth">,</span>&nbsp;<span class="num">1</span><span class="oth">,</span>&nbsp;<span class="wrd">HIDEMOUSE</span><br>
+<span class="key">Print</span><br>
+<span class="key">Print</span>&nbsp;<span class="quo">"ET&nbsp;MAINTENANT&nbsp;ON EST&nbsp;EN DEHORS&nbsp;DE&nbsp;LA&nbsp;BOUCLE"</span><br>
+<span class="key">Sleep</span><br>
+</div></tt><br>
+<br \="">
+Vous pouvez voir les nombreuses instructions IF dans ce dernier morceau de code. Les nombres qui sont l&agrave; ont &eacute;t&eacute; d&eacute;termin&eacute;s par rapport aux coordonn&eacute;es renvoy&eacute;es par SCREEN 12. Toutefois, elles devraient fonctionner dans tous les modes graphiques, car un pixel est un pixel dans une fen&ecirc;tre graphique de la console. Chaque IF repr&eacute;sente le lieu o&ugrave; les diff&eacute;rentes options sont &eacute;crites &agrave; l'&eacute;cran. Si vous voulez utiliser une routine de bouton graphique,vous pouvez simplement utiliser les m&ecirc;mes largeur et hauteur pour dessiner le bouton dans ces instructions IF pour savoir quel bouton a &eacute;t&eacute; cliqu&eacute;.<br \="">
+<br \="">
+<b>EN CONCLUSION</b><br \="">
+<br \="">
+Comme vous pouvez le voir, utiliser la souris est tr&egrave;s simple dans FreeBasic. Vous pouvez utiliser une simple instruction comme la commande d'affichage PRINT pour dessiner vos &eacute;crans ou vous pouvez utiliser une commande graphique comme LINE pour dessiner vos &eacute;crans graphiquement. Peu importe la façon dont vous choisissez d' &eacute;laborer vos &eacute;crans, les instructions SETMOUSE et GETMOUSE fonctionneront de la m&ecirc;me mani&egrave;re et retourneront les m&ecirc;mes valeurs. Tout ce que vous avez &agrave; faire, c'est d'obtenir les informations, et d'obliger vos programmes &agrave; faire ce que vous voulez qu'ils fassent si on appuye sur un bouton, s&eacute;lectionne une option, ou m&ecirc;me dans le cas d'un jeu, vous pouvez facilement faire bouger le personnage principal vers l'endroit o&ugrave; vous avez cliqu&eacute; sur l'&eacute;cran. A vous de choisir.<br \="">
+<br \="">
+Comme toujours, si vous avez des questions concernant ce tutoriel ou sur tout autre que j'ai &eacute;crit, n'h&eacute;sitez pas &agrave; m'envoyer un email et nous verrons ce que nous pouvons faire pour r&eacute;soudre votre probl&egrave;me particulier.<br \="">
+<br \="">
+<br \="">
+MystikShadows<br \="">
+St&eacute;phane Richard<br \="">
 srichard@adaworld.com </div>
 </div>
 </div> 
 </div> 
-</body>
-</html>
+</body></html>

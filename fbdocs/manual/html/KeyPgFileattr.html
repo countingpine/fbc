@@ -11,46 +11,46 @@
 </div> 
 <div id="fb_pg_wrapper">
 <div id="fb_pg_body">
-	Returns information about an open file number<br \>
+	Retourne des informations sur un num&eacute;ro de fichier ouvert<br \>
 <br \>
-<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<div class="fb_sect_title">Syntaxe</div><div class="fb_sect_cont"><tt><br \>
 <a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgFunction.html">Function</a> <b>FileAttr</b> ( <a href="KeyPgByval.html">ByVal</a> <i>filenum</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a>, <a href="KeyPgByval.html">ByVal</a> <i>returntype</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a> = 1 ) <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a><br \>
 </tt><br \>
 </div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
 #include "file.bi"<br \>
 <i>result</i> = <b>FileAttr</b>( <i>filenum</i>, [ <i>returntype</i> ] )<br \>
 </tt><br \>
-<i>or</i><br \>
+<i>ou</i><br \>
 <tt><br \>
 #include "vbcompat.bi"<br \>
 <i>result</i> = <b>FileAttr</b>( <i>filenum</i>, [ <i>returntype</i> ] )<br \>
 </tt><br \>
-</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Param&egrave;tres</div><div class="fb_sect_cont"><br \>
 <tt><i>filenum</i></tt><br \>
-<div class="fb_indent">The file number of a file or device opened with <tt><a href="KeyPgOpen.html">Open</a></tt><br \>
+<div class="fb_indent">Le num&eacute;ro de fichier ou p&eacute;riph&eacute;rique ouvert avec <tt><a href="KeyPgOpen.html">Open</a></tt><br \>
 </div><tt><i>returntype</i></tt><br \>
-<div class="fb_indent">An <tt><a href="KeyPgInteger.html">Integer</a></tt> indicating the type of information to return.<br \>
+<div class="fb_indent">Un nombre <tt><a href="KeyPgInteger.html">Integer (Entier)</a></tt> indiquant le type d'information &agrave; renvoyer.<br \>
 <br \>
-</div></div><div class="fb_sect_title">Return Value</div><div class="fb_sect_cont"><br \>
-A value associated with the return type, otherwise 0 on error.<br \>
+</div></div><div class="fb_sect_title">Valeur retourn&eacute;e</div><div class="fb_sect_cont"><br \>
+Une valeur associ&eacute;e au type de retour, sinon 0 en cas d'erreur.<br \>
 <br \>
 </div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
-Information about the file number is returned based on the supplied <tt><i>returntype</i></tt><br \>
-<div class="fb_indent"><div class="fb_table"><table><tr><td>Value</td><td>Description</td><td>constant</td></tr><tr><td>1</td><td>File Mode</td><td>fbFileAttrMode</td></tr><tr><td>2</td><td>File Handle</td><td>fbFileAttrHandle</td></tr><tr><td>3</td><td>Encoding</td><td>fbFileAttrEncoding</td></tr></table></div><br \>
+Information sur le num&eacute;ro de fichier est retourn&eacute; sur la base du <tt><i>returntype</i></tt> fourni<br \>
+<div class="fb_indent"><div class="fb_table"><table><tr><td>Valeur</td><td>Description</td><td>constante</td></tr><tr><td>1</td><td>File Mode</td><td>fbFileAttrMode</td></tr><tr><td>2</td><td>File Handle</td><td>fbFileAttrHandle</td></tr><tr><td>3</td><td>Encoding</td><td>fbFileAttrEncoding</td></tr></table></div><br \>
 <br \>
-</div>For File Mode, <tt><i>returntype</i></tt> = 1 (<tt>fbFileAttrMode</tt>) the return value is the sum of one or more of the following values: <br \>
-<div class="fb_indent"><div class="fb_table"><table><tr><td>Value</td><td>File Mode</td><td>Constant</td></tr><tr><td>1</td><td>Input</td><td>fbFileModeInput</td></tr><tr><td>2</td><td>Output</td><td>fbFileModeOutput</td></tr><tr><td>4</td><td>Random</td><td>fbFileModeRandom</td></tr><tr><td>8</td><td>Append</td><td>fbFileModeAppend</td></tr><tr><td>32</td><td>Binary</td><td>fbFileModeBinary</td></tr></table></div><br \>
+</div>Pour "File Mode", <tt><i>returntype</i></tt> = 1 (<tt>fbFileAttrMode</tt>) la valeur retourn&eacute;e est la somme d'une ou plusieurs des valeurs suivantes: <br \>
+<div class="fb_indent"><div class="fb_table"><table><tr><td>Valeur</td><td>Mode fichier</td><td>Constante</td></tr><tr><td>1</td><td>Input</td><td>fbFileModeInput</td></tr><tr><td>2</td><td>Output</td><td>fbFileModeOutput</td></tr><tr><td>4</td><td>Random</td><td>fbFileModeRandom</td></tr><tr><td>8</td><td>Append</td><td>fbFileModeAppend</td></tr><tr><td>32</td><td>Binary</td><td>fbFileModeBinary</td></tr></table></div><br \>
 <br \>
-</div>For File Handle, <tt><i>returntype</i></tt> = 2 (<tt>fbFileAttrHandle</tt>), the return value is the file handle as supplied by the C Runtime for file-type devices.  <br \>
+</div>Pour "File Handle", <tt><i>returntype</i></tt> = 2 (<tt>fbFileAttrHandle</tt>), la valeur de retour est le descripteur de fichier fourni par le "C Runtime" pour les dispositifs de type de fichier.  <br \>
 <br \>
-On Windows only: For File Handle, <tt><i>returntype</i></tt> = 2 (<tt>fbFileAttrHandle</tt>), the value returned for COM devices is the handle returned by <tt>CreateFile()</tt> when the device was first opened.  The value returned for LPT devices is the handle returned by <tt>OpenPrinter()</tt> when the device was first opened.  This handle value can be passed to other Windows API functions.<br \>
+Sous Windows seulement: Pour "File Handle", <tt><i>returntype</i></tt> = 2 (<tt>fbFileAttrHandle</tt>), la valeur retourn&eacute;e pour les p&eacute;riph&eacute;riques COM est le "handle" retourn&eacute; par <tt>CreateFile()</tt> quand le p&eacute;riph&eacute;rique a &eacute;t&eacute; ouvert.  La valeur retourn&eacute;e pour les p&eacute;riph&eacute;riques LPT est le "handle" retourn&eacute; par <tt>OpenPrinter()</tt> quand le p&eacute;riph&eacute;rique a &eacute;t&eacute; ouvert.  Cette valeur "handle" peut être transmise &agrave; d'autres fonctions API de Windows.<br \>
 <br \>
-On Linux only: For File Handle, <tt><i>returntype</i></tt> = 2 (<tt>fbFileAttrHandle</tt>), the value returned for COM devices is the file descriptor returned by open() when the device was first opened.<br \>
+Sous Linux seulement: Pour "File Handle", <tt><i>returntype</i></tt> = 2 (<tt>fbFileAttrHandle</tt>), la valeur retourn&eacute;e pour les p&eacute;riph&eacute;riques COM est le descripteur de fichier retourn&eacute; par open() quand le p&eacute;riph&eacute;rique a &eacute;t&eacute; ouvert.<br \>
 <br \>
-For Encoding, <tt><i>returntype</i></tt> = 3 (<tt>fbFileAttrEncoding</tt>), the return value is one of the following values:<br \>
-<div class="fb_indent"><div class="fb_table"><table><tr><td>Value</td><td>Encoding</td><td>Constant</td></tr><tr><td>0</td><td>Ascii</td><td>fbFileEncodASCII</td></tr><tr><td>1</td><td>UTF-8</td><td>fbFileEncodUTF8</td></tr><tr><td>2</td><td>UTF-16</td><td>fbFileEncodUTF16</td></tr><tr><td>3</td><td>UTF-32</td><td>fbFileEncodUTF32</td></tr></table></div><br \>
+Pour Encoding, <tt><i>returntype</i></tt> = 3 (<tt>fbFileAttrEncoding</tt>), la valeur de retour est l'une des valeurs suivantes:<br \>
+<div class="fb_indent"><div class="fb_table"><table><tr><td>Valeur</td><td>Encoding</td><td>Constante</td></tr><tr><td>0</td><td>Ascii</td><td>fbFileEncodASCII</td></tr><tr><td>1</td><td>UTF-8</td><td>fbFileEncodUTF8</td></tr><tr><td>2</td><td>UTF-16</td><td>fbFileEncodUTF16</td></tr><tr><td>3</td><td>UTF-32</td><td>fbFileEncodUTF32</td></tr></table></div><br \>
 <br \>
-</div></div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+</div></div><div class="fb_sect_title">Exemple</div><div class="fb_sect_cont"><br \>
 <tt><div class="freebasic">
 <span class="def">#include&nbsp;"vbcompat.bi"<br />
 #include&nbsp;"crt.bi"<br />
@@ -77,12 +77,12 @@ For Encoding, <tt><i>returntype</i></tt> = 3 (<tt>fbFileAttrEncoding</tt>), the 
 <span class="key">Close</span>&nbsp;<span class="oth">#</span><span class="num">1</span><br />
 </div></tt><br />
 <br \>
-</div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
-<ul><li> None for <tt><i>returntype</i></tt> = 1<br \>
-<li> QBasic and 16-bit Visual Basic returned DOS file handle for <tt><i>returntype</i></tt> = 2<br \>
-<li> <tt><i>returntype</i></tt> = 3 is new to FreeBASIC<br \>
+</div><div class="fb_sect_title">Diff&eacute;rences avec QB</div><div class="fb_sect_cont"><br \>
+<ul><li> Aucune pour <tt><i>returntype</i></tt> = 1<br \>
+<li> QBasic et Visual Basic 16-bit retourne le "handle" fichier DOS pour <tt><i>returntype</i></tt> = 2<br \>
+<li> <tt><i>returntype</i></tt> = 3 nouveau pour FreeBASIC<br \>
 <br \>
-</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+</ul></div><div class="fb_sect_title">Voir aussi</div><div class="fb_sect_cont"><br \>
 <ul><li> <tt><a href="KeyPgOpen.html">Open</a></tt><br \>
 <br \>
 </ul></div>

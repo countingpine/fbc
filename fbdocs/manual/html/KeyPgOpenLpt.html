@@ -11,58 +11,58 @@
 </div> 
 <div id="fb_pg_wrapper">
 <div id="fb_pg_body">
-	Open a printer device<br \>
+	Ouvre un p&eacute;riph&eacute;rique imprimante<br \>
 <br \>
-<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<div class="fb_sect_title">Syntaxe</div><div class="fb_sect_cont"><tt><br \>
 <b>Open Lpt</b> ["[LPT[x]:][<i>Printer_Name</i>][,<i>TITLE=Doc_Title</i>][,<i>EMU=TTY</i>]"] [For Input|Output] <a href="KeyPgAs.html">As</a> #<i>filenum</i><br \>
 </tt><br \>
 </div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
 <b>Open Lpt</b> "LPT..." <a href="KeyPgAs.html">As</a> [#]<i>filenum</i><br \>
-<div class="fb_indent"><i>or</i><br \>
+<div class="fb_indent"><i>ou</i><br \>
 </div><i>result</i> = <b>Open Lpt</b>( "LPT..." <a href="KeyPgAs.html">As</a> [#]<i>filenum</i> )<br \>
 </tt><br \>
-</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Param&egrave;tres</div><div class="fb_sect_cont"><br \>
 <tt><i>x</i></tt><br \>
-<div class="fb_indent">Specifies a port number.  If omitted, output is sent to the system print spooler.<br \>
+<div class="fb_indent">Sp&eacute;cifie un num&eacute;ro de port. S'il est omis, la sortie est envoy&eacute;e de spooleur d'impression du syst&egrave;me.<br \>
 </div><tt><i>Printer_Name</i></tt><br \>
-<div class="fb_indent">Name of printer to open.  This parameter is ignored on DOS.<br \>
+<div class="fb_indent">Nom de l'imprimante &agrave; ouvrir. Ce param&egrave;tre est ignor&eacute; sous DOS.<br \>
 </div><tt><i>TITLE=Doc_Title</i></tt><br \>
-<div class="fb_indent">Title of the print job as seen by the printer spooler.  This parameter is ignored on DOS.<br \>
+<div class="fb_indent">Titre de l'impression comme on le voit sur le spooler d'imprimante. Ce param&egrave;tre est ignor&eacute; sous DOS.<br \>
 </div><tt><i>EMU=TTY</i></tt><br \>
-<div class="fb_indent">Emulation of TTY output on a windows GDI printer, using driver text imaging.  This parameter is ignored on DOS and Linux.<br \>
+<div class="fb_indent">Emulation de sortie TTY sur une imprimante GDI pour Windows, en utilisant un pilote d'imagerie de texte. Ce param&egrave;tre est ignor&eacute; sous DOS et Linux.<br \>
 </div><tt>For Input|Output</tt><br \>
-<div class="fb_indent">clause is allowed for compatibility, but it is ignored.<br \>
+<div class="fb_indent">clause pour la compatibilit&eacute;, mais ignor&eacute;e.<br \>
 </div><tt><i>filenum</i></tt><br \>
-<div class="fb_indent">An unused file number to assign to the device.<br \>
+<div class="fb_indent">Un num&eacute;ro de fichier utilis&eacute; pour l'attribuer &agrave; l'appareil.<br \>
 <br \>
-</div></div><div class="fb_sect_title">Return Value</div><div class="fb_sect_cont"><br \>
-Zero is returned if <b>Open Lpt</b> completed successfully, otherwise a non-zero value is returned to indicate failure.<br \>
+</div></div><div class="fb_sect_title">Valeur retourn&eacute;e</div><div class="fb_sect_cont"><br \>
+Z&eacute;ro si succ&egrave;s complet de <b>Open Lpt</b>, autrement une valeur diff&eacute;rente de z&eacute;ro pour indiquer un &eacute;chec.<br \>
 <br \>
 </div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
-<b>Open Lpt</b> opens a connection to a printer device.  The connection is treated like a file, so data may be written to the printer using <tt><a href="KeyPgPrint.html">Print</a></tt> and <tt><a href="KeyPgPutfileio.html">Put #</a></tt> commands.  <br \>
+<b>Open Lpt</b> ouvre une connexion avec un p&eacute;riph&eacute;rique d'impression.  La connexion est trait&eacute;e comme un fichier, afin que les donn&eacute;es puissent &ecirc;tre &eacute;crites &agrave; l'imprimante &agrave; l'aide des commandes <tt><a href="KeyPgPrint.html">Print</a></tt> et <tt><a href="KeyPgPutfileio.html">Put #</a></tt>.<br \>
 <br \>
-Any printer attached to the system may be opened with <b>Open Lpt</b><br \>
+Toute imprimante reli&eacute;e au syst&egrave;me peut &ecirc;tre ouverte avec <b>Open Lpt</b><br \>
 <br \>
-<tt><b>Open Lpt</b> "LPT:" ...</tt> will try to open the default printer on Windows and Linux, and "LPT1:" on DOS.<br \>
+<tt><b>Open Lpt</b> "LPT:" ...</tt> va essayer d'ouvrir l'imprimante par d&eacute;faut sur Windows et Linux, et "LPT1:" sous DOS.<br \>
 <br \>
-<tt><a href="KeyPgLprint.html">LPrint</a></tt> will automatically try to open the default printer on Windows and Linux, and <tt>"LPT1:"</tt> on DOS.<br \>
+<tt><a href="KeyPgLprint.html">LPrint</a></tt> va automatiquement essayez d'ouvrir l'imprimante par d&eacute;faut sur Windows et Linux, et "LPT1:" sous DOS.<br \>
 <br \>
-Platform specific notes:<br \>
+Notes sp&eacute;cifiques aux plates-formes:<br \>
 <br \>
 <b>Windows</b><br \>
-<div class="fb_indent">The argument EMU=TTY assumes printable ASCII or Unicode text, and applies printer driver text imaging to the input.  EMU=TTY also allows the usage of CR, LF, BS, TAB, FF, etc., for virtual print-head movement...even when the printer is a GDI printer and therefore doesn't itself understand these special characters.  If ",EMU=TTY" is omitted, the data must be sent in the printer's language (ESC/P, HPGL, PostScript, etc...).  Other useful emulation modes aren't supported yet.<br \>
+<div class="fb_indent">L'argument EMU=TTY suppose imprimables les textes ASCII ou Unicode, et applique un pilote d'imagerie de texte &agrave; l'imprimante pour la sortie.  EMU=TTY permet aussi l'usage de CR, LF, BS, TAB, FF, etc., pour le mouvement de t&ecirc;te d'impression virtuelle...m&ecirc;me si l'imprimante est une imprimante GDI et par cons&eacute;quent ne comprend pas ces caract&egrave;res sp&eacute;ciaux.  Si ",EMU=TTY" est omis, les donn&eacute;es doivent &ecirc;tre envoy&eacute;es dans le langage de l'imprimante (ESC/P, HPGL, PostScript, etc...).  Les autres modes d'&eacute;mulation utiles ne sont pas encore pris en charge.<br \>
 <br \>
 </div><b>Linux</b><br \>
-<div class="fb_indent">A printer spooler available through <tt>lp</tt> must be installed to access printers by name or a default printer.  Spooler access was tested only with CUPS, but other spoolers may work that are invoked through <tt>lp</tt>.  Port are zero based on linux. <tt>"LPT1:"</tt> corresponds with <tt>"/dev/lp0"</tt>.<br \>
+<div class="fb_indent">Un spooleur d'imprimante disponible par le biais de <tt>lp</tt> doit &ecirc;tre install&eacute; pour acc&eacute;der aux imprimantes par leur nom ou &agrave; une imprimante par d&eacute;faut.  L'acc&egrave;s au spooleur a &eacute;t&eacute; test&eacute; uniquement avec CUPS, mais d'autres spoolers peuvent travailler s'ils sont invoqu&eacute;s par <tt>lp</tt>.  Les ports sont bas&eacute;s sur z&eacute;ro sous Linux. <tt>"LPT1:"</tt> correspond &agrave; <tt>"/dev/lp0"</tt>.<br \>
 <br \>
-The data must be sent in the printer's language (ESC/P, HPGL, PostScript, etc...). Emulation modes aren't supported yet.<br \>
+Les donn&eacute;es doivent &ecirc;tre envoy&eacute;es dans le langage de l'imprimante (ESC/P, HPGL, PostScript, etc...). Les modes d'&eacute;mulation ne sont pas encore pris en charge.<br \>
 <br \>
 </div><b>DOS</b><br \>
-<div class="fb_indent">FreeBASIC does not support print spoolers on DOS.  Printers must be accessible through <tt>"LPTx:"</tt>.<br \>
+<div class="fb_indent">FreeBASIC ne supporte pas les spooleurs d'impression sous DOS.  Les imprimantes sont accessible par le biais de <tt>"LPTx:"</tt>.<br \>
 <br \>
-The data must be sent in the printer's language (ESC/P, HPGL, PostScript, etc...).  Emulation modes aren't supported yet.<br \>
+Les donn&eacute;es doivent &ecirc;tre envoy&eacute;es dans le langage de l'imprimante (ESC/P, HPGL, PostScript, etc...).  Les modes d'&eacute;mulation ne sont pas encore pris en charge.<br \>
 <br \>
-</div></div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+</div></div><div class="fb_sect_title">Exemple</div><div class="fb_sect_cont"><br \>
 <tt><div class="freebasic">
 <span class="com">'&nbsp;Send&nbsp;some&nbsp;text&nbsp;to&nbsp;the&nbsp;Windows&nbsp;printer&nbsp;on&nbsp;LPT1:,&nbsp;using&nbsp;driver&nbsp;text&nbsp;imaging.</span><br />
 <span class="key">Open</span>&nbsp;<span class="key">Lpt</span>&nbsp;<span class="quo">"LPT1:EMU=TTY"</span>&nbsp;<span class="key">For</span>&nbsp;<span class="key">Output</span>&nbsp;&nbsp;<span class="key">As</span>&nbsp;<span class="oth">#</span><span class="num">1</span><br />
@@ -116,10 +116,10 @@ The data must be sent in the printer's language (ESC/P, HPGL, PostScript, etc...
 <span class="key">Print</span>&nbsp;<span class="quo">"Printing&nbsp;Completed!"</span><br />
 </div></tt><br />
 <br \>
-</div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
-<ul><li> In the <i><a href="CompilerOptlang.html">-lang qb</a></i> dialect the old syntax is supported OPEN "LPT:..." . This syntax used in the other dialects will open a regular file.<br \>
+</div><div class="fb_sect_title">Diff&eacute;rences de dialecte</div><div class="fb_sect_cont"><br \>
+<ul><li> Dans le dialecte <i><a href="CompilerOptlang.html">-lang qb</a></i> l'ancienne syntaxe est support&eacute;e OPEN "LPT:..." . Cette syntaxe utilis&eacute;e dans les autres dialectes ouvrira un fichier r&eacute;gulier.<br \>
 <br \>
-</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+</ul></div><div class="fb_sect_title">Voir aussi</div><div class="fb_sect_cont"><br \>
 <ul><li> <tt><a href="KeyPgLprint.html">LPrint</a></tt><br \>
 <br \>
 </ul></div>

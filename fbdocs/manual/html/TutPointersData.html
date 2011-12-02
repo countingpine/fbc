@@ -6,16 +6,16 @@
 <body>
 <div id="fb_body_wrapper">
 <div id="fb_tab">
-<div id="fb_tab_l">Pointers, Data Types and Memory</div>
+<div id="fb_tab_l">Pointeurs, types de donn&eacute;es et m&eacute;moire</div>
 <div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
 </div> 
 <div id="fb_pg_wrapper">
 <div id="fb_pg_body">
-	<i>Written by <a href="WikiRick.html">rdc</a></i><br \>
+	<i>Ecrit par <a href="WikiRick.html">rdc</a></i><br \>
 <br \>
-If you read the article <a href="TutPointers.html">Introduction to Pointers</a> you know that pointers contain memory location addresses. You can manipulate the data in these memory locations using the reference operator *. Using pointers with single data item isn?t a problem, but what if you need to store multiple data items together and manipulate them using a pointer? It can get a bit tricky unless you understand how data is stored in memory.<br \>
+Si vous lisez l'article <a href="TutPointers.html">Introduction aux pointeurs</a> vous savez que les pointeurs contiennent des adresses d'emplacements m&eacute;moire. Vous pouvez manipuler les donn&eacute;es de ces emplacements m&eacute;moire en utilisant l'op&eacute;rateur de r&eacute;f&eacute;rence *. L'utilisation de pointeurs avec un seul item de donn&eacute;es unique n'est pas un probl&egrave;me, mais que faire si vous avez besoin de stocker de multiples &eacute;l&eacute;ments de donn&eacute;es et de les manipuler &agrave; l'aide d'un pointeur? C'est peut &ecirc;tre un peu plus difficile &agrave; moins de comprendre comment les donn&eacute;es sont stock&eacute;es en m&eacute;moire.<br \>
 <br \>
-A single memory location in a computer is 1 byte long. Big enough to hold a single ANSI character (as opposed to Unicode characters, which are wide characters and are two bytes. We won?t be discussing Unicode characters in this article.) However, all data types are not a single byte in width. Here is a simple program that displays the length in bytes of each data type.<br \>
+Un emplacement m&eacute;moire dans un ordinateur a une longueur de 1 octet. Assez grand pour contenir un caract&egrave;re ANSI (par opposition aux caract&egrave;res Unicode, qui sont des caract&egrave;res larges et occupent deux octets. Nous ne discuterons pas de caract&egrave;res Unicode dans cet article.) Cependant, tous les types de donn&eacute;es n'ont pas un seul octet de longueur. Voici un programme simple qui affiche la longueur en octets de chaque type de donn&eacute;es.<br \>
 <br \>
 <tt><tt><div class="freebasic">
 <span class="key">Dim</span>&nbsp;<span class="wrd">a</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Byte</span><br />
@@ -62,7 +62,7 @@ A single memory location in a computer is 1 byte long. Big enough to hold a sing
 </div></tt><br />
 </tt><br \>
 <br \>
-The output is:<br \>
+Affiche &agrave; l'&eacute;cran:<br \>
 <br \>
 <tt><tt><div class="freebasic">
 <span class="key">Byte</span><span class="oth">:</span>&nbsp;&nbsp;<span class="num">1</span><br />
@@ -83,9 +83,9 @@ The output is:<br \>
 </div></tt><br />
 </tt><br \>
 <br \>
-Notice that the length of a pointer is always 4 bytes long (the same as an integer), regardless of the data being pointed to, since a pointer contains a memory address and not data.<br \>
+Notez que la longueur d'un pointeur est toujours de 4 octets (la m&ecirc;me que celle d'un entier), ind&eacute;pendamment des donn&eacute;es point&eacute;es, puisque un pointeur contient une adresse m&eacute;moire et non les donn&eacute;es.<br \>
 <br \>
-Looking at the length of the different data types, you can see that if you were to <a href="KeyPgAllocate.html">Allocate</a> enough space for 10 integers, it would take 40 bytes of memory. Each integer takes up 4 bytes. So the question is, how do you access each integer value from the memory buffer? The answer, pointer math. Take a look at the following program.<br \>
+En regardant la longueur des diff&eacute;rents types de donn&eacute;es, vous voyez que pour <a href="KeyPgAllocate.html">Allocate</a> suffisamment d'espace pour 10 entiers, il faut 40 octets de m&eacute;moire. Chaque entier prend 4 octets. Donc la question est, comment acc&eacute;der &agrave; chaque valeur enti&egrave;re de la m&eacute;moire tampon? La r&eacute;ponse, l'arithm&eacute;tique des pointeurs. Jetez un oeil au programme suivant.<br \>
 <br \>
 <tt><tt><div class="freebasic">
 <span class="key">Option</span>&nbsp;<span class="key">Explicit</span><br />
@@ -109,24 +109,24 @@ Looking at the length of the different data types, you can see that if you were 
 </div></tt><br />
 </tt><br \>
 <br \>
-In this program we dimension two variables, an <a href="KeyPgInteger.html">Integer</a> and an <a href="KeyPgInteger.html">Integer</a> <a href="KeyPgPointer.html">Pointer</a>, aptr. Aptr will point to our memory buffer that will contain two integers. The <a href="KeyPgAllocate.html">Allocate</a> function requires the size of the buffer we need, so we multiply the size of an <a href="KeyPgInteger.html">Integer</a> by 2 to reserve 8 bytes of memory (each integer will take 4 bytes of space). <br \>
+Dans ce programme nous dimensionnons deux variables, un <a href="KeyPgInteger.html">Integer</a> et un <a href="KeyPgInteger.html">Integer</a> <a href="KeyPgPointer.html">Pointer</a>, aptr. Aptr pointera sur notre tampon m&eacute;moire qui contiendra deux entiers. La fonction <a href="KeyPgAllocate.html">Allocate</a> requiert la taille du tampon m&eacute;moire dont nous avons besoin, donc nous multiplions la taille d'un <a href="KeyPgInteger.html">Integer</a> par 2 pour r&eacute;server 8 octets de m&eacute;moire (chaque entier prendra 4 octets d'espace). <br \>
 <br \>
-After the allocation process, aptr contains the address of the first byte of our memory buffer. Storing the first integer is simply a matter of using the reference operator and setting the value to 1. To print out the value, we again just use *aptr.<br \>
+Apr&egrave;s le processus d'allocation, aptr contient l'adresse du premier octet de notre tampon m&eacute;moire. Stocker le premier entier consiste tout simplement &agrave; utiliser la r&eacute;f&eacute;rence de l'op&eacute;rateur et de lui donner la valeur &agrave; 1. Pour afficher sa valeur, nous utilisons simplement *aptr.<br \>
 <br \>
-Now, le me ask you a question: How does the compiler know that the value 1 requires 4 bytes and not 1 or 2 bytes? Because we dimensioned aptr as an <i>integer ptr</i>. The compiler knows that an integer takes 4 bytes and so loads the data into four bytes of memory. This is why when we print out the value we get 1 and not some strange number.<br \>
+Maintenant, laissez-moi vous poser une question: Comment le compilateur sait que la valeur 1 requiert 4 octets, et non pas 1 ou 2 octets? Parce que nous avons dimensionn&eacute; aptr comme un <i>integer ptr</i>. Le compilateur sait qu'un entier occupe 4 octets et donc il charge les donn&eacute;es dans quatre octets de m&eacute;moire. C'est pourquoi, lorsque nous affichons la valeur nous obtenons 1 et non pas un nombre &eacute;trange.<br \>
 <br \>
-To load the second value into our buffer, we use:<br \>
+Pour charger la deuxi&egrave;me valeur dans notre tampon, nous utilisons:<br \>
 <br \>
 <tt><tt><div class="freebasic">
 <span class="oth">*(</span><span class="wrd">aptr</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="num">4</span><span class="oth">)</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">2</span><br />
 </div></tt><br />
 </tt><br \>
 <br \>
-This may look a little strange at first glance. Aptr points to the first byte in our memory buffer. An integer is 4 bytes long, so to get to the next integer byte position, we must add 4 to aptr. We need the parenthesis around the add operation because the reference operator * has a higher precedence than +. The parenthesis ensure that we perform the add operation first, and then apply the indirection operator.<br \>
+Cela peut para&icirc;tre un peu &eacute;trange au premier abord. Aptr pointe sur le premier octet dans notre tampon m&eacute;moire. Un entier occupe 4 octets, donc pour arriver &agrave; la position de l'octet entier suivant, il faut ajouter 4 &agrave; aptr. Nous avons besoin de parenth&egrave;ses autour de l'op&eacute;ration d'addition, car l'op&eacute;rateur de r&eacute;f&eacute;rence * a une priorit&eacute; sup&eacute;rieure &agrave; +. Les parenth&egrave;ses nous assurent que nous effectuons l'op&eacute;ration d'addition en premier et qu'ensuite nous appliquons l'op&eacute;rateur d'indirection.<br \>
 <br \>
-Notice that we didn?t increment aptr directly. If we did, aptr would no longer point to the start of the memory buffer and the program would crash when we deallocated the buffer since it would <a href="KeyPgDeallocate.html">Deallocate</a> memory outside the memory buffer. If the need arises to directly increment a pointer, then create a temporary pointer variable and increment that, rather than the pointer used in the original allocation. <br \>
+Notez que nous n'avons pas incr&eacute;menter aptr directement. Si nous l'avions fait, aptr pointerait plus vers le d&eacute;but du tampon m&eacute;moire et le programme planterait quand on d&eacute;sallouerait le tampon, car <a href="KeyPgDeallocate.html">Deallocate</a> s'effectuerait en-dehors du tampon m&eacute;moire. Si le besoin se faisait sentir d' incr&eacute;menter directement un pointeur, alors il faudrait cr&eacute;er une variable pointeur temporaire et l'incr&eacute;menter, plut&ocirc;t que le pointeur utilis&eacute; dans l'allocation initiale.<br \>
 <br \>
-Memory buffers and pointers are a powerful way to store and manipulate data in memory. Care must be taken though to ensure that you are accessing the data correctly according to the type of data being stored in the buffer.
+Les tampons m&eacute;moire et les pointeurs sont un moyen puissant pour stocker et manipuler des donn&eacute;es en m&eacute;moire. Des pr&eacute;cautions doivent &ecirc;tre prises pour s'assurer que vous acc&eacute;dez correctement aux donn&eacute;es en fonction du type de donn&eacute;es stock&eacute;es dans le tampon m&eacute;moire.
 </div>
 </div> 
 </div> 

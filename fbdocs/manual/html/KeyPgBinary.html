@@ -11,46 +11,47 @@
 </div> 
 <div id="fb_pg_wrapper">
 <div id="fb_pg_body">
-	Specifies file or device to be opened for binary mode<br \>
+	Sp&eacute;cifie que le fichier ou le p&eacute;riph&eacute;rique doit &ecirc;tre ouvert en mode binaire<br \>
 <br \>
-<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<div class="fb_sect_title">Syntaxe</div><div class="fb_sect_cont"><tt><br \>
 <a href="KeyPgOpen.html">Open</a> <i>filename</i> for <b>Binary</b> [<a href="KeyPgAccess.html">Access</a> <i>access_type</i>] [<a href="KeyPgLock.html">Lock</a> <i>lock_type</i>] as [#]<i>filenum</i> <br \>
 </tt><br \>
-</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Param&egrave;tres</div><div class="fb_sect_cont"><br \>
 <tt><i>filename</i></tt><br \>
-<div class="fb_indent">file name to open<br \>
+<div class="fb_indent">nom de fichier &agrave; ouvrir<br \>
 </div><tt><i>access_type</i></tt><br \>
-<div class="fb_indent">indicates whether the file may be read from, written to or both<br \>
+<div class="fb_indent">indique si on lit le fichier, si on &eacute;crit sur le fichier ou les deux<br \>
 </div><tt><i>lock_type</i></tt><br \>
-<div class="fb_indent">locking to be used while the file is open<br \>
+<div class="fb_indent">verrouillage utilis&eacute; pendant que le fichier est ouvert<br \>
 </div><tt><i>filenum</i></tt><br \>
-<div class="fb_indent">unused file number to associate with the open file<br \>
+<div class="fb_indent">num&eacute;ro de fichier &agrave; associer au fichier ouvert<br \>
 <br \>
 </div></div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
-Opens a file or device for reading and/or writing binary data in the file <tt><i>filenum</i></tt>, with free format.<br \>
-If the file does not exist, a new file will be created. The file pointer is initialized by <tt><a href="KeyPgOpen.html">Open</a></tt> at byte no. 1. <br \>
-<tt><a href="KeyPgGetfileio.html">Get #</a></tt> and <tt><a href="KeyPgPutfileio.html">Put #</a></tt> file operations move the file pointer according to the size of the data, the pointer can be set to any byte in the file.<br \>
-The data existing in the file is preserved by <tt><a href="KeyPgOpen.html">Open</a></tt>. <br \>
-This file mode can use any buffer variable to read/write data in the file.   <br \>
-The data is saved in binary mode, in the same internal format FreeBASIC uses, by means of <tt><a href="KeyPgGetfileio.html">Get #</a></tt> and <tt><a href="KeyPgPutfileio.html">Put #</a></tt>.<br \>
+Ouvre un fichier ou un p&eacute;rph&eacute;rique en lecture et/ou &eacute;criture de donn&eacute;es binaires dans <tt><i>filenum</i></tt>, avec un format libre.<br \>
+Si le fichier n'existe pas, un nouveau fichier sera cr&eacute;&eacute;. Le pointeur de fichier est initialis&eacute; par <tt><a href="KeyPgOpen.html">Open</a></tt> &agrave; l'octet num&eacute;ro 1. <br \>
+Les op&eacute;rations sur les fichiers <tt><a href="KeyPgGetfileio.html">Get #</a></tt> et <tt><a href="KeyPgPutfileio.html">Put #</a></tt> d&eacute;placent le pointeur de fichier en fonction de la taille des donn&eacute;es, le pointeur peut &ecirc;tre d&eacute;plac&eacute; sur n'importe quel octet du fichier.<br \>
+Les donn&eacute;es existantes dans le fichier sont conserv&eacute;es par <tt><a href="KeyPgOpen.html">Open</a></tt>. <br \>
+Ce mode fichier peut utiliser n'importe quel tampon variable pour lire/&eacute;crire des donn&eacute;es dans le fichier.<br \>
+Les donn&eacute;es sont sauvegard&eacute;es en mode binaire, dans le m&ecirc;me format interne utilis&eacute; par FreeBasic, par le biais de <tt><a href="KeyPgGetfileio.html">Get #</a></tt> et <tt><a href="KeyPgPutfileio.html">Put #</a></tt>.<br \>
 <br \>
-<tt><i>filename</i></tt> must be a string expression resulting in a legal file name in the target OS, without wildcards. The file will be sought for in the present directory, unless a path is given.<br \>
-<tt><i>Access_type</i></tt> By default <tt><b>Binary</b></tt> mode allows to both read and write the file, unless an <tt><a href="KeyPgAccess.html">Access</a></tt> type is specified, it mus be one of: <br \>
-<ul><ul><li> <tt><b>Read</b></tt> - the file is opened for input only<br \>
-<li> <tt><b>Write</b></tt> - the file is opened for output only<br \>
-<li> <tt><b>Read Write</b></tt> - the file is opened for input and output (the default)<br \>
+<tt><i>filename</i></tt> doit &ecirc;tre une expression cha&icirc;ne correspondant &agrave; un nom de fichier l&eacute;gal dans le syst&egrave;me d'exploitation cible, sans jokers de remplacement. Le fichier sera recherch&eacute; dans le r&eacute;pertoire courant, sauf si <tt><i>filename</i></tt> contient un chemin.<br \>
 <br \>
-</ul></ul><tt><i>Lock_type</i></tt> indicates the way the file is locked  for other processes (users or threads), it is one of:<br \>
-<ul><ul><li> <tt><b>Shared</b></tt> - The file can be freely accessed by other processes     <br \>
-<li> <tt><b>Lock Read</b></tt> - The file can't be opened simultaneously for reading<br \>
-<li> <tt><b>Lock Write</b></tt> - The file can't be opened simultaneously for writing<br \>
-<li> <tt><b>Lock Read Write</b></tt> - The file cannot be opened simultaneously by other processes.<br \>
-</ul></ul><div class="fb_indent">If no lock type is stated, the file will be <tt><b>Shared</b></tt> for other threads of the program and <tt><b>Lock Read Write</b></tt> for other programs.<br \>
-<tt><a href="KeyPgLock.html">Lock</a></tt> and <tt><a href="KeyPgUnlock.html">Unlock</a></tt> can be used to restrict temporally access to parts of a file.<br \>
+<tt><i>Access_type</i></tt> par d&eacute;faut le mode <tt><b>Binary</b></tt> permet &agrave; la fois de lire et &eacute;crire dans le fichier, sauf si un type d'<tt><a href="KeyPgAccess.html">Access</a></tt> est sp&eacute;cifi&eacute;, il doit &ecirc;tre l'un de ceux-ci:<br \>
+<ul><ul><li> <tt><b>Read</b></tt> - le fichier est ouvert en entr&eacute;e seulement<br \>
+<li> <tt><b>Write</b></tt> - le fichier est ouvert en sortie seulement<br \>
+<li> <tt><b>Read Write</b></tt> - le fichier est ouvert en entr&eacute;e et sortie (par d&eacute;faut)<br \>
 <br \>
-</div><tt><i>filenum</i></tt> is a valid file number (in the range <tt>1..255</tt>) not being used for any other file presently open. The file number identifies the file for the rest of file operations. A free file number can be found using the <tt><a href="KeyPgFreefile.html">FreeFile</a></tt> function.<br \>
+</ul></ul><tt><i>Lock_type</i></tt> indique la fa&ccedil;on dont le fichier est verrouill&eacute; pour les autres processus (utilisateurs ou fils), il est l'un de ceux-ci:<br \>
+<ul><ul><li> <tt><b>Shared</b></tt> - Le fichier peut &ecirc;tre librement consult&eacute; par d'autres processus<br \>
+<li> <tt><b>Lock Read</b></tt> - Le fichier ne peut pas &ecirc;tre ouvert en m&ecirc;me temps pour la lecture<br \>
+<li> <tt><b>Lock Write</b></tt> - Le fichier ne peut pas &ecirc;tre ouvert en m&ecirc;me temps pour l'&eacute;criture<br \>
+<li> <tt><b>Lock Read Write</b></tt> - Le fichier ne peut pas &ecirc;tre ouvert simultan&eacute;ment par d'autres processus.<br \>
+</ul></ul><div class="fb_indent">Si aucun type de verrouillage n'est indiqu&eacute;, le fichier sera <tt><b>Shared</b></tt> pour les autres "threads" du programme et <tt><b>Lock Read Write</b></tt> pour les autres programmes.<br \>
+<tt><a href="KeyPgLock.html">Lock</a></tt> et <tt><a href="KeyPgUnlock.html">Unlock</a></tt> peut &ecirc;tre utilis&eacute; pour restreindre temporairement l'acc&egrave;s &agrave; des parties d'un fichier.<br \>
 <br \>
-</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+</div><tt><i>filenum</i></tt> est un num&eacute;ro de fichier valide (dans la plage <tt>1..255</tt>) non utilis&eacute; par un autre fichier actuellement ouvert. Le num&eacute;ro de fichier identifie celui-ci pour le reste des op&eacute;rations. Un num&eacute;ro de fichier libre peut &ecirc;tre trouv&eacute; avec la fonction <tt><a href="KeyPgFreefile.html">FreeFile</a></tt>.<br \>
+<br \>
+</div><div class="fb_sect_title">Exemple</div><div class="fb_sect_cont"><br \>
 <tt><div class="freebasic">
 <span class="com">''&nbsp;Create&nbsp;a&nbsp;binary&nbsp;data&nbsp;file&nbsp;with&nbsp;one&nbsp;number&nbsp;in&nbsp;it</span><br />
 <span class="key">Dim</span>&nbsp;<span class="wrd">x</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Single</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">17.164</span><br />
@@ -89,10 +90,10 @@ The data is saved in binary mode, in the same internal format FreeBASIC uses, by
 <span class="key">Print</span>&nbsp;<span class="wrd">txt</span><br />
 </div></tt><br />
 <br \>
-</div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
-<ul><li> None<br \>
+</div><div class="fb_sect_title">Diff&eacute;rences avec QB</div><div class="fb_sect_cont"><br \>
+<ul><li> Aucune.<br \>
 <br \>
-</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+</ul></div><div class="fb_sect_title">Voir aussi</div><div class="fb_sect_cont"><br \>
 <ul><li> <tt><a href="KeyPgOpen.html">Open</a></tt><br \>
 <li> <tt><a href="KeyPgPutfileio.html">Put #</a></tt><br \>
 <li> <tt><a href="KeyPgGetfileio.html">Get #</a></tt><br \>

@@ -6,49 +6,49 @@
 <body>
 <div id="fb_body_wrapper">
 <div id="fb_tab">
-<div id="fb_tab_l">Operator New</div>
+<div id="fb_tab_l">Op&eacute;rateur New</div>
 <div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
 </div> 
 <div id="fb_pg_wrapper">
 <div id="fb_pg_body">
-	Operator to dynamically allocate memory and construct data of a specified type<br \>
+	Op&eacute;rateur qui alloue dynamiquement de la m&eacute;moire et construit une donn&eacute;e du type sp&eacute;cifi&eacute;<br \>
 <br \>
-<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<div class="fb_sect_title">Syntaxe</div><div class="fb_sect_cont"><tt><br \>
 <a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgOperator.html">Operator</a> <b>New</b> ( <i>size</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgUinteger.html">UInteger</a> ) <a href="KeyPgAs.html">As</a> <a href="KeyPgAny.html">Any</a> <a href="KeyPgPtr.html">Ptr</a><br \>
 <a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgOperator.html">Operator</a> <b>new[]</b> ( <i>size</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgUinteger.html">UInteger</a> ) <a href="KeyPgAs.html">As</a> <a href="KeyPgAny.html">Any</a> <a href="KeyPgPtr.html">Ptr</a><br \>
 </tt><br \>
 </div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
 <i>result</i> = <b>New</b> <i><a href="DataType.html">datatype</a></i><br \>
-<div class="fb_indent"><i>or</i><br \>
+<div class="fb_indent"><i>ou</i><br \>
 </div><i>result</i> = <b>New</b> <i><a href="DataType.html">datatype</a></i> ( <i>initializers</i>, ... )<br \>
-<div class="fb_indent"><i>or</i><br \>
+<div class="fb_indent"><i>ou</i><br \>
 </div><i>result</i> = <b>New</b> <i><a href="DataType.html">datatype</a></i><b>[</b> <i>count</i> <b>]</b><br \>
 </tt><br \>
-</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Param&egrave;tres</div><div class="fb_sect_cont"><br \>
 <tt><i>size</i></tt> <br \>
-<div class="fb_indent">Number of bytes to allocate.<br \>
+<div class="fb_indent">Nombre d'octets &agrave; allouer.<br \>
 </div><tt><i>initializers</i></tt><br \>
-<div class="fb_indent">Initial value(s) for the variable.<br \>
+<div class="fb_indent">Valeur(s) pour initialiser la variable.<br \>
 </div><tt><i>datatype</i></tt><br \>
-<div class="fb_indent">Name of the data type to create.<br \>
+<div class="fb_indent">Nom du type de donn&eacute;e &agrave; cr&eacute;er.<br \>
 </div><tt><i>count</i></tt><br \>
-<div class="fb_indent">Exact number of elements to allocate.<br \>
+<div class="fb_indent">Nombre exact d'&eacute;l&eacute;ments &agrave; allouer.<br \>
 <br \>
-</div></div><div class="fb_sect_title">Return Value</div><div class="fb_sect_cont"><br \>
-A pointer of type <a href="DataType.html">datatype</a> to the newly allocated data.<br \>
+</div></div><div class="fb_sect_title">Valeur retourn&eacute;e</div><div class="fb_sect_cont"><br \>
+Un pointeur du type <a href="DataType.html">datatype</a> vers la nouvelle donn&eacute;e allou&eacute;e.<br \>
 <br \>
 </div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
-The <tt><b>New</b></tt> operator dynamically allocates memory and constructs a specified data type. For simple types, like integers, an initial value can be given. For types without constructors, initial values can be specified for each field. Types that have constructors can have their constructors called by <tt><b>New</b></tt> as well. If no initializers are given, the default values for those types will be set.<br \>
+L'op&eacute;rateur <tt><b>New</b></tt> alloue dynamiquement de la m&eacute;moire et construit une donn&eacute;e du type sp&eacute;cifi&eacute;. Pour des types simples, comme les entiers, une valeur initiale peut &ecirc;tre attribu&eacute;e. Pour des types sans constructeur(s), des valeurs initiales peuvent &ecirc;tre sp&eacute;cifi&eacute;es pour chaque champ. Les types qui ont des constructeurs, ceux-ci peuvent &ecirc;tre appel&eacute;s par <tt><b>New</b></tt>. Si aucun initialiseur n'est fourni, les valeurs par d&eacute;faut seront attribu&eacute;es pour ces types.<br \>
 <br \>
-<tt><b>New[]</b></tt> is the array-version of the <tt><b>New</b></tt> operator and allocates enough memory for the specified number of objects.  The default constructor for the type will be used to set the initial values for each item.<br \>
+<tt><b>New[]</b></tt> est la version pour les tableaux de l'op&eacute;rateur <tt><b>New</b></tt> et alloue suffisamment de m&eacute;moire pour le nombre d'objets sp&eacute;cifi&eacute;.  Le constructeur par d&eacute;faut pour le type sera utilis&eacute; pour initialiser chacun des &eacute;l&eacute;ments.<br \>
 <br \>
-Objects created with <tt><b>New</b></tt> must be freed with <tt><a href="KeyPgOpDelete.html">Delete</a></tt>. Memory allocated with <tt><b>New[]</b></tt> must be freed with <tt><b>Delete[]</b></tt>, the array-version of <tt><a href="KeyPgOpDelete.html">Delete</a></tt>. You cannot mix and match the different versions of the operators.<br \>
+Les objects cr&eacute;&eacute;s avec <tt><b>New</b></tt> doivent &ecirc;tre lib&eacute;r&eacute;s avec <tt><a href="KeyPgOpDelete.html">Delete</a></tt>. La m&eacute;moire allou&eacute;e avec <tt><b>New[]</b></tt> doit &ecirc;tre lib&eacute;r&eacute;e avec <tt><b>Delete[]</b></tt>, la version pour les tableaux de <tt><a href="KeyPgOpDelete.html">Delete</a></tt>. Vous ne pouvez pas m&eacute;langer les deux versions de l'op&eacute;rateur.<br \>
 <br \>
-Specifying an initial value of <tt><a href="KeyPgAny.html">Any</a></tt>, as in <tt>new datatype(any)</tt> will allocate memory for the type, but not initialize the data.  This is only valid on data types that do not have constructors.<br \>
+Sp&eacute;cifier une valeur initiale <tt><a href="KeyPgAny.html">Any</a></tt>, comme dans <tt>new datatype(any)</tt> allouera de la m&eacute;moire pour le type, mais n'initialisera pas les donn&eacute;es.  Ceci n'est valide que pour les types qui n'ont pas de constructeur.<br \>
 <br \>
-Specifying an initial value of <tt><a href="KeyPgAny.html">Any</a></tt>, as in <tt>new datatype[count]{any}</tt> will allocate memory for the array, but not initialize the data.  This is only valid on data types that do not have constructors.<br \>
+Sp&eacute;cifier une valeur initiale <tt><a href="KeyPgAny.html">Any</a></tt>, comme dans <tt>new datatype[count]{any}</tt> allouera de la m&eacute;moire pour le tableau, mais n'initialisera pas les donn&eacute;es.  Ceci n'est valide que pour les types qui n'ont pas de constructeur.<br \>
 <br \>
-</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Exemple</div><div class="fb_sect_cont"><br \>
 <tt><div class="freebasic">
 <span class="key">Type</span>&nbsp;<span class="wrd">Rational</span><br />
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">numerator</span><span class="oth">,</span>&nbsp;<span class="wrd">denominator</span><br />
@@ -81,13 +81,13 @@ Specifying an initial value of <tt><a href="KeyPgAny.html">Any</a></tt>, as in <
 <br />
 <span class="key">End</span>&nbsp;<span class="key">Scope</span><br />
 </div></tt><br />
-</div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
-<ul><li> Only available in the <i><a href="CompilerOptlang.html">-lang fb</a></i> dialect.<br \>
+</div><div class="fb_sect_title">Diff&eacute;rences de dialecte</div><div class="fb_sect_cont"><br \>
+<ul><li> Utilisable seulement dans le dialecte <i><a href="CompilerOptlang.html">-lang fb</a></i>.<br \>
 <br \>
-</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
-<ul><li> New to FreeBASIC<br \>
+</ul></div><div class="fb_sect_title">Diff&eacute;rences avec QB</div><div class="fb_sect_cont"><br \>
+<ul><li> Nouveau pour FreeBASIC<br \>
 <br \>
-</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+</ul></div><div class="fb_sect_title">Voir aussi</div><div class="fb_sect_cont"><br \>
 <ul><li> <tt><a href="KeyPgOpDelete.html">Delete</a></tt><br \>
 <li> <tt><a href="KeyPgOpPlacementNew.html">Placement New</a></tt><br \>
 <br \>

@@ -11,29 +11,29 @@
 </div> 
 <div id="fb_pg_wrapper">
 <div id="fb_pg_body">
-	Writes text to the default printer.<br \>
+	&Eacute;crit du texte vers l'imprimante par d&eacute;faut.<br \>
 <br \>
-<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<div class="fb_sect_title">Syntaxe</div><div class="fb_sect_cont"><tt><br \>
 <b>LPrint</b>  [ <a href="KeyPgPrintusing.html">Using</a> <i>formatstring</i>,] [<i>expressionlist</i>] [(, | ;)] ...<br \>
 </tt><br \>
-</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Param&egrave;tres</div><div class="fb_sect_cont"><br \>
 <tt><i>formatstring</i></tt><br \>
-<div class="fb_indent">String specifying the output format.<br \>
+<div class="fb_indent">Cha&icirc;ne sp&eacute;cifiant le format de sortie.<br \>
 </div><tt><i>expressionlist</i></tt><br \>
-<div class="fb_indent">List of variables to output according to the specified format.<br \>
+<div class="fb_indent">Liste des variables pour une sortie selon le format sp&eacute;cifi&eacute;.<br \>
 <br \>
 </div></div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
-Prints <tt><i>expressionlist</i></tt> to the printer attached to the parallel port LPT1, or if it does not exist, to the default printer.  To print to a printer different from the default one, use <tt><a href="KeyPgOpenLpt.html">Open Lpt</a></tt>.<br \>
+Imprime <tt><i>expressionlist</i></tt> sur l'imprimante connect&eacute;e au port parall&egrave;le LPT1, ou si elle n'existe pas, &agrave; l'imprimante par d&eacute;faut.  Pour imprimer sur une imprimante diff&eacute;rente de celle par d&eacute;faut, utilisez <tt><a href="KeyPgOpenLpt.html">Open Lpt</a></tt>.<br \>
 <br \>
-The <tt><a href="KeyPgPrintusing.html">Using</a></tt> clause formats <tt><i>expressionlist</i></tt> according to <tt><i>formatstring</i></tt>.  Any data type but a UDT can be passed to <b><tt>LPrint</tt></b> <tt><i>expressionlist</tt></i>, expressions do <b>not</b> have to be converted to strings first.<br \>
+La clause <tt><a href="KeyPgPrintusing.html">Using</a></tt> formate <tt><i>expressionlist</i></tt> en accord avec <tt><i>formatstring</i></tt>.  Tout type de donn&eacute;es sauf un type d&eacute;fini par l'utilisateur peut &ecirc;tre pass&eacute; &agrave; <b><tt>LPrint</tt></b> <tt><i>expressionlist</tt></i>, les expressions n'ont pas &agrave; &ecirc;tre converties en cha&icirc;nes avant.<br \>
 <br \>
-Using a comma (<tt>,</tt>) as separator or in the end of the <tt><i>expressionlist</i></tt> will place the cursor in the next column (every 14 characters), using a semi-colon (<tt>;</tt>) won't move the cursor. If neither of them are used in the end of the <tt><i>expressionlist</i></tt>, then a new-line will be printed.<br \>
+L'utilisation d'une virgule (<tt>,</tt>) comme s&eacute;parateur ou &agrave; la fin de <tt><i>expressionlist</i></tt> placera le curseur au d&eacute;but de la colonne suivante (tous les 14 caract&egrave;res), l'utilisation d'un point-virgule (<tt>;</tt>) ne d&eacute;placera pas le curseur. Si ni l'un ni l'autre n'est plac&eacute; &agrave; la fin de <tt><i>expressionlist</i></tt>, alors une sp&eacute;cification de nouvelle ligne sera envoy&eacute;e.<br \>
 <br \>
-Some printers will not print at all until a <tt><a href="KeyPgChr.html">Chr</a>(12)</tt> (End of Page) character is printed.<br \>
+Certaines imprimantes n'impriment rien tant qu'un caract&egrave;re <tt><a href="KeyPgChr.html">Chr</a>(12)</tt> (Fin de Page) n'est pas envoy&eacute;.<br \>
 <br \>
-Internally, FreeBASIC uses the special file number <tt>-1</tt> for printing using <b><tt>LPrint</tt></b>.  This file number may be safely closed using <tt><a href="KeyPgClose.html">Close</a> -1</tt>.  The next use of <b><tt>LPrint</tt></b> will automatically reopen it as needed.<br \>
+En interne, FreeBASIC utilise le num&eacute;ro de fichier sp&eacute;cial <tt>-1</tt> pour l'impression en utilisant <b><tt>LPrint</tt></b>.  Ce num&eacute;ro de fichier peut &ecirc;tre ferm&eacute; en toute s&eacute;curit&eacute; avec <tt><a href="KeyPgClose.html">Close</a> -1</tt>.  L'utilisation suivante de <b><tt>LPrint</tt></b> le r&eacute;ouvrira automatiquement si n&eacute;cessaire.<br \>
 <br \>
-</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Exemple</div><div class="fb_sect_cont"><br \>
 <tt><div class="freebasic">
 <span class="com">''&nbsp;Compile&nbsp;with&nbsp;-lang&nbsp;fblite&nbsp;or&nbsp;qb</span><br />
 <br />
@@ -54,19 +54,21 @@ Internally, FreeBASIC uses the special file number <tt>-1</tt> for printing usin
 <span class="key">LPrint</span>&nbsp;<span class="key">Chr$</span><span class="oth">(</span><span class="num">12</span><span class="oth">)</span><br />
 </div></tt><br />
 <br \>
-</div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
-<ul><li> None<br \>
+</div><div class="fb_sect_title">Diff&eacute;rences avec QB</div><div class="fb_sect_cont"><br \>
+<ul><li> Aucune<br \>
 <br \>
-</ul></div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
-<ul><li> <tt><b>LPrint</b></tt> is not supported in the <i><a href="CompilerOptlang.html">-lang fb</a></i> dialect. In this dialect the printer must be properly opened with <tt><a href="KeyPgOpenLpt.html">Open Lpt</a></tt> and <tt><a href="KeyPgPrintPp.html">Print #</a></tt> must be used to print.<br \>
+</ul></div><div class="fb_sect_title">Diff&eacute;rences de dialecte</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><b>LPrint</b></tt> n'est pas support&eacute; par le dialecte <i><a href="CompilerOptlang.html">-lang fb</a></i>. Dans ce dialecte, l'imprimante doit &ecirc;tre ouverte correctement avec <tt><a href="KeyPgOpenLpt.html">Open Lpt</a></tt> et <tt><a href="KeyPgPrintPp.html">Print #</a></tt> doit &ecirc;tre utilis&eacute; pour imprimer.<br \>
 <br \>
-</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+</ul></div><div class="fb_sect_title">Voir aussi</div><div class="fb_sect_cont"><br \>
 <ul><li> <tt><a href="KeyPgOpenLpt.html">Open Lpt</a></tt><br \>
 <li> <tt><a href="KeyPgPrint.html">Print</a></tt><br \>
 <li> <tt><a href="KeyPgPrintPp.html">Print #</a></tt><br \>
 <li> <tt><a href="KeyPgWrite.html">Write</a></tt><br \>
 <br \>
-</ul></div>
+</ul><br \>
+   <br \>
+</div>
 </div>
 </div> 
 </div> 

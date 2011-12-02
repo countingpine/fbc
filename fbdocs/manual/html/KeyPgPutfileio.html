@@ -6,14 +6,14 @@
 <body>
 <div id="fb_body_wrapper">
 <div id="fb_tab">
-<div id="fb_tab_l">Put (File I/O)</div>
+<div id="fb_tab_l">Put (Entr&eacute;e/Sortie fichiers)</div>
 <div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
 </div> 
 <div id="fb_pg_wrapper">
 <div id="fb_pg_body">
-	Writes data from a buffer to a file<br \>
+	Ecrit des donn&eacute;es d'un tampon vers un fichier<br \>
 <br \>
-<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<div class="fb_sect_title">Syntaxe</div><div class="fb_sect_cont"><tt><br \>
 <b>Put</b> #<i>filenum</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a>, [<i>position</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgLongint.html">LongInt</a>], <i>data</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgAny.html">Any</a> [, <i>amount</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a>]<br \>
 <b>Put</b> #<i>filenum</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a>, [<i>position</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgLongint.html">LongInt</a>], <i>data</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgString.html">String</a><br \>
 <b>Put</b> #<i>filenum</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a>, [<i>position</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgLongint.html">LongInt</a>], <i>data()</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgAny.html">Any</a><br \>
@@ -22,31 +22,31 @@
 <b>Put</b> #<i>filenum</i>, <i>position</i>, <i>data</i> [, <i>amount</i>]<br \>
 varres = <b>Put</b> (#<i>filenum</i>, <i>position</i>, <i>data</i> [, <i>amount</i>])<br \>
 </tt><br \>
-</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Param&egrave;tres</div><div class="fb_sect_cont"><br \>
 <tt><i>filenum</i></tt><br \>
-<div class="fb_indent">The value passed to <tt><a href="KeyPgOpen.html">Open</a></tt> when the file was opened.<br \>
+<div class="fb_indent">La valeur pass&eacute;e &agrave; <tt><a href="KeyPgOpen.html">Open</a></tt> lorsque le dossier a &eacute;t&eacute; ouvert.<br \>
 </div><tt><i>position</i></tt><br \>
-<div class="fb_indent">Is the position where <tt>Put</tt> must start in the file. If the file was opened <tt>For Random</tt>, the position is in records, else it is given in bytes. If omitted, writing starts at the present file pointer position.  The position is 1-based: i.e. the first record or byte of a file is at position <tt>1</tt>.<br \>
-If <tt><i>position</i></tt> is omitted or zero (<tt>0</tt>), file writing will start from the current file position.<br \>
+<div class="fb_indent">Est la position o&ugrave; <tt><b>Put</b></tt> doit commencer dans le fichier. Si le fichier a &eacute;t&eacute; ouvert en mode <tt><i>For Random</i></tt>, la position est &eacute;valu&eacute;e en enregistrements, sinon elle est &eacute;valu&eacute;e en octets. Si omise, l'&eacute;criture commence &agrave; la position actuelle du pointeur.  La position est bas&eacute;e sur 1: par exemple le premier enregistrement ou octet est &agrave; la position <tt>1</tt>.<br \>
+Si <tt><i>position</i></tt> est omise ou z&eacute;ro (<tt>0</tt>), l'&eacute;criture dans le fichier commencera &agrave; partir de la position courante dans le fichier.<br \>
 </div><tt><i>data</i></tt><br \>
-<div class="fb_indent">Is the buffer where data is written from. It can be a numeric variable, a string, an array or a user-defined type. The operation will try to transfer to disk the complete variable, unless <tt><i>amount</i></tt> is given.<br \>
-When putting arrays, <tt><i>data</i></tt> should be followed by an empty pair of brackets: '<tt>()</tt>'.  <tt><b>Put</b></tt> will write all of the data in the array.  <tt><i>amount</i></tt> is not allowed.<br \>
-When putting <tt><a href="KeyPgString.html">String</a></tt>s, the number of bytes written is the same as the number of bytes in the string data.  <tt><i>amount</i></tt> is not allowed.<br \>
-Note: If you want to write values from a buffer, you should NOT pass a pointer to the buffer; instead you should pass the first variable in the buffer.  (This can be done by dereferencing the pointer with <tt><a href="KeyPgOpValueOf.html">Operator * (Value Of)</a></tt>.) If you pass a pointer directly, then <tt><b>Put</b></tt> will put the memory from the pointer variable, not the memory it points to.<br \>
+<div class="fb_indent">Est le tampon m&eacute;moire &agrave; partir duquel les donn&eacute;es sont &eacute;crites. Il peut &ecirc;tre une variable num&eacute;rique, une cha&icirc;ne, un tableau ou un type d&eacute;fini par l'utilisateur. L'op&eacute;ration va essayer de transf&eacute;rer sur le disque la variable compl&egrave;te, sauf si <tt><i>amount</i></tt> est pr&eacute;cis&eacute;.<br \>
+Lorsque <tt><b>Put</b></tt> concerne un tableau, <tt><i>data</i></tt> doit &ecirc;tre suivi par une paire de parenth&egrave;ses vides: '<tt>()</tt>'.  <tt><b>Put</b></tt> &eacute;crira toutes les donn&eacute;es du tableau.  <tt><i>amount</i></tt> n'est pas permis.<br \>
+Lorsque <tt><b>Put</b></tt> concerne une <tt><a href="KeyPgString.html">String</a></tt>, le nombre d'octets &eacute;crits est le m&ecirc;me que le nombre d'octets dans la cha&icirc;ne.  <tt><i>amount</i></tt> n'est pas permis.<br \>
+Note: Si vous voulez &eacute;crire des valeurs &agrave; partir d'un tampon, vous NE DEVEZ PAS passer un pointeur vers la m&eacute;moire tampon; au lieu de cela vous devez passer la premi&egrave;re variable dans la m&eacute;moire tampon.  (Cela peut &ecirc;tre fait par le d&eacute;r&eacute;f&eacute;rencement du pointeur avec <tt><a href="KeyPgOpValueOf.html">Operator * (Valeur de)</a></tt>.)  <tt><b>Put</b></tt> d&eacute;duira automatiquement que le reste de la m&eacute;moire tampon se poursuit apr&egrave;s la premi&egrave;re variable.  Si vous passez un pointeur directement, alors <tt><b>Put</b></tt> utilisera la m&eacute;moire &agrave; partir de la variable pointeur et non pas la m&eacute;moire point&eacute;e par lui.<br \>
 </div><tt><i>amount</i></tt><br \>
-<div class="fb_indent">Makes <tt>Put</tt> write to file <tt><i>amount</i></tt> consecutive variables to the file - i.e. it writes <tt>( <i>amount</i> * <a href="KeyPgSizeof.html">SizeOf</a>(<i>data</i>) )</tt> bytes of data, starting at <tt><i>data</i></tt>'s location in memory, into the file.  If <tt><i>amount</i></tt> is omitted it defaults to <tt>1</tt>, meaning that <tt><b>Put</b></tt> just writes a single variable.<div class="fb_header"><br \>
+<div class="fb_indent"><tt>Put</tt> &eacute;crira dans le fichier <tt><i>amount</i></tt> variables cons&eacute;cutives - c'est &agrave; dire qu'il &eacute;crira, dans le fichier, <tt>( <i>amount</i> * <a href="KeyPgSizeof.html">SizeOf</a>(<i>data</i>) )</tt> octets de donn&eacute;es, commen&ccedil;ant &agrave; la position <tt><i>data</i></tt> dans la m&eacute;moire.  Si <tt><i>amount</i></tt> est omis sa valeur par d&eacute;faut est <tt>1</tt>, ce qui signifie que <tt><b>Put</b></tt> n'&eacute;crit qu'une seule variable.<div class="fb_header"><br \>
 <br \>
-</div></div></div><div class="fb_sect_title">Return Value</div><div class="fb_sect_cont"><br \>
-<tt>0</tt> on success; nonzero on error. "disk full" is considered as an error, and results in return code <tt>3</tt>. An "exact" amount of data written before is not available, and wouldn't be really useful anyway. <br \>
+</div></div></div><div class="fb_sect_title">Valeur retourn&eacute;e</div><div class="fb_sect_cont"><br \>
+<tt>0</tt> si succ&egrave;s; non z&eacute;ro si erreur. "disk full" (disque complet) est consid&eacute;r&eacute; comme une erreur et il en r&eacute;sulte un code retour de <tt>3</tt>. La quantit&eacute; "exacte" des donn&eacute;es &eacute;crites avant n'est pas disponible et ce ne serait pas vraiment utile de toute fa&ccedil;on. <br \>
 <br \>
 </div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
-Writes binary data from a buffer variable to a file opened in <tt><a href="KeyPgBinary.html">Binary</a></tt> or <tt><a href="KeyPgRandom.html">Random</a></tt> mode.<br \>
+&Eacute;crit des donn&eacute;es binaires &agrave; partir d'une variable tampon dans un fichier ouvert en mode <tt><a href="KeyPgBinary.html">Binary</a></tt> ou <tt><a href="KeyPgRandom.html">Random</a></tt>.<br \>
 <br \>
-<tt><b>Put</b></tt> can be used as a function, and will return <tt>0</tt> on success or an error code on failure.	<br \>
+<tt><b>Put</b></tt> peut &ecirc;tre utilis&eacute; comme une fonction, et retournera <tt>0</tt> si succ&egrave;s ou un code d'erreur si &eacute;chec.	<br \>
 <br \>
-For files opened in <tt><a href="KeyPgRandom.html">Random</a></tt> mode, the size in bytes of the data to write must match the specified record size.<br \>
+Pour les fichiers ouverts en mode <tt><a href="KeyPgRandom.html">Random</a></tt>, la taille en octets des donn&eacute;es &agrave; &eacute;crire doit correspondre &agrave; la taille sp&eacute;cifi&eacute;e de l'enregistrement.<br \>
 <br \>
-</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Exemple</div><div class="fb_sect_cont"><br \>
 <tt><div class="freebasic">
 <span class="com">'&nbsp;Create&nbsp;integer&nbsp;variables&nbsp;(our&nbsp;buffer&nbsp;has&nbsp;just&nbsp;4&nbsp;bytes)</span><br />
 <span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="wrd">buffer</span>&nbsp;<span class="oth">,</span>&nbsp;<span class="wrd">f</span>&nbsp;<br />
@@ -93,7 +93,7 @@ For files opened in <tt><a href="KeyPgRandom.html">Random</a></tt> mode, the siz
 <span class="key">End</span><br />
 </div></tt><br />
 <br \>
-</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Exemple</div><div class="fb_sect_cont"><br \>
 <tt><div class="freebasic">
 <span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Byte</span>&nbsp;<span class="key">Ptr</span>&nbsp;<span class="wrd">lpBuffer</span><br />
 <span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="wrd">hFile</span><span class="oth">,</span>&nbsp;<span class="wrd">Counter</span><span class="oth">,</span>&nbsp;<span class="wrd">Size</span><br />
@@ -119,20 +119,22 @@ For files opened in <tt><a href="KeyPgRandom.html">Random</a></tt> mode, the siz
 <span class="com">'&nbsp;End&nbsp;the&nbsp;program.</span><br />
 <span class="key">End</span><br />
 </div></tt><br />
-</div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
-<ul><li> <tt><b>Put</b></tt> can write full arrays as in VB or, alternatively, write a multiple of the data size from <tt><i>buffer</i></tt>'s memory location.<br \>
-<li> <tt><b>Put</b></tt> can be used as a function in FB, to find the success/error code returned without having to use error handling procedures.<br \>
+</div><div class="fb_sect_title">Diff&eacute;rences avec QB</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><b>Put</b></tt> peut &eacute;crire des tableaux pleins comme dans VB ou, &agrave; d&eacute;faut, &eacute;crire un multiple de la taille des donn&eacute;es &agrave; partir de la position m&eacute;moire <tt><i>buffer</i></tt>.<br \>
+<li> <tt><b>Put</b></tt> peut &ecirc;tre utilis&eacute; comme une fonction dans FB, pour d&eacute;terminer s'il y a eu succ&egrave;s ou si un code d'erreur a &eacute;t&eacute; renvoy&eacute; sans avoir &agrave; utiliser les proc&eacute;dures de gestion des erreurs.<br \>
 <br \>
-</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
-<ul><li> <tt><a href="KeyPgPutgraphics.html">Put (Graphics)</a></tt> different usage of same keyword <br \>
-<li> <tt><a href="KeyPgGetfileio.html">Get (File I/O)</a></tt><br \>
+</ul></div><div class="fb_sect_title">Voir aussi</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgPutgraphics.html">Put (Graphique)</a></tt> utilisation diff&eacute;rente du m&ecirc;me mot-cl&eacute;<br \>
+<li> <tt><a href="KeyPgGetfileio.html">Get (Entr&eacute;e/Sortie fichiers)</a></tt><br \>
 <li> <tt><a href="KeyPgOpen.html">Open</a></tt><br \>
 <li> <tt><a href="KeyPgClose.html">Close</a></tt><br \>
 <li> <tt><a href="KeyPgRandom.html">Random</a></tt><br \>
 <li> <tt><a href="KeyPgBinary.html">Binary</a></tt><br \>
 <li> <tt><a href="KeyPgFreefile.html">FreeFile</a></tt><br \>
 <br \>
-</ul></div>
+</ul><br \>
+   <br \>
+</div>
 </div>
 </div> 
 </div> 

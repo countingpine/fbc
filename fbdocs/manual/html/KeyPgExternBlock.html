@@ -11,27 +11,27 @@
 </div> 
 <div id="fb_pg_wrapper">
 <div id="fb_pg_body">
-	Statement block to allow calling of functions compiled for specific languages or platforms.<br \>
+	Bloc d'instructions permettant d'appeler des fonctions compil&eacute;es pour des langages ou des plates-formes sp&eacute;cifiques.<br \>
 <br \>
-<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<div class="fb_sect_title">Syntaxe</div><div class="fb_sect_cont"><tt><br \>
 <b>Extern { "C" | "C++" | "Windows" | "Windows-MS" }</b> [ <b><a href="KeyPgLib.html">Lib</a></b> "<i>libname</i>" ]<br \>
 <div class="fb_indent"><i>declarative statements</i><br \>
 </div><b>End Extern</b><br \>
 </tt><br \>
 </div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
-<tt><b>Extern</b></tt> blocks provide default calling conventions for procedures and mandate a certain name decoration.<br \>
+Les blocs <tt><b>Extern</b></tt> fournissent par d&eacute;faut des conventions d'appel pour les proc&eacute;dures et mandatent une certaine "name decoration".<br \>
 <br \>
-<tt><b>Extern "C"</b></tt> blocks provide a default <tt><a href="KeyPgCdecl.html">cdecl</a></tt> calling convention to procedures, and also preserve the case of all names declared within them. The same effect can be achieved without the EXTERN block by using <tt><a href="KeyPgCdecl.html">cdecl</a></tt> together with an <tt><a href="KeyPgAlias.html">Alias</a></tt> string containing the exact procedure name.<br \>
+Les blocs <tt><b>Extern "C"</b></tt> fournissent par d&eacute;faut une convention d'appel <tt><a href="KeyPgCdecl.html">cdecl</a></tt> pour les proc&eacute;dures et pr&eacute;servent aussi la casse de tous les noms d&eacute;clar&eacute;s dans celles-ci. Le m&ecirc;me r&eacute;sultat peut &ecirc;tre obtenu en utilisant <tt><a href="KeyPgCdecl.html">cdecl</a></tt> en m&ecirc;me temps qu'un <tt><a href="KeyPgAlias.html">Alias</a></tt> cha&icirc;ne contenant le nom exact de la proc&eacute;dure.<br \>
 <br \>
-<tt><b>Extern "C++"</b></tt> blocks are exactly like <tt><b>Extern "C"</b></tt> blocks but they also mangle the names declared within them in a way compatible to that of <i>g++-4.x</i>.<br \>
+Les blocs <tt><b>Extern "C++"</b></tt> sont exactement comme les blocs <tt><b>Extern "C"</b></tt> mais ils transforment aussi les noms d&eacute;clar&eacute;s &agrave; l'int&eacute;rieur d'une mani&egrave;re compatible avec celle de <i>g++-4.x</i>.<br \>
 <br \>
-<tt><b>Extern "Windows"</b></tt> blocks provide a default <tt><a href="KeyPgStdcall.html">stdcall</a></tt> calling convention to procedures, preserve the case of all names declared within them, and on the Windows platform, append an <tt>"@<i>N</i>"</tt> suffix to procedure names, where <tt><i>N</i></tt> is the total size in bytes of any procedure parameters. Similar to the <tt><b>Extern "C"</b></tt> block, the same effect can be achieved by using <tt><a href="KeyPgStdcall.html">stdcall</a></tt> and <tt><a href="KeyPgAlias.html">Alias</a></tt>.<br \>
+Les blocs <tt><b>Extern "Windows"</b></tt> fournissent par d&eacute;faut une convention d'appel <tt><a href="KeyPgStdcall.html">stdcall</a></tt> pour les proc&eacute;dures, pr&eacute;servent la casse de tous les noms d&eacute;clar&eacute;s &agrave; l'int&eacute;rieur de celles-ci et sur les plates-formes Windows, ajoutent un suffixe <tt>"@<i>N</i>"</tt> aux noms des proc&eacute;dures, o&ugrave; <tt><i>N</i></tt> est la taille totale en octets des param&egrave;tres de la proc&eacute;dure. Similaire au bloc <tt><b>Extern "C"</b></tt>, le m&ecirc;me effet est obtenu en utilisant <tt><a href="KeyPgStdcall.html">stdcall</a></tt> et <tt><a href="KeyPgAlias.html">Alias</a></tt>. <br \>
 <br \>
-<tt><b>Extern "Windows-MS"</b></tt> blocks are exactly like <tt><b>Extern "Windows"</b></tt> blocks but do not append the <tt>"@<i>N</i>"</tt> suffix to procedure names on Windows.<br \>
+Les blocs <tt><b>Extern "Windows-MS"</b></tt> sont identiques aux blocs <tt><b>Extern "Windows"</b></tt> mais n'ajoutent pas le suffixe <tt>"@<i>N</i>"</tt> aux noms de proc&eacute;dure sur les plates-formes Windows.<br \>
 <br \>
-<tt><a href="KeyPgLib.html">Lib</a> "<i>libname</i>"</tt> can be used to specify a library which will be linked in as if <tt><a href="KeyPgInclib.html">#Inclib "Libname"</a></tt> or <tt><a href="CompilerOptl.html">-l libname</a></tt> had been used. Additionally, all procedure declarations inside the <b>Extern</b> block will use the specified <tt><a href="KeyPgLib.html">Lib</a> "<i>libname</i>"</tt> as if it was specified as part of their declarations (but it can still be overridden with an explicit <tt><a href="KeyPgLib.html">Lib</a> "<i>libname</i>"</tt>).<br \>
+<tt><a href="KeyPgLib.html">Lib</a> "<i>libname</i>"</tt> peut &ecirc;tre utilis&eacute; pour sp&eacute;cifier une librairie qui sera li&eacute;e comme si on avait utilis&eacute; <tt><a href="KeyPgInclib.html">#Inclib "Libname"</a></tt> ou <tt><a href="CompilerOptl.html">-l libname</a></tt>. De plus, toutes les d&eacute;clarations de proc&eacute;dures &agrave; l'int&eacute;rieur du bloc <b>Extern</b> utiliseront <tt><a href="KeyPgLib.html">Lib</a> "<i>libname</i>"</tt> comme si cela avait &eacute;t&eacute; sp&eacute;cifi&eacute; dans le cadre de leurs déclarations (mais cela peut &ecirc;tre modifié par un <tt><a href="KeyPgLib.html">Lib</a> "<i>libname</i>"</tt> explicite.<br \>
 <br \>
-</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Exemple</div><div class="fb_sect_cont"><br \>
 <tt><div class="freebasic">
 <span class="key">Extern</span>&nbsp;<span class="quo">"C"</span><br />
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;This&nbsp;procedure&nbsp;uses&nbsp;the&nbsp;CDECL&nbsp;convention&nbsp;and&nbsp;is&nbsp;seen&nbsp;externally</span><br />
@@ -59,16 +59,16 @@
 <span class="key">End</span>&nbsp;<span class="key">Extern</span><br />
 </div></tt><br />
 <br \>
-</div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
-<ul><li> <tt><b>Extern</b></tt> blocks are only available in the <i><a href="CompilerOptlang.html">-lang fb</a></i> dialect.<br \>
+</div><div class="fb_sect_title">Diff&eacute;rences de dialecte</div><div class="fb_sect_cont"><br \>
+<ul><li>Les blocs <tt><b>Extern</b></tt> sont disponibles seulement en dialecte <i><a href="CompilerOptlang.html">-lang fb</a></i>.<br \>
 <br \>
-</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
-<ul><li> New to FreeBASIC<br \>
+</ul></div><div class="fb_sect_title">Diff&eacute;rences avec QB</div><div class="fb_sect_cont"><br \>
+<ul><li> Nouveau pour FreeBASIC<br \>
 <br \>
-</ul></div><div class="fb_sect_title">Platform Differences</div><div class="fb_sect_cont"><br \>
-<ul><li> On Linux, *BSD and DOS platforms, <tt><b>Extern "Windows"</b></tt> blocks never append a <tt>"@<i>N</i>"</tt> suffix to procedure names, and thus are equal to <tt><b>Extern "Windows-MS"</b></tt>.<br \>
+</ul></div><div class="fb_sect_title">Diff&eacute;rences de plate-forme</div><div class="fb_sect_cont"><br \>
+<ul><li> Dans les plates-formes Linux, *BSD and DOS les blocs <tt><b>Extern "Windows"</b></tt> n'ajoutent jamais le suffixe <tt>"@<i>N</i>"</tt> aux noms des proc&eacute;dures et sont donc &eacute;quivalents &agrave; <tt><b>Extern "Windows-MS"</b></tt>.<br \>
 <br \>
-</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+</ul></div><div class="fb_sect_title">Voir aussi</div><div class="fb_sect_cont"><br \>
 <ul><li> <tt><a href="KeyPgCdecl.html">cdecl</a></tt><br \>
 <li> <tt><a href="KeyPgStdcall.html">stdcall</a></tt><br \>
 <li> <tt><a href="KeyPgExtern.html">Extern</a></tt><br \>

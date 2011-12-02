@@ -11,81 +11,81 @@
 </div> 
 <div id="fb_pg_wrapper">
 <div id="fb_pg_body">
-	Computes a valid color value including alpha (transparency) for hi/truecolor modes<br \>
+	Calcule une valeur de couleur valide incluant la transparence (alpha) pour les modes "hi/truecolor"<br \>
 <br \>
-<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<div class="fb_sect_title">Syntaxe</div><div class="fb_sect_cont"><tt><br \>
 <a href="KeyPgPpdefine.html">#define</a> <b>RGBA</b>(<i>r</i>,<i>g</i>,<i>b</i>,<i>a</i>) ((<a href="KeyPgCuint.html">CUInt</a>(r) <a href="KeyPgOpShiftLeft.html">Shl</a> 16) <a href="KeyPgOpOr.html">Or</a> (<a href="KeyPgCuint.html">CUInt</a>(g) <a href="KeyPgOpShiftLeft.html">Shl</a> 8) <a href="KeyPgOpOr.html">Or</a> <a href="KeyPgCuint.html">CUInt</a>(b) <a href="KeyPgOpOr.html">Or</a> (<a href="KeyPgCuint.html">CUInt</a>(a) <a href="KeyPgOpShiftLeft.html">Shl</a> 24))<br \>
 </tt><br \>
 </div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
 <i>result</i> = <b>RGBA</b>(<i>red</i>, <i>green</i>, <i>blue</i>, <i>alpha</i>)<br \>
 </tt><br \>
-</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Param&egrave;tres</div><div class="fb_sect_cont"><br \>
 <tt><i>red</i></tt><br \>
-<div class="fb_indent">red color component value<br \>
+<div class="fb_indent">valeur de la composante de couleur rouge<br \>
 </div><tt><i>green</i></tt><br \>
-<div class="fb_indent">green color component value<br \>
+<div class="fb_indent">valeur de la composante de couleur vert<br \>
 </div><tt><i>blue</i></tt><br \>
-<div class="fb_indent">blue color component value<br \>
+<div class="fb_indent">valeur de la composante de couleur bleu<br \>
 </div><tt><i>alpha</i></tt><br \>
-<div class="fb_indent">alpha component value<br \>
+<div class="fb_indent">valeur de la composante alpha<br \>
 <br \>
-</div></div><div class="fb_sect_title">Return Value</div><div class="fb_sect_cont"><br \>
-the combined color<br \>
+</div></div><div class="fb_sect_title">Valeur renvoy&eacute;e</div><div class="fb_sect_cont"><br \>
+La couleur correspondant &agrave; la combinaison.<br \>
 <br \>
 </div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
-<tt><i>red</i></tt>, <tt><i>green</i></tt>, <tt><i>blue</i></tt> and <tt><i>alpha</i></tt> are components ranging <tt>0</tt>..<tt>255</tt>.<br \>
+<tt><i>red</i></tt>, <tt><i>green</i></tt>, <tt><i>blue</i></tt> et <tt><i>alpha</i></tt> sont les composantes - valeurs de <tt>0</tt> &agrave; <tt>255</tt>.<br \>
 <br \>
-The <tt><b>RGBA</b></tt> function can be used to compute a valid color value including an alpha channel for use while in hi/truecolor modes. It returns an unsigned integer in the format <tt>&hAARRGGBB</tt>, where <tt>RR</tt>, <tt>GG</tt>, <tt>BB</tt>, <tt>AA</tt> equal the values passed to this function, in hexadecimal format.<br \>
-It is possible to retrieve the red, green, blue  and alpha values from a color value, by using a combination of <tt><a href="KeyPgOpAnd.html">And</a></tt> and <tt><a href="KeyPgOpShiftRight.html">Shr</a></tt>.  The second example below shows how to <tt><a href="KeyPgPpdefine.html">#define</a></tt> and use macros to do this.<br \>
+La fonction <tt><b>RGBA</b></tt> est utilis&eacute;e pour calculer une valeur de couleur valide incluant la transparence (canal alpha) pour une utilisation avec les modes "hi/truecolor". Elle renvoie un entier non sign&eacute; du format <tt>&hAARRVVBB</tt>, o&ugrave; <tt>RR</tt>, <tt>VV</tt>, <tt>BB</tt>, <tt>AA</tt>  correspondent aux valeurs pass&eacute;es &agrave; la fonction, dans le format hexad&eacute;cimal.<br \>
+Il est possible de retrouver les valeurs rouge, vert, bleu et alpha &agrave; partir d'un valeur de couleur, en utilisant une combinaison de <tt><a href="KeyPgOpAnd.html">And</a></tt> et <tt><a href="KeyPgOpShiftRight.html">Shr</a></tt>.  Le second exemple ci-dessous comment utiliser <tt><a href="KeyPgPpdefine.html">#define</a></tt> et des macros pour ce faire.<br \>
 <br \>
-</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Exemple</div><div class="fb_sect_cont"><br \>
 <tt><div class="freebasic">
-<span class="com">'open&nbsp;a&nbsp;graphics&nbsp;screen&nbsp;(320&nbsp;*&nbsp;240,&nbsp;32-bit)</span><br />
+<span class="com">'ouvre&nbsp;ecran&nbsp;graphique&nbsp;(320&nbsp;*&nbsp;240,&nbsp;32-bit)</span><br />
 <span class="key">ScreenRes</span>&nbsp;<span class="num">320</span><span class="oth">,</span>&nbsp;<span class="num">240</span><span class="oth">,</span>&nbsp;<span class="num">32</span><br />
 <br />
 <span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Any</span>&nbsp;<span class="key">Ptr</span>&nbsp;<span class="wrd">img</span><br />
 <span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="wrd">x</span><span class="oth">,</span>&nbsp;<span class="wrd">y</span><br />
 <br />
-<span class="com">'make&nbsp;an&nbsp;image&nbsp;that&nbsp;varies&nbsp;in&nbsp;transparency&nbsp;and&nbsp;color</span><br />
+<span class="com">'fabriquemake&nbsp;image&nbsp;en&nbsp;variant&nbsp;transparence&nbsp;et&nbsp;couleur</span><br />
 <span class="wrd">img</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">ImageCreate</span><span class="oth">(</span><span class="num">64</span><span class="oth">,</span>&nbsp;<span class="num">64</span><span class="oth">)</span><br />
 <span class="key">For</span>&nbsp;<span class="wrd">x</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">63</span><br />
 &nbsp;&nbsp;<span class="key">For</span>&nbsp;<span class="wrd">y</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">63</span><br />
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="key">PSet</span>&nbsp;<span class="wrd">img</span><span class="oth">,</span>&nbsp;<span class="oth">(</span><span class="wrd">x</span><span class="oth">,</span>&nbsp;<span class="wrd">y</span><span class="oth">),</span>&nbsp;<span class="key">RGBA</span><span class="oth">(</span><span class="wrd">x</span>&nbsp;<span class="oth">*</span>&nbsp;<span class="num">4</span><span class="oth">,</span>&nbsp;<span class="num">0</span><span class="oth">,</span>&nbsp;<span class="wrd">y</span>&nbsp;<span class="oth">*</span>&nbsp;<span class="num">4</span><span class="oth">,</span>&nbsp;<span class="oth">(</span><span class="wrd">x</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="wrd">y</span><span class="oth">)</span>&nbsp;<span class="oth">*</span>&nbsp;<span class="num">2</span><span class="oth">)</span><br />
 &nbsp;&nbsp;<span class="key">Next</span>&nbsp;<span class="wrd">y</span><br />
 <span class="key">Next</span>&nbsp;<span class="wrd">x</span><br />
-<span class="key">Circle</span>&nbsp;<span class="wrd">img</span><span class="oth">,</span>&nbsp;<span class="oth">(</span><span class="num">31</span><span class="oth">,</span>&nbsp;<span class="num">31</span><span class="oth">),</span>&nbsp;<span class="num">25</span><span class="oth">,</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">RGBA</span><span class="oth">(</span><span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">127</span><span class="oth">,</span>&nbsp;<span class="num">192</span><span class="oth">,</span>&nbsp;<span class="num">192</span><span class="oth">),</span>&nbsp;<span class="oth">,,,</span>&nbsp;<span class="wrd">F</span>&nbsp;<span class="com">'semi-transparent&nbsp;blue&nbsp;circle</span><br />
-<span class="key">Line</span>&nbsp;&nbsp;&nbsp;<span class="wrd">img</span><span class="oth">,</span>&nbsp;<span class="oth">(</span><span class="num">26</span><span class="oth">,</span>&nbsp;<span class="num">20</span><span class="oth">)-(</span><span class="num">38</span><span class="oth">,</span>&nbsp;<span class="num">44</span><span class="oth">),</span>&nbsp;<span class="key">RGBA</span><span class="oth">(</span><span class="num">255</span><span class="oth">,</span>&nbsp;<span class="num">255</span><span class="oth">,</span>&nbsp;<span class="num">255</span><span class="oth">,</span>&nbsp;<span class="num">0</span><span class="oth">),</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">BF</span>&nbsp;<span class="com">'transparent&nbsp;white&nbsp;rectangle</span><br />
+<span class="key">Circle</span>&nbsp;<span class="wrd">img</span><span class="oth">,</span>&nbsp;<span class="oth">(</span><span class="num">31</span><span class="oth">,</span>&nbsp;<span class="num">31</span><span class="oth">),</span>&nbsp;<span class="num">25</span><span class="oth">,</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">RGBA</span><span class="oth">(</span><span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">127</span><span class="oth">,</span>&nbsp;<span class="num">192</span><span class="oth">,</span>&nbsp;<span class="num">192</span><span class="oth">),</span>&nbsp;<span class="oth">,,,</span>&nbsp;<span class="wrd">F</span>&nbsp;<span class="com">'cercle&nbsp;bleu&nbsp;semi-transparent</span><br />
+<span class="key">Line</span>&nbsp;&nbsp;&nbsp;<span class="wrd">img</span><span class="oth">,</span>&nbsp;<span class="oth">(</span><span class="num">26</span><span class="oth">,</span>&nbsp;<span class="num">20</span><span class="oth">)-(</span><span class="num">38</span><span class="oth">,</span>&nbsp;<span class="num">44</span><span class="oth">),</span>&nbsp;<span class="key">RGBA</span><span class="oth">(</span><span class="num">255</span><span class="oth">,</span>&nbsp;<span class="num">255</span><span class="oth">,</span>&nbsp;<span class="num">255</span><span class="oth">,</span>&nbsp;<span class="num">0</span><span class="oth">),</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">BF</span>&nbsp;<span class="com">'rectangle&nbsp;blanc&nbsp;transparent</span><br />
 <br />
-<span class="com">'draw&nbsp;a&nbsp;background&nbsp;(diagonal&nbsp;white&nbsp;lines)</span><br />
+<span class="com">'dessine&nbsp;arriere-plan&nbsp;(lignes&nbsp;diagonales&nbsp;blanches)</span><br />
 <span class="key">For</span>&nbsp;<span class="wrd">x</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="oth">-</span><span class="num">240</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">319</span>&nbsp;<span class="key">Step</span>&nbsp;<span class="num">10</span><br />
 &nbsp;&nbsp;<span class="key">Line</span>&nbsp;<span class="oth">(</span><span class="wrd">x</span><span class="oth">,</span>&nbsp;<span class="num">0</span><span class="oth">)-</span><span class="key">Step</span><span class="oth">(</span><span class="num">240</span><span class="oth">,</span>&nbsp;<span class="num">240</span><span class="oth">),</span>&nbsp;<span class="key">RGB</span><span class="oth">(</span><span class="num">255</span><span class="oth">,</span>&nbsp;<span class="num">255</span><span class="oth">,</span>&nbsp;<span class="num">255</span><span class="oth">)</span><br />
 <span class="key">Next</span><br />
 <br />
-<span class="key">Line</span>&nbsp;<span class="oth">(</span><span class="num">10</span><span class="oth">,</span>&nbsp;&nbsp;<span class="num">10</span><span class="oth">)-(</span><span class="num">310</span><span class="oth">,</span>&nbsp;&nbsp;<span class="num">37</span><span class="oth">),</span>&nbsp;<span class="key">RGB</span><span class="oth">(</span><span class="num">127</span><span class="oth">,</span>&nbsp;<span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">0</span><span class="oth">),</span>&nbsp;<span class="wrd">BF</span>&nbsp;<span class="com">'red&nbsp;box&nbsp;for&nbsp;text</span><br />
-<span class="key">Line</span>&nbsp;<span class="oth">(</span><span class="num">10</span><span class="oth">,</span>&nbsp;<span class="num">146</span><span class="oth">)-(</span><span class="num">310</span><span class="oth">,</span>&nbsp;<span class="num">229</span><span class="oth">),</span>&nbsp;<span class="key">RGB</span><span class="oth">(</span><span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">127</span><span class="oth">,</span>&nbsp;<span class="num">0</span><span class="oth">),</span>&nbsp;<span class="wrd">BF</span>&nbsp;<span class="com">'green&nbsp;box&nbsp;for&nbsp;Putting&nbsp;onto</span><br />
+<span class="key">Line</span>&nbsp;<span class="oth">(</span><span class="num">10</span><span class="oth">,</span>&nbsp;&nbsp;<span class="num">10</span><span class="oth">)-(</span><span class="num">310</span><span class="oth">,</span>&nbsp;&nbsp;<span class="num">37</span><span class="oth">),</span>&nbsp;<span class="key">RGB</span><span class="oth">(</span><span class="num">127</span><span class="oth">,</span>&nbsp;<span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">0</span><span class="oth">),</span>&nbsp;<span class="wrd">BF</span>&nbsp;<span class="com">'boite&nbsp;rouge&nbsp;pour&nbsp;texte</span><br />
+<span class="key">Line</span>&nbsp;<span class="oth">(</span><span class="num">10</span><span class="oth">,</span>&nbsp;<span class="num">146</span><span class="oth">)-(</span><span class="num">310</span><span class="oth">,</span>&nbsp;<span class="num">229</span><span class="oth">),</span>&nbsp;<span class="key">RGB</span><span class="oth">(</span><span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">127</span><span class="oth">,</span>&nbsp;<span class="num">0</span><span class="oth">),</span>&nbsp;<span class="wrd">BF</span>&nbsp;<span class="com">'boite&nbsp;verte&nbsp;pour&nbsp;Putting&nbsp;dessus</span><br />
 <br />
-<span class="com">'draw&nbsp;the&nbsp;image&nbsp;and&nbsp;some&nbsp;text&nbsp;with&nbsp;PSET</span><br />
+<span class="com">'dessine&nbsp;image&nbsp;et&nbsp;texte&nbsp;avec&nbsp;PSET</span><br />
 <span class="key">Draw</span>&nbsp;<span class="key">String</span><span class="oth">(</span><span class="num">64</span><span class="oth">,</span>&nbsp;<span class="num">20</span><span class="oth">),</span>&nbsp;<span class="quo">"PSet"</span><br />
 <span class="key">Put</span><span class="oth">(</span><span class="num">48</span><span class="oth">,</span>&nbsp;&nbsp;<span class="num">48</span><span class="oth">),</span>&nbsp;<span class="wrd">img</span><span class="oth">,</span>&nbsp;<span class="key">PSet</span><br />
 <span class="key">Put</span><span class="oth">(</span><span class="num">48</span><span class="oth">,</span>&nbsp;<span class="num">156</span><span class="oth">),</span>&nbsp;<span class="wrd">img</span><span class="oth">,</span>&nbsp;<span class="key">PSet</span><br />
 <br />
-<span class="com">'draw&nbsp;the&nbsp;image&nbsp;and&nbsp;some&nbsp;text&nbsp;with&nbsp;ALPHA</span><br />
+<span class="com">'dessine&nbsp;image&nbsp;et&nbsp;texte&nbsp;avec&nbsp;ALPHA</span><br />
 <span class="key">Draw</span>&nbsp;<span class="key">String</span>&nbsp;<span class="oth">(</span><span class="num">220</span><span class="oth">,</span>&nbsp;<span class="num">20</span><span class="oth">),</span>&nbsp;<span class="quo">"Alpha"</span><br />
 <span class="key">Put</span><span class="oth">(</span><span class="num">208</span><span class="oth">,</span>&nbsp;&nbsp;<span class="num">48</span><span class="oth">),</span>&nbsp;<span class="wrd">img</span><span class="oth">,</span>&nbsp;<span class="key">Alpha</span><br />
 <span class="key">Put</span><span class="oth">(</span><span class="num">208</span><span class="oth">,</span>&nbsp;<span class="num">156</span><span class="oth">),</span>&nbsp;<span class="wrd">img</span><span class="oth">,</span>&nbsp;<span class="key">Alpha</span><br />
 <br />
 <br />
 <br />
-<span class="com">'Free&nbsp;the&nbsp;image&nbsp;memory</span><br />
+<span class="com">'Libere&nbsp;memoire&nbsp;image</span><br />
 <span class="key">ImageDestroy</span>&nbsp;<span class="wrd">img</span><br />
 <br />
-<span class="com">'Keep&nbsp;the&nbsp;window&nbsp;open&nbsp;until&nbsp;the&nbsp;user&nbsp;presses&nbsp;a&nbsp;key</span><br />
+<span class="com">'Attend&nbsp;touche&nbsp;appuyee</span><br />
 <span class="key">Sleep</span><br />
 </div></tt><br />
 <div class="fb_img"><img src="images/rgba.png" /></div><br \>
 <br \>
 <tt><div class="freebasic">
-<span class="com">''&nbsp;setting&nbsp;and&nbsp;retrieving&nbsp;Red,&nbsp;Green,&nbsp;Blue&nbsp;and&nbsp;Alpha&nbsp;values</span><br />
+<span class="com">''&nbsp;valide&nbsp;et&nbsp;recupere&nbsp;Rouge,&nbsp;Vert,&nbsp;Bleu&nbsp;et&nbsp;Alpha/span><br />
 <br />
 <span class="def">#define&nbsp;RGBA_R(&nbsp;c&nbsp;)&nbsp;(&nbsp;CUInt(&nbsp;c&nbsp;)&nbsp;Shr&nbsp;16&nbsp;And&nbsp;255&nbsp;)<br />
 #define&nbsp;RGBA_G(&nbsp;c&nbsp;)&nbsp;(&nbsp;CUInt(&nbsp;c&nbsp;)&nbsp;Shr&nbsp;&nbsp;8&nbsp;And&nbsp;255&nbsp;)<br />
@@ -110,15 +110,16 @@ It is possible to retrieve the red, green, blue  and alpha values from a color v
 <span class="key">Print</span>&nbsp;<span class="key">Using</span>&nbsp;<span class="quo">"Alpha:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_&amp;H\\&nbsp;=&nbsp;###"</span><span class="oth">;</span>&nbsp;<span class="key">Hex</span><span class="oth">(</span><span class="wrd">a</span><span class="oth">,</span>&nbsp;<span class="num">2</span><span class="oth">);</span>&nbsp;<span class="wrd">a</span><br />
 </div></tt><br />
 <br \>
-</div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
-<ul><li> Not available in the <i><a href="CompilerOptlang.html">-lang qb</a></i> dialect.<br \>
 <br \>
-</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
-<ul><li> New to FreeBASIC<br \>
+</div><div class="fb_sect_title">Diff&eacute;rences de dialectes</div><div class="fb_sect_cont"><br \>
+<ul><li> Non disponible dans le dialecte <i><a href="CompilerOptlang.html">-lang qb</a></i>.<br \>
 <br \>
-</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
-<ul><li> <tt><a href="KeyPgRgb.html">RGB</a></tt><br \>
-<li> <tt><a href="KeyPgColor.html">Color</a></tt><br \>
+</ul></div><div class="fb_sect_title">Diff&eacute;rences avec QB</div><div class="fb_sect_cont"><br \>
+<ul><li> Nouveau pour FreeBASIC<br \>
+<br \>
+</ul></div><div class="fb_sect_title">Voir aussi</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgColor.html">Color</a></tt><br \>
+<li> <tt><a href="KeyPgRgb.html">RGB</a></tt><br \>
 <li> <tt><a href="KeyPgPpdefine.html">#define</a></tt><br \>
 <br \>
 </ul></div>

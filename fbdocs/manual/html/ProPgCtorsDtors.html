@@ -6,41 +6,41 @@
 <body>
 <div id="fb_body_wrapper">
 <div id="fb_tab">
-<div id="fb_tab_l">Constructors and Destructors</div>
+<div id="fb_tab_l">Constructeurs et destructeurs</div>
 <div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
 </div> 
 <div id="fb_pg_wrapper">
 <div id="fb_pg_body">
-	In charge of the creation and destruction of objects.<br \>
+	En charge de la cr&eacute;ation et la destruction d'objets.<br \>
 <br \>
-<b><a href="#OVERVIEW">Overview</a></b><br \>
-<b><a href="#DECLARATION">Declaration</a></b><br \>
-<b><a href="#DEFCTOR">Default constructors</a></b><br \>
-<b><a href="#COPYCTOR">Copy constructors</a></b><br \>
-<b><a href="#CALLCTOR">Calling constructors</a></b><br \>
+<b><a href="#OVERVIEW">Vue d'ensemble</a></b><br \>
+<b><a href="#DECLARATION">D&eacute;claration</a></b><br \>
+<b><a href="#DEFCTOR">Les constructeurs par d&eacute;faut</a></b><br \>
+<b><a href="#COPYCTOR">Constructeurs de copie</a></b><br \>
+<b><a href="#CALLCTOR">Appel des constructeurs</a></b><br \>
+<b><a href="#COMPCTORDTOR">Constructeurs et destructeurs fournis par le compilateur</a></b><br \>
 <br \>
-<a name="OVERVIEW"></a><div class="fb_sect_title">Overview</div><div class="fb_sect_cont"><br \>
-Constructors and destructors are responsible for creating and destroying objects, respectively. In general, constructors give objects their initial state, that is, they give meaningful values to their objects' member data. Destructors perform the opposite function; they make sure any resources owned by their objects are properly freed.<br \>
+<a name="OVERVIEW"></a><div class="fb_sect_title">Vue d'ensemble</div><div class="fb_sect_cont"><br \>
+Les constructeurs et les destructeurs sont responsables, respectivement, de la cr&eacute;ation et de la destruction d'objets. En g&eacute;n&eacute;ral, les constructeurs donnent aux objets leur &eacute;tat initial, c'est &agrave; dire qu'ils donnent des valeurs significatives aux donn&eacute;es membres de leurs objets. Les destructeurs accomplissent la fonction inverse; ils s'assurent que les ressources qui appartiennent aux objets sont correctement lib&eacute;r&eacute;es.<br \>
 <br \>
-Simply, constructors are special member procedures that are called when an object is created, and destructors are special member procedures called when an object is destroyed. Both constructors and destructors are called automatically by the compiler whenever an object is created or destroyed, whether explicitly with the use of the <tt><a href="KeyPgDim.html">Dim</a></tt> or <tt><a href="KeyPgOpNew.html">New</a></tt> keywords, or implicitly by passing an object to a procedure by value or through an object going out of scope.<br \>
+Simplement, les constructeurs sont des membres sp&eacute;ciaux des proc&eacute;dures qui sont appel&eacute;s lorsqu'un objet est cr&eacute;&eacute; et les destructeurs sont des membres sp&eacute;ciaux des proc&eacute;dures qui sont appel&eacute;s lorsqu'un objet est d&eacute;truit. Les constructeurs et destructeurs sont appel&eacute;s automatiquement par le compilateur chaque fois qu'un objet est cr&eacute;&eacute; ou d&eacute;truit, ou d&eacute;truit explicitement lors de l'utilisation des mots-cl&eacute;s <tt><a href="KeyPgDim.html">Dim</a></tt> ou <tt><a href="KeyPgOpNew.html">New</a></tt> ou ou implicitement par le passage d'un objet par valeur &agrave; une proc&eacute;dure ou via un objet sortant du champ d'application.<br \>
 <br \>
-<a name="DECLARATION"></a></div><div class="fb_sect_title">Declaration</div><div class="fb_sect_cont"><br \>
-Constructors and destructors are declared like member procedures but with the <tt><a href="KeyPgConstructor.html">Constructor</a></tt> keyword instead of <tt><a href="KeyPgMemberSub.html">Sub</a></tt> or <tt><a href="KeyPgMemberFunction.html">Function</a></tt>, and without a name. Similarly, they are defined with only the name of the <tt><a href="KeyPgType.html">Type</a></tt> or <tt><a href="KeyPgClass.html">Class</a></tt> they are declared in.<br \>
+<a name="DECLARATION"></a></div><div class="fb_sect_title">D&eacute;claration</div><div class="fb_sect_cont"><br \>
+Les constructeurs et les destructeurs sont d&eacute;clar&eacute;s comme membres de proc&eacute;dures, mais avec les mots-clefs <tt><a href="KeyPgConstructor.html">Constructor</a></tt> ou <tt><a href="KeyPgDestructor.html">Destructor</a></tt> &agrave; la place de <tt><a href="KeyPgMemberSub.html">Sub</a></tt> ou <tt><a href="KeyPgMemberFunction.html">Function</a></tt> et sans nom. De m&ecirc;me, ils sont d&eacute;finis avec seulement le nom du <tt><a href="KeyPgType.html">Type</a></tt> ou de la <tt><a href="KeyPgClass.html">Class</a></tt> dans le(la)quel(le) ils sont d&eacute;clar&eacute;s.<br \>
+<br \>Un <tt><a href="KeyPgType.html">Type</a></tt> ou une <tt><a href="KeyPgClass.html">Class</a></tt> peuvent avoir plusieurs constructeurs, mais seulement un destructeur.<br \>
 <br \>
-A <tt><a href="KeyPgType.html">Type</a></tt> or <tt><a href="KeyPgClass.html">Class</a></tt> can have multiple constructors, but only one destructor.<br \>
+<a name="DEFCTOR"></a></div><div class="fb_sect_title">Les constructeurs par d&eacute;faut</div><div class="fb_sect_cont"><br \>
+Les constructeurs par d&eacute;faut sont des constructeurs qui soit n'ont pas de param&egrave;tres, soit la totalit&eacute; de leurs param&egrave;tres ont une valeur par d&eacute;faut. Ils sont appel&eacute;s quand un objet est d&eacute;fini, mais pas initialis&eacute;, ou cr&eacute;&eacute;s dans le cadre d'un tableau, avec les mots-clefs <tt><a href="KeyPgDim.html">Dim</a></tt>, <tt><a href="KeyPgRedim.html">ReDim</a></tt> ou <tt><a href="KeyPgOpNew.html">New</a></tt>[]. Le premier constructeur d&eacute;clar&eacute; dans l'exemple ci-dessous est un constructeur par d&eacute;faut.<br \>
 <br \>
-<a name="DEFCTOR"></a></div><div class="fb_sect_title">Default constructors</div><div class="fb_sect_cont"><br \>
-Default constructors are constructors that either have no parameters, or all of their parameters have a default value. They are called when an object is defined but not initialized, or is created as part of an array, with the <tt><a href="KeyPgDim.html">Dim</a></tt>, <tt><a href="KeyPgRedim.html">ReDim</a></tt> or <tt><a href="KeyPgOpNew.html">New</a></tt>[] keywords. The first constructor declared in the example below is a default constructor.<br \>
+<a name="COPYCTOR"></a></div><div class="fb_sect_title">Constructeurs de copie</div><div class="fb_sect_cont"><br \>
+Les constructeurs de copie sont des constructeurs appel&eacute;s quand un objet est cr&eacute;&eacute;, ou clon&eacute;, &agrave; partir d'un autre objet du m&ecirc;me type (ou d'un objet qui peut &ecirc;tre converti dans ce type). Cela se produit explicitement lors de l'initialisation d'un objet avec un autre objet ou implicitement en passant par valeur un objet &agrave; une proc&eacute;dure. Les constructeurs de copie sont d&eacute;clar&eacute;s comme ayant un param&egrave;tre: un objet du m&ecirc;me type pass&eacute; par r&eacute;f&eacute;rence.<br \>
 <br \>
-<a name="COPYCTOR"></a></div><div class="fb_sect_title">Copy constructors</div><div class="fb_sect_cont"><br \>
-Copy constructors are constructors called when an object is created, or cloned, from another object of the same type (or an object that can be converted to that type). This happens explicitly when initializing an object with another object, or implicitly by passing an object to a procedure by value. Copy constructors are declared having one parameter: an object of the same type passed by reference.<br \>
+Les constructeurs de copie ne sont appel&eacute;s que lors de la cr&eacute;ation et l'initialisation d'instances d'objets. L'affectation &agrave; des objets est assur&eacute;e par <tt><a href="KeyPgOperator.html">Member Operator Let</a></tt>.<br \>
 <br \>
-Copy constructors are only called when creating and initializing object instances. Assignment to objects is handled by the <tt><a href="KeyPgOperator.html">Member Operator Let</a></tt>.<br \>
+<a name="CALLCTOR"></a></div><div class="fb_sect_title">Appel des constructeurs</div><div class="fb_sect_cont"><br \>
+Contrairement aux autres membres des proc&eacute;dures, les constructeurs ne peuvent pas &ecirc;tre appel&eacute;s directement &agrave; partir d'une instance d'objet. Au lieu de cela, un constructeur est pr&eacute;cis&eacute; dans une instruction <tt><a href="KeyPgDim.html">Dim</a></tt> avec un initialiseur ou sans ou dans une instruction <tt><a href="KeyPgOpNew.html">New</a></tt> avec ou sans arguments.<br \>
 <br \>
-<a name="CALLCTOR"></a></div><div class="fb_sect_title">Calling constructors</div><div class="fb_sect_cont"><br \>
-Unlike other member procedures, constructors cannot be called directly from an object instance. Instead, a constructor is specified in a <tt><a href="KeyPgDim.html">Dim</a></tt> statement either with an initializer or without one, or in a <tt><a href="KeyPgOpNew.html">New</a></tt> statement with or without arguments.<br \>
-<br \>
-When specifying an initializer for an object, the name of the type followed by any arguments it requires is used.<br \>
+Lorsque vous sp&eacute;cifiez un initialiseur pour un objet, le nom du type suivi par tous les arguments qu'il exige est utilis&eacute;.<br \>
 <br \>
 <tt><div class="freebasic">
 <span class="key">Type</span>&nbsp;<span class="wrd">foo</span><br />
@@ -99,14 +99,14 @@ When specifying an initializer for an object, the name of the type followed by a
 <span class="key">End</span>&nbsp;<span class="key">Scope</span>&nbsp;<span class="com">''&nbsp;&lt;-&nbsp;a,&nbsp;b&nbsp;and&nbsp;c&nbsp;are&nbsp;destroyed&nbsp;here&nbsp;as&nbsp;well</span><br />
 </div></tt><br />
 <br \>
-<a name="COMPCTORDTOR"></a></div><div class="fb_sect_title">Compiler-provided constructors and destructors</div><div class="fb_sect_cont"><br \>
-If no copy constructor is declared for a <tt><a href="KeyPgType.html">Type</a></tt> or <tt><a href="KeyPgClass.html">Class</a></tt>, the compiler provides one. If no constructor has been declared, the compiler also provides a default constructor.<br \>
+<a name="COMPCTORDTOR"></a></div><div class="fb_sect_title">Constructeurs et destructeurs fournis par le compilateur</div><div class="fb_sect_cont"><br \>
+Si aucun constructeur de copie n'est d&eacute;clar&eacute; pour un <tt><a href="KeyPgType.html">Type</a></tt> ou une <tt><a href="KeyPgClass.html">Class</a></tt>, le compilateur en fournit un. Si aucun constructeur n'a &eacute;t&eacute; d&eacute;clar&eacute;, le compilateur en fournit &eacute;galement un par d&eacute;faut.<br \>
 <br \>
-The compiler-provided default constructor initializes member data to default values, that is, numeric and pointer members are set to zero (0), and object members are default-constructed. The copy constructor that the compiler declares shallow-copies all member data from one type to another: numeric and pointer types are initialized with the corresponding data members in the object that is copied, and object members are copy-constructed from their corresponding object members. This means that dynamic resources, such as memory pointed to by a pointer data member, is not copied; only the address is copied. So if an object owns a resource, meaning it is responsible for it's creation and destruction, then the compiler-generated copy constructor will not be sufficient.<br \>
+Le constructeur par d&eacute;faut fourni par le compilateur initialise les donn&eacute;es des membres &agrave; des valeurs par d&eacute;faut, c'est &agrave; dire, que les membres num&eacute;riques et pointeurs sont mis &agrave; z&eacute;ro (0) et les membres object sont construits par d&eacute;faut. Le constructeur de copie d&eacute;clar&eacute; par le compilateur fait des copies rapides de toutes les donn&eacute;es membres d'un type &agrave; un autre: les types num&eacute;riques et pointeur sont initialis&eacute;s avec les membres de donn&eacute;es correspondant &agrave; l'objet qui est copi&eacute;, et les membres objet sont construits &agrave; partir de la copie de leurs membres objet correspondants. Cela signifie que les ressources dynamiques, telle que la m&eacute;moire point&eacute;e par un membre de donn&eacute;es pointeur, ne sont pas copi&eacute;es; seule l'adresse est copi&eacute;e. Donc, si un objet poss&egrave;de une ressource, cela signifie qu'il est responsable de sa cr&eacute;ation et de sa destruction, le constructeur de copie g&eacute;n&eacute;r&eacute; par le compilateur ne sera pas suffisant.<br \>
 <br \>
-If a destructor is not declared, the compiler generates one. This destructor calls object members' destructors and does nothing for numeric and pointer types. Again, if an object owns a dynamic resource, then the compiler-generated destructor will not be sufficient, as the resource will not be freed when the object is destroyed.<br \>
+Si un destructeur n'est pas d&eacute;clar&eacute;, le compilateur en g&eacute;n&egrave;re un. Ce destructeur appelle les destructeurs des membres de l'objet et ne fait rien pour les types num&eacute;riques et pointeurs. Encore une fois, si un objet poss&egrave;de une ressource dynamique, alors le destructeur g&eacute;n&eacute;r&eacute; par le compilateur ne sera pas suffisant, car la ressource ne sera pas lib&eacute;r&eacute;e lorsque l'objet sera d&eacute;truit.<br \>
 <br \>
-This is commonly referred to as the "Rule of 3": If an object needs a custom copy constructor, assignment operator or destructor, chances are it needs all three.<br \>
+Ceci est commun&eacute;ment appel&eacute; la "r&egrave;gle des 3": Si un objet a besoin d'un constructeur de copie personnalis&eacute;, op&eacute;rateur d'affectation ou destructeur, il y a des chances qu'il ait besoin des trois.<br \>
 <br \>
 </div>
 </div>

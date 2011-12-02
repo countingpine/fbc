@@ -6,23 +6,23 @@
 <body>
 <div id="fb_body_wrapper">
 <div id="fb_tab">
-<div id="fb_tab_l">Error Handling</div>
+<div id="fb_tab_l">Gestion des erreurs</div>
 <div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
 </div> 
 <div id="fb_pg_wrapper">
 <div id="fb_pg_body">
-	Handling runtime errors.<br \>
+	Gestion des erreurs d'ex&eacute;cution.<br \>
 <br \>
-FreeBASIC can handle the errors in the following ways:<br \>
-<ul><li> By default the program does nothing with the errors - they are silently ignored and code continues. In this case code should process possible errors in the next line by using the <tt><a href="KeyPgErr.html">Err</a></tt> function.<br \>
-<li> If compiled with <i><a href="CompilerOpte.html">-e</a></i> or <i><a href="CompilerOptex.html">-ex</a></i> options, FreeBASIC uses QB-like error handling.<br \>
-<li> <b>Future</b> OOP versions of FreeBASIC may have a java-like TRY..CATCH...FINALLY exception handler implemented.<br \>
+FreeBasic peut g&eacute;rer les erreurs de la mani&egrave;re suivante:<br \>
+<ul><li> Par d&eacute;faut, le programme ne fait rien avec les erreurs - elles sont ignor&eacute;es et le code continue. Dans ce cas, le code devrait traiter les erreurs possibles dans la ligne suivante en utilisant la fonction <tt><a href="KeyPgErr.html">Err</a></tt>.<br \>
+<li> S'il est compil&eacute; avec les options <i><a href="CompilerOpte.html">-e</a></i> ou <i><a href="CompilerOptex.html">-ex</a></i>, FreeBASIC utilise la gestion des erreurs comme dans QB.<br \>
+<li> Les <b>futures</b> versions POO de FreeBASIC auront un gestionnaire d'exception comme dans Java: TRY..CATCH...FINALLY.<br \>
 <br \>
-</ul><b>NOTE:</b> The following information is valid unless the error produces an OS General Protection Fault (for example if the program writes outside the process memory area). In these cases the OS will immediately stop the program and issue an error: nothing can avoid it from inside FreeBASIC.<br \>
+</ul><b>NOTE:</b> Les informations suivantes sont valables sauf si l'erreur produit un: "OS General Protection Fault" = "syst&egrave;me d'exploitation erreur de protection g&eacute;n&eacute;rale"  (par exemple, si le programme &eacute;crit en dehors de la zone m&eacute;moire du processus). Dans ces cas, le syst&egrave;me d'exploitation va imm&eacute;diatement arr&ecirc;ter le programme et &eacute;mettre une erreur: rien ne peut l'&eacute;viter &agrave; l'int&eacute;rieur de FreeBASIC.<br \>
 <br \>
-<div class="fb_sect_title">Default error handling</div><div class="fb_sect_cont"><br \>
+<div class="fb_sect_title">La gestion des erreurs, par d&eacute;faut</div><div class="fb_sect_cont"><br \>
 <br \>
-The default FreeBASIC behavior is to set the ERR variable and continue. <br \>
+Le comportement par d&eacute;faut FreeBasic est de d&eacute;finir la variable ERR et de continuer. <br \>
 <br \>
 <tt><div class="freebasic">
 <span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="wrd">e</span><br />
@@ -32,20 +32,20 @@ The default FreeBASIC behavior is to set the ERR variable and continue. <br \>
 <span class="key">Sleep</span><br />
 </div></tt><br />
 <br \>
-(The example program supposes there is no <tt>xzxwz.zwz</tt> file). The program does not stop; it sets the ERR variable and continues. The error can be processed in the next line.<br \>
+(Le programme d'exemple suppose il n'y a pas de fichier <tt>xzxwz.zwz</tt>). Le programme ne s'arr&ecirc;te pas; il d&eacute;finit la variable ERR et continue. L'erreur peut &ecirc;tre trait&eacute;e sur la ligne suivante.<br \>
 <br \>
-Some IO functions such as <tt><a href="KeyPgOpen.html">Open</a></tt> and <tt><a href="KeyPgPutfileio.html">Put #</a></tt>... can be used in function form, returning an error number or zero if successful.<br \>
+Certaines fonctions d'entr&eacute;e/sortie telles que <tt><a href="KeyPgOpen.html">Open</a></tt> et <tt><a href="KeyPgPutfileio.html">Put #</a></tt>... peuvent &ecirc;tre utilis&eacute;es sous forme de fonction qui retourne un num&eacute;ro d'erreur ou z&eacute;ro en cas de succ&egrave;s.<br \>
 <br \>
 <tt><div class="freebasic">
 <span class="key">Print</span>&nbsp;<span class="key">Open</span>&nbsp;<span class="oth">(</span><span class="quo">"xzxwz.zwz"</span>&nbsp;<span class="key">For</span>&nbsp;<span class="key">Input</span>&nbsp;<span class="key">As</span>&nbsp;<span class="oth">#</span><span class="num">1</span><span class="oth">)</span><br />
 <span class="key">Sleep</span><br />
 </div></tt><br />
 <br \>
-</div><div class="fb_sect_title">QuickBASIC-like error handling</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">La gestion des erreurs comme dans QuickBasic</div><div class="fb_sect_cont"><br \>
 <br \>
-If the  <i><a href="CompilerOpte.html">-e</a></i> or <i><a href="CompilerOptex.html">-ex</a></i> switch is used at compile time, the program is expected to have a QB-like error handler enabled. If no handler processes the error, the program stops with an error.<br \>
+Si l'option <i><a href="CompilerOpte.html">-e</a></i> ou <i><a href="CompilerOptex.html">-ex</a></i> est utilis&eacute;e lors de la compilation, le programme est suppos&eacute; avoir un gestionnaire d'erreurs comme dans QB. Si aucun gestionnaire ne g&egrave;re l'erreur, le programme s'arr&ecirc;te avec une erreur.<br \>
 <br \>
-Notice: if QB-Like error handling is used, the programmer should be prepared to handle all error conditions.<br \>
+Note: si une gestion des erreurs comme dans QB est utilis&eacute;e, le programmeur doit &ecirc;tre pr&eacute;par&eacute; &agrave; g&eacute;rer toutes les conditions d'erreur.<br \>
 <br \>
 <tt><div class="freebasic">
 <span class="com">''&nbsp;Compile&nbsp;with&nbsp;QB&nbsp;(-lang&nbsp;qb)&nbsp;dialect</span><br />
@@ -65,12 +65,12 @@ Notice: if QB-Like error handling is used, the programmer should be prepared to 
 <span class="key">End</span><br />
 </div></tt><br />
 <br \>
-<tt><a href="KeyPgOnerror.html">On Error</a></tt> sets an error handling routine which the program will jump to when an error is found. <tt><a href="KeyPgOnerror.html">On Error</a> <a href="KeyPgGoto.html">Goto</a> 0</tt> disables the error handling.<br \>
+<tt><a href="KeyPgOnerror.html">On Error</a></tt> d&eacute;finit une routine de gestion d'erreur dans laquelle le programme va sauter au moment o&ugrave; une erreur est trouv&eacute;e. <tt><a href="KeyPgOnerror.html">On Error</a> <a href="KeyPgGoto.html">Goto</a> 0</tt> d&eacute;sactive la gestion des erreurs.<br \>
 <br \>
-If an error handling routine is not set when an error occurs, the program will stop and send the console an error message.<br \>
+Si une routine de gestion d'erreur n'est pas d&eacute;finie quand une erreur survient, le programme s'arr&ecirc;te et envoie sur la console un message d'erreur.<br \>
 <pre class="fb_pre">
 Aborting program due to runtime error 2 (file not found)
-</pre><div style="clear:both">&nbsp;</div>The error handler routine can be at the end of the program, as in QB. The <tt><a href="KeyPgLocal.html">On Local Error</a></tt> statement allows the setting of a local error handler routine at the end of the same <tt><a href="KeyPgSub.html">Sub</a></tt> or <tt><a href="KeyPgFunction.html">Function</a></tt> in which the error occurs.<br \>
+</pre><div style="clear:both">&nbsp;</div>La routine de gestionnaire d'erreurs peut &ecirc;tre &agrave; la fin du programme, comme dans QB. L'instruction <tt><a href="KeyPgLocal.html">On Local Error</a></tt> permet la cr&eacute;ation d'une routine de gestion locale de l'erreur &agrave; la fin de la m&ecirc;me <tt><a href="KeyPgSub.html">Sub</a></tt> ou <tt><a href="KeyPgFunction.html">Function</a></tt> dans laquelle l'erreur se produit.<br \>
 <br \>
 <tt><div class="freebasic">
 <span class="com">''&nbsp;Compile&nbsp;with&nbsp;-e</span><br />
@@ -100,18 +100,18 @@ Aborting program due to runtime error 2 (file not found)
 <span class="key">End</span>&nbsp;<span class="key">Sub</span><br />
 </div></tt><br />
 <br \>
-If the <i><a href="CompilerOpte.html">-e</a></i> switch is used the error handler must terminate the program. <br \>
-With <i><a href="CompilerOptex.html">-ex</a></i> the error routine can end by using <tt><a href="KeyPgResume.html">Resume</a></tt> (retries the statement that caused the error) or <tt><a href="KeyPgResumenext.html">Resume Next</a></tt> (continues at the next instruction) .<br \>
+Si l'option <i><a href="CompilerOpte.html">-e</a></i> est utilis&eacute;e, le gestionnaire d'erreurs doit terminer le programme. <br \>
+Avec <i><a href="CompilerOptex.html">-ex</a></i> la routine d'erreur peut se terminer en utilisant <tt><a href="KeyPgResume.html">Resume</a></tt> (r&eacute;essaie la d&eacute;claration qui a provoqu&eacute; l'erreur) ou <tt><a href="KeyPgResumenext.html">Resume Next</a></tt> (se poursuit &agrave; l'instruction suivante) .<br \>
 <br \>
-</div><div class="fb_sect_title">Error codes</div><div class="fb_sect_cont"><br \>
+</div><div class="fb_sect_title">Les codes d'erreur</div><div class="fb_sect_cont"><br \>
 <br \>
-See <a href="TblRuntimeErrors.html">Runtime Error Codes</a> for a listing of runtime error numbers and their associated meaning.<br \>
+Voir <a href="TblRuntimeErrors.html">Codes d'erreurs de fonctionnement</a> pour une liste des num&eacute;ros d'erreur d'ex&eacute;cution et leur signification associ&eacute;e.<br \>
 <br \>
-No user error code range is defined. If <tt><a href="KeyPgError.html">Error</a></tt> is used to set an error code it is wise to use high values to avoid collisions with the list of built-in error codes. (This built-in list may be expanded later.)<br \>
+Aucune gamme de code d'erreurs utilisateur n'est d&eacute;finie. Si <tt><a href="KeyPgError.html">Error</a></tt> est utilis&eacute;e pour d&eacute;finir un code d'erreur, il est sage d'utiliser des valeurs &eacute;lev&eacute;es pour &eacute;viter les collisions avec la liste des codes d'erreurs int&eacute;gr&eacute;e. (Cette liste int&eacute;gr&eacute;e pouvant &ecirc;tre &eacute;tendue ult&eacute;rieurement.)<br \>
 <br \>
-</div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
-<ul><li> <a href="CatPgError.html">Error Handling Functions</a><br \>
-<li> <a href="TblRuntimeErrors.html">Runtime Error Codes</a><br \>
+</div><div class="fb_sect_title">Voir aussi</div><div class="fb_sect_cont"><br \>
+<ul><li> <a href="CatPgError.html">Fonctions de gestion des erreurs</a><br \>
+<li> <a href="TblRuntimeErrors.html">Codes d'erreurs de fonctionnement</a><br \>
 <br \>
 </ul></div>
 </div>
