@@ -1,0 +1,101 @@
+<html>
+<head>
+<title>Union</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Union</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Declares a union user defined type.<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<b>Union</b> <i>typename</i><br \>
+<div class="fb_indent"><i>fieldname</i> as <a href="DataType.html">datatype</a><br \>
+<a href="KeyPgDeclare.html">Declare</a> <i>member function declaration</i> ...<br \>
+...<br \>
+</div>End Union<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+<tt><i>typename</i></tt><br \>
+<div class="fb_indent">Name of the <tt><b>Union</b></tt><br \>
+</div><tt><i>fieldname</i></tt><br \>
+<div class="fb_indent">Name of a data field member<br \>
+</div><tt><i>member function declaration</i></tt><br \>
+<div class="fb_indent">Any of the supported member functions<br \>
+<br \>
+</div></div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+Unions are similar to a <tt><a href="KeyPgType.html">Type</a></tt> structure, except that the elements of a union occupy the same space in memory. The size of the Union is the size of the largest data item. A data item can be an unnamed <tt><a href="KeyPgType.html">Type</a></tt> . Since they occupy the same space, only a single element can be used. <br \>
+<br \>
+Unnamed unions can be nested inside a type structure and unnamed types can be nested inside an union . See Example.<br \>
+<br \>
+Unions support member functions including <tt><a href="KeyPgConstructor.html">Constructor</a></tt>, <tt><a href="KeyPgDestructor.html">Destructor</a></tt>, <tt><a href="KeyPgMemberFunction.html">Function</a></tt>, <tt><a href="KeyPgOperator.html">Operator</a></tt>, <tt><a href="KeyPgProperty.html">Property</a></tt> and <tt><a href="KeyPgMemberSub.html">Sub</a></tt>.  All members of a union are public and access control is not supported.<br \>
+<br \>
+A <tt><b>Union</b></tt> can be passed as a user defined type to overloaded operator functions.<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="com">'define&nbsp;our&nbsp;union</span><br />
+<span class="key">Union</span>&nbsp;<span class="wrd">AUnion</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">a</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">UByte</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">b</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Union</span><br />
+<span class="com">'define&nbsp;a&nbsp;composite&nbsp;type</span><br />
+<span class="key">Type</span>&nbsp;<span class="wrd">CompType</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">s</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span>&nbsp;<span class="oth">*</span>&nbsp;<span class="num">20</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">ui</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Byte</span>&nbsp;<span class="com">'Flag&nbsp;to&nbsp;tell&nbsp;us&nbsp;what&nbsp;to&nbsp;use&nbsp;in&nbsp;union.</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Union</span>&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">au</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">UByte</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">bu</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">End</span>&nbsp;<span class="key">Union</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Type</span><br />
+<br />
+<span class="com">'Flags&nbsp;to&nbsp;let&nbsp;us&nbsp;know&nbsp;what&nbsp;to&nbsp;use&nbsp;in&nbsp;union.</span><br />
+<span class="com">'You&nbsp;can&nbsp;only&nbsp;use&nbsp;a&nbsp;single&nbsp;element&nbsp;of&nbsp;a&nbsp;union.</span><br />
+<span class="key">Const</span>&nbsp;<span class="wrd">IsInteger</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">1</span><br />
+<span class="key">Const</span>&nbsp;<span class="wrd">IsUByte</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">2</span><br />
+<br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">MyUnion</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">AUnion</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">MyComposite</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">CompType</span><br />
+<br />
+<span class="com">'Can&nbsp;only&nbsp;set&nbsp;one&nbsp;value&nbsp;in&nbsp;union</span><br />
+<span class="wrd">MyUnion.a</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">128</span><br />
+<br />
+<span class="wrd">MyComposite.s</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="quo">"Type&nbsp;+&nbsp;Union"</span><br />
+<span class="wrd">MyComposite.ui</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">IsInteger</span>&nbsp;<span class="com">'Tells&nbsp;us&nbsp;this&nbsp;is&nbsp;an&nbsp;integer&nbsp;union</span><br />
+<span class="wrd">MyComposite.bu</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">1500</span><br />
+<br />
+<span class="key">Print</span>&nbsp;<span class="quo">"Union:&nbsp;"</span><span class="oth">;</span><span class="wrd">MyUnion.a</span><br />
+<br />
+<span class="key">Print</span>&nbsp;<span class="quo">"Composite:&nbsp;"</span><span class="oth">;</span><br />
+<span class="key">If</span>&nbsp;<span class="wrd">MyComposite.ui</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">IsInteger</span>&nbsp;<span class="key">Then</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="wrd">MyComposite.bu</span><br />
+<span class="key">ElseIf</span>&nbsp;<span class="wrd">MyComposite.ui</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">IsUByte</span>&nbsp;<span class="key">Then</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="wrd">MyComposite.au</span><br />
+<span class="key">Else</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"Unknown&nbsp;type."</span><br />
+<span class="key">End</span>&nbsp;<span class="key">If</span><br />
+<br />
+<span class="key">Sleep</span><br />
+</div></tt><br />
+<br \>
+</div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
+<ul><li> Object-related features as functions defined inside the <tt><b>Union</b></tt> block are supported only in the <i><a href="CompilerOptlang.html">-lang fb</a></i> dialect.<br \>
+<li> Not available in the <i><a href="CompilerOptlang.html">-lang qb</a></i> dialect unless referenced with the alias <tt><b>__Union</b></tt>.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> New to FreeBASIC<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgType.html">Type</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

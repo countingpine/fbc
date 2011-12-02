@@ -1,0 +1,71 @@
+<html>
+<head>
+<title>ValULng</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">ValULng</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Converts a string to a unsigned long integer<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgFunction.html">Function</a> <b>ValULng</b> <a href="KeyPgOverload.html">Overload</a> ( <a href="KeyPgByref.html">ByRef</a> <i>strnum</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgConstQualifier.html">Const</a> <a href="KeyPgString.html">String</a> ) <a href="KeyPgAs.html">As</a> <a href="KeyPgUlongint.html">ULongInt</a><br \>
+<a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgFunction.html">Function</a> <b>ValULng</b> ( <a href="KeyPgByval.html">ByVal</a> <i>strnum</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgConstQualifier.html">Const</a> <a href="KeyPgWstring.html">WString</a> <a href="KeyPgPtr.html">Ptr</a> ) <a href="KeyPgAs.html">As</a> <a href="KeyPgUlongint.html">ULongInt</a><br \>
+</tt><br \>
+</div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
+<i>result</i> = <b>ValULng</b> ( <i>strnum</i> )<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+<tt><i>strnum</i></tt><br \>
+<div class="fb_indent">the string to convert<br \>
+<br \>
+</div></div><div class="fb_sect_title">Return Value</div><div class="fb_sect_cont"><br \>
+Returns a <tt><a href="KeyPgUlongint.html">ULongInt</a></tt> of the converted string<br \>
+<br \>
+If the first character of the string is invalid, <tt><b>ValULng</b></tt> will return <tt>0</tt>.<br \>
+<br \>
+</div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+For example, <tt><b>ValULng</b>("10")</tt> will return <tt>10</tt>, and <tt><b>ValULng</b>("10.60")</tt> will return <tt>10</tt> as well. The function parses the string from the left, skipping any white space, and returns the longest number it can read, stopping at the first non-suitable character it finds.  Any non-numeric characters, including decimal points and exponent specifiers, are considered non-suitable, for example, <tt><b>ValULng</b>("23.1E+6")</tt> will just return <tt>23</tt>.<br \>
+<br \>
+<tt><b>ValULng</b></tt> can be used to convert integer numbers in <a href="KeyPgBin.html">Binary</a> / <a href="KeyPgOct.html">Octal</a> / <a href="KeyPgHex.html">Hexadecimal</a> format, if they have the relevant identifier (<tt>"&B"</tt> / <tt>"&O"</tt> / <tt>"&H"</tt>) prefixed, for example: <tt><b>ValULng</b>("&HFF")</tt> returns <tt>255</tt>.<br \>
+<br \>
+If you want to convert a number into string format, use the <tt><a href="KeyPgStr.html">Str</a></tt> function.<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="key">Dim</span>&nbsp;<span class="wrd">a</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span><span class="oth">,</span>&nbsp;<span class="wrd">b</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">ULongInt</span><br />
+<span class="wrd">a</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="quo">"20xa211"</span><br />
+<span class="wrd">b</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">ValULng</span><span class="oth">(</span><span class="wrd">a</span><span class="oth">)</span><br />
+<span class="key">Print</span>&nbsp;<span class="wrd">a</span><span class="oth">,</span>&nbsp;<span class="wrd">b</span><br />
+</div></tt><br />
+<br \>
+<pre class="fb_pre">
+20xa211   20
+</pre><br \>
+<br \>
+</div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
+<ul><li> Not available in the <i><a href="CompilerOptlang.html">-lang qb</a></i> dialect unless referenced with the alias <tt><b>__Valulng</b></tt>.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> New to FreeBASIC<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgCulngint.html">CULngInt</a></tt><br \>
+<li> <tt><a href="KeyPgVal.html">Val</a></tt><br \>
+<li> <tt><a href="KeyPgValuint.html">ValUInt</a></tt><br \>
+<li> <tt><a href="KeyPgVallng.html">ValLng</a></tt><br \>
+<li> <tt><a href="KeyPgStr.html">Str</a></tt><br \>
+<li> <tt><a href="KeyPgChr.html">Chr</a></tt><br \>
+<li> <tt><a href="KeyPgAsc.html">Asc</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

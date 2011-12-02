@@ -1,0 +1,66 @@
+<html>
+<head>
+<title>va_arg</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">va_arg</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Returns the current argument from a variable argument list.<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<i>variable</i> = <b>va_arg</b> ( <i>argument_list</i>, <a href="DataType.html">datatype</a> )<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+The <tt><b>va_arg</b></tt> macro allows the use of a variable number of arguments within a function. <tt><b>va_arg</b></tt> returns the current argument in the list, <tt><i>argument_list</i></tt>, with an expected data type of <tt><i>datatype</i></tt>. Before <tt><b>va_arg</b></tt> can be used, it must be Initialized with the command <tt><a href="KeyPgVaFirst.html">va_first</a></tt>. Unlike the C macro with the same name, <tt><b>va_arg</b></tt> does not automatically increment <tt><i>argument_list</i></tt> to the next argument within the list. The command <tt><a href="KeyPgVaNext.html">va_next</a></tt> must be used for this purpose.<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="com">'&nbsp;Note&nbsp;that&nbsp;CDECL&nbsp;is&nbsp;used&nbsp;here&nbsp;--&gt;&nbsp;it&nbsp;must&nbsp;be&nbsp;used&nbsp;with&nbsp;an&nbsp;ellipsis&nbsp;argument&nbsp;(...).</span><br />
+<span class="key">Function</span>&nbsp;<span class="wrd">Avg</span>&nbsp;<span class="key">cdecl</span>&nbsp;<span class="oth">(</span><span class="wrd">Count</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">,</span>&nbsp;<span class="oth">...</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Double</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="wrd">ARG</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Any</span>&nbsp;<span class="key">Ptr</span>&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="wrd">SUM</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Double</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="wrd">i</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">ARG</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">va_first</span><span class="oth">()</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">For</span>&nbsp;<span class="wrd">i</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">1</span>&nbsp;<span class="key">To</span>&nbsp;<span class="wrd">COUNT</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">SUM</span>&nbsp;<span class="oth">+=</span>&nbsp;<span class="key">va_arg</span><span class="oth">(</span><span class="wrd">ARG</span><span class="oth">,</span>&nbsp;<span class="key">Double</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">ARG</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">va_next</span><span class="oth">(</span><span class="wrd">ARG</span><span class="oth">,</span><span class="key">Double</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Next</span>&nbsp;<span class="wrd">i</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Return</span>&nbsp;<span class="wrd">SUM</span><span class="oth">/</span><span class="wrd">COUNT</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Function</span><br />
+<br />
+<span class="key">Print</span>&nbsp;<span class="wrd">AVG</span>&nbsp;<span class="oth">(</span><span class="num">4</span><span class="oth">,</span>&nbsp;<span class="num">3.4</span><span class="oth">,</span><span class="num">5.0</span><span class="oth">,</span><span class="num">3.2</span><span class="oth">,</span><span class="num">4.1</span><span class="oth">)</span><br />
+<span class="key">Print</span>&nbsp;<span class="wrd">AVG</span>&nbsp;<span class="oth">(</span><span class="num">2</span><span class="oth">,</span>&nbsp;<span class="num">65.2</span><span class="oth">,</span><span class="num">454.65481</span><span class="oth">)</span><br />
+<br />
+<span class="key">Sleep</span><br />
+</div></tt><br />
+<br \>
+The output would look like:<br \>
+<pre class="fb_pre">
+3.925
+259.927405
+</pre><br \>
+</div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
+<ul><li> Not available in the <i><a href="CompilerOptlang.html">-lang qb</a></i> dialect unless referenced with the alias <tt><b>__va_arg</b></tt>.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> New to FreeBASIC<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgDots.html">... (Ellipsis)</a></tt><br \>
+<li> <tt><a href="KeyPgVaFirst.html">va_first</a></tt><br \>
+<li> <tt><a href="KeyPgVaNext.html">va_next</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

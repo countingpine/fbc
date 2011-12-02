@@ -1,0 +1,167 @@
+<html>
+<head>
+<title>Introduction to Pointers</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Introduction to Pointers</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	<i>Written by <a href="WikiRick.html">rdc</a></i><br \>
+<br \>
+<b>What is a Pointer?</b><br \>
+<br \>
+A pointer is a 4-byte data type that holds an address to a memory location. A pointer doesn't contain data, it points to data once it has been initialized. An uninitialized pointer points to nothing and is undefined.<br \>
+<br \>
+To understand pointers, think of an egg carton that has numbers 1 through 12 printed on the bottom of each "hole" (where you put the eggs). These holes are like memory locations in a computer; each hole, or memory location, has an address, in this example, 1 through 12. If an egg represents a data item, then an egg in hole 1 has an address of 1.<br \>
+<br \>
+Normally, you would access the data directly through the use of variables. When you DIMension a variable of a particular type, you are setting aside storage space for the data. You do not need to know, or care, where the data resides since you can access the data directly through the variable. This is like reaching out and picking up the egg in hole 1 (reading the data) or putting an egg in hole 1 (setting the data) without looking at the numbers written on the bottom of the hole.<br \>
+<br \>
+Using pointers is a bit different. Imagine you have a little scrap of paper that will represent our pointer. Right now it is blank and doesn't point to anything. This undefined pointer can't be used until it is initialized. To initialize the pointer, write a 1 on it. Now our pointer is "pointing" to hole 1 in our egg carton. To put data (an egg) in hole 1, we look at our scrap of paper, match it to hole 1 and place the egg in the hole. To retrieve the egg we do just the opposite. We match our slip of paper to hole 1 and then grab the egg. All the putting and getting of the egg has to be done through the slip of paper and is called dereferencing the pointer. That is, we get to the data through the reference contained in the pointer, the number 1. The pointer doesn't contain the data; it contains a reference to the data.<br \>
+<br \>
+In FreeBasic we define a pointer using the <a href="KeyPgDim.html">Dim</a> and <a href="KeyPgPtr.html">Ptr</a> statements:<br \>
+<br \>
+<tt><tt><div class="freebasic">
+<span class="key">Dim</span>&nbsp;<span class="wrd">aptr</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="key">Ptr</span><br />
+</div></tt><br />
+</tt><br \>
+<br \>
+This statement corresponds to our blank piece of paper in the above example. The pointer doesn't point to anything and is undefined. If we tried to use the pointer right now, more than likely the program would crash.<br \>
+<br \>
+In order for a pointer to be useful, it must be initialized:<br \>
+<br \>
+<tt><tt><div class="freebasic">
+<span class="key">Dim</span>&nbsp;<span class="wrd">aptr</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="key">Ptr</span><br />
+<br />
+<span class="wrd">aptr</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">Allocate</span><span class="oth">(</span><span class="key">SizeOf</span><span class="oth">(</span><span class="key">Integer</span><span class="oth">))</span><br />
+</div></tt><br />
+</tt><br \>
+<br \>
+Here we are using <a href="KeyPgAllocate.html">Allocate</a> to set aside enough space in memory for an <a href="KeyPgInteger.html">Integer</a> and loading the address of that space into aptr. The <a href="KeyPgSizeof.html">SizeOf</a> macro returns the size in bytes of the passed data type. You could use len instead of <a href="KeyPgSizeof.html">SizeOf</a> (since .13b) if you prefer.<br \>
+<br \>
+Once we have initialized the pointer, we can now use it:<br \>
+<br \>
+<tt><tt><div class="freebasic">
+<span class="oth">*</span><span class="wrd">aptr</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">5</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"aptr:&nbsp;"</span><span class="oth">;</span>&nbsp;<span class="oth">*</span><span class="wrd">aptr</span><br />
+</div></tt><br />
+</tt><br \>
+<br \>
+Notice the <b></b>* prefix on aptr. The * is the reference operator. This is like matching the number on the slip of paper to the number on the hole in the egg carton. By using the * operator, we are able to get at the data (egg) contained in the hole pointed at by aptr.<br \>
+<br \>
+Here is a complete example program:<br \>
+<br \>
+<tt><tt><div class="freebasic">
+<span class="key">Option</span>&nbsp;<span class="key">Explicit</span><br />
+<br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">aptr</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="key">Ptr</span><br />
+<br />
+<span class="wrd">aptr</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">Allocate</span><span class="oth">(</span><span class="key">SizeOf</span><span class="oth">(</span><span class="key">Integer</span><span class="oth">))</span><br />
+<span class="oth">*</span><span class="wrd">aptr</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">5</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"aptr:&nbsp;"</span><span class="oth">;</span>&nbsp;<span class="oth">*</span><span class="wrd">aptr</span><br />
+<span class="key">Deallocate</span>&nbsp;<span class="wrd">aptr</span><br />
+<span class="key">Sleep</span><br />
+</div></tt><br />
+</tt><br \>
+<br \>
+The <a href="KeyPgDeallocate.html">Deallocate</a> function frees the memory pointed at by aptr, and makes aptr undefined once again. This is like erasing the number on our slip of paper. If we were to use aptr after deallocating it, the program would crash.<br \>
+<br \>
+<b>What Good are Pointers?</b><br \>
+<br \>
+A major reason for adding pointers to FreeBasic is that many external libraries require pointers to type structures and pointers to strings. For example, the Win32 API has many structures that must be filled out and then passed to a function through a pointer.<br \>
+<br \>
+Another use of a pointer is in a <a href="KeyPgType.html">Type</a> definition. <a href="KeyPgType.html">Type</a> defs in FreeBasic can only contain fixed length strings, but what if you don't know the length of a string until the program is running? A pointer can serve this purpose.<br \>
+<br \>
+(It should be stated that the Type definitions can now support variable length strings.)<br \>
+<br \>
+<tt><tt><div class="freebasic">
+<span class="key">Option</span>&nbsp;<span class="key">Explicit</span><br />
+<br />
+<span class="key">Type</span>&nbsp;<span class="wrd">mytptr</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">sptr</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">ZString</span>&nbsp;<span class="key">Ptr</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Type</span><br />
+<span class="com">'This&nbsp;function&nbsp;will&nbsp;allocate&nbsp;space&nbsp;for&nbsp;the&nbsp;passed&nbsp;string</span><br />
+<span class="com">'and&nbsp;load&nbsp;it&nbsp;into&nbsp;a&nbsp;memory&nbsp;location,&nbsp;returning&nbsp;the</span><br />
+<span class="com">'pointer&nbsp;to&nbsp;the&nbsp;string.</span><br />
+<span class="key">Declare</span>&nbsp;<span class="key">Function</span>&nbsp;<span class="wrd">pSetString</span><span class="oth">(</span><span class="key">ByVal</span>&nbsp;<span class="wrd">s</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">ZString</span>&nbsp;<span class="key">Ptr</span><br />
+<br />
+<span class="com">'type&nbsp;var</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">mytype</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">mytptr</span><br />
+<br />
+<span class="com">'Set&nbsp;a&nbsp;variable&nbsp;string&nbsp;into&nbsp;the&nbsp;type&nbsp;def</span><br />
+<span class="wrd">mytype.sptr</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">pSetString</span><span class="oth">(</span><span class="quo">"Hello&nbsp;World&nbsp;From&nbsp;FreeBasic!"</span><span class="oth">)</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"aptr:&nbsp;"</span><span class="oth">;</span>&nbsp;<span class="oth">*</span><span class="wrd">mytype.sptr</span><br />
+<span class="key">Deallocate</span><span class="oth">(</span><span class="wrd">mytype.sptr</span><span class="oth">)</span><br />
+<span class="key">Sleep</span><br />
+<span class="key">End</span><br />
+<br />
+<span class="key">Function</span>&nbsp;<span class="wrd">pSetString</span><span class="oth">(</span><span class="key">ByVal</span>&nbsp;<span class="wrd">s</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">ZString</span>&nbsp;<span class="key">Ptr</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="wrd">sz</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">ZString</span>&nbsp;<span class="key">Ptr</span><br />
+&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">'allocate&nbsp;some&nbsp;space&nbsp;+&nbsp;1&nbsp;for&nbsp;the&nbsp;chr(0)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">sz</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">Allocate</span><span class="oth">(</span><span class="key">Len</span><span class="oth">(</span><span class="wrd">s</span><span class="oth">)</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="num">1</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">'load&nbsp;the&nbsp;string&nbsp;into&nbsp;the&nbsp;memory&nbsp;location</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">*</span><span class="wrd">sz</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">s</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">'return&nbsp;the&nbsp;pointer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Return</span>&nbsp;<span class="wrd">sz</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Function</span><br />
+</div></tt><br />
+</tt><br \>
+<br \>
+Here we define our type with a field sptr as <a href="KeyPgZstring.html">ZString</a> <a href="KeyPgPtr.html">Ptr</a>. Zstrings are null terminated strings and are used by many external libraries and are designed for dynamic allocations. Once we define our type we create an instance of it with the <a href="KeyPgDim.html">Dim</a> statement:<br \>
+<br \>
+<tt><tt><div class="freebasic">
+<span class="key">Dim</span>&nbsp;<span class="wrd">mytype</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">mytptr</span><br />
+</div></tt><br />
+</tt><br \>
+<br \>
+We then call our function pSetString to get the address of the variable length string we want in our <a href="KeyPgType.html">Type</a> def.<br \>
+<br \>
+<tt><tt><div class="freebasic">
+<span class="wrd">mytype.sptr</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">pSetString</span><span class="oth">(</span><span class="quo">"Hello&nbsp;World&nbsp;From&nbsp;FreeBasic!"</span><span class="oth">)</span><br />
+</div></tt><br />
+</tt><br \>
+<br \>
+Remember sptr is defined as a pointer, not a string variable, so pSetString is returning a pointer (memory address) to the string not the string itself. In other words, if the string is in hole #1, pSetString returns 1.<br \>
+<br \>
+The function pSetString uses a temporary <a href="KeyPgZstring.html">ZString</a> sz, to <a href="KeyPgAllocate.html">Allocate</a> space for the passed string parameter s. Because a <a href="KeyPgZstring.html">ZString</a> is a null terminated string, we must add 1 to the length of s for the null terminator in the <a href="KeyPgAllocate.html">Allocate</a> function.<br \>
+<br \>
+<tt><tt><div class="freebasic">
+<span class="com">'allocate&nbsp;some&nbsp;space&nbsp;+&nbsp;1&nbsp;for&nbsp;the&nbsp;chr(0)</span><br />
+<span class="wrd">sz</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">Allocate</span><span class="oth">(</span><span class="key">Len</span><span class="oth">(</span><span class="wrd">s</span><span class="oth">)</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="num">1</span><span class="oth">)</span><br />
+</div></tt><br />
+</tt><br \>
+<br \>
+Once we have allocated space for the string, we use the reference operator * to load the data into the memory location.<br \>
+<br \>
+<tt><tt><div class="freebasic">
+<span class="com">'load&nbsp;the&nbsp;string&nbsp;into&nbsp;the&nbsp;memory&nbsp;location</span><br />
+<span class="oth">*</span><span class="wrd">sz</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">s</span><br />
+</div></tt><br />
+</tt><br \>
+<br \>
+We then return a pointer (the address of the string) back to our type, which is saved in mytype.sptr.<br \>
+<br \>
+<tt><tt><div class="freebasic">
+<span class="com">'return&nbsp;the&nbsp;pointer</span><br />
+<span class="key">Return</span>&nbsp;<span class="wrd">sz</span><br />
+</div></tt><br />
+</tt><br \>
+<br \>
+We can now reference the string in our type using the reference operator.<br \>
+<br \>
+<tt><tt><div class="freebasic">
+<span class="key">Print</span>&nbsp;<span class="quo">"aptr:&nbsp;"</span><span class="oth">;</span>&nbsp;<span class="oth">*</span><span class="wrd">mytype.sptr</span><br />
+</div></tt><br />
+</tt><br \>
+<br \>
+Pointers can be confusing for the uninitiated, however they need not be if it is kept in mind that the pointer doesn't contain data, it simply points to some data. The pointer is a memory address, and you manipulate that data through the reference operator *. It really isn't much different than a normal variable.
+</div>
+</div> 
+</div> 
+</body>
+</html>

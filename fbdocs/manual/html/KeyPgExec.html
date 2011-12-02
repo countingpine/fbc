@@ -1,0 +1,68 @@
+<html>
+<head>
+<title>Exec</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Exec</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Temporarily transfers execution to an external program<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgSub.html">Function</a> <b>Exec</b> ( <a href="KeyPgByref.html">ByRef</a> <i>program</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgConstQualifier.html">Const</a> <a href="KeyPgString.html">String</a>, <a href="KeyPgByref.html">ByRef</a> <i>arguments</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgConstQualifier.html">Const</a> <a href="KeyPgString.html">String</a> ) <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a><br \>
+</tt><br \>
+</div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
+<i>result</i> = <b>Exec</b>( <i>program</i>, <i>arguments</i> )<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+<tt><i>program</i></tt><br \>
+<div class="fb_indent">The file name (including file path) of the program (executable) to transfer control to.<br \>
+</div><tt><i>arguments</i></tt><br \>
+<div class="fb_indent">The command-line arguments to be passed to the program.<br \>
+<br \>
+</div></div><div class="fb_sect_title">Return Value</div><div class="fb_sect_cont"><br \>
+The exit status of the program, or negative one (-1) if the program could not be executed.<br \>
+<br \>
+</div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+Transfers control over to an external program. When the program exits, execution resumes immediately after the call to <tt><b>Exec</b></tt>.<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="com">'A&nbsp;Windows&nbsp;based&nbsp;example&nbsp;but&nbsp;the&nbsp;same&nbsp;idea&nbsp;applies&nbsp;to&nbsp;Linux</span><br />
+<span class="key">Const</span>&nbsp;<span class="wrd">exename</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="quo">"NoSuchProgram.exe"</span><br />
+<span class="key">Const</span>&nbsp;<span class="wrd">cmdline</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="quo">"arg1&nbsp;arg2&nbsp;arg3"</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">result</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+<span class="wrd">result</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">Exec</span><span class="oth">(</span>&nbsp;<span class="wrd">exename</span><span class="oth">,</span>&nbsp;<span class="wrd">cmdline</span>&nbsp;<span class="oth">)</span><br />
+<span class="key">If</span>&nbsp;<span class="wrd">result</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="oth">-</span><span class="num">1</span>&nbsp;<span class="key">Then</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"Error&nbsp;running&nbsp;"</span><span class="oth">;</span>&nbsp;<span class="wrd">exename</span><br />
+<span class="key">Else</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"Exit&nbsp;code:"</span><span class="oth">;</span>&nbsp;<span class="wrd">result</span><br />
+<span class="key">End</span>&nbsp;<span class="key">If</span><br />
+</div></tt><br />
+</div><div class="fb_sect_title">Platform Differences</div><div class="fb_sect_cont"><br \>
+<ul><li> Linux requires the <i>program</i> case matches the real name of the file. Windows and DOS  are case insensitive. The program being executed may be case sensitive for its command line parameters.<br \>
+<li> Path separators in Linux are forward slashes / . Windows uses backward slashes \ but it allows for forward slashes .  DOS uses backward  \ slashes. <br \>
+<li> Exit code is limited to 8 bits in DOS.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
+<ul><li> Not available in the <i><a href="CompilerOptlang.html">-lang qb</a></i> dialect unless referenced with the alias <tt><b>__Exec</b></tt>.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> New to FreeBASIC<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgChain.html">Chain</a></tt> transfer temporarily, without arguments<br \>
+<li> <tt><a href="KeyPgRun.html">Run</a></tt> one-way transfer<br \>
+<li> <tt><a href="KeyPgCommand.html">Command</a></tt> pick arguments<br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

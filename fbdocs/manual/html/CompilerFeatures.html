@@ -1,0 +1,116 @@
+<html>
+<head>
+<title>Most Important Features</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Most Important Features</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	<br \>
+<b><u>BASIC compatibility</u></b><br \>
+<ul><li> FreeBASIC is not a "new" BASIC language. You don't need to learn much new if you are familiar with any Microsoft-BASIC variant. You can use either <tt>"-lang qb"</tt> for compatibility, or (default) <tt>"-lang fb"</tt>  for some of the new features, but it also brings some restrictions and some similarity with the "C" programming language. See also CompilerDialects.<br \>
+<li> FreeBASIC is case-insensitive; explicit "main" procedure is not required; most of the graphic and console statements and procedures found in Microsoft QuickBASIC are implemented, et cetera.<br \>
+<li> Only with <tt>"-lang qb"</tt>: scalar variables don't need to be dimensioned and suffixes can be used; line numbers are supported; <tt><a href="KeyPgOnerror.html">On Error</a></tt> and <tt><a href="KeyPgGosub.html">GoSub</a></tt> supported.<br \>
+<br \>
+</ul><b><u>Clean syntax</u></b><br \>
+<ul><li> Only a small number of keywords have been added. All procedures are implemented as libraries, so for the most part, there are no new intrinsic routines, and therefore there is a low chance of having name duplication with old code.<br \>
+<br \>
+</ul><b><u>Thin bindings (header files) to existing C libraries and APIs</u></b><br \>
+<ul><li> No wrappers or helpers are necessary, just a ported header file, making usage of external C libraries very easy<br \>
+<li> The official distribution comes with several bindings to existing C libraries already, see <a href="ExtLibTOC.html">External Libraries TOC</a> for a complete up-to-date list<br \>
+<br \>
+</ul><b><u>Multi-platform</u></b><br \>
+<ul><li> FreeBASIC currently runs on 32-bit Windows, Linux, and DOS (a 16-bit DOS is good enough, although FreeBASIC itself and compiler output are 32-bit) and also creates applications for the Xbox console. More platforms to come.<br \>
+<li> The runtime library was written with portability in mind. All third-party tools used exist on most operating systems already as they are from the GNU binutils. The compiler is written in 100% FreeBASIC code (that is, FreeBASIC compiles itself.), which makes it simple to be bootstrapped as it doesn't depend on non-portable tools.<br \>
+<br \>
+</ul><b><u>Unicode support</u></b><br \>
+<ul><li> Besides ASCII files with <a href="Unicode.html">Unicode</a> escape sequences (\u), FreeBASIC can parse UTF-8, UTF-16LE, UTF-16BE, UTF-32LE and UTF-32BE source (.bas) or header (.bi) files, they can be freely mixed with other sources/headers in the same project (also with other ASCII files).<br \>
+<li> Literal strings can be typed in the original non-Latin alphabet, just use a text-editor that supports some of the <a href="Unicode.html">Unicode</a> formats listed above.<br \>
+<li> The <tt><a href="KeyPgWstring.html">WString</a></tt> type holds wide-characters, all string procedures (like <tt><a href="KeyPgLeft.html">Left</a></tt>, <tt><a href="KeyPgTrim.html">Trim</a></tt>, etc) will work with wide-strings too.<br \>
+<li> <tt><a href="KeyPgOpen.html">Open</a></tt> was extended to support UTF-8, UTF-16LE and UTF-32LE files with the <tt><a href="KeyPgEncoding.html">Encoding</a></tt> specifier. <tt><a href="KeyPgInputPp.html">Input #</a></tt> and <tt><a href="KeyPgLineinputPp.html">Line Input #</a></tt>, as well as <tt><a href="KeyPgPrintPp.html">Print #</a></tt> and <tt><a href="KeyPgWritePp.html">Write #</a></tt> can be used normally, and any conversion between <a href="Unicode.html">Unicode</a> to ASCII is done automatically if necessary.<br \>
+<li> <tt><a href="KeyPgPrint.html">Print</a></tt> also supports <a href="Unicode.html">Unicode</a> output (see Requirements).<br \>
+<br \>
+</ul><b><u>A large number of built-in data types</u></b><br \>
+<ul><li> Integer: <tt><a href="KeyPgByte.html">Byte</a></tt>, <tt><a href="KeyPgUbyte.html">UByte</a></tt>, <tt><a href="KeyPgShort.html">Short</a></tt>, <tt><a href="KeyPgUshort.html">UShort</a></tt>, <tt><a href="KeyPgInteger.html">Integer</a></tt>, <tt><a href="KeyPgUinteger.html">UInteger</a></tt>, <tt><a href="KeyPgLong.html">Long</a></tt>, <tt><a href="KeyPgUlong.html">Ulong</a></tt>, <tt><a href="KeyPgLongint.html">LongInt</a></tt>, <tt><a href="KeyPgUlongint.html">ULongInt</a></tt><br \>
+<li> Floating-point: <tt><a href="KeyPgSingle.html">Single</a></tt>, <tt><a href="KeyPgDouble.html">Double</a></tt><br \>
+<li> String: fixed, variable-length or null-terminated (<tt><a href="KeyPgZstring.html">ZString</a></tt>), up to 2GB long<br \>
+<li> <a href="Unicode.html">Unicode</a> strings (<tt><a href="KeyPgWstring.html">WString</a></tt>), like <tt><a href="KeyPgZstring.html">ZString</a></tt>, but with support for wide characters. Use the Windows <a href="Unicode.html">Unicode</a> API procedures directly, etc.<br \>
+<br \>
+</ul><b><u>User-defined types (UDTs)</u></b><br \>
+<ul><li> Unlimited nesting.<br \>
+<li> BASIC's <tt><a href="KeyPgType.html">Type</a></tt> statement is supported, along with the new <tt><a href="KeyPgUnion.html">Union</a></tt> statement (including anonymous nested unions).<br \>
+<li> Array fields utilizing up to eight dimensions can be used.<br \>
+<li> Procedure pointer fields.<br \>
+<li> Bit fields.<br \>
+</ul>  	<br \>
+<b><u>Enumerations (enums)</u></b><br \>
+<ul><li> Easily declare a list of constants with sequential values with <tt><a href="KeyPgEnum.html">Enum</a></tt>.<br \>
+<br \>
+</ul><b><u>Arrays</u></b><br \>
+<ul><li> Fixed- and variable- length arrays are supported, up to 2 GB in size.<br \>
+<li> Up to eight dimensions, including arrays with unknown dimensions.<br \>
+<li> Any lower and upper boundaries.<br \>
+<li> Element data can be preserved during a re-size of variable-length arrays with <tt><a href="KeyPgRedim.html">ReDim</a></tt> using the new <tt><a href="KeyPgPreserve.html">Preserve</a></tt> specifier.<br \>
+<br \>
+</ul><b><u>Pointers</u></b><br \>
+<ul><li> Pointers to any of the data types listed above, including string characters, array elements and UDT's.<br \>
+<li> Uses the same syntax as C.<br \>
+<li> Unlimited indirection levels (e.g., pointer to pointer to ...).<br \>
+<li> Procedure pointers.<br \>
+<li> Indexing []'s (including string indexing).<br \>
+<li> Type casting.<br \>
+</ul>  <br \>
+<b><u>Variable, object and array initialization</u></b><br \>
+<ul><li> For static, module-level or local variables, arrays and UDT's.<br \>
+<br \>
+</ul><b><u>Default procedure parameter values</u></b><br \>
+<ul><li> For numeric, string and UDT parameter types.<br \>
+</ul>  <br \>
+<b><u>Procedure overloading</u></b><br \>
+<ul><li> Including procedures with default parameter values.<br \>
+<br \>
+</ul><b><u>In-line assembly</u></b><br \>
+<ul><li> Intel syntax.<br \>
+<li> Reference variables directly by name; no "trick code" needed.<br \>
+<br \>
+</ul><b><u>Traditional preprocessor support</u></b><br \>
+<ul><li> Same syntax as in C.<br \>
+<li> Single-line macros supported with the <tt><a href="KeyPgPpdefine.html">#define</a></tt> command, including parameters.<br \>
+<li> Multi-line macros supported with the <tt><a href="KeyPgPpmacro.html">#macro</a></tt> command.<br \>
+<br \>
+</ul><b><u>Type aliases</u></b><br \>
+<ul><li> Supporting forward referencing as in C, including UDT and procedure pointer types.<br \>
+<br \>
+</ul><b><u>C-like escape sequences for string literals</u></b><br \>
+<ul><li> Same as in C (except numbers are interpreted as decimal, not octal).<br \>
+<br \>
+</ul><b><u>Debugging support</u></b><br \>
+<ul><li> Full debugging support with <i>GDB</i> (the GNU debugger) or <i>Insight</i> (a <i>GDB</i> GUI frontend).<br \>
+<li> Array bounds checking (only enabled by the <tt>-exx</tt> command-line option).<br \>
+<li> Null pointer checking (same as above).<br \>
+<br \>
+</ul><b><u>Create OBJ's, LIB's, DLL's, and console or GUI EXE's</u></b><br \>
+<ul><li> You are in no way locked to an IDE or editor of any kind.<br \>
+<li> You can create static and dynamic/shared libraries adding just one command-line option (<tt>-lib</tt> or <tt>-dylib/-dll</tt>).<br \>
+<br \>
+</ul><b><u>As a 32-bit application</u></b><br \>
+<ul><li> FreeBASIC can compile source code files up to 2 GB in size.<br \>
+<li> The number of symbols (variables, constants, et cetera) is only limited by the total memory available during compile time. (You can, for example, include OpenGL, GTK/SDL, BASS, simultaneously in your source code.)<br \>
+<br \>
+</ul><b><u>Optimized code generation</u></b><br \>
+<ul><li> While FreeBASIC is not an optimizing compiler, it does many kinds of general optimizations to generate the fastest possible code on x86 CPU's, not losing to other BASIC alternatives, including the commercial ones.<br \>
+<br \>
+</ul><b><u>Completely free</u></b><br \>
+<ul><li> All third-party tools are also free. No piece of abandoned or copyrighted software is used (except GoRC on Win32). The assembler, linker, archiver, and other command-line applications come from the GNU binutils programming tools.<br \>
+<br \>
+</ul>
+</div>
+</div> 
+</div> 
+</body>
+</html>

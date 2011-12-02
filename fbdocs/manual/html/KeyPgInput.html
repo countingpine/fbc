@@ -1,0 +1,89 @@
+<html>
+<head>
+<title>Input</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Input</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Reads a list of values from the keyboard<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<b>Input</b> [;] ["<i>prompt</i>" <i>separator</i>] <i>variable_list</i><br \>
+</tt><br \>
+</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+<tt><i>prompt</i></tt><br \>
+<div class="fb_indent">an optional string literal that is written to the screen.<br \>
+</div><tt><i>separator</i></tt><br \>
+<div class="fb_indent">a semicolon (<tt>;</tt>), which appends <tt>"? "</tt> to the prompt, or comma (<tt>,</tt>), which appends nothing.<br \>
+</div><tt><i>variable_list</i></tt><br \>
+<div class="fb_indent">a list of comma-separated variables used to hold the values read from the user.<br \>
+<br \>
+</div></div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+Reads a list values from the keyboard up until the first carriage return. Numerical values are converted from their string representation into the corresponding types in the variable list. Characters are echoed to the screen as they are typed.<br \>
+If there is more than one value in the input list, the user must be instructed to type commas or whitespace to separate each value.  Surrounding whitespace will be trimmed from string values. If an input string has a comma in it, it must be wrapped in quotes (<tt>"..."</tt>) to prevent it being split up.  <br \>
+Alternatively, <tt><a href="KeyPgLineinput.html">Line Input</a></tt> maybe used to input an entire line to a single string without delimiting.<br \>
+<br \>
+The prompt - if any - is written to the screen at the current cursor location, and characters read are echoed to the screen immediately following the prompt. If no prompt is specified, characters are echoed at the current cursor location.<br \>
+<br \>
+The optional leading semicolon after <tt><b>Input</b></tt> is similar to the optional trailing semicolon in a <tt><a href="KeyPgPrint.html">Print</a></tt> statement: the cursor will remain on the same line after all of the characters have been echoed, otherwise, the cursor will move to the beginning of the next line.<br \>
+<br \>
+If more values are read than are listed in the variable list, extra values will be ignored; if fewer values are read (i.e. the user presses enter before inputting all values), the remaining variables will be initialized - numeric variables to zero (<tt>0</tt>), and string variables to the null string (<tt>"</tt><tt>"</tt>).<br \>
+<br \>
+Numeric values are converted similar to the procedures <tt><a href="KeyPgVal.html">Val</a></tt> and <tt><a href="KeyPgVallng.html">ValLng</a></tt>, using the most appropriate function for the number format, converting as many numeric characters as possible.<br \>
+<br \>
+<tt><b>Input</b></tt> has a limited edit capacity: it allows to erase characters using the backspace key.  If a better user interface is needed, a custom input routine should be used.<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<br \>
+<b>Example #1</b><br \>
+<tt><div class="freebasic">
+<span class="key">Dim</span>&nbsp;<span class="wrd">n</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span><span class="oth">,</span>&nbsp;<span class="wrd">a</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+<span class="key">Input</span>&nbsp;<span class="quo">"Enter&nbsp;[Name,&nbsp;Age]:&nbsp;"</span><span class="oth">,</span>&nbsp;<span class="wrd">n</span><span class="oth">,</span>&nbsp;<span class="wrd">a</span><br />
+<span class="key">Print</span>&nbsp;<span class="wrd">n</span><br />
+<span class="key">Print</span>&nbsp;<span class="wrd">a</span><br />
+</div></tt><br />
+<br \>
+<b>Example #2</b><br \>
+<tt><div class="freebasic">
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Double</span>&nbsp;<span class="wrd">a</span><span class="oth">,</span>&nbsp;<span class="wrd">b</span><br />
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span>&nbsp;<span class="wrd">yn</span><br />
+<br />
+<span class="key">Do</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Input</span>&nbsp;&nbsp;&nbsp;<span class="quo">"Please&nbsp;enter&nbsp;a&nbsp;number:&nbsp;"</span><span class="oth">,</span>&nbsp;<span class="wrd">a</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Input</span>&nbsp;<span class="oth">;</span>&nbsp;<span class="quo">"And&nbsp;another:&nbsp;"</span><span class="oth">,</span>&nbsp;<span class="wrd">b</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="oth">,</span>&nbsp;<span class="quo">"Thank&nbsp;you"</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Sleep</span>&nbsp;<span class="num">500</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"The&nbsp;total&nbsp;is&nbsp;"</span><span class="oth">;</span>&nbsp;<span class="wrd">a</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="wrd">b</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Do</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Input</span>&nbsp;<span class="quo">"Would&nbsp;you&nbsp;like&nbsp;to&nbsp;enter&nbsp;some&nbsp;more&nbsp;numbers"</span><span class="oth">;</span>&nbsp;<span class="wrd">yn</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">yn</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">LCase</span><span class="oth">(</span><span class="wrd">yn</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Loop</span>&nbsp;<span class="key">Until</span>&nbsp;<span class="wrd">yn</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="quo">"y"</span>&nbsp;<span class="key">Or</span>&nbsp;<span class="wrd">yn</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="quo">"n"</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+<span class="key">Loop</span>&nbsp;<span class="key">While</span>&nbsp;<span class="key">LCase</span><span class="oth">(</span><span class="wrd">yn</span><span class="oth">)</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="quo">"y"</span><br />
+</div></tt><br />
+<br \>
+</div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> If the user inputs the wrong number of values, or if it expects a number for a value and gets a string that is not a valid number, then QBASIC issues the message "Redo from start", and does not continue further until it receives a valid input.<br \>
+<li> QB does not treat space as a delimiter when inputting a number from the console.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgInputPp.html">Input #</a></tt><br \>
+<li> <tt><a href="KeyPgInputnum.html">Input()</a></tt><br \>
+<li> <tt><a href="KeyPgLineinput.html">Line Input</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

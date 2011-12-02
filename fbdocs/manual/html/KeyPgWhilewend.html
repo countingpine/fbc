@@ -1,0 +1,69 @@
+<html>
+<head>
+<title>While</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">While</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Control flow statement for looping<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<b>While</b> [<i>condition</i>]<br \>
+<div class="fb_indent">[<i>statement block</i>]<br \>
+</div><b>Wend</b><br \>
+</tt><br \>
+</div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+The <tt><b>While</b></tt> statement will cause the following set of statements in the <i>statement block</i> to execute repeatedly if and while the expression <i>condition</i> evaluates to true.<br \>
+<br \>
+If <i>condition</i> evaluates to false when the WHILE statement is first executed, then the <i>statement block</i> is skipped and execution resumes immediately following the enclosing <tt><b>Wend</b></tt> statement.<br \>
+<br \>
+If an <tt><a href="KeyPgExit.html">Exit</a></tt> <tt><b>While</b></tt> statement is encountered inside the <i>statement block</i>, the loop is terminated, and execution resumes immediately following the enclosing <tt><b>Wend</b></tt> statement. If a <tt><a href="KeyPgContinue.html">Continue</a></tt> <tt><b>While</b></tt> statement is encountered, the rest of the <i>statement block</i> is skipped and execution resumes at the <tt><b>While</b></tt> statement.<br \>
+<br \>
+Like all control flow statements, the <tt><b>While</b></tt> statement can be nested, that is, it can be used in a statement block of another <tt><a href="KeyPgWhile.html">While</a></tt> statement.<br \>
+<br \>
+<i><b>note</b>: the <tt><b>While</b></tt> </i>keyword<i> is also used in the <tt><a href="KeyPgDoloop.html">Do...Loop</a></tt> statement to indicate the type of comparison. Used in this way, the DO statement becomes functionally equivalent to the WHILE statement, so do not confuse their enclosing keywords <tt>Loop</tt> and <tt><b>Wend</b></tt>, respectively.</i><br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+In this example, a <tt><b>While</b></tt> loop is used to reverse a string by iterating through it backward. The loop stops if index is less than 0 <i>(0 being the first index in the string)</i>.<br \>
+<tt><div class="freebasic">
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span>&nbsp;<span class="wrd">sentence</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;string&nbsp;to&nbsp;reverse</span><br />
+<span class="wrd">sentence</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="quo">"The&nbsp;quick&nbsp;brown&nbsp;fox&nbsp;jumps&nbsp;over&nbsp;the&nbsp;lazy&nbsp;dog."</span><br />
+<br />
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span>&nbsp;<span class="wrd">ecnetnes</span><br />
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="wrd">index</span><br />
+<span class="wrd">index</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">Len</span><span class="oth">(</span>&nbsp;<span class="wrd">sentence</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="oth">-</span>&nbsp;<span class="num">1</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;point&nbsp;to&nbsp;last&nbsp;character</span><br />
+<span class="key">While</span><span class="oth">(</span>&nbsp;<span class="wrd">index</span>&nbsp;<span class="oth">&gt;=</span>&nbsp;<span class="num">0</span>&nbsp;<span class="oth">)</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;stop&nbsp;after&nbsp;first&nbsp;character</span><br />
+&nbsp;&nbsp;<span class="wrd">ecnetnes</span>&nbsp;<span class="oth">+=</span>&nbsp;<span class="key">Chr</span><span class="oth">(</span>&nbsp;<span class="wrd">sentence</span><span class="oth">[</span><span class="wrd">index</span><span class="oth">]</span>&nbsp;<span class="oth">)</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;append&nbsp;character&nbsp;to&nbsp;new&nbsp;string</span><br />
+&nbsp;&nbsp;<span class="wrd">index</span>&nbsp;<span class="oth">-=</span>&nbsp;<span class="num">1</span><br />
+<span class="key">Wend</span><br />
+<br />
+<span class="key">Print</span>&nbsp;<span class="quo">"original:&nbsp;"""</span>&nbsp;<span class="oth">;</span>&nbsp;<span class="wrd">sentence</span>&nbsp;<span class="oth">;</span>&nbsp;<span class="quo">""""</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"reversed:&nbsp;"""</span>&nbsp;<span class="oth">;</span>&nbsp;<span class="wrd">ecnetnes</span>&nbsp;<span class="oth">;</span>&nbsp;<span class="quo">""""</span><br />
+<br />
+<span class="key">End</span>&nbsp;<span class="num">0</span><br />
+</div></tt><br />
+<br \>
+</div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
+<ul><li> In the <i><a href="CompilerOptlang.html">-lang qb</a></i> and <i><a href="CompilerOptlang.html">-lang fblite</a></i> dialects, variables declared inside a WHILE..WEND loop have a function-wide <a href="ProPgVariableScope.html">scope</a> as in QB <br \>
+<li> In the <i><a href="CompilerOptlang.html">-lang fb</a></i> and <i><a href="CompilerOptlang.html">-lang deprecated</a></i> dialects, variables declared inside a <tt><b>While</b></tt>..<tt><b>Wend</b></tt> block are visible only inside the block, and can't be accessed outside it.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> None<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgExit.html">Exit</a></tt><br \>
+<li> <tt><a href="KeyPgContinue.html">Continue</a></tt><br \>
+<li> <tt><a href="KeyPgDoloop.html">Do...Loop</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

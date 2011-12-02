@@ -1,0 +1,85 @@
+<html>
+<head>
+<title>Static Libraries</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Static Libraries</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	A static library is compiled code that can be later used when building an executable.<br \>
+<br \>
+When the compiler makes an executable, the basic source files are first turned in to object files.  The object files are then linked together to make an executable.  When we compile source code, we don't necessarily have to make an executable.  We could instead group all of the object files (made from sources) in to a single file called a static library.<br \>
+<br \>
+The library is referred to as static, because when the object files which it contains are later linked in to an executable, a copy of all the needed code in the library is added to the executable.<br \>
+<br \>
+Once the library is made, we can then use the code that it contains just as if we were compiling the source directly with our program.<br \>
+<br \>
+Following is a simple example of creating a static library using these three files:<br \>
+<ul><li> <tt>mylib.bas</tt> - the source for the library<br \>
+<li> <tt>mylib.bi</tt> - the header for the library<br \>
+<li> <tt>mytest.bas</tt> - a test program<br \>
+<br \>
+</ul>Our library will be a single module providing a single function:<br \>
+<br \>
+<tt><div class="freebasic">
+<span class="com">''&nbsp;mylib.bas</span><br />
+<span class="com">''&nbsp;compile&nbsp;with:&nbsp;fbc&nbsp;-lib&nbsp;mylib.bas</span><br />
+<br />
+<span class="com">''&nbsp;Add&nbsp;two&nbsp;numbers&nbsp;together&nbsp;and&nbsp;return&nbsp;the&nbsp;result</span><br />
+<span class="key">Public</span>&nbsp;<span class="key">Function</span>&nbsp;<span class="wrd">Add2</span><span class="oth">(</span>&nbsp;<span class="key">ByVal</span>&nbsp;<span class="wrd">x</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">,</span>&nbsp;<span class="key">ByVal</span>&nbsp;<span class="wrd">y</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;<span class="key">Return</span><span class="oth">(</span>&nbsp;<span class="wrd">x</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="wrd">y</span>&nbsp;<span class="oth">)</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Function</span><br />
+</div></tt><br />
+Compile the library with:<br \>
+<tt>fbc -lib mylib.bas</tt><br \>
+<br \>
+The <i><a href="CompilerOptlib.html">-lib</a></i> option tells the compiler to take the source code, <tt>mylib.bas</tt>, and turn it in to an object file <tt>mylib.o</tt>, then store the object file in to a library file, also called an archive, <tt>libmylib.a</tt>.  A library might contain many modules (source files) each with many functions, but for this simple example, it is just one each.<br \>
+<br \>
+To make use of the library in some other source code, we need some way of telling the compiler what exactly is in the library.  A good way to do this is to put the declarations ( also called an interface, or API ) for the library in to a header file.<br \>
+<br \>
+<tt><div class="freebasic">
+<span class="com">''&nbsp;mylib.bi</span><br />
+<span class="def">#inclib&nbsp;"mylib"<br />
+</span><span class="key">Declare</span>&nbsp;<span class="key">Function</span>&nbsp;<span class="wrd">Add2</span><span class="oth">(</span>&nbsp;<span class="key">ByVal</span>&nbsp;<span class="wrd">x</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">,</span>&nbsp;<span class="key">ByVal</span>&nbsp;<span class="wrd">y</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+</div></tt><br />
+There is no need to compile the header.  We want this in its source form so it can be included with other source files.  The <tt><a href="KeyPgInclib.html">#inclib</a></tt> statement will tell the compiler the name of a static library that we need to link with when eventually making an executable.<br \>
+<br \>
+With our library (.a file) and a header (.bi file) we can try them out in a test program:<br \>
+<br \>
+<tt><div class="freebasic">
+<span class="com">''&nbsp;mytest.bas</span><br />
+<span class="com">''&nbsp;compile&nbsp;with:&nbsp;fbc&nbsp;mytest.bas</span><br />
+<span class="def">#include&nbsp;once&nbsp;"mylib.bi"<br />
+</span><span class="key">Print</span>&nbsp;<span class="wrd">Add2</span><span class="oth">(</span><span class="num">1</span><span class="oth">,</span><span class="num">2</span><span class="oth">)</span><br />
+</div></tt><br />
+The <tt><a href="KeyPgInclude.html">#include</a></tt> statement tells the compiler to include the source code from <tt>mylib.bi</tt> just as if we had typed it in to the original source.  With the way we have written our include file, it tells the compiler everything it needs to know about the library.<br \>
+<br \>
+We compile this with:<br \>
+<tt>fbc mytest.bas</tt><br \>
+<br \>
+Then when we run the <tt>mytest</tt> executable, we should get the result of:<br \>
+<tt>3</tt><br \>
+<br \>
+More than one source module can be used when making a library.  And basic programs can use more than one library by including each needed header.  Some libraries are so large that they might use several headers.  On very large projects, making libraries out of some code modules that seldom change can improve compile times dramatically.<br \>
+<br \>
+Libraries can optionally contain debugging information specified with the <i><a href="CompilerOptg.html">-g</a></i> command line option.<br \>
+<br \>
+Object files, and therefore libraries, are platform specific and in some cases specific to a particular version of the compiler and FreeBASIC runtime library.<br \>
+<br \>
+<div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <a href="ProPgSharedLibraries.html">Shared Libraries</a><br \>
+<li> <tt><a href="KeyPgInclib.html">#inclib</a></tt><br \>
+<li> <tt><a href="KeyPgInclude.html">#include</a></tt><br \>
+<li> <a href="CompilerOptlib.html">Compiler Option: -lib</a><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

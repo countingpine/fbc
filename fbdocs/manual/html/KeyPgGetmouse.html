@@ -1,0 +1,127 @@
+<html>
+<head>
+<title>GetMouse</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">GetMouse</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Retrieves the status of the mouse pointing device<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgFunction.html">Function</a> <b>GetMouse</b> ( <a href="KeyPgByref.html">ByRef</a> <i>x</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a>, <a href="KeyPgByref.html">ByRef</a> <i>y</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a>, <a href="KeyPgByref.html">ByRef</a> <i>wheel</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a> = 0, <a href="KeyPgByref.html">ByRef</a> <i>buttons</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a> = 0, <a href="KeyPgByref.html">ByRef</a> <i>clip</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a> = 0 ) <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a><br \>
+</tt><br \>
+</div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
+<i>result</i> = <b>GetMouse</b> (<i>x</i>, <i>y</i> [, [ <i>wheel</i> ] [, [ <i>buttons</i> ] [, [ <i>clip</i> ]]]])<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+<tt><i>x</i></tt><br \>
+<div class="fb_indent">x coordinate value<br \>
+</div><tt><i>y</i></tt><br \>
+<div class="fb_indent">y coordinate value<br \>
+</div><tt><i>wheel</i></tt><br \>
+<div class="fb_indent">scroll wheel value<br \>
+</div><tt><i>buttons</i></tt><br \>
+<div class="fb_indent">button status<br \>
+</div><tt><i>clip</i></tt><br \>
+<div class="fb_indent">clip status<br \>
+<br \>
+</div></div><div class="fb_sect_title">Return Value</div><div class="fb_sect_cont"><br \>
+<tt>0</tt> on success or <tt>1</tt> on failure.<br \>
+<br \>
+</div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+<tt><b>GetMouse</b></tt> retrieves the mouse position and buttons status; information is returned in the variables passed to this function by reference. If a mouse is not available, all variables will contain the <tt>-1</tt> value. <br \>
+<br \>
+If in console mode, the <tt><i>x</i></tt> and <tt><i>y</i></tt> coordinates are the character cell coordinates the mouse is currently on; the upper left corner of the screen is at coordinates <tt>0, 0</tt>. If the mouse moves out of the console window, <tt><b>GetMouse</b></tt> returns the last coordinate on the window that the mouse was on. <br \>
+<br \>
+If in graphics mode, <tt><i>x</i></tt> and <tt><i>y</i></tt> will always be returned in pixel coordinates still relative to the upper left corner of the screen, which is at 0,0 in this case; custom coordinates system set via <tt><a href="KeyPgViewgraphics.html">View</a></tt> or <tt><a href="KeyPgWindow.html">Window</a></tt> do not affect the coordinates returned by <tt><b>GetMouse</b></tt>. If the mouse runs off the window, all values are set to <tt>-1</tt>.<br \>
+<br \>
+<tt><i>Wheel</i></tt> is the mouse wheel counter; rotating the wheel away from you makes the count to increase, rotating the wheel toward you makes it to decrease. At program startup or when a new graphics mode is set via <tt><a href="KeyPgScreengraphics.html">Screen</a></tt>, wheel position is reset to 0. FreeBASIC may not always support mouse wheels for a given platform, in which case 0 is always returned.<br \>
+<br \>
+<tt><i>Buttons</i></tt> stores the buttons status as a bitmask: bit 0 is set if left mouse button is down; bit 1 is set if right mouse button is down; bit 2 is set if middle mouse button / wheel is down.<br \>
+<br \>
+<tt><i>Clip</i></tt> stores the mouse clipping status; if <tt>1</tt>, the mouse is currently clipped to the graphics window; if <tt>0</tt>, the mouse is not clipped.<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="wrd">x</span><span class="oth">,</span>&nbsp;<span class="wrd">y</span><span class="oth">,</span>&nbsp;<span class="wrd">buttons</span><span class="oth">,</span>&nbsp;<span class="wrd">res</span>&nbsp;<br />
+<span class="com">'&nbsp;Set&nbsp;video&nbsp;mode&nbsp;and&nbsp;enter&nbsp;loop</span><br />
+<span class="key">ScreenRes</span>&nbsp;<span class="num">640</span><span class="oth">,</span>&nbsp;<span class="num">480</span><span class="oth">,</span>&nbsp;<span class="num">8</span><br />
+<span class="key">Do</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">'&nbsp;Get&nbsp;mouse&nbsp;x,&nbsp;y&nbsp;and&nbsp;buttons.&nbsp;Discard&nbsp;wheel&nbsp;position.</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">res</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">GetMouse</span>&nbsp;<span class="oth">(</span><span class="wrd">x</span><span class="oth">,</span>&nbsp;<span class="wrd">y</span><span class="oth">,</span>&nbsp;<span class="oth">,</span>&nbsp;<span class="wrd">buttons</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Locate</span>&nbsp;<span class="num">1</span><span class="oth">,</span>&nbsp;<span class="num">1</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">If</span>&nbsp;<span class="wrd">res</span>&nbsp;<span class="oth">&lt;&gt;</span>&nbsp;<span class="num">0</span>&nbsp;<span class="key">Then</span>&nbsp;<span class="com">''&nbsp;Failure</span><br />
+<br />
+<span class="def">#ifdef&nbsp;__FB_DOS__<br />
+</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"Mouse&nbsp;or&nbsp;mouse&nbsp;driver&nbsp;not&nbsp;available"</span><br />
+<span class="def">#else<br />
+</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"Mouse&nbsp;not&nbsp;available&nbsp;or&nbsp;not&nbsp;on&nbsp;window"</span><br />
+<span class="def">#endif<br />
+</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Else</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="key">Using</span>&nbsp;<span class="quo">"Mouse&nbsp;position:&nbsp;###:###&nbsp;&nbsp;Buttons:&nbsp;"</span><span class="oth">;</span>&nbsp;<span class="wrd">x</span><span class="oth">;</span>&nbsp;<span class="wrd">y</span><span class="oth">;</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">If</span>&nbsp;<span class="wrd">buttons</span>&nbsp;<span class="key">And</span>&nbsp;<span class="num">1</span>&nbsp;<span class="key">Then</span>&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"L"</span><span class="oth">;</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">If</span>&nbsp;<span class="wrd">buttons</span>&nbsp;<span class="key">And</span>&nbsp;<span class="num">2</span>&nbsp;<span class="key">Then</span>&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"R"</span><span class="oth">;</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">If</span>&nbsp;<span class="wrd">buttons</span>&nbsp;<span class="key">And</span>&nbsp;<span class="num">4</span>&nbsp;<span class="key">Then</span>&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"M"</span><span class="oth">;</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"&nbsp;&nbsp;&nbsp;"</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">End</span>&nbsp;<span class="key">If</span><br />
+<span class="key">Loop</span>&nbsp;<span class="key">While</span>&nbsp;<span class="key">Inkey</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="quo">""</span><br />
+<span class="key">End</span><br />
+</div></tt><br />
+<tt><div class="freebasic">
+<span class="com">'Example&nbsp;2:&nbsp;type-union-type&nbsp;structure</span><br />
+<span class="key">Type</span>&nbsp;<span class="wrd">mouse</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="wrd">res</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="wrd">x</span><span class="oth">,</span>&nbsp;<span class="wrd">y</span><span class="oth">,</span>&nbsp;<span class="wrd">wheel</span><span class="oth">,</span>&nbsp;<span class="wrd">clip</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Union</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">buttons</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Type</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Left</span><span class="oth">:</span><span class="num">1</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Right</span><span class="oth">:</span><span class="num">1</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">middle</span><span class="oth">:</span><span class="num">1</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">End</span>&nbsp;<span class="key">Type</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">End</span>&nbsp;<span class="key">Union</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Type</span><br />
+&nbsp;<br />
+<span class="key">Screen</span>&nbsp;<span class="num">11</span><br />
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">mouse</span>&nbsp;<span class="wrd">m</span><br />
+<br />
+<span class="key">Do</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">m.res</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">GetMouse</span><span class="oth">(</span>&nbsp;<span class="wrd">m.x</span><span class="oth">,</span>&nbsp;<span class="wrd">m.y</span><span class="oth">,</span>&nbsp;<span class="wrd">m.wheel</span><span class="oth">,</span>&nbsp;<span class="wrd">m.buttons</span><span class="oth">,</span>&nbsp;<span class="wrd">m.clip</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Cls</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="key">Using</span>&nbsp;<span class="quo">"res&nbsp;=&nbsp;#"</span><span class="oth">;</span>&nbsp;<span class="wrd">m.res</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="key">Using</span>&nbsp;<span class="quo">"x&nbsp;=&nbsp;###;&nbsp;y&nbsp;=&nbsp;###;&nbsp;wheel&nbsp;=&nbsp;+###;&nbsp;clip&nbsp;=&nbsp;##"</span><span class="oth">;</span>&nbsp;<span class="wrd">m.x</span><span class="oth">;</span>&nbsp;<span class="wrd">m.y</span><span class="oth">;</span>&nbsp;<span class="wrd">m.wheel</span><span class="oth">;</span>&nbsp;<span class="wrd">m.clip</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="key">Using</span>&nbsp;<span class="quo">"buttons&nbsp;=&nbsp;##;&nbsp;left&nbsp;=&nbsp;#;&nbsp;middle&nbsp;=&nbsp;#;&nbsp;right&nbsp;=&nbsp;#"</span><span class="oth">;</span>&nbsp;<span class="wrd">m.buttons</span><span class="oth">;</span>&nbsp;<span class="wrd">m.left</span><span class="oth">;</span>&nbsp;<span class="wrd">m.middle</span><span class="oth">;</span>&nbsp;<span class="wrd">m.right</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Sleep</span>&nbsp;<span class="num">10</span><span class="oth">,</span>&nbsp;<span class="num">1</span><br />
+<span class="key">Loop</span>&nbsp;<span class="key">While</span>&nbsp;<span class="key">Inkey</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="quo">""</span><br />
+</div></tt><br />
+<br \>
+</div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
+<ul><li> Not available in the <i><a href="CompilerOptlang.html">-lang qb</a></i> dialect unless referenced with the alias <tt><b>__Getmouse</b></tt>.  The variables passed must also be of type <tt><a href="KeyPgLong.html">Long</a></tt> instead of <tt><a href="KeyPgInteger.html">Integer</a></tt>.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">Platform Differences</div><div class="fb_sect_cont"><br \>
+<ul><li> On Win32, scroll wheel changes are not guaranteed to be detected in full-screen console mode. <br \>
+<li> In DOS, the "clip" value has no relevance.  Additionally the wheel and middle button will not work unless supported and enabled by the mouse driver. See also FaqDOS.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> New to FreeBASIC<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgScreenres.html">ScreenRes</a></tt> setting graph mode by resolution<br \>
+<li> <tt><a href="KeyPgScreengraphics.html">Screen (Graphics)</a></tt> setting mode the QB-like way<br \>
+<li> <tt><a href="KeyPgSetmouse.html">SetMouse</a></tt><br \>
+<li> <tt><a href="KeyPgMultikey.html">MultiKey</a></tt><br \>
+<li> <tt><a href="KeyPgGetjoystick.html">GetJoystick</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

@@ -1,0 +1,70 @@
+<html>
+<head>
+<title>stdcall</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">stdcall</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Specifies a <i>stdcall</i>-style calling convention in a procedure declaration<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<a href="KeyPgDeclare.html">Declare</a> [<a href="KeyPgStatic.html">Static</a>] <a href="KeyPgSub.html">Sub</a> <i>procedure_name</i> [<a href="KeyPgOverload.html">Overload</a>] <b>stdcall</b> [<a href="KeyPgAlias.html">Alias</a> <i>"external_name"</i>] [([<i>parameter_list</i>])] [<a href="KeyPgModuleConstructor.html">Constructor</a> [<i>priority</i>]] [<a href="KeyPgStatic.html">Static</a>] [<a href="KeyPgExport.html">Export</a>]<br \>
+<br \>
+<a href="KeyPgDeclare.html">Declare</a> [<a href="KeyPgStatic.html">Static</a>] <a href="KeyPgFunction.html">Function</a> <i>procedure_name</i> [<a href="KeyPgOverload.html">Overload</a>] <b>stdcall</b> [<a href="KeyPgAlias.html">Alias</a> <i>"external_name"</i>] [([<i>parameter_list</i>])] <a href="KeyPgAs.html">As</a> <i>return_type</i> [<a href="KeyPgStatic.html">Static</a>] [<a href="KeyPgExport.html">Export</a>]<br \>
+<br \>
+[<a href="KeyPgPublic.html">Public</a>|<a href="KeyPgPrivate.html">Private</a>] <a href="KeyPgSub.html">Sub</a> <i>procedure_name</i> [<a href="KeyPgOverload.html">Overload</a>] <b>stdcall</b> [<a href="KeyPgAlias.html">Alias</a> <i>"external_name"</i>] [([<i>parameter_list</i>])] [<a href="KeyPgModuleConstructor.html">Constructor</a> [<i>priority</i>]] [<a href="KeyPgStatic.html">Static</a>] [<a href="KeyPgExport.html">Export</a>]<br \>
+<div class="fb_indent"><i>..procedure body..</i><br \>
+</div><a href="KeyPgEnd.html">End</a> <a href="KeyPgSub.html">Sub</a><br \>
+<br \>
+[<a href="KeyPgPublic.html">Public</a>|<a href="KeyPgPrivate.html">Private</a>] <a href="KeyPgFunction.html">Function</a> <i>procedure_name</i> [<a href="KeyPgOverload.html">Overload</a>] <b>stdcall</b> [<a href="KeyPgAlias.html">Alias</a> <i>"external_name"</i>] [([<i>parameter_list</i>])] <a href="KeyPgAs.html">As</a> <i>return_type</i>  [<a href="KeyPgStatic.html">Static</a>] [<a href="KeyPgExport.html">Export</a>]<br \>
+<div class="fb_indent"><i>..procedure body..</i><br \>
+</div><a href="KeyPgEnd.html">End</a> <a href="KeyPgFunction.html">Function</a><br \>
+</tt><br \>
+</div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+In procedure declarations, <tt><b>stdcall</b></tt> specifies that a procedure will use the <i>stdcall</i> calling convention. In the <i>stdcall</i> calling convention, any parameters are to be passed (pushed onto the stack) in the reverse order in which they are listed, that is, from right to left. The procedures need not preserve the <tt>EAX</tt>, <tt>ECX</tt> or <tt>EDX</tt> registers, and must clean up the stack (pop any parameters) before it returns.<br \>
+<br \>
+<tt><b>stdcall</b></tt> is not allowed to be used with variadic procedure declarations (those with the last parameter listed as "<tt><a href="KeyPgDots.html">...</a></tt>").<br \>
+<br \>
+<i>stdcall</i> is the default calling convention on Windows, unless another calling convention is explicitly specified or implied by one of the <a href="KeyPgExternBlock.html">Extern Blocks</a>. <i>stdcall</i> is also the standard (or most common) calling convention used in BASIC languages, and the Windows API.<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="key">Declare</span>&nbsp;<span class="key">Function</span>&nbsp;<span class="wrd">Example</span>&nbsp;<span class="key">stdcall</span>&nbsp;<span class="oth">(</span><span class="wrd">param1</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">,</span>&nbsp;<span class="wrd">param2</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+<span class="key">Declare</span>&nbsp;<span class="key">Function</span>&nbsp;<span class="wrd">Example2</span>&nbsp;<span class="key">cdecl</span>&nbsp;<span class="oth">(</span><span class="wrd">param1</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">,</span>&nbsp;<span class="wrd">param2</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+<br />
+<span class="key">Function</span>&nbsp;<span class="wrd">Example</span>&nbsp;<span class="key">stdcall</span>&nbsp;<span class="oth">(</span><span class="wrd">param1</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">,</span>&nbsp;<span class="wrd">param2</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">'&nbsp;This&nbsp;is&nbsp;an&nbsp;STDCALL&nbsp;function,&nbsp;the&nbsp;first&nbsp;parameter&nbsp;on&nbsp;the&nbsp;stack&nbsp;is&nbsp;param2,&nbsp;since&nbsp;it&nbsp;was&nbsp;pushed&nbsp;last.</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="wrd">param1</span><span class="oth">,</span>&nbsp;<span class="wrd">param2</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Return</span>&nbsp;<span class="wrd">param1</span>&nbsp;<span class="key">Mod</span>&nbsp;<span class="wrd">param2</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Function</span><br />
+<br />
+<span class="key">Function</span>&nbsp;<span class="wrd">Example2</span>&nbsp;<span class="key">cdecl</span>&nbsp;<span class="oth">(</span><span class="wrd">param1</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">,</span>&nbsp;<span class="wrd">param2</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">'&nbsp;This&nbsp;is&nbsp;a&nbsp;CDECL&nbsp;function,&nbsp;the&nbsp;first&nbsp;parameter&nbsp;on&nbsp;the&nbsp;stack&nbsp;is&nbsp;param1,&nbsp;since&nbsp;it&nbsp;was&nbsp;pushed&nbsp;last.</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="wrd">param1</span><span class="oth">,</span>&nbsp;<span class="wrd">param2</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Return</span>&nbsp;<span class="wrd">param1</span>&nbsp;<span class="key">Mod</span>&nbsp;<span class="wrd">param2</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Function</span><br />
+</div></tt><br />
+<br \>
+</div><div class="fb_sect_title">Platform Differences</div><div class="fb_sect_cont"><br \>
+<ul><li> On Windows systems, <i>stdcall</i> procedures have an "@<i>N</i>" decoration added to their internal/external name, where <i>N</i> is the size of the parameter list, in bytes.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> New to FreeBASIC<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <a href="KeyPgPascal.html">pascal</a>, <a href="KeyPgCdecl.html">cdecl</a><br \>
+<li> <a href="KeyPgDeclare.html">Declare</a><br \>
+<li> <a href="KeyPgSub.html">Sub</a>, <a href="KeyPgFunction.html">Function</a><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

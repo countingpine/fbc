@@ -1,0 +1,103 @@
+<html>
+<head>
+<title>Operator Overloading</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Operator Overloading</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Changing the way user defined types work with built-in operators.<br \>
+<br \>
+<a href="#OVERVIEW">Overview</a><br \>
+<a href="#GLOBAL">Global Operators</a><br \>
+<a href="#MEMBER">Member Operators</a><br \>
+<br \>
+<a name="OVERVIEW"></a><div class="fb_sect_title">Overview</div><div class="fb_sect_cont"><br \>
+Simply, operators are procedures, and their arguments are called <i>operands</i>. Operators that take one operand (<tt><a href="KeyPgOpNot.html">Operator Not</a></tt>) are called <i>unary operators</i>, operators that take two operands (<tt><a href="KeyPgOpAdd.html">Operator +</a></tt>) are called <i>binary operators</i> and operators taking three operands (<tt><a href="KeyPgIif.html">Operator Iif</a></tt>) are called <i>ternary operators</i>.<br \>
+<br \>
+Most operators are not called like procedures. Instead, their operator symbol is placed next to their operands. For unary operators, their sole operand is placed to the right of the symbol. For binary operators, their operands - referred to as the left and right-hand side operands - are placed to the left and right of the operator symbol. FreeBASIC has one ternary operator, <tt><a href="KeyPgIif.html">Operator Iif</a></tt>, and it is called like a procedure, with its operands comma-separated surrounded by parenthesis. For example, the following code calls <tt><a href="KeyPgIif.html">Operator Iif</a></tt> to determine if a pointer is valid. If it is, <tt><a href="KeyPgOpValueOf.html">Operator * (Value Of)</a></tt> is called to dereference the pointer, and if not, <tt><a href="KeyPgOpDivide.html">Operator / (Divide)</a></tt> is called to find the value of twenty divided by four.<br \>
+<br \>
+<tt><div class="freebasic">
+<span class="key">Dim</span>&nbsp;<span class="wrd">i</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">420</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">p</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="key">Ptr</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="oth">@</span><span class="wrd">i</span><br />
+<br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">result</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">IIf</span><span class="oth">(</span>&nbsp;<span class="wrd">p</span><span class="oth">,</span>&nbsp;<span class="oth">*</span><span class="wrd">p</span><span class="oth">,</span>&nbsp;<span class="key">CInt</span><span class="oth">(</span>&nbsp;<span class="num">20</span>&nbsp;<span class="oth">/</span>&nbsp;<span class="num">4</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="oth">)</span><br />
+</div></tt><br />
+Notice the call to <tt><a href="KeyPgIif.html">Operator Iif</a></tt> is similar to a procedure call, while the calls to <tt><a href="KeyPgOpValueOf.html">Operator * (Value Of)</a></tt> and <tt><a href="KeyPgOpDivide.html">Operator / (Divide)</a></tt> are not. In the example, <tt><i>p</i></tt> is the operand to <tt><a href="KeyPgOpValueOf.html">Operator * (Value Of)</a></tt>, and <tt><i>20</i></tt> and <tt><i>4</i></tt> are the left and right-hand side operands of <tt><a href="KeyPgOpDivide.html">Operator / (Divide)</a></tt>, respectively.<br \>
+<br \>
+All operators in FreeBASIC are predefined to take operands of standard data types, like <tt><a href="KeyPgInteger.html">Integer</a></tt> and <tt><a href="KeyPgSingle.html">Single</a></tt>, but they may also be overloaded for user-defined types; that is, they can be defined to accept operands that are objects as well. There are two types of operators that can be overloaded, <i>global operators</i> and <i>member operators</i>.<br \>
+<br \>
+<a name="GLOBAL"></a></div><div class="fb_sect_title">Global Operators</div><div class="fb_sect_cont"><br \>
+Global operators are those that are declared in module-level scope (globally). These are the operators <tt><a href="KeyPgOpNegate.html">- (Negate)</a></tt>, <tt><a href="KeyPgOpNot.html">Not (Bitwise Not)</a></tt>, <tt><a href="KeyPgOpPtrMemberAccess.html">-&gt; (Pointer To Member Access)</a></tt>, <tt><a href="KeyPgOpValueOf.html">* (Value Of)</a></tt>, <tt><a href="KeyPgOpAdd.html">+ (Add)</a></tt>, <tt><a href="KeyPgOpSubtract.html">- (Subtract)</a></tt>, <tt><a href="KeyPgOpMultiply.html">* (Multiply)</a></tt>, <tt><a href="KeyPgOpDivide.html">/ (Divide)</a></tt>, <tt><a href="KeyPgOpIntegerDivide.html">\ (Integer Divide)</a></tt>, <tt><a href="KeyPgOpConcatConvert.html">&amp; (Concatenate)</a></tt>, <tt><a href="KeyPgOpModulus.html">Mod (Modulus)</a></tt>, <tt><a href="KeyPgOpShiftLeft.html">Shl (Shift Left)</a></tt>, <tt><a href="KeyPgOpShiftRight.html">Shr (Shift Right)</a></tt>, <tt><a href="KeyPgOpAnd.html">And (Bitwise And)</a></tt>, <tt><a href="KeyPgOpOr.html">Or (Bitwise Or)</a></tt>, <tt><a href="KeyPgOpXor.html">Xor (Bitwise Xor)</a></tt>, <tt><a href="KeyPgOpImp.html">Imp (Bitwise Imp)</a></tt>, <tt><a href="KeyPgOpEqv.html">Eqv (Bitwise Eqv)</a></tt>, <tt><a href="KeyPgOpExponentiate.html">^ (Exponentiate)</a></tt>, <tt><a href="KeyPgOpEqual.html">= (Equal)</a></tt>, <tt><a href="KeyPgOpNotEqual.html">&lt;&gt; (Not Equal)</a></tt>, <tt><a href="KeyPgOpLessThan.html">&lt; (Less Than)</a></tt>, <tt><a href="KeyPgOpGreaterThan.html">&gt; (Greater Than)</a></tt>, <tt><a href="KeyPgOpLessThanOrEqual.html">&lt;= (Less Than Or Equal)</a></tt> and <tt><a href="KeyPgOpGreaterThanOrEqual.html">&gt;= (Greater Than Or Equal)</a></tt>.<br \>
+<br \>
+Declaring a custom global operator is similar to declaring a procedure. The <tt><a href="KeyPgDeclare.html">Declare</a></tt> keyword is used with the <tt><a href="KeyPgOperator.html">Operator</a></tt> keyword. The operator symbol is placed next followed by the comma-separated list of parameters surrounded in parenthesis that will represent the operands passed to the operator. Unlike procedures, operators can be overloaded by default, so the <tt><a href="KeyPgOverload.html">Overload</a></tt> keyword is not necessary when declaring custom operators. At least one of the operator's parameters must be of user-defined type (after all, operators with built-in type parameters are already defined).<br \>
+<br \>
+The following example declares the global operators <tt><a href="KeyPgOpNegate.html">- (Negate)</a></tt> and <tt><a href="KeyPgOpMultiply.html">+ (Multiply)</a></tt> to accept operands of a user-defined type.<br \>
+<br \>
+<tt><div class="freebasic">
+<span class="key">Type</span>&nbsp;<span class="wrd">Rational</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="wrd">numerator</span><span class="oth">,</span>&nbsp;<span class="wrd">denominator</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Type</span><br />
+<br />
+<span class="key">Operator</span>&nbsp;<span class="oth">-</span>&nbsp;<span class="oth">(</span><span class="key">ByRef</span>&nbsp;<span class="wrd">rhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">Rational</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">Rational</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Return</span>&nbsp;<span class="key">Type</span><span class="oth">(-</span><span class="wrd">rhs.numerator</span><span class="oth">,</span>&nbsp;<span class="wrd">rhs.denominator</span><span class="oth">)</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Operator</span><br />
+<br />
+<span class="key">Operator</span>&nbsp;<span class="oth">*</span>&nbsp;<span class="oth">(</span><span class="key">ByRef</span>&nbsp;<span class="wrd">lhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">Rational</span><span class="oth">,</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">rhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">Rational</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">Rational</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Return</span>&nbsp;<span class="key">Type</span><span class="oth">(</span><span class="wrd">lhs.numerator</span>&nbsp;<span class="oth">*</span>&nbsp;<span class="wrd">rhs.numerator</span><span class="oth">,</span>&nbsp;<span class="wrd">_</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">lhs.denominator</span>&nbsp;<span class="oth">*</span>&nbsp;<span class="wrd">rhs.denominator</span><span class="oth">)</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Operator</span><br />
+<br />
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">Rational</span>&nbsp;<span class="wrd">r1</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="oth">(</span><span class="num">2</span><span class="oth">,</span>&nbsp;<span class="num">3</span><span class="oth">),</span>&nbsp;<span class="wrd">r2</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="oth">(</span><span class="num">3</span><span class="oth">,</span>&nbsp;<span class="num">4</span><span class="oth">)</span><br />
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">Rational</span>&nbsp;<span class="wrd">r3</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="oth">-(</span><span class="wrd">r1</span>&nbsp;<span class="oth">*</span>&nbsp;<span class="wrd">r2</span><span class="oth">)</span><br />
+<span class="key">Print</span>&nbsp;<span class="wrd">r3.numerator</span>&nbsp;<span class="oth">&amp;</span>&nbsp;<span class="quo">"/"</span>&nbsp;<span class="oth">&amp;</span>&nbsp;<span class="wrd">r3.denominator</span><br />
+</div></tt><br />
+Here the global operators are defined for type <tt><i>Rational</i></tt>, and are used in the initialization expression for <tt><i>r3</i></tt>. The output is <tt><i>-6/12</i></tt>.<br \>
+<br \>
+<a name="MEMBER"></a></div><div class="fb_sect_title">Member Operators</div><div class="fb_sect_cont"><br \>
+Member operators are declared inside a <tt><a href="KeyPgType.html">Type</a></tt> or <tt><a href="KeyPgClass.html">Class</a></tt> definition, like member procedures, and they are the cast and assignment operators <tt><a href="KeyPgOpAssignment.html">Let (Assign)</a></tt>, <tt><a href="KeyPgCast.html">Cast (Cast)</a></tt>, <tt><a href="KeyPgOpCombineAdd.html">+= (Add And Assign)</a></tt>, <tt><a href="KeyPgOpCombineSub.html">-= (Subtract And Assign)</a></tt>, <tt><a href="KeyPgOpCombineMultiply.html">*= (Multiply And Assign)</a></tt>, <tt><a href="KeyPgOpCombineDivide.html">/= (Divide And Assign)</a></tt>, <tt><a href="KeyPgOpCombineIntegerDivide.html">\= (Integer Divide And Assign)</a></tt>, <tt><a href="KeyPgOpCombineExponentiate.html">^= (Exponentiate And Assign)</a></tt>, <tt><a href="KeyPgOpCombineConcat.html">&amp;= (Concat And Assign)</a></tt>, <tt><a href="KeyPgOpCombineModulus.html">Mod= (Modulus And Assign)</a></tt>, <tt><a href="KeyPgOpCombineShiftLeft.html">Shl= (Shift Left And Assign)</a></tt>, <tt><a href="KeyPgOpCombineShiftRight.html">Shr= (Shift Right And Assign)</a></tt>, <tt><a href="KeyPgOpCombineAnd.html">And= (Conjunction And Assign)</a></tt>, <tt><a href="KeyPgOpCombineOr.html">Or= (Inclusive Disjunction And Assign)</a></tt>, <tt><a href="KeyPgOpCombineXor.html">Xor= (Exclusive Disjunction And Assign)</a></tt>, <tt><a href="KeyPgOpCombineImp.html">Imp= (Implication And Assign)</a></tt> and <tt><a href="KeyPgOpCombineEqv.html">Eqv= (Equivalence And Assign)</a></tt>.<br \>
+<br \>
+When declaring member operators, the <tt><a href="KeyPgDeclare.html">Declare</a></tt> and <tt><a href="KeyPgOperator.html">Operator</a></tt> keywords are used followed by the operator symbol and its parameter list. Like member procedures, member operators are defined outside the <tt><a href="KeyPgType.html">Type</a></tt> or <tt><a href="KeyPgClass.html">Class</a></tt> definition, and the symbol name is prefixed with the name of the <tt><a href="KeyPgType.html">Type</a></tt> or <tt><a href="KeyPgClass.html">Class</a></tt> name.<br \>
+<br \>
+The following example overloads the member operators <tt><a href="KeyPgCast.html">Cast (Cast)</a></tt> and <tt><a href="KeyPgOpCombineMultiply.html">*= (Multiply And Assign)</a></tt> for objects of a user-defined type.<br \>
+<br \>
+<tt><div class="freebasic">
+<span class="key">Type</span>&nbsp;<span class="wrd">Rational</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="wrd">numerator</span><span class="oth">,</span>&nbsp;<span class="wrd">denominator</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Operator</span>&nbsp;<span class="key">Cast</span>&nbsp;<span class="oth">()</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Double</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Operator</span>&nbsp;<span class="key">Cast</span>&nbsp;<span class="oth">()</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Operator</span>&nbsp;<span class="oth">*=</span>&nbsp;<span class="oth">(</span><span class="key">ByRef</span>&nbsp;<span class="wrd">rhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">Rational</span><span class="oth">)</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Type</span><br />
+<br />
+<span class="key">Operator</span>&nbsp;<span class="wrd">Rational.cast</span>&nbsp;<span class="oth">()</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Double</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Return</span>&nbsp;<span class="wrd">numerator</span>&nbsp;<span class="oth">/</span>&nbsp;<span class="wrd">denominator</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Operator</span><br />
+<br />
+<span class="key">Operator</span>&nbsp;<span class="wrd">Rational.cast</span>&nbsp;<span class="oth">()</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Return</span>&nbsp;<span class="wrd">numerator</span>&nbsp;<span class="oth">&amp;</span>&nbsp;<span class="quo">"/"</span>&nbsp;<span class="oth">&amp;</span>&nbsp;<span class="wrd">denominator</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Operator</span><br />
+<br />
+<span class="key">Operator</span>&nbsp;<span class="wrd">Rational.</span><span class="oth">*=</span>&nbsp;<span class="oth">(</span><span class="key">ByRef</span>&nbsp;<span class="wrd">rhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">Rational</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">numerator</span>&nbsp;<span class="oth">*=</span>&nbsp;<span class="wrd">rhs.numerator</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">denominator</span>&nbsp;<span class="oth">*=</span>&nbsp;<span class="wrd">rhs.denominator</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Operator</span><br />
+<br />
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">Rational</span>&nbsp;<span class="wrd">r1</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="oth">(</span><span class="num">2</span><span class="oth">,</span>&nbsp;<span class="num">3</span><span class="oth">),</span>&nbsp;<span class="wrd">r2</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="oth">(</span><span class="num">3</span><span class="oth">,</span>&nbsp;<span class="num">4</span><span class="oth">)</span><br />
+<span class="wrd">r1</span>&nbsp;<span class="oth">*=</span>&nbsp;<span class="wrd">r2</span><br />
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Double</span>&nbsp;<span class="wrd">d</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">r1</span><br />
+<span class="key">Print</span>&nbsp;<span class="wrd">r1</span><span class="oth">,</span>&nbsp;<span class="wrd">d</span><br />
+</div></tt><br />
+Notice that the member operator <tt><a href="KeyPgCast.html">Cast (Cast)</a></tt> is declared twice, once for the conversion to <tt><a href="KeyPgDouble.html">Double</a></tt> and once for the conversion to <tt><a href="KeyPgString.html">String</a></tt>. This is the only operator (or procedure) that can be declared multiple times when only the return type differs. The compiler decides which cast overload to call based on how the object is used (in the initialization of the <tt><a href="KeyPgDouble.html">Double</a></tt> <tt><i>d</i></tt>, <tt><i>Rational.Cast as double</i></tt> is called, and in the <tt><a href="KeyPgPrint.html">Print</a></tt> statement, <tt><i>Rational.Cast as string</i></tt> is used instead).<br \>
+<br \>
+</div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

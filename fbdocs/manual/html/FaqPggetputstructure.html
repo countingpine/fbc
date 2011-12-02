@@ -1,0 +1,85 @@
+<html>
+<head>
+<title>GET/PUT image header example</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">GET/PUT image header example</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Example showing the two different headers used for image buffers.<br \>
+Note: <tt><a href="KeyPgImageInfo.html">ImageInfo</a></tt> is provided as a simpler alternative to reading the image structures directly.<br \>
+<br \>
+<tt><div class="freebasic">
+<span class="com">''&nbsp;fbgfx.bi&nbsp;contains&nbsp;the&nbsp;necessary&nbsp;structures&nbsp;and&nbsp;constants&nbsp;for&nbsp;working</span><br />
+<span class="com">''&nbsp;directly&nbsp;with&nbsp;image&nbsp;headers</span><br />
+<span class="def">#include&nbsp;"fbgfx.bi"<br />
+</span><br />
+<span class="com">''&nbsp;in&nbsp;lang&nbsp;fb,&nbsp;structures&nbsp;and&nbsp;constants&nbsp;are&nbsp;contained&nbsp;in&nbsp;the&nbsp;FB&nbsp;namespace</span><br />
+<span class="def">#if&nbsp;__FB_LANG__&nbsp;=&nbsp;"fb"<br />
+</span><span class="key">Using</span>&nbsp;<span class="wrd">FB</span><br />
+<span class="def">#endif<br />
+</span><br />
+<br />
+<span class="com">''&nbsp;function&nbsp;to&nbsp;show&nbsp;info&nbsp;on&nbsp;an&nbsp;image</span><br />
+<span class="key">Sub</span>&nbsp;<span class="wrd">show_image_info</span><span class="oth">(</span>&nbsp;<span class="key">ByVal</span>&nbsp;<span class="wrd">image</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Any</span>&nbsp;<span class="key">Ptr</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">PUT_HEADER</span>&nbsp;<span class="key">Ptr</span>&nbsp;<span class="wrd">header</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="wrd">w</span><span class="oth">,</span>&nbsp;<span class="wrd">h</span><span class="oth">,</span>&nbsp;<span class="wrd">bpp</span><span class="oth">,</span>&nbsp;<span class="wrd">pitch</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">header</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">image</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">If</span><span class="oth">(</span>&nbsp;<span class="wrd">header</span><span class="oth">-&gt;</span><span class="key">Type</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">PUT_HEADER_NEW</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="key">Then</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"New&nbsp;style&nbsp;header"</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">w</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">header</span><span class="oth">-&gt;</span><span class="key">Width</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">h</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">header</span><span class="oth">-&gt;</span><span class="wrd">height</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">bpp</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">header</span><span class="oth">-&gt;</span><span class="wrd">bpp</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">pitch</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">header</span><span class="oth">-&gt;</span><span class="wrd">pitch</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Else</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"Old&nbsp;style&nbsp;header"</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">w</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">header</span><span class="oth">-&gt;</span><span class="wrd">old.width</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">h</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">header</span><span class="oth">-&gt;</span><span class="wrd">old.height</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">bpp</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">header</span><span class="oth">-&gt;</span><span class="wrd">old.bpp</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">pitch</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">w</span>&nbsp;<span class="oth">*</span>&nbsp;<span class="wrd">bpp</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">End</span>&nbsp;<span class="key">If</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"Image&nbsp;dimensions&nbsp;are&nbsp;"</span>&nbsp;<span class="oth">&amp;</span>&nbsp;<span class="wrd">w</span>&nbsp;<span class="oth">&amp;</span>&nbsp;<span class="quo">"*"</span>&nbsp;<span class="oth">&amp;</span>&nbsp;<span class="wrd">h</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"Image&nbsp;uses&nbsp;"</span>&nbsp;<span class="oth">&amp;</span>&nbsp;<span class="wrd">bpp</span>&nbsp;<span class="oth">&amp;</span>&nbsp;<span class="quo">"&nbsp;bytes&nbsp;for&nbsp;each&nbsp;pixel"</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"A&nbsp;row&nbsp;of&nbsp;image&nbsp;pixels&nbsp;takes&nbsp;"</span>&nbsp;<span class="oth">&amp;</span>&nbsp;<span class="wrd">pitch</span>&nbsp;<span class="oth">&amp;</span>&nbsp;<span class="quo">"&nbsp;bytes"</span><br />
+<br />
+<span class="key">End</span>&nbsp;<span class="key">Sub</span><br />
+<br />
+<br />
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Any</span>&nbsp;<span class="key">Ptr</span>&nbsp;<span class="wrd">picture</span><br />
+<br />
+<span class="key">ScreenRes</span>&nbsp;<span class="num">320</span><span class="oth">,</span>&nbsp;<span class="num">200</span><span class="oth">,</span>&nbsp;<span class="num">32</span><br />
+<br />
+<span class="wrd">picture</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">ImageCreate</span><span class="oth">(</span>&nbsp;<span class="num">10</span><span class="oth">,</span>&nbsp;<span class="num">10</span><span class="oth">,</span>&nbsp;<span class="key">RGB</span><span class="oth">(</span><span class="num">128</span><span class="oth">,</span>&nbsp;<span class="num">192</span><span class="oth">,</span>&nbsp;<span class="num">255</span><span class="oth">)</span>&nbsp;<span class="oth">)</span><br />
+<br />
+<span class="key">Put</span><span class="oth">(</span>&nbsp;<span class="num">40</span><span class="oth">,</span>&nbsp;<span class="num">40</span>&nbsp;<span class="oth">),</span>&nbsp;<span class="wrd">picture</span><span class="oth">,</span>&nbsp;<span class="key">PSet</span><br />
+<br />
+<span class="wrd">show_image_info</span><span class="oth">(</span>&nbsp;<span class="wrd">picture</span>&nbsp;<span class="oth">)</span><br />
+<br />
+<span class="key">ImageDestroy</span>&nbsp;<span class="wrd">picture</span><br />
+<br />
+<span class="key">Sleep</span></div></tt><br />
+<br \>
+NOTE: To use this code with an array, pass your array to the function, like this:<br \>
+<br \>
+<tt><div class="freebasic">
+<span class="wrd">show_image_info</span><span class="oth">(</span>&nbsp;<span class="key">VarPtr</span><span class="oth">(</span>&nbsp;<span class="wrd">myarray</span><span class="oth">(</span>&nbsp;<span class="wrd">L</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="oth">)</span><br />
+</div></tt><br />
+where L is the lower bound of myarray().
+</div>
+</div> 
+</div> 
+</body>
+</html>

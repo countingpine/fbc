@@ -1,0 +1,85 @@
+<html>
+<head>
+<title>Line (Graphics)</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Line (Graphics)</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Draws a line<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<b>Line</b> [<i>target</i>,] [[STEP] (<i>x1</i>, <i>y1</i>)]-[STEP] (<i>x2, y2</i>) [, [<i>color</i>][, [B|BF][, <i>style</i>]]]<br \>
+or<br \>
+<b>Line</b> - (<i>x2</i>, <i>y2</i>) [, [<i>color</i>][, [B|BF][, <i>style</i>]]]<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+<tt><i>target</i></tt><br \>
+<div class="fb_indent">specifies buffer to draw on<br \>
+</div><tt>STEP</tt><br \>
+<div class="fb_indent">indicates that the starting coordinates are relative<br \>
+</div><tt><i>(x1, y1)</i></tt><br \>
+<div class="fb_indent">starting coordinates of the line<br \>
+</div><tt>STEP</tt><br \>
+<div class="fb_indent">indicates that ending coordinates are relative<br \>
+</div><tt><i>(x2, y2)</i></tt><br \>
+<div class="fb_indent">ending coordinates of the line<br \>
+</div><tt><i>color</i></tt><br \>
+<div class="fb_indent">the color attribute.<br \>
+</div><tt>B|BF</tt><br \>
+<div class="fb_indent">specifies box or box filled mode<br \>
+</div><tt><i>style</i></tt><br \>
+<div class="fb_indent">line style<br \>
+<br \>
+</div></div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+Graphics statement that draws a straight line or a box between two points. The action will take place on the current work page set via <a href="KeyPgScreenset.html">ScreenSet</a>, or onto the buffer <a href="KeyPgGetgraphics.html">Get</a>/<a href="KeyPgPutgraphics.html">Put</a> buffer if specified.<br \>
+<br \>
+<b>Line</b> coordinates are affected by custom coordinates system set via <a href="KeyPgWindow.html">Window</a> and <a href="KeyPgViewgraphics.html">View (Graphics)</a> statements, and respect clipping rectangle set by <a href="KeyPgViewgraphics.html">View (Graphics)</a>. If a pair of coordinates is preceded by the <tt>STEP</tt> keyword, the coordinates are assumed to be relative to the last graphics cursor position. If the <tt>B</tt> flag is specified, a rectangle will be drawn instead of a line, with <tt>(<i>x1</i>,<i>y1</i>)-(<i>x2</i>,<i>y2</i>)</tt> as the coordinates of the opposite rectangle corners. If <tt>BF</tt> is specified, a filled rectangle will be drawn.<br \>
+<br \>
+<tt><i>Color</i></tt> denotes the color attribute, which is mode specific (see <a href="KeyPgColor.html">Color</a> and <a href="KeyPgScreengraphics.html">Screen (Graphics)</a> for details). If omitted, the current foreground color as set by the <a href="KeyPgColor.html">Color</a> statement is used.<br \>
+<br \>
+<tt><i>Style</i></tt>, if specified, allows styled line drawing; its value is interpreted as a 16bit bitmask, and <b>Line</b> will use it to skip pixel drawing. Starting at <tt>(<i>x1</i>,<i>y1</i>)</tt>, the most significant bit of the style mask is checked: if 1, the pixel is drawn, if 0, it's skipped. This repeats for all the line pixels with the other bits, with the mask being reused when the 16 bits are all checked.<br \>
+<br \>
+When <b>Line</b> is used as <i>Line - (x2, y2)</i>, a line is drawn from the current cursor position to the <tt>(<i>x2</i>,<i>y2</i>)</tt> coordinates specified by LINE. Alternatively, <a href="KeyPgPoint.html">Point</a> can be used to get the current cursor position.<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="com">''&nbsp;draws&nbsp;a&nbsp;diagonal&nbsp;red&nbsp;line&nbsp;with&nbsp;a&nbsp;white&nbsp;box,&nbsp;and&nbsp;waits&nbsp;for&nbsp;3&nbsp;seconds</span><br />
+<span class="key">Screen</span>&nbsp;<span class="num">13</span><br />
+<span class="key">Line</span>&nbsp;<span class="oth">(</span><span class="num">20</span><span class="oth">,</span>&nbsp;<span class="num">20</span><span class="oth">)-(</span><span class="num">300</span><span class="oth">,</span>&nbsp;<span class="num">180</span><span class="oth">),</span>&nbsp;<span class="num">4</span><br />
+<span class="key">Line</span>&nbsp;<span class="oth">(</span><span class="num">140</span><span class="oth">,</span>&nbsp;<span class="num">80</span><span class="oth">)-(</span><span class="num">180</span><span class="oth">,</span>&nbsp;<span class="num">120</span><span class="oth">),</span>&nbsp;<span class="num">15</span><span class="oth">,</span>&nbsp;<span class="wrd">b</span><br />
+<span class="key">Line</span>&nbsp;<span class="oth">-</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="num">200</span><span class="oth">,</span>&nbsp;<span class="num">200</span>&nbsp;<span class="oth">),</span>&nbsp;<span class="num">15</span><br />
+<span class="key">Sleep</span>&nbsp;<span class="num">3000</span><br />
+</div></tt><br />
+<br \>
+<tt><div class="freebasic">
+<span class="com">'&nbsp;Draws&nbsp;2&nbsp;lines&nbsp;with&nbsp;2&nbsp;different&nbsp;line&nbsp;styles&nbsp;in&nbsp;2&nbsp;different&nbsp;colors</span><br />
+<span class="key">ScreenRes</span>&nbsp;<span class="num">320</span><span class="oth">,</span>&nbsp;<span class="num">240</span><br />
+<br />
+<span class="key">Line</span>&nbsp;<span class="oth">(</span><span class="num">10</span><span class="oth">,</span>&nbsp;<span class="num">100</span><span class="oth">)-(</span><span class="num">309</span><span class="oth">,</span>&nbsp;<span class="num">140</span><span class="oth">),</span>&nbsp;&nbsp;<span class="num">4</span><span class="oth">,</span>&nbsp;<span class="wrd">B</span><span class="oth">,</span>&nbsp;<span class="num">&amp;b1010101010101010</span>&nbsp;<span class="com">'&nbsp;red&nbsp;box&nbsp;with&nbsp;dashed&nbsp;border</span><br />
+<br />
+<span class="key">Line</span>&nbsp;<span class="oth">(</span><span class="num">20</span><span class="oth">,</span>&nbsp;<span class="num">115</span><span class="oth">)-(</span><span class="num">299</span><span class="oth">,</span>&nbsp;<span class="num">115</span><span class="oth">),</span>&nbsp;&nbsp;<span class="num">9</span><span class="oth">,</span>&nbsp;&nbsp;<span class="oth">,</span>&nbsp;<span class="num">&amp;b1111000011111111</span>&nbsp;<span class="com">'&nbsp;blue&nbsp;dashed&nbsp;line</span><br />
+<span class="key">Line</span>&nbsp;<span class="oth">(</span><span class="num">20</span><span class="oth">,</span>&nbsp;<span class="num">125</span><span class="oth">)-(</span><span class="num">299</span><span class="oth">,</span>&nbsp;<span class="num">125</span><span class="oth">),</span>&nbsp;<span class="num">10</span><span class="oth">,</span>&nbsp;&nbsp;<span class="oth">,</span>&nbsp;<span class="num">&amp;b0000000011110000</span>&nbsp;<span class="com">'&nbsp;green&nbsp;dashed&nbsp;line</span><br />
+<br />
+<span class="key">Sleep</span><br />
+</div></tt><br />
+<br \>
+</div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><i>target</i></tt> is new to FreeBASIC<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <a href="KeyPgCircle.html">Circle</a><br \>
+<li> <a href="KeyPgWindow.html">Window</a><br \>
+<li> <a href="KeyPgViewgraphics.html">View (Graphics)</a><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

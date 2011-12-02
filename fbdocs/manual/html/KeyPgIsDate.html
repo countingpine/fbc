@@ -1,0 +1,77 @@
+<html>
+<head>
+<title>IsDate</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">IsDate</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Tests if a string can be converted to a <a href="ProPgDates.html">Date Serial</a><br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgFunction.html">Function</a> <b>IsDate</b> ( <a href="KeyPgByref.html">ByRef</a> <i>stringdate</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgConstQualifier.html">Const</a> <a href="KeyPgString.html">String</a> ) <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a><br \>
+</tt><br \>
+</div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
+#include "vbcompat.bi"<br \>
+<i>result</i> = <b>IsDate</b>( <i>stringdate</i> )<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+<tt><i>stringdate</i></tt><br \>
+<div class="fb_indent">the string to test<br \>
+<br \>
+</div></div><div class="fb_sect_title">Return Value</div><div class="fb_sect_cont"><br \>
+Returns non-zero (-1) if the date string can be converted to a <a href="ProPgDates.html">Date Serial</a>, otherwise returns zero (0).<br \>
+<br \>
+</div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+Date strings must be in the format set in the regional settings of the OS to be considered valid dates.<br \>
+<br \>
+<tt><b>IsDate(<a href="KeyPgDate.html">Date</a>)</b></tt> will return non-zero (-1) only if the regional settings specify the same date format that QB used.<br \>
+<br \>
+The compiler will not recognize this function unless <tt>vbcompat.bi</tt> or <tt>datetime.bi</tt> is included.<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="def">#include&nbsp;"vbcompat.bi"<br />
+</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">s</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span><span class="oth">,</span>&nbsp;<span class="wrd">d</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+<br />
+<span class="key">Do</span><br />
+&nbsp;&nbsp;<span class="key">Print</span><br />
+&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"Enter&nbsp;a&nbsp;date:&nbsp;"</span><br />
+<br />
+&nbsp;&nbsp;<span class="key">Line</span>&nbsp;<span class="key">Input</span>&nbsp;<span class="wrd">s</span><br />
+<br />
+&nbsp;&nbsp;<span class="key">If</span>&nbsp;<span class="wrd">s</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="quo">""</span>&nbsp;<span class="key">Then</span>&nbsp;<span class="key">Exit</span>&nbsp;<span class="key">Do</span><br />
+<br />
+&nbsp;&nbsp;<span class="key">If</span>&nbsp;<span class="key">IsDate</span><span class="oth">(</span>&nbsp;<span class="wrd">s</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span>&nbsp;<span class="key">Then</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"'"</span><span class="oth">;</span>&nbsp;<span class="wrd">s</span><span class="oth">;</span>&nbsp;<span class="quo">"'&nbsp;is&nbsp;not&nbsp;a&nbsp;valid&nbsp;date"</span><br />
+&nbsp;&nbsp;<span class="key">Else</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">d</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">DateValue</span><span class="oth">(</span>&nbsp;<span class="wrd">s</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"year&nbsp;&nbsp;=&nbsp;"</span><span class="oth">;</span>&nbsp;<span class="key">Year</span><span class="oth">(</span>&nbsp;<span class="wrd">d</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"month&nbsp;=&nbsp;"</span><span class="oth">;</span>&nbsp;<span class="key">Month</span><span class="oth">(</span>&nbsp;<span class="wrd">d</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"day&nbsp;&nbsp;&nbsp;=&nbsp;"</span><span class="oth">;</span>&nbsp;<span class="key">Day</span><span class="oth">(</span>&nbsp;<span class="wrd">d</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;<span class="key">End</span>&nbsp;<span class="key">If</span><br />
+<br />
+<span class="key">Loop</span><br />
+</div></tt><br />
+<br \>
+</div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> New to FreeBASIC<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <a href="ProPgDates.html">Date Serials</a><br \>
+<li> <tt><a href="KeyPgDateSerial.html">DateSerial</a></tt><br \>
+<li> <tt><a href="KeyPgTimeValue.html">TimeValue</a></tt><br \>
+<li> <tt><a href="KeyPgDateValue.html">DateValue</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

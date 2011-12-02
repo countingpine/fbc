@@ -1,0 +1,66 @@
+<html>
+<head>
+<title>Chain</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Chain</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Temporarily transfers control to an external program<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgFunction.html">Function</a> <b>Chain</b> ( <a href="KeyPgByref.html">ByRef</a> <i>program</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgConstQualifier.html">Const</a> <a href="KeyPgString.html">String</a> ) <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a><br \>
+</tt><br \>
+</div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
+<i>result</i> = <b>Chain</b>( <i>program</i> )<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+<tt><i>program</i></tt><br \>
+<div class="fb_indent">The file name (including file path) of the program (executable) to transfer control to.<br \>
+<br \>
+</div></div><div class="fb_sect_title">Return Value</div><div class="fb_sect_cont"><br \>
+    Returns the external program's exit code if executed successfully, or negative one (-1) otherwise.<br \>
+<br \>
+</div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+Transfers control over to an external program. When the program exits, execution resumes immediately after the call to <tt><b>Chain</b></tt>.<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="def">#ifdef&nbsp;FB__LINUX<br />
+#define&nbsp;CHAIN2&nbsp;&nbsp;&nbsp;&nbsp;"chain2"<br />
+#else<br />
+#define&nbsp;CHAIN2&nbsp;&nbsp;&nbsp;&nbsp;"chain2.exe"<br />
+#endif<br />
+</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"chain1&nbsp;begins"</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Chain</span>&nbsp;<span class="wrd">CHAIN2</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"chain1&nbsp;ends"</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Sleep</span><br />
+</div></tt><br />
+</div><div class="fb_sect_title">Platform Differences</div><div class="fb_sect_cont"><br \>
+<ul><li> Linux requires the <tt><i>program</i></tt> name case matches the real name of the file. Windows and DOS  are case insensitive. The program  chained may be case sensitive for its command line parameters.<br \>
+<li> Path separators in Linux are forward slashes / . Windows uses backward slashes \ but it allows for forward slashes .  DOS uses backward  \ slashes.<br \>
+<li> Exit code is limited to 8 bits in DOS.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> None<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgExec.html">Exec</a></tt> transfer temporarily, with arguments  <br \>
+<li> <tt><a href="KeyPgRun.html">Run</a></tt> one-way transfer<br \>
+<li> <tt><a href="KeyPgCommand.html">Command</a></tt> pick arguments<br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

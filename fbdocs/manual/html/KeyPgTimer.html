@@ -1,0 +1,66 @@
+<html>
+<head>
+<title>Timer</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Timer</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Returns the amount of time that has passed since a static reference point.<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgFunction.html">Function</a> <b>Timer</b> ( ) <a href="KeyPgAs.html">As</a> <a href="KeyPgDouble.html">Double</a><br \>
+</tt><br \>
+</div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
+<i>result</i> = <b>Timer</b><br \>
+</tt><br \>
+</div><div class="fb_sect_title">Return Value</div><div class="fb_sect_cont"><br \>
+Returns a <tt><a href="KeyPgDouble.html">Double</a></tt> precision result with the time, in seconds, since a static reference point.<br \>
+<br \>
+</div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+<br \>
+The <tt><b>Timer</b></tt> function is useful for finding out how long a section of code takes to run, or for control the timing of your code.  To find out how much time has passed between two points in your program, you can record the value of <tt><b>Timer</b></tt> at the start and end points, and then subtract the start value from the end value.<br \>
+<br \>
+On some platforms, the value of <tt><b>Timer</b></tt> resets to zero at midnight (see below), so if the start and end time are on either side of the reset point, the difference will be negative.  This could cause unexpected behavior in some programs.  In those cases, adding <tt>86400</tt> (the number of seconds in 24 hours) to the difference should return the correct result.  If the time taken is longer than a day, then it will be also be necessary to check the number of days that have elapsed.<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="com">''&nbsp;Example&nbsp;of&nbsp;using&nbsp;TIMER&nbsp;function&nbsp;</span><br />
+<span class="com">''&nbsp;Note:&nbsp;see&nbsp;text&nbsp;about&nbsp;correct&nbsp;waiting&nbsp;strategies</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">Start</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Double</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"Wait&nbsp;2.5&nbsp;seconds."</span><br />
+<span class="wrd">Start</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">Timer</span><br />
+<span class="key">Do</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Sleep</span>&nbsp;<span class="num">1</span><span class="oth">,</span>&nbsp;<span class="num">1</span><br />
+<span class="key">Loop</span>&nbsp;<span class="key">Until</span>&nbsp;<span class="oth">(</span><span class="key">Timer</span>&nbsp;<span class="oth">-</span>&nbsp;<span class="wrd">Start</span><span class="oth">)</span>&nbsp;<span class="oth">&gt;</span>&nbsp;<span class="num">2.5</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"Done."</span><br />
+</div></tt><br />
+<br \>
+</div><div class="fb_sect_title">Platform Differences</div><div class="fb_sect_cont"><br \>
+<ul><li> On Win32 and Linux, if the program must wait for periods of 0.1 seconds or more, <tt><a href="KeyPgSleep.html">Sleep</a></tt> should be used, this allows other programs to run during the waiting period. For shorter delays, a loop using TIMER can be more precise.<br \>
+<li> The reference point chosen varies, depending on the platform.  On Windows, the time is measured relative to the point the computer was booted up.  On DOS, the time is measured relative to Jan 1 1970.<br \>
+<br \>
+</ul><i>Note for DOS users: today, the number of seconds since 1970 is in excess of <tt>10^9</tt>, and is therefore unsuitable for storing in <tt><a href="KeyPgSingle.html">Single</a></tt>-precision variables, also it shouldn't be multiplied (to get 1/10 seconds or so) and stored in 32-bit integer variables then</i><br \>
+<br \>
+<ul><li> The precision of TIMER varies, depending on the computer used.  If the processor has a precision timer (as the Performance Counter Pentium processors from Intel have) and the OS uses it, the precision is linked to the processor clock and microseconds can be expected. With older processors (386, 486), and always in DOS, the resolution is 1/18 second.<br \>
+<br \>
+<li> Usage of TIMER can cause disk accesses in DOS, see <a href="http://www.freebasic.net/forum/viewtopic.php?t=12985">forum</a> for analysis and solutions<br \>
+<br \>
+</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> In QB TIMER returned the number of seconds from last midnight, and its accuracy was 1/18 secs<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgTime.html">Time</a></tt><br \>
+<li> <tt><a href="KeyPgSleep.html">Sleep</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

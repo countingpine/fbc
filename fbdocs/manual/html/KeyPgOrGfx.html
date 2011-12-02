@@ -1,0 +1,71 @@
+<html>
+<head>
+<title>Or</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Or</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Parameter to the <tt><a href="KeyPgPutgraphics.html">Put</a></tt> graphics statement which uses a bit-wise <tt><a href="KeyPgOpOr.html">Or</a></tt> as the blitting method<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<b>Put</b> [ <i>target</i>, ] [ STEP ] ( <i>x</i>,<i>y</i> ), <i>source</i> [ ,( <i>x1</i>,<i>y1</i> )-( <i>x2</i>,<i>y2</i> ) ], <b>Or</b><br \>
+</tt><br \>
+</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+<tt><b>Or</b></tt><br \>
+<div class="fb_indent">Required.<br \>
+<br \>
+</div></div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+The <tt><b>Or</b></tt> method combines each source pixel with the corresponding destination pixel, using the bit-wise <tt><a href="KeyPgOpOr.html">Or</a></tt> function.  The result of this is output as the destination pixel.<br \>
+This method works in all graphics modes.  There is no mask color, although color values of <tt>0</tt> (<tt><a href="KeyPgRgba.html">RGBA</a>(0, 0, 0, 0)</tt> in full-color modes) will have no effect, because of the behavior of <tt><a href="KeyPgOpOr.html">Or</a></tt>.<br \>
+<br \>
+In full-color modes, each component (red, green, blue and alpha) is kept in a discrete set of bits, so the operation can be made to only affect some of the channels, by making sure the all the values of the other channels are set to <tt>0</tt>.<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="com">''open&nbsp;a&nbsp;graphics&nbsp;window</span><br />
+<span class="key">ScreenRes</span>&nbsp;<span class="num">320</span><span class="oth">,</span>&nbsp;<span class="num">200</span><span class="oth">,</span>&nbsp;<span class="num">16</span><br />
+<br />
+<span class="com">''create&nbsp;3&nbsp;sprites&nbsp;containing&nbsp;red,&nbsp;green&nbsp;and&nbsp;blue&nbsp;circles</span><br />
+<span class="key">Const</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="wrd">r</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">32</span><br />
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Any</span>&nbsp;<span class="key">Ptr</span>&nbsp;<span class="wrd">cr</span><span class="oth">,</span>&nbsp;<span class="wrd">cg</span><span class="oth">,</span>&nbsp;<span class="wrd">cb</span><br />
+<span class="wrd">cr</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">ImageCreate</span><span class="oth">(</span><span class="wrd">r</span>&nbsp;<span class="oth">*</span>&nbsp;<span class="num">2</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="num">1</span><span class="oth">,</span>&nbsp;<span class="wrd">r</span>&nbsp;<span class="oth">*</span>&nbsp;<span class="num">2</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="num">1</span><span class="oth">,</span>&nbsp;<span class="key">RGBA</span><span class="oth">(</span><span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">0</span><span class="oth">))</span><br />
+<span class="wrd">cg</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">ImageCreate</span><span class="oth">(</span><span class="wrd">r</span>&nbsp;<span class="oth">*</span>&nbsp;<span class="num">2</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="num">1</span><span class="oth">,</span>&nbsp;<span class="wrd">r</span>&nbsp;<span class="oth">*</span>&nbsp;<span class="num">2</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="num">1</span><span class="oth">,</span>&nbsp;<span class="key">RGBA</span><span class="oth">(</span><span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">0</span><span class="oth">))</span><br />
+<span class="wrd">cb</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">ImageCreate</span><span class="oth">(</span><span class="wrd">r</span>&nbsp;<span class="oth">*</span>&nbsp;<span class="num">2</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="num">1</span><span class="oth">,</span>&nbsp;<span class="wrd">r</span>&nbsp;<span class="oth">*</span>&nbsp;<span class="num">2</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="num">1</span><span class="oth">,</span>&nbsp;<span class="key">RGBA</span><span class="oth">(</span><span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">0</span><span class="oth">))</span><br />
+<span class="key">Circle</span>&nbsp;<span class="wrd">cr</span><span class="oth">,</span>&nbsp;<span class="oth">(</span><span class="wrd">r</span><span class="oth">,</span>&nbsp;<span class="wrd">r</span><span class="oth">),</span>&nbsp;<span class="wrd">r</span><span class="oth">,</span>&nbsp;<span class="key">RGB</span><span class="oth">(</span><span class="num">255</span><span class="oth">,</span>&nbsp;<span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">0</span><span class="oth">),</span>&nbsp;<span class="oth">,</span>&nbsp;<span class="oth">,</span>&nbsp;<span class="num">1</span><span class="oth">,</span>&nbsp;<span class="wrd">f</span><br />
+<span class="key">Circle</span>&nbsp;<span class="wrd">cg</span><span class="oth">,</span>&nbsp;<span class="oth">(</span><span class="wrd">r</span><span class="oth">,</span>&nbsp;<span class="wrd">r</span><span class="oth">),</span>&nbsp;<span class="wrd">r</span><span class="oth">,</span>&nbsp;<span class="key">RGB</span><span class="oth">(</span><span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">255</span><span class="oth">,</span>&nbsp;<span class="num">0</span><span class="oth">),</span>&nbsp;<span class="oth">,</span>&nbsp;<span class="oth">,</span>&nbsp;<span class="num">1</span><span class="oth">,</span>&nbsp;<span class="wrd">f</span><br />
+<span class="key">Circle</span>&nbsp;<span class="wrd">cb</span><span class="oth">,</span>&nbsp;<span class="oth">(</span><span class="wrd">r</span><span class="oth">,</span>&nbsp;<span class="wrd">r</span><span class="oth">),</span>&nbsp;<span class="wrd">r</span><span class="oth">,</span>&nbsp;<span class="key">RGB</span><span class="oth">(</span><span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">255</span><span class="oth">),</span>&nbsp;<span class="oth">,</span>&nbsp;<span class="oth">,</span>&nbsp;<span class="num">1</span><span class="oth">,</span>&nbsp;<span class="wrd">f</span><br />
+<br />
+<span class="com">''put&nbsp;the&nbsp;sprite&nbsp;at&nbsp;three&nbsp;different&nbsp;multipier</span><br />
+<span class="com">''levels,&nbsp;overlapping&nbsp;each&nbsp;other&nbsp;in&nbsp;the&nbsp;middle</span><br />
+<span class="key">Put</span>&nbsp;<span class="oth">(</span><span class="num">146</span>&nbsp;<span class="oth">-</span>&nbsp;<span class="wrd">r</span><span class="oth">,</span>&nbsp;<span class="num">108</span>&nbsp;<span class="oth">-</span>&nbsp;<span class="wrd">r</span><span class="oth">),</span>&nbsp;<span class="wrd">cr</span><span class="oth">,</span>&nbsp;<span class="key">Or</span><br />
+<span class="key">Put</span>&nbsp;<span class="oth">(</span><span class="num">174</span>&nbsp;<span class="oth">-</span>&nbsp;<span class="wrd">r</span><span class="oth">,</span>&nbsp;<span class="num">108</span>&nbsp;<span class="oth">-</span>&nbsp;<span class="wrd">r</span><span class="oth">),</span>&nbsp;<span class="wrd">cg</span><span class="oth">,</span>&nbsp;<span class="key">Or</span><br />
+<span class="key">Put</span>&nbsp;<span class="oth">(</span><span class="num">160</span>&nbsp;<span class="oth">-</span>&nbsp;<span class="wrd">r</span><span class="oth">,</span>&nbsp;&nbsp;<span class="num">84</span>&nbsp;<span class="oth">-</span>&nbsp;<span class="wrd">r</span><span class="oth">),</span>&nbsp;<span class="wrd">cb</span><span class="oth">,</span>&nbsp;<span class="key">Or</span><br />
+<br />
+<span class="com">''free&nbsp;the&nbsp;memory&nbsp;used&nbsp;by&nbsp;the&nbsp;sprites</span><br />
+<span class="key">ImageDestroy</span>&nbsp;<span class="wrd">cr</span><br />
+<span class="key">ImageDestroy</span>&nbsp;<span class="wrd">cg</span><br />
+<span class="key">ImageDestroy</span>&nbsp;<span class="wrd">cb</span><br />
+<br />
+<span class="com">''pause&nbsp;the&nbsp;program&nbsp;before&nbsp;closing</span><br />
+<span class="key">Sleep</span><br />
+</div></tt><br />
+<div class="fb_img"><img src="images/put-or.png" /></div><br \>
+</div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> None<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgOpOr.html">Or</a></tt><br \>
+<li> <tt><a href="KeyPgPutgraphics.html">Put (Graphics)</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

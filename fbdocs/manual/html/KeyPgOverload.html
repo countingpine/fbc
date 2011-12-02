@@ -1,0 +1,69 @@
+<html>
+<head>
+<title>Overload</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Overload</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Specifies that a procedure name can be overloaded<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<a href="KeyPgDeclare.html">Declare</a> [<a href="KeyPgStatic.html">Static</a>] <a href="KeyPgSub.html">Sub</a> <i>procedure_name</i> <b>Overload</b> [<a href="KeyPgCdecl.html">cdecl</a>|<a href="KeyPgStdcall.html">stdcall</a>|<a href="KeyPgPascal.html">pascal</a>] [<a href="KeyPgAlias.html">Alias</a> <i>"external_name"</i>] [([<i>parameter_list</i>])] [<a href="KeyPgModuleConstructor.html">Constructor</a> [<i>priority</i>]] [<a href="KeyPgStatic.html">Static</a>] [<a href="KeyPgExport.html">Export</a>]<br \>
+<br \>
+<a href="KeyPgDeclare.html">Declare</a> [<a href="KeyPgStatic.html">Static</a>] <a href="KeyPgFunction.html">Function</a> <i>procedure_name</i> <b>Overload</b> [<a href="KeyPgCdecl.html">cdecl</a>|<a href="KeyPgStdcall.html">stdcall</a>|<a href="KeyPgPascal.html">pascal</a>] [<a href="KeyPgAlias.html">Alias</a> <i>"external_name"</i>] [([<i>parameter_list</i>])] <a href="KeyPgAs.html">As</a> <i>return_type</i> [<a href="KeyPgStatic.html">Static</a>] [<a href="KeyPgExport.html">Export</a>]<br \>
+<br \>
+[<a href="KeyPgPublic.html">Public</a>|<a href="KeyPgPrivate.html">Private</a>] <a href="KeyPgSub.html">Sub</a> <i>procedure_name</i> <b>Overload</b> [<a href="KeyPgCdecl.html">cdecl</a>|<a href="KeyPgStdcall.html">stdcall</a>|<a href="KeyPgPascal.html">pascal</a>] [<a href="KeyPgAlias.html">Alias</a> <i>"external_name"</i>] [([<i>parameter_list</i>])] [<a href="KeyPgModuleConstructor.html">Constructor</a> [<i>priority</i>]] [<a href="KeyPgStatic.html">Static</a>] [<a href="KeyPgExport.html">Export</a>]<br \>
+<div class="fb_indent"><i>..procedure body..</i><br \>
+</div><a href="KeyPgEnd.html">End</a> <a href="KeyPgSub.html">Sub</a><br \>
+<br \>
+[<a href="KeyPgPublic.html">Public</a>|<a href="KeyPgPrivate.html">Private</a>] <a href="KeyPgFunction.html">Function</a> <i>procedure_name</i> <b>Overload</b> [<a href="KeyPgCdecl.html">cdecl</a>|<a href="KeyPgStdcall.html">stdcall</a>|<a href="KeyPgPascal.html">pascal</a>] [<a href="KeyPgAlias.html">Alias</a> <i>"external_name"</i>] [([<i>parameter_list</i>])] <a href="KeyPgAs.html">As</a> <i>return_type</i>  [<a href="KeyPgStatic.html">Static</a>] [<a href="KeyPgExport.html">Export</a>]<br \>
+<div class="fb_indent"><i>..procedure body..</i><br \>
+</div><a href="KeyPgEnd.html">End</a> <a href="KeyPgFunction.html">Function</a><br \>
+</tt><br \>
+</div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+In procedure declarations, <b>Overload</b> allows procedure names to be overloaded, that is, other procedures can then be declared with the same name if their parameter lists are unique. Two parameter lists are unique if they contain a different number of parameters, or have parameters of different types. Note that this means that two or more procedures cannot be declared with the same name if they differ in return type alone.<br \>
+<br \>
+Once a procedure name has been declared overloaded, further declarations using the name need not specify *Overload*, but it is allowed.<br \>
+<br \>
+<b>Overload</b> is not necessary in member procedure declarations, as they are always implicitly overloaded.<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="key">Declare</span>&nbsp;<span class="key">Function</span>&nbsp;<span class="wrd">SUM</span>&nbsp;<span class="key">Overload</span>&nbsp;<span class="oth">(</span><span class="wrd">A</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">,</span><span class="wrd">B</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+<span class="key">Declare</span>&nbsp;<span class="key">Function</span>&nbsp;<span class="wrd">SUM</span>&nbsp;<span class="key">Overload</span>&nbsp;<span class="oth">(</span><span class="wrd">A</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Single</span><span class="oth">,</span><span class="wrd">B</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Single</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Single</span><br />
+<span class="key">Function</span>&nbsp;<span class="wrd">SUM</span>&nbsp;&nbsp;<span class="oth">(</span><span class="wrd">A</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">,</span><span class="wrd">B</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;<span class="key">Function</span><span class="oth">=</span><span class="wrd">A</span><span class="oth">+</span><span class="wrd">B</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Function</span>&nbsp;&nbsp;&nbsp;<br />
+<span class="key">Function</span>&nbsp;<span class="wrd">SUM</span>&nbsp;&nbsp;<span class="oth">(</span><span class="wrd">A</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Single</span><span class="oth">,</span><span class="wrd">B</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Single</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Single</span><br />
+&nbsp;&nbsp;&nbsp;<span class="key">Function</span><span class="oth">=</span><span class="wrd">A</span><span class="oth">+</span><span class="wrd">B</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Function</span>&nbsp;&nbsp;&nbsp;<br />
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="wrd">A</span><span class="oth">,</span><span class="wrd">B</span><br />
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Single</span>&nbsp;<span class="wrd">A1</span><span class="oth">,</span><span class="wrd">B1</span><br />
+<span class="wrd">A</span><span class="oth">=</span><span class="num">2</span><br />
+<span class="wrd">B</span><span class="oth">=</span><span class="num">3</span><br />
+<span class="wrd">A1</span><span class="oth">=</span><span class="num">2</span><span class="oth">.</span><br />
+<span class="wrd">b1</span><span class="oth">=</span><span class="num">3</span><span class="oth">.</span><br />
+<span class="key">Print</span>&nbsp;<span class="wrd">SUM</span><span class="oth">(</span><span class="wrd">A</span><span class="oth">,</span><span class="wrd">B</span><span class="oth">)</span><br />
+<span class="key">Print</span>&nbsp;<span class="wrd">SUM</span>&nbsp;<span class="oth">(</span><span class="wrd">A1</span><span class="oth">,</span><span class="wrd">B1</span><span class="oth">)</span><br />
+<span class="key">Sleep</span><br />
+</div></tt><br />
+<br \>
+</div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> New to FreeBASIC<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgDeclare.html">Declare</a></tt><br \>
+<li> <tt><a href="KeyPgSub.html">Sub</a></tt>, <tt><a href="KeyPgFunction.html">Function</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

@@ -1,0 +1,61 @@
+<html>
+<head>
+<title>Control Flow Statements</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Control Flow Statements</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	<ul></ul>Statements that direct the flow of execution.<br \>
+<br \>
+<div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+Control flow statements control program execution from one statement to the next; they determine what statements get executed and when, based on some kind of condition. The condition is always some expression that evaluates to true or false. Most control flow statements check for some kind of condition, and direct code flow accordingly, that is, they do or do not execute a block of code (except for the transferring control flow statements and <tt><a href="KeyPgDoloop.html">Do..Loop</a></tt>, which has an optional condition). Additionally, all control flow statements can be nested, that is, they can have other control flow statements within the statement block.<br \>
+<br \>
+Control flow statements come in three flavors: transferring, branching and looping. Transferring control flow statements transfer execution to different parts of code. Branching control flow statements execute certain statements blocks based on a condition, while looping control flow statements execute code repeatedly while or until a condition is met.<br \>
+<br \>
+</div><div class="fb_sect_title">Transferring Statements</div><div class="fb_sect_cont"><br \>
+These statements are used for either unconditional or conditional, temporary or permanent transfer of execution. The "ON" variants conditionally select a point of transfer from a list of text labels.  Execution may be transferred between different scopes provided that the branching does not cross any local array, variable length string or object definition.<br \>
+<br \>
+<b><a href="KeyPgGoto.html">Goto</a></b><br \>
+<div class="fb_indent">Unconditionally transfers execution to another point in code defined by a text label. Execution resumes with the first statement after the label.<br \>
+<br \>
+</div><b><a href="KeyPgGosub.html">GoSub</a></b><br \>
+<div class="fb_indent">Unconditionally and temporarily transfers execution to another point in code, defined by a text label. Execution resumes with the first statement after the label. Execution is then brought back to its original location with the <tt><a href="KeyPgReturn.html">Return</a></tt> keyword. Yes, <tt><a href="KeyPgGosub.html">GoSub</a></tt> statements can be nested, that is, multiple <tt><a href="KeyPgGosub.html">GoSub</a></tt> statements can be executed before the first corresponding <tt><a href="KeyPgReturn.html">Return</a></tt>, but there must always be a corresponding <tt><a href="KeyPgReturn.html">Return</a></tt> throughout the course of an application.<br \>
+<br \>
+</div><b><a href="KeyPgOngoto.html">On Goto</a></b><br \>
+<div class="fb_indent">Transfers execution to one of a number of points in code defined by text labels, based on the value of an expression.<br \>
+<br \>
+</div><b><a href="KeyPgOngosub.html">On Gosub</a></b><br \>
+<div class="fb_indent">Temporarily transfers execution to one of a number of points in code defined by text labels, based on the value of an expression.<br \>
+<br \>
+</div></div><div class="fb_sect_title">Branching Statements</div><div class="fb_sect_cont"><br \>
+These statements are used for executing one of a number of statement blocks.<br \>
+<br \>
+<b><a href="KeyPgIfthen.html">If..End If</a></b><br \>
+<div class="fb_indent">Executes a block of statements if an expression evaluates to true (the condition). If and only if the expression evaluates to false, another statement block can be executed if yet another expression evaluates to true using the <tt><a href="KeyPgElseif.html">ElseIf</a></tt> keyword. If and only if all of those expressions evaluate to false, a statement block can be execute using the <tt><a href="KeyPgElse.html">Else</a></tt> keyword.<br \>
+<br \>
+</div><b><a href="KeyPgSelectcase.html">Select..End Select</a></b><br \>
+<div class="fb_indent">Executes one of a number of statement blocks. This branching statement tries to meet a condition of an expression and one of a number of case expressions. The case expressions are checked in the order in which they are given, and the first case expression that is met has its associated statement block executed. Like <tt><a href="KeyPgIfthen.html">If..End If</a></tt>, a default case can be defined when no other case expression meets the condition, and, as with the looping control flow statements, a case's statement block can be prematurely broken out of with the <tt><a href="KeyPgExit.html">Exit</a></tt> keyword.<br \>
+<br \>
+</div></div><div class="fb_sect_title">Looping Statements</div><div class="fb_sect_cont"><br \>
+These statements are used for executing a block of statements repeatedly. Within a statement block, the loop can be prematurely re-executed using the <tt><a href="KeyPgContinue.html">Continue</a></tt> keyword, or broken out of using the <tt><a href="KeyPgExit.html">Exit</a></tt> keyword. Whether the loop is terminated by the condition or with the <tt><a href="KeyPgExit.html">Exit</a></tt> keyword, execution always begins at the first statement after the block.<br \>
+<br \>
+<b><a href="KeyPgWhilewend.html">While..Wend</a></b><br \>
+<div class="fb_indent">Executes a block of statements while some expression evaluates to true (the condition). The expression is evaluated and checked before the block of statements is executed.<br \>
+<br \>
+</div><b><a href="KeyPgFornext.html">For..Next</a></b><br \>
+<div class="fb_indent">Like <tt><a href="KeyPgWhilewend.html">While..Wend</a></tt>, but more suited to loop a certain number of times. This loop initializes a so-called iterator with an initial value that is checked against a test expression. If the iterator compares less than or equal to the test expression (the condition), the block of statements is executed and the iterator gets incremented. The loop can also be setup so that the iterator gets decremented after every loop, in which case it is compared greater than or equal to the test expression. Iterators can be numeric data types like <tt><a href="KeyPgInteger.html">Integer</a></tt> or <tt><a href="KeyPgSingle.html">Double</a></tt>, or user-defined types. User-defined types must implement <tt><a href="KeyPgOpFor.html">Operator For</a></tt>.<br \>
+</div><b><a href="KeyPgDoloop.html">Do..Loop</a></b><br \>
+<div class="fb_indent">The most versatile of the looping control flow statements, this loop can execute a block of statements while or until an expression evaluates to true (the condition). It can also delay the checking of the expression until after the block has executed the first time, useful when a block of statements needs to be executed <i>at least once</i>. Finally, this loop can have no condition at all, and merely loop indefinitely.<br \>
+<br \>
+</div></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

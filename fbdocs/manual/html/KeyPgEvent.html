@@ -1,0 +1,79 @@
+<html>
+<head>
+<title>Event</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Event</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Pre-defined structure(UDT) used by <a href="KeyPgScreenevent.html">ScreenEvent</a> to return event data <br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<a href="KeyPgDim.html">Dim</a> <i>variable</i> <a href="KeyPgAs.html">As</a> <b>Event</b><br \>
+</tt><br \>
+</div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+ Here we report the <tt>EVENT</tt> structure for clarity:<br \>
+<tt><div class="freebasic">
+<span class="key">Type</span>&nbsp;<span class="wrd">EVENT</span>&nbsp;<span class="key">Field</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">1</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Type</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Union</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Type</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">scancode</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">ascii</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">End</span>&nbsp;<span class="key">Type</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Type</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">x</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">y</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">dx</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">dy</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">End</span>&nbsp;<span class="key">Type</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">button</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">z</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">w</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">End</span>&nbsp;<span class="key">Union</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Type</span><br />
+</div></tt><br />
+<br \>
+The <tt>Type Field</tt> will contain the event type ID, while the remaining 4 integers will hold sensitive data to the event type. <br \>
+<br \>
+<u>Event types</u><br \>
+<div class="fb_indent">The event type is identified by an ID number returned into the first integer of the <tt><i>event</i></tt> buffer (the <tt>.type</tt> field in the <tt>EVENT</tt> structure). Known event type IDs - and their values at time of writing - are:<br \>
+<br \>
+</div><ul><li> <tt>EVENT_KEY_PRESS</tt> (<tt>1</tt>) A key was pressed on the keyboard. The <tt>.scancode</tt> field contains the platform independent scancode value for the key; if the key has an ascii representation, it is held into the <tt>.ascii</tt> field, which otherwise has a value of 0.<br \>
+<li> <tt>EVENT_KEY_RELEASE</tt> (<tt>2</tt>) A key was released on the keyboard. The <tt>.scancode</tt> and <tt>.ascii</tt> fields have the same meaning as with the <tt>EVENT_KEY_PRESS</tt> event.<br \>
+<li> <tt>EVENT_KEY_REPEAT</tt> (<tt>3</tt>) A key is being held down repeatedly. The <tt>.scancode</tt> and <tt>.ascii</tt> fields have the same meaning as with the <tt>EVENT_KEY_PRESS</tt> event.<br \>
+<li> <tt>EVENT_MOUSE_MOVE</tt> (<tt>4</tt>) The mouse was moved while it was on the program window. The <tt>.x</tt> and <tt>.y</tt> fields contain the new mouse position relative to the upper-left corner of the screen, while the <tt>.dx</tt> and <tt>.dy</tt> fields contain the motion deltas.<br \>
+<li> <tt>EVENT_MOUSE_BUTTON_PRESS</tt> (<tt>5</tt>) One of the mouse buttons was pressed. The <tt>.button</tt> field has one bit set identifying the button that was pressed; bit 0 identifies the left mouse button, bit 1 the right mouse button and bit 2 the middle mouse button.<br \>
+<li> <tt>EVENT_MOUSE_BUTTON_RELEASE</tt> (<tt>6</tt>) One of the mouse buttons was released. The <tt>.button</tt> field has the same meaning as with the <tt>EVENT_MOUSE_BUTTON_PRESS</tt> event.<br \>
+<li> <tt>EVENT_MOUSE_DOUBLE_CLICK</tt> (<tt>7</tt>)  One of the mouse buttons was double clicked. The <tt>.button</tt> field has the same meaning as with the <tt>EVENT_MOUSE_BUTTON_PRESS</tt> event.<br \>
+<li> <tt>EVENT_MOUSE_WHEEL</tt> (<tt>8</tt>) The mouse wheel was used; the new wheel position is returned into the <tt>.z</tt> field.<br \>
+<li> <tt>EVENT_MOUSE_ENTER</tt> (<tt>9</tt>) The mouse was moved into the program window.<br \>
+<li> <tt>EVENT_MOUSE_EXIT</tt> (<tt>10</tt>) The mouse was moved out of the program window.<br \>
+<li> <tt>EVENT_WINDOW_GOT_FOCUS</tt> (<tt>11</tt>) The program window has got focus.<br \>
+<li> <tt>EVENT_WINDOW_LOST_FOCUS</tt> (<tt>12</tt>) The program window has lost focus.<br \>
+<li> <tt>EVENT_WINDOW_CLOSE</tt> (<tt>13</tt>) The user attempted to close the program window.<br \>
+<li> <tt>EVENT_MOUSE_HWHEEL</tt> (<tt>14</tt>) The horizontal mouse wheel was used; the new horizontal wheel position is returned into the <tt>.w</tt> field. (Note: currently implemented on Windows only)<br \>
+<br \>
+<br \>
+</ul>The <tt>fbgfx.bi</tt> header file contains a definition of the <tt>EVENT</tt> user data type.<br \>
+</div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
+<ul><li> In <i><a href="CompilerDialects.html">lang fb</a></i>, the structure and constants are stored in the <tt>FB</tt> <tt><a href="KeyPgNamespace.html">Namespace</a></tt>.<br \>
+<br \>
+<br \>
+</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> New to FreeBASIC<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgScreenEvent.html">ScreenEvent</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

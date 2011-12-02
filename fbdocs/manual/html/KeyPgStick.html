@@ -1,0 +1,86 @@
+<html>
+<head>
+<title>Stick</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Stick</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Reads axis position from attached gaming devices<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgFunction.html">Function</a> <b>Stick</b> ( <a href="KeyPgByval.html">ByVal</a> <i>axis</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a> ) <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a><br \>
+</tt><br \>
+</div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
+<i>result</i> = <b>Stick</b>( <i>axis</i> )<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+<tt><i>axis</i></tt><br \>
+<div class="fb_indent">the axis number to query for position<br \>
+<br \>
+</div></div><div class="fb_sect_title">Return Value</div><div class="fb_sect_cont"><br \>
+Returns a number between 1 and 200 for specified <tt><i>axis</i></tt>, otherwise zero (0), if the device is not attached.<br \>
+<br \>
+</div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+<tt><b>Stick</b></tt> will retrieve the axis position for the first and second axes on the first and second gaming devices.  <tt><i>axis</i></tt> must be a number between 0 and 3 having the following meaning:<br \>
+<br \>
+<div class="fb_table"><table><tr><td>Axis</td><td>Returns</td></tr><tr><td>0</td><td>X position of gaming device A</td></tr><tr><td>1</td><td>Y position of gaming device A when STICK(0) was called</td></tr><tr><td>2</td><td>X position of gaming device B when STICK(0) was called</td></tr><tr><td>3</td><td>Y position of gaming device B when STICK(0) was called</td></tr></table></div><br \>
+<br \>
+<tt><b>Stick(0)</b></tt> must first be called to obtain the positions for the other axes.<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="com">''&nbsp;Compile&nbsp;with&nbsp;-lang&nbsp;qb</span><br />
+<br />
+<span class="com">'$lang:&nbsp;"qb"</span><br />
+<br />
+<span class="key">Screen</span>&nbsp;<span class="num">12</span><br />
+<br />
+<span class="key">Do</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Locate</span>&nbsp;<span class="num">1</span><span class="oth">,</span>&nbsp;<span class="num">1</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"Joystick&nbsp;A-X&nbsp;position&nbsp;:&nbsp;"</span><span class="oth">;</span>&nbsp;<span class="key">Stick</span><span class="oth">(</span><span class="num">0</span><span class="oth">);</span>&nbsp;<span class="quo">"&nbsp;&nbsp;&nbsp;"</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"Joystick&nbsp;A-Y&nbsp;position&nbsp;:&nbsp;"</span><span class="oth">;</span>&nbsp;<span class="key">Stick</span><span class="oth">(</span><span class="num">1</span><span class="oth">);</span>&nbsp;<span class="quo">"&nbsp;&nbsp;&nbsp;"</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"Joystick&nbsp;B-X&nbsp;position&nbsp;:&nbsp;"</span><span class="oth">;</span>&nbsp;<span class="key">Stick</span><span class="oth">(</span><span class="num">2</span><span class="oth">);</span>&nbsp;<span class="quo">"&nbsp;&nbsp;&nbsp;"</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"Joystick&nbsp;B-Y&nbsp;position&nbsp;:&nbsp;"</span><span class="oth">;</span>&nbsp;<span class="key">Stick</span><span class="oth">(</span><span class="num">3</span><span class="oth">);</span>&nbsp;<span class="quo">"&nbsp;&nbsp;&nbsp;"</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"Button&nbsp;A1&nbsp;was&nbsp;pressed&nbsp;:&nbsp;"</span><span class="oth">;</span>&nbsp;<span class="key">Strig</span><span class="oth">(</span><span class="num">0</span><span class="oth">);</span>&nbsp;<span class="quo">"&nbsp;&nbsp;"</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"Button&nbsp;A1&nbsp;is&nbsp;pressed&nbsp;&nbsp;:&nbsp;"</span><span class="oth">;</span>&nbsp;<span class="key">Strig</span><span class="oth">(</span><span class="num">1</span><span class="oth">);</span>&nbsp;<span class="quo">"&nbsp;&nbsp;"</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"Button&nbsp;B1&nbsp;was&nbsp;pressed&nbsp;:&nbsp;"</span><span class="oth">;</span>&nbsp;<span class="key">Strig</span><span class="oth">(</span><span class="num">2</span><span class="oth">);</span>&nbsp;<span class="quo">"&nbsp;&nbsp;"</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"Button&nbsp;B1&nbsp;is&nbsp;pressed&nbsp;&nbsp;:&nbsp;"</span><span class="oth">;</span>&nbsp;<span class="key">Strig</span><span class="oth">(</span><span class="num">3</span><span class="oth">);</span>&nbsp;<span class="quo">"&nbsp;&nbsp;"</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"Button&nbsp;A2&nbsp;was&nbsp;pressed&nbsp;:&nbsp;"</span><span class="oth">;</span>&nbsp;<span class="key">Strig</span><span class="oth">(</span><span class="num">4</span><span class="oth">);</span>&nbsp;<span class="quo">"&nbsp;&nbsp;"</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"Button&nbsp;A2&nbsp;is&nbsp;pressed&nbsp;&nbsp;:&nbsp;"</span><span class="oth">;</span>&nbsp;<span class="key">Strig</span><span class="oth">(</span><span class="num">5</span><span class="oth">);</span>&nbsp;<span class="quo">"&nbsp;&nbsp;"</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"Button&nbsp;B2&nbsp;was&nbsp;pressed&nbsp;:&nbsp;"</span><span class="oth">;</span>&nbsp;<span class="key">Strig</span><span class="oth">(</span><span class="num">6</span><span class="oth">);</span>&nbsp;<span class="quo">"&nbsp;&nbsp;"</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"Button&nbsp;B2&nbsp;is&nbsp;pressed&nbsp;&nbsp;:&nbsp;"</span><span class="oth">;</span>&nbsp;<span class="key">Strig</span><span class="oth">(</span><span class="num">7</span><span class="oth">);</span>&nbsp;<span class="quo">"&nbsp;&nbsp;"</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"Press&nbsp;ESC&nbsp;to&nbsp;Quit"</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">If</span>&nbsp;<span class="key">Inkey$</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">Chr$</span><span class="oth">(</span><span class="num">27</span><span class="oth">)</span>&nbsp;<span class="key">Then</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Exit</span>&nbsp;<span class="key">Do</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">End</span>&nbsp;<span class="key">If</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Sleep</span>&nbsp;<span class="num">1</span><br />
+<br />
+<span class="key">Loop</span><br />
+</div></tt><br />
+<br \>
+</div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
+<ul><li> Only available in the <i><a href="CompilerOptlang.html">-lang qb</a></i> dialect.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> None<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgGetjoystick.html">GetJoystick</a></tt><br \>
+<li> <tt><a href="KeyPgStrig.html">Strig</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

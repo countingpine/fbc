@@ -1,0 +1,170 @@
+<html>
+<head>
+<title>GFX_NULL</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">GFX_NULL</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Using the <tt>GFX_NULL</tt> driver in Windows<br \>
+<br \>
+<div class="fb_indent">The client area of the window is updated using GfxLib. Menus, toolbars or dialogs can be added to the window using normal Win API calls.<br \>
+<br \>
+</div><tt><div class="freebasic">
+<span class="com">''&nbsp;Example&nbsp;of&nbsp;use&nbsp;of&nbsp;the&nbsp;GFX_NULL&nbsp;driver&nbsp;in&nbsp;windows</span><br />
+<span class="com">''&nbsp;The&nbsp;GfxLib&nbsp;is&nbsp;set&nbsp;up&nbsp;in&nbsp;the&nbsp;ON_Create&nbsp;sub</span><br />
+<span class="com">''&nbsp;The&nbsp;GFXLib&nbsp;buffer&nbsp;is&nbsp;drawn&nbsp;&nbsp;to&nbsp;screen&nbsp;in&nbsp;th&nbsp;On_Paint&nbsp;Sub</span><br />
+<span class="com">''&nbsp;The&nbsp;GfXLib&nbsp;is&nbsp;updated&nbsp;in&nbsp;the&nbsp;event&nbsp;loop</span><br />
+<br />
+<span class="def">#include&nbsp;"fbgfx.bi"<br />
+#include&nbsp;once&nbsp;"windows.bi"<br />
+</span><br />
+<span class="key">Using</span>&nbsp;<span class="wrd">fb</span><br />
+<br />
+<span class="key">Dim</span>&nbsp;<span class="key">Shared</span>&nbsp;<span class="wrd">bmi</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">bitmapv4header</span><br />
+<span class="key">Dim</span>&nbsp;<span class="key">Shared</span>&nbsp;<span class="wrd">mywin</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">rect</span><br />
+<br />
+<span class="com">''</span><br />
+<span class="com">''--------------------------------------------------------------------------</span><br />
+<span class="key">Function</span>&nbsp;<span class="wrd">on_paint</span><span class="oth">(</span><span class="key">ByVal</span>&nbsp;<span class="wrd">hwnd</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">HWND</span><span class="oth">,</span><span class="key">ByVal</span>&nbsp;<span class="wrd">wparam</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">WPARAM</span><span class="oth">,</span><span class="key">ByVal</span>&nbsp;<span class="wrd">lparam</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">LPARAM</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="wrd">rct</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">RECT</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="wrd">pnt</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">PAINTSTRUCT</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="wrd">hDC</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">HDC</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">'draw&nbsp;the&nbsp;gfx&nbsp;buffer&nbsp;to&nbsp;screen</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">hDC</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">BeginPaint</span><span class="oth">(</span><span class="wrd">hWnd</span><span class="oth">,</span>&nbsp;<span class="oth">@</span><span class="wrd">pnt</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">GetClientRect</span><span class="oth">(</span>&nbsp;<span class="wrd">hWnd</span><span class="oth">,</span>&nbsp;<span class="oth">@</span><span class="wrd">rct</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">With</span>&nbsp;<span class="wrd">rct</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">StretchDIBits</span>&nbsp;<span class="wrd">hDC</span><span class="oth">,</span>&nbsp;<span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">0</span><span class="oth">,.</span><span class="key">Right</span><span class="oth">-.</span><span class="key">Left</span><span class="oth">+</span><span class="num">1</span><span class="oth">,.</span><span class="wrd">bottom</span><span class="oth">-.</span><span class="wrd">top</span><span class="oth">+</span><span class="num">1</span><span class="oth">,</span>&nbsp;<span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">0</span><span class="oth">,</span>&nbsp;<span class="oth">.</span><span class="key">Right</span><span class="oth">-.</span><span class="key">Left</span><span class="oth">+</span><span class="num">1</span><span class="oth">,</span><span class="wrd">_</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">.</span><span class="wrd">bottom</span><span class="oth">-.</span><span class="wrd">top</span><span class="oth">+</span><span class="num">1</span><span class="oth">,</span><span class="key">ScreenPtr</span><span class="oth">,</span><span class="key">CPtr</span><span class="oth">(</span><span class="wrd">bitmapinfo</span>&nbsp;<span class="key">Ptr</span><span class="oth">,</span>&nbsp;<span class="oth">@</span><span class="wrd">bmi</span><span class="oth">),</span>&nbsp;<span class="wrd">DIB_RGB_COLORS</span><span class="oth">,</span>&nbsp;<span class="wrd">SRCCOPY</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">End</span>&nbsp;<span class="key">With</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">EndPaint</span>&nbsp;<span class="wrd">hWnd</span><span class="oth">,</span>&nbsp;<span class="oth">@</span><span class="wrd">pnt</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Function</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span><br />
+<br />
+<span class="key">End</span>&nbsp;<span class="key">Function</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+<br />
+<span class="com">''</span><br />
+<span class="com">''---------------------------------------------------------------------------</span><br />
+<span class="key">Function</span>&nbsp;<span class="wrd">on_Create</span><span class="oth">(</span><span class="key">ByVal</span>&nbsp;<span class="wrd">hwnd</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">HWND</span><span class="oth">,</span><span class="key">ByVal</span>&nbsp;<span class="wrd">wparam</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">WPARAM</span><span class="oth">,</span><span class="key">ByVal</span>&nbsp;<span class="wrd">lparam</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">LPARAM</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="wrd">rct</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">RECT</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">'set&nbsp;a&nbsp;gfxscreen&nbsp;of&nbsp;the&nbsp;size&nbsp;of&nbsp;the&nbsp;client&nbsp;area</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">GetClientRect</span><span class="oth">(</span>&nbsp;<span class="wrd">hWnd</span><span class="oth">,</span>&nbsp;<span class="oth">@</span><span class="wrd">mywin</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">ScreenRes</span>&nbsp;<span class="wrd">mywin.right</span><span class="oth">+</span><span class="num">1</span><span class="oth">,</span><span class="wrd">mywin.bottom</span><span class="oth">+</span><span class="num">1</span><span class="oth">,</span>&nbsp;<span class="num">32</span><span class="oth">,</span>&nbsp;<span class="num">1</span><span class="oth">,</span>&nbsp;<span class="wrd">GFX_NULL</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">'and&nbsp;create&nbsp;a&nbsp;bmp&nbsp;header,required&nbsp;to&nbsp;paint&nbsp;it&nbsp;yo&nbsp;screen</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">With</span>&nbsp;<span class="wrd">bmi</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">.</span><span class="wrd">bV4Size</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">Len</span><span class="oth">(</span><span class="wrd">BITMAPV4HEADER</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">.</span><span class="wrd">bv4width</span><span class="oth">=</span><span class="wrd">mywin.right</span><span class="oth">+</span><span class="num">1</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">.</span><span class="wrd">bv4height</span><span class="oth">=-(</span><span class="wrd">mywin.bottom</span><span class="oth">+</span><span class="num">1</span><span class="oth">)</span>&nbsp;&nbsp;&nbsp;<span class="com">'negative&nbsp;value=&gt;top&nbsp;to&nbsp;bottom&nbsp;bmp</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">'(standard&nbsp;BMP's&nbsp;are&nbsp;bottom&nbsp;to&nbsp;top)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">.</span><span class="wrd">bv4planes</span><span class="oth">=</span>&nbsp;&nbsp;<span class="num">1</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">.</span><span class="wrd">bv4bitcount</span><span class="oth">=</span><span class="num">32</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">.</span><span class="wrd">bv4v4compression</span><span class="oth">=</span><span class="num">0</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">.</span><span class="wrd">bv4sizeimage</span><span class="oth">=</span><span class="wrd">mywin.right</span><span class="oth">+</span><span class="num">1</span><span class="oth">*</span><span class="wrd">mywin.bottom</span><span class="oth">+</span><span class="num">1</span><span class="oth">*</span><span class="num">4</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">.</span><span class="wrd">bV4RedMask</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">&amp;h0F00</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">.</span><span class="wrd">bV4GreenMask</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">&amp;h00F0</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">.</span><span class="wrd">bV4BlueMask</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">&amp;h000F</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">.</span><span class="wrd">bV4AlphaMask</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">&amp;hF000</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">End</span>&nbsp;<span class="key">With</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Function</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span><br />
+<br />
+<span class="key">End</span>&nbsp;<span class="key">Function</span><br />
+<br />
+<span class="com">''</span><br />
+<span class="com">''---------------------------------------------------------------------------</span><br />
+<span class="key">Function</span>&nbsp;<span class="wrd">on_Destroy</span><span class="oth">(</span><span class="key">ByVal</span>&nbsp;<span class="wrd">hwnd</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">HWND</span><span class="oth">,</span><span class="key">ByVal</span>&nbsp;<span class="wrd">wparam</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">WPARAM</span><span class="oth">,</span><span class="key">ByVal</span>&nbsp;<span class="wrd">lparam</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">LPARAM</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">'clear&nbsp;arrays....</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">PostQuitMessage</span><span class="oth">(</span>&nbsp;<span class="num">0</span>&nbsp;<span class="oth">)</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Function</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span><br />
+<br />
+<span class="key">End</span>&nbsp;<span class="key">Function</span><br />
+<br />
+<span class="com">''</span><br />
+<span class="com">''----------------------------------------------------------------------------</span><br />
+<span class="key">Function</span>&nbsp;<span class="wrd">WndProc</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="key">ByVal</span>&nbsp;<span class="wrd">hWnd</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">HWND</span><span class="oth">,</span><span class="key">ByVal</span>&nbsp;<span class="wrd">message</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">UINT</span><span class="oth">,</span>&nbsp;<span class="wrd">_</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">ByVal</span>&nbsp;<span class="wrd">wParam</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">WPARAM</span><span class="oth">,</span><span class="key">ByVal</span>&nbsp;<span class="wrd">lParam</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">LPARAM</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">LRESULT</span><br />
+&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Function</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Select</span>&nbsp;<span class="key">Case</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Const</span>&nbsp;&nbsp;<span class="wrd">message</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Case</span>&nbsp;<span class="wrd">WM_CREATE</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Function</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">On_create</span><span class="oth">(</span><span class="wrd">hwnd</span><span class="oth">,</span><span class="wrd">wparam</span><span class="oth">,</span><span class="wrd">lparam</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Case</span>&nbsp;<span class="wrd">WM_PAINT</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Function</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">On_paint</span><span class="oth">(</span><span class="wrd">hwnd</span><span class="oth">,</span><span class="wrd">wparam</span><span class="oth">,</span><span class="wrd">lparam</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Case</span>&nbsp;<span class="wrd">WM_DESTROY</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Function</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">On_destroy</span><span class="oth">(</span><span class="wrd">hwnd</span><span class="oth">,</span><span class="wrd">wparam</span><span class="oth">,</span><span class="wrd">lparam</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Case</span>&nbsp;<span class="key">Else</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Function</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">DefWindowProc</span><span class="oth">(</span>&nbsp;<span class="wrd">hWnd</span><span class="oth">,</span>&nbsp;<span class="wrd">message</span><span class="oth">,</span>&nbsp;<span class="wrd">wParam</span><span class="oth">,</span>&nbsp;<span class="wrd">lParam</span>&nbsp;<span class="oth">)</span>&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">End</span>&nbsp;<span class="key">Select</span><br />
+<br />
+<span class="key">End</span>&nbsp;<span class="key">Function</span><br />
+<br />
+<span class="com">''</span><br />
+<span class="com">''------------------------------------------------------------------------------</span><br />
+<span class="com">''main&nbsp;program&nbsp;create&nbsp;window&nbsp;+&nbsp;event&nbsp;loop</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="wrd">wMsg</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">MSG</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="wrd">wcls</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">WNDCLASS</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="wrd">szAppName</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">ZString</span>&nbsp;<span class="oth">*</span>&nbsp;<span class="num">30</span>&nbsp;<span class="oth">=&gt;</span>&nbsp;<span class="quo">"Random&nbsp;Rectangles"</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="wrd">hWnd</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">HWND</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="wrd">i</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">With</span>&nbsp;<span class="wrd">wcls</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">.</span><span class="wrd">style</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">CS_HREDRAW</span>&nbsp;<span class="key">Or</span>&nbsp;<span class="wrd">CS_VREDRAW</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">.</span><span class="wrd">lpfnWndProc</span>&nbsp;&nbsp;&nbsp;<span class="oth">=</span>&nbsp;<span class="oth">@</span><span class="wrd">WndProc</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">.</span><span class="wrd">cbClsExtra</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">.</span><span class="wrd">cbWndExtra</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">.</span><span class="wrd">hInstance</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">GetModuleHandle</span><span class="oth">(</span>&nbsp;<span class="wrd">null</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">.</span><span class="wrd">hIcon</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">LoadIcon</span><span class="oth">(</span>&nbsp;<span class="wrd">NULL</span><span class="oth">,</span>&nbsp;<span class="wrd">IDI_APPLICATION</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">.</span><span class="wrd">hCursor</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">LoadCursor</span><span class="oth">(</span>&nbsp;<span class="wrd">NULL</span><span class="oth">,</span>&nbsp;<span class="wrd">IDC_ARROW</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">.</span><span class="wrd">hbrBackground</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">GetStockObject</span><span class="oth">(</span><span class="wrd">WHITE_BRUSH</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">.</span><span class="wrd">lpszMenuName</span>&nbsp;&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">NULL</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">.</span><span class="wrd">lpszClassName</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="oth">@</span><span class="wrd">szAppName</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">End</span>&nbsp;<span class="key">With</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">If</span><span class="oth">(</span>&nbsp;<span class="wrd">RegisterClass</span><span class="oth">(</span>&nbsp;<span class="oth">@</span><span class="wrd">wcls</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">FALSE</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="key">Then</span>&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">End</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">End</span>&nbsp;<span class="key">If</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">'make&nbsp;a&nbsp;non-resizable&nbsp;screen</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">hWnd</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">CreateWindowEx</span><span class="oth">(</span>&nbsp;<span class="num">0</span><span class="oth">,</span><span class="wrd">szAppName</span><span class="oth">,</span><span class="quo">"Example&nbsp;of&nbsp;GFX_NULL"</span><span class="oth">,</span><span class="wrd">_</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">WS_OVERLAPPEDWINDOW</span>&nbsp;<span class="key">And</span>&nbsp;<span class="key">Not</span>&nbsp;<span class="oth">(</span><span class="wrd">WS_sizebox</span>&nbsp;<span class="key">Or</span>&nbsp;<span class="wrd">ws_maximizebox</span><span class="oth">),</span><span class="wrd">_</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">CW_USEDEFAULT</span><span class="oth">,</span><span class="wrd">CW_USEDEFAULT</span><span class="oth">,</span><span class="wrd">CW_USEDEFAULT</span><span class="oth">,</span>&nbsp;<span class="wrd">CW_USEDEFAULT</span><span class="oth">,</span>&nbsp;<span class="wrd">_</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">NULL</span><span class="oth">,</span><span class="wrd">NULL</span><span class="oth">,</span>&nbsp;<span class="wrd">wcls.hinstance</span><span class="oth">,</span><span class="wrd">NULL</span>&nbsp;<span class="oth">)</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">ShowWindow</span><span class="oth">(</span>&nbsp;<span class="wrd">hWnd</span><span class="oth">,</span>&nbsp;<span class="wrd">SW_NORMAL</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">UpdateWindow</span><span class="oth">(</span>&nbsp;<span class="wrd">hWnd</span>&nbsp;<span class="oth">)</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">While</span>&nbsp;<span class="num">1</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">If</span>&nbsp;<span class="wrd">PeekMessage</span><span class="oth">(</span>&nbsp;<span class="oth">@</span><span class="wrd">wMsg</span><span class="oth">,</span>&nbsp;<span class="wrd">NULL</span><span class="oth">,</span>&nbsp;<span class="num">0</span><span class="oth">,</span><span class="num">0</span><span class="oth">,</span>&nbsp;<span class="wrd">PM_Remove</span><span class="oth">)</span>&nbsp;<span class="key">Then</span>&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">If</span>&nbsp;<span class="wrd">wmsg.message</span><span class="oth">=</span><span class="wrd">WM_QUIT</span>&nbsp;<span class="key">Then</span>&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Exit</span>&nbsp;<span class="key">While</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">End</span>&nbsp;<span class="key">If</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">TranslateMessage</span><span class="oth">(</span>&nbsp;<span class="oth">@</span><span class="wrd">wMsg</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">DispatchMessage</span><span class="oth">(</span>&nbsp;<span class="oth">@</span><span class="wrd">wMsg</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Else</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">'update&nbsp;the&nbsp;gfx&nbsp;buffer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Line</span>&nbsp;<span class="oth">(</span><span class="key">Rnd</span><span class="oth">*</span><span class="wrd">mywin.right</span><span class="oth">,</span><span class="key">Rnd</span><span class="oth">*</span><span class="wrd">mywin.bottom</span><span class="oth">)-(</span><span class="key">Rnd</span><span class="oth">*</span><span class="wrd">mywin.right</span><span class="oth">,</span><span class="key">Rnd</span><span class="oth">*</span><span class="wrd">mywin.bottom</span><span class="oth">),</span><span class="wrd">_</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">RGB</span><span class="oth">(</span><span class="key">Rnd</span><span class="oth">*</span><span class="num">255</span><span class="oth">,</span><span class="key">Rnd</span><span class="oth">*</span><span class="num">255</span><span class="oth">,</span><span class="key">Rnd</span><span class="oth">*</span><span class="num">255</span><span class="oth">),</span><span class="wrd">bf</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">redrawwindow</span>&nbsp;<span class="oth">(</span><span class="wrd">hwnd</span><span class="oth">,</span><span class="num">0</span><span class="oth">,</span><span class="num">0</span><span class="oth">,</span><span class="wrd">rdw_invalidate</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">End</span>&nbsp;<span class="key">If</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Wend</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">End</span>&nbsp;<span class="wrd">wMsg.wparam</span>&nbsp;<br />
+</div></tt><br />
+<br \>
+
+</div>
+</div> 
+</div> 
+</body>
+</html>

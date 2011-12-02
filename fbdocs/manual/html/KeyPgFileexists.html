@@ -1,0 +1,72 @@
+<html>
+<head>
+<title>FileExists</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">FileExists</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Tests the existence of a file<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgFunction.html">Function</a> <b>FileExists</b> ( <a href="KeyPgByval.html">ByVal</a> <i>filename</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgZstring.html">ZString</a> <a href="KeyPgPtr.html">Ptr</a> ) <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a><br \>
+</tt><br \>
+</div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
+#include "file.bi"<br \>
+<i>result</i> = <b>FileExists</b>( <i>filename</i> )<br \>
+</tt><br \>
+<i>or</i><br \>
+<tt><br \>
+#include "vbcompat.bi"<br \>
+<i>result</i> = <b>FileExists</b>( <i>filename</i> )<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+<tt><i>filename</i></tt><br \>
+<div class="fb_indent">Filename to test for existence.<br \>
+<br \>
+</div></div><div class="fb_sect_title">Return Value</div><div class="fb_sect_cont"><br \>
+Returns non-zero (<tt>-1</tt>) if the file exists, otherwise returns zero (<tt>0</tt>).<br \>
+<br \>
+</div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+<tt><b>FileExists</b></tt> tests for the existence of a file.<br \>
+Internally, it may issue an Open() and a Close() function, which may have consequences - eg, any existing <tt><a href="KeyPgLock.html">Lock</a></tt>(s) on the file may be released.<br \>
+Depending on the exact requirements, alternative methods of checking for file existence may be to use the <tt><a href="KeyPgDir.html">Dir</a>()</tt> function (being careful of attributes and ensuring the path doesn't contain wildcards), or to try <tt><a href="KeyPgOpen.html">Open</a></tt>ing the file and checking the return value for success.<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="def">#include&nbsp;"vbcompat.bi"<br />
+</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">filename</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span><br />
+<br />
+<span class="key">Print</span>&nbsp;<span class="quo">"Enter&nbsp;a&nbsp;filename:&nbsp;"</span><br />
+<span class="key">Line</span>&nbsp;<span class="key">Input</span>&nbsp;<span class="wrd">filename</span><br />
+<br />
+<span class="key">If</span>&nbsp;<span class="key">FileExists</span><span class="oth">(</span>&nbsp;<span class="wrd">filename</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="key">Then</span><br />
+&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"File&nbsp;found:&nbsp;"</span>&nbsp;<span class="oth">&amp;</span>&nbsp;<span class="wrd">filename</span><br />
+<span class="key">Else</span><br />
+&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"File&nbsp;not&nbsp;found:&nbsp;"</span>&nbsp;<span class="oth">&amp;</span>&nbsp;<span class="wrd">filename</span><br />
+<span class="key">End</span>&nbsp;<span class="key">If</span><br />
+</div></tt><br />
+<br \>
+</div><div class="fb_sect_title">Platform Differences</div><div class="fb_sect_cont"><br \>
+<ul><li> Linux requires the <tt><i>filename</i></tt> case matches the real name of the file. Windows and DOS are case insensitive. <br \>
+<li> Path separators in Linux are forward slashes <tt>/</tt>. Windows uses backward slashes <tt>\</tt> but it allows for forward slashes.  DOS uses backward <tt>\</tt> slashes. <br \>
+<br \>
+<br \>
+</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> New to FreeBASIC<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgDir.html">Dir</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

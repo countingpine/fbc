@@ -1,0 +1,100 @@
+<html>
+<head>
+<title>To</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">To</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Statement modifier to specify a range.<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+FOR <i>iterator</i> <i>intial_value</i> TO <i>ending_value</i><br \>
+<div class="fb_indent"><i>statement(s)</i>.<br \>
+</div>NEXT [ <i>iterator</i> ]<br \>
+<i>or</i><br \>
+SELECT CASE <i>case_comparison_value</i><br \>
+CASE <i>lower_bound</i> TO <i>upper_bound</i><br \>
+<div class="fb_indent"><i>statement(s)</i>.<br \>
+</div>END SELECT<br \>
+<i>or</i><br \>
+DIM <i>variable_identifier</i>( <i>lower_bound</i> TO <i>upper_bound</i> ) AS <i>type_specifier</i><br \>
+</tt><br \>
+</div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+The TO keyword is used to define a certain numerical range. This keyword is valid only if used with <a href="KeyPgFornext.html">For ... Next</a>, <a href="KeyPgSelectcase.html">Select / Case</a> and <a href="KeyPgDim.html">Dim</a> statements.<br \>
+<br \>
+In the first syntax, the TO keyword defines the initial and ending values of the iterator in a FOR statement.<br \>
+<br \>
+In the second syntax, the TO keyword defines lower and upper bounds for CASE comparisons.<br \>
+<br \>
+In the third syntax, the TO keyword defines the array bounds in a DIM statement<br \>
+<br \>
+For more information, see <a href="KeyPgFornext.html">For...Next</a>, <a href="KeyPgDim.html">Dim</a> and <a href="KeyPgSelectcase.html">Select Case</a>.<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="com">''&nbsp;this&nbsp;program&nbsp;uses&nbsp;bound&nbsp;variables&nbsp;along&nbsp;with&nbsp;the&nbsp;TO&nbsp;keyword&nbsp;to&nbsp;create&nbsp;an&nbsp;array,&nbsp;store&nbsp;random</span><br />
+<span class="com">''&nbsp;temperatures&nbsp;inside&nbsp;the&nbsp;array,&nbsp;and&nbsp;to&nbsp;determine&nbsp;output&nbsp;based&nbsp;upon&nbsp;the&nbsp;value&nbsp;of&nbsp;the&nbsp;temperatures</span><br />
+<span class="key">Randomize</span>&nbsp;<span class="key">Timer</span><br />
+<br />
+<span class="com">''&nbsp;define&nbsp;minimum&nbsp;and&nbsp;maximum&nbsp;number&nbsp;of&nbsp;temperatures&nbsp;we&nbsp;will&nbsp;create</span><br />
+<span class="key">Const</span>&nbsp;<span class="wrd">minimum_temp_count</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">1</span><br />
+<span class="key">Const</span>&nbsp;<span class="wrd">maximum_temp_count</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">10</span><br />
+<br />
+<span class="com">''&nbsp;define&nbsp;the&nbsp;range&nbsp;of&nbsp;temperatures&nbsp;zones&nbsp;in&nbsp;which&nbsp;bacteria&nbsp;breed&nbsp;rapidly&nbsp;(in&nbsp;degrees)</span><br />
+<span class="key">Const</span>&nbsp;<span class="wrd">min_low_danger</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">40</span><br />
+<span class="key">Const</span>&nbsp;<span class="wrd">max_low_danger</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">69</span><br />
+<span class="key">Const</span>&nbsp;<span class="wrd">min_medium_danger</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">70</span><br />
+<span class="key">Const</span>&nbsp;<span class="wrd">max_medium_danger</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">99</span><br />
+<span class="key">Const</span>&nbsp;<span class="wrd">min_high_danger</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">100</span><br />
+<span class="key">Const</span>&nbsp;<span class="wrd">max_high_danger</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">130</span><br />
+<br />
+<span class="com">''&nbsp;define&nbsp;array&nbsp;to&nbsp;hold&nbsp;temperatures&nbsp;using&nbsp;our&nbsp;min/max&nbsp;temp&nbsp;count&nbsp;bounds</span><br />
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="wrd">array</span><span class="oth">(</span>&nbsp;<span class="wrd">minimum_temp_count</span>&nbsp;<span class="key">To</span>&nbsp;<span class="wrd">maximum_temp_count</span>&nbsp;<span class="oth">)</span><br />
+<br />
+<span class="com">''&nbsp;declare&nbsp;a&nbsp;for&nbsp;loop&nbsp;that&nbsp;iterates&nbsp;from&nbsp;minimum&nbsp;to&nbsp;maximum&nbsp;temp&nbsp;count</span><br />
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="wrd">it</span><br />
+<span class="key">For</span>&nbsp;<span class="wrd">it</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">minimum_temp_count</span>&nbsp;<span class="key">To</span>&nbsp;<span class="wrd">maximum_temp_count</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;<span class="wrd">array</span><span class="oth">(</span>&nbsp;<span class="wrd">it</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">Int</span><span class="oth">(</span>&nbsp;<span class="key">Rnd</span><span class="oth">(</span>&nbsp;<span class="num">1</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="oth">*</span>&nbsp;<span class="num">200</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="num">1</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;display&nbsp;a&nbsp;message&nbsp;based&nbsp;on&nbsp;temperature&nbsp;using&nbsp;our&nbsp;min/max&nbsp;danger&nbsp;zone&nbsp;bounds</span><br />
+&nbsp;&nbsp;&nbsp;<span class="key">Select</span>&nbsp;<span class="key">Case</span>&nbsp;<span class="wrd">array</span><span class="oth">(</span>&nbsp;<span class="wrd">it</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Case</span>&nbsp;<span class="wrd">min_low_danger</span>&nbsp;<span class="key">To</span>&nbsp;<span class="wrd">max_low_danger</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Color</span>&nbsp;<span class="num">11</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"Temperature"</span>&nbsp;<span class="oth">;</span>&nbsp;<span class="wrd">it</span>&nbsp;<span class="oth">;</span>&nbsp;<span class="quo">"&nbsp;is&nbsp;in&nbsp;the&nbsp;low&nbsp;danger&nbsp;zone&nbsp;at"</span>&nbsp;<span class="oth">;</span>&nbsp;<span class="wrd">array</span><span class="oth">(</span>&nbsp;<span class="wrd">it</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="oth">;</span>&nbsp;<span class="quo">"&nbsp;degrees!"</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Case</span>&nbsp;<span class="wrd">min_medium_danger</span>&nbsp;<span class="key">To</span>&nbsp;<span class="wrd">max_medium_danger</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Color</span>&nbsp;<span class="num">14</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"Temperature"</span>&nbsp;<span class="oth">;</span>&nbsp;<span class="wrd">it</span>&nbsp;<span class="oth">;</span>&nbsp;<span class="quo">"&nbsp;is&nbsp;in&nbsp;the&nbsp;medium&nbsp;danger&nbsp;zone&nbsp;at"</span>&nbsp;<span class="oth">;</span>&nbsp;<span class="wrd">array</span><span class="oth">(</span>&nbsp;<span class="wrd">it</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="oth">;</span>&nbsp;<span class="quo">"&nbsp;degrees!"</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Case</span>&nbsp;<span class="wrd">min_high_danger</span>&nbsp;<span class="key">To</span>&nbsp;<span class="wrd">max_high_danger</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Color</span>&nbsp;<span class="num">12</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"Temperature"</span>&nbsp;<span class="oth">;</span>&nbsp;<span class="wrd">it</span>&nbsp;<span class="oth">;</span>&nbsp;<span class="quo">"&nbsp;is&nbsp;in&nbsp;the&nbsp;high&nbsp;danger&nbsp;zone&nbsp;at"</span>&nbsp;<span class="oth">;</span>&nbsp;<span class="wrd">array</span><span class="oth">(</span>&nbsp;<span class="wrd">it</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="oth">;</span>&nbsp;<span class="quo">"&nbsp;degrees!"</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Case</span>&nbsp;<span class="key">Else</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Color</span>&nbsp;<span class="num">3</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"Temperature"</span>&nbsp;<span class="oth">;</span>&nbsp;<span class="wrd">it</span>&nbsp;<span class="oth">;</span>&nbsp;<span class="quo">"&nbsp;is&nbsp;safe&nbsp;at"</span>&nbsp;<span class="oth">;</span>&nbsp;<span class="wrd">array</span><span class="oth">(</span>&nbsp;<span class="wrd">it</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="oth">;</span>&nbsp;<span class="quo">"&nbsp;degrees."</span><br />
+&nbsp;&nbsp;&nbsp;<span class="key">End</span>&nbsp;<span class="key">Select</span><br />
+<br />
+<span class="key">Next</span>&nbsp;<span class="wrd">it</span><br />
+<br />
+<span class="key">Sleep</span><br />
+</div></tt><br />
+<br \>
+</div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> none<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgFornext.html">For...Next</a></tt><br \>
+<li> <tt><a href="KeyPgDim.html">Dim</a></tt><br \>
+<li> <tt><a href="KeyPgSelectcase.html">Select Case</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

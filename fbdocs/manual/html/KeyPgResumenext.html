@@ -1,0 +1,69 @@
+<html>
+<head>
+<title>Resume Next</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Resume Next</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Error handling statement to resume execution after a jump to an error handler<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<b>Resume Next</b><br \>
+</tt><br \>
+</div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+<tt><b>Resume Next</b></tt> is used in the traditional QB error handling mechanism within an error handler (called by <tt><a href="KeyPgOnerror.html">On Error</a></tt>) to return execution to the line after the one that caused the error.  Usually this is used to avoid executing the same line and causing the error again.<br \>
+<br \>
+<tt><b>Resume Next</b></tt> resets the <tt><a href="KeyPgErr.html">Err</a></tt> value to 0<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="com">''&nbsp;Compile&nbsp;with&nbsp;-lang&nbsp;fblite&nbsp;or&nbsp;qb</span><br />
+<br />
+<span class="def">#lang&nbsp;"fblite"<br />
+</span><br />
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Single</span>&nbsp;<span class="wrd">i</span><span class="oth">,</span>&nbsp;<span class="wrd">j</span><br />
+<br />
+<span class="key">On</span>&nbsp;<span class="key">Error</span>&nbsp;<span class="key">Goto</span>&nbsp;<span class="wrd">ErrHandler</span><br />
+<br />
+<span class="wrd">i</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span><br />
+<span class="wrd">j</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">5</span><br />
+<span class="wrd">j</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">1</span>&nbsp;<span class="oth">/</span>&nbsp;<span class="wrd">i</span>&nbsp;<span class="com">'&nbsp;this&nbsp;line&nbsp;causes&nbsp;a&nbsp;divide-by-zero&nbsp;error;&nbsp;execution&nbsp;jumps&nbsp;to&nbsp;ErrHandler&nbsp;label</span><br />
+<br />
+<span class="key">Print</span>&nbsp;<span class="quo">"ending..."</span><br />
+<br />
+<span class="key">End</span>&nbsp;<span class="com">'&nbsp;end&nbsp;the&nbsp;program&nbsp;so&nbsp;that&nbsp;execution&nbsp;does&nbsp;not&nbsp;fall&nbsp;through&nbsp;to&nbsp;the&nbsp;error&nbsp;handler&nbsp;again</span><br />
+<br />
+<span class="wrd">ErrHandler</span><span class="oth">:</span><br />
+<br />
+<span class="key">Resume</span>&nbsp;<span class="key">Next</span>&nbsp;<span class="com">'&nbsp;execution&nbsp;jumps&nbsp;to&nbsp;'Print&nbsp;"ending..."'&nbsp;line,&nbsp;but&nbsp;j&nbsp;is&nbsp;now&nbsp;in&nbsp;an&nbsp;undefined&nbsp;state</span><br />
+</div></tt><br />
+<br \>
+</div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
+<ul><li>  ON ERROR is not supported in the <i><a href="CompilerOptlang.html">-lang fb</a></i> dialect. Statements can be used in its function form to return an error code<br \>
+</ul><tt><div class="freebasic">
+<span class="key">If</span>&nbsp;<span class="key">Open</span><span class="oth">(</span>&nbsp;<span class="quo">"text"</span>&nbsp;<span class="key">For</span>&nbsp;<span class="key">Input</span>&nbsp;<span class="key">As</span>&nbsp;<span class="oth">#</span><span class="num">1</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="oth">&lt;&gt;</span>&nbsp;<span class="num">0</span>&nbsp;<span class="key">Then</span><br />
+&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"Unable&nbsp;to&nbsp;open&nbsp;file"</span><br />
+<span class="key">End</span>&nbsp;<span class="key">If</span><br />
+</div></tt><br />
+ <br \>
+<br \>
+</div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> Must compile with <i><a href="CompilerOptex.html">-ex</a></i> option<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgErr.html">Err</a></tt><br \>
+<li> <tt><a href="KeyPgResume.html">Resume</a></tt><br \>
+<li> <a href="ProPgErrorHandling.html">Error Handling</a><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

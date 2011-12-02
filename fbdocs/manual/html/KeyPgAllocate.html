@@ -1,0 +1,116 @@
+<html>
+<head>
+<title>Allocate</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Allocate</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Allocates a block of memory from the free store<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgFunction.html">Function</a> <b>Allocate</b> <a href="KeyPgCdecl.html">cdecl</a> ( <a href="KeyPgByval.html">ByVal</a> <i>count</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a> ) <a href="KeyPgAs.html">As</a> <a href="KeyPgAny.html">Any</a> <a href="KeyPgPtr.html">Ptr</a><br \>
+</tt><br \>
+</div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
+<i>result</i> = <b>Allocate</b>( <i>count</i> )<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+<tt><i>count</i></tt><br \>
+<div class="fb_indent">The size, in bytes, of the block of memory to allocate.<br \>
+<br \>
+</div></div><div class="fb_sect_title">Return Value</div><div class="fb_sect_cont"><br \>
+If successful, the address of the start of the allocated memory is returned. Otherwise, if the requested block size could not be allocated, or if <tt><i>count</i> &lt; 0</tt>, then the null pointer (<tt>0</tt>) is returned.<br \>
+<br \>
+</div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+Attempts to allocate, or reserve, <tt><i>count</i></tt> number of bytes from the free store (heap). The initial value of newly allocated memory is unspecified. The pointer that is returned is an <a href="KeyPgAny.html">Any</a> <a href="KeyPgPtr.html">Ptr</a> and points to the start of the allocated memory. This pointer is guaranteed to be unique, even if <tt><i>count</i></tt> is zero.<br \>
+<br \>
+Allocated memory must be deallocated, or returned back to the free store, with <tt><a href="KeyPgDeallocate.html">Deallocate</a></tt> when no longer needed. <br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="com">''&nbsp;This&nbsp;program&nbsp;uses&nbsp;the&nbsp;ALLOCATE(...)&nbsp;function&nbsp;to&nbsp;create&nbsp;a&nbsp;buffer&nbsp;of&nbsp;15&nbsp;integers&nbsp;that&nbsp;is</span><br />
+<span class="com">''&nbsp;then&nbsp;filled&nbsp;with&nbsp;the&nbsp;first&nbsp;15&nbsp;numbers&nbsp;of&nbsp;the&nbsp;Fibonacci&nbsp;Sequence,&nbsp;then&nbsp;output&nbsp;to&nbsp;the</span><br />
+<span class="com">''&nbsp;screen.&nbsp;Note&nbsp;the&nbsp;call&nbsp;to&nbsp;DEALLOCATE(...)&nbsp;at&nbsp;the&nbsp;end&nbsp;of&nbsp;the&nbsp;program.</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Const</span>&nbsp;<span class="wrd">integerCount</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">15</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;Try&nbsp;allocating&nbsp;memory&nbsp;for&nbsp;a&nbsp;number&nbsp;of&nbsp;integers.</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="wrd">buffer</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="key">Ptr</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">buffer</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">Allocate</span><span class="oth">(</span><span class="wrd">integerCount</span>&nbsp;<span class="oth">*</span>&nbsp;<span class="key">SizeOf</span><span class="oth">(</span><span class="key">Integer</span><span class="oth">))</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">If</span>&nbsp;<span class="oth">(</span><span class="num">0</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">buffer</span><span class="oth">)</span>&nbsp;<span class="key">Then</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"Error:&nbsp;unable&nbsp;to&nbsp;allocate&nbsp;memory,&nbsp;quitting."</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">End</span>&nbsp;<span class="oth">-</span><span class="num">1</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">End</span>&nbsp;<span class="key">If</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;Prime&nbsp;and&nbsp;fill&nbsp;the&nbsp;memory&nbsp;with&nbsp;the&nbsp;fibonacci&nbsp;sequence.</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">buffer</span><span class="oth">[</span><span class="num">0</span><span class="oth">]</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">buffer</span><span class="oth">[</span><span class="num">1</span><span class="oth">]</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">1</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">For</span>&nbsp;<span class="wrd">i</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">2</span>&nbsp;<span class="key">To</span>&nbsp;<span class="wrd">integerCount</span>&nbsp;<span class="oth">-</span>&nbsp;<span class="num">1</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">buffer</span><span class="oth">[</span><span class="wrd">i</span><span class="oth">]</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">buffer</span><span class="oth">[</span><span class="wrd">i</span>&nbsp;<span class="oth">-</span>&nbsp;<span class="num">1</span><span class="oth">]</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="wrd">buffer</span><span class="oth">[</span><span class="wrd">i</span>&nbsp;<span class="oth">-</span>&nbsp;<span class="num">2</span><span class="oth">]</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Next</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;Display&nbsp;the&nbsp;sequence.</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">For</span>&nbsp;<span class="wrd">i</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span>&nbsp;<span class="key">To</span>&nbsp;<span class="wrd">integerCount</span>&nbsp;<span class="oth">-</span>&nbsp;<span class="num">1</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="wrd">buffer</span><span class="oth">[</span><span class="wrd">i</span><span class="oth">]</span>&nbsp;<span class="oth">;</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Next</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Deallocate</span><span class="oth">(</span><span class="wrd">buffer</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">End</span>&nbsp;<span class="num">0</span><br />
+</div></tt><br />
+Output is:<br \>
+<table class="fb_box"><tr><td><tt> 0 1 1 2 3 5 8 13 21 34 55 89 144 233 377</tt></td></tr></table><div style="clear:both">&nbsp;</div><br \>
+It is important to free allocated memory if it's not going to be used anymore. Unused memory that isn't freed is simply wasting memory, and if the address of that memory is somehow overwritten or forgotten, that memory can never be freed. This condition is known as a memory leak, and should be avoided at all costs. Note that leaked memory is always completely freed when the application terminates, either by an "ordinary" exit or crash, so the leak "persists" only as long as the application runs, nevertheless it's a good habit to free any allocated memory inside your application. The following example demonstrates a function with a memory leak, where the address of allocated memory is lost and isn't and can't be freed anymore. If such a function is called frequently, the total amount of memory wasted can add up quickly.<br \>
+<br \>
+<tt><div class="freebasic">
+<span class="com">''&nbsp;Bad&nbsp;example&nbsp;of&nbsp;Allocate&nbsp;usage,&nbsp;causing&nbsp;memory&nbsp;leaks</span><br />
+<br />
+<span class="key">Sub</span>&nbsp;<span class="wrd">BadAllocateExample</span><span class="oth">()</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="wrd">p</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Byte</span>&nbsp;<span class="key">Ptr</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">p</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">Allocate</span><span class="oth">(</span><span class="num">420</span><span class="oth">)</span>&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;assign&nbsp;pointer&nbsp;to&nbsp;new&nbsp;memory</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">p</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">Allocate</span><span class="oth">(</span><span class="num">420</span><span class="oth">)</span>&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;reassign&nbsp;same&nbsp;pointer&nbsp;to&nbsp;different&nbsp;memory,</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;old&nbsp;address&nbsp;is&nbsp;lost&nbsp;and&nbsp;that&nbsp;memory&nbsp;is&nbsp;leaked</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Deallocate</span><span class="oth">(</span><span class="wrd">p</span><span class="oth">)</span><br />
+<br />
+<span class="key">End</span>&nbsp;<span class="key">Sub</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;Main</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">BadAllocateExample</span><span class="oth">()</span>&nbsp;<span class="com">''&nbsp;Creates&nbsp;a&nbsp;memory&nbsp;leak&nbsp;</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"Memory&nbsp;leak!"</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">BadAllocateExample</span><span class="oth">()</span>&nbsp;<span class="com">''&nbsp;...&nbsp;and&nbsp;another</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"Memory&nbsp;leak!"</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">End</span><br />
+</div></tt><br />
+<br \>
+</td></tr></table></div><div class="fb_sect_title">Platform Differences</div><div class="fb_sect_cont"><br \>
+<ul><li> This procedure is not guaranteed to be thread-safe.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
+<ul><li> Not available in the <i><a href="CompilerOptlang.html">-lang qb</a></i> dialect unless referenced with the alias <tt><b>__Allocate</b></tt> <br \>
+<br \>
+</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> New to FreeBASIC<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgCallocate.html">CAllocate</a></tt><br \>
+<li> <tt><a href="KeyPgReallocate.html">Reallocate</a></tt><br \>
+<li> <tt><a href="KeyPgDeallocate.html">Deallocate</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

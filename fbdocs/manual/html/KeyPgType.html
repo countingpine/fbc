@@ -1,0 +1,176 @@
+<html>
+<head>
+<title>Type</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Type</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Declares a user-defined type.<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<br \>
+<b>Type</b> <i>typename</i><br \>
+<div class="fb_indent"><i>fieldname1</i> <a href="KeyPgAs.html">As</a> <i><a href="DataType.html">DataType</a></i><br \>
+<i>fieldname2</i> <a href="KeyPgAs.html">As</a> <i><a href="DataType.html">DataType</a></i><br \>
+...<br \>
+</div><b>End Type</b><br \>
+<br \>
+<b>Type</b> <i>typename</i> [ <a href="KeyPgField.html">Field</a> = <i>alignment</i> ]<br \>
+<div class="fb_indent">[ <a href="KeyPgVisPrivate.html">Private</a>: ]<br \>
+[ <a href="KeyPgVisPublic.html">Public</a>: ]<br \>
+[ <a href="KeyPgVisProtected.html">Protected</a>: ]<br \>
+<a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgConstructor.html">Constructor</a> [ ( [ <i>parameters</i> ] ) ]<br \>
+<a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgDestructor.html">Destructor</a>  [ () ]<br \>
+<a href="KeyPgDeclare.html">Declare</a> [ <a href="KeyPgStaticMember.html">Static</a> | <a href="KeyPgConstMember.html">Const</a> ] <a href="KeyPgMemberSub.html">Sub</a> <i>fieldname</i> [<i>calling convention specifier</i>] [ <a href="KeyPgAlias.html">Alias</a> <i>external_name</i> ] [ ( [ <i>parameters</i> ] ) ] [ <a href="KeyPgStatic.html">Static</a> ]<br \>
+<a href="KeyPgDeclare.html">Declare</a> [ <a href="KeyPgStaticMember.html">Static</a> | <a href="KeyPgConstMember.html">Const</a> ] <a href="KeyPgMemberFunction.html">Function</a> <i>fieldname</i> [<i>calling convention specifier</i>] [ <a href="KeyPgAlias.html">Alias</a> <i>external_name</i> ] [ ( [ <i>parameters</i> ] ) ] [ <a href="KeyPgAs.html">As</a> <a href="DataType.html">datatype</a> ] [ <a href="KeyPgStatic.html">Static</a> ]<br \>
+<i>fieldname</i> [ ( <i>array subscripts</i> ) | : <i>bits</i> ] <a href="KeyPgAs.html">As</a> <i><a href="DataType.html">DataType</a></i> [ = <i>initializer</i> ]<br \>
+<a href="KeyPgAs.html">As</a> <a href="DataType.html">DataType</a> <i>fieldname</i> [ ( <i>array subscripts</i> ) | : <i>bits</i> ] [ = <i>initializer</i> ], ...<br \>
+<a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgOperator.html">Operator</a> <i>operatorname</i>[ ( [ <i>parameters</i> ] ) ]<br \>
+<a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgProperty.html">Property</a> <i>fieldname</i>[ ( [ <i>parameters</i> ] ) ] [ <a href="KeyPgAs.html">As</a> <a href="DataType.html">datatype</a> ]<br \>
+...<br \>
+</div><b>End Type</b><br \>
+</tt><br \>
+</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+<tt><i>alignment</i></tt><br \>
+<div class="fb_indent">Specifies the byte alignment for data fields.<br \>
+</div><tt><i>fieldname</i></tt><br \>
+<div class="fb_indent">Name of the data field or member procedure.<br \>
+</div><tt><i>external_name</i></tt><br \>
+<div class="fb_indent">Name of field as seen when externally linked.<br \>
+</div><tt><i>parameters</i></tt><br \>
+<div class="fb_indent">The parameters to be passed to a member procedure.<br \>
+</div><tt><i>array subscripts</i></tt><br \>
+<div class="fb_indent">Subscripts to declare a fixed-length array.<br \>
+</div><tt><i>bits</i></tt><br \>
+<div class="fb_indent">Number of bits a data field occupies.<br \>
+</div><tt><i>initializer</i></tt><br \>
+<div class="fb_indent">Default initializer for the data field.<br \>
+</div><tt><i>operatorname</i></tt><br \>
+<div class="fb_indent">The name of the operator to be overloaded.<br \>
+</div><tt><i>calling convention specifier</i></tt><br \>
+<div class="fb_indent">Can be <tt><a href="KeyPgCdecl.html">cdecl</a></tt>, <tt><a href="KeyPgStdcall.html">stdcall</a></tt> or <tt><a href="KeyPgPascal.html">pascal</a></tt>.<br \>
+<br \>
+</div></div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+<tt><b>Type</b></tt> is used to declare custom data types containing one or more bit, scalar, array or other <tt><b>Type</b></tt> fields.<br \>
+<br \>
+Types support member functions including <tt><a href="KeyPgConstructor.html">Constructor</a></tt>, <tt><a href="KeyPgDestructor.html">Destructor</a></tt>, <tt><a href="KeyPgMemberFunction.html">Function</a></tt>, <tt><a href="KeyPgOperator.html">Operator</a></tt>, <tt><a href="KeyPgProperty.html">Property</a></tt> and <tt><a href="KeyPgMemberSub.html">Sub</a></tt>.<br \>
+<br \>
+Fields default to <tt><a href="KeyPgVisPublic.html">Public:</a></tt> member access unless, <tt><a href="KeyPgVisPrivate.html">Private:</a></tt> or <tt><a href="KeyPgVisProtected.html">Protected:</a></tt> is specified.<br \>
+<br \>
+An anonymous <tt><a href="KeyPgUnion.html">Union</a></tt> can be nested in a <tt><b>Type</b></tt> declaration.<br \>
+<br \>
+The optional <tt><a href="KeyPgField.html">Field</a>=<i>number</i></tt> when given will change the default field alignment. <tt><a href="KeyPgField.html">Field</a>=1</tt> will disable any alignment, making the <tt><b>Type</b></tt> contiguous in memory. <br \>
+<br \>
+<tt><b>Type</b></tt> can be used to return a temporary type variable.  See <tt><a href="KeyPgTypeTemp.html">Type()</a></tt>.<br \>
+<br \>
+<tt><b>Type</b></tt> can be used to declare a type definition ( i.e. an alias or alternative name ) for an already declared or yet to be declared type.  See <tt><a href="KeyPgTypeAlias.html">Type (Alias)</a></tt><br \>
+<br \>
+Data fields may have an optional default <tt><i>initializer</i></tt> value.  This default value initializes the data field immediately before any constructor is called.<br \>
+<br \>
+<tt><a href="KeyPgStaticMember.html">Static</a></tt> immediately preceding <tt><a href="KeyPgMemberSub.html">Sub</a></tt> or <tt><a href="KeyPgMemberFunction.html">Function</a></tt> indicates that no hidden <tt><a href="KeyPgThis.html">This</a></tt> parameter is to be passed to the member procedure.<br \>
+<br \>
+<tt><a href="KeyPgConstMember.html">Const</a></tt> immediately preceding <tt><a href="KeyPgMemberSub.html">Sub</a></tt> or <tt><a href="KeyPgMemberFunction.html">Function</a></tt> indicates that the hidden <tt><a href="KeyPgThis.html">This</a></tt> parameter is to be considered read-only.<br \>
+<br \>
+ <b>Warning</b> Special care must be taken when using a user defined type for file I/O.  It is recommended to use <tt>Field = 1</tt> for such cases, and it may be required to read files created by other applications.<br \>
+UDTs that contain pointers to data should not be written to file as-is: when the data is read later, the pointers will almost certainly be invalid, and the data they pointed to will no longer be available.  Instead, custom input/output routines should be used, to save the allocated data in a different format in the file.  This includes UDTs containing variable-length strings.<br \>
+Additionally, reading fixed length strings in UDT's from files is problematic: at present, fixed-length strings contain an extra NULL character on the end.  To preserve alignment the field would need to be declared with one char less than the actual size and accessing the field by its name makes the last character unavailable.  It also means there may be potential problems passing the string to functions that expect the NULL character to be there.<br \>
+A better solution is to use ubyte arrays, this requires a couple of auxiliary functions converting to/from string. See the example.<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+This is an example of a QB-style type, not including procedure definitions<br \>
+<tt><div class="freebasic">
+<span class="key">Type</span>&nbsp;<span class="wrd">clr</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">red</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">UByte</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">green</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">UByte</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">blue</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">UByte</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Type</span><br />
+<br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">c</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">clr</span><br />
+<span class="wrd">c.red</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">255</span><br />
+<span class="wrd">c.green</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">128</span><br />
+<span class="wrd">c.blue</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">64</span><br />
+</div></tt><br />
+<br \>
+And this is an example of a type working as an object:<br \>
+<tt><div class="freebasic">
+<span class="com">''&nbsp;Example&nbsp;showing&nbsp;the&nbsp;problems&nbsp;with&nbsp;fixed&nbsp;length&nbsp;string&nbsp;fields&nbsp;in&nbsp;UDTs</span><br />
+<span class="com">''&nbsp;Suppose&nbsp;we&nbsp;have&nbsp;read&nbsp;a&nbsp;GIF&nbsp;header&nbsp;from&nbsp;a&nbsp;file</span><br />
+<span class="com">''&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;signature&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;width&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;height</span><br />
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">ZString</span><span class="oth">*(</span><span class="num">10</span><span class="oth">+</span><span class="num">1</span><span class="oth">)</span>&nbsp;<span class="wrd">z</span>&nbsp;<span class="oth">=&gt;</span>&nbsp;<span class="quo">"GIF89a"</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="key">MKShort</span><span class="oth">(</span><span class="num">10</span><span class="oth">)</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="key">MKShort</span><span class="oth">(</span><span class="num">11</span><span class="oth">)</span><br />
+<br />
+<span class="key">Print</span>&nbsp;<span class="quo">"Using&nbsp;fixed-length&nbsp;string"</span><br />
+<br />
+<span class="key">Type</span>&nbsp;<span class="wrd">hdr1</span>&nbsp;<span class="key">Field</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">1</span><br />
+&nbsp;&nbsp;&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span><span class="oth">*(</span><span class="num">6</span><span class="oth">-</span><span class="num">1</span><span class="oth">)</span>&nbsp;<span class="wrd">sig</span>&nbsp;<span class="com">/'&nbsp;We&nbsp;have&nbsp;to&nbsp;dimension&nbsp;the&nbsp;string&nbsp;with&nbsp;1&nbsp;char</span><br />
+<span class="com">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'&nbsp;&nbsp;less&nbsp;to&nbsp;avoid&nbsp;misalignments&nbsp;'/</span><br />
+&nbsp;&nbsp;&nbsp;<span class="key">As</span>&nbsp;<span class="key">UShort</span>&nbsp;<span class="wrd">wid</span><span class="oth">,</span>&nbsp;<span class="wrd">hei</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Type</span><br />
+<br />
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">hdr1</span>&nbsp;<span class="key">Ptr</span>&nbsp;<span class="wrd">h1</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">CPtr</span><span class="oth">(</span><span class="wrd">hdr1</span>&nbsp;<span class="key">Ptr</span><span class="oth">,</span>&nbsp;<span class="oth">@</span><span class="wrd">z</span><span class="oth">)</span><br />
+<span class="key">Print</span>&nbsp;<span class="wrd">h1</span><span class="oth">-&gt;</span><span class="wrd">sig</span><span class="oth">,</span>&nbsp;<span class="wrd">h1</span><span class="oth">-&gt;</span><span class="wrd">wid</span><span class="oth">,</span>&nbsp;<span class="wrd">h1</span><span class="oth">-&gt;</span><span class="wrd">hei</span>&nbsp;<span class="com">''&nbsp;Prints&nbsp;GIF89&nbsp;(misses&nbsp;a&nbsp;char!)&nbsp;&nbsp;10&nbsp;&nbsp;11</span><br />
+<br />
+<span class="com">''&nbsp;We&nbsp;can&nbsp;do&nbsp;comparisons&nbsp;only&nbsp;with&nbsp;the&nbsp;5&nbsp;visible&nbsp;chars&nbsp;and&nbsp;creating&nbsp;a&nbsp;temporary&nbsp;string&nbsp;with&nbsp;LEFT</span><br />
+<br />
+<span class="key">If</span>&nbsp;<span class="key">Left</span><span class="oth">(</span><span class="wrd">h1</span><span class="oth">-&gt;</span><span class="wrd">sig</span><span class="oth">,</span>&nbsp;<span class="num">5</span><span class="oth">)</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="quo">"GIF89"</span>&nbsp;<span class="key">Then</span>&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"ok"</span>&nbsp;<span class="key">Else</span>&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"error"</span><br />
+<br />
+<br />
+<span class="com">''&nbsp;Using&nbsp;a&nbsp;ubyte&nbsp;array,&nbsp;we&nbsp;need&nbsp;an&nbsp;auxiliary&nbsp;function&nbsp;to&nbsp;convert&nbsp;it&nbsp;to&nbsp;a&nbsp;string</span><br />
+<span class="key">Function</span>&nbsp;<span class="wrd">ub2str</span><span class="oth">(</span>&nbsp;<span class="wrd">ub</span><span class="oth">()</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">UByte</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="wrd">length</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">UBound</span><span class="oth">(</span><span class="wrd">ub</span><span class="oth">)</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="num">1</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span>&nbsp;<span class="wrd">res</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">Space</span><span class="oth">(</span><span class="wrd">length</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">For</span>&nbsp;<span class="wrd">i</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span>&nbsp;<span class="key">To</span>&nbsp;<span class="wrd">length</span><span class="oth">-</span><span class="num">1</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">res</span><span class="oth">[</span><span class="wrd">i</span><span class="oth">]</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">ub</span><span class="oth">(</span><span class="wrd">i</span><span class="oth">):</span>&nbsp;<span class="key">Next</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Function</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">res</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Function</span><br />
+<br />
+<br />
+<span class="key">Print</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"Using&nbsp;an&nbsp;array&nbsp;of&nbsp;ubytes"</span><br />
+<br />
+<span class="key">Type</span>&nbsp;<span class="wrd">hdr2</span>&nbsp;<span class="key">Field</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">1</span><br />
+&nbsp;&nbsp;&nbsp;<span class="wrd">sig</span><span class="oth">(</span><span class="num">0</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">6</span><span class="oth">-</span><span class="num">1</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">UByte</span>&nbsp;<span class="com">''&nbsp;Dimension&nbsp;6</span><br />
+&nbsp;&nbsp;&nbsp;<span class="key">As</span>&nbsp;<span class="key">UShort</span>&nbsp;<span class="wrd">wid</span><span class="oth">,</span>&nbsp;<span class="wrd">hei</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Type</span><br />
+<br />
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">hdr2</span>&nbsp;<span class="key">Ptr</span>&nbsp;<span class="wrd">h2</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">CPtr</span><span class="oth">(</span><span class="wrd">hdr2</span>&nbsp;<span class="key">Ptr</span><span class="oth">,</span>&nbsp;<span class="oth">@</span><span class="wrd">z</span><span class="oth">)</span><br />
+<span class="com">''&nbsp;Viewing&nbsp;and&nbsp;comparing&nbsp;is&nbsp;correct&nbsp;but&nbsp;a&nbsp;conversion&nbsp;to&nbsp;string&nbsp;is&nbsp;required</span><br />
+<br />
+<span class="key">Print</span>&nbsp;<span class="wrd">ub2str</span><span class="oth">(</span><span class="wrd">h2</span><span class="oth">-&gt;</span><span class="wrd">sig</span><span class="oth">()),</span>&nbsp;<span class="wrd">h2</span><span class="oth">-&gt;</span><span class="wrd">wid</span><span class="oth">,</span>&nbsp;<span class="wrd">h2</span><span class="oth">-&gt;</span><span class="wrd">hei</span>&nbsp;<span class="com">''&nbsp;Prints&nbsp;GIF89a&nbsp;&nbsp;10&nbsp;&nbsp;11&nbsp;(ok)</span><br />
+<span class="key">If</span>&nbsp;<span class="wrd">ub2str</span><span class="oth">(</span><span class="wrd">h2</span><span class="oth">-&gt;</span><span class="wrd">sig</span><span class="oth">())</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="quo">"GIF89a"</span>&nbsp;<span class="key">Then</span>&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"ok"</span>&nbsp;<span class="key">Else</span>&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"error"</span>&nbsp;<span class="com">''&nbsp;Prints&nbsp;ok</span><br />
+</div></tt><br />
+<br \>
+</div><div class="fb_sect_title">Platform Differences</div><div class="fb_sect_cont"><br \>
+<ul><li> The default field alignment is 4 bytes for DOS and Linux targets.<br \>
+<li> The default field alignment is 8 bytes for Windows targets.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
+<ul><li> Object-related features such as functions declared inside <tt><b>Type</b></tt> blocks are supported only with the <i><a href="CompilerOptlang.html">-lang fb</a></i> dialect since version 0.17b<br \>
+<li> In the <i><a href="CompilerOptlang.html">-lang fb</a></i> and <i><a href="CompilerOptlang.html">-lang fblite</a></i> dialects, the default field alignment depends on the target platform.<br \>
+<li> With the <i><a href="CompilerOptlang.html">-lang qb</a></i> dialect the fields are aligned to byte boundaries by default, unless otherwise specified.<br \>
+<li> To force byte alignment use <tt>FIELD=1</tt>.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> At present, fixed-length strings have an extra, redundant character on the end, which means they take up one more byte than they do in QB.  For this reason, UDTs that use them are not compatible with QB when used for file I/O.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgTypeAlias.html">Type (Alias)</a></tt><br \>
+<li> <tt><a href="KeyPgTypeTemp.html">Type (Temporary)</a></tt><br \>
+<li> <tt><a href="KeyPgUnion.html">Union</a></tt><br \>
+<li> <tt><a href="KeyPgEnum.html">Enum</a></tt><br \>
+<li> <tt><a href="KeyPgTypeof.html">TypeOf</a></tt><br \>
+<li> <tt><a href="KeyPgOffsetof.html">OffsetOf</a></tt><br \>
+<li> <tt><a href="KeyPgField.html">Field</a></tt><br \>
+<li> <tt><a href="KeyPgWith.html">With</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

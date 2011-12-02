@@ -1,0 +1,65 @@
+<html>
+<head>
+<title>Poke</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Poke</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Assigns a value to a location in memory.<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgSub.html">Sub</a> <b>Poke</b> ( <a href="KeyPgByval.html">ByVal</a> <i>address</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgAny.html">Any</a> <a href="KeyPgPtr.html">Ptr</a>, <a href="KeyPgByref.html">ByRef</a> <i>value</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgUbyte.html">UByte</a> )<br \>
+<a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgSub.html">Sub</a> <b>Poke</b> ( <i>datatype</i>, <a href="KeyPgByval.html">ByVal</a> <i>address</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgAny.html">Any</a> <a href="KeyPgPtr.html">Ptr</a>, <a href="KeyPgByref.html">ByRef</a> <i>value</i> <a href="KeyPgAs.html">As</a> <i>datatype</i> )<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
+<b>Poke</b>( [ <i>datatype</i>, ] <i>address</i>, <i>value</i> )<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+<tt><i>datatype</i></tt><br \>
+<div class="fb_indent">The type of data at the specified address.<br \>
+</div><tt><i>address</i></tt><br \>
+<div class="fb_indent">The location in memory to assign to.<br \>
+</div><tt><i>value</i></tt><br \>
+<div class="fb_indent">The value to assign.<br \>
+<br \>
+</div></div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+<tt><b>Poke</b></tt> assigns a value to a location in memory. It is equivalent to<br \>
+<br \>
+<div class="fb_indent"><tt>*cast(ubyte ptr, <i>address</i>) = <i>value</i></tt><br \>
+<div class="fb_indent">or<br \>
+</div><tt>*cast(<i>datatype</i> ptr, <i>address</i>) = <i>value</i></tt><br \>
+<br \>
+</div>When <tt><i>datatype</i></tt> is a user-defined type, <tt><b>Poke</b></tt> assigns <tt><i>value</i></tt> using the type's <tt><a href="KeyPgOpLet.html">Operator Let</a></tt>.<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="key">Dim</span>&nbsp;<span class="wrd">i</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">,</span>&nbsp;<span class="wrd">p</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="key">Ptr</span><br />
+<span class="wrd">p</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="oth">@</span><span class="wrd">i</span><br />
+<br />
+<span class="key">Poke</span>&nbsp;<span class="key">Integer</span><span class="oth">,</span>&nbsp;<span class="wrd">p</span><span class="oth">,</span>&nbsp;<span class="num">420</span><br />
+<span class="key">Print</span>&nbsp;<span class="key">Peek</span><span class="oth">(</span><span class="key">Integer</span><span class="oth">,</span>&nbsp;<span class="wrd">p</span><span class="oth">)</span><br />
+</div></tt><br />
+Will produce the output:<br \>
+<br \>
+<pre class="fb_pre">420
+</pre><br \>
+</div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> Only the byte form were supported in QB.<br \>
+<li> <tt>DEF SEG</tt> isn't needed anymore because the address space is 32-bit flat in FreeBASIC.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgPeek.html">Peek</a></tt><br \>
+<br \>
+</ul><br \>
+</div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

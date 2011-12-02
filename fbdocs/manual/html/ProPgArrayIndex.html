@@ -1,0 +1,119 @@
+<html>
+<head>
+<title>Array Index</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Array Index</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	An array index is the number used to access an <a href="ProPgArrays.html">Array</a> of <a href="ProPgVariables.html">Variables</a> created using the <tt><a href="KeyPgDim.html">Dim</a></tt> command.<br \>
+<br \>
+<div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+The following examples illustrate the use of array elements.<br \>
+<br \>
+If we have an array <tt>myArray</tt> with elements of 1 to 10, filled with random data:<br \>
+<pre class="fb_pre">
+Index        Data
+1              5
+2              2
+3              6
+4              5
+5              9
+6              1
+7              0
+8              4
+9              5
+10             7
+</pre><br \>
+One can access each piece of data separately by pointing to the Index of the array element:<br \>
+<tt><div class="freebasic">
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="wrd">myArray</span><span class="oth">(</span><span class="num">5</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;</div></tt><br />
+Printing the data contained in the fifth element of <tt>myArray</tt> results in an output of:<br \>
+<pre class="fb_pre">
+	9
+	</pre>To change the contents of an array, use it like any other <a href="ProPgVariables.html">Variable</a>:<br \>
+<tt><div class="freebasic">
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">myArray</span><span class="oth">(</span><span class="num">3</span><span class="oth">)</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;</div></tt><br />
+To print the contents of <tt>myArray(3)</tt>, use the command:<br \>
+<tt><div class="freebasic">
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="wrd">myArray</span><span class="oth">(</span><span class="num">3</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;</div></tt><br />
+Which results in an output of:<br \>
+<pre class="fb_pre">
+	0
+	</pre>Array elements can be indexed using another <a href="ProPgVariables.html">Variable</a>. In this example we set all elements in our array to zero:<br \>
+<tt><div class="freebasic">
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="wrd">a</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">For</span>&nbsp;<span class="wrd">a</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">1</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">10</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">myArray</span><span class="oth">(</span><span class="wrd">a</span><span class="oth">)</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Next</span>&nbsp;<span class="wrd">a</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;</div></tt><br />
+To change a random array element to a random value:<br \>
+<tt><div class="freebasic">
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="wrd">Index</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="wrd">Value</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">index</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">Int</span><span class="oth">(</span><span class="key">Rnd</span><span class="oth">(</span><span class="num">1</span><span class="oth">)</span>&nbsp;<span class="oth">*</span>&nbsp;<span class="num">10</span><span class="oth">)</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="num">1</span>&nbsp;<span class="com">'This&nbsp;line&nbsp;will&nbsp;simply&nbsp;return&nbsp;a&nbsp;random&nbsp;value&nbsp;between&nbsp;1&nbsp;and&nbsp;10</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">Value</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">Int</span><span class="oth">(</span><span class="key">Rnd</span><span class="oth">(</span><span class="num">1</span><span class="oth">)</span>&nbsp;<span class="oth">*</span>&nbsp;<span class="num">10</span><span class="oth">)</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="num">1</span>&nbsp;<span class="com">'This&nbsp;line&nbsp;will&nbsp;do&nbsp;the&nbsp;same</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">myArray</span><span class="oth">(</span><span class="wrd">index</span><span class="oth">)</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">Value</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;</div></tt><br />
+<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="key">Declare</span>&nbsp;<span class="key">Sub</span>&nbsp;<span class="wrd">PrintArray</span><span class="oth">()</span><br />
+<br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">Numbers</span><span class="oth">(</span><span class="num">1</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">10</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+<span class="key">Dim</span>&nbsp;<span class="key">Shared</span>&nbsp;<span class="wrd">OtherNumbers</span><span class="oth">(</span><span class="num">1</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">10</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">a</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+<br />
+<span class="wrd">Numbers</span><span class="oth">(</span><span class="num">1</span><span class="oth">)</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">1</span><br />
+<span class="wrd">Numbers</span><span class="oth">(</span><span class="num">2</span><span class="oth">)</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">2</span><br />
+<span class="wrd">OtherNumbers</span><span class="oth">(</span><span class="num">1</span><span class="oth">)</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">3</span><br />
+<span class="wrd">OtherNumbers</span><span class="oth">(</span><span class="num">2</span><span class="oth">)</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">4</span><br />
+<br />
+<span class="wrd">PrintArray</span>&nbsp;<span class="oth">()</span><br />
+<br />
+<span class="key">For</span>&nbsp;<span class="wrd">a</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">1</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">10</span><br />
+&nbsp;<span class="key">Print</span>&nbsp;<span class="wrd">Numbers</span><span class="oth">(</span><span class="wrd">a</span><span class="oth">)</span><br />
+<span class="key">Next</span>&nbsp;<span class="wrd">a</span><br />
+<br />
+<span class="key">Print</span>&nbsp;<span class="wrd">OtherNumbers</span><span class="oth">(</span><span class="num">1</span><span class="oth">)</span><br />
+<span class="key">Print</span>&nbsp;<span class="wrd">OtherNumbers</span><span class="oth">(</span><span class="num">2</span><span class="oth">)</span><br />
+<span class="key">Print</span>&nbsp;<span class="wrd">OtherNumbers</span><span class="oth">(</span><span class="num">3</span><span class="oth">)</span><br />
+<span class="key">Print</span>&nbsp;<span class="wrd">OtherNumbers</span><span class="oth">(</span><span class="num">4</span><span class="oth">)</span><br />
+<span class="key">Print</span>&nbsp;<span class="wrd">OtherNumbers</span><span class="oth">(</span><span class="num">5</span><span class="oth">)</span><br />
+<span class="key">Print</span>&nbsp;<span class="wrd">OtherNumbers</span><span class="oth">(</span><span class="num">6</span><span class="oth">)</span><br />
+<span class="key">Print</span>&nbsp;<span class="wrd">OtherNumbers</span><span class="oth">(</span><span class="num">7</span><span class="oth">)</span><br />
+<span class="key">Print</span>&nbsp;<span class="wrd">OtherNumbers</span><span class="oth">(</span><span class="num">8</span><span class="oth">)</span><br />
+<span class="key">Print</span>&nbsp;<span class="wrd">OtherNumbers</span><span class="oth">(</span><span class="num">9</span><span class="oth">)</span><br />
+<span class="key">Print</span>&nbsp;<span class="wrd">OtherNumbers</span><span class="oth">(</span><span class="num">10</span><span class="oth">)</span><br />
+<br />
+<span class="key">Sub</span>&nbsp;<span class="wrd">PrintArray</span>&nbsp;<span class="oth">()</span><br />
+&nbsp;<span class="key">Dim</span>&nbsp;<span class="wrd">a</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;<span class="key">For</span>&nbsp;<span class="wrd">a</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">1</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">10</span><br />
+&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="wrd">otherNumbers</span><span class="oth">(</span><span class="wrd">a</span><span class="oth">)</span><br />
+&nbsp;<span class="key">Next</span>&nbsp;<span class="wrd">a</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Sub</span><br />
+</div></tt><br />
+<br \>
+</div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <a href="ProPgArrays.html">Arrays</a><br \>
+<li> <tt><a href="KeyPgDim.html">Dim</a></tt><br \>
+<li> <tt><a href="KeyPgFunction.html">Function</a></tt><br \>
+<li> <tt><a href="KeyPgSub.html">Sub</a></tt><br \>
+<li> <a href="ProPgVariables.html">Variables</a> <br \>
+<li> <a href="ProPgVariableScope.html">Variable Scope</a><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

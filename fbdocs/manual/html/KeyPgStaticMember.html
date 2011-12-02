@@ -1,0 +1,111 @@
+<html>
+<head>
+<title>Static (Member)</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Static (Member)</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Declaration specifier for a static member procedure.<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<a href="KeyPgType.html">Type</a> <i>typename</i><br \>
+<div class="fb_indent"><a href="KeyPgDeclare.html">Declare</a> <b>Static</b> <i>membertype</i> <i>membername</i> ...<br \>
+</div>End Type<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+<tt><i>typename</i></tt><br \>
+<div class="fb_indent">name of a user defined data type			<br \>
+</div><tt><i>membertype</i></tt><br \>
+<div class="fb_indent"><tt><a href="KeyPgMemberSub.html">Sub</a></tt> or <tt><a href="KeyPgMemberFunction.html">Function</a></tt>.<br \>
+</div><tt><i>membername</i> ...</tt><br \>
+<div class="fb_indent">Name of the member to declare or define with parameter list or return value following.<br \>
+<br \>
+</div></div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+When declaring a member procedure, <tt><b>Static</b></tt> specifies that the member procedure not have an implicit instance argument passed to it, and thus can only access values passed to it. Static member procedures may access Private or Protected members in their type, but to call procedures you must pass the Object as an additional first parameter. You may call a static member procedure anywhere in your code just like any other procedure in a type, i.e. <i>variable of the type</i>.<i>static procedure name</i>(<i>arguments</i>). The address of a static member function can also be assigned to a function pointer using the standard <a href="KeyPgOpProcptr.html">Procptr()</a> or the <a href="KeyPgOpAt.html">@ Operator</a> usage. <br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="com">''&nbsp;Example&nbsp;showing&nbsp;how&nbsp;the&nbsp;actual&nbsp;procedure&nbsp;invoked&nbsp;by&nbsp;a&nbsp;member&nbsp;can&nbsp;be&nbsp;set&nbsp;at&nbsp;runtime.</span><br />
+<span class="com">''&nbsp;using&nbsp;static&nbsp;member&nbsp;procedures.</span><br />
+<span class="key">Type</span>&nbsp;<span class="wrd">Object</span><br />
+<br />
+&nbsp;&nbsp;<span class="key">Enum</span>&nbsp;<span class="wrd">handlertype</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">ht_default</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">ht_A</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">ht_B</span><br />
+&nbsp;&nbsp;<span class="key">End</span>&nbsp;<span class="key">Enum</span><br />
+<br />
+&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Constructor</span><span class="oth">(</span>&nbsp;<span class="key">ByVal</span>&nbsp;<span class="wrd">ht</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">handlertype</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">ht_default</span><span class="oth">)</span><br />
+<br />
+&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Sub</span>&nbsp;<span class="wrd">handler</span><span class="oth">()</span><br />
+<br />
+<span class="key">Private</span><span class="oth">:</span><br />
+&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Static</span>&nbsp;<span class="key">Sub</span>&nbsp;<span class="wrd">handler_default</span><span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">obj</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">Object</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Static</span>&nbsp;<span class="key">Sub</span>&nbsp;<span class="wrd">handler_A</span><span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">obj</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">Object</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Static</span>&nbsp;<span class="key">Sub</span>&nbsp;<span class="wrd">handler_B</span><span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">obj</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">Object</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;<span class="wrd">handler_func</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Sub</span><span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">obj</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">Object</span>&nbsp;<span class="oth">)</span><br />
+<br />
+<span class="key">End</span>&nbsp;<span class="key">Type</span><br />
+<br />
+<span class="key">Constructor</span>&nbsp;<span class="wrd">Object</span><span class="oth">(</span>&nbsp;<span class="key">ByVal</span>&nbsp;<span class="wrd">ht</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">handlertype</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;<span class="key">Select</span>&nbsp;<span class="key">Case</span>&nbsp;<span class="wrd">ht</span><br />
+&nbsp;&nbsp;<span class="key">Case</span>&nbsp;<span class="wrd">ht_A</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">handler_func</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="oth">@</span><span class="wrd">Object.handler_A</span><br />
+&nbsp;&nbsp;<span class="key">Case</span>&nbsp;<span class="wrd">ht_B</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">handler_func</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="oth">@</span><span class="wrd">Object.handler_B</span><br />
+&nbsp;&nbsp;<span class="key">Case</span>&nbsp;<span class="key">Else</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">handler_func</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="oth">@</span><span class="wrd">Object.handler_default</span><br />
+&nbsp;&nbsp;<span class="key">End</span>&nbsp;<span class="key">Select</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Constructor</span><br />
+<br />
+<span class="key">Sub</span>&nbsp;<span class="wrd">Object.handler</span><span class="oth">()</span><br />
+&nbsp;&nbsp;<span class="wrd">handler_func</span><span class="oth">(</span><span class="key">This</span><span class="oth">)</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Sub</span><br />
+<br />
+<span class="key">Sub</span>&nbsp;<span class="wrd">Object.handler_default</span><span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">obj</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">Object</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"Handling&nbsp;using&nbsp;default&nbsp;method"</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Sub</span><br />
+<br />
+<span class="key">Sub</span>&nbsp;<span class="wrd">Object.handler_A</span><span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">obj</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">Object</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"Handling&nbsp;using&nbsp;method&nbsp;A"</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Sub</span><br />
+<br />
+<span class="key">Sub</span>&nbsp;<span class="wrd">Object.handler_B</span><span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">obj</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">Object</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"Handling&nbsp;using&nbsp;method&nbsp;B"</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Sub</span><br />
+<br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">objects</span><span class="oth">(</span><span class="num">1</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">4</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">Object</span>&nbsp;<span class="oth">=&gt;</span>&nbsp;<span class="wrd">_</span><br />
+&nbsp;&nbsp;<span class="oth">{</span>&nbsp;<span class="wrd">_</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">Object.handlertype.ht_B</span><span class="oth">,</span>&nbsp;<span class="wrd">_</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">Object.handlertype.ht_default</span><span class="oth">,</span>&nbsp;<span class="wrd">_</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">Object.handlertype.ht_A</span>&nbsp;<span class="wrd">_</span><br />
+&nbsp;&nbsp;<span class="oth">}</span><br />
+&nbsp;&nbsp;<span class="com">''&nbsp;4th&nbsp;array&nbsp;item&nbsp;will&nbsp;be&nbsp;Object.handlertype.ht_default</span><br />
+<br />
+<span class="key">For</span>&nbsp;<span class="wrd">i</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">1</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">4</span><br />
+&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="wrd">i</span><span class="oth">,</span><br />
+&nbsp;&nbsp;<span class="wrd">objects</span><span class="oth">(</span><span class="wrd">i</span><span class="oth">).</span><span class="wrd">handler</span><span class="oth">()</span><br />
+<span class="key">Next</span>&nbsp;<span class="wrd">i</span><br />
+</div></tt><br />
+<br \>
+</div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> New to FreeBASIC<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgClass.html">Class</a></tt><br \>
+<li> <tt><a href="KeyPgDeclare.html">Declare</a></tt><br \>
+<li> <tt><a href="KeyPgType.html">Type</a></tt><br \>
+<li> <tt><a href="KeyPgStatic.html">Static</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

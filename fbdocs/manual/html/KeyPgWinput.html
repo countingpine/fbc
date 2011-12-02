@@ -1,0 +1,105 @@
+<html>
+<head>
+<title>Winput()</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Winput()</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Reads a number of wide-characters from console or file<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgFunction.html">Function</a> <b>WInput</b>( <a href="KeyPgByval.html">ByVal</a> <i>num</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a> ) <a href="KeyPgAs.html">As</a> <a href="KeyPgString.html">WString</a><br \>
+<a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgFunction.html">Function</a> <b>WInput</b>( <a href="KeyPgByval.html">ByVal</a> <i>num</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a>, <a href="KeyPgByval.html">ByVal</a> <i>filenum</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a> = 0 ) <a href="KeyPgAs.html">As</a> <a href="KeyPgString.html">WString</a><br \>
+</tt><br \>
+</div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
+<i>result</i> = <b>WInput</b>( <i>num</i> [, [#]<i>filenum</i> } )<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+<tt><i>num</i></tt><br \>
+<div class="fb_indent">Number of characters to read.<br \>
+</div><tt><i>filenum</i></tt><br \>
+<div class="fb_indent">File number of bound file or device.<br \>
+<br \>
+</div></div><div class="fb_sect_title">Return Value</div><div class="fb_sect_cont"><br \>
+Returns a <a href="KeyPgWstring.html">WString</a> of the characters read.<br \>
+<br \>
+</div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+Reads a number of wide-characters from the console, or a bound file/device specified by <tt><i>filenum</i></tt>.<br \>
+<br \>
+The first version waits for and reads <tt><i>n</i></tt> wide characters from the keyboard buffer. Extended keys are not read. The characters are not echoed to the screen.<br \>
+<br \>
+The second version waits for and reads <tt><i>n</i></tt> wide characters from a file or device. The file position is updated.<br \>
+<br \>
+<i>Note: FreeBASIC does not currently support reading wide-characters from the console.</i><br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="key">Dim</span>&nbsp;<span class="wrd">char</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">WString</span>&nbsp;<span class="oth">*</span>&nbsp;<span class="num">2</span><br />
+<br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">filename</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span><span class="oth">,</span>&nbsp;<span class="wrd">enc</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">f</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+<br />
+<span class="key">Line</span>&nbsp;<span class="key">Input</span>&nbsp;<span class="quo">"Please&nbsp;enter&nbsp;a&nbsp;file&nbsp;name:&nbsp;"</span><span class="oth">,</span>&nbsp;<span class="wrd">filename</span><br />
+<span class="key">Line</span>&nbsp;<span class="key">Input</span>&nbsp;<span class="quo">"Please&nbsp;enter&nbsp;an&nbsp;encoding&nbsp;type&nbsp;(optional):&nbsp;"</span><span class="oth">,</span>&nbsp;<span class="wrd">enc</span><br />
+<span class="key">If</span>&nbsp;<span class="wrd">enc</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="quo">""</span>&nbsp;<span class="key">Then</span>&nbsp;<span class="wrd">enc</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="quo">"ascii"</span><br />
+<br />
+<span class="wrd">f</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">FreeFile</span><br />
+<span class="key">If</span>&nbsp;<span class="key">Open</span><span class="oth">(</span><span class="wrd">filename</span>&nbsp;<span class="key">For</span>&nbsp;<span class="key">Input</span>&nbsp;<span class="key">Encoding</span>&nbsp;<span class="wrd">enc</span>&nbsp;<span class="key">As</span>&nbsp;<span class="oth">#</span><span class="wrd">f</span><span class="oth">)</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span>&nbsp;<span class="key">Then</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"Press&nbsp;space&nbsp;to&nbsp;read&nbsp;a&nbsp;character&nbsp;from&nbsp;the&nbsp;file,&nbsp;or&nbsp;escape&nbsp;to&nbsp;exit."</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Do</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Select</span>&nbsp;<span class="key">Case</span>&nbsp;<span class="key">Input</span><span class="oth">(</span><span class="num">1</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Case</span>&nbsp;<span class="quo">"&nbsp;"</span>&nbsp;<span class="com">'Space</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">If</span>&nbsp;<span class="key">EOF</span><span class="oth">(</span><span class="wrd">f</span><span class="oth">)</span>&nbsp;<span class="key">Then</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"You&nbsp;have&nbsp;reached&nbsp;the&nbsp;end&nbsp;of&nbsp;the&nbsp;file."</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Exit</span>&nbsp;<span class="key">Do</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">End</span>&nbsp;<span class="key">If</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">char</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">WInput</span><span class="oth">(</span><span class="num">1</span><span class="oth">,</span>&nbsp;<span class="wrd">f</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="wrd">char</span>&nbsp;<span class="oth">&amp;</span>&nbsp;<span class="quo">"&nbsp;(char&nbsp;no&nbsp;"</span>&nbsp;<span class="oth">&amp;</span>&nbsp;<span class="key">Asc</span><span class="oth">(</span><span class="wrd">char</span><span class="oth">)</span>&nbsp;<span class="oth">&amp;</span>&nbsp;<span class="quo">")"</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Case</span>&nbsp;<span class="key">Chr</span><span class="oth">(</span><span class="num">27</span><span class="oth">)</span>&nbsp;<span class="com">'Escape</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Exit</span>&nbsp;<span class="key">Do</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">End</span>&nbsp;<span class="key">Select</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Loop</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Close</span>&nbsp;<span class="oth">#</span><span class="wrd">f</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+<span class="key">Else</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"There&nbsp;was&nbsp;an&nbsp;error&nbsp;opening&nbsp;the&nbsp;file."</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+<span class="key">End</span>&nbsp;<span class="key">If</span><br />
+</div></tt><br />
+<br \>
+</div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
+<ul><li> Not available in the <i><a href="CompilerOptlang.html">-lang qb</a></i> dialect.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> QB does not support Unicode<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgInputnum.html">Input()</a></tt><br \>
+<li> <tt><a href="KeyPgOpen.html">Open</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

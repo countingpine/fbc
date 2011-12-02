@@ -1,0 +1,63 @@
+<html>
+<head>
+<title>ZString</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">ZString</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Standard data type: 8 bit character string<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<a href="KeyPgDim.html">Dim</a> <i>variable</i> <a href="KeyPgAs.html">As</a> <b>ZString</b> * <i>size</i><br \>
+<a href="KeyPgDim.html">Dim</a> <i>variable</i> <a href="KeyPgAs.html">As</a> <b>ZString</b> <a href="KeyPgPtr.html">Ptr</a><br \>
+</tt><br \>
+</div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+A <tt><b>ZString</b></tt> is a C-style fixed-size array of chars.  It has no descriptor so it's faster to pass it as an argument to functions. FreeBASIC avoids any overflow that could occur, by truncating the contents.<br \>
+<br \>
+A <tt><b>ZString</b></tt> <a href="KeyPgPtr.html">Ptr</a> can point to a standard <tt><b>ZString</b></tt>, also can be used to implement an "user-managed" <tt><b>ZString</b></tt>, in this case <tt><a href="KeyPgAllocate.html">Allocate</a></tt>/<tt><a href="KeyPgReallocate.html">Reallocate</a></tt>/<tt><a href="KeyPgDeallocate.html">Deallocate</a></tt> must be used to size-resize-dispose it and is up  to the user to avoid overflows . <br \>
+<br \>
+The end of the string is marked by a character 0 ASCII, this is automatically managed by the FreeBASIC string handling functions. A character 0 ASCII must never enter in the text of a <tt><b>ZString</b></tt> or it will be truncated, as no descriptor exists . <br \>
+<br \>
+In a <tt><b>ZString</b></tt>, <tt><a href="KeyPgLen.html">Len</a></tt> returns the size of the contained string and <tt><a href="KeyPgSizeof.html">SizeOf</a></tt> returns the space allocated to the <tt><b>ZString</b></tt>.<br \>
+<br \>
+This type is provided for easy interfacing with C libraries and to also replace the fixed-length strings, that can't be managed through pointers. Any intrinsic string functions like <tt><a href="KeyPgLeft.html">Left</a></tt> will work with <tt><b>ZString</b></tt>'s too, plus any string operator.<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">ZString</span>&nbsp;<span class="oth">*</span>&nbsp;<span class="num">14</span>&nbsp;<span class="wrd">str1</span>&nbsp;<span class="oth">=&gt;</span>&nbsp;<span class="quo">"hello,&nbsp;world"</span><br />
+<span class="key">Print</span>&nbsp;<span class="wrd">str1</span><br />
+<span class="key">Print</span>&nbsp;<span class="key">Len</span><span class="oth">(</span><span class="wrd">str1</span><span class="oth">)</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">'returns&nbsp;12,&nbsp;the&nbsp;size&nbsp;of&nbsp;the&nbsp;string&nbsp;it&nbsp;contains&nbsp;</span><br />
+<span class="key">Print</span>&nbsp;<span class="key">SizeOf</span><span class="oth">(</span><span class="wrd">str1</span><span class="oth">)</span>&nbsp;<span class="com">'returns&nbsp;14,&nbsp;the&nbsp;size&nbsp;of&nbsp;the&nbsp;variable</span><br />
+</div></tt><br />
+<br \>
+<tt><div class="freebasic">
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">ZString</span>&nbsp;<span class="key">Ptr</span>&nbsp;<span class="wrd">str2</span><br />
+<span class="wrd">str2</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">Allocate</span><span class="oth">(</span>&nbsp;<span class="num">14</span>&nbsp;<span class="oth">)</span><br />
+<span class="oth">*</span><span class="wrd">str2</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="quo">"hello,&nbsp;world"</span><br />
+<span class="key">Print</span>&nbsp;<span class="oth">*</span><span class="wrd">str2</span><br />
+<span class="key">Print</span>&nbsp;<span class="key">Len</span><span class="oth">(*</span><span class="wrd">str2</span><span class="oth">)</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">'returns&nbsp;12,&nbsp;the&nbsp;size&nbsp;of&nbsp;the&nbsp;string&nbsp;it&nbsp;contains&nbsp;</span><br />
+<span class="key">Print</span>&nbsp;<span class="key">SizeOf</span><span class="oth">(*</span><span class="wrd">str2</span><span class="oth">)</span>&nbsp;&nbsp;<span class="com">'returns&nbsp;len(zstring),&nbsp;the&nbsp;size&nbsp;of&nbsp;the&nbsp;variable</span><br />
+</div></tt><br />
+<br \>
+</div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
+<ul><li> Not available in the <i><a href="CompilerOptlang.html">-lang qb</a></i> dialect unless referenced with the alias <tt><b>__Zstring</b></tt>.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> New to FreeBASIC<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgString.html">String</a></tt><br \>
+<li> <tt><a href="KeyPgWstring.html">WString</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

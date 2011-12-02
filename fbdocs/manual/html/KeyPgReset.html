@@ -1,0 +1,80 @@
+<html>
+<head>
+<title>Reset</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Reset</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Closes all open files, or resets standard I/O handles.<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgSub.html">Sub</a> <b>Reset</b> ( )<br \>
+<a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgSub.html">Sub</a> <b>Reset</b> ( <a href="KeyPgByval.html">ByVal</a> <i>streamno</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a> )<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
+<b>Reset</b><br \>
+<i>or</i><br \>
+<b>Reset</b>( <i>streamno</i> )<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+<tt><i>streamno</i></tt><br \>
+<div class="fb_indent">The stream number, 0 for stdin or 1 for stdout to reset.<br \>
+<br \>
+</div></div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+<tt><b>Reset</b></tt>, when called with no arguments, closes all disk files.<br \>
+<br \>
+<tt><b>Reset</b></tt>, when called with the <tt><i>streamno</i></tt> argument, will reset the redirected or piped streams associated with stdin (0), or stdout (1).  Passing any value for <tt><i>streamno</i></tt> other than 0 or 1 has no effect.<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="key">Open</span>&nbsp;<span class="quo">"test.txt"</span>&nbsp;<span class="key">For</span>&nbsp;<span class="key">Output</span>&nbsp;<span class="key">As</span>&nbsp;<span class="oth">#</span><span class="num">1</span><br />
+<span class="key">Print</span>&nbsp;<span class="oth">#</span><span class="num">1</span><span class="oth">,</span>&nbsp;<span class="quo">"testing&nbsp;123"</span><br />
+<span class="key">Reset</span><br />
+</div></tt><br />
+<br \>
+<tt><div class="freebasic">
+<span class="key">Dim</span>&nbsp;<span class="wrd">x</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span><br />
+<br />
+<span class="com">''&nbsp;Read&nbsp;from&nbsp;STDIN&nbsp;from&nbsp;piped&nbsp;input</span><br />
+<span class="key">Open</span>&nbsp;<span class="key">Cons</span>&nbsp;<span class="key">For</span>&nbsp;<span class="key">Input</span>&nbsp;<span class="key">As</span>&nbsp;<span class="oth">#</span><span class="num">1</span><br />
+<span class="key">While</span>&nbsp;<span class="key">EOF</span><span class="oth">(</span><span class="num">1</span><span class="oth">)</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span><br />
+&nbsp;&nbsp;<span class="key">Input</span>&nbsp;<span class="oth">#</span><span class="num">1</span><span class="oth">,</span>&nbsp;<span class="wrd">x</span><br />
+&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">""""</span><span class="oth">;</span>&nbsp;<span class="wrd">x</span><span class="oth">;</span>&nbsp;<span class="quo">""""</span><br />
+<span class="key">Wend</span><br />
+<span class="key">Close</span>&nbsp;<span class="oth">#</span><span class="num">1</span><br />
+<br />
+<span class="com">''&nbsp;Reset&nbsp;to&nbsp;read&nbsp;from&nbsp;the&nbsp;keyboard</span><br />
+<span class="key">Reset</span><span class="oth">(</span><span class="num">0</span><span class="oth">)</span><br />
+<br />
+<span class="key">Print</span>&nbsp;<span class="quo">"Enter&nbsp;some&nbsp;text:"</span><br />
+<span class="key">Input</span>&nbsp;<span class="wrd">x</span><br />
+<br />
+<span class="com">''&nbsp;Read&nbsp;from&nbsp;STDIN&nbsp;(now&nbsp;from&nbsp;keyboard)</span><br />
+<span class="key">Open</span>&nbsp;<span class="key">Cons</span>&nbsp;<span class="key">For</span>&nbsp;<span class="key">Input</span>&nbsp;<span class="key">As</span>&nbsp;<span class="oth">#</span><span class="num">1</span><br />
+<span class="key">While</span>&nbsp;<span class="key">EOF</span><span class="oth">(</span><span class="num">1</span><span class="oth">)</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span><br />
+&nbsp;&nbsp;<span class="key">Input</span>&nbsp;<span class="oth">#</span><span class="num">1</span><span class="oth">,</span>&nbsp;<span class="wrd">x</span><br />
+&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">""""</span><span class="oth">;</span>&nbsp;<span class="wrd">x</span><span class="oth">;</span>&nbsp;<span class="quo">""""</span><br />
+<span class="key">Wend</span><br />
+<span class="key">Close</span>&nbsp;<span class="oth">#</span><span class="num">1</span><br />
+</div></tt><br />
+</div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> None for <tt><b>Reset</b>()</tt>.<br \>
+<li> The <tt><b>Reset</b>(<i>streamno</i>)</tt> usage is new to FreeBASIC.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgClose.html">Close</a></tt><br \>
+<li> <tt><a href="KeyPgOpen.html">Open</a></tt><br \>
+<li> <tt><a href="KeyPgOpenCons.html">Open Cons</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

@@ -1,0 +1,65 @@
+<html>
+<head>
+<title>PSet</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">PSet</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Parameter to the <tt><a href="KeyPgPutgraphics.html">Put</a></tt> graphics statement which selects <tt><a href="KeyPgPset.html">PSet</a></tt> as the blitting method<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<b>Put</b> [ <i>target</i>, ] [ STEP ] ( <i>x</i>,<i>y</i> ), <i>source</i> [ ,( <i>x1</i>,<i>y1</i> )-( <i>x2</i>,<i>y2</i> ) ], <b>PSet</b><br \>
+</tt><br \>
+</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+<tt><b>PSet</b></tt><br \>
+<div class="fb_indent">Required.<br \>
+<br \>
+</div></div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+The <tt><b>PSet</b></tt> method copies the source pixel values onto the destination pixels.<br \>
+<br \>
+This is the simplest <tt><a href="KeyPgPutgraphics.html">Put</a></tt> method. The pixels in the destination buffer are directly overwritten with the pixels in the source buffer.  No additional operations are done, and there are no color values that are treated as transparent.  It has the same effect as <tt><a href="KeyPgPset.html">PSet</a>ting</tt> each pixel individually.<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="com">''&nbsp;set&nbsp;up&nbsp;a&nbsp;screen:&nbsp;320&nbsp;*&nbsp;200,&nbsp;16&nbsp;bits&nbsp;per&nbsp;pixel</span><br />
+<span class="key">ScreenRes</span>&nbsp;<span class="num">320</span><span class="oth">,</span>&nbsp;<span class="num">200</span><span class="oth">,</span>&nbsp;<span class="num">16</span><br />
+<span class="key">Line</span>&nbsp;<span class="oth">(</span><span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">0</span><span class="oth">)-(</span><span class="num">319</span><span class="oth">,</span>&nbsp;<span class="num">199</span><span class="oth">),</span>&nbsp;<span class="key">RGB</span><span class="oth">(</span><span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">128</span><span class="oth">,</span>&nbsp;<span class="num">255</span><span class="oth">),</span>&nbsp;<span class="wrd">bf</span><br />
+<br />
+<span class="com">''&nbsp;set&nbsp;up&nbsp;an&nbsp;image&nbsp;with&nbsp;the&nbsp;mask&nbsp;color&nbsp;as&nbsp;the&nbsp;background.</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">img</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Any</span>&nbsp;<span class="key">Ptr</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">ImageCreate</span><span class="oth">(</span>&nbsp;<span class="num">33</span><span class="oth">,</span>&nbsp;<span class="num">33</span><span class="oth">,</span>&nbsp;<span class="key">RGB</span><span class="oth">(</span><span class="num">255</span><span class="oth">,</span>&nbsp;<span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">255</span><span class="oth">)</span>&nbsp;<span class="oth">)</span><br />
+<span class="key">Circle</span>&nbsp;<span class="wrd">img</span><span class="oth">,</span>&nbsp;<span class="oth">(</span><span class="num">16</span><span class="oth">,</span>&nbsp;<span class="num">16</span><span class="oth">),</span>&nbsp;<span class="num">15</span><span class="oth">,</span>&nbsp;<span class="key">RGB</span><span class="oth">(</span><span class="num">255</span><span class="oth">,</span>&nbsp;<span class="num">255</span><span class="oth">,</span>&nbsp;<span class="num">0</span><span class="oth">),</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">,</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">,</span>&nbsp;<span class="num">1</span><span class="oth">,</span>&nbsp;<span class="wrd">f</span><br />
+<span class="key">Circle</span>&nbsp;<span class="wrd">img</span><span class="oth">,</span>&nbsp;<span class="oth">(</span><span class="num">10</span><span class="oth">,</span>&nbsp;<span class="num">10</span><span class="oth">),</span>&nbsp;<span class="num">3</span><span class="oth">,</span>&nbsp;&nbsp;<span class="key">RGB</span><span class="oth">(</span>&nbsp;&nbsp;<span class="num">0</span><span class="oth">,</span>&nbsp;&nbsp;&nbsp;<span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">0</span><span class="oth">),</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">,</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">,</span>&nbsp;<span class="num">2</span><span class="oth">,</span>&nbsp;<span class="wrd">f</span><br />
+<span class="key">Circle</span>&nbsp;<span class="wrd">img</span><span class="oth">,</span>&nbsp;<span class="oth">(</span><span class="num">23</span><span class="oth">,</span>&nbsp;<span class="num">10</span><span class="oth">),</span>&nbsp;<span class="num">3</span><span class="oth">,</span>&nbsp;&nbsp;<span class="key">RGB</span><span class="oth">(</span>&nbsp;&nbsp;<span class="num">0</span><span class="oth">,</span>&nbsp;&nbsp;&nbsp;<span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">0</span><span class="oth">),</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">,</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">,</span>&nbsp;<span class="num">2</span><span class="oth">,</span>&nbsp;<span class="wrd">f</span><br />
+<span class="key">Circle</span>&nbsp;<span class="wrd">img</span><span class="oth">,</span>&nbsp;<span class="oth">(</span><span class="num">16</span><span class="oth">,</span>&nbsp;<span class="num">18</span><span class="oth">),</span>&nbsp;<span class="num">10</span><span class="oth">,</span>&nbsp;<span class="key">RGB</span><span class="oth">(</span>&nbsp;&nbsp;<span class="num">0</span><span class="oth">,</span>&nbsp;&nbsp;&nbsp;<span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">0</span><span class="oth">),</span>&nbsp;<span class="num">3.14</span><span class="oth">,</span>&nbsp;<span class="num">6.28</span><br />
+<br />
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="wrd">x</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">160</span>&nbsp;<span class="oth">-</span>&nbsp;<span class="num">16</span><span class="oth">,</span>&nbsp;<span class="wrd">y</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">100</span>&nbsp;<span class="oth">-</span>&nbsp;<span class="num">16</span><br />
+<br />
+<span class="com">''&nbsp;Put&nbsp;the&nbsp;image&nbsp;with&nbsp;PSET</span><br />
+<span class="key">Put</span>&nbsp;<span class="oth">(</span><span class="wrd">x</span><span class="oth">,</span>&nbsp;<span class="wrd">y</span><span class="oth">),</span>&nbsp;<span class="wrd">img</span><span class="oth">,</span>&nbsp;<span class="key">PSet</span><br />
+<br />
+<span class="com">''&nbsp;free&nbsp;the&nbsp;image&nbsp;memory</span><br />
+<span class="key">ImageDestroy</span>&nbsp;<span class="wrd">img</span><br />
+<br />
+<span class="com">''&nbsp;wait&nbsp;for&nbsp;a&nbsp;keypress</span><br />
+<span class="key">Sleep</span><br />
+</div></tt><br />
+<div class="fb_img"><img src="images/putpset.png" /></div><br \>
+</div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> None<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgPset.html">PSet</a></tt><br \>
+<li> <tt><a href="KeyPgPutgraphics.html">Put (Graphics)</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

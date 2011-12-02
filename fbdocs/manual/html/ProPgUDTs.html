@@ -1,0 +1,72 @@
+<html>
+<head>
+<title>User Defined Types</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">User Defined Types</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Custom types.<br \>
+<br \>
+<div class="fb_sect_title">Overview</div><div class="fb_sect_cont"><br \>
+<i>User-Defined Types</i> are special kinds of <a href="ProPgVariables.html">variables</a> which can be created by the programmer.  A User-Defined Type (UDT) is really just a container that contains a bunch of other variables, like an <a href="ProPgArrays.html">array</a>, but unlike arrays UDTs can hold <i>different</i> variable types (whereas arrays always hold many variables of the <i>same</i> type).  In fact, UDTs can even have <a href="ProPgProcedures.html">procedures</a> inside of them!<br \>
+<br \>
+</div><div class="fb_sect_title">Members</div><div class="fb_sect_cont"><br \>
+The different variables and/or procedures stored inside a UDT are called "members", or more generally, items.  Members can be variables of just about any type, including numerical types, strings, <a href="ProPgPointers.html">pointers</a>, <a href="KeyPgEnum.html">Enums</a>, and even arrays (the only exception being <a href="ProPgVarLenArrays.html">variable-length arrays</a> declared using <a href="KeyPgRedim.html">ReDim</a>, which cannot be used in UDTs because of the way they are used internally.  Variables are created in UDTs much the same way variables are created 	normally, except that the Dim keyword is optional.  UDT members are accessed via the <a href="KeyPgOpMemberAccess.html">. Operator</a>, so for example if you created a variable called someVar in a UDT you would access it with the name of the UDT variable followed by ".someVar".  Here is an example:<br \>
+<br \>
+<tt><div class="freebasic">
+<span class="com">'Define&nbsp;a&nbsp;UDT&nbsp;called&nbsp;myType,&nbsp;with&nbsp;an&nbsp;Integer&nbsp;member&nbsp;named&nbsp;someVar</span><br />
+<span class="key">Type</span>&nbsp;<span class="wrd">myType</span><br />
+&nbsp;&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="wrd">someVar</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Type</span><br />
+<br />
+<span class="com">'Create&nbsp;a&nbsp;variable&nbsp;of&nbsp;that&nbsp;type</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">myUDT</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">myType</span><br />
+<br />
+<span class="com">'Set&nbsp;the&nbsp;member&nbsp;someVar&nbsp;to&nbsp;23,&nbsp;then&nbsp;display&nbsp;its&nbsp;contents&nbsp;on&nbsp;the&nbsp;screen</span><br />
+<span class="wrd">myUDT.someVar</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">23</span><br />
+<span class="key">Print</span>&nbsp;<span class="wrd">myUDT.someVar</span><br />
+</div></tt><br />
+<br \>
+Notice that the <a href="KeyPgType.html">Type...End Type</a> does not actually create a variable of that type, it only defines what variables of that type contain.  You must create a variable of that type to actually use it!<br \>
+<br \>
+</div><div class="fb_sect_title">UDT Pointers</div><div class="fb_sect_cont"><br \>
+UDT Pointers are, as the name implies, pointers to UDTs.  They are created like regular pointers, but there is a special way to use them.  To access the member of a UDT pointed to by a pointer, you use the <a href="KeyPgOpPtrMemberAccess.html">-&gt; Operator</a>.  For example, if myUDTPtr is a pointer to a UDT which has a member someVar, you would access the member as myUDTPtr-&gt;someVar, which is a much cleaner shorthand for the equally valid *(myUDTPtr).someVar.<br \>
+<br \>
+<tt><div class="freebasic">
+<span class="key">Type</span>&nbsp;<span class="wrd">rect</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">x</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">y</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Type</span><br />
+<br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">r</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">rect</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">rp</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">rect</span>&nbsp;<span class="key">Pointer</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="oth">@</span><span class="wrd">r</span><br />
+<br />
+<span class="wrd">rp</span><span class="oth">-&gt;</span><span class="wrd">x</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">4</span><br />
+<span class="wrd">rp</span><span class="oth">-&gt;</span><span class="wrd">y</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">2</span><br />
+<br />
+<span class="key">Print</span>&nbsp;<span class="quo">"x&nbsp;=&nbsp;"</span>&nbsp;<span class="oth">&amp;</span>&nbsp;<span class="wrd">rp</span><span class="oth">-&gt;</span><span class="wrd">x</span>&nbsp;<span class="oth">&amp;</span>&nbsp;<span class="quo">",&nbsp;y&nbsp;=&nbsp;"</span>&nbsp;<span class="oth">&amp;</span>&nbsp;<span class="wrd">rp</span><span class="oth">-&gt;</span><span class="wrd">y</span><br />
+<span class="key">Sleep</span><br />
+</div></tt><br />
+<br \>
+<br \>
+</div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <a href="ProPgTypeAliases.html">Type Aliases</a><br \>
+<li> <a href="KeyPgTypeTemp.html">Temporary Types</a><br \>
+<li> <a href="ProPgCtorsDtors.html">Constructors and Destructors</a><br \>
+<li> <a href="ProPgMemberProcedures.html">Member Procedures</a><br \>
+<li> <a href="ProPgMemberAccessRights.html">Member Access Rights</a><br \>
+<li> <a href="ProPgOperatorOverloading.html">Operator Overloading</a><br \>
+<br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

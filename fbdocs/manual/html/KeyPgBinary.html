@@ -1,0 +1,109 @@
+<html>
+<head>
+<title>Binary</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Binary</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Specifies file or device to be opened for binary mode<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<a href="KeyPgOpen.html">Open</a> <i>filename</i> for <b>Binary</b> [<a href="KeyPgAccess.html">Access</a> <i>access_type</i>] [<a href="KeyPgLock.html">Lock</a> <i>lock_type</i>] as [#]<i>filenum</i> <br \>
+</tt><br \>
+</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+<tt><i>filename</i></tt><br \>
+<div class="fb_indent">file name to open<br \>
+</div><tt><i>access_type</i></tt><br \>
+<div class="fb_indent">indicates whether the file may be read from, written to or both<br \>
+</div><tt><i>lock_type</i></tt><br \>
+<div class="fb_indent">locking to be used while the file is open<br \>
+</div><tt><i>filenum</i></tt><br \>
+<div class="fb_indent">unused file number to associate with the open file<br \>
+<br \>
+</div></div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+Opens a file or device for reading and/or writing binary data in the file <tt><i>filenum</i></tt>, with free format.<br \>
+If the file does not exist, a new file will be created. The file pointer is initialized by <tt><a href="KeyPgOpen.html">Open</a></tt> at byte no. 1. <br \>
+<tt><a href="KeyPgGetfileio.html">Get #</a></tt> and <tt><a href="KeyPgPutfileio.html">Put #</a></tt> file operations move the file pointer according to the size of the data, the pointer can be set to any byte in the file.<br \>
+The data existing in the file is preserved by <tt><a href="KeyPgOpen.html">Open</a></tt>. <br \>
+This file mode can use any buffer variable to read/write data in the file.   <br \>
+The data is saved in binary mode, in the same internal format FreeBASIC uses, by means of <tt><a href="KeyPgGetfileio.html">Get #</a></tt> and <tt><a href="KeyPgPutfileio.html">Put #</a></tt>.<br \>
+<br \>
+<tt><i>filename</i></tt> must be a string expression resulting in a legal file name in the target OS, without wildcards. The file will be sought for in the present directory, unless a path is given.<br \>
+<tt><i>Access_type</i></tt> By default <tt><b>Binary</b></tt> mode allows to both read and write the file, unless an <tt><a href="KeyPgAccess.html">Access</a></tt> type is specified, it mus be one of: <br \>
+<ul><ul><li> <tt><b>Read</b></tt> - the file is opened for input only<br \>
+<li> <tt><b>Write</b></tt> - the file is opened for output only<br \>
+<li> <tt><b>Read Write</b></tt> - the file is opened for input and output (the default)<br \>
+<br \>
+</ul></ul><tt><i>Lock_type</i></tt> indicates the way the file is locked  for other processes (users or threads), it is one of:<br \>
+<ul><ul><li> <tt><b>Shared</b></tt> - The file can be freely accessed by other processes     <br \>
+<li> <tt><b>Lock Read</b></tt> - The file can't be opened simultaneously for reading<br \>
+<li> <tt><b>Lock Write</b></tt> - The file can't be opened simultaneously for writing<br \>
+<li> <tt><b>Lock Read Write</b></tt> - The file cannot be opened simultaneously by other processes.<br \>
+</ul></ul><div class="fb_indent">If no lock type is stated, the file will be <tt><b>Shared</b></tt> for other threads of the program and <tt><b>Lock Read Write</b></tt> for other programs.<br \>
+<tt><a href="KeyPgLock.html">Lock</a></tt> and <tt><a href="KeyPgUnlock.html">Unlock</a></tt> can be used to restrict temporally access to parts of a file.<br \>
+<br \>
+</div><tt><i>filenum</i></tt> is a valid file number (in the range <tt>1..255</tt>) not being used for any other file presently open. The file number identifies the file for the rest of file operations. A free file number can be found using the <tt><a href="KeyPgFreefile.html">FreeFile</a></tt> function.<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="com">''&nbsp;Create&nbsp;a&nbsp;binary&nbsp;data&nbsp;file&nbsp;with&nbsp;one&nbsp;number&nbsp;in&nbsp;it</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">x</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Single</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">17.164</span><br />
+<br />
+<span class="key">Open</span>&nbsp;<span class="quo">"MyFile.Dat"</span>&nbsp;<span class="key">For</span>&nbsp;<span class="key">Binary</span>&nbsp;<span class="key">As</span>&nbsp;<span class="oth">#</span><span class="num">1</span><br />
+&nbsp;&nbsp;<span class="com">''&nbsp;put&nbsp;without&nbsp;a&nbsp;position&nbsp;setting&nbsp;will&nbsp;put&nbsp;from&nbsp;the&nbsp;last&nbsp;known&nbsp;file&nbsp;position</span><br />
+&nbsp;&nbsp;<span class="com">''&nbsp;in&nbsp;this&nbsp;case,&nbsp;the&nbsp;very&nbsp;beginning&nbsp;of&nbsp;the&nbsp;file.</span><br />
+&nbsp;&nbsp;<span class="key">Put</span>&nbsp;<span class="oth">#</span><span class="num">1</span><span class="oth">,</span>&nbsp;<span class="oth">,</span>&nbsp;<span class="wrd">x</span><br />
+<span class="key">Close</span>&nbsp;<span class="oth">#</span><span class="num">1</span><br />
+</div></tt><br />
+<br \>
+<tt><div class="freebasic">
+<span class="com">''&nbsp;Now&nbsp;read&nbsp;the&nbsp;number&nbsp;from&nbsp;the&nbsp;file</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">x</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Single</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span><br />
+<br />
+<span class="key">Open</span>&nbsp;<span class="quo">"MyFile.Dat"</span>&nbsp;<span class="key">For</span>&nbsp;<span class="key">Binary</span>&nbsp;<span class="key">As</span>&nbsp;<span class="oth">#</span><span class="num">1</span><br />
+&nbsp;&nbsp;<span class="key">Get</span>&nbsp;<span class="oth">#</span><span class="num">1</span><span class="oth">,</span>&nbsp;<span class="oth">,</span>&nbsp;<span class="wrd">x</span><br />
+<span class="key">Close</span>&nbsp;<span class="oth">#</span><span class="num">1</span><br />
+<br />
+<span class="key">Print</span>&nbsp;<span class="wrd">x</span><br />
+</div></tt><br />
+<br \>
+<tt><div class="freebasic">
+<span class="com">''&nbsp;Read&nbsp;entire&nbsp;contents&nbsp;of&nbsp;a&nbsp;file&nbsp;to&nbsp;a&nbsp;string</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">txt</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span><br />
+<br />
+<span class="key">Open</span>&nbsp;<span class="quo">"myfile.txt"</span>&nbsp;<span class="key">For</span>&nbsp;<span class="key">Binary</span>&nbsp;<span class="key">Access</span>&nbsp;<span class="key">Read</span>&nbsp;<span class="key">As</span>&nbsp;<span class="oth">#</span><span class="num">1</span><br />
+&nbsp;&nbsp;<span class="key">If</span>&nbsp;<span class="key">LOF</span><span class="oth">(</span><span class="num">1</span><span class="oth">)</span>&nbsp;<span class="oth">&gt;</span>&nbsp;<span class="num">0</span>&nbsp;<span class="key">Then</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;our&nbsp;string&nbsp;has&nbsp;as&nbsp;many&nbsp;characters&nbsp;as&nbsp;the&nbsp;file&nbsp;has&nbsp;in&nbsp;bytes</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">txt</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">String</span><span class="oth">(</span><span class="key">LOF</span><span class="oth">(</span><span class="num">1</span><span class="oth">),</span>&nbsp;<span class="num">0</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;size&nbsp;of&nbsp;txt&nbsp;is&nbsp;known.&nbsp;&nbsp;entire&nbsp;string&nbsp;filled&nbsp;with&nbsp;file&nbsp;data</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Get</span>&nbsp;<span class="oth">#</span><span class="num">1</span><span class="oth">,</span>&nbsp;<span class="oth">,</span>&nbsp;<span class="wrd">txt</span><br />
+&nbsp;&nbsp;<span class="key">End</span>&nbsp;<span class="key">If</span><br />
+<span class="key">Close</span>&nbsp;<span class="oth">#</span><span class="num">1</span><br />
+<br />
+<span class="key">Print</span>&nbsp;<span class="wrd">txt</span><br />
+</div></tt><br />
+<br \>
+</div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> None<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgOpen.html">Open</a></tt><br \>
+<li> <tt><a href="KeyPgPutfileio.html">Put #</a></tt><br \>
+<li> <tt><a href="KeyPgGetfileio.html">Get #</a></tt><br \>
+<li> <tt><a href="KeyPgRandom.html">Random</a></tt><br \>
+<li> <tt><a href="KeyPgAppend.html">Append</a></tt><br \>
+<li> <tt><a href="KeyPgOutput.html">Output</a></tt><br \>
+<li> <tt><a href="KeyPgInputfilemode.html">Input</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

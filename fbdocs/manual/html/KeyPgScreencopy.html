@@ -1,0 +1,105 @@
+<html>
+<head>
+<title>ScreenCopy</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">ScreenCopy</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Copies the contents of a graphical page into another graphical page<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgSub.html">Sub</a> <b>ScreenCopy</b> ( <a href="KeyPgByval.html">ByVal</a> <i>frompage</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a> = -1, <a href="KeyPgByval.html">ByVal</a> <i>topage</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a> = -1 )<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
+<b>ScreenCopy</b> [ <i>from_page</i> ] [, <i>to_page</i> ]<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+<tt><i>frompage</i></tt><br \>
+<div class="fb_indent">page to copy from<br \>
+</div><tt><i>topage</i></tt><br \>
+<div class="fb_indent">page to copy to<br \>
+<br \>
+</div></div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+<tt><i>from_page</i></tt> is the page to copy from. If this argument is omitted, the current work page is assumed.<br \>
+<br \>
+<tt><i>to_page</i></tt> is the page to copy to. If this argument is omitted, the currently visible page is assumed.<br \>
+<br \>
+Page numbers range from 0 to the num_pages specified when setting the graphics mode minus 1 <br \>
+<br \>
+You can use this function to add a double buffer to your graphics. Any graphics screen mode supports this function; you must supply valid page numbers otherwise <tt><b>ScreenCopy</b></tt> will have no effect.<br \>
+<br \>
+There are two other functons similar to this: <tt><a href="KeyPgFlip.html">Flip</a></tt> and <tt><a href="KeyPgPcopy.html">PCopy</a></tt>.  <tt><a href="KeyPgFlip.html">Flip</a></tt> is designed to work in OpenGL modes, while <tt><a href="KeyPgPcopy.html">PCopy</a></tt> supports console pages on some platforms.  Both do the same thing as <tt><b>ScreenCopy</b></tt> in normal graphics modes.<br \>
+<br \>
+Example:<br \>
+See <tt><a href="KeyPgScreenset.html">ScreenSet</a></tt> example.<br \>
+<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="com">''&nbsp;320x200x8,&nbsp;with&nbsp;3&nbsp;pages</span><br />
+<span class="key">Screen</span>&nbsp;<span class="num">13</span><span class="oth">,,</span><span class="num">3</span><br />
+<br />
+<span class="com">''&nbsp;image&nbsp;for&nbsp;page&nbsp;#1</span><br />
+<span class="key">ScreenSet</span>&nbsp;<span class="num">1</span><span class="oth">,</span>&nbsp;<span class="num">0</span><br />
+<span class="key">Cls</span><br />
+<span class="key">Circle</span><span class="oth">(</span>&nbsp;<span class="num">160</span><span class="oth">,</span>&nbsp;<span class="num">100</span>&nbsp;<span class="oth">),</span>&nbsp;<span class="num">90</span><span class="oth">,</span>&nbsp;<span class="num">1</span>&nbsp;<span class="oth">,,,,</span>&nbsp;<span class="wrd">f</span><br />
+<span class="key">Circle</span><span class="oth">(</span>&nbsp;<span class="num">160</span><span class="oth">,</span>&nbsp;<span class="num">100</span>&nbsp;<span class="oth">),</span>&nbsp;<span class="num">90</span><span class="oth">,</span>&nbsp;<span class="num">15</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"Press&nbsp;2&nbsp;to&nbsp;copy&nbsp;page&nbsp;#2&nbsp;to&nbsp;visible&nbsp;page"</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"Press&nbsp;escape&nbsp;to&nbsp;exit"</span><br />
+<br />
+<span class="com">''&nbsp;image&nbsp;for&nbsp;page&nbsp;#2</span><br />
+<span class="key">ScreenSet</span>&nbsp;<span class="num">2</span><span class="oth">,</span>&nbsp;<span class="num">0</span><br />
+<span class="key">Cls</span><br />
+<span class="key">Line</span><span class="oth">(</span>&nbsp;<span class="num">50</span><span class="oth">,</span>&nbsp;<span class="num">50</span>&nbsp;<span class="oth">)-(</span>&nbsp;<span class="num">270</span><span class="oth">,</span>&nbsp;<span class="num">150</span>&nbsp;<span class="oth">),</span>&nbsp;<span class="num">2</span><span class="oth">,</span>&nbsp;<span class="wrd">bf</span><br />
+<span class="key">Line</span><span class="oth">(</span>&nbsp;<span class="num">50</span><span class="oth">,</span>&nbsp;<span class="num">50</span>&nbsp;<span class="oth">)-(</span>&nbsp;<span class="num">270</span><span class="oth">,</span>&nbsp;<span class="num">150</span>&nbsp;<span class="oth">),</span>&nbsp;<span class="num">15</span><span class="oth">,</span>&nbsp;<span class="wrd">b</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"Press&nbsp;1&nbsp;to&nbsp;copy&nbsp;page&nbsp;#1&nbsp;to&nbsp;visible&nbsp;page"</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"Press&nbsp;escape&nbsp;to&nbsp;exit"</span><br />
+<br />
+<span class="com">''&nbsp;page&nbsp;#0&nbsp;is&nbsp;the&nbsp;visible&nbsp;page</span><br />
+<span class="key">ScreenSet</span>&nbsp;<span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">0</span><br />
+<span class="key">Cls</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"Press&nbsp;1&nbsp;to&nbsp;copy&nbsp;page&nbsp;#1&nbsp;to&nbsp;visible&nbsp;page"</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"Press&nbsp;2&nbsp;to&nbsp;copy&nbsp;page&nbsp;#2&nbsp;to&nbsp;visible&nbsp;page"</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"Press&nbsp;escape&nbsp;to&nbsp;exit"</span><br />
+<br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">k</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span><br />
+<br />
+<span class="key">Do</span><br />
+&nbsp;&nbsp;<span class="wrd">k</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">Inkey</span><br />
+&nbsp;&nbsp;<span class="key">Select</span>&nbsp;<span class="key">Case</span>&nbsp;<span class="wrd">k</span><br />
+&nbsp;&nbsp;<span class="key">Case</span>&nbsp;<span class="key">Chr</span><span class="oth">(</span><span class="num">27</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Exit</span>&nbsp;<span class="key">Do</span><br />
+&nbsp;&nbsp;<span class="key">Case</span>&nbsp;<span class="quo">"1"</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">ScreenCopy</span>&nbsp;<span class="num">1</span><span class="oth">,</span>&nbsp;<span class="num">0</span><br />
+&nbsp;&nbsp;<span class="key">Case</span>&nbsp;<span class="quo">"2"</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">ScreenCopy</span>&nbsp;<span class="num">2</span><span class="oth">,</span>&nbsp;<span class="num">0</span><br />
+&nbsp;&nbsp;<span class="key">End</span>&nbsp;<span class="key">Select</span><br />
+<br />
+&nbsp;&nbsp;<span class="key">Sleep</span>&nbsp;<span class="num">25</span><br />
+<span class="key">Loop</span><br />
+</div></tt><br />
+<br \>
+<br \>
+</div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
+<ul><li> Not available in the <i><a href="CompilerOptlang.html">-lang qb</a></i> dialect unless referenced with the alias <tt><b>__Screencopy</b></tt>.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> New to FreeBASIC. QB had <tt><a href="KeyPgPcopy.html">PCopy</a></tt> to do the same function.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgScreengraphics.html">Screen (Graphics)</a></tt><br \>
+<li> <tt><a href="KeyPgScreenres.html">ScreenRes</a></tt><br \>
+<li> <tt><a href="KeyPgScreenset.html">ScreenSet</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

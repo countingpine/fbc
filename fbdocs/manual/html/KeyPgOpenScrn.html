@@ -1,0 +1,75 @@
+<html>
+<head>
+<title>Open Scrn</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Open Scrn</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Opens the console directly for input and output as a file<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<b><a href="KeyPgOpen.html">Open</a> Scrn</b> [for <i>mode</i>] <a href="KeyPgAs.html">As</a> [#]<i>filenum</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a><br \>
+</tt><br \>
+</div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
+<b>Open Scrn</b> [for <i>mode</i>] as [#]<i>filenum</i><br \>
+<div class="fb_indent"><i>or</i><br \>
+</div><i>result</i> = <b>Open Scrn</b>( [for <i>mode</i>] as [#]<i>filenum</i> )<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+<tt><i>mode</i></tt><br \>
+<div class="fb_indent">Either <tt><a href="KeyPgInputfilemode.html">Input</a></tt> or <tt><a href="KeyPgOutput.html">Output</a></tt>.  If omitted, <tt><a href="KeyPgOutput.html">Output</a></tt> is assumed.<br \>
+</div><tt><i>filenum</i></tt><br \>
+<div class="fb_indent">An unused file number.<br \>
+<br \>
+</div></div><div class="fb_sect_title">Return Value</div><div class="fb_sect_cont"><br \>
+Zero is returned if <tt><b>Open Err</b></tt> completed successfully, otherwise a non-zero value is returned to indicate failure.<br \>
+<br \>
+</div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+This command opens the console for both input and output as a file, allowing to read/write from/to it with normal file commands.<br \>
+<br \>
+This command may use direct access to the console for speed in some implementations, so  it should not be used when the input / output is required to be redirected or piped with OS commands.    <br \>
+<br \>
+The normal console commands, such as <tt><a href="KeyPgColor.html">Color</a></tt> and <tt><a href="KeyPgLocate.html">Locate</a></tt>, do not work in this mode, because they do not accept a file number.<br \>
+<br \>
+The <tt>[For Input|Output]</tt> clause is allowed for compatibility, but is ignored.<br \>
+<br \>
+<tt><i>filenum</i></tt> is an unused file number.<br \>
+<br \>
+An unused file number can be found using <tt><a href="KeyPgFreefile.html">FreeFile</a></tt>.<br \>
+<br \>
+<br \>
+<b>Runtime errors:</b><br \>
+    <tt><b>Open Cons</b></tt> throws one of the following <a href="ProPgErrorHandling.html">runtime errors</a>:<br \>
+<br \>
+<i>(<tt>1</tt>) Illegal function call</i><br \>
+<ul><ul><li> Filenumber was not free at the time. use <tt><a href="KeyPgFreefile.html">FreeFile</a></tt> to ensure that filenumber is free.<br \>
+<br \>
+</ul></ul></div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="key">Dim</span>&nbsp;<span class="wrd">a</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span><br />
+<span class="key">Open</span>&nbsp;<span class="key">Scrn</span>&nbsp;<span class="key">For</span>&nbsp;<span class="key">Input</span>&nbsp;&nbsp;<span class="key">As</span>&nbsp;<span class="oth">#</span><span class="num">1</span><br />
+<span class="key">Print</span>&nbsp;<span class="oth">#</span><span class="num">1</span><span class="oth">,</span><span class="quo">"Please&nbsp;write&nbsp;something&nbsp;and&nbsp;press&nbsp;ENTER"</span><br />
+<span class="key">Line</span>&nbsp;<span class="key">Input</span>&nbsp;<span class="oth">#</span><span class="num">1</span><span class="oth">,</span><span class="wrd">a</span><br />
+<span class="key">Print</span>&nbsp;<span class="oth">#</span><span class="num">1</span><span class="oth">,</span>&nbsp;<span class="quo">"You&nbsp;wrote"</span><span class="oth">;</span><span class="wrd">a</span><br />
+<span class="key">Close</span><br />
+<span class="key">Sleep</span><br />
+</div></tt><br />
+<br \>
+</div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> QB used OPEN "SCRN:" ...<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgOpenCons.html">Open Cons</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

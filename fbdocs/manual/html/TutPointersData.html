@@ -1,0 +1,134 @@
+<html>
+<head>
+<title>Pointers, Data Types and Memory</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Pointers, Data Types and Memory</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	<i>Written by <a href="WikiRick.html">rdc</a></i><br \>
+<br \>
+If you read the article <a href="TutPointers.html">Introduction to Pointers</a> you know that pointers contain memory location addresses. You can manipulate the data in these memory locations using the reference operator *. Using pointers with single data item isn?t a problem, but what if you need to store multiple data items together and manipulate them using a pointer? It can get a bit tricky unless you understand how data is stored in memory.<br \>
+<br \>
+A single memory location in a computer is 1 byte long. Big enough to hold a single ANSI character (as opposed to Unicode characters, which are wide characters and are two bytes. We won?t be discussing Unicode characters in this article.) However, all data types are not a single byte in width. Here is a simple program that displays the length in bytes of each data type.<br \>
+<br \>
+<tt><tt><div class="freebasic">
+<span class="key">Dim</span>&nbsp;<span class="wrd">a</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Byte</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">b</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Short</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">c</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">d</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">LongInt</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">au</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">UByte</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">bu</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">UShort</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">cu</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">UInteger</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">du</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">ULongInt</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">e</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Single</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">f</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Double</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">g</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="key">Ptr</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">h</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Byte</span>&nbsp;<span class="key">Ptr</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">s1</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span>&nbsp;<span class="oth">*</span>&nbsp;<span class="num">10</span>&nbsp;<span class="com">'fixed&nbsp;string</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">s2</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">'variable&nbsp;length&nbsp;string</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">s3</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">ZString</span>&nbsp;<span class="key">Ptr</span>&nbsp;<span class="com">'zstring</span><br />
+<br />
+<br />
+<span class="wrd">s1</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="quo">"Hello&nbsp;World!"</span><br />
+<span class="wrd">s2</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="quo">"Hello&nbsp;World&nbsp;from&nbsp;FreeBasic!"</span><br />
+<span class="wrd">s3</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">Allocate</span><span class="oth">(</span>&nbsp;<span class="key">Len</span><span class="oth">(</span>&nbsp;<span class="wrd">s2</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="num">1</span>&nbsp;<span class="oth">)</span><br />
+<span class="oth">*</span><span class="wrd">s3</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">s2</span><br />
+<br />
+<span class="key">Print</span>&nbsp;<span class="quo">"Byte:&nbsp;"</span><span class="oth">;</span><span class="key">Len</span><span class="oth">(</span><span class="wrd">a</span><span class="oth">)</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"Short:&nbsp;"</span><span class="oth">;</span><span class="key">Len</span><span class="oth">(</span><span class="wrd">b</span><span class="oth">)</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"Integer:&nbsp;"</span><span class="oth">;</span><span class="key">Len</span><span class="oth">(</span><span class="wrd">c</span><span class="oth">)</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"Longint:&nbsp;"</span><span class="oth">;</span><span class="key">Len</span><span class="oth">(</span><span class="wrd">d</span><span class="oth">)</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"UByte:&nbsp;"</span><span class="oth">;</span><span class="key">Len</span><span class="oth">(</span><span class="wrd">au</span><span class="oth">)</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"UShort:&nbsp;"</span><span class="oth">;</span><span class="key">Len</span><span class="oth">(</span><span class="wrd">bu</span><span class="oth">)</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"UInteger:&nbsp;"</span><span class="oth">;</span><span class="key">Len</span><span class="oth">(</span><span class="wrd">cu</span><span class="oth">)</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"ULongint:&nbsp;"</span><span class="oth">;</span><span class="key">Len</span><span class="oth">(</span><span class="wrd">du</span><span class="oth">)</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"Single:&nbsp;"</span><span class="oth">;</span><span class="key">Len</span><span class="oth">(</span><span class="wrd">e</span><span class="oth">)</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"Double:&nbsp;"</span><span class="oth">;</span><span class="key">Len</span><span class="oth">(</span><span class="wrd">f</span><span class="oth">)</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"Integer&nbsp;Pointer:&nbsp;"</span><span class="oth">;</span><span class="key">Len</span><span class="oth">(</span><span class="wrd">g</span><span class="oth">)</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"Byte&nbsp;Pointer:&nbsp;"</span><span class="oth">;</span><span class="key">Len</span><span class="oth">(</span><span class="wrd">h</span><span class="oth">)</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"Fixed&nbsp;String:&nbsp;"</span><span class="oth">;</span><span class="key">Len</span><span class="oth">(</span><span class="wrd">s1</span><span class="oth">)</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"Variable&nbsp;String:&nbsp;"</span><span class="oth">;</span><span class="key">Len</span><span class="oth">(</span><span class="wrd">s2</span><span class="oth">)</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"ZString:&nbsp;"</span><span class="oth">;</span><span class="key">Len</span><span class="oth">(*</span><span class="wrd">s3</span><span class="oth">)</span><br />
+<br />
+<span class="key">Deallocate</span>&nbsp;<span class="wrd">s3</span><br />
+<br />
+<span class="key">Sleep</span><br />
+</div></tt><br />
+</tt><br \>
+<br \>
+The output is:<br \>
+<br \>
+<tt><tt><div class="freebasic">
+<span class="key">Byte</span><span class="oth">:</span>&nbsp;&nbsp;<span class="num">1</span><br />
+<span class="key">Short</span><span class="oth">:</span>&nbsp;&nbsp;<span class="num">2</span><br />
+<span class="key">Integer</span><span class="oth">:</span>&nbsp;&nbsp;<span class="num">4</span><br />
+<span class="key">LongInt</span><span class="oth">:</span>&nbsp;&nbsp;<span class="num">8</span><br />
+<span class="key">UByte</span><span class="oth">:</span>&nbsp;&nbsp;<span class="num">1</span><br />
+<span class="key">UShort</span><span class="oth">:</span>&nbsp;&nbsp;<span class="num">2</span><br />
+<span class="key">UInteger</span><span class="oth">:</span>&nbsp;&nbsp;<span class="num">4</span><br />
+<span class="key">ULongInt</span><span class="oth">:</span>&nbsp;&nbsp;<span class="num">8</span><br />
+<span class="key">Single</span><span class="oth">:</span>&nbsp;&nbsp;<span class="num">4</span><br />
+<span class="key">Double</span><span class="oth">:</span>&nbsp;&nbsp;<span class="num">8</span><br />
+<span class="key">Integer</span>&nbsp;<span class="key">Pointer</span><span class="oth">:</span>&nbsp;&nbsp;<span class="num">4</span><br />
+<span class="key">Byte</span>&nbsp;<span class="key">Pointer</span><span class="oth">:</span>&nbsp;&nbsp;<span class="num">4</span><br />
+<span class="wrd">Fixed</span>&nbsp;<span class="key">String</span><span class="oth">:</span>&nbsp;&nbsp;<span class="num">10</span><br />
+<span class="wrd">Variable</span>&nbsp;<span class="key">String</span><span class="oth">:</span>&nbsp;&nbsp;<span class="num">27</span><br />
+<span class="key">ZString</span><span class="oth">:</span>&nbsp;&nbsp;<span class="num">27</span><br />
+</div></tt><br />
+</tt><br \>
+<br \>
+Notice that the length of a pointer is always 4 bytes long (the same as an integer), regardless of the data being pointed to, since a pointer contains a memory address and not data.<br \>
+<br \>
+Looking at the length of the different data types, you can see that if you were to <a href="KeyPgAllocate.html">Allocate</a> enough space for 10 integers, it would take 40 bytes of memory. Each integer takes up 4 bytes. So the question is, how do you access each integer value from the memory buffer? The answer, pointer math. Take a look at the following program.<br \>
+<br \>
+<tt><tt><div class="freebasic">
+<span class="key">Option</span>&nbsp;<span class="key">Explicit</span><br />
+<br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">a</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">aptr</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="key">Ptr</span><br />
+<br />
+<span class="com">'Allocate&nbsp;enough&nbsp;space&nbsp;for&nbsp;2&nbsp;integers</span><br />
+<span class="wrd">aptr</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">Allocate</span><span class="oth">(</span><span class="key">Len</span><span class="oth">(</span><span class="wrd">a</span><span class="oth">)</span>&nbsp;<span class="oth">*</span>&nbsp;<span class="num">2</span><span class="oth">)</span><br />
+<span class="com">'Load&nbsp;our&nbsp;first&nbsp;integer</span><br />
+<span class="oth">*</span><span class="wrd">aptr</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">1</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"Int&nbsp;#1:&nbsp;"</span><span class="oth">;*</span><span class="wrd">aptr</span><br />
+<span class="com">'Move&nbsp;the&nbsp;pointer&nbsp;to&nbsp;the&nbsp;next&nbsp;integer&nbsp;position</span><br />
+<span class="com">'aptr&nbsp;+&nbsp;4</span><br />
+<span class="oth">*(</span><span class="wrd">aptr</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="num">4</span><span class="oth">)</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">2</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"Int&nbsp;#2:&nbsp;"</span><span class="oth">;*(</span><span class="wrd">aptr</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="num">4</span><span class="oth">)</span><br />
+<br />
+<span class="key">Deallocate</span>&nbsp;<span class="wrd">aptr</span><br />
+<span class="key">Sleep</span><br />
+<span class="key">End</span><br />
+</div></tt><br />
+</tt><br \>
+<br \>
+In this program we dimension two variables, an <a href="KeyPgInteger.html">Integer</a> and an <a href="KeyPgInteger.html">Integer</a> <a href="KeyPgPointer.html">Pointer</a>, aptr. Aptr will point to our memory buffer that will contain two integers. The <a href="KeyPgAllocate.html">Allocate</a> function requires the size of the buffer we need, so we multiply the size of an <a href="KeyPgInteger.html">Integer</a> by 2 to reserve 8 bytes of memory (each integer will take 4 bytes of space). <br \>
+<br \>
+After the allocation process, aptr contains the address of the first byte of our memory buffer. Storing the first integer is simply a matter of using the reference operator and setting the value to 1. To print out the value, we again just use *aptr.<br \>
+<br \>
+Now, le me ask you a question: How does the compiler know that the value 1 requires 4 bytes and not 1 or 2 bytes? Because we dimensioned aptr as an <i>integer ptr</i>. The compiler knows that an integer takes 4 bytes and so loads the data into four bytes of memory. This is why when we print out the value we get 1 and not some strange number.<br \>
+<br \>
+To load the second value into our buffer, we use:<br \>
+<br \>
+<tt><tt><div class="freebasic">
+<span class="oth">*(</span><span class="wrd">aptr</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="num">4</span><span class="oth">)</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">2</span><br />
+</div></tt><br />
+</tt><br \>
+<br \>
+This may look a little strange at first glance. Aptr points to the first byte in our memory buffer. An integer is 4 bytes long, so to get to the next integer byte position, we must add 4 to aptr. We need the parenthesis around the add operation because the reference operator * has a higher precedence than +. The parenthesis ensure that we perform the add operation first, and then apply the indirection operator.<br \>
+<br \>
+Notice that we didn?t increment aptr directly. If we did, aptr would no longer point to the start of the memory buffer and the program would crash when we deallocated the buffer since it would <a href="KeyPgDeallocate.html">Deallocate</a> memory outside the memory buffer. If the need arises to directly increment a pointer, then create a temporary pointer variable and increment that, rather than the pointer used in the original allocation. <br \>
+<br \>
+Memory buffers and pointers are a powerful way to store and manipulate data in memory. Care must be taken though to ensure that you are accessing the data correctly according to the type of data being stored in the buffer.
+</div>
+</div> 
+</div> 
+</body>
+</html>

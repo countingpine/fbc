@@ -1,0 +1,100 @@
+<html>
+<head>
+<title>Function (Member)</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Function (Member)</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Declares or defines a member procedure returning a value.<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+{ <a href="KeyPgType.html">Type</a> | <a href="KeyPgClass.html">Class</a> | <a href="KeyPgUnion.html">Union</a> } <i>typename</i><br \>
+<div class="fb_indent"><a href="KeyPgDeclare.html">Declare</a> [ <a href="KeyPgStaticMember.html">Static</a> | <a href="KeyPgConstMember.html">Const</a> ] <b>Function</b> <i>fieldname</i> [<i>calling convention specifier</i>] [ <a href="KeyPgAlias.html">Alias</a> <i>external_name</i> ] ( [ <i>parameters</i> ] ) <a href="KeyPgAs.html">As</a> <a href="DataType.html">datatype</a> [ <a href="KeyPgStatic.html">Static</a> ]<br \>
+</div>End { <a href="KeyPgType.html">Type</a> | <a href="KeyPgClass.html">Class</a> | <a href="KeyPgUnion.html">Union</a> }<br \>
+<br \>
+<b>Function</b> <i>typename</i>.<i>fieldname</i> ( [ <i>parameters</i> ] ) <a href="KeyPgAs.html">As</a> <a href="DataType.html">datatype</a><br \>
+<div class="fb_indent"><i>statements</i><br \>
+</div><b>End Function</b><br \>
+</tt><br \>
+</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+<tt><i>typename</i></tt> <br \>
+<div class="fb_indent">name of the <tt><a href="KeyPgType.html">Type</a></tt>, <tt><a href="KeyPgClass.html">Class</a></tt>, or <tt><a href="KeyPgUnion.html">Union</a></tt><br \>
+</div><tt><i>fieldname</i></tt> <br \>
+<div class="fb_indent">name of the procedure<br \>
+</div><tt><i>external_name</i></tt><br \>
+<div class="fb_indent">name of field as seen when externally linked<br \>
+</div><tt><i>parameters</i></tt> <br \>
+<div class="fb_indent">the parameters to be passed to the procedure<br \>
+</div><tt><i>calling convention specifier</i></tt>	<br \>
+<div class="fb_indent">can be one of: <tt><a href="KeyPgCdecl.html">cdecl</a></tt>, <tt><a href="KeyPgStdcall.html">stdcall</a></tt> or <tt><a href="KeyPgPascal.html">pascal</a></tt><br \>
+<br \>
+</div></div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+<tt><b>Function</b></tt> members are accessed with <tt><a href="KeyPgOpMemberAccess.html">Operator . (Member Access)</a></tt> or <tt><a href="KeyPgOpPtrMemberAccess.html">Operator -&gt; (Pointer To Member Access)</a></tt> to call a member procedure that returns a value.  The procedure may optionally accept parameters either <tt><a href="KeyPgByval.html">ByVal</a></tt> or <tt><a href="KeyPgByref.html">ByRef</a></tt>.  <tt><i>typename</i></tt> be overloaded  without explicit use of the <tt><a href="KeyPgOverload.html">Overload</a></tt> keyword.<br \>
+<br \>
+<tt><i>typename</i></tt> is the name of the type for which the <tt><b>Function</b></tt> method is declared and defined.  Name resolution for <tt><i>typename</i></tt> follows the same rules as procedures when used in a <tt><a href="KeyPgNamespace.html">Namespace</a></tt>.<br \>
+<br \>
+A hidden <tt><a href="KeyPgThis.html">This</a></tt> parameter having the same type as <tt><i>typename</i></tt> is passed to non-static member procedures.  <tt><a href="KeyPgThis.html">This</a></tt> is used to access the fields of the <tt><a href="KeyPgType.html">Type</a></tt>, <tt><a href="KeyPgClass.html">Class</a></tt>, or <tt><a href="KeyPgUnion.html">Union</a></tt>.<br \>
+<br \>
+A <tt><a href="KeyPgStaticMember.html">Static (Member)</a></tt> may be declared using the <tt><b>Static</b></tt> specifier.  A <tt><a href="KeyPgConstMember.html">Const (Member)</a></tt> may be declared using the <tt><b>Const</b></tt> specifier.<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="def">#include&nbsp;"vbcompat.bi"<br />
+</span><br />
+<span class="key">Type</span>&nbsp;<span class="key">Date</span><br />
+<br />
+&nbsp;&nbsp;<span class="wrd">value</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Double</span><br />
+<br />
+&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Static</span>&nbsp;<span class="key">Function</span>&nbsp;<span class="wrd">Today</span><span class="oth">()</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Date</span><br />
+<br />
+&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Function</span>&nbsp;<span class="key">Year</span><span class="oth">()</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Function</span>&nbsp;<span class="key">Month</span><span class="oth">()</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Function</span>&nbsp;<span class="key">Day</span><span class="oth">()</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+<br />
+<span class="key">End</span>&nbsp;<span class="key">Type</span><br />
+<br />
+<span class="key">Function</span>&nbsp;<span class="wrd">Date.Today</span><span class="oth">()</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Date</span><br />
+&nbsp;&nbsp;<span class="key">Return</span>&nbsp;<span class="key">Type</span><span class="oth">(</span><span class="key">Now</span><span class="oth">())</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Function</span><br />
+<br />
+<span class="key">Function</span>&nbsp;<span class="wrd">Date.Year</span><span class="oth">()</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;<span class="key">Return</span>&nbsp;<span class="oth">..</span><span class="key">Year</span><span class="oth">(</span><span class="wrd">value</span><span class="oth">)</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Function</span><br />
+<br />
+<span class="key">Function</span>&nbsp;<span class="wrd">Date.Month</span><span class="oth">()</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;<span class="key">Return</span>&nbsp;<span class="oth">..</span><span class="key">Month</span><span class="oth">(</span><span class="wrd">value</span><span class="oth">)</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Function</span><br />
+<br />
+<span class="key">Function</span>&nbsp;<span class="wrd">Date.Day</span><span class="oth">()</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;<span class="key">Return</span>&nbsp;<span class="oth">..</span><span class="key">Day</span><span class="oth">(</span><span class="wrd">value</span><span class="oth">)</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Function</span><br />
+<br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">d</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Date</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">Date.Today</span><br />
+<br />
+<span class="key">Print</span>&nbsp;<span class="quo">"Year&nbsp;&nbsp;=&nbsp;"</span><span class="oth">;</span>&nbsp;<span class="wrd">d.Year</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"Month&nbsp;=&nbsp;"</span><span class="oth">;</span>&nbsp;<span class="wrd">d.Month</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"Day&nbsp;&nbsp;&nbsp;=&nbsp;"</span><span class="oth">;</span>&nbsp;<span class="wrd">d.Day</span><br />
+<br />
+</div></tt><br />
+<br \>
+</div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
+<ul><li> Only available in the <i><a href="CompilerOptlang.html">-lang fb</a></i> dialect.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgClass.html">Class</a></tt><br \>
+<li> <tt><a href="KeyPgFunction.html">Function</a></tt><br \>
+<li> <tt><a href="KeyPgMemberSub.html">Sub (Member)</a></tt><br \>
+<li> <tt><a href="KeyPgType.html">Type</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

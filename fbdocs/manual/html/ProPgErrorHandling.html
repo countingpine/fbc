@@ -1,0 +1,121 @@
+<html>
+<head>
+<title>Error Handling</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Error Handling</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Handling runtime errors.<br \>
+<br \>
+FreeBASIC can handle the errors in the following ways:<br \>
+<ul><li> By default the program does nothing with the errors - they are silently ignored and code continues. In this case code should process possible errors in the next line by using the <tt><a href="KeyPgErr.html">Err</a></tt> function.<br \>
+<li> If compiled with <i><a href="CompilerOpte.html">-e</a></i> or <i><a href="CompilerOptex.html">-ex</a></i> options, FreeBASIC uses QB-like error handling.<br \>
+<li> <b>Future</b> OOP versions of FreeBASIC may have a java-like TRY..CATCH...FINALLY exception handler implemented.<br \>
+<br \>
+</ul><b>NOTE:</b> The following information is valid unless the error produces an OS General Protection Fault (for example if the program writes outside the process memory area). In these cases the OS will immediately stop the program and issue an error: nothing can avoid it from inside FreeBASIC.<br \>
+<br \>
+<div class="fb_sect_title">Default error handling</div><div class="fb_sect_cont"><br \>
+<br \>
+The default FreeBASIC behavior is to set the ERR variable and continue. <br \>
+<br \>
+<tt><div class="freebasic">
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="wrd">e</span><br />
+<span class="key">Open</span>&nbsp;<span class="quo">"xzxwz.zwz"</span>&nbsp;<span class="key">For</span>&nbsp;<span class="key">Input</span>&nbsp;<span class="key">As</span>&nbsp;<span class="oth">#</span><span class="num">1</span><br />
+<span class="wrd">e</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">Err</span><br />
+<span class="key">Print</span>&nbsp;<span class="wrd">e</span><br />
+<span class="key">Sleep</span><br />
+</div></tt><br />
+<br \>
+(The example program supposes there is no <tt>xzxwz.zwz</tt> file). The program does not stop; it sets the ERR variable and continues. The error can be processed in the next line.<br \>
+<br \>
+Some IO functions such as <tt><a href="KeyPgOpen.html">Open</a></tt> and <tt><a href="KeyPgPutfileio.html">Put #</a></tt>... can be used in function form, returning an error number or zero if successful.<br \>
+<br \>
+<tt><div class="freebasic">
+<span class="key">Print</span>&nbsp;<span class="key">Open</span>&nbsp;<span class="oth">(</span><span class="quo">"xzxwz.zwz"</span>&nbsp;<span class="key">For</span>&nbsp;<span class="key">Input</span>&nbsp;<span class="key">As</span>&nbsp;<span class="oth">#</span><span class="num">1</span><span class="oth">)</span><br />
+<span class="key">Sleep</span><br />
+</div></tt><br />
+<br \>
+</div><div class="fb_sect_title">QuickBASIC-like error handling</div><div class="fb_sect_cont"><br \>
+<br \>
+If the  <i><a href="CompilerOpte.html">-e</a></i> or <i><a href="CompilerOptex.html">-ex</a></i> switch is used at compile time, the program is expected to have a QB-like error handler enabled. If no handler processes the error, the program stops with an error.<br \>
+<br \>
+Notice: if QB-Like error handling is used, the programmer should be prepared to handle all error conditions.<br \>
+<br \>
+<tt><div class="freebasic">
+<span class="com">''&nbsp;Compile&nbsp;with&nbsp;QB&nbsp;(-lang&nbsp;qb)&nbsp;dialect</span><br />
+<br />
+<span class="com">'$lang:&nbsp;"qb"</span><br />
+<br />
+<span class="key">On</span>&nbsp;<span class="key">Error</span>&nbsp;<span class="key">Goto</span>&nbsp;<span class="wrd">FAILED</span><br />
+<span class="key">Open</span>&nbsp;<span class="quo">"xzxwz.zwz"</span>&nbsp;<span class="key">For</span>&nbsp;<span class="key">Input</span>&nbsp;<span class="key">As</span>&nbsp;<span class="oth">#</span><span class="num">1</span><br />
+<span class="key">On</span>&nbsp;<span class="key">Error</span>&nbsp;<span class="key">Goto</span>&nbsp;<span class="num">0</span><br />
+<span class="key">Sleep</span><br />
+<span class="key">End</span><br />
+<br />
+<span class="wrd">FAILED</span><span class="oth">:</span><br />
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="wrd">e</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">Err</span><br />
+<span class="key">Print</span>&nbsp;<span class="wrd">e</span><br />
+<span class="key">Sleep</span><br />
+<span class="key">End</span><br />
+</div></tt><br />
+<br \>
+<tt><a href="KeyPgOnerror.html">On Error</a></tt> sets an error handling routine which the program will jump to when an error is found. <tt><a href="KeyPgOnerror.html">On Error</a> <a href="KeyPgGoto.html">Goto</a> 0</tt> disables the error handling.<br \>
+<br \>
+If an error handling routine is not set when an error occurs, the program will stop and send the console an error message.<br \>
+<pre class="fb_pre">
+Aborting program due to runtime error 2 (file not found)
+</pre><div style="clear:both">&nbsp;</div>The error handler routine can be at the end of the program, as in QB. The <tt><a href="KeyPgLocal.html">On Local Error</a></tt> statement allows the setting of a local error handler routine at the end of the same <tt><a href="KeyPgSub.html">Sub</a></tt> or <tt><a href="KeyPgFunction.html">Function</a></tt> in which the error occurs.<br \>
+<br \>
+<tt><div class="freebasic">
+<span class="com">''&nbsp;Compile&nbsp;with&nbsp;-e</span><br />
+<span class="com">''&nbsp;The&nbsp;-e&nbsp;command&nbsp;line&nbsp;option&nbsp;is&nbsp;needed&nbsp;to&nbsp;enable&nbsp;error&nbsp;handling.</span><br />
+<br />
+<span class="key">Declare</span>&nbsp;<span class="key">Sub</span>&nbsp;<span class="wrd">foo</span><br />
+&nbsp;&nbsp;<span class="wrd">foo</span><br />
+<span class="key">Sleep</span><br />
+<br />
+<span class="key">Sub</span>&nbsp;<span class="wrd">foo</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="wrd">filename</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="wrd">errmsg</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">filename</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="quo">""</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">On</span>&nbsp;<span class="key">Local</span>&nbsp;<span class="key">Error</span>&nbsp;<span class="key">Goto</span>&nbsp;<span class="wrd">fail</span><br />
+&nbsp;&nbsp;<span class="key">Open</span>&nbsp;<span class="wrd">filename</span>&nbsp;<span class="key">For</span>&nbsp;<span class="key">Input</span>&nbsp;<span class="key">Access</span>&nbsp;<span class="key">Read</span>&nbsp;<span class="key">As</span>&nbsp;<span class="oth">#</span><span class="num">1</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"No&nbsp;error"</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">On</span>&nbsp;<span class="key">Local</span>&nbsp;<span class="key">Error</span>&nbsp;<span class="key">Goto</span>&nbsp;<span class="num">0</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Exit</span>&nbsp;<span class="key">Sub</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;<span class="wrd">fail</span><span class="oth">:</span><br />
+&nbsp;&nbsp;<span class="wrd">errmsg</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="quo">"Error&nbsp;"</span>&nbsp;<span class="oth">&amp;</span>&nbsp;<span class="key">Err</span>&nbsp;<span class="oth">&amp;</span>&nbsp;<span class="wrd">_</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="quo">"&nbsp;in&nbsp;function&nbsp;"</span>&nbsp;<span class="oth">&amp;</span>&nbsp;<span class="oth">*</span><span class="key">Erfn</span>&nbsp;<span class="oth">&amp;</span>&nbsp;<span class="wrd">_</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="quo">"&nbsp;on&nbsp;line&nbsp;"</span>&nbsp;<span class="oth">&amp;</span>&nbsp;<span class="key">Erl</span><br />
+&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="wrd">errmsg</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+<span class="key">End</span>&nbsp;<span class="key">Sub</span><br />
+</div></tt><br />
+<br \>
+If the <i><a href="CompilerOpte.html">-e</a></i> switch is used the error handler must terminate the program. <br \>
+With <i><a href="CompilerOptex.html">-ex</a></i> the error routine can end by using <tt><a href="KeyPgResume.html">Resume</a></tt> (retries the statement that caused the error) or <tt><a href="KeyPgResumenext.html">Resume Next</a></tt> (continues at the next instruction) .<br \>
+<br \>
+</div><div class="fb_sect_title">Error codes</div><div class="fb_sect_cont"><br \>
+<br \>
+See <a href="TblRuntimeErrors.html">Runtime Error Codes</a> for a listing of runtime error numbers and their associated meaning.<br \>
+<br \>
+No user error code range is defined. If <tt><a href="KeyPgError.html">Error</a></tt> is used to set an error code it is wise to use high values to avoid collisions with the list of built-in error codes. (This built-in list may be expanded later.)<br \>
+<br \>
+</div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <a href="CatPgError.html">Error Handling Functions</a><br \>
+<li> <a href="TblRuntimeErrors.html">Runtime Error Codes</a><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

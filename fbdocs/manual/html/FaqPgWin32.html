@@ -1,0 +1,112 @@
+<html>
+<head>
+<title>Windows Related FAQ</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Windows Related FAQ</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	<br \>
+<a name="item0"></a><br \>
+<b>Windows:</b><br \>
+<br \>
+<div class="fb_indent"><b>- <a href="#item01">Which IDEs are available for Windows?</a></b><br \>
+<b>- <a href="#item02">Can I get rid of the console / 'DOS' screen in a graphics application?</a></b><br \>
+<b>- <a href="#item03">My GUI program does nothing when run / The program compiles but I get a permission denied error in the linker</a></b><br \>
+<b>- <a href="#item04">How to debug ?</a></b><br \>
+<b>- <a href="#item05">Why Windows refuses to run my code using OUT and/or INP?</a></b><br \>
+<b>- <a href="#item06">I get the error 'Cannot start blah.exe because xxxx.dll was not found.' or similar. What is missing?</a></b><br \>
+<b>- <a href="#item07">Does FreeBASIC work with Windows Vista ?</a></b><br \>
+<b>- <a href="#item08">Where can I find some tutorials on programming the Windows GUI ?</a></b><br \>
+<b>- <a href="#item09">Are there Windows GUI code builders for FB?</a></b>	<br \>
+<br \>
+</div><br \>
+<br \>
+<br \>
+<div style="text-align: center;"><b>FreeBASIC Windows questions</b></div><br \>
+<br \>
+<a name="item01"></a><b>Which IDEs are available for Windows?</b><br \>
+<br \>
+<div class="fb_indent">At the moment three full featured IDEs have been developed specifically for FB: <a href="http://fbide.freebasic.net/">FBIde</a> (not being updated, avoid using of old versions of FBC bundled with it), <a href="http://fbedit.freebasic.net/">FbEdit</a> and <a href="http://www.planetsquires.com/jellyfishpro_freebasic.htm">JellyFishPro</a>. These IDEs require a minimum configuration -as path to the compiler- to work. <br \>
+You can also download  <a href="http://fbide.freebasic.net/">FBIde</a> and <a href="http://fbedit.freebasic.net/">FbEdit</a> as bundles  (Editor + Compiler) that install in a single operation. But the bundled version of the compiler may be out of date.<br \>
+Commercial "general use" IDEs can be used with FreeBASIC but may require an extensive setup. They are handy for multi language programming, as they provide a unified user interface.<br \>
+Instructions for installing FB JFish Pro, FBIde, and FbEdit can be found here:<br \>
+   - <a href="http://www.freebasic.net/forum/viewtopic.php?t=10350">IDE Installation guide for Windows</a><br \>
+<br \>
+</div><a href="#item0">Back to top</a>	<br \>
+<br \>
+<a name="item02"></a><b>Can I get rid of the console / 'DOS' screen in a graphics application?</b><br \>
+<div class="fb_indent">Yes. You have to give FreeBASIC the right command for it when you compile your program.<br \>
+</div><ul><li> If you compile from a command prompt, simply add <tt>"-s gui"</tt> to the end, like <tt>"fbc myprg.bas -s gui"</tt><br \>
+<li> If you compile in a specific IDE, you have to edit the "Compiler Defaults". <br \>
+<ul><li> In Jelly-Fish Pro, its "Compiler-&gt;Set Compiler Defaults-&gt;Compiler Options". Add "-s gui" (NO QUOTES) in that box.<br \>
+<li> In FbEdit select Windows GUI in the targets dropdown list in the right of the tool bar.<br \>
+<br \>
+</ul></ul><a href="#item0">Back to top</a><br \>
+<br \>
+<a name="item03"></a><b>My GUI program does nothing when run / The program compiles but I get a permission denied error in the linker</b><br \>
+<div class="fb_indent">The problem may be related with the previous question. If a program tries to PRINT and it was compiled with <tt>"-s gui"</tt> it will freeze because no console is available. If the PRINT is issued before the first window is registered/opened, nothing will show in the screen or in the taskbar. The running program can only be seen in (and killed from) the task manager's processes tab. If a new compilation is tried  before killing the process it will give a "Permission denied" error when the compiler tries to modify a still running .exe.<br \>
+In Windows GUI programs do not use console commands. Use MessageBox or print to a log file to issue any error message to the user. Be sure any PRINT to console you used for debugging is not compiled in the final version. <br \>
+<br \>
+</div><a href="#item0">Back to top</a><br \>
+<br \>
+<a name="item04"></a><b>How to debug ?</b><br \>
+<div class="fb_indent">FreeBASIC can use any debugger compatible with GNU GDB. Insight Win32 debugger is an user friendly wrapper for GDB. <br \>
+</div><ul><li> Get Insight from <a href="http://prdownloads.sourceforge.net/dev-cpp/Insight_Binary.DevPak?download">Dev-C++</a><br \>
+<li> Rename the file to Insight.tar.bz2, and decompress it to an empty folder<br \>
+<li> Compile your program with the -g switch<br \>
+<li> Run &lt;Your_Insight_Dir&gt;\bin\usr\bin\Insight.exe<br \>
+<li> Do File&gt;Open to load your program into Insight<br \>
+<li> From there you can watch, set breakpoints, step, examine memory and registers. Check Insight's help<br \>
+<br \>
+</ul><a href="#item0">Back to top</a><br \>
+<br \>
+<a name="item05"></a><b>Why Windows refuses to run my code using OUT and/or INP?</b><br \>
+<div class="fb_indent">Windows requires a driver to be installed to access the hardware ports. FB-Win32 programs using INP and OUT include a built-in driver that installs temporarily for a session. Windows allows only users with Admin rights to run driver installations. This means if you usually run your windows sessions without Admin rights, you will have to use the windows command line command RUNAS to run your program for the first time in each session so Windows allows it to install the driver.<br \>
+If this behavior is not acceptable you can use an external library as <a href="http://www.winfordeng.com/products/portio32/">PortIO32</a> that installs a permanent port driver.<br \>
+<br \>
+</div><a href="#item0">Back to top</a><br \>
+<br \>
+<a name="item06"></a><b>I get the error 'Cannot start blah.exe because xxxx.dll was not found.' or similar. What is missing?</b><br \>
+<div class="fb_indent">You are trying to run a program using a third party library that resides in a dll not installed in your system.<br \>
+FreeBASIC comes with headers and wrappers required to code for a lot of third party libraries but does not provide the actual runtime dll files.<br \>
+You have to download and install these from their home page. Find in <a href="http://www.freebasic.net/forum/viewtopic.php?t=788">the Links thread in the Libraries subforum</a> the URL's of the home pages of the libraries provided. You need the binaries for Win32 of the libraries. If you want to develop programs with the libs you will need the documentation too.<br \>
+When releasing compiled code it's good etiquette to provide the third party dll's required to run it.<br \>
+<br \>
+</div><a href="#item0">Back to top</a><br \>
+<br \>
+<a name="item07"></a><b>Does FreeBASIC work with Windows Vista ?</b><br \>
+<div class="fb_indent">Yes. (Write me!!!)<br \>
+<br \>
+</div><a href="#item0">Back to top</a><br \>
+<br \>
+<a name="item08"></a><b>Where can I find some tutorials on programming the Windows GUI ?</b><br \>
+<div class="fb_indent">See the answers to this question in this <a href="http://www.freebasic.net/forum/viewtopic.php?p=89225">thread in the forum</a><br \>
+More advanced use requires a frequent consultation of the reference at the <a href="http://msdn2.microsoft.com/en-us/library/aa139672.aspx">Microsoft Developers Network</a>. A local install of the API reference is possible, search Microsoft for the Platform SDK (a huge download) and install just the documentation.<br \>
+<br \>
+</div><a href="#item0">Back to top</a><br \>
+<br \>
+<a name="item09"></a><b>Are there Windows GUI code builders for FB?</b>	<br \>
+<div class="fb_indent">Yes there are some 3rd party developments generating Windows API code  from a windows designer à la Visual Basic. None of them is Open source:<br \>
+    <a href="http://www.freewebs.com/fielden/">Jerry Fielden' Ezeegui</a> uses a "graphical" textmode interface to let you build your code.<br \>
+<a href="http://mrhx.ucoz.com/load/">mrhx Software's VISG</a> has a more classical user interface.<br \>
+Less helpful may be the graphical resource editors generating scripts for the resource compiler. Any editor generating scripts compatible with GoRC can be used, as the  one included with <a href="http://fbedit.freebasic.net/index.php">FbEdit</a>. Graphical resource editors are a great help in designing dialogs and menus, but they leave to you the task of writing the window procedures required to make them active.<br \>
+<br \>
+<br \>
+</div><a href="#item0">Back to top</a><br \>
+<br \>
+<div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<div class="fb_indent"><a href="CompilerFAQ.html">Compiler FAQ</a>.<br \>
+<a href="FaqPgrtlib.html">FB Runtime Library FAQ</a>.<br \>
+<br \>
+</div></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

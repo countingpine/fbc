@@ -1,0 +1,96 @@
+<html>
+<head>
+<title>Circle</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Circle</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Graphics statement to draw a circle<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<b>Circle</b> [<i>target</i>,] [STEP] (x,y), radius[, [color][, [start][, [end][, [aspect][, F]]]]]<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+<tt><i>target</i></tt><br \>
+<div class="fb_indent">specifies buffer to draw on.  <br \>
+</div><tt>STEP</tt><br \>
+<div class="fb_indent">indicates that coordinates are relative<br \>
+</div><tt>(<i>x, y</i>)</tt><br \>
+<div class="fb_indent">coordinates of the circle's center.<br \>
+</div><tt><i>radius</i></tt><br \>
+<div class="fb_indent">radius	<br \>
+</div><tt><i>color</i></tt><br \>
+<div class="fb_indent">the color attribute.<br \>
+</div><tt><i>start</i></tt><br \>
+<div class="fb_indent">starting angle<br \>
+</div><tt><i>end</i></tt><br \>
+<div class="fb_indent">ending angle<br \>
+</div><tt><i>aspect</i></tt><br \>
+<div class="fb_indent">aspect ratio<br \>
+</div><tt>F</tt><br \>
+<div class="fb_indent">fill mode indicator<br \>
+<br \>
+</div></div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+<tt><b>Circle</b></tt> will draw a circle, ellipse, or arc based on the parameters given to it. <br \>
+<br \>
+<tt><i>target</i></tt> specifies buffer to draw on.  <tt><i>target</i></tt> may be an image created with <tt><a href="KeyPgImagecreate.html">ImageCreate</a></tt> or <tt><a href="KeyPgGetgraphics.html">Get (Graphics)</a></tt>.  If omitted, <tt><i>target</i></tt> defaults to the screen's current work page.  (See <tt><a href="KeyPgScreenset.html">ScreenSet</a></tt>)<br \>
+<br \>
+The center of the shape will be placed on the destination surface at <tt>(<i>X</i>,<i>Y</i>)</tt>. <br \>
+<br \>
+<tt><i>Radius</i></tt> denotes the radius of the shape. If aspect ratio is used, the biggest radius must be given here.<br \>
+<br \>
+<tt><i>Color</i></tt> denotes the color attribute, which is mode specific (see <tt><a href="KeyPgColor.html">Color</a></tt> and <tt><a href="KeyPgScreengraphics.html">Screen (Graphics)</a></tt> for details). If omitted, the current foreground color as set by the <tt><a href="KeyPgColor.html">Color</a></tt> statement is used.<br \>
+<br \>
+The <tt>STEP</tt> option specifies that <tt><i>X</i></tt> and <tt><i>Y</i></tt> are offsets relative to the current graphics cursor position.<br \>
+<br \>
+<tt><i>start</i></tt> and <tt><i>end</i></tt> are angles are in <tt><a href="ProPgRadians.html">radians</a></tt>. These can range -2PI to 2PI; if you specify a negative angle, its value is changed sign and a line is drawn from the center up to that point in the arc. End angle can be less than start angle. If you do not specify start and end, a full circle/ellipse is drawn; if you you specify start but not end, end is assumed to be 2PI; if you specify end but not start, start is assumed to be 0.<br \>
+<br \>
+<tt><i>aspect</i></tt> is the aspect ratio, or the ratio of the y radius over the x radius. The default value is the value required to draw a perfect circle on the screen, keeping pixel aspect ratio in mind. This value can be calculated as follows:<br \>
+<br \>
+<tt>ratio = (y_radius / x_radius) * pixel_aspect_ratio</tt><br \>
+<br \>
+Where pixel_aspect_ratio is the ratio of the current mode width over the current mode height, assuming a 4:3 standard monitor. If aspect ratio is less than 1, radius is the x radius; if aspect is more or equal to 1, radius is the y radius.<br \>
+'f' is the fill flag. If you specify this flag, the circle/ellipse will be filled with the selected color. This has no effect if you're drawing an arc.<br \>
+<br \>
+Custom coordinates system set up by <tt><a href="KeyPgWindow.html">Window</a></tt> and/or <tt><a href="KeyPgViewgraphics.html">View (Graphics)</a></tt> affect the drawing operation; clipping set by <tt><a href="KeyPgViewgraphics.html">View</a></tt> also applies. When <tt><b>Circle</b></tt> finishes drawing, the current graphics cursor position is set to the supplied center.<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="com">'&nbsp;Set&nbsp;640x480&nbsp;mode,&nbsp;256&nbsp;colors</span><br />
+<span class="key">Screen</span>&nbsp;<span class="num">18</span><br />
+<br />
+<span class="com">'&nbsp;Draws&nbsp;a&nbsp;circle&nbsp;in&nbsp;the&nbsp;center</span><br />
+<span class="key">Circle</span>&nbsp;<span class="oth">(</span><span class="num">320</span><span class="oth">,</span>&nbsp;<span class="num">240</span><span class="oth">),</span>&nbsp;<span class="num">200</span><span class="oth">,</span>&nbsp;<span class="num">15</span><br />
+<br />
+<span class="com">'&nbsp;Draws&nbsp;a&nbsp;filled&nbsp;ellipse</span><br />
+<span class="key">Circle</span>&nbsp;<span class="oth">(</span><span class="num">320</span><span class="oth">,</span>&nbsp;<span class="num">240</span><span class="oth">),</span>&nbsp;<span class="num">200</span><span class="oth">,</span>&nbsp;<span class="num">2</span><span class="oth">,</span>&nbsp;<span class="oth">,</span>&nbsp;<span class="oth">,</span>&nbsp;<span class="num">0.2</span><span class="oth">,</span>&nbsp;<span class="wrd">F</span><br />
+<br />
+<span class="com">'&nbsp;Draws&nbsp;a&nbsp;small&nbsp;arc</span><br />
+<span class="key">Circle</span>&nbsp;<span class="oth">(</span><span class="num">320</span><span class="oth">,</span>&nbsp;<span class="num">240</span><span class="oth">),</span>&nbsp;<span class="num">200</span><span class="oth">,</span>&nbsp;<span class="num">4</span><span class="oth">,</span>&nbsp;<span class="num">0.83</span><span class="oth">,</span>&nbsp;<span class="num">1.67</span><span class="oth">,</span>&nbsp;<span class="num">3</span><br />
+<br />
+<span class="key">Sleep</span><br />
+</div></tt><br />
+<br \>
+<div class="fb_img"><img src="images/circle.png" /></div><br \>
+<br \>
+</div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><i>target</i></tt> is new to FreeBASIC<br \>
+<li> The FreeBASIC implementation uses a different algorithm for ellipse/arc drawing than QB, so the result may not be equal to QB for every pixel.<br \>
+<li> The F flag to draw filled circles/ellipses is new to FreeBASIC.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgScreengraphics.html">Screen (Graphics)</a></tt><br \>
+<li> <tt><a href="KeyPgColor.html">Color</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

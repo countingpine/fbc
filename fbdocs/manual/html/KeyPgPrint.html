@@ -1,0 +1,82 @@
+<html>
+<head>
+<title>Print</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Print</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Writes text to the screen<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<b>Print</b> [ <i>expressionlist</i> ] [ , | ; ]<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+<tt><i>expressionlist</i></tt><br \>
+<div class="fb_indent">list of items to print<br \>
+<br \>
+</div></div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+<tt><b>Print</b></tt> outputs a list of values to the screen. Numeric values are converted to their string representation, with left padding for the sign. Objects of user-defined types must overload <tt>Operator Cast () As String</tt>.<br \>
+<br \>
+Consecutive values in the expression list are separated either by a comma (<tt>,</tt>) or semicolon (<tt>;</tt>). A comma indicates printing should take place at the next 14 column boundary, while a semicolon indicates values are printed with no space between them.  This has a similar effect to concatenating expressions using <tt><a href="KeyPgOpConcat.html">+</a></tt> or <tt><a href="KeyPgOpConcatConvert.html">&amp;</a></tt>.<br \>
+<br \>
+<tt><b>Print</b></tt> also supports the special expressions, <tt><a href="KeyPgSpc.html">Spc</a>()</tt> and <tt><a href="KeyPgTab.html">Tab</a>()</tt>.  These can be used to space out expressions, or to align the printing to a specific column.<br \>
+<br \>
+A new-line character is printed after the values in the expression list unless the expression list is followed by a comma or semicolon.  A <tt><b>Print</b></tt> without any expressions or separators following it will just print a new-line.<br \>
+<br \>
+    NOTE: <tt><b>Print</b></tt> resets the <tt><a href="KeyPgErr.html">Err</a></tt> value after each expression is printed.<br \>
+    <br \>
+For more control over character style and text position in graphics modes, consider using <tt><a href="KeyPgDrawString.html">Draw String</a></tt>.<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="com">''&nbsp;print&nbsp;"Hello&nbsp;World!",&nbsp;and&nbsp;a&nbsp;new-line</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"Hello&nbsp;World!"</span><br />
+<br />
+<span class="com">''&nbsp;print&nbsp;several&nbsp;strings&nbsp;on&nbsp;one&nbsp;line,&nbsp;then&nbsp;print&nbsp;a&nbsp;new-line</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"Hello"</span><span class="oth">;</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"World"</span><span class="oth">;</span>&nbsp;<span class="quo">"!"</span><span class="oth">;</span><br />
+<span class="key">Print</span><br />
+<br />
+<span class="com">''&nbsp;column&nbsp;separator</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"Hello!"</span><span class="oth">,</span>&nbsp;<span class="quo">"World!"</span><br />
+</div></tt><br />
+<tt><div class="freebasic">
+<span class="com">''&nbsp;printing&nbsp;variables/expressions</span><br />
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Double</span>&nbsp;<span class="wrd">pi</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">Atn</span><span class="oth">(</span><span class="num">1</span><span class="oth">)</span>&nbsp;<span class="oth">*</span>&nbsp;<span class="num">4</span><br />
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span>&nbsp;<span class="wrd">s</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="quo">"FreeBASIC"</span><br />
+<br />
+<span class="key">Print</span>&nbsp;<span class="quo">"3&nbsp;*&nbsp;4&nbsp;="</span><span class="oth">;</span>&nbsp;<span class="num">3</span>&nbsp;<span class="oth">*</span>&nbsp;<span class="num">4</span><br />
+<br />
+<span class="key">Print</span>&nbsp;<span class="quo">"Pi&nbsp;is&nbsp;approximately"</span><span class="oth">;</span>&nbsp;<span class="wrd">pi</span><br />
+<span class="key">Print</span>&nbsp;<span class="wrd">s</span><span class="oth">;</span>&nbsp;<span class="quo">"&nbsp;is&nbsp;great!"</span><br />
+</div></tt><br />
+<br \>
+</div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
+<ul><li> In the <i><a href="CompilerOptlang.html">-lang qb</a></i> dialect, an extra space is printed after numbers.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> None, when using QBASIC's variable types in <i><a href="CompilerOptlang.html">-lang qb</a></i>.<br \>
+<li> Unsigned numbers are printed without a space before them.<br \>
+<li> QB did not support casting for UDTs, so didn't allow them to be <tt><b>Print</b></tt>ed.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgSpc.html">Spc</a></tt><br \>
+<li> <tt><a href="KeyPgTab.html">Tab</a></tt><br \>
+<li> <tt><a href="KeyPgPrintPp.html">Print #</a></tt><br \>
+<li> <tt><a href="KeyPgPrintusing.html">Print Using</a></tt><br \>
+<li> <tt><a href="KeyPgWrite.html">Write</a></tt><br \>
+<li> <tt><a href="KeyPgDrawString.html">Draw String</a></tt><br \>
+<li> <tt><a href="KeyPgInput.html">Input</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

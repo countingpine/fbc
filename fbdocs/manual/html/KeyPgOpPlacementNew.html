@@ -1,0 +1,95 @@
+<html>
+<head>
+<title>Operator Placement New</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Operator Placement New</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Operator to construct an object at a specified memory address.<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<i>result</i> = <b>New(<i>address</i>)</b> <i><a href="DataType.html">datatype</a></i><br \>
+<div class="fb_indent"><i>or</i><br \>
+</div><i>result</i> = <b>New(<i>address</i>)</b> <i><a href="DataType.html">datatype</a></i> ( <i>initializers</i>, ... )<br \>
+<div class="fb_indent"><i>or</i><br \>
+</div><i>result</i> = <b>New(<i>address</i>)</b> <i><a href="DataType.html">datatype</a></i><b>[</b> <i>count</i> <b>]</b><br \>
+</tt><br \>
+</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+<tt><i>address</i></tt> <br \>
+<div class="fb_indent">the location in memory to construct. the parenthesis are <b>not</b> optional.<br \>
+</div><tt><i>size</i></tt> <br \>
+<div class="fb_indent">number of bytes to allocate.<br \>
+</div><tt><i>initializers</i></tt><br \>
+<div class="fb_indent">Initial value(s) for the variable.<br \>
+</div><tt><i>datatype</i></tt><br \>
+<div class="fb_indent">name of the data type to create.<br \>
+</div><tt><i>count</i></tt><br \>
+<div class="fb_indent">Number of elements to allocate.<br \>
+<br \>
+</div></div><div class="fb_sect_title">Return Value</div><div class="fb_sect_cont"><br \>
+A pointer of type <a href="DataType.html">datatype</a> to the newly allocated data.<br \>
+<br \>
+</div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+The <tt><b>Placement New</b></tt> operator constructs a specified data type at the specified memory location. <br \>
+<br \>
+For simple types, like integers, an initial value can be given. For types without constructors, initial values can be specified for each field. Types that have constructors can have their constructors called by <tt><b>Placement New</b></tt> as well. If no initializers are given, the default values for those types will be set.<br \>
+<br \>
+Memory is <b>not</b> allocated when using the <tt><b>Placement New</b></tt> operator. Instead, the memory at the specified <tt><i>address</i></tt> is used.  It is incorrect to call <tt><a href="KeyPgOpDelete.html">Delete</a></tt> on the address. See examples below for proper <i>placement new</i> usage.<br \>
+<br \>
+Specifying an initial value of <tt><a href="KeyPgAny.html">Any</a></tt>, as in <tt>new(address) datatype(any)</tt> will not initialize the data.  This is only valid on data types that do not have constructors.<br \>
+<br \>
+Specifying an initial value of <tt><a href="KeyPgAny.html">Any</a></tt>, as in <tt>new(address) datatype[count]{any}</tt> will not initialize the data.  This is only valid on data types that do not have constructors.<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="com">''&nbsp;"placement&nbsp;new"&nbsp;example</span><br />
+<br />
+<span class="key">Type</span>&nbsp;<span class="wrd">Rational</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">numerator</span><span class="oth">,</span>&nbsp;<span class="wrd">denominator</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Type</span><br />
+<br />
+<span class="key">Scope</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;allocate&nbsp;some&nbsp;memory&nbsp;to&nbsp;construct&nbsp;as&nbsp;a&nbsp;Rational</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Any</span>&nbsp;<span class="key">Ptr</span>&nbsp;<span class="wrd">ap</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">CAllocate</span><span class="oth">(</span><span class="key">Len</span><span class="oth">(</span><span class="wrd">Rational</span><span class="oth">))</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;make&nbsp;the&nbsp;placement&nbsp;new&nbsp;call</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">Rational</span>&nbsp;<span class="key">Ptr</span>&nbsp;<span class="wrd">r</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">New</span>&nbsp;<span class="oth">(</span><span class="wrd">ap</span><span class="oth">)</span>&nbsp;<span class="wrd">Rational</span><span class="oth">(</span>&nbsp;<span class="num">3</span><span class="oth">,</span>&nbsp;<span class="num">4</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;you&nbsp;can&nbsp;see,&nbsp;the&nbsp;addresses&nbsp;are&nbsp;the&nbsp;same,&nbsp;just&nbsp;having&nbsp;different&nbsp;types&nbsp;in&nbsp;the&nbsp;compiler</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="wrd">ap</span><span class="oth">,</span>&nbsp;<span class="wrd">r</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;confirm&nbsp;all&nbsp;is&nbsp;okay</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="wrd">r</span><span class="oth">-&gt;</span><span class="wrd">numerator</span>&nbsp;<span class="oth">&amp;</span>&nbsp;<span class="quo">"/"</span>&nbsp;<span class="oth">&amp;</span>&nbsp;<span class="wrd">r</span><span class="oth">-&gt;</span><span class="wrd">denominator</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;destroying&nbsp;must&nbsp;be&nbsp;done&nbsp;explicitly,&nbsp;because&nbsp;delete&nbsp;will&nbsp;automatically&nbsp;free&nbsp;the&nbsp;memory</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;and&nbsp;that&nbsp;isn't&nbsp;always&nbsp;okay&nbsp;when&nbsp;using&nbsp;placement&nbsp;new.&nbsp;ALWAYS&nbsp;explicitly&nbsp;call&nbsp;the&nbsp;destructor.</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">r</span><span class="oth">-&gt;</span><span class="key">Destructor</span><span class="oth">(</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;we&nbsp;explicitly&nbsp;allocated,&nbsp;so&nbsp;we&nbsp;explicitly&nbsp;deallocate</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Deallocate</span><span class="oth">(</span>&nbsp;<span class="wrd">ap</span>&nbsp;<span class="oth">)</span><br />
+<br />
+<span class="key">End</span>&nbsp;<span class="key">Scope</span><br />
+</div></tt><br />
+</div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
+<ul><li> Only available in the <i><a href="CompilerOptlang.html">-lang fb</a></i> dialect.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> New to FreeBASIC<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgOpDelete.html">Delete</a></tt><br \>
+<li> <tt><a href="KeyPgOpNew.html">New</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

@@ -1,0 +1,81 @@
+<html>
+<head>
+<title>Using Prebuilt Libraries</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Using Prebuilt Libraries</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	FreeBASIC is distributed with many headers for common or popular libraries.  The headers allow a programmer to use functions available in these existing static or shared libraries (DLLs).  <br \>
+<br \>
+The libraries themselves are not distributed with FreeBASIC, but most can be downloaded from the web and readily installed.  Some other libraries may need to be first compiled from sources to be used.  Please see the documentation for the specific library on how to configure, install, and use them.<br \>
+<br \>
+Some static or shared libraries (DLLs) may be already present on the system since they might be part of FreeBASIC itself or the operating system.<br \>
+<br \>
+Although many headers can be used on any of the platforms supported by FreeBASIC, some headers are platform specific and will not be usable on other platforms.<br \>
+<br \>
+<div class="fb_sect_title">FreeBASIC headers</div><div class="fb_sect_cont"><br \>
+There are a few headers that are specific to FreeBASIC and expose some functions that are otherwise not available:<br \>
+<ul><li> <tt>datetime.bi</tt> - Declarations for <tt><a href="KeyPgDateSerial.html">DateSerial</a></tt>, <tt><a href="KeyPgDateValue.html">DateValue</a></tt>, <tt><a href="KeyPgIsDate.html">IsDate</a></tt>, <tt><a href="KeyPgYear.html">Year</a></tt>, <tt><a href="KeyPgMonth.html">Month</a></tt>, <tt><a href="KeyPgDay.html">Day</a></tt>, <tt><a href="KeyPgWeekday.html">Weekday</a></tt>, <tt><a href="KeyPgTimeserial.html">TimeSerial</a></tt>, <tt><a href="KeyPgTimeValue.html">TimeValue</a></tt>, <tt><a href="KeyPgHour.html">Hour</a></tt>, <tt><a href="KeyPgMinute.html">Minute</a></tt>, <tt><a href="KeyPgSecond.html">Second</a></tt>, <tt><a href="KeyPgNow.html">Now</a></tt>, <tt><a href="KeyPgDateAdd.html">DateAdd</a></tt>, <tt><a href="KeyPgDatePart.html">DatePart</a></tt>, <tt><a href="KeyPgDateDiff.html">DateDiff</a></tt>, <tt><a href="KeyPgMonthname.html">MonthName</a></tt>, <tt><a href="KeyPgWeekdayname.html">WeekdayName</a></tt><br \>
+<li> <tt>dir.bi</tt> - Constants to be used with <tt><a href="KeyPgDir.html">Dir</a></tt><br \>
+<li> <tt>fbgfx.bi</tt> - Additional constants and structures to be used with graphics commands such as <tt><a href="KeyPgMultikey.html">MultiKey</a></tt>,  <tt><a href="KeyPgScreencontrol.html">ScreenControl</a></tt>, and <tt><a href="KeyPgScreenevent.html">ScreenEvent</a></tt>, <tt><a href="KeyPgImagecreate.html">ImageCreate</a></tt>.<br \>
+<li> <tt>file.bi</tt> - Declarations for <tt><a href="KeyPgFilecopy.html">FileCopy</a></tt>, <tt><a href="KeyPgFileattr.html">FileAttr</a></tt>, <tt><a href="KeyPgFilelen.html">FileLen</a></tt>, <tt><a href="KeyPgFileexists.html">FileExists</a></tt>, <tt><a href="KeyPgFiledatetime.html">FileDateTime</a></tt><br \>
+<li> <tt>string.bi</tt> - Declarations for <tt><a href="KeyPgFormat.html">Format</a></tt><br \>
+<li> <tt>vbcompat.bi</tt> - Includes datetime.bi, dir.bi, file.bi, and string.bi plus additional constants compatible with Microsoft Visual Basic.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">C Runtime (CRT)</div><div class="fb_sect_cont"><br \>
+Where possible cross-platform compatible headers have been provided for the C runtime (CRT).  For example,<br \>
+<tt><div class="freebasic">
+<span class="def">#include&nbsp;once&nbsp;"crt.bi"<br />
+</span><span class="wrd">printf</span><span class="oth">(</span>&nbsp;<span class="oth">!</span><span class="quo">"Hello&nbsp;World\n"</span>&nbsp;<span class="oth">)</span><br />
+</div></tt><br />
+To include a specific CRT header, prefix the name of the header file with <tt>"crt/"</tt>.  For example:<br \>
+<tt><div class="freebasic">
+<span class="def">#include&nbsp;once&nbsp;"crt/stdio.bi"<br />
+</span><span class="key">Dim</span>&nbsp;<span class="wrd">f</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">FILE</span>&nbsp;<span class="key">Ptr</span><br />
+<span class="wrd">f</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">fopen</span><span class="oth">(</span><span class="quo">"somefile.txt"</span><span class="oth">,</span>&nbsp;<span class="quo">"w"</span><span class="oth">)</span><br />
+<span class="wrd">fprintf</span><span class="oth">(</span>&nbsp;<span class="wrd">f</span><span class="oth">,</span>&nbsp;<span class="quo">"Hello&nbsp;File\n"</span><span class="oth">)</span><br />
+<span class="wrd">fclose</span><span class="oth">(</span>&nbsp;<span class="wrd">f</span>&nbsp;<span class="oth">)</span><br />
+</div></tt><br />
+<br \>
+</div><div class="fb_sect_title">Windows API</div><div class="fb_sect_cont"><br \>
+Many (many) headers for the Windows API are available for inclusion in FreeBASIC source code.  In most cases the only include file needed is "windows.bi".  For example,<br \>
+<tt><div class="freebasic">
+<span class="def">#include&nbsp;once&nbsp;"windows.bi"<br />
+</span><span class="wrd">MessageBox</span><span class="oth">(</span>&nbsp;<span class="wrd">null</span><span class="oth">,</span>&nbsp;<span class="quo">"Hello&nbsp;World"</span><span class="oth">,</span>&nbsp;<span class="quo">"FreeBASIC"</span><span class="oth">,</span>&nbsp;<span class="wrd">MB_OK</span>&nbsp;<span class="oth">)</span><br />
+</div></tt><br />
+To include a specific Windows API header, prefix the name of the header with "win/" for example:<br \>
+<tt><div class="freebasic">
+<span class="def">#include&nbsp;once&nbsp;"win/ddraw.bi"<br />
+</span></div></tt><br />
+Browse the "./inc/win/" directory where FreeBASIC was installed to see all of the available Windows API headers.<br \>
+<br \>
+</div><div class="fb_sect_title">Other Headers Provided</div><div class="fb_sect_cont"><br \>
+Browse the "./inc/" directory located where FreeBASIC was installed to find other headers.  It is possible that headers might be available for a library you need to use.  Some headers are located in "./inc/" and others might be located in a sub-directory.  To include headers located in a subdirectory of "./inc/", prefix the name of the header with the name of the directory where it is located.  For example:<br \>
+<tt><div class="freebasic">
+<span class="com">''&nbsp;located&nbsp;in&nbsp;./inc/</span><br />
+<span class="def">#include&nbsp;once&nbsp;"curl.bi"<br />
+</span><br />
+<span class="com">''&nbsp;located&nbsp;in&nbsp;./inc/GL</span><br />
+<span class="def">#include&nbsp;once&nbsp;"GL/gl.bi"<br />
+</span></div></tt><br />
+<br \>
+</div><div class="fb_sect_title">Requirements for Using Prebuilt Static Libraries</div><div class="fb_sect_cont"><br \>
+<ul><li> The source code must include the appropriate headers using <tt><a href="KeyPgInclude.html">#include</a></tt>.<br \>
+<li> The static library must be linked at compile time by using either <tt><a href="KeyPgInclib.html">#inclib</a></tt> in the source code or by using the <i>-l</i> option on the command line to specify the name of the library.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">Requirements for Using Prebuilt Shared Libraries</div><div class="fb_sect_cont"><br \>
+<ul><li> The source code must include the appropriate headers using <tt><a href="KeyPgInclude.html">#include</a></tt>.<br \>
+<li> The shared library (.DLL) must be present on the host computer where the compiled program will run.<br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

@@ -1,0 +1,475 @@
+<html>
+<head>
+<title>Types as Objects</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Types as Objects</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	An example of the overloadable operators and member procedures<br \>
+<br \>
+<div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+!!! WRITEME !!!<br \>
+<br \>
+<tt><div class="freebasic">
+<span class="com">''&nbsp;Sample&nbsp;Type&nbsp;showing&nbsp;available&nbsp;methods&nbsp;and&nbsp;operators</span><br />
+<span class="com">''&nbsp;Practically&nbsp;this&nbsp;is&nbsp;a&nbsp;pointless&nbsp;example,&nbsp;as&nbsp;the&nbsp;only</span><br />
+<span class="com">''&nbsp;data&nbsp;member&nbsp;is&nbsp;an&nbsp;Integer.&nbsp;&nbsp;It&nbsp;serves&nbsp;only&nbsp;as&nbsp;a</span><br />
+<span class="com">''&nbsp;demonstration&nbsp;and&nbsp;guide.</span><br />
+<span class="com">''</span><br />
+<span class="com">''&nbsp;There&nbsp;are&nbsp;many&nbsp;other&nbsp;combinations&nbsp;that&nbsp;can&nbsp;be</span><br />
+<span class="com">''&nbsp;used&nbsp;in&nbsp;pass&nbsp;parameters.&nbsp;&nbsp;For&nbsp;simplicity</span><br />
+<span class="com">''&nbsp;This&nbsp;example&nbsp;only&nbsp;uses&nbsp;byref&nbsp;and&nbsp;type&nbsp;T</span><br />
+<span class="com">''&nbsp;where&nbsp;ever&nbsp;possible.</span><br />
+<br />
+<span class="com">''&nbsp;The&nbsp;type&nbsp;'DataType'&nbsp;is&nbsp;included&nbsp;to&nbsp;show&nbsp;where</span><br />
+<span class="com">''&nbsp;any&nbsp;data&nbsp;type&nbsp;might&nbsp;be&nbsp;used</span><br />
+<span class="key">Type</span>&nbsp;<span class="wrd">DataType</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+<br />
+<span class="com">''&nbsp;The&nbsp;type&nbsp;'UDT'&nbsp;is&nbsp;included&nbsp;to&nbsp;show&nbsp;where&nbsp;only&nbsp;</span><br />
+<span class="com">''&nbsp;a&nbsp;UDT&nbsp;data&nbsp;type&nbsp;can&nbsp;be&nbsp;used</span><br />
+<span class="key">Type</span>&nbsp;<span class="wrd">UDT</span><br />
+&nbsp;&nbsp;<span class="wrd">value</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Type</span><br />
+<br />
+<span class="com">''&nbsp;Our&nbsp;main&nbsp;type</span><br />
+<span class="key">Type</span>&nbsp;<span class="wrd">T</span><br />
+&nbsp;&nbsp;<span class="wrd">value</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span><br />
+&nbsp;&nbsp;<span class="wrd">value_array</span><span class="oth">(</span>&nbsp;<span class="num">0</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span><br />
+<br />
+&nbsp;&nbsp;<span class="com">''&nbsp;let,&nbsp;cast,&nbsp;combined&nbsp;assignment&nbsp;operators,</span><br />
+&nbsp;&nbsp;<span class="com">''&nbsp;constructors,&nbsp;and&nbsp;the&nbsp;destructor,&nbsp;must&nbsp;be</span><br />
+&nbsp;&nbsp;<span class="com">''&nbsp;declared&nbsp;inside&nbsp;the&nbsp;type.</span><br />
+&nbsp;&nbsp;<span class="com">''</span><br />
+&nbsp;&nbsp;<span class="com">''&nbsp;Parameters&nbsp;can&nbsp;be&nbsp;passed&nbsp;Byval&nbsp;or&nbsp;Byref</span><br />
+&nbsp;&nbsp;<span class="com">''&nbsp;in&nbsp;most&nbsp;(All?&nbsp;-&nbsp;verify&nbsp;this).</span><br />
+&nbsp;&nbsp;<span class="com">''</span><br />
+&nbsp;&nbsp;<span class="com">''&nbsp;All&nbsp;procs&nbsp;can&nbsp;be&nbsp;overloaded&nbsp;with&nbsp;different</span><br />
+&nbsp;&nbsp;<span class="com">''&nbsp;types&nbsp;as&nbsp;parameters.&nbsp;&nbsp;In&nbsp;many&nbsp;cases&nbsp;this&nbsp;is&nbsp;not</span><br />
+&nbsp;&nbsp;<span class="com">''&nbsp;necessary&nbsp;as&nbsp;the&nbsp;TYPE&nbsp;can&nbsp;be&nbsp;coerced&nbsp;and</span><br />
+&nbsp;&nbsp;<span class="com">''&nbsp;converted&nbsp;depending&nbsp;on&nbsp;the&nbsp;CAST&nbsp;methods</span><br />
+&nbsp;&nbsp;<span class="com">''&nbsp;it&nbsp;exposes.&nbsp;&nbsp;The&nbsp;compiler&nbsp;will&nbsp;to&nbsp;its&nbsp;best</span><br />
+&nbsp;&nbsp;<span class="com">''&nbsp;to&nbsp;evaluate&nbsp;statements&nbsp;and&nbsp;expressions&nbsp;if</span><br />
+&nbsp;&nbsp;<span class="com">''&nbsp;there&nbsp;is&nbsp;enough&nbsp;information&nbsp;to&nbsp;complete</span><br />
+&nbsp;&nbsp;<span class="com">''&nbsp;the&nbsp;operation.</span><br />
+&nbsp;&nbsp;<span class="com">''</span><br />
+&nbsp;&nbsp;<span class="com">''&nbsp;For&nbsp;example,</span><br />
+&nbsp;&nbsp;<span class="com">''&nbsp;Even&nbsp;though&nbsp;operator&nbsp;+=&nbsp;may&nbsp;not&nbsp;be&nbsp;overloaded</span><br />
+&nbsp;&nbsp;<span class="com">''&nbsp;but&nbsp;operator&nbsp;let&nbsp;and&nbsp;operator&nbsp;+&nbsp;are,&nbsp;the</span><br />
+&nbsp;&nbsp;<span class="com">''&nbsp;compiler&nbsp;will&nbsp;convert&nbsp;the&nbsp;T&nbsp;+=&nbsp;datatype</span><br />
+&nbsp;&nbsp;<span class="com">''&nbsp;to&nbsp;T&nbsp;=&nbsp;T&nbsp;+&nbsp;datatype.</span><br />
+<br />
+&nbsp;&nbsp;<span class="com">''&nbsp;Nonstatic&nbsp;members&nbsp;must&nbsp;be&nbsp;declared&nbsp;inside&nbsp;the</span><br />
+&nbsp;&nbsp;<span class="com">''&nbsp;type.</span><br />
+&nbsp;&nbsp;<span class="com">''</span><br />
+&nbsp;&nbsp;<span class="com">''&nbsp;All&nbsp;Nonstatic&nbsp;members&nbsp;are&nbsp;implicitly</span><br />
+&nbsp;&nbsp;<span class="com">''&nbsp;passed&nbsp;a&nbsp;hidden&nbsp;**this**&nbsp;parameter&nbsp;having</span><br />
+&nbsp;&nbsp;<span class="com">''&nbsp;the&nbsp;same&nbsp;type&nbsp;as&nbsp;the&nbsp;TYPE&nbsp;in&nbsp;which&nbsp;they&nbsp;are</span><br />
+&nbsp;&nbsp;<span class="com">''&nbsp;declared.</span><br />
+&nbsp;&nbsp;<span class="com">''</span><br />
+&nbsp;&nbsp;<span class="com">''&nbsp;Nonstatic&nbsp;member&nbsp;overloaded&nbsp;operators&nbsp;do&nbsp;not</span><br />
+&nbsp;&nbsp;<span class="com">''&nbsp;return&nbsp;a&nbsp;type.&nbsp;&nbsp;All&nbsp;operations&nbsp;are&nbsp;done&nbsp;on&nbsp;the</span><br />
+&nbsp;&nbsp;<span class="com">''&nbsp;hidden&nbsp;this&nbsp;parameter.</span><br />
+&nbsp;&nbsp;<span class="com">''</span><br />
+&nbsp;&nbsp;<span class="com">''&nbsp;Properties:&nbsp;Can&nbsp;be&nbsp;value&nbsp;properties&nbsp;or&nbsp;single</span><br />
+&nbsp;&nbsp;<span class="com">''&nbsp;indexed&nbsp;value&nbsp;properties</span><br />
+&nbsp;&nbsp;<span class="com">''&nbsp;GET/SET&nbsp;methods&nbsp;must&nbsp;be&nbsp;each&nbsp;delcared&nbsp;if&nbsp;used.</span><br />
+<br />
+&nbsp;&nbsp;<span class="com">''&nbsp;Nonstatic&nbsp;Member&nbsp;Declarations:</span><br />
+<br />
+&nbsp;&nbsp;<span class="com">''&nbsp;Assignment</span><br />
+<br />
+&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Operator</span>&nbsp;<span class="key">Let</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">rhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">T</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Operator</span>&nbsp;<span class="key">Let</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">rhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span>&nbsp;<span class="oth">)</span><br />
+<br />
+&nbsp;&nbsp;<span class="com">''&nbsp;Cast&nbsp;can&nbsp;be&nbsp;overloaded&nbsp;to&nbsp;return&nbsp;multiple&nbsp;types</span><br />
+<br />
+&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Operator</span>&nbsp;<span class="key">Cast</span>&nbsp;<span class="oth">()</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span><br />
+&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Operator</span>&nbsp;<span class="key">Cast</span>&nbsp;<span class="oth">()</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span><br />
+<br />
+&nbsp;&nbsp;<span class="com">''&nbsp;Combined&nbsp;assignment</span><br />
+<br />
+&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Operator</span>&nbsp;<span class="oth">+=</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">rhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">T</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Operator</span>&nbsp;<span class="oth">+=</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">rhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span>&nbsp;<span class="oth">)</span><br />
+<br />
+&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Operator</span>&nbsp;<span class="oth">-=</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">rhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Operator</span>&nbsp;<span class="oth">*=</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">rhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Operator</span>&nbsp;<span class="oth">/=</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">rhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Operator</span>&nbsp;<span class="oth">\=</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">rhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Operator</span>&nbsp;<span class="key">Mod</span><span class="oth">=</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">rhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Operator</span>&nbsp;<span class="key">Shl</span><span class="oth">=</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">rhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Operator</span>&nbsp;<span class="key">Shr</span><span class="oth">=</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">rhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Operator</span>&nbsp;<span class="key">And</span><span class="oth">=</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">rhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Operator</span>&nbsp;<span class="key">Or</span><span class="oth">=</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">rhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Operator</span>&nbsp;<span class="key">Xor</span><span class="oth">=</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">rhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Operator</span>&nbsp;<span class="key">Imp</span><span class="oth">=</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">rhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Operator</span>&nbsp;<span class="key">Eqv</span><span class="oth">=</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">rhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Operator</span>&nbsp;<span class="oth">^=</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">rhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span>&nbsp;<span class="oth">)</span><br />
+<br />
+&nbsp;&nbsp;<span class="com">''&nbsp;Address&nbsp;of</span><br />
+<br />
+&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Operator</span>&nbsp;<span class="oth">@</span>&nbsp;<span class="oth">()</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span>&nbsp;<span class="key">Ptr</span><br />
+<br />
+&nbsp;&nbsp;<span class="com">''&nbsp;Constructors&nbsp;can&nbsp;be&nbsp;overloaded</span><br />
+<br />
+&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Constructor</span><span class="oth">()</span><br />
+&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Constructor</span><span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">rhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">T</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Constructor</span><span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">rhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span>&nbsp;<span class="oth">)</span><br />
+<br />
+&nbsp;&nbsp;<span class="com">''&nbsp;There&nbsp;can&nbsp;be&nbsp;only&nbsp;one&nbsp;destructor</span><br />
+<br />
+&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Destructor</span><span class="oth">()</span><br />
+<br />
+&nbsp;&nbsp;<span class="com">''&nbsp;Nonstatic&nbsp;member&nbsp;functions&nbsp;and&nbsp;subs</span><br />
+&nbsp;&nbsp;<span class="com">''&nbsp;overloaded&nbsp;procs&nbsp;must&nbsp;have&nbsp;different&nbsp;parameters</span><br />
+<br />
+&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Function</span>&nbsp;<span class="wrd">f</span><span class="oth">(</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span><br />
+&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Function</span>&nbsp;<span class="wrd">f</span><span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">arg1</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span><br />
+<br />
+&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Sub</span>&nbsp;<span class="wrd">s</span><span class="oth">(</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Sub</span>&nbsp;<span class="wrd">s</span><span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">arg1</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">T</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Sub</span>&nbsp;<span class="wrd">s</span><span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">arg1</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span>&nbsp;<span class="oth">)</span><br />
+<br />
+&nbsp;&nbsp;<span class="com">''&nbsp;Properties</span><br />
+<br />
+&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Property</span>&nbsp;<span class="wrd">p</span>&nbsp;<span class="oth">()</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span><br />
+&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Property</span>&nbsp;<span class="wrd">p</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">new_value</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span>&nbsp;<span class="oth">)</span><br />
+<br />
+&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Property</span>&nbsp;<span class="wrd">pidx</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="key">ByVal</span>&nbsp;<span class="wrd">index</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span><br />
+&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Property</span>&nbsp;<span class="wrd">pidx</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="key">ByVal</span>&nbsp;<span class="wrd">index</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span><span class="oth">,</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">new_value</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span>&nbsp;<span class="oth">)</span><br />
+<br />
+<span class="key">End</span>&nbsp;<span class="key">Type</span><br />
+<br />
+<span class="com">''&nbsp;These&nbsp;must&nbsp;be&nbsp;global&nbsp;procedures</span><br />
+<span class="com">''&nbsp;Globals&nbsp;are&nbsp;not&nbsp;prefixed&nbsp;with&nbsp;the&nbsp;the&nbsp;TYPE&nbsp;name</span><br />
+<br />
+<span class="com">''&nbsp;At&nbsp;least&nbsp;one&nbsp;parameter&nbsp;must&nbsp;be&nbsp;of&nbsp;Type&nbsp;'T'</span><br />
+<span class="com">''&nbsp;For&nbsp;simplicity,&nbsp;type&nbsp;'T'&nbsp;is&nbsp;always&nbsp;given&nbsp;first&nbsp;for&nbsp;binary&nbsp;ops</span><br />
+<span class="com">''&nbsp;in&nbsp;this&nbsp;example</span><br />
+<br />
+<span class="key">Declare</span>&nbsp;<span class="key">Operator</span>&nbsp;<span class="oth">-</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">rhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">T</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span><br />
+<span class="key">Declare</span>&nbsp;<span class="key">Operator</span>&nbsp;<span class="key">Not</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">rhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">T</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span><br />
+<br />
+<span class="key">Declare</span>&nbsp;<span class="key">Operator</span>&nbsp;<span class="oth">-&gt;</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">rhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">T</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">UDT</span><br />
+<span class="key">Declare</span>&nbsp;<span class="key">Operator</span>&nbsp;<span class="oth">*</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">rhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">T</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span><br />
+<br />
+<span class="key">Declare</span>&nbsp;<span class="key">Operator</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">lhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">T</span><span class="oth">,</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">rhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span><br />
+<span class="key">Declare</span>&nbsp;<span class="key">Operator</span>&nbsp;<span class="oth">-</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">lhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">T</span><span class="oth">,</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">rhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span>&nbsp;<br />
+<span class="key">Declare</span>&nbsp;<span class="key">Operator</span>&nbsp;<span class="oth">*</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">lhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">T</span><span class="oth">,</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">rhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span><br />
+<span class="key">Declare</span>&nbsp;<span class="key">Operator</span>&nbsp;<span class="oth">/</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">lhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">T</span><span class="oth">,</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">rhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span><br />
+<span class="key">Declare</span>&nbsp;<span class="key">Operator</span>&nbsp;<span class="oth">\</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">lhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">T</span><span class="oth">,</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">rhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span><br />
+<span class="key">Declare</span>&nbsp;<span class="key">Operator</span>&nbsp;<span class="key">Mod</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">lhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">T</span><span class="oth">,</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">rhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span><br />
+<span class="key">Declare</span>&nbsp;<span class="key">Operator</span>&nbsp;<span class="key">Shl</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">lhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">T</span><span class="oth">,</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">rhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span><br />
+<span class="key">Declare</span>&nbsp;<span class="key">Operator</span>&nbsp;<span class="key">Shr</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">lhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">T</span><span class="oth">,</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">rhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span><br />
+<span class="key">Declare</span>&nbsp;<span class="key">Operator</span>&nbsp;<span class="key">And</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">lhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">T</span><span class="oth">,</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">rhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span><br />
+<span class="key">Declare</span>&nbsp;<span class="key">Operator</span>&nbsp;<span class="key">Or</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">lhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">T</span><span class="oth">,</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">rhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span><br />
+<span class="key">Declare</span>&nbsp;<span class="key">Operator</span>&nbsp;<span class="key">Xor</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">lhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">T</span><span class="oth">,</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">rhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span><br />
+<span class="key">Declare</span>&nbsp;<span class="key">Operator</span>&nbsp;<span class="key">Imp</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">lhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">T</span><span class="oth">,</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">rhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span><br />
+<span class="key">Declare</span>&nbsp;<span class="key">Operator</span>&nbsp;<span class="key">Eqv</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">lhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">T</span><span class="oth">,</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">rhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span><br />
+<span class="key">Declare</span>&nbsp;<span class="key">Operator</span>&nbsp;<span class="oth">^</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">lhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">T</span><span class="oth">,</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">rhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span><br />
+<span class="key">Declare</span>&nbsp;<span class="key">Operator</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">lhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">T</span><span class="oth">,</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">rhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span><br />
+<span class="key">Declare</span>&nbsp;<span class="key">Operator</span>&nbsp;<span class="oth">&lt;&gt;</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">lhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">T</span><span class="oth">,</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">rhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span><br />
+<span class="key">Declare</span>&nbsp;<span class="key">Operator</span>&nbsp;<span class="oth">&lt;</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">lhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">T</span><span class="oth">,</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">rhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span><br />
+<span class="key">Declare</span>&nbsp;<span class="key">Operator</span>&nbsp;<span class="oth">&gt;</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">lhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">T</span><span class="oth">,</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">rhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span><br />
+<span class="key">Declare</span>&nbsp;<span class="key">Operator</span>&nbsp;<span class="oth">&lt;=</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">lhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">T</span><span class="oth">,</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">rhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span><br />
+<span class="key">Declare</span>&nbsp;<span class="key">Operator</span>&nbsp;<span class="oth">&gt;=</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">lhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">T</span><span class="oth">,</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">rhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span><br />
+<br />
+<span class="com">''&nbsp;Global&nbsp;procedures&nbsp;(subs&nbsp;and&nbsp;funcs)&nbsp;can&nbsp;also&nbsp;accept&nbsp;the&nbsp;TYPE</span><br />
+<span class="com">''&nbsp;as&nbsp;a&nbsp;parameter&nbsp;or&nbsp;return&nbsp;it&nbsp;as&nbsp;a&nbsp;value,&nbsp;as&nbsp;could&nbsp;be&nbsp;done</span><br />
+<span class="com">''&nbsp;in&nbsp;previous&nbsp;versions&nbsp;of&nbsp;FreeBASIC.</span><br />
+<span class="com">''&nbsp;No&nbsp;example&nbsp;given.&nbsp;See&nbsp;function&nbsp;or&nbsp;sub&nbsp;in&nbsp;the&nbsp;manual.</span><br />
+<br />
+<span class="com">''&nbsp;All&nbsp;TYPE&nbsp;members&nbsp;are&nbsp;defined&nbsp;outside&nbsp;the&nbsp;TYPE</span><br />
+<br />
+<span class="com">''&nbsp;Nonstatic&nbsp;members&nbsp;must&nbsp;be&nbsp;prefixed&nbsp;with&nbsp;type&nbsp;name</span><br />
+<span class="com">''&nbsp;in&nbsp;this&nbsp;case&nbsp;'T'</span><br />
+<br />
+<span class="com">''&nbsp;Name&nbsp;resolution&nbsp;in&nbsp;a&nbsp;NAMESPACE&nbsp;is&nbsp;same&nbsp;as&nbsp;other</span><br />
+<span class="com">''&nbsp;subs/funcs.&nbsp;&nbsp;Use&nbsp;USING&nbsp;or&nbsp;prefix&nbsp;the&nbsp;namespace&nbsp;name</span><br />
+<br />
+<span class="key">Operator</span>&nbsp;<span class="wrd">T.let</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">rhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">T</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;<span class="wrd">value</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">rhs.value</span>&nbsp;&nbsp;<br />
+<span class="key">End</span>&nbsp;<span class="key">Operator</span><br />
+<br />
+<span class="key">Operator</span>&nbsp;<span class="wrd">T.let</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">rhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;<span class="wrd">value</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">rhs</span>&nbsp;&nbsp;<br />
+<span class="key">End</span>&nbsp;<span class="key">Operator</span><br />
+<br />
+<span class="key">Operator</span>&nbsp;<span class="wrd">T.cast</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span><br />
+&nbsp;&nbsp;<span class="key">Return</span>&nbsp;<span class="key">Str</span><span class="oth">(</span>&nbsp;<span class="wrd">value</span>&nbsp;<span class="oth">)</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Operator</span><br />
+<br />
+<span class="key">Operator</span>&nbsp;<span class="wrd">T.cast</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span><br />
+&nbsp;&nbsp;<span class="key">Return</span>&nbsp;<span class="wrd">value</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Operator</span><br />
+<br />
+<span class="key">Operator</span>&nbsp;<span class="wrd">T.</span><span class="oth">+=</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">rhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">T</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;<span class="wrd">value</span>&nbsp;<span class="oth">+=</span>&nbsp;<span class="wrd">rhs.value</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Operator</span><br />
+<br />
+<span class="key">Operator</span>&nbsp;<span class="wrd">T.</span><span class="oth">+=</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">rhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;<span class="wrd">value</span>&nbsp;<span class="oth">+=</span>&nbsp;<span class="wrd">rhs</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Operator</span><br />
+<br />
+<span class="key">Operator</span>&nbsp;<span class="wrd">T.</span><span class="oth">-=</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">rhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;<span class="wrd">value</span>&nbsp;<span class="oth">-=</span>&nbsp;<span class="wrd">rhs</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Operator</span><br />
+<br />
+<span class="key">Operator</span>&nbsp;<span class="wrd">T.</span><span class="oth">*=</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">rhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;<span class="wrd">value</span>&nbsp;<span class="oth">*=</span>&nbsp;<span class="wrd">rhs</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Operator</span><br />
+<br />
+<span class="key">Operator</span>&nbsp;<span class="wrd">T.</span><span class="oth">/=</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">rhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;<span class="wrd">value</span>&nbsp;<span class="oth">/=</span>&nbsp;<span class="wrd">rhs</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Operator</span><br />
+<br />
+<span class="key">Operator</span>&nbsp;<span class="wrd">T.</span><span class="oth">\=</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">rhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;<span class="wrd">value</span>&nbsp;<span class="oth">\=</span>&nbsp;<span class="wrd">rhs</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Operator</span><br />
+<br />
+<span class="key">Operator</span>&nbsp;<span class="wrd">T.mod</span><span class="oth">=</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">rhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;<span class="wrd">value</span>&nbsp;<span class="key">Mod</span><span class="oth">=</span>&nbsp;<span class="wrd">rhs</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Operator</span><br />
+<br />
+<span class="key">Operator</span>&nbsp;<span class="wrd">T.shl</span><span class="oth">=</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">rhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;<span class="wrd">value</span>&nbsp;<span class="key">Shl</span><span class="oth">=</span>&nbsp;<span class="wrd">rhs</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Operator</span><br />
+<br />
+<span class="key">Operator</span>&nbsp;<span class="wrd">T.shr</span><span class="oth">=</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">rhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;<span class="wrd">value</span>&nbsp;<span class="key">Shr</span><span class="oth">=</span>&nbsp;<span class="wrd">rhs</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Operator</span><br />
+<br />
+<span class="key">Operator</span>&nbsp;<span class="wrd">T.and</span><span class="oth">=</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">rhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;<span class="wrd">value</span>&nbsp;<span class="key">And</span><span class="oth">=</span>&nbsp;<span class="wrd">rhs</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Operator</span><br />
+<br />
+<span class="key">Operator</span>&nbsp;<span class="wrd">T.or</span><span class="oth">=</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">rhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;<span class="wrd">value</span>&nbsp;<span class="key">Or</span><span class="oth">=</span>&nbsp;<span class="wrd">rhs</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Operator</span><br />
+<br />
+<span class="key">Operator</span>&nbsp;<span class="wrd">T.xor</span><span class="oth">=</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">rhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;<span class="wrd">value</span>&nbsp;<span class="key">Xor</span><span class="oth">=</span>&nbsp;<span class="wrd">rhs</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Operator</span><br />
+<br />
+<span class="key">Operator</span>&nbsp;<span class="wrd">T.imp</span><span class="oth">=</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">rhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;<span class="wrd">value</span>&nbsp;<span class="key">Imp</span><span class="oth">=</span>&nbsp;<span class="wrd">rhs</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Operator</span><br />
+<br />
+<span class="key">Operator</span>&nbsp;<span class="wrd">T.eqv</span><span class="oth">=</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">rhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;<span class="wrd">value</span>&nbsp;<span class="key">Eqv</span><span class="oth">=</span>&nbsp;<span class="wrd">rhs</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Operator</span><br />
+<br />
+<span class="key">Operator</span>&nbsp;<span class="wrd">T.</span><span class="oth">^=</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">rhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;<span class="wrd">value</span>&nbsp;<span class="oth">^=</span>&nbsp;<span class="wrd">rhs</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Operator</span><br />
+<br />
+<span class="key">Operator</span>&nbsp;<span class="wrd">T.</span><span class="oth">@</span>&nbsp;<span class="oth">()</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span>&nbsp;<span class="key">Ptr</span><br />
+&nbsp;&nbsp;<span class="key">Return</span><span class="oth">(</span>&nbsp;<span class="key">Cast</span><span class="oth">(</span>&nbsp;<span class="wrd">DataType</span>&nbsp;<span class="key">Ptr</span><span class="oth">,</span>&nbsp;<span class="oth">@</span><span class="key">This</span>&nbsp;<span class="oth">))</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Operator</span><br />
+<br />
+<br />
+<span class="com">''&nbsp;Constructors:</span><br />
+<br />
+<span class="key">Constructor</span>&nbsp;<span class="wrd">T</span><span class="oth">()</span><br />
+&nbsp;&nbsp;<span class="wrd">value</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Constructor</span><br />
+<br />
+<span class="key">Constructor</span>&nbsp;<span class="wrd">T</span><span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">rhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">T</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;<span class="wrd">value</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">rhs.value</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Constructor</span><br />
+<br />
+<span class="key">Constructor</span>&nbsp;<span class="wrd">T</span><span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">rhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;<span class="wrd">value</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">rhs</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Constructor</span><br />
+<br />
+<span class="com">''&nbsp;There&nbsp;can&nbsp;be&nbsp;only&nbsp;one&nbsp;destructor</span><br />
+<br />
+<span class="key">Destructor</span>&nbsp;<span class="wrd">T</span><span class="oth">()</span><br />
+&nbsp;&nbsp;<span class="com">''&nbsp;clean-up,&nbsp;none&nbsp;in&nbsp;this&nbsp;example</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Destructor</span><br />
+<br />
+<br />
+<br />
+<span class="com">''&nbsp;Globals&nbsp;must&nbsp;specify&nbsp;all&nbsp;arguments&nbsp;and&nbsp;return&nbsp;type</span><br />
+<br />
+<span class="key">Operator</span>&nbsp;<span class="oth">-</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">rhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">T</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span><br />
+&nbsp;&nbsp;<span class="key">Return</span>&nbsp;<span class="oth">(-</span><span class="wrd">rhs.value</span><span class="oth">)</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Operator</span><br />
+<br />
+<span class="key">Operator</span>&nbsp;<span class="key">Not</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">rhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">T</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span><br />
+&nbsp;&nbsp;<span class="key">Return</span>&nbsp;<span class="oth">(</span><span class="key">Not</span>&nbsp;<span class="wrd">rhs.value</span><span class="oth">)</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Operator</span><br />
+<br />
+<span class="key">Operator</span>&nbsp;<span class="oth">-&gt;</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">rhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">T</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">UDT</span><br />
+&nbsp;&nbsp;<span class="key">Return</span>&nbsp;<span class="key">Type</span><span class="oth">(</span><span class="num">4</span><span class="oth">)</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Operator</span><br />
+<br />
+<span class="key">Operator</span>&nbsp;<span class="oth">*</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">rhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">T</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span><br />
+&nbsp;&nbsp;<span class="key">Return</span>&nbsp;<span class="num">5</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Operator</span><br />
+<br />
+<span class="key">Operator</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">lhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">T</span><span class="oth">,</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">rhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span><br />
+&nbsp;&nbsp;<span class="key">Return</span>&nbsp;<span class="oth">(</span><span class="wrd">lhs.value</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="wrd">rhs</span><span class="oth">)</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Operator</span><br />
+<br />
+<span class="key">Operator</span>&nbsp;<span class="oth">-</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">lhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">T</span><span class="oth">,</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">rhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span><br />
+&nbsp;&nbsp;<span class="key">Return</span>&nbsp;<span class="oth">(</span><span class="wrd">lhs.value</span>&nbsp;<span class="oth">-</span>&nbsp;<span class="wrd">rhs</span><span class="oth">)</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Operator</span><br />
+<br />
+<span class="key">Operator</span>&nbsp;<span class="oth">*</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">lhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">T</span><span class="oth">,</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">rhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span><br />
+&nbsp;&nbsp;<span class="key">Return</span>&nbsp;<span class="oth">(</span><span class="wrd">lhs.value</span>&nbsp;<span class="oth">*</span>&nbsp;<span class="wrd">rhs</span><span class="oth">)</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Operator</span><br />
+<br />
+<span class="key">Operator</span>&nbsp;<span class="oth">/</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">lhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">T</span><span class="oth">,</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">rhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span><br />
+&nbsp;&nbsp;<span class="key">Return</span>&nbsp;<span class="oth">(</span><span class="wrd">lhs.value</span>&nbsp;<span class="oth">/</span>&nbsp;<span class="wrd">rhs</span><span class="oth">)</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Operator</span><br />
+<br />
+<span class="key">Operator</span>&nbsp;<span class="oth">\</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">lhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">T</span><span class="oth">,</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">rhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span><br />
+&nbsp;&nbsp;<span class="key">Return</span>&nbsp;<span class="oth">(</span><span class="wrd">lhs.value</span>&nbsp;<span class="oth">\</span>&nbsp;<span class="wrd">rhs</span><span class="oth">)</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Operator</span><br />
+<br />
+<span class="key">Operator</span>&nbsp;<span class="key">Mod</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">lhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">T</span><span class="oth">,</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">rhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span><br />
+&nbsp;&nbsp;<span class="key">Return</span>&nbsp;<span class="oth">(</span><span class="wrd">lhs.value</span>&nbsp;<span class="key">Mod</span>&nbsp;<span class="wrd">rhs</span><span class="oth">)</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Operator</span><br />
+<br />
+<span class="key">Operator</span>&nbsp;<span class="key">Shl</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">lhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">T</span><span class="oth">,</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">rhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span><br />
+&nbsp;&nbsp;<span class="key">Return</span>&nbsp;<span class="oth">(</span><span class="wrd">lhs.value</span>&nbsp;<span class="key">Shl</span>&nbsp;<span class="wrd">rhs</span><span class="oth">)</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Operator</span><br />
+<br />
+<span class="key">Operator</span>&nbsp;<span class="key">Shr</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">lhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">T</span><span class="oth">,</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">rhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span><br />
+&nbsp;&nbsp;<span class="key">Return</span>&nbsp;<span class="oth">(</span><span class="wrd">lhs.value</span>&nbsp;<span class="key">Shr</span>&nbsp;<span class="wrd">rhs</span><span class="oth">)</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Operator</span><br />
+<br />
+<span class="key">Operator</span>&nbsp;<span class="key">And</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">lhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">T</span><span class="oth">,</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">rhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span><br />
+&nbsp;&nbsp;<span class="key">Return</span>&nbsp;<span class="oth">(</span><span class="wrd">lhs.value</span>&nbsp;<span class="key">And</span>&nbsp;<span class="wrd">rhs</span><span class="oth">)</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Operator</span><br />
+<br />
+<span class="key">Operator</span>&nbsp;<span class="key">Or</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">lhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">T</span><span class="oth">,</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">rhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span><br />
+&nbsp;&nbsp;<span class="key">Return</span>&nbsp;<span class="oth">(</span><span class="wrd">lhs.value</span>&nbsp;<span class="key">Or</span>&nbsp;<span class="wrd">rhs</span><span class="oth">)</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Operator</span><br />
+<br />
+<span class="key">Operator</span>&nbsp;<span class="key">Xor</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">lhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">T</span><span class="oth">,</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">rhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span><br />
+&nbsp;&nbsp;<span class="key">Return</span>&nbsp;<span class="oth">(</span><span class="wrd">lhs.value</span>&nbsp;<span class="key">Xor</span>&nbsp;<span class="wrd">rhs</span><span class="oth">)</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Operator</span><br />
+<br />
+<span class="key">Operator</span>&nbsp;<span class="key">Imp</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">lhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">T</span><span class="oth">,</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">rhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span><br />
+&nbsp;&nbsp;<span class="key">Return</span>&nbsp;<span class="oth">(</span><span class="wrd">lhs.value</span>&nbsp;<span class="key">Imp</span>&nbsp;<span class="wrd">rhs</span><span class="oth">)</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Operator</span><br />
+<br />
+<span class="key">Operator</span>&nbsp;<span class="key">Eqv</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">lhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">T</span><span class="oth">,</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">rhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span><br />
+&nbsp;&nbsp;<span class="key">Return</span>&nbsp;<span class="oth">(</span><span class="wrd">lhs.value</span>&nbsp;<span class="key">Eqv</span>&nbsp;<span class="wrd">rhs</span><span class="oth">)</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Operator</span><br />
+<br />
+<span class="key">Operator</span>&nbsp;<span class="oth">^</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">lhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">T</span><span class="oth">,</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">rhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span><br />
+&nbsp;&nbsp;<span class="key">Return</span>&nbsp;<span class="oth">(</span><span class="wrd">lhs.value</span>&nbsp;<span class="oth">^</span>&nbsp;<span class="wrd">rhs</span><span class="oth">)</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Operator</span><br />
+<br />
+<span class="key">Operator</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">lhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">T</span><span class="oth">,</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">rhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span><br />
+&nbsp;&nbsp;<span class="key">Return</span>&nbsp;<span class="oth">(</span><span class="wrd">lhs.value</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">rhs</span><span class="oth">)</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Operator</span><br />
+<br />
+<span class="key">Operator</span>&nbsp;<span class="oth">&lt;&gt;</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">lhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">T</span><span class="oth">,</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">rhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span><br />
+&nbsp;&nbsp;<span class="key">Return</span>&nbsp;<span class="oth">(</span><span class="wrd">lhs.value</span>&nbsp;<span class="oth">&lt;&gt;</span>&nbsp;<span class="wrd">rhs</span><span class="oth">)</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Operator</span><br />
+<br />
+<span class="key">Operator</span>&nbsp;<span class="oth">&lt;</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">lhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">T</span><span class="oth">,</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">rhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span><br />
+&nbsp;&nbsp;<span class="key">Return</span>&nbsp;<span class="oth">(</span><span class="wrd">lhs.value</span>&nbsp;<span class="oth">&lt;</span>&nbsp;<span class="wrd">rhs</span><span class="oth">)</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Operator</span><br />
+<br />
+<span class="key">Operator</span>&nbsp;<span class="oth">&gt;</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">lhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">T</span><span class="oth">,</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">rhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span><br />
+&nbsp;&nbsp;<span class="key">Return</span>&nbsp;<span class="oth">(</span><span class="wrd">lhs.value</span>&nbsp;<span class="oth">&gt;</span>&nbsp;<span class="wrd">rhs</span><span class="oth">)</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Operator</span><br />
+<br />
+<span class="key">Operator</span>&nbsp;<span class="oth">&lt;=</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">lhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">T</span><span class="oth">,</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">rhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span><br />
+&nbsp;&nbsp;<span class="key">Return</span>&nbsp;<span class="oth">(</span><span class="wrd">lhs.value</span>&nbsp;<span class="oth">&lt;=</span>&nbsp;<span class="wrd">rhs</span><span class="oth">)</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Operator</span><br />
+<br />
+<span class="key">Operator</span>&nbsp;<span class="oth">&gt;=</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">lhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">T</span><span class="oth">,</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">rhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span><br />
+&nbsp;&nbsp;<span class="key">Return</span>&nbsp;<span class="oth">(</span><span class="wrd">lhs.value</span>&nbsp;<span class="oth">&gt;=</span>&nbsp;<span class="wrd">rhs</span><span class="oth">)</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Operator</span><br />
+<br />
+<br />
+<span class="com">''&nbsp;Nonstatic&nbsp;member&nbsp;methods</span><br />
+<br />
+<span class="key">Function</span>&nbsp;<span class="wrd">T.f</span><span class="oth">(</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span><br />
+&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="wrd">x</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span><br />
+&nbsp;&nbsp;<span class="key">Return</span>&nbsp;<span class="wrd">x</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Function</span><br />
+<br />
+<span class="key">Function</span>&nbsp;<span class="wrd">T.f</span><span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">arg1</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span><br />
+&nbsp;&nbsp;<span class="wrd">arg1</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">this.value</span><br />
+&nbsp;&nbsp;<span class="key">Return</span>&nbsp;<span class="wrd">value</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Function</span><br />
+<br />
+<span class="key">Sub</span>&nbsp;<span class="wrd">T.s</span><span class="oth">(</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;<span class="com">''&nbsp;refer&nbsp;to&nbsp;the&nbsp;type&nbsp;using</span><br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;<span class="com">''&nbsp;with&nbsp;block</span><br />
+&nbsp;&nbsp;<span class="key">With</span>&nbsp;<span class="key">This</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">.</span><span class="wrd">value</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">1</span><br />
+&nbsp;&nbsp;<span class="key">End</span>&nbsp;<span class="key">With</span><br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;<span class="com">''&nbsp;field&nbsp;access</span><br />
+&nbsp;&nbsp;<span class="wrd">this.value</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">2</span><br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;<span class="com">''&nbsp;directly</span><br />
+&nbsp;&nbsp;<span class="wrd">value</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">3</span><br />
+<br />
+<span class="key">End</span>&nbsp;<span class="key">Sub</span><br />
+<br />
+<span class="key">Sub</span>&nbsp;<span class="wrd">T.s</span><span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">arg1</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">T</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;<span class="wrd">value</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">arg1.value</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Sub</span><br />
+<br />
+<span class="key">Sub</span>&nbsp;<span class="wrd">T.s</span><span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">arg1</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;<span class="wrd">value</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">arg1</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Sub</span><br />
+<br />
+<span class="key">Property</span>&nbsp;<span class="wrd">T.p</span>&nbsp;<span class="oth">()</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span><br />
+&nbsp;&nbsp;<span class="com">''&nbsp;GET&nbsp;property</span><br />
+&nbsp;&nbsp;<span class="key">Return</span>&nbsp;<span class="wrd">value</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Property</span><br />
+<br />
+<span class="key">Property</span>&nbsp;<span class="wrd">T.p</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">new_value</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;<span class="com">''&nbsp;SET&nbsp;property</span><br />
+&nbsp;&nbsp;<span class="wrd">value</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">new_value</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Property</span><br />
+<br />
+<span class="key">Property</span>&nbsp;<span class="wrd">T.pidx</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="key">ByVal</span>&nbsp;<span class="wrd">index</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span><br />
+&nbsp;&nbsp;<span class="com">''&nbsp;GET&nbsp;indexed&nbsp;property</span><br />
+&nbsp;&nbsp;<span class="key">Return</span>&nbsp;<span class="wrd">value_array</span><span class="oth">(</span>&nbsp;<span class="wrd">index</span>&nbsp;<span class="oth">)</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Property</span><br />
+<br />
+<span class="key">Property</span>&nbsp;<span class="wrd">T.pidx</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="key">ByVal</span>&nbsp;<span class="wrd">index</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span><span class="oth">,</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">new_value</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DataType</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;<span class="com">''&nbsp;SET&nbsp;indexed&nbsp;property</span><br />
+&nbsp;&nbsp;<span class="wrd">value_array</span><span class="oth">(</span>&nbsp;<span class="wrd">index</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">new_value</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Property</span><br />
+<br />
+<br />
+<span class="com">''&nbsp;new,&nbsp;delete,&nbsp;delete[]</span><br />
+<br />
+<span class="com">''&nbsp;Allocate&nbsp;object</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">X</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">T</span>&nbsp;<span class="key">Ptr</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">New</span>&nbsp;<span class="wrd">T</span><br />
+<br />
+<span class="com">''&nbsp;Deallocate&nbsp;object</span><br />
+<span class="key">Delete</span>&nbsp;<span class="wrd">X</span><br />
+<br />
+<span class="com">''&nbsp;Allocate&nbsp;object&nbsp;vector</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">Xlist</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">T</span>&nbsp;<span class="key">Ptr</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">New</span>&nbsp;<span class="wrd">T</span><span class="oth">[</span><span class="num">10</span><span class="oth">]</span><br />
+<br />
+<span class="com">''&nbsp;Deallocate&nbsp;object&nbsp;vector</span><br />
+<span class="key">Delete</span><span class="oth">[]</span>&nbsp;<span class="wrd">Xlist</span><br />
+</div></tt><br />
+<br \>
+</div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgType.html">Type</a></tt></ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

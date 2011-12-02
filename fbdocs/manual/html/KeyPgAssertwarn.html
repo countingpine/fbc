@@ -1,0 +1,60 @@
+<html>
+<head>
+<title>AssertWarn</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">AssertWarn</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Debugging macro that prints a warning if an expression evaluates to 0.<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<a href="KeyPgPpdefine.html">#define</a> <b>AssertWarn</b>(<i>expression</i>) <a href="KeyPgIfthen.html">If</a> (expression) = 0 <a href="KeyPgThen.html">Then</a> : fb_AssertWarn( <a href="KeyPgDdfile.html">__FILE__</a>, <a href="KeyPgDdline.html">__LINE__</a>, <a href="KeyPgDdfunction.html">__FUNCTION__</a>, <a href="KeyPgOpPpStringize.html">#</a>expression ) : <a href="KeyPgEndif.html">End If</a><br \>
+</tt><br \>
+</div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
+<b>AssertWarn</b>( <i>expression</i> )<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+<tt><i>expression</i></tt><br \>
+<div class="fb_indent">Any valid expression.  If <tt><i>expression</i></tt> evaluates to 0, a warning message is printed to stdout (console).<br \>
+<br \>
+</div></div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+The <tt><b>AssertWarn</b></tt> macro is intended for use in debugging and works only if the <tt>-g</tt> option is selected in the FBC command line. In this case it prints a warning message if <tt><i>expression</i></tt> evaluates to 0. It doesn't stop the program execution like <a href="KeyPgAssert.html">Assert</a> does.<br \>
+<br \>
+Its normal use is to check the correct value of the variables during debugging.<br \>
+<br \>
+If <tt>-g</tt> is not passed to fbc, the macro does not generate any code.<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="key">Sub</span>&nbsp;<span class="wrd">foo</span><br />
+&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="wrd">a</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;<span class="wrd">a</span><span class="oth">=</span><span class="num">0</span><br />
+&nbsp;&nbsp;<span class="key">AssertWarn</span><span class="oth">(</span><span class="wrd">a</span><span class="oth">=</span><span class="num">1</span><span class="oth">)</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Sub</span><br />
+<br />
+<span class="wrd">foo</span>&nbsp;<br />
+<br />
+<span class="com">''&nbsp;If&nbsp;-g&nbsp;is&nbsp;used&nbsp;this&nbsp;code&nbsp;prints:&nbsp;test.bas(3):&nbsp;assertion&nbsp;failed&nbsp;at&nbsp;FOO:&nbsp;a=1&nbsp;</span><br />
+</div></tt><br />
+<br \>
+</div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
+<ul><li> Not available in the <i><a href="CompilerOptlang.html">-lang qb</a></i> dialect unless referenced with the alias <tt><b>__ASSERTWARN</b></tt>.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> New to FreeBASIC<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgAssert.html">Assert</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

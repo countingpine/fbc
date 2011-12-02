@@ -1,0 +1,92 @@
+<html>
+<head>
+<title>If...Then</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">If...Then</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Control flow statement for conditional branching<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<b>If</b> <i>expression</i> <b>Then</b> [<i>statement(s)</i>] [<b>Else</b> [<i>statement(s)</i>]] [<b>End If</b>]<br \>
+<i>or</i><br \>
+<b>If</b> <i>expression</i> <b>Then</b> : [<i>statement(s)</i>] [<b>Else</b> [<i>statement(s)</i>]] : <b>End If</b><br \>
+<i>or</i><br \>
+<b>If</b> <i>expression</i> <b>Then</b><br \>
+<div class="fb_indent">[<i>statement(s)</i>]<br \>
+</div>[ <b>ElseIf</b> <i>expression</i> <b>Then</b> ]<br \>
+<div class="fb_indent">[<i>statement(s)</i>]<br \>
+</div>[ <b>Else</b> ]<br \>
+<div class="fb_indent">[<i>statement(s)</i>]<br \>
+</div><b>End If</b><br \>
+</tt><br \>
+</div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+<tt><b>If...Then</b></tt> is a way to make decisions. It is a mechanism to execute code only if a condition is true, and can provide alternative code to execute based on more conditions.<br \>
+<br \>
+<tt><i>expression</i></tt> can be one of several forms:<br \>
+<ul><ul><li> a conditional expression, for example:<br \>
+</ul></ul><div class="fb_indent"><div class="fb_indent"><tt>x = 5</tt><br \>
+</div></div><ul><ul><li> multiple conditions separated by logical bit-wise operators, for example:<br \>
+</ul></ul><div class="fb_indent"><div class="fb_indent"><tt>x &gt;= 5 <a href="KeyPgOpAnd.html">And</a> x &lt;= 10</tt><br \>
+</div></div><ul><ul><li> multiple conditions separated by logical short-circuit operators, for example:<br \>
+</ul></ul><div class="fb_indent"><div class="fb_indent"><tt>y &lt;&gt; 0 <a href="KeyPgOpAndAlso.html">AndAlso</a> x \ y = 1</tt><br \>
+(in this case, "<tt>x \ y = 1</tt>" will only be evaluated if "<tt>y &lt;&gt; 0</tt>" is True)<br \>
+</div></div><ul><ul><li> any numerical expression, in which case a value of zero (<tt>0</tt>) represents False, and a non-zero value represents True<br \>
+<br \>
+</ul></ul>Both multi-line and single-line <tt><b>If</b></tt>s can be nested.  In the latter case, the optional <tt><b>End If</b></tt>s can be useful to control where nested <tt><b>If</b></tt>s begin and end.<br \>
+<br \>
+In the <i><a href="CompilerOptlang.html">-lang fb</a></i> and <i><a href="CompilerOptlang.html">-lang fblite</a></i> dialects, colons (<tt>:</tt>) can be used instead of newlines to construct multi-line <tt><b>If</b></tt> blocks on a single line.<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="com">''&nbsp;Here&nbsp;is&nbsp;a&nbsp;simple&nbsp;"guess&nbsp;the&nbsp;number"&nbsp;game&nbsp;using&nbsp;if...then&nbsp;for&nbsp;a&nbsp;decision.</span><br />
+<br />
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="wrd">num</span><span class="oth">,</span>&nbsp;<span class="wrd">guess</span><br />
+<br />
+<span class="key">Randomize</span><br />
+<span class="wrd">num</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">Int</span><span class="oth">(</span><span class="key">Rnd</span>&nbsp;<span class="oth">*</span>&nbsp;<span class="num">10</span><span class="oth">)</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="num">1</span>&nbsp;<span class="com">'Create&nbsp;a&nbsp;random&nbsp;number&nbsp;between&nbsp;1&nbsp;and&nbsp;10...</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+<span class="key">Print</span>&nbsp;<span class="quo">"guess&nbsp;the&nbsp;number&nbsp;between&nbsp;1&nbsp;and&nbsp;10"</span><br />
+<br />
+<span class="key">Do</span>&nbsp;<span class="com">'Start&nbsp;a&nbsp;loop</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Input</span>&nbsp;<span class="quo">"Guess"</span><span class="oth">;</span>&nbsp;<span class="wrd">guess</span>&nbsp;<span class="com">'Input&nbsp;a&nbsp;number&nbsp;from&nbsp;the&nbsp;user</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">If</span>&nbsp;<span class="wrd">guess</span>&nbsp;<span class="oth">&gt;</span>&nbsp;<span class="num">10</span>&nbsp;<span class="key">OrElse</span>&nbsp;<span class="wrd">guess</span>&nbsp;<span class="oth">&lt;</span>&nbsp;<span class="num">1</span>&nbsp;<span class="key">Then</span>&nbsp;&nbsp;<span class="com">'The&nbsp;user's&nbsp;guess&nbsp;is&nbsp;out&nbsp;of&nbsp;range</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"The&nbsp;number&nbsp;can't&nbsp;be&nbsp;greater&nbsp;then&nbsp;10&nbsp;or&nbsp;less&nbsp;than&nbsp;1!"</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">ElseIf</span>&nbsp;<span class="wrd">guess</span>&nbsp;<span class="oth">&gt;</span>&nbsp;<span class="wrd">num</span>&nbsp;<span class="key">Then</span>&nbsp;&nbsp;<span class="com">'The&nbsp;user's&nbsp;guess&nbsp;is&nbsp;too&nbsp;low</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"Too&nbsp;low"</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">ElseIf</span>&nbsp;<span class="wrd">guess</span>&nbsp;<span class="oth">&lt;</span>&nbsp;<span class="wrd">num</span>&nbsp;<span class="key">Then</span>&nbsp;&nbsp;<span class="com">'The&nbsp;user's&nbsp;guess&nbsp;is&nbsp;too&nbsp;high</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"Too&nbsp;high"</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">ElseIf</span>&nbsp;<span class="wrd">guess</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">num</span>&nbsp;<span class="key">Then</span>&nbsp;&nbsp;<span class="com">'The&nbsp;user&nbsp;guessed&nbsp;the&nbsp;right&nbsp;number!</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"Correct!"</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Exit</span>&nbsp;<span class="key">Do</span>&nbsp;&nbsp;&nbsp;<span class="com">'Exit&nbsp;the&nbsp;loop</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">End</span>&nbsp;<span class="key">If</span><br />
+<br />
+<span class="key">Loop</span>&nbsp;<span class="com">'Go&nbsp;back&nbsp;to&nbsp;the&nbsp;start&nbsp;of&nbsp;the&nbsp;loop</span><br />
+</div></tt><br />
+<br \>
+</div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
+In the <i><a href="CompilerOptlang.html">-lang fb</a></i> and <i><a href="CompilerOptlang.html">-lang fblite</a></i> dialects, if there is a new line, a single-line comment (<tt>'</tt>), a colon (<tt>:</tt>), or a <tt><a href="KeyPgRem.html">Rem</a></tt> statement directly after THEN, then the IF will be multi-line.  Any other statement will result in a single-line IF.<br \>
+In the <i><a href="CompilerOptlang.html">-lang qb</a></i> dialect, if there is a new line or a single-line comment (<tt>'</tt>) directly after THEN, then the IF will be multi-line.  A colon, a <tt><a href="KeyPgRem.html">Rem</a></tt> or any other statement will result in a single-line IF.<br \>
+<br \>
+</div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> END IF was not supported in single-line IFs in QBASIC.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgDoloop.html">Do...Loop</a></tt><br \>
+<li> <tt><a href="KeyPgPpif.html">#if</a></tt><br \>
+<li> <tt><a href="KeyPgSelectcase.html">Select Case</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

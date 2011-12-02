@@ -1,0 +1,62 @@
+<html>
+<head>
+<title>ByRef</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">ByRef</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Declaration specifier to explicitly pass a parameter by reference<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<b>ByRef</b> <i>param</i> <a href="KeyPgAs.html">As</a> <a href="DataType.html">datatype</a><br \>
+</tt><br \>
+</div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
+[ <a href="KeyPgDeclare.html">Declare</a> ] { <a href="KeyPgSub.html">Sub</a> | <a href="KeyPgFunction.html">Function</a> } <i>proc_name</i> ( <b>ByRef</b> <i>param</i> <a href="KeyPgAs.html">As</a> <a href="DataType.html">datatype</a>  )<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+Passes a variable by reference, that is its address, to a subroutine or function. When a variable is passed by reference, the contents of the variable can be changed by the target subroutine or function.<br \>
+<br \>
+In <i><a href="CompilerOptlang.html">-lang qb</a></i> and <i><a href="CompilerOptlang.html">-lang fblite</a></i> dialects, <tt><b>ByRef</b></tt> is the default parameter passing convention, unless <tt><a href="KeyPgOptionbyval.html">Option ByVal</a></tt> is in effect.<br \>
+<br \>
+Opposite of <tt><a href="KeyPgByval.html">ByVal</a></tt>.<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="key">Dim</span>&nbsp;<span class="wrd">MyVar</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+<br />
+<span class="key">Sub</span>&nbsp;<span class="wrd">ChangeVar</span><span class="oth">(</span><span class="key">ByRef</span>&nbsp;<span class="wrd">AVar</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">AVar</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">AVar</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="num">1</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Sub</span><br />
+<br />
+<span class="wrd">MyVar</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">1</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"MyVar:&nbsp;"</span><span class="oth">;</span>&nbsp;<span class="wrd">MyVar</span>&nbsp;<span class="com">'output&nbsp;=&nbsp;1</span><br />
+<span class="wrd">ChangeVar</span>&nbsp;<span class="wrd">MyVar</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"MyVar:&nbsp;"</span><span class="oth">;</span>&nbsp;<span class="wrd">MyVar</span>&nbsp;<span class="com">'output&nbsp;=&nbsp;2</span><br />
+<span class="key">Sleep</span><br />
+<span class="key">End</span><br />
+</div></tt><br />
+<br \>
+</div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
+<ul><li> In <i><a href="CompilerOptlang.html">-lang fb</a></i> dialect, <tt><b>ByVal</b></tt> is the default parameter passing convention for all built-in types except <tt><a href="KeyPgString.html">String</a></tt>; String and user-defined <tt><a href="KeyPgType.html">Type</a></tt>s are passed <tt><a href="KeyPgByref.html">ByRef</a></tt> by default.<br \>
+<li> In <i><a href="CompilerOptlang.html">-lang qb</a></i> and <i><a href="CompilerOptlang.html">-lang fblite</a></i> dialects, <tt><b>ByRef</b></tt> is the default parameter passing convention.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> New to FreeBASIC<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <a href="ProPgPassingArguments.html">Passing Arguments to Procedures</a><br \>
+<li> <tt><a href="KeyPgDeclare.html">Declare</a></tt><br \>
+<li> <tt><a href="KeyPgByval.html">ByVal</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

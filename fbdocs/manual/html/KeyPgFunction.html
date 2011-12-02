@@ -1,0 +1,161 @@
+<html>
+<head>
+<title>Function</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Function</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Defines a procedure returning a value<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+[<a href="KeyPgPublic.html">Public</a>|<a href="KeyPgPrivate.html">Private</a>] <b>Function</b> <i>identifier</i> [<a href="KeyPgCdecl.html">cdecl</a>|<a href="KeyPgPascal.html">pascal</a>|<a href="KeyPgStdcall.html">stdcall</a>] [<a href="KeyPgOverload.html">Overload</a>] [<a href="KeyPgAlias.html">Alias</a> <i>external_identifier</i>] [([<i>parameter_list</i>])] [<a href="KeyPgAs.html">As</a> <i>return_type</i>] [<a href="KeyPgStatic.html">Static</a>] [<a href="KeyPgExport.html">Export</a>]<br \>
+<div class="fb_indent"><i>statements</i><br \>
+...<br \>
+{ {<a href="KeyPgReturn.html">Return</a> [<i>return_value</i>]}|{Function = <i>return_value</i>}|{<i>identifier</i> = <i>return_value</i>} }<br \>
+...<br \>
+</div><a href="KeyPgEndblock.html">End</a> Function<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+<tt><i>identifier</i></tt>: the name of the function<br \>
+<tt><i>external_identifier</i></tt>: externally visible (to the linker) name enclosed in quotes<br \>
+<tt><i>parameter_list</i></tt>: <tt><i>parameter</i>[, <i>parameter</i>[, ...]]</tt><br \>
+<tt><i>parameter</i></tt>: <tt>[<a href="KeyPgByref.html">ByRef</a>|<a href="KeyPgByval.html">ByVal</a>] <i>identifier</i> [<a href="KeyPgAs.html">As</a> <i>type</i>] [= <i>default_value</i>]</tt><br \>
+<div class="fb_indent"><tt><i>identifier</i></tt>: the name of the variable referenced in the function.  If the argument is an array then the identifier must be followed by an empty parenthesis. <br \>
+<tt><i>type</i></tt>: the type of variable<br \>
+<tt><i>default_value</i></tt>: the value of the argument if none is specified in the call<br \>
+</div><tt><i>return_type</i></tt>: the type of variable returned by the function<br \>
+<tt><i>statements</i></tt>: one or more statements that make up the function body<br \>
+<tt><i>return_value</i></tt>: the value returned from the function<br \>
+<br \>
+</div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+A function defines a block of code which can be executed with a single statement (a function call), and provide a value back to the caller when finished (a return value). 	There are several reasons to use functions:<br \>
+<ul><li> Reduces redundancy in your program<br \>
+<li> Enables reuse of code in many programs<br \>
+<li> Improves readability of the program<br \>
+<li> Improves maintainability of the program<br \>
+<li> Makes it easy to extend your program<br \>
+<br \>
+</ul><i>Access Rights</i> : The <tt><a href="KeyPgPublic.html">Public</a></tt> and <tt><a href="KeyPgPrivate.html">Private</a></tt> keywords specify public or private intra module-level access rights, respectively. If neither is given, the function defaults to public access (<tt><a href="KeyPgPublic.html">Public</a></tt>).<br \>
+<br \>
+<i>Calling Convention</i> : Calling convention, or the order in which arguments are pushed and popped from the stack during function calls, is specified with the <tt><a href="KeyPgCdecl.html">cdecl</a></tt>, <tt><a href="KeyPgPascal.html">pascal</a></tt> and <tt><a href="KeyPgStdcall.html">stdcall</a></tt> keywords. If none is given, the function uses the standard convention by default (<tt><a href="KeyPgStdcall.html">stdcall</a></tt>).<br \>
+<br \>
+<i>Passing Arguments</i> : Functions may receive one or more variables, or arguments, when called. These arguments are listed as <tt><i>parameters</i></tt> in the <tt><i>parameter_list</i></tt>. The <tt><a href="KeyPgByref.html">ByRef</a></tt> and <tt><a href="KeyPgByval.html">ByVal</a></tt> keywords specify whether the argument will be passed by reference or by value, respectively. The argument's type is given by "<tt><a href="KeyPgAs.html">As</a> <i>type</i></tt>" following the <tt><i>parameter</i></tt>. If a parameter in the declaration is given a default value, the parameter is optional.  Array parameters are specified by following an identifier with an empty parenthesis.  Note that array parameters are always <tt><a href="KeyPgByref.html">ByRef</a></tt> and the <tt><a href="KeyPgByref.html">ByRef</a></tt> keyword is neither required nor allowed for array parameters.  When calling a function with an array argument the parenthesis must be supplied there too; see the examples.<br \>
+<br \>
+<i>Overloaded Functions</i> : An overloaded function may share the same name (<tt><i>identifier</i></tt>) as another with a different signature. The <tt><a href="KeyPgOverload.html">Overload</a></tt> keyword specifies that a function may be overloaded. A function must be defined - or declared - using the <tt><a href="KeyPgOverload.html">Overload</a></tt> keyword prior to any functions that overload them.<br \>
+<br \>
+<i>Returning values</i> : <tt><i>return_type</i></tt> specifies the <tt><a href="DataType.html">data type</a></tt> returned by a function upon exit. If no data type is specified, then the function will return the default data type, which will be Integer unless set to another data type using <tt><a href="KeyPgDefsng.html">DefSng</a></tt>, <tt><a href="KeyPgDefdbl.html">DefDbl</a></tt>, <tt><a href="KeyPgDefstr.html">DefStr</a></tt>, etc. Functions can return values <i>(and soon, references)</i> using three methods: the <tt><a href="KeyPgReturn.html">Return</a></tt> keyword followed by a value exits the function immediately, and returns that value to the caller. Functions can also return values by assigning the Function keyword or the function's <tt><i>identifier</i></tt> to the desired return value. The latter two methods do not cause the function to exit, however. Since functions return values, function calls evaluate to expressions. Thus, function calls can be made wherever an expression is expected, like in <a href="KeyPgOpAssignment.html">Assignments</a> or <tt><a href="KeyPgIfthen.html">If</a></tt> statements.<br \>
+<br \>
+<i>Local Variable Preservation</i> : The <tt><a href="KeyPgStatic.html">Static</a></tt> keyword specifies that a function's locally declared variables are preserved between function calls. Upon entering a function defined with <tt><a href="KeyPgStatic.html">Static</a></tt>, local variables have the same value as when the function was last called.<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<br \>
+<tt><div class="freebasic">
+<span class="com">''&nbsp;This&nbsp;program&nbsp;demonstrates&nbsp;the&nbsp;declaration&nbsp;of&nbsp;a&nbsp;function&nbsp;</span><br />
+<span class="com">''&nbsp;and&nbsp;returning&nbsp;a&nbsp;value&nbsp;using&nbsp;Return&nbsp;command</span><br />
+<br />
+<span class="key">Declare</span>&nbsp;<span class="key">Function</span>&nbsp;<span class="wrd">ReturnTen</span>&nbsp;<span class="oth">()</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+<br />
+<span class="key">Print</span>&nbsp;<span class="wrd">ReturnTen</span>&nbsp;<span class="oth">()</span>&nbsp;<span class="com">''&nbsp;ReturnTen&nbsp;returns&nbsp;an&nbsp;integer&nbsp;by&nbsp;default.</span><br />
+<br />
+<span class="key">Function</span>&nbsp;<span class="wrd">ReturnTen</span><span class="oth">()</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Return</span>&nbsp;<span class="num">10</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Function</span><br />
+</div></tt><br />
+<br \>
+<tt><div class="freebasic">
+<span class="com">''&nbsp;This&nbsp;program&nbsp;demonstrates&nbsp;the&nbsp;declaration&nbsp;of&nbsp;a&nbsp;function&nbsp;</span><br />
+<span class="com">''&nbsp;and&nbsp;returning&nbsp;a&nbsp;value&nbsp;using&nbsp;assignment&nbsp;to&nbsp;function&nbsp;name</span><br />
+<br />
+<span class="key">Declare</span>&nbsp;<span class="key">Function</span>&nbsp;<span class="wrd">ReturnTen</span>&nbsp;<span class="oth">()</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+<br />
+<span class="key">Print</span>&nbsp;<span class="wrd">ReturnTen</span>&nbsp;<span class="oth">()</span>&nbsp;<span class="com">''&nbsp;ReturnTen&nbsp;returns&nbsp;an&nbsp;integer&nbsp;by&nbsp;default.</span><br />
+<br />
+<span class="key">Function</span>&nbsp;<span class="wrd">ReturnTen</span><span class="oth">()</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">ReturnTen</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">10</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Function</span><br />
+</div></tt><br />
+<br \>
+<tt><div class="freebasic">
+<span class="com">''&nbsp;This&nbsp;program&nbsp;demonstrates&nbsp;function&nbsp;overloading.</span><br />
+<br />
+<span class="com">''&nbsp;The&nbsp;overloaded&nbsp;functions&nbsp;must&nbsp;be&nbsp;FIRST.</span><br />
+<span class="key">Declare</span>&nbsp;<span class="key">Function</span>&nbsp;<span class="wrd">ReturnTen</span>&nbsp;<span class="key">Overload</span>&nbsp;<span class="oth">(</span><span class="wrd">a</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Single</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+<span class="key">Declare</span>&nbsp;<span class="key">Function</span>&nbsp;<span class="wrd">ReturnTen</span>&nbsp;<span class="key">Overload</span>&nbsp;<span class="oth">(</span><span class="wrd">a</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+<span class="key">Declare</span>&nbsp;<span class="key">Function</span>&nbsp;<span class="wrd">ReturnTen</span>&nbsp;<span class="oth">(</span><span class="wrd">a</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+<br />
+<span class="key">Print</span>&nbsp;<span class="wrd">ReturnTen</span>&nbsp;<span class="oth">(</span><span class="num">10.000!</span><span class="oth">)</span>&nbsp;<span class="com">''&nbsp;ReturnTen&nbsp;will&nbsp;take&nbsp;a&nbsp;single&nbsp;and&nbsp;return&nbsp;an&nbsp;integer</span><br />
+<span class="key">Print</span>&nbsp;<span class="wrd">ReturnTen</span>&nbsp;<span class="oth">(</span><span class="num">10</span><span class="oth">)</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;ReturnTen&nbsp;will&nbsp;take&nbsp;an&nbsp;integer&nbsp;and&nbsp;return&nbsp;an&nbsp;integer</span><br />
+<span class="key">Print</span>&nbsp;<span class="wrd">ReturnTen</span>&nbsp;<span class="oth">(</span><span class="quo">"10"</span><span class="oth">)</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;ReturnTen&nbsp;will&nbsp;take&nbsp;a&nbsp;string&nbsp;and&nbsp;return&nbsp;an&nbsp;integer</span><br />
+<br />
+<span class="key">Function</span>&nbsp;<span class="wrd">ReturnTen</span>&nbsp;<span class="key">Overload</span>&nbsp;<span class="oth">(</span><span class="wrd">a</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Single</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Return</span>&nbsp;<span class="key">Int</span><span class="oth">(</span><span class="wrd">a</span><span class="oth">)</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Function</span><br />
+<br />
+<span class="key">Function</span>&nbsp;<span class="wrd">ReturnTen</span>&nbsp;<span class="key">Overload</span>&nbsp;<span class="oth">(</span><span class="wrd">a</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Return</span>&nbsp;<span class="key">Val</span><span class="oth">(</span><span class="wrd">a</span><span class="oth">)</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Function</span><br />
+<br />
+<span class="key">Function</span>&nbsp;<span class="wrd">ReturnTen</span>&nbsp;<span class="oth">(</span><span class="wrd">a</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Return</span>&nbsp;<span class="wrd">a</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Function</span><br />
+</div></tt><br />
+<br \>
+<tt><div class="freebasic">
+<span class="com">''&nbsp;The&nbsp;following&nbsp;example&nbsp;demonstrates&nbsp;optional&nbsp;parameters.</span><br />
+<br />
+<span class="key">Function</span>&nbsp;<span class="wrd">TestFunc</span><span class="oth">(</span><span class="wrd">P</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="quo">"Default"</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Return</span>&nbsp;<span class="wrd">P</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Function</span><br />
+<br />
+<span class="key">Print</span>&nbsp;<span class="wrd">TestFunc</span><span class="oth">(</span><span class="quo">"Testing:"</span><span class="oth">)</span><br />
+<span class="key">Print</span>&nbsp;<span class="wrd">TestFunc</span><br />
+</div></tt><br />
+<br \>
+<tt><div class="freebasic">
+<span class="com">''&nbsp;This&nbsp;example&nbsp;shows&nbsp;how&nbsp;to&nbsp;declare&nbsp;and&nbsp;call&nbsp;</span><br />
+<span class="com">''&nbsp;functions&nbsp;taking&nbsp;array&nbsp;arguments.</span><br />
+<br />
+<span class="key">Function</span>&nbsp;<span class="wrd">x</span><span class="oth">(</span><span class="wrd">b</span><span class="oth">()</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Double</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;<span class="wrd">x</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">UBound</span><span class="oth">(</span><span class="wrd">b</span><span class="oth">)-</span><span class="key">LBound</span><span class="oth">(</span><span class="wrd">b</span><span class="oth">)+</span><span class="num">1</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Function</span><br />
+<br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">a</span><span class="oth">(</span><span class="num">1</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">10</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Double</span><br />
+<span class="key">Print</span>&nbsp;<span class="wrd">x</span><span class="oth">(</span><span class="wrd">a</span><span class="oth">())</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">c</span><span class="oth">(</span><span class="num">10</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">20</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Double</span>&nbsp;<br />
+<span class="key">Print</span>&nbsp;<span class="wrd">x</span><span class="oth">(</span><span class="wrd">c</span><span class="oth">())</span><br />
+</div></tt><br />
+<br \>
+</div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
+<ul><li> In the <i><a href="CompilerOptlang.html">-lang fb</a></i> dialect, <tt><b>ByVal</b></tt> is the default parameter passing convention for all built-in types except <tt><a href="KeyPgString.html">String</a></tt>; String and user-defined <tt><a href="KeyPgType.html">Type</a></tt>s are passed <tt><a href="KeyPgByref.html">ByRef</a></tt> by default.<br \>
+<li> In the <i><a href="CompilerOptlang.html">-lang qb</a></i> and <i><a href="CompilerOptlang.html">-lang fblite</a></i> dialects, <tt><b>ByRef</b></tt> is the default parameter passing convention.<br \>
+<li> In the <i><a href="CompilerOptlang.html">-lang qb</a></i> dialect, the name of the function must be used in an assignment to specify the return value.  Using <tt><b>Function</b> = ...</tt>" to specify the return value may not be used.<br \>
+<li> In the <i><a href="CompilerOptlang.html">-lang qb</a></i> and <i><a href="CompilerOptlang.html">-lang fblite</a></i> dialects, <tt><a href="KeyPgReturn.html">Return</a></tt> may only be used to return a value when <tt><a href="KeyPgOptiongosub.html">Option Gosub</a></tt> is off.  In <i><a href="CompilerOptlang.html">-lang qb</a></i>, this must be done explicitly using the <tt><a href="KeyPgOptionnogosub.html">Option Nogosub</a></tt> statement.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> Parameters can be optional in FreeBASIC.<br \>
+<li> In QBASIC, the return type could only specified with a suffix, not with <tt>AS TYPE</tt>, and only allowed functions to return a built-in type.<br \>
+<li> Return value can now be specified by a <tt><a href="KeyPgReturn.html">Return</a></tt> statement.<br \>
+<li> Function <tt><a href="KeyPgOverload.html">Overload</a></tt>ing is supported in FreeBASIC.<br \>
+<li> The return value of <tt><a href="KeyPgInteger.html">Integer</a></tt> functions (all integer types) can be ignored in the calling code.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgSub.html">Sub</a></tt><br \>
+<li> <tt><a href="KeyPgExit.html">Exit</a></tt><br \>
+<li> <tt><a href="KeyPgReturn.html">Return</a></tt><br \>
+<li> <tt><a href="KeyPgDeclare.html">Declare</a></tt><br \>
+<li> <tt><a href="KeyPgPublic.html">Public</a></tt><br \>
+<li> <tt><a href="KeyPgPrivate.html">Private</a></tt><br \>
+<br \>
+</ul><br \>
+</div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

@@ -1,0 +1,154 @@
+<html>
+<head>
+<title>FreeBASIC Dialects</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">FreeBASIC Dialects</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	<br \>
+<div class="fb_indent">FreeBASIC version 0.17b introduces a <i><a href="CompilerOptlang.html">-lang</a></i> command-line option, used to change the language compatibility mode for different dialects of the basic language.<br \>
+<br \>
+Starting with version 0.18.3b the <i><a href="CompilerOptlang.html">-lang qb</a></i> dialect has been further restricted to only allow what would have been allowed in <a href="QuickBASIC.html">QuickBASIC</a>.<br \>
+<br \>
+In version 0.18.4b the <i><a href="CompilerOptlang.html">-lang fblite</a></i> dialect was added, intended to replace <tt>-lang deprecated</tt> in future.<br \>
+<br \>
+In version 0.20.0b the <tt><a href="KeyPgPplang.html">#lang</a></tt> directive and <tt><a href="KeyPgMetaLang.html">$Lang</a></tt> metacommand were added to specify a dialect from source.<br \>
+<br \>
+<div class="fb_table"><table><tr><td>-lang option</td><td>description</td></tr><tr><td>fb</td><td>FreeBASIC compatibility (default)</td></tr><tr><td>qb</td><td>qbasic compatibility</td></tr><tr><td>fblite</td><td>FreeBASIC language compatibility, with a more QBASIC-compatible coding style</td></tr><tr><td>deprecated</td><td>compatibility with FB 0.16</td></tr></table></div><br \>
+<br \>
+The <i><a href="CompilerOptlang.html">-lang</a></i> option was needed to allow FreeBASIC to support object-orientation and other features in the future, without crippling the QuickBASIC support or breaking compatibility with old FreeBASIC sources, and without making FreeBASIC difficult to maintain with many different versions of very similar packages. The QuickBASIC support can continue to be improved, if needed, without breaking the sources written specifically for FreeBASIC.<br \>
+<br \>
+To compile old GW-BASIC or QuickBASIC/QBasic sources without too many changes, use the <i><a href="CompilerOptlang.html">-lang qb</a></i> option on the command-line when running <tt>fbc</tt>. This option will evolve into a better compatibility with QuickBASIC/QBasic code.<br \>
+<br \>
+To compile FreeBASIC sources from 0.16b, use the <i><a href="CompilerOptlang.html">-lang deprecated</a></i> option. This option is maintained for compatibility and will not evolve in the future, and it's likely to disappear when FreeBASIC reaches a non-beta release.<br \>
+<br \>
+For programmers who want to access some of FreeBASIC's newer features, but want to retain a more QBASIC-friendly programming style, use the <i><a href="CompilerOptlang.html">-lang fblite</a></i> option.  This dialect will not undergo significant changes in the future, but will continue to be maintained and supported.<br \>
+This option is also the most compatible with sources that were made using older versions of FreeBASIC.<br \>
+<br \>
+It is recommended to use <i><a href="CompilerOptlang.html">-lang fb</a></i> for new projects, as new features (object classes, inheritance..) will be added exclusively to this dialect.<br \>
+<br \>
+<br \>
+</div><b><u>-lang fb (the default mode)</u></b><br \>
+<div class="fb_indent"><b>Not supported:</b><br \>
+<br \>
+1) implicit variable declaration<br \>
+</div><ul><ul><li> All variables must be explicitly declared, using <tt><a href="KeyPgDim.html">Dim</a></tt>, <tt><a href="KeyPgRedim.html">ReDim</a></tt>, <tt><a href="KeyPgVar.html">Var</a></tt>, <tt><a href="KeyPgConst.html">Const</a></tt>, <tt><a href="KeyPgExtern.html">Extern</a></tt> or <tt><a href="KeyPgCommon.html">Common</a></tt>.<br \>
+<br \>
+</ul></ul><div class="fb_indent">2) type suffixes (<tt>!, #, $, %, &</tt>)<br \>
+</div><ul><ul><li> They are only allowed for numeric literals, but it's recommended to use <tt><a href="KeyPgCast.html">Cast</a></tt> or the <tt>f</tt> (<tt>single</tt>), <tt>d</tt> (<tt>double</tt>), <tt>ll</tt> (<tt>longint</tt>), <tt>ul</tt> (<tt>uinteger</tt>), <tt>ull</tt> (<tt>ulongint</tt>) numeric literal suffixes to resolve overloading.<br \>
+<br \>
+</ul></ul><div class="fb_indent">3) <tt><a href="KeyPgDefbyte.html">DefByte</a></tt>, <tt><a href="KeyPgDefubyte.html">DefUByte</a></tt>, <tt><a href="KeyPgDefshort.html">DefShort</a></tt>, <tt><a href="KeyPgDefushort.html">DefUShort</a></tt>, <tt><a href="KeyPgDefint.html">DefInt</a></tt>, <tt><a href="KeyPgDefuint.html">DefUInt</a></tt>, <tt><a href="KeyPgDeflng.html">DefLng</a></tt>, <tt><a href="KeyPgDeflongint.html">Deflongint</a></tt>, <tt><a href="KeyPgDefulongint.html">Defulongint</a></tt>, <tt><a href="KeyPgDefsng.html">DefSng</a></tt>, <tt><a href="KeyPgDefdbl.html">DefDbl</a></tt>, <tt><a href="KeyPgDefstr.html">DefStr</a></tt><br \>
+</div><ul><ul><li> An explicit type ("<tt>As <i>T</i></tt>") is needed when declaring variables using <tt><a href="KeyPgDim.html">Dim</a></tt>, <tt><a href="KeyPgRedim.html">ReDim</a></tt>, <tt><a href="KeyPgExtern.html">Extern</a></tt> or <tt><a href="KeyPgCommon.html">Common</a></tt>. Variables declared using <tt><a href="KeyPgVar.html">Var</a></tt> or <tt><a href="KeyPgConst.html">Const</a></tt> have their types inferred from an initialization value (an explicit type is optional using <tt><a href="KeyPgConst.html">Const</a></tt>).<br \>
+<br \>
+</ul></ul><div class="fb_indent">4) all parameters passed by reference by default<br \>
+</div><ul><ul><li> By default, all intrinsic scalar types - numeric and pointer types - are passed by value (<tt><a href="KeyPgByval.html">ByVal</a></tt>). Any other type - <tt><a href="KeyPgString.html">String</a></tt> or user-defined type - is passed by reference (<tt><a href="KeyPgByref.html">ByRef</a></tt>).<br \>
+<li> Use the <tt>-w pedantic</tt> command-line option to have parameters without explicit <tt><a href="KeyPgByval.html">ByVal</a></tt> or <tt><a href="KeyPgByref.html">ByRef</a></tt> reported.<br \>
+<br \>
+</ul></ul><div class="fb_indent">5) <tt>OPTION</tt>s of any kind (no context-sensitivity)<br \>
+</div><ul><ul><li> Instead of <tt><a href="KeyPgOptionnokeyword.html">Option NoKeyword</a></tt>, use <tt>#undef</tt>.<br \>
+<li> Instead of <tt><a href="KeyPgOptionescape.html">Option Escape</a></tt>, use: <tt>!"some esc seq \n\r"</tt> (notice the '<tt>!</tt>' char) and pass <tt>-w pedantic</tt> to check for possible escape sequences.<br \>
+<li> <tt><a href="KeyPgOptionexplicit.html">Option Explicit</a></tt> isn't needed, see item 1.<br \>
+<li> Instead of <tt><a href="KeyPgOptiondynamic.html">Option Dynamic</a></tt>, declare variable-length arrays using <tt><a href="KeyPgRedim.html">ReDim</a></tt>. <tt><a href="KeyPgDim.html">Dim</a></tt> can also be used to declare variable-length arrays using variable or no subscripts.<br \>
+<li> Instead of <tt><a href="KeyPgOptionbase.html">Option Base</a></tt>, use explicit lower-bound subscripts in arrays declarations.<br \>
+<li> Instead of <tt><a href="KeyPgOptionprivate.html">Option Private</a></tt>, use <tt><a href="KeyPgPrivate.html">Private</a></tt> to declare procedures with internal linkage.<br \>
+<li> Instead of <tt><a href="KeyPgOptiongosub.html">Option Gosub</a></tt> and <tt><a href="KeyPgOptionnogosub.html">Option Nogosub</a></tt>, use procedures with <tt><a href="KeyPgSub.html">Sub</a></tt> or <tt><a href="KeyPgFunction.html">Function</a></tt>.<br \>
+<br \>
+</ul></ul><div class="fb_indent">6) periods in symbol names <br \>
+</div><ul><ul><li> Use namespaces instead.<br \>
+</ul></ul><div class="fb_indent"> <br \>
+7) <tt><a href="KeyPgGosub.html">GoSub</a></tt> or <tt><a href="KeyPgReturn.html">Return (From Gosub)</a></tt><br \>
+</div><ul><ul><li> Nested procedures may be allowed in future.<br \>
+<br \>
+</ul></ul><div class="fb_indent">8) <tt><a href="KeyPgOngosub.html">On Gosub</a></tt> or <tt><a href="KeyPgOngoto.html">On Goto</a></tt><br \>
+</div><ul><ul><li> Use <tt>SELECT expr AS CONST</tt> for the latter.<br \>
+<br \>
+</ul></ul><div class="fb_indent">9) <tt><a href="KeyPgOnerror.html">On Error</a></tt> or <tt><a href="KeyPgResume.html">Resume</a></tt><br \>
+</div><ul><ul><li> Most runtime and graphics library procedures now return an error code, like:  <tt>IF OPEN( "text" FOR INPUT AS #1 ) &lt;&gt; 0 THEN error</tt>... <br \>
+<br \>
+</ul></ul><div class="fb_indent">10) <tt>'$DYNAMIC</tt>, <tt>'$STATIC</tt>, <tt>'$INCLUDE</tt> meta-commands embedded in comments<br \>
+</div><ul><ul><li> See item 5 about <tt><a href="KeyPgOptiondynamic.html">Option Dynamic</a></tt>.<br \>
+<li> Use <tt>#include "filename"</tt> instead of <tt>'$include</tt>.<br \>
+<br \>
+</ul></ul><div class="fb_indent">11) <tt><a href="KeyPgCall.html">Call</a></tt> or <tt><a href="KeyPgLet.html">Let</a></tt><br \>
+</div><ul><ul><li> Just remove them.<br \>
+<br \>
+</ul></ul><div class="fb_indent">12) numeric labels<br \>
+</div><ul><ul><li> No comment.<br \>
+<br \>
+</ul></ul><div class="fb_indent">13) global symbols with the same name as keywords <br \>
+</div><ul><ul><li> Declare them inside a namespace. <br \>
+<br \>
+<br \>
+</ul></ul><b><u>-lang deprecated</u></b><br \>
+<div class="fb_indent"> <br \>
+<b>Supported:</b> <i>Anything allowed in version 0.16b, but:</i><br \>
+<br \>
+1) <tt>GOSUB</tt>/<tt>RETURN</tt> and <tt>ON ... GOSUB</tt> (even at module-level)<br \>
+</div><ul><ul><li> so the <tt>GOSUB</tt> implementation could be thread-unsafe in the <tt>-lang qb</tt> mode, allowing fast execution (<tt>-lang qb</tt> doesn't support multi-threading, while <tt>-lang deprecated</tt> does).<br \>
+<br \>
+</ul></ul><div class="fb_indent"><b>Not supported:</b><br \>
+<br \>
+1) Classes<br \>
+</div><ul><ul><li> Periods allowed in symbol names make it too difficult and/or ambiguous.<br \>
+<br \>
+</ul></ul><div class="fb_indent">2) Operator overloading<br \>
+</div><ul><ul><li> Periods allowed in symbol names make it too difficult and/or ambiguous.<br \>
+<br \>
+</ul></ul><div class="fb_indent">3) Constructors, destructors and methods in <tt>TYPE</tt>s.<br \>
+</div><ul><ul><li> Periods allowed in symbol names make it too difficult and/or ambiguous.<br \>
+<br \>
+<br \>
+</ul></ul><b><u>-lang fblite</u></b><br \>
+<div class="fb_indent"> <br \>
+<b>Supported:</b> <i>Anything allowed in the </i><a href="CompilerOptlang.html">-lang deprecated</a><i> dialect, plus..</i><br \>
+<br \>
+1) <tt>GOSUB</tt>/<tt>RETURN</tt><br \>
+    - Use <tt><a href="KeyPgOptiongosub.html">Option Gosub</a></tt> to enable.  This will disable <tt>RETURN</tt> from exiting a procedure, due to ambiguity.<br \>
+<br \>
+<b>Not supported:</b><br \>
+<br \>
+1) <tt><a href="KeyPgScope.html">Scope</a></tt> blocks<br \>
+</div><ul><ul><li> All variables are given procedure scope.  Explicit <tt><a href="KeyPgScope.html">Scope</a></tt> blocks may be added later.<br \>
+<br \>
+</ul></ul><b><u>-lang qb</u></b><br \>
+<div class="fb_indent"><b>Supported:</b> <i>Everything not supported/allowed in the </i><a href="CompilerOptlang.html">-lang fb</a><i> dialect, plus..</i><br \>
+<br \>
+1) <tt><a href="KeyPgCall.html">Call</a></tt> can be used with forward-referenced functions.<br \>
+<br \>
+2) <tt><a href="KeyPgShared.html">Shared</a></tt> can be used inside functions. (W.I.P.)<br \>
+<br \>
+3) All variables, implicitly or explicitly declared, are always allocated in the procedure scope, like in QuickBASIC.<br \>
+<br \>
+4) The <tt><a href="KeyPgData.html">Data</a></tt> statement won't look up symbols, every token is assumed to be a literal string even without quotes, like in QuickBASIC.<br \>
+<br \>
+<br \>
+<b>Not supported:</b><br \>
+<br \>
+1) Multi-threading<br \>
+</div><ul><ul><li> None of the <tt><a href="CatPgThreading.html">threading</a></tt> procedures may be used.<br \>
+<br \>
+</ul></ul><div class="fb_indent">2) Classes and Namespaces<br \>
+<br \>
+3) Procedure and operator overloading<br \>
+<br \>
+4) Constructors, destructors and other member procedures in <tt><a href="KeyPgType.html">Type</a></tt> definitions.<br \>
+<br \>
+5) <tt><a href="KeyPgScope.html">Scope</a></tt> blocks<br \>
+<br \>
+6) <tt><a href="KeyPgExternBlock.html">Extern</a></tt> blocks<br \>
+<br \>
+7) Variable initialization<br \>
+</div><ul><ul><li> All variables are moved to the procedure scope (like in QuickBASIC), making initializing local variables too difficult to support.<br \>
+<br \>
+</ul></ul>
+</div>
+</div> 
+</div> 
+</body>
+</html>

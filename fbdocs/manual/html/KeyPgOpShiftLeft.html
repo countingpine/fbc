@@ -1,0 +1,82 @@
+<html>
+<head>
+<title>Operator Shl (Shift Left)</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Operator Shl (Shift Left)</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Shifts the bits of a numeric expression to the left<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgOperator.html">Operator</a> <b>Shl</b> ( <a href="KeyPgByref.html">ByRef</a> <i>lhs</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a>, <a href="KeyPgByref.html">ByRef</a> <i>rhs</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a> ) <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a><br \>
+<a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgOperator.html">Operator</a> <b>Shl</b> ( <a href="KeyPgByref.html">ByRef</a> <i>lhs</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgUinteger.html">UInteger</a>, <a href="KeyPgByref.html">ByRef</a> <i>rhs</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgUinteger.html">UInteger</a> ) <a href="KeyPgAs.html">As</a> <a href="KeyPgUinteger.html">UInteger</a><br \>
+<a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgOperator.html">Operator</a> <b>Shl</b> ( <a href="KeyPgByref.html">ByRef</a> <i>lhs</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgLongint.html">LongInt</a>, <a href="KeyPgByref.html">ByRef</a> <i>rhs</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgLongint.html">LongInt</a> ) <a href="KeyPgAs.html">As</a> <a href="KeyPgLongint.html">LongInt</a><br \>
+<a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgOperator.html">Operator</a> <b>Shl</b> ( <a href="KeyPgByref.html">ByRef</a> <i>lhs</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgUlongint.html">ULongInt</a>, <a href="KeyPgByref.html">ByRef</a> <i>rhs</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgUlongint.html">ULongInt</a> ) <a href="KeyPgAs.html">As</a> <a href="KeyPgUlongint.html">ULongInt</a><br \>
+</tt><br \>
+</div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
+<i>result</i> = <i>lhs</i> <b>Shl</b> <i>rhs</i><br \>
+</tt><br \>
+</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+<tt><i>lhs</i></tt><br \>
+<div class="fb_indent">The left-hand side expression.<br \>
+</div><tt><i>rhs</i></tt><br \>
+<div class="fb_indent">The right-hand side shift expression.<br \>
+<br \>
+</div></div><div class="fb_sect_title">Return Value</div><div class="fb_sect_cont"><br \>
+Returns the result of <tt><i>lhs</i></tt> being shifted left <tt><i>rhs</i></tt> number of times.<br \>
+<br \>
+</div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+<b><tt>Operator Shl</tt> (Shift left)</b> shifts all of the bits in the left-hand side expression (<tt><i>lhs</i></tt>) left a number of times specified by the right-hand side expression (<tt><i>rhs</i></tt>). This has the effect of multiplying <tt><i>lhs</i></tt> by two for each shift. For example, "<tt>&b0101 <b>Shl</b> 1</tt>" returns the binary number <tt>&b01010</tt>, and "<tt>5 <b>Shl</b> 1</tt>" returns <tt>10</tt>.<br \>
+<br \>
+Neither of the operands are modified in any way.<br \>
+<br \>
+This operator can be overloaded for user-defined types.<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="com">'Double&nbsp;a&nbsp;number</span><br />
+<span class="key">For</span>&nbsp;<span class="wrd">i</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">10</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="num">5</span>&nbsp;<span class="key">Shl</span>&nbsp;<span class="wrd">i</span><span class="oth">,</span>&nbsp;<span class="key">Bin</span><span class="oth">(</span><span class="num">5</span>&nbsp;<span class="key">Shl</span>&nbsp;<span class="wrd">i</span><span class="oth">,</span>&nbsp;<span class="num">16</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+<span class="key">Next</span>&nbsp;<span class="wrd">i</span><br />
+</div></tt><br />
+Output:<br \>
+<pre class="fb_pre">
+ 5            0000000000000101
+ 10           0000000000001010
+ 20           0000000000010100
+ 40           0000000000101000
+ 80           0000000001010000
+ 160          0000000010100000
+ 320          0000000101000000
+ 640          0000001010000000
+ 1280         0000010100000000
+ 2560         0000101000000000
+ 5120         0001010000000000
+</pre><br \>
+<br \>
+</div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
+<ul><li> Not available in the <i><a href="CompilerOptlang.html">-lang qb</a></i> dialect unless referenced with the alias <tt><b>__Shl</b></tt>.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> New to FreeBASIC<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgOpCombineShiftLeft.html">Operator Shl= (Shift Left And Assign)</a></tt><br \>
+<li> <tt><a href="KeyPgOpShiftRight.html">Operator Shr (Shift Right)</a></tt><br \>
+<li> <tt><a href="KeyPgBin.html">Bin</a></tt><br \>
+<li> <a href="CatPgMath.html">Mathematical Functions</a><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

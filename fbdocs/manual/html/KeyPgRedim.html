@@ -1,0 +1,173 @@
+<html>
+<head>
+<title>ReDim</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">ReDim</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Defines or resizes a variable-length array<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<b>ReDim</b> [ <a href="KeyPgShared.html">Shared</a> ] [ <a href="KeyPgPreserve.html">Preserve</a> ] <i>symbolname</i>([<i>subscript</i> [, ...]]) As <a href="DataType.html">datatype</a> [, ...]<br \>
+<b>ReDim</b> [ <a href="KeyPgShared.html">Shared</a> ] [ <a href="KeyPgPreserve.html">Preserve</a> ] As <a href="DataType.html">datatype</a> <i>symbolname</i>([<i>subscript</i> [, ...]]) [, ...]<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+<tt><a href="KeyPgShared.html">Shared</a></tt><br \>
+<div class="fb_indent">Specifies shared (file-scope) access to the array throughout the module.<br \>
+</div><tt><a href="KeyPgPreserve.html">Preserve</a></tt><br \>
+<div class="fb_indent">When used with an existing array, the contents of the array will be preserved during the resize. Note that <tt><a href="KeyPgPreserve.html">Preserve</a></tt> will not work properly in all cases.<br \>
+</div><tt><i>symbolname</i></tt><br \>
+<div class="fb_indent">A new or existing array id.<br \>
+</div><tt><i>subscript</i></tt>: [ <tt><i>lowerbound</i> To</tt> ] <tt><i>upperbound</i></tt><br \>
+<div class="fb_indent">The lower and upper bound range for a dimension of the array. Lower bound defaults to zero (<tt>0</tt>), or the default <tt><a href="KeyPgOptionbase.html">Base</a></tt>, if not specified.<br \>
+</div><tt><a href="DataType.html">datatype</a></tt><br \>
+<div class="fb_indent">The type of elements contained in the array.<br \>
+<br \>
+</div></div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+<tt><b>ReDim</b></tt> can be used to define new variable-length arrays, or resize existing variable-length arrays. <tt><b>ReDim</b></tt> always produces variable-length arrays, so, unlike <tt><a href="KeyPgDim.html">Dim</a></tt>, variable-length arrays can be defined with constant subscripts.<br \>
+<br \>
+When defining a new variable-length array, its elements are default constructed. For simple data types like <tt><a href="KeyPgInteger.html">Integer</a></tt> or <tt><a href="KeyPgDouble.html">Double</a></tt>, the elements are initialized to zero (<tt>0</tt>). For user-defined types with a default constructor, that will be called.<br \>
+<br \>
+<b>NOTES</b>: <br \>
+<ul><li> <tt><b>ReDim</b> <a href="KeyPgPreserve.html">Preserve</a></tt> may not work as expected in all cases:<br \>
+</ul><div class="fb_indent"><tt><a href="KeyPgPreserve.html">Preserve</a></tt>'s current behavior is to keep the original data contiguous in memory, and only expand or truncate the size of the memory.<br \>
+Its behavior (with a single dimension) is well-defined only when the upper bound is changed.  If the lower bound is changed, the current result is that the data is in effect shifted to start at the new lower bound.<br \>
+With multiple dimensions, only the upper bound of only the first dimension may be safely increased.  If the first dimension is reduced, the existing mappable data may be lost. If lower-order dimensions are resized at all, the effects can be hard to predict.<br \>
+<br \>
+</div><ul><li> <tt><b>ReDim</b></tt> cannot be used on fixed-size arrays - i.e. arrays with constant bounds made with <tt><a href="KeyPgDim.html">Dim</a></tt>.  This includes arrays contained in UDTs (user-defined <tt><a href="KeyPgType.html">Type</a></tt>s), because currently only fixed-size arrays are supported in UDTs.  This also includes fixed-length arrays passed as parameters in a function.  FreeBASIC cannot prevent you trying this at compile-time, but the results at run-time will be undefined.<br \>
+<br \>
+<li> Using <tt><b>ReDim</b></tt> within a member procedure with an array that contains an instance of the object class is undefined, and will [hopefully] result in horrible crashes.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="com">''&nbsp;Define&nbsp;a&nbsp;variable-length&nbsp;array&nbsp;with&nbsp;5&nbsp;elements</span><br />
+<span class="com">''</span><br />
+<span class="key">ReDim</span>&nbsp;<span class="wrd">array</span><span class="oth">(</span><span class="num">0</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">4</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+<br />
+<span class="key">For</span>&nbsp;<span class="wrd">index</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">LBound</span><span class="oth">(</span><span class="wrd">array</span><span class="oth">)</span>&nbsp;<span class="key">To</span>&nbsp;<span class="key">UBound</span><span class="oth">(</span><span class="wrd">array</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">array</span><span class="oth">(</span><span class="wrd">index</span><span class="oth">)</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">index</span><br />
+<span class="key">Next</span><br />
+<br />
+<span class="com">''&nbsp;Resize&nbsp;a&nbsp;variable-length&nbsp;array&nbsp;with&nbsp;10&nbsp;elements&nbsp;</span><br />
+<span class="com">''&nbsp;(the&nbsp;lower&nbsp;bound&nbsp;should&nbsp;be&nbsp;kept&nbsp;the&nbsp;same)</span><br />
+<span class="key">ReDim</span>&nbsp;<span class="key">Preserve</span>&nbsp;<span class="wrd">array</span><span class="oth">(</span><span class="num">0</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">9</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+<br />
+<span class="key">Print</span>&nbsp;<span class="quo">"index"</span><span class="oth">,</span>&nbsp;<span class="quo">"value"</span><br />
+<span class="key">For</span>&nbsp;<span class="wrd">index</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">LBound</span><span class="oth">(</span><span class="wrd">array</span><span class="oth">)</span>&nbsp;<span class="key">To</span>&nbsp;<span class="key">UBound</span><span class="oth">(</span><span class="wrd">array</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="wrd">index</span><span class="oth">,</span>&nbsp;<span class="wrd">array</span><span class="oth">(</span><span class="wrd">index</span><span class="oth">)</span><br />
+<span class="key">Next</span><br />
+</div></tt><br />
+This program will produce the following output:<br \>
+<br \>
+<pre class="fb_pre">index         value
+ 0             0
+ 1             1
+ 2             2
+ 3             3
+ 4             4
+ 5             5
+ 6             0
+ 7             0
+ 8             0
+ 9             0
+</pre><br \>
+<tt><div class="freebasic">
+<span class="com">''&nbsp;Define&nbsp;a&nbsp;variable-length&nbsp;array</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">array</span><span class="oth">()</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+<br />
+<span class="com">''&nbsp;ReDim&nbsp;array&nbsp;to&nbsp;have&nbsp;3*4&nbsp;elements</span><br />
+<span class="key">ReDim</span>&nbsp;<span class="wrd">array</span><span class="oth">(</span><span class="num">1</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">3</span><span class="oth">,</span>&nbsp;<span class="num">1</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">4</span><span class="oth">)</span><br />
+<br />
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="wrd">n</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">1</span><span class="oth">,</span>&nbsp;<span class="wrd">i</span><span class="oth">,</span>&nbsp;<span class="wrd">j</span><br />
+<br />
+<span class="key">Print</span>&nbsp;<span class="quo">"3&nbsp;*&nbsp;4:"</span><br />
+<span class="key">Print</span><br />
+<span class="key">For</span>&nbsp;<span class="wrd">i</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">LBound</span><span class="oth">(</span><span class="wrd">array</span><span class="oth">,</span>&nbsp;<span class="num">1</span><span class="oth">)</span>&nbsp;<span class="key">To</span>&nbsp;<span class="key">UBound</span><span class="oth">(</span><span class="wrd">array</span><span class="oth">,</span>&nbsp;<span class="num">1</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">For</span>&nbsp;<span class="wrd">j</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">LBound</span><span class="oth">(</span><span class="wrd">array</span><span class="oth">,</span>&nbsp;<span class="num">2</span><span class="oth">)</span>&nbsp;<span class="key">To</span>&nbsp;<span class="key">UBound</span><span class="oth">(</span><span class="wrd">array</span><span class="oth">,</span>&nbsp;<span class="num">2</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">array</span><span class="oth">(</span><span class="wrd">i</span><span class="oth">,</span>&nbsp;<span class="wrd">j</span><span class="oth">)</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">n</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="key">Using</span>&nbsp;<span class="quo">"##&nbsp;&nbsp;"</span><span class="oth">;</span>&nbsp;<span class="wrd">array</span><span class="oth">(</span><span class="wrd">i</span><span class="oth">,</span>&nbsp;<span class="wrd">j</span><span class="oth">);</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">n</span>&nbsp;<span class="oth">+=</span>&nbsp;<span class="num">1</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Next</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span><br />
+<span class="key">Next</span><br />
+<span class="key">Print</span><br />
+<br />
+<br />
+<span class="com">''&nbsp;ReDim&nbsp;Preserve&nbsp;array&nbsp;to&nbsp;have&nbsp;4*4&nbsp;elements,&nbsp;preserving&nbsp;the&nbsp;contents</span><br />
+<span class="com">''&nbsp;(only&nbsp;the&nbsp;first&nbsp;upper&nbsp;bound&nbsp;should&nbsp;be&nbsp;changed)</span><br />
+<span class="key">ReDim</span>&nbsp;<span class="key">Preserve</span>&nbsp;<span class="wrd">array</span><span class="oth">(</span><span class="num">1</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">4</span><span class="oth">,</span>&nbsp;<span class="num">1</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">4</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+<br />
+<span class="key">Print</span>&nbsp;<span class="quo">"4&nbsp;*&nbsp;4:"</span><br />
+<span class="key">Print</span><br />
+<span class="key">For</span>&nbsp;<span class="wrd">i</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">LBound</span><span class="oth">(</span><span class="wrd">array</span><span class="oth">,</span>&nbsp;<span class="num">1</span><span class="oth">)</span>&nbsp;<span class="key">To</span>&nbsp;<span class="key">UBound</span><span class="oth">(</span><span class="wrd">array</span><span class="oth">,</span>&nbsp;<span class="num">1</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">For</span>&nbsp;<span class="wrd">j</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">LBound</span><span class="oth">(</span><span class="wrd">array</span><span class="oth">,</span>&nbsp;<span class="num">2</span><span class="oth">)</span>&nbsp;<span class="key">To</span>&nbsp;<span class="key">UBound</span><span class="oth">(</span><span class="wrd">array</span><span class="oth">,</span>&nbsp;<span class="num">2</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="key">Using</span>&nbsp;<span class="quo">"##&nbsp;&nbsp;"</span><span class="oth">;</span>&nbsp;<span class="wrd">array</span><span class="oth">(</span><span class="wrd">i</span><span class="oth">,</span>&nbsp;<span class="wrd">j</span><span class="oth">);</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Next</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span><br />
+<span class="key">Next</span><br />
+<span class="key">Print</span><br />
+<br />
+<br />
+<span class="com">''&nbsp;ReDim&nbsp;Preserve&nbsp;array&nbsp;to&nbsp;have&nbsp;2*4&nbsp;elements,&nbsp;preserving&nbsp;but&nbsp;trancating&nbsp;the&nbsp;contents</span><br />
+<span class="com">''&nbsp;(only&nbsp;the&nbsp;first&nbsp;upper&nbsp;bound&nbsp;should&nbsp;be&nbsp;changed)</span><br />
+<span class="key">ReDim</span>&nbsp;<span class="key">Preserve</span>&nbsp;<span class="wrd">array</span><span class="oth">(</span><span class="num">1</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">2</span><span class="oth">,</span>&nbsp;<span class="num">1</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">4</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+<br />
+<span class="key">Print</span>&nbsp;<span class="quo">"2&nbsp;*&nbsp;4:"</span><br />
+<span class="key">Print</span><br />
+<span class="key">For</span>&nbsp;<span class="wrd">i</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">LBound</span><span class="oth">(</span><span class="wrd">array</span><span class="oth">,</span>&nbsp;<span class="num">1</span><span class="oth">)</span>&nbsp;<span class="key">To</span>&nbsp;<span class="key">UBound</span><span class="oth">(</span><span class="wrd">array</span><span class="oth">,</span>&nbsp;<span class="num">1</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">For</span>&nbsp;<span class="wrd">j</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">LBound</span><span class="oth">(</span><span class="wrd">array</span><span class="oth">,</span>&nbsp;<span class="num">2</span><span class="oth">)</span>&nbsp;<span class="key">To</span>&nbsp;<span class="key">UBound</span><span class="oth">(</span><span class="wrd">array</span><span class="oth">,</span>&nbsp;<span class="num">2</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="key">Using</span>&nbsp;<span class="quo">"##&nbsp;&nbsp;"</span><span class="oth">;</span>&nbsp;<span class="wrd">array</span><span class="oth">(</span><span class="wrd">i</span><span class="oth">,</span>&nbsp;<span class="wrd">j</span><span class="oth">);</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Next</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span><br />
+<span class="key">Next</span><br />
+<span class="key">Print</span><br />
+</div></tt><br />
+This program will produce the following output:<br \>
+<br \>
+<pre class="fb_pre">3 * 4:
+
+ 1   2   3   4
+ 5   6   7   8
+ 9  10  11  12
+
+4 * 4:
+
+ 1   2   3   4
+ 5   6   7   8
+ 9  10  11  12
+ 0   0   0   0
+
+2 * 4:
+
+ 1   2   3   4
+ 5   6   7   8
+
+</pre></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgPreserve.html">Preserve</a></tt> was in Visual Basic, but not in QBASIC.<br \>
+<li> Multi-dimensional arrays in FreeBASIC are in row-major order, rather than column-major order.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgCommon.html">Common</a></tt><br \>
+<li> <tt><a href="KeyPgDim.html">Dim</a></tt><br \>
+<li> <tt><a href="KeyPgErase.html">Erase</a></tt><br \>
+<li> <tt><a href="KeyPgExtern.html">Extern</a></tt><br \>
+<li> <tt><a href="KeyPgLbound.html">LBound</a></tt><br \>
+<li> <tt><a href="KeyPgRedim.html">ReDim</a></tt><br \>
+<li> <tt><a href="KeyPgPreserve.html">Preserve</a></tt><br \>
+<li> <tt><a href="KeyPgShared.html">Shared</a></tt><br \>
+<li> <tt><a href="KeyPgStatic.html">Static</a></tt><br \>
+<li> <tt><a href="KeyPgUbound.html">UBound</a></tt><br \>
+<li> <tt><a href="KeyPgVar.html">Var</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

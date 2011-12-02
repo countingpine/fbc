@@ -1,0 +1,80 @@
+<html>
+<head>
+<title>BSave</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">BSave</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Saves an array of arbitrary data and palette information to a file on disk<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgFunction.html">Function</a> <b>BSave</b> ( <a href="KeyPgByref.html">ByRef</a> <i>filename</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgConstQualifier.html">Const</a> <a href="KeyPgString.html">String</a>, <a href="KeyPgByval.html">ByVal</a> <i>source</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgAny.html">Any</a> <a href="KeyPgPtr.html">Ptr</a>, <a href="KeyPgByval.html">ByVal</a> <i>size</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a> = 0, <a href="KeyPgByval.html">ByVal</a> <i>pal</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgAny.html">Any</a> <a href="KeyPgPtr.html">Ptr</a> = 0 ) <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a><br \>
+</tt><br \>
+</div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
+<i>result</i> = <b>BSave</b>( <i>filename</i>, <i>source</i> [,[ <i>size</i> ][, <i>pal</i> ]] )<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+<tt><i>filename</i></tt><br \>
+<div class="fb_indent">the name of the file to create for storing the pixel and palette data.<br \>
+</div><tt><i>source</i></tt><br \>
+<div class="fb_indent">the address of the data to store, or null (<tt>0</tt>) to store pixel data from the current screen work page.<br \>
+</div><tt><i>size</i></tt><br \>
+<div class="fb_indent">the total number of bytes of data to store.<br \>
+</div><tt><i>pal</i></tt><br \>
+<div class="fb_indent">the address of a buffer holding palette information, or null (<tt>0</tt>) to use the current screen palette.<br \>
+<br \>
+</div></div><div class="fb_sect_title">Return Value</div><div class="fb_sect_cont"><br \>
+Returns zero (<tt>0</tt>) if successful, or a non-zero error code to indicate a failure. <i><a href="ProPgErrorHandling.html">(throws a runtime error)</a></i><br \>
+<br \>
+</div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+<tt><b>BSave</b></tt> is used for saving arbitrary data from memory into a file, using a file format specific to FB, or saving images into a standard BMP image file, replacing an existing file if necessary.<br \>
+<br \>
+<tt><b>BSave</b></tt> outputs a <u>total</u> of <tt><i>size</i></tt> bytes of arbitrary data located at <tt><i>source</i></tt> to a specified file. If <tt><i>source</i></tt> is null (<tt>0</tt>), then <tt><b>BSave</b></tt> outputs a <u>maximum</u> of <tt><i>size</i></tt> bytes from the current work page's pixel buffer, which is structured in the current screen mode's internal pixel format. Palette information is obtained from <tt><i>pal</i></tt> if non-null, or if null (<tt>0</tt>), from the current screen palette.<br \>
+<br \>
+A BMP image file can be created if <tt><i>filename</i></tt> has a file extension of "BMP". <tt><i>source</i></tt> is assumed to point to a valid image buffer whose entire pixel data will be stored in the BMP file. If <tt><i>source</i></tt> is null (<tt>0</tt>), the entire current work page will be stored instead. Palette information is obtained from <tt><i>pal</i></tt> if non-null, or if null (<tt>0</tt>), from the current screen palette. The <tt><i>size</i></tt> parameter is ignored when saving BMP files.<br \>
+<br \>
+<b>Runtime errors:</b><br \>
+<tt><b>BSave</b></tt> throws one of the following <a href="ProPgErrorHandling.html">runtime errors</a>:<br \>
+<br \>
+<i>(<tt>2</tt>) File not found</i><br \>
+<ul><ul><li> The file could not be created.<br \>
+<li> <tt><i>size</i></tt> is less than zero (<tt>0</tt>), or <tt><i>size</i></tt> is zero and <tt><i>source</i></tt> is non-null.<br \>
+</ul></ul><i>(<tt>3</tt>) File I/O error</i><br \>
+<ul><ul><li> The file could not be written to.<br \>
+<br \>
+</ul></ul></div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="com">'&nbsp;Set&nbsp;gfx&nbsp;mode</span><br />
+<span class="key">ScreenRes</span>&nbsp;<span class="num">320</span><span class="oth">,</span>&nbsp;<span class="num">200</span><span class="oth">,</span>&nbsp;<span class="num">32</span><br />
+<br />
+<span class="com">'&nbsp;Clear&nbsp;with&nbsp;black&nbsp;on&nbsp;white</span><br />
+<span class="key">Color</span>&nbsp;<span class="key">RGB</span><span class="oth">(</span><span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">0</span><span class="oth">),</span>&nbsp;<span class="key">RGB</span><span class="oth">(</span><span class="num">255</span><span class="oth">,</span>&nbsp;<span class="num">255</span><span class="oth">,</span>&nbsp;<span class="num">255</span><span class="oth">)</span><br />
+<span class="key">Cls</span><br />
+<br />
+<span class="key">Locate</span>&nbsp;<span class="num">13</span><span class="oth">,</span>&nbsp;<span class="num">15</span><span class="oth">:</span>&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"Hello&nbsp;world!"</span><br />
+<br />
+<span class="com">'&nbsp;Save&nbsp;as&nbsp;BMP</span><br />
+<span class="key">BSave</span>&nbsp;<span class="quo">"hello.bmp"</span><span class="oth">,</span>&nbsp;<span class="num">0</span><br />
+</div></tt><br />
+<br \>
+</div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> Support for saving more than 64KiB of arbitrary data is new to FreeBASIC.<br \>
+<li> Support for saving BMP files is new to FreeBASIC.<br \>
+<li> QB cannot use <tt><a href="KeyPgBload.html">BLoad</a></tt> to load files created with <tt><b>BSave</b></tt> in FreeBASIC, but FreeBASIC can use <tt><a href="KeyPgBload.html">BLoad</a></tt> to load files created with <tt><b>BSave</b></tt> in QB<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgBload.html">BLoad</a></tt><br \>
+<li> <tt><a href="KeyPgPalette.html">Palette</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

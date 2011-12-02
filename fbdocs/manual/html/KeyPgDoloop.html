@@ -1,0 +1,83 @@
+<html>
+<head>
+<title>Do...Loop</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Do...Loop</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Control flow statement for looping<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<b>Do</b> [ { <b>Until</b> | <b>While</b> } <i>condition</i> ]<br \>
+<div class="fb_indent">[ <i>statement block</i> ]<br \>
+</div><b>Loop</b><br \>
+<i>or</i><br \>
+<b>Do</b><br \>
+<div class="fb_indent">[ <i>statement block</i> ]<br \>
+</div><b>Loop</b> [ { <b>Until</b> | <b>While</b> } <i>condition</i> ]<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+The <tt><b>Do</b></tt> statement executes the statements in the following <i>statement block</i> until/while the <i>condition</i>, if any,  evaluates to true.<br \>
+<br \>
+If <tt><b>Until</b></tt> is used, the <tt><b>Do</b></tt> statement stops repetition of the <i>statement block</i> when <i>condition</i> evaluates to true. The <tt><b>While</b></tt> keyword has opposite effect, stopping the loop if <i>condition</i> evaluates to false. If both <i>condition</i> and either <tt><b>Until</b></tt> or <tt><b>While</b></tt> are omitted, the <tt><b>Do</b></tt> statement loops indefinitely.<br \>
+<br \>
+If an <tt><a href="KeyPgExit.html">Exit</a></tt> <tt><b>Do</b></tt> statement is encountered inside the <i>statement block</i>, the loop is terminated, and execution resumes immediately following the enclosing <tt><b>Loop</b></tt> statement. If a <tt><a href="KeyPgContinue.html">Continue</a></tt> <tt><b>Do</b></tt> statement is encountered, the rest of the <i>statement block</i> is skipped and execution resumes at the <tt><b>Do</b></tt> statement.<br \>
+<br \>
+In the first syntax, the <i>condition</i> is checked when the <tt><b>Do</b></tt> statement is first encountered, and if the <i>condition</i> is met, the <i>statement block</i> will be skipped. In the second syntax, <i>condition</i> is initially checked <i>after</i> the <i>statement block</i> is executed. This means that the <i>statement block</i> is always guaranteed to execute <i>at least</i> once.<br \>
+<br \>
+<i>condition</i> may be any valid expression that evaluates to False (zero) or True (non-zero).<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+In this example, a <tt><b>Do</b></tt> loop is used to count the total number of odd numbers from 1 to 10. It will repeat <i>until</i> it's <i>n &gt; 10</i> condition is met:<br \>
+<tt><div class="freebasic">
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="wrd">n</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">1</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;number&nbsp;to&nbsp;check</span><br />
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="wrd">total_odd</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;running&nbsp;total&nbsp;of&nbsp;odd&nbsp;numbers</span><br />
+<span class="key">Do</span>&nbsp;<span class="key">Until</span><span class="oth">(</span>&nbsp;<span class="wrd">n</span>&nbsp;<span class="oth">&gt;</span>&nbsp;<span class="num">10</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;<span class="key">If</span><span class="oth">(</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="wrd">n</span>&nbsp;<span class="key">Mod</span>&nbsp;<span class="num">2</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="oth">&gt;</span>&nbsp;<span class="num">0</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="key">Then</span>&nbsp;<span class="wrd">total_odd</span>&nbsp;<span class="oth">+=</span>&nbsp;<span class="num">1</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;add&nbsp;to&nbsp;total&nbsp;if&nbsp;n&nbsp;is&nbsp;odd&nbsp;(has&nbsp;remainder&nbsp;from&nbsp;division&nbsp;by&nbsp;2)</span><br />
+&nbsp;&nbsp;<span class="wrd">n</span>&nbsp;<span class="oth">+=</span>&nbsp;<span class="num">1</span><br />
+<span class="key">Loop</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"total&nbsp;odd&nbsp;numbers:&nbsp;"</span>&nbsp;<span class="oth">;</span>&nbsp;<span class="wrd">total_odd</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;prints&nbsp;'5'</span><br />
+<br />
+<span class="key">End</span>&nbsp;<span class="num">0</span><br />
+</div></tt><br />
+<br \>
+Here, an infinite DO loop is used to count the total number of evens. We place the conditional check inside the loop via an <tt><a href="KeyPgIfthen.html">If...Then</a></tt> statement, which exits the loop if and when <i>n &gt; 10</i> becomes true:<br \>
+<tt><div class="freebasic">
+&nbsp;&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="wrd">n</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">1</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;number&nbsp;to&nbsp;check</span><br />
+&nbsp;&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="wrd">total_even</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;running&nbsp;total&nbsp;of&nbsp;even&nbsp;numbers</span><br />
+&nbsp;&nbsp;&nbsp;<span class="key">Do</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">If</span><span class="oth">(</span>&nbsp;<span class="wrd">n</span>&nbsp;<span class="oth">&gt;</span>&nbsp;<span class="num">10</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="key">Then</span>&nbsp;<span class="key">Exit</span>&nbsp;<span class="key">Do</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;exit&nbsp;if&nbsp;we've&nbsp;scanned&nbsp;our&nbsp;10&nbsp;numbers</span><br />
+&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">If</span><span class="oth">(</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="wrd">n</span>&nbsp;<span class="key">Mod</span>&nbsp;<span class="num">2</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="key">Then</span>&nbsp;<span class="wrd">total_even</span>&nbsp;<span class="oth">+=</span>&nbsp;<span class="num">1</span>&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;add&nbsp;to&nbsp;total&nbsp;if&nbsp;n&nbsp;is&nbsp;even&nbsp;(no&nbsp;remainder&nbsp;from&nbsp;division&nbsp;by&nbsp;2)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">n</span>&nbsp;<span class="oth">+=</span>&nbsp;<span class="num">1</span><br />
+&nbsp;&nbsp;&nbsp;<span class="key">Loop</span><br />
+&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"total&nbsp;even&nbsp;numbers:&nbsp;"</span>&nbsp;<span class="oth">;</span>&nbsp;<span class="wrd">total_even</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;prints&nbsp;'5'</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;<span class="key">End</span>&nbsp;<span class="num">0</span><br />
+</div></tt><br />
+<br \>
+</div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
+<ul><li> In the <i><a href="CompilerOptlang.html">-lang qb</a></i> and <i><a href="CompilerOptlang.html">-lang fblite</a></i> dialects, variables declared inside a DO..LOOP block have a function-wide <a href="ProPgVariableScope.html">scope</a>  as in QB <br \>
+<li> In the <i><a href="CompilerOptlang.html">-lang fb</a></i> and <i><a href="CompilerOptlang.html">-lang deprecated</a></i> dialects, variables declared inside a FOR..NEXT block are visible only inside the block, and can't be accessed outside it.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> None<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgContinue.html">Continue</a></tt><br \>
+<li> <tt><a href="KeyPgExit.html">Exit</a></tt><br \>
+<li> <tt><a href="KeyPgFornext.html">For...Next</a></tt><br \>
+<li> <tt><a href="KeyPgWhilewend.html">While...Wend</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

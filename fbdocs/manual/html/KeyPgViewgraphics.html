@@ -1,0 +1,84 @@
+<html>
+<head>
+<title>View (Graphics)</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">View (Graphics)</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Sets new physical coordinate mapping and clipping region<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<b>View</b><br \>
+<b>View</b> ( <i>x1</i>, <i>y1</i> )-( <i>x2</i>, <i>y2</i> ) [ [, <i>fill_color</i> ] [, <i>border_color</i> ] ]<br \>
+<b>View Screen</b> ( <i>x1</i>, <i>y1</i> )-( <i>x2</i>, <i>y2</i> ) [ [, <i>fill_color</i> ] [, <i>border_color</i> ] ]<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+<tt><i>x1</i></tt> <tt><a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a></tt>, <tt><i>y1</i></tt> <tt><a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a></tt><br \>
+<div class="fb_indent">The horizontal and vertical offsets, in pixels, of one corner of the viewport relative to the top-left corner of the screen.<br \>
+</div><tt><i>x2</i></tt> <tt><a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a></tt>, <tt><i>y2</i></tt> <tt><a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a></tt><br \>
+<div class="fb_indent">The horizontal and vertical offsets, in pixels, of the opposite corner of the viewport relative to the top-left corner of the screen.<br \>
+</div><tt><i>fill_color</i></tt> <tt><a href="KeyPgAs.html">As</a> <a href="KeyPgUinteger.html">UInteger</a></tt><br \>
+<div class="fb_indent">The color to fill the new viewport.<br \>
+</div><tt><i>border_color</i></tt> <tt><a href="KeyPgAs.html">As</a> <a href="KeyPgUinteger.html">UInteger</a></tt><br \>
+<div class="fb_indent">The color of the border to draw around the new viewport.<br \>
+<br \>
+</div></div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+The <i>viewport</i>, or clipping region, is a rectangular area of the graphics screen, outside of which no drawing will be done. That is, only drawing done within this area will be shown. A graphics screen must be created with <tt><a href="KeyPgScreengraphics.html">Screen</a></tt> or <tt><a href="KeyPgScreenres.html">ScreenRes</a></tt> before calling <tt><b>View</b></tt> or <tt><b>View Screen</b></tt>.<br \>
+<br \>
+The first statement sets the viewport to encompass the entire screen, which is the default viewport for a new graphics screen.<br \>
+<br \>
+The second and third statements both allow a new viewport to be defined. The corners of the viewport are specified by the <tt><i>x1</i></tt>, <tt><i>y1</i></tt>, <tt><i>x2</i></tt> and <tt><i>y2</i></tt> parameters. <tt><i>fill_color</i></tt> and <tt><i>border_color</i></tt> are both in the format accepted by <tt><a href="KeyPgColor.html">Color</a></tt>. The indicated effects for each parameter only occur if that parameter is specified.<br \>
+<br \>
+The second statement modifies the co-ordinate mapping of the graphics screen such that co-ordinates specified for drawing statements and procedures are relative to the top-left corner of the viewport.<br \>
+<br \>
+The third statement modifies the co-ordinate mapping of the graphics screen such that co-ordinates specified for drawing statements and procedures are relative to the top-left corner of the screen.<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="key">Screen</span>&nbsp;<span class="num">12</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">ip</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="key">Ptr</span><br />
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="wrd">i</span><span class="oth">,</span>&nbsp;<span class="wrd">j</span><span class="oth">,</span>&nbsp;<span class="wrd">k</span><br />
+<span class="com">'simple&nbsp;sprite</span><br />
+<span class="key">For</span>&nbsp;<span class="wrd">i</span><span class="oth">=</span><span class="num">0</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">63</span><span class="oth">:</span>&nbsp;<span class="key">For</span>&nbsp;<span class="wrd">j</span><span class="oth">=</span><span class="num">0</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">63</span><span class="oth">:</span><span class="key">PSet</span>&nbsp;<span class="oth">(</span><span class="wrd">i</span><span class="oth">,</span><span class="wrd">j</span><span class="oth">),</span>&nbsp;<span class="oth">(</span><span class="wrd">i</span><span class="oth">\</span><span class="num">4</span><span class="oth">)</span>&nbsp;<span class="key">Xor</span>&nbsp;<span class="oth">(</span><span class="wrd">j</span><span class="oth">\</span><span class="num">4</span><span class="oth">):</span><span class="key">Next</span>&nbsp;<span class="wrd">j</span><span class="oth">,</span><span class="wrd">i</span><br />
+<span class="wrd">ip</span><span class="oth">=</span><span class="key">ImageCreate</span><span class="oth">(</span><span class="num">64</span><span class="oth">,</span><span class="num">64</span><span class="oth">)</span><br />
+<span class="key">Get</span>&nbsp;<span class="oth">(</span><span class="num">0</span><span class="oth">,</span><span class="num">0</span><span class="oth">)-(</span><span class="num">63</span><span class="oth">,</span><span class="num">63</span><span class="oth">),</span><span class="wrd">ip</span><br />
+<span class="key">Cls</span><br />
+<span class="com">'viewport</span><br />
+<span class="key">Line</span>&nbsp;<span class="oth">(</span><span class="num">215</span><span class="oth">,</span><span class="num">135</span><span class="oth">)-(</span><span class="num">425</span><span class="oth">,</span><span class="num">345</span><span class="oth">),</span><span class="num">1</span><span class="oth">,</span><span class="wrd">bf</span><br />
+<span class="key">View</span>&nbsp;&nbsp;<span class="oth">(</span><span class="num">220</span><span class="oth">,</span><span class="num">140</span><span class="oth">)-(</span><span class="num">420</span><span class="oth">,</span><span class="num">340</span><span class="oth">)</span><br />
+<span class="wrd">k</span><span class="oth">=</span><span class="num">0</span><br />
+<span class="com">'move&nbsp;sprite</span><br />
+<span class="key">Do</span><br />
+&nbsp;&nbsp;<span class="wrd">i</span><span class="oth">=</span><span class="num">100</span><span class="oth">*</span><span class="key">Sin</span><span class="oth">(</span><span class="wrd">k</span><span class="oth">*</span><span class="num">.02</span><span class="oth">)+</span><span class="num">50</span><span class="oth">:</span>&nbsp;&nbsp;<span class="wrd">j</span><span class="oth">=</span><span class="num">100</span><span class="oth">*</span>&nbsp;<span class="key">Sin</span><span class="oth">(</span><span class="wrd">k</span><span class="oth">*</span><span class="num">.027</span><span class="oth">)+</span><span class="num">50</span><br />
+&nbsp;&nbsp;<span class="key">ScreenSync</span><br />
+&nbsp;&nbsp;<span class="key">ScreenLock</span><br />
+&nbsp;&nbsp;<span class="key">Cls</span>&nbsp;<span class="num">1</span><span class="oth">:</span>&nbsp;<span class="key">Put</span>&nbsp;<span class="oth">(</span><span class="wrd">i</span><span class="oth">,</span><span class="wrd">j</span><span class="oth">),</span><span class="wrd">ip</span>&nbsp;<span class="oth">,</span><span class="key">PSet</span><br />
+&nbsp;&nbsp;<span class="key">ScreenUnlock</span><br />
+&nbsp;&nbsp;<span class="wrd">k</span><span class="oth">=</span><span class="wrd">k</span><span class="oth">+</span><span class="num">1</span><br />
+<span class="key">Loop</span>&nbsp;<span class="key">Until</span>&nbsp;<span class="key">Len</span><span class="oth">(</span><span class="key">Inkey</span><span class="oth">)</span><br />
+<span class="key">ImageDestroy</span><span class="oth">(</span><span class="wrd">ip</span><span class="oth">)</span><br />
+<br />
+</div></tt><br />
+<br \>
+</div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> QBASIC preserves the <tt>WINDOW</tt> coordinate mapping after subsequent calls to <tt>VIEW</tt>.<br \>
+<li> FreeBASIC's current behavior is to preserve the <tt>WINDOW</tt> coordinates after calls to <tt>VIEW</tt>, or when working on images, meaning that the coordinate mapping may undergo scaling/translations if the viewport changes. (If a <tt>WINDOW</tt> hasn't been set, there is no coordinate mapping, and so it doesn't change after calls to <tt>VIEW</tt>.)  The behavior may change in future, but consistent behavior can be assured over inconstent viewport coordinates by re-calling <tt>WINDOW</tt> whenever you change the <tt>VIEW</tt>.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgViewtext.html">View Print</a></tt><br \>
+<li> <tt><a href="KeyPgScreengraphics.html">Screen (Graphics)</a></tt><br \>
+<li> <tt><a href="KeyPgWindow.html">Window</a></tt><br \>
+<li> <tt><a href="KeyPgPmap.html">PMap</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

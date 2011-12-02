@@ -1,0 +1,74 @@
+<html>
+<head>
+<title>Line Input #</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Line Input #</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Reads one line of text from a file<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<b>Line Input</b> #<i>file number</i>, <i>string_variable</i><br \>
+</tt><br \>
+</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+<tt><i>file number</i></tt><br \>
+<div class="fb_indent">file number of an file opened for <tt><a href="KeyPgInputfilemode.html">Input</a></tt><br \>
+</div><tt><i>string_variable</i></tt><br \>
+<div class="fb_indent">variable to receive the line of text<br \>
+<br \>
+</div></div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+Reads a line from an open text file (opened for <tt><a href="KeyPgInputfilemode.html">Input</a></tt> through a bound file number) and stores it in a string variable.  <br \>
+<br \>
+A line of text ends at, but does not include the end of line characters.  An end of line character may be the <tt>LF</tt> character (<tt><a href="KeyPgChr.html">Chr</a>(10)</tt>) or the <tt>CRLF</tt> character pair (<tt><a href="KeyPgChr.html">Chr</a>(13,10)</tt>).<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="com">'&nbsp;compile&nbsp;with&nbsp;-lang&nbsp;qb</span><br />
+<br />
+<span class="com">'$lang:&nbsp;"qb"</span><br />
+<br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">Filehandle</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">txt</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+<span class="key">On</span>&nbsp;<span class="key">Error</span>&nbsp;<span class="key">Goto</span>&nbsp;<span class="wrd">HandleErrors</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+<span class="wrd">Filehandle</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">FreeFile</span><br />
+<span class="key">Open</span>&nbsp;<span class="quo">"test_text_file.txt"</span>&nbsp;<span class="key">For</span>&nbsp;<span class="key">Input</span>&nbsp;<span class="key">As</span>&nbsp;<span class="oth">#</span><span class="wrd">filehandle</span><br />
+<br />
+<span class="key">If</span>&nbsp;<span class="key">LOF</span><span class="oth">(</span><span class="wrd">filehandle</span><span class="oth">)</span>&nbsp;<span class="oth">&gt;</span>&nbsp;<span class="num">0</span>&nbsp;<span class="key">Then</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Line</span>&nbsp;<span class="key">Input</span>&nbsp;<span class="oth">#</span><span class="wrd">filehandle</span><span class="oth">,</span>&nbsp;<span class="wrd">txt</span><br />
+<span class="key">Else</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Goto</span>&nbsp;<span class="wrd">HandleErrors</span><br />
+<span class="key">End</span>&nbsp;<span class="key">If</span><br />
+<br />
+<span class="key">Close</span>&nbsp;<span class="oth">#</span><span class="wrd">filehandle</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"The&nbsp;first&nbsp;line&nbsp;of&nbsp;test_text_file.txt&nbsp;is:"</span><br />
+<span class="key">Print</span>&nbsp;<span class="wrd">txt</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+<span class="wrd">HandleErrors</span><span class="oth">:</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"Error."</span><br />
+<span class="key">Resume</span>&nbsp;<span class="key">Next</span><br />
+<br />
+</div></tt><br />
+<br \>
+</div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> None<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgInputPp.html">Input #</a></tt><br \>
+<li> <tt><a href="KeyPgLineinputPp.html">Line Input #</a></tt><br \>
+<li> <tt><a href="KeyPgOpen.html">Open</a></tt><br \>
+<li> <tt><a href="KeyPgInputfilemode.html">Input (File Mode)</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

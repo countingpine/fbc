@@ -1,0 +1,116 @@
+<html>
+<head>
+<title>ThreadCreate</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">ThreadCreate</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Starts a user-defined procedure in a separate execution thread<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgFunction.html">Function</a> <b>ThreadCreate</b> ( <a href="KeyPgByval.html">ByVal</a> <i>proc</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgSub.html">Sub</a> ( <a href="KeyPgByval.html">ByVal</a> <a href="KeyPgAs.html">As</a> <a href="KeyPgAny.html">Any</a> <a href="KeyPgPtr.html">Ptr</a> ), <a href="KeyPgByval.html">ByVal</a> <i>param</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgAny.html">Any</a> <a href="KeyPgPtr.html">Ptr</a> = 0, <a href="KeyPgByval.html">ByVal</a> <i>stack_size</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a> = 0 ) <a href="KeyPgAs.html">As</a> <a href="KeyPgAny.html">Any</a> <a href="KeyPgPtr.html">Ptr</a><br \>
+</tt><br \>
+</div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
+<i>result</i> = <b>ThreadCreate</b> ( <i>proc</i> [, [ <i>param</i> ] [, <i>stack_size</i> ] ] )<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+<tt><i>proc</i></tt><br \>
+<div class="fb_indent">A pointer to the <tt><a href="KeyPgSub.html">Sub</a></tt> intended to work as a thread.<br \>
+</div><tt><i>param</i></tt><br \>
+<div class="fb_indent">Optional <a href="KeyPgAny.html">Any</a> <a href="KeyPgPtr.html">Ptr</a> argument for the <tt><a href="KeyPgSub.html">Sub</a></tt> pointed to by <tt><i>proc</i></tt> (it can be a pointer to a structure or an array if more arguments are needed).<br \>
+</div><tt><i>stack_size</i></tt><br \>
+<div class="fb_indent">Optional number of bytes to reserve for this thread's stack.<br \>
+<br \>
+</div></div><div class="fb_sect_title">Return Value</div><div class="fb_sect_cont"><br \>
+<b>Threadcreate</b> returns an <tt><a href="KeyPgAny.html">Any</a> <a href="KeyPgPtr.html">Ptr</a></tt> handle to the thread created, or the null pointer (0) on failure.<br \>
+<br \>
+</div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+The user function is started as a thread executes in parallel with the main part of the program. The OS achieves this by assigning it to a different processor if it exists, or using the waiting times in the main program.<br \>
+<br \>
+Before closing, a program must wait for the termination of all the threads it has launched; see <tt><a href="KeyPgThreadWait.html">ThreadWait</a></tt>.<br \>
+<br \>
+To avoid simultaneous access to shared resources from different threads, FreeBASIC implements mutexes, mutual exclusion locks that can be "owned" by a single thread when doing critical work. See <tt><a href="KeyPgMutexCreate.html">MutexCreate</a></tt>, <tt><a href="KeyPgMutexLock.html">MutexLock</a></tt>, <tt><a href="KeyPgMutexUnlock.html">MutexUnlock</a></tt>, <tt><a href="KeyPgMutexDestroy.html">MutexDestroy</a></tt>.<br \>
+<br \>
+On some systems, the stack automatically grows beyond <tt><i>stack_size</i></tt> if more space is needed; on others, this is the fixed maximum allowed. Behavior is undefined when more stack is used than the reserved size on systems where stacks are not able to grow.<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="key">Dim</span>&nbsp;<span class="key">Shared</span>&nbsp;<span class="wrd">terminate</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span><br />
+<br />
+<span class="key">Sub</span>&nbsp;<span class="wrd">mythread</span>&nbsp;<span class="oth">(</span><span class="wrd">param</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Any</span>&nbsp;<span class="key">Ptr</span><span class="oth">)</span>&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Double</span>&nbsp;<span class="wrd">t</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">Timer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">While</span><span class="oth">(</span>&nbsp;<span class="num">1</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"*"</span><span class="oth">;</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;pause&nbsp;for&nbsp;.1&nbsp;second</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">While</span><span class="oth">(</span>&nbsp;<span class="key">Abs</span><span class="oth">(</span>&nbsp;<span class="key">Timer</span>&nbsp;<span class="oth">-</span>&nbsp;<span class="wrd">t</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="oth">&lt;</span>&nbsp;<span class="num">.1</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Sleep</span>&nbsp;<span class="num">1</span><span class="oth">,</span>&nbsp;<span class="num">1</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Wend</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">t</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">Timer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">If</span>&nbsp;<span class="wrd">terminate</span><span class="oth">=</span><span class="num">1</span>&nbsp;<span class="key">Then</span>&nbsp;<span class="key">Exit</span>&nbsp;<span class="key">Sub</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Wend</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+<span class="key">End</span>&nbsp;<span class="key">Sub</span><br />
+<br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">thread</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Any</span>&nbsp;<span class="key">Ptr</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">b</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Double</span>&nbsp;<span class="wrd">t</span><br />
+<br />
+<span class="key">Print</span>&nbsp;<span class="quo">"Main&nbsp;program&nbsp;prints&nbsp;dots"</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"Thread&nbsp;prints&nbsp;asterisks"</span><br />
+<span class="wrd">thread</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">ThreadCreate</span><span class="oth">(</span>&nbsp;<span class="oth">@</span><span class="wrd">mythread</span><span class="oth">,</span>&nbsp;<span class="num">0</span>&nbsp;<span class="oth">)</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"Thread&nbsp;launched"</span><span class="oth">;</span><br />
+<br />
+<span class="key">While</span>&nbsp;<span class="wrd">b</span>&nbsp;<span class="oth">&lt;</span>&nbsp;<span class="num">30</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"."</span><span class="oth">;</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;pause&nbsp;for&nbsp;.1&nbsp;second</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">While</span><span class="oth">(</span>&nbsp;<span class="key">Abs</span><span class="oth">(</span>&nbsp;<span class="key">Timer</span>&nbsp;<span class="oth">-</span>&nbsp;<span class="wrd">t</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="oth">&lt;</span>&nbsp;<span class="num">.1</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Sleep</span>&nbsp;<span class="num">1</span><span class="oth">,</span>&nbsp;<span class="num">1</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Wend</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">t</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">Timer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">b</span>&nbsp;<span class="oth">+=</span>&nbsp;<span class="num">1</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+<span class="key">Wend</span><br />
+<br />
+<span class="wrd">terminate</span><span class="oth">=</span><span class="num">1</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"Terminate&nbsp;launched"</span><span class="oth">;</span><br />
+<span class="key">ThreadWait</span>&nbsp;<span class="oth">(</span><span class="wrd">thread</span><span class="oth">)</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"Thread&nbsp;terminated"</span><br />
+<span class="key">Sleep</span><br />
+</div></tt><br />
+<br \>
+</div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
+<ul><li> Threading is not allowed in <tt>-lang qb</tt><br \>
+<br \>
+</ul></div><div class="fb_sect_title">Platform Differences</div><div class="fb_sect_cont"><br \>
+<ul><li> <b>Threadcreate</b> is not available with the DOS version / target of FreeBASIC, because multithreading is not supported by DOS kernel nor the used extender.<br \>
+<li> In Linux the threads are always started in the order they are created, this can't be assumed in Win32. It's an OS, not a FreeBASIC issue. <br \>
+<br \>
+</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> New to FreeBASIC<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgThreadWait.html">ThreadWait</a></tt><br \>
+<li> <tt><a href="KeyPgMutexCreate.html">MutexCreate</a></tt><br \>
+<li> <tt><a href="KeyPgMutexLock.html">MutexLock</a></tt><br \>
+<li> <tt><a href="KeyPgMutexUnlock.html">MutexUnlock</a></tt><br \>
+<li> <tt><a href="KeyPgMutexDestroy.html">MutexDestroy</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

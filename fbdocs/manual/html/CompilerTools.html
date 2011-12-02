@@ -1,0 +1,93 @@
+<html>
+<head>
+<title>Tools used by fbc</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Tools used by fbc</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	External tools the FreeBASIC compiler (fbc) may invoke during the compilation process.<br \>
+<br \>
+<div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+<div class="fb_indent">FreeBASIC uses several tools for compiling source code in addition to the <tt>fbc</tt> compiler.  The exact tools used by <tt>fbc</tt> and how they are invoked depends on how <tt>fbc</tt> was configured, the host platform (where fbc is running), the target platform (where the produced executable will be run), and other options (like environment variables and command line options).<br \>
+<br \>
+FreeBASIC (<tt>fbc</tt>) may have been configured in one of two ways: either as standalone or prefixed.  The standalone version searches directories relative to where the executable is located.  The prefixed version has a hardcoded path configured in to the compiler indicating where it expects to find additional tools and libraries.  For more information on configuring FreeBASIC, see the <tt>INSTALL</tt> text file located in the src/compiler directory of the FreeBASIC sources.<br \>
+<br \>
+You can check if your installed version of <tt>fbc</tt> is "standalone" or "prefixed" by invoking <tt>fbc</tt> with the <i><a href="CompilerOptversion.html">-version</a></i> command line option.<br \>
+<br \>
+</div><b><u>Standalone</u></b><br \>
+<div class="fb_indent">If <tt>fbc</tt> was configured as "standalone", it will search for files relative to where the <tt>fbc</tt> executable is located.  <tt>fbc</tt> is at the "top" of the directory tree and searches sub-directories below it.  The "top" directory (which defaults to the location where <tt>fbc</tt> is located) can be overridden with the <i><a href="CompilerOptprefix.html">-prefix</a></i> command line option.  "topdir" shown in the directories below represents the directory where the <tt>fbc</tt> executable is located, or the directory specified with the <i><a href="CompilerOptprefix.html">-prefix</a></i> command line option (if it was given). "&lt;target&gt;" refers to the target platform having the same name as specified by the <i><a href="CompilerOpttarget.html">-target</a></i> option.<br \>
+<br \>
+If not cross compiling, <tt>fbc</tt> looks in these locations: <br \>
+</div><ul><ul><li> <tt>/topdir/inc</tt><br \>
+<li> <tt>/topdir/lib/&lt;target&gt;</tt><br \>
+<li> <tt>/topdir/bin/&lt;target&gt;</tt><br \>
+<li> gcc is queried for missing libraries (currently on linux/freebsd only) <br \>
+<br \>
+</ul></ul><div class="fb_indent">If cross compiling, <tt>fbc</tt> looks in the these locations: <br \>
+</div><ul><ul><li> <tt>/topdir/inc</tt><br \>
+<li> <tt>/topdir/lib/&lt;target&gt;</tt><br \>
+<li> <tt>/topdir/bin/&lt;target&gt;</tt><br \>
+<li> gcc is not queried (only target library directory is used)<br \>
+<br \>
+</ul></ul><b><u>Prefixed</u></b><br \>
+<div class="fb_indent">If <tt>fbc</tt> was configured as "prefixed", it will search for files relative to the configured prefix (hardcoded in the <tt>fbc</tt> executable).  "prefix" shown in the directories below represents the configured prefix, or the directory specified with the <i><a href="CompilerOptprefix.html">-prefix</a></i> command line option (if it was given).  "<tt>&lt;target&gt;</tt>" refers to the target platform having the same name as specified by the <i><a href="CompilerOpttarget.html">-target</a></i> option.<br \>
+<br \>
+If not cross compiling, <tt>fbc</tt> looks in these locations: <br \>
+</div><ul><ul><li> <tt>/prefix/include/freebasic</tt><br \>
+<li> <tt>/prefix/lib/freebasic/&lt;target&gt;</tt><br \>
+<li> <tt>/prefix/bin/freebasic/&lt;target&gt;</tt><br \>
+<li> gcc is queried for missing libraries (currently on linux/freebsd only) <br \>
+<br \>
+</ul></ul><div class="fb_indent">If cross compiling, <tt>fbc</tt> looks in the these locations: <br \>
+</div><ul><ul><li> <tt>/prefix/include/freebasic</tt><br \>
+<li> <tt>/prefix/lib/freebasic/&lt;target&gt;</tt><br \>
+<li> <tt>/prefix/bin/freebasic/&lt;target&gt;</tt><br \>
+<li> gcc is not queried (only target library directory is used)<br \>
+<br \>
+</ul></ul><b><u>GCC Queries</u></b><br \>
+<div class="fb_indent">If <tt>fbc</tt> is unable to locate a file, it may invoke <tt>gcc -print-file-name=&lt;file&gt;</tt> to query the location of the file.  The following are files that may be located using gcc:<br \>
+</div><ul><ul><li> <tt>crt1.o</tt><br \>
+<li> <tt>crtbegin.o</tt><br \>
+<li> <tt>crtend.o</tt><br \>
+<li> <tt>crti.o</tt><br \>
+<li> <tt>crtn.o</tt><br \>
+<li> <tt>gcrt1.o</tt><br \>
+<li> <tt>libgcc.a</tt><br \>
+<li> <tt>libsupc++.a</tt><br \>
+<li> <tt>libc.so (Linux only)</tt><br \>
+<br \>
+</ul></ul><b><u>Finding Binaries</u></b><br \>
+<div class="fb_indent"><tt>fbc</tt> will invoke additional tools (binary executables) as part of the compiling and linking process.  The following is a list of tools (executables) that may be invoked by <tt>fbc</tt> depending on the host platform, target, or type of executable or library to be produced:<br \>
+</div><ul><ul><li> <tt>as</tt><br \>
+<li> <tt>ar</tt><br \>
+<li> <tt>ld</tt><br \>
+<li> <tt>gcc</tt><br \>
+<li> <tt>GoRC</tt><br \>
+<li> <tt>dlltool</tt><br \>
+<li> <tt>pexports</tt><br \>
+<li> <tt>cxbe</tt><br \>
+<br \>
+</ul></ul><div class="fb_indent"><tt>fbc</tt> will search for these tools in the following manner:<br \>
+</div><ul><ul><li> If an environment variable (having same name as the tool without any extension, all in uppercase) has been set, it explicitly indicates the path and name of the executable to be invoked.<br \>
+<li> If the file (or a symlink) exists in <tt>prefix/bin/freebasic/&lt;target&gt;</tt>, or <tt>./bin/&lt;target&gt;</tt> for the standalone version, then use it.<br \>
+<li> On Linux, if the tool could not be found in <tt>prefix/bin/freebasic/&lt;target&gt;</tt>, or <tt>./bin/&lt;target&gt;</tt> for the standalone version, <tt>fbc</tt> tries to invoke it anyway as it may be installed on the system and located on the PATH.<br \>
+<br \>
+</ul></ul><div class="fb_indent">"<tt>&lt;target&gt;</tt>" refers to the target platform having the same name as specified by the <i><a href="CompilerOpttarget.html">-target</a></i> option.<br \>
+<br \>
+</div></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <a href="CompilerRunning.html">Running FreeBASIC</a><br \>
+<li> <a href="CompilerCmdLine.html">Compiler Command Line Options</a><br \>
+<li> <a href="CompilerFAQ.html">Compiler FAQ</a><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

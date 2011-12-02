@@ -1,0 +1,92 @@
+<html>
+<head>
+<title>SetEnviron</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">SetEnviron</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Sets a system environment variable<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgFunction.html">Function</a> <b>SetEnviron</b> ( <a href="KeyPgByref.html">ByRef</a> <i>varname</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgString.html">String</a> ) <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a><br \>
+</tt><br \>
+</div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
+<i>result</i> = <b>SetEnviron</b>( <i>varname</i> )<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+<tt><i>varname</i></tt><br \>
+<div class="fb_indent">The name of the environment variable to set.<br \>
+<br \>
+</div></div><div class="fb_sect_title">Return Value</div><div class="fb_sect_cont"><br \>
+Return zero (0) if successful, non-zero otherwise.<br \>
+<br \>
+</div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+Modifies system environment variables.  There are several variables available for editing other than the default ones on your system.  An example of this would be fbgfx, where you can choose the form of graphics driver the FreeBASIC graphics library will use.<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="com">'e.g.&nbsp;to&nbsp;set&nbsp;the&nbsp;system&nbsp;variable&nbsp;"path"&nbsp;to&nbsp;"c:":</span><br />
+<br />
+<span class="key">Shell</span>&nbsp;<span class="quo">"set&nbsp;path"</span>&nbsp;<span class="com">'shows&nbsp;the&nbsp;value&nbsp;of&nbsp;path</span><br />
+<span class="key">SetEnviron</span>&nbsp;<span class="quo">"path=c:"</span><br />
+<span class="key">Shell</span>&nbsp;<span class="quo">"set&nbsp;path"</span>&nbsp;<span class="com">'shows&nbsp;the&nbsp;new&nbsp;value&nbsp;of&nbsp;path</span><br />
+</div></tt><br />
+<br \>
+<tt><div class="freebasic">
+&nbsp;&nbsp;<span class="com">''&nbsp;WINDOWS&nbsp;ONLY&nbsp;EXAMPLE!&nbsp;-&nbsp;We&nbsp;just&nbsp;set&nbsp;the&nbsp;graphics&nbsp;method&nbsp;to&nbsp;use</span><br />
+&nbsp;&nbsp;<span class="com">''&nbsp;GDI&nbsp;rather&nbsp;than&nbsp;DirectX.</span><br />
+&nbsp;&nbsp;<span class="com">''&nbsp;You&nbsp;may&nbsp;note&nbsp;a&nbsp;difference&nbsp;in&nbsp;FPS.</span><br />
+<span class="key">SetEnviron</span><span class="oth">(</span><span class="quo">"fbgfx=GDI"</span><span class="oth">)</span><br />
+<br />
+&nbsp;&nbsp;<span class="com">''&nbsp;Desktop&nbsp;width/height</span><br />
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="wrd">ScrW</span><span class="oth">,</span>&nbsp;<span class="wrd">ScrH</span><span class="oth">,</span>&nbsp;<span class="wrd">BPP</span><br />
+<span class="key">ScreenInfo</span>&nbsp;<span class="wrd">ScrW</span><span class="oth">,</span>&nbsp;<span class="wrd">ScrH</span><span class="oth">,</span>&nbsp;<span class="wrd">BPP</span><br />
+<br />
+&nbsp;&nbsp;<span class="com">''&nbsp;Create&nbsp;a&nbsp;screen&nbsp;at&nbsp;the&nbsp;width/height&nbsp;of&nbsp;your&nbsp;monitor.</span><br />
+&nbsp;&nbsp;<span class="com">''&nbsp;Normally&nbsp;this&nbsp;would&nbsp;be&nbsp;slow,&nbsp;but&nbsp;GDI&nbsp;is&nbsp;fairly&nbsp;fast&nbsp;for&nbsp;this&nbsp;kind</span><br />
+&nbsp;&nbsp;<span class="com">''&nbsp;of&nbsp;thing.</span><br />
+<span class="key">ScreenRes</span>&nbsp;<span class="wrd">ScrW</span><span class="oth">,</span>&nbsp;<span class="wrd">ScrH</span><span class="oth">,</span>&nbsp;<span class="wrd">BPP</span><br />
+<br />
+&nbsp;&nbsp;<span class="com">''&nbsp;Start&nbsp;our&nbsp;timer/</span><br />
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Double</span>&nbsp;<span class="wrd">T</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">Timer</span><br />
+<br />
+&nbsp;&nbsp;<span class="com">''&nbsp;Lock&nbsp;our&nbsp;page</span><br />
+<span class="key">ScreenLock</span><br />
+<span class="key">Do</span><br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;Print&nbsp;time&nbsp;since&nbsp;last&nbsp;frame</span><br />
+&nbsp;&nbsp;<span class="key">Locate</span>&nbsp;<span class="num">1</span><span class="oth">,</span>&nbsp;<span class="num">1</span><br />
+&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"FPS:&nbsp;"</span>&nbsp;<span class="oth">&amp;</span>&nbsp;<span class="num">1</span>&nbsp;<span class="oth">/</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="key">Timer</span>&nbsp;<span class="oth">-</span>&nbsp;<span class="wrd">T</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;<span class="wrd">T</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">Timer</span><br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;Flip&nbsp;our&nbsp;screen</span><br />
+&nbsp;&nbsp;<span class="key">ScreenUnlock</span><br />
+&nbsp;&nbsp;<span class="key">ScreenLock</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;Commit&nbsp;a&nbsp;graphical&nbsp;change&nbsp;to&nbsp;our&nbsp;screen.</span><br />
+&nbsp;&nbsp;<span class="key">Cls</span><br />
+&nbsp;&nbsp;<br />
+<span class="key">Loop</span>&nbsp;<span class="key">Until</span>&nbsp;<span class="key">Len</span><span class="oth">(</span><span class="key">Inkey</span><span class="oth">)</span><br />
+<br />
+&nbsp;&nbsp;<span class="com">''&nbsp;unlock&nbsp;our&nbsp;page.</span><br />
+<span class="key">ScreenUnlock</span><br />
+</div></tt><br />
+<br \>
+</div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> In QB, <tt><b>SetEnviron</b></tt> was called <tt><b>Environ</b></tt>.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgEnviron.html">Environ</a></tt><br \>
+<li> <tt><a href="KeyPgShell.html">Shell</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

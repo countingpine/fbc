@@ -1,0 +1,72 @@
+<html>
+<head>
+<title>Close</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Close</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Stream I/O function to terminate access to a device<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<b>Close</b> [[#]<i>filenum</i> ] [, [#]<i>filenum</i> ...]<br \>
+            <i> or </i><br \>
+<i>result</i> = <b>Close</b>( [#<i>filenum</i>] )<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+<tt><i>filenum</i></tt><br \>
+<div class="fb_indent">List of file numbers to close.<br \>
+<br \>
+</div></div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+Closes the files whose file numbers are passed as arguments. If an unused file number is passed, <tt><b>Close</b></tt> returns an error.<br \>
+<br \>
+<tt><b>Close</b></tt> without arguments closes all the files presently opened.<br \>
+<br \>
+Terminating the program using an <tt><a href="KeyPgEnd.html">End</a></tt> statement will automatically close all files.<br \>
+<br \>
+</div><div class="fb_sect_title">Return Value</div><div class="fb_sect_cont"><br \>
+<tt><b>Close</b></tt> returns zero (<tt>0</tt>) on success and a non-zero error code otherwise.<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="com">'&nbsp;Create&nbsp;a&nbsp;string&nbsp;and&nbsp;fill&nbsp;it.</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">buffer</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span><span class="oth">,</span>&nbsp;<span class="wrd">f</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+<br />
+<span class="wrd">buffer</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="quo">"Hello&nbsp;World&nbsp;within&nbsp;a&nbsp;file."</span><br />
+<br />
+<span class="com">'&nbsp;Find&nbsp;the&nbsp;first&nbsp;free&nbsp;file&nbsp;number.</span><br />
+<span class="wrd">f</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">FreeFile</span><br />
+<br />
+<span class="com">'&nbsp;Open&nbsp;the&nbsp;file&nbsp;"file.ext"&nbsp;for&nbsp;binary&nbsp;usage,&nbsp;using&nbsp;the&nbsp;number&nbsp;"f".</span><br />
+<span class="key">Open</span>&nbsp;<span class="quo">"file.ext"</span>&nbsp;<span class="key">For</span>&nbsp;<span class="key">Binary</span>&nbsp;<span class="key">As</span>&nbsp;<span class="oth">#</span><span class="wrd">f</span><br />
+<br />
+&nbsp;&nbsp;<span class="com">'&nbsp;Place&nbsp;our&nbsp;string&nbsp;inside&nbsp;the&nbsp;file,&nbsp;using&nbsp;number&nbsp;"f".</span><br />
+&nbsp;&nbsp;<span class="key">Put</span>&nbsp;<span class="oth">#</span><span class="wrd">f</span><span class="oth">,</span>&nbsp;<span class="oth">,</span>&nbsp;<span class="wrd">buffer</span><br />
+<br />
+<span class="com">'&nbsp;Close&nbsp;the&nbsp;file.&nbsp;&nbsp;We&nbsp;could&nbsp;also&nbsp;do&nbsp;'Close&nbsp;#f',&nbsp;but&nbsp;it's&nbsp;only&nbsp;necessary&nbsp;if&nbsp;more&nbsp;than&nbsp;one&nbsp;number&nbsp;is&nbsp;open.</span><br />
+<span class="key">Close</span><br />
+<br />
+<span class="com">'&nbsp;End&nbsp;the&nbsp;program.&nbsp;(Check&nbsp;the&nbsp;file&nbsp;"file.ext"&nbsp;upon&nbsp;running&nbsp;to&nbsp;see&nbsp;the&nbsp;output.)</span><br />
+<span class="key">End</span><br />
+</div></tt><br />
+<br \>
+</div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> None <br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgOpen.html">Open</a></tt><br \>
+<li> <tt><a href="KeyPgPutfileio.html">Put (File I/O)</a></tt> <br \>
+<li> <tt><a href="KeyPgGetfileio.html">Get (File I/O)</a></tt><br \>
+<li> <tt><a href="KeyPgFreefile.html">FreeFile</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

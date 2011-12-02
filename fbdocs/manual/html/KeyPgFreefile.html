@@ -1,0 +1,91 @@
+<html>
+<head>
+<title>FreeFile</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">FreeFile</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Returns a free file number<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgFunction.html">Function</a> <b>FreeFile</b> ( ) <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a><br \>
+</tt><br \>
+</div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
+<i>result</i> = <b>FreeFile</b><br \>
+</tt><br \>
+</div><div class="fb_sect_title">Return Value</div><div class="fb_sect_cont"><br \>
+The next available file number, if any, otherwise zero (<tt>0</tt>).<br \>
+<br \>
+</div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+Returns the number of the next free file number with valid values <tt>1</tt> to <tt>255</tt>, or <tt>0</tt> if there are already 255 files opened. This value is a required argument to <tt><a href="KeyPgOpen.html">Open</a></tt> a file. <tt><b>FreeFile</b></tt> is useful when opening files in complex programs where the programmer can't keep track of the used file numbers.<br \>
+Make sure to always close files when no longer needed, otherwise you will get a file number leak, and won't be able to open any files anymore after 255 filenumbers are exhausted while your program is running.<br \>
+<tt><b>FreeFile</b></tt> will always return the smallest free file number.  The file number returned by <tt><b>FreeFile</b></tt> will not change until that file number is <tt><a href="KeyPgOpen.html">Open</a></tt>ed, or until a smaller file number is <tt><a href="KeyPgClose.html">Close</a></tt>d.  For this reason, it is wise to use <tt><b>FreeFile</b></tt> immediately before its corresponding <tt><a href="KeyPgOpen.html">Open</a></tt>, to ensure that the file number is not returned and opened elsewhere first.<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="com">'&nbsp;Create&nbsp;a&nbsp;string&nbsp;and&nbsp;fill&nbsp;it.</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">buffer</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span><span class="oth">,</span>&nbsp;<span class="wrd">f</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+<span class="wrd">buffer</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="quo">"Hello&nbsp;World&nbsp;within&nbsp;a&nbsp;file."</span><br />
+<br />
+<span class="com">'&nbsp;Find&nbsp;the&nbsp;first&nbsp;free&nbsp;file&nbsp;number.</span><br />
+<span class="wrd">f</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">FreeFile</span><br />
+<br />
+<span class="com">'&nbsp;Open&nbsp;the&nbsp;file&nbsp;"file.ext"&nbsp;for&nbsp;binary&nbsp;usage,&nbsp;using&nbsp;the&nbsp;file&nbsp;number&nbsp;"f".</span><br />
+<span class="key">Open</span>&nbsp;<span class="quo">"file.ext"</span>&nbsp;<span class="key">For</span>&nbsp;<span class="key">Binary</span>&nbsp;<span class="key">As</span>&nbsp;<span class="oth">#</span><span class="wrd">f</span><br />
+<br />
+<span class="com">'&nbsp;Place&nbsp;our&nbsp;string&nbsp;inside&nbsp;the&nbsp;file,&nbsp;using&nbsp;file&nbsp;number&nbsp;"f".</span><br />
+<span class="key">Put</span>&nbsp;<span class="oth">#</span><span class="wrd">f</span><span class="oth">,</span>&nbsp;<span class="oth">,</span>&nbsp;<span class="wrd">buffer</span><br />
+<br />
+<span class="com">'&nbsp;Close&nbsp;the&nbsp;file.</span><br />
+<span class="key">Close</span>&nbsp;<span class="oth">#</span><span class="wrd">f</span><br />
+<br />
+<span class="com">'&nbsp;End&nbsp;the&nbsp;program.&nbsp;(Check&nbsp;the&nbsp;file&nbsp;"file.ext"&nbsp;upon&nbsp;running&nbsp;to&nbsp;see&nbsp;the&nbsp;output.)</span><br />
+<span class="key">End</span><br />
+</div></tt><br />
+<br \>
+When using multiple <tt><b>FreeFile</b></tt> statements, <tt><b>FreeFile</b></tt> should be used immediately before the <tt><a href="KeyPgOpen.html">Open</a></tt> statement:<br \>
+<tt><div class="freebasic">
+<span class="key">Dim</span>&nbsp;<span class="wrd">fr</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">,</span>&nbsp;<span class="wrd">fs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+<span class="com">'&nbsp;The&nbsp;CORRECT&nbsp;way:</span><br />
+<span class="wrd">fr</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">FreeFile</span><br />
+<span class="key">Open</span>&nbsp;<span class="quo">"File1"</span>&nbsp;<span class="key">For</span>&nbsp;<span class="key">Input</span>&nbsp;<span class="key">As</span>&nbsp;<span class="oth">#</span><span class="wrd">fr</span><br />
+<br />
+<span class="wrd">fs</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">FreeFile</span><br />
+<span class="key">Open</span>&nbsp;<span class="quo">"File2"</span>&nbsp;<span class="key">For</span>&nbsp;<span class="key">Input</span>&nbsp;<span class="key">As</span>&nbsp;<span class="oth">#</span><span class="wrd">fs</span><br />
+</div></tt><br />
+<br \>
+As opposed to:<br \>
+<tt><div class="freebasic">
+<span class="key">Dim</span>&nbsp;<span class="wrd">fr</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">,</span>&nbsp;<span class="wrd">fs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+<span class="com">'&nbsp;The&nbsp;WRONG&nbsp;way:</span><br />
+<span class="wrd">fr</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">FreeFile</span><br />
+<span class="wrd">fs</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">FreeFile</span>&nbsp;<span class="com">''&nbsp;fs&nbsp;has&nbsp;taken&nbsp;the&nbsp;same&nbsp;file&nbsp;number&nbsp;as&nbsp;fr</span><br />
+<br />
+<span class="key">Open</span>&nbsp;<span class="quo">"file1"</span>&nbsp;<span class="key">For</span>&nbsp;<span class="key">Input</span>&nbsp;<span class="key">As</span>&nbsp;<span class="oth">#</span><span class="wrd">fr</span><br />
+<span class="key">Open</span>&nbsp;<span class="quo">"file2"</span>&nbsp;<span class="key">For</span>&nbsp;<span class="key">Input</span>&nbsp;<span class="key">As</span>&nbsp;<span class="oth">#</span><span class="wrd">fs</span>&nbsp;<span class="com">''&nbsp;error:&nbsp;file&nbsp;number&nbsp;already&nbsp;opened</span><br />
+</div></tt><br />
+<br \>
+</div><div class="fb_sect_title">Platform Differences</div><div class="fb_sect_cont"><br \>
+<ul><li> On Windows, a file number used in a dynamic link library is not the same as an identical file number used in the main program.  File numbers can not be passed or returned and then used between a DLL and an executable.<br \>
+<li> Besides FreeBASIC's limit of 255 files per program opened at same time, there is an OS limit of total amount of opened files, but usually you won't touch it except in DOS, where the limit may be as low as 15 files total.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> None<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgOpen.html">Open</a></tt><br \>
+<li> <tt><a href="KeyPgPutfileio.html">Put (File I/O)</a></tt><br \>
+<li> <tt><a href="KeyPgGetfileio.html">Get (File I/O)</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

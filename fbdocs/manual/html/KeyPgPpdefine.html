@@ -1,0 +1,102 @@
+<html>
+<head>
+<title>#define</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">#define</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Preprocessor directive to define a macro<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+#define <i>identifier</i> <i>text</i><br \>
+#define <i>identifier</i>( [ <i>parameters</i> ] ) <i>macro_text</i><br \>
+#define <i>identifier</i>( [ <i>parameters</i>, ] <i>variadic_parameter</i><a href="KeyPgDots.html">...</a> ) <i>macro_text</i><br \>
+</tt><br \>
+</div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+Preprocessor keyword that defines an identifier with a custom meaning:<br \>
+<ul><ul><li> Non-empty defines (with <tt><i>text</i></tt>) are substituted by its <tt><i>text</i></tt> when the source is parsed, allowing a sort of "shorthand".  <tt><i>text</i></tt> may be empty, which is useful for making defines that are just designed for checking with <tt><a href="KeyPgPpifdef.html">#ifdef</a></tt> and <tt><a href="KeyPgPpifndef.html">#ifndef</a></tt>.<br \>
+<li> Defines with parameters are substituted by the <tt><i>macro_text</i></tt>, that will contain all the arguments passed replaced.  <b>Note:</b> The open parentheses character ("<tt>(</tt>") must immediately follow the <tt><i>identifier</i></tt>, there should be no white-spaces between them, otherwise the parentheses will be taken as part of <tt><i>text</i></tt>.<br \>
+<li> Defines are visible only in the scope where they are defined.  If defined at module level, the define is visible throughout the module.  If the <tt><i>identifier</i></tt> is defined inside a compound statement having scope (<tt><a href="KeyPgSub.html">Sub</a></tt>, <tt><a href="KeyPgFornext.html">For..Next</a></tt>, <tt><a href="KeyPgWhilewend.html">While..Wend</a></tt>, <tt><a href="KeyPgDoloop.html">Do..Loop</a></tt>, <tt><a href="KeyPgScope.html">Scope..End Scope</a></tt>, etc), the <tt><i>identifier</i></tt> is visible only within that scope.<br \>
+<li> Namespaces do not have any effect on the visibility of a define.<br \>
+<br \>
+</ul></ul><tt><i>Identifier</i></tt>s can be checked to see whether they have been defined with <tt><a href="KeyPgPpifdef.html">#ifdef</a></tt> and <tt><a href="KeyPgPpifndef.html">#ifndef</a></tt>, which can be used to hide parts of code to the compiler (conditional compiling).<br \>
+<br \>
+For defining identifiers with constant values associated with them <tt><a href="KeyPgConst.html">Const</a></tt> may be used as a more powerful method.<br \>
+<br \>
+Using <tt><a href="KeyPgDots.html">...</a></tt> (an ellipsis) behind the last parameter of a macro allows to create a variadic macro. This means it is possible to pass any number of arguments to the <i>variadic_parameter</i>, which can be used in the <i>macro_text</i>, just like a normal macro parameter. The <i>variadic_parameter</i> will expand to the full list of arguments passed to it, including commas, and can also be completely empty.<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="com">''&nbsp;Definition&nbsp;and&nbsp;check</span><br />
+<span class="def">#define&nbsp;DEBUGGING<br />
+#ifdef&nbsp;DEBUGGING<br />
+</span>&nbsp;&nbsp;<span class="com">'&nbsp;...&nbsp;statements</span><br />
+<span class="def">#endif<br />
+</span><br />
+<span class="com">''&nbsp;Simple&nbsp;definition/text&nbsp;replacement</span><br />
+<span class="def">#define&nbsp;FALSE&nbsp;0<br />
+#define&nbsp;TRUE&nbsp;(Not&nbsp;FALSE)<br />
+</span><br />
+<span class="com">''&nbsp;Function&nbsp;like&nbsp;definition</span><br />
+<span class="def">#define&nbsp;MyRGB(R,G,B)&nbsp;(((R)Shl&nbsp;16)&nbsp;&nbsp;Or&nbsp;((G)Shl&nbsp;8)&nbsp;Or&nbsp;(B))&nbsp;<br />
+</span><span class="key">Print</span>&nbsp;<span class="key">Hex</span><span class="oth">(</span>&nbsp;<span class="wrd">MyRGB</span><span class="oth">(</span><span class="num">&amp;hff</span><span class="oth">,</span>&nbsp;<span class="num">&amp;h00</span><span class="oth">,</span>&nbsp;<span class="num">&amp;hff</span><span class="oth">)</span>&nbsp;<span class="oth">)</span><br />
+<br />
+<span class="com">''&nbsp;Line&nbsp;continuation&nbsp;and&nbsp;statements&nbsp;in&nbsp;a&nbsp;definition</span><br />
+<span class="def">#define&nbsp;printval(bar)&nbsp;_<br />
+</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="oth">#</span><span class="wrd">bar</span><span class="oth">;</span>&nbsp;<span class="quo">"&nbsp;="</span><span class="oth">;</span>&nbsp;<span class="wrd">bar</span><br />
+<br />
+<span class="com">''&nbsp;#defines&nbsp;are&nbsp;visible&nbsp;only&nbsp;in&nbsp;the&nbsp;scope&nbsp;where&nbsp;they&nbsp;are&nbsp;defined</span><br />
+<span class="key">Scope</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="def">#define&nbsp;LOCALDEF&nbsp;1<br />
+</span><span class="key">End</span>&nbsp;<span class="key">Scope</span><br />
+<br />
+<span class="def">#ifndef&nbsp;LOCALDEF<br />
+#&nbsp;&nbsp;&nbsp;&nbsp;Print&nbsp;LOCALDEF&nbsp;Is&nbsp;Not&nbsp;defined<br />
+#endif<br />
+</span><br />
+<span class="com">''&nbsp;namespaces&nbsp;have&nbsp;no&nbsp;effect&nbsp;on&nbsp;the&nbsp;visibility&nbsp;of&nbsp;a&nbsp;define</span><br />
+<span class="key">Namespace</span>&nbsp;<span class="wrd">foo</span><br />
+<span class="def">#&nbsp;&nbsp;&nbsp;&nbsp;define&nbsp;NSDEF<br />
+</span><span class="key">End</span>&nbsp;<span class="key">Namespace</span><br />
+<br />
+<span class="def">#ifdef&nbsp;NSDEF<br />
+#&nbsp;&nbsp;&nbsp;&nbsp;Print&nbsp;NSDEF&nbsp;Is&nbsp;defined<br />
+#endif<br />
+</span></div></tt><br />
+<br \>
+<tt><div class="freebasic">
+<span class="com">''&nbsp;Using&nbsp;a&nbsp;variadic&nbsp;macro&nbsp;to&nbsp;wrap&nbsp;a&nbsp;variadic&nbsp;function</span><br />
+<span class="def">#include&nbsp;"crt.bi"<br />
+#define&nbsp;eprintf(Format,&nbsp;args...)&nbsp;fprintf(stderr,&nbsp;Format,&nbsp;args)<br />
+</span><span class="wrd">eprintf</span><span class="oth">(!</span><span class="quo">"Hello&nbsp;from&nbsp;printf:&nbsp;%i&nbsp;%s&nbsp;%i\n"</span><span class="oth">,</span>&nbsp;<span class="num">5</span><span class="oth">,</span>&nbsp;<span class="quo">"test"</span><span class="oth">,</span>&nbsp;<span class="num">123</span><span class="oth">)</span><br />
+<br />
+<span class="com">''&nbsp;LISP-like&nbsp;accessors&nbsp;allowing&nbsp;to&nbsp;modify&nbsp;comma-separated&nbsp;lists</span><br />
+<span class="def">#define&nbsp;car(a,&nbsp;b...)&nbsp;a<br />
+#define&nbsp;cdr(a,&nbsp;b...)&nbsp;b<br />
+</span></div></tt><br />
+<br \>
+</div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> New to FreeBASIC<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgPpmacro.html">#macro</a></tt><br \>
+<li> <tt><a href="KeyPgOpPpStringize.html"># Preprocessor Stringize</a></tt><br \>
+<li> <tt><a href="KeyPgOpPpConcat.html">## Preprocessor Concatenate</a></tt><br \>
+<li> <tt><a href="KeyPgPpifdef.html">#ifdef</a></tt><br \>
+<li> <tt><a href="KeyPgPpifndef.html">#ifndef</a></tt><br \>
+<li> <tt><a href="KeyPgPpundef.html">#undef</a></tt><br \>
+<li> <tt><a href="KeyPgDefined.html">defined</a></tt><br \>
+<li> <tt><a href="KeyPgConst.html">Const</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

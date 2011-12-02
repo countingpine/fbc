@@ -1,0 +1,137 @@
+<html>
+<head>
+<title>Operator Step (Iteration)</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Operator Step (Iteration)</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Increments the iterator of a <tt><a href="KeyPgFornext.html">For...Next</a></tt> loop<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+{ <a href="KeyPgType.html">Type</a> | <a href="KeyPgClass.html">Class</a> | <a href="KeyPgUnion.html">Union</a> } <i>typename</i><br \>
+<div class="fb_indent"><a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgOperator.html">Operator</a> <b>Step</b> ()<br \>
+<a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgOperator.html">Operator</a> <b>Step</b> ( [ <a href="KeyPgByref.html">ByRef</a> | <a href="KeyPgByval.html">ByVal</a> ] <i>stp</i> <a href="KeyPgAs.html">As</a> <i>typename</i> )<br \>
+<i>...</i><br \>
+</div>End { <a href="KeyPgType.html">Type</a> | <a href="KeyPgClass.html">Class</a> | <a href="KeyPgUnion.html">Union</a> }<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
+<a href="KeyPgFornext.html">For</a> <i>iterator</i> [ As <i>typename</i> ] = <i>start_value</i> To <i>end_value</i> [ <a href="KeyPgFornext.html">Step</a> <i>step_value</i> ]<br \>
+<div class="fb_indent">[<i> ...statements... </i>]<br \>
+</div><a href="KeyPgFornext.html">Next</a><br \>
+</tt><br \>
+</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+<tt><i>typename</i></tt><br \>
+<div class="fb_indent">name of the <tt><a href="KeyPgType.html">Type</a></tt>, <tt><a href="KeyPgClass.html">Class</a></tt>, or <tt><a href="KeyPgUnion.html">Union</a></tt><br \>
+</div><tt><i>stp</i></tt>, <tt><i>step_value</i></tt><br \>
+<div class="fb_indent">a <tt><i>typename</i></tt> object used as an incremental value<br \>
+</div><tt><i>iterator</i></tt><br \>
+<div class="fb_indent">a <tt><i>typename</i></tt> object used as an iterator<br \>
+</div><tt><i>end_value</i></tt><br \>
+<div class="fb_indent">a <tt><i>typename</i></tt> object used as a loop-terminating value<br \>
+</div><tt><i>start_value</i></tt><br \>
+<div class="fb_indent">a <tt><i>typename</i></tt> object used to copy construct or assign to the iterator initially<br \>
+<br \>
+</div></div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+<tt><a href="KeyPgOpFor.html">Operator For</a></tt>, <tt><a href="KeyPgOpNext.html">Operator Next</a></tt> and <tt><b>Operator Step</b></tt> can be overloaded in user-defined type definitions to allow objects of that type to be used as iterators and step values in <tt><a href="KeyPgFornext.html">For...Next</a></tt> loops.<br \>
+<br \>
+<tt><b>Operator Step</b></tt> is called to increment the iterator immediately after all statements in the <tt><a href="KeyPgFornext.html">For...Next</a></tt> body are executed, if any.<br \>
+<br \>
+The first version of <tt><b>Operator Step</b></tt> is used if no step value is given in the <tt><a href="KeyPgFornext.html">For...Next</a></tt> statement. If a step value is given, the second version is used and is passed the step value.<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="com">''&nbsp;Example&nbsp;Type</span><br />
+<span class="key">Type</span>&nbsp;<span class="wrd">T</span><br />
+&nbsp;&nbsp;<span class="com">''&nbsp;value&nbsp;is&nbsp;set&nbsp;by&nbsp;the&nbsp;constructor</span><br />
+&nbsp;&nbsp;<span class="wrd">value</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Double</span><br />
+&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Constructor</span><span class="oth">(</span>&nbsp;<span class="key">ByVal</span>&nbsp;<span class="wrd">x</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Double</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span>&nbsp;<span class="oth">)</span><br />
+<br />
+&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Operator</span>&nbsp;<span class="key">For</span><span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">stp</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">T</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Operator</span>&nbsp;<span class="key">Step</span><span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">stp</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">T</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Operator</span>&nbsp;<span class="key">Next</span><span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">cond</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">T</span><span class="oth">,</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">stp</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">T</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Type</span><br />
+<br />
+<span class="key">Constructor</span>&nbsp;<span class="wrd">T</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="key">ByVal</span>&nbsp;<span class="wrd">x</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Double</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"T&nbsp;iterator&nbsp;constructed&nbsp;with&nbsp;value&nbsp;"</span>&nbsp;<span class="oth">&amp;</span>&nbsp;<span class="wrd">x</span><br />
+&nbsp;&nbsp;<span class="wrd">value</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">x</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Constructor</span><br />
+<br />
+<span class="key">Operator</span>&nbsp;<span class="wrd">T.for</span><span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">stp</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">T</span>&nbsp;<span class="oth">)</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Operator</span><br />
+<br />
+<span class="key">Operator</span>&nbsp;<span class="wrd">T.step</span><span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">stp</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">T</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"&nbsp;incremented&nbsp;by&nbsp;"</span>&nbsp;<span class="oth">&amp;</span>&nbsp;<span class="wrd">stp.value</span>&nbsp;<span class="oth">&amp;</span>&nbsp;<span class="quo">"&nbsp;in&nbsp;step."</span><br />
+&nbsp;&nbsp;<span class="wrd">value</span>&nbsp;<span class="oth">+=</span>&nbsp;<span class="wrd">stp.value</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Operator</span><br />
+<br />
+<span class="key">Operator</span>&nbsp;<span class="wrd">T.next</span><span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">cond</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">T</span><span class="oth">,</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">stp</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">T</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;<span class="com">''&nbsp;iterator's&nbsp;moving&nbsp;from&nbsp;a&nbsp;high&nbsp;value&nbsp;to&nbsp;a&nbsp;low&nbsp;value&nbsp;(step&nbsp;&gt;=&nbsp;0)</span><br />
+&nbsp;&nbsp;<span class="key">If</span><span class="oth">(</span>&nbsp;<span class="wrd">stp.value</span>&nbsp;<span class="oth">&lt;</span>&nbsp;<span class="num">0</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="key">Then</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Return</span><span class="oth">(</span>&nbsp;<span class="wrd">value</span>&nbsp;<span class="oth">&gt;=</span>&nbsp;<span class="wrd">cond.value</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;<span class="key">Else</span><br />
+&nbsp;&nbsp;<span class="com">''&nbsp;iterator's&nbsp;moving&nbsp;from&nbsp;a&nbsp;low&nbsp;value&nbsp;to&nbsp;a&nbsp;high&nbsp;value&nbsp;(step&nbsp;&lt;&nbsp;0)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Return</span><span class="oth">(</span>&nbsp;<span class="wrd">value</span>&nbsp;<span class="oth">&lt;=</span>&nbsp;<span class="wrd">cond.value</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;<span class="key">End</span>&nbsp;<span class="key">If</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Operator</span><br />
+<br />
+<span class="com">''&nbsp;Example&nbsp;Usage.&nbsp;It&nbsp;looks&nbsp;like&nbsp;we&nbsp;are&nbsp;working&nbsp;with&nbsp;numbers,&nbsp;but&nbsp;the&nbsp;iterators</span><br />
+<span class="com">''&nbsp;have&nbsp;overloaded&nbsp;constructors.&nbsp;The&nbsp;10,&nbsp;1,&nbsp;and&nbsp;-1&nbsp;are&nbsp;all&nbsp;of&nbsp;type&nbsp;T.</span><br />
+<span class="key">For</span>&nbsp;<span class="wrd">i</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">T</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">10</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">1</span>&nbsp;<span class="key">Step</span>&nbsp;<span class="oth">-</span><span class="num">1</span><br />
+&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="wrd">i.value</span><span class="oth">;</span><br />
+<span class="key">Next</span>&nbsp;<span class="wrd">i</span><br />
+</div></tt><br />
+A more practical example demonstrating file iteration based on <a href="http://www.freebasic.net/forum/viewtopic.php?p=83564">cha0s' file iteration class</a>.<br \>
+<tt><div class="freebasic">
+<span class="com">''&nbsp;a&nbsp;class&nbsp;which&nbsp;iterates&nbsp;through&nbsp;files</span><br />
+<span class="key">Type</span>&nbsp;<span class="wrd">FileIter</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span>&nbsp;<span class="wrd">pathName</span><span class="oth">,</span>&nbsp;<span class="wrd">fileName</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Constructor</span><span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">pathName</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span>&nbsp;<span class="oth">)</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Operator</span>&nbsp;<span class="key">For</span><span class="oth">()</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Operator</span>&nbsp;<span class="key">Step</span><span class="oth">()</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Operator</span>&nbsp;<span class="key">Next</span><span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">endCond</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">FileIter</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Type</span><br />
+<br />
+<span class="key">Constructor</span>&nbsp;<span class="wrd">FileIter</span><span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">pathName</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span>&nbsp;<span class="oth">)</span>&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">this.pathName</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">pathName</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Constructor</span><br />
+<br />
+<span class="key">Operator</span>&nbsp;<span class="wrd">FileIter.for</span><span class="oth">(</span>&nbsp;<span class="oth">)</span>&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">fileName</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">Dir</span><span class="oth">(</span><span class="wrd">pathName</span>&nbsp;<span class="oth">&amp;</span>&nbsp;<span class="quo">"/*.*"</span><span class="oth">)</span>&nbsp;&nbsp;&nbsp;<br />
+<span class="key">End</span>&nbsp;<span class="key">Operator</span><br />
+<br />
+<span class="key">Operator</span>&nbsp;<span class="wrd">FileIter.step</span><span class="oth">(</span>&nbsp;<span class="oth">)</span>&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">fileName</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">Dir</span><span class="oth">(</span><span class="quo">""</span><span class="oth">)</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Operator</span><br />
+<br />
+<span class="key">Operator</span>&nbsp;<span class="wrd">FileIter.next</span><span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">endCond</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">FileIter</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Return</span><span class="oth">(</span><span class="wrd">fileName</span>&nbsp;<span class="oth">&lt;&gt;</span>&nbsp;<span class="wrd">endCond.pathName</span><span class="oth">)</span>&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;the&nbsp;c'tor&nbsp;sets&nbsp;the&nbsp;path&nbsp;name&nbsp;and&nbsp;so&nbsp;we&nbsp;check&nbsp;against&nbsp;that</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Operator</span><br />
+<br />
+<span class="com">''&nbsp;example&nbsp;code</span><br />
+<span class="com">''&nbsp;change&nbsp;it&nbsp;to&nbsp;any&nbsp;directory</span><br />
+<span class="key">For</span>&nbsp;<span class="wrd">i</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">FileIter</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="quo">"./"</span>&nbsp;<span class="key">To</span>&nbsp;<span class="quo">""</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="wrd">i.fileName</span><br />
+<span class="key">Next</span><br />
+</div></tt><br />
+</div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
+<ul><li> Only available in the <i><a href="CompilerOptlang.html">-lang fb</a></i> dialect.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgOpFor.html">Operator For</a></tt><br \>
+<li> <tt><a href="KeyPgOpNext.html">Operator Next</a></tt><br \>
+<li> <tt><a href="KeyPgFornext.html">For...Next</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

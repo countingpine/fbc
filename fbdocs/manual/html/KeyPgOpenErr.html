@@ -1,0 +1,70 @@
+<html>
+<head>
+<title>Open Err</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Open Err</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Opens both the standard input (<i>stdin</i>) and standard error (<i>stderr</i>) streams for file operations.<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<b><a href="KeyPgOpen.html">Open</a> Err</b> [for <i>mode</i>] <a href="KeyPgAs.html">As</a> [#]<i>filenum</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a><br \>
+</tt><br \>
+</div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
+<b>Open Err</b> [for <i>mode</i>] as [#]<i>filenum</i><br \>
+<div class="fb_indent"><i>or</i><br \>
+</div><i>result</i> = <b>Open Err</b>( [for <i>mode</i>] as [#]<i>filenum</i> )<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+<tt><i>mode</i></tt><br \>
+<div class="fb_indent">Ignored.<br \>
+</div><tt><i>filenum</i></tt><br \>
+<div class="fb_indent">An unused file number.<br \>
+<br \>
+</div></div><div class="fb_sect_title">Return Value</div><div class="fb_sect_cont"><br \>
+Zero is returned if <tt><b>Open Err</b></tt> completed successfully, otherwise a non-zero value is returned to indicate failure.<br \>
+<br \>
+</div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+This command opens <tt>stdin</tt> to read from and <tt>stderr</tt> to write to the console allowing read and write operations with normal file commands.<br \>
+<br \>
+<tt>stderr</tt> is an output stream different from <tt>stdout</tt> allowing error messages to be redirected separately from the main console output.<br \>
+<br \>
+The normal console commands, such as <tt><a href="KeyPgColor.html">Color</a></tt> and <tt><a href="KeyPgLocate.html">Locate</a></tt>, do not work in this mode, because they do not accept a file number.<br \>
+<br \>
+The <tt>[For Input|Output]</tt> <tt><i>mode</i></tt> is allowed for compatibility, but is ignored.<br \>
+<br \>
+<b>Runtime errors:</b><br \>
+    <tt><b>Open Err</b></tt> throws one of the following <a href="ProPgErrorHandling.html">runtime errors</a>:<br \>
+<br \>
+<i>(<tt>1</tt>) Illegal function call</i><br \>
+<ul><ul><li> Filenumber was not free at the time. use <tt><a href="KeyPgFreefile.html">FreeFile</a></tt> to ensure that filenumber is free.<br \>
+<br \>
+</ul></ul></div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="key">Dim</span>&nbsp;<span class="wrd">a</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span><br />
+<span class="key">Open</span>&nbsp;<span class="key">Err</span>&nbsp;<span class="key">For</span>&nbsp;<span class="key">Input</span>&nbsp;&nbsp;<span class="key">As</span>&nbsp;<span class="oth">#</span><span class="num">1</span><br />
+<span class="key">Print</span>&nbsp;<span class="oth">#</span><span class="num">1</span><span class="oth">,</span><span class="quo">"Please&nbsp;write&nbsp;something&nbsp;and&nbsp;press&nbsp;ENTER"</span><br />
+<span class="key">Line</span>&nbsp;<span class="key">Input</span>&nbsp;<span class="oth">#</span><span class="num">1</span><span class="oth">,</span>&nbsp;<span class="wrd">a</span>&nbsp;<br />
+<span class="key">Print</span>&nbsp;<span class="oth">#</span><span class="num">1</span><span class="oth">,</span>&nbsp;<span class="quo">"You&nbsp;wrote"</span><span class="oth">;</span>&nbsp;<span class="wrd">a</span><br />
+<span class="key">Close</span><br />
+<span class="key">Sleep</span><br />
+</div></tt><br />
+<br \>
+</div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> New to FreeBASIC<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgOpen.html">Open</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

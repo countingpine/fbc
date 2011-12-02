@@ -1,0 +1,111 @@
+<html>
+<head>
+<title>GetJoystick</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">GetJoystick</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Reads buttons and axis information from attached gaming devices<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgFunction.html">Function</a> <b>GetJoystick</b> ( <a href="KeyPgByval.html">ByVal</a> <i>id</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a>, <a href="KeyPgByref.html">ByRef</a> <i>buttons</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a> = 0, <a href="KeyPgByref.html">ByRef</a> <i>a1</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgSingle.html">Single</a> = 0, <a href="KeyPgByref.html">ByRef</a> <i>a2</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgSingle.html">Single</a> = 0, <a href="KeyPgByref.html">ByRef</a> <i>a3</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgSingle.html">Single</a> = 0, <a href="KeyPgByref.html">ByRef</a> <i>a4</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgSingle.html">Single</a> = 0, <a href="KeyPgByref.html">ByRef</a> <i>a5</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgSingle.html">Single</a> = 0, <a href="KeyPgByref.html">ByRef</a> <i>a6</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgSingle.html">Single</a> = 0, <a href="KeyPgByref.html">ByRef</a> <i>a7</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgSingle.html">Single</a> = 0, <a href="KeyPgByref.html">ByRef</a> <i>a8</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgSingle.html">Single</a> = 0 ) <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a><br \>
+</tt><br \>
+</div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
+<i>result</i> = <b>GetJoystick</b>( <i>id</i>[, <i>buttons</i>[, <i>a1</i>[, <i>a2</i>[, <i>a3</i>[, <i>a4</i>[, <i>a5</i>[, <i>a6</i>[, <i>a7</i>[, <i>a8</i>]]]]]]]]] )<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+<tt><i>id</i></tt><br \>
+<div class="fb_indent">the device id number (0 - 15)<br \>
+</div><tt><i>buttons</i></tt><br \>
+<div class="fb_indent">the button status<br \>
+</div><tt><i>a1</i></tt><br \>
+<div class="fb_indent">first axis value<br \>
+</div><tt><i>a2</i></tt><br \>
+<div class="fb_indent">second axis value<br \>
+</div><tt><i>a3</i></tt><br \>
+<div class="fb_indent">third axis value<br \>
+</div><tt><i>a4</i></tt><br \>
+<div class="fb_indent">fourth axis value<br \>
+</div><tt><i>a5</i></tt><br \>
+<div class="fb_indent">fifth axis value<br \>
+</div><tt><i>a6</i></tt><br \>
+<div class="fb_indent">sixth axis value<br \>
+</div><tt><i>a7</i></tt><br \>
+<div class="fb_indent">seventh axis value<br \>
+</div><tt><i>a8</i></tt><br \>
+<div class="fb_indent">eighth axis value<br \>
+<br \>
+</div></div><div class="fb_sect_title">Return Value</div><div class="fb_sect_cont"><br \>
+0 on success or 1 on failure.  All of the axis positions are returned in floating point format.<br \>
+<br \>
+</div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+<tt><b>GetJoystick</b></tt> will retrieves the button state, and the axis positions for up to 8 axes, for the joystick determined by <tt><i>id</i></tt>, a number between 0 and 15. Buttons are stored in a similar manner to <tt><a href="KeyPgGetmouse.html">GetMouse</a></tt>, with each bit in <tt><i>buttons</i></tt> representing a button.<br \>
+<br \>
+A single precision value between <tt>-1.0</tt> and <tt>1.0</tt> is returned for each valid axis.  If the axis does not exist for the controller, a value of <tt>-1000.00</tt> is returned.<br \>
+<br \>
+<tt><b>GetJoystick</b></tt> will return 0 upon successful completion; It will return 1 upon failure. Failure can be caused by specifying an illegal joystick number, specifying a joystick which doesn't exist, or a failure in the joystick API.<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="key">Screen</span>&nbsp;<span class="num">12</span><br />
+<br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">x</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Single</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">y</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Single</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">buttons</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">result</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">a</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+<br />
+<span class="key">Const</span>&nbsp;<span class="wrd">JoystickID</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span><br />
+<br />
+<span class="com">'This&nbsp;line&nbsp;checks&nbsp;to&nbsp;see&nbsp;if&nbsp;the&nbsp;joystick&nbsp;is&nbsp;ok.</span><br />
+<br />
+<span class="key">If</span>&nbsp;<span class="key">GetJoystick</span><span class="oth">(</span><span class="wrd">JoystickID</span><span class="oth">,</span><span class="wrd">buttons</span><span class="oth">,</span><span class="wrd">x</span><span class="oth">,</span><span class="wrd">y</span><span class="oth">)</span>&nbsp;<span class="key">Then</span>&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"Joystick&nbsp;doesn't&nbsp;exist&nbsp;or&nbsp;joystick&nbsp;error."</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"Press&nbsp;any&nbsp;key&nbsp;to&nbsp;continue."</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Sleep</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">End</span><br />
+<span class="key">End</span>&nbsp;<span class="key">If</span><br />
+<br />
+<br />
+<span class="key">Do</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">result</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">GetJoystick</span><span class="oth">(</span><span class="wrd">JoystickID</span><span class="oth">,</span><span class="wrd">buttons</span><span class="oth">,</span><span class="wrd">x</span><span class="oth">,</span><span class="wrd">y</span><span class="oth">)</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Locate</span>&nbsp;<span class="num">1</span><span class="oth">,</span><span class="num">1</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="oth">;</span><span class="quo">"result:"</span><span class="oth">;</span><span class="wrd">result</span><span class="oth">;</span><span class="quo">"&nbsp;x:"</span>&nbsp;<span class="oth">;</span><span class="wrd">x</span><span class="oth">;</span><span class="quo">"&nbsp;y:"</span><span class="oth">;</span><span class="wrd">y</span><span class="oth">;</span><span class="quo">"&nbsp;Buttons:"</span><span class="oth">;</span><span class="wrd">buttons</span><span class="oth">,</span><span class="quo">""</span><span class="oth">,</span><span class="quo">""</span><span class="oth">,</span><span class="quo">""</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">'This&nbsp;tests&nbsp;to&nbsp;see&nbsp;which&nbsp;buttons&nbsp;from&nbsp;1&nbsp;to&nbsp;27&nbsp;are&nbsp;pressed.&nbsp;</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">For</span>&nbsp;<span class="wrd">a</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">26</span>&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">If</span>&nbsp;<span class="oth">(</span><span class="wrd">buttons</span>&nbsp;<span class="key">And</span>&nbsp;<span class="oth">(</span><span class="num">1</span>&nbsp;<span class="key">Shl</span>&nbsp;<span class="wrd">a</span><span class="oth">))</span>&nbsp;<span class="key">Then</span>&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"Button&nbsp;"</span><span class="oth">;</span><span class="wrd">a</span><span class="oth">;</span><span class="quo">"&nbsp;pressed.&nbsp;&nbsp;&nbsp;&nbsp;"</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Else</span>&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"Button&nbsp;"</span><span class="oth">;</span><span class="wrd">a</span><span class="oth">;</span><span class="quo">"&nbsp;not&nbsp;pressed."</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">End</span>&nbsp;<span class="key">If</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Next</span>&nbsp;<span class="wrd">a</span><br />
+<span class="key">Loop</span><br />
+</div></tt><br />
+<br \>
+</div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
+<ul><li> Not available in the <i><a href="CompilerOptlang.html">-lang qb</a></i> dialect unless referenced with the alias <tt><b>__Getjoystick</b></tt>.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> New to FreeBASIC<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgScreengraphics.html">Screen (Graphics)</a></tt><br \>
+<li> <tt><a href="KeyPgSetmouse.html">SetMouse</a></tt><br \>
+<li> <tt><a href="KeyPgGetmouse.html">GetMouse</a></tt><br \>
+<li> <tt><a href="KeyPgMultikey.html">MultiKey</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

@@ -1,0 +1,111 @@
+<html>
+<head>
+<title>Sub</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Sub</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Defines a procedure<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+[<a href="KeyPgPublic.html">Public</a>|<a href="KeyPgPrivate.html">Private</a>] <b>Sub</b> <i>identifier</i> [<a href="KeyPgCdecl.html">cdecl</a>|<a href="KeyPgPascal.html">pascal</a>|<a href="KeyPgStdcall.html">stdcall</a>] [<a href="KeyPgOverload.html">Overload</a>] [<a href="KeyPgAlias.html">Alias</a> <i>external_identifier</i>] [( [<i>parameter_list</i>] )] [<a href="KeyPgStatic.html">Static</a>]<br \>
+<div class="fb_indent"><i>statements</i><br \>
+...<br \>
+[<a href="KeyPgReturn.html">Return</a>]<br \>
+...<br \>
+</div><a href="KeyPgEndblock.html">End</a> Sub<br \>
+<br \>
+[<a href="KeyPgPublic.html">Public</a>] <b>Sub</b> <i>identifier</i> [<a href="KeyPgCdecl.html">cdecl</a>|<a href="KeyPgPascal.html">pascal</a>|<a href="KeyPgStdcall.html">stdcall</a>] [<a href="KeyPgOverload.html">Overload</a>] [<a href="KeyPgAlias.html">Alias</a> <i>external_identifier</i>] [()] [<a href="KeyPgModuleConstructor.html">Constructor</a>|<a href="KeyPgModuleDestructor.html">Destructor</a>] [<a href="KeyPgStatic.html">Static</a>]<br \>
+<div class="fb_indent"><i>statements</i><br \>
+...<br \>
+[<a href="KeyPgReturn.html">Return</a>]<br \>
+...<br \>
+</div><a href="KeyPgEndblock.html">End</a> Sub<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+<div class="fb_indent"><tt><i>identifier</i></tt>: the name of the subroutine<br \>
+<tt><i>external_identifier</i></tt>: externally visible (to the linker) name enclosed in quotes<br \>
+<tt><i>parameter_list</i></tt>: parameter[, parameter[, ...]]<br \>
+<tt><i>parameter</i></tt>: <tt>[<a href="KeyPgByref.html">ByRef</a>|<a href="KeyPgByval.html">ByVal</a>] <i>identifier</i> [<a href="KeyPgAs.html">As</a> <i>type</i>] [= <i>default_value</i>]</tt><br \>
+<div class="fb_indent"><tt><i>identifier</i></tt>: the name of the variable referenced in the subroutine<br \>
+<tt><i>type</i></tt>: the type of variable<br \>
+<tt><i>default_value</i></tt>: the value of the argument if none is specified in the call<br \>
+</div><tt><i>statements</i></tt>: one or more statements that make up the subroutine body<br \>
+<br \>
+</div></div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+A subroutine is a block of code which may be called at any time from a program.  This code may need to be executed multiple times, and subroutines provide an invaluable means to simplify code by replacing these blocks of code with a single subroutine call.  A subroutine also serves to allow a user to extend the FreeBASIC language to provide custom commands.  Many of the functions built into FreeBASIC are merely subroutines part of a "runtime library" linked to by default.<br \>
+<br \>
+The <tt><b>Sub</b></tt> keyword marks the beginning of a subroutine, and its end is marked by <tt><b>End Sub</b></tt>.  The "name" parameter is the name by which this subroutine is called.  For instance, if the declaration is "<tt><b>Sub</b>...<b>End Sub</b></tt>", the user can execute the code in between "<tt><b>Sub</b> foo</tt>" and "<tt><b>End Sub</b></tt>" by using "<tt>foo</tt>" as a statement.  This code is executed separate from the code which calls the subroutine, so any variable names, unless they are shared, are not available to the subroutine.  Values can, however, be passed using parameters.<br \>
+<br \>
+Parameters are the arguments passed to any statement.  For instance, if a user executes a statement as "<tt><a href="KeyPgPrint.html">Print</a> 4</tt>", the value "4" is passed to the function "<tt><a href="KeyPgPrint.html">Print</a></tt>".  Parameters that need to be passed to a subroutine are supplied by one or more parameter arguments in the "<tt><b>Sub</b></tt>" keyword.  Creating a subroutine with "<tt><b>Sub</b> mysub(foo, bar)...<b>End Sub</b></tt>", allows the code in between "<tt><b>Sub</b></tt>" and "<tt><b>End Sub</b></tt>" to refer to the first passed argument as "foo" and the second passed argument as "bar".  If a parameter is given a default value, that parameter is optional.<br \>
+<br \>
+Parameters must also have a supplied type, in the form "<tt><i>parameter</i> as <i>type</i></tt>".  If this is omitted, <tt><i>type</i></tt> is assumed to be <tt><a href="KeyPgInteger.html">Integer</a></tt>.  A passed value MUST be of the type specified.<br \>
+<br \>
+A subroutine can also specify how parameters are passed, either as "<tt><a href="KeyPgByref.html">ByRef</a></tt>" or "<tt><a href="KeyPgByval.html">ByVal</a></tt>", as shown in the syntax definition.  If a parameter is "<tt><a href="KeyPgByref.html">ByRef</a></tt>", the parameter name literally becomes a reference to the original variable passed to the subroutine.  Any changes made to that variable will be reflected outside of the subroutine.  If a parameter is passed "<tt><a href="KeyPgByval.html">ByVal</a></tt>", however, the value of any passed variable is copied into a new variable, and any changes made to it will not affect the original.  (Note: this does not currently apply to <tt><a href="KeyPgString.html">String</a></tt>s, and "<tt><a href="KeyPgByval.html">ByVal</a></tt>" should be avoided with them for the time being.)<br \>
+<br \>
+The <tt><a href="KeyPgStatic.html">Static</a></tt> specifier indicates that the values of all local variables defined in the sub should be preserved between calls.  To specify individual local variables as static see the <tt><a href="KeyPgStatic.html">Static</a></tt> keyword.<br \>
+<br \>
+Sub is the same as <tt><a href="KeyPgFunction.html">Function</a></tt>, except it does not allow a value to be returned.<br \>
+<br \>
+The second syntax defines either a constructor or destructor using the <tt><a href="KeyPgModuleConstructor.html">Constructor</a></tt> and <tt><a href="KeyPgModuleDestructor.html">Destructor</a></tt> keywords, respectively.  Constructor subroutines are executed before the first line of code in the module, while destructors execute on module exit. Note the public access specifier and empty parameter list for both constructors and destructors.<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="com">''&nbsp;Example&nbsp;of&nbsp;writing&nbsp;colored&nbsp;text&nbsp;using&nbsp;a&nbsp;sub:</span><br />
+<br />
+<span class="key">Sub</span>&nbsp;<span class="wrd">PrintColoredText</span><span class="oth">(</span>&nbsp;<span class="key">ByVal</span>&nbsp;<span class="wrd">colour</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">,</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">text</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;<span class="key">Color</span>&nbsp;<span class="wrd">colour</span><br />
+&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="wrd">text</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Sub</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;<span class="wrd">PrintColoredText</span><span class="oth">(</span>&nbsp;<span class="num">1</span><span class="oth">,</span>&nbsp;<span class="quo">"blue"</span>&nbsp;<span class="oth">)</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;a&nbsp;few&nbsp;colors</span><br />
+&nbsp;&nbsp;&nbsp;<span class="wrd">PrintColoredText</span><span class="oth">(</span>&nbsp;<span class="num">2</span><span class="oth">,</span>&nbsp;<span class="quo">"green"</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;<span class="wrd">PrintColoredText</span><span class="oth">(</span>&nbsp;<span class="num">4</span><span class="oth">,</span>&nbsp;<span class="quo">"red"</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;<span class="key">Print</span><br />
+&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="wrd">i</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;<span class="key">For</span>&nbsp;<span class="wrd">i</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">15</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;all&nbsp;16&nbsp;colors</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">PrintColoredText</span><span class="oth">(</span>&nbsp;<span class="wrd">i</span><span class="oth">,</span>&nbsp;<span class="oth">(</span><span class="quo">"color&nbsp;"</span>&nbsp;<span class="oth">&amp;</span>&nbsp;<span class="wrd">i</span><span class="oth">)</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;<span class="key">Next</span>&nbsp;<span class="wrd">i</span><br />
+</div></tt><br />
+<tt><div class="freebasic">
+<span class="com">'&nbsp;The&nbsp;following&nbsp;demonstrates&nbsp;optional&nbsp;parameters.</span><br />
+<br />
+<span class="key">Sub</span>&nbsp;<span class="wrd">TestSub</span><span class="oth">(</span><span class="wrd">P</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="quo">"Default"</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="wrd">P</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Sub</span><br />
+<br />
+<span class="wrd">TestSub</span>&nbsp;<span class="quo">"Testing:"</span><br />
+<span class="wrd">TestSub</span><br />
+</div></tt><br />
+<br \>
+</div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
+<ul><li> The <i><a href="CompilerOptlang.html">-lang qb</a></i> and <i><a href="CompilerOptlang.html">-lang fblite</a></i> dialects keep the QB convention: parameters are <tt><a href="KeyPgByref.html">ByRef</a></tt> by default.<br \>
+<li> In the <i><a href="CompilerOptlang.html">-lang fb</a></i> dialect, numeric parameters are passed <tt><a href="KeyPgByval.html">ByVal</a></tt> by default.  <tt><a href="KeyPgString.html">String</a></tt>s and UDTs are passed <tt><a href="KeyPgByref.html">ByRef</a></tt> by default.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> Public and Private access specifiers are new to FreeBASIC.<br \>
+<li> Constructor subroutines are new to FreeBASIC.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgDeclare.html">Declare</a></tt><br \>
+<li> <tt><a href="KeyPgFunction.html">Function</a></tt><br \>
+<li> <tt><a href="KeyPgExit.html">Exit</a></tt><br \>
+<li> <tt><a href="KeyPgPublic.html">Public</a></tt><br \>
+<li> <tt><a href="KeyPgPrivate.html">Private</a></tt><br \>
+<li> <tt><a href="KeyPgStatic.html">Static</a></tt><br \>
+<br \>
+</ul><br \>
+   <br \>
+</div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

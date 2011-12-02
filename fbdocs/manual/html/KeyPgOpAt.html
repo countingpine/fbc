@@ -1,0 +1,102 @@
+<html>
+<head>
+<title>Operator @ (Address Of)</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Operator @ (Address Of)</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Returns the address of a string literal, variable, object or procedure<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgOperator.html">Operator</a> <b>@</b> ( <a href="KeyPgByref.html">ByRef</a> <i>rhs</i> <a href="KeyPgAs.html">As</a> <i>T</i> ) <a href="KeyPgAs.html">As</a> <i>T</i> <a href="KeyPgPointer.html">Pointer</a><br \>
+</tt><br \>
+</div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
+<i>result</i> = <b>@</b> <i>rhs</i><br \>
+</tt><br \>
+</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+<tt><i>rhs</i></tt><br \>
+<div class="fb_indent">The string literal, variable, object or procedure to retrieve the address of.<br \>
+</div><tt><i>T</i></tt><br \>
+<div class="fb_indent">Any <a href="CatPgStdDataTypes.html">standard</a>, <a href="CatPgUserDefTypes.html">user-defined</a> or procedure type.<br \>
+<br \>
+</div></div><div class="fb_sect_title">Return Value</div><div class="fb_sect_cont"><br \>
+Returns the address of the right-hand side (<tt><i>rhs</i></tt>) operand.<br \>
+<br \>
+</div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+<b><tt>Operator @</tt> (Address of)</b> returns the memory address of its operand.<br \>
+<br \>
+When the operand is of type <tt><a href="KeyPgString.html">String</a></tt>, the address of the internal string descriptor is returned. Use <tt><a href="KeyPgOpStrptr.html">Operator Strptr</a></tt> (String pointer) to retrieve the address of the string data.<br \>
+<br \>
+The operand cannot be an array, but may be an array element. For example, <tt>"@myarray(0)"</tt> returns the address of <tt>"myarray(0)"</tt>.<br \>
+<br \>
+This operator can be overloaded for user-defined types.<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="com">'This&nbsp;program&nbsp;demonstrates&nbsp;the&nbsp;use&nbsp;of&nbsp;the&nbsp;@&nbsp;operator.</span><br />
+<br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">a</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">b</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+<br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">addr</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="key">Ptr</span><br />
+<br />
+<span class="wrd">a</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">5</span>&nbsp;&nbsp;&nbsp;<span class="com">'Here&nbsp;we&nbsp;place&nbsp;the&nbsp;values&nbsp;5&nbsp;and&nbsp;10&nbsp;into&nbsp;a&nbsp;and&nbsp;b,&nbsp;respectively.</span><br />
+<span class="wrd">b</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">10</span><br />
+<br />
+<span class="com">'Here,&nbsp;we&nbsp;print&nbsp;the&nbsp;value&nbsp;of&nbsp;the&nbsp;variables,&nbsp;then&nbsp;where&nbsp;in&nbsp;memory&nbsp;they&nbsp;are&nbsp;stored.</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"The&nbsp;value&nbsp;in&nbsp;A&nbsp;is&nbsp;"</span><span class="oth">;</span><span class="wrd">a</span><span class="oth">;</span><span class="quo">"&nbsp;but&nbsp;the&nbsp;pointer&nbsp;to&nbsp;a&nbsp;is&nbsp;"</span><span class="oth">;@</span><span class="wrd">a</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"The&nbsp;value&nbsp;in&nbsp;B&nbsp;is&nbsp;"</span><span class="oth">;</span><span class="wrd">b</span><span class="oth">;</span><span class="quo">"&nbsp;but&nbsp;the&nbsp;pointer&nbsp;to&nbsp;b&nbsp;is&nbsp;"</span><span class="oth">;@</span><span class="wrd">b</span><br />
+<br />
+<span class="com">'Now,&nbsp;we&nbsp;will&nbsp;take&nbsp;the&nbsp;integer&nbsp;ptr&nbsp;above,&nbsp;and&nbsp;use&nbsp;@&nbsp;to&nbsp;place&nbsp;a&nbsp;value&nbsp;into&nbsp;it.</span><br />
+<span class="com">'Note&nbsp;that&nbsp;the&nbsp;*&nbsp;will&nbsp;check&nbsp;the&nbsp;value&nbsp;in&nbsp;the&nbsp;ptr,&nbsp;just&nbsp;as&nbsp;@&nbsp;checked&nbsp;the&nbsp;ptr&nbsp;</span><br />
+<span class="com">'for&nbsp;a&nbsp;normal&nbsp;variable.</span><br />
+<br />
+<span class="wrd">addr</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="oth">@</span><span class="wrd">a</span><br />
+<br />
+<span class="key">Print</span>&nbsp;<span class="quo">"The&nbsp;pointer&nbsp;addr&nbsp;is&nbsp;now&nbsp;pointing&nbsp;at&nbsp;the&nbsp;memory&nbsp;address&nbsp;to&nbsp;a,&nbsp;value:&nbsp;"</span><span class="oth">;*</span><span class="wrd">addr</span><br />
+<br />
+<span class="wrd">addr</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="oth">@</span><span class="wrd">b</span><br />
+<br />
+<span class="key">Print</span>&nbsp;<span class="quo">"The&nbsp;pointer&nbsp;addr&nbsp;is&nbsp;now&nbsp;pointing&nbsp;at&nbsp;the&nbsp;memory&nbsp;address&nbsp;to&nbsp;b,&nbsp;value:&nbsp;"</span><span class="oth">;*</span><span class="wrd">addr</span><br />
+</div></tt><br />
+<br \>
+<tt><div class="freebasic">
+<span class="com">'This&nbsp;program&nbsp;demonstrates&nbsp;how&nbsp;the&nbsp;@&nbsp;symbol&nbsp;can&nbsp;be&nbsp;used</span><br />
+<span class="com">'to&nbsp;create&nbsp;pointers&nbsp;to&nbsp;subroutines.</span><br />
+<br />
+<span class="key">Declare</span>&nbsp;<span class="key">Sub</span>&nbsp;<span class="wrd">mySubroutine</span>&nbsp;<span class="oth">()</span><br />
+<br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">say_Hello</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Sub</span><span class="oth">()</span>&nbsp;<br />
+<br />
+<span class="wrd">say_Hello</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="oth">@</span><span class="wrd">mySubroutine</span>&nbsp;&nbsp;&nbsp;<span class="com">'We&nbsp;tell&nbsp;say_Hello&nbsp;to&nbsp;point&nbsp;to&nbsp;mySubroutine.</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">'The&nbsp;sub()&nbsp;datatype&nbsp;acts&nbsp;as&nbsp;a&nbsp;pointer&nbsp;here.</span><br />
+<br />
+<span class="wrd">say_Hello</span><span class="oth">()</span>&nbsp;<span class="com">'Now&nbsp;we&nbsp;can&nbsp;run&nbsp;say_Hello&nbsp;just&nbsp;like&nbsp;mySubroutine.</span><br />
+<br />
+<span class="key">Sub</span>&nbsp;<span class="wrd">mySubroutine</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"hi"</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Sub</span><br />
+</div></tt><br />
+<br \>
+</div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
+<ul><li> In the <i><a href="CompilerOptlang.html">-lang qb</a></i> dialect, this operator cannot be overloaded.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> New to FreeBASIC<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgOpValueOf.html">Operator * (Value Of)</a></tt><br \>
+<li> <a href="ProPgPointers.html">Pointers</a><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

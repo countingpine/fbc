@@ -1,0 +1,66 @@
+<html>
+<head>
+<title>Trans</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Trans</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Parameter to the <tt><a href="KeyPgPutgraphics.html">Put</a></tt> graphics statement which selects transparent background as the blitting method<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<b>Put</b> [ <i>target</i>, ] [ STEP ] ( <i>x</i>,<i>y</i> ), <i>source</i> [ ,( <i>x1</i>,<i>y1</i> )-( <i>x2</i>,<i>y2</i> ) ], <b>Trans</b><br \>
+</tt><br \>
+</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+<tt><b>Trans</b></tt><br \>
+<div class="fb_indent">Required.<br \>
+<br \>
+</div></div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+<tt><b>Trans</b></tt> selects transparent background as the method for blitting an image buffer.  This is similar to the <tt>PSET</tt> method, but pixels containing the mask color are skipped.<br \>
+For 8-bit color images, the mask color is palette index 0.  For 16/32-bit color images, the mask color is Magenta, which is <tt><a href="KeyPgRgb.html">RGB</a>(255, 0, 255)</tt>.  The alpha value is ignored when checking for the mask color in 32-bit images.<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="com">''&nbsp;set&nbsp;up&nbsp;a&nbsp;screen:&nbsp;320&nbsp;*&nbsp;200,&nbsp;16&nbsp;bits&nbsp;per&nbsp;pixel</span><br />
+<span class="key">ScreenRes</span>&nbsp;<span class="num">320</span><span class="oth">,</span>&nbsp;<span class="num">200</span><span class="oth">,</span>&nbsp;<span class="num">16</span><br />
+<br />
+<span class="com">''&nbsp;set&nbsp;up&nbsp;an&nbsp;image&nbsp;with&nbsp;the&nbsp;mask&nbsp;color&nbsp;as&nbsp;the&nbsp;background.</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">img</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Any</span>&nbsp;<span class="key">Ptr</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">ImageCreate</span><span class="oth">(</span>&nbsp;<span class="num">32</span><span class="oth">,</span>&nbsp;<span class="num">32</span><span class="oth">,</span>&nbsp;<span class="key">RGB</span><span class="oth">(</span><span class="num">255</span><span class="oth">,</span>&nbsp;<span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">255</span><span class="oth">)</span>&nbsp;<span class="oth">)</span><br />
+<span class="key">Circle</span>&nbsp;<span class="wrd">img</span><span class="oth">,</span>&nbsp;<span class="oth">(</span><span class="num">16</span><span class="oth">,</span>&nbsp;<span class="num">16</span><span class="oth">),</span>&nbsp;<span class="num">15</span><span class="oth">,</span>&nbsp;<span class="key">RGB</span><span class="oth">(</span><span class="num">255</span><span class="oth">,</span>&nbsp;<span class="num">255</span><span class="oth">,</span>&nbsp;<span class="num">0</span><span class="oth">),</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">,</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">,</span>&nbsp;<span class="num">1</span><span class="oth">,</span>&nbsp;<span class="wrd">f</span><br />
+<span class="key">Circle</span>&nbsp;<span class="wrd">img</span><span class="oth">,</span>&nbsp;<span class="oth">(</span><span class="num">10</span><span class="oth">,</span>&nbsp;<span class="num">10</span><span class="oth">),</span>&nbsp;<span class="num">3</span><span class="oth">,</span>&nbsp;&nbsp;<span class="key">RGB</span><span class="oth">(</span>&nbsp;&nbsp;<span class="num">0</span><span class="oth">,</span>&nbsp;&nbsp;&nbsp;<span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">0</span><span class="oth">),</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">,</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">,</span>&nbsp;<span class="num">2</span><span class="oth">,</span>&nbsp;<span class="wrd">f</span><br />
+<span class="key">Circle</span>&nbsp;<span class="wrd">img</span><span class="oth">,</span>&nbsp;<span class="oth">(</span><span class="num">23</span><span class="oth">,</span>&nbsp;<span class="num">10</span><span class="oth">),</span>&nbsp;<span class="num">3</span><span class="oth">,</span>&nbsp;&nbsp;<span class="key">RGB</span><span class="oth">(</span>&nbsp;&nbsp;<span class="num">0</span><span class="oth">,</span>&nbsp;&nbsp;&nbsp;<span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">0</span><span class="oth">),</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">,</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">,</span>&nbsp;<span class="num">2</span><span class="oth">,</span>&nbsp;<span class="wrd">f</span><br />
+<span class="key">Circle</span>&nbsp;<span class="wrd">img</span><span class="oth">,</span>&nbsp;<span class="oth">(</span><span class="num">16</span><span class="oth">,</span>&nbsp;<span class="num">18</span><span class="oth">),</span>&nbsp;<span class="num">10</span><span class="oth">,</span>&nbsp;<span class="key">RGB</span><span class="oth">(</span>&nbsp;&nbsp;<span class="num">0</span><span class="oth">,</span>&nbsp;&nbsp;&nbsp;<span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">0</span><span class="oth">),</span>&nbsp;<span class="num">3.14</span><span class="oth">,</span>&nbsp;<span class="num">6.28</span><br />
+<br />
+<span class="com">''&nbsp;Put&nbsp;the&nbsp;image&nbsp;with&nbsp;PSET&nbsp;(gives&nbsp;the&nbsp;exact&nbsp;contents&nbsp;of&nbsp;the&nbsp;image&nbsp;buffer)</span><br />
+<span class="key">Draw</span>&nbsp;<span class="key">String</span>&nbsp;<span class="oth">(</span><span class="num">110</span><span class="oth">,</span>&nbsp;<span class="num">50</span>&nbsp;<span class="oth">-</span>&nbsp;<span class="num">4</span><span class="oth">),</span>&nbsp;<span class="quo">"Image&nbsp;put&nbsp;with&nbsp;PSET"</span><br />
+<span class="key">Put</span>&nbsp;<span class="oth">(</span><span class="num">60</span>&nbsp;<span class="oth">-</span>&nbsp;<span class="num">16</span><span class="oth">,</span>&nbsp;<span class="num">50</span>&nbsp;<span class="oth">-</span>&nbsp;<span class="num">16</span><span class="oth">),</span>&nbsp;<span class="wrd">img</span><span class="oth">,</span>&nbsp;<span class="key">PSet</span><br />
+<br />
+<span class="com">''&nbsp;Put&nbsp;the&nbsp;image&nbsp;with&nbsp;TRANS</span><br />
+<span class="key">Draw</span>&nbsp;<span class="key">String</span>&nbsp;<span class="oth">(</span><span class="num">110</span><span class="oth">,</span>&nbsp;<span class="num">150</span>&nbsp;<span class="oth">-</span>&nbsp;<span class="num">4</span><span class="oth">),</span>&nbsp;<span class="quo">"Image&nbsp;put&nbsp;with&nbsp;TRANS"</span><br />
+<span class="key">Put</span>&nbsp;<span class="oth">(</span><span class="num">60</span>&nbsp;<span class="oth">-</span>&nbsp;<span class="num">16</span><span class="oth">,</span>&nbsp;<span class="num">150</span>&nbsp;<span class="oth">-</span>&nbsp;<span class="num">16</span><span class="oth">),</span>&nbsp;<span class="wrd">img</span><span class="oth">,</span>&nbsp;<span class="key">Trans</span><br />
+<br />
+<span class="com">''&nbsp;free&nbsp;the&nbsp;image&nbsp;memory</span><br />
+<span class="key">ImageDestroy</span>&nbsp;<span class="wrd">img</span><br />
+<br />
+<span class="com">''&nbsp;wait&nbsp;for&nbsp;a&nbsp;keypress</span><br />
+<span class="key">Sleep</span><br />
+</div></tt><br />
+<div class="fb_img"><img src="images/trans.png" /></div><br \>
+<br \>
+</div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> New to FreeBASIC<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgPutgraphics.html">Put (Graphics)</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

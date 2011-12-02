@@ -1,0 +1,157 @@
+<html>
+<head>
+<title>Type Aliases</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Type Aliases</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Additional names for variable or object types<br \>
+<br \>
+<b><a href="#OVERVIEW">Overview</a></b><br \>
+<b><a href="#DECL">Declaration</a></b><br \>
+<b><a href="#OVERLOAD">Overload resolution</a></b><br \>
+<b><a href="#PROCPTRPTR">Pointers to procedure pointers</a></b><br \>
+<b><a href="#TYPEFORWARD">Type forwarding</a></b><br \>
+<b><a href="#INCTYPES">Incomplete types</a></b><br \>
+<br \>
+<a name="OVERVIEW"></a><div class="fb_sect_title">Overview</div><div class="fb_sect_cont"><br \>
+Type aliases are alternative names for a type. They can be used to facilitate a mass change from one type to another, save typing, or make circular dependency possible.<br \>
+<br \>
+<a name="DECL"></a></div><div class="fb_sect_title">Declaration</div><div class="fb_sect_cont"><br \>
+Type aliases are declared using the <tt><a href="KeyPgTypeAlias.html">Type</a></tt> keyword much like declaring variables or objects with <a href="KeyPgExtern.html">Extern</a> or <a href="KeyPgDim.html">Dim</a>.<br \>
+<br \>
+The following example declares a type alias to <tt><a href="KeyPgSingle.html">Single</a></tt> called "<tt><i>float</i></tt>", a procedure, and defines and initializes two variables of that type:<br \>
+<br \>
+<tt><div class="freebasic">
+<span class="key">Type</span>&nbsp;<span class="wrd">float</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Single</span><br />
+<br />
+<span class="key">Declare</span>&nbsp;<span class="key">Function</span>&nbsp;<span class="wrd">add</span>&nbsp;<span class="oth">(</span><span class="wrd">a</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">float</span><span class="oth">,</span>&nbsp;<span class="wrd">b</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">float</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">float</span><br />
+<br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">foo</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">float</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">1.23</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">bar</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">float</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="oth">-</span><span class="num">4.56</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div></tt><br />
+<br \>
+Procedure pointer type aliases are declared in the same fashion, as shown in the following example:<br \>
+<br \>
+<tt><div class="freebasic">
+<span class="key">Declare</span>&nbsp;<span class="key">Function</span>&nbsp;<span class="wrd">f</span>&nbsp;<span class="oth">(</span><span class="key">ByRef</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+<br />
+<span class="key">Type</span>&nbsp;<span class="wrd">func_t</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Function</span>&nbsp;<span class="oth">(</span><span class="key">ByRef</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+<br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">func</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">func_t</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="oth">@</span><span class="wrd">f</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+<span class="key">Function</span>&nbsp;<span class="wrd">f</span>&nbsp;<span class="oth">(</span><span class="key">ByRef</span>&nbsp;<span class="wrd">arg</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Function</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">CInt</span><span class="oth">(</span><span class="wrd">arg</span><span class="oth">)</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Function</span><br />
+</div></tt><br />
+<br \>
+<a name="OVERLOAD"></a></div><div class="fb_sect_title">Overload resolution</div><div class="fb_sect_cont"><br \>
+Type aliases are just that - aliases. For all intents and purposes, a type alias <b>is</b> the type it aliases. So as far as procedure overload resolution is concerned, a procedure declared with a parameter of type "<tt><i>alias_to_T</i></tt>" is the same as a procedure declared with a parameter of type "<tt><i>T</i></tt>" (the same applies to overloading member procedures as well).<br \>
+<br \>
+In other words, it is an error - duplicated definition - to declare a procedure where parameters differ only in a type and its alias, as the following example shows:<br \>
+<br \>
+<tt><div class="freebasic">
+<span class="key">Type</span>&nbsp;<span class="wrd">float</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Single</span><br />
+<br />
+<span class="key">Declare</span>&nbsp;<span class="key">Sub</span>&nbsp;<span class="wrd">f</span>&nbsp;<span class="key">Overload</span>&nbsp;<span class="oth">(</span><span class="wrd">a</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Single</span><span class="oth">)</span><br />
+<br />
+<span class="com">''&nbsp;If&nbsp;uncommented,&nbsp;this&nbsp;will&nbsp;generate&nbsp;a&nbsp;duplicated&nbsp;definition&nbsp;error</span><br />
+<span class="com">''&nbsp;Declare&nbsp;Sub&nbsp;f&nbsp;(a&nbsp;As&nbsp;float)</span><br />
+</div></tt><br />
+<br \>
+<a name="PROCPTRPTR"></a></div><div class="fb_sect_title">Pointers to procedure pointers</div><div class="fb_sect_cont"><br \>
+Pointers to procedure pointers are just like any other pointer type, except they point to procedure pointers. Because the syntax for declaring procedure pointers doesn't allow directly creating a pointer to procedure pointer, a type alias is used.<br \>
+<br \>
+The following example declares a pointer to a procedure returning an integer pointer, and then a pointer to a pointer to a procedure returning an integer:<br \>
+<br \>
+<tt><div class="freebasic">
+<span class="key">Dim</span>&nbsp;<span class="wrd">pf</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Function</span><span class="oth">()</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="key">Ptr</span><br />
+<br />
+<span class="key">Type</span>&nbsp;<span class="wrd">pf_t</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Function</span><span class="oth">()</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">ppf</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">pf_t</span>&nbsp;<span class="key">Ptr</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;</div></tt><br />
+<br \>
+<a name="TYPEFORWARD"></a></div><div class="fb_sect_title">Type forwarding</div><div class="fb_sect_cont"><br \>
+Type aliases can be forward referencing: an alias can refer to some other type not yet fully defined.<br \>
+<br \>
+<tt><div class="freebasic">
+<span class="key">Type</span>&nbsp;<span class="wrd">foo</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">bar</span><br />
+<br />
+<span class="key">Type</span>&nbsp;<span class="wrd">sometype</span><br />
+&nbsp;&nbsp;<span class="wrd">f</span>&nbsp;&nbsp;&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">foo</span>&nbsp;<span class="key">Ptr</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Type</span><br />
+<br />
+<span class="key">Type</span>&nbsp;<span class="wrd">bar</span><br />
+&nbsp;&nbsp;<span class="wrd">st</span>&nbsp;&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">sometype</span><br />
+&nbsp;&nbsp;<span class="wrd">a</span>&nbsp;&nbsp;&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Type</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;</div></tt><br />
+<br \>
+Using a type alias and forward referencing allows circular dependencies between types.<br \>
+<br \>
+<tt><div class="freebasic">
+<span class="key">Type</span>&nbsp;<span class="wrd">list</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">list_</span><br />
+<br />
+<span class="key">Type</span>&nbsp;<span class="wrd">listnode</span><br />
+&nbsp;&nbsp;<span class="wrd">parent</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">list</span>&nbsp;<span class="key">Ptr</span><br />
+&nbsp;&nbsp;<span class="wrd">text</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Type</span><br />
+<br />
+<span class="key">Type</span>&nbsp;<span class="wrd">list_</span><br />
+&nbsp;&nbsp;<span class="wrd">first</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">listnode</span>&nbsp;<span class="key">Ptr</span><br />
+&nbsp;&nbsp;<span class="wrd">count</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Type</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;</div></tt><br />
+<br \>
+<a name="INCTYPES"></a></div><div class="fb_sect_title">Incomplete types</div><div class="fb_sect_cont"><br \>
+ A type is considered incomplete until the size of it, that is the number of bytes it would need to occupy in memory is known, and the offsets of all of its fields are known.  It is not possible to allocate space for an incomplete type.  It is not possible to declare a variable having the data type of an incomplete type, pass an incomplete type as a parameter, or access the members of an incomplete type.<br \>
+<br \>
+However, pointers to incomplete types may be allocated, declared as members in other types, or passed as parameters to a procedures since the size of a pointer is known.<br \>
+<br \>
+<tt><div class="freebasic">
+<span class="key">Type</span>&nbsp;<span class="wrd">sometype</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">sometype_</span><br />
+<br />
+<span class="com">''&nbsp;Not&nbsp;allowed&nbsp;since&nbsp;size&nbsp;of&nbsp;sometype&nbsp;is&nbsp;unknown</span><br />
+<span class="com">''&nbsp;TYPE&nbsp;incomplete</span><br />
+<span class="com">''&nbsp;&nbsp;&nbsp;a&nbsp;AS&nbsp;sometype</span><br />
+<span class="com">''&nbsp;END&nbsp;TYPE</span><br />
+<br />
+<span class="com">''&nbsp;Allowed&nbsp;since&nbsp;size&nbsp;of&nbsp;a&nbsp;pointer&nbsp;is&nbsp;known</span><br />
+<span class="key">Type</span>&nbsp;<span class="wrd">complete</span><br />
+&nbsp;&nbsp;<span class="wrd">a</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">sometype</span>&nbsp;<span class="key">Ptr</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Type</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">x</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">complete</span><br />
+<br />
+<span class="com">''&nbsp;Not&nbsp;allowed&nbsp;since&nbsp;size&nbsp;of&nbsp;sometype&nbsp;is&nbsp;still&nbsp;unknown</span><br />
+<span class="com">''&nbsp;DIM&nbsp;size_sometype&nbsp;AS&nbsp;INTEGER&nbsp;=&nbsp;SIZEOF(&nbsp;sometype&nbsp;)</span><br />
+<br />
+<span class="com">''&nbsp;Complete&nbsp;the&nbsp;type</span><br />
+<span class="key">Type</span>&nbsp;<span class="wrd">sometype_</span><br />
+&nbsp;&nbsp;<span class="wrd">value</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Type</span><br />
+<br />
+<span class="com">''&nbsp;Allowed&nbsp;since&nbsp;the&nbsp;types&nbsp;are&nbsp;now&nbsp;completed</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">size_sometype</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">SizeOf</span><span class="oth">(</span>&nbsp;<span class="wrd">sometype</span>&nbsp;<span class="oth">)</span><br />
+<br />
+<span class="key">Type</span>&nbsp;<span class="wrd">completed</span><br />
+&nbsp;&nbsp;<span class="wrd">a</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">sometype</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Type</span><br />
+<br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">size_completed</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">SizeOf</span><span class="oth">(</span>&nbsp;<span class="wrd">completed</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;</div></tt><br />
+<br \>
+<br \>
+<br \>
+   <br \>
+</div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

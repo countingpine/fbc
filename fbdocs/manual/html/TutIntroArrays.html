@@ -1,0 +1,252 @@
+<html>
+<head>
+<title>Introduction To Arrays</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Introduction To Arrays</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	<i>Written by <a href="WikiRick.html">rdc</a></i><br \>
+<br \>
+Arrays are probably the single most useful programming construct  that is available to you in FreeBasic. Many problems that you will try to solve with a programming solution involve data arranged in tabular format, and arrays are perfect for managing this type of data. Understanding arrays is a crucial skill in becoming a competent programmer.<br \>
+<br \>
+Arrays are contiguous memory segments of a single or composite data type. You can think of an array as a table, with rows and columns of data. An array can have one or more rows, and each row can have one or more columns. The number of rows and columns define the dimensions of the array. FreeBasic uses the row-major scheme for arrays, which means that the first dimension references the row in an array that has more than one dimension. FreeBasic supports up to eight dimensions in an array.<br \>
+<br \>
+<div class="fb_header"> One-Dimensional Arrays </div><br \>
+<br \>
+An array with a single row is called a one-dimensional array. If an array is a single-dimensional array, then the row is not defined in the declaration, only the number of columns in the row. Since an array requires a minimum of one row, the row is understood to exist in this case. The following code snippets create a single-dimension integer array using the different array definition schemes available in FreeBasic.<br \>
+<br \>
+<tt><div class="freebasic">
+<span class="key">Dim</span>&nbsp;<span class="wrd">myArray</span><span class="oth">(</span><span class="num">10</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+<br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">myArray</span><span class="oth">(</span><span class="num">1</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">10</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+</div></tt><br />
+<br \>
+The first method will define an array with a single row and 11 columns, with column indexes (numbers) ranging from 0 to 10. The second method defines the lower and upper bounds using the <tt>To</tt> keyword. Here the indexes will range from 1 to 10.<br \>
+<br \>
+<div class="fb_header"> One-Dimensional Array Indexes </div><br \>
+<br \>
+You access each element of an array using an index value. In the case of a single-dimension array, the index would refer to a column number in the default row. The format is to use the array variable, with the index surrounded by parenthesis.<br \>
+<br \>
+<tt><div class="freebasic">
+<span class="wrd">myArray</span><span class="oth">(</span><span class="num">5</span><span class="oth">)</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">7</span><br />
+</div></tt><br />
+<br \>
+This would set column 5 in the array to 7.<br \>
+<br \>
+<tt><div class="freebasic">
+<span class="wrd">myInt</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">myArray</span><span class="oth">(</span><span class="num">5</span><span class="oth">)</span><br />
+</div></tt><br />
+<br \>
+This will set the value of <tt>myInt</tt> to the current value of column 5 in <tt>myArray</tt>.<br \>
+<br \>
+<div class="fb_header"> Two-Dimensional Arrays </div><br \>
+<br \>
+A two-dimensional array is an array that has more than one row, along with the defined columns. A two-dimensional array is like a table, with a defined number of rows, where each row has a defined number of columns. The following code snippet defines an array using the default method.<br \>
+<br \>
+<tt><div class="freebasic">
+<span class="key">Dim</span>&nbsp;<span class="wrd">myArray</span><span class="oth">(</span><span class="num">2</span><span class="oth">,</span>&nbsp;<span class="num">10</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+</div></tt><br />
+<br \>
+The first dimension defines the number of rows in the array, while the second dimension defines the number of columns in each row. In this example, the array has 3 rows, numbered 0 to 2, and each row has 11 columns, numbered 0 to 10.<br \>
+<br \>
+You can also define the lower and upper bounds of the array.<br \>
+<br \>
+<tt><div class="freebasic">
+<span class="key">Dim</span>&nbsp;<span class="wrd">myArray</span><span class="oth">(</span><span class="num">1</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">2</span><span class="oth">,</span>&nbsp;<span class="num">1</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">10</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+</div></tt><br />
+<br \>
+This definition would set the number of rows to 2, numbered 1 to 2 and the number of columns to 10, numbered 1 to 10.<br \>
+<br \>
+<div class="fb_header"> Two-Dimensional Array Indexes </div><br \>
+<br \>
+To access the array elements of a two-dimensional array, you would use two indexes. The first index selects the row, and the second index selects a column within that row.<br \>
+<br \>
+<tt><div class="freebasic">
+<span class="wrd">myArray</span><span class="oth">(</span><span class="num">1</span><span class="oth">,</span>&nbsp;<span class="num">5</span><span class="oth">)</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">7</span><br />
+</div></tt><br />
+<br \>
+This code would set column 5 in row 1 to 7.<br \>
+<br \>
+<tt><div class="freebasic">
+<span class="wrd">myInt</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">myArray</span><span class="oth">(</span><span class="num">1</span><span class="oth">,</span>&nbsp;<span class="num">5</span><span class="oth">)</span><br />
+</div></tt><br />
+<br \>
+This code would set myInt to the current value contained within column 5 of row 1 of the array.<br \>
+<br \>
+<div class="fb_header"> Multi-Dimensional Arrays </div><br \>
+<br \>
+For arrays of three or more dimensions, you would use the same format as listed above, taking into account the progression of the array dimensions. For a three-dimensional array, the first dimension would be the row, the second the column, the third would be the z-order, or depth, of each column. <br \>
+<br \>
+For example, to define a cube in space, you would use the y,x,z format, where y defines the vertical axis, x defines the horizontal axis and z defines the depth axis. To create an array in this format you could define the array as: <br \>
+<br \>
+<tt><div class="freebasic">
+<span class="key">Dim</span>&nbsp;<span class="wrd">myCube</span><span class="oth">(</span><span class="wrd">y</span><span class="oth">,</span>&nbsp;<span class="wrd">x</span><span class="oth">,</span>&nbsp;<span class="wrd">z</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">Integer.</span>&nbsp;<br />
+</div></tt><br />
+<br \>
+<tt>MyCube(10, 10, 10)</tt> would create a cube with 11 vertical units, 0 to 10, 11 horizontal units, 0 to 10 and 10 depth units, 0 to 10. To access the center of the cube, you would use <tt>iCenter = myCube(5, 5, 5)</tt>. <br \>
+<br \>
+You will probably never need to use arrays of more than three dimensions, unless you are doing some advanced mathematical calculations. However, if you need to use higher-dimensional arrays, the same principles apply.<br \>
+<br \>
+<div class="fb_header"> Dynamic Arrays </div><br \>
+<br \>
+The arrays described above are static arrays; the array size cannot change during program execution. You can also create dynamic arrays that can change size during execution. Dynamic arrays are useful for creating data structures such as stacks or queues.<br \>
+<br \>
+Static arrays, the arrays described above, are kept on the heap, but dynamic arrays are allocated from the computer's pool of memory. The compiler dynamically allocates memory for the array based on the requested dimensions of the array.<br \>
+<br \>
+You specify a dynamic array by using the <tt>ReDim</tt> keyword.<br \>
+<br \>
+<tt><div class="freebasic">
+<span class="key">ReDim</span>&nbsp;<span class="wrd">myArray</span><span class="oth">(</span><span class="num">1</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">5</span><span class="oth">,</span>&nbsp;<span class="num">1</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">5</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+</div></tt><br />
+<br \>
+If you don't know the needed array bounds at the start of the program execution, you can define an array with empty indexes.<br \>
+<br \>
+<tt><div class="freebasic">
+<span class="key">Dim</span>&nbsp;<span class="wrd">myArray</span><span class="oth">()</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+</div></tt><br />
+<br \>
+In this case the compiler sets a default value of 0 for the array size. You can then use the <tt>ReDim</tt> at some point in the program to set the array bounds.<br \>
+<br \>
+<div class="fb_header"> ReDim and ReDim Preserve </div><br \>
+<br \>
+Dynamic arrays can change sizes during execution. <tt>ReDim</tt> will clear the contents of the array to the default data type values, while <tt>ReDim Preserve</tt> will keep intact the existing contents, unless the array size is smaller than the previous size.<br \>
+<br \>
+<div class="fb_header"> Array Functions </div><br \>
+<br \>
+There are a number of <a href="CatPgArray.html">functions</a> that you can use with arrays.<br \>
+<br \>
+<div class="fb_header"> Arrays of Composite Types </div><br \>
+<br \>
+Type definitions allow you to group related data into a single entity, and often you will need more than one instance of a type to fully express the data. Arrays of types allow you create multiple instances of a type definition that can be easily managed using the arrays functions. An example of this usage may be an inventory system for your RPG, a series of document descriptions within an editor, and a set of employee records from a random access database.<br \>
+<br \>
+You create arrays of types just as you would with any of the intrinsic data types. The following code snippet  illustrates the syntax.<br \>
+<br \>
+<tt><div class="freebasic">
+<span class="key">Type</span>&nbsp;<span class="wrd">myPoint</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">row</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">col</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Type</span><br />
+<br />
+<span class="key">Type</span>&nbsp;<span class="wrd">myLine</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">p1</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">myPoint</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">p2</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">myPoint</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">char</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span>&nbsp;<span class="oth">*</span>&nbsp;<span class="num">1</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Type</span><br />
+<br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">myLineSet</span>&nbsp;<span class="oth">(</span><span class="num">1</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">3</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">myLine</span><br />
+</div></tt><br />
+<br \>
+The code defines a set of 3 lines, with endpoints <tt>p1</tt> and <tt>p2</tt>, where each endpoint is located at row and col. You access the array elements by using a combination of array index and dot operator.<br \>
+<br \>
+<tt><div class="freebasic">
+<span class="wrd">myLineSet</span><span class="oth">(</span><span class="num">1</span><span class="oth">).</span><span class="wrd">p1.row</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">1</span><br />
+<span class="wrd">myLineSet</span><span class="oth">(</span><span class="num">1</span><span class="oth">).</span><span class="wrd">p1.col</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">1</span><br />
+<span class="wrd">myLineSet</span><span class="oth">(</span><span class="num">1</span><span class="oth">).</span><span class="wrd">p2.row</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">10</span><br />
+<span class="wrd">myLineSet</span><span class="oth">(</span><span class="num">1</span><span class="oth">).</span><span class="wrd">p2.col</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">10</span><br />
+<span class="wrd">myLineSet</span><span class="oth">(</span><span class="num">1</span><span class="oth">).</span><span class="wrd">char</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">Chr</span><span class="oth">(</span><span class="num">219</span><span class="oth">)</span><br />
+</div></tt><br />
+<br \>
+<div class="fb_header"> Arrays in Types </div><br \>
+<br \>
+Not only can you create an array of a composite type, you can have an array as a field in a composite type. The above example can be written more efficiently by replacing <tt>p1</tt> and <tt>p2</tt> with an array.<br \>
+<br \>
+<tt><div class="freebasic">
+<span class="key">Type</span>&nbsp;<span class="wrd">myPoint</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">row</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">col</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Type</span><br />
+<br />
+<span class="key">Type</span>&nbsp;<span class="wrd">myLine</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">pts</span><span class="oth">(</span><span class="num">1</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">2</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">myPoint</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">char</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span>&nbsp;<span class="oth">*</span>&nbsp;<span class="num">1</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Type</span><br />
+<br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">myLineSet</span>&nbsp;<span class="oth">(</span><span class="num">1</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">3</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">myLine</span><br />
+</div></tt><br />
+<br \>
+Here <tt>pts</tt> is an array of <tt>myPoint</tt>. To access this structure you would use a combination of indexes and dot operators.<br \>
+<br \>
+<tt><div class="freebasic">
+<span class="wrd">myLineSet</span><span class="oth">(</span><span class="num">1</span><span class="oth">).</span><span class="wrd">pts</span><span class="oth">(</span><span class="num">1</span><span class="oth">).</span><span class="wrd">row</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">1</span><br />
+<span class="wrd">myLineSet</span><span class="oth">(</span><span class="num">1</span><span class="oth">).</span><span class="wrd">pts</span><span class="oth">(</span><span class="num">1</span><span class="oth">).</span><span class="wrd">col</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">1</span><br />
+<span class="wrd">myLineSet</span><span class="oth">(</span><span class="num">1</span><span class="oth">).</span><span class="wrd">pts</span><span class="oth">(</span><span class="num">2</span><span class="oth">).</span><span class="wrd">row</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">10</span><br />
+<span class="wrd">myLineSet</span><span class="oth">(</span><span class="num">1</span><span class="oth">).</span><span class="wrd">pts</span><span class="oth">(</span><span class="num">2</span><span class="oth">).</span><span class="wrd">col</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">10</span><br />
+<span class="wrd">myLineSet</span><span class="oth">(</span><span class="num">1</span><span class="oth">).</span><span class="wrd">char</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">Chr</span><span class="oth">(</span><span class="num">219</span><span class="oth">)</span><br />
+</div></tt><br />
+<br \>
+<tt>myLineSet</tt> is an array, so you use an index value. <tt>pts</tt> is an element of the type, so you need to qualify it with the dot operator. However, <tt>pts</tt> is also an array, so you use an index to select each <tt>pts</tt> array element. <tt>Row</tt> and <tt>col</tt> are elements of the <tt>myPoint</tt> type and are accessed with the dot operator.<br \>
+<br \>
+Using an array for the endpoints enables you to easily extend the line definition to support not only lines, but triangles and squares. The following code snippet shows one possible definition.<br \>
+<br \>
+<tt><div class="freebasic">
+<span class="key">Type</span>&nbsp;<span class="wrd">myObj</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">objid</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Union</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">myLine</span><span class="oth">(</span><span class="num">1</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">2</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">myPoint</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">myTriangle</span><span class="oth">(</span><span class="num">1</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">3</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">myPoint</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">mySquare</span><span class="oth">(</span><span class="num">1</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">4</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">myPoint</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">End</span>&nbsp;<span class="key">Union</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">char</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span>&nbsp;<span class="oth">*</span>&nbsp;<span class="num">1</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Type</span><br />
+</div></tt><br />
+<br \>
+The <tt>objid</tt> field would indicate which type of object is contained within the union definition. That is, a 1 may indicate a line, a 2 may indicate a triangle and a 3 may indicate a square. Since the definition defines a single object, a <tt>Union</tt> is used to enclose the endpoint arrays to maximize memory usage. <br \>
+<br \>
+To print the object to the screen, you would examine the objid and then use the Lbound and Ubound on the appropriate endpoint array definition, printing the number of lines that correspond to the type of object. <br \>
+<br \>
+One further enhancement you can make to this program is to add a function pointer to the type definition, and then write print routines that correspond to the type of object being printed. Using this technique will enable you to further extend the usefulness of the code by simplifying the process of adding new objects to the type definition. <br \>
+<br \>
+For example, if you needed to be able to describe a cube, you would simply add an new array to the union, add a cube print function, and the type definition would be able to print a cube by simply adding a few lines of code, while keeping the original functionality intact.<br \>
+<br \>
+<div class="fb_header"> Array Initialization </div><br \>
+<br \>
+You can initialize an array with values when using the <tt>Dim</tt> statement in a manner similar to initializing any of the other intrinsic data types, and type definitions. The following code snippet illustrates the syntax using a one dimensional array.<br \>
+<br \>
+<tt><div class="freebasic">
+<span class="key">Dim</span>&nbsp;<span class="wrd">aArray</span><span class="oth">(</span><span class="num">1</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">5</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="oth">=&gt;</span>&nbsp;<span class="oth">{</span><span class="num">1</span><span class="oth">,</span>&nbsp;<span class="num">2</span><span class="oth">,</span>&nbsp;<span class="num">3</span><span class="oth">,</span>&nbsp;<span class="num">4</span><span class="oth">,</span>&nbsp;<span class="num">5</span><span class="oth">}</span><br />
+</div></tt><br />
+<br \>
+This code snippet dimensions an integer array with 5 elements, then sets the elements to the list contained within the curly brackets. The arrow operator, =&gt; tells the compiler that the list following the <tt>Dim</tt> statement should be used to initialize the array. <br \>
+<br \>
+You can also dimension multidimensional arrays in the same manner, by specifying blocks of data enclosed within curly braces as the following code snippet illustrates.<br \>
+<br \>
+<tt><div class="freebasic">
+<span class="key">Dim</span>&nbsp;<span class="wrd">bArray</span><span class="oth">(</span><span class="num">1</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">2</span><span class="oth">,</span>&nbsp;<span class="num">1</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">5</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="oth">=&gt;</span>&nbsp;<span class="oth">{{</span><span class="num">1</span><span class="oth">,</span>&nbsp;<span class="num">2</span><span class="oth">,</span>&nbsp;<span class="num">3</span><span class="oth">,</span>&nbsp;<span class="num">4</span><span class="oth">,</span>&nbsp;<span class="num">5</span><span class="oth">},{</span><span class="num">6</span><span class="oth">,</span>&nbsp;<span class="num">7</span><span class="oth">,</span>&nbsp;<span class="num">8</span><span class="oth">,</span>&nbsp;<span class="num">9</span><span class="oth">,</span>&nbsp;<span class="num">10</span><span class="oth">}}</span><br />
+</div></tt><br />
+<br \>
+In this example, the first block, <tt>{1, 2, 3, 4, 5}</tt>, corresponds to row 1, and the second block, <tt>{6, 7, 8, 9, 10}</tt>, corresponds to row 2. Remember that FreeBasic arrays are row-major, so the row is specified before the column. When you initialize an array in this manner, you must be sure that the number of elements defined will fit into the array.<br \>
+<br \>
+<div class="fb_header"> Type Array Initialization </div><br \>
+<br \>
+Not only can you initialize an array of simple data types, you can also initialize an array with composite types. The following code snippet illustrates a type array that contains an array as an element of the type.<br \>
+<br \>
+<tt><div class="freebasic">
+<span class="key">Type</span>&nbsp;<span class="wrd">aType</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">a</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">b</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Byte</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">c</span><span class="oth">(</span><span class="num">1</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">2</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span>&nbsp;<span class="oth">*</span>&nbsp;<span class="num">10</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Type</span><br />
+<br />
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">aType</span>&nbsp;<span class="wrd">myType</span><span class="oth">(</span><span class="num">1</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">2</span><span class="oth">)</span>&nbsp;<span class="oth">=&gt;</span>&nbsp;<span class="oth">{</span>&nbsp;<span class="oth">(</span><span class="num">1234</span><span class="oth">,</span>&nbsp;<span class="num">12</span><span class="oth">,</span>&nbsp;<span class="oth">{</span><span class="quo">"Hello"</span><span class="oth">,</span>&nbsp;<span class="quo">"World"</span><span class="oth">}),</span>&nbsp;<span class="oth">(</span><span class="num">5678</span><span class="oth">,</span>&nbsp;<span class="num">24</span><span class="oth">,</span>&nbsp;<span class="oth">{</span><span class="quo">"From"</span><span class="oth">,</span>&nbsp;<span class="quo">"Freebasic"</span><span class="oth">})}</span>&nbsp;<br />
+</div></tt><br />
+<br \>
+The curly brackets signify that this is an array initialization, while the parenthesis indicate the type initialization. Since the type has an embedded array, you use the curly brackets to load the data into the embedded array, just as you would a stand-alone array. If the embedded array was a multidimensional array, then you would need to wrap each row in { and } just as you would a stand-alone array. <br \>
+<br \>
+<div class="fb_header"> Using the -exx Compiler Switch </div><br \>
+<br \>
+The -exx compiler switch will enable error and bounds checking within your program. If you go outside the bounds of an array within your program, the compiler will generate an “out of bounds” error while the program is running. <br \>
+<br \>
+This is a great help in debugging your program, and finding problems associated with arrays. -exx will also  inform of you of Null pointer assignments, so it is quite useful when working with pointers as well. <br \>
+<br \>
+Using -exx does add quite of bit of additional code to your program, so once your program is functioning correctly, you will want to compile the program without the -exx switch.
+</div>
+</div> 
+</div> 
+</body>
+</html>

@@ -1,0 +1,208 @@
+<html>
+<head>
+<title>Member Procedures</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Member Procedures</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Procedures with full access to members of a <tt><a href="KeyPgType.html">Type</a></tt> or <tt><a href="KeyPgClass.html">Class</a></tt>.<br \>
+<br \>
+<b><a href="#DECL">Declaration and definition</a></b><br \>
+Declaring and defining member procedures.<br \>
+<b><a href="#USAGE">Usage</a></b><br \>
+Calling member procedures.<br \>
+<b><a href="#THIS">The hidden parameter, This</a></b><br \>
+Implicit access to the instance with which non-static member procedures are called.<br \>
+<b><a href="#ACCESS">Access rights</a></b><br \>
+Referring to other members in member procedures.<br \>
+<b><a href="#OVERLOAD">Overloading</a></b><br \>
+Declaring two or more member procedures with the same name.<br \>
+<b><a href="#STATIC">Static member procedures</a></b><br \>
+Differences from non-static member procedures.<br \>
+<br \>
+<i>The term 'member procedure' refers to both static and non-static member procedures, unless otherwise noted.</i><br \>
+<br \>
+<a name="DECL"></a><div class="fb_sect_title">Declaration and definition</div><div class="fb_sect_cont"><br \>
+Member procedures are declared much like normal module-level procedures except that they are declared within, and defined outside, a <tt><a href="KeyPgType.html">Type</a></tt> or <tt><a href="KeyPgClass.html">Class</a></tt> definition *.<br \>
+<br \>
+When defining member procedures, the procedure name is prefixed with the name of the <tt><a href="KeyPgType.html">Type</a></tt> or <tt><a href="KeyPgClass.html">Class</a></tt> and the member access operator (<tt><a href="KeyPgOpMemberAccess.html">Operator . (Member Access)</a></tt>). It is an error to define a member procedure without a matching declaration in the <tt><a href="KeyPgType.html">Type</a></tt> or <tt><a href="KeyPgClass.html">Class</a></tt> definition.<br \>
+<br \>
+The following example declares and defines a <tt><a href="KeyPgSub.html">Sub</a></tt> and <tt><a href="KeyPgFunction.html">Function</a></tt> member procedure:<br \>
+<br \>
+<tt><div class="freebasic">
+<span class="com">''&nbsp;foo1.bi</span><br />
+<br />
+<span class="key">Type</span>&nbsp;<span class="wrd">foo</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Sub</span>&nbsp;<span class="wrd">f</span>&nbsp;<span class="oth">(</span><span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Function</span>&nbsp;<span class="wrd">g</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">i</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Type</span><br />
+<br />
+<span class="key">Sub</span>&nbsp;<span class="wrd">foo.f</span>&nbsp;<span class="oth">(</span><span class="wrd">n</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="wrd">n</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Sub</span><br />
+<br />
+<span class="key">Function</span>&nbsp;<span class="wrd">foo.g</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Return</span>&nbsp;<span class="num">420</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Function</span><br />
+</div></tt><br />
+<br \>
+* <i>In the future, member procedures may be able to be defined within the <tt><a href="KeyPgType.html">Type</a></tt> or <tt><a href="KeyPgClass.html">Class</a></tt> definition.</i><br \>
+<br \>
+<a name="USAGE"></a></div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><br \>
+Member procedures are referred to just like member data, that is, their name is prefixed with the name of an object instance and the member access operator (<tt><a href="KeyPgOpMemberAccess.html">Operator . (Member Access)</a></tt>) *.<br \>
+<br \>
+The following example, using the code from the last example, calls <tt><a href="KeyPgSub.html">Sub</a></tt> and <tt><a href="KeyPgFunction.html">Function</a></tt> member procedures:<br \>
+<br \>
+<tt><div class="freebasic">
+<span class="com">''&nbsp;...&nbsp;foo&nbsp;with&nbsp;non-static&nbsp;members&nbsp;as&nbsp;before&nbsp;...</span><br />
+<span class="def">#include&nbsp;once&nbsp;"foo1.bi"<br />
+</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">bar</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">foo</span><br />
+<span class="wrd">bar.f</span><span class="oth">(</span><span class="wrd">bar.g</span><span class="oth">())</span><br />
+</div></tt><br />
+<br \>
+* <i>Static member procedures do not require an object instance in order to be called.</i><br \>
+<br \>
+<a name="THIS"></a></div><div class="fb_sect_title">The hidden parameter, This</div><div class="fb_sect_cont"><br \>
+Member procedures actually have an additional parameter than what they are declared with *. When they are called, using the name of an instance and <tt><a href="KeyPgOpMemberAccess.html">Operator . (Member Access)</a></tt>, a reference to that instance is passed along with any other arguments in the call, allowing the member procedure direct access to the instance.<br \>
+<br \>
+The additional parameter added by the compiler is called <tt><a href="KeyPgThis.html">This</a></tt>, and since it's a reference, any modifications to <tt><a href="KeyPgThis.html">This</a></tt> are actually modifications to the instance that was passed to the member procedure when it was called. You can use <tt><a href="KeyPgThis.html">This</a></tt> just like any other variable, ie., pass it to procedures taking a object of the same type, call other member procedures and access member data using <tt><a href="KeyPgOpMemberAccess.html">Operator . (Member Access)</a></tt>, etc.<br \>
+<br \>
+Most of the time, however, using <tt><a href="KeyPgThis.html">This</a></tt> explicitly is unnecessary; member procedures can refer to other members of the instance which they are passed directly by name, without having to qualify it with <tt><a href="KeyPgThis.html">This</a></tt> and <tt><a href="KeyPgOpMemberAccess.html">Operator . (Member Access)</a></tt>. The only times when you need to qualify member names with <tt><a href="KeyPgThis.html">This</a></tt> is when the member name is hidden, for example, by a parameter or local variable. In these situations, qualifying the member name is the only way to refer to these hidden member names.<br \>
+<br \>
+The following example uses the <tt><a href="KeyPgThis.html">This</a></tt> keyword to refer to member data whose name is hidden by a parameter and local variable:<br \>
+<br \>
+<tt><div class="freebasic">
+<span class="key">Type</span>&nbsp;<span class="wrd">foo</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Sub</span>&nbsp;<span class="wrd">f</span>&nbsp;<span class="oth">(</span><span class="wrd">i</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Sub</span>&nbsp;<span class="wrd">g</span>&nbsp;<span class="oth">()</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">i</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">420</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Type</span><br />
+<br />
+<span class="key">Sub</span>&nbsp;<span class="wrd">foo.f</span>&nbsp;<span class="oth">(</span><span class="wrd">i</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;A&nbsp;parameter&nbsp;hides&nbsp;T.i,&nbsp;so&nbsp;it&nbsp;needs&nbsp;to&nbsp;be&nbsp;qualified&nbsp;to&nbsp;be&nbsp;used:</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="wrd">this.i</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Sub</span><br />
+<br />
+<span class="key">Sub</span>&nbsp;<span class="wrd">foo.g</span>&nbsp;<span class="oth">()</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;A&nbsp;local&nbsp;variable&nbsp;hides&nbsp;T.i,&nbsp;so&nbsp;it&nbsp;needs&nbsp;to&nbsp;be&nbsp;qualified&nbsp;to&nbsp;be&nbsp;used:</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="wrd">i</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="wrd">this.i</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Sub</span><br />
+</div></tt><br />
+<br \>
+* <i>Static member procedures do not have this extra parameter added by the compiler, and so cannot access the object instance from which it was called with.</i><br \>
+<br \>
+<a name="ACCESS"></a></div><div class="fb_sect_title">Access rights</div><div class="fb_sect_cont"><br \>
+Unlike normal module-level procedures, member procedures have full access rights to the members of the <tt><a href="KeyPgType.html">Type</a></tt> or <tt><a href="KeyPgClass.html">Class</a></tt> they are declared in; they can refer to the public, protected and private members of a <tt><a href="KeyPgType.html">Type</a></tt> or <tt><a href="KeyPgClass.html">Class</a></tt>.<br \>
+<br \>
+<a name="OVERLOAD"></a></div><div class="fb_sect_title">Overloading</div><div class="fb_sect_cont"><br \>
+A member procedure can be declared to have the same name as another member procedure, provided the parameters are different, either in number or in type. This is referred to as overloading.<br \>
+<br \>
+Only the parameters are used to determine if a procedure declaration is a valid overload. For example, a <tt><a href="KeyPgType.html">Type</a></tt> or <tt><a href="KeyPgClass.html">Class</a></tt> could have static and non-static member procedures with the same name, or <tt><a href="KeyPgSub.html">Sub</a></tt> and <tt><a href="KeyPgFunction.html">Function</a></tt> member procedures with the same name<br \>
+<br \>
+Unlike a module-level procedure, which needs to specify the <tt><a href="KeyPgOverload.html">Overload</a></tt> clause in the declaration to allow overloading it, a member procedure is overloadable by default, and does not need the <tt><a href="KeyPgOverload.html">Overload</a></tt> clause.<br \>
+<br \>
+<tt><div class="freebasic">
+<span class="key">Type</span>&nbsp;<span class="wrd">T</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Sub</span>&nbsp;<span class="wrd">f</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;Different&nbsp;number&nbsp;of&nbsp;parameters:</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Sub</span>&nbsp;<span class="wrd">f</span>&nbsp;<span class="oth">(</span><span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;Different&nbsp;type&nbsp;of&nbsp;parameters:</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Sub</span>&nbsp;<span class="wrd">f</span>&nbsp;<span class="oth">(</span><span class="key">ByRef</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;Again,&nbsp;parameters&nbsp;are&nbsp;different:</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Function</span>&nbsp;<span class="wrd">f</span>&nbsp;<span class="oth">(</span><span class="key">As</span>&nbsp;<span class="key">UByte</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;following&nbsp;three&nbsp;members&nbsp;would&nbsp;cause&nbsp;an&nbsp;error,</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;number&nbsp;of&nbsp;parameters&nbsp;and/or&nbsp;types&nbsp;do&nbsp;not&nbsp;differ:</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;Declare&nbsp;Function&nbsp;f&nbsp;As&nbsp;Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;Declare&nbsp;Function&nbsp;f&nbsp;(As&nbsp;UByte)&nbsp;As&nbsp;String</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;Declare&nbsp;Static&nbsp;Function&nbsp;f&nbsp;(As&nbsp;UByte)&nbsp;As&nbsp;Integer</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;...</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">somedata</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Any</span>&nbsp;<span class="key">Ptr</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Type</span><br />
+</div></tt><br />
+<br \>
+<a name="STATIC"></a></div><div class="fb_sect_title">Static member procedures</div><div class="fb_sect_cont"><br \>
+Static member procedures are declared and defined much in the same way as non-static member procedures, with the <tt><a href="KeyPgStatic.html">Static</a></tt> keyword preceding the declaration and definition.<br \>
+<br \>
+Member procedures defined using the <tt><a href="KeyPgStatic.html">Static</a></tt> keyword must be declared with the <tt><a href="KeyPgStatic.html">Static</a></tt> keyword in the <a href="KeyPgType.html">Type</a> or <a href="KeyPgClass.html">Class</a> definition, or a compiler error will occur. Like non-static member procedures, it is an error to define a static member procedure without a matching declaration in the <a href="KeyPgType.html">Type</a> or <a href="KeyPgClass.html">Class</a> definition.<br \>
+<br \>
+Do not confuse this with procedure definitions that specify static storage for their variables and objects by appending the <tt><a href="KeyPgStatic.html">Static</a></tt> keyword to the procedure header. The <tt><a href="KeyPgStatic.html">Static</a></tt> keyword can be used in both contexts, however; static member procedures can be defined with static variable and object storage.<br \>
+<br \>
+The following example declares two static member procedures, the first of which also has static variable and object storage. Note that the <tt><a href="KeyPgStatic.html">Static</a></tt> keyword is optional in the member procedure definition:<br \>
+<br \>
+<tt><div class="freebasic">
+<span class="com">''&nbsp;foo2.bi</span><br />
+<br />
+<span class="key">Type</span>&nbsp;<span class="wrd">foo</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Static</span>&nbsp;<span class="key">Sub</span>&nbsp;<span class="wrd">f</span>&nbsp;<span class="oth">(</span><span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Static</span>&nbsp;<span class="key">Function</span>&nbsp;<span class="wrd">g</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">i</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Type</span><br />
+<br />
+<span class="key">Static</span>&nbsp;<span class="key">Sub</span>&nbsp;<span class="wrd">foo.f</span>&nbsp;<span class="oth">(</span><span class="wrd">n</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">)</span>&nbsp;<span class="key">Static</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="wrd">n</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Sub</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+<span class="key">Function</span>&nbsp;<span class="wrd">foo.g</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Return</span>&nbsp;<span class="num">420</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Function</span><br />
+</div></tt><br />
+<br \>
+Static member procedures can be called like non-static member procedures, qualifying the name of the procedure with the name of an instance and the member access operator (<tt><a href="KeyPgOpMemberAccess.html">Operator . (Member Access)</a></tt>).<br \>
+<br \>
+They can also be called by qualifying the procedure name with the name of the <tt><a href="KeyPgType.html">Type</a></tt> or <tt><a href="KeyPgClass.html">Class</a></tt> they were declared in and the member access operator (<tt><a href="KeyPgOpMemberAccess.html">Operator . (Member Access)</a></tt>). In other words, an instance is not required in order to call static-member procedures.<br \>
+<br \>
+The following example, using the code from the last example, uses both ways to call static member procedures:<br \>
+<br \>
+<tt><div class="freebasic">
+<span class="com">''&nbsp;...&nbsp;foo&nbsp;with&nbsp;static&nbsp;members&nbsp;as&nbsp;before&nbsp;...</span><br />
+<span class="def">#include&nbsp;once&nbsp;"foo2.bi"<br />
+</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">bar</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">foo</span><br />
+<span class="wrd">bar.f</span><span class="oth">(</span><span class="wrd">foo.g</span><span class="oth">())</span><br />
+</div></tt><br />
+<br \>
+Unlike non-static member procedures, which are declared with an extra <tt><a href="KeyPgThis.html">This</a></tt> parameter, static member procedures do not get passed an instance when called. Because of this, static member procedures can only refer to constants, enumerations, other static members (data or procedures), etc., without qualifying their names. Static member procedures can still refer to non-static members when qualified with an instance, for example: a parameter or local variable.<br \>
+<br \>
+The following example refers to a non-static member from a static procedure:<br \>
+<br \>
+<tt><div class="freebasic">
+<span class="key">Type</span>&nbsp;<span class="wrd">foo</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Static</span>&nbsp;<span class="key">Sub</span>&nbsp;<span class="wrd">f</span>&nbsp;<span class="oth">(</span><span class="key">ByRef</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">foo</span><span class="oth">)</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">i</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Type</span><br />
+<br />
+<span class="key">Sub</span>&nbsp;<span class="wrd">foo.f</span>&nbsp;<span class="oth">(</span><span class="key">ByRef</span>&nbsp;<span class="wrd">self</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">foo</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;Ok,&nbsp;self&nbsp;is&nbsp;an&nbsp;instance&nbsp;of&nbsp;foo:</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="wrd">self.i</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;would&nbsp;cause&nbsp;error</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;cannot&nbsp;access&nbsp;non-static&nbsp;members,&nbsp;no&nbsp;foo&nbsp;instance:</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;Print&nbsp;i</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Sub</span><br />
+</div></tt><br />
+<br \>
+</div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

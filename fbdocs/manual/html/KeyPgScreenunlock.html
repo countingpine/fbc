@@ -1,0 +1,58 @@
+<html>
+<head>
+<title>ScreenUnlock</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">ScreenUnlock</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Unlocks work page's framebuffer<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgSub.html">Sub</a> <b>ScreenUnlock</b> ( <a href="KeyPgByval.html">ByVal</a> <i>startline</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a> = -1, <a href="KeyPgByval.html">ByVal</a> <i>endline</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a> = -1 )<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
+<b>ScreenUnlock</b> [ <i>start_line</i> ] [, <i>end_line</i> ]<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+<tt><i>startline</i></tt><br \>
+<div class="fb_indent">optional argument specifying first screen line to be updated. If omitted, top screen line is assumed.<br \>
+</div><tt><i>endline</i></tt><br \>
+<div class="fb_indent">optional argument specifying last screen line to be updated. If omitted, bottom screen line is assumed.<br \>
+<br \>
+</div></div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+<tt><b>ScreenUnlock</b></tt> unlocks the current work page assuming it was previously locked by calling <tt><a href="KeyPgScreenlock.html">ScreenLock</a></tt> and lets the system restart updating the screen regularly. When called with <tt>start_line</tt> and <tt>end_line</tt> , only the screen area between those lines is assumed to have changed, and will be updated. <br \>
+<br \>
+An internal counter exists that remembers the screen lock state, thus <tt><b>ScreenUnlock</b></tt> has an effect only on a screen that is locked.  A screen that has not been locked with <tt><b>ScreenLock</b></tt> cannot get unlocked, however <tt><b>ScreenUnlock</b></tt> still will force an update of given area or full screen.   <br \>
+<br \>
+Calls to <tt><b>ScreenUnlock</b></tt> must be paired with matching calls to <tt><b><a href="KeyPgScreenlock.html">ScreenLock</a></b></tt>.  Only the first call to <tt><b><a href="KeyPgScreenlock.html">ScreenLock</a></b></tt> actually performs a locking operation.  Subsequent calls to <tt><b>ScreenLock</b></tt> only increment the lock counter.  Conversely, <tt><b>ScreenUnlock</b></tt> only decrements the lock counter until it reaches zero at which time the actual unlock operation will be performed.  Using <tt><a href="KeyPgScreengraphics.html">Screen</a></tt> or <tt><a href="KeyPgScreenres.html">ScreenRes</a></tt> will release all locks and set the lock counter back to zero before changing screen modes.<br \>
+<br \>
+All graphic statements automatically lock the screen before the function call, and unlock the screen afterwards, so you do not need to do this explicitly using <tt><b><a href="KeyPgScreenlock.html">ScreenLock</a></b></tt> and <tt><b>ScreenUnlock</b></tt>. You only need to lock the screen when you wish to access the screen (framebuffer) directly using <tt><a href="KeyPgScreenptr.html">ScreenPtr</a></tt>  or when you wish to group several graphic statements together so their effects appear simultaneously on screen, thus avoiding potential screen flicker during screen updates.<br \>
+<br \>
+Warning (Win32, Linux) : The screen is locked by stopping the thread that processes also the OS' events. This means the screen should be locked only for the short time required to redraw it, and no user input will be received while the screen is locked.<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+See <tt><a href="KeyPgScreenptr.html">ScreenPtr</a></tt> example.<br \>
+<br \>
+</div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
+<ul><li> Not available in the <i><a href="CompilerOptlang.html">-lang qb</a></i> dialect unless referenced with the alias <tt><b>__Screenunlock</b></tt>.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> New to FreeBASIC<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgScreengraphics.html">Screen (Graphics)</a></tt><br \>
+<li> <tt><a href="KeyPgScreenlock.html">ScreenLock</a></tt><br \>
+<li> <tt><a href="KeyPgScreenptr.html">ScreenPtr</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

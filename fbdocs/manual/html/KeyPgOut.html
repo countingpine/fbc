@@ -1,0 +1,77 @@
+<html>
+<head>
+<title>Out</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Out</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Outputs a value to a hardware port.<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgFunction.html">Function</a> <b>Out</b> ( <a href="KeyPgByval.html">ByVal</a> <i>port</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgUshort.html">UShort</a> , <a href="KeyPgByval.html">ByVal</a> <i>data</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgUbyte.html">UByte</a> ) <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a><br \>
+</tt><br \>
+</div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
+<b>Out</b> <i>port</i>,<i>value</i><br \>
+</tt><br \>
+</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+<tt><i>port</i></tt><br \>
+<div class="fb_indent">Hardware port to write to.<br \>
+</div><tt><i>data</i></tt><br \>
+<div class="fb_indent">Data value to write.<br \>
+<br \>
+</div></div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+This function sends <tt><i>value</i></tt> to <tt><i>port</i></tt> and returns immediately.<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="com">'speakersound.bas&nbsp;</span><br />
+<span class="key">Sub</span>&nbsp;<span class="wrd">Sound</span><span class="oth">(</span><span class="key">ByVal</span>&nbsp;<span class="wrd">freq</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">UInteger</span><span class="oth">,</span>&nbsp;<span class="wrd">dur</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">UInteger</span><span class="oth">)</span><br />
+&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="wrd">t</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Double</span><span class="oth">,</span><span class="wrd">f1</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Unsigned</span>&nbsp;<span class="key">Short</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">f1</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">1193181</span>&nbsp;<span class="oth">\</span>&nbsp;<span class="wrd">freq</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Out</span>&nbsp;<span class="num">&amp;h61</span><span class="oth">,</span><span class="key">Inp</span><span class="oth">(</span><span class="num">&amp;h61</span><span class="oth">)</span>&nbsp;<span class="key">Or</span>&nbsp;<span class="num">3</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Out</span>&nbsp;<span class="num">&amp;h43</span><span class="oth">,</span><span class="num">&amp;hb6</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Out</span>&nbsp;<span class="num">&amp;h42</span><span class="oth">,</span><span class="key">LoByte</span><span class="oth">(</span><span class="wrd">f1</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Out</span>&nbsp;<span class="num">&amp;h42</span><span class="oth">,</span><span class="key">HiByte</span><span class="oth">(</span><span class="wrd">f1</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">t</span><span class="oth">=</span><span class="key">Timer</span>&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">While</span>&nbsp;<span class="oth">((</span><span class="key">Timer</span>&nbsp;<span class="oth">-</span>&nbsp;<span class="wrd">t</span><span class="oth">)</span>&nbsp;<span class="oth">*</span>&nbsp;<span class="num">1000</span><span class="oth">)</span>&nbsp;<span class="oth">&lt;</span>&nbsp;<span class="wrd">dur</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Sleep</span>&nbsp;<span class="num">0</span><span class="oth">,</span><span class="num">1</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Wend</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Out</span>&nbsp;<span class="num">&amp;h61</span><span class="oth">,</span><span class="key">Inp</span><span class="oth">(</span><span class="num">&amp;h61</span><span class="oth">)</span>&nbsp;<span class="key">And</span>&nbsp;<span class="num">&amp;hfc</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Sub</span><br />
+<br />
+<span class="wrd">Sound</span><span class="oth">(</span><span class="num">523</span><span class="oth">,</span>&nbsp;<span class="num">60</span><span class="oth">)</span>&nbsp;&nbsp;<span class="com">'C5</span><br />
+<span class="wrd">Sound</span><span class="oth">(</span><span class="num">587</span><span class="oth">,</span>&nbsp;<span class="num">60</span><span class="oth">)</span>&nbsp;&nbsp;<span class="com">'D5</span><br />
+<span class="wrd">Sound</span><span class="oth">(</span><span class="num">659</span><span class="oth">,</span>&nbsp;<span class="num">60</span><span class="oth">)</span>&nbsp;&nbsp;<span class="com">'E5</span><br />
+<span class="wrd">Sound</span><span class="oth">(</span><span class="num">698</span><span class="oth">,</span>&nbsp;<span class="num">60</span><span class="oth">)</span>&nbsp;&nbsp;<span class="com">'F5</span><br />
+<span class="wrd">Sound</span><span class="oth">(</span><span class="num">784</span><span class="oth">,</span>&nbsp;<span class="num">60</span><span class="oth">)</span>&nbsp;&nbsp;<span class="com">'G5</span><br />
+<span class="wrd">Sound</span><span class="oth">(</span><span class="num">880</span><span class="oth">,</span>&nbsp;<span class="num">60</span><span class="oth">)</span>&nbsp;&nbsp;<span class="com">'A5</span><br />
+<span class="wrd">Sound</span><span class="oth">(</span><span class="num">988</span><span class="oth">,</span>&nbsp;<span class="num">60</span><span class="oth">)</span>&nbsp;&nbsp;<span class="com">'B5</span><br />
+<span class="wrd">Sound</span><span class="oth">(</span><span class="num">1046</span><span class="oth">,</span>&nbsp;<span class="num">60</span><span class="oth">)</span>&nbsp;<span class="com">'C6&nbsp;</span><br />
+</div></tt><br />
+	<br \>
+<br \>
+</div><div class="fb_sect_title">Platform Differences</div><div class="fb_sect_cont"><br \>
+<ul><li> In the Windows and Linux versions three port numbers (&H3C7, &H3C8, &H3C9) are hooked by the graphics library when a graphics mode is in use to emulate QB's VGA palette handling. This use  is deprecated; use <tt><a href="KeyPgPalette.html">Palette</a></tt> to retrieve and set palette colors.<br \>
+<br \>
+<li> Using true port access in the Windows version requires the program to install a device driver for the present session. For that reason, Windows executables using hardware port access should be run with administrator permits each time the computer is restarted. Further runs don't require admin rights as they just use the already installed driver. The driver is only 3K in size and is embedded in the executable.<br \>
+<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgInp.html">Inp</a></tt><br \>
+<li> <tt><a href="KeyPgWait.html">Wait</a></tt><br \>
+<li> <tt><a href="KeyPgPalette.html">Palette</a></tt><br \>
+<br \>
+</ul><br \>
+   <br \>
+</div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

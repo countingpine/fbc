@@ -1,0 +1,118 @@
+<html>
+<head>
+<title>Restore</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Restore</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Changes the next read location for values stored with the <tt><a href="KeyPgData.html">Data</a></tt> statement.<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<b>Restore</b> <i>label</i><br \>
+</tt><br \>
+</div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+Sets the next-data-to-read pointer to the first element of the first <tt><a href="KeyPgData.html">Data</a></tt> statement after the label.  The label must be contained in the same module as the currently-executing code.  <tt>Restore</tt> alters the normal top to bottom order in which <tt>Data</tt> are <tt><a href="KeyPgRead.html">Read</a></tt>. It allows re-reading some <tt>Data</tt> or using multiple sets of <tt>Data</tt> in a single module.	<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="com">'&nbsp;Create&nbsp;an&nbsp;2&nbsp;arrays&nbsp;of&nbsp;integers&nbsp;and&nbsp;a&nbsp;2&nbsp;strings&nbsp;to&nbsp;hold&nbsp;the&nbsp;data.</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">h</span><span class="oth">(</span><span class="num">4</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">h2</span><span class="oth">(</span><span class="num">4</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">hs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">hs2</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">read_data1</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">read_data2</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+<br />
+<span class="com">'&nbsp;Set&nbsp;the&nbsp;data&nbsp;read&nbsp;to&nbsp;the&nbsp;label&nbsp;'dat2:'</span><br />
+<span class="key">Restore</span>&nbsp;<span class="wrd">dat2</span><br />
+<br />
+<span class="com">'&nbsp;Set&nbsp;up&nbsp;to&nbsp;loop&nbsp;5&nbsp;times&nbsp;(for&nbsp;5&nbsp;numbers...&nbsp;check&nbsp;the&nbsp;data)</span><br />
+<span class="key">For</span>&nbsp;<span class="wrd">read_data1</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">4</span><br />
+<br />
+&nbsp;&nbsp;<span class="com">'&nbsp;Read&nbsp;in&nbsp;an&nbsp;integer.</span><br />
+&nbsp;&nbsp;<span class="key">Read</span>&nbsp;<span class="wrd">h</span><span class="oth">(</span><span class="wrd">read_data1</span><span class="oth">)</span><br />
+<br />
+&nbsp;&nbsp;<span class="com">'&nbsp;Display&nbsp;it.</span><br />
+&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"Bloc&nbsp;1,&nbsp;number"</span><span class="oth">;</span>&nbsp;<span class="wrd">read_data1</span><span class="oth">;</span><span class="quo">"&nbsp;=&nbsp;"</span><span class="oth">;</span>&nbsp;<span class="wrd">h</span><span class="oth">(</span><span class="wrd">read_data1</span><span class="oth">)</span><br />
+<br />
+<span class="key">Next</span><br />
+<br />
+<span class="com">'&nbsp;Spacer.</span><br />
+<span class="key">Print</span><br />
+<br />
+<span class="com">'&nbsp;Read&nbsp;in&nbsp;a&nbsp;string.</span><br />
+<span class="key">Read</span>&nbsp;<span class="wrd">hs</span><br />
+<br />
+<span class="com">'&nbsp;Print&nbsp;it.</span><br />
+<span class="key">Print</span>&nbsp;&nbsp;<span class="quo">"Bloc&nbsp;1&nbsp;string&nbsp;=&nbsp;"</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="wrd">hs</span><br />
+<br />
+<span class="com">'&nbsp;Spacers.</span><br />
+<span class="key">Print</span><br />
+<span class="key">Print</span><br />
+<br />
+<br />
+<span class="com">'&nbsp;Set&nbsp;the&nbsp;data&nbsp;read&nbsp;to&nbsp;the&nbsp;label&nbsp;'dat1:'</span><br />
+<span class="key">Restore</span>&nbsp;<span class="wrd">dat1</span><br />
+<br />
+<span class="com">'&nbsp;Set&nbsp;up&nbsp;to&nbsp;loop&nbsp;5&nbsp;times&nbsp;(for&nbsp;5&nbsp;numbers...&nbsp;check&nbsp;the&nbsp;data)</span><br />
+<span class="key">For</span>&nbsp;<span class="wrd">read_data2</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">4</span><br />
+<br />
+&nbsp;&nbsp;<span class="com">'&nbsp;Read&nbsp;in&nbsp;an&nbsp;integer.</span><br />
+&nbsp;&nbsp;<span class="key">Read</span>&nbsp;<span class="wrd">h2</span><span class="oth">(</span><span class="wrd">read_data2</span><span class="oth">)</span><br />
+<br />
+&nbsp;&nbsp;<span class="com">'&nbsp;Display&nbsp;it.</span><br />
+&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"Bloc&nbsp;2,&nbsp;number"</span><span class="oth">;</span>&nbsp;<span class="wrd">read_data2</span><span class="oth">;</span><span class="quo">"&nbsp;=&nbsp;"</span><span class="oth">;</span>&nbsp;<span class="wrd">h2</span><span class="oth">(</span><span class="wrd">read_data2</span><span class="oth">)</span><br />
+<br />
+<span class="key">Next</span><br />
+<br />
+<span class="com">'&nbsp;Spacer.</span><br />
+<span class="key">Print</span><br />
+<br />
+<span class="com">'&nbsp;Read&nbsp;in&nbsp;a&nbsp;string.</span><br />
+<span class="key">Read</span>&nbsp;<span class="wrd">hs2</span><br />
+<br />
+<span class="com">'&nbsp;Print&nbsp;it.</span><br />
+<span class="key">Print</span>&nbsp;&nbsp;<span class="quo">"Bloc&nbsp;2&nbsp;string&nbsp;=&nbsp;"</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="wrd">hs2</span><br />
+<br />
+<span class="com">'&nbsp;Await&nbsp;a&nbsp;keypress.</span><br />
+<span class="key">Sleep</span><br />
+<br />
+<span class="com">'&nbsp;Exit&nbsp;program.</span><br />
+<span class="key">End</span><br />
+<br />
+<br />
+<br />
+<span class="com">'&nbsp;First&nbsp;block&nbsp;of&nbsp;data.</span><br />
+<span class="wrd">dat1</span><span class="oth">:</span><br />
+<span class="key">Data</span>&nbsp;<span class="num">3</span><span class="oth">,</span>&nbsp;<span class="num">234</span><span class="oth">,</span>&nbsp;<span class="num">4354</span><span class="oth">,</span>&nbsp;<span class="num">23433</span><span class="oth">,</span>&nbsp;<span class="num">87643</span><span class="oth">,</span>&nbsp;<span class="quo">"Bye!"</span><br />
+<br />
+<span class="com">'&nbsp;Second&nbsp;block&nbsp;of&nbsp;data.</span><br />
+<span class="wrd">dat2</span><span class="oth">:</span><br />
+<span class="key">Data</span>&nbsp;<span class="num">546</span><span class="oth">,</span>&nbsp;<span class="num">7894</span><span class="oth">,</span>&nbsp;<span class="num">4589</span><span class="oth">,</span>&nbsp;<span class="num">64657</span><span class="oth">,</span>&nbsp;<span class="num">34554</span><span class="oth">,</span>&nbsp;<span class="quo">"Hi!"</span><br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</div></tt><br />
+<br \>
+<br \>
+</div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> None<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgData.html">Data</a></tt><br \>
+<li> <tt><a href="KeyPgRead.html">Read</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

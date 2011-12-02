@@ -1,0 +1,101 @@
+<html>
+<head>
+<title>Cls</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Cls</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Clears the screen in both text modes and graphics modes<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgSub.html">Sub</a> <b>Cls</b> ( <a href="KeyPgByval.html">ByVal</a> <i>mode</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a> = 1 )<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
+<b>Cls</b> <i>mode</i><br \>
+</tt><br \>
+</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+<tt><i>mode</i></tt><br \>
+<div class="fb_indent">A optional numeric variable with a value from <tt>0</tt> to <tt>2</tt>.  If omitted, it defaults to <tt>1</tt>.<br \>
+<br \>
+</div></div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+An optional <tt><i>mode</i></tt> parameter may be given,<br \>
+<br \>
+<div class="fb_indent">If omitted, <tt><b>Cls</b></tt> clears either the text or graphics viewport.  If a graphics viewport has been defined using the <tt><a href="KeyPgViewgraphics.html">View (Graphics)</a></tt> statement, the graphics viewport is cleared.  Otherwise, the text viewport, defined by <tt><a href="KeyPgViewtext.html">View Print</a></tt>, is cleared.  (If there is no explicit text viewport defined, the entire screen is cleared.)<br \>
+<br \>
+If <tt>0</tt>, clears the entire screen<br \>
+<br \>
+If <tt>1</tt>, clears the graphics viewport if defined.  Otherwise, clears the text viewport<br \>
+<br \>
+If <tt>2</tt>, clears the text viewport<br \>
+<br \>
+<br \>
+</div></div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="com">''&nbsp;set&nbsp;the&nbsp;color&nbsp;to&nbsp;light&nbsp;grey&nbsp;text&nbsp;on&nbsp;a&nbsp;blue&nbsp;background</span><br />
+<span class="key">Color</span>&nbsp;<span class="num">7</span><span class="oth">,</span>&nbsp;<span class="num">1</span><br />
+<br />
+<span class="com">''&nbsp;clear&nbsp;the&nbsp;screen&nbsp;to&nbsp;the&nbsp;background&nbsp;color</span><br />
+<span class="key">Cls</span><br />
+<br />
+<span class="com">''&nbsp;print&nbsp;text&nbsp;in&nbsp;the&nbsp;center&nbsp;of&nbsp;the&nbsp;screen</span><br />
+<span class="key">Locate</span>&nbsp;<span class="num">12</span><span class="oth">,</span>&nbsp;<span class="num">33</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"Hello&nbsp;Universe!"</span><br />
+</div></tt><br />
+<br \>
+In graphics modes, if you want to clear the entire screen to color <tt>0</tt>, it can be faster using  <tt><a href="KeyPgClear.html">Clear</a></tt> to write zeroes to the screen memory than calling <tt><b>Cls</b></tt>.<br \>
+<br \>
+<tt><div class="freebasic">
+<span class="key">Dim</span>&nbsp;<span class="wrd">scrbuf</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Byte</span>&nbsp;<span class="key">Ptr</span><span class="oth">,</span>&nbsp;<span class="wrd">scrsize</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="wrd">scrhei</span><span class="oth">,</span>&nbsp;<span class="wrd">scrpitch</span><br />
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="wrd">r</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span><span class="oth">,</span>&nbsp;<span class="wrd">dr</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">1</span><br />
+<br />
+<span class="key">ScreenRes</span>&nbsp;<span class="num">640</span><span class="oth">,</span>&nbsp;<span class="num">480</span><span class="oth">,</span>&nbsp;<span class="num">8</span><br />
+<br />
+<span class="wrd">scrbuf</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">ScreenPtr</span><span class="oth">:</span>&nbsp;<span class="key">Assert</span><span class="oth">(</span>&nbsp;<span class="wrd">scrbuf</span>&nbsp;<span class="oth">&lt;&gt;</span>&nbsp;<span class="num">0</span>&nbsp;<span class="oth">)</span><br />
+<span class="key">ScreenInfo</span><span class="oth">(</span>&nbsp;<span class="oth">,</span>&nbsp;<span class="wrd">scrhei</span><span class="oth">,</span>&nbsp;<span class="oth">,</span>&nbsp;<span class="oth">,</span>&nbsp;<span class="wrd">scrpitch</span>&nbsp;<span class="oth">)</span><br />
+<span class="wrd">scrsize</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">scrpitch</span>&nbsp;<span class="oth">*</span>&nbsp;<span class="wrd">scrhei</span><br />
+<br />
+<span class="key">Do</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;lock&nbsp;the&nbsp;screen&nbsp;(must&nbsp;do&nbsp;this&nbsp;while&nbsp;working&nbsp;directly&nbsp;on&nbsp;screenbuffer)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">ScreenLock</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;clear&nbsp;the&nbsp;screen&nbsp;(could&nbsp;use&nbsp;Cls&nbsp;here):</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Clear</span>&nbsp;<span class="oth">*</span><span class="wrd">scrbuf</span><span class="oth">,</span>&nbsp;<span class="num">0</span><span class="oth">,</span>&nbsp;<span class="wrd">scrsize</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;draw&nbsp;circle</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Circle</span>&nbsp;<span class="oth">(</span><span class="num">320</span><span class="oth">,</span>&nbsp;<span class="num">240</span><span class="oth">),</span>&nbsp;<span class="wrd">r</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">ScreenUnlock</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;grow/shrink&nbsp;circle&nbsp;radius</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">r</span>&nbsp;<span class="oth">+=</span>&nbsp;<span class="wrd">dr</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">If</span>&nbsp;<span class="wrd">r</span>&nbsp;<span class="oth">&lt;=</span>&nbsp;<span class="num">0</span>&nbsp;<span class="key">Then</span>&nbsp;<span class="wrd">dr</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">1</span>&nbsp;<span class="key">Else</span>&nbsp;<span class="key">If</span>&nbsp;<span class="wrd">r</span>&nbsp;<span class="oth">&gt;=</span>&nbsp;<span class="num">100</span>&nbsp;<span class="key">Then</span>&nbsp;<span class="wrd">dr</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="oth">-</span><span class="num">1</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;short&nbsp;pause&nbsp;in&nbsp;each&nbsp;frame&nbsp;(prevents&nbsp;hogging&nbsp;the&nbsp;CPU)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Sleep</span>&nbsp;<span class="num">1</span><span class="oth">,</span>&nbsp;<span class="num">1</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;run&nbsp;loop&nbsp;until&nbsp;user&nbsp;presses&nbsp;a&nbsp;key</span><br />
+<span class="key">Loop</span>&nbsp;<span class="key">Until</span>&nbsp;<span class="key">Len</span><span class="oth">(</span><span class="key">Inkey</span><span class="oth">)</span>&nbsp;<span class="oth">&gt;</span>&nbsp;<span class="num">0</span></div></tt><br />
+<br \>
+</div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> None<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgColor.html">Color</a></tt><br \>
+<li> <tt><a href="KeyPgLocate.html">Locate</a></tt><br \>
+<li> <tt><a href="KeyPgPrint.html">Print</a></tt><br \>
+<li> <tt><a href="KeyPgViewgraphics.html">View (Graphics)</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

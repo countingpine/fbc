@@ -1,0 +1,56 @@
+<html>
+<head>
+<title>Source Files (.bas)</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Source Files (.bas)</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Text files read by FreeBASIC and compiled into executable code.<br \>
+<br \>
+A source file is a text file that contains FreeBASIC language statements.  A program might be made from just one source file or possibly hundreds.  Source files are read by the compiler and compiled into object code.  Object code is then linked to create an executable or can be stored for later use as a library.<br \>
+<br \>
+FreeBASIC by default, automatically takes care of compiling sources and linking object modules in to executables, so normally it is possible to make an executable program by just passing the names of the source files on the <tt>fbc</tt> command line.  For example, assuming we had three source files that together made a program, we could create an executable for the program by running <tt>fbc</tt>, the FreeBASIC compiler on a command line as follows:<br \>
+<tt><br \>
+fbc myprog.bas tools.bas funcs.bas<br \>
+</tt><br \>
+<div class="fb_sect_title">Unicode support</div><div class="fb_sect_cont"><br \>
+<ul><li> Besides ASCII files with Unicode escape sequences (\u), FreeBASIC can parse UTF-8, UTF-16LE, UTF-16BE, UTF-32LE and UTF-32BE source (.bas) or header (.bi) files, they can be freely mixed with other sources/headers in the same project (also with other ASCII files).<br \>
+<br \>
+<li> Literal strings can be typed in the original non-Latin alphabet, just use a text-editor that supports one of the Unicode formats listed above.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">Implicit main()</div><div class="fb_sect_cont"><br \>
+Some languages require a special <tt>main()</tt> procedure be defined as an entry point to the program which define the first statements that will be executed when the program starts.  FreeBASIC allows executable statements in module level code and normally the first source file passed to fbc on the command line will be used as the "main" module.  The main module can be explicitly names by passing <i>-m filename</i> on the command line, where <i>filename</i> is the name of the main module without the .bas extension.<br \>
+<tt><div class="freebasic">
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;sample.bas</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Sub</span>&nbsp;<span class="wrd">ShowHelp</span><span class="oth">()</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;This&nbsp;next&nbsp;line&nbsp;is&nbsp;the&nbsp;first&nbsp;executable&nbsp;statement&nbsp;in&nbsp;the&nbsp;program</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">If</span>&nbsp;<span class="key">Command</span><span class="oth">(</span><span class="num">1</span><span class="oth">)</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="quo">""</span>&nbsp;<span class="key">Then</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">ShowHelp</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">End</span>&nbsp;<span class="num">0</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">End</span>&nbsp;<span class="key">If</span>&nbsp;&nbsp;&nbsp;&nbsp;<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Sub</span>&nbsp;<span class="wrd">ShowHelp</span><span class="oth">()</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"no&nbsp;options&nbsp;specified."</span>&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">End</span>&nbsp;<span class="key">Sub</span><br />
+</div></tt><br />
+<br \>
+</div><div class="fb_sect_title">Header Files</div><div class="fb_sect_cont"><br \>
+A header file is a special kind of source file that typically only contains declarations and has a <tt>.bi</tt> extension. See <a href="ProPgHeaderFiles.html">Header Files (.bi)</a>.<br \>
+<br \>
+</div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <a href="CompilerCmdLine.html">fbc command-line</a><br \>
+<li> <a href="ProPgHeaderFiles.html">Header Files (.bi)</a><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

@@ -1,0 +1,136 @@
+<html>
+<head>
+<title>Simulating Polymorphism</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Simulating Polymorphism</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	<i>Written by <a href="WikiRick.html">rdc</a></i><br \>
+<br \>
+<div class="fb_header"> Introduction</div><br \>
+<br \>
+Polymorphism is a powerful tool in object-oriented program. A polymorphic method (Sub or Function) behaves differently depending on the definition of the object. For example, an animal object may have a speak method that will issue a bark for a dog and a meow for a cat. FreeBasic doesn’t yet support true polymorphism; this will be added when classes are implemented. However, you can simulate polymorphic methods using method pointers. <br \>
+<br \>
+<div class="fb_header"> Polymorphism</div><br \>
+<br \>
+Polymorphic methods are subroutines or functions that have the same type and parameter list, but behave differently when bound to different objects. An animal object may have a Speak method that will issue a bark for a dog and a meow for a cat. Since FreeBasic doesn’t yet have classes, you cannot implement true polymorphic methods, but you can simulate the behavior by using method pointers.<br \>
+<br \>
+The following listing shows a couple of defines and an extended type declaration:<br \>
+<tt><div class="freebasic">
+<span class="def">#define&nbsp;isdog&nbsp;1<br />
+#define&nbsp;iscat&nbsp;2<br />
+</span><br />
+<span class="key">Type</span>&nbsp;<span class="wrd">animal</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Public</span><span class="oth">:</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">speak</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Sub</span><span class="oth">()</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Constructor</span>&nbsp;<span class="oth">(</span><span class="wrd">anid</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">)</span>&nbsp;&nbsp;&nbsp;&nbsp;<br />
+<span class="key">End</span>&nbsp;<span class="key">Type</span><br />
+</div></tt><br />
+The #defines are passed to the Constructor to signal what type of object is being created. The speak As Sub()definition defines the method pointer. As you will see, the address of two different subroutines will be passed to the speak method pointer. The following listing shows the different speak subroutines and the Constructor method:<br \>
+<tt><div class="freebasic">
+<span class="com">'Speak&nbsp;method&nbsp;for&nbsp;dog&nbsp;object</span><br />
+<span class="key">Sub</span>&nbsp;<span class="wrd">Bark</span><span class="oth">()</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"Woof!"</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Sub</span><br />
+<br />
+<span class="com">'Speak&nbsp;method&nbsp;for&nbsp;cat&nbsp;object</span><br />
+<span class="key">Sub</span>&nbsp;<span class="wrd">Meow</span><span class="oth">()</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"Meow!"</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Sub</span><br />
+<br />
+<span class="com">'Set&nbsp;the&nbsp;proper&nbsp;method&nbsp;pointer&nbsp;based&nbsp;on&nbsp;animal&nbsp;id</span><br />
+<span class="key">Constructor</span>&nbsp;<span class="wrd">animal</span><span class="oth">(</span><span class="wrd">anid</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">If</span>&nbsp;<span class="wrd">anid</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">isdog</span>&nbsp;<span class="key">Then</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">this.speak</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="oth">@</span><span class="wrd">Bark</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">ElseIf</span>&nbsp;<span class="wrd">anid</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">iscat</span>&nbsp;<span class="key">Then</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">this.speak</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="oth">@</span><span class="wrd">Meow</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">End</span>&nbsp;<span class="key">If</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Constructor</span><br />
+</div></tt><br />
+The Bark subroutine will be called if the object is a dog and the Meow subroutine will be called if the object is a cat. You may be wondering why you can’t just overload the method? For overloaded methods, the type and parameter list must be unique, where in a polymorphic method, the type and parameter list must be the same. Since Bark and Meow have the same parameter list, that is no parameters, you cannot overload the method.<br \>
+<br \>
+The Constructor code is where the program decides what method call to use. If anid is equal to isdog, then the Speak method pointer will be set to the address of the Bark subroutine. If anid is equal to iscat then Speak will be set to the address of the Meow subroutine. The addressof operator @ is used to pass the address of Bark and Meow to the Speak pointer. <br \>
+<br \>
+The <i>this</i> object reference is a hidden parameter that is passed to the Constructor that references the type, which in this case is animal. You can use this to reference the internal variables within the type.<br \>
+<br \>
+The only thing left to do is to create and initialize the object:<br \>
+<tt><div class="freebasic">
+<span class="com">'Create&nbsp;a&nbsp;dog&nbsp;and&nbsp;cat&nbsp;object</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">myDog</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">animal</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">isdog</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">mycat</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">animal</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">iscat</span><br />
+</div></tt><br />
+Here myDog and myCat are created with the appropriate flags passed to the Constructor so that the proper references can be set up. Once the object are created you can call the speak method of each object.<br \>
+<tt><div class="freebasic">
+<span class="com">'Have&nbsp;the&nbsp;animals&nbsp;speak</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"My&nbsp;dog&nbsp;says&nbsp;"</span><span class="oth">;</span><br />
+<span class="wrd">myDog.speak</span><span class="oth">()</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"My&nbsp;cat&nbsp;says&nbsp;"</span><span class="oth">;</span><br />
+<span class="wrd">myCat.speak</span><span class="oth">()</span><br />
+</div></tt><br />
+Notice that you are calling the same speak method, yet the output is different:<br \>
+<tt><div class="freebasic">
+<span class="wrd">My</span>&nbsp;<span class="wrd">dog</span>&nbsp;<span class="wrd">says</span>&nbsp;<span class="wrd">Woof!</span><br />
+<span class="wrd">My</span>&nbsp;<span class="wrd">cat</span>&nbsp;<span class="wrd">says</span>&nbsp;<span class="wrd">Meow!</span><br />
+</div></tt><br />
+This is the essence of polymorphic methods. <br \>
+<br \>
+Here is the complete program listing:<br \>
+<tt><div class="freebasic">
+<span class="com">'Simulated&nbsp;Polymorphism&nbsp;Using&nbsp;Method&nbsp;Pointers</span><br />
+<span class="com">'Richard&nbsp;D.&nbsp;Clark</span><br />
+<span class="com">'Requires&nbsp;the&nbsp;CVS&nbsp;version&nbsp;of&nbsp;FreeBasic</span><br />
+<span class="com">'**********************************************</span><br />
+<br />
+<span class="def">#define&nbsp;isdog&nbsp;1<br />
+#define&nbsp;iscat&nbsp;2<br />
+</span><br />
+<br />
+<span class="key">Type</span>&nbsp;<span class="wrd">animal</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Public</span><span class="oth">:</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">speak</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Sub</span><span class="oth">()</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Constructor</span>&nbsp;<span class="oth">(</span><span class="wrd">anid</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">)</span>&nbsp;&nbsp;&nbsp;&nbsp;<br />
+<span class="key">End</span>&nbsp;<span class="key">Type</span><br />
+<br />
+<span class="com">'Speak&nbsp;method&nbsp;for&nbsp;dog&nbsp;object</span><br />
+<span class="key">Sub</span>&nbsp;<span class="wrd">Bark</span><span class="oth">()</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"Woof!"</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Sub</span><br />
+<br />
+<span class="com">'Speak&nbsp;mehod&nbsp;for&nbsp;cat&nbsp;object</span><br />
+<span class="key">Sub</span>&nbsp;<span class="wrd">Meow</span><span class="oth">()</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"Meow!"</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Sub</span><br />
+<br />
+<span class="com">'Set&nbsp;the&nbsp;proper&nbsp;method&nbsp;pointer&nbsp;based&nbsp;on&nbsp;animal&nbsp;id</span><br />
+<span class="key">Constructor</span>&nbsp;<span class="wrd">animal</span><span class="oth">(</span><span class="wrd">anid</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">If</span>&nbsp;<span class="wrd">anid</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">isdog</span>&nbsp;<span class="key">Then</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">this.speak</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="oth">@</span><span class="wrd">Bark</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">ElseIf</span>&nbsp;<span class="wrd">anid</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">iscat</span>&nbsp;<span class="key">Then</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">this.speak</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="oth">@</span><span class="wrd">Meow</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">End</span>&nbsp;<span class="key">If</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Constructor</span><br />
+<br />
+<span class="com">'Create&nbsp;a&nbsp;dog&nbsp;and&nbsp;cat&nbsp;object</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">myDog</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">animal</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">isdog</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">mycat</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">animal</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">iscat</span><br />
+<br />
+<span class="com">'Have&nbsp;the&nbsp;animals&nbsp;speak</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"My&nbsp;dog&nbsp;says&nbsp;"</span><span class="oth">;</span><br />
+<span class="wrd">myDog.speak</span><span class="oth">()</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"My&nbsp;cat&nbsp;says&nbsp;"</span><span class="oth">;</span><br />
+<span class="wrd">myCat.speak</span><span class="oth">()</span><br />
+<br />
+<span class="key">Sleep</span><br />
+<span class="key">End</span><br />
+</div></tt>
+</div>
+</div> 
+</div> 
+</body>
+</html>

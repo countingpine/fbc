@@ -1,0 +1,74 @@
+<html>
+<head>
+<title>LPrint</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">LPrint</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Writes text to the default printer.<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<b>LPrint</b>  [ <a href="KeyPgPrintusing.html">Using</a> <i>formatstring</i>,] [<i>expressionlist</i>] [(, | ;)] ...<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+<tt><i>formatstring</i></tt><br \>
+<div class="fb_indent">String specifying the output format.<br \>
+</div><tt><i>expressionlist</i></tt><br \>
+<div class="fb_indent">List of variables to output according to the specified format.<br \>
+<br \>
+</div></div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+Prints <tt><i>expressionlist</i></tt> to the printer attached to the parallel port LPT1, or if it does not exist, to the default printer.  To print to a printer different from the default one, use <tt><a href="KeyPgOpenLpt.html">Open Lpt</a></tt>.<br \>
+<br \>
+The <tt><a href="KeyPgPrintusing.html">Using</a></tt> clause formats <tt><i>expressionlist</i></tt> according to <tt><i>formatstring</i></tt>.  Any data type but a UDT can be passed to <b><tt>LPrint</tt></b> <tt><i>expressionlist</tt></i>, expressions do <b>not</b> have to be converted to strings first.<br \>
+<br \>
+Using a comma (<tt>,</tt>) as separator or in the end of the <tt><i>expressionlist</i></tt> will place the cursor in the next column (every 14 characters), using a semi-colon (<tt>;</tt>) won't move the cursor. If neither of them are used in the end of the <tt><i>expressionlist</i></tt>, then a new-line will be printed.<br \>
+<br \>
+Some printers will not print at all until a <tt><a href="KeyPgChr.html">Chr</a>(12)</tt> (End of Page) character is printed.<br \>
+<br \>
+Internally, FreeBASIC uses the special file number <tt>-1</tt> for printing using <b><tt>LPrint</tt></b>.  This file number may be safely closed using <tt><a href="KeyPgClose.html">Close</a> -1</tt>.  The next use of <b><tt>LPrint</tt></b> will automatically reopen it as needed.<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="com">''&nbsp;Compile&nbsp;with&nbsp;-lang&nbsp;fblite&nbsp;or&nbsp;qb</span><br />
+<br />
+<span class="def">#lang&nbsp;"fblite"<br />
+</span><br />
+<span class="com">''&nbsp;new-line</span><br />
+<span class="key">LPrint</span>&nbsp;<span class="quo">"Hello&nbsp;World!"</span><br />
+<br />
+<span class="com">''&nbsp;no&nbsp;new-line</span><br />
+<span class="key">LPrint</span>&nbsp;<span class="quo">"Hello"</span><span class="oth">;</span>&nbsp;<span class="quo">"World"</span><span class="oth">;</span>&nbsp;<span class="quo">"!"</span><span class="oth">;</span><br />
+<br />
+<span class="key">LPrint</span><br />
+<br />
+<span class="com">''&nbsp;column&nbsp;separator</span><br />
+<span class="key">LPrint</span>&nbsp;<span class="quo">"Hello!"</span><span class="oth">,</span>&nbsp;<span class="quo">"World!"</span><br />
+<br />
+<span class="com">''&nbsp;end&nbsp;of&nbsp;page</span><br />
+<span class="key">LPrint</span>&nbsp;<span class="key">Chr$</span><span class="oth">(</span><span class="num">12</span><span class="oth">)</span><br />
+</div></tt><br />
+<br \>
+</div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> None<br \>
+<br \>
+</ul></div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><b>LPrint</b></tt> is not supported in the <i><a href="CompilerOptlang.html">-lang fb</a></i> dialect. In this dialect the printer must be properly opened with <tt><a href="KeyPgOpenLpt.html">Open Lpt</a></tt> and <tt><a href="KeyPgPrintPp.html">Print #</a></tt> must be used to print.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgOpenLpt.html">Open Lpt</a></tt><br \>
+<li> <tt><a href="KeyPgPrint.html">Print</a></tt><br \>
+<li> <tt><a href="KeyPgPrintPp.html">Print #</a></tt><br \>
+<li> <tt><a href="KeyPgWrite.html">Write</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

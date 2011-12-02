@@ -1,0 +1,102 @@
+<html>
+<head>
+<title>For...Next</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">For...Next</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Control flow statement for looping<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<b>For</b> <i>iterator</i> [ <a href="KeyPgAs.html">As</a> <a href="DataType.html">datatype</a> ] = <i>startvalue</i> <b>To</b> <i>endvalue</i> [ <b>Step</b> <i>stepvalue</i> ]<br \>
+<div class="fb_indent">[ <i>statement block</i> ]<br \>
+</div><b>Next</b> [ <i>iterator</i> ]<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+<tt><i>iterator</i></tt><br \>
+<div class="fb_indent">a variable identifier that is used to iterate from an initial value to an end value<br \>
+</div><tt><i>datatype</i></tt><br \>
+<div class="fb_indent">If specified, the variable <tt><i>iterator</i></tt> will automatically be declared with the type <tt><i>datatype</i></tt>.<br \>
+</div><tt><i>startvalue</i></tt><br \>
+<div class="fb_indent">an expression that denotes the starting value of the iterator<br \>
+</div><tt><i>endvalue</i></tt><br \>
+<div class="fb_indent">an expression used to compare with the value of the iterator<br \>
+</div><tt><i>stepvalue</i></tt><br \>
+<div class="fb_indent">an expression that is added to the iterator after every iteration<br \>
+<br \>
+</div></div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+A <tt><b>For...Next</b></tt> loop initializes <tt><i>iterator</i></tt> to <tt><i>startvalue</i></tt>, then executes the <tt><i>statement block</i></tt>'s, incrementing <tt><i>iterator</i></tt> by <tt><i>stepvalue</i></tt> until it reaches <tt><i>endvalue</i></tt>. If <tt><i>stepvalue</i></tt> is not explicitly given it will set to 1.<br \>
+<br \>
+The values of <tt><i>stepvalue</i></tt> and <tt><i>endvalue</i></tt> are stored internally immediately following execution of the <tt><b>For</b></tt> statement and thus neither can be changed inside the <tt><b>For</b></tt> loop. (the variables that define them can be changed, but changing those variables inside the <tt><b>For</b></tt> loop will not affect its execution. See examples)<br \>
+<br \>
+The <tt><i>iterator</i></tt> may be defined having the same scope as the <tt><b>For</b></tt> statement by using the <tt><a href="KeyPgAs.html">As</a> <a href="DataType.html">datatype</a></tt> syntax.  With this syntax, <i>iterator</i> is created and destroyed within the <tt><b>For...Next</b></tt> scope. See dialect differences below.<br \>
+<br \>
+If <tt><i>endvalue</i></tt> is less than <tt><i>startvalue</i></tt> then a negative <tt><i>stepvalue</i></tt> must be specified or the <tt><i>statement block</i></tt> will not execute at all, since <tt><i>startvalue</i></tt> compares greater than <tt><i>endvalue</i></tt>.<br \>
+<br \>
+The <tt><b>For</b></tt> statement causes the execution of the statements in the <tt><i>statement block</i></tt> until <tt><i>iterator</i></tt> compares <b>greater than</b> <tt><i>endvalue</i></tt> (or <b>less than</b> <tt><i>endvalue</i></tt> if <tt><i>stepvalue</i> &lt; 0</tt>). <tt><i>iterator</i></tt> will be incremented the amount of <tt><i>stepvalue</i></tt> following each execution of the <tt><i>statement block</i></tt>. If an increment is not given, <tt><i>iterator</i></tt> will be implicitly incremented by <tt>1</tt>.<br \>
+<br \>
+If an <tt><a href="KeyPgExit.html">Exit</a></tt> <tt><b>For</b></tt> statement is encountered inside the <tt><i>statement block</i></tt>, the loop is terminated, and execution resumes immediately following the enclosing <tt><b>Next</b></tt> statement. If a <tt><a href="KeyPgContinue.html">Continue</a></tt> <tt><b>For</b></tt> statement is encountered, the rest of the <tt><i>statement block</i></tt> is skipped and execution resumes at the FOR statement.<br \>
+<br \>
+Like all control flow statements, the <tt><b>For</b></tt> statement can be nested, that is, it can be used in a statement block of another <tt><b>For</b></tt> statement.<br \>
+<br \>
+<b>note</b>: When a negative <tt><i>stepvalue</i></tt> is specified, the <tt><b>For</b></tt> statement loops until <tt><i>iterator</i></tt> compares <i>less than</i> <tt><i>end_value</i></tt>.<br \>
+<br \>
+<tt><i>For</i></tt>, <tt><i>Next</i></tt>, and <tt><i>Step</i></tt> are operators that can be overloaded inside user defined types. See <a href="KeyPgOpFor.html">Operator For</a>, <a href="KeyPgOpNext.html">Operator Next</a>, <a href="KeyPgOpStep.html">Operator Step</a><br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="key">Dim</span>&nbsp;<span class="wrd">i</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Single</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"counting&nbsp;from&nbsp;3&nbsp;to&nbsp;0,&nbsp;with&nbsp;a&nbsp;step&nbsp;of&nbsp;-0.5"</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">i</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Single</span><br />
+<span class="key">For</span>&nbsp;<span class="wrd">i</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">3</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">0</span>&nbsp;<span class="key">Step</span>&nbsp;<span class="oth">-</span><span class="num">0.5</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"i&nbsp;is&nbsp;"</span>&nbsp;<span class="oth">&amp;</span>&nbsp;<span class="wrd">i</span><br />
+<span class="key">Next</span>&nbsp;<span class="wrd">i</span></div></tt><br />
+<tt><div class="freebasic">
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="wrd">i</span><span class="oth">,</span>&nbsp;<span class="wrd">j</span><span class="oth">,</span>&nbsp;<span class="wrd">k</span><span class="oth">,</span>&nbsp;<span class="wrd">toTemp</span><span class="oth">,</span>&nbsp;<span class="wrd">stepTemp</span><br />
+<span class="wrd">j</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">9</span><span class="oth">:</span>&nbsp;<span class="wrd">k</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">1</span><br />
+<br />
+<span class="key">For</span>&nbsp;<span class="wrd">i</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span>&nbsp;<span class="key">To</span>&nbsp;<span class="wrd">j</span>&nbsp;<span class="key">Step</span>&nbsp;<span class="wrd">k</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">j</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span><span class="oth">:</span>&nbsp;<span class="wrd">k</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span>&nbsp;<span class="com">''&nbsp;Changing&nbsp;j&nbsp;and&nbsp;k&nbsp;has&nbsp;no&nbsp;effect&nbsp;on&nbsp;the&nbsp;current&nbsp;loop.</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="wrd">i</span><span class="oth">;</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+<span class="key">Next</span>&nbsp;<span class="wrd">i</span><br />
+<span class="key">Print</span><br />
+<br />
+<span class="com">'&nbsp;Internally,&nbsp;this&nbsp;is&nbsp;what&nbsp;the&nbsp;above&nbsp;example&nbsp;does:</span><br />
+<span class="wrd">j</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">9</span><span class="oth">:</span>&nbsp;<span class="wrd">k</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">1</span><br />
+<br />
+<span class="wrd">i</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span><span class="oth">:</span>&nbsp;<span class="wrd">toTemp</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">j</span><span class="oth">:</span>&nbsp;<span class="wrd">stepTemp</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">k</span><br />
+<span class="key">Do</span>&nbsp;<span class="key">While</span>&nbsp;<span class="key">IIf</span><span class="oth">(</span><span class="wrd">stepTemp</span>&nbsp;<span class="oth">&gt;=</span>&nbsp;<span class="num">0</span><span class="oth">,</span>&nbsp;<span class="wrd">i</span>&nbsp;<span class="oth">&lt;=</span>&nbsp;<span class="wrd">toTemp</span><span class="oth">,</span>&nbsp;<span class="wrd">i</span>&nbsp;<span class="oth">&gt;=</span>&nbsp;<span class="wrd">toTemp</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">j</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span><span class="oth">:</span>&nbsp;<span class="wrd">k</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span>&nbsp;<span class="com">''&nbsp;Changing&nbsp;j&nbsp;and&nbsp;k&nbsp;has&nbsp;no&nbsp;effect&nbsp;on&nbsp;the&nbsp;current&nbsp;loop.</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="wrd">i</span><span class="oth">;</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">i</span>&nbsp;<span class="oth">+=</span>&nbsp;<span class="wrd">stepTemp</span><br />
+<span class="key">Loop</span><br />
+<span class="key">Print</span></div></tt><br />
+<br \>
+</div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
+<ul><li> In the <i><a href="CompilerOptlang.html">-lang qb</a></i> and <i><a href="CompilerOptlang.html">-lang fblite</a></i> dialects, variables declared inside a FOR..NEXT loop have a function-wide <a href="ProPgVariableScope.html">scope</a>  as in QB <br \>
+<li> In the <i><a href="CompilerOptlang.html">-lang fb</a></i> and <i><a href="CompilerOptlang.html">-lang deprecated</a></i> dialects, variables declared inside a <tt><b>For</b></tt>..<tt><b>Next</b></tt> block are visible only inside the block, and can't be accessed outside it.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgByref.html">ByRef</a></tt> arguments cannot be used as counters.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgContinue.html">Continue</a></tt><br \>
+<li> <tt><a href="KeyPgDoloop.html">Do...Loop</a></tt><br \>
+<li> <tt><a href="KeyPgExit.html">Exit</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

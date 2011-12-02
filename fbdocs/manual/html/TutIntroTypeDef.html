@@ -1,0 +1,361 @@
+<html>
+<head>
+<title>Introduction to the Type Def</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Introduction to the Type Def</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	<i>Written by <a href="WikiRick.html">rdc</a></i><br \>
+<br \>
+There are times when creating a program that you may want to define an aggregate structure such as a personnel record, or an enemy in a game. While you can do this using individual data types, it is hard to manage within  a program. Composite data types allow you to group together related data items into a single structure that can be manipulated as a single entity. FreeBasic offers two composite data types, the Type and Union. <br \>
+<br \>
+<div class="fb_header"> Types </div><br \>
+<br \>
+FreeBasic allows you to group several data types into a unified structure called a Type definition which you can use to describe these aggregate data structures.<br \>
+<br \>
+The basic structure of a type definition is:<br \>
+<br \>
+<tt><div class="freebasic">
+<span class="key">Type</span>&nbsp;<span class="wrd">typename</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Var</span>&nbsp;<span class="wrd">definition</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Var</span>&nbsp;<span class="wrd">definition</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">...</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Type</span><br />
+</div></tt><br />
+<br \>
+The Type-End Type block defines the scope of the definition. You define the elements of the type structure in the same manner as using the Dim keyword, without using Dim. The following code snippet shows how to build an employee type.<br \>
+<br \>
+<tt><div class="freebasic">
+<span class="key">Type</span>&nbsp;<span class="wrd">EmployeeType</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">fname</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span>&nbsp;<span class="oth">*</span>&nbsp;<span class="num">10</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">lname</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span>&nbsp;<span class="oth">*</span>&nbsp;<span class="num">10</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">empid</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">dept</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Type</span>&nbsp;&nbsp;&nbsp;&nbsp;<br />
+</div></tt><br />
+<br \>
+You can use any of the supported data types as data elements, including pointers and other type definitions. When you create the type definition, such as in the example above, you are just creating a template for the compiler. In order to use the type definition, you need to create a variable of the type, as the following code snippet illustrates.<br \>
+<br \>
+<tt><div class="freebasic">
+<span class="key">Dim</span>&nbsp;<span class="wrd">Employee</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">EmployeeType</span><br />
+</div></tt><br />
+<br \>
+Once you have created a variable of the type, you can access each element within the type using the dot notation <i>var_name.field_name</i>.  <br \>
+<br \>
+Using the above example, to access the fname field you would use: <br \>
+<br \>
+<tt><div class="freebasic">
+<span class="wrd">Employee.fname</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="oth">“</span><span class="wrd">Susan</span><span class="oth">”</span><br />
+</div></tt><br />
+<br \>
+<div class="fb_header"> Using With </div><br \>
+<br \>
+To access multiple fields at a time, you can use the With-End With block. The following code snippet shows how to use the With block with the above example.<br \>
+<br \>
+<tt><div class="freebasic">
+<span class="key">With</span>&nbsp;<span class="wrd">Employee</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">.</span><span class="wrd">fname</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="quo">"Susan"</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">.</span><span class="wrd">lname</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="quo">"Jones"</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">.</span><span class="wrd">empid</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">1001</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">.</span><span class="wrd">dept</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">24</span><br />
+<span class="key">End</span>&nbsp;<span class="key">With</span>&nbsp;&nbsp;&nbsp;&nbsp;<br />
+</div></tt><br />
+<br \>
+The compiler will automatically bind the variable Employee to the individual data elements within the With block. Not only does mean that you don't have as much typing, but the structure is optimized and is a bit faster than using the full dot notation.<br \>
+<br \>
+<div class="fb_header"> Passing Types to Subroutines and Functions </div><br \>
+<br \>
+One advantage to using types in your program is that you can pass the structure to a subroutine or function and operate on the structure as a whole. The following code fragment shows a partial subroutine definition.<br \>
+<br \>
+<tt><div class="freebasic">
+<span class="key">Sub</span>&nbsp;<span class="wrd">UpdateEmployeeDept</span><span class="oth">(</span><span class="key">ByRef</span>&nbsp;<span class="wrd">Emp</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">EmployeeType</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">.</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">.</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">.</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Sub</span><br />
+</div></tt><br />
+<br \>
+Notice that the parameter is qualified with Byref. This is important since you want to update the type within the subroutine. There are two parameter passing modes in FreeBasic: ByRef and Byval. <br \>
+<br \>
+<b> Byref and Byval: A Quick Introduction </b><br \>
+<br \>
+Byref and Byval tell the compiler how to pass a reference to the subroutine or function. When you use Byref, or <i>By Reference</i>, you are passing a pointer reference to the parameter, and any changes you make to the parameter inside the sub or func will be reflected in the actual variable that was passed. In other words, the Byref parameter points to the actual variable in memory.<br \>
+<br \>
+Byval, or <i>By Value</i>, on the other hand makes a copy of the parameter, and any changes you make inside the sub or func are local and will not be reflected in the actual variable that was passed. The Byval parameter points to a copy of the variable not the actual variable itself.<br \>
+<br \>
+The default for FreeBasic .17 is to pass parameters using Byval. In order to change a passed parameter, you need to specify the Byref qualifier. In this example, the subroutine updates the the department id of the employee type, so the parameter is qualified as Byref so that the subroutine can update the dept field of the type variable.<br \>
+<br \>
+On the other hand you may not need to update the type as in the following code fragment.<br \>
+<br \>
+<tt><div class="freebasic">
+<span class="key">Sub</span>&nbsp;<span class="wrd">PrintEmployeeRecord</span><span class="oth">(</span><span class="wrd">Emp</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">EmployeeType</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">.</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">.</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">.</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Sub</span><br />
+</div></tt><br />
+<br \>
+In this sub you are just printing the employee record to the screen or a printer and do not need to change anything in the type variable. Here the default Byval is used which passes a copy  of the employee record to the sub rather than a reference to the variable. By using Byval in this case, you won't accidentally change something in the type variable that you didn't intend to change.<br \>
+<br \>
+You should only use Byref if you intend to change the parameter data. It is much safer to use Byval in cases where you need to have the parameter data, but want to prevent accidental changes to the data. These accidental changes generate hard-to-find bugs in your program.<br \>
+<br \>
+<div class="fb_header"> Types Within Types </div><br \>
+<br \>
+In addition to the intrinsic data types, type fields can also be based on a type definition. Why would you want to do this? One reason is data abstraction. The more general your data structures, the more you can reuse the code in other parts of your program. The less code you have to write, the less chance of errors finding their way into your program. <br \>
+<br \>
+Using the Employee example, suppose for a moment that you needed to track more dept information than just the department id. You might need to keep track of the department manager, the location of the department, such as the floor or the building, or the main telephone number of the department. By putting this information into a separate type definition, you could use this information by itself, or as part of another type definition such as the Employee type. By generalizing your data structures, your program will be smaller, and much more robust.<br \>
+<br \>
+Using a type within a type is the same as using one of the intrinsic data types. The following code snippets illustrates an expanded department type and an updated employee type.<br \>
+<br \>
+<tt><div class="freebasic">
+<span class="key">Type</span>&nbsp;<span class="wrd">DepartmentType</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">id</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">managerid</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">floor</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Type</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+<br />
+<span class="key">Type</span>&nbsp;<span class="wrd">EmployeeType</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">fname</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span>&nbsp;<span class="oth">*</span>&nbsp;<span class="num">10</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">lname</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span>&nbsp;<span class="oth">*</span>&nbsp;<span class="num">10</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">empid</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">dept</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DepartmentType</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Type</span><br />
+<br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">Employee</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">EmployeeType</span><br />
+</div></tt><br />
+<br \>
+Notice that in the Employee definition the dept field is defined as DepartmentType rather than as one of the intrinsic data types. To access the department information within the Employee type, you use the compound dot notation to access the dept fields.<br \>
+<br \>
+<tt><div class="freebasic">
+<span class="wrd">Employee.dept.id</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">24</span><br />
+<span class="wrd">Employee.dept.managerid</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">1012</span><br />
+<span class="wrd">Employee.dept.floor</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">13</span><br />
+</div></tt><br />
+<br \>
+The top level of the type definition is Employee, so that reference comes first. Since dept is now a type definition as well, you need to use the dept  identifier to access the individual fields within the DepartmentType. Employee refers to the employee type, dept refers to the department type and id, managerid and floor are fields within the department type.<br \>
+<br \>
+You can even carry this further, by including a type within a type within a type. You would simply use the dot notation of the additional type level as needed. While there is no limit on the levels of nested type definitions, it gets to be a bit unwieldy when used with several levels.<br \>
+<br \>
+<div class="fb_header"> With and Nested Types </div><br \>
+<br \>
+You can also use the With-End With block with nested types, by nesting the With block, as illustrated in the following code snippet.<br \>
+<br \>
+<tt><div class="freebasic">
+<span class="key">With</span>&nbsp;<span class="wrd">Employee</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">.</span><span class="wrd">fname</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="quo">"Susan"</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">.</span><span class="wrd">lname</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="quo">"Jones"</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">.</span><span class="wrd">empid</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">1001</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">With</span>&nbsp;<span class="oth">.</span><span class="wrd">dept</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">.</span><span class="wrd">id</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">24</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">.</span><span class="wrd">managerid</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">1012</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">.</span><span class="wrd">floor</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">13</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">End</span>&nbsp;<span class="key">With</span><br />
+<span class="key">End</span>&nbsp;<span class="key">With</span><br />
+</div></tt><br />
+<br \>
+Notice that the second With uses the dot notation, .dept, to specify the next level of type definitions. When using nested With blocks, be sure that you match all the End With statements with their correct With statements to avoid a compile error.<br \>
+<br \>
+<div class="fb_header"> Type Assignments </div><br \>
+<br \>
+Extending the idea of data abstraction further, it would be nice to be able to separate the initialization of the department type from the initialization of the employee type. By separating the two functions, you can easily add additional department information as needed. This is where you can use type assignments. <br \>
+<br \>
+Just as you can assign one intrinsic data type to another, you can assign one type variable to another type variable, providing they share the same type definition.<br \>
+<br \>
+The following code snippet abstracts the department initialization function and assigns the result to the department type within the Employee type.<br \>
+<br \>
+<tt><div class="freebasic">
+<span class="com">'This&nbsp;function&nbsp;will&nbsp;init&nbsp;the&nbsp;dept&nbsp;type&nbsp;and&nbsp;return&nbsp;it&nbsp;to&nbsp;caller</span><br />
+<span class="key">Function</span>&nbsp;<span class="wrd">InitDept</span><span class="oth">(</span><span class="wrd">deptid</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DepartmentType</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="wrd">tmpDpt</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DepartmentType</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Select</span>&nbsp;<span class="key">Case</span>&nbsp;<span class="wrd">deptid</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Case</span>&nbsp;<span class="num">24</span>&nbsp;<span class="com">'dept&nbsp;24</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">With</span>&nbsp;<span class="wrd">tmpDpt</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">.</span><span class="wrd">id</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">deptid</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">.</span><span class="wrd">managerid</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">1012</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">.</span><span class="wrd">floor</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">13</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">End</span>&nbsp;<span class="key">With</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Case</span>&nbsp;<span class="num">48</span>&nbsp;<span class="com">'dept&nbsp;48</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">With</span>&nbsp;<span class="wrd">tmpDpt</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">.</span><span class="wrd">id</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">deptid</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">.</span><span class="wrd">managerid</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">1024</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">.</span><span class="wrd">floor</span>&nbsp;&nbsp;<span class="oth">=</span>&nbsp;<span class="num">12</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">End</span>&nbsp;<span class="key">With</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Case</span>&nbsp;<span class="key">Else</span>&nbsp;<span class="com">'In&nbsp;case&nbsp;a&nbsp;bad&nbsp;department&nbsp;id&nbsp;was&nbsp;passed</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">With</span>&nbsp;<span class="wrd">tmpDpt</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">.</span><span class="wrd">id</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">.</span><span class="wrd">managerid</span>&nbsp;&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">.</span><span class="wrd">floor</span>&nbsp;&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">End</span>&nbsp;<span class="key">With</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">End</span>&nbsp;<span class="key">Select</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">'Return&nbsp;the&nbsp;dept&nbsp;info</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Return</span>&nbsp;<span class="wrd">tmpDpt</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Function</span><br />
+<br />
+<span class="com">'Create&nbsp;an&nbsp;instance&nbsp;of&nbsp;the&nbsp;type</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">Employee</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">EmployeeType</span><br />
+<br />
+<span class="com">'Initialize&nbsp;the&nbsp;Employee&nbsp;type</span><br />
+<span class="key">With</span>&nbsp;<span class="wrd">Employee</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">.</span><span class="wrd">fname</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="quo">"Susan"</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">.</span><span class="wrd">lname</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="quo">"Jones"</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">.</span><span class="wrd">empid</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">1001</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">.</span><span class="wrd">dept</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">InitDept</span><span class="oth">(</span><span class="num">24</span><span class="oth">)</span>&nbsp;<span class="com">'get&nbsp;dept&nbsp;info</span><br />
+<span class="key">End</span>&nbsp;<span class="key">With</span><br />
+</div></tt><br />
+<br \>
+As you can see in the snippet, the dept field of the employee type is initialized with a function call. The InitDept function returns a DepartmentType and the compiler will assign that type to the dept field of the Employee record. <br \>
+<br \>
+By just adding a simple function to the program, you have made the program easier to maintain. If a new department is created, you can simply update the InitDept function with the new department information, recompile and the program is ready to go.<br \>
+<br \>
+<div class="fb_header"> Bit Fields </div><br \>
+<br \>
+There is yet another data type that can be used in type definitions, the bit field. Bit fields are defined as <i>variable_name: bits As DataType</i>. The variable name must be followed with a colon, the number of bits, followed by the data type. Only integer data types are allowed within a bit field. Bit fields are useful when you need to keep track of boolean type information. A bit can be either 0 or 1, which may represent Yes or No, On or Off or even Black and White. <br \>
+<br \>
+The following code snippet illustrates a bit field definition.<br \>
+<br \>
+<tt><div class="freebasic">
+<span class="key">Type</span>&nbsp;<span class="wrd">BitType</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">b1</span><span class="oth">:</span>&nbsp;<span class="num">1</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">b2</span><span class="oth">:</span>&nbsp;<span class="num">4</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Type</span><br />
+</div></tt><br />
+<br \>
+b1 is defined as a single bit, and b2 is defined as four bits. You initialize the bitfields by passing the individual bits to the type fields.<br \>
+<br \>
+<tt><div class="freebasic">
+<span class="wrd">myBitType.b1</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">1</span><br />
+<span class="wrd">myBitType.b2</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">1101</span><br />
+</div></tt><br />
+<br \>
+The data type of the bit field determines how many bits you can declare in a bit field. Since an integer is 32 bits long, you could declare up to 32 bits in the field. However, in most cases you would declare a single bit for each field, and use a number of fields to define the bit masking that you wish to use. Using a single bit simplifies the coding you need to do to determine if a bit is set or cleared and allows you to easily identify what a bit means within the type definition.<br \>
+<br \>
+<div class="fb_header"> The Field Property </div><br \>
+<br \>
+When you create a variable of a type definition, the type is padded in memory. The padding allows for faster access of the type members since the type fields are aligned on a 4 byte or Word boundary. However, this can cause problems when trying to read a type record from a file that is not padded. You can use the use field property to change the padding of a type definition. <br \>
+<br \>
+The field keyword is used right after the type name and can have the values 1, for 1 byte alignment (no padding), 2 for 2 byte alignment and 4 for 4 byte alignment. To define a type with no padding you would use the following syntax.<br \>
+<br \>
+<tt><div class="freebasic">
+<span class="key">Type</span>&nbsp;<span class="wrd">myType</span>&nbsp;<span class="key">Field</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">1</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">v1</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">v2</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Byte</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Type</span><br />
+</div></tt><br />
+<br \>
+For 2 byte alignment you would use field = 2. If no field = property is assigned, then the padding will be 4 bytes. If you are reading a type definition created by FreeBasic using the default alignment, then you do not need to use the field property.<br \>
+<br \>
+<div class="fb_table"><table><tr><td> If you are reading a Quick Basic type record, then you will need to use field = 1, as QB used byte alignment by default.</td></tr></table></div><br \>
+<br \>
+<div class="fb_header"> Type Initialization </div><br \>
+<br \>
+You can initialize a type definition when you dimension the type just as you can any of the intrinsic variables. The following code snippet illustrates the syntax.<br \>
+<br \>
+<tt><div class="freebasic">
+<span class="key">Type</span>&nbsp;<span class="wrd">aType</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">a</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">b</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Byte</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">c</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span>&nbsp;<span class="oth">*</span>&nbsp;<span class="num">10</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Type</span><br />
+<br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">myType</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">aType</span>&nbsp;<span class="oth">=&gt;</span>&nbsp;<span class="oth">(</span><span class="num">12345</span><span class="oth">,</span>&nbsp;<span class="num">12</span><span class="oth">,</span>&nbsp;<span class="quo">"Hello"</span><span class="oth">)</span><br />
+</div></tt><br />
+<br \>
+In the Dim statement, the arrow operator <i>+&gt;</i> is used to tell the compiler that you are initializing the type variable. The type element values must be enclosed in parenthesis, and separated by commas. The order of the value list corresponds to the order of the type elements, where a will be set to 12345, b to 12 and c to “Hello”. <br \>
+<br \>
+<div class="fb_table"><table><tr><td> You cannot initialize a dynamic string within a type definition using this method. The string must be fixed length.</td></tr></table></div><br \>
+<br \>
+Initializing a type definition in a Dim statement is useful when you need to have a set of initial values for a type, or values that will not change during program execution. Since the values are known at compile time, the compiler can doesn't have to spend cycles loading the values during runtime.<br \>
+<br \>
+<div class="fb_header"> Unions </div><br \>
+<br \>
+Unions look similar to Types in their definition.<br \>
+<br \>
+<tt><div class="freebasic">
+<span class="key">Union</span>&nbsp;<span class="wrd">aUnion</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">b</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Byte</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">s</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Short</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">i</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Union</span><br />
+</div></tt><br />
+<br \>
+If this were a Type, you could access each field within the definition. For a Union however, you can only access one field at any given time; all the fields within a Union occupy the same memory segment, and the size of the Union is the size of the largest member. <br \>
+<br \>
+In this case, the Union would occupy four bytes, the size of an Integer, with the <i>b</i> field occupying 1 byte, the <i>s</i> field occupying 2 bytes, and the <i>i</i> occupying the full 4 bytes. Each field starts at the first byte, so the <i>s</i> field would include the <i>b</i> field, and the <i>i</i> field would include both the <i>b</i> and <i>s</i> fields.<br \>
+<br \>
+<div class="fb_header"> Types in Unions </div><br \>
+<br \>
+A good example of using a type definition in a union is the Large_Integer definition found in winnt.bi. The Large_Integer data type is used in a number of Windows functions within the C Runtime Library. The following code snippet shows the Large_Integer definition.<br \>
+<br \>
+<tt><div class="freebasic">
+<span class="key">Union</span>&nbsp;<span class="wrd">LARGE_INTEGER</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Type</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">LowPart</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DWORD</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">HighPart</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Long</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">End</span>&nbsp;<span class="key">Type</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">QuadPart</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">LONGLONG</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Union</span><br />
+</div></tt><br />
+<br \>
+The Dword data type is defined in windef.bi as a FreeBasic Uinteger, and the Longlong type is defined as a Longint. A Long is just an alias for the integer data type. Remember that a type occupies contiguous memory locations, so the HighPart field follows the LowPart part field in memory. Since this is a union, the type occupies the same memory segment as the QuadPart field. <br \>
+<br \>
+When you set QuardPart to a large integer value, you are also setting the values of the type fields, which you can then extract as the LowPart and HighPart. You can also do the reverse; that is by setting the LowPart and HighPart of the type, you are setting the value of the QuadPart field.<br \>
+<br \>
+As you can see, using a type within a union is an easy way to set or retrieve individual values of a component data type without resorting to a lot of conversion code. The layout of the memory segments does the conversion for you, providing that the memory segments make sense within the context of the component type. <br \>
+<br \>
+In the Large_Integer case, the LowPart and HighPart have been defined to return the appropriate component values. Using values other than Dword and Long would not return correct values for LowPart and HighPart. You need to make sure when defining a type within a union, you are segmenting the union memory segment correctly within the type definition.<br \>
+<br \>
+<div class="fb_header"> Unions in Types </div><br \>
+<br \>
+A union within a type definition is an efficient way to manage data when one field within a type can only one of several values. The most common example of this is the Variant data type found in other programing languages.<br \>
+<br \>
+<div class="fb_table"><table><tr><td> FreeBasic does not have a native Variant data type at this time. However, by using the extended Type syntax, you could create a Variant data type for use in your program.</td></tr></table></div><br \>
+<br \>
+When using a Union within a type it is common practice to create an id field within the type that indicates what the union contains at any given moment. The following code snippet illustrates this concept.<br \>
+<br \>
+<tt><div class="freebasic">
+<span class="com">'Union&nbsp;field&nbsp;ids</span><br />
+<span class="def">#define&nbsp;vInteger&nbsp;0<br />
+#define&nbsp;vDouble&nbsp;1<br />
+</span><br />
+<span class="com">'Define&nbsp;type&nbsp;def&nbsp;with&nbsp;variable&nbsp;data&nbsp;fields</span><br />
+<span class="key">Type</span>&nbsp;<span class="wrd">vType</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">vt_id</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Union</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">d</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Double</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">i</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">End</span>&nbsp;<span class="key">Union</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Type</span><br />
+</div></tt><br />
+<br \>
+The union definition here is called an anonymous union since it isn't defined with a name. The <i>vt_id</i> field of the type definition indicates the value of the union. To initialize the type you would use code like the following.<br \>
+<br \>
+<tt><div class="freebasic">
+<span class="key">Dim</span>&nbsp;<span class="wrd">myVarianti</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">vType</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">myVariantd</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">vType</span><br />
+<br />
+<span class="wrd">myVarianti.vt_id</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">vInteger</span><br />
+<span class="wrd">myVarianti.i</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">300</span><br />
+<br />
+<span class="wrd">myVariantd.vt_id</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">vDouble</span><br />
+<span class="wrd">myVariantd.d</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">356.56</span><br />
+</div></tt><br />
+<br \>
+<i>myVarianti</i> contains an integer value so the id is set to vInteger. <i>myVariantd</i> contains a double so the id is set to vDouble. If you were to create a subroutine that had a vType parameter, you could examine the <i>vt_type</i> field to determine whether an integer or double had been passed to the subroutine.<br \>
+<br \>
+<div class="fb_table"><table><tr><td> You cannot use dynamic strings within a union.</td></tr></table></div><br \>
+<br \>
+Using a combination of unions and types within a program allows you to design custom data types that have a lot of flexibility, but care must be taken to ensure that you are using the data constructs correctly. Improper use of these data types can lead to hard-to-find bugs. The benefits however, out-weigh the risks and once mastered, are a powerful programming tool.<br \>
+
+</div>
+</div> 
+</div> 
+</body>
+</html>

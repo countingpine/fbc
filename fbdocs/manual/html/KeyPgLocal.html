@@ -1,0 +1,67 @@
+<html>
+<head>
+<title>Local</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Local</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Error handling statement to set the current error handler<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+On <b>Local</b> Error Goto <i>label</i><br \>
+</tt><br \>
+</div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
+On <b>Local</b> Error Goto <i>label</i><br \>
+</tt><br \>
+</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+<tt><i>label</i></tt><br \>
+<div class="fb_indent">label to jump to when error occurs<br \>
+<br \>
+</div></div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+The <tt><b>Local</b></tt> clause in an <tt><a href="KeyPgOnerror.html">On Error</a></tt> construction allows to define an error handler in the same <tt><a href="KeyPgSub.html">Sub</a></tt>/<tt><a href="KeyPgFunction.html">Function</a></tt> the <tt><b>On Local Error</b></tt> is. <tt><a href="KeyPgExit.html">Exit</a></tt> <tt><a href="KeyPgSub.html">Sub</a></tt>/<tt><a href="KeyPgFunction.html">Function</a></tt> must be used before the start of the error handler.<br \>
+<br \>
+Notice the program must be compiled with <i><a href="CompilerOpte.html">-e</a></i> or <i><a href="CompilerOptex.html">-ex</a></i> option for the QB-like error handling to work.<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="com">''&nbsp;compile&nbsp;with&nbsp;-lang&nbsp;fblite&nbsp;or&nbsp;qb</span><br />
+<br />
+<span class="def">#lang&nbsp;"fblite"<br />
+</span><br />
+<span class="key">Declare</span>&nbsp;<span class="key">Sub</span>&nbsp;<span class="wrd">foo</span><br />
+<br />
+<span class="wrd">foo</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"ok"</span><br />
+<span class="key">Sleep</span><br />
+<br />
+<span class="key">Sub</span>&nbsp;<span class="wrd">foo</span><br />
+&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="wrd">errno</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;<span class="key">On</span>&nbsp;<span class="key">Local</span>&nbsp;<span class="key">Error</span>&nbsp;<span class="key">Goto</span>&nbsp;<span class="wrd">fail</span><br />
+&nbsp;&nbsp;<span class="key">Open</span>&nbsp;<span class="quo">"xzxwz.zwz"</span>&nbsp;<span class="key">For</span>&nbsp;<span class="key">Input</span>&nbsp;<span class="key">As</span>&nbsp;<span class="oth">#</span><span class="num">1</span><br />
+&nbsp;&nbsp;<span class="key">On</span>&nbsp;<span class="key">Local</span>&nbsp;<span class="key">Error</span>&nbsp;<span class="key">Goto</span>&nbsp;<span class="num">0</span><br />
+&nbsp;&nbsp;<span class="key">Exit</span>&nbsp;<span class="key">Sub</span><br />
+<span class="wrd">fail</span><span class="oth">:</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">'&nbsp;here&nbsp;starts&nbsp;the&nbsp;error&nbsp;handler</span><br />
+&nbsp;&nbsp;<span class="wrd">errno</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">Err</span><br />
+&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"Error&nbsp;"</span><span class="oth">;</span>&nbsp;<span class="wrd">errno</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">'&nbsp;just&nbsp;print&nbsp;the&nbsp;error&nbsp;number</span><br />
+&nbsp;&nbsp;<span class="key">Sleep</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Sub</span><br />
+</div></tt><br />
+</div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> The LOCAL clause comes from PDS 7.1. QB 4.5 does not allow local error handling.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <a href="ProPgErrorHandling.html">Error Handling</a><br \>
+<br \>
+</ul><br \>
+</div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

@@ -1,0 +1,80 @@
+<html>
+<head>
+<title>LOC</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">LOC</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Returns the file position where the last file read/write was performed<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgFunction.html">Function</a> <b>LOC</b> ( <a href="KeyPgByval.html">ByVal</a> <i>filenum</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a> ) <a href="KeyPgAs.html">As</a> <a href="KeyPgLongint.html">LongInt</a><br \>
+</tt><br \>
+</div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
+<i>result</i> = <b>LOC</b>( <i>filenum</i> )<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+<tt><i>filenum</i></tt><br \>
+<div class="fb_indent">The file number of an open file.<br \>
+<br \>
+</div></div><div class="fb_sect_title">Return Value</div><div class="fb_sect_cont"><br \>
+The file position where the last read/write was performed.<br \>
+<br \>
+</div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+Returns the position where the last file read/write was performed.<br \>
+<br \>
+The position is indicated in records:<br \>
+<div class="fb_indent">In files opened FOR RANDOM the record length specified when file was opened is used<br \>
+In  text files (FOR INPUT|OUTPUT|APPEND, a record length of 128 bytes is supposed.<br \>
+In files opened for BINARY a 1 byte record length is used.<br \>
+<br \>
+</div>In FreeBASIC the file position is 1 based, the first record of a file is record 1.<br \>
+<br \>
+When used with a serial device, <tt><b>LOC</b></tt> returns the number of bytes waiting to be read from the serial device's input buffer.<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="key">Dim</span>&nbsp;<span class="wrd">b</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span><br />
+<br />
+<span class="key">If</span>&nbsp;<span class="key">Open</span>&nbsp;<span class="key">Com</span>&nbsp;<span class="oth">(</span><span class="quo">"com1:9600,n,8,1,cs,rs,ds,bin"</span>&nbsp;<span class="key">For</span>&nbsp;<span class="key">Binary</span>&nbsp;<span class="key">As</span>&nbsp;<span class="oth">#</span><span class="num">1</span><span class="oth">)</span>&nbsp;<span class="oth">&lt;&gt;</span>&nbsp;<span class="num">0</span>&nbsp;<span class="key">Then</span><br />
+&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"unable&nbsp;to&nbsp;open&nbsp;serial&nbsp;port"</span><br />
+&nbsp;&nbsp;<span class="key">End</span><br />
+<span class="key">End</span>&nbsp;<span class="key">If</span><br />
+<br />
+<span class="key">Print</span>&nbsp;<span class="quo">"Sending&nbsp;command:&nbsp;AT"</span><br />
+<br />
+<span class="key">Print</span>&nbsp;<span class="oth">#</span><span class="num">1</span><span class="oth">,</span>&nbsp;<span class="quo">"AT"</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="key">Chr</span><span class="oth">(</span><span class="num">13</span><span class="oth">,</span>&nbsp;<span class="num">10</span><span class="oth">);</span><br />
+<br />
+<span class="key">Sleep</span>&nbsp;<span class="num">500</span><span class="oth">,</span><span class="num">1</span><br />
+<br />
+<span class="key">Print</span>&nbsp;<span class="quo">"Response:"</span><br />
+<br />
+<span class="key">While</span><span class="oth">(</span>&nbsp;<span class="key">LOC</span><span class="oth">(</span><span class="num">1</span><span class="oth">)</span>&nbsp;<span class="oth">&gt;</span>&nbsp;<span class="num">0</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;<span class="wrd">b</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">Input</span><span class="oth">(</span><span class="key">LOC</span><span class="oth">(</span><span class="num">1</span><span class="oth">),</span>&nbsp;<span class="num">1</span><span class="oth">)</span><br />
+&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="wrd">b</span><span class="oth">;</span><br />
+<span class="key">Wend</span><br />
+<br />
+<span class="key">Close</span>&nbsp;<span class="oth">#</span><span class="num">1</span><br />
+</div></tt><br />
+<br \>
+</div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> !!WRITEME!! ?<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgLof.html">LOF</a></tt><br \>
+<li> <tt><a href="KeyPgEof.html">EOF</a></tt><br \>
+<li> <tt><a href="KeyPgSeekreturn.html">Seek (Function)</a></tt><br \>
+<li> <tt><a href="KeyPgOpen.html">Open</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

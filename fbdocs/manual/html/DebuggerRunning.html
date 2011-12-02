@@ -1,0 +1,42 @@
+<html>
+<head>
+<title>Debugging</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Debugging</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	<br \>
+<div class="fb_indent">The debugger is in the bin\win32 or bin\dos directories (the <b>GDB</b>.EXE file), for the Windows and DOS versions respectively. It usually comes already installed in most Linux distros.<br \>
+<br \>
+(Note: all commands should be typed without quotes and then [return] must be pressed.)<br \>
+<br \>
+</div><ul><li> Compile the sources using the -g cmd-line option to add debugging support.<br \>
+<li> Load it in GDB using: <tt>"gdb myapplicationname.exe"</tt><br \>
+<li> Set the arguments to the application been debugged using: "set args arg1 arg2 argn". You can also run GDB and pass the arguments directly to the application been debugged: "gdb --args myapp.exe arg1 arg2 arg3".<br \>
+<li> If the executable isn't in the same directory of the source files where it was compiled, type: <tt>"dir path/to/my/application/sources"</tt>.<br \>
+<li> Place a breakpoint in the first line using: "b main". To place a breakpoint in a function called "abc" use: "b ABC" (note: all in uppercase, GDB is case sensitive by default, but you can use the "set language pascal" command to change GDB to case-insensitive mode).<br \>
+<li> Type "r" to start the application.<br \>
+<li> Type "n" to step over function calls. Keep pressing [return] to skip to the next line.<br \>
+<li> Type "s" to step into function calls. Same as above.<br \>
+<li> Type "c" to continue execution until the next breakpoint.<br \>
+<li> Use "print ABC" to show the contents of the variable called "abc". GDB supports pointer/pointer field dereferencing, indexing and arithmetics too, so "print *MYPOINTER" will also work. (note: undeclared variables or the ones with suffixes like % & ! # $ can't be printed).<br \>
+<li> Use "disp ABC" to display the contents of a variable called "abc".<br \>
+<li> Use "watch ABC" to stop each time a variable called "abc" is changed.<br \>
+<li> Use "r" again to restart the application when finished.<br \>
+<li> Type "q" to quit.<br \>
+<li> Type "help" to see a list of commands, there are many others.<br \>
+<br \>
+<br \>
+<br \>
+</ul>
+</div>
+</div> 
+</div> 
+</body>
+</html>

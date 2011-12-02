@@ -1,0 +1,106 @@
+<html>
+<head>
+<title>Palette</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Palette</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Customizes colors in modes with paletted colors<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<b>Palette</b> [Get] [<i>index</i>, <i>color</i>]<br \>
+<b>Palette</b> [Get] [<i>index</i>, <i>r</i>, <i>g</i>, <i>b</i>]<br \>
+<b>Palette</b> [Get] Using <i>arrayname(idx)</i><br \>
+</tt><br \>
+</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+<tt>Get</tt><br \>
+<div class="fb_indent">indicates getting palette information rather than setting palette information<br \>
+</div><tt>Using</tt><br \>
+<div class="fb_indent">indicates using array of color values<br \>
+</div><tt><i>index</i></tt><br \>
+<div class="fb_indent">palette index<br \>
+</div><tt><i>color</i></tt><br \>
+<div class="fb_indent">color attribute<br \>
+</div><tt><i>r</i></tt><br \>
+<div class="fb_indent">red color component<br \>
+</div><tt><i>g</i></tt><br \>
+<div class="fb_indent">green color component<br \>
+</div><tt><i>b</i></tt><br \>
+<div class="fb_indent">blue color component<br \>
+</div><tt><i>arrayname(idx)</i></tt><br \>
+<div class="fb_indent">array and index to get/set color attributes<br \>
+<br \>
+</div></div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+The <tt><b>Palette</b></tt> statement is used to retrieve or customize the current palette for graphics modes with a color depth of up to 8bpp; using <tt><b>Palette</b></tt> while in a mode with a higher color depth will have no effect. Calling <tt><b>Palette</b></tt> with no argument restores the default palette for current graphics mode, as set by the <tt><a href="KeyPgScreengraphics.html">Screen (Graphics)</a></tt> statement.<br \>
+The GfxLib sets a <a href="GfxDefPalettes.html">default palette</a> when a <a href="KeyPgScreengraphics.html">Screen</a> mode is initialized.<br \>
+<br \>
+<b>First form</b><br \>
+<div class="fb_indent">If you specify index and color, these are dependent on the current mode:<br \>
+<div class="fb_table"><table><tr><td>Screen mode</td><td>index range</td><td>color range</td></tr><tr><td>1</td><td>0-3</td><td>0-15</td></tr><tr><td>2</td><td>0-1</td><td>0-15</td></tr><tr><td>7,8</td><td>0-15</td><td>0-15</td></tr><tr><td>9</td><td>0-15</td><td>0-63</td></tr><tr><td>11</td><td>0-1</td><td>see below</td></tr><tr><td>12</td><td>0-15</td><td>see below</td></tr><tr><td>13 to 21</td><td>0-255</td><td> see below</td></tr></table></div><br \>
+In screen modes 1, 2, 7, 8 and 9 you can assign to each color index one of the colors in the available range. In other screen modes, the color must be specified in the form &hBBGGRR, where BB, GG and RR are the blue, green and red components ranging <tt>&h0</tt>-<tt>&h3F</tt> in hexadecimal (0-63 in decimal). If you don't like hexadecimal form, you can use the following formula to compute the integer value to pass to this parameter:<br \>
+<tt>color = red <a href="KeyPgOpOr.html">Or</a> (green <a href="KeyPgOpShiftLeft.html">Shl</a> 8) <a href="KeyPgOpOr.html">Or</a> (blue <a href="KeyPgOpShiftLeft.html">Shl</a> 16)</tt><br \>
+Where red, green and blue must range <tt>0</tt>-<tt>63</tt>. Please note that color values accepted by <tt><b>Palette</b></tt> are <b>not</b> the in the same form as returned by the <tt><a href="KeyPgRgb.html">RGB</a></tt> macro (the red and blue fields are inverted, and the range is different); this is for backward compatibility with QB.<br \>
+<br \>
+</div><b>Second form</b><br \>
+<div class="fb_indent">In the second form, you specify the red, green and blue components for a palette entry directly, by calling <tt><b>Palette</b></tt> with 4 parameters. In this case <tt><i>r</i></tt>, <tt><i>g</i></tt> and <tt><i>b</i></tt> must be in the range <tt>0</tt>-<tt>255</tt>.<br \>
+</div><b>Third form</b><br \>
+<div class="fb_indent">Calling <tt><b>Palette Using</b></tt> allows to set a list of color values all at once; you should pass an array holding enough elements as the color indices available for your current graphics mode color depth (2 for 1bpp, 4 for 2bpp, 16 for 4bpp or 256 for 8bpp). The array elements must be integer color values in the form described above. The colors stored into <tt><i>arrayname</i></tt> starting with given <tt><i>idx</i></tt> index are then assigned to each palette index, starting with index 0.<br \>
+</div>Form 1 and 3 are for backward compatibility with QB; form 2 is meant to ease palette handling. Any change to the palette is immediately visible on screen.<br \>
+<br \>
+If the <tt><b>Get</b></tt> option is specified, <tt><b>Palette</b></tt> retrieves instead of setting color values for the current palette. The parameters have the same meaning as specified for the form being used, but in this case color, <tt><i>r</i></tt>, <tt><i>g</i></tt> and <tt><i>b</i></tt> must be variables passed by reference that will hold the color RGB values on function exit.<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="com">'&nbsp;Setting&nbsp;a&nbsp;single&nbsp;color,&nbsp;form&nbsp;1.</span><br />
+<span class="key">Screen</span>&nbsp;<span class="num">15</span><br />
+<span class="key">Locate</span>&nbsp;<span class="num">1</span><span class="oth">,</span><span class="num">1</span><span class="oth">:</span>&nbsp;<span class="key">Color</span>&nbsp;<span class="num">15</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"Press&nbsp;any&nbsp;key&nbsp;to&nbsp;change&nbsp;my&nbsp;color!"</span><br />
+<span class="key">Sleep</span><br />
+<span class="com">'&nbsp;Now&nbsp;change&nbsp;color&nbsp;15&nbsp;hues&nbsp;to&nbsp;bright&nbsp;red</span><br />
+<span class="key">Palette</span>&nbsp;<span class="num">15</span><span class="oth">,</span>&nbsp;<span class="num">&amp;h00003F</span><br />
+<span class="key">Sleep</span><br />
+</div></tt><br />
+<br \>
+<tt><div class="freebasic">
+<span class="com">'&nbsp;Getting&nbsp;a&nbsp;single&nbsp;color,&nbsp;form&nbsp;2.</span><br />
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="wrd">r</span><span class="oth">,</span>&nbsp;<span class="wrd">g</span><span class="oth">,</span>&nbsp;<span class="wrd">b</span><br />
+<span class="key">Screen</span>&nbsp;<span class="num">13</span><br />
+<span class="key">Palette</span>&nbsp;<span class="key">Get</span>&nbsp;<span class="num">32</span><span class="oth">,</span>&nbsp;<span class="wrd">r</span><span class="oth">,</span>&nbsp;<span class="wrd">g</span><span class="oth">,</span>&nbsp;<span class="wrd">b</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"Color&nbsp;32&nbsp;hues:"</span><br />
+<span class="key">Print</span>&nbsp;<span class="key">Using</span>&nbsp;<span class="quo">"Red:###&nbsp;Green:###&nbsp;Blue:###"</span><span class="oth">;</span>&nbsp;<span class="wrd">r</span><span class="oth">;</span>&nbsp;<span class="wrd">g</span><span class="oth">;</span>&nbsp;<span class="wrd">b</span><br />
+<span class="key">Sleep</span><br />
+</div></tt><br />
+<br \>
+<tt><div class="freebasic">
+<span class="com">'&nbsp;Getting&nbsp;whole&nbsp;palette,&nbsp;form&nbsp;3.</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">pal</span><span class="oth">(</span><span class="num">1</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">256</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">i</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+<span class="key">Screen</span>&nbsp;<span class="num">13</span><br />
+<span class="key">Palette</span>&nbsp;<span class="key">Get</span>&nbsp;<span class="key">Using</span>&nbsp;<span class="wrd">pal</span><br />
+<span class="key">For</span>&nbsp;<span class="wrd">i</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">1</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">16</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"Color"</span><span class="oth">;</span>&nbsp;<span class="wrd">i</span><span class="oth">;</span>&nbsp;<span class="quo">"&nbsp;="</span><span class="oth">;</span>&nbsp;<span class="key">Hex</span><span class="oth">(</span><span class="wrd">pal</span><span class="oth">(</span><span class="wrd">i</span><span class="oth">))</span><br />
+<span class="key">Next</span>&nbsp;<span class="wrd">i</span><br />
+<span class="key">Sleep</span><br />
+</div></tt><br />
+<br \>
+</div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> QB version did not support palette retrieval.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgScreengraphics.html">Screen (Graphics)</a></tt><br \>
+<li> <tt><a href="KeyPgColor.html">Color</a></tt><br \>
+<li> <tt><a href="KeyPgUsing.html">Using</a></tt><br \>
+<li> <tt><a href="GfxInternalFormats.html">Internal Pixel Formats</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

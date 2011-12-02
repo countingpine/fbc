@@ -1,0 +1,245 @@
+<html>
+<head>
+<title>Variable Scope</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Variable Scope</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Visibility and access rules for variables and objects<br \>
+<br \>
+A variable's scope refers to its visibility in a program. A variable is not visible (cannot be accessed) outside the scope in which it was declared. Where and how a variable is declared determines its scope.<br \>
+<br \>
+In FreeBASIC, there are 4 categories of scope: <b><i>local</i></b>, <b><i>shared</i></b>, <b><i>common</i></b> and <b><i>common shared</i></b>. Each of these scopes has different visibility rules, which are detailed below.<br \>
+<br \>
+<div class="fb_sect_title">Local Scope</div><div class="fb_sect_cont"><br \>
+<br \>
+Variables declared in the local scope are visible only in the most local instance of the IF, FOR, SCOPE, function, or module block in which they are declared.<br \>
+<br \>
+<ul><li> <tt><a href="KeyPgSub.html">Sub</a></tt>, <tt><a href="KeyPgFunction.html">Function</a></tt>, the main body, and each compound statement implicitly define a new local scope block. <br \>
+<li> Explicitly declared variables using <tt><a href="KeyPgDim.html">Dim</a></tt> or <tt><a href="KeyPgRedim.html">ReDim</a></tt> take the scope of the local most block in which they are declared. <br \>
+<li> Implicit variables take the scope of the the local most <tt><a href="KeyPgScope.html">Scope...End Scope</a></tt> block in which they are first used, otherwise take the scope of the <tt><a href="KeyPgSub.html">Sub</a></tt>, <tt><a href="KeyPgFunction.html">Function</a></tt>, or main body in which they are used. <br \>
+<br \>
+</ul>In the local scope, there is no visibility between module-level code and function level code. Furthermore, variables dimensioned within a block decision or loop statement will only be visible within the block in which they are dimensioned. Variables declared in the local scope of a module are not visible in any of the functions within that module. Similarly, local variables declared inside functions are not visible in the module-level code, nor any other function within the module.<br \>
+<br \>
+Variables declared inside <tt><a href="KeyPgScope.html">Scope</a></tt> blocks may only be declared of local scope, and are not visible outside the block. <tt><a href="KeyPgScope.html">Scope</a></tt> blocks, however, inherit the surrounding scope, so local variables declared outside the <tt><a href="KeyPgScope.html">Scope</a></tt> block will be visible inside (<i>see example program</i>).<br \>
+<br \>
+You can declare a variable to be of local scope explicitly by using the <tt><a href="KeyPgDim.html">Dim</a></tt> statement, or implicitly by simply introducing the variable (<i>see <a href="ProPgImplicitdeclarations.html">Implicit Declarations</a></i>). The example program <tt><b>local.bas</b></tt> demonstrates visibility rules for the local scope.<br \>
+<br \>
+<b>local.bas</b><br \>
+<tt><div class="freebasic">
+<span class="com">''&nbsp;visible&nbsp;only&nbsp;in&nbsp;this&nbsp;module</span><br />
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="wrd">local_moduleLevel1</span><br />
+<br />
+<span class="com">''&nbsp;OK.</span><br />
+<span class="key">Print</span>&nbsp;<span class="wrd">local_moduleLevel1</span><br />
+<br />
+<span class="key">Scope</span><br />
+&nbsp;&nbsp;<span class="com">''&nbsp;OK;&nbsp;SCOPE&nbsp;Blocks&nbsp;inherit&nbsp;outer&nbsp;scope</span><br />
+&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="wrd">local_moduleLevel1</span><br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;<span class="com">''&nbsp;visible&nbsp;only&nbsp;in&nbsp;this&nbsp;SCOPE&nbsp;Block</span><br />
+&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="wrd">local_moduleLevel2</span><br />
+<br />
+&nbsp;&nbsp;<span class="com">''&nbsp;OK.</span><br />
+&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="wrd">local_moduleLevel2</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Scope</span><br />
+<br />
+<span class="com">''&nbsp;Error;&nbsp;can't&nbsp;see&nbsp;inner-SCOPE&nbsp;vars</span><br />
+<span class="com">''&nbsp;print&nbsp;local_moduleLevel2</span><br />
+<br />
+<span class="key">Function</span>&nbsp;<span class="wrd">some_function</span><span class="oth">(</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;<span class="com">''&nbsp;visible&nbsp;only&nbsp;in&nbsp;this&nbsp;function</span><br />
+&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="wrd">local_functionLevel</span><br />
+<br />
+&nbsp;&nbsp;<span class="com">''&nbsp;OK.</span><br />
+&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="wrd">local_functionLevel</span><br />
+<br />
+&nbsp;&nbsp;<span class="com">''&nbsp;Error;&nbsp;can't&nbsp;see&nbsp;local&nbsp;module-level&nbsp;vars&nbsp;&nbsp;</span><br />
+&nbsp;&nbsp;<span class="com">''&nbsp;print&nbsp;local_moduleLevel1</span><br />
+<br />
+&nbsp;&nbsp;<span class="com">''&nbsp;Error;&nbsp;can't&nbsp;see&nbsp;local&nbsp;module-level&nbsp;vars</span><br />
+&nbsp;&nbsp;<span class="com">''&nbsp;print&nbsp;local_moduleLevel2</span><br />
+<br />
+&nbsp;&nbsp;<span class="key">Function</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span><br />
+<br />
+<span class="key">End</span>&nbsp;<span class="key">Function</span><br />
+<br />
+<span class="com">''&nbsp;print&nbsp;local_functionLevel&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;''&nbsp;Error;&nbsp;can't&nbsp;see&nbsp;function_level&nbsp;vars</span><br />
+<span class="key">End</span>&nbsp;<span class="num">0</span><br />
+</div></tt><br />
+<br \>
+</div><div class="fb_sect_title">Shared Scope</div><div class="fb_sect_cont"><br \>
+<br \>
+Variables declared in the shared scope of a module are visible to both the module and all functions of that module.<br \>
+<br \>
+Unlike the local scope, the shared scope makes module-level variables visible to functions of that module. In other words, the module <i>shares</i> its declarations with its functions.<br \>
+<br \>
+Variables can only be declared to be of shared scope at the module-level. Ie., only modules can share variables. Neither functions nor <tt><a href="KeyPgScope.html">Scope</a></tt> blocks can declare variables in the shared scope, thus variables declared there can only be local to that function or block.<br \>
+<br \>
+You can declare a variable to be of shared scope by using the DIM statement with the <tt><a href="KeyPgShared.html">Shared</a></tt> keyword. The example program <tt><b>shared_scope.bas</b></tt> demonstrates visibility rules for the shared scope.<br \>
+<br \>
+<tt><b>shared.bas</b></tt><br \>
+<tt><div class="freebasic">
+<span class="com">''&nbsp;visible&nbsp;throughout&nbsp;this&nbsp;module</span><br />
+<span class="key">Dim</span>&nbsp;<span class="key">Shared</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="wrd">shared_moduleLevel1</span><br />
+<br />
+<span class="com">''&nbsp;OK.</span><br />
+<span class="key">Print</span>&nbsp;<span class="wrd">shared_moduleLevel1</span><br />
+<br />
+<span class="key">Scope</span><br />
+&nbsp;&nbsp;<span class="com">''&nbsp;OK;&nbsp;can&nbsp;see&nbsp;outer-scope&nbsp;vars</span><br />
+&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="wrd">shared_moduleLevel1</span><br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;<span class="com">''&nbsp;Error;&nbsp;SCOPE-level&nbsp;vars&nbsp;cannot&nbsp;be&nbsp;shared</span><br />
+&nbsp;&nbsp;<span class="com">''&nbsp;dim&nbsp;shared&nbsp;as&nbsp;integer&nbsp;shared_ModuleLevel2</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Scope</span><br />
+<br />
+<span class="key">End</span>&nbsp;<span class="num">0</span><br />
+<br />
+<span class="key">Function</span>&nbsp;<span class="wrd">some_function</span><span class="oth">(</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;<span class="com">''&nbsp;OK;&nbsp;can&nbsp;see&nbsp;shared&nbsp;module-level&nbsp;vars</span><br />
+&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="wrd">shared_moduleLevel1</span><br />
+<br />
+&nbsp;&nbsp;<span class="com">''&nbsp;Error;&nbsp;function-level&nbsp;vars&nbsp;cannot&nbsp;be&nbsp;shared&nbsp;&nbsp;</span><br />
+&nbsp;&nbsp;<span class="com">''&nbsp;dim&nbsp;shared&nbsp;as&nbsp;integer&nbsp;sharedFunctionLevel</span><br />
+<br />
+&nbsp;&nbsp;<span class="key">Function</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Function</span><br />
+</div></tt><br />
+<br \>
+</div><div class="fb_sect_title">Common Scope</div><div class="fb_sect_cont"><br \>
+<br \>
+Variables declared in the common scope are visible to all modules.<br \>
+<br \>
+Variables declared with <tt><a href="KeyPgCommon.html">Common</a></tt> are visible to other modules with a matching <tt><a href="KeyPgCommon.html">Common</a></tt> variable declaration.  The variable name declared must match from between modules.<br \>
+<br \>
+<tt><b>module1.bas</b></tt><br \>
+<tt><div class="freebasic">
+<span class="com">''&nbsp;compile&nbsp;with:</span><br />
+<span class="com">''&nbsp;&nbsp;&nbsp;&nbsp;fbc&nbsp;-lang&nbsp;qb&nbsp;module1.bas&nbsp;module2.bas</span><br />
+<br />
+<span class="com">'$lang:&nbsp;"qb"</span><br />
+<br />
+<span class="key">Declare</span>&nbsp;<span class="key">Sub</span>&nbsp;<span class="wrd">Print_Values</span><span class="oth">()</span><br />
+<span class="key">Common</span>&nbsp;<span class="wrd">m1</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+<span class="key">Common</span>&nbsp;<span class="wrd">m2</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">'&nbsp;This&nbsp;is&nbsp;executed&nbsp;after&nbsp;all&nbsp;other&nbsp;modules</span><br />
+<span class="wrd">m1</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">1</span><br />
+<br />
+<span class="key">Print</span>&nbsp;<span class="quo">"Module1"</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+<span class="key">Print</span>&nbsp;<span class="quo">"m1&nbsp;=&nbsp;"</span><span class="oth">;</span>&nbsp;<span class="wrd">m1</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">'&nbsp;m1&nbsp;=&nbsp;1&nbsp;as&nbsp;set&nbsp;in&nbsp;this&nbsp;module</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"m2&nbsp;=&nbsp;"</span><span class="oth">;</span>&nbsp;<span class="wrd">m2</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">'&nbsp;m2&nbsp;=&nbsp;2&nbsp;as&nbsp;set&nbsp;in&nbsp;module2</span><br />
+<br />
+<span class="wrd">Print_Values</span><br />
+</div></tt><br />
+<br \>
+<tt><b>module2.bas</b></tt><br \>
+<tt><div class="freebasic">
+<span class="key">Common</span>&nbsp;<span class="wrd">m1</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+<span class="key">Common</span>&nbsp;<span class="wrd">m2</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+<br />
+<span class="wrd">m2</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">2</span><br />
+<br />
+<span class="key">Print</span>&nbsp;<span class="quo">"Module2"</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">'&nbsp;This&nbsp;is&nbsp;executed&nbsp;first</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"m1&nbsp;=&nbsp;"</span><span class="oth">;</span>&nbsp;<span class="wrd">m1</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">'&nbsp;m1&nbsp;=&nbsp;0&nbsp;(by&nbsp;default)</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"m2&nbsp;=&nbsp;"</span><span class="oth">;</span>&nbsp;<span class="wrd">m2</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">'&nbsp;m2&nbsp;=&nbsp;2</span><br />
+<br />
+<span class="key">Sub</span>&nbsp;<span class="wrd">Print_Values</span><span class="oth">()</span><br />
+&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"Module2.Print_Values"</span><br />
+&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"m1&nbsp;=&nbsp;"</span><span class="oth">;</span>&nbsp;<span class="wrd">m1</span>&nbsp;&nbsp;&nbsp;<span class="com">'&nbsp;Implicit&nbsp;variable&nbsp;=&nbsp;0&nbsp;&nbsp;&nbsp;&nbsp;</span><br />
+&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"m2&nbsp;=&nbsp;"</span><span class="oth">;</span>&nbsp;<span class="wrd">m2</span>&nbsp;&nbsp;&nbsp;<span class="com">'&nbsp;Implicit&nbsp;variable&nbsp;=&nbsp;0&nbsp;&nbsp;</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Sub</span><br />
+</div></tt><br />
+<br \>
+<b>Output:</b><br \>
+<pre class="fb_pre">
+  Module2
+  m1 = 0
+  m2 = 2
+  Module1
+  m1 = 1
+  m2 = 2
+  Module2.Print_Values
+  m1 = 0
+  m2 = 0
+</pre><br \>
+</div><div class="fb_sect_title">Common Shared Scope</div><div class="fb_sect_cont"><br \>
+<br \>
+Variables declared in the common shared scope are visible to all modules and all functions of those modules.<br \>
+<br \>
+Variables declared with <tt><a href="KeyPgCommon.html">Common</a></tt> are visible to other modules with a matching <tt><a href="KeyPgCommon.html">Common</a></tt> variable declaration.  The variable name declared must match from between modules.  Within a module the <tt><a href="KeyPgShared.html">Shared</a></tt> declaration modifier gives the variable module scope and makes the variable visible to all subs and functions.<br \>
+<br \>
+<i><b><tt>module3.bas</tt></b></i><br \>
+<tt><div class="freebasic">
+<span class="com">''&nbsp;compile&nbsp;with:</span><br />
+<span class="com">''&nbsp;&nbsp;&nbsp;&nbsp;fbc&nbsp;module3.bas&nbsp;module4.bas</span><br />
+<br />
+<span class="key">Declare</span>&nbsp;<span class="key">Sub</span>&nbsp;<span class="wrd">Print_Values</span><span class="oth">()</span><br />
+<span class="key">Common</span>&nbsp;<span class="wrd">m1</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+<span class="key">Common</span>&nbsp;<span class="wrd">m2</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+<br />
+<span class="com">''&nbsp;This&nbsp;is&nbsp;executed&nbsp;after&nbsp;all&nbsp;other&nbsp;modules</span><br />
+<span class="wrd">m1</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">1</span><br />
+<br />
+<span class="key">Print</span>&nbsp;<span class="quo">"Module3"</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+<span class="key">Print</span>&nbsp;<span class="quo">"m1&nbsp;=&nbsp;"</span><span class="oth">;</span>&nbsp;<span class="wrd">m1</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;m1&nbsp;=&nbsp;1&nbsp;as&nbsp;set&nbsp;in&nbsp;this&nbsp;module</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"m2&nbsp;=&nbsp;"</span><span class="oth">;</span>&nbsp;<span class="wrd">m2</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;m2&nbsp;=&nbsp;2&nbsp;as&nbsp;set&nbsp;in&nbsp;module2</span><br />
+<br />
+<span class="wrd">Print_Values</span><br />
+</div></tt><br />
+<br \>
+<tt><b>module4.bas</b></tt><br \>
+<tt><div class="freebasic">
+<span class="key">Common</span>&nbsp;<span class="key">Shared</span>&nbsp;<span class="wrd">m1</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+<span class="key">Common</span>&nbsp;<span class="key">Shared</span>&nbsp;<span class="wrd">m2</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+<br />
+<span class="wrd">m2</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">2</span><br />
+<br />
+<span class="key">Print</span>&nbsp;<span class="quo">"Module4"</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;This&nbsp;is&nbsp;executed&nbsp;first</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"m1&nbsp;=&nbsp;"</span><span class="oth">;</span>&nbsp;<span class="wrd">m1</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;m1&nbsp;=&nbsp;0&nbsp;(by&nbsp;default)</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"m2&nbsp;=&nbsp;"</span><span class="oth">;</span>&nbsp;<span class="wrd">m2</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;m2&nbsp;=&nbsp;2</span><br />
+<br />
+<span class="key">Sub</span>&nbsp;<span class="wrd">Print_Values</span><span class="oth">()</span><br />
+&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"Module4.Print_Values"</span><br />
+&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"m1&nbsp;=&nbsp;"</span><span class="oth">;</span>&nbsp;<span class="wrd">m1</span>&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;m1&nbsp;=&nbsp;1&nbsp;&nbsp;&nbsp;&nbsp;</span><br />
+&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"m2&nbsp;=&nbsp;"</span><span class="oth">;</span>&nbsp;<span class="wrd">m2</span>&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;m2&nbsp;=&nbsp;2</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Sub</span><br />
+</div></tt><br />
+<br \>
+<i><b><tt>Output:</tt></b></i><br \>
+<pre class="fb_pre">
+  Module4
+  m1 = 0
+  m2 = 2
+  Module3
+  m1 = 1
+  m2 = 2
+  Module4.Print_Values
+  m1 = 1
+  m2 = 2
+</pre><br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+See examples above.<br \>
+<br \>
+</div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgScope.html">Scope</a></tt><br \>
+<li> <tt><a href="KeyPgDim.html">Dim</a></tt><br \>
+<li> <tt><a href="KeyPgCommon.html">Common</a></tt><br \>
+<li> <tt><a href="KeyPgShared.html">Shared</a></tt><br \>
+<li> <a href="ProPgVariables.html">Variables</a><br \>
+<li> <a href="ProPgImplicitdeclarations.html">Implicit Declarations</a><br \>
+<br \>
+</ul><br \>
+   <br \>
+</div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

@@ -1,0 +1,57 @@
+<html>
+<head>
+<title>Preserve</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Preserve</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Used with <tt><a href="KeyPgRedim.html">ReDim</a></tt> to preserve contents will resizing an array<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<a href="KeyPgRedim.html">ReDim</a> <b>Preserve</b> <i>array</i>(...) <a href="KeyPgAs.html">As</a> <a href="DataType.html">datatype</a><br \>
+</tt><br \>
+</div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+Used with <tt><a href="KeyPgRedim.html">ReDim</a></tt> so that when an array is resized, data is not reset but is preserved. This means when the array is enlarged that only new data is reset, while the old data remains the same.<br \>
+<br \>
+<b>NOTE</b>: <tt><b>ReDim</b> <a href="KeyPgPreserve.html">Preserve</a></tt> may not work as expected in all cases:<br \>
+<div class="fb_indent"><tt><a href="KeyPgPreserve.html">Preserve</a></tt>'s current behavior is to keep the original data contiguous in memory, and only expand or truncate the size of the memory.<br \>
+Its behavior is only well-defined when the upper bound is changed.  If the lower bound is changed, the current result is that the data is in effect shifted to start at the new lower bound.<br \>
+If there are multiple dimensions, only the upper bound of the first dimension may be changed safely.  If lower-order dimensions are resized at all, the effects can be hard to predict.<br \>
+<br \>
+</div></div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="key">ReDim</span>&nbsp;<span class="wrd">array</span><span class="oth">(</span><span class="num">1</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">3</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">i</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+<br />
+<span class="wrd">array</span><span class="oth">(</span><span class="num">1</span><span class="oth">)</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">10</span><br />
+<span class="wrd">array</span><span class="oth">(</span><span class="num">2</span><span class="oth">)</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">5</span><br />
+<span class="wrd">array</span><span class="oth">(</span><span class="num">3</span><span class="oth">)</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">8</span><br />
+<br />
+<span class="key">ReDim</span>&nbsp;<span class="key">Preserve</span>&nbsp;<span class="wrd">array</span><span class="oth">(</span><span class="num">1</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">10</span><span class="oth">)</span><br />
+<br />
+<span class="key">For</span>&nbsp;<span class="wrd">i</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">1</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">10</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"array("</span><span class="oth">;</span>&nbsp;<span class="wrd">i</span><span class="oth">;</span>&nbsp;<span class="quo">")&nbsp;=&nbsp;"</span><span class="oth">;</span>&nbsp;<span class="wrd">array</span><span class="oth">(</span><span class="wrd">i</span><span class="oth">)</span><br />
+<span class="key">Next</span><br />
+</div></tt><br />
+<br \>
+</div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><b>Preserve</b></tt> wasn't supported until PDS 7.1<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgDim.html">Dim</a></tt><br \>
+<li> <tt><a href="KeyPgLbound.html">LBound</a></tt><br \>
+<li> <tt><a href="KeyPgRedim.html">ReDim</a></tt><br \>
+<li> <tt><a href="KeyPgUbound.html">UBound</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

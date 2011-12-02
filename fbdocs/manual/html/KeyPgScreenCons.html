@@ -1,0 +1,150 @@
+<html>
+<head>
+<title>Screen (Console)</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Screen (Console)</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Gets the character or color attribute at a given location<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgFunction.html">Function</a> <b>Screen</b> ( <a href="KeyPgByval.html">ByVal</a> row <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a>, <a href="KeyPgByval.html">ByVal</a> column <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a>, <a href="KeyPgByval.html">ByVal</a> colorflag <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a> = 0 ) <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a><br \>
+</tt><br \>
+</div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
+<i>result</i> = <b>Screen</b>( <i>row</i>, <i>column</i> [, <i>colorflag</i> ] )<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+<tt><i>row</i></tt><br \>
+<div class="fb_indent">1-based offset from the top left corner of the console.<br \>
+</div><tt><i>column</i></tt><br \>
+<div class="fb_indent">1-based offset from the top left corner of the console.<br \>
+</div><tt><i>colorflag</i></tt><br \>
+<div class="fb_indent">If equal to 0, the <a href="CptAscii.html">ASCII</a> code is returned, otherwise the color attribute is returned.  If omitted, it defaults to 0.<br \>
+<br \>
+</div></div><div class="fb_sect_title">Return Value</div><div class="fb_sect_cont"><br \>
+The <a href="CptAscii.html">ASCII</a> or color attribute of the character.<br \>
+At the moment (v0.18.5), if coordinates are out of screen, no error number is set and the value returned is not reliable.<br \>
+<br \>
+</div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+<tt><b>Screen</b></tt> returns the character or the color attribute found at a given position of a console output. It works in console mode and in graphics mode.<br \>
+<br \>
+The format of the color attribute depends on the current color depth:<br \>
+<br \>
+If the color type is a palette type with up to 4 bits per pixel (such as the Win32 console), then the color attribute is an 8-bit value, where the higher four bits hold the cell background color and the lower four bits hold the foreground (character) color.<br \>
+<br \>
+If the color type is an 8-bit palette, then the color attribute is a 16-bit value, where the high byte holds the background color and the low byte holds the foreground color.<br \>
+<br \>
+If the color type is full color, then the color attribute is a 32-bit integer, holding a single color value.  If <tt><i>colorflag</i></tt> is equal to 1, then the foreground color is returned; if <tt><i>colorflag</i></tt> is equal to 2, then the background color is returned.<br \>
+<br \>
+<br \>
+The color values for the standard 16 color palette are:<br \>
+<br \>
+<div class="fb_indent"><div class="fb_table"><table><tr><td>Value</td><td>Color</td><td>Value</td><td>Color</td></tr><tr><td>0</td><td>Black</td><td>8</td><td>Gray</td></tr><tr><td>1</td><td>Blue</td><td>9</td><td>Bright Blue</td></tr><tr><td>2</td><td>Green</td><td>10</td><td>Bright Green</td></tr><tr><td>3</td><td>Cyan</td><td>11</td><td>Bright Cyan</td></tr><tr><td>4</td><td>Red</td><td>12</td><td>Bright Red</td></tr><tr><td>5</td><td>Magenta</td><td>13</td><td>Pink</td></tr><tr><td>6</td><td>Brown</td><td>14</td><td>Yellow</td></tr><tr><td>7</td><td>White</td><td>15</td><td>Bright White</td></tr></table></div><br \>
+<br \>
+</div></div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="key">Dim</span>&nbsp;<span class="wrd">character_ascii_value</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">attribute</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">background</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">cell_color</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">row</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">,</span>&nbsp;<span class="wrd">col</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+<br />
+<span class="wrd">character_ascii_value</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">Screen</span><span class="oth">(</span>&nbsp;<span class="wrd">row</span><span class="oth">,</span>&nbsp;<span class="wrd">col</span>&nbsp;<span class="oth">)</span><br />
+<span class="wrd">attribute</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">Screen</span><span class="oth">(</span>&nbsp;<span class="wrd">row</span><span class="oth">,</span>&nbsp;<span class="wrd">col</span><span class="oth">,</span>&nbsp;<span class="num">1</span>&nbsp;<span class="oth">)</span><br />
+<span class="wrd">background</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">attribute</span>&nbsp;<span class="key">Shr</span>&nbsp;<span class="num">4</span><br />
+<span class="wrd">cell_color</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">attribute</span>&nbsp;<span class="key">And</span>&nbsp;<span class="num">&amp;hf</span><br />
+</div></tt><br />
+<br \>
+<tt><div class="freebasic">
+<span class="com">''&nbsp;open&nbsp;a&nbsp;graphics&nbsp;screen&nbsp;with&nbsp;4&nbsp;bits&nbsp;per&nbsp;pixel</span><br />
+<span class="com">''&nbsp;(alternatively,&nbsp;omit&nbsp;this&nbsp;line&nbsp;to&nbsp;use&nbsp;the&nbsp;console)</span><br />
+<span class="key">ScreenRes</span>&nbsp;<span class="num">320</span><span class="oth">,</span>&nbsp;<span class="num">200</span><span class="oth">,</span>&nbsp;<span class="num">4</span><br />
+<br />
+<span class="com">''&nbsp;print&nbsp;a&nbsp;character</span><br />
+<span class="key">Color</span>&nbsp;<span class="num">7</span><span class="oth">,</span>&nbsp;<span class="num">1</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"A"</span><br />
+<br />
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">UInteger</span>&nbsp;<span class="wrd">char</span><span class="oth">,</span>&nbsp;<span class="wrd">col</span><span class="oth">,</span>&nbsp;<span class="wrd">fg</span><span class="oth">,</span>&nbsp;<span class="wrd">bg</span><br />
+<br />
+<span class="com">''&nbsp;get&nbsp;the&nbsp;ASCII&nbsp;value&nbsp;of&nbsp;the&nbsp;character&nbsp;we've&nbsp;just&nbsp;printed</span><br />
+<span class="wrd">char</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">Screen</span><span class="oth">(</span><span class="num">1</span><span class="oth">,</span>&nbsp;<span class="num">1</span><span class="oth">,</span>&nbsp;<span class="num">0</span><span class="oth">)</span><br />
+<br />
+<span class="com">''get&nbsp;the&nbsp;color&nbsp;attributes</span><br />
+<span class="wrd">col</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">Screen</span><span class="oth">(</span><span class="num">1</span><span class="oth">,</span>&nbsp;<span class="num">1</span><span class="oth">,</span>&nbsp;<span class="num">1</span><span class="oth">)</span><br />
+<span class="wrd">fg</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">col</span>&nbsp;<span class="key">And</span>&nbsp;<span class="num">&amp;HF</span><br />
+<span class="wrd">bg</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="oth">(</span><span class="wrd">col</span>&nbsp;<span class="key">Shr</span>&nbsp;<span class="num">4</span><span class="oth">)</span>&nbsp;<span class="key">And</span>&nbsp;<span class="num">&amp;HF</span><br />
+<br />
+<span class="key">Print</span>&nbsp;<span class="key">Using</span>&nbsp;<span class="quo">"ASCII&nbsp;value:&nbsp;###&nbsp;(""!"")"</span><span class="oth">;</span>&nbsp;<span class="wrd">char</span><span class="oth">;</span>&nbsp;<span class="key">Chr</span><span class="oth">(</span><span class="wrd">char</span><span class="oth">)</span><br />
+<span class="key">Print</span>&nbsp;<span class="key">Using</span>&nbsp;<span class="quo">"Foreground&nbsp;color:&nbsp;##"</span><span class="oth">;</span>&nbsp;<span class="wrd">fg</span><br />
+<span class="key">Print</span>&nbsp;<span class="key">Using</span>&nbsp;<span class="quo">"Background&nbsp;color:&nbsp;##"</span><span class="oth">;</span>&nbsp;<span class="wrd">bg</span><br />
+<span class="key">Sleep</span><br />
+</div></tt><br />
+<br \>
+<tt><div class="freebasic">
+<span class="com">''&nbsp;open&nbsp;a&nbsp;graphics&nbsp;screen&nbsp;with&nbsp;8&nbsp;bits&nbsp;per&nbsp;pixel</span><br />
+<span class="key">ScreenRes</span>&nbsp;<span class="num">320</span><span class="oth">,</span>&nbsp;<span class="num">200</span><span class="oth">,</span>&nbsp;<span class="num">8</span><br />
+<br />
+<span class="com">''&nbsp;print&nbsp;a&nbsp;character</span><br />
+<span class="key">Color</span>&nbsp;<span class="num">30</span><span class="oth">,</span>&nbsp;<span class="num">16</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"Z"</span><br />
+<br />
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">UInteger</span>&nbsp;<span class="wrd">char</span><span class="oth">,</span>&nbsp;<span class="wrd">col</span><span class="oth">,</span>&nbsp;<span class="wrd">fg</span><span class="oth">,</span>&nbsp;<span class="wrd">bg</span><br />
+<br />
+<span class="com">''&nbsp;get&nbsp;the&nbsp;ASCII&nbsp;value&nbsp;of&nbsp;the&nbsp;character&nbsp;we've&nbsp;just&nbsp;printed</span><br />
+<span class="wrd">char</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">Screen</span><span class="oth">(</span><span class="num">1</span><span class="oth">,</span>&nbsp;<span class="num">1</span><span class="oth">,</span>&nbsp;<span class="num">0</span><span class="oth">)</span><br />
+<br />
+<span class="com">''get&nbsp;the&nbsp;color&nbsp;attributes</span><br />
+<span class="wrd">col</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">Screen</span><span class="oth">(</span><span class="num">1</span><span class="oth">,</span>&nbsp;<span class="num">1</span><span class="oth">,</span>&nbsp;<span class="num">1</span><span class="oth">)</span><br />
+<span class="wrd">fg</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">col</span>&nbsp;<span class="key">And</span>&nbsp;<span class="num">&amp;HFF</span><br />
+<span class="wrd">bg</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="oth">(</span><span class="wrd">col</span>&nbsp;<span class="key">Shr</span>&nbsp;<span class="num">8</span><span class="oth">)</span>&nbsp;<span class="key">And</span>&nbsp;<span class="num">&amp;HFF</span><br />
+<br />
+<span class="key">Print</span>&nbsp;<span class="key">Using</span>&nbsp;<span class="quo">"ASCII&nbsp;value:&nbsp;###&nbsp;(""!"")"</span><span class="oth">;</span>&nbsp;<span class="wrd">char</span><span class="oth">;</span>&nbsp;<span class="key">Chr</span><span class="oth">(</span><span class="wrd">char</span><span class="oth">)</span><br />
+<span class="key">Print</span>&nbsp;<span class="key">Using</span>&nbsp;<span class="quo">"Foreground&nbsp;color:&nbsp;###"</span><span class="oth">;</span>&nbsp;<span class="wrd">fg</span><br />
+<span class="key">Print</span>&nbsp;<span class="key">Using</span>&nbsp;<span class="quo">"Background&nbsp;color:&nbsp;###"</span><span class="oth">;</span>&nbsp;<span class="wrd">bg</span><br />
+<span class="key">Sleep</span><br />
+</div></tt><br />
+<br \>
+<tt><div class="freebasic">
+<span class="com">''&nbsp;open&nbsp;a&nbsp;full-color&nbsp;graphics&nbsp;screen</span><br />
+<span class="key">ScreenRes</span>&nbsp;<span class="num">320</span><span class="oth">,</span>&nbsp;<span class="num">200</span><span class="oth">,</span>&nbsp;<span class="num">32</span><br />
+<br />
+<span class="com">''&nbsp;print&nbsp;a&nbsp;character</span><br />
+<span class="key">Color</span>&nbsp;<span class="key">RGB</span><span class="oth">(</span><span class="num">255</span><span class="oth">,</span>&nbsp;<span class="num">255</span><span class="oth">,</span>&nbsp;<span class="num">0</span><span class="oth">),</span>&nbsp;<span class="key">RGB</span><span class="oth">(</span><span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">255</span><span class="oth">)</span>&nbsp;<span class="com">'yellow&nbsp;on&nbsp;blue</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"M"</span><br />
+<br />
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="wrd">char</span><span class="oth">,</span>&nbsp;<span class="wrd">fg</span><span class="oth">,</span>&nbsp;<span class="wrd">bg</span><br />
+<br />
+<span class="com">''&nbsp;get&nbsp;the&nbsp;ASCII&nbsp;value&nbsp;of&nbsp;the&nbsp;character&nbsp;we've&nbsp;just&nbsp;printed</span><br />
+<span class="wrd">char</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">Screen</span><span class="oth">(</span><span class="num">1</span><span class="oth">,</span>&nbsp;<span class="num">1</span><span class="oth">,</span>&nbsp;<span class="num">0</span><span class="oth">)</span><br />
+<br />
+<span class="com">''get&nbsp;the&nbsp;color&nbsp;attributes</span><br />
+<span class="wrd">fg</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">Screen</span><span class="oth">(</span><span class="num">1</span><span class="oth">,</span>&nbsp;<span class="num">1</span><span class="oth">,</span>&nbsp;<span class="num">1</span><span class="oth">)</span><br />
+<span class="wrd">bg</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">Screen</span><span class="oth">(</span><span class="num">1</span><span class="oth">,</span>&nbsp;<span class="num">1</span><span class="oth">,</span>&nbsp;<span class="num">2</span><span class="oth">)</span><br />
+<br />
+<span class="key">Print</span>&nbsp;<span class="key">Using</span>&nbsp;<span class="quo">"ASCII&nbsp;value:&nbsp;###&nbsp;(""!"")"</span><span class="oth">;</span>&nbsp;<span class="wrd">char</span><span class="oth">;</span>&nbsp;<span class="key">Chr</span><span class="oth">(</span><span class="wrd">char</span><span class="oth">)</span><br />
+<span class="key">Print</span>&nbsp;<span class="key">Using</span>&nbsp;<span class="quo">"Foreground&nbsp;color:&nbsp;&amp;"</span><span class="oth">;</span>&nbsp;<span class="key">Hex</span><span class="oth">(</span><span class="wrd">fg</span><span class="oth">,</span>&nbsp;<span class="num">8</span><span class="oth">)</span><br />
+<span class="key">Print</span>&nbsp;<span class="key">Using</span>&nbsp;<span class="quo">"Background&nbsp;color:&nbsp;&amp;"</span><span class="oth">;</span>&nbsp;<span class="key">Hex</span><span class="oth">(</span><span class="wrd">bg</span><span class="oth">,</span>&nbsp;<span class="num">8</span><span class="oth">)</span><br />
+<span class="key">Sleep</span><br />
+</div></tt><br />
+</div><div class="fb_sect_title">Platform Differences</div><div class="fb_sect_cont"><br \>
+<ul><li> On the Linux version, the value returned can differ from the character shown on the console.  For example, unprintable control codes - such as the <tt>LF</tt> character (<tt>10</tt>) that implicitly occurs after the end of <tt><a href="KeyPgPrint.html">Print</a></tt>ed text - may be picked up instead of the untouched character in its place.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> In QB <tt><b>Screen</b></tt> triggered an error if the coordinates were out of screen.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgScreengraphics.html">Screen (Graphics)</a></tt><br \>
+<li> <tt><a href="KeyPgColor.html">Color</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

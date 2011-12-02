@@ -1,0 +1,58 @@
+<html>
+<head>
+<title>CPtr</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">CPtr</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Converts a pointer expression to a specified data type pointer<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<b>CPtr</b>( <i>PointerDataType</i>, <i>expression</i> )<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+Converts <tt><i>expression</i></tt> to <tt><i>PointerDataType</i></tt>.<br \>
+<br \>
+<tt><i>PointerDataType</i></tt> must be a <tt><a href="KeyPgPointer.html">Pointer</a></tt> type (e.g. a DataType <tt><a href="KeyPgPtr.html">Ptr</a></tt> or an <tt><a href="KeyPgAny.html">Any</a></tt> <tt><a href="KeyPgPtr.html">Ptr</a></tt>), or a <tt><a href="KeyPgTypeAlias.html">Type (Alias)</a></tt> to one.<br \>
+<tt><i>expression</i></tt> may have a different pointer type or be an <tt><a href="KeyPgInteger.html">Integer</a></tt>.<br \>
+<br \>
+<i>Note: Currently, FB does not actually enforce that <tt></i>PointerDataType<i></tt> must be a pointer.  This will likely change in future versions though.  Currently, it will display a warning if you try to convert to a non-pointer, if you compile with the <tt><b><a href="CompilerOptw.html">-w pedantic</a></b></tt> compiler switch.</i><br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="key">Dim</span>&nbsp;<span class="wrd">intval</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">intptr</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="key">Ptr</span><br />
+<span class="wrd">intval</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">&amp;h0080</span><br />
+<span class="wrd">intptr</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="oth">@</span><span class="wrd">intval</span><br />
+<span class="com">''&nbsp;will&nbsp;print&nbsp;-128&nbsp;and&nbsp;128,&nbsp;as&nbsp;the&nbsp;first&nbsp;expression&nbsp;will&nbsp;be&nbsp;"seen"&nbsp;as&nbsp;an&nbsp;signed&nbsp;byte</span><br />
+<span class="key">Print</span>&nbsp;<span class="oth">*</span><span class="key">CPtr</span><span class="oth">(</span>&nbsp;<span class="key">Byte</span>&nbsp;<span class="key">Ptr</span><span class="oth">,</span>&nbsp;<span class="wrd">intptr</span>&nbsp;<span class="oth">),</span>&nbsp;<span class="oth">*</span><span class="wrd">intptr</span><br />
+</div></tt><br />
+<br \>
+</div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
+<ul><li> Not available in the <i><a href="CompilerOptlang.html">-lang qb</a></i> dialect unless referenced with the alias <tt><b>__Cptr</b></tt>.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> New to FreeBASIC<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgPtr.html">Ptr</a></tt><br \>
+<li> <tt><a href="KeyPgCast.html">Cast</a></tt><br \>
+<li> <tt><a href="KeyPgCbyte.html">CByte</a></tt><br \>
+<li> <tt><a href="KeyPgCshort.html">CShort</a></tt><br \>
+<li> <tt><a href="KeyPgCint.html">CInt</a></tt><br \>
+<li> <tt><a href="KeyPgClngint.html">CLngInt</a></tt><br \>
+<li> <tt><a href="KeyPgCsng.html">CSng</a></tt><br \>
+<li> <tt><a href="KeyPgCdbl.html">CDbl</a></tt> <br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

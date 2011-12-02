@@ -1,0 +1,75 @@
+<html>
+<head>
+<title>Common</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Common</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Variable declaration and scope modifier<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<b>Common</b> [<a href="KeyPgShared.html">Shared</a>] <i>symbolname</i>[()] [AS <a href="DataType.html">DataType</a>] [, ...]<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+Declares a variable which is shared between code modules. A matching <tt><b>Common</b></tt> statement must appear in all other code modules using the variable. <br \>
+<br \>
+The <tt><b>Shared</b></tt> optional parameter makes the variable global so that it can be used inside <tt><a href="KeyPgSub.html">Sub</a></tt>s and <tt><a href="KeyPgFunction.html">Function</a></tt>s, as well as at module level. <tt><b>Common</b></tt> arrays are always variable-length, and must be defined with an empty parameter list <tt>()</tt>, and its dimensions set in a later <tt><a href="KeyPgDim.html">Dim</a></tt> or <tt><a href="KeyPgRedim.html">ReDim</a></tt> statement.<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="com">''&nbsp;common1.bas</span><br />
+<br />
+<span class="key">Declare</span>&nbsp;<span class="key">Sub</span>&nbsp;<span class="wrd">initme</span><span class="oth">()</span><br />
+<br />
+<span class="key">Common</span>&nbsp;<span class="key">Shared</span>&nbsp;<span class="wrd">foo</span><span class="oth">()</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Double</span><br />
+<br />
+<span class="key">ReDim</span>&nbsp;<span class="wrd">foo</span><span class="oth">(</span><span class="num">0</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">2</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Double</span><br />
+<br />
+<span class="wrd">initme</span><span class="oth">()</span><br />
+<br />
+<span class="key">Print</span>&nbsp;<span class="wrd">foo</span><span class="oth">(</span><span class="num">0</span><span class="oth">),</span>&nbsp;<span class="wrd">foo</span><span class="oth">(</span><span class="num">1</span><span class="oth">),</span>&nbsp;<span class="wrd">foo</span><span class="oth">(</span><span class="num">2</span><span class="oth">)</span><br />
+</div></tt><br />
+<br \>
+<tt><div class="freebasic">
+<span class="com">''&nbsp;common2.bas</span><br />
+<br />
+<span class="key">Common</span>&nbsp;<span class="key">Shared</span>&nbsp;<span class="wrd">foo</span><span class="oth">()</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Double</span><br />
+<br />
+<span class="key">Sub</span>&nbsp;<span class="wrd">initme</span><span class="oth">()</span><br />
+&nbsp;&nbsp;<span class="wrd">foo</span><span class="oth">(</span><span class="num">0</span><span class="oth">)</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">4</span><span class="oth">*</span><span class="key">Atn</span><span class="oth">(</span><span class="num">1</span><span class="oth">)</span><br />
+&nbsp;&nbsp;<span class="wrd">foo</span><span class="oth">(</span><span class="num">1</span><span class="oth">)</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">foo</span><span class="oth">(</span><span class="num">0</span><span class="oth">)/</span><span class="num">3</span><br />
+&nbsp;&nbsp;<span class="wrd">foo</span><span class="oth">(</span><span class="num">2</span><span class="oth">)</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">foo</span><span class="oth">(</span><span class="num">1</span><span class="oth">)*</span><span class="num">2</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Sub</span><br />
+</div></tt><br />
+Output:<br \>
+<pre class="fb_pre">
+ 3.141592653589793           1.047197551196598           2.094395102393195
+</pre><br \>
+</div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> The arrays will be always variable-length.<br \>
+<li> <tt><i>blockname</i></tt> is not needed and must be removed because the order of declaration no longer matters, only the symbol names.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgDim.html">Dim</a></tt><br \>
+<li> <tt><a href="KeyPgErase.html">Erase</a></tt><br \>
+<li> <tt><a href="KeyPgExtern.html">Extern</a></tt><br \>
+<li> <tt><a href="KeyPgLbound.html">LBound</a></tt><br \>
+<li> <tt><a href="KeyPgRedim.html">ReDim</a></tt><br \>
+<li> <tt><a href="KeyPgPreserve.html">Preserve</a></tt><br \>
+<li> <tt><a href="KeyPgShared.html">Shared</a></tt><br \>
+<li> <tt><a href="KeyPgStatic.html">Static</a></tt><br \>
+<li> <tt><a href="KeyPgUbound.html">UBound</a></tt><br \>
+<li> <tt><a href="KeyPgVar.html">Var</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

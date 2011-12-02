@@ -1,0 +1,70 @@
+<html>
+<head>
+<title>Operator Varptr (Variable Pointer)</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Operator Varptr (Variable Pointer)</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Returns the address of a variable or object<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgOperator.html">Operator</a> <b>VarPtr</b> ( <a href="KeyPgByref.html">ByRef</a> <i>lhs</i> <a href="KeyPgAs.html">As</a> <i>T</i> ) <a href="KeyPgAs.html">As</a> <i>T</i> <a href="KeyPgPtr.html">Ptr</a><br \>
+</tt><br \>
+</div><div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<i>result</i> = <b>VarPtr</b> ( <i>lhs</i> )<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+<tt><i>lhs</i></tt><br \>
+<div class="fb_indent">A variable or object.<br \>
+</div><tt><i>T</i></tt><br \>
+<div class="fb_indent">Any data type.<br \>
+<br \>
+</div></div><div class="fb_sect_title">Return Value</div><div class="fb_sect_cont"><br \>
+Returns the address of a variable or object.<br \>
+<br \>
+</div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+This operator returns the address of its operand.<br \>
+<br \>
+When the operand is of type <tt><a href="KeyPgString.html">String</a></tt>, the address of the internal string descriptor is returned. Use <tt><a href="KeyPgOpStrptr.html">Operator Strptr (String Pointer)</a></tt> to retrieve the address of the string data.<br \>
+<br \>
+The operand cannot be an array, but may be an array element. For example, <tt>"<b>VarPtr</b>(myarray(0))"</tt> returns the address of <tt>"myarray(0)"</tt>.<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="key">Dim</span>&nbsp;<span class="wrd">a</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">,</span>&nbsp;<span class="wrd">addr</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+<span class="wrd">a</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">10</span><br />
+<br />
+<span class="com">''&nbsp;place&nbsp;the&nbsp;address&nbsp;of&nbsp;a&nbsp;in&nbsp;addr</span><br />
+<span class="wrd">addr</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">CInt</span><span class="oth">(</span>&nbsp;<span class="key">VarPtr</span><span class="oth">(</span><span class="wrd">a</span><span class="oth">)</span>&nbsp;<span class="oth">)</span><br />
+<br />
+<span class="com">''&nbsp;change&nbsp;all&nbsp;4&nbsp;bytes&nbsp;(size&nbsp;of&nbsp;INTEGER)&nbsp;of&nbsp;a</span><br />
+<span class="key">Poke</span>&nbsp;<span class="key">Integer</span><span class="oth">,</span>&nbsp;<span class="wrd">addr</span><span class="oth">,</span>&nbsp;<span class="oth">-</span><span class="num">1000</span>&nbsp;<br />
+<span class="key">Print</span>&nbsp;<span class="wrd">a</span><br />
+<br />
+<span class="com">''&nbsp;place&nbsp;the&nbsp;address&nbsp;of&nbsp;a&nbsp;in&nbsp;addr&nbsp;(same&nbsp;as&nbsp;above)</span><br />
+<span class="wrd">addr</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">CInt</span><span class="oth">(</span>&nbsp;<span class="oth">@</span><span class="wrd">a</span>&nbsp;<span class="oth">)</span><br />
+<br />
+<span class="com">''&nbsp;print&nbsp;the&nbsp;least&nbsp;or&nbsp;most&nbsp;significant&nbsp;byte,&nbsp;depending&nbsp;on&nbsp;the&nbsp;CPU&nbsp;endianess</span><br />
+<span class="key">Print</span>&nbsp;<span class="key">Peek</span><span class="oth">(</span>&nbsp;<span class="wrd">addr</span>&nbsp;<span class="oth">)</span>&nbsp;<br />
+</div></tt><br />
+<br \>
+</div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> None<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <a href="ProPgPointers.html">Pointers</a><br \>
+<li> <tt><a href="KeyPgPoke.html">Peek</a></tt><br \>
+<li> <tt><a href="KeyPgPoke.html">Poke</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

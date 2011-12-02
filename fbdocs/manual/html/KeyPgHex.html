@@ -1,0 +1,81 @@
+<html>
+<head>
+<title>Hex</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Hex</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Returns the hexadecimal of the given number<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgFunction.html">Function</a> <b>Hex</b> <a href="KeyPgOverload.html">Overload</a> ( <a href="KeyPgByval.html">ByVal</a> <i>number</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgByte.html">Byte</a> ) <a href="KeyPgAs.html">As</a> <a href="KeyPgString.html">String</a><br \>
+<br \>
+<a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgFunction.html">Function</a> <b>Hex</b> ( <a href="KeyPgByval.html">ByVal</a> <i>number</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgShort.html">Short</a> ) <a href="KeyPgAs.html">As</a> <a href="KeyPgString.html">String</a><br \>
+<br \>
+<a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgFunction.html">Function</a> <b>Hex</b> ( <a href="KeyPgByval.html">ByVal</a> <i>number</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a> ) <a href="KeyPgAs.html">As</a> <a href="KeyPgString.html">String</a><br \>
+<a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgFunction.html">Function</a> <b>Hex</b> ( <a href="KeyPgByval.html">ByVal</a> <i>number</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a>, <a href="KeyPgByval.html">ByVal</a> <i>digits</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a> ) <a href="KeyPgAs.html">As</a> <a href="KeyPgString.html">String</a><br \>
+<br \>
+<a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgFunction.html">Function</a> <b>Hex</b> ( <a href="KeyPgByval.html">ByVal</a> <i>number</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgLongint.html">LongInt</a> ) <a href="KeyPgAs.html">As</a> <a href="KeyPgString.html">String</a><br \>
+<a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgFunction.html">Function</a> <b>Hex</b> ( <a href="KeyPgByval.html">ByVal</a> <i>number</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgLongint.html">LongInt</a>, <a href="KeyPgByval.html">ByVal</a> <i>digits</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a> ) <a href="KeyPgAs.html">As</a> <a href="KeyPgString.html">String</a>	<br \>
+<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
+<i>result</i> = <b>Hex</b>[$]( <i>number</i> [, <i>digits</i> ] )<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+<tt><i>number</i></tt><br \>
+<div class="fb_indent">A number or expression evaluating to a number.  A floating-point number will be converted to a <tt><a href="KeyPgLongint.html">LongInt</a></tt>.<br \>
+</div><tt><i>digits</i></tt><br \>
+<div class="fb_indent">Optional number of digits to return.<br \>
+<br \>
+</div></div><div class="fb_sect_title">Return Value</div><div class="fb_sect_cont"><br \>
+A <a href="KeyPgString.html">String</a> containing the unsigned hexadecimal representation of <tt><i>number</i></tt>.<br \>
+<br \>
+</div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+Returns the unsigned hexadecimal string representation of the integer <tt><i>number</i></tt>. Hexadecimal digits range from 0-9, or A-F.<br \>
+<br \>
+If you specify <tt><i>digits</i></tt> &gt; 0, the result string will be exactly that length.  It will be truncated or padded with zeros on the left, if necessary.<br \>
+<br \>
+The length of the string will not go longer than the maximum number of digits required for the type of <tt><i>number</i></tt> (8 for an <tt><a href="KeyPgInteger.html">Integer</a></tt>, 16 for a <tt><a href="KeyPgLongint.html">LongInt</a>)</tt>.<br \>
+<br \>
+If you want to do the opposite, i.e. convert a hexadecimal string back into a number, the easiest way to do it is to prepend the string with <tt>"&H"</tt>, and convert it using <tt><a href="KeyPgValint.html">ValInt</a></tt> or <tt><a href="KeyPgVallng.html">ValLng</a></tt>, similarly to a normal numeric string.  E.g. <tt><a href="KeyPgValint.html">ValInt</a>("&HFF")</tt><br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="com">'54321&nbsp;is&nbsp;D431&nbsp;in&nbsp;hex</span><br />
+<span class="key">Print</span>&nbsp;<span class="key">Hex</span><span class="oth">(</span><span class="num">54321</span><span class="oth">)</span><br />
+<span class="key">Print</span>&nbsp;<span class="key">Hex</span><span class="oth">(</span><span class="num">54321</span><span class="oth">,</span>&nbsp;<span class="num">2</span><span class="oth">)</span><br />
+<span class="key">Print</span>&nbsp;<span class="key">Hex</span><span class="oth">(</span><span class="num">54321</span><span class="oth">,</span>&nbsp;<span class="num">5</span><span class="oth">)</span><br />
+</div></tt><br />
+will produce the output:<br \>
+<br \>
+<pre class="fb_pre">D431
+31
+0D431
+</pre><br \>
+</div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
+<ul><li> The string type suffix <tt>"$"</tt> is obligatory in the <i><a href="CompilerOptlang.html">-lang qb</a></i> dialect.<br \>
+<li> The string type suffix <tt>"$"</tt> is optional in the <i><a href="CompilerOptlang.html">-lang fblite</a></i> and <i><a href="CompilerOptlang.html">-lang fb</a></i> dialects.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> In QBASIC, there was no way to specify the number of digits returned.<br \>
+<li> The size of the string returned was limited to 32 bits, or 8 hexadecimal digits.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgBin.html">Bin</a></tt><br \>
+<li> <tt><a href="KeyPgOct.html">Oct</a></tt><br \>
+<li> <tt><a href="KeyPgValint.html">ValInt</a></tt><br \>
+<li> <tt><a href="KeyPgVallng.html">ValLng</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

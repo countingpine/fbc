@@ -1,0 +1,98 @@
+<html>
+<head>
+<title>RGB</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">RGB</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Computes a valid color value for hi/truecolor modes<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<a href="KeyPgPpdefine.html">#define</a> <b>RGB</b>(<i>r</i>,<i>g</i>,<i>b</i>) ((<a href="KeyPgCuint.html">CUInt</a>(r) <a href="KeyPgOpShiftLeft.html">Shl</a> 16) <a href="KeyPgOpOr.html">Or</a> (<a href="KeyPgCuint.html">CUInt</a>(g) <a href="KeyPgOpShiftLeft.html">Shl</a> 8) <a href="KeyPgOpOr.html">Or</a> <a href="KeyPgCuint.html">CUInt</a>(b) <a href="KeyPgOpOr.html">Or</a> &hFF000000)<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
+<i>result</i> = <b>RGB</b>(<i>red</i>, <i>green</i>, <i>blue</i>)<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+<tt><i>red</i></tt><br \>
+<div class="fb_indent">red color component value<br \>
+</div><tt><i>green</i></tt><br \>
+<div class="fb_indent">green color component value<br \>
+</div><tt><i>blue</i></tt><br \>
+<div class="fb_indent">blue color component value<br \>
+<br \>
+</div></div><div class="fb_sect_title">Return Value</div><div class="fb_sect_cont"><br \>
+The combined color.<br \>
+<br \>
+</div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+<tt><i>red</i></tt>, <tt><i>green</i></tt> and <tt><i>blue</i></tt> are components ranging <tt>0</tt>..<tt>255</tt>.<br \>
+<br \>
+The <tt><b>RGB</b></tt> function can be used to compute a valid color value for use while in hi/truecolor modes. It returns an unsigned integer  in the format <tt>&hAARRGGBB</tt>, where <tt>RR</tt>, <tt>GG</tt> and <tt>BB</tt> equal the values passed to this function, in hexadecimal format. <tt>AA</tt> is the implicit alpha value and is automatically set to <tt>&hFF</tt> (opaque).<br \>
+It is possible to retrieve the red, green, blue and alpha values from a color value, by using a combination of <tt><a href="KeyPgOpAnd.html">And</a></tt> and <tt><a href="KeyPgOpShiftRight.html">Shr</a></tt>.  The second example below shows how to <tt><a href="KeyPgPpdefine.html">#define</a></tt> and use macros to do this.<br \>
+<br \>
+<b>Note for Windows API programmers</b>: The macro named <tt>RGB</tt> in the Windows references has been renamed <tt>BGR</tt> in the FB headers for Windows to avoid collisions. <br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+See <tt><a href="KeyPgPutgraphics.html">Put (Graphics)</a></tt> example in addition.<br \>
+<br \>
+<tt><div class="freebasic">
+<span class="key">ScreenRes</span>&nbsp;<span class="num">640</span><span class="oth">,</span><span class="num">480</span><span class="oth">,</span><span class="num">32</span>&nbsp;&nbsp;<span class="com">'32&nbsp;bit&nbsp;color</span><br />
+<span class="key">Line</span><span class="oth">(</span><span class="num">0</span><span class="oth">,</span><span class="num">0</span><span class="oth">)-(</span><span class="num">319</span><span class="oth">,</span><span class="num">479</span><span class="oth">),</span>&nbsp;<span class="key">RGB</span><span class="oth">(</span><span class="num">255</span><span class="oth">,</span><span class="num">0</span><span class="oth">,</span><span class="num">0</span><span class="oth">)</span>&nbsp;<span class="com">'draws&nbsp;a&nbsp;bright&nbsp;red&nbsp;box&nbsp;on&nbsp;the&nbsp;left&nbsp;side&nbsp;of&nbsp;the&nbsp;window</span><br />
+<span class="key">Line</span><span class="oth">(</span><span class="num">639</span><span class="oth">,</span><span class="num">0</span><span class="oth">)-(</span><span class="num">320</span><span class="oth">,</span><span class="num">479</span><span class="oth">),</span>&nbsp;<span class="key">RGB</span><span class="oth">(</span><span class="num">0</span><span class="oth">,</span><span class="num">0</span><span class="oth">,</span><span class="num">255</span><span class="oth">)</span>&nbsp;<span class="com">'draws&nbsp;a&nbsp;bright&nbsp;blue&nbsp;box&nbsp;on&nbsp;the&nbsp;right&nbsp;side&nbsp;of&nbsp;the&nbsp;window</span><br />
+<br />
+<span class="key">Sleep</span>&nbsp;<span class="com">'wait&nbsp;before&nbsp;exiting</span><br />
+</div></tt><br />
+<br \>
+<tt><div class="freebasic">
+<span class="com">''&nbsp;setting&nbsp;and&nbsp;retrieving&nbsp;Red,&nbsp;Green,&nbsp;Blue&nbsp;and&nbsp;Alpha&nbsp;values</span><br />
+<br />
+<span class="def">#define&nbsp;RGBA_R(&nbsp;c&nbsp;)&nbsp;(&nbsp;CUInt(&nbsp;c&nbsp;)&nbsp;Shr&nbsp;16&nbsp;And&nbsp;255&nbsp;)<br />
+#define&nbsp;RGBA_G(&nbsp;c&nbsp;)&nbsp;(&nbsp;CUInt(&nbsp;c&nbsp;)&nbsp;Shr&nbsp;&nbsp;8&nbsp;And&nbsp;255&nbsp;)<br />
+#define&nbsp;RGBA_B(&nbsp;c&nbsp;)&nbsp;(&nbsp;CUInt(&nbsp;c&nbsp;)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;And&nbsp;255&nbsp;)<br />
+#define&nbsp;RGBA_A(&nbsp;c&nbsp;)&nbsp;(&nbsp;CUInt(&nbsp;c&nbsp;)&nbsp;Shr&nbsp;24&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)<br />
+</span><br />
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">UInteger</span>&nbsp;<span class="wrd">r</span><span class="oth">,</span>&nbsp;<span class="wrd">g</span><span class="oth">,</span>&nbsp;<span class="wrd">b</span><span class="oth">,</span>&nbsp;<span class="wrd">a</span><br />
+<br />
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">UInteger</span>&nbsp;<span class="wrd">col</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">RGB</span><span class="oth">(</span><span class="num">128</span><span class="oth">,</span>&nbsp;<span class="num">192</span><span class="oth">,</span>&nbsp;<span class="num">64</span><span class="oth">)</span><br />
+<br />
+<span class="key">Print</span>&nbsp;<span class="key">Using</span>&nbsp;<span class="quo">"Color:&nbsp;_&amp;H\&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\"</span><span class="oth">;</span>&nbsp;<span class="key">Hex</span><span class="oth">(</span><span class="wrd">col</span><span class="oth">,</span>&nbsp;<span class="num">8</span><span class="oth">)</span><br />
+<br />
+<span class="wrd">r</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">RGBA_R</span><span class="oth">(</span>&nbsp;<span class="wrd">col</span>&nbsp;<span class="oth">)</span><br />
+<span class="wrd">g</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">RGBA_G</span><span class="oth">(</span>&nbsp;<span class="wrd">col</span>&nbsp;<span class="oth">)</span><br />
+<span class="wrd">b</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">RGBA_B</span><span class="oth">(</span>&nbsp;<span class="wrd">col</span>&nbsp;<span class="oth">)</span><br />
+<span class="wrd">a</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">RGBA_A</span><span class="oth">(</span>&nbsp;<span class="wrd">col</span>&nbsp;<span class="oth">)</span><br />
+<br />
+<span class="key">Print</span><br />
+<span class="key">Print</span>&nbsp;<span class="key">Using</span>&nbsp;<span class="quo">"Red:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_&amp;H\\&nbsp;=&nbsp;###"</span><span class="oth">;</span>&nbsp;<span class="key">Hex</span><span class="oth">(</span><span class="wrd">r</span><span class="oth">,</span>&nbsp;<span class="num">2</span><span class="oth">);</span>&nbsp;<span class="wrd">r</span><br />
+<span class="key">Print</span>&nbsp;<span class="key">Using</span>&nbsp;<span class="quo">"Green:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_&amp;H\\&nbsp;=&nbsp;###"</span><span class="oth">;</span>&nbsp;<span class="key">Hex</span><span class="oth">(</span><span class="wrd">g</span><span class="oth">,</span>&nbsp;<span class="num">2</span><span class="oth">);</span>&nbsp;<span class="wrd">g</span><br />
+<span class="key">Print</span>&nbsp;<span class="key">Using</span>&nbsp;<span class="quo">"Blue:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_&amp;H\\&nbsp;=&nbsp;###"</span><span class="oth">;</span>&nbsp;<span class="key">Hex</span><span class="oth">(</span><span class="wrd">b</span><span class="oth">,</span>&nbsp;<span class="num">2</span><span class="oth">);</span>&nbsp;<span class="wrd">b</span><br />
+<span class="key">Print</span>&nbsp;<span class="key">Using</span>&nbsp;<span class="quo">"Alpha:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_&amp;H\\&nbsp;=&nbsp;###"</span><span class="oth">;</span>&nbsp;<span class="key">Hex</span><span class="oth">(</span><span class="wrd">a</span><span class="oth">,</span>&nbsp;<span class="num">2</span><span class="oth">);</span>&nbsp;<span class="wrd">a</span><br />
+</div></tt><br />
+<br \>
+</div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
+<ul><li> Not available in the <i><a href="CompilerOptlang.html">-lang qb</a></i> dialect.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> New to FreeBASIC<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgRgba.html">RGBA</a></tt><br \>
+<li> <tt><a href="KeyPgColor.html">Color</a></tt><br \>
+<li> <tt><a href="KeyPgPpdefine.html">#define</a></tt><br \>
+<br \>
+</ul><br \>
+   <br \>
+<br \>
+   <br \>
+</div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

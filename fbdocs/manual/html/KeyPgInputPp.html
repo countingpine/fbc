@@ -1,0 +1,66 @@
+<html>
+<head>
+<title>Input #</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Input #</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Reads a list of values from a text file<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<b>Input</b> # <i>filenum</i>, <i>variable_list</i><br \>
+</tt><br \>
+</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+<tt><i>filenum</i></tt><br \>
+<div class="fb_indent">a file number of a file or device opened for <tt><a href="KeyPgInputfilemode.html">Input</a></tt><br \>
+</div><tt><i>variable_list</i></tt><br \>
+<div class="fb_indent">a list of variables used to hold the values read<br \>
+<br \>
+</div></div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+Reads from a text file through a bound file number a delimiter-separated set of values and writes them in reading order into the variables in <tt><i>variable_list</i></tt>. If a variable is numeric the read value is converted from its string representation into the corresponding type.<br \>
+<br \>
+Numeric values are converted in a similar way to the procedures <tt><a href="KeyPgVal.html">Val</a></tt> and <tt><a href="KeyPgVallng.html">ValLng</a></tt>, using the most appropriate function for the number format.<br \>
+<br \>
+Delimiters may be commas or line breaks. Whitespace is also treated as a separator after numbers. A string including a comma or a whitespace must be surrounded by double quotes. <br \>
+<br \>
+To read an entire line into a string, use <tt><a href="KeyPgLineinputPp.html">Line Input</a></tt> instead.<br \>
+<a href="KeyPgWritePp.html">Write #</a> can be used to create a file readable with <tt><b>Input #</b></tt>.<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="key">Dim</span>&nbsp;<span class="wrd">a</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">b</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">c</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Single</span><br />
+<br />
+<span class="key">Open</span>&nbsp;<span class="quo">"myfile.txt"</span>&nbsp;<span class="key">For</span>&nbsp;<span class="key">Output</span>&nbsp;<span class="key">As</span>&nbsp;<span class="oth">#</span><span class="num">1</span><br />
+<span class="key">Write</span>&nbsp;<span class="oth">#</span><span class="num">1</span><span class="oth">,</span>&nbsp;<span class="num">1</span><span class="oth">,</span>&nbsp;<span class="quo">"Hello,&nbsp;World"</span><span class="oth">,</span>&nbsp;<span class="num">34.5</span><br />
+<span class="key">Close</span>&nbsp;<span class="oth">#</span><span class="num">1</span><br />
+<br />
+<span class="key">Open</span>&nbsp;<span class="quo">"myfile.txt"</span>&nbsp;<span class="key">For</span>&nbsp;<span class="key">Input</span>&nbsp;<span class="key">As</span>&nbsp;<span class="oth">#</span><span class="num">1</span><br />
+<span class="key">Input</span>&nbsp;<span class="oth">#</span><span class="num">1</span><span class="oth">,</span>&nbsp;<span class="wrd">a</span><span class="oth">,</span>&nbsp;<span class="wrd">b</span><span class="oth">,</span>&nbsp;<span class="wrd">c</span><br />
+<span class="key">Close</span>&nbsp;<span class="oth">#</span><span class="num">1</span><br />
+<span class="key">Print</span>&nbsp;<span class="wrd">a</span><span class="oth">,</span>&nbsp;<span class="wrd">b</span><span class="oth">,</span>&nbsp;<span class="wrd">c</span><br />
+</div></tt><br />
+<br \>
+</div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> QB has a bug in INPUT # that causes it to read past the end of the line if it does not find a matching end-quote when reading a string. If you are porting QB code that relies upon this bug, you may need to edit your data files to remove newlines from inside quoted strings, or to use a custom function to piece back together the multiline string.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgInput.html">Input</a></tt><br \>
+<li> <tt><a href="KeyPgLineinputPp.html">Line Input #</a></tt><br \>
+<li> <tt><a href="KeyPgWritePp.html">Write #</a></tt><br \>
+<li> <tt><a href="KeyPgOpen.html">Open</a></tt><br \>
+<li> <tt><a href="KeyPgInputfilemode.html">Input (File Mode)</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

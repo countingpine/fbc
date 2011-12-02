@@ -1,0 +1,66 @@
+<html>
+<head>
+<title>Lib</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Lib</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Specifies the library where a sub or function can be found as part of a declaration<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<a href="KeyPgDeclare.html">Declare</a> { <a href="KeyPgSub.html">Sub</a> | <a href="KeyPgFunction.html">Function</a> } <i>proc_name</i> <b>Lib</b> "<i>libname</i>" [ <a href="KeyPgAlias.html">Alias</a> "<i>symbol_name</i>" ] ( <i>arguments list</i> ) <a href="KeyPgAs.html">As</a> <i>return_type</i><br \>
+<br \>
+<a href="KeyPgExternBlock.html">Extern</a> "<i>mangling</i>" lib "<i>libname</i>"<br \>
+<div class="fb_indent"><i>declarative statements</i><br \>
+</div>end <a href="KeyPgExternBlock.html">Extern</a><br \>
+<br \>
+<a href="KeyPgType.html">Type</a> <i>T</i><br \>
+<div class="fb_indent"><a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a> dummy<br \>
+<a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgConstructor.html">Constructor</a> <b>Lib</b> "<i>libname</i>" [ <a href="KeyPgAlias.html">Alias</a> "<i>symbol_name</i>" ] ( <i>arguments list</i> )<br \>
+</div>end <a href="KeyPgType.html">Type</a><br \>
+<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+In <tt><a href="KeyPgSub.html">Sub</a></tt> or <tt><a href="KeyPgFunction.html">Function</a></tt> declarations, and also in class method declarations (including constructors and destructors), <tt><b>Lib</b></tt> indicates the library containing the function. Libraries specified in this way are linked in as if <tt><a href="KeyPgInclib.html">#Inclib "Libname"</a></tt> or <tt><a href="CompilerOptl.html">-l libname</a></tt> had been used.<br \>
+<br \>
+<tt><b>Lib</b></tt> can also be used with <a href="KeyPgExternBlock.html">Extern ... End Extern Blocks</a> to specifiy a <tt><b>Lib</b></tt> for all declarations inside.<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="com">''&nbsp;mydll.bas</span><br />
+<span class="com">''&nbsp;compile&nbsp;with:</span><br />
+<span class="com">''&nbsp;&nbsp;&nbsp;fbc&nbsp;-dll&nbsp;mydll.bas</span><br />
+<br />
+<span class="key">Public</span>&nbsp;<span class="key">Function</span>&nbsp;<span class="wrd">GetValue</span><span class="oth">()</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="key">Export</span><br />
+&nbsp;&nbsp;<span class="key">Function</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">&amp;h1234</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Function</span><br />
+</div></tt><br />
+<br \>
+<tt><div class="freebasic">
+<span class="key">Declare</span>&nbsp;<span class="key">Function</span>&nbsp;<span class="wrd">GetValue</span>&nbsp;<span class="key">Lib</span>&nbsp;<span class="quo">"mydll"</span>&nbsp;<span class="oth">()</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+<br />
+<span class="key">Print</span>&nbsp;<span class="quo">"GetValue&nbsp;=&nbsp;&amp;h"</span><span class="oth">;</span>&nbsp;<span class="key">Hex</span><span class="oth">(</span><span class="wrd">GetValue</span><span class="oth">())</span><br />
+<br />
+<span class="com">'&nbsp;Expected&nbsp;Output&nbsp;:</span><br />
+<span class="com">'&nbsp;GetValue&nbsp;=&nbsp;&amp;h1234</span><br />
+</div></tt><br />
+<br \>
+</div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> New to FreeBASIC<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgDeclare.html">Declare</a></tt><br \>
+<li> <tt><a href="KeyPgInclib.html">#inclib</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

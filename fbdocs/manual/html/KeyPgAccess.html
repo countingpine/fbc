@@ -1,0 +1,84 @@
+<html>
+<head>
+<title>Access</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Access</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Clause of the <tt><a href="KeyPgOpen.html">Open</a></tt> statement to specify requested privileges<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<a href="KeyPgOpen.html">Open</a> <i>filename</i> for <a href="KeyPgBinary.html">Binary</a> <b>Access</b> {<b>Read</b> | <b>Write</b> | <b>Read Write</b>} as [#]<i>filenum</i><br \>
+</tt><br \>
+</div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
+open <i>filename</i> for binary <b>Access Read</b> as #<i>filenum</i><br \>
+open <i>filename</i> for binary <b>Access Write</b> as #<i>filenum</i><br \>
+open <i>filename</i> for binary <b>Access Read Write</b> as #<i>filenum</i><br \>
+</tt><br \>
+</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+<tt>Read</tt><br \>
+<div class="fb_indent">Open the file with only read privileges.<br \>
+</div><tt>Write</tt><br \>
+<div class="fb_indent">Open the file with only write privileges.<br \>
+</div><tt>Read Write</tt><br \>
+<div class="fb_indent">Open the file with read and write privileges.<br \>
+<br \>
+</div></div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+<tt>Access</tt> is used with the <tt><a href="KeyPgOpen.html">Open</a></tt> statement to request read, write, or read and write privileges.  If the <tt>Access</tt> clause is not specified, <tt>Read Write</tt> is assumed.<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<br \>
+This example shows how to open the file "data.raw" with <tt><a href="KeyPgReadFile.html">Read</a></tt> and then "data.out" with <tt><a href="KeyPgWriteFile.html">Write</a></tt> access, in <tt><a href="KeyPgBinary.html">Binary</a></tt> mode, in an open file number returned by <tt><a href="KeyPgFreefile.html">FreeFile</a></tt>.<br \>
+<tt><div class="freebasic">
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="wrd">o</span><br />
+<br />
+&nbsp;&nbsp;<span class="com">''&nbsp;get&nbsp;an&nbsp;open&nbsp;file&nbsp;number.</span><br />
+&nbsp;&nbsp;<span class="wrd">o</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">FreeFile</span><br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;<span class="com">''&nbsp;open&nbsp;file&nbsp;for&nbsp;read-only&nbsp;access.&nbsp;&nbsp;&nbsp;&nbsp;</span><br />
+&nbsp;&nbsp;<span class="key">Open</span>&nbsp;<span class="quo">"data.raw"</span>&nbsp;<span class="key">For</span>&nbsp;<span class="key">Binary</span>&nbsp;<span class="key">Access</span>&nbsp;<span class="key">Read</span>&nbsp;<span class="key">As</span>&nbsp;<span class="oth">#</span><span class="wrd">o</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;make&nbsp;a&nbsp;buffer&nbsp;in&nbsp;memory&nbsp;thats&nbsp;the&nbsp;entire&nbsp;size&nbsp;of&nbsp;the&nbsp;file</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">UByte</span>&nbsp;<span class="wrd">file_char</span><span class="oth">(</span>&nbsp;<span class="key">LOF</span><span class="oth">(</span>&nbsp;<span class="wrd">o</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="oth">-</span>&nbsp;<span class="num">1</span>&nbsp;<span class="oth">)</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;get&nbsp;the&nbsp;file&nbsp;into&nbsp;the&nbsp;buffer.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Get</span>&nbsp;<span class="oth">#</span><span class="wrd">o</span><span class="oth">,</span>&nbsp;<span class="oth">,</span>&nbsp;<span class="wrd">file_char</span><span class="oth">()</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;<span class="key">Close</span><br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;<span class="com">''&nbsp;get&nbsp;another&nbsp;open&nbsp;file&nbsp;number.</span><br />
+&nbsp;&nbsp;<span class="wrd">o</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">FreeFile</span><br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;<span class="com">''&nbsp;open&nbsp;file&nbsp;for&nbsp;write-only&nbsp;access.&nbsp;&nbsp;&nbsp;&nbsp;</span><br />
+&nbsp;&nbsp;<span class="key">Open</span>&nbsp;<span class="quo">"data.out"</span>&nbsp;<span class="key">For</span>&nbsp;<span class="key">Binary</span>&nbsp;<span class="key">Access</span>&nbsp;<span class="key">Write</span>&nbsp;<span class="key">As</span>&nbsp;<span class="oth">#</span><span class="wrd">o</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;put&nbsp;the&nbsp;buffer&nbsp;into&nbsp;the&nbsp;new&nbsp;file.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Put</span>&nbsp;<span class="oth">#</span><span class="wrd">o</span><span class="oth">,</span>&nbsp;<span class="oth">,</span>&nbsp;<span class="wrd">file_char</span><span class="oth">()</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;<span class="key">Close</span><br />
+<br />
+&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"Copied&nbsp;file&nbsp;""data.raw""&nbsp;to&nbsp;file&nbsp;""data.out"""</span><br />
+<br />
+&nbsp;&nbsp;<span class="key">Sleep</span><br />
+</div></tt><br />
+<br \>
+</div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> None known.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgOpen.html">Open</a></tt><br \>
+<li> <tt><a href="KeyPgReadFile.html">Read</a></tt><br \>
+<li> <tt><a href="KeyPgWriteFile.html">Write</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

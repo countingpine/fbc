@@ -1,0 +1,115 @@
+<html>
+<head>
+<title>Introduction to Variable Scope</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Introduction to Variable Scope</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	<i>Written by <a href="WikiRick.html">rdc</a></i><br \>
+<br \>
+<div class="fb_header"> Variable Scope </div><br \>
+<br \>
+Scope refers to the visibility of a variable, where you can access a variable within a program. Before you can understand the different levels of scope, you need to understand the structure of a program in FreeBasic.<br \>
+<br \>
+<b> Program Structure </b><br \>
+<br \>
+A complete program is composed of one or more .bas files, called modules. Each module can contain both module level code, and code contained within subroutines and functions. Module level code is code that is <i>not</i> contained within a subroutine or function. The following snippet illustrates the various parts of a module.<br \>
+<br \>
+<tt><div class="freebasic">
+<span class="key">Dim</span>&nbsp;<span class="wrd">aInt</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="com">'Variable&nbsp;declared&nbsp;at&nbsp;module&nbsp;level</span><br />
+<br />
+<span class="key">Sub</span>&nbsp;<span class="wrd">DoSomething</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="wrd">aInt</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="com">'Variable&nbsp;declared&nbsp;at&nbsp;sub&nbsp;level</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">...</span>&nbsp;<span class="com">'This&nbsp;code&nbsp;is&nbsp;local&nbsp;to&nbsp;sub</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Sub</span><br />
+<br />
+<span class="key">Function</span>&nbsp;<span class="wrd">DoSomethingElse</span><span class="oth">()</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="wrd">aInt</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="com">'Variable&nbsp;declared&nbsp;at&nbsp;func&nbsp;level</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">...</span>&nbsp;<span class="com">'This&nbsp;code&nbsp;is&nbsp;local&nbsp;to&nbsp;func</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Function</span><br />
+<br />
+<span class="com">'Module&nbsp;level&nbsp;code</span><br />
+<span class="wrd">aInt</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">5</span><br />
+<span class="wrd">DoSomething</span><br />
+<span class="wrd">aInt</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">DoSomethingElse</span><span class="oth">()</span><br />
+</div></tt><br />
+<br \>
+<b> Local Variables </b><br \>
+<br \>
+If you define a variable at the module level (and not using <tt>Shared</tt>), the variable is said to have local module level scope. It is visible to the module level code, but not to any subroutine or function within the module. In the example above the module variable <tt>aInt</tt> is only visible to the module level code. <br \>
+<br \>
+Variables defined within a subroutine or function are local to the subroutine or function and are not visible to module level code or any other subroutine or function.<br \>
+<br \>
+<b> Variables Defined Within Control Structures </b><br \>
+<br \>
+Variables that are defined within If, For-Next, While-Wend and Do-Loop constructs are local to the control structure block code. That is, they are not visible outside the bounds of the begin and end of the control block, just like a variable declared within a subroutine or function. <br \>
+<br \>
+<b> Shared Variables </b><br \>
+<br \>
+In the example, if you wanted <tt>aInt</tt> to be visible within the subroutine or function, you would need to declare the variable as <tt>Shared</tt> and then not declare a variable with the same name within any subroutine, function or control block. <tt>Shared</tt> variables are visible to module level code, subroutine or function level code and within control structure blocks.<br \>
+<br \>
+<b> Scope Conflicts </b><br \>
+<br \>
+In the code snippet above, if <tt>aInt</tt> were declared as <tt>Shared</tt>, and each subroutine and function declared <tt>aInt</tt>, there would be a scope conflict, since there is one variable name used for different levels of scope.<br \>
+<br \>
+The compiler resolves this by taking the current scope into account and mapping the variable within that scope. Since subroutines and functions have a lower level of scope than the module, <tt>aInt</tt> would refer to the variable declared within the sub or func, and not the one declared at the module level, even though it is declared as a shared variable.<br \>
+<br \>
+<b> Multiple Modules </b><br \>
+<br \>
+Scope is limited to a single module, that is a single .bas file. However, it is sometimes necessary to extend the scope from one module to another. You would use the <tt>Common</tt> statement when you declare a variable that needs to be shared among modules.<br \>
+<br \>
+Each module must have the same <tt>Common</tt> declaration in order for the compiler to match up the common variables. If you declare a variable in module1 as <tt>Common aInt as Integer</tt> then module2 must also have <tt>Common aInt as Integer</tt>. Without the common declaration <tt>aInt</tt> would not be visible within module2.<br \>
+<br \>
+You can add the <tt>Shared</tt> attribute to <tt>Common</tt>, that is <tt>Common Shared</tt> to not only extend scope to multiple modules, but to extend scope within a module. <tt>Common Shared</tt> operates the same as <tt>Shared</tt> within a single module. As with <tt>Common</tt>, you need to have matching declarations in each module that needs access to the variable.<br \>
+<br \>
+<div class="fb_header"> Scope...End Scope </div><br \>
+<br \>
+You can create a temporary scope block by using the <tt>Scope</tt>, <tt>End Scope</tt> keywords. The scope block is very useful when creating multi-line macros where you may need to create some temporary working variables but do not want to introduce name conflicts in the program. The following snippet illustrates how to create a scope block.<br \>
+<br \>
+<tt><div class="freebasic">
+<span class="key">Scope</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="wrd">tmp</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">...</span>&nbsp;<span class="com">'Some&nbsp;code</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Scope</span><br />
+</div></tt><br />
+<br \>
+The scope of any variable created within a scope block is limited to the block itself. However, the scope block inherits the visibility of the surrounding scope so that variables created at the same scope as the scope block are visible within the block.<br \>
+<br \>
+For example, if you have aInt which is at module level scope, and the scope block is at module level scope, then <tt>aInt</tt> would be visible inside the scope block. Unless of course there is a scope conflict, in which case the variable inside the scope block would override the variable with the same name outside the scope block.<br \>
+<br \>
+<div class="fb_header"> Variable Lifetime </div><br \>
+<br \>
+Not only does scope set the visibility of a variable, it also determines the lifetime of a variable. A variable goes through several stages in its lifetime; creation, initialization, access and destruction. When this occurs depends on the scope of a variable, that is, where the variable has been defined within the program.<br \>
+<br \>
+<b> Module Level Variables </b><br \>
+<br \>
+Module level variables exist for the life of a program, since they are declared within the main body of the program. Module level code is the main executing code of the program, and terminates when the program ends.<br \>
+<br \>
+<b> Subroutine and Function Level Variables </b><br \>
+<br \>
+Variables declared within a subroutine and function exist as long as the program is within the body of the subroutine and function. On entering the sub/func, the variable is created, initialized and can be accessed within the sub/func. Once the subroutine or function exits, the variable is destroyed.<br \>
+<br \>
+<b> Static Variables  </b><br \>
+<br \>
+One exception to the declared sub/func variable is the <tt>Static</tt> variable. <tt>Static</tt> variables maintain their value between calls to the subroutine or function and so have a module level lifespan. <br \>
+<br \>
+<b> Control Block Variables </b><br \>
+<br \>
+Variables declared within a control block, such as a For-Next, exist as long as the control block is executing. Upon leaving the control block, the variables are destroyed.<br \>
+<br \>
+<b> Scope...End Scope Variables </b><br \>
+<br \>
+Variables declared within a scope block exist as long as the the scope block exists. Once the program leaves the scope block, any variables created within the scope block are destroyed.
+</div>
+</div> 
+</div> 
+</body>
+</html>

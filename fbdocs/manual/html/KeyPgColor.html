@@ -1,0 +1,88 @@
+<html>
+<head>
+<title>Color</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Color</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Sets the display foreground / background color that is used with console output and graphics output of text<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgFunction.html">Function</a> <b>Color</b> ( <a href="KeyPgByval.html">ByVal</a> <i>foreground</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a> , <a href="KeyPgByval.html">ByVal</a> <i>background</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a> ) <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a><br \>
+</tt><br \>
+</div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
+<b>Color</b> [<i>foreground</i>] [, <i>background</i>]<br \>
+<i>result</i> = <b>Color</b> [( [<i>foreground</i>] [, <i>background</i>] )]<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+<tt><i>foreground</i></tt><br \>
+<div class="fb_indent">the foreground color to set<br \>
+</div><tt><i>background</i></tt><br \>
+<div class="fb_indent">the background color to set<br \>
+<br \>
+</div></div><div class="fb_sect_title">Return Value</div><div class="fb_sect_cont"><br \>
+Returns a 32 bit <tt><a href="KeyPgInteger.html">Integer</a></tt> containing the current foreground color in the <a href="KeyPgLoWord.html">Low Word</a> and the current background color in the <a href="KeyPgHiword.html">High Word</a>.  The old color values can be retrieved at the same time as setting new ones.<br \>
+<br \>
+</div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+The <tt><b>Color</b></tt> statement sets the current foreground and/or background colors. <tt><a href="KeyPgCircle.html">Circle</a></tt>, <tt><a href="KeyPgDraw.html">Draw</a></tt>, <tt><a href="KeyPgLinegraphics.html">Line (Graphics)</a></tt>, <tt><a href="KeyPgCls.html">Cls</a></tt>, <tt><a href="KeyPgPaint.html">Paint</a></tt>, <tt><a href="KeyPgPrint.html">Print</a></tt>, <tt><a href="KeyPgPreset.html">PReset</a></tt> and <tt><a href="KeyPgPset.html">PSet</a></tt> all use the last colors set by this function when you don't specify a color to them, where applicable. The color values that <tt><b>Color</b></tt> accepts depend on the current graphics mode.<br \>
+<br \>
+<div class="fb_table"><table><tr><td>Mode</td><td>Meaning</td></tr><tr><td>1</td><td>foreground is screen color (ranging 0-15). background modulo 4 is the emulated CGA palette to be used: 0 (green, red, and brown), 1 (cyan, magenta and white), 2 (same as 0, but with bright colors) or 3 (same as 1, but with bright colors)</td></tr><tr><td>2, 11</td><td>foreground is a color index in current palette (ranging 0-1). background is a color index in current palette (ranging 0-1).</td></tr><tr><td>7, 8</td><td>foreground is a color index in current palette (ranging 0-15). background is screen color index in current palette (ranging 0-15).</td></tr><tr><td>9</td><td>foreground is a color index in current palette (ranging 0-63). background is screen color index in current palette (ranging 0-63).</td></tr><tr><td>12</td><td>foreground is a color index in current palette (ranging 0-15). background is a color index in current palette (ranging 0-15).</td></tr><tr><td>13 and up</td><td>foreground is a color index in current palette (ranging 0-255). background is a color index in current palette (ranging 0-255).</td></tr></table></div><br \>
+<br \>
+If you are using a color depth higher than 8bpp, foreground and background are direct <tt><a href="KeyPgRgb.html">RGB</a></tt> color values in the form <tt>&hAARRGGBB</tt>, where <tt>AA</tt>, <tt>RR</tt>, <tt>GG</tt> and <tt>BB</tt> are the alpha, red, green and blue components ranging <tt>&h00-&hFF</tt> (0-255 in decimal notation). While in hi/truecolor modes, you can use the <tt><a href="KeyPgRgb.html">RGB</a></tt> or <tt><a href="KeyPgRgba.html">RGBA</a></tt> macro to obtain a valid color value.<br \>
+A <a href="GfxDefPalettes.html">Default Palette</a> is automatically set when entering a <tt><a href="KeyPgScreengraphics.html">Screen</a></tt> mode. <br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="com">'&nbsp;Sets&nbsp;320x240&nbsp;in&nbsp;32bpp&nbsp;color&nbsp;depth</span><br />
+<span class="key">Screen</span>&nbsp;<span class="num">14</span><span class="oth">,</span>&nbsp;<span class="num">32</span><br />
+<br />
+<span class="com">'&nbsp;Sets&nbsp;orange&nbsp;foreground&nbsp;and&nbsp;dark&nbsp;blue&nbsp;background&nbsp;color</span><br />
+<span class="key">Color</span>&nbsp;<span class="key">RGB</span><span class="oth">(</span><span class="num">255</span><span class="oth">,</span>&nbsp;<span class="num">128</span><span class="oth">,</span>&nbsp;<span class="num">0</span><span class="oth">),</span>&nbsp;<span class="key">RGB</span><span class="oth">(</span><span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">64</span><span class="oth">)</span><br />
+<br />
+<span class="com">'&nbsp;Clears&nbsp;the&nbsp;screen&nbsp;to&nbsp;the&nbsp;background&nbsp;color</span><br />
+<span class="key">Cls</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+<br />
+<span class="com">'&nbsp;Prints&nbsp;"Hello&nbsp;World!"&nbsp;in&nbsp;the&nbsp;middle&nbsp;of&nbsp;the&nbsp;screen</span><br />
+<span class="key">Locate</span>&nbsp;<span class="num">15</span><span class="oth">,</span>&nbsp;<span class="num">14</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"Hello&nbsp;World!"</span><br />
+<br />
+<span class="key">Sleep</span><br />
+</div></tt><br />
+<div class="fb_img"><img src="images/color.png" /></div><br \>
+<tt><div class="freebasic">
+<span class="key">Dim</span>&nbsp;<span class="wrd">c</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">UInteger</span><br />
+<br />
+<span class="com">'retrieve&nbsp;current&nbsp;color&nbsp;values</span><br />
+<span class="wrd">c</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">Color</span><span class="oth">()</span><br />
+<br />
+<span class="com">'extract&nbsp;color&nbsp;values&nbsp;from&nbsp;c&nbsp;using&nbsp;LOWORD&nbsp;and&nbsp;HIWORD</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"Console&nbsp;colors:"</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"Foreground:&nbsp;"</span>&nbsp;<span class="oth">&amp;</span>&nbsp;<span class="key">LoWord</span><span class="oth">(</span><span class="wrd">c</span><span class="oth">)</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"Background:&nbsp;"</span>&nbsp;<span class="oth">&amp;</span>&nbsp;<span class="key">HiWord</span><span class="oth">(</span><span class="wrd">c</span><span class="oth">)</span><br />
+</div></tt><br />
+<br \>
+</div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> Direct color modes were not supported in QB.<br \>
+<li> There is no border argument.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgRgb.html">RGB</a></tt><br \>
+<li> <tt><a href="KeyPgRgba.html">RGBA</a></tt><br \>
+<li> <tt><a href="KeyPgLoWord.html">LoWord</a></tt><br \>
+<li> <tt><a href="KeyPgHiword.html">HiWord</a></tt><br \>
+<li> <tt><a href="KeyPgLocate.html">Locate</a></tt><br \>
+<li> <tt><a href="KeyPgPalette.html">Palette</a></tt><br \>
+<li> <tt><a href="KeyPgScreengraphics.html">Screen</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

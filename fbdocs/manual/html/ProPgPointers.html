@@ -1,0 +1,68 @@
+<html>
+<head>
+<title>Pointers</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Pointers</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Data types whose values are addresses in memory.<br \>
+<br \>
+<div class="fb_sect_title">Declaration</div><div class="fb_sect_cont"><br \>
+Pointers are <a href="ProPgVariables.html">Variables</a> whose values are addresses in memory, and they are said to 'point' to this memory. The type of data that is pointed to depends on the type of pointer (an <tt><a href="KeyPgInteger.html">Integer</a> <a href="KeyPgPointer.html">Pointer</a></tt> points to <tt><a href="KeyPgInteger.html">Integer</a></tt> data). Pointers are declared like any other variable, with the suffix "<tt>pointer</tt>" or "<tt>ptr</tt>" following the type name.<br \>
+<br \>
+</div><div class="fb_sect_title">Accessing pointed to data</div><div class="fb_sect_cont"><br \>
+The data pointed to by a pointer can be accessed with <tt><a href="KeyPgOpValueOf.html">Operator *</a></tt> (Value of). This operator returns a reference to the data that its operand points to. The following,<br \>
+<br \>
+<tt><div class="freebasic">
+<span class="key">Dim</span>&nbsp;<span class="wrd">myInteger</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">10</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">myPointer</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="key">Pointer</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="oth">@</span><span class="wrd">myInteger</span><br />
+<span class="oth">*</span><span class="wrd">myPointer</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">20</span><br />
+<span class="key">Print</span>&nbsp;<span class="wrd">myInteger</span><br />
+</div></tt><br />
+defines an <tt><a href="KeyPgInteger.html">Integer</a></tt> variable called <tt>myInteger</tt> and an <tt><a href="KeyPgInteger.html">Integer</a></tt> pointer called <tt>myPointer</tt> that points to the location in memory where <tt>myInteger</tt> is stored. <tt><a href="KeyPgOpAt.html">Operator @</a></tt> (Address of) is used to retrieve the address of <tt>myInteger</tt>. The value of <tt>20</tt> is assigned to the location at which <tt>myPointer</tt> points - the address of <tt>myInteger</tt>, or <tt>@myInteger</tt>. Changes to <tt>*myPointer</tt> directly affect the value of <tt>myInteger</tt> (the expression "<tt>*myPointer</tt>" is the same thing as "<tt>myInteger</tt>").<br \>
+<br \>
+</div><div class="fb_sect_title">Pointers to user-defined types</div><div class="fb_sect_cont"><br \>
+Pointers to user-defined types are defined and used like all other pointers. Accessing a member of a <a href="KeyPgType.html">Type</a> or <a href="KeyPgClass.html">Class</a> requires one of the following two methods:<br \>
+<br \>
+<tt><div class="freebasic">
+<span class="key">Type</span>&nbsp;<span class="wrd">myType</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">a</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">b</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Double</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Type</span><br />
+<br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">x</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">myType</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">p</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">myType</span>&nbsp;<span class="key">Pointer</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="oth">@</span><span class="wrd">x</span><br />
+<br />
+<span class="com">''&nbsp;1)&nbsp;dereference&nbsp;the&nbsp;pointer&nbsp;and&nbsp;use&nbsp;the&nbsp;member&nbsp;access&nbsp;operator:</span><br />
+<span class="oth">(*</span><span class="wrd">p</span><span class="oth">).</span><span class="wrd">a</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">10</span><br />
+<span class="oth">(*</span><span class="wrd">p</span><span class="oth">).</span><span class="wrd">b</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">12.34</span><br />
+<br />
+<span class="com">''&nbsp;2)&nbsp;use&nbsp;the&nbsp;shorthand&nbsp;form&nbsp;of&nbsp;the&nbsp;member&nbsp;access&nbsp;operator:</span><br />
+<span class="key">Print</span>&nbsp;<span class="wrd">p</span><span class="oth">-&gt;</span><span class="wrd">a</span><br />
+<span class="key">Print</span>&nbsp;<span class="wrd">p</span><span class="oth">-&gt;</span><span class="wrd">b</span><br />
+</div></tt><br />
+The first method uses <tt><a href="KeyPgOpMemberAccess.html">Operator . (Member Access)</a></tt>. This operator accesses members from references, so the pointer is dereferenced first. The member access operator has higher priority over the dereference operator, so parenthesis are needed to dereference the pointer before using it with the member access operator.<br \>
+<br \>
+The second method uses <tt><a href="KeyPgOpPtrMemberAccess.html">Operator -&gt; (Pointer To Member Access)</a></tt>. This operator accesses members from pointers, which are automatically dereferenced. This can make code a little clearer, although both forms produce identical results.<br \>
+<br \>
+</div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgOpAt.html">Operator @ (Address Of)</a></tt><br \>
+<li> <tt><a href="KeyPgOpValueOf.html">Operator * (Value Of)</a></tt><br \>
+<li> <tt><a href="KeyPgOpMemberAccess.html">Operator . (Member Access)</a></tt><br \>
+<li> <tt><a href="KeyPgOpPtrMemberAccess.html">Operator -&gt; (Pointer To Member Access)</a></tt><br \>
+<li> <tt><a href="KeyPgOpVarptr.html">VarPtr</a></tt><br \>
+<li> <tt><a href="KeyPgOpStrptr.html">StrPtr</a></tt><br \>
+<li> <tt><a href="KeyPgOpProcptr.html">ProcPtr</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

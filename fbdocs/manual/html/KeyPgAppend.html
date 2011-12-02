@@ -1,0 +1,75 @@
+<html>
+<head>
+<title>Append</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Append</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Specifies text file to be opened for append mode<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<a href="KeyPgOpen.html">Open</a> <i>filename</i> for <b>Append</b> [<a href="KeyPgEncoding.html">Encoding</a> <i>encoding_type</i>] [<a href="KeyPgLock.html">Lock</a> <i>lock_type</i>] as [#]<i>filenum</i> <br \>
+</tt><br \>
+</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+<tt><i>filename</i></tt><br \>
+<div class="fb_indent">file name to open for append<br \>
+</div><tt><i>encoding_type</i></tt><br \>
+<div class="fb_indent">indicates encoding type for the file<br \>
+</div><tt><i>lock_type</i></tt><br \>
+<div class="fb_indent">locking to be used while the file is open<br \>
+</div><tt><i>filenum</i></tt><br \>
+<div class="fb_indent">unused file number to associate with the open file<br \>
+<br \>
+</div></div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+A file mode used with <tt><a href="KeyPgOpen.html">Open</a></tt> to open a text file for writing.<br \>
+<br \>
+This mode is used to add text to an existing file  with <tt><a href="KeyPgPrintPp.html">Print #</a></tt>, or comma separated values with <tt><a href="KeyPgWrite.html">Write#</a></tt>.<br \>
+<br \>
+Text files can't be simultaneously read and written in FreeBASIC, so if both functions are required on the same file, it must be opened twice.<br \>
+<br \>
+<tt><i>filename</i></tt> must be a string expression resulting in a legal file name in the target OS, without wildcards. The file will be sought for in the present directory, unless the <tt><i>filename</i></tt> contains a path . If the file does not exist, it is created. The pointer is set after the last character of the file.<br \>
+<br \>
+<tt><i>Encoding_type</i></tt> indicates the Unicode <tt><a href="KeyPgEncoding.html">Encoding</a></tt> of the file, so characters are correctly read. If omitted, "ascii" encoding is defaulted. Only little endian character encodings are supported at the moment. <br \>
+<ul><ul><li><tt>"utf8"</tt><br \>
+<li><tt>"utf16"</tt><br \>
+<li><tt>"utf32"</tt><br \>
+<li><tt>"ascii"</tt> (the default)<br \>
+<br \>
+</ul></ul><tt><i>Lock_type</i></tt> indicates the way the file is locked  for other processes, it is one of:<br \>
+<ul><ul><li> <tt><b>Read</b></tt> - the file can be opened simultaneously by other processes, but not for reading<br \>
+<li> <tt><b>Write</b></tt> - the file can be opened simultaneously by other processes, but not for writing<br \>
+<li> <tt><b>Read Write</b></tt> - the file cannot be opened simultaneously by other processes (the default)<br \>
+<br \>
+</ul></ul><tt><i>filenum</i></tt> Is a valid FreeBASIC file number (in the range <tt>1..255</tt>) not being used for any other file presently open. The file number identifies the file for the rest of file operations. A free file number can be found using the <tt><a href="KeyPgFreefile.html">FreeFile</a></tt> function.<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="key">Dim</span>&nbsp;<span class="wrd">i</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+<span class="key">For</span>&nbsp;<span class="wrd">i</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">1</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">10</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Open</span>&nbsp;<span class="quo">"test.txt"</span>&nbsp;<span class="key">For</span>&nbsp;<span class="key">Append</span>&nbsp;<span class="key">As</span>&nbsp;<span class="oth">#</span><span class="num">1</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="oth">#</span><span class="num">1</span><span class="oth">,</span>&nbsp;<span class="quo">"extending&nbsp;test.txt"</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Close</span>&nbsp;<span class="oth">#</span><span class="num">1</span><br />
+<span class="key">Next</span><br />
+</div></tt><br />
+</div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> None<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgInputfilemode.html">Input (File Mode)</a></tt><br \>
+<li> <tt><a href="KeyPgOpen.html">Open</a></tt><br \>
+<li> <tt><a href="KeyPgOutput.html">Output</a></tt><br \>
+<li> <tt><a href="KeyPgPrintPp.html">Print #</a></tt><br \>
+<li> <tt><a href="KeyPgWrite.html">Write #</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

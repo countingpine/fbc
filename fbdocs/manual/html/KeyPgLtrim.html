@@ -1,0 +1,77 @@
+<html>
+<head>
+<title>LTrim</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">LTrim</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Removes surrounding substrings or characters on the left side of a string<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgFunction.html">Function</a> <b>LTrim</b> <a href="KeyPgOverload.html">Overload</a> ( <a href="KeyPgByref.html">ByRef</a> <i>str</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgConstQualifier.html">Const</a> <a href="KeyPgString.html">String</a>, [ <b>Any</b> ] <a href="KeyPgByref.html">ByRef</a> <i>trimset</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgConstQualifier.html">Const</a> <a href="KeyPgString.html">String</a> = " " ) <a href="KeyPgAs.html">As</a> <a href="KeyPgString.html">String</a><br \>
+<a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgFunction.html">Function</a> <b>LTrim</b> ( <a href="KeyPgByref.html">ByRef</a> <i>str</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgConstQualifier.html">Const</a> <a href="KeyPgWstring.html">WString</a>, [ <b>Any</b> ] <a href="KeyPgByref.html">ByRef</a> <i>trimset</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgConstQualifier.html">Const</a> <a href="KeyPgWstring.html">WString</a> = <a href="KeyPgWstr.html">WStr</a>(" ") ) <a href="KeyPgAs.html">As</a> <a href="KeyPgWstring.html">WString</a><br \>
+</tt><br \>
+</div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
+<i>result</i> = <b>LTrim</b>[$]( <i>str</i> [, [ <b>Any</b> ] <i>trimset</i> ] )<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+<tt><i>str</i></tt><br \>
+<div class="fb_indent">The source string.<br \>
+</div><tt><i>trimset</i></tt><br \>
+<div class="fb_indent">The substring to trim.<br \>
+<br \>
+</div></div><div class="fb_sect_title">Return Value</div><div class="fb_sect_cont"><br \>
+Returns the trimmed string.<br \>
+<br \>
+</div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+This procedure trims surrounding characters from the left (beginning) of a source string. Substrings matching <tt><i>trimset</i></tt> will be trimmed if specified, otherwise spaces (<a href="CptAscii.html">ASCII</a> code 32) are trimmed.<br \>
+<br \>
+If the <tt><b>Any</b></tt> keyword is used, any character matching a character in <tt><i>trimset</i></tt> will be trimmed.<br \>
+<br \>
+All comparisons are case-sensitive.<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="key">Dim</span>&nbsp;<span class="wrd">s1</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="quo">"&nbsp;&nbsp;101&nbsp;Things&nbsp;to&nbsp;do."</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"'"</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="key">LTrim</span><span class="oth">(</span><span class="wrd">s1</span><span class="oth">)</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="quo">"'"</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"'"</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="key">LTrim</span><span class="oth">(</span><span class="wrd">s1</span><span class="oth">,</span>&nbsp;<span class="quo">"&nbsp;01"</span><span class="oth">)</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="quo">"'"</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"'"</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="key">LTrim</span><span class="oth">(</span><span class="wrd">s1</span><span class="oth">,</span>&nbsp;<span class="key">Any</span>&nbsp;<span class="quo">"&nbsp;01"</span><span class="oth">)</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="quo">"'"</span><br />
+<br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">s2</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="quo">"BaaBaaBAA&nbsp;Test&nbsp;Pattern"</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"'"</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="key">LTrim</span><span class="oth">(</span><span class="wrd">s2</span><span class="oth">,</span>&nbsp;<span class="quo">"Baa"</span><span class="oth">)</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="quo">"'"</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"'"</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="key">LTrim</span><span class="oth">(</span><span class="wrd">s2</span><span class="oth">,</span>&nbsp;<span class="key">Any</span>&nbsp;<span class="quo">"BaA"</span><span class="oth">)</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="quo">"'"</span><br />
+</div></tt><br />
+will produce the output:<br \>
+<br \>
+<pre class="fb_pre">'101 Things to do.'
+'  101 Things to do.'
+'Things to do.'
+'BAA Test Pattern'
+' Test Pattern'
+</pre><br \>
+</div><div class="fb_sect_title">Platform Differences</div><div class="fb_sect_cont"><br \>
+<ul><li> DOS version/target of FreeBASIC does not support the wide-character version of <tt><b>LTrim</b></tt>.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
+<ul><li> The string type suffix "$" is obligatory in the <i><a href="CompilerOptlang.html">-lang qb</a></i> dialect.<br \>
+<li> The string type suffix "$" is optional in the <i><a href="CompilerOptlang.html">-lang fblite</a></i> and <i><a href="CompilerOptlang.html">-lang fb</a></i> dialects.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> QB does not support specifying a <tt><i>trimset</i></tt> string or the <tt>ANY</tt> clause.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgRtrim.html">RTrim</a></tt><br \>
+<li> <tt><a href="KeyPgTrim.html">Trim</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

@@ -1,0 +1,147 @@
+<html>
+<head>
+<title>ScreenPtr</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">ScreenPtr</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Returns a pointer to the current work page's framebuffer<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgFunction.html">Function</a> <b>ScreenPtr</b> ( ) <a href="KeyPgAs.html">As</a> <a href="KeyPgAny.html">Any</a> <a href="KeyPgPtr.html">Ptr</a><br \>
+</tt><br \>
+</div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
+<i>result</i> = <b>ScreenPtr</b><br \>
+</tt><br \>
+</div><div class="fb_sect_title">Return Value</div><div class="fb_sect_cont"><br \>
+a pointer to the current work page framebuffer memory, or NULL (0) if no graphics mode is set.<br \>
+<br \>
+</div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+<tt><b>ScreenPtr</b></tt> provides a way to directly read/write the working page's framebuffer. <tt><a href="KeyPgScreenlock.html">ScreenLock</a></tt> should be used before any read or writes are attempted. The pointer returned is valid up until any subsequent call to <tt><a href="KeyPgScreengraphics.html">Screen</a></tt> or <tt><a href="KeyPgScreenres.html">ScreenRes</a></tt>, which invalidates it.<br \>
+<br \>
+<tt><b>ScreenPtr</b></tt> can also be used to test if a call to <tt><a href="KeyPgScreengraphics.html">Screen</a></tt> or <tt><a href="KeyPgScreenres.html">ScreenRes</a></tt> was successful, indicated by a non-NULL (&lt;&gt; 0) return value.<br \>
+<br \>
+In order to access a pixel in the screen buffer, you will need to know the screen's width, height, bytes per pixel and pitch (bytes per row).  This information can be found out using <tt><a href="KeyPgScreeninfo.html">ScreenInfo</a></tt>.<br \>
+Each row in the frame buffer is <tt><i>pitch</i></tt> bytes long.  The frame buffer consists of <tt><i>height</i></tt> rows, stored in order of their position on the screen, running from top to bottom, left to right.<br \>
+<br \>
+Because of the design of FreeBasic graphics library, <tt><b>ScreenPtr</b></tt> (if non-ZERO) will always point to the backbuffer, and never to actual video RAM.<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="key">Const</span>&nbsp;<span class="wrd">SCREEN_WIDTH</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">640</span><span class="oth">,</span>&nbsp;<span class="wrd">SCREEN_HEIGHT</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">480</span><br />
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="wrd">w</span><span class="oth">,</span>&nbsp;<span class="wrd">h</span><span class="oth">,</span>&nbsp;<span class="wrd">bypp</span><span class="oth">,</span>&nbsp;<span class="wrd">pitch</span><br />
+<br />
+<span class="com">''&nbsp;Make&nbsp;8-bit&nbsp;screen.</span><br />
+<span class="key">ScreenRes</span>&nbsp;<span class="wrd">SCREEN_WIDTH</span><span class="oth">,</span>&nbsp;<span class="wrd">SCREEN_HEIGHT</span><span class="oth">,</span>&nbsp;<span class="num">8</span><br />
+<br />
+<span class="com">''&nbsp;Get&nbsp;screen&nbsp;info&nbsp;(w&nbsp;and&nbsp;h&nbsp;should&nbsp;match&nbsp;the&nbsp;constants&nbsp;above,&nbsp;bypp&nbsp;should&nbsp;be&nbsp;1)</span><br />
+<span class="key">ScreenInfo</span>&nbsp;<span class="wrd">w</span><span class="oth">,</span>&nbsp;<span class="wrd">h</span><span class="oth">,</span>&nbsp;<span class="oth">,</span>&nbsp;<span class="wrd">bypp</span><span class="oth">,</span>&nbsp;<span class="wrd">pitch</span><br />
+<br />
+<span class="com">''&nbsp;Get&nbsp;the&nbsp;address&nbsp;of&nbsp;the&nbsp;frame&nbsp;buffer.&nbsp;An&nbsp;Any&nbsp;Ptr&nbsp;</span><br />
+<span class="com">''&nbsp;is&nbsp;used&nbsp;here&nbsp;to&nbsp;allow&nbsp;simple&nbsp;pointer&nbsp;arithmetic</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">buffer</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Any</span>&nbsp;<span class="key">Ptr</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">ScreenPtr</span><span class="oth">()</span><br />
+<span class="key">If</span>&nbsp;<span class="oth">(</span><span class="wrd">buffer</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span><span class="oth">)</span>&nbsp;<span class="key">Then</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"Error:&nbsp;graphics&nbsp;screen&nbsp;not&nbsp;initialized."</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Sleep</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">End</span>&nbsp;<span class="oth">-</span><span class="num">1</span><br />
+<span class="key">End</span>&nbsp;<span class="key">If</span><br />
+<br />
+<span class="com">''&nbsp;Lock&nbsp;the&nbsp;screen&nbsp;to&nbsp;allow&nbsp;direct&nbsp;framebuffer&nbsp;access</span><br />
+<span class="key">ScreenLock</span><span class="oth">()</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;Find&nbsp;the&nbsp;address&nbsp;of&nbsp;the&nbsp;pixel&nbsp;in&nbsp;the&nbsp;centre&nbsp;of&nbsp;the&nbsp;screen</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;It's&nbsp;an&nbsp;8-bit&nbsp;pixel,&nbsp;so&nbsp;use&nbsp;a&nbsp;UByte&nbsp;Ptr.</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="wrd">x</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">w</span>&nbsp;<span class="oth">\</span>&nbsp;<span class="num">2</span><span class="oth">,</span>&nbsp;<span class="wrd">y</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">h</span>&nbsp;<span class="oth">\</span>&nbsp;<span class="num">2</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">UByte</span>&nbsp;<span class="key">Ptr</span>&nbsp;<span class="wrd">pixel</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">buffer</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="oth">(</span><span class="wrd">y</span>&nbsp;<span class="oth">*</span>&nbsp;<span class="wrd">pitch</span><span class="oth">)</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="oth">(</span><span class="wrd">x</span>&nbsp;<span class="oth">*</span>&nbsp;<span class="wrd">bypp</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;Set&nbsp;the&nbsp;pixel&nbsp;color&nbsp;to&nbsp;10&nbsp;(light&nbsp;green).</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">*</span><span class="wrd">pixel</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">10</span><br />
+<br />
+<span class="com">''&nbsp;Unlock&nbsp;the&nbsp;screen.</span><br />
+<span class="key">ScreenUnlock</span><span class="oth">()</span><br />
+<br />
+<span class="com">''&nbsp;Wait&nbsp;for&nbsp;the&nbsp;user&nbsp;to&nbsp;press&nbsp;a&nbsp;key&nbsp;before&nbsp;closing&nbsp;the&nbsp;program</span><br />
+<span class="key">Sleep</span><br />
+</div></tt><br />
+<tt><div class="freebasic">
+<span class="key">Const</span>&nbsp;<span class="wrd">SCREEN_WIDTH</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">256</span><span class="oth">,</span>&nbsp;<span class="wrd">SCREEN_HEIGHT</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">256</span><br />
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="wrd">w</span><span class="oth">,</span>&nbsp;<span class="wrd">h</span><span class="oth">,</span>&nbsp;<span class="wrd">bypp</span><span class="oth">,</span>&nbsp;<span class="wrd">pitch</span><br />
+<br />
+<span class="com">''&nbsp;Make&nbsp;32-bit&nbsp;screen.</span><br />
+<span class="key">ScreenRes</span>&nbsp;<span class="wrd">SCREEN_WIDTH</span><span class="oth">,</span>&nbsp;<span class="wrd">SCREEN_HEIGHT</span><span class="oth">,</span>&nbsp;<span class="num">32</span><br />
+<br />
+<span class="com">''&nbsp;Get&nbsp;screen&nbsp;info&nbsp;(w&nbsp;and&nbsp;h&nbsp;should&nbsp;match&nbsp;the&nbsp;constants&nbsp;above,&nbsp;bypp&nbsp;should&nbsp;be&nbsp;4)</span><br />
+<span class="key">ScreenInfo</span>&nbsp;<span class="wrd">w</span><span class="oth">,</span>&nbsp;<span class="wrd">h</span><span class="oth">,</span>&nbsp;<span class="oth">,</span>&nbsp;<span class="wrd">bypp</span><span class="oth">,</span>&nbsp;<span class="wrd">pitch</span><br />
+<br />
+<span class="com">''&nbsp;Get&nbsp;the&nbsp;address&nbsp;of&nbsp;the&nbsp;frame&nbsp;buffer.&nbsp;An&nbsp;Any&nbsp;Ptr&nbsp;</span><br />
+<span class="com">''&nbsp;is&nbsp;used&nbsp;here&nbsp;to&nbsp;allow&nbsp;simple&nbsp;pointer&nbsp;arithmetic</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">buffer</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Any</span>&nbsp;<span class="key">Ptr</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">ScreenPtr</span><span class="oth">()</span><br />
+<span class="key">If</span>&nbsp;<span class="oth">(</span><span class="wrd">buffer</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span><span class="oth">)</span>&nbsp;<span class="key">Then</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"Error:&nbsp;graphics&nbsp;screen&nbsp;not&nbsp;initialized."</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Sleep</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">End</span>&nbsp;<span class="oth">-</span><span class="num">1</span><br />
+<span class="key">End</span>&nbsp;<span class="key">If</span><br />
+<br />
+<span class="com">''&nbsp;Lock&nbsp;the&nbsp;screen&nbsp;to&nbsp;allow&nbsp;direct&nbsp;framebuffer&nbsp;access</span><br />
+<span class="key">ScreenLock</span><span class="oth">()</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;Set&nbsp;row&nbsp;address&nbsp;to&nbsp;the&nbsp;start&nbsp;of&nbsp;the&nbsp;buffer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Any</span>&nbsp;<span class="key">Ptr</span>&nbsp;<span class="wrd">row</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">buffer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;Iterate&nbsp;over&nbsp;all&nbsp;the&nbsp;pixels&nbsp;in&nbsp;the&nbsp;screen:</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">For</span>&nbsp;<span class="wrd">y</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span>&nbsp;<span class="key">To</span>&nbsp;<span class="wrd">h</span>&nbsp;<span class="oth">-</span>&nbsp;<span class="num">1</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;Set&nbsp;pixel&nbsp;address&nbsp;to&nbsp;the&nbsp;start&nbsp;of&nbsp;the&nbsp;row</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;It's&nbsp;a&nbsp;32-bit&nbsp;pixel,&nbsp;so&nbsp;use&nbsp;a&nbsp;UInteger&nbsp;Ptr</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">UInteger</span>&nbsp;<span class="key">Ptr</span>&nbsp;<span class="wrd">pixel</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">row</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">For</span>&nbsp;<span class="wrd">x</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span>&nbsp;<span class="key">To</span>&nbsp;<span class="wrd">w</span>&nbsp;<span class="oth">-</span>&nbsp;<span class="num">1</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;Set&nbsp;the&nbsp;pixel&nbsp;value</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">*</span><span class="wrd">pixel</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">RGB</span><span class="oth">(</span><span class="wrd">x</span><span class="oth">,</span>&nbsp;<span class="wrd">x</span>&nbsp;<span class="key">Xor</span>&nbsp;<span class="wrd">y</span><span class="oth">,</span>&nbsp;<span class="wrd">y</span><span class="oth">)</span>&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;Get&nbsp;the&nbsp;next&nbsp;pixel&nbsp;address&nbsp;</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;(UInteger&nbsp;Ptr&nbsp;will&nbsp;increment&nbsp;by&nbsp;4&nbsp;bytes)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">pixel</span>&nbsp;<span class="oth">+=</span>&nbsp;<span class="num">1</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Next</span>&nbsp;<span class="wrd">x</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;Go&nbsp;to&nbsp;the&nbsp;next&nbsp;row</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">row</span>&nbsp;<span class="oth">+=</span>&nbsp;<span class="wrd">pitch</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Next</span>&nbsp;<span class="wrd">y</span><br />
+<br />
+<span class="com">''&nbsp;Unlock&nbsp;the&nbsp;screen.</span><br />
+<span class="key">ScreenUnlock</span><span class="oth">()</span><br />
+<br />
+<span class="com">''&nbsp;Wait&nbsp;for&nbsp;the&nbsp;user&nbsp;to&nbsp;press&nbsp;a&nbsp;key&nbsp;before&nbsp;closing&nbsp;the&nbsp;program</span><br />
+<span class="key">Sleep</span><br />
+</div></tt><br />
+<br \>
+</div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
+<ul><li> Not available in the <i><a href="CompilerOptlang.html">-lang qb</a></i> dialect unless referenced with the alias <tt><b>__Screenptr</b></tt>.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> New to FreeBASIC<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgScreengraphics.html">Screen (Graphics)</a></tt><br \>
+<li> <tt><a href="KeyPgScreenres.html">ScreenRes</a></tt><br \>
+<li> <tt><a href="KeyPgScreeninfo.html">ScreenInfo</a></tt><br \>
+<li> <tt><a href="KeyPgScreenlock.html">ScreenLock</a></tt><br \>
+<li> <tt><a href="KeyPgScreenunlock.html">ScreenUnlock</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

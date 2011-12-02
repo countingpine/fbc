@@ -1,0 +1,178 @@
+<html>
+<head>
+<title>Dir</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Dir</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Searches for and returns information about an item in the filesystem, performs a directory search.<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+# <a href="KeyPgInclude.html">Include</a> "dir.bi"<br \>
+<br \>
+<a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgFunction.html">Function</a> <b>Dir</b> <a href="KeyPgOverload.html">Overload</a> ( <a href="KeyPgByref.html">ByRef</a> <i>item_spec</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgConstQualifier.html">Const</a> <a href="KeyPgString.html">String</a>, <a href="KeyPgByval.html">ByVal</a> <i>attrib_mask</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a> = <b>fbNormal</b>, <a href="KeyPgByref.html">ByRef</a> <i>out_attrib</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a> ) <a href="KeyPgAs.html">As</a> <a href="KeyPgString.html">String</a><br \>
+<a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgFunction.html">Function</a> <b>Dir</b> ( <a href="KeyPgByref.html">ByRef</a> <i>item_spec</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgConstQualifier.html">Const</a> <a href="KeyPgString.html">String</a>, <a href="KeyPgByval.html">ByVal</a> <i>attrib_mask</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a> = <b>fbNormal</b>, <a href="KeyPgByval.html">ByVal</a> <i>p_out_attrib</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a> <a href="KeyPgPtr.html">Ptr</a> = 0 ) <a href="KeyPgAs.html">As</a> <a href="KeyPgString.html">String</a><br \>
+<a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgFunction.html">Function</a> <b>Dir</b> ( <a href="KeyPgByval.html">ByVal</a> <i>attrib_mask</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a> = <b>fbNormal</b>, <a href="KeyPgByref.html">ByRef</a> <i>out_attrib</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a> ) <a href="KeyPgAs.html">As</a> <a href="KeyPgString.html">String</a><br \>
+<a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgFunction.html">Function</a> <b>Dir</b> ( <a href="KeyPgByval.html">ByVal</a> <i>attrib_mask</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a> = <b>fbNormal</b>, <a href="KeyPgByval.html">ByVal</a> <i>p_out_attrib</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a> <a href="KeyPgPtr.html">Ptr</a> = 0 ) <a href="KeyPgAs.html">As</a> <a href="KeyPgString.html">String</a><br \>
+</tt><br \>
+</div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
+<i>result</i> = <b>Dir</b>( <i>item_spec</i>, [ <i>attrib_mask</i> ], <i>out_attrib</i> ] )<br \>
+<i>result</i> = <b>Dir</b>( <i>item_spec</i> [, [ <i>attrib_mask</i> ] [, <i>p_out_attrib</i> ] ] )<br \>
+<i>result</i> = <b>Dir</b>( <i>out_attrib</i> )<br \>
+<i>result</i> = <b>Dir</b>( [ <i>p_out_attrib</i> ] )<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+<tt><i>item_spec</i></tt><br \>
+<div class="fb_indent">The pattern to match an item's name against.<br \>
+</div><tt><i>attrib_mask</i></tt><br \>
+<div class="fb_indent">The bit mask to match an item's attributes against.<br \>
+</div><tt><i>out_attrib</i></tt><br \>
+<div class="fb_indent">Reference to a bit mask that's assigned each of the found item's attributes, if any.<br \>
+</div><tt><i>p_out_attrib</i></tt><br \>
+<div class="fb_indent">Pointer to a bit mask that's assigned each of the found item's attributes, if any.<br \>
+<br \>
+</div></div><div class="fb_sect_title">Return Value</div><div class="fb_sect_cont"><br \>
+If no item matching the name <tt><i>item_spec</i></tt> or the attribute mask <tt><i>attrib_mask</i></tt> was found, then <tt><i>out_attrib</i></tt> (or <tt>*<i>p_out_attrib</i></tt>) is assigned to zero and an empty string is returned. Otherwise, <tt><i>out_attrib</i></tt> (or <tt>*<i>p_out_attrib</i></tt>) is assigned the attribute mask of the item, and the item name, without a path, is returned.<br \>
+<br \>
+</div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+If <tt><i>item_spec</i></tt> contains an absolute path, then the first procedure searches the filesystem for an item that matches the name <tt><i>item_spec</i></tt> and whose attributes are all contained in <tt><i>attrib_mask</i></tt>. Otherwise, it searches relative to the current directory (see <tt><a href="KeyPgCurdir.html">CurDir</a></tt>). In any case, if a matching item is not found, <tt><i>out_attrib</i></tt> is assigned to zero and an empty string is returned. Otherwise, <tt><i>out_attrib</i></tt> is assigned with the attribute flags of the item, and the name of the item, without a path, is returned.<br \>
+<br \>
+<tt><i>item_spec</i></tt> may include an asterisk (<tt>*</tt>, for matching any adjacent characters) or one or more question marks (<tt>?</tt>, for matching any individual character). If it does, the procedure searches for the first such item. If found, subsequent calls with <tt><i>item_spec</i></tt> equal to an empty string will return the next item matching the name <tt><i>item_spec</i></tt> until no more such items are found. If <tt><i>attrib_mask</i></tt> is omitted from these subsequent calls, the procedure searches for items with the same attributes as in the previous call.<br \>
+<br \>
+The second procedure behaves the same as <tt><b>Dir</b>( <i>item_spec</i>, <i>attrib_mask</i>, *<i>p_out_attrib</i> )</tt>.<br \>
+<br \>
+The third procedure behaves the same as <tt><b>Dir</b>( "</tt><tt>", , <i>out_attrib</i> )</tt>.<br \>
+<br \>
+The fourth procedure behaves the same as <tt><b>Dir</b>( "</tt><tt>", , *<i>p_out_attrib</i> )</tt>.<br \>
+<br \>
+<b>File Attributes:</b><br \>
+Files and directories and other items can be said to possess so-called file attributes; metadata that describes the item. The meaning of this metadata varies with operating system and the file system it uses. The following macros are used as bit-flags with <tt><i>attrib_mask</i></tt>, <tt><i>out_attrib</i></tt> and <tt>*<i>p_out_attrib</i></tt>. Their values can be combined to form a mask using <tt><a href="KeyPgOpOr.html">Operator Or</a></tt>, or individual values can be checked using <tt><a href="KeyPgOpAnd.html">Operator And</a></tt>. To access them, <tt><a href="KeyPgInclude.html">Include</a> "dir.bi"</tt>.<br \>
+<br \>
+<tt> # define fbReadOnly &h01 </tt><br \>
+<div class="fb_indent"><i>The item cannot be written to or deleted.</i><br \>
+<b>DOS & Windows</b>: The item has the "read-only" attribute set.<br \>
+<b>Linux</b>:The item has no write permissions associated with the current user or group, nor is it globally writable.  (Whether or not the user has root permissions is ignored.)<br \>
+<br \>
+</div><tt> # define fbHidden &h02 </tt><br \>
+<div class="fb_indent"><i>The item is hidden in ordinary directory listings.</i><br \>
+<b>DOS & Windows</b>: The item has the "hidden" attribute set.<br \>
+<b>Linux</b>: The item's name has a period (<tt>.</tt>) as the first character.<br \>
+<br \>
+</div><tt> # define fbSystem &h04 </tt><br \>
+<div class="fb_indent"><i>The item is used almost exclusively by the system.</i><br \>
+<b>DOS & Windows</b>: The item has the "system" attribute set.<br \>
+<b>Linux</b>: The item is either a character device, block device, named pipe (FIFO) or Unix socket.<br \>
+<br \>
+</div><tt> # define fbDirectory &h10 </tt> <br \>
+<div class="fb_indent"><i>The item is a directory. Includes the current (<tt>.</tt>) and parent (<tt>..</tt>) directories as well.</i><br \>
+<b>DOS & Windows & Linux</b>: The item is a directory.<br \>
+<br \>
+</div><tt> # define fbArchive &h20 </tt><br \>
+<div class="fb_indent"><i>The item may be backed up after some automated operations.</i><br \>
+<b>DOS & Windows</b>: The item has the "archive" attribute set (automatically set after every write access to a file).<br \>
+<b>Linux</b>: The item is not a directory; typical filesystems do not support this metadata.<br \>
+<br \>
+</div><tt> # define fbNormal (fbReadOnly or fbArchive) </tt><br \>
+<div class="fb_indent"><i>The item is a file or directory.</i><br \>
+<br \>
+</div>Items found having no attributes are always matched, regardless of the value of <tt><i>attrib_mask</i></tt>. An item will not be matched if it has one or more attributes that aren't specified in <tt><i>attrib_mask</i></tt>.<br \>
+If <tt><i>attrib_mask</i></tt> does not include <tt><b>fbArchive</b></tt>, then <tt><b>Dir</b></tt> may widen the check to include <tt><b>fbDirectory</b></tt>, but it is recommended to add <tt><b>fbDirectory</b></tt> explicitly, if that is the behaviour sought.  Finer control can be gained by checking the <tt><i>out_attrib</i></tt> value for the desired set of attributes.<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="def">#include&nbsp;"dir.bi"&nbsp;'provides&nbsp;constants&nbsp;to&nbsp;use&nbsp;for&nbsp;the&nbsp;attrib_mask&nbsp;parameter<br />
+</span><br />
+<span class="key">Sub</span>&nbsp;<span class="wrd">list_files</span>&nbsp;<span class="oth">(</span><span class="key">ByRef</span>&nbsp;<span class="wrd">filespec</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span><span class="oth">,</span>&nbsp;<span class="key">ByVal</span>&nbsp;<span class="wrd">attrib</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="wrd">filename</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">filename</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">Dir</span><span class="oth">(</span>&nbsp;<span class="wrd">filespec</span><span class="oth">,</span>&nbsp;<span class="wrd">attrib</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Do</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="wrd">filename</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">filename</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">Dir</span><span class="oth">(</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Loop</span>&nbsp;<span class="key">While</span>&nbsp;<span class="key">Len</span><span class="oth">(</span>&nbsp;<span class="wrd">filename</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="oth">&gt;</span>&nbsp;<span class="num">0</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Sub</span><br />
+<br />
+<span class="key">Print</span>&nbsp;<span class="quo">"directories:"</span><br />
+<span class="wrd">list_files</span>&nbsp;<span class="quo">"*"</span><span class="oth">,</span>&nbsp;<span class="wrd">fbDirectory</span><br />
+<br />
+<span class="key">Print</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"archive&nbsp;files:"</span><br />
+<span class="wrd">list_files</span>&nbsp;<span class="quo">"*"</span><span class="oth">,</span>&nbsp;<span class="wrd">fbArchive</span><br />
+</div></tt><br />
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="com">''&nbsp;Example&nbsp;of&nbsp;using&nbsp;DIR&nbsp;function&nbsp;and&nbsp;retrieving&nbsp;attributes</span><br />
+<br />
+<span class="def">#include&nbsp;"dir.bi"&nbsp;''&nbsp;provides&nbsp;constants&nbsp;to&nbsp;match&nbsp;the&nbsp;attributes&nbsp;against<br />
+</span><br />
+<span class="com">''&nbsp;set&nbsp;input&nbsp;attribute&nbsp;mask&nbsp;to&nbsp;allow&nbsp;files&nbsp;that&nbsp;are&nbsp;normal,&nbsp;hidden,&nbsp;system&nbsp;or&nbsp;directory</span><br />
+<span class="key">Const</span>&nbsp;<span class="wrd">attrib_mask</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">fbNormal</span>&nbsp;<span class="key">Or</span>&nbsp;<span class="wrd">fbHidden</span>&nbsp;<span class="key">Or</span>&nbsp;<span class="wrd">fbSystem</span>&nbsp;<span class="key">Or</span>&nbsp;<span class="wrd">fbDirectory</span>&nbsp;<span class="com">'&nbsp;=&nbsp;&amp;h37</span><br />
+<br />
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">UInteger</span>&nbsp;<span class="wrd">out_attr</span>&nbsp;<span class="com">''&nbsp;unsigned&nbsp;integer&nbsp;to&nbsp;hold&nbsp;retrieved&nbsp;attributes</span><br />
+<br />
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span>&nbsp;<span class="wrd">fname</span>&nbsp;<span class="com">''&nbsp;file/directory&nbsp;name&nbsp;returned&nbsp;with</span><br />
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="wrd">filecount</span><span class="oth">,</span>&nbsp;<span class="wrd">dircount</span><br />
+<br />
+<span class="wrd">fname</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">Dir</span><span class="oth">(</span><span class="quo">"*.*"</span><span class="oth">,</span>&nbsp;<span class="wrd">attrib_mask</span><span class="oth">,</span>&nbsp;<span class="wrd">out_attr</span><span class="oth">)</span>&nbsp;<span class="com">''&nbsp;Get&nbsp;first&nbsp;file&nbsp;name/attributes,&nbsp;according&nbsp;to&nbsp;supplied&nbsp;file&nbsp;spec&nbsp;and&nbsp;attribute&nbsp;mask</span><br />
+<br />
+<span class="key">Print</span>&nbsp;<span class="quo">"File&nbsp;listing&nbsp;in&nbsp;"</span>&nbsp;<span class="oth">&amp;</span>&nbsp;<span class="key">CurDir</span>&nbsp;<span class="oth">&amp;</span>&nbsp;<span class="quo">":"</span><br />
+<br />
+<span class="key">Do</span>&nbsp;<span class="key">Until</span>&nbsp;<span class="key">Len</span><span class="oth">(</span><span class="wrd">fname</span><span class="oth">)</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span>&nbsp;<span class="com">''&nbsp;loop&nbsp;until&nbsp;Dir&nbsp;returns&nbsp;empty&nbsp;string</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">If</span>&nbsp;<span class="oth">(</span><span class="wrd">fname</span>&nbsp;<span class="oth">&lt;&gt;</span>&nbsp;<span class="quo">"."</span><span class="oth">)</span>&nbsp;<span class="key">And</span>&nbsp;<span class="oth">(</span><span class="wrd">fname</span>&nbsp;<span class="oth">&lt;&gt;</span>&nbsp;<span class="quo">".."</span><span class="oth">)</span>&nbsp;<span class="key">Then</span>&nbsp;<span class="com">''&nbsp;ignore&nbsp;current&nbsp;and&nbsp;parent&nbsp;directory&nbsp;entries</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="wrd">fname</span><span class="oth">,</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">If</span>&nbsp;<span class="oth">(</span><span class="wrd">out_attr</span>&nbsp;<span class="key">And</span>&nbsp;<span class="wrd">fbDirectory</span><span class="oth">)</span>&nbsp;<span class="oth">&lt;&gt;</span>&nbsp;<span class="num">0</span>&nbsp;<span class="key">Then</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"-&nbsp;directory"</span><span class="oth">;</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">dircount</span>&nbsp;<span class="oth">+=</span>&nbsp;<span class="num">1</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Else</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"-&nbsp;file"</span><span class="oth">;</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">filecount</span>&nbsp;<span class="oth">+=</span>&nbsp;<span class="num">1</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">End</span>&nbsp;<span class="key">If</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">If</span>&nbsp;<span class="oth">(</span><span class="wrd">out_attr</span>&nbsp;<span class="key">And</span>&nbsp;<span class="wrd">fbReadOnly</span><span class="oth">)</span>&nbsp;<span class="oth">&lt;&gt;</span>&nbsp;<span class="num">0</span>&nbsp;<span class="key">Then</span>&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">",&nbsp;read-only"</span><span class="oth">;</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">If</span>&nbsp;<span class="oth">(</span><span class="wrd">out_attr</span>&nbsp;<span class="key">And</span>&nbsp;<span class="wrd">fbHidden</span><span class="oth">)</span>&nbsp;<span class="oth">&lt;&gt;</span>&nbsp;<span class="num">0</span>&nbsp;<span class="key">Then</span>&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">",&nbsp;hidden"</span><span class="oth">;</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">If</span>&nbsp;<span class="oth">(</span><span class="wrd">out_attr</span>&nbsp;<span class="key">And</span>&nbsp;<span class="wrd">fbSystem</span><span class="oth">)</span>&nbsp;<span class="oth">&lt;&gt;</span>&nbsp;<span class="num">0</span>&nbsp;<span class="key">Then</span>&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">",&nbsp;system"</span><span class="oth">;</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">If</span>&nbsp;<span class="oth">(</span><span class="wrd">out_attr</span>&nbsp;<span class="key">And</span>&nbsp;<span class="wrd">fbArchive</span><span class="oth">)</span>&nbsp;<span class="oth">&lt;&gt;</span>&nbsp;<span class="num">0</span>&nbsp;<span class="key">Then</span>&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">",&nbsp;archived"</span><span class="oth">;</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">End</span>&nbsp;<span class="key">If</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">fname</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">Dir</span><span class="oth">(</span><span class="wrd">out_attr</span><span class="oth">)</span>&nbsp;<span class="com">''&nbsp;find&nbsp;next&nbsp;name/attributes</span><br />
+<br />
+<span class="key">Loop</span><br />
+<br />
+<span class="key">Print</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"Found&nbsp;"</span>&nbsp;<span class="oth">&amp;</span>&nbsp;<span class="wrd">filecount</span>&nbsp;<span class="oth">&amp;</span>&nbsp;<span class="quo">"&nbsp;files&nbsp;and&nbsp;"</span>&nbsp;<span class="oth">&amp;</span>&nbsp;<span class="wrd">dircount</span>&nbsp;<span class="oth">&amp;</span>&nbsp;<span class="quo">"&nbsp;subdirs"</span><br />
+</div></tt><br />
+<br \>
+</div><div class="fb_sect_title">Platform Differences</div><div class="fb_sect_cont"><br \>
+<ul><li> Linux requires the <tt><i>filename</i></tt> case to match the real name of the file. Windows and DOS are case insensitive.<br \>
+<li> Path separators in Linux are forward slashes <tt>/</tt>. Windows uses backslashes <tt>\</tt> but it allows for forward slashes.  DOS uses backslashes.<br \>
+<li> In DOS, the attrib mask value of <tt>&h37</tt> (<tt>&h3F</tt> usually works also, but <tt>&h37</tt> is safer) returns all files and directories, including "." and "..", but no Volume: the value <tt>8</tt> returns the Volume, even if current directory is not the main directory.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
+<ul><li> Not available in the <i><a href="CompilerOptlang.html">-lang qb</a></i> dialect unless referenced with the alias <tt><b>__Dir</b></tt>.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> Not found in QBasic but present in Visual Basic.  The <tt><i>out_attrib</i></tt> parameter is new to FreeBASIC.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgOpen.html">Open</a></tt><br \>
+<li> <tt><a href="KeyPgCurdir.html">CurDir</a></tt><br \>
+<li> <tt><a href="KeyPgMkdir.html">MkDir</a></tt><br \>
+<li> <tt><a href="KeyPgRmdir.html">RmDir</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

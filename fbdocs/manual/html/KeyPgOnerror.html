@@ -1,0 +1,76 @@
+<html>
+<head>
+<title>On Error</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">On Error</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Error handling statement to set the current error handler<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<b>On [Local] Error Goto</b> <i>label</i><br \>
+</tt><br \>
+</div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
+<b>On [Local] Error Goto</b> <i>label</i><br \>
+</tt><br \>
+</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+<tt><i>label</i></tt><br \>
+<div class="fb_indent">label to jump to when error occurs<br \>
+<br \>
+</div></div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+<tt><a href="KeyPgOnerror.html">On Error</a></tt> triggers a jump to an error handler when an error occurs. <br \>
+<br \>
+If <tt><a href="KeyPgLocal.html">Local</a></tt> is not used the handler must be in the main part of the module. Using <tt><a href="KeyPgLocal.html">Local</a></tt> allows to have the error handler inside the <tt><a href="KeyPgSub.html">Sub</a></tt>/<tt><a href="KeyPgFunction.html">Function</a></tt> where the <tt><b>On Error</b></tt> is located.<br \>
+<br \>
+<tt><b>On Error GOTO 0</b></tt> deactivates the current error handler.<br \>
+<br \>
+The use of QB-like error handling requires compilation with switch <i><a href="CompilerOpte.html">-e</a></i>, <i><a href="CompilerOptex.html">-ex</a></i> or <i><a href="CompilerOptexx.html">-exx</a></i> activated.<br \>
+<br \>
+See <a href="TblRuntimeErrors.html">Runtime Error Codes</a> for a listing of runtime error numbers and their associated meaning.<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="com">''&nbsp;Compile&nbsp;with&nbsp;QB&nbsp;(-lang&nbsp;qb)&nbsp;dialect</span><br />
+<br />
+<span class="com">'$lang:&nbsp;"qb"</span><br />
+<br />
+<span class="key">On</span>&nbsp;<span class="key">Error</span>&nbsp;<span class="key">Goto</span>&nbsp;<span class="wrd">errorhandler</span><br />
+<span class="key">Error</span>&nbsp;<span class="num">24</span>&nbsp;<span class="com">''&nbsp;simulate&nbsp;an&nbsp;error</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"this&nbsp;message&nbsp;will&nbsp;not&nbsp;be&nbsp;seen"</span><br />
+<br />
+<span class="wrd">errorhandler</span><span class="oth">:</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"Error&nbsp;#"</span><span class="oth">;</span>&nbsp;<span class="key">Err</span><span class="oth">;</span>&nbsp;<span class="quo">"!"</span><br />
+<span class="key">End</span><br />
+</div></tt><br />
+<br \>
+</div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
+<ul><li> ON ERROR is supported in the <i><a href="CompilerOptlang.html">-lang qb</a></i> dialect only. In the <i><a href="CompilerOptlang.html">-lang fb</a></i> dialect, statements can be used in function form to return an error code<br \>
+</ul><tt><div class="freebasic">
+<span class="com">''&nbsp;Compile&nbsp;with&nbsp;FB&nbsp;default&nbsp;(-lang&nbsp;fb)&nbsp;dialect&nbsp;</span><br />
+<span class="key">If</span>&nbsp;<span class="key">Open</span><span class="oth">(</span>&nbsp;<span class="quo">"text"</span>&nbsp;<span class="key">For</span>&nbsp;<span class="key">Input</span>&nbsp;<span class="key">As</span>&nbsp;<span class="oth">#</span><span class="num">1</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="oth">&lt;&gt;</span>&nbsp;<span class="num">0</span>&nbsp;<span class="key">Then</span><br />
+&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"Unable&nbsp;to&nbsp;open&nbsp;file"</span><br />
+<span class="key">End</span>&nbsp;<span class="key">If</span><br />
+<br />
+</div></tt><br />
+<br \>
+</div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> QB has no LOCAL clause and requires the label to be in the main part of the module. <br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgError.html">Error</a></tt><br \>
+<li> <tt><a href="KeyPgLocal.html">Local</a></tt><br \>
+<li> <tt><a href="KeyPgErr.html">Err</a></tt><br \>
+<li> <a href="TblRuntimeErrors.html">Runtime Error Codes</a><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

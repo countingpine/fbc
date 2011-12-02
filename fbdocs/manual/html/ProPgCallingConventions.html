@@ -1,0 +1,57 @@
+<html>
+<head>
+<title>Calling Conventions</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Calling Conventions</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Specifying how procedures are called.<br \>
+<br \>
+Calling conventions determine how calling code interacts with procedures when called. They specify rules about how parameters are pushed onto the call stack, how values are returned and when the call stack is cleaned up. This information is useful when interacting with code written in other languages, particularly assembly language. In some cases, calling conventions also apply some kind of name decoration to procedure names.<br \>
+<br \>
+FreeBASIC supports 3 calling conventions: <b>stdcall</b>, <b>cdecl</b> and <b>pascal</b>, specified with <tt><a href="KeyPgStdcall.html">stdcall</a></tt>, <tt><a href="KeyPgCdecl.html">cdecl</a></tt> and <tt><a href="KeyPgPascal.html">pascal</a></tt>, respectively. Calling convention can be specified in either a procedure declaration or definition immediately following the procedure name. The declaration of a procedure must have the same calling convention as the definition. The default convention is <b>stdcall</b> when not specified, or within <tt><a href="KeyPgExternBlock.html">Extern "Windows"</a></tt> and <tt><a href="KeyPgExternBlock.html">Extern "Windows-Ms"</a></tt> blocks.<br \>
+<br \>
+In all calling conventions, integral procedure return values are returned in the <tt>EAX</tt>(, <tt>EDX</tt>) register(s), and floating-point return values are stored in the <tt>ST(0)</tt> register (the top of the floating-point stack). User-defined type (UDT) values are returned in the <tt>EAX</tt>(, <tt>EDX</tt>) register(s) if eight (8) bytes or less in size, otherwise they are returned in memory by having their address pushed onto the call stack after any parameters.<br \>
+<br \>
+<div class="fb_sect_title">stdcall</div><div class="fb_sect_cont">	<br \>
+In the <b>stdcall</b> convention, procedure parameters are pushed onto the call stack in the reverse order they are declared, that is, from right to left. The procedure is in charge of popping any parameters from the call stack.<br \>
+<br \>
+<b>stdcall</b> is the default calling convention for all FreeBASIC procedures, and those within <tt><a href="KeyPgExternBlock.html">Extern "Windows"</a></tt> and <tt><a href="KeyPgExternBlock.html">Extern "Windows-Ms"</a></tt> blocks. It is also the default convention used in the Windows API.<br \>
+<br \>
+</div><div class="fb_sect_title">Platform Differences</div><div class="fb_sect_cont"><br \>
+<ul><li> In DOS and Windows platforms, the procedure name is decorated with an "<tt>@<i>N</i></tt>" suffix, where <tt><i>N</i></tt> is the total size, in bytes, of any parameters passed.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">cdecl</div><div class="fb_sect_cont"><br \>
+In the <b>cdecl</b> convention, procedure parameters are pushed onto the call stack in the reverse order they are declared, that is, from right to left. The calling code is in charge of popping parameters from the call stack.<br \>
+<br \>
+<b>cdecl</b> is the default calling convention for procedures within <tt><a href="KeyPgExternBlock.html">Extern "C"</a></tt> and <tt><a href="KeyPgExternBlock.html">Extern "C++"</a></tt> blocks. It is also the default convention used by most C and C++ compilers.<br \>
+<br \>
+</div><div class="fb_sect_title">pascal</div><div class="fb_sect_cont"><br \>
+In the <b>pascal</b> convention, procedure parameters are pushed onto the call stack in the order they are declared, that is, from left to right. The procedure is in charge of popping any parameters from the call stack.<br \>
+<br \>
+<b>pascal</b> is the default convention used by Pascal and the Microsoft QuickBASIC series of compilers.<br \>
+<br \>
+The following table summarizes the differences between the various calling conventions:<br \>
+<br \>
+<div class="fb_table"><table><tr><td>Calling convention </td><td> Parameters are pushed onto the call stack from </td><td> Parameters are popped off the call stack by </td></tr><tr><td> stdcall </td><td> right to left </td><td> the procedure </td></tr><tr><td> cdecl </td><td> right to left </td><td> the calling code </td></tr><tr><td> pascal </td><td> left to right </td><td> the procedure</td></tr></table></div><br \>
+<br \>
+</div><div class="fb_sect_title">Platform Differences</div><div class="fb_sect_cont"><br \>
+<ul><li> In DOS and Windows platforms, all calling conventions decorate procedure names with an underscore ("_") prefix.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgDeclare.html">Declare</a></tt>, <tt><a href="KeyPgSub.html">Sub</a></tt>, <tt><a href="KeyPgFunction.html">Function</a></tt><br \>
+<li> <tt><a href="KeyPgStdcall.html">stdcall</a></tt>, <tt><a href="KeyPgCdecl.html">cdecl</a></tt>, <tt><a href="KeyPgPascal.html">pascal</a></tt><br \>
+<li> <tt><a href="KeyPgExternBlock.html">Extern..End Extern</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

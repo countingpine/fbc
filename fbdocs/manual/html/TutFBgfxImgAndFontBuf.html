@@ -1,0 +1,527 @@
+<html>
+<head>
+<title>FBgfx Image and Font Buffers</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">FBgfx Image and Font Buffers</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Creating and understanding your FBgfx image and font buffers<br \>
+<br \>
+The FBgfx Image Buffer<br \>
+<div class="fb_indent">Creating Buffers<br \>
+Buffer Format<br \>
+Getting Pixels<br \>
+</div>The FBgfx Font Header<br \>
+<div class="fb_indent">Header Details<br \>
+Creating a Font Buffer<br \>
+Assigning Font Characters<br \>
+</div>Tips & Tricks<br \>
+<div class="fb_indent">Coloring your Custom Fonts<br \>
+ScrPtr vs ImgBuf<br \>
+<br \>
+</div><b>Download Accompanying Tutorial Files:  <a href="http://pritchard.hmcsoft.org/files/fb%20font%20tut.7z">FreeBASIC Font Tutorial.7z</a></b><br \>
+<br \>
+<div class="fb_header">The FBgfx Image Buffer</div><br \>
+<br \>
+FBgfx has a new data type in .17 and above.  This type is called <tt>IMAGE</tt>.  You can use it by including the FBgfx Header in your program (<tt><a href="KeyPgInclude.html">#include</a> "fbgfx.bi"</tt>) and then accessing the namespace for FBgfx, via <tt>FB.IMAGE</tt>.  When we create buffers in this tutorial, we're going to be using the <tt>fb.Image <a href="KeyPgPtr.html">Ptr</a></tt> type.  A pointer, because it's dynamic memory which we can resize.<br \>
+<br \>
+To use an image in the FBgfx Library, you have to create it via image buffer.  Your buffer is an area of memory allocated (created, made available) for your image.  You have to deallocate (free, make available to other programs) the buffer when you are done using it at the end of your program.  FBgfx has its own internal pixel format, as well as an image header at the beginning of every buffer created.  The image header contains information about your image.  Things like its width, height, bit depth, etc., while the pixel Buffer contains the actual colors for each individual pixel in RGB (red, blue, green) format.<br \>
+<br \>
+<b>Creating Buffers</b><br \>
+<br \>
+The size of the buffer you create will vary depending on screen depth.  Your bytes-per-pixel are the number of bytes needed to store individual pixels.  Thus, a 32-bit pixel depth screen will need 4 bytes per pixel (8 bits in a byte).  You don't need to worry about this, however, as using the <tt>fb.Image <a href="KeyPgPtr.html">Ptr</a></tt> setup to create your buffer makes it very easy to get the information we need from our buffers.  You only need to know this information to understand how much size a buffer may take up total, for memory usage information.<br \>
+<br \>
+Actually creating the buffer is very simple.  It's just a simple creation of an <tt>fb.Image <a href="KeyPgPtr.html">Ptr</a></tt>, and a call to <tt><a href="KeyPgImagecreate.html">ImageCreate</a></tt> (Example1.bas):<br \>
+<br \>
+<tt><div class="freebasic">
+<span class="def">#include&nbsp;"fbgfx.bi"<br />
+</span><br />
+&nbsp;&nbsp;<span class="com">''&nbsp;Our&nbsp;image&nbsp;width/height</span><br />
+<span class="key">Const</span>&nbsp;<span class="wrd">ImgW</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">64</span><br />
+<span class="key">Const</span>&nbsp;<span class="wrd">ImgH</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">64</span><br />
+<br />
+&nbsp;&nbsp;<span class="com">''&nbsp;Screens&nbsp;have&nbsp;to&nbsp;be&nbsp;created&nbsp;before&nbsp;a&nbsp;call&nbsp;to&nbsp;imagecreate</span><br />
+<span class="key">ScreenRes</span>&nbsp;<span class="num">640</span><span class="oth">,</span>&nbsp;<span class="num">480</span><span class="oth">,</span>&nbsp;<span class="num">32</span><br />
+<br />
+&nbsp;&nbsp;<span class="com">''&nbsp;Create&nbsp;our&nbsp;buffer</span><br />
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">FB.Image</span>&nbsp;<span class="key">Ptr</span>&nbsp;<span class="wrd">myBuf</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">ImageCreate</span><span class="oth">(</span><span class="wrd">ImgW</span><span class="oth">,</span>&nbsp;<span class="wrd">ImgH</span><span class="oth">)</span><br />
+<br />
+&nbsp;&nbsp;<span class="com">''&nbsp;Print&nbsp;the&nbsp;address&nbsp;of&nbsp;our&nbsp;buffer.</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"Buffer&nbsp;created&nbsp;at:&nbsp;"</span>&nbsp;<span class="oth">&amp;</span>&nbsp;<span class="wrd">myBuf</span><br />
+<span class="key">Sleep</span><br />
+<br />
+&nbsp;&nbsp;<span class="com">''&nbsp;Destroy&nbsp;our&nbsp;buffer.&nbsp;&nbsp;Always&nbsp;DESTROY&nbsp;buffers&nbsp;you&nbsp;CREATE</span><br />
+<span class="key">ImageDestroy</span><span class="oth">(</span>&nbsp;<span class="wrd">myBuf</span>&nbsp;<span class="oth">)</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"Our&nbsp;buffer&nbsp;was&nbsp;destroyed."</span><br />
+<span class="key">Sleep</span><br />
+</div></tt><br />
+<br \>
+<b>Code Dissection</b><br \>
+<br \>
+<tt><div class="freebasic">
+<span class="def">#include&nbsp;"fbgfx.bi"<br />
+</span></div></tt><br />
+<br \>
+This includes the header file which contains the definition for the <tt>fb.Image</tt> type.<br \>
+<br \>
+<tt><div class="freebasic">
+&nbsp;&nbsp;<span class="com">''&nbsp;Our&nbsp;image&nbsp;width/height</span><br />
+<span class="key">Const</span>&nbsp;<span class="wrd">ImgW</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">64</span><br />
+<span class="key">Const</span>&nbsp;<span class="wrd">ImgH</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">64</span><br />
+</div></tt><br />
+<br \>
+This creates constants which will be used to decide the size of our image.  FBgfx doesn't know about these.  We'll have to pass them to <tt><a href="KeyPgImagecreate.html">ImageCreate</a></tt> when we use it.<br \>
+<br \>
+<tt><div class="freebasic">
+&nbsp;&nbsp;<span class="com">''&nbsp;Screens&nbsp;have&nbsp;to&nbsp;be&nbsp;created&nbsp;before&nbsp;a&nbsp;call&nbsp;to&nbsp;imagecreate</span><br />
+<span class="key">ScreenRes</span>&nbsp;<span class="num">640</span><span class="oth">,</span>&nbsp;<span class="num">480</span><span class="oth">,</span>&nbsp;<span class="num">32</span><br />
+</div></tt><br />
+<br \>
+This creates our FBgfx screen.  <tt><a href="KeyPgImagecreate.html">ImageCreate</a></tt> needs to know our bit depth beforehand.  However, FBgfx's <tt><a href="KeyPgImagecreate.html">ImageCreate</a></tt> now has an extra parameter allowing you to set the depth yourself.<br \>
+<br \>
+<tt><div class="freebasic">
+&nbsp;&nbsp;<span class="com">''&nbsp;Create&nbsp;our&nbsp;buffer</span><br />
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">FB.Image</span>&nbsp;<span class="key">Ptr</span>&nbsp;<span class="wrd">myBuf</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">ImageCreate</span><span class="oth">(</span><span class="wrd">ImgW</span><span class="oth">,</span>&nbsp;<span class="wrd">ImgH</span><span class="oth">)</span><br />
+</div></tt><br />
+<br \>
+This first of all creates a pointer that is of the <tt>fb.Image</tt> type.  It's just a location of memory.  We haven't filled it with anything yet.  In fact, right now it equals zero, and could not be used.  That's considered to be null.<br \>
+<br \>
+The <tt><a href="KeyPgImagecreate.html">ImageCreate</a></tt> call returns the address of an area in memory of a newly created <tt>fb.Image</tt> which we initialize our pointer with.  The size of this buffer depends on the bit depth, but the width/height of the image contained in the buffer is going to be the ones we set earlier.  <tt><a href="KeyPgImagecreate.html">ImageCreate</a></tt> can also take a fill color and depth as the third and fourth arguments, respectively; if not specified, the image will be created filled with the transparent color and match the current screen color depth.<br \>
+<br \>
+We now have allocated a space in memory.  It's enough space to hold an ImgWxImgH image, along with the data FBgfx holds within its <tt>fb.Image</tt> type.  We'll need to destroy it later for proper memory management.<br \>
+<br \>
+<tt><div class="freebasic">
+&nbsp;&nbsp;<span class="com">''&nbsp;Print&nbsp;the&nbsp;address&nbsp;of&nbsp;our&nbsp;buffer.</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"Buffer&nbsp;created&nbsp;at:&nbsp;"</span>&nbsp;<span class="oth">&amp;</span>&nbsp;<span class="wrd">myBuf</span><br />
+<span class="key">Sleep</span><br />
+</div></tt><br />
+<br \>
+This is just there to let you know what we've done.  We print the address of <tt>myBuf</tt>.  If it's not <tt>0</tt>, we can assume that <tt><a href="KeyPgImagecreate.html">ImageCreate</a></tt> had worked.<br \>
+<br \>
+<tt><div class="freebasic">
+&nbsp;&nbsp;<span class="com">''&nbsp;Destroy&nbsp;our&nbsp;buffer.&nbsp;&nbsp;Always&nbsp;DESTROY&nbsp;buffers&nbsp;you&nbsp;CREATE</span><br />
+<span class="key">ImageDestroy</span><span class="oth">(</span>&nbsp;<span class="wrd">myBuf</span>&nbsp;<span class="oth">)</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"Our&nbsp;buffer&nbsp;was&nbsp;destroyed."</span><br />
+<span class="key">Sleep</span><br />
+</div></tt><br />
+<br \>
+Here we destroy our buffer with a call to <tt><a href="KeyPgImageDestroy.html">ImageDestroy</a></tt>.  We don't have to use <tt><a href="KeyPgImageDestroy.html">ImageDestroy</a></tt> to deallocate our buffer, but it's best to use it for consistency and clarity.<br \>
+<br \>
+<b>Buffer Format</b><br \>
+<br \>
+Now that we know how to create buffers, we might want to know more information about what's being held inside of them.  You can open up the <tt>fbgfx.bi</tt> header file and find the <tt>fb.Image</tt> type, and you can see all of this cool stuff inside of it.<br \>
+<br \>
+We actually don't need to know much about the format itself.  The reason for this is, we used an <tt>fb.Image <a href="KeyPgPtr.html">Ptr</a></tt>.  Everything after the <tt>Buf + <a href="KeyPgSizeof.html">SizeOf</a>(fb.Image)</tt> in memory belongs to pixels.  Everything before that is the header.  The header can be accessed very easily because we used the <tt>fb.Image <a href="KeyPgPtr.html">Ptr</a></tt>.  All you have to know is what you want to look for.<br \>
+<br \>
+<b>FB.IMAGE Data Type</b><br \>
+<br \>
+<tt><div class="freebasic">
+&nbsp;&nbsp;<span class="com">''&nbsp;Image&nbsp;buffer&nbsp;header,&nbsp;new&nbsp;style&nbsp;(incorporates&nbsp;old&nbsp;header)</span><br />
+<span class="key">Type</span>&nbsp;<span class="wrd">IMAGE</span>&nbsp;<span class="key">Field</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">1</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Union</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">old</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">_OLD_HEADER</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Type</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">UInteger</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">End</span>&nbsp;<span class="key">Union</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">bpp</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Width</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">UInteger</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">height</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">UInteger</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">pitch</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">UInteger</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">_reserved</span><span class="oth">(</span><span class="num">1</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">12</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">UByte</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Type</span><br />
+</div></tt><br />
+<br \>
+This same information can be found in <tt>fbgfx.bi</tt>.  As you can see, this data type saves a *lot* of neat information about your buffer.  The Width, Height, Pitch (bytes per row), and Bit Depth (bytes per pixel) are all contained.  In the union is included the type of header, and the old header itself within the same space.  The new header format is indicated by a type value of <tt>7</tt>.  The old header format is not used in the default dialect in the newer versions of FB, so we're not going to cover it here.<br \>
+<br \>
+How do we access that information within the header?  If you're familiar with pointers (which you should be, we used a pointer for our buffer in the first example), then all you have to do is access your buffer like a pointer, and directly access the data within.  This may leave you to believe that all that's contained in your buffer is the <tt>fb.Image</tt> type itself, but that's just not true.  Using a <tt>fb.Image <a href="KeyPgPtr.html">Ptr</a></tt> allows the compiler to think that's what's contained in the buffer, even though only the first part does so.<br \>
+<br \>
+<b>Getting Pixels</b><br \>
+<br \>
+The first section of our buffer which FreeBASIC helps us out with contains the header information.  Add the size of the <tt>fb.Image</tt> to our address, and the rest of our buffer contains pixels (Example2.bas).<br \>
+<br \>
+<tt><div class="freebasic">
+&nbsp;&nbsp;<span class="com">''&nbsp;We&nbsp;have&nbsp;to&nbsp;include&nbsp;this&nbsp;to&nbsp;use&nbsp;our&nbsp;FB.IMAGE&nbsp;datatype,&nbsp;remember.</span><br />
+<span class="def">#include&nbsp;"fbgfx.bi"<br />
+</span></div></tt><br />
+<br \>
+Remember to include our <tt>fb.Image</tt> data type!<br \>
+<br \>
+<tt><div class="freebasic">
+&nbsp;&nbsp;<span class="com">''&nbsp;This&nbsp;one&nbsp;is&nbsp;very&nbsp;important.</span><br />
+&nbsp;&nbsp;<span class="com">''&nbsp;We&nbsp;cast&nbsp;to&nbsp;a&nbsp;ubyte&nbsp;ptr&nbsp;first&nbsp;off,&nbsp;to&nbsp;get&nbsp;the&nbsp;exact&nbsp;byte&nbsp;our&nbsp;pixels&nbsp;begin.</span><br />
+&nbsp;&nbsp;<span class="com">''&nbsp;We&nbsp;then&nbsp;cast&nbsp;to&nbsp;a&nbsp;uInteger&nbsp;ptr,&nbsp;simply&nbsp;to&nbsp;avoid&nbsp;"suspicious&nbsp;assignment"</span><br />
+&nbsp;&nbsp;<span class="com">''&nbsp;warnings.</span><br />
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">UInteger</span>&nbsp;<span class="key">Ptr</span>&nbsp;<span class="wrd">myPix</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">Cast</span><span class="oth">(</span>&nbsp;<span class="key">UInteger</span>&nbsp;<span class="key">Ptr</span><span class="oth">,</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="key">Cast</span><span class="oth">(</span>&nbsp;<span class="key">UByte</span>&nbsp;<span class="key">Ptr</span><span class="oth">,</span>&nbsp;<span class="wrd">myBuf</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="key">SizeOf</span><span class="oth">(</span><span class="wrd">FB.Image</span><span class="oth">)</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="oth">)</span><br />
+</div></tt><br />
+<br \>
+Phew.  Alright.  We have to make sure we get the exact address of our pixels.  An integer contains 4 bytes.  3 of these are used for our RGB, and the extra is generally used for alpha when you need it (some people are very resourceful and will use the alpha byte - or channel - to store all kinds of data).  If we're even ONE BYTE off, your Red can become your Green, and your Blue into your Red!  So we have to cast to a <tt><a href="KeyPgUbyte.html">UByte</a> <a href="KeyPgPtr.html">Ptr</a></tt> first.<br \>
+<br \>
+You probably also noticed that we simply added <tt>sizeof(fb.Image)</tt> to our address.  That's another perk of using <tt>fb.Image</tt>!  If you add its size to the start of the buffer, we have just skipped all the memory addresses relating to the header and are now at our pixels.<br \>
+<br \>
+Finally, we cast it all to a <tt><a href="KeyPgUinteger.html">UInteger</a> <a href="KeyPgPtr.html">Ptr</a></tt>, mainly for safety.  We're in 32 bit depth mode, so we need 4 bytes per pixels.  A <tt><a href="KeyPgUinteger.html">UInteger</a></tt> has that.<br \>
+<br \>
+Here's a small line if you still don't understand how this works.  Here is our buffer:  |FB.IMAGE Header|Pixels|<br \>
+<br \>
+If what's contained in the first section of our buffer is the <tt>fb.Image</tt> Header, it's obviously going to be that big in size.  So, we can get our address for the pixels, simply by adding the size of the <tt>fb.Image</tt> datatype onto our original address.<br \>
+<br \>
+One problem though!  If we add that size to our buffer address, to try and get a new one, we end up with strange results.  This is because our datatype isn't one byte long.  We have to cast to a <tt><a href="KeyPgUbyte.html">UByte</a> <a href="KeyPgPtr.html">Ptr</a></tt> first, then add the address.  A <tt><a href="KeyPgUbyte.html">UByte</a></tt> is one byte long, so we'll get the exact byte we need in memory to work with.<br \>
+<br \>
+Finally, we're in 32-bits.  We just casted to a <tt><a href="KeyPgUbyte.html">UByte</a> <a href="KeyPgPtr.html">Ptr</a></tt>.  Although we *can* just assign the uInteger ptr the address of the <tt><a href="KeyPgUbyte.html">UByte</a></tt>, it's best practice to cast it to a <tt><a href="KeyPgUinteger.html">UInteger</a> <a href="KeyPgPtr.html">Ptr</a></tt> first.  We finally have the address of our pixels, in the right datatype (one per pixel!).  We could manipulate those pixels directly now, if we'd like.<br \>
+<br \>
+<br \>
+<tt><div class="freebasic">
+&nbsp;&nbsp;<span class="com">''&nbsp;Print&nbsp;information&nbsp;stored&nbsp;in&nbsp;our&nbsp;buffer.</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"Image&nbsp;Width:&nbsp;"</span>&nbsp;<span class="oth">&amp;</span>&nbsp;<span class="wrd">myBuf</span><span class="oth">-&gt;</span><span class="key">Width</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"Image&nbsp;Height:&nbsp;"</span>&nbsp;<span class="oth">&amp;</span>&nbsp;<span class="wrd">myBuf</span><span class="oth">-&gt;</span><span class="wrd">Height</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"Image&nbsp;Bit&nbsp;Depth:&nbsp;"</span>&nbsp;<span class="oth">&amp;</span>&nbsp;<span class="wrd">myBuf</span><span class="oth">-&gt;</span><span class="wrd">BPP</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"Image&nbsp;Pitch:&nbsp;"</span>&nbsp;<span class="oth">&amp;</span>&nbsp;<span class="wrd">myBuf</span><span class="oth">-&gt;</span><span class="wrd">Pitch</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">""</span><br />
+</div></tt><br />
+<br \>
+This is what I was talking about earlier.  FB will treat your pointer as if it's an <tt>fb.Image <a href="KeyPgPtr.html">Ptr</a></tt>, so you can access the data in the header directly.  Since we have the size of the image as well as its pixels address now, we could edit and manipulate them as if they were a pointer to our screen buffer!  See ScrPtr vs ImgBuf.bas for an example on this.<br \>
+<br \>
+<div class="fb_header">FBGfx Font Header</div><br \>
+<br \>
+<b>Header Details</b><br \>
+<br \>
+The first row of an image buffer that will be used as a font contains the header information for your font, on a byte by byte basis (remember that the first row of pixels are going to be the first byes since it's stored in row-&gt;column).<br \>
+<br \>
+The very first byte tells us what version of the header we're using.  Currently, only 0 is supported, as only one header version has been released.  The second byte tells us the first character supported in our font, and the third byte tells us the last.<br \>
+<br \>
+0; Byte; Header Version<br \>
+1; Byte; First Character Supported<br \>
+2; Byte; Last Character Supported<br \>
+3 to (3 + LastChar - FirstChar); Byte; Width of each Character in our font.<br \>
+<br \>
+<b>Creating a Font Buffer</b><br \>
+<br \>
+If you had a font that supported character 37 as the first, and character 200 as the last, your bytes would contain:<br \>
+<br \>
+0 for the header version.  It's the current only version supported.<br \>
+37 for the first character supported.<br \>
+200 for the last character supported.<br \>
+94 bytes containing the widths of each character.<br \>
+<br \>
+Since the first row is taken up for header data, the font buffer will be an image buffer whose height is the font height plus one.  That is, if you have a font height of 8, you need a buffer height of 9.  You'll be putting the font in the second row of your buffer, rather than the first as you usually would.<br \>
+<br \>
+Here's an example (Example3.bas), which creates a font buffer.  It only creates it and assigns header data right now, not the actual font:<br \>
+<br \>
+<tt><div class="freebasic">
+&nbsp;&nbsp;<span class="com">''&nbsp;The&nbsp;first&nbsp;supported&nbsp;character</span><br />
+<span class="key">Const</span>&nbsp;<span class="wrd">FirstChar</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">32</span><br />
+&nbsp;&nbsp;<span class="com">''&nbsp;Last&nbsp;supported&nbsp;character</span><br />
+<span class="key">Const</span>&nbsp;<span class="wrd">LastChar</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">190</span><br />
+&nbsp;&nbsp;<span class="com">''&nbsp;Number&nbsp;of&nbsp;characters&nbsp;total.</span><br />
+<span class="key">Const</span>&nbsp;<span class="wrd">NumChar</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="oth">(</span><span class="wrd">LastChar</span>&nbsp;<span class="oth">-</span>&nbsp;<span class="wrd">FirstChar</span><span class="oth">)</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="num">1</span><br />
+</div></tt><br />
+<br \>
+These constants help us.  It makes the code cleaner and faster.<br \>
+<br \>
+<br \>
+<tt><div class="freebasic">
+&nbsp;&nbsp;<span class="com">''&nbsp;Create&nbsp;a&nbsp;font&nbsp;buffer&nbsp;large&nbsp;enough&nbsp;to&nbsp;hold&nbsp;96&nbsp;characters,&nbsp;with&nbsp;widths&nbsp;of&nbsp;8.</span><br />
+&nbsp;&nbsp;<span class="com">''&nbsp;Remember&nbsp;to&nbsp;make&nbsp;our&nbsp;buffer&nbsp;one&nbsp;height&nbsp;larger&nbsp;than&nbsp;the&nbsp;font&nbsp;itself.</span><br />
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">FB.Image</span>&nbsp;<span class="key">Ptr</span>&nbsp;<span class="wrd">myFont</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">ImageCreate</span><span class="oth">(</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="wrd">NumChar</span>&nbsp;<span class="oth">*</span>&nbsp;<span class="num">8</span>&nbsp;<span class="oth">),</span>&nbsp;<span class="num">8</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="num">1</span>&nbsp;<span class="oth">)</span><br />
+</div></tt><br />
+<br \>
+Create our font buffer.  Remember, we need to add horizontal space for each character in the font (8 pixels wide).  We also need to add an extra row for our font header information.<br \>
+<br \>
+<br \>
+<tt><div class="freebasic">
+&nbsp;&nbsp;<span class="com">''&nbsp;Our&nbsp;font&nbsp;header&nbsp;information.</span><br />
+&nbsp;&nbsp;<span class="com">''&nbsp;Cast&nbsp;to&nbsp;uByte&nbsp;ptr&nbsp;for&nbsp;safety&nbsp;and&nbsp;consistency,&nbsp;remember.</span><br />
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">UByte</span>&nbsp;<span class="key">Ptr</span>&nbsp;<span class="wrd">myHeader</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">Cast</span><span class="oth">(</span><span class="key">UByte</span>&nbsp;<span class="key">Ptr</span><span class="oth">,</span>&nbsp;<span class="wrd">myFont</span>&nbsp;<span class="oth">)</span><br />
+</div></tt><br />
+<br \>
+Get the exact, casted, and having no warnings address of our font buffer.  The header goes on a byte by byte basis, so we can't work on this with an <tt>fb.Image</tt> type.<br \>
+<br \>
+<br \>
+<tt><div class="freebasic">
+&nbsp;&nbsp;<span class="com">''&nbsp;Assign&nbsp;font&nbsp;buffer&nbsp;header.</span><br />
+&nbsp;&nbsp;<span class="com">''&nbsp;Header&nbsp;version</span><br />
+<span class="wrd">myHeader</span><span class="oth">[</span><span class="num">0</span><span class="oth">]</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span><br />
+&nbsp;&nbsp;<span class="com">''&nbsp;First&nbsp;supported&nbsp;character</span><br />
+<span class="wrd">myHeader</span><span class="oth">[</span><span class="num">1</span><span class="oth">]</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">FirstChar</span><br />
+&nbsp;&nbsp;<span class="com">''&nbsp;Last&nbsp;supported&nbsp;character</span><br />
+<span class="wrd">myHeader</span><span class="oth">[</span><span class="num">2</span><span class="oth">]</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">LastChar</span><br />
+</div></tt><br />
+<br \>
+Assign the header information described above, into the first three bytes.  The header version, the first supported character, and the last supported character.<br \>
+<br \>
+<br \>
+<tt><div class="freebasic">
+&nbsp;&nbsp;<span class="com">''&nbsp;Assign&nbsp;the&nbsp;widths&nbsp;of&nbsp;each&nbsp;character&nbsp;in&nbsp;the&nbsp;font.</span><br />
+<span class="key">For</span>&nbsp;<span class="wrd">DoVar</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span>&nbsp;<span class="key">To</span>&nbsp;<span class="wrd">NumChar</span>&nbsp;<span class="oth">-</span>&nbsp;<span class="num">1</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;Skip&nbsp;the&nbsp;header,&nbsp;if&nbsp;you&nbsp;recall</span><br />
+&nbsp;&nbsp;<span class="wrd">myHeader</span><span class="oth">[</span><span class="num">3</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="wrd">DoVar</span><span class="oth">]</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">8</span>&nbsp;&nbsp;<br />
+<span class="key">Next</span><br />
+</div></tt><br />
+<br \>
+Each character in our font can have its own width, so we have to assign these.  The <tt>3 +</tt> skips the header information.  ##DoVar## starts at 0, so the first time it runs through that code, we'll be at index 3.  Give all supported characters a width of 8.<br \>
+<br \>
+<br \>
+<tt><div class="freebasic">
+&nbsp;&nbsp;<span class="com">''&nbsp;Remember&nbsp;to&nbsp;destroy&nbsp;our&nbsp;image&nbsp;buffer.</span><br />
+<span class="key">ImageDestroy</span><span class="oth">(</span>&nbsp;<span class="wrd">myFont</span>&nbsp;<span class="oth">)</span><br />
+</div></tt><br />
+<br \>
+Just reminding you :D<br \>
+<br \>
+<b>Assigning Font Characters</b><br \>
+<br \>
+This is fairly simple.  We'll use <span >FreeBASIC</span>'s default font to draw onto our buffer.  Remember to draw starting at column 1, rather than column 0, as the very first column is reserved for header data.  Start the character you're drawing at your first supported character, and give it the color you want.  Be warned, you can't have custom colors when drawing your font.  When you add a character to our buffer, it's stuck the color you draw it as!  See the tips & tricks section on how to get around this, however.<br \>
+<br \>
+Here's the modified code (Example4.bas), where we'll add the font drawing via FreeBASIC's default font onto our buffer.<br \>
+<br \>
+<tt><div class="freebasic">
+&nbsp;&nbsp;<span class="com">''&nbsp;NEW!!!</span><br />
+&nbsp;&nbsp;<span class="com">''&nbsp;Our&nbsp;current&nbsp;font&nbsp;character.</span><br />
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">UByte</span>&nbsp;<span class="wrd">CurChar</span><br />
+</div></tt><br />
+<br \>
+Just to have a quick index of the current ASCII character we're drawing onto our font.<br \>
+<br \>
+<br \>
+<tt><div class="freebasic">
+<span class="key">Draw</span>&nbsp;<span class="key">String</span>&nbsp;<span class="wrd">myFont</span><span class="oth">,</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="wrd">DoVar</span>&nbsp;<span class="oth">*</span>&nbsp;<span class="num">8</span><span class="oth">,</span>&nbsp;<span class="num">1</span>&nbsp;<span class="oth">),</span>&nbsp;<span class="key">Chr</span><span class="oth">(</span><span class="wrd">CurChar</span><span class="oth">),</span>&nbsp;<span class="key">RGB</span><span class="oth">(</span><span class="key">Rnd</span>&nbsp;<span class="oth">*</span>&nbsp;<span class="num">255</span><span class="oth">,</span>&nbsp;<span class="key">Rnd</span>&nbsp;<span class="oth">*</span>&nbsp;<span class="num">255</span><span class="oth">,</span>&nbsp;<span class="key">Rnd</span>&nbsp;<span class="oth">*</span>&nbsp;<span class="num">255</span><span class="oth">)</span><br />
+</div></tt><br />
+<br \>
+Skip the first row of our image buffer, as that contains font buffer information.  Draw our font using FBgfx's font as our custom font.  Fill it with a random color.  You should note that we're drawing right into our buffer, with "<tt>Draw String myFont</tt>...".<br \>
+<br \>
+<br \>
+<tt><div class="freebasic">
+<span class="key">Print</span>&nbsp;<span class="key">Chr</span><span class="oth">(</span><span class="wrd">CurChar</span><span class="oth">);</span><br />
+</div></tt><br />
+<br \>
+Just for clarity, so you can see the characters we're drawing into the buffer.<br \>
+<br \>
+<br \>
+<tt><div class="freebasic">
+&nbsp;&nbsp;<span class="com">''&nbsp;Use&nbsp;our&nbsp;font&nbsp;buffer&nbsp;to&nbsp;draw&nbsp;some&nbsp;text!</span><br />
+<span class="key">Draw</span>&nbsp;<span class="key">String</span>&nbsp;<span class="oth">(</span><span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">80</span><span class="oth">),</span>&nbsp;<span class="quo">"Hello!"</span><span class="oth">,</span>&nbsp;<span class="oth">,</span>&nbsp;<span class="wrd">myFont</span><br />
+<span class="key">Draw</span>&nbsp;<span class="key">String</span>&nbsp;<span class="oth">(</span><span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">88</span><span class="oth">),</span>&nbsp;<span class="quo">"HOW&nbsp;ARE&nbsp;ya&nbsp;DOIN&nbsp;Today?!&nbsp;&nbsp;YA&nbsp;DOIN&nbsp;FINE?!"</span><span class="oth">,</span>&nbsp;<span class="oth">,</span>&nbsp;<span class="wrd">myFont</span><br />
+<span class="key">Sleep</span><br />
+</div></tt><br />
+<br \>
+Test out our new font.  Of course, it's the same one we're used to.  You could have created your own from your own custom font buffer somewhere.<br \>
+<br \>
+<div class="fb_header">Tips & Tricks</div><br \>
+<br \>
+<b>Coloring Your Custom Fonts</b><br \>
+<br \>
+Alright, so by now you have realized that once you color a custom font, you can't use <tt><a href="KeyPgDrawString.html">Draw String</a></tt> to change that color.  Well, no fear, we can get around that (CustFontCol.bas).  It might be a bit slow, however.<br \>
+<br \>
+We can create a font object, which has a function to return a font buffer.  What the code does is it redraws the font buffer every time we change color, and returns the font buffer stored in the object.  This *could* in theory be sped up if we knew the range of characters to redraw, so we could only redraw from the lowest to the highest.  Figuring out that range in itself, could also be slow.<br \>
+<br \>
+<tt><div class="freebasic">
+<span class="def">#include&nbsp;"fbgfx.bi"<br />
+</span><br />
+<span class="key">Type</span>&nbsp;<span class="wrd">Font</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;Our&nbsp;font&nbsp;buffer.</span><br />
+&nbsp;&nbsp;<span class="wrd">Buf</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">FB.Image</span>&nbsp;<span class="key">Ptr</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;Font&nbsp;header.</span><br />
+&nbsp;&nbsp;<span class="wrd">Hdr</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">As</span>&nbsp;<span class="key">UByte</span>&nbsp;<span class="key">Ptr</span><br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;Current&nbsp;font&nbsp;color.</span><br />
+&nbsp;&nbsp;<span class="wrd">Col</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">As</span>&nbsp;<span class="key">UInteger</span><br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;Make&nbsp;our&nbsp;font&nbsp;buffer.</span><br />
+&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Sub</span>&nbsp;<span class="wrd">Make</span><span class="oth">(</span>&nbsp;<span class="key">ByVal</span>&nbsp;<span class="wrd">_Col_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">UInteger</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">RGB</span><span class="oth">(</span><span class="num">255</span><span class="oth">,</span>&nbsp;<span class="num">255</span><span class="oth">,</span>&nbsp;<span class="num">255</span><span class="oth">)</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;Change&nbsp;the&nbsp;font&nbsp;color&nbsp;and&nbsp;edit&nbsp;the&nbsp;font&nbsp;buffer.</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;Return&nbsp;the&nbsp;new&nbsp;font.</span><br />
+&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Function</span>&nbsp;<span class="wrd">myFont</span><span class="oth">(</span>&nbsp;<span class="key">ByVal</span>&nbsp;<span class="wrd">_Col_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">UInteger</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">RGB</span><span class="oth">(</span><span class="num">255</span><span class="oth">,</span>&nbsp;<span class="num">255</span><span class="oth">,</span>&nbsp;<span class="num">255</span><span class="oth">)</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">FB.Image</span>&nbsp;<span class="key">Ptr</span><br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;Create/Destroy&nbsp;our&nbsp;font.</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;Set&nbsp;a&nbsp;default&nbsp;color&nbsp;to&nbsp;it&nbsp;if&nbsp;you&nbsp;like.</span><br />
+&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Constructor</span><span class="oth">(</span>&nbsp;<span class="key">ByVal</span>&nbsp;<span class="wrd">_Col_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">UInteger</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">RGB</span><span class="oth">(</span><span class="num">255</span><span class="oth">,</span>&nbsp;<span class="num">255</span><span class="oth">,</span>&nbsp;<span class="num">255</span><span class="oth">)</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Destructor</span><span class="oth">()</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Type</span><br />
+<br />
+&nbsp;&nbsp;<span class="com">''&nbsp;Create&nbsp;our&nbsp;font's&nbsp;buffer.</span><br />
+<span class="key">Constructor</span>&nbsp;<span class="wrd">Font</span><span class="oth">(</span>&nbsp;<span class="key">ByVal</span>&nbsp;<span class="wrd">_Col_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">UInteger</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">RGB</span><span class="oth">(</span><span class="num">255</span><span class="oth">,</span>&nbsp;<span class="num">255</span><span class="oth">,</span>&nbsp;<span class="num">255</span><span class="oth">)</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;<span class="wrd">This.Make</span><span class="oth">(</span>&nbsp;<span class="wrd">_Col_</span>&nbsp;<span class="oth">)</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Constructor</span><br />
+<br />
+&nbsp;&nbsp;<span class="com">''&nbsp;Destroy&nbsp;font&nbsp;buffer.</span><br />
+<span class="key">Destructor</span>&nbsp;<span class="wrd">Font</span><span class="oth">()</span><br />
+&nbsp;&nbsp;<span class="key">ImageDestroy</span><span class="oth">(</span>&nbsp;<span class="wrd">Buf</span>&nbsp;<span class="oth">)</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Destructor</span><br />
+<br />
+&nbsp;&nbsp;<span class="com">''&nbsp;Assign&nbsp;the&nbsp;FBgfx&nbsp;font&nbsp;into&nbsp;our&nbsp;font&nbsp;buffer.</span><br />
+<span class="key">Sub</span>&nbsp;<span class="wrd">Font.Make</span><span class="oth">(</span>&nbsp;<span class="key">ByVal</span>&nbsp;<span class="wrd">_Col_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">UInteger</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">RGB</span><span class="oth">(</span><span class="num">255</span><span class="oth">,</span>&nbsp;<span class="num">255</span><span class="oth">,</span>&nbsp;<span class="num">255</span><span class="oth">)</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;No&nbsp;image&nbsp;buffer&nbsp;data.&nbsp;&nbsp;Create&nbsp;it.</span><br />
+&nbsp;&nbsp;<span class="key">If</span>&nbsp;<span class="wrd">This.Buf</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span>&nbsp;<span class="key">Then</span><br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;No&nbsp;screen&nbsp;created&nbsp;yet.</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">If</span>&nbsp;<span class="key">ScreenPtr</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span>&nbsp;<span class="key">Then</span>&nbsp;<span class="key">Exit</span>&nbsp;<span class="key">Sub</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;Support&nbsp;256&nbsp;characters,&nbsp;8&nbsp;in&nbsp;width.</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;Add&nbsp;the&nbsp;extra&nbsp;row&nbsp;for&nbsp;the&nbsp;font&nbsp;header.</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">This.Buf</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">ImageCreate</span><span class="oth">(</span>&nbsp;<span class="num">256</span>&nbsp;<span class="oth">*</span>&nbsp;<span class="num">8</span><span class="oth">,</span>&nbsp;<span class="num">9</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;Get&nbsp;the&nbsp;address&nbsp;of&nbsp;the&nbsp;font&nbsp;header,</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;which&nbsp;is&nbsp;the&nbsp;same&nbsp;as&nbsp;getting&nbsp;our&nbsp;pixel&nbsp;address</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;Except&nbsp;that&nbsp;we&nbsp;always&nbsp;will&nbsp;use&nbsp;a&nbsp;ubyte.</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">This.Hdr</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">Cast</span><span class="oth">(</span><span class="key">UByte</span>&nbsp;<span class="key">Ptr</span><span class="oth">,</span>&nbsp;<span class="wrd">This.Buf</span><span class="oth">)</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="key">SizeOf</span><span class="oth">(</span><span class="wrd">FB.Image</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;Assign&nbsp;header&nbsp;information.</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">This.Hdr</span><span class="oth">[</span><span class="num">0</span><span class="oth">]</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;First&nbsp;supported&nbsp;character</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">This.Hdr</span><span class="oth">[</span><span class="num">1</span><span class="oth">]</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;Last&nbsp;supported&nbsp;character</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">This.Hdr</span><span class="oth">[</span><span class="num">2</span><span class="oth">]</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">255</span><br />
+&nbsp;&nbsp;<span class="key">Else</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">If</span>&nbsp;<span class="wrd">This.Col</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">_Col_</span>&nbsp;<span class="key">Then</span>&nbsp;<span class="key">Exit</span>&nbsp;<span class="key">Sub</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;<span class="key">End</span>&nbsp;<span class="key">If</span><br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;Draw&nbsp;our&nbsp;font.</span><br />
+&nbsp;&nbsp;<span class="key">For</span>&nbsp;<span class="wrd">DoVar</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">255</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;Set&nbsp;font&nbsp;width&nbsp;information.</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">This.Hdr</span><span class="oth">[</span><span class="num">3</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="wrd">DoVar</span><span class="oth">]</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">8</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Draw</span>&nbsp;<span class="key">String</span>&nbsp;<span class="wrd">This.Buf</span><span class="oth">,</span>&nbsp;<span class="oth">(</span><span class="wrd">DoVar</span>&nbsp;<span class="oth">*</span>&nbsp;<span class="num">8</span><span class="oth">,</span>&nbsp;<span class="num">1</span><span class="oth">),</span>&nbsp;<span class="key">Chr</span><span class="oth">(</span><span class="wrd">DoVar</span><span class="oth">),</span>&nbsp;<span class="wrd">_Col_</span><br />
+&nbsp;&nbsp;<span class="key">Next</span><br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;Remember&nbsp;our&nbsp;font&nbsp;color.</span><br />
+&nbsp;&nbsp;<span class="wrd">This.Col</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">_Col_</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Sub</span><br />
+<br />
+&nbsp;&nbsp;<span class="com">''&nbsp;Get&nbsp;the&nbsp;buffer&nbsp;for&nbsp;our&nbsp;font.</span><br />
+&nbsp;&nbsp;<span class="com">''&nbsp;Remake&nbsp;the&nbsp;font&nbsp;if&nbsp;the&nbsp;color's&nbsp;different.</span><br />
+<span class="key">Function</span>&nbsp;<span class="wrd">Font.myFont</span><span class="oth">(</span>&nbsp;<span class="key">ByVal</span>&nbsp;<span class="wrd">_Col_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">UInteger</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">RGB</span><span class="oth">(</span><span class="num">255</span><span class="oth">,</span>&nbsp;<span class="num">255</span><span class="oth">,</span>&nbsp;<span class="num">255</span><span class="oth">)</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">FB.Image</span>&nbsp;<span class="key">Ptr</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;If&nbsp;our&nbsp;colors&nbsp;match,&nbsp;just&nbsp;return&nbsp;the&nbsp;current&nbsp;buffer.</span><br />
+&nbsp;&nbsp;<span class="key">If</span>&nbsp;<span class="wrd">_Col_</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">Col</span>&nbsp;<span class="key">Then</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Return</span>&nbsp;<span class="wrd">Buf</span><br />
+&nbsp;&nbsp;<span class="key">End</span>&nbsp;<span class="key">If</span><br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;Make&nbsp;the&nbsp;font&nbsp;with&nbsp;a&nbsp;new&nbsp;color.</span><br />
+&nbsp;&nbsp;<span class="wrd">This.Make</span><span class="oth">(</span>&nbsp;<span class="wrd">_Col_</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;Return&nbsp;out&nbsp;buffer.</span><br />
+&nbsp;&nbsp;<span class="key">Return</span>&nbsp;<span class="wrd">This.Buf</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Function</span><br />
+<br />
+<br />
+&nbsp;&nbsp;<span class="com">''&nbsp;MAIN&nbsp;CODE&nbsp;HERE!</span><br />
+<span class="key">ScreenRes</span>&nbsp;<span class="num">640</span><span class="oth">,</span>&nbsp;<span class="num">480</span><span class="oth">,</span>&nbsp;<span class="num">32</span><br />
+<br />
+&nbsp;&nbsp;<span class="com">''&nbsp;Create&nbsp;our&nbsp;font.</span><br />
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">Font</span>&nbsp;<span class="wrd">myFont</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">RGB</span><span class="oth">(</span><span class="num">255</span><span class="oth">,</span>&nbsp;<span class="num">255</span><span class="oth">,</span>&nbsp;<span class="num">255</span><span class="oth">)</span><br />
+<br />
+&nbsp;&nbsp;<span class="com">''&nbsp;Draw&nbsp;a&nbsp;string&nbsp;using&nbsp;our&nbsp;custom&nbsp;font.</span><br />
+<span class="key">Draw</span>&nbsp;<span class="key">String</span>&nbsp;<span class="oth">(</span><span class="num">0</span><span class="oth">,</span><span class="num">0</span><span class="oth">),</span>&nbsp;<span class="quo">"Hello.&nbsp;&nbsp;I&nbsp;am&nbsp;the&nbsp;custom&nbsp;font."</span><span class="oth">,,</span>&nbsp;<span class="wrd">myFont.myFont</span><span class="oth">()</span><br />
+&nbsp;&nbsp;<span class="com">''&nbsp;Gasp.&nbsp;&nbsp;A&nbsp;new&nbsp;color!</span><br />
+<span class="key">Draw</span>&nbsp;<span class="key">String</span>&nbsp;<span class="oth">(</span><span class="num">0</span><span class="oth">,</span><span class="num">8</span><span class="oth">),</span>&nbsp;<span class="quo">"Hello.&nbsp;&nbsp;I&nbsp;am&nbsp;the&nbsp;custom&nbsp;font."</span><span class="oth">,,</span>&nbsp;<span class="wrd">myFont.myFont</span><span class="oth">(</span><span class="key">RGB</span><span class="oth">(</span><span class="num">255</span><span class="oth">,</span>&nbsp;<span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">0</span><span class="oth">))</span><br />
+<span class="key">Sleep</span><br />
+<br />
+&nbsp;&nbsp;<span class="com">''&nbsp;Speed&nbsp;test.&nbsp;&nbsp;Turns&nbsp;out&nbsp;it's&nbsp;quite&nbsp;slow.</span><br />
+<span class="key">Scope</span><br />
+&nbsp;&nbsp;<span class="key">Randomize</span>&nbsp;<span class="key">Timer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;Our&nbsp;timer.</span><br />
+&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Double</span>&nbsp;<span class="wrd">T</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">Timer</span><br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;Time&nbsp;how&nbsp;long&nbsp;it&nbsp;takes&nbsp;to&nbsp;make&nbsp;a&nbsp;new&nbsp;font&nbsp;this&nbsp;way.</span><br />
+&nbsp;&nbsp;<span class="key">For</span>&nbsp;<span class="wrd">DoVar</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">499</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">myFont.Make</span><span class="oth">(</span>&nbsp;<span class="key">RGB</span><span class="oth">(</span><span class="key">Rnd</span>&nbsp;<span class="oth">*</span>&nbsp;<span class="num">255</span><span class="oth">,</span>&nbsp;<span class="key">Rnd</span>&nbsp;<span class="oth">*</span>&nbsp;<span class="num">255</span><span class="oth">,</span>&nbsp;<span class="key">Rnd</span>&nbsp;<span class="oth">*</span>&nbsp;<span class="num">255</span><span class="oth">)</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;<span class="key">Next</span><br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;And&nbsp;we're&nbsp;all&nbsp;done.&nbsp;&nbsp;Print&nbsp;important&nbsp;data.</span><br />
+&nbsp;&nbsp;<span class="key">Locate</span>&nbsp;<span class="num">3</span><span class="oth">,</span>&nbsp;<span class="num">1</span><br />
+&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"Time&nbsp;to&nbsp;Re-Draw&nbsp;font&nbsp;499&nbsp;times:&nbsp;"</span>&nbsp;<span class="oth">&amp;</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="key">Timer</span>&nbsp;<span class="oth">-</span>&nbsp;<span class="wrd">T</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"Time&nbsp;per&nbsp;Re-Draw:&nbsp;"</span>&nbsp;<span class="oth">&amp;</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="key">Timer</span>&nbsp;<span class="oth">-</span>&nbsp;<span class="wrd">T</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="oth">/</span>&nbsp;<span class="num">500</span><br />
+&nbsp;&nbsp;<span class="key">Sleep</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Scope</span><br />
+</div></tt><br />
+<br \>
+<b>ScrPtr vs ImgBuf</b><br \>
+<br \>
+Comparison of how to draw onto image buffer pixels, versus how to draw on the screen's buffer (ScrPtr vs ImgBuf.bas):<br \>
+<br \>
+<tt><div class="freebasic">
+<span class="def">#include&nbsp;"fbgfx.bi"<br />
+</span><br />
+<br />
+<span class="key">ScreenRes</span>&nbsp;<span class="num">640</span><span class="oth">,</span>&nbsp;<span class="num">480</span><span class="oth">,</span>&nbsp;<span class="num">32</span><br />
+<br />
+<br />
+&nbsp;&nbsp;<span class="com">''&nbsp;Create&nbsp;a&nbsp;buffer&nbsp;the&nbsp;size&nbsp;of&nbsp;our&nbsp;screen.</span><br />
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">FB.IMAGE</span>&nbsp;<span class="key">Ptr</span>&nbsp;<span class="wrd">myBuf</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">ImageCreate</span><span class="oth">(</span>&nbsp;<span class="num">640</span><span class="oth">,</span>&nbsp;<span class="num">480</span>&nbsp;<span class="oth">)</span><br />
+<br />
+&nbsp;&nbsp;<span class="com">''&nbsp;Get&nbsp;the&nbsp;address&nbsp;of&nbsp;our&nbsp;screen's&nbsp;buffer.</span><br />
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">UInteger</span>&nbsp;<span class="key">Ptr</span>&nbsp;<span class="wrd">myScrPix</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">ScreenPtr</span><br />
+&nbsp;&nbsp;<span class="com">''&nbsp;Get&nbsp;the&nbsp;address&nbsp;of&nbsp;our&nbsp;pixel's&nbsp;buffer.</span><br />
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">UInteger</span>&nbsp;<span class="key">Ptr</span>&nbsp;<span class="wrd">myBufPix</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">Cast</span><span class="oth">(</span>&nbsp;<span class="key">UInteger</span>&nbsp;<span class="key">Ptr</span><span class="oth">,</span>&nbsp;<span class="key">Cast</span><span class="oth">(</span>&nbsp;<span class="key">UByte</span>&nbsp;<span class="key">Ptr</span><span class="oth">,</span>&nbsp;<span class="wrd">myBuf</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="key">SizeOf</span><span class="oth">(</span><span class="wrd">FB.IMAGE</span><span class="oth">)</span>&nbsp;<span class="oth">)</span><br />
+<br />
+<br />
+&nbsp;&nbsp;<span class="com">''&nbsp;Lock&nbsp;our&nbsp;page.&nbsp;&nbsp;Fill&nbsp;the&nbsp;entire&nbsp;page&nbsp;with&nbsp;white.</span><br />
+<span class="key">ScreenLock</span><br />
+<br />
+&nbsp;&nbsp;<span class="com">''&nbsp;Alternatively,&nbsp;if&nbsp;the&nbsp;screen&nbsp;resolution's&nbsp;unknown,&nbsp;use&nbsp;ScreenInfo&nbsp;to</span><br />
+&nbsp;&nbsp;<span class="com">''&nbsp;make&nbsp;this&nbsp;more&nbsp;secure</span><br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;<span class="com">''&nbsp;Note:&nbsp;this&nbsp;code&nbsp;assumes&nbsp;no&nbsp;padding&nbsp;between&nbsp;rows.&nbsp;&nbsp;To&nbsp;prevent&nbsp;this,</span><br />
+&nbsp;&nbsp;<span class="com">''&nbsp;you&nbsp;need&nbsp;to&nbsp;use&nbsp;ScreenInfo&nbsp;to&nbsp;get&nbsp;the&nbsp;screen's&nbsp;pitch,&nbsp;and&nbsp;calculate</span><br />
+&nbsp;&nbsp;<span class="com">''&nbsp;row&nbsp;offsets&nbsp;using&nbsp;that&nbsp;instead.</span><br />
+&nbsp;&nbsp;<span class="key">For</span>&nbsp;<span class="wrd">xVar</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">639</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">For</span>&nbsp;<span class="wrd">yVar</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">479</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">myScrPix</span><span class="oth">[</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="wrd">yVar</span>&nbsp;<span class="oth">*</span>&nbsp;<span class="num">640</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="wrd">xVar</span>&nbsp;<span class="oth">]</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">RGB</span><span class="oth">(</span><span class="num">255</span><span class="oth">,</span>&nbsp;<span class="num">255</span><span class="oth">,</span>&nbsp;<span class="num">255</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Next</span><br />
+&nbsp;&nbsp;<span class="key">Next</span><br />
+<br />
+<span class="key">ScreenUnlock</span><br />
+<span class="key">Sleep</span><br />
+<br />
+<br />
+&nbsp;&nbsp;<span class="com">''&nbsp;Draw&nbsp;onto&nbsp;our&nbsp;image&nbsp;buffer&nbsp;all&nbsp;red.</span><br />
+<span class="key">For</span>&nbsp;<span class="wrd">xVar</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span>&nbsp;<span class="key">To</span>&nbsp;<span class="wrd">myBuf</span><span class="oth">-&gt;</span><span class="key">Width</span>&nbsp;<span class="oth">-</span>&nbsp;<span class="num">1</span><br />
+&nbsp;&nbsp;<span class="key">For</span>&nbsp;<span class="wrd">yVar</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span>&nbsp;<span class="key">To</span>&nbsp;<span class="wrd">myBuf</span><span class="oth">-&gt;</span><span class="wrd">Height</span>&nbsp;<span class="oth">-</span>&nbsp;<span class="num">1</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">myBufPix</span><span class="oth">[</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="wrd">yVar</span>&nbsp;<span class="oth">*</span>&nbsp;<span class="oth">(</span><span class="wrd">myBuf</span><span class="oth">-&gt;</span><span class="wrd">Pitch</span>&nbsp;<span class="oth">\</span>&nbsp;<span class="key">SizeOf</span><span class="oth">(*</span><span class="wrd">myBufPix</span><span class="oth">))</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="wrd">xVar</span>&nbsp;<span class="oth">]</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">RGB</span><span class="oth">(</span><span class="num">255</span><span class="oth">,</span>&nbsp;<span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">0</span><span class="oth">)</span><br />
+&nbsp;&nbsp;<span class="key">Next</span><br />
+<span class="key">Next</span><br />
+<br />
+&nbsp;&nbsp;<span class="com">''&nbsp;Put&nbsp;the&nbsp;red&nbsp;buffer&nbsp;on&nbsp;the&nbsp;screen.</span><br />
+<span class="key">Put</span>&nbsp;<span class="oth">(</span><span class="num">0</span><span class="oth">,</span><span class="num">0</span><span class="oth">),</span>&nbsp;<span class="wrd">myBuf</span><span class="oth">,</span>&nbsp;<span class="key">PSet</span><br />
+<span class="key">Sleep</span><br />
+<br />
+<br />
+<span class="com">/'</span><br />
+<span class="com">&nbsp;&nbsp;ScreenPtr:</span><br />
+<span class="com">&nbsp;1)&nbsp;Get&nbsp;address&nbsp;of&nbsp;screen&nbsp;buffer</span><br />
+<span class="com">&nbsp;&nbsp;&nbsp;&nbsp;(remember&nbsp;that&nbsp;FBgfx&nbsp;uses&nbsp;a&nbsp;dummy&nbsp;buffer&nbsp;that&nbsp;it&nbsp;flips&nbsp;automatically)</span><br />
+<span class="com">&nbsp;2)&nbsp;Lock&nbsp;page</span><br />
+<span class="com">&nbsp;3)&nbsp;Draw&nbsp;onto&nbsp;screen&nbsp;address</span><br />
+<span class="com">&nbsp;4)&nbsp;Unlock&nbsp;page&nbsp;to&nbsp;show&nbsp;buffer</span><br />
+<span class="com">&nbsp;&nbsp;</span><br />
+<span class="com">&nbsp;&nbsp;Image&nbsp;Buffer:</span><br />
+<span class="com">&nbsp;1)&nbsp;Create&nbsp;an&nbsp;image&nbsp;buffer</span><br />
+<span class="com">&nbsp;2)&nbsp;Get&nbsp;the&nbsp;address&nbsp;of&nbsp;image&nbsp;pixels</span><br />
+<span class="com">&nbsp;3)&nbsp;Draw&nbsp;onto&nbsp;image&nbsp;pixels</span><br />
+<span class="com">&nbsp;&nbsp;&nbsp;&nbsp;(you&nbsp;can&nbsp;use&nbsp;neat&nbsp;stuff&nbsp;like&nbsp;the&nbsp;buffer&nbsp;information&nbsp;to&nbsp;help&nbsp;you&nbsp;here)</span><br />
+<span class="com">&nbsp;4)&nbsp;Put&nbsp;down&nbsp;Image&nbsp;where&nbsp;you&nbsp;please</span><br />
+<span class="com">&nbsp;&nbsp;&nbsp;&nbsp;(another&nbsp;big&nbsp;plus!)</span><br />
+<span class="com">&nbsp;&nbsp;&nbsp;&nbsp;</span><br />
+<span class="com">&nbsp;&nbsp;About&nbsp;Drawing:</span><br />
+<span class="com">&nbsp;cast(ubyte&nbsp;ptr,&nbsp;mybuff)&nbsp;+&nbsp;Y&nbsp;*&nbsp;Pitch&nbsp;+&nbsp;X&nbsp;*&nbsp;Bpp</span><br />
+<span class="com">&nbsp;</span><br />
+<span class="com">&nbsp;Every&nbsp;Y&nbsp;contains&nbsp;PITCH&nbsp;number&nbsp;of&nbsp;bytes.&nbsp;&nbsp;In&nbsp;order&nbsp;to&nbsp;reach&nbsp;your&nbsp;new&nbsp;Y,&nbsp;you&nbsp;</span><br />
+<span class="com">&nbsp;have&nbsp;to&nbsp;skip&nbsp;an&nbsp;entire&nbsp;row.</span><br />
+<span class="com">&nbsp;</span><br />
+<span class="com">&nbsp;It&nbsp;should&nbsp;be&nbsp;safe&nbsp;to&nbsp;do&nbsp;the&nbsp;pointer&nbsp;arithmetic&nbsp;in&nbsp;cases&nbsp;where&nbsp;the&nbsp;pointer's&nbsp;data</span><br />
+<span class="com">&nbsp;type&nbsp;is&nbsp;not&nbsp;one&nbsp;byte&nbsp;long,&nbsp;so&nbsp;you&nbsp;may&nbsp;find&nbsp;it&nbsp;easier&nbsp;to&nbsp;use&nbsp;a&nbsp;pointer&nbsp;type&nbsp;to</span><br />
+<span class="com">&nbsp;match&nbsp;your&nbsp;bit&nbsp;depth.</span><br />
+<span class="com">&nbsp;In&nbsp;these&nbsp;cases&nbsp;you&nbsp;should&nbsp;divide&nbsp;the&nbsp;Pitch&nbsp;and&nbsp;BPP&nbsp;by&nbsp;the&nbsp;size&nbsp;of&nbsp;the&nbsp;pointer&nbsp;type.</span><br />
+<span class="com">&nbsp;Conveniently,&nbsp;in&nbsp;this&nbsp;case&nbsp;the&nbsp;Pitch&nbsp;should&nbsp;always&nbsp;be&nbsp;divisible&nbsp;by&nbsp;the&nbsp;pixel's&nbsp;type&nbsp;</span><br />
+<span class="com">&nbsp;size.&nbsp;And,&nbsp;obviously,&nbsp;so&nbsp;will&nbsp;the&nbsp;BPP,&nbsp;which&nbsp;will&nbsp;just&nbsp;cancel&nbsp;to&nbsp;1&nbsp;:D</span><br />
+<span class="com">&nbsp;</span><br />
+<span class="com">'/</span><br />
+</div></tt>
+</div>
+</div> 
+</div> 
+</body>
+</html>

@@ -1,0 +1,65 @@
+<html>
+<head>
+<title>Alias</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Alias</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Clause of the <tt><a href="KeyPgSub.html">Sub</a></tt> and <tt><a href="KeyPgFunction.html">Function</a></tt> statements that provides an alternate internal name<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+[<a href="KeyPgDeclare.html">Declare</a>] { <a href="KeyPgSub.html">Sub</a> | <a href="KeyPgFunction.html">Function</a> } <i>usablename</i> <b>Alias "<i>alternatename</i>"</b> (...)<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
+declare sub <i>usablename</i> Alias "<i>alternatename</i>" ( ... )<br \>
+<div class="fb_indent"></tt><i>or</i><tt><br \>
+</div>declare function <i>usablename</i> Alias "<i>alternatename</i>" ( ... )<br \>
+<div class="fb_indent"></tt><i>or</i><tt><br \>
+</div>sub <i>usablename</i> Alias "<i>alternatename</i>" ( ... )<br \>
+<div class="fb_indent">...<br \>
+</div>end sub<br \>
+<div class="fb_indent"></tt><i>or</i><tt><br \>
+</div>function <i>usablename</i> Alias "<i>alternatename</i>" ( ... )<br \>
+<div class="fb_indent">...<br \>
+</div>end function<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+<tt>Alias</tt> gives an alternate name to a procedure.  This alternate name cannot be used within the program to call the procedure, but it is visible (if the function is not private) to the linker when linking with code written in other languages.<br \>
+<br \>
+<tt>Alias</tt> is commonly used for procedures in libraries written in other languages when such procedure names are valid in the other language but invalid in BASIC.  When using <tt>Alias</tt> with <tt><a href="KeyPgDeclare.html">Declare</a></tt>, only the alternate name is used by the linker.<br \>
+<br \>
+Differently from normal procedure names, <tt>Alias</tt> does not change the case of the alternate name, so it is useful when external code requires an exported function with a particular name or with a particular case.<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<br \>
+If there is a sub called <tt>xClearScreen</tt> in an external library and you want to reference it with the name <tt>ClearVideoScreen</tt>, here is sample code to do so:<br \>
+<tt><div class="freebasic">
+<span class="key">Declare</span>&nbsp;<span class="key">Sub</span>&nbsp;<span class="wrd">ClearVideoScreen</span>&nbsp;<span class="key">Alias</span>&nbsp;<span class="quo">"xClearScreen"</span>&nbsp;<span class="oth">()</span><br />
+</div></tt><br />
+<br \>
+A procedure meant to be used by external C code, exported as <tt>MyExportedProc</tt>:<br \>
+<tt><div class="freebasic">
+<span class="key">Function</span>&nbsp;<span class="wrd">MultiplyByFive</span>&nbsp;<span class="key">cdecl</span>&nbsp;<span class="key">Alias</span>&nbsp;<span class="quo">"MyExportedProc"</span>&nbsp;<span class="oth">(</span><span class="key">ByVal</span>&nbsp;<span class="wrd">Parameter</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="key">Export</span><br />
+&nbsp;&nbsp;<span class="key">Return</span>&nbsp;<span class="wrd">Parameter</span>&nbsp;<span class="oth">*</span>&nbsp;<span class="num">5</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Function</span><br />
+</div></tt><br />
+<br \>
+</div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> In QB, <tt>Alias</tt> only worked with <tt><a href="KeyPgDeclare.html">Declare</a></tt>.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgDeclare.html">Declare</a></tt><br \>
+<li> <tt><a href="KeyPgExport.html">Export</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

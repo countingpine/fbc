@@ -1,0 +1,125 @@
+<html>
+<head>
+<title>PCopy</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">PCopy</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Copies one graphical or text page onto another<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgSub.html">Sub</a> <b>PCopy</b> ( <a href="KeyPgByval.html">ByVal</a> <i>source</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a> = -1, <a href="KeyPgByval.html">ByVal</a> <i>destination</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a> = -1 )<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
+<b>PCopy</b> [ <i>source</i> ] [, <i>destination</i> ]<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+<tt><i>source</i></tt><br \>
+<div class="fb_indent">page to copy from<br \>
+</div><tt><i>destination</i></tt><br \>
+<div class="fb_indent">page to copy to<br \>
+<br \>
+</div></div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+Copies one graphical or text video page to another. Useful for drawing all graphics on one invisible page and copying it to the active visible page - creating smooth graphics and animation. Known as 'double buffering' or 'page flipping'.<br \>
+<br \>
+<tt><i>source</i></tt> and <tt><i>destination</i></tt> refer to page numbers. The 'source' page is copied over the 'destination' page when pcopy is called.<br \>
+<br \>
+If the <tt><i>source</i></tt> argument is omitted, the current working page is assumed.  If the <tt><i>destination</i></tt> page is omitted, the current visible page is assumed.<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="key">ScreenRes</span>&nbsp;<span class="num">320</span><span class="oth">,</span>&nbsp;<span class="num">240</span><span class="oth">,</span>&nbsp;<span class="num">32</span><span class="oth">,</span>&nbsp;<span class="num">2</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">'Sets&nbsp;up&nbsp;the&nbsp;screen&nbsp;to&nbsp;be&nbsp;320x240&nbsp;in&nbsp;32-bit&nbsp;color&nbsp;with&nbsp;2&nbsp;video&nbsp;pages.</span><br />
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="wrd">max_x_value</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">270</span><span class="oth">,</span>&nbsp;<span class="wrd">x_value</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">50</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">'Dimension&nbsp;our&nbsp;working&nbsp;variables.</span><br />
+<br />
+<span class="key">Do</span>&nbsp;<span class="key">While</span>&nbsp;<span class="wrd">x_value</span>&nbsp;<span class="oth">&lt;</span>&nbsp;<span class="wrd">max_x_value</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">'Loop&nbsp;while&nbsp;x_value&nbsp;is&nbsp;less&nbsp;than&nbsp;the&nbsp;max</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">ScreenSet</span>&nbsp;<span class="num">2</span><span class="oth">,</span><span class="num">1</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">'Sets&nbsp;the&nbsp;working&nbsp;page&nbsp;to&nbsp;2&nbsp;and&nbsp;the&nbsp;displayed&nbsp;page&nbsp;to&nbsp;1</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Cls</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">'Clears&nbsp;the&nbsp;screen&nbsp;so&nbsp;we&nbsp;can&nbsp;start&nbsp;fresh</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Circle</span>&nbsp;<span class="oth">(</span><span class="wrd">x_value</span><span class="oth">,</span><span class="num">50</span><span class="oth">),</span><span class="num">50</span><span class="oth">,</span><span class="num">&amp;h00FFFF00</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">'Draws&nbsp;a&nbsp;circle&nbsp;with&nbsp;a&nbsp;50&nbsp;pixel&nbsp;radius&nbsp;in&nbsp;yellow&nbsp;on&nbsp;page&nbsp;2</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">ScreenSet</span>&nbsp;<span class="num">1</span><span class="oth">,</span><span class="num">1</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">'Sets&nbsp;the&nbsp;working&nbsp;page&nbsp;to&nbsp;1&nbsp;and&nbsp;the&nbsp;displayed&nbsp;page&nbsp;to&nbsp;1</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">ScreenSync</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">'Waits&nbsp;for&nbsp;vertical&nbsp;refresh</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">PCopy</span>&nbsp;<span class="num">2</span><span class="oth">,</span><span class="num">1</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">'Copies&nbsp;our&nbsp;circle&nbsp;from&nbsp;page&nbsp;2&nbsp;to&nbsp;page&nbsp;1</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">x_value</span>&nbsp;<span class="oth">+=</span>&nbsp;<span class="num">1</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">'Increments&nbsp;x_value&nbsp;so&nbsp;it&nbsp;will&nbsp;move.</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Sleep</span>&nbsp;<span class="num">25</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">'Waits&nbsp;for&nbsp;25&nbsp;milliseconds.</span><br />
+<span class="key">Loop</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">'Goes&nbsp;back&nbsp;to&nbsp;do&nbsp;as&nbsp;long&nbsp;as&nbsp;x_value&nbsp;is&nbsp;less&nbsp;than&nbsp;x_max_value</span><br />
+<br />
+<span class="key">Sleep</span>&nbsp;&nbsp;&nbsp;<span class="com">'Waits&nbsp;for&nbsp;any&nbsp;key&nbsp;to&nbsp;be&nbsp;pressed&nbsp;so&nbsp;you&nbsp;can&nbsp;see&nbsp;the&nbsp;work&nbsp;done.</span><br />
+</div></tt><br />
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="com">'&nbsp;Console&nbsp;mode&nbsp;example:</span><br />
+<br />
+<span class="com">''&nbsp;set&nbsp;the&nbsp;working&nbsp;page&nbsp;number&nbsp;to&nbsp;0,&nbsp;and&nbsp;the&nbsp;visible&nbsp;page&nbsp;number&nbsp;to&nbsp;1</span><br />
+<span class="def">#if&nbsp;__FB_LANG__&nbsp;=&nbsp;"QB"<br />
+</span><span class="key">Screen</span>&nbsp;<span class="oth">,,</span>&nbsp;<span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">1</span><br />
+<span class="def">#else<br />
+</span><span class="key">Screen</span>&nbsp;<span class="oth">,</span>&nbsp;<span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">1</span><br />
+<span class="def">#endif<br />
+</span><br />
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="wrd">i</span><span class="oth">,</span>&nbsp;<span class="wrd">frames</span><span class="oth">,</span>&nbsp;<span class="wrd">fps</span><br />
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Double</span>&nbsp;<span class="wrd">t</span><br />
+<br />
+<span class="wrd">t</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">Timer</span><br />
+<br />
+<span class="key">Do</span><br />
+<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;fill&nbsp;working&nbsp;page&nbsp;with&nbsp;a&nbsp;certain&nbsp;color&nbsp;and&nbsp;character</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Cls</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Locate</span>&nbsp;<span class="num">1</span><span class="oth">,</span>&nbsp;<span class="num">1</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Color</span>&nbsp;<span class="oth">(</span><span class="wrd">i</span>&nbsp;<span class="key">And</span>&nbsp;<span class="num">15</span><span class="oth">),</span>&nbsp;<span class="num">0</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="key">String$</span><span class="oth">(</span><span class="num">80</span>&nbsp;<span class="oth">*</span>&nbsp;<span class="num">25</span><span class="oth">,</span>&nbsp;<span class="key">Hex$</span><span class="oth">(</span><span class="wrd">i</span><span class="oth">,</span>&nbsp;<span class="num">1</span><span class="oth">));</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">i</span>&nbsp;<span class="oth">+=</span>&nbsp;<span class="num">1</span><br />
+<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;show&nbsp;frames&nbsp;per&nbsp;second</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Color</span>&nbsp;<span class="num">15</span><span class="oth">,</span>&nbsp;<span class="num">0</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Locate</span>&nbsp;<span class="num">1</span><span class="oth">,</span>&nbsp;<span class="num">1</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"fps:&nbsp;"</span>&nbsp;<span class="oth">&amp;</span>&nbsp;<span class="wrd">fps</span><span class="oth">,</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">If</span>&nbsp;<span class="key">Int</span><span class="oth">(</span><span class="wrd">t</span><span class="oth">)</span>&nbsp;<span class="oth">&lt;&gt;</span>&nbsp;<span class="key">Int</span><span class="oth">(</span><span class="key">Timer</span><span class="oth">)</span>&nbsp;<span class="key">Then</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">t</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">Timer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">fps</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">frames</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">frames</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">End</span>&nbsp;<span class="key">If</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">frames</span>&nbsp;<span class="oth">+=</span>&nbsp;<span class="num">1</span><br />
+<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;copy&nbsp;working&nbsp;page&nbsp;to&nbsp;visible&nbsp;page</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">PCopy</span><br />
+<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;sleep&nbsp;50ms&nbsp;per&nbsp;frame&nbsp;to&nbsp;free&nbsp;up&nbsp;cpu&nbsp;time</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Sleep</span>&nbsp;<span class="num">50</span><span class="oth">,</span>&nbsp;<span class="num">1</span><br />
+<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;run&nbsp;loop&nbsp;until&nbsp;user&nbsp;presses&nbsp;a&nbsp;key</span><br />
+<span class="key">Loop</span>&nbsp;<span class="key">Until</span>&nbsp;<span class="key">Len</span><span class="oth">(</span><span class="key">Inkey$</span><span class="oth">)</span><br />
+</div></tt><br />
+<br \>
+</div><div class="fb_sect_title">Platform Differences</div><div class="fb_sect_cont"><br \>
+<ul><li> Maximum number of text pages in Windows is 4.<br \>
+<li> Maximum number of text pages in DOS is 8.<br \>
+<li> Maximum number of text pages in all other targets is 1.<br \>
+<li> Maximum number of graphics pages depends on what was specified when the <tt><a href="KeyPgScreengraphics.html">Screen</a></tt> or <tt><a href="KeyPgScreenres.html">ScreenRes</a></tt> statement was called.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> None<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgScreencopy.html">ScreenCopy</a></tt><br \>
+<li> <tt><a href="KeyPgFlip.html">Flip</a></tt><br \>
+<li> <tt><a href="KeyPgScreengraphics.html">Screen</a></tt><br \>
+<br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

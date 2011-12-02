@@ -1,0 +1,89 @@
+<html>
+<head>
+<title>Select Case</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Select Case</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Conditional statement block<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<b>Select Case</b> <i>expression</i><br \>
+[ <b>Case</b> <i>expressionlist</i>] <br \>
+<div class="fb_indent">[<i>statements</i>]<br \>
+</div>[ <b>Case Else</b> ]<br \>
+<div class="fb_indent">[<i>statements</i>]<br \>
+</div><b>End Select</b><br \>
+<i>or</i><br \>
+<b>Select Case</b> As Const <i>integer_expression</i><br \>
+[ <b>Case</b> <i>constant</i> | <i>enumeration</i> ]<br \>
+<div class="fb_indent">[ <i>statements</i> ]<br \>
+</div>[ <b>Case Else</b> ]<br \>
+<div class="fb_indent">[ <i>statements</i> ]<br \>
+</div><b>End Select</b><br \>
+</tt><br \>
+</div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+<br \>
+<tt><b>Select Case</b></tt> executes specific code depending on the value of an expression. The expression is evaluated once, and compared against each <tt><b>Case</b></tt>, in order, until a matching expression is found. The code inside the matching Case branch is executed, and the program skips down to the end of the <tt><b>Select Case</b></tt> block. <tt><b>Case Else</b></tt> matches any case not already matched, so if there is a <tt><b>Case Else</b></tt>, at least one <tt><b>Case</b></tt> is guaranteed to be executed. If no <tt><b>Case</b></tt>s match, the whole <tt><b>Select Case</b></tt> block will be skipped.<br \>
+<br \>
+<tt><b>End Select</b></tt> is used to close the <tt><b>Select Case...End Select</b></tt> block.<br \>
+<br \>
+Note for C users: In FreeBASIC, <tt><b>Select Case</b></tt> works like a <tt>switch</tt> block where all cases have a <tt>break</tt> at the end. As there is no fall-through, multiple options must be put in an expression list in a single <tt><b>Case</b></tt>.<br \>
+<br \>
+Besides integer types, floating point and string expressions are also supported with the first syntax.  <br \>
+<br \>
+Syntax of an expression list:<br \>
+<tt>{ <i>expression</i> | <i>expression</i> <b>To</b> <i>expression</i> | <b>Is</b> <i>relational operator</i> <i>expression</i> }[, ...]</tt><br \>
+<br \>
+<ul><li> <tt><i>expr</i></tt>: evaluates <tt><i>expr</i></tt>, and compares for equality with the original expression.  If they are equal, then a match has been found.  This could be considered as a shorthand for "<tt><b>Is</b> = <i>expr</i></tt>" (see below).<br \>
+<li> <tt><i>expr1</i> <b>To</b> <i>expr2</i></tt>: evaluates <tt><i>expr1</i></tt> and checks to see if it is less than or equal to the original expression.  If so, it evaluates <tt><i>expr2</i></tt>, and checks to see if it is greater than or equal to the original expression.  If so, then a match has been found.<br \>
+<li> <tt><b>Is</b> <i>relational_operator</i> <i>expr</i></tt>: evaluates <tt><i>expr</i></tt>, and compares the original operation against it, using the supplied <tt><i>relational_operator</i></tt> (<tt>=</tt>, <tt>&gt;</tt>, <tt>&lt;</tt>, <tt>&lt;&gt;</tt>, <tt>&lt;=</tt>, <tt>&gt;=</tt>).  If the comparison is true, then a match has been found.<br \>
+<br \>
+</ul>Multiple checks can be made in each <tt><b>Case</b></tt>, by separating them by a comma (<tt>,</tt>).  Once a match is found, the program finishes its checks, and goes on to execute the code statements for that <tt><b>Case</b></tt> block.  No further expressions are evaluated or checked.<br \>
+<br \>
+example of expression lists:<br \>
+<div class="fb_table"><table><tr><td>Case 1 </td><td>constant</td></tr><tr><td>Case 5.4 To 10.1</td><td>range</td></tr><tr><td>Case Is &gt; 3</td><td>bigger than-smaller than</td></tr><tr><td>Case 1, 3, 5, 7 to 9</td><td>match against a set of values</td></tr><tr><td>Case x </td><td>value of a variable</td></tr></table></div><br \>
+<br \>
+If <tt><b>As Const</b></tt> is used, only <tt><a href="KeyPgInteger.html">Integer</a></tt> constants can be evaluated and the expression list supports single constants and enumerations only. "<tt><b>To</b></tt>" ranges are supported, but "<tt><b>Is</b></tt>" relational operators are not.<br \>
+<br \>
+With <tt><b>As Const</b></tt>, a jump table is created to contain the full range of integer <tt><b>Case</b></tt>s handled.  This allows <tt><b>Select Case As Const</b></tt> to be faster than <tt><b>Select Case</b></tt>.  However, the size of the range of values is limited, and the largest value in the range may be no higher than the smallest value + 4096.<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="key">Dim</span>&nbsp;<span class="wrd">choice</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+<br />
+<span class="key">Input</span>&nbsp;<span class="quo">"Choose&nbsp;a&nbsp;number&nbsp;between&nbsp;1&nbsp;and&nbsp;10:&nbsp;"</span><span class="oth">;</span>&nbsp;<span class="wrd">choice</span><br />
+<br />
+<span class="key">Select</span>&nbsp;<span class="key">Case</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Const</span>&nbsp;<span class="wrd">choice</span><br />
+<span class="key">Case</span>&nbsp;<span class="num">1</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"number&nbsp;is&nbsp;1"</span><br />
+<span class="key">Case</span>&nbsp;<span class="num">2</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"number&nbsp;is&nbsp;2"</span><br />
+<span class="key">Case</span>&nbsp;<span class="num">3</span><span class="oth">,</span>&nbsp;<span class="num">4</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"number&nbsp;is&nbsp;3&nbsp;or&nbsp;4"</span><br />
+<span class="key">Case</span>&nbsp;<span class="num">5</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">10</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"number&nbsp;is&nbsp;in&nbsp;the&nbsp;range&nbsp;of&nbsp;5&nbsp;to&nbsp;10"</span><br />
+<span class="key">Case</span>&nbsp;<span class="key">Else</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"number&nbsp;is&nbsp;outside&nbsp;the&nbsp;1-10&nbsp;range"</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Select</span><br />
+</div></tt><br />
+<br \>
+</div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><b>Select Case As Const</b></tt> did not exist in QB<br \>
+<li> in an "<tt><i>expr1</i> TO <i>expr2</i></tt>" case, QB would always evaluate both expressions, even if <tt><i>expr1</i></tt> was higher than the original expression.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgIfthen.html">If...Then</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

@@ -1,0 +1,174 @@
+<html>
+<head>
+<title>Constructor</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Constructor</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Called automatically when a class or user defined type is created<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<a href="KeyPgType.html">Type</a> <i>typename</i><br \>
+<div class="fb_indent"><a href="KeyPgDeclare.html">Declare</a> <b>Constructor</b> ( )<br \>
+<a href="KeyPgDeclare.html">Declare</a> <b>Constructor</b> ( [ <a href="KeyPgByref.html">ByRef</a> | <a href="KeyPgByval.html">ByVal</a> ] <i>parameter</i> <a href="KeyPgAs.html">As</a> <a href="DataType.html">datatype</a> [ = <i>default</i> ] [, ... ] )<br \>
+</div>End Type<br \>
+<br \>
+<b>Constructor</b> <i>typename</i> ( [ <i>parameters</i> ] )<br \>
+<div class="fb_indent"><i>statements</i><br \>
+</div><b>End Constructor</b><br \>
+</tt><br \>
+</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+<tt><i>typename</i></tt> <br \>
+<div class="fb_indent">name of the <tt><a href="KeyPgType.html">Type</a></tt> of <tt><a href="KeyPgClass.html">Class</a></tt><br \>
+<br \>
+</div></div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+<tt><b>Constructor</b></tt> methods are called when a user defined <tt><a href="KeyPgType.html">Type</a></tt> or <tt><a href="KeyPgClass.html">Class</a></tt> variable is created.<br \>
+<br \>
+<tt><i>typename</i></tt> is the name of the type for which the <tt><b>Constructor</b></tt> method is declared and defined.  Name resolution for <tt><i>typename</i></tt> follows the same rules as procedures when used in a <tt><a href="KeyPgNamespace.html">Namespace</a></tt>.<br \>
+<br \>
+More than one constructor may exist for a type or class.  The exact constructor method called depends on the <tt><i>parameter</i></tt> signature matched when the variable is initialized.  More than one <tt><i>parameter</i></tt> may exist in a constructor method declaration.<br \>
+<br \>
+A constructor method is passed a hidden <tt><a href="KeyPgThis.html">This</a></tt> parameter having the same type as <tt><i>typename</i></tt>.  <tt><a href="KeyPgThis.html">This</a></tt> is optionally used to access the fields of the <tt><a href="KeyPgType.html">Type</a></tt> or <tt><a href="KeyPgClass.html">Class</a></tt> which is to be initialized in the <tt><b>Constructor</b></tt> method.<br \>
+<br \>
+Chaining of constructors in nested types is supported.  Any fields that have their own default constructor are called first.<br \>
+<br \>
+Constructors are called when declaring global or local static instances of <tt><i>typename</i></tt> and when allocating <tt><i>typename</i></tt> dynamically using the <tt><a href="KeyPgOpNew.html">New</a></tt> operator.<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+Simple constructor example for beginners.<br \>
+<tt><div class="freebasic">
+<span class="key">Type</span>&nbsp;<span class="wrd">MyObj</span><br />
+&nbsp;&nbsp;<span class="wrd">Foo</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="key">Ptr</span><br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;Constructor&nbsp;to&nbsp;create&nbsp;our&nbsp;integer,&nbsp;and&nbsp;set&nbsp;its&nbsp;value.</span><br />
+&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Constructor</span><span class="oth">(</span>&nbsp;<span class="key">ByVal</span>&nbsp;<span class="wrd">DefVal</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;Destroy&nbsp;our&nbsp;integer&nbsp;on&nbsp;object&nbsp;deletion.</span><br />
+&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Destructor</span><span class="oth">()</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Type</span><br />
+<br />
+<span class="key">Constructor</span>&nbsp;<span class="wrd">MyObj</span><span class="oth">(</span>&nbsp;<span class="key">ByVal</span>&nbsp;<span class="wrd">DefVal</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"Creating&nbsp;a&nbsp;new&nbsp;integer&nbsp;in&nbsp;MyObj!"</span><br />
+&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"The&nbsp;Integer&nbsp;will&nbsp;have&nbsp;the&nbsp;value&nbsp;of:&nbsp;"</span>&nbsp;<span class="oth">&amp;</span>&nbsp;<span class="wrd">DefVal</span><br />
+&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">""</span><br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;Create&nbsp;a&nbsp;pointer,&nbsp;and&nbsp;set&nbsp;its&nbsp;value&nbsp;to&nbsp;the&nbsp;one&nbsp;passed&nbsp;to&nbsp;the</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;Constructor.</span><br />
+&nbsp;&nbsp;<span class="wrd">This.Foo</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">New</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;<span class="oth">*</span><span class="wrd">This.Foo</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">DefVal</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Constructor</span><br />
+<br />
+<span class="key">Destructor</span>&nbsp;<span class="wrd">MyObj</span><span class="oth">()</span><br />
+&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"Deleting&nbsp;our&nbsp;Integer&nbsp;in&nbsp;MyObj!"</span><br />
+&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">""</span><br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;Delete&nbsp;the&nbsp;pointer&nbsp;we&nbsp;created&nbsp;in&nbsp;MyObj.</span><br />
+&nbsp;&nbsp;<span class="key">Delete</span>&nbsp;<span class="wrd">This.Foo</span><br />
+&nbsp;&nbsp;<span class="wrd">This.Foo</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Destructor</span><br />
+<br />
+<br />
+<span class="key">Scope</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;Create&nbsp;a&nbsp;MyObj&nbsp;type&nbsp;object</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;Send&nbsp;the&nbsp;value&nbsp;of&nbsp;'10'&nbsp;to&nbsp;the&nbsp;constructor</span><br />
+&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">MyObj</span>&nbsp;<span class="wrd">Bar</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">10</span><br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;See&nbsp;if&nbsp;the&nbsp;integer's&nbsp;been&nbsp;created.&nbsp;&nbsp;Print&nbsp;its&nbsp;value.</span><br />
+&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"The&nbsp;Value&nbsp;of&nbsp;our&nbsp;integer&nbsp;is:&nbsp;"</span>&nbsp;<span class="oth">&amp;</span>&nbsp;<span class="oth">*</span><span class="wrd">Bar.Foo</span><br />
+&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">""</span><br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;<span class="key">Sleep</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Scope</span><br />
+&nbsp;&nbsp;<span class="com">''&nbsp;We've&nbsp;just&nbsp;gone&nbsp;out&nbsp;of&nbsp;a&nbsp;scope.&nbsp;&nbsp;The&nbsp;Destructor&nbsp;should&nbsp;be&nbsp;called&nbsp;now</span><br />
+&nbsp;&nbsp;<span class="com">''&nbsp;Because&nbsp;our&nbsp;objects&nbsp;are&nbsp;being&nbsp;deleted.</span><br />
+<span class="key">Sleep</span><br />
+</div></tt><br />
+More advanced construction example, showing constructor overloading among other things.<br \>
+<tt><div class="freebasic">
+<span class="key">Type</span>&nbsp;<span class="wrd">sample</span><br />
+<br />
+&nbsp;&nbsp;<span class="wrd">_text</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span><br />
+<br />
+&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Constructor</span>&nbsp;<span class="oth">()</span><br />
+&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Constructor</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="wrd">a</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Constructor</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="wrd">a</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Single</span>&nbsp;&nbsp;<span class="oth">)</span>&nbsp;<br />
+&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Constructor</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="wrd">a</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span><span class="oth">,</span>&nbsp;<span class="wrd">b</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Byte</span>&nbsp;<span class="oth">)</span>&nbsp;<br />
+<br />
+&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Operator</span>&nbsp;<span class="key">Cast</span>&nbsp;<span class="oth">()</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span><br />
+<br />
+<span class="key">End</span>&nbsp;<span class="key">Type</span><br />
+<br />
+<span class="key">Constructor</span>&nbsp;<span class="wrd">sample</span>&nbsp;<span class="oth">()</span><br />
+&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"constructor&nbsp;sample&nbsp;()"</span><br />
+&nbsp;&nbsp;<span class="key">Print</span><br />
+&nbsp;&nbsp;<span class="wrd">this._text</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="quo">"Empty"</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Constructor</span><br />
+<br />
+<span class="key">Constructor</span>&nbsp;<span class="wrd">sample</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="wrd">a</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"constructor&nbsp;sample&nbsp;(&nbsp;a&nbsp;as&nbsp;integer&nbsp;)"</span><br />
+&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"&nbsp;&nbsp;a&nbsp;=&nbsp;"</span><span class="oth">;</span>&nbsp;<span class="wrd">a</span><br />
+&nbsp;&nbsp;<span class="key">Print</span><br />
+&nbsp;&nbsp;<span class="wrd">this._text</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">Str</span><span class="oth">(</span><span class="wrd">a</span><span class="oth">)</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Constructor</span><br />
+<br />
+<span class="key">Constructor</span>&nbsp;<span class="wrd">sample</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="wrd">a</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Single</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"constructor&nbsp;sample&nbsp;(&nbsp;a&nbsp;as&nbsp;single&nbsp;)"</span><br />
+&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"&nbsp;&nbsp;a&nbsp;=&nbsp;"</span><span class="oth">;</span>&nbsp;<span class="wrd">a</span><br />
+&nbsp;&nbsp;<span class="key">Print</span><br />
+&nbsp;&nbsp;<span class="wrd">this._text</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">Str</span><span class="oth">(</span><span class="wrd">a</span><span class="oth">)</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Constructor</span><br />
+<br />
+<span class="key">Constructor</span>&nbsp;<span class="wrd">sample</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="wrd">a</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span><span class="oth">,</span>&nbsp;<span class="wrd">b</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Byte</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"constructor&nbsp;sample&nbsp;(&nbsp;a&nbsp;as&nbsp;string,&nbsp;b&nbsp;as&nbsp;byte&nbsp;)"</span><br />
+&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"&nbsp;&nbsp;a&nbsp;=&nbsp;"</span><span class="oth">;</span>&nbsp;<span class="wrd">a</span><br />
+&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"&nbsp;&nbsp;b&nbsp;=&nbsp;"</span><span class="oth">;</span>&nbsp;<span class="wrd">b</span><br />
+&nbsp;&nbsp;<span class="key">Print</span><br />
+&nbsp;&nbsp;<span class="wrd">this._text</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">Str</span><span class="oth">(</span><span class="wrd">a</span><span class="oth">)</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="quo">","</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="key">Str</span><span class="oth">(</span><span class="wrd">b</span><span class="oth">)</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Constructor</span><br />
+<br />
+<span class="key">Operator</span>&nbsp;<span class="wrd">sample.cast</span>&nbsp;<span class="oth">()</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span><br />
+&nbsp;&nbsp;<span class="key">Return</span>&nbsp;<span class="wrd">this._text</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Operator</span><br />
+<br />
+<span class="key">Print</span>&nbsp;<span class="quo">"Creating&nbsp;x1"</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">x1</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">sample</span><br />
+<br />
+<span class="key">Print</span>&nbsp;<span class="quo">"Creating&nbsp;x2"</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">x2</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">sample</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">1</span><br />
+<br />
+<span class="key">Print</span>&nbsp;<span class="quo">"Creating&nbsp;x3"</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">x3</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">sample</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">99.9</span><br />
+<br />
+<span class="key">Print</span>&nbsp;<span class="quo">"Creating&nbsp;x4"</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">x4</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">sample</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">sample</span><span class="oth">(</span>&nbsp;<span class="quo">"aaa"</span><span class="oth">,</span>&nbsp;<span class="num">1</span>&nbsp;<span class="oth">)</span><br />
+<br />
+<span class="key">Print</span>&nbsp;<span class="quo">"Values:"</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"&nbsp;&nbsp;x1&nbsp;=&nbsp;"</span><span class="oth">;</span>&nbsp;<span class="wrd">x1</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"&nbsp;&nbsp;x2&nbsp;=&nbsp;"</span><span class="oth">;</span>&nbsp;<span class="wrd">x2</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"&nbsp;&nbsp;x3&nbsp;=&nbsp;"</span><span class="oth">;</span>&nbsp;<span class="wrd">x3</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"&nbsp;&nbsp;x4&nbsp;=&nbsp;"</span><span class="oth">;</span>&nbsp;<span class="wrd">x4</span><br />
+</div></tt><br />
+</div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
+<ul><li> Object-related features are supported only in the <i><a href="CompilerOptlang.html">-lang fb</a></i> option<br \>
+<br \>
+</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> New to FreeBASIC<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgType.html">Class</a></tt><br \>
+<li> <tt><a href="KeyPgModuleConstructor.html">Constructor (Module)</a></tt><br \>
+<li> <tt><a href="KeyPgOpNew.html">New</a></tt><br \>
+<li> <tt><a href="KeyPgDestructor.html">Destructor</a></tt><br \>
+<li> <tt><a href="KeyPgType.html">Type</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

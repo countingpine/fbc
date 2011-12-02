@@ -1,0 +1,177 @@
+<html>
+<head>
+<title>Dynamic Arrays in Types</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Dynamic Arrays in Types</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	<i>Written by <a href="WikiRick.html">rdc</a></i><br \>
+<br \>
+<div class="fb_header"> Introduction </div><br \>
+<br \>
+A dynamic array in a type definition is a very useful feature, but FreeBasic doesn't support it. Or rather, it doesn't support it directly. However, you can create dynamic arrays by using pointers and the associated memory functions.<br \>
+<br \>
+An array is simply a contiguous block of memory that holds a certain data type. Arrays in FreeBasic use an array descriptor to describe the data contained within the array, and you can use this same technique to build a dynamic array within a type. The two elements you need within your type-def are a pointer to a particular data type, and a size indicator. <br \>
+<br \>
+You can then use the ptr field to allocate a block of memory to the needed size, and save that size in the size indicator field. The size field is used to tell you how many elements are currently in the array. Once the array has been initialized, you can then use pointer indexing to access each element in the array.<br \>
+<br \>
+<div class="fb_header"> Getting the Point(er) in Code </div><br \>
+<br \>
+The following program illustrates the steps in creating, initializing and resizing a dynamic type-def array.<br \>
+<tt><div class="freebasic">
+<span class="com">'Define&nbsp;type:</span><br />
+<span class="com">'size&nbsp;is&nbsp;current&nbsp;size&nbsp;of&nbsp;array</span><br />
+<span class="com">'darray&nbsp;will&nbsp;contain&nbsp;array&nbsp;data</span><br />
+<span class="key">Type</span>&nbsp;<span class="wrd">DType</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">size</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">darray</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="key">Ptr</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Type</span><br />
+<br />
+<span class="com">'Create&nbsp;an&nbsp;instance&nbsp;of&nbsp;type</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">myType</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DType</span><br />
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="wrd">i</span><span class="oth">,</span>&nbsp;<span class="wrd">tmp</span><br />
+<br />
+<span class="com">'Create&nbsp;enough&nbsp;space&nbsp;for&nbsp;elements</span><br />
+<span class="wrd">myType.darray</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">CAllocate</span><span class="oth">(</span><span class="num">5</span><span class="oth">,</span>&nbsp;<span class="key">SizeOf</span><span class="oth">(</span><span class="key">Integer</span><span class="oth">))</span><br />
+<span class="com">'Set&nbsp;the&nbsp;length&nbsp;of&nbsp;the&nbsp;array</span><br />
+<span class="com">'in&nbsp;the&nbsp;array&nbsp;size&nbsp;indicator</span><br />
+<span class="wrd">myType.size</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">5</span><br />
+<br />
+<span class="com">'Load&nbsp;data&nbsp;into&nbsp;array</span><br />
+<span class="key">For</span>&nbsp;<span class="wrd">i</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span>&nbsp;<span class="key">To</span>&nbsp;<span class="wrd">myType.Size</span>&nbsp;<span class="oth">-</span>&nbsp;<span class="num">1</span>&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">myType.darray</span><span class="oth">[</span><span class="wrd">i</span><span class="oth">]</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">i</span><br />
+<span class="key">Next</span><br />
+<br />
+<span class="com">'Print&nbsp;data</span><br />
+<span class="key">For</span>&nbsp;<span class="wrd">i</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span>&nbsp;<span class="key">To</span>&nbsp;<span class="wrd">myType.Size</span>&nbsp;<span class="oth">-</span>&nbsp;<span class="num">1</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"darray["</span><span class="oth">;</span><span class="wrd">i</span><span class="oth">;</span><span class="quo">"&nbsp;]:"</span><span class="oth">;</span><span class="wrd">myType.darray</span><span class="oth">[</span><span class="wrd">i</span><span class="oth">]</span><br />
+<span class="key">Next</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"Press&nbsp;any&nbsp;key..."</span><br />
+<span class="key">Sleep</span><br />
+<span class="key">Print</span><br />
+<br />
+<span class="com">'Save&nbsp;the&nbsp;current&nbsp;array&nbsp;size</span><br />
+<span class="wrd">tmp</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">myType.size</span><br />
+<span class="com">'Now&nbsp;resize&nbsp;the&nbsp;array</span><br />
+<span class="wrd">myType.darray</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">Reallocate</span><span class="oth">(</span><span class="wrd">myType.darray</span><span class="oth">,</span>&nbsp;<span class="num">10</span><span class="oth">)</span><br />
+<span class="com">'Set&nbsp;the&nbsp;length&nbsp;indicator</span><br />
+<span class="wrd">myType.size</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">10</span><br />
+<br />
+<span class="com">'Load&nbsp;in&nbsp;data&nbsp;into&nbsp;new&nbsp;allocation</span><br />
+<span class="key">For</span>&nbsp;<span class="wrd">i</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">tmp</span>&nbsp;<span class="oth">-</span>&nbsp;<span class="num">1</span>&nbsp;<span class="key">To</span>&nbsp;<span class="wrd">myType.Size</span>&nbsp;<span class="oth">-</span>&nbsp;<span class="num">1</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">myType.darray</span><span class="oth">[</span><span class="wrd">i</span><span class="oth">]</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">i</span><br />
+<span class="key">Next</span><br />
+<br />
+<span class="com">'Print&nbsp;out&nbsp;contents</span><br />
+<span class="key">For</span>&nbsp;<span class="wrd">i</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span>&nbsp;<span class="key">To</span>&nbsp;<span class="wrd">myType.Size</span>&nbsp;<span class="oth">-</span>&nbsp;<span class="num">1</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"darray["</span><span class="oth">;</span><span class="wrd">i</span><span class="oth">;</span><span class="quo">"&nbsp;]:"</span><span class="oth">;</span><span class="wrd">myType.darray</span><span class="oth">[</span><span class="wrd">i</span><span class="oth">]</span><br />
+<span class="key">Next</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"Press&nbsp;any&nbsp;key..."</span><br />
+<span class="key">Sleep</span><br />
+<br />
+<span class="com">'Free&nbsp;allocated&nbsp;space</span><br />
+<span class="key">Deallocate</span>&nbsp;<span class="wrd">myType.darray</span><br />
+<br />
+<span class="key">End</span><br />
+</div></tt><br />
+<br \>
+<div class="fb_header"> How it Works </div><br \>
+<br \>
+The first step is, of course, to define the type-def:<br \>
+<tt><div class="freebasic">
+<span class="key">Type</span>&nbsp;<span class="wrd">DType</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">size</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">darray</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="key">Ptr</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Type</span><br />
+</div></tt><br />
+<br \>
+Since this is just an example there are only two elements within the type, a size indicator and the array pointer. Notice that the array pointer is defined as an Integer ptr. When you define a pointer to a particular type, you are creating a "typed" pointer. The compiler can use this type information to check to make sure the values being placed into the array are valid, and will also use this information for pointer arithmetic.<br \>
+<br \>
+The next step is to define the working variables.<br \>
+<tt><div class="freebasic">
+<span class="key">Dim</span>&nbsp;<span class="wrd">myType</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">DType</span><br />
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="wrd">i</span><span class="oth">,</span>&nbsp;<span class="wrd">tmp</span><br />
+</div></tt><br />
+Here an instance of the type is created, as well as some working variables that are used in the following code. WARNING: You must initialize the array pointer before you can use it; using an uninitialized ptr can cause program crashes, system lockups and all sorts of bad things. <br \>
+<tt><div class="freebasic">
+<span class="wrd">myType.darray</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">CAllocate</span><span class="oth">(</span><span class="num">5</span><span class="oth">,</span>&nbsp;<span class="key">SizeOf</span><span class="oth">(</span><span class="key">Integer</span><span class="oth">))</span><br />
+<span class="wrd">myType.size</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">5</span><br />
+</div></tt><br />
+These two lines of code initialize the array pointer to hold 5 integers. Callocate is used to allocate the memory segment, since Callocate will initialize the segment to zeros.<br \>
+<br \>
+The size field stores the current length of the array. Now, of course, you could calculate the size of the array by simply dividing the number of bytes in the allocation by the size of an integer, but using a size indicator within the type is much cleaner and saves you a calculation in your program.<br \>
+<tt><div class="freebasic">
+<span class="key">For</span>&nbsp;<span class="wrd">i</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span>&nbsp;<span class="key">To</span>&nbsp;<span class="wrd">myType.Size</span>&nbsp;<span class="oth">-</span>&nbsp;<span class="num">1</span>&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">myType.darray</span><span class="oth">[</span><span class="wrd">i</span><span class="oth">]</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">i</span><br />
+<span class="key">Next</span><br />
+</div></tt><br />
+This section of code loads the array with some values. You can see why saving the size of the array simplifies the coding process. Since the array is a typed pointer, you can access the array using the pointer indexing method, which is almost like accessing a predefined array.<br \>
+<tt><div class="freebasic">
+<span class="key">For</span>&nbsp;<span class="wrd">i</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span>&nbsp;<span class="key">To</span>&nbsp;<span class="wrd">myType.Size</span>&nbsp;<span class="oth">-</span>&nbsp;<span class="num">1</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"darray["</span><span class="oth">;</span><span class="wrd">i</span><span class="oth">;</span><span class="quo">"&nbsp;]:"</span><span class="oth">;</span><span class="wrd">myType.darray</span><span class="oth">[</span><span class="wrd">i</span><span class="oth">]</span><br />
+<span class="key">Next</span><br />
+</div></tt><br />
+This section simply prints out the values using the same method that was used to load the array.<br \>
+<br \>
+Of course, this should be a dynamic array, so you should be able to resize the array, and this is exactly what the next section of code will do.<br \>
+<tt><div class="freebasic">
+<span class="wrd">tmp</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">myType.size</span><br />
+<span class="wrd">myType.darray</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">Reallocate</span><span class="oth">(</span><span class="wrd">myType.darray</span><span class="oth">,</span>&nbsp;<span class="num">10</span><span class="oth">)</span><br />
+<span class="wrd">myType.size</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">10</span><br />
+</div></tt><br />
+The first line of code saves the current size of the array so that the new memory segment can be initialized while not overwriting any existing data. You will see this in a moment.<br \>
+<br \>
+The second line uses the Reallocate function to resize the memory segment, that is, resize the array. In this case, the array is being made larger; you could of course make the array smaller. If you were to make the array smaller, any data not in the new segment would be lost, as you would expect.<br \>
+<br \>
+The last line of code above saves the new array size in the size indicator.<br \>
+<tt><div class="freebasic">
+<span class="key">For</span>&nbsp;<span class="wrd">i</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">tmp</span>&nbsp;<span class="oth">-</span>&nbsp;<span class="num">1</span>&nbsp;<span class="key">To</span>&nbsp;<span class="wrd">myType.Size</span>&nbsp;<span class="oth">-</span>&nbsp;<span class="num">1</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">myType.darray</span><span class="oth">[</span><span class="wrd">i</span><span class="oth">]</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">i</span><br />
+<span class="key">Next</span><br />
+</div></tt><br />
+Here, you can see why the old array size was saved. In the For statement, the initialization procedure starts from the old index and iterates through the newly added indexes, storing data within the memory segment. This is like using the Redim Preserve statement on a normal array.<br \>
+<tt><div class="freebasic">
+<span class="key">For</span>&nbsp;<span class="wrd">i</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span>&nbsp;<span class="key">To</span>&nbsp;<span class="wrd">myType.Size</span>&nbsp;<span class="oth">-</span>&nbsp;<span class="num">1</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"darray["</span><span class="oth">;</span><span class="wrd">i</span><span class="oth">;</span><span class="quo">"&nbsp;]:"</span><span class="oth">;</span><span class="wrd">myType.darray</span><span class="oth">[</span><span class="wrd">i</span><span class="oth">]</span><br />
+<span class="key">Next</span><br />
+</div></tt><br />
+This code section simply prints out the new values. <br \>
+<tt><div class="freebasic">
+<span class="key">Deallocate</span>&nbsp;<span class="wrd">myType.darray</span><br />
+</div></tt><br />
+This is vitally important. You should always deallocate any allocated memory that you have created in your program to prevent memory leaks.<br \>
+<br \>
+When you run the program you should see the following output:<br \>
+<tt><div class="freebasic">
+<span class="wrd">darray</span><span class="oth">[</span>&nbsp;<span class="num">0</span>&nbsp;<span class="oth">]:</span>&nbsp;<span class="num">0</span><br />
+<span class="wrd">darray</span><span class="oth">[</span>&nbsp;<span class="num">1</span>&nbsp;<span class="oth">]:</span>&nbsp;<span class="num">1</span><br />
+<span class="wrd">darray</span><span class="oth">[</span>&nbsp;<span class="num">2</span>&nbsp;<span class="oth">]:</span>&nbsp;<span class="num">2</span><br />
+<span class="wrd">darray</span><span class="oth">[</span>&nbsp;<span class="num">3</span>&nbsp;<span class="oth">]:</span>&nbsp;<span class="num">3</span><br />
+<span class="wrd">darray</span><span class="oth">[</span>&nbsp;<span class="num">4</span>&nbsp;<span class="oth">]:</span>&nbsp;<span class="num">4</span><br />
+<span class="wrd">Press</span>&nbsp;<span class="key">Any</span>&nbsp;<span class="wrd">key...</span><br />
+<br />
+<span class="wrd">darray</span><span class="oth">[</span>&nbsp;<span class="num">0</span>&nbsp;<span class="oth">]:</span>&nbsp;<span class="num">0</span><br />
+<span class="wrd">darray</span><span class="oth">[</span>&nbsp;<span class="num">1</span>&nbsp;<span class="oth">]:</span>&nbsp;<span class="num">1</span><br />
+<span class="wrd">darray</span><span class="oth">[</span>&nbsp;<span class="num">2</span>&nbsp;<span class="oth">]:</span>&nbsp;<span class="num">2</span><br />
+<span class="wrd">darray</span><span class="oth">[</span>&nbsp;<span class="num">3</span>&nbsp;<span class="oth">]:</span>&nbsp;<span class="num">3</span><br />
+<span class="wrd">darray</span><span class="oth">[</span>&nbsp;<span class="num">4</span>&nbsp;<span class="oth">]:</span>&nbsp;<span class="num">4</span><br />
+<span class="wrd">darray</span><span class="oth">[</span>&nbsp;<span class="num">5</span>&nbsp;<span class="oth">]:</span>&nbsp;<span class="num">5</span><br />
+<span class="wrd">darray</span><span class="oth">[</span>&nbsp;<span class="num">6</span>&nbsp;<span class="oth">]:</span>&nbsp;<span class="num">6</span><br />
+<span class="wrd">darray</span><span class="oth">[</span>&nbsp;<span class="num">7</span>&nbsp;<span class="oth">]:</span>&nbsp;<span class="num">7</span><br />
+<span class="wrd">darray</span><span class="oth">[</span>&nbsp;<span class="num">8</span>&nbsp;<span class="oth">]:</span>&nbsp;<span class="num">8</span><br />
+<span class="wrd">darray</span><span class="oth">[</span>&nbsp;<span class="num">9</span>&nbsp;<span class="oth">]:</span>&nbsp;<span class="num">9</span><br />
+<span class="wrd">Press</span>&nbsp;<span class="key">Any</span>&nbsp;<span class="wrd">key...</span><br />
+</div></tt><br />
+The first print out shows the original array. The second print out shows the newly resized array.<br \>
+
+</div>
+</div> 
+</div> 
+</body>
+</html>

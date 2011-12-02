@@ -1,0 +1,79 @@
+<html>
+<head>
+<title>ScreenInfo</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">ScreenInfo</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Retrieves information about current video mode or the desktop.<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgSub.html">Sub</a> <b>ScreenInfo</b> ( <a href="KeyPgByref.html">ByRef</a> <i>w</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a> = 0, <a href="KeyPgByref.html">ByRef</a> <i>h</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a> = 0, <a href="KeyPgByref.html">ByRef</a> <i>depth</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a> = 0, <a href="KeyPgByref.html">ByRef</a> <i>bpp</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a> = 0, <a href="KeyPgByref.html">ByRef</a> <i>pitch</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a> = 0, <a href="KeyPgByref.html">ByRef</a> <i>rate</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a> = 0, <a href="KeyPgByref.html">ByRef</a> <i>driver</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgString.html">String</a> = "</tt><tt>" )<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
+<b>ScreenInfo</b> [ <i>w</i> ] [, [ <i>h</i> ] [, [ <i>depth</i> ] [ , [ <i>bpp</i> ] [ , [ <i>pitch</i> ] [ , [ <i>rate</i> ] [, <i>driver</i> ]]]]]<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+<tt><i>w</i></tt><br \>
+<div class="fb_indent">Width.<br \>
+</div><tt><i>h</i></tt><br \>
+<div class="fb_indent">Height.<br \>
+</div><tt><i>depth</i></tt><br \>
+<div class="fb_indent">Color depth in bits.<br \>
+</div><tt><i>bpp</i></tt><br \>
+<div class="fb_indent">Bytes per pixel.<br \>
+</div><tt><i>pitch</i></tt><br \>
+<div class="fb_indent">Bytes per scan line.<br \>
+</div><tt><i>rate</i></tt><br \>
+<div class="fb_indent">Refresh rate.<br \>
+</div><tt><i>driver</i></tt><br \>
+<div class="fb_indent">Driver name.<br \>
+<br \>
+</div></div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+This function can be useful to get current mode informations like graphics driver name, color depth, screen size and more.<br \>
+<br \>
+If <tt><b>ScreenInfo</b></tt> is called when no graphics mode is set, it returns the information about the desktop.<br \>
+<br \>
+Here's a description of available fields:<br \>
+<br \>
+<div class="fb_table"><table><tr><td>w</td><td>Width of the screen in pixels</td></tr><tr><td>h</td><td>Height of the screen in pixels</td></tr><tr><td>depth</td><td>Current pixel format bits per pixel: this can be 1, 2, 4, 8, 16, or 32</td></tr><tr><td>pitch</td><td>Size of a framebuffer row in bytes</td></tr><tr><td>rate</td><td>Current refresh rate, or 0 if unknown</td></tr><tr><td>driver</td><td>Name of current graphics driver in use, like DirectX or X11</td></tr></table></div><br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="key">Dim</span>&nbsp;<span class="wrd">w</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">,</span>&nbsp;<span class="wrd">h</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">depth</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">driver_name</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span><br />
+<br />
+<span class="key">Screen</span>&nbsp;<span class="num">15</span><span class="oth">,</span>&nbsp;<span class="num">32</span>&nbsp;<br />
+<span class="com">'&nbsp;Obtain&nbsp;info&nbsp;about&nbsp;current&nbsp;mode&nbsp;</span><br />
+<span class="key">ScreenInfo</span>&nbsp;<span class="wrd">w</span><span class="oth">,</span>&nbsp;<span class="wrd">h</span><span class="oth">,</span>&nbsp;<span class="wrd">depth</span><span class="oth">,,,,</span><span class="wrd">driver_name</span><br />
+<span class="key">Print</span>&nbsp;<span class="key">Str</span><span class="oth">(</span><span class="wrd">w</span><span class="oth">)</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="quo">"x"</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="key">Str</span><span class="oth">(</span><span class="wrd">h</span><span class="oth">)</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="quo">"x"</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="key">Str</span><span class="oth">(</span><span class="wrd">depth</span><span class="oth">);</span>&nbsp;<br />
+<span class="key">Print</span>&nbsp;<span class="quo">"&nbsp;using&nbsp;"</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="wrd">driver_name</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="quo">"&nbsp;driver"</span>&nbsp;<br />
+<span class="key">Sleep</span>&nbsp;<br />
+<span class="com">'&nbsp;Quit&nbsp;graphics&nbsp;mode&nbsp;and&nbsp;obtain&nbsp;info&nbsp;about&nbsp;desktop&nbsp;</span><br />
+<span class="key">Screen</span>&nbsp;<span class="num">0</span>&nbsp;<br />
+<span class="key">ScreenInfo</span>&nbsp;<span class="wrd">w</span><span class="oth">,</span>&nbsp;<span class="wrd">h</span><span class="oth">,</span>&nbsp;<span class="wrd">depth</span>&nbsp;<br />
+<span class="key">Print</span>&nbsp;<span class="quo">"Desktop&nbsp;running&nbsp;at&nbsp;"</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="key">Str</span><span class="oth">(</span><span class="wrd">w</span><span class="oth">)</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="quo">"x"</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="key">Str</span><span class="oth">(</span><span class="wrd">h</span><span class="oth">)</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="quo">"x"</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="key">Str</span><span class="oth">(</span><span class="wrd">depth</span><span class="oth">);</span>&nbsp;<br />
+</div></tt><br />
+<br \>
+</div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
+<ul><li> Not available in the <i><a href="CompilerOptlang.html">-lang qb</a></i> dialect unless referenced with the alias <tt><b>__Screeninfo</b></tt>.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> New to FreeBASIC<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgScreengraphics.html">Screen (Graphics)</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

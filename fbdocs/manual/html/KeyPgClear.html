@@ -1,0 +1,75 @@
+<html>
+<head>
+<title>Clear</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Clear</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	<ul></ul>Clears or initializes some memory<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgSub.html">Sub</a> <b>Clear</b> <a href="KeyPgCdecl.html">cdecl</a> ( <a href="KeyPgByref.html">ByRef</a> <i>dst</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgAny.html">Any</a>, <a href="KeyPgByval.html">ByVal</a> <i>value</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a> = 0, <a href="KeyPgByval.html">ByVal</a> <i>bytes</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a> )<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
+<b>Clear</b>( <i>dst</i>, [<i>value</i>], <i>bytes</i> )<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+<tt><i>dst</i></tt><br \>
+<div class="fb_indent">starting address of some memory<br \>
+</div><tt><i>value</i></tt><br \>
+<div class="fb_indent">the value to set all bytes equal to<br \>
+</div><tt><i>bytes</i></tt><br \>
+<div class="fb_indent">number of bytes to clear<br \>
+<br \>
+</div></div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+<tt><b>Clear</b></tt> sets one or more bytes in memory to a certain value (the default value is zero (<tt>0</tt>) if not specified). The starting address is taken from a reference to a variable or array element.<br \>
+<br \>
+<b>NOTE:</b> In order to clear memory referenced by a <tt><a href="KeyPgPointer.html">Pointer</a></tt>, it must be dereferenced first.  Otherwise, <tt><b>Clear</b></tt> will try to clear the bytes at the <b>pointer variable</b>'s memory location.<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="com">'create&nbsp;an&nbsp;array&nbsp;with&nbsp;100&nbsp;elements</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">array</span><span class="oth">(</span><span class="num">0</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">99</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+<br />
+<span class="com">'clear&nbsp;the&nbsp;contents&nbsp;of&nbsp;the&nbsp;array&nbsp;to&nbsp;0,&nbsp;starting&nbsp;with&nbsp;the&nbsp;first&nbsp;element</span><br />
+<span class="key">Clear</span>&nbsp;<span class="wrd">array</span><span class="oth">(</span><span class="num">1</span><span class="oth">),</span>&nbsp;<span class="oth">,</span>&nbsp;<span class="num">100</span>&nbsp;<span class="oth">*</span>&nbsp;<span class="key">SizeOf</span><span class="oth">(</span><span class="key">Integer</span><span class="oth">)</span><br />
+<br />
+<br />
+<span class="com">'allocate&nbsp;20&nbsp;bytes&nbsp;of&nbsp;memory</span><br />
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Byte</span>&nbsp;<span class="key">Ptr</span>&nbsp;<span class="wrd">p</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">Allocate</span><span class="oth">(</span><span class="num">20</span><span class="oth">)</span><br />
+<br />
+<span class="com">'set&nbsp;each&nbsp;of&nbsp;the&nbsp;first&nbsp;ten&nbsp;bytes&nbsp;to&nbsp;0</span><br />
+<span class="key">Clear</span>&nbsp;<span class="oth">*</span><span class="wrd">p</span><span class="oth">,</span>&nbsp;<span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">10</span><br />
+<br />
+<span class="com">'set&nbsp;each&nbsp;of&nbsp;the&nbsp;next&nbsp;ten&nbsp;bytes&nbsp;to&nbsp;42</span><br />
+<span class="key">Clear</span>&nbsp;<span class="wrd">p</span><span class="oth">[</span><span class="num">10</span><span class="oth">],</span>&nbsp;<span class="num">42</span><span class="oth">,</span>&nbsp;<span class="num">10</span><br />
+<br />
+<span class="com">'check&nbsp;the&nbsp;values&nbsp;of&nbsp;the&nbsp;allocated&nbsp;bytes</span><br />
+<span class="key">For</span>&nbsp;<span class="wrd">i</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">19</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="wrd">i</span><span class="oth">,</span>&nbsp;<span class="wrd">p</span><span class="oth">[</span><span class="wrd">i</span><span class="oth">]</span><br />
+<span class="key">Next</span><br />
+<br />
+<span class="com">'deallocate&nbsp;memory</span><br />
+<span class="key">Deallocate</span>&nbsp;<span class="wrd">p</span><br />
+</div></tt><br />
+<br \>
+</div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> The behavior and usage is new to FreeBASIC<br \>
+<li> The keyword <tt>CLEAR</tt> was used in QB to erase all variables, close all files, and optionally change the stack size. This use is not supported in FreeBASIC.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgErase.html">Erase</a></tt><br \>
+<li> <tt><a href="KeyPgReset.html">Reset</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

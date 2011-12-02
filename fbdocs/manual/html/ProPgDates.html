@@ -1,0 +1,54 @@
+<html>
+<head>
+<title>Date Serials</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Date Serials</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	<br \>
+<div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+A date serial is a number that holds a date and time value in the same format used by PDS or VBDOS. The value is a count of the days from 0:00 AM of December 30,1899; it's mainly used for easy counting of the time between two dates.<br \>
+<br \>
+The date serial unit is one day and the fractional part represents the time of the day. If a date serial is written into an integer, the time is lost. FreeBASIC date serials are not limited to dates between 1753 and 2078 as in VBDOS. FreeBASIC date serial handling functions use <tt><a href="KeyPgDouble.html">Double</a></tt> arguments.<br \>
+<br \>
+FreeBASIC date serial handling functions require the inclusion of <tt>vbcompat.bi</tt> or <tt>datetime.bi</tt> in the source.<br \>
+<br \>
+A date serial can be created by the functions <tt><a href="KeyPgNow.html">Now</a></tt>, <tt><a href="KeyPgTimeserial.html">TimeSerial</a></tt>+<tt><a href="KeyPgDateSerial.html">DateSerial</a></tt>, or <tt><a href="KeyPgDateValue.html">DateValue</a></tt>+<tt><a href="KeyPgTimeValue.html">TimeValue</a></tt>.<br \>
+<br \>
+The functions <tt><a href="KeyPgYear.html">Year</a></tt>, <tt><a href="KeyPgMonth.html">Month</a></tt>, <tt><a href="KeyPgWeekday.html">Weekday</a></tt>, <tt><a href="KeyPgDay.html">Day</a></tt>, <tt><a href="KeyPgHour.html">Hour</a></tt>, <tt><a href="KeyPgMinute.html">Minute</a></tt>, <tt><a href="KeyPgSecond.html">Second</a></tt> allow to recover the different components of a date serial.<br \>
+<br \>
+The <tt><a href="KeyPgFormat.html">Format</a></tt> function has formatting expressions to print date serials in a human readable way.<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="def">#include&nbsp;"vbcompat.bi"<br />
+</span><span class="key">Dim</span>&nbsp;<span class="wrd">a</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Double</span><span class="oth">,</span>&nbsp;<span class="wrd">b</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Double</span><br />
+<br />
+<span class="wrd">a</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"The&nbsp;origin&nbsp;of&nbsp;the&nbsp;date&nbsp;serials&nbsp;is:"</span><br />
+<span class="key">Print</span>&nbsp;<span class="key">Format</span><span class="oth">(</span><span class="wrd">a</span><span class="oth">,</span>&nbsp;<span class="quo">"yyyy/mm/dd&nbsp;hh:mm:ss"</span><span class="oth">)</span><br />
+<span class="key">Print</span><br />
+<br />
+<span class="wrd">a</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">Now</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"The&nbsp;time&nbsp;now&nbsp;is:&nbsp;"</span><br />
+<span class="key">Print</span>&nbsp;<span class="key">Format</span><span class="oth">(</span><span class="wrd">a</span><span class="oth">,</span>&nbsp;<span class="quo">"yyyy/mm/dd&nbsp;hh:mm:ss"</span><span class="oth">)</span><br />
+<span class="key">Print</span><br />
+<br />
+<span class="wrd">b</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">DateSerial</span><span class="oth">(</span><span class="num">2000</span><span class="oth">,</span><span class="num">1</span><span class="oth">,</span><span class="num">1</span><span class="oth">)</span><br />
+<span class="key">Print</span>&nbsp;<span class="key">Int</span><span class="oth">(</span><span class="wrd">a</span><span class="oth">-</span><span class="wrd">b</span><span class="oth">)</span>&nbsp;<span class="oth">&amp;</span>&nbsp;<span class="quo">"&nbsp;days&nbsp;have&nbsp;passed&nbsp;since&nbsp;2000/01/01"</span><br />
+</div></tt><br />
+<br \>
+<br \>
+   <br \>
+</div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

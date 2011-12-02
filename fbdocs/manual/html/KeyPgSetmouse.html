@@ -1,0 +1,78 @@
+<html>
+<head>
+<title>SetMouse</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">SetMouse</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Sets the position and visibility of the mouse cursor<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgFunction.html">Function</a> <b>SetMouse</b> ( <a href="KeyPgByval.html">ByVal</a> <i>x</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a> = -1, <a href="KeyPgByval.html">ByVal</a> <i>y</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a> = -1, <a href="KeyPgByval.html">ByVal</a> <i>visibility</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a> = -1, <a href="KeyPgByval.html">ByVal</a> <i>clip</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a> = -1 ) <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a><br \>
+</tt><br \>
+</div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
+<i>result</i> = <b>SetMouse</b>([ <i>x</i> ] [, [ <i>y</i> ] [, [ <i>visibility</i> ] [, [ <i>clip</i> ]]]])<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+(For each parameter, <tt>-1</tt> is a special value indicating "no changes.")<br \>
+<tt><i>x</i></tt><br \>
+<div class="fb_indent">optional - set x coordinate<br \>
+</div><tt><i>y</i></tt><br \>
+<div class="fb_indent">optional - set y coordinate<br \>
+</div><tt><i>visibility</i></tt><br \>
+<div class="fb_indent">optional - set visibility: <tt>1</tt> indicates visible, <tt>0</tt> indicates hidden<br \>
+</div><tt><i>clip</i></tt><br \>
+<div class="fb_indent">optional - set clipping: <tt>1</tt> indicates mouse is clipped to graphics window, <tt>0</tt> indicates no clipping<br \>
+<br \>
+</div></div><div class="fb_sect_title">Return Value</div><div class="fb_sect_cont"><br \>
+Zero (<tt>0</tt>) on success, non-zero to indicate failure.<br \>
+<br \>
+</div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+<tt><b>SetMouse</b></tt> will set the (<tt><i>x</i></tt>, <tt><i>y</i></tt>) coordinates of the mouse pointer, as well as setting its visibility.  THe mouse position is set using the <tt><i>x</i></tt> and <tt><i>y</i></tt> parameters.  The mouse will be visible if visibility is set to <tt>1</tt>, and invisible if visibility is set to <tt>0</tt>.  <tt><b>SetMouse</b></tt> is intended for graphics modes initiated using the <tt><a href="KeyPgScreengraphics.html">Screen (Graphics)</a></tt> statement only.<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="wrd">x</span><span class="oth">,</span>&nbsp;<span class="wrd">y</span><span class="oth">,</span>&nbsp;<span class="wrd">buttons</span><br />
+<br />
+<span class="com">'&nbsp;create&nbsp;a&nbsp;screen&nbsp;640*480</span><br />
+<span class="key">ScreenRes</span>&nbsp;<span class="num">640</span><span class="oth">,</span>&nbsp;<span class="num">480</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"Click&nbsp;the&nbsp;mouse&nbsp;button&nbsp;to&nbsp;center&nbsp;the&nbsp;mouse"</span><br />
+<br />
+<span class="key">Do</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">'&nbsp;get&nbsp;mouse&nbsp;x,&nbsp;y&nbsp;and&nbsp;button&nbsp;state&nbsp;(wait&nbsp;until&nbsp;mouse&nbsp;is&nbsp;onscreen)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Do</span><span class="oth">:</span>&nbsp;<span class="key">Sleep</span>&nbsp;<span class="num">1</span><span class="oth">:</span>&nbsp;<span class="key">Loop</span>&nbsp;<span class="key">While</span>&nbsp;<span class="key">GetMouse</span><span class="oth">(</span>&nbsp;<span class="wrd">x</span><span class="oth">,</span>&nbsp;<span class="wrd">y</span>&nbsp;<span class="oth">,</span>&nbsp;<span class="oth">,</span>&nbsp;<span class="wrd">buttons</span><span class="oth">)</span>&nbsp;<span class="oth">&lt;&gt;</span>&nbsp;<span class="num">0</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">If</span>&nbsp;<span class="wrd">buttons</span>&nbsp;<span class="key">And</span>&nbsp;<span class="num">1</span>&nbsp;<span class="key">Then</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">'&nbsp;on&nbsp;left&nbsp;mouse&nbsp;click,&nbsp;center&nbsp;mouse</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">SetMouse</span>&nbsp;<span class="num">320</span><span class="oth">,</span>&nbsp;<span class="num">240</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">End</span>&nbsp;<span class="key">If</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">'&nbsp;run&nbsp;loop&nbsp;until&nbsp;Escape&nbsp;is&nbsp;pressed</span><br />
+<span class="key">Loop</span>&nbsp;<span class="key">Until</span>&nbsp;<span class="key">Inkey</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">Chr</span><span class="oth">(</span><span class="num">27</span><span class="oth">)</span><br />
+</div></tt><br />
+<br \>
+<br \>
+</div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
+<ul><li> Not available in the <i><a href="CompilerOptlang.html">-lang qb</a></i> dialect unless referenced with the alias <tt><b>__Setmouse</b></tt>.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> New to FreeBASIC<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgGetmouse.html">GetMouse</a></tt><br \>
+<li> <tt><a href="KeyPgScreengraphics.html">Screen</a></tt><br \>
+<li> <tt><a href="KeyPgMultikey.html">MultiKey</a></tt><br \>
+<li> <tt><a href="KeyPgGetkey.html">GetKey</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

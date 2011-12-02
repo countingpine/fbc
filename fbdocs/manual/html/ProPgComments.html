@@ -1,0 +1,119 @@
+<html>
+<head>
+<title>Comments</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Comments</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Comments are regions of text that the compiler will ignore but may contain information that is useful to the programmer.  One exception are metacommands which may appear in certain types of comments.<br \>
+<br \>
+<div class="fb_sect_title">Single Line comments</div><div class="fb_sect_cont"><br \>
+The single quote character (<tt><b>'</b></tt>) may be used to indicate a comment and may appear after other keywords on a source line.  The rest of the statement will be treated as a comment.<br \>
+<tt><div class="freebasic">
+<span class="com">'&nbsp;comment&nbsp;text</span><br />
+</div></tt><br />
+<br \>
+</div><div class="fb_sect_title">The comment statement: Rem</div><div class="fb_sect_cont"><br \>
+A source code statement beginning with <tt><a href="KeyPgRem.html">Rem</a></tt> indicates that the rest of the line is comment and will not be compiled.  <tt><a href="KeyPgRem.html">Rem</a></tt> behavior is the same as above, except it must be the first keyword in the statement.<br \>
+<tt><div class="freebasic">
+<span class="key">Rem</span>&nbsp;<span class="wrd">comment</span><br />
+</div></tt><br />
+<br \>
+</div><div class="fb_sect_title">Multi-line comments</div><div class="fb_sect_cont"><br \>
+Multi-line comments are marked with the tokens <tt><b>/'</b></tt> and <tt><b>'/</b></tt>.  All text between the two markers is considered comment text and is not compiled.<br \>
+<br \>
+Multi-line comments can span several lines, and can also be used in the middle of statements.  After the end of the comment, the statement will continue to be parsed as normal (even if the comment crosses line breaks).<br \>
+<tt><div class="freebasic">
+<span class="com">/'&nbsp;Multi-line</span><br />
+<span class="com">&nbsp;&nbsp;&nbsp;comment&nbsp;'/</span><br />
+<br />
+<span class="key">Print</span>&nbsp;<span class="quo">"Hello"</span>&nbsp;<span class="com">/'&nbsp;embedded&nbsp;comment'/</span>&nbsp;<span class="quo">"&nbsp;world"</span><br />
+</div></tt><br />
+Note: If FreeBASIC encounters a close-comment marker while it's not in a multi-line comment, it will treat it as a normal single-line comment due to the single quote.<br \>
+<br \>
+</div><div class="fb_sect_title">Nested Comments</div><div class="fb_sect_cont"><br \>
+A multi-line comment can contain other multi-line comments inside it.  Each inner comment has its own open- and close-comment markers.<br \>
+<br \>
+<tt><div class="freebasic">
+<span class="com">/'</span><br />
+<span class="com">&nbsp;This&nbsp;is&nbsp;a&nbsp;comment.</span><br />
+<span class="com">&nbsp;/'</span><br />
+<span class="com">&nbsp;&nbsp;This&nbsp;is&nbsp;a&nbsp;comment&nbsp;inside&nbsp;a&nbsp;comment</span><br />
+<span class="com">&nbsp;'/</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">This</span>&nbsp;<span class="key">Is</span>&nbsp;<span class="wrd">a</span>&nbsp;<span class="wrd">comment.</span><br />
+<span class="com">'/</span><br />
+</div></tt><br />
+A multi-line comment can contain unlimited levels of nested comments.  FreeBASIC will continue to parse the multi-line comment for more markers until the number of close-comment markers reaches the number of open-comment markers, i.e. when it has closed all the comments it has opened.<br \>
+<br \>
+</div><div class="fb_sect_title">Comments after line continuation</div><div class="fb_sect_cont"><br \>
+A single-line comment may appear after the line continuation character ( <tt><b>_</b></tt> ) in a multi-line statement.  FreeBASIC does not parse the text after the line continuation character, though, so you can't open multi-line comments after them.<br \>
+<br \>
+<tt><div class="freebasic">
+<span class="key">Print</span>&nbsp;<span class="wrd">_</span>&nbsp;<span class="com">'&nbsp;line</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="quo">"This&nbsp;is&nbsp;part&nbsp;of&nbsp;the&nbsp;previous&nbsp;line's&nbsp;statement"</span><br />
+</div></tt><br />
+<br \>
+</div><div class="fb_sect_title">Metacommands</div><div class="fb_sect_cont"><br \>
+Metacommands, such as <tt><a href="KeyPgMetaStatic.html">$Static</a></tt> and <tt><a href="KeyPgMetaInclude.html">$Include</a></tt>, can be placed in single-line comments.  The <tt><b>$</b></tt> sign and the keyword must be the first two things in the statement, not including white space.<br \>
+<br \>
+<tt><div class="freebasic">
+<span class="key">Rem</span>&nbsp;<span class="wrd">compile</span>&nbsp;<span class="key">With</span>&nbsp;<span class="oth">-</span><span class="wrd">lang</span>&nbsp;<span class="wrd">fblite</span>&nbsp;<span class="key">Or</span>&nbsp;<span class="wrd">qb</span><br />
+<br />
+<span class="def">#lang&nbsp;"fblite"<br />
+</span><br />
+<span class="key">Rem</span>&nbsp;<span class="oth">$</span><span class="key">Static</span><br />
+<span class="com">'&nbsp;$include:&nbsp;'vbcompat.bi'</span><br />
+</div></tt><br />
+<br \>
+</div><div class="fb_sect_title">Single-line comment parsing</div><div class="fb_sect_cont"><br \>
+When you make a single-line comment, FreeBASIC will parse the comment, to check for a metacommand.  If it finds a multi-line comment, it will treat it as usual, and continue parsing the single-line comment after the close-comment marker.<br \>
+<br \>
+If you want to prevent FreeBASIC parsing the single-line comment, put another single quote (<tt><b>'</b></tt>), at the start of the comment.  FreeBASIC will treat the rest of the line, including multi-line comment markers and metacommands, as ordinary text, and will ignore it.  Other words encountered in a comment will also stop the parsing.<br \>
+<ul><ul><li><i>Note: As of version 0.21.0, this will not longer apply in the </i><a href="CompilerOptlang.html">-lang fb</a><i> dialect, and multi-line comment markers will be completely ignored inside single-line comments</i><br \>
+<br \>
+</ul></ul><tt><div class="freebasic">
+<span class="com">''&nbsp;$static&nbsp;&lt;--&nbsp;will&nbsp;not&nbsp;get&nbsp;parsed</span><br />
+<span class="com">''&nbsp;this&nbsp;multiline&nbsp;comment&nbsp;marker&nbsp;("/'")&nbsp;will&nbsp;be&nbsp;ignored</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"This&nbsp;line&nbsp;is&nbsp;not&nbsp;a&nbsp;comment."</span><br />
+</div></tt><br />
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="com">/'&nbsp;this&nbsp;is&nbsp;a&nbsp;multi&nbsp;line&nbsp;</span><br />
+<span class="com">comment&nbsp;as&nbsp;a&nbsp;header&nbsp;of</span><br />
+<span class="com">this&nbsp;example&nbsp;'/</span><br />
+<br />
+<span class="key">Rem</span>&nbsp;<span class="key">This</span>&nbsp;<span class="key">Is</span>&nbsp;<span class="wrd">a</span>&nbsp;<span class="key">Single</span>&nbsp;<span class="key">Line</span>&nbsp;<span class="wrd">comment</span><br />
+<br />
+<span class="com">'this&nbsp;is&nbsp;a&nbsp;single&nbsp;line&nbsp;comment</span><br />
+<br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">a</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;&nbsp;&nbsp;<span class="com">'comment&nbsp;following&nbsp;a&nbsp;statement</span><br />
+<br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">b</span>&nbsp;<span class="key">As</span>&nbsp;<span class="com">/'&nbsp;can&nbsp;comment&nbsp;in&nbsp;here&nbsp;also&nbsp;'/</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Integer</span><br />
+<br />
+<br />
+<span class="def">#if&nbsp;0<br />
+</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">before</span>&nbsp;<span class="wrd">version</span>&nbsp;<span class="num">0.16</span><span class="oth">,</span>&nbsp;<span class="key">This</span>&nbsp;<span class="wrd">was</span>&nbsp;<span class="wrd">the</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">only</span>&nbsp;<span class="wrd">way</span>&nbsp;<span class="wrd">of</span>&nbsp;<span class="wrd">commenting</span>&nbsp;<span class="key">Out</span>&nbsp;<span class="wrd">sections</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">With</span>&nbsp;<span class="wrd">multiple</span>&nbsp;<span class="wrd">lines</span>&nbsp;<span class="wrd">of</span>&nbsp;<span class="wrd">code.</span><br />
+<span class="def">#endif<br />
+</span><br />
+</div></tt><br />
+<br \>
+</div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgRem.html">Rem</a></tt><br \>
+<br \>
+</ul><br \>
+   <br \>
+</div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

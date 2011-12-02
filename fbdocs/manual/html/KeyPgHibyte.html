@@ -1,0 +1,72 @@
+<html>
+<head>
+<title>HiByte</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">HiByte</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Gets the most-significant byte (MSB, or <i>hi-byte</i>) of the least-significant word (LSW, or <i>lo-word</i>) of an <tt><a href="KeyPgUinteger.html">UInteger</a></tt> value.<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<a href="KeyPgPpdefine.html">#define</a> <b>HiByte</b>( <i>expr</i> ) ( ( <a href="KeyPgCast.html">Cast</a>(<a href="KeyPgUinteger.html">UInteger</a>, <i>expr</i>) <a href="KeyPgOpAnd.html">And</a> &h0000FF00 ) <a href="KeyPgOpShiftRight.html">Shr</a> 8 )<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
+<i>result</i> = <b>HiByte</b>( <i>expr</i> )<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+<tt><i>expr</i></tt><br \>
+<div class="fb_indent">A numeric expression, converted to an <tt><a href="KeyPgUinteger.html">UInteger</a></tt> value.<br \>
+<br \>
+</div></div><div class="fb_sect_title">Return Value</div><div class="fb_sect_cont"><br \>
+Returns the MSB value of the LSW of `<tt><a href="KeyPgCast.html">Cast</a>(<a href="KeyPgUinteger.html">UInteger</a>, <i>expr</i>)</tt>`.<br \>
+<br \>
+</div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+This macro converts the numeric expression <tt><i>expr</i></tt> to an <tt><a href="KeyPgUinteger.html">UInteger</a></tt> value, then expands to an <a href="KeyPgUinteger.html">UInteger</a> representing the value of the MSB of its LSW. It behaves as `<tt><a href="KeyPgHibyte.html">HiByte</a>(<a href="KeyPgLoWord.html">LoWord</a>(<i>expr</i>))</tt>`.<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="key">Dim</span>&nbsp;<span class="wrd">N</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">UInteger</span><br />
+<br />
+<span class="com">'Note&nbsp;there&nbsp;are&nbsp;16&nbsp;bits</span><br />
+<span class="wrd">N</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">&amp;b1010101110000001</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"N&nbsp;is&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"</span><span class="oth">;</span>&nbsp;<span class="wrd">N</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"The&nbsp;binary&nbsp;representation&nbsp;of&nbsp;N&nbsp;is&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"</span><span class="oth">;</span>&nbsp;<span class="key">Bin</span><span class="oth">(</span><span class="wrd">N</span><span class="oth">)</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"The&nbsp;most&nbsp;significant&nbsp;byte&nbsp;(MSB)&nbsp;of&nbsp;N&nbsp;is&nbsp;&nbsp;&nbsp;&nbsp;"</span><span class="oth">;</span>&nbsp;<span class="key">HiByte</span><span class="oth">(</span><span class="wrd">N</span><span class="oth">)</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"The&nbsp;least&nbsp;significant&nbsp;byte&nbsp;(LSB)&nbsp;of&nbsp;N&nbsp;is&nbsp;&nbsp;&nbsp;"</span><span class="oth">;</span>&nbsp;<span class="key">LoByte</span><span class="oth">(</span><span class="wrd">N</span><span class="oth">)</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"The&nbsp;binary&nbsp;representation&nbsp;of&nbsp;the&nbsp;MSB&nbsp;is&nbsp;&nbsp;&nbsp;&nbsp;"</span><span class="oth">;</span>&nbsp;<span class="key">Bin</span><span class="oth">(</span><span class="key">HiByte</span><span class="oth">(</span><span class="wrd">N</span><span class="oth">))</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"The&nbsp;binary&nbsp;representation&nbsp;of&nbsp;the&nbsp;LSB&nbsp;is&nbsp;&nbsp;&nbsp;&nbsp;"</span><span class="oth">;</span>&nbsp;<span class="key">Bin</span><span class="oth">(</span><span class="key">LoByte</span><span class="oth">(</span><span class="wrd">N</span><span class="oth">))</span><br />
+<span class="key">Sleep</span><br />
+</div></tt><br />
+<br \>
+The output would look like:<br \>
+<pre class="fb_pre">
+N Is                                       43905
+The Binary representation of N Is          1010101110000001
+The most significant Byte (MSB) of N Is    171
+The least significant Byte (LSB) of N Is   129
+The Binary representation of the MSB Is    10101011
+The Binary representation of the LSB Is    10000001
+</pre><br \>
+</div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
+<ul><li> Not available in the <i><a href="CompilerOptlang.html">-lang qb</a></i> dialect unless referenced with the alias <tt><b>__HIBYTE</b></tt>.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> New to FreeBASIC<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgLoByte.html">LoByte</a></tt><br \>
+<li> <tt><a href="KeyPgLoWord.html">LoWord</a></tt><br \>
+<li> <tt><a href="KeyPgHiword.html">HiWord</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

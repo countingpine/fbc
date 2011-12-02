@@ -1,0 +1,426 @@
+<html>
+<head>
+<title>Introduction to the Extended Type</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Introduction to the Extended Type</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	<i>Written by <a href="WikiRick.html">rdc</a></i><br \>
+<br \>
+<div class="fb_header"> Introduction</div><br \>
+<br \>
+FreeBasic is moving towards implementing Object Oriented programming. While classes have not yet been added to the language, the Type definition has been extended to include some Object Oriented constructs as a first step towards full class support. This article introduces some of the concepts of Object Oriented design and explains some of the extended type constructs.<br \>
+<br \>
+<div class="fb_header"> Object Oriented Programming</div><br \>
+<br \>
+Object Oriented Programming, usually shortened to OOP, is a methodology that enables the programmer to build code units called objects. An object is a thing; it is a unit of code that represents something that needs to be manipulated in a program. You can think of an object as a noun: a person, place or thing. An object could be a sprite, a drawing primitive or something more elaborate like a tank in a game. Any concrete entity that has a set of characteristics and actions can be represented as an object.<br \>
+<br \>
+An object contains both the data needed by the object, and the methods (subroutines and functions) that act on the data. This grouping of data and methods into a single entity is called encapsulation. Encapsulation allows you to create modular units that can be reused in multiple programs. This idea of code reuse was the main motivation in the creation of the OOP paradigm.<br \>
+<br \>
+Another beneficial consequence of encapsulation is information hiding. The data inside the object is shielded from the outside world so that unwanted changes to the data cannot occur. Instead of accessing a variable directly, the object has a public interface that the external program should use to access and change data members. By using an interface, you can control how the object behaves and ensure that its operation is consistent across many programs. <br \>
+<br \>
+The interface also allows you to make internal changes to the code, without changing the way the object is accessed. As long as you don’t change the published interface, that is change any existing public methods, you can improve the object without breaking any existing code that relies on the object. In the cases where a program my need an improved method, you can leave the old method in place to maintain compatibility, and just add a new method with the improved functionality. New programs can use the new method, while old programs can still use the old method.<br \>
+<br \>
+Another advantage of using a public interface is so that other programmers can use your object without worrying about the internal details of the object. As long as the published interface is stable and well documented, anyone should be able to use your object, even beginners.<br \>
+<br \>
+<div class="fb_header"> The Published Contract</div><br \>
+<br \>
+As already stated, OOP was designed to enable code reuse among programmers. In order for code reuse to be helpful, the published interface must remain stable. That is, once an object has been released and is being used in programs, the published interface should not change so that programs that use the object continue to work correctly. There is an implicit contract between you as the author of the object and the end-user of your object that you will maintain the published interface across changes that may need to be made to the object. This implicit contract between author and user is the main strength of the OOP paradigm, and is the main reason that OOP has become such a powerful programming methodology.<br \>
+<br \>
+<div class="fb_header"> The Characteristics of an Object</div><br \>
+<br \>
+As already mentioned, an object contains both data and methods. The data describes the properties of an object, while the methods describe what the object can do. A simple, and not-really-useful example will illustrate this concept. <br \>
+<br \>
+Suppose you want to create an object that draws a rectangle on the screen. A rectangle can have several properties that would be contained within the data members of the object. A rectangle has an origin on the screen, normally the top left corner, which can be represented by x and y data members. A rectangle has a width and a height, so the object would have width and height data members. A rectangle can either be outlined or filled, so a filled flag data member can be added to the object. Of course, if you are going to draw a rectangle, you will want to draw it in a particular color, so the object will need to have a color data member, and to have the object be a bit more flexible, you can add a color member for the outline and a different color member for the fill. Of course you will need a method to actually draw the rectangle on the screen, so you can add a draw routine to the object definition.<br \>
+<br \>
+So our rectangle object has the following preliminary properties and methods:<br \>
+<br \>
+<div class="fb_indent"> Property: x and y origin<br \>
+ Property: width<br \>
+ Property: height<br \>
+ Property: filled<br \>
+ Property: outline color<br \>
+ Property: fill color<br \>
+ Method: DrawRectangle<br \>
+<br \>
+</div>This list is called the object definition. In FreeBasic you define an object using the extended Type definition. The extended Type is similar to the standard Type, with some added language constructs that implements a subset of OOP features.<br \>
+<br \>
+<div class="fb_header"> A Rectangle Type Definition</div><br \>
+<br \>
+The following code snippet is a partial rectangle definition:<br \>
+<tt><div class="freebasic">
+<span class="key">Type</span>&nbsp;<span class="wrd">myRect</span><br />
+&nbsp;&nbsp;<span class="key">Private</span><span class="oth">:</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">X_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">Y_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">Width_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">Height_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">Filled_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">Otlncolor_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">Fillcolor_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Public</span><span class="oth">:</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Sub</span>&nbsp;<span class="wrd">DrawRect</span><span class="oth">()</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Type</span><br />
+</div></tt><br />
+As you can see, the extended Type looks much like a standard Type except for the Private: and Public: keywords and the sub declaration. The Private: keyword tells the compiler that the data members that follow are private to the type, that is cannot be accessed outside of the type. The private state extends to all object members until a new qualifier is encountered, which in this case is the Public: qualifier just above the Sub declaration. All of the data members are hidden from the outside world and cannot be changed from outside the scope of the Type, a process called information hiding. The underscore appended to the private variables is the common way to define private variables.<br \>
+<br \>
+Information hiding is a way to maintain the integrity of the object. You should never allow an outside process to directly access a data member. All data access should be through the use of Property members so that you can control what is being passed to your object. Strict control over your object’s data will help prevent many errors that may occur when a programmer uses your object.<br \>
+<tt><div class="freebasic">
+<span class="key">Type</span>&nbsp;<span class="wrd">myRect</span><br />
+&nbsp;&nbsp;<span class="key">Private</span><span class="oth">:</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">X_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">Y_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">Width_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">Height_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">Filled_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">Otlncolor_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">Fillcolor_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Public</span><span class="oth">:</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Sub</span>&nbsp;<span class="wrd">DrawRect</span><span class="oth">()</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Property</span>&nbsp;<span class="wrd">X</span><span class="oth">(</span><span class="key">ByVal</span>&nbsp;<span class="wrd">xx_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Property</span>&nbsp;<span class="wrd">X</span><span class="oth">()</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Property</span>&nbsp;<span class="wrd">Y</span><span class="oth">(</span><span class="key">ByVal</span>&nbsp;<span class="wrd">yy_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Property</span>&nbsp;<span class="wrd">Y</span><span class="oth">()</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Property</span>&nbsp;<span class="key">Width</span><span class="oth">(</span><span class="key">ByVal</span>&nbsp;<span class="wrd">w_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Property</span>&nbsp;<span class="key">Width</span><span class="oth">()</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Property</span>&nbsp;<span class="wrd">Height</span><span class="oth">(</span><span class="key">ByVal</span>&nbsp;<span class="wrd">h_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Property</span>&nbsp;<span class="wrd">Height</span><span class="oth">()</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Property</span>&nbsp;<span class="wrd">Filled</span><span class="oth">(</span><span class="key">ByVal</span>&nbsp;<span class="wrd">f_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Property</span>&nbsp;<span class="wrd">Filled</span><span class="oth">()</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Property</span>&nbsp;<span class="wrd">Otlncolor</span><span class="oth">(</span><span class="key">ByVal</span>&nbsp;<span class="wrd">oc_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Property</span>&nbsp;<span class="wrd">Otlncolor</span><span class="oth">()</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Property</span>&nbsp;<span class="wrd">FillColor</span><span class="oth">(</span><span class="key">ByVal</span>&nbsp;<span class="wrd">fc_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Property</span>&nbsp;<span class="wrd">FillColor</span><span class="oth">()</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Type</span><br />
+</div></tt><br />
+The Declare statements following the Public: qualifier comprises the public interface to your object. Since the variables of the type are defined with the Private: keyword, the only way to access the variables is through the Property members maintaining the integrity of the object. Since you define the code in each Property member, you have full control over what is being put into your object. A common example of this is to put range checking code in your property members so that the object does not contain invalid data.<br \>
+<br \>
+In this example, the variables can be both written and read. The compiler distinguishes between a read Property and a write Property by the type of the method. A subroutine-formatted Property is a write property since you are passing a value that will be saved in a private variable. A function-formatted Property is a read property since a private variable will be returned to the caller. You can create read-only Properties by adding just a function-formatted Property or write-only Properties by just adding a subroutine-formatted Property.<br \>
+<br \>
+<div class="fb_header"> Creating Well-Behaved Objects</div><br \>
+<br \>
+The definition looks complete at this point, but there is a problem. What would happen if some or all of the variables were not initialized? The object would not perform correctly and potentially generate a runtime error. It would be better to have a set of default values for the object variables just in case one or more variables did not get initialized. You can initialize the object at the moment of creation by using a Constructor.<br \>
+<br \>
+A Constructor is a subroutine that is called when the object is created using the Dim (or New) statement. Constructors are useful for initializing an object, either with default values, or values you pass to the Constructor. The updated type definition now looks like the following:<br \>
+<tt><div class="freebasic">
+<span class="key">Type</span>&nbsp;<span class="wrd">myRect</span><br />
+&nbsp;&nbsp;<span class="key">Private</span><span class="oth">:</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">X_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">Y_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">Width_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">Height_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">Filled_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">Otlncolor_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">Fillcolor_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Public</span><span class="oth">:</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Sub</span>&nbsp;<span class="wrd">DrawRect</span><span class="oth">()</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Property</span>&nbsp;<span class="wrd">X</span><span class="oth">(</span><span class="key">ByVal</span>&nbsp;<span class="wrd">xx_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Property</span>&nbsp;<span class="wrd">X</span><span class="oth">()</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Property</span>&nbsp;<span class="wrd">Y</span><span class="oth">(</span><span class="key">ByVal</span>&nbsp;<span class="wrd">yy_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Property</span>&nbsp;<span class="wrd">Y</span><span class="oth">()</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Property</span>&nbsp;<span class="key">Width</span><span class="oth">(</span><span class="key">ByVal</span>&nbsp;<span class="wrd">w_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Property</span>&nbsp;<span class="key">Width</span><span class="oth">()</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Property</span>&nbsp;<span class="wrd">Height</span><span class="oth">(</span><span class="key">ByVal</span>&nbsp;<span class="wrd">h_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Property</span>&nbsp;<span class="wrd">Height</span><span class="oth">()</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Property</span>&nbsp;<span class="wrd">Filled</span><span class="oth">(</span><span class="key">ByVal</span>&nbsp;<span class="wrd">f_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Property</span>&nbsp;<span class="wrd">Filled</span><span class="oth">()</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Property</span>&nbsp;<span class="wrd">Otlncolor</span><span class="oth">(</span><span class="key">ByVal</span>&nbsp;<span class="wrd">oc_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Property</span>&nbsp;<span class="wrd">Otlncolor</span><span class="oth">()</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Property</span>&nbsp;<span class="wrd">FillColor</span><span class="oth">(</span><span class="key">ByVal</span>&nbsp;<span class="wrd">fc_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Property</span>&nbsp;<span class="wrd">FillColor</span><span class="oth">()</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Constructor</span><span class="oth">()</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Constructor</span><span class="oth">(</span><span class="wrd">xx_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">,</span>&nbsp;<span class="wrd">yy_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">,</span>&nbsp;<span class="wrd">w_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">,</span>&nbsp;<span class="wrd">_</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">h_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">,</span>&nbsp;<span class="wrd">f_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">,</span>&nbsp;<span class="wrd">oc_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">,</span>&nbsp;<span class="wrd">_</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">fc_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+<span class="key">End</span>&nbsp;<span class="key">Type</span><br />
+</div></tt><br />
+You will notice in the definition that we have two Constructors, one that takes a set of parameters and one that doesn’t. This is called overloading and can be used not only with Constructors but also with other subroutines and functions. Overloading is useful for situations where you need to handle different parameter types with a single method call. The compiler will determine which method to call based on the parameters passed to the method. You can overload as many methods as you want, as long as the number and type of parameters for each method is unique.<br \>
+<br \>
+In this instance, if the Constructor is not passed any parameter values, it will initialize the variables to a set of default values. If the Constructor is called with parameters, then it will use the passed values to initialize the object’s variables.<br \>
+<br \>
+There is also a Destructor method that is called when the object is destroyed. You can use the Destructor to perform any cleanup tasks that must be carried out before the object is released from memory. If the object created any pointer references, or opened any files, then you would clean up those references in the Destructor. Since the Rectangle object doesn’t create any outside references, a Destructor is not needed.<br \>
+<br \>
+<br \>
+<div class="fb_header"> Filling in the Object Methods</div><br \>
+<br \>
+The type definition is a template for the object type and tells the compiler how to set up the object in memory. However, in order to actually use the object, you need to create the actual method calls, which is shown in the next listing.<br \>
+<tt><div class="freebasic">
+<span class="key">Type</span>&nbsp;<span class="wrd">myRect</span><br />
+&nbsp;&nbsp;<span class="key">Private</span><span class="oth">:</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">X_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">Y_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">Width_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">Height_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">Filled_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">Otlncolor_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">Fillcolor_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Public</span><span class="oth">:</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Sub</span>&nbsp;<span class="wrd">DrawRect</span><span class="oth">()</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Property</span>&nbsp;<span class="wrd">X</span><span class="oth">(</span><span class="key">ByVal</span>&nbsp;<span class="wrd">xx_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Property</span>&nbsp;<span class="wrd">X</span><span class="oth">()</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Property</span>&nbsp;<span class="wrd">Y</span><span class="oth">(</span><span class="key">ByVal</span>&nbsp;<span class="wrd">yy_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Property</span>&nbsp;<span class="wrd">Y</span><span class="oth">()</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Property</span>&nbsp;<span class="key">Width</span><span class="oth">(</span><span class="key">ByVal</span>&nbsp;<span class="wrd">w_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Property</span>&nbsp;<span class="key">Width</span><span class="oth">()</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Property</span>&nbsp;<span class="wrd">Height</span><span class="oth">(</span><span class="key">ByVal</span>&nbsp;<span class="wrd">h_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Property</span>&nbsp;<span class="wrd">Height</span><span class="oth">()</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Property</span>&nbsp;<span class="wrd">Filled</span><span class="oth">(</span><span class="key">ByVal</span>&nbsp;<span class="wrd">f_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Property</span>&nbsp;<span class="wrd">Filled</span><span class="oth">()</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Property</span>&nbsp;<span class="wrd">Otlncolor</span><span class="oth">(</span><span class="key">ByVal</span>&nbsp;<span class="wrd">oc_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Property</span>&nbsp;<span class="wrd">Otlncolor</span><span class="oth">()</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Property</span>&nbsp;<span class="wrd">FillColor</span><span class="oth">(</span><span class="key">ByVal</span>&nbsp;<span class="wrd">fc_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Property</span>&nbsp;<span class="wrd">FillColor</span><span class="oth">()</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Constructor</span><span class="oth">()</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Constructor</span><span class="oth">(</span><span class="wrd">xx_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">,</span>&nbsp;<span class="wrd">yy_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">,</span>&nbsp;<span class="wrd">w_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">,</span>&nbsp;<span class="wrd">_</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">h_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">,</span>&nbsp;<span class="wrd">f_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">,</span>&nbsp;<span class="wrd">oc_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">,</span>&nbsp;<span class="wrd">_</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">fc_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">)</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Type</span><br />
+<br />
+<span class="key">Sub</span>&nbsp;<span class="wrd">myRect.DrawRect</span><span class="oth">()</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Line</span>&nbsp;<span class="oth">(</span><span class="wrd">this.x_</span><span class="oth">,</span>&nbsp;<span class="wrd">this.y_</span><span class="oth">)-(</span><span class="wrd">this.x_</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="key">Width</span>&nbsp;<span class="oth">-</span>&nbsp;<span class="num">1</span><span class="oth">,</span>&nbsp;<span class="wrd">this.y_</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="wrd">this.height_</span>&nbsp;<span class="oth">-</span>&nbsp;<span class="num">1</span><span class="oth">),</span>&nbsp;<span class="wrd">this.Otlncolor_</span><span class="oth">,</span>&nbsp;<span class="wrd">B</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">If</span>&nbsp;<span class="wrd">this.Filled_</span>&nbsp;<span class="oth">&lt;&gt;</span>&nbsp;<span class="num">0</span>&nbsp;<span class="key">Then</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Paint</span>&nbsp;<span class="oth">(</span><span class="wrd">this.x_</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="num">1</span><span class="oth">,</span>&nbsp;<span class="wrd">this.y_</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="num">1</span><span class="oth">),</span>&nbsp;<span class="wrd">this.Fillcolor_</span><span class="oth">,</span>&nbsp;<span class="wrd">this.Otlncolor_</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">End</span>&nbsp;<span class="key">If</span>&nbsp;&nbsp;&nbsp;<br />
+<span class="key">End</span>&nbsp;<span class="key">Sub</span><br />
+<br />
+<span class="key">Property</span>&nbsp;<span class="wrd">myRect.x</span><span class="oth">(</span><span class="key">ByVal</span>&nbsp;<span class="wrd">xx_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">this.X_</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">xx_</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Property</span><br />
+<br />
+<span class="key">Property</span>&nbsp;<span class="wrd">myRect.x</span><span class="oth">()</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Return</span>&nbsp;<span class="wrd">this.X_</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Property</span><br />
+<br />
+<span class="key">Property</span>&nbsp;<span class="wrd">myRect.y</span><span class="oth">(</span><span class="key">ByVal</span>&nbsp;<span class="wrd">yy_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">this.Y_</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">yy_</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Property</span><br />
+<br />
+<span class="key">Property</span>&nbsp;<span class="wrd">myRect.y</span><span class="oth">()</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Return</span>&nbsp;<span class="wrd">this.y_</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Property</span><br />
+<br />
+<span class="key">Property</span>&nbsp;<span class="wrd">myRect.Width</span><span class="oth">(</span><span class="key">ByVal</span>&nbsp;<span class="wrd">w_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">this.Width_</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">w_</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Property</span><br />
+<br />
+<span class="key">Property</span>&nbsp;<span class="wrd">myRect.Width</span><span class="oth">()</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Return</span>&nbsp;<span class="wrd">this.Width_</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Property</span><br />
+<br />
+<span class="key">Property</span>&nbsp;<span class="wrd">myRect.Height</span><span class="oth">(</span><span class="key">ByVal</span>&nbsp;<span class="wrd">h_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">this.Height_</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">h_</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Property</span><br />
+<br />
+<span class="key">Property</span>&nbsp;<span class="wrd">myRect.Height</span><span class="oth">()</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Return</span>&nbsp;<span class="wrd">this.Height_</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Property</span><br />
+<br />
+<span class="key">Property</span>&nbsp;<span class="wrd">myRect.Filled</span><span class="oth">(</span><span class="key">ByVal</span>&nbsp;<span class="wrd">f_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">this.Filled_</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">f_</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Property</span><br />
+<br />
+<span class="key">Property</span>&nbsp;<span class="wrd">myRect.Filled</span><span class="oth">()</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Return</span>&nbsp;<span class="wrd">this.Filled_</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Property</span><br />
+<br />
+<span class="key">Property</span>&nbsp;<span class="wrd">myRect.Otlncolor</span><span class="oth">(</span><span class="key">ByVal</span>&nbsp;<span class="wrd">oc_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">this.Otlncolor_</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">oc_</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Property</span><br />
+<br />
+<span class="key">Property</span>&nbsp;<span class="wrd">myRect.Otlncolor</span><span class="oth">()</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Return</span>&nbsp;<span class="wrd">this.Otlncolor_</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Property</span><br />
+<br />
+<span class="key">Property</span>&nbsp;<span class="wrd">myRect.FillColor</span><span class="oth">(</span><span class="key">ByVal</span>&nbsp;<span class="wrd">fc_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">this.Fillcolor_</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">fc_</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Property</span><br />
+<br />
+<span class="key">Property</span>&nbsp;<span class="wrd">myRect.FillColor</span><span class="oth">()</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Return</span>&nbsp;<span class="wrd">this.Fillcolor_</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Property</span><br />
+<br />
+<span class="key">Constructor</span>&nbsp;<span class="wrd">myRect</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">this.X_</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">this.Y_</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">this.Width_</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">10</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">this.Height_</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">10</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">this.Filled_</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span>&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">this.Otlncolor_</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">15</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">this.Fillcolor_</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">7</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Constructor</span><br />
+<br />
+<span class="key">Constructor</span>&nbsp;<span class="wrd">MyRect</span>&nbsp;<span class="oth">(</span><span class="wrd">xx_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">,</span>&nbsp;<span class="wrd">yy_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">,</span>&nbsp;<span class="wrd">w_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">,</span>&nbsp;<span class="wrd">_</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">h_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">,</span>&nbsp;<span class="wrd">f_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">,</span>&nbsp;<span class="wrd">oc_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">,</span>&nbsp;<span class="wrd">_</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">fc_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">)</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">this.X_</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">xx_</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">this.Y_</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">yy_</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">this.Width_</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">w_</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">this.Height_</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">h_</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">this.Filled_</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">f_</span>&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">this.Otlncolor_</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">oc_</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">this.Fillcolor_</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">fc_</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Constructor</span><br />
+</div></tt><br />
+The Methods and Properties are defined using the Sub/Function/Property methodname.TypeName syntax. This tells the compiler how to match up methods with the proper type definition. The Constructors are defined with the type name for the same reason. The <i>this</i> identifier is a hidden parameter that is passed to the methods that refers to the defined type. You use the <i>this</i> identifier to specify that you want to access the type constructs.<br \>
+<br \>
+<div class="fb_header"> Using Your Object</div><br \>
+<br \>
+The object is now complete can be used in a program which is listed below.<br \>
+<tt><div class="freebasic">
+<span class="key">Type</span>&nbsp;<span class="wrd">myRect</span><br />
+&nbsp;&nbsp;<span class="key">Private</span><span class="oth">:</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">X_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">Y_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">Width_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">Height_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">Filled_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">Otlncolor_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">Fillcolor_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Public</span><span class="oth">:</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Sub</span>&nbsp;<span class="wrd">DrawRect</span><span class="oth">()</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Property</span>&nbsp;<span class="wrd">X</span><span class="oth">(</span><span class="key">ByVal</span>&nbsp;<span class="wrd">xx_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Property</span>&nbsp;<span class="wrd">X</span><span class="oth">()</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Property</span>&nbsp;<span class="wrd">Y</span><span class="oth">(</span><span class="key">ByVal</span>&nbsp;<span class="wrd">yy_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Property</span>&nbsp;<span class="wrd">Y</span><span class="oth">()</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Property</span>&nbsp;<span class="key">Width</span><span class="oth">(</span><span class="key">ByVal</span>&nbsp;<span class="wrd">w_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Property</span>&nbsp;<span class="key">Width</span><span class="oth">()</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Property</span>&nbsp;<span class="wrd">Height</span><span class="oth">(</span><span class="key">ByVal</span>&nbsp;<span class="wrd">h_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Property</span>&nbsp;<span class="wrd">Height</span><span class="oth">()</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Property</span>&nbsp;<span class="wrd">Filled</span><span class="oth">(</span><span class="key">ByVal</span>&nbsp;<span class="wrd">f_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Property</span>&nbsp;<span class="wrd">Filled</span><span class="oth">()</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Property</span>&nbsp;<span class="wrd">Otlncolor</span><span class="oth">(</span><span class="key">ByVal</span>&nbsp;<span class="wrd">oc_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Property</span>&nbsp;<span class="wrd">Otlncolor</span><span class="oth">()</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Property</span>&nbsp;<span class="wrd">FillColor</span><span class="oth">(</span><span class="key">ByVal</span>&nbsp;<span class="wrd">fc_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Property</span>&nbsp;<span class="wrd">FillColor</span><span class="oth">()</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Constructor</span><span class="oth">()</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Constructor</span><span class="oth">(</span><span class="wrd">xx_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">,</span>&nbsp;<span class="wrd">yy_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">,</span>&nbsp;<span class="wrd">w_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">,</span>&nbsp;<span class="wrd">_</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">h_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">,</span>&nbsp;<span class="wrd">f_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">,</span>&nbsp;<span class="wrd">oc_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">,</span>&nbsp;<span class="wrd">_</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">fc_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">)</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Type</span><br />
+<br />
+<span class="key">Sub</span>&nbsp;<span class="wrd">myRect.DrawRect</span><span class="oth">()</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Line</span>&nbsp;<span class="oth">(</span><span class="wrd">this.x_</span><span class="oth">,</span>&nbsp;<span class="wrd">this.y_</span><span class="oth">)-(</span><span class="wrd">this.x_</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="wrd">this.Width_</span>&nbsp;<span class="oth">-</span>&nbsp;<span class="num">1</span><span class="oth">,</span>&nbsp;<span class="wrd">this.y_</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="wrd">this.height_</span>&nbsp;<span class="oth">-</span>&nbsp;<span class="num">1</span><span class="oth">),</span>&nbsp;<span class="wrd">this.Otlncolor_</span><span class="oth">,</span>&nbsp;<span class="wrd">B</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">If</span>&nbsp;<span class="wrd">this.Filled_</span>&nbsp;<span class="oth">&lt;&gt;</span>&nbsp;<span class="num">0</span>&nbsp;<span class="key">Then</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Paint</span>&nbsp;<span class="oth">(</span><span class="wrd">this.x_</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="num">1</span><span class="oth">,</span>&nbsp;<span class="wrd">this.y_</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="num">1</span><span class="oth">),</span>&nbsp;<span class="wrd">this.Fillcolor_</span><span class="oth">,</span>&nbsp;<span class="wrd">this.Otlncolor_</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">End</span>&nbsp;<span class="key">If</span>&nbsp;&nbsp;&nbsp;<br />
+<span class="key">End</span>&nbsp;<span class="key">Sub</span><br />
+<br />
+<span class="key">Property</span>&nbsp;<span class="wrd">myRect.x</span><span class="oth">(</span><span class="key">ByVal</span>&nbsp;<span class="wrd">xx_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">this.X_</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">xx_</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Property</span><br />
+<br />
+<span class="key">Property</span>&nbsp;<span class="wrd">myRect.x</span><span class="oth">()</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Return</span>&nbsp;<span class="wrd">this.X_</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Property</span><br />
+<br />
+<span class="key">Property</span>&nbsp;<span class="wrd">myRect.y</span><span class="oth">(</span><span class="key">ByVal</span>&nbsp;<span class="wrd">yy_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">this.Y_</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">yy_</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Property</span><br />
+<br />
+<span class="key">Property</span>&nbsp;<span class="wrd">myRect.y</span><span class="oth">()</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Return</span>&nbsp;<span class="wrd">this.y_</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Property</span><br />
+<br />
+<span class="key">Property</span>&nbsp;<span class="wrd">myRect.Width</span><span class="oth">(</span><span class="key">ByVal</span>&nbsp;<span class="wrd">w_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">this.Width_</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">w_</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Property</span><br />
+<br />
+<span class="key">Property</span>&nbsp;<span class="wrd">myRect.Width</span><span class="oth">()</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Return</span>&nbsp;<span class="wrd">this.Width_</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Property</span><br />
+<br />
+<span class="key">Property</span>&nbsp;<span class="wrd">myRect.Height</span><span class="oth">(</span><span class="key">ByVal</span>&nbsp;<span class="wrd">h_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">this.Height_</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">h_</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Property</span><br />
+<br />
+<span class="key">Property</span>&nbsp;<span class="wrd">myRect.Height</span><span class="oth">()</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Return</span>&nbsp;<span class="wrd">this.Height_</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Property</span><br />
+<br />
+<span class="key">Property</span>&nbsp;<span class="wrd">myRect.Filled</span><span class="oth">(</span><span class="key">ByVal</span>&nbsp;<span class="wrd">f_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">this.Filled_</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">f_</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Property</span><br />
+<br />
+<span class="key">Property</span>&nbsp;<span class="wrd">myRect.Filled</span><span class="oth">()</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Return</span>&nbsp;<span class="wrd">this.Filled_</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Property</span><br />
+<br />
+<span class="key">Property</span>&nbsp;<span class="wrd">myRect.Otlncolor</span><span class="oth">(</span><span class="key">ByVal</span>&nbsp;<span class="wrd">oc_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">this.Otlncolor_</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">oc_</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Property</span><br />
+<br />
+<span class="key">Property</span>&nbsp;<span class="wrd">myRect.Otlncolor</span><span class="oth">()</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Return</span>&nbsp;<span class="wrd">this.Otlncolor_</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Property</span><br />
+<br />
+<span class="key">Property</span>&nbsp;<span class="wrd">myRect.FillColor</span><span class="oth">(</span><span class="key">ByVal</span>&nbsp;<span class="wrd">fc_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">this.Fillcolor_</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">fc_</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Property</span><br />
+<br />
+<span class="key">Property</span>&nbsp;<span class="wrd">myRect.FillColor</span><span class="oth">()</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Return</span>&nbsp;<span class="wrd">this.Fillcolor_</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Property</span><br />
+<br />
+<span class="key">Constructor</span>&nbsp;<span class="wrd">myRect</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">this.X_</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">this.Y_</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">this.Width_</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">10</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">this.Height_</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">10</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">this.Filled_</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span>&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">this.Otlncolor_</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">15</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">this.Fillcolor_</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">7</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Constructor</span><br />
+<br />
+<span class="key">Constructor</span>&nbsp;<span class="wrd">MyRect</span>&nbsp;<span class="oth">(</span><span class="wrd">xx_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">,</span>&nbsp;<span class="wrd">yy_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">,</span>&nbsp;<span class="wrd">w_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">,</span>&nbsp;<span class="wrd">_</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">h_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">,</span>&nbsp;<span class="wrd">f_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">,</span>&nbsp;<span class="wrd">oc_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">,</span>&nbsp;<span class="wrd">_</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">fc_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">)</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">this.X_</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">xx_</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">this.Y_</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">yy_</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">this.Width_</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">w_</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">this.Height_</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">h_</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">this.Filled_</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">f_</span>&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">this.Otlncolor_</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">oc_</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">this.Fillcolor_</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">fc_</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Constructor</span><br />
+<br />
+<span class="com">'Create&nbsp;a&nbsp;graphic&nbsp;screen</span><br />
+<span class="key">Screen</span>&nbsp;<span class="num">18</span><br />
+<br />
+<span class="com">'Create&nbsp;an&nbsp;object&nbsp;using&nbsp;the&nbsp;default&nbsp;constrcutor</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">aRect</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">myRect</span><br />
+<span class="com">'Create&nbsp;an&nbsp;object&nbsp;by&nbsp;explicitly&nbsp;setting&nbsp;the&nbsp;constructor&nbsp;values</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">bRect</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">myRect</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">myRect</span><span class="oth">(</span><span class="num">200</span><span class="oth">,</span>&nbsp;<span class="num">200</span><span class="oth">,</span>&nbsp;<span class="num">200</span><span class="oth">,</span>&nbsp;<span class="num">100</span><span class="oth">,</span>&nbsp;<span class="num">1</span><span class="oth">,</span>&nbsp;<span class="num">15</span><span class="oth">,</span>&nbsp;<span class="num">9</span><span class="oth">)</span><br />
+<br />
+<span class="com">'Draw&nbsp;the&nbsp;rectangles&nbsp;on&nbsp;the&nbsp;screen</span><br />
+<span class="wrd">aRect.DrawRect</span><br />
+<span class="wrd">bRect.DrawRect</span><br />
+<br />
+<span class="com">'Update&nbsp;aRect&nbsp;properties</span><br />
+<span class="wrd">aRect.X</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">90</span><br />
+<span class="wrd">aRect.Y</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">20</span><br />
+<span class="wrd">aRect.Filled</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">1</span><br />
+<span class="wrd">aRect.FillColor</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">15</span><br />
+<br />
+<span class="com">'Draw&nbsp;new&nbsp;rect</span><br />
+<span class="wrd">aRect.DrawRect</span><br />
+<span class="key">Sleep</span><br />
+<span class="key">End</span><br />
+</div></tt><br />
+<br \>
+To initialize the object using the default Constructor, you simply Dim the extended Type just as you would the standard type. If the Constructor only takes a single value then you can use the Dim var as Typename = value syntax. To initialize the object with a set of values, you Dim the type and then use the = typename(par1m parm1…) syntax. You can see that accessing the members of the object is just like accessing the member of a standard type.<br \>
+<br \>
+Thanks to cha0s at the FreeBasic forums for the information regarding Properties.<br \>
+
+</div>
+</div> 
+</div> 
+</body>
+</html>

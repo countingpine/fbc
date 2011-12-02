@@ -1,0 +1,125 @@
+<html>
+<head>
+<title>Shared Libraries</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Shared Libraries</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	A shared library is compiled code that can loaded and used later used when running an executable.<br \>
+<br \>
+When the compiler makes an executable, the basic source files are first turned in to object files.  The object files are then linked together to make an executable.  A shared library is much like a static library in that it contains object files.  But a shared library is also like an executable in that it only gets loaded when the executable is running.  <br \>
+<br \>
+The library is referred to as shared, because the code in the library is loaded by an executable at runtime and can be loaded by more than one executable, even though there might only be one copy of the shared library.<br \>
+<br \>
+Once the library is made, we can then use the code that it contains just as if we were compiling the source directly with our program.<br \>
+<br \>
+<div class="fb_sect_title">Shared Library Example</div><div class="fb_sect_cont"><br \>
+Following is a simple example of creating a shared library using these three files:<br \>
+<ul><li> <tt>mylib.bas</tt> - the source for the library<br \>
+<li> <tt>mylib.bi</tt> - the header for the library<br \>
+<li> <tt>mytest.bas</tt> - a test program<br \>
+<br \>
+</ul>Our library will be a single module providing a single function:<br \>
+<br \>
+<tt><div class="freebasic">
+<span class="com">''&nbsp;mylib.bas</span><br />
+<span class="com">''&nbsp;compile&nbsp;with:&nbsp;fbc&nbsp;-dll&nbsp;mylib.bas</span><br />
+<br />
+<span class="com">''&nbsp;Add&nbsp;two&nbsp;numbers&nbsp;together&nbsp;and&nbsp;return&nbsp;the&nbsp;result</span><br />
+<span class="key">Public</span>&nbsp;<span class="key">Function</span>&nbsp;<span class="wrd">Add2</span><span class="oth">(</span>&nbsp;<span class="key">ByVal</span>&nbsp;<span class="wrd">x</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">,</span>&nbsp;<span class="key">ByVal</span>&nbsp;<span class="wrd">y</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="key">Export</span><br />
+&nbsp;&nbsp;<span class="key">Return</span><span class="oth">(</span>&nbsp;<span class="wrd">x</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="wrd">y</span>&nbsp;<span class="oth">)</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Function</span><br />
+</div></tt><br />
+Compile the library with:<br \>
+<tt>fbc -dll mylib.bas</tt><br \>
+<br \>
+The <tt>-dll</tt> option tells the compiler to take the source code, <tt>mylib.bas</tt>, and turn it in to an object file <tt>mylib.o</tt>, then store the object file in to a shared library.  The name of the shared library will have a <tt>.so</tt> extension or <tt>.dll</tt> extension depending on if the platform is the linux or windows version. A library might contain many modules (source files) each with many functions, but for this simple example, it is just one each.<br \>
+<br \>
+Making a shared library is almost identical to making a static library except for the addition of <tt><a href="KeyPgExport.html">Export</a></tt> declaration specifier.  <tt><b>Export</b></tt> tells the compiler to make the function visible to other executables loading the shared library.<br \>
+<br \>
+To make use of the library in some other source code, we need some way of telling the compiler what exactly is in the library.  A good way to do this is to put the declarations ( also called an interface, or API ) for the library in to a header file.<br \>
+<br \>
+<tt><div class="freebasic">
+<span class="com">''&nbsp;mylib.bi</span><br />
+<span class="def">#inclib&nbsp;"mylib"<br />
+</span><span class="key">Declare</span>&nbsp;<span class="key">Function</span>&nbsp;<span class="wrd">Add2</span><span class="oth">(</span>&nbsp;<span class="key">ByVal</span>&nbsp;<span class="wrd">x</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">,</span>&nbsp;<span class="key">ByVal</span>&nbsp;<span class="wrd">y</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+</div></tt><br />
+There is no need to compile the header.  We want this in its source form so it can be included with other source files.  The <tt><a href="KeyPgInclib.html">#inclib</a></tt> statement will tell the compiler the name of a shared library that we need to link with at runtime running an executable that needs it.<br \>
+<br \>
+With our library (.dll / .so file) and a header (.bi file) we can try them out in a test program:<br \>
+<br \>
+<tt><div class="freebasic">
+<span class="com">''&nbsp;mytest.bas</span><br />
+<span class="com">''&nbsp;compile&nbsp;with:&nbsp;fbc&nbsp;mytest.bas</span><br />
+<span class="def">#include&nbsp;once&nbsp;"mylib.bi"<br />
+</span><span class="key">Print</span>&nbsp;<span class="wrd">Add2</span><span class="oth">(</span><span class="num">1</span><span class="oth">,</span><span class="num">2</span><span class="oth">)</span><br />
+</div></tt><br />
+The <tt><a href="KeyPgInclude.html">#include</a></tt> statement tells the compiler to include the source code from <tt>mylib.bi</tt> just as if we had typed it in to the original source.  With the way we have written our include file, it tells the compiler everything it needs to know about the library.<br \>
+<br \>
+We compile this with:<br \>
+<tt>fbc mytest.bas</tt><br \>
+<br \>
+Then when we run the <tt>mytest</tt> executable, we should get the result of:<br \>
+<tt>3</tt><br \>
+<br \>
+More than one source module can be used when making a library.  And basic programs can use more than one library by including each needed header.  Some libraries are so large that they might use several headers.  On very large projects, making shared libraries out of some code modules that seldom change can improve compile times and link times dramatically.<br \>
+<br \>
+Shared libraries can optionally contain debugging information specified with the <i><a href="CompilerOptg.html">-g</a></i> command line option.<br \>
+<br \>
+Object files, and therefore shared libraries, are platform specific and in some cases specific to a particular version of the compiler and FreeBASIC runtime library.<br \>
+<br \>
+</div><div class="fb_sect_title">Using Shared Libraries on Windows</div><div class="fb_sect_cont"><br \>
+On windows, the shared library must be stored in a location where it can be found by the executable that needs it a run-time.  <br \>
+<br \>
+The operating system may search the following directories:<br \>
+<ul><li> The directory from which the executable was loaded.<br \>
+<li> The current directory.<br \>
+<li> The windows and windows system folder.<br \>
+<li> Directories list in the <tt>PATH</tt> environment variable.<br \>
+<br \>
+</ul>The order in which directories are searched may depend on the Windows version in use, and on what settings that the operating system is configured with.<br \>
+<br \>
+</div><div class="fb_sect_title">Using Shared Libraries on Linux</div><div class="fb_sect_cont"><br \>
+<br \>
+By default, linux will not normally search the current directory or the directory from which the executable was loaded.  You will need to either:<br \>
+<ul><li> copy the .so file to a directory that has shared libraries (e.g. <tt>/usr/lib</tt>) and run <tt>ldconfig</tt> to configure the library.<br \>
+<li> modify the environment variable LD_LIBRARY_PATH to search the current directory or a specific directory for the newly created shared library.<br \>
+<br \>
+</ul>To run the executable <tt>./mytest/</tt> and temporarily tell linux to search the current directory, use the following shell command:<br \>
+<pre class="fb_pre">
+LD_LIBRARY_PATH=.:$LD_LIBRARY_PATH ./mytest
+</pre><br \>
+</div><div class="fb_sect_title">Executables that export symbols</div><div class="fb_sect_cont"><br \>
+If an executable has symbols that must be available to other shared libraries when those shared libraries are loaded, use the <tt><a href="KeyPgExport.html">Export</a></tt> procedure declaration specifier, and the <i><a href="CompilerOptexport.html">-export</a></i> command line option when making (linking) the executable.<br \>
+<br \>
+The <i><a href="CompilerOptexport.html">-export</a></i> option has no extra effect when used with the <i><a href="CompilerOptdylib.html">-dylib</a></i> or <i><a href="CompilerOptdll.html">-dll</a></i> command line options.<br \>
+<br \>
+</div><div class="fb_sect_title">Loading Shared Libraries Dynamically</div><div class="fb_sect_cont"><br \>
+Shared libraries can be loaded and used at run time by dynamically loading the library and its symbols at runtime.<br \>
+<ul><li> <tt><a href="KeyPgDylibload.html">DyLibLoad</a></tt> can be used to load and obtain a handle to a shared library.<br \>
+<li> <tt><a href="KeyPgDylibsymbol.html">DyLibSymbol</a></tt> is used to obtain the address of a symbol in a loaded shared library.<br \>
+<li> <tt><a href="KeyPgDylibfree.html">DyLibFree</a></tt> is used to unload a shared library when it is no longer needed.<br \>
+<br \>
+</ul>Procedures in the shared library must use the <tt><a href="KeyPgExport.html">Export</a></tt> specifier to ensure that the symbols name is placed in the shared library's export table.<br \>
+<br \>
+</div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <a href="ProPgStaticLibraries.html">Static Libraries</a><br \>
+<li> <tt><a href="KeyPgInclib.html">#inclib</a></tt><br \>
+<li> <tt><a href="KeyPgInclude.html">#include</a></tt><br \>
+<li> <a href="CompilerOptdll.html">Compiler Option: -dll</a><br \>
+<li> <a href="CompilerOptexport.html">Compiler Option: -export</a><br \>
+<li> <a href="CompilerOptdylib.html">Compiler Option: -dylib</a><br \>
+<br \>
+</ul><br \>
+</div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

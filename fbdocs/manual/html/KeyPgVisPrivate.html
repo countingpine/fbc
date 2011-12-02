@@ -1,0 +1,75 @@
+<html>
+<head>
+<title>Private: (Access Control)</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Private: (Access Control)</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Specifies private member access control in a <tt><a href="KeyPgType.html">Type</a></tt> or <tt><a href="KeyPgClass.html">Class</a></tt><br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<a href="KeyPgType.html">Type</a> <i>typename</i><br \>
+<div class="fb_indent"><b>Private:</b><br \>
+<div class="fb_indent"><i>member declarations</i><br \>
+</div></div>End Type<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+<tt><i>typename</i></tt><br \>
+<div class="fb_indent">name of the <tt><a href="KeyPgType.html">Type</a></tt> or <tt><a href="KeyPgClass.html">Class</a></tt><br \>
+</div><tt><i>member declarations</i></tt><br \>
+<div class="fb_indent">declarations for fields, functions, or enumerations<br \>
+<br \>
+</div></div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+<tt><b>Private:</b></tt> indicates that <tt><i>member declarations</i></tt> following it have private access.  Private members are accessible only from inside a member function for the <tt><a href="KeyPgType.html">Type</a></tt> or <tt><a href="KeyPgClass.html">Class</a></tt>.<br \>
+<br \>
+<tt><i>member declarations</i></tt> following <tt><b>Private:</b></tt> are private until a different access control specifier is given, like <tt><a href="KeyPgVisPublic.html">Public:</a></tt> or <tt><a href="KeyPgVisProtected.html">Protected:</a></tt>.<br \>
+<br \>
+Members in a <tt><a href="KeyPgType.html">Type</a></tt> declaration are <tt><b>Public:</b></tt> by default if no member access control specifier is given.<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="key">Type</span>&nbsp;<span class="wrd">testing</span><br />
+&nbsp;&nbsp;<span class="wrd">number</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;<span class="key">Private</span><span class="oth">:</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">nome</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span><br />
+&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Sub</span>&nbsp;<span class="wrd">setNome</span><span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">newnome</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span>&nbsp;<span class="oth">)</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Type</span><br />
+<br />
+<span class="key">Sub</span>&nbsp;<span class="wrd">testing.setnome</span><span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">newnome</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;<span class="com">''&nbsp;This&nbsp;is&nbsp;OK.&nbsp;We're&nbsp;inside&nbsp;a&nbsp;member&nbsp;function&nbsp;for&nbsp;the&nbsp;type</span><br />
+&nbsp;&nbsp;<span class="wrd">this.nome</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">newnome</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Sub</span><br />
+<br />
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">testing</span>&nbsp;<span class="wrd">myVariable</span><br />
+<br />
+<span class="com">''&nbsp;This&nbsp;is&nbsp;OK,&nbsp;number&nbsp;is&nbsp;public</span><br />
+<span class="wrd">myVariable.number</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">69</span><br />
+<br />
+<span class="com">''&nbsp;this&nbsp;would&nbsp;generate&nbsp;a&nbsp;compile&nbsp;error&nbsp;</span><br />
+<span class="com">''&nbsp;-&nbsp;nome&nbsp;is&nbsp;private&nbsp;and&nbsp;we're&nbsp;trying&nbsp;to&nbsp;access&nbsp;it&nbsp;outside&nbsp;any&nbsp;of&nbsp;this&nbsp;TYPE's&nbsp;member&nbsp;functions&nbsp;</span><br />
+<span class="com">''&nbsp;myVariable.nome&nbsp;=&nbsp;"FreeBASIC"</span><br />
+</div></tt><br />
+<br \>
+</div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
+<ul><li> Available only in the <i><a href="CompilerOptlang.html">-lang fb</a></i> dialect.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> New to FreeBASIC<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgVisPublic.html">Public:</a></tt> (Access Control)<br \>
+<li> <tt><a href="KeyPgVisProtected.html">Protected:</a></tt> (Access Control)<br \>
+<li> <tt><a href="KeyPgType.html">Type</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

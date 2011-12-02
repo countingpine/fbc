@@ -1,0 +1,98 @@
+<html>
+<head>
+<title>Sub (Member)</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Sub (Member)</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Declares or defines a member procedure.<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+{ <a href="KeyPgType.html">Type</a> | <a href="KeyPgClass.html">Class</a> | <a href="KeyPgUnion.html">Union</a> } <i>typename</i><br \>
+<div class="fb_indent"><a href="KeyPgDeclare.html">Declare</a> [ <a href="KeyPgStaticMember.html">Static</a> ] <b>Sub</b> <i>fieldname</i> [<i>calling convention specifier</i>] [ <a href="KeyPgAlias.html">Alias</a> <i>external_name</i> ] ( [ <i>parameters</i> ] ) [ <a href="KeyPgStatic.html">Static</a> ]<br \>
+</div>End { <a href="KeyPgType.html">Type</a> | <a href="KeyPgClass.html">Class</a> | <a href="KeyPgUnion.html">Union</a> }<br \>
+<br \>
+<b>Sub</b> <i>typename</i>.<i>fieldname</i> ( [ <i>parameters</i> ] )<br \>
+<div class="fb_indent"><i>statements</i><br \>
+</div><b>End Sub</b><br \>
+</tt><br \>
+</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+<tt><i>typename</i></tt> <br \>
+<div class="fb_indent">name of the <tt><a href="KeyPgType.html">Type</a></tt>, <tt><a href="KeyPgClass.html">Class</a></tt>, or <tt><a href="KeyPgUnion.html">Union</a></tt><br \>
+</div><tt><i>fieldname</i></tt> <br \>
+<div class="fb_indent">name of the procedure<br \>
+</div><tt><i>external_name</i></tt><br \>
+<div class="fb_indent">name of field as seen when externally linked<br \>
+</div><tt><i>parameters</i></tt> <br \>
+<div class="fb_indent">the parameters to be passed to the procedure<br \>
+</div><tt><i>calling convention specifier</i></tt>	<br \>
+<div class="fb_indent">can be one of: <tt><a href="KeyPgCdecl.html">cdecl</a></tt>, <tt><a href="KeyPgStdcall.html">stdcall</a></tt> or <tt><a href="KeyPgPascal.html">pascal</a></tt><br \>
+<br \>
+</div></div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+<tt><b>Sub</b></tt> members are accessed with <tt><a href="KeyPgOpMemberAccess.html">Operator . (Member Access)</a></tt> or <tt><a href="KeyPgOpPtrMemberAccess.html">Operator -&gt; (Pointer To Member Access)</a></tt> to call a member procedure and may optionally accept parameters either <tt><a href="KeyPgByval.html">ByVal</a></tt> or <tt><a href="KeyPgByref.html">ByRef</a></tt>.  <tt><i>typename</i></tt> be overloaded  without explicit use of the <tt><a href="KeyPgOverload.html">Overload</a></tt> keyword.<br \>
+<br \>
+<tt><i>typename</i></tt> is the name of the type for which the <tt><b>Sub</b></tt> method is declared and defined.  Name resolution for <tt><i>typename</i></tt> follows the same rules as procedures when used in a <tt><a href="KeyPgNamespace.html">Namespace</a></tt>.<br \>
+<br \>
+A hidden <tt><a href="KeyPgThis.html">This</a></tt> parameter having the same type as <tt><i>typename</i></tt> is passed to non-static member procedures.  <tt><a href="KeyPgThis.html">This</a></tt> is used to access the fields of the <tt><a href="KeyPgType.html">Type</a></tt>, <tt><a href="KeyPgClass.html">Class</a></tt>, or <tt><a href="KeyPgUnion.html">Union</a></tt>.<br \>
+<br \>
+A <tt><a href="KeyPgStaticMember.html">Static (Member)</a></tt> may be declared using the <tt><b>Static</b></tt> specifier.  A <tt><a href="KeyPgConstMember.html">Const (Member)</a></tt> may be declared using the <tt><b>Const</b></tt> specifier.<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="key">Type</span>&nbsp;<span class="wrd">Statistics</span><br />
+&nbsp;&nbsp;<span class="wrd">count</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Single</span><br />
+&nbsp;&nbsp;<span class="wrd">sum</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Single</span><br />
+&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Sub</span>&nbsp;<span class="wrd">AddValue</span><span class="oth">(</span>&nbsp;<span class="key">ByVal</span>&nbsp;<span class="wrd">x</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Single</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Sub</span>&nbsp;<span class="wrd">ShowResults</span><span class="oth">(</span>&nbsp;<span class="oth">)</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Type</span><br />
+<br />
+<span class="key">Sub</span>&nbsp;<span class="wrd">Statistics.AddValue</span><span class="oth">(</span>&nbsp;<span class="key">ByVal</span>&nbsp;<span class="wrd">x</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Single</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;<span class="wrd">count</span>&nbsp;<span class="oth">+=</span>&nbsp;<span class="num">1</span><br />
+&nbsp;&nbsp;<span class="wrd">sum</span>&nbsp;<span class="oth">+=</span>&nbsp;<span class="wrd">x</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Sub</span><br />
+<br />
+<span class="key">Sub</span>&nbsp;<span class="wrd">Statistics.ShowResults</span><span class="oth">(</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"Number&nbsp;of&nbsp;Values&nbsp;=&nbsp;"</span><span class="oth">;</span>&nbsp;<span class="wrd">count</span><br />
+&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"Average&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;"</span><span class="oth">;</span><br />
+&nbsp;&nbsp;<span class="key">If</span><span class="oth">(</span>&nbsp;<span class="wrd">count</span>&nbsp;<span class="oth">&gt;</span>&nbsp;<span class="num">0</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="key">Then</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="wrd">sum</span>&nbsp;<span class="oth">/</span>&nbsp;<span class="wrd">count</span><br />
+&nbsp;&nbsp;<span class="key">Else</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"N/A"</span><br />
+&nbsp;&nbsp;<span class="key">End</span>&nbsp;<span class="key">If</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Sub</span><br />
+<br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">stats</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">Statistics</span><br />
+<br />
+<span class="wrd">stats.AddValue</span>&nbsp;<span class="num">17.5</span><br />
+<span class="wrd">stats.AddValue</span>&nbsp;<span class="num">20.1</span><br />
+<span class="wrd">stats.AddValue</span>&nbsp;<span class="num">22.3</span><br />
+<span class="wrd">stats.AddValue</span>&nbsp;<span class="num">16.9</span><br />
+<br />
+<span class="wrd">stats.ShowResults</span><br />
+</div></tt><br />
+<b>Output:</b><br \>
+<pre class="fb_pre">
+Number of Values =  4
+Average          =  19.2
+</pre><br \>
+</div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
+<ul><li> Only available in the <i><a href="CompilerOptlang.html">-lang fb</a></i> dialect.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgClass.html">Class</a></tt><br \>
+<li> <tt><a href="KeyPgMemberFunction.html">Function (Member)</a></tt><br \>
+<li> <tt><a href="KeyPgSub.html">Sub</a></tt><br \>
+<li> <tt><a href="KeyPgType.html">Type</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

@@ -1,0 +1,140 @@
+<html>
+<head>
+<title>CondCreate</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">CondCreate</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Creates a conditional variable to be used in synchronizing threads<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgFunction.html">Function</a> <b>CondCreate</b> ( ) <a href="KeyPgAs.html">As</a> <a href="KeyPgAny.html">Any</a> <a href="KeyPgPtr.html">Ptr</a><br \>
+</tt><br \>
+</div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
+<i>result</i> = <b>CondCreate</b><br \>
+</tt><br \>
+</div><div class="fb_sect_title">Return Value</div><div class="fb_sect_cont"><br \>
+A handle to a newly created conditional variable, or the null pointer (0) on failure.<br \>
+<br \>
+</div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+Once the conditional is <tt><b>KeyPgCondCreate Condcreate</b></tt>d and the threads are started, one or more of them can be set to <tt><a href="KeyPgCondWait.html">CondWait</a></tt> for the conditional, they will be stopped until some other thread <tt><a href="KeyPgCondSignal.html">CondSignal</a></tt>s that the waiting thread can restart. <tt><a href="KeyPgCondBroadcast.html">CondBroadcast</a></tt> can be used to restart all threads waiting for the conditional. At the end of the program <tt><a href="KeyPgCondDestroy.html">CondDestroy</a></tt> must be used to avoid leaking resources in the OS.<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="com">''</span><br />
+<span class="com">''&nbsp;make&nbsp;newly-created&nbsp;threads&nbsp;wait&nbsp;until&nbsp;all&nbsp;threads&nbsp;are&nbsp;ready,&nbsp;then&nbsp;start&nbsp;them&nbsp;all&nbsp;at&nbsp;once</span><br />
+<span class="com">''</span><br />
+<br />
+<span class="key">Dim</span>&nbsp;<span class="key">Shared</span>&nbsp;<span class="wrd">hcondstart</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Any</span>&nbsp;<span class="key">Ptr</span><br />
+<span class="key">Dim</span>&nbsp;<span class="key">Shared</span>&nbsp;<span class="wrd">hmutexstart</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Any</span>&nbsp;<span class="key">Ptr</span><br />
+<span class="key">Dim</span>&nbsp;<span class="key">Shared</span>&nbsp;<span class="wrd">start</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span><br />
+<br />
+<span class="key">Dim</span>&nbsp;<span class="key">Shared</span>&nbsp;<span class="wrd">threadcount</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+<span class="key">Dim</span>&nbsp;<span class="key">Shared</span>&nbsp;<span class="wrd">hmutexready</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Any</span>&nbsp;<span class="key">Ptr</span><br />
+<span class="key">Dim</span>&nbsp;<span class="key">Shared</span>&nbsp;<span class="wrd">hcondready</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Any</span>&nbsp;<span class="key">Ptr</span><br />
+<br />
+<span class="key">Sub</span>&nbsp;<span class="wrd">mythread</span><span class="oth">(</span><span class="key">ByVal</span>&nbsp;<span class="wrd">id_ptr</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Any</span>&nbsp;<span class="key">Ptr</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="wrd">id</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">Cast</span><span class="oth">(</span><span class="key">Integer</span><span class="oth">,</span>&nbsp;<span class="wrd">id_ptr</span><span class="oth">)</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"Thread&nbsp;#"</span>&nbsp;<span class="oth">&amp;</span>&nbsp;<span class="wrd">id</span>&nbsp;<span class="oth">&amp;</span>&nbsp;<span class="quo">"&nbsp;is&nbsp;waiting..."</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;signal&nbsp;that&nbsp;this&nbsp;thread&nbsp;is&nbsp;ready</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">MutexLock</span>&nbsp;<span class="wrd">hmutexready</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">threadcount</span>&nbsp;<span class="oth">+=</span>&nbsp;<span class="num">1</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">CondSignal</span>&nbsp;<span class="wrd">hcondready</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">MutexUnlock</span>&nbsp;<span class="wrd">hmutexready</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;wait&nbsp;for&nbsp;the&nbsp;start&nbsp;signal</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">MutexLock</span>&nbsp;<span class="wrd">hmutexstart</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Do</span>&nbsp;<span class="key">While</span>&nbsp;<span class="wrd">start</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span>&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">CondWait</span>&nbsp;<span class="wrd">hcondstart</span><span class="oth">,</span>&nbsp;<span class="wrd">hmutexstart</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Loop</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;now&nbsp;this&nbsp;thread&nbsp;holds&nbsp;the&nbsp;lock&nbsp;on&nbsp;hmutexstart</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">MutexUnlock</span>&nbsp;<span class="wrd">hmutexstart</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;print&nbsp;out&nbsp;the&nbsp;number&nbsp;of&nbsp;this&nbsp;thread</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">For</span>&nbsp;<span class="wrd">i</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">1</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">40</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="wrd">id</span><span class="oth">;</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Next</span>&nbsp;<span class="wrd">i</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Sub</span><br />
+<br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">threads</span><span class="oth">(</span><span class="num">1</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">9</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Any</span>&nbsp;<span class="key">Ptr</span><br />
+<br />
+<span class="wrd">hcondstart</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">CondCreate</span><span class="oth">()</span><br />
+<span class="wrd">hmutexstart</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">MutexCreate</span><span class="oth">()</span><br />
+<br />
+<span class="wrd">hcondready</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">CondCreate</span><span class="oth">()</span><br />
+<span class="wrd">hmutexready</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">MutexCreate</span><span class="oth">()</span><br />
+<br />
+<span class="wrd">threadcount</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span><br />
+<br />
+<br />
+<span class="key">For</span>&nbsp;<span class="wrd">i</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">1</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">9</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">threads</span><span class="oth">(</span><span class="wrd">i</span><span class="oth">)</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">ThreadCreate</span><span class="oth">(@</span><span class="wrd">mythread</span><span class="oth">,</span>&nbsp;<span class="key">Cast</span><span class="oth">(</span><span class="key">Any</span>&nbsp;<span class="key">Ptr</span><span class="oth">,</span>&nbsp;<span class="wrd">i</span><span class="oth">))</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">If</span>&nbsp;<span class="wrd">threads</span><span class="oth">(</span><span class="wrd">i</span><span class="oth">)</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span>&nbsp;<span class="key">Then</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"unable&nbsp;to&nbsp;create&nbsp;thread"</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">End</span>&nbsp;<span class="key">If</span><br />
+<span class="key">Next</span>&nbsp;<span class="wrd">i</span><br />
+<br />
+<span class="key">Print</span>&nbsp;<span class="quo">"Waiting&nbsp;until&nbsp;all&nbsp;threads&nbsp;are&nbsp;ready..."</span><br />
+<br />
+<span class="key">MutexLock</span><span class="oth">(</span><span class="wrd">hmutexready</span><span class="oth">)</span><br />
+<span class="key">Do</span>&nbsp;<span class="key">Until</span>&nbsp;<span class="wrd">threadcount</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">9</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">CondWait</span><span class="oth">(</span><span class="wrd">hcondready</span><span class="oth">,</span>&nbsp;<span class="wrd">hmutexready</span><span class="oth">)</span><br />
+<span class="key">Loop</span><br />
+<span class="key">MutexUnlock</span><span class="oth">(</span><span class="wrd">hmutexready</span><span class="oth">)</span><br />
+<br />
+<span class="key">Print</span>&nbsp;<span class="quo">"Go!"</span><br />
+<br />
+<span class="key">MutexLock</span>&nbsp;<span class="wrd">hmutexstart</span><br />
+<span class="wrd">start</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">1</span><br />
+<span class="key">CondBroadcast</span>&nbsp;<span class="wrd">hcondstart</span><br />
+<span class="key">MutexUnlock</span>&nbsp;<span class="wrd">hmutexstart</span><br />
+<br />
+<span class="com">''&nbsp;wait&nbsp;for&nbsp;all&nbsp;threads&nbsp;to&nbsp;complete</span><br />
+<span class="key">For</span>&nbsp;<span class="wrd">i</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">1</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">9</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">If</span>&nbsp;<span class="wrd">threads</span><span class="oth">(</span><span class="wrd">i</span><span class="oth">)</span>&nbsp;<span class="oth">&lt;&gt;</span>&nbsp;<span class="num">0</span>&nbsp;<span class="key">Then</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">ThreadWait</span>&nbsp;<span class="wrd">threads</span><span class="oth">(</span><span class="wrd">i</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">End</span>&nbsp;<span class="key">If</span><br />
+<span class="key">Next</span>&nbsp;<span class="wrd">i</span><br />
+<br />
+<span class="key">MutexDestroy</span>&nbsp;<span class="wrd">hmutexready</span><br />
+<span class="key">CondDestroy</span>&nbsp;<span class="wrd">hcondready</span><br />
+<br />
+<span class="key">MutexDestroy</span>&nbsp;<span class="wrd">hmutexstart</span><br />
+<span class="key">CondDestroy</span>&nbsp;<span class="wrd">hcondstart</span><br />
+</div></tt><br />
+<br \>
+</div><div class="fb_sect_title">Platform Differences</div><div class="fb_sect_cont"><br \>
+<ul><li> <b>Condcreate</b> is not available with the DOS version / target of FreeBASIC, because multithreading is not supported by DOS kernel nor the used extender.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
+<ul><li> Threading is not allowed in <i><a href="CompilerOptlang.html">-lang qb</a></i><br \>
+<br \>
+</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> New to FreeBASIC<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgCondBroadcast.html">CondBroadcast</a></tt><br \>
+<li> <tt><a href="KeyPgCondDestroy.html">CondDestroy</a></tt><br \>
+<li> <tt><a href="KeyPgCondSignal.html">CondSignal</a></tt><br \>
+<li> <tt><a href="KeyPgCondWait.html">CondWait</a></tt><br \>
+<li> <tt><a href="KeyPgMutexCreate.html">MutexCreate</a></tt><br \>
+<li> <tt><a href="KeyPgMutexLock.html">MutexLock</a></tt><br \>
+<li> <tt><a href="KeyPgMutexUnlock.html">MutexUnlock</a></tt><br \>
+<li> <tt><a href="KeyPgThreadCreate.html">ThreadCreate</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

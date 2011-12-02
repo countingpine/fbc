@@ -1,0 +1,75 @@
+<html>
+<head>
+<title>DateAdd</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">DateAdd</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Offset a date with a specified interval<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgFunction.html">Function</a> <b>DateAdd</b> ( <a href="KeyPgByref.html">ByRef</a> <i>interval</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgConstQualifier.html">Const</a> <a href="KeyPgString.html">String</a>, <a href="KeyPgByval.html">ByVal</a> <i>number</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgDouble.html">Double</a>, <a href="KeyPgByval.html">ByVal</a> <i>date_serial</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgDouble.html">Double</a> ) <a href="KeyPgAs.html">As</a> <a href="KeyPgDouble.html">Double</a><br \>
+</tt><br \>
+</div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
+#include "vbcompat.bi"<br \>
+<i>result</i> = <b>DateAdd</b>( <i>interval</i>, <i>number</i>, <i>date_serial</i> )<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+<tt><i>interval</i></tt><br \>
+<div class="fb_indent">string indicating which period of time corresponds to one unit of <tt><i>number</i></tt><br \>
+</div><tt><i>number</i></tt><br \>
+<div class="fb_indent">the number of intervals to add to the base date.  The number will be rounded to the nearest integer.<br \>
+</div><tt><i>date_serial</i></tt><br \>
+<div class="fb_indent">the base date<br \>
+<br \>
+</div></div><div class="fb_sect_title">Return Value</div><div class="fb_sect_cont"><br \>
+Returns a <a href="ProPgDates.html">Date Serial</a> corresponding to the received <tt><i>date_serial</i></tt> plus the <tt><i>number</i></tt> of <tt><i>intervals</i></tt>.<br \>
+<br \>
+</div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+Interval is specified as follows:<br \>
+<br \>
+<div class="fb_table"><table><tr><td>value</td><td>interval</td></tr><tr><td>yyyy</td><td>years</td></tr><tr><td>q</td><td>quarter(three months)</td></tr><tr><td>m</td><td>months</td></tr><tr><td>ww</td><td>weeks</td></tr><tr><td>d,w,y</td><td>days</td></tr><tr><td>h</td><td>hours</td></tr><tr><td>n</td><td>minutes</td></tr><tr><td>s</td><td>seconds</td></tr></table></div>  <br \>
+<br \>
+The compiler will not recognize this function unless <tt>vbcompat.bi</tt> or <tt>datetime.bi</tt> is included.<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="def">#include&nbsp;"vbcompat.bi"<br />
+</span><br />
+<span class="key">Const</span>&nbsp;<span class="wrd">fmt</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="quo">"ddddd&nbsp;ttttt"</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">d</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Double</span><br />
+<span class="wrd">d</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">Now</span><span class="oth">()</span><br />
+<br />
+<span class="key">Print</span>&nbsp;<span class="quo">"1&nbsp;hour&nbsp;from&nbsp;now&nbsp;is&nbsp;"</span><span class="oth">;</span><br />
+<span class="key">Print</span>&nbsp;<span class="key">Format</span><span class="oth">(</span>&nbsp;<span class="key">DateAdd</span><span class="oth">(</span>&nbsp;<span class="quo">"h"</span><span class="oth">,</span>&nbsp;<span class="num">1</span><span class="oth">,</span>&nbsp;<span class="wrd">d</span>&nbsp;<span class="oth">),</span>&nbsp;<span class="wrd">fmt</span>&nbsp;<span class="oth">)</span><br />
+<br />
+<span class="key">Print</span>&nbsp;<span class="quo">"1&nbsp;day&nbsp;from&nbsp;now&nbsp;is&nbsp;"</span><span class="oth">;</span><br />
+<span class="key">Print</span>&nbsp;<span class="key">Format</span><span class="oth">(</span>&nbsp;<span class="key">DateAdd</span><span class="oth">(</span>&nbsp;<span class="quo">"d"</span><span class="oth">,</span>&nbsp;<span class="num">1</span><span class="oth">,</span>&nbsp;<span class="wrd">d</span>&nbsp;<span class="oth">),</span>&nbsp;<span class="wrd">fmt</span>&nbsp;<span class="oth">)</span><br />
+<br />
+<span class="key">Print</span>&nbsp;<span class="quo">"1&nbsp;week&nbsp;from&nbsp;now&nbsp;is&nbsp;"</span><span class="oth">;</span><br />
+<span class="key">Print</span>&nbsp;<span class="key">Format</span><span class="oth">(</span>&nbsp;<span class="key">DateAdd</span><span class="oth">(</span>&nbsp;<span class="quo">"ww"</span><span class="oth">,</span>&nbsp;<span class="num">1</span><span class="oth">,</span>&nbsp;<span class="wrd">d</span>&nbsp;<span class="oth">),</span>&nbsp;<span class="wrd">fmt</span>&nbsp;<span class="oth">)</span><br />
+<br />
+<span class="key">Print</span>&nbsp;<span class="quo">"1&nbsp;month&nbsp;from&nbsp;now&nbsp;is&nbsp;"</span><span class="oth">;</span><br />
+<span class="key">Print</span>&nbsp;<span class="key">Format</span><span class="oth">(</span>&nbsp;<span class="key">DateAdd</span><span class="oth">(</span>&nbsp;<span class="quo">"m"</span><span class="oth">,</span>&nbsp;<span class="num">1</span><span class="oth">,</span>&nbsp;<span class="wrd">d</span>&nbsp;<span class="oth">),</span>&nbsp;<span class="wrd">fmt</span>&nbsp;<span class="oth">)</span><br />
+</div></tt><br />
+<br \>
+</div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> Did not exist in QB. This function appeared in Visual Basic.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <a href="ProPgDates.html">Date Serials</a><br \>
+<br \>
+</ul><br \>
+   <br \>
+</div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

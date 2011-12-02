@@ -1,0 +1,171 @@
+<html>
+<head>
+<title>Const (Qualifier)</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Const (Qualifier)</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Specifies that a data type or pointer data type is read only.<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+... <a href="KeyPgAs.html">As</a> [<b>Const</b>] <i><a href="DataType.html">datatype</a></i> [ [<b>Const</b>] <a href="KeyPgPtr.html">Ptr</a> ... ]<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+<tt><i>datatype</i></tt><br \>
+<div class="fb_indent">Name of a standard or user defined data type.<br \>
+<br \>
+</div></div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+Specifies that the <tt><i>datatype</i></tt> or <tt><a href="KeyPgPtr.html">Ptr</a></tt> immediately to the right of the <tt><b>Const</b></tt> qualifier is to be considered as read only.  Read-only (<tt><b>Const</b></tt>) declarations are a measure of type safety that can be read as 'promises not to change.'  The compiler uses the const declarations to check operations on variables and parameters and generate an error at compile time if their data could potentially change.  There is no runtime overhead for using <tt><b>Const</b></tt> qualifiers since all of the checks are made at compile time.<br \>
+<br \>
+<tt><b>Const</b></tt> can be used anywhere data type declarations are made.  This includes variables, parameters, function return results, user defined type fields, type aliases, and casting.  The <tt><i>datatype</i></tt> can be any built-in standard data type or user defined type.<br \>
+<br \>
+Read-only variables must have an initializer since modifying a read-only variable through an assignment will generate a compiler error.  The initializer may appear after the declaration of the variable.<br \>
+<br \>
+Both non-const and const variables may be passed to a procedure expecting a const parameter.  However, a const variable may not be passed to a procedure taking a non-const parameter, and will generate a compile error.<br \>
+<br \>
+Procedures can be overloaded based on the const-ness of parameters.  For example a procedure can be overloaded where one version of the procedure takes a <tt>'byref foo as bar'</tt> parameter and another version of the procedure takes a <tt>'byref foo as const bar'</tt> parameter.<br \>
+<br \>
+With pointer declarations, <tt><b>Const</b></tt> can be used to indicate which part of the pointer declaration is read-only (all other parts are by default read-write).  The read-only portion of the pointer data type could be the pointer itself (the address), what the pointer points to (the data), or both.  In a declaration with more than one level of <tt><a href="KeyPgPtr.html">Ptr</a></tt> indirection, the right most <tt><a href="KeyPgPtr.html">Ptr</a></tt> indicates the highest order level of indirection and is therefore dereferenced first.<br \>
+<br \>
+The compiler has an internal hard-limit of eight (8) levels of pointer indirection with respect to const qualifiers and the behavior of using <tt><b>Const</b></tt> with <tt><a href="KeyPgPtr.html">Ptr</a></tt> data types having greater than eight (8) levels of indirection is undefined.<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="com">''&nbsp;Const&nbsp;Variables</span><br />
+<br />
+<span class="com">''&nbsp;procedure&nbsp;taking&nbsp;a&nbsp;const&nbsp;parameter</span><br />
+<span class="key">Sub</span>&nbsp;<span class="wrd">proc1</span><span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">x</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Const</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="oth">)</span><br />
+<br />
+&nbsp;&nbsp;<span class="com">''&nbsp;can't&nbsp;change&nbsp;x&nbsp;because&nbsp;it&nbsp;is&nbsp;const</span><br />
+&nbsp;&nbsp;<span class="com">''&nbsp;x&nbsp;=&nbsp;10&nbsp;''&nbsp;compile&nbsp;error</span><br />
+<br />
+&nbsp;&nbsp;<span class="com">''&nbsp;but&nbsp;we&nbsp;can&nbsp;use&nbsp;it&nbsp;in&nbsp;expressions&nbsp;and</span><br />
+&nbsp;&nbsp;<span class="com">''&nbsp;assign&nbsp;it&nbsp;to&nbsp;other&nbsp;variables</span><br />
+&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="wrd">y</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;<span class="wrd">y</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">x</span><br />
+&nbsp;&nbsp;<span class="wrd">y</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">y</span>&nbsp;<span class="oth">*</span>&nbsp;<span class="wrd">x</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="wrd">x</span><br />
+<br />
+<span class="key">End</span>&nbsp;<span class="key">Sub</span><br />
+<br />
+<span class="com">''&nbsp;procedure&nbsp;taking&nbsp;a&nbsp;non-const&nbsp;parameter</span><br />
+<span class="key">Sub</span>&nbsp;<span class="wrd">proc2</span><span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">x</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;<span class="com">''&nbsp;we&nbsp;can&nbsp;change&nbsp;the&nbsp;value</span><br />
+&nbsp;&nbsp;<span class="wrd">x</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">10</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Sub</span><br />
+<br />
+<span class="com">''&nbsp;declare&nbsp;a&nbsp;non-const&nbsp;and&nbsp;const&nbsp;variable</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">a</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">b</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Const</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">5</span><br />
+<br />
+<span class="com">''&nbsp;proc1()&nbsp;will&nbsp;accept&nbsp;a&nbsp;non-const&nbsp;or&nbsp;const</span><br />
+<span class="com">''&nbsp;argument&nbsp;because&nbsp;proc1()&nbsp;promises&nbsp;not&nbsp;to</span><br />
+<span class="com">''&nbsp;change&nbsp;the&nbsp;variable&nbsp;passed&nbsp;to&nbsp;it.</span><br />
+<span class="wrd">proc1</span><span class="oth">(</span>&nbsp;<span class="wrd">a</span>&nbsp;<span class="oth">)</span><br />
+<span class="wrd">proc1</span><span class="oth">(</span>&nbsp;<span class="wrd">b</span>&nbsp;<span class="oth">)</span><br />
+<br />
+<span class="com">''&nbsp;proc2()&nbsp;will&nbsp;accept&nbsp;a&nbsp;non-const&nbsp;argument</span><br />
+<span class="wrd">proc2</span><span class="oth">(</span>&nbsp;<span class="wrd">a</span>&nbsp;<span class="oth">)</span><br />
+<br />
+<span class="com">''&nbsp;but&nbsp;not&nbsp;a&nbsp;const&nbsp;argument&nbsp;because&nbsp;proc2()</span><br />
+<span class="com">''&nbsp;might&nbsp;change&nbsp;the&nbsp;variable's&nbsp;data&nbsp;and&nbsp;we</span><br />
+<span class="com">''&nbsp;promised&nbsp;that&nbsp;'b'&nbsp;would&nbsp;not&nbsp;change.</span><br />
+<span class="com">''&nbsp;proc2(&nbsp;b&nbsp;)&nbsp;''&nbsp;compile&nbsp;error</span><br />
+</div></tt><br />
+<br \>
+<tt><div class="freebasic">
+<span class="com">''&nbsp;Const&nbsp;Pointers</span><br />
+<br />
+<span class="com">''&nbsp;an&nbsp;integer</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">x</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">1</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">y</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">2</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">z</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">3</span><br />
+<br />
+<span class="com">''&nbsp;To&nbsp;check&nbsp;that&nbsp;the&nbsp;compiler&nbsp;generates&nbsp;errors</span><br />
+<span class="com">''&nbsp;when&nbsp;attempting&nbsp;to&nbsp;reassign&nbsp;const&nbsp;variables,</span><br />
+<span class="com">''&nbsp;uncomment&nbsp;the&nbsp;assignments&nbsp;below.</span><br />
+<br />
+<span class="com">''</span><br />
+<span class="key">Scope</span><br />
+&nbsp;&nbsp;<span class="com">''&nbsp;a&nbsp;pointer&nbsp;to&nbsp;an&nbsp;integer</span><br />
+&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="wrd">p</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="key">Ptr</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="oth">@</span><span class="wrd">x</span><br />
+<br />
+&nbsp;&nbsp;<span class="wrd">p</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="oth">@</span><span class="wrd">y</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">/'&nbsp;OK&nbsp;-&nbsp;pointer&nbsp;can&nbsp;be&nbsp;changed&nbsp;'/</span><br />
+&nbsp;&nbsp;<span class="oth">*</span><span class="wrd">p</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">z</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">/'&nbsp;OK&nbsp;-&nbsp;data&nbsp;can&nbsp;be&nbsp;changed&nbsp;'/</span><br />
+<br />
+<span class="key">End</span>&nbsp;<span class="key">Scope</span><br />
+<br />
+<span class="com">''</span><br />
+<span class="key">Scope</span><br />
+&nbsp;&nbsp;<span class="com">''&nbsp;a&nbsp;pointer&nbsp;to&nbsp;a&nbsp;constant&nbsp;integer</span><br />
+&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="wrd">p</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Const</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="key">Ptr</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="oth">@</span><span class="wrd">x</span><br />
+<br />
+&nbsp;&nbsp;<span class="wrd">p</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="oth">@</span><span class="wrd">y</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">/'&nbsp;OK&nbsp;-&nbsp;pointer&nbsp;can&nbsp;be&nbsp;changed&nbsp;'/</span><br />
+&nbsp;&nbsp;<span class="com">''&nbsp;*p&nbsp;=&nbsp;z&nbsp;&nbsp;&nbsp;&nbsp;/'&nbsp;Error&nbsp;-&nbsp;data&nbsp;is&nbsp;const&nbsp;'/</span><br />
+<br />
+<span class="key">End</span>&nbsp;<span class="key">Scope</span><br />
+<br />
+<span class="com">''</span><br />
+<span class="key">Scope</span><br />
+&nbsp;&nbsp;<span class="com">''&nbsp;a&nbsp;constant&nbsp;pointer&nbsp;to&nbsp;an&nbsp;integer</span><br />
+&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="wrd">p</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="key">Const</span>&nbsp;<span class="key">Ptr</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="oth">@</span><span class="wrd">x</span><br />
+<br />
+&nbsp;&nbsp;<span class="com">''&nbsp;p&nbsp;=&nbsp;@y&nbsp;&nbsp;&nbsp;&nbsp;/'&nbsp;Error&nbsp;-&nbsp;pointer&nbsp;is&nbsp;const&nbsp;'/</span><br />
+&nbsp;&nbsp;<span class="oth">*</span><span class="wrd">p</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">z</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">/'&nbsp;OK&nbsp;-&nbsp;data&nbsp;can&nbsp;be&nbsp;changed&nbsp;'/</span><br />
+<br />
+<span class="key">End</span>&nbsp;<span class="key">Scope</span><br />
+<br />
+<span class="com">''</span><br />
+<span class="key">Scope</span><br />
+&nbsp;&nbsp;<span class="com">''&nbsp;a&nbsp;constant&nbsp;pointer&nbsp;to&nbsp;a&nbsp;constant&nbsp;integer</span><br />
+&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="wrd">p</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Const</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="key">Const</span>&nbsp;<span class="key">Ptr</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="oth">@</span><span class="wrd">x</span><br />
+<br />
+&nbsp;&nbsp;<span class="com">''&nbsp;p&nbsp;=&nbsp;@y&nbsp;&nbsp;&nbsp;&nbsp;/'&nbsp;Error&nbsp;-&nbsp;pointer&nbsp;is&nbsp;const&nbsp;'/</span><br />
+&nbsp;&nbsp;<span class="com">''&nbsp;*p&nbsp;=&nbsp;z&nbsp;&nbsp;&nbsp;&nbsp;/'&nbsp;Error&nbsp;-&nbsp;data&nbsp;is&nbsp;const&nbsp;'/</span><br />
+<br />
+<span class="key">End</span>&nbsp;<span class="key">Scope</span><br />
+</div></tt><br />
+<br \>
+<tt><div class="freebasic">
+<span class="com">''&nbsp;Const&nbsp;Parameters&nbsp;in&nbsp;an&nbsp;Overloaded&nbsp;Procedure</span><br />
+<br />
+<span class="com">''&nbsp;procedure&nbsp;with&nbsp;non-const&nbsp;parameter</span><br />
+<span class="key">Sub</span>&nbsp;<span class="wrd">foo</span>&nbsp;<span class="key">Overload</span><span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">n</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"called&nbsp;'foo(&nbsp;byref&nbsp;n&nbsp;as&nbsp;integer&nbsp;)'"</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Sub</span><br />
+<br />
+<span class="com">''&nbsp;procedure&nbsp;with&nbsp;const&nbsp;parameter</span><br />
+<span class="key">Sub</span>&nbsp;<span class="wrd">foo</span>&nbsp;<span class="key">Overload</span><span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">n</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Const</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"called&nbsp;'foo(&nbsp;byref&nbsp;n&nbsp;as&nbsp;const&nbsp;integer&nbsp;)'"</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Sub</span><br />
+<br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">x</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">1</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">y</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Const</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">2</span><br />
+<br />
+<span class="wrd">foo</span><span class="oth">(</span>&nbsp;<span class="wrd">x</span>&nbsp;<span class="oth">)</span><br />
+<span class="wrd">foo</span><span class="oth">(</span>&nbsp;<span class="wrd">y</span>&nbsp;<span class="oth">)</span><br />
+<br />
+<span class="com">''&nbsp;OUTPUT:</span><br />
+<span class="com">''&nbsp;called&nbsp;'foo(&nbsp;byref&nbsp;n&nbsp;as&nbsp;integer&nbsp;)'</span><br />
+<span class="com">''&nbsp;called&nbsp;'foo(&nbsp;byref&nbsp;n&nbsp;as&nbsp;const&nbsp;integer&nbsp;)'</span><br />
+</div></tt><br />
+</div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> New to FreeBASIC<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgConst.html">Const</a></tt><br \>
+<li> <tt><a href="KeyPgConstMember.html">Const (Member)</a></tt><br \>
+<li> <tt><a href="KeyPgDim.html">Dim</a></tt><br \>
+<li> <tt><a href="KeyPgType.html">Type</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

@@ -1,0 +1,126 @@
+<html>
+<head>
+<title>MutexCreate</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">MutexCreate</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Creates a mutex used for synchronizing the execution of threads<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgFunction.html">Function</a> <b>MutexCreate</b> ( ) <a href="KeyPgAs.html">As</a> <a href="KeyPgAny.html">Any</a> <a href="KeyPgPtr.html">Ptr</a><br \>
+</tt><br \>
+</div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
+<i>result</i> = <b>MutexCreate</b><br \>
+</tt><br \>
+</div><div class="fb_sect_title">Return Value</div><div class="fb_sect_cont"><br \>
+The <tt><a href="KeyPgAny.html">Any</a> <a href="KeyPgPtr.html">Ptr</a></tt> handle of the mutex created, or the null pointer (0) on failure.<br \>
+<br \>
+</div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+Mutexes, short for "Mutually Exclusive", are a way of synchronizing shared data within threads.  If there is a global variable used by multiple threads (or a local variable used by a single thread, called multiple times), it should be "locked" during its use with a mutex.  This halts all threads using <tt><a href="KeyPgMutexLock.html">MutexLock</a></tt> with that mutex, until it is unlocked with <tt><a href="KeyPgMutexUnlock.html">MutexUnlock</a></tt>.<br \>
+<br \>
+<tt>Mutexcreate</tt> creates a mutex, returning a handle which is to be referred to when locking, unlocking, or destroying the mutex.  Mutexes created with <tt>Mutexcreate</tt> should be destroyed when no longer needed or before the end of the program with <tt><a href="KeyPgMutexDestroy.html">MutexDestroy</a></tt>.<br \>
+<br \>
+A  mutex is a lock that guarantees three things:<br \>
+1. Atomicity - Locking a mutex is an atomic operation, meaning that the operating system (or threads library) assures you that if you locked a mutex, no other thread succeeded in locking this mutex at the same time.<br \>
+2. Singularity - If a thread managed to lock a mutex, it is assured that no other thread will be able to lock the thread until the original thread releases the lock.<br \>
+3. Non-Busy Wait - If a thread attempts to lock a thread that was locked by a second thread, the first thread will be suspended (and will not consume any CPU resources) until the lock is freed by the second thread. At this time, the first thread will wake up and continue execution, having the mutex locked by it. <br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="com">''&nbsp;Threading&nbsp;syncronyzation&nbsp;using&nbsp;Mutexes</span><br />
+<span class="com">''&nbsp;If&nbsp;you&nbsp;comment&nbsp;out&nbsp;the&nbsp;lines&nbsp;containing&nbsp;"MutexLock"&nbsp;and&nbsp;"MutexUnlock",</span><br />
+<span class="com">''&nbsp;the&nbsp;threads&nbsp;will&nbsp;not&nbsp;be&nbsp;in&nbsp;sync&nbsp;and&nbsp;some&nbsp;of&nbsp;the&nbsp;data&nbsp;may&nbsp;be&nbsp;printed</span><br />
+<span class="com">''&nbsp;out&nbsp;of&nbsp;place.</span><br />
+<br />
+<span class="key">Const</span>&nbsp;<span class="wrd">MAX_THREADS</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">10</span><br />
+<br />
+<span class="key">Declare</span>&nbsp;<span class="key">Sub</span>&nbsp;<span class="wrd">thread</span><span class="oth">(</span>&nbsp;<span class="key">ByVal</span>&nbsp;<span class="wrd">id_ptr</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Any</span>&nbsp;<span class="key">Ptr</span>&nbsp;<span class="oth">)</span><br />
+<span class="key">Declare</span>&nbsp;<span class="key">Sub</span>&nbsp;<span class="wrd">teletype</span>&nbsp;<span class="oth">(</span><span class="key">ByVal</span>&nbsp;<span class="wrd">text</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span><span class="oth">,</span>&nbsp;<span class="key">ByVal</span>&nbsp;<span class="wrd">x</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">,</span>&nbsp;<span class="key">ByVal</span>&nbsp;<span class="wrd">y</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">)</span><br />
+<br />
+<span class="key">Dim</span>&nbsp;<span class="key">Shared</span>&nbsp;<span class="wrd">threadsync</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Any</span>&nbsp;<span class="key">Ptr</span><br />
+<br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">i</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+<br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">handleTb</span><span class="oth">(</span><span class="num">0</span>&nbsp;<span class="key">To</span>&nbsp;<span class="wrd">MAX_THREADS</span><span class="oth">-</span><span class="num">1</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Any</span>&nbsp;<span class="key">Ptr</span><br />
+<br />
+<span class="com">''&nbsp;Create&nbsp;a&nbsp;mutex&nbsp;to&nbsp;syncronize&nbsp;the&nbsp;threads</span><br />
+<span class="wrd">threadsync</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">MutexCreate</span><br />
+<br />
+<span class="com">''&nbsp;Create&nbsp;threads</span><br />
+<span class="key">For</span>&nbsp;<span class="wrd">i</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span>&nbsp;<span class="key">To</span>&nbsp;<span class="wrd">MAX_THREADS</span><span class="oth">-</span><span class="num">1</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">handleTb</span><span class="oth">(</span><span class="wrd">i</span><span class="oth">)</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">ThreadCreate</span><span class="oth">(@</span><span class="wrd">thread</span><span class="oth">,</span>&nbsp;<span class="oth">@</span><span class="wrd">i</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">If</span>&nbsp;<span class="wrd">handleTb</span><span class="oth">(</span><span class="wrd">i</span><span class="oth">)</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span>&nbsp;<span class="key">Then</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"Error&nbsp;creating&nbsp;thread:"</span><span class="oth">;</span>&nbsp;<span class="wrd">i</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Exit</span>&nbsp;<span class="key">For</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">End</span>&nbsp;<span class="key">If</span><br />
+<span class="key">Next</span><br />
+<br />
+<span class="com">''&nbsp;Wait&nbsp;until&nbsp;all&nbsp;threads&nbsp;are&nbsp;finished</span><br />
+<span class="key">For</span>&nbsp;<span class="wrd">i</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span>&nbsp;<span class="key">To</span>&nbsp;<span class="wrd">MAX_THREADS</span><span class="oth">-</span><span class="num">1</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">If</span><span class="oth">(</span>&nbsp;<span class="wrd">handleTb</span><span class="oth">(</span><span class="wrd">i</span><span class="oth">)</span>&nbsp;<span class="oth">&lt;&gt;</span>&nbsp;<span class="num">0</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="key">Then</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">ThreadWait</span><span class="oth">(</span>&nbsp;<span class="wrd">handleTb</span><span class="oth">(</span><span class="wrd">i</span><span class="oth">)</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">End</span>&nbsp;<span class="key">If</span><br />
+<span class="key">Next</span><br />
+<br />
+<span class="wrd">teletype</span>&nbsp;<span class="quo">"Testing................."</span><span class="oth">,</span>&nbsp;<span class="num">1</span><span class="oth">,</span>&nbsp;<span class="num">1</span><br />
+<span class="wrd">teletype</span>&nbsp;<span class="quo">"Testing&nbsp;again..........."</span><span class="oth">,</span>&nbsp;<span class="num">10</span><span class="oth">,</span>&nbsp;<span class="num">1</span><br />
+<br />
+<span class="com">''&nbsp;Discard&nbsp;the&nbsp;mutex&nbsp;when&nbsp;we&nbsp;are&nbsp;through&nbsp;using&nbsp;teletype</span><br />
+<span class="key">MutexDestroy</span>&nbsp;<span class="wrd">threadsync</span><br />
+<br />
+<span class="key">Sub</span>&nbsp;<span class="wrd">thread</span><span class="oth">(</span>&nbsp;<span class="key">ByVal</span>&nbsp;<span class="wrd">id_ptr</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Any</span>&nbsp;<span class="key">Ptr</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="wrd">id</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">id</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="oth">*</span><span class="key">Cast</span><span class="oth">(</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="key">Ptr</span><span class="oth">,</span>&nbsp;<span class="wrd">id_ptr</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">teletype</span>&nbsp;<span class="quo">"Thread&nbsp;("</span>&nbsp;<span class="oth">&amp;</span>&nbsp;<span class="wrd">id</span>&nbsp;<span class="oth">&amp;</span>&nbsp;<span class="quo">")........."</span><span class="oth">,</span>&nbsp;<span class="num">1</span><span class="oth">,</span>&nbsp;<span class="num">1</span><span class="oth">+</span><span class="wrd">id</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Sub</span><br />
+<br />
+<span class="com">''&nbsp;Teletype&nbsp;unfurls&nbsp;some&nbsp;text&nbsp;across&nbsp;the&nbsp;screen&nbsp;at&nbsp;a&nbsp;given&nbsp;location</span><br />
+<span class="key">Sub</span>&nbsp;<span class="wrd">teletype</span>&nbsp;<span class="oth">(</span><span class="key">ByVal</span>&nbsp;<span class="wrd">text</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span><span class="oth">,</span>&nbsp;<span class="key">ByVal</span>&nbsp;<span class="wrd">x</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">,</span>&nbsp;<span class="key">ByVal</span>&nbsp;<span class="wrd">y</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="wrd">i</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">For</span>&nbsp;<span class="wrd">i</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span>&nbsp;<span class="key">To</span>&nbsp;<span class="key">Len</span><span class="oth">(</span><span class="wrd">text</span><span class="oth">)-</span><span class="num">1</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;MutexLock&nbsp;prevents&nbsp;the&nbsp;two&nbsp;simultaneously&nbsp;running</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;threads&nbsp;from&nbsp;sharing&nbsp;"x",&nbsp;"y",&nbsp;and&nbsp;"a"</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">MutexLock</span>&nbsp;<span class="wrd">threadsync</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Locate</span>&nbsp;<span class="wrd">y</span><span class="oth">,</span>&nbsp;<span class="wrd">x</span><span class="oth">+</span><span class="wrd">i</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="key">Chr</span><span class="oth">(</span><span class="wrd">text</span><span class="oth">[</span><span class="wrd">i</span><span class="oth">])</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;MutexUnlock&nbsp;releases&nbsp;these&nbsp;variables&nbsp;for&nbsp;other&nbsp;use</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">MutexUnlock</span>&nbsp;<span class="wrd">threadsync</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Sleep</span>&nbsp;<span class="num">25</span><br />
+&nbsp;&nbsp;&nbsp;<span class="key">Next</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Sub</span><br />
+</div></tt><br />
+<br \>
+</div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
+<ul><li> Threading is not allowed in the <i><a href="CompilerOptlang.html">-lang qb</a></i> dialect.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">Platform Differences</div><div class="fb_sect_cont"><br \>
+<ul><li> The DOS version of FreeBASIC does not allow for threads, as the OS does not support them.<br \>
+<li> In Linux the threads are always started in the order they are created, this can't be assumed in Win32. It's an OS, not a FreeBASIC issue. <br \>
+<br \>
+</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> New to FreeBASIC<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgMutexDestroy.html">MutexDestroy</a></tt><br \>
+<li> <tt><a href="KeyPgMutexLock.html">MutexLock</a></tt><br \>
+<li> <tt><a href="KeyPgMutexUnlock.html">MutexUnlock</a></tt><br \>
+<li> <tt><a href="KeyPgThreadCreate.html">ThreadCreate</a></tt><br \>
+<li> <tt><a href="KeyPgThreadWait.html">ThreadWait</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

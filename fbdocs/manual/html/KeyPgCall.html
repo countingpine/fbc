@@ -1,0 +1,84 @@
+<html>
+<head>
+<title>Call</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Call</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Statement to invoke a subroutine<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<b>Call</b> <i>procname</i> ([<i>parameter list</i>])<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+Calls a <tt><a href="KeyPgSub.html">Sub</a></tt> or <tt><a href="KeyPgFunction.html">Function</a></tt>.<br \>
+<br \>
+This keyword is a holdover from earlier dialects of BASIC, and is mainly deprecated.<br \>
+<br \>
+In <i><a href="CompilerOptlang.html">-lang qb</a></i>, it can be used to call <tt><a href="KeyPgSub.html">Sub</a></tt>s in code before they are declared.  The function will be implicitly <tt><a href="KeyPgDeclare.html">Declare</a></tt>'d, with any parameters passed <tt><a href="KeyPgByref.html">ByRef</a> As <a href="KeyPgAny.html">Any</a></tt>.<br \>
+Note: until the function is declared, no type-checking is done on the parameters, so it is up to the programmer to ensure they are of the correct type.<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="com">''&nbsp;Compile&nbsp;with&nbsp;-lang&nbsp;qb&nbsp;or&nbsp;-lang&nbsp;fblite</span><br />
+<br />
+<span class="def">#lang&nbsp;"fblite"<br />
+</span><br />
+<span class="key">Declare</span>&nbsp;<span class="key">Sub</span>&nbsp;<span class="wrd">foobar</span><span class="oth">(</span><span class="key">ByVal</span>&nbsp;<span class="wrd">x</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">,</span>&nbsp;<span class="key">ByVal</span>&nbsp;<span class="wrd">y</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">)</span><br />
+<span class="key">Call</span>&nbsp;<span class="wrd">foobar</span><span class="oth">(</span><span class="num">35</span><span class="oth">,</span>&nbsp;<span class="num">42</span><span class="oth">)</span><br />
+<br />
+<span class="key">Sub</span>&nbsp;<span class="wrd">foobar</span><span class="oth">(</span><span class="key">ByVal</span>&nbsp;<span class="wrd">x</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">,</span>&nbsp;<span class="key">ByVal</span>&nbsp;<span class="wrd">y</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">)</span><br />
+<span class="key">Print</span>&nbsp;<span class="wrd">x</span><span class="oth">;</span>&nbsp;<span class="wrd">y</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Sub</span><br />
+</div></tt><br />
+<br \>
+<tt><div class="freebasic">
+<span class="com">''&nbsp;Compile&nbsp;with&nbsp;-lang&nbsp;qb&nbsp;or&nbsp;-lang&nbsp;fblite</span><br />
+<br />
+<span class="def">#lang&nbsp;"fblite"<br />
+</span><br />
+<span class="key">Function</span>&nbsp;<span class="wrd">f</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+<span class="wrd">f</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">42</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Function</span><br />
+<br />
+<span class="key">Call</span>&nbsp;<span class="wrd">f</span>&nbsp;<span class="com">'&nbsp;execute&nbsp;function&nbsp;f,&nbsp;but&nbsp;ignore&nbsp;the&nbsp;answer</span><br />
+</div></tt><br />
+<br \>
+<tt><div class="freebasic">
+<span class="com">''&nbsp;Compile&nbsp;with&nbsp;-lang&nbsp;qb</span><br />
+<br />
+<span class="com">'$lang:&nbsp;"qb"</span><br />
+<br />
+<span class="key">Call</span>&nbsp;<span class="wrd">mysub</span><span class="oth">(</span><span class="num">15</span><span class="oth">,</span>&nbsp;<span class="num">16</span><span class="oth">)</span>&nbsp;<span class="com">''&nbsp;call&nbsp;"mysub"&nbsp;before&nbsp;it&nbsp;has&nbsp;been&nbsp;declared,&nbsp;or&nbsp;even&nbsp;mentioned.</span><br />
+<br />
+<span class="key">Sub</span>&nbsp;<span class="wrd">mysub</span><span class="oth">(</span><span class="key">ByRef</span>&nbsp;<span class="wrd">a</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">,</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">b</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="wrd">a</span><span class="oth">,</span>&nbsp;<span class="wrd">b</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+<span class="key">End</span>&nbsp;<span class="key">Sub</span><br />
+</div></tt><br />
+<br \>
+</div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
+<ul><li> The use of <tt><b>Call</b></tt> is not allowed in the <i><a href="CompilerOptlang.html">-lang fb</a></i> dialect.<br \>
+<li> The <i><a href="CompilerOptlang.html">-lang fblite</a></i> dialect does not allow you to call functions that have not been previously declared.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> The procedure must have already been declared.<br \>
+<li> <tt><b>Call</b></tt> in QB will make a copy of all parameters, so changes made to the arguments inside the called <tt><a href="KeyPgSub.html">Sub</a></tt> will not be reflected in the variables in the caller.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgDeclare.html">Declare</a></tt><br \>
+<li> <tt><a href="KeyPgSub.html">Sub</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

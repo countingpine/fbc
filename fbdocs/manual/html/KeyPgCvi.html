@@ -1,0 +1,59 @@
+<html>
+<head>
+<title>CVI</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">CVI</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Converts an four byte string to an integer variable<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgFunction.html">Function</a> <b>CVI</b> ( <a href="KeyPgByref.html">ByRef</a> <i>str</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgConstQualifier.html">Const</a> <a href="KeyPgString.html">String</a> ) <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a><br \>
+</tt><br \>
+</div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
+<i>result</i> = <b>CVI</b>( <i>str</i> )<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+<tt><i>str</i></tt><br \>
+<div class="fb_indent">A <a href="KeyPgString.html">String</a> exactly four bytes in length with a binary copy of an integer variable stored in it.<br \>
+<br \>
+</div></div><div class="fb_sect_title">Return Value</div><div class="fb_sect_cont"><br \>
+An <a href="KeyPgInteger.html">Integer</a> variable to copy the binary copy of a integer to.<br \>
+<br \>
+</div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+Returns a 32 bit <tt><a href="KeyPgInteger.html">Integer</a></tt> value using the binary data contained in a string that is <b>exactly</b> four bytes in length.  An integer value of zero (0) is returned if the string is not exactly four bytes in length.<br \>
+<br \>
+<tt><b>CVI</b></tt> is used to convert 4-byte-strings created with <tt><a href="KeyPgMki.html">MKI</a></tt>.<br \>
+<br \>
+This function can also be used to convert 32 bit integer values from a memory or file buffer without the need for a <tt>[[KeyPgType ]]</tt> structure.  However, just as with the type structure, special care should be taken when using <tt><b>CVI</b></tt> to convert strings that have been read from a buffer.  The <tt><a href="KeyPgCvi.html">CVI</a></tt> and <tt><a href="KeyPgMki.html">MKI</a></tt> functions are processor dependent.  That is, they will return different results depending on the endianness of the processor.<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="key">Dim</span>&nbsp;<span class="wrd">a</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">,</span>&nbsp;<span class="wrd">b</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span><br />
+<span class="wrd">a</span><span class="oth">=</span><span class="num">4534</span><br />
+<span class="wrd">b</span><span class="oth">=</span><span class="key">MKI</span><span class="oth">(</span><span class="wrd">a</span><span class="oth">)</span><br />
+<span class="key">Print</span>&nbsp;<span class="wrd">a</span><span class="oth">,</span>&nbsp;<span class="key">CVI</span><span class="oth">(</span><span class="wrd">b</span><span class="oth">)</span><br />
+<span class="key">Sleep</span><br />
+</div></tt><br />
+<br \>
+</div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
+<ul><li> In the <i><a href="CompilerOptlang.html">-lang qb</a></i> dialect, <tt><b>CVI</b></tt> expects a 2-byte-string, since a QB integer is only 16 bits.  Only the first two bytes of the string are used, even if the string happens to be longer than two bytes.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> In QB an error occurs if the string passed is less than two bytes in length.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgMki.html">MKI</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

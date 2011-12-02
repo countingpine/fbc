@@ -1,0 +1,44 @@
+<html>
+<head>
+<title>BLOAD/BSAVE text mode work-around</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">BLOAD/BSAVE text mode work-around</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	These functions allow you to use BSAVE and BLOAD in a text mode.<br \>
+<br \>
+<tt><div class="freebasic">
+<span class="key">Sub</span>&nbsp;<span class="wrd">_bsave</span><span class="oth">(</span>&nbsp;<span class="wrd">file</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span><span class="oth">,</span>&nbsp;<span class="wrd">p</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Any</span>&nbsp;<span class="key">Ptr</span><span class="oth">,</span>&nbsp;<span class="wrd">sz</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="oth">)</span>&nbsp;<br />
+<br />
+&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="wrd">ff</span>&nbsp;<br />
+&nbsp;&nbsp;<span class="wrd">ff</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">FreeFile</span>&nbsp;<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;<span class="key">Open</span>&nbsp;<span class="wrd">file</span>&nbsp;<span class="key">For</span>&nbsp;<span class="key">Binary</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">ff</span>&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">fb_fileput</span><span class="oth">(</span>&nbsp;<span class="wrd">ff</span><span class="oth">,</span>&nbsp;<span class="num">0</span><span class="oth">,</span>&nbsp;<span class="key">ByVal</span>&nbsp;<span class="wrd">p</span><span class="oth">,</span>&nbsp;<span class="wrd">sz</span>&nbsp;<span class="oth">)</span>&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;<span class="key">Close</span>&nbsp;<br />
+&nbsp;&nbsp;<br />
+<span class="key">End</span>&nbsp;<span class="key">Sub</span>&nbsp;<br />
+<br />
+<span class="key">Sub</span>&nbsp;<span class="wrd">_bload</span><span class="oth">(</span>&nbsp;<span class="wrd">file</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span><span class="oth">,</span>&nbsp;<span class="wrd">p</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Any</span>&nbsp;<span class="key">Ptr</span>&nbsp;<span class="oth">)</span>&nbsp;<br />
+<br />
+&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="wrd">ff</span>&nbsp;<br />
+&nbsp;&nbsp;<span class="wrd">ff</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">FreeFile</span>&nbsp;<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;<span class="key">Open</span>&nbsp;<span class="wrd">file</span>&nbsp;<span class="key">For</span>&nbsp;<span class="key">Binary</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">ff</span>&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">fb_fileget</span><span class="oth">(</span>&nbsp;<span class="wrd">ff</span><span class="oth">,</span>&nbsp;<span class="num">0</span><span class="oth">,</span>&nbsp;<span class="key">ByVal</span>&nbsp;<span class="wrd">p</span><span class="oth">,</span>&nbsp;<span class="key">LOF</span><span class="oth">(</span>&nbsp;<span class="wrd">ff</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="oth">)</span>&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;<span class="key">Close</span>&nbsp;<br />
+&nbsp;&nbsp;<br />
+<span class="key">End</span>&nbsp;<span class="key">Sub</span></div></tt>
+</div>
+</div> 
+</div> 
+</body>
+</html>

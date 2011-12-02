@@ -1,0 +1,199 @@
+<html>
+<head>
+<title>ScreenControl</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">ScreenControl</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Sets or gets internal graphics library settings<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgSub.html">Sub</a> <b>ScreenControl</b> ( <a href="KeyPgByval.html">ByVal</a> what <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a>, <a href="KeyPgByref.html">ByRef</a> param1 <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a> = 0, <a href="KeyPgByref.html">ByRef</a> param2 <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a> = 0, <a href="KeyPgByref.html">ByRef</a> param3 <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a> = 0, <a href="KeyPgByref.html">ByRef</a> param4 <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a> = 0 )<br \>
+<a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgSub.html">Sub</a> <b>ScreenControl</b> ( <a href="KeyPgByval.html">ByVal</a> what <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a>, <a href="KeyPgByref.html">ByRef</a> param <a href="KeyPgAs.html">As</a> <a href="KeyPgString.html">String</a> = </tt>"<tt></tt>"<tt> )<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
+<b>ScreenControl</b>( <i>what</i> [, [ <i>param1</i> ][, [ <i>param2</i> ][, [ <i>param3</i> ][, [ <i>param4</i> ]]]]] )<br \>
+<div class="fb_indent"></tt>or,<tt><br \>
+</div><b>ScreenControl</b>( <i>what</i> [, <i>param</i> ] )<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+<tt><i>what</i></tt><br \>
+<div class="fb_indent">specifies the function to perform<br \>
+</div><tt><i>param1</i></tt><br \>
+<div class="fb_indent">optional first integer parameter, contains value to be set on entry or value got on exit<br \>
+</div><tt><i>param2</i></tt><br \>
+<div class="fb_indent">optional second integer parameter, contains value to be set on entry or value got on exit<br \>
+</div><tt><i>param3</i></tt><br \>
+<div class="fb_indent">optional third integer parameter, contains value to be set on entry or value got on exit<br \>
+</div><tt><i>param4</i></tt><br \>
+<div class="fb_indent">optional fourth integer parameter, contains value to be set on entry or value got on exit<br \>
+</div><tt><i>param</i></tt><br \>
+<div class="fb_indent">optional string parameter, contains text to be set on entry or text got on exit<br \>
+<br \>
+</div></div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+<br \>
+This function can be used to set or get internal GfxLib states. The <tt><i>what</i></tt> parameter specifies which operation to perform. On operations that set states, the <tt><i>param*</i></tt> parameters must contain the values to be set. On operations that get states, <tt><i>param*</i></tt> will hold the values returned by GfxLib when the function returns.<br \>
+The meaning of the <tt><i>param*</i></tt> parameters depend on the <tt><i>what</i></tt> parameter, whose possible values are defined as constants in <tt>fbgfx.bi</tt>.  In <i><a href="CompilerDialects.html">lang fb</a></i>, they are set to be stored in the <tt>FB</tt> <tt><a href="KeyPgNamespace.html">Namespace</a></tt>.<br \>
+Below is a list of the supported <tt><i>what</i></tt> constants - and their values as defined at time of writing - along with the parameters associated with them.<br \>
+<br \>
+<u>Supported operations</u><br \>
+<div class="fb_indent">Note: * denotes operations that are allowed while a graphics mode has not yet been set via <a href="KeyPgScreengraphics.html">Screen (Graphics)</a> or <a href="KeyPgScreenres.html">ScreenRes</a>. For all other operations, return values are zero(<tt>0</tt>) or the empty string(<tt>"</tt><tt>"</tt>) and the operation has no effect if a graphics mode is not available at call time.<br \>
+<br \>
+<b>Get operations</b><br \>
+</div><ul><li> <tt>GET_WINDOW_POS</tt> (<tt>0</tt>) Returns the current window position, in desktop coordinates.<br \>
+</ul><div class="fb_indent">[OUT] <tt><i>param1</i></tt> x<br \>
+[OUT] <tt><i>param2</i></tt> y<br \>
+</div><ul><li> * <tt>GET_WINDOW_TITLE</tt> (<tt>1</tt>) Returns the title of the program window.<br \>
+</ul><div class="fb_indent">[OUT] <tt><i>param</i></tt> title<br \>
+</div><ul><li> <tt>GET_WINDOW_HANDLE</tt> (<tt>2</tt>) Returns a handle to the program window.<br \>
+</ul><div class="fb_indent">[OUT] <tt><i>param1</i></tt> handle; this is a <tt>HWND</tt> in Windows, a "Window" XID in X11<br \>
+</div><ul><li> * <tt>GET_DESKTOP_SIZE</tt> (<tt>3</tt>) Returns the desktop size, in pixels.<br \>
+</ul><div class="fb_indent">[OUT] <tt><i>param1</i></tt> width<br \>
+[OUT] <tt><i>param2</i></tt> height<br \>
+</div><ul><li> <tt>GET_SCREEN_SIZE</tt> (<tt>4</tt>) Returns the current screen size in pixels.<br \>
+</ul><div class="fb_indent">[OUT] <tt><i>param1</i></tt> width<br \>
+[OUT] <tt><i>param2</i></tt> height<br \>
+</div><ul><li> <tt>GET_SCREEN_DEPTH</tt> (<tt>5</tt>) Returns current graphics mode screen depth.<br \>
+</ul><div class="fb_indent">[OUT] <tt><i>param1</i></tt> bits per pixel<br \>
+</div><ul><li> <tt>GET_SCREEN_BPP</tt> (<tt>6</tt>) Returns current graphics mode BPP.<br \>
+</ul><div class="fb_indent">[OUT] <tt><i>param1</i></tt> bytes per pixel<br \>
+</div><ul><li> <tt>GET_SCREEN_PITCH</tt> (<tt>7</tt>) Returns the current graphics mode framebuffer pitch, in bytes.<br \>
+</ul><div class="fb_indent">[OUT] <tt><i>param1</i></tt> pitch<br \>
+</div><ul><li> <tt>GET_SCREEN_REFRESH</tt> (<tt>8</tt>) Returns the current graphics mode refresh rate, in hertz.<br \>
+</ul><div class="fb_indent">[OUT] <tt><i>param1</i></tt> rate<br \>
+</div><ul><li> <tt>GET_DRIVER_NAME</tt> (<tt>9</tt>) Returns the current graphics mode driver name.<br \>
+</ul><div class="fb_indent">[OUT] <tt><i>param</i></tt> name<br \>
+</div><ul><li> <tt>GET_TRANSPARENT_COLOR</tt> (<tt>10</tt>) Returns the transparent color value for the current graphics mode depth.<br \>
+</ul><div class="fb_indent">[OUT] <tt><i>param1</i></tt> value<br \>
+</div><ul><li> <tt>GET_VIEWPORT</tt> (<tt>11</tt>) Returns the current viewport as set by the <a href="KeyPgViewgraphics.html">View (Graphics)</a> statement, in screen coordinates.<br \>
+</ul><div class="fb_indent">[OUT] <tt><i>param1</i></tt> x1<br \>
+[OUT] <tt><i>param2</i></tt> y1<br \>
+[OUT] <tt><i>param3</i></tt> x2<br \>
+[OUT] <tt><i>param4</i></tt> y2<br \>
+</div><ul><li> <tt>GET_PEN_POS</tt> (<tt>12</tt>) Returns the last graphical pen position, in screen coordinates. This position is used in graphics functions supporting relative coordinates using the <tt><a href="KeyPgStep.html">Step</a></tt> keyword.<br \>
+</ul><div class="fb_indent">[OUT] <tt><i>param1</i></tt> x<br \>
+[OUT] <tt><i>param2</i></tt> y<br \>
+</div><ul><li> <tt>GET_COLOR</tt> (<tt>13</tt>) Returns the current graphics mode color.<br \>
+</ul><div class="fb_indent">[OUT] <tt><i>param1</i></tt> foreground<br \>
+[OUT] <tt><i>param2</i></tt> background<br \>
+</div><ul><li> <tt>GET_ALPHA_PRIMITIVES</tt> (<tt>14</tt>) Returns if primitives drawing support for alpha channel is enabled.<br \>
+</ul><div class="fb_indent">[OUT] <tt><i>param1</i></tt> <tt>TRUE</tt> (<tt>-1</tt>) if alpha primitives is enabled, <tt>FALSE</tt> (<tt>0</tt>) otherwise<br \>
+</div><ul><li> <tt>GET_GL_EXTENSIONS</tt> (<tt>15</tt>) Returns a string holding all supported GL extensions, or the empty string if not in OpenGL mode.<br \>
+</ul><div class="fb_indent">[OUT] <tt><i>param</i></tt> supported GL extensions<br \>
+</div><ul><li> <tt>GET_HIGH_PRIORITY</tt> (<tt>16</tt>) Returns if <tt>GFX_HIGH_PRIORITY</tt> was specified in the flags passed to <tt><a href="KeyPgScreengraphics.html">Screen</a></tt> or <tt><a href="KeyPgScreenres.html">ScreenRes</a></tt>.<br \>
+</ul><div class="fb_indent">[OUT] <tt><i>param1</i></tt> higher priority graphics processing enabled<br \>
+<br \>
+<b>Set operations</b><br \>
+</div><ul><li> <tt>SET_WINDOW_POS</tt> (<tt>100</tt>) Sets the current program window position, in desktop coordinates.<br \>
+</ul><div class="fb_indent">[IN] <tt><i>param1</i></tt> x<br \>
+[IN] <tt><i>param2</i></tt> y<br \>
+</div><ul><li> * <tt>SET_WINDOW_TITLE</tt> (<tt>101</tt>) Sets the current program window title. This is equivalent to calling <tt><a href="KeyPgWindowtitle.html">WindowTitle</a>( <i>param</i> )</tt>.<br \>
+</ul><div class="fb_indent">[IN] <tt><i>param</i></tt> title<br \>
+</div><ul><li> <tt>SET_PEN_POS</tt> (<tt>102</tt>) Sets the current graphical pen position, in screen coordinates. This position is used in graphics functions supporting relative coordinates using the <tt><a href="KeyPgStep.html">Step</a></tt> keyword.<br \>
+</ul><div class="fb_indent">[IN] <tt><i>param1</i></tt> x<br \>
+[IN] <tt><i>param2</i></tt> y<br \>
+</div><ul><li> * <tt>SET_DRIVER_NAME</tt> (<tt>103</tt>) Sets the name of the internal graphics driver to be used in subsequent calls to <tt><a href="KeyPgScreengraphics.html">Screen</a></tt> or <tt><a href="KeyPgScreenres.html">ScreenRes</a></tt>.<br \>
+</ul><div class="fb_indent">[IN] <tt><i>param</i></tt> driver name<br \>
+</div><ul><li> <tt>SET_ALPHA_PRIMITIVES</tt> (<tt>104</tt>) Sets if primitives drawing should honor alpha channel.<br \>
+</ul><div class="fb_indent">[IN] <tt><i>param1</i></tt> enabled<br \>
+</div><ul><li> * <tt>SET_GL_COLOR_BITS</tt> (<tt>105</tt>) Sets the number of bits dedicated to the OpenGL color buffer<br \>
+</ul><div class="fb_indent">[IN] <tt><i>param1</i></tt> bits<br \>
+</div><ul><li> * <tt>SET_GL_COLOR_RED_BITS</tt> (<tt>106</tt>) Sets the number of bits dedicated to the red component of the OpenGL color buffer<br \>
+</ul><div class="fb_indent">[IN] <tt><i>param1</i></tt> bits<br \>
+</div><ul><li> * <tt>SET_GL_COLOR_GREEN_BITS</tt> (<tt>107</tt>) Sets the number of bits dedicated to the green component of the OpenGL color buffer<br \>
+</ul><div class="fb_indent">[IN] <tt><i>param1</i></tt> bits<br \>
+</div><ul><li> * <tt>SET_GL_COLOR_BLUE_BITS</tt> (<tt>108</tt>) Sets the number of bits dedicated to the blue component of the OpenGL color buffer<br \>
+</ul><div class="fb_indent">[IN] <tt><i>param1</i></tt> bits<br \>
+</div><ul><li> * <tt>SET_GL_COLOR_ALPHA_BITS</tt> (<tt>109</tt>) Sets the number of bits dedicated to the alpha component of the OpenGL color buffer<br \>
+</ul><div class="fb_indent">[IN] <tt><i>param1</i></tt> bits<br \>
+</div><ul><li> * <tt>SET_GL_DEPTH_BITS</tt> (<tt>110</tt>) Sets the number of bits dedicated to the OpenGL depth buffer<br \>
+</ul><div class="fb_indent">[IN] <tt><i>param1</i></tt> bits<br \>
+</div><ul><li> * <tt>SET_GL_STENCIL_BITS</tt> (<tt>111</tt>) Sets the number of bits dedicated to the OpenGL stencil buffer<br \>
+</ul><div class="fb_indent">[IN] <tt><i>param1</i></tt> bits<br \>
+</div><ul><li> * <tt>SET_GL_ACCUM_BITS</tt> (<tt>112</tt>) Sets the number of bits dedicated to the OpenGL accumulation buffer<br \>
+</ul><div class="fb_indent">[IN] <tt><i>param1</i></tt> bits<br \>
+</div><ul><li> * <tt>SET_GL_ACCUM_RED_BITS</tt> (<tt>113</tt>) Sets the number of bits dedicated to the red component of the OpenGL accumulation buffer<br \>
+</ul><div class="fb_indent">[IN] <tt><i>param1</i></tt> bits<br \>
+</div><ul><li> * <tt>SET_GL_ACCUM_GREEN_BITS</tt> (<tt>114</tt>) Sets the number of bits dedicated to the green component of the OpenGL accumulation buffer<br \>
+</ul><div class="fb_indent">[IN] <tt><i>param1</i></tt> bits<br \>
+</div><ul><li> * <tt>SET_GL_ACCUM_BLUE_BITS</tt> (<tt>115</tt>) Sets the number of bits dedicated to the blue component of the OpenGL accumulation buffer<br \>
+</ul><div class="fb_indent">[IN] <tt><i>param1</i></tt> bits<br \>
+</div><ul><li> * <tt>SET_GL_ACCUM_ALPHA_BITS</tt> (<tt>116</tt>) Sets the number of bits dedicated to the alpha component of the OpenGL accumulation buffer<br \>
+</ul><div class="fb_indent">[IN] <tt><i>param1</i></tt> bits<br \>
+</div><ul><li> * <tt>SET_GL_NUM_SAMPLES</tt> (<tt>117</tt>) Sets the number of samples to be used for OpenGL multisampling<br \>
+</ul><div class="fb_indent">[IN] <tt><i>param1</i></tt> samples<br \>
+<br \>
+<b>Other operations</b><br \>
+</div><ul><li> <tt>POLL_EVENTS</tt> (<tt>200</tt>) Cause the library to poll all events, ie to check the system event queue, specifically used for retrieving keyboard and mouse events.  This is most useful for OpenGL code where <tt><a href="KeyPgFlip.html">Flip</a></tt> is not used, as normally <tt><a href="KeyPgFlip.html">Flip</a></tt> will cause these events to be polled.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="com">''&nbsp;include&nbsp;fbgfx.bi&nbsp;for&nbsp;some&nbsp;useful&nbsp;definitions</span><br />
+<span class="def">#include&nbsp;"fbgfx.bi"<br />
+</span><br />
+<span class="key">Using</span>&nbsp;<span class="wrd">fb</span><br />
+<br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">e</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">EVENT</span><br />
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="wrd">x</span><span class="oth">,</span>&nbsp;<span class="wrd">y</span><span class="oth">,</span>&nbsp;<span class="wrd">pressed</span><span class="oth">,</span>&nbsp;<span class="wrd">col</span><br />
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Any</span>&nbsp;<span class="key">Ptr</span>&nbsp;<span class="wrd">img</span><br />
+<br />
+<span class="key">ScreenRes</span>&nbsp;<span class="num">384</span><span class="oth">,</span>&nbsp;<span class="num">64</span><span class="oth">,</span>&nbsp;<span class="num">32</span><span class="oth">,,</span>&nbsp;<span class="wrd">GFX_SHAPED_WINDOW</span><br />
+<br />
+<span class="com">''&nbsp;create&nbsp;a&nbsp;fancy&nbsp;window&nbsp;shape</span><br />
+<span class="wrd">img</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">ImageCreate</span><span class="oth">(</span><span class="num">48</span><span class="oth">,</span><span class="num">8</span><span class="oth">)</span><br />
+<span class="key">Draw</span>&nbsp;<span class="key">String</span>&nbsp;<span class="wrd">img</span><span class="oth">,</span>&nbsp;<span class="oth">(</span><span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">0</span><span class="oth">),</span>&nbsp;<span class="quo">"GfxLib"</span><br />
+<span class="key">For</span>&nbsp;<span class="wrd">y</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">63</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">For</span>&nbsp;<span class="wrd">x</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">383</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">col</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">Point</span><span class="oth">(</span><span class="wrd">x</span>&nbsp;<span class="oth">\</span>&nbsp;<span class="num">8</span><span class="oth">,</span>&nbsp;<span class="wrd">y</span>&nbsp;<span class="oth">\</span>&nbsp;<span class="num">8</span><span class="oth">,</span>&nbsp;<span class="wrd">img</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">If</span>&nbsp;<span class="oth">(</span><span class="wrd">col</span>&nbsp;<span class="oth">&lt;&gt;</span>&nbsp;<span class="key">RGB</span><span class="oth">(</span><span class="num">255</span><span class="oth">,</span>&nbsp;<span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">255</span><span class="oth">))</span>&nbsp;<span class="key">Then</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">col</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">RGB</span><span class="oth">((</span><span class="wrd">x</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="wrd">y</span><span class="oth">)</span>&nbsp;<span class="key">And</span>&nbsp;<span class="num">&amp;hFF</span><span class="oth">,</span>&nbsp;<span class="oth">(</span><span class="wrd">x</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="wrd">y</span><span class="oth">)</span>&nbsp;<span class="key">And</span>&nbsp;<span class="num">&amp;hFF</span><span class="oth">,</span>&nbsp;<span class="oth">(</span><span class="wrd">x</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="wrd">y</span><span class="oth">)</span>&nbsp;<span class="key">And</span>&nbsp;<span class="num">&amp;hFF</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">End</span>&nbsp;<span class="key">If</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">PSet</span>&nbsp;<span class="oth">(</span><span class="wrd">x</span><span class="oth">,</span>&nbsp;<span class="wrd">y</span><span class="oth">),</span>&nbsp;<span class="wrd">col</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Next</span>&nbsp;<span class="wrd">x</span><br />
+<span class="key">Next</span>&nbsp;<span class="wrd">y</span><br />
+<br />
+<span class="wrd">pressed</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span><br />
+<span class="key">Do</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">If</span>&nbsp;<span class="oth">(</span><span class="key">ScreenEvent</span><span class="oth">(@</span><span class="wrd">e</span><span class="oth">))</span>&nbsp;<span class="key">Then</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Select</span>&nbsp;<span class="key">Case</span>&nbsp;<span class="wrd">e.type</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Case</span>&nbsp;<span class="wrd">EVENT_MOUSE_BUTTON_PRESS</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">pressed</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="oth">-</span><span class="num">1</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Case</span>&nbsp;<span class="wrd">EVENT_MOUSE_BUTTON_RELEASE</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">pressed</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Case</span>&nbsp;<span class="wrd">EVENT_MOUSE_MOVE</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">If</span>&nbsp;<span class="oth">(</span><span class="wrd">pressed</span><span class="oth">)</span>&nbsp;<span class="key">Then</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">ScreenControl</span>&nbsp;<span class="wrd">GET_WINDOW_POS</span><span class="oth">,</span>&nbsp;<span class="wrd">x</span><span class="oth">,</span>&nbsp;<span class="wrd">y</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">ScreenControl</span>&nbsp;<span class="wrd">SET_WINDOW_POS</span><span class="oth">,</span>&nbsp;<span class="wrd">x</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="wrd">e.dx</span><span class="oth">,</span>&nbsp;<span class="wrd">y</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="wrd">e.dy</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">End</span>&nbsp;<span class="key">If</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">End</span>&nbsp;<span class="key">Select</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">End</span>&nbsp;<span class="key">If</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Sleep</span>&nbsp;<span class="num">5</span><br />
+<span class="key">Loop</span>&nbsp;<span class="key">While</span>&nbsp;<span class="key">Not</span>&nbsp;<span class="key">MultiKey</span><span class="oth">(</span><span class="num">1</span><span class="oth">)</span><br />
+</div></tt><br />
+<br \>
+<br \>
+</div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
+<ul><li> Not available in the <i><a href="CompilerOptlang.html">-lang qb</a></i> dialect unless referenced with the alias <tt><b>__Screencontrol</b></tt>.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> New to FreeBASIC<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgScreengraphics.html">Screen (Graphics)</a></tt><br \>
+<li> <tt><a href="KeyPgScreenevent.html">ScreenEvent</a></tt><br \>
+<li> <tt><a href="KeyPgScreeninfo.html">ScreenInfo</a></tt><br \>
+<li> <tt><a href="KeyPgWindowtitle.html">WindowTitle</a></tt><br \>
+<li> <tt><a href="KeyPgViewgraphics.html">View (Graphics)</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

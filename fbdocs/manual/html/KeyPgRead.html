@@ -1,0 +1,85 @@
+<html>
+<head>
+<title>Read</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Read</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Reads values stored with the <tt><a href="KeyPgData.html">Data</a></tt> statement.<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<b>Read</b> <i>variable_list</i><br \>
+</tt><br \>
+</div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+Reads data stored in the application with the <tt><a href="KeyPgData.html">Data</a></tt> command. <br \>
+<br \>
+The elements of the <tt><i>variable_list</i></tt> must be of basic types, numeric, strings or elements of arrays and user defined types.<br \>
+<br \>
+All the <tt><a href="KeyPgData.html">Data</a></tt> statements in the program behave as a single list, after the last element of one <tt><a href="KeyPgData.html">Data</a></tt> statement is read, the first element of the following <tt><a href="KeyPgData.html">Data</a></tt> statement will be read.<br \>
+The program should not attempt to <tt><a href="KeyPgRead.html">Read</a></tt> after the last <tt><b>Data</b></tt> element.  The results are (in all dialects) undefined,  and the program may crash (Page Fault).<br \>
+<br \>
+Data constants can only be of simple types (numeric or string).  A string read into a numeric variable will be evaluated by the <tt><a href="KeyPgVal.html">Val</a></tt> function.<br \>
+<br \>
+The "<tt><a href="KeyPgRestore.html">Restore</a> <i>label</i></tt>" statement makes the first <tt><a href="KeyPgData.html">Data</a></tt> item after <tt><i>label</i></tt> the next item to be read, allowing the user to choose specific sections of data to be read.<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="com">'&nbsp;Create&nbsp;an&nbsp;array&nbsp;of&nbsp;5&nbsp;integers&nbsp;and&nbsp;a&nbsp;string&nbsp;to&nbsp;hold&nbsp;the&nbsp;data.</span><br />
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="wrd">h</span><span class="oth">(</span><span class="num">4</span><span class="oth">)</span><br />
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span>&nbsp;<span class="wrd">hs</span><br />
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="wrd">readindex</span><br />
+<br />
+<span class="com">'&nbsp;Set&nbsp;up&nbsp;to&nbsp;loop&nbsp;5&nbsp;times&nbsp;(for&nbsp;5&nbsp;numbers...&nbsp;check&nbsp;the&nbsp;data)</span><br />
+<span class="key">For</span>&nbsp;<span class="wrd">readindex</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">4</span><br />
+<br />
+&nbsp;&nbsp;<span class="com">'&nbsp;Read&nbsp;in&nbsp;an&nbsp;integer.</span><br />
+&nbsp;&nbsp;<span class="key">Read</span>&nbsp;<span class="wrd">h</span><span class="oth">(</span><span class="wrd">readindex</span><span class="oth">)</span><br />
+<br />
+&nbsp;&nbsp;<span class="com">'&nbsp;Display&nbsp;it.</span><br />
+&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"Number"</span>&nbsp;<span class="oth">;</span>&nbsp;<span class="wrd">readindex</span>&nbsp;<span class="oth">;</span>&nbsp;<span class="quo">"&nbsp;=&nbsp;"</span>&nbsp;<span class="oth">;</span>&nbsp;<span class="wrd">h</span><span class="oth">(</span><span class="wrd">readindex</span><span class="oth">)</span><br />
+<br />
+<span class="key">Next</span>&nbsp;<span class="wrd">readindex</span><br />
+<br />
+<span class="com">'&nbsp;Spacer.</span><br />
+<span class="key">Print</span><br />
+<br />
+<span class="com">'&nbsp;Read&nbsp;in&nbsp;a&nbsp;string.</span><br />
+<span class="key">Read</span>&nbsp;<span class="wrd">hs</span><br />
+<br />
+<span class="com">'&nbsp;Print&nbsp;it.</span><br />
+<span class="key">Print</span>&nbsp;&nbsp;<span class="quo">"String&nbsp;=&nbsp;"</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="wrd">hs</span><br />
+<br />
+<span class="com">'&nbsp;Await&nbsp;a&nbsp;keypress.</span><br />
+<span class="key">Sleep</span><br />
+<br />
+<span class="com">'&nbsp;Exit&nbsp;program.</span><br />
+<span class="key">End</span><br />
+<br />
+<span class="com">'&nbsp;Block&nbsp;of&nbsp;data.</span><br />
+<span class="key">Data</span>&nbsp;<span class="num">3</span><span class="oth">,</span>&nbsp;<span class="num">234</span><span class="oth">,</span>&nbsp;<span class="num">4354</span><span class="oth">,</span>&nbsp;<span class="num">23433</span><span class="oth">,</span>&nbsp;<span class="num">87643</span><span class="oth">,</span>&nbsp;<span class="quo">"Bye!"</span><br />
+</div></tt><br />
+<br \>
+</div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
+<ul><li> None in syntax and usage of <tt><b>Read</b></tt><br \>
+<li> See the <tt><a href="KeyPgData.html">Data</a></tt> page for more information on differences in storing the data<br \>
+<br \>
+</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> None in syntax and usage of <tt><b>Read</b></tt><br \>
+<li> See the <tt><a href="KeyPgData.html">Data</a></tt> page for more information on differences in storing the data<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgData.html">Data</a></tt><br \>
+<li> <tt><a href="KeyPgRestore.html">Restore</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

@@ -1,0 +1,68 @@
+<html>
+<head>
+<title>End (Statement)</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">End (Statement)</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Control flow statement to end the program.<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgSub.html">Sub</a> <b>End</b> ( <a href="KeyPgByval.html">ByVal</a> <i>retval</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a> = 0 )<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
+<b>End</b> [ <i>retval</i> ]<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+<tt><i>retval</i></tt><br \>
+<div class="fb_indent">Error code returned to system.<br \>
+<br \>
+</div></div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+Used to terminate the program, and return to the operating system.  An optional integer return value can be specified to indicate an error code to the system.  If no return value is given, a value of 0 is automatically returned.<br \>
+<br \>
+Usage of this statement does not cleanly close scope.   Variables and memory are not destroyed automatically and object destructors are not called.  Calling the required destructors and other clean-up should be explicitly performed before an <tt><b>End</b></tt> statement.<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="com">''&nbsp;This&nbsp;program&nbsp;stores&nbsp;input&nbsp;from&nbsp;the&nbsp;user&nbsp;in&nbsp;a&nbsp;string,&nbsp;checks&nbsp;the&nbsp;strings&nbsp;length,</span><br />
+<span class="com">''&nbsp;by&nbsp;calling&nbsp;valid_string,&nbsp;and&nbsp;either&nbsp;displays&nbsp;the&nbsp;string,&nbsp;or&nbsp;an&nbsp;error&nbsp;message</span><br />
+<br />
+<span class="key">Function</span>&nbsp;<span class="wrd">valid_string</span><span class="oth">(</span>&nbsp;<span class="wrd">s</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;<span class="key">Return</span>&nbsp;<span class="key">Len</span><span class="oth">(</span>&nbsp;<span class="wrd">s</span>&nbsp;<span class="oth">)</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Function</span><br />
+<br />
+<span class="com">''&nbsp;assign&nbsp;input&nbsp;to&nbsp;text&nbsp;string&nbsp;(a&nbsp;string&nbsp;of&nbsp;spaces&nbsp;will&nbsp;input&nbsp;as&nbsp;an&nbsp;empty&nbsp;string)</span><br />
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span>&nbsp;<span class="wrd">text</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"Type&nbsp;in&nbsp;some&nbsp;text&nbsp;(&nbsp;try&nbsp;""abc""&nbsp;):&nbsp;"</span>&nbsp;<span class="oth">;</span><br />
+<span class="key">Input</span>&nbsp;<span class="wrd">text</span><br />
+<br />
+<span class="com">''&nbsp;check&nbsp;if&nbsp;string&nbsp;is&nbsp;valid&nbsp;(not&nbsp;empty).&nbsp;If&nbsp;so,&nbsp;print&nbsp;an&nbsp;error&nbsp;message&nbsp;and&nbsp;return</span><br />
+<span class="com">''&nbsp;to&nbsp;the&nbsp;OS&nbsp;with&nbsp;error&nbsp;code&nbsp;-1</span><br />
+<span class="key">If</span><span class="oth">(</span>&nbsp;<span class="key">Not</span>&nbsp;<span class="wrd">valid_string</span><span class="oth">(</span>&nbsp;<span class="wrd">text</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="key">Then</span><br />
+&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"ERROR:&nbsp;you&nbsp;must&nbsp;enter&nbsp;a&nbsp;valid&nbsp;string"</span><br />
+&nbsp;&nbsp;&nbsp;<span class="key">Sleep</span>&nbsp;<span class="oth">:</span>&nbsp;<span class="key">End</span>&nbsp;<span class="oth">-</span><span class="num">1</span><br />
+<span class="key">End</span>&nbsp;<span class="key">If</span><br />
+<br />
+<span class="com">''&nbsp;string&nbsp;is&nbsp;valid,&nbsp;so&nbsp;print&nbsp;the&nbsp;string&nbsp;and&nbsp;return&nbsp;to&nbsp;the&nbsp;OS&nbsp;with&nbsp;error&nbsp;code&nbsp;0</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"You&nbsp;entered:&nbsp;"</span>&nbsp;<span class="oth">;</span>&nbsp;<span class="wrd">text</span><br />
+<span class="key">Sleep</span>&nbsp;<span class="oth">:</span>&nbsp;<span class="key">End</span>&nbsp;<span class="num">0</span><br />
+</div></tt><br />
+<br \>
+</div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> The END statement supports specifying a custom return value to be returned to the operating system.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgEndblock.html">End (Block)</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

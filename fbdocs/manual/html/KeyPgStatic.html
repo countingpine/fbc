@@ -1,0 +1,80 @@
+<html>
+<head>
+<title>Static</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Static</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Defines variables, objects and arrays having static storage<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<b>Static</b> <i>symbol</i> [ ( [ <i>subscripts</i> ] ) ] [ <a href="KeyPgAs.html">As</a> <a href="DataType.html">DataType</a> ] [ , ... ]<br \>
+<div class="fb_indent"><i>or</i><br \>
+</div>{ <a href="KeyPgSub.html">Sub</a>|<a href="KeyPgFunction.html">Function</a> } <i>proc_header</i> <b>Static</b><br \>
+<div class="fb_indent">[ ... ]<br \>
+</div><a href="KeyPgEndblock.html">End</a> { <a href="KeyPgSub.html">Sub</a>|<a href="KeyPgFunction.html">Function</a> }<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+<tt><i>symbol</i></tt><br \>
+<div class="fb_indent">variable or array symbol name.<br \>
+</div><tt><i>subscripts</i></tt><br \>
+<div class="fb_indent">a comma-separated list of subscript ranges.<br \>
+</div><tt><i>proc_header</i></tt><br \>
+<div class="fb_indent">procedure header for a procedure definition.<br \>
+<br \>
+</div></div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+Specifies <a href="ProPgStorageClasses.html">static storage</a> for variables, objects and arrays; they are allocated at program startup and deallocated upon exit. Objects are constructed once when they are defined, and destructed upon program exit.<br \>
+<br \>
+When declaring static arrays, only <a href="ProPgLiterals.html">numeric literals</a>, <a href="KeyPgConst.html">Constants</a> or <a href="KeyPgEnum.html">Enumerations</a> may be used as subscript range values. Static variable-length arrays must be declared empty (no subscript range list) and resized using <tt><a href="KeyPgRedim.html">ReDim</a></tt> before used.<br \>
+<br \>
+In both iterative and recursive blocks, like looping <a href="CatPgControlFlow.html">control flow statements</a> or procedures, static variables, objects and arrays local to the block are guaranteed to occupy the same storage across all instantiations of the block. For example, procedures that call themselves - either directly or indirectly - share the same instances of their local static variables.<br \>
+<br \>
+When used with module-level and member procedure declarations, <tt><b>Static</b></tt> specifies <a href="ProPgStorageClasses.html">static storage</a> for all local variables, objects and arrays.<br \>
+<br \>
+<tt><a href="KeyPgStaticMember.html">Static (Member)</a></tt> is also used in member procedure declarations to specify static member procedures.<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="key">Sub</span>&nbsp;<span class="wrd">f</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;static&nbsp;variables&nbsp;are&nbsp;initialized&nbsp;to&nbsp;0&nbsp;by&nbsp;default</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Static</span>&nbsp;<span class="wrd">i</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">i</span>&nbsp;<span class="oth">+=</span>&nbsp;<span class="num">1</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"Number&nbsp;of&nbsp;times&nbsp;called:&nbsp;"</span>&nbsp;<span class="oth">&amp;</span>&nbsp;<span class="wrd">i</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Sub</span><br />
+<br />
+<span class="com">''&nbsp;the&nbsp;static&nbsp;variable&nbsp;in&nbsp;f()&nbsp;retains&nbsp;its&nbsp;value&nbsp;between</span><br />
+<span class="com">''&nbsp;multiple&nbsp;procedure&nbsp;calls.</span><br />
+<span class="wrd">f</span><span class="oth">()</span><br />
+<span class="wrd">f</span><span class="oth">()</span><br />
+</div></tt><br />
+Will output:<br \>
+<br \>
+<pre class="fb_pre">
+Number of times called: 1
+Number of times called: 2
+</pre><br \>
+</div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> QuickBASIC allows variables and arrays to be declared using the <tt><b>Static</b></tt> keyword within procedures and <tt>DEF FN</tt> routines only.<br \>
+<li> <tt><b>Static</b></tt> forces local visibility of variables and arrays in QuickBASIC <tt>DEF FN</tt> routines. FreeBASIC supports neither <tt>DEF FN</tt> routines nor this usage of <tt><b>Static</b></tt>.<br \>
+<li> Using <tt><a href="KeyPgStaticMember.html">Static</a></tt> to specify static member procedures is new to FreeBASIC.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgStaticMember.html">Static (Member)</a></tt><br \>
+<li> <tt><a href="KeyPgDim.html">Dim</a></tt>, <tt><a href="KeyPgRedim.html">ReDim</a></tt><br \>
+<li> <tt><a href="KeyPgSub.html">Sub (Module)</a></tt>, <tt><a href="KeyPgFunction.html">Function (Module)</a></tt><br \>
+<li> <tt><a href="KeyPgMemberSub.html">Sub (Member)</a></tt>, <tt><a href="KeyPgMemberFunction.html">Function (Member)</a></tt><br \>
+<li> <tt><a href="KeyPgOptionstatic.html">Option Static</a></tt><br \>
+<li> <tt><a href="ProPgStorageClasses.html">Storage Classes</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

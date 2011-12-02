@@ -1,0 +1,96 @@
+<html>
+<head>
+<title>Destructor</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Destructor</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Called automatically when a class or user defined type goes out of scope or is destroyed<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<a href="KeyPgType.html">Type</a> <i>typename</i><br \>
+<div class="fb_indent"><i>field declarations</i><br \>
+<a href="KeyPgDeclare.html">Declare</a> <b>Destructor</b> ( )<br \>
+</div>End Type<br \>
+<br \>
+<b>Destructor</b> <i>typename</i> ( )<br \>
+<div class="fb_indent"><i>statements</i><br \>
+</div><b>End Destructor</b><br \>
+</tt><br \>
+</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+<tt><i>typename</i></tt> <br \>
+<div class="fb_indent">name of the <tt><a href="KeyPgType.html">Type</a></tt> of <tt><a href="KeyPgClass.html">Class</a></tt><br \>
+<br \>
+</div></div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+The destructor method is called when a user defined <tt><a href="KeyPgType.html">Type</a></tt> or <tt><a href="KeyPgClass.html">Class</a></tt> variable goes out of scope or is destroyed explicitly with the <tt><a href="KeyPgOpDelete.html">Delete</a></tt> operator.<br \>
+<br \>
+The <tt><b>Destructor</b></tt> method is passed a hidden <tt><a href="KeyPgThis.html">This</a></tt> parameter having the same type as <tt><i>typename</i></tt>.<br \>
+<br \>
+The destructor in a type is called before the destructors on any of its fields.  Therefore, all fields are accessible with the hidden <tt><a href="KeyPgThis.html">This</a></tt> parameter in the destructor body.<br \>
+<br \>
+Only one destructor may be declared and defined per type.<br \>
+<br \>
+Since the <tt><a href="KeyPgEnd.html">End</a></tt> statement does not close any scope, object destructors will not automatically be called if the <tt><a href="KeyPgEnd.html">End</a></tt> statement is used to terminate the program.<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="key">Type</span>&nbsp;<span class="wrd">T</span><br />
+&nbsp;&nbsp;<span class="wrd">value</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">ZString</span>&nbsp;<span class="oth">*</span>&nbsp;<span class="num">32</span><br />
+&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Constructor</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="wrd">init_value</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Destructor</span>&nbsp;<span class="oth">()</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Type</span><br />
+<br />
+<span class="key">Constructor</span>&nbsp;<span class="wrd">T</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="wrd">init_value</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;<span class="wrd">value</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">init_value</span><br />
+&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"Creating:&nbsp;"</span><span class="oth">;</span>&nbsp;<span class="wrd">value</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Constructor</span><br />
+<br />
+<span class="key">Destructor</span>&nbsp;<span class="wrd">T</span>&nbsp;<span class="oth">()</span><br />
+&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"Destroying:&nbsp;"</span><span class="oth">;</span>&nbsp;<span class="wrd">value</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Destructor</span><br />
+<br />
+<span class="key">Sub</span>&nbsp;<span class="wrd">MySub</span><br />
+&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="wrd">x</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">T</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="oth">(</span><span class="quo">"A.x"</span><span class="oth">)</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Sub</span><br />
+<br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">x</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">T</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="oth">(</span><span class="quo">"main.x"</span><span class="oth">)</span><br />
+<br />
+<span class="key">Scope</span><br />
+&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="wrd">x</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">T</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="oth">(</span><span class="quo">"main.scope.x"</span><span class="oth">)</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Scope</span><br />
+<br />
+<span class="wrd">MySub</span><br />
+</div></tt><br />
+Output:<br \>
+<pre class="fb_pre">
+Creating: main.x
+Creating: main.scope.x
+Destroying: main.scope.x
+Creating: A.x
+Destroying: A.x
+Destroying: main.x
+</pre></div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
+<ul><li> Object-related features are supported only in the <i><a href="CompilerOptlang.html">-lang fb</a></i> dialect.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> New to FreeBASIC<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgClass.html">Class</a></tt><br \>
+<li> <tt><a href="KeyPgConstructor.html">Constructor</a></tt><br \>
+<li> <tt><a href="KeyPgOpDelete.html">Delete</a></tt><br \>
+<li> <tt><a href="KeyPgModuleDestructor.html">Destructor (Module)</a></tt><br \>
+<li> <tt><a href="KeyPgType.html">Type</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

@@ -1,0 +1,61 @@
+<html>
+<head>
+<title>Option Base</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Option Base</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Specifies a default lower bound for array declarations<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<b>Option Base</b> <i>base_subscript</i><br \>
+</tt><br \>
+</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+<tt><i>base_subscript</i></tt><br \>
+<div class="fb_indent">an numeric literal value<br \>
+<br \>
+</div></div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+<tt><b>Option Base</b></tt> is a statement that sets the default lower bound for any following array declarations. This default remains in effect for the rest of the module in which <tt><b>Option Base</b></tt> is used, and can be overridden by declaring arrays with an explicit lower bound, or with another <tt><b>Option Base</b></tt> statement.<br \>
+<br \>
+Note: initially, the default base is <tt>0</tt>.<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="com">''&nbsp;Compile&nbsp;with&nbsp;the&nbsp;"-lang&nbsp;qb"&nbsp;or&nbsp;"-lang&nbsp;fblite"&nbsp;compiler&nbsp;switches</span><br />
+<br />
+<span class="def">#lang&nbsp;"fblite"<br />
+</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">foo</span><span class="oth">(</span><span class="num">10</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">'&nbsp;declares&nbsp;an&nbsp;array&nbsp;with&nbsp;indices&nbsp;0-10</span><br />
+<br />
+<span class="key">Option</span>&nbsp;<span class="key">Base</span>&nbsp;<span class="num">5</span><br />
+<br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">bar</span><span class="oth">(</span><span class="num">15</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">'&nbsp;declares&nbsp;an&nbsp;array&nbsp;with&nbsp;indices&nbsp;5-15</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">baz</span><span class="oth">(</span><span class="num">0</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">4</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;&nbsp;<span class="com">'&nbsp;declares&nbsp;an&nbsp;array&nbsp;with&nbsp;indices&nbsp;0-4</span><br />
+</div></tt><br />
+<br \>
+</div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
+<ul><li> Only available in the <i><a href="CompilerOptlang.html">-lang fblite</a></i> and <i><a href="CompilerOptlang.html">-lang qb</a></i> dialects.<br \>
+<li> In <i><a href="CompilerOptlang.html">-lang fb</a></i>, <tt><b>Option Base</b></tt> is not allowed, and the default lower bound is always <tt>0</tt>.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> QBASIC only supported values of <tt>0</tt> or <tt>1</tt> for <tt><i>base_subscript</i></tt>.<br \>
+<li> In QBASIC the word <tt><b>Base</b></tt> was a reserved keyword, and couldn't be used as a variable name.<br \>
+<li> Arrays must always be explicitly created in FreeBASIC.  QBASIC would implicitly create an array from <tt><i>base_subscript</i></tt> to <tt>10</tt> if one was used in code without being predefined.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgDim.html">Dim</a></tt><br \>
+<li> <tt><a href="KeyPgRedim.html">ReDim</a></tt><br \>
+<li> <tt><a href="KeyPgLbound.html">LBound</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

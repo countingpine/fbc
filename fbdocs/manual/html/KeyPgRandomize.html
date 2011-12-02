@@ -1,0 +1,73 @@
+<html>
+<head>
+<title>Randomize</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Randomize</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Seeds the random number generator<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgSub.html">Sub</a> <b>Randomize</b> ( <a href="KeyPgByval.html">ByVal</a> <i>seed</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgDouble.html">Double</a> = -1.0,  <a href="KeyPgByval.html">ByVal</a> <i>algorithm</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a> = 0 )<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
+<b>Randomize</b> [ <i>seed</i> ][, <i>algorithm</i> ]<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+<tt><i>seed</i></tt><br \>
+<div class="fb_indent">A <tt><a href="KeyPgDouble.html">Double</a></tt> seed value for the random number generator.  If omitted, a value based on <tt><a href="KeyPgTimer.html">Timer</a></tt> will be used instead.<br \>
+</div><tt><i>algorithm</i></tt><br \>
+<div class="fb_indent">An <tt><a href="KeyPgInteger.html">Integer</a></tt> value to select the algorithm used.  If omitted, the default algorithm for the current <a href="CompilerDialects.html">language dialect</a> is used.<br \>
+<br \>
+</div></div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+Sets the random seed that helps <tt><a href="KeyPgRnd.html">Rnd</a></tt> generate random numbers, and selects the algorithm to use. Valid values for <tt><i>algorithm</i></tt> are:<br \>
+<br \>
+<div class="fb_indent"><tt><b>0</b></tt> - Default for current <a href="CompilerDialects.html">language dialect</a>. This is algorithm <tt><b>3</b></tt> in the <i><a href="CompilerOptlang.html">-lang fb</a></i> dialect, <tt><b>4</b></tt> in the <i><a href="CompilerOptlang.html">-lang qb</a></i> dialect and <tt><b>1</b></tt> in the <i><a href="CompilerOptlang.html">-lang fblite</a></i> dialect.<br \>
+<tt><b>1</b></tt> - Uses the C runtime library's <tt>rand()</tt> function. This will give different results depending on the platform.<br \>
+<tt><b>2</b></tt> - Uses a fast implementation. This should be stable across all platforms, and provides 32-bit granularity, reasonable degree of randomness.<br \>
+<tt><b>3</b></tt> - Uses the Mersenne Twister. This should be stable across all platforms, provides 32-bit granularity, and gives a high degree of randomness.<br \>
+<tt><b>4</b></tt> - Uses a function that is designed to give the same random number sequences as QBASIC. This should be stable across all platforms, and provides 24-bit precision, with a low degree of randomness.<br \>
+<br \>
+For any given seed, each algorithm will produce a specific, deterministic sequence of numbers for that seed.  If you want each call to <tt><b>Randomize</b></tt> to produce a different sequence of numbers, a seed that is not quite predictable should be used - for example, the value returned from <tt><a href="KeyPgTimer.html">Timer</a></tt>.  Omitting the <tt><i>seed</i></tt> parameter will use a value based on this.<br \>
+Note: using the <tt><a href="KeyPgTimer.html">Timer</a></tt> value directly as a parameter will produce the same seed if used more than once in the same second.  However, it is generally not worth calling <tt><b>Randomize</b></tt> twice with unpredictable seeds anyway, because the second sequence will be no more random than the first.  In most cases, the Mersenne twister should provide a sufficiently random sequence of numbers, without requiring reseeding between <tt><a href="KeyPgRnd.html">Rnd</a></tt> calls.<br \>
+<br \>
+<br \>
+When you call <tt><b>Randomize</b></tt> with the QB compatible algorithm, part of the old seed is retained.  This means that if you call <tt><b>Randomize</b></tt> several times with the same seed, you will <b>not</b> get the same sequence each time.  To get a specific sequence in QB compatible mode, set the seed by calling <tt><a href="KeyPgRnd.html">Rnd</a></tt> with a negative parameter.<br \>
+<br \>
+</div></div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="com">''&nbsp;Seed&nbsp;the&nbsp;RNG&nbsp;to&nbsp;the&nbsp;method&nbsp;using&nbsp;C's&nbsp;rand()</span><br />
+<span class="key">Randomize</span>&nbsp;<span class="oth">,</span>&nbsp;<span class="num">1</span><br />
+<br />
+<span class="com">''&nbsp;Print&nbsp;a&nbsp;sequence&nbsp;of&nbsp;random&nbsp;numbers</span><br />
+<span class="key">For</span>&nbsp;<span class="wrd">i</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">1</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">10</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="key">Rnd</span><br />
+<span class="key">Next</span><br />
+</div></tt><br />
+<br \>
+</div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
+The default algorithm used depends on the current dialect in use:<br \>
+<ul><ul><li> With the <i><a href="CompilerOptlang.html">-lang fb</a></i> dialect, a 32 bit Mersenne Twister function with a granularity of 32 bits is used.<br \>
+<li> With the <i><a href="CompilerOptlang.html">-lang qb</a></i> dialect, a function giving the same output as <tt><b>Rnd</b></tt> in QB is used. The granularity is 24 bits.<br \>
+<li> With the <i><a href="CompilerOptlang.html">-lang deprecated</a></i> and <i><a href="CompilerOptlang.html">-lang fblite</a></i> dialects, the function in the C runtime available in the system is used. The function has a granularity of 15 bits in Win32, and 32 bits in Linux and DOS.<br \>
+<br \>
+</ul></ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> The <tt><i>algorithm</i></tt> parameter is new to FreeBASIC.<br \>
+<li> QBASIC only had one algorithm (replicated in FB in algorithm number <tt><b>4</b></tt>, and set as the default in the <i><a href="CompilerOptlang.html">-lang qb</a></i> dialect).<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgRnd.html">Rnd</a></tt><br \>
+<li> <a href="CompilerDialects.html">Language dialects</a><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

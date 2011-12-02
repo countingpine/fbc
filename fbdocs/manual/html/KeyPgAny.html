@@ -1,0 +1,105 @@
+<html>
+<head>
+<title>Any</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Any</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	<tt><b>Any</b></tt> is not a real type, but it's used as a placeholder in various ways.<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<i>identifier</i> <a href="KeyPgAs.html">As</a> <b>Any</b> <a href="KeyPgPointer.html">Pointer</a>|<a href="KeyPgPtr.html">Ptr</a><br \>
+<i>or</i><br \>
+<a href="KeyPgDeclare.html">Declare</a> { <a href="KeyPgSub.html">Sub</a> | <a href="KeyPgFunction.html">Function</a> } <i>identifier</i> ( [ ..., ] <a href="KeyPgByref.html">ByRef</a> <i>identifier</i> <a href="KeyPgAs.html">As</a> <b>Any</b> [ , ... ] )<br \>
+<i>or</i><br \>
+<a href="KeyPgDim.html">Dim</a> <i>identifier</i> <a href="KeyPgAs.html">As</a> <a href="DataType.html">datatype</a> = <b>Any</b><br \>
+</tt><br \>
+</div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
+<b></tt>1)</b><tt> Dim <i>identifier</i> as <b>Any</b> ptr<br \>
+<i>or</i><br \>
+<b></tt>1)</b><tt> Declare Sub <i>identifier</i> ( [ byval | byref ] <i>identifier</i> as <b>Any</b> ptr )<br \>
+<i>or</i><br \>
+<b></tt>2)</b><tt> Dim <i>identifier</i> As <i>datatype</i> = <b>Any</b><br \>
+<i>or</i><br \>
+<b></tt>3)</b><tt> Declare Sub <i>identifier</i> ( byref <i>identifier</i> as <b>Any</b> )<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+<tt><b>1)</b></tt> A special pointer type called the <tt><b>Any <a href="KeyPgPtr.html">Pointer</a></b></tt> allows pointing to any variable type. If you cast it to an <tt><a href="KeyPgInteger.html">Integer</a> <a href="KeyPgPtr.html">Pointer</a></tt>, it will operate on the subject as though it were an <tt><a href="KeyPgInteger.html">Integer</a></tt>, etc.<br \>
+<br \>
+You may not create variables of the type <tt><b>Any</b></tt>. It is illegal to dereference an <tt><b>Any Pointer</b></tt>, but an <tt><b>Any Pointer Pointer</b></tt> may be dereferenced, because doing so will result in an <tt><b>Any Pointer</b></tt>. Trying to dereference that resulting <tt><b>Any Pointer</b></tt> would be illegal.<br \>
+<br \>
+This should not be confused with <tt>Variant</tt>, a Visual Basic data type which can contain any type of variable. FreeBASIC does not natively support the <tt>Variant</tt> type.<br \>
+<br \>
+<tt><b>2) </b></tt> <tt><b>Any</b></tt> can be used as a fake initializer to disable the default initialization to <tt>0</tt> of the variables. This may save time in critical sections of the programs. It is up to the program to fill the variables with significant data. You may recognize this as the default behavior of C.<br \>
+<br \>
+<tt><b>3) </b></tt> <b><tt>Any</tt></b> can be used  in function prototypes (in a <tt><a href="KeyPgDeclare.html">Declare</a></tt> statement) with <tt><a href="KeyPgByref.html">ByRef</a></tt> arguments to disable the compiler checking for the correct type of the variable passed. This use of <tt><b>Any</b></tt> is deprecated and it is only there for compatibility with QB, where it was the only way of passing arrays as arguments.<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="key">Declare</span>&nbsp;<span class="key">Sub</span>&nbsp;<span class="wrd">echo</span><span class="oth">(</span><span class="key">ByVal</span>&nbsp;<span class="wrd">x</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Any</span>&nbsp;<span class="key">Ptr</span><span class="oth">)</span>&nbsp;<span class="com">''&nbsp;echo&nbsp;will&nbsp;accept&nbsp;any&nbsp;pointer&nbsp;type</span><br />
+<br />
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="wrd">a</span><span class="oth">(</span><span class="num">0</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">9</span><span class="oth">)</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">Any</span>&nbsp;<span class="com">''&nbsp;this&nbsp;variable&nbsp;is&nbsp;not&nbsp;initialized</span><br />
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Double</span>&nbsp;&nbsp;<span class="wrd">d</span><span class="oth">(</span><span class="num">0</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">4</span><span class="oth">)</span><br />
+<br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">p</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Any</span>&nbsp;<span class="key">Ptr</span><br />
+<br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">pa</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="key">Ptr</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="oth">@</span><span class="wrd">a</span><span class="oth">(</span><span class="num">0</span><span class="oth">)</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"Not&nbsp;initialized&nbsp;"</span><span class="oth">;</span><br />
+<span class="wrd">echo</span>&nbsp;<span class="wrd">pa</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;pass&nbsp;to&nbsp;echo&nbsp;a&nbsp;pointer&nbsp;to&nbsp;integer</span><br />
+<br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">pd</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Double</span>&nbsp;<span class="key">Ptr</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="oth">@</span><span class="wrd">d</span><span class="oth">(</span><span class="num">0</span><span class="oth">)</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"Initialized&nbsp;"</span><span class="oth">;</span><br />
+<span class="wrd">echo</span>&nbsp;<span class="wrd">pd</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;pass&nbsp;to&nbsp;echo&nbsp;a&nbsp;pointer&nbsp;to&nbsp;double</span><br />
+<br />
+<span class="wrd">p</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">pa</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;assign&nbsp;to&nbsp;p&nbsp;a&nbsp;pointer&nbsp;to&nbsp;integer</span><br />
+<span class="wrd">p</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">pd</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;assign&nbsp;to&nbsp;p&nbsp;a&nbsp;pointer&nbsp;to&nbsp;double&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br />
+<br />
+<span class="key">Sleep</span><br />
+<br />
+<span class="key">Sub</span>&nbsp;<span class="wrd">echo</span>&nbsp;<span class="oth">(</span><span class="key">ByVal</span>&nbsp;<span class="wrd">x</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Any</span>&nbsp;<span class="key">Ptr</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="wrd">i</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">For</span>&nbsp;<span class="wrd">i</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">39</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">'echo&nbsp;interprets&nbsp;the&nbsp;data&nbsp;in&nbsp;the&nbsp;pointer&nbsp;as&nbsp;bytes</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="key">Cast</span><span class="oth">(</span><span class="key">UByte</span>&nbsp;<span class="key">Ptr</span><span class="oth">,</span>&nbsp;<span class="wrd">x</span><span class="oth">)[</span><span class="wrd">i</span><span class="oth">]</span>&nbsp;<span class="oth">&amp;</span>&nbsp;<span class="quo">"&nbsp;"</span><span class="oth">;</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Next</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Sub</span><br />
+</div></tt><br />
+<br \>
+<tt><div class="freebasic">
+<span class="com">'Example&nbsp;of&nbsp;ANY&nbsp;disabling&nbsp;the&nbsp;variable&nbsp;type&nbsp;checking</span><br />
+<span class="key">Declare</span>&nbsp;<span class="key">Sub</span>&nbsp;<span class="wrd">echo</span>&nbsp;<span class="oth">(</span><span class="key">ByRef</span>&nbsp;<span class="wrd">a</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Any</span><span class="oth">)</span>&nbsp;<span class="com">''&nbsp;ANY&nbsp;disables&nbsp;the&nbsp;checking&nbsp;for&nbsp;the&nbsp;type&nbsp;of&nbsp;data&nbsp;passed&nbsp;to&nbsp;the&nbsp;function</span><br />
+<br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">x</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Single</span><br />
+<span class="wrd">x</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="oth">-</span><span class="num">15</span><br />
+<span class="wrd">echo</span>&nbsp;<span class="wrd">x</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;Passing&nbsp;a&nbsp;single&nbsp;to&nbsp;a&nbsp;function&nbsp;that&nbsp;expects&nbsp;an&nbsp;integer.&nbsp;The&nbsp;compiler&nbsp;does&nbsp;not&nbsp;complain!!&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br />
+<span class="key">Sleep</span><br />
+<br />
+<span class="key">Sub</span>&nbsp;<span class="wrd">echo</span>&nbsp;<span class="oth">(</span><span class="key">ByRef</span>&nbsp;<span class="wrd">a</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">)</span><br />
+&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="key">Hex</span><span class="oth">(</span><span class="wrd">a</span><span class="oth">)</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+<span class="key">End</span>&nbsp;<span class="key">Sub</span><br />
+<br />
+</div></tt><br />
+<br \>
+</div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
+<ul><li> Not available in the <i><a href="CompilerOptlang.html">-lang qb</a></i> dialect.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> Pointers and initializers are new to FreeBASIC.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgDim.html">Dim</a></tt><br \>
+<li> <tt><a href="KeyPgDeclare.html">Declare</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

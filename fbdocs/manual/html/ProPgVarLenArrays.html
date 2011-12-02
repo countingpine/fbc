@@ -1,0 +1,58 @@
+<html>
+<head>
+<title>Variable-length Arrays</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Variable-length Arrays</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Resizable homogeneous data structures.<br \>
+<br \>
+<div class="fb_sect_title">Overview</div><div class="fb_sect_cont"><br \>
+Variable-length arrays are <a href="ProPgArrays.html">arrays</a> that can, during program execution, either be resized to hold more or less elements, or have their dimension[s] use a different subscript range. The memory used by a variable-length array to store its elements is allocated at runtime, in the free store (the heap), as opposed to fixed-length arrays whose data is either allocated on the program stack or in the <tt>.BSS</tt> or <tt>.DATA</tt> sections of the executable, depending on whether they were defined with <tt><a href="KeyPgStatic.html">Static</a></tt>.<br \>
+<br \>
+</div><div class="fb_sect_title">Declaration and definition</div><div class="fb_sect_cont"><br \>
+A variable-length array is declared with the <tt><a href="KeyPgExtern.html">Extern</a></tt> keyword, followed by a variable identifier, a parenthesized list of zero (0) or more subscript ranges and an element <a href="CatPgStdDataTypes.html">datatype</a>. For an array to be declared variable-length, either an empty subscript range list can be used, or one or more of the subscript ranges must have non-constant values - that is, the ranges must be specified by variables or objects convertible to <tt><a href="KeyPgInteger.html">Integer</a></tt>.<br \>
+<br \>
+<tt><div class="freebasic">
+<span class="key">Dim</span>&nbsp;<span class="wrd">maxLowerBound</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="oth">-</span><span class="num">5</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">maxUpperBound</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">10</span><br />
+<br />
+<span class="com">''&nbsp;Declares&nbsp;a&nbsp;two&nbsp;dimensional&nbsp;variable-length&nbsp;array&nbsp;of&nbsp;elements&nbsp;of&nbsp;type&nbsp;STRING..</span><br />
+<span class="key">Extern</span>&nbsp;<span class="wrd">arrayOfStrings</span><span class="oth">(</span><span class="wrd">maxLowerBound</span>&nbsp;<span class="key">To</span>&nbsp;<span class="wrd">maxUpperBound</span><span class="oth">,</span>&nbsp;<span class="num">20</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span><br />
+<br />
+<span class="com">''&nbsp;Declares&nbsp;a&nbsp;one-dimensional&nbsp;variable-length&nbsp;array&nbsp;of&nbsp;elements&nbsp;of&nbsp;type&nbsp;BYTE..</span><br />
+<span class="key">Extern</span>&nbsp;<span class="wrd">arrayOfBytes</span><span class="oth">()</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Byte</span><br />
+</div></tt><br />
+A variable-length array is defined with either the <tt><a href="KeyPgDim.html">Dim</a></tt> or <tt><a href="KeyPgRedim.html">ReDim</a></tt> keywords, following the same form as declaration. The <tt><a href="KeyPgRedim.html">ReDim</a></tt> keyword always defines variable-length arrays, whether the subscript ranges are constant or not. Variable-length arrays cannot be defined with static storage using <tt><a href="KeyPgStatic.html">Static</a></tt>.<br \>
+<br \>
+<tt><div class="freebasic">
+<span class="com">''&nbsp;Defines&nbsp;one-dimensional&nbsp;variable-length&nbsp;arrays&nbsp;of&nbsp;type&nbsp;SHORT&nbsp;and&nbsp;INTEGER..</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">arrayOfShorts</span><span class="oth">()</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Short</span><br />
+<span class="key">ReDim</span>&nbsp;<span class="wrd">arrayOfIntegers</span><span class="oth">(</span><span class="num">9</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+</div></tt><br />
+Since the memory for variable-length arrays is allocated at runtime, when they are defined, the elements of variable-length arrays declared with <tt><a href="KeyPgExtern.html">Extern</a></tt> cannot be accessed until the array is defined. Similarly, variable-length arrays defined with empty subscript range lists have zero size - they hold zero elements - so they too must be resized before any elements can be accessed.<br \>
+<br \>
+</div><div class="fb_sect_title">Resizing</div><div class="fb_sect_cont"><br \>
+Resizing a variable-length array refers to "redefining" the array with different values for its subscript range[s], allowing the array to grow or shrink. Elements outside the new subscript range[s] are erased; object elements will be destroyed. If the array is resized to a larger size, new elements are added initialized with a zero or <i>null</i> value; object elements are default-constructed. Variable-length arrays are resized using the <tt><a href="KeyPgRedim.html">ReDim</a></tt> keyword following the same form as definition.<br \>
+<br \>
+<tt><div class="freebasic">
+<span class="com">''&nbsp;Define&nbsp;an&nbsp;empty&nbsp;variable-length&nbsp;array&nbsp;of&nbsp;SINGLE&nbsp;elements..</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">array</span><span class="oth">()</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Single</span><br />
+<br />
+<span class="com">''&nbsp;Resize&nbsp;the&nbsp;array&nbsp;to&nbsp;hold&nbsp;ten&nbsp;(10)&nbsp;SINGLE&nbsp;elements..</span><br />
+<span class="key">ReDim</span>&nbsp;<span class="wrd">array</span><span class="oth">(</span><span class="num">9</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Single</span><br />
+</div></tt><br />
+By default, element values of a variable-length array are lost when resized - the array will contain zero or more elements initialized to a zero or <i>null</i> value, or if the elements are objects, they will be default-constructed. To retain the previous element values during a resize, use the <tt><a href="KeyPgPreserve.html">Preserve</a></tt> keyword.<br \>
+<br \>
+</div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

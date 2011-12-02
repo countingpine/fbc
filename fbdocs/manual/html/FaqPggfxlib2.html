@@ -1,0 +1,112 @@
+<html>
+<head>
+<title>Frequently Asked FreeBASIC Graphics Library Questions</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Frequently Asked FreeBASIC Graphics Library Questions</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	<br \>
+<a name="item0"></a><br \>
+<br \>
+<b>FreeBASIC Graphics Library questions:</b><br \>
+<div class="fb_indent"><b>- <a href="#item1">How can I link/use Gfxlib?</a></b><br \>
+<b>- <a href="#item2">What about the fbgfx.bi header file?</a></b><br \>
+<b>- <a href="#item3">How are GET/PUT arrays managed?</a></b><br \>
+<b>- <a href="#item4">Why is BSAVE/BLOAD crashing?</a></b><br \>
+<b>- <a href="#item5">How can I get the red, green, blue, or alpha component of a colour?</a></b><br \>
+<b>- <a href="#item6">How can I make the 'x' button in the window header close my application?</a></b><br \>
+<b>- <a href="#item7">Can't run programs using SCREEN 13 or 14 in fullscreen !</a></b><br \>
+<br \>
+</div><br \>
+<br \>
+<br \>
+<div style="text-align: center;"><b>FreeBASIC Graphics Library questions</b></div><br \>
+<br \>
+<a name="item1"></a><b>How can I link/use Gfxlib?</b><br \>
+<div class="fb_indent">Gfxlib is "built in" into the language, it is not necessary to include any .bi file or to link any library explicitly. FreeBASIC detects you want to use Gfxlib when it finds a <a href="KeyPgScreengraphics.html">Screen</a> or <a href="KeyPgScreenres.html">ScreenRes</a> instruction. So to use Gfxlib, just start a graphics screen mode and use the graphics commands.<br \>
+<br \>
+</div><a href="#item0">Back to top</a><br \>
+<br \>
+<a name="item2"></a><b>What about the <tt>fbgfx.bi</tt> header file?</b><br \>
+<div class="fb_indent">The <tt>fbgfx.bi</tt> header file is available for inclusion by your program, and contains constant and type definitions that may be helpful to the programmer when using Gfxlib. You do not have to explicitly include this file to use Gfxlib however; the header is only available as an aid. Contents include <a href="KeyPgScreengraphics.html">Screen</a> / <a href="KeyPgScreenres.html">ScreenRes</a> mode flag constants, definitions of <a href="GfxScancodes.html">Keyboard scancodes</a> and more.<br \>
+<br \>
+</div><a href="#item0">Back to top</a><br \>
+<br \>
+<a name="item3"></a><b>How are GET/PUT arrays managed?</b><br \>
+<div class="fb_indent">In FreeBASIC, images can be used as arrays (as in QB) or as pointers. Either way, the image data is contained in one continuous chunk. The chunk consists of an header followed by the image data. The header can be of two types (old-style and new-style) and determines the format of the following image data, for details see GfxInternalFormats .<br \>
+<br \>
+</div><a href="#item0">Back to top</a><br \>
+<br \>
+<a name="item4"></a><b>Why is BSAVE/BLOAD crashing?</b><br \>
+<div class="fb_indent">BSAVE/BLOAD can only be used to load and save graphics screens in FreeBASIC. It can't be used to save a text mode screen. To load and save an array check this <a href="FaqPgbloadworkaround.html">snippet using file GET/PUT</a> .<br \>
+<br \>
+</div><a href="#item0">Back to top</a><br \>
+<br \>
+<a name="item5"></a><b>How can I get the red, green, blue, or alpha component of a color?</b><br \>
+<br \>
+<div class="fb_indent">Each byte in a color attribute corresponds with the red, green, blue, and alpha components.  The following example shows how to extract the component values from a 16, 24, or 32 bit color attribute.<br \>
+<br \>
+</div><tt><div class="freebasic">
+<span class="def">#define&nbsp;rgb_a(x)&nbsp;((x)&nbsp;Shr&nbsp;24)<br />
+#define&nbsp;rgb_r(x)&nbsp;((x)&nbsp;Shr&nbsp;16&nbsp;And&nbsp;255)<br />
+#define&nbsp;rgb_g(x)&nbsp;((x)&nbsp;Shr&nbsp;8&nbsp;And&nbsp;255)<br />
+#define&nbsp;rgb_b(x)&nbsp;((x)&nbsp;And&nbsp;255)<br />
+</span><br />
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">UInteger</span>&nbsp;<span class="wrd">c</span><br />
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="wrd">x</span><span class="oth">,</span>&nbsp;<span class="wrd">y</span><br />
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">UByte</span>&nbsp;<span class="wrd">red</span><span class="oth">,</span>&nbsp;<span class="wrd">green</span><span class="oth">,</span>&nbsp;<span class="wrd">blue</span><span class="oth">,</span>&nbsp;<span class="key">Alpha</span><br />
+<br />
+<span class="com">''&nbsp;Assume&nbsp;a&nbsp;16,&nbsp;24,&nbsp;or&nbsp;32&nbsp;bit&nbsp;screen&nbsp;mode&nbsp;has&nbsp;been&nbsp;set</span><br />
+<span class="wrd">c</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">Point</span><span class="oth">(</span><span class="wrd">x</span><span class="oth">,</span>&nbsp;<span class="wrd">y</span><span class="oth">)</span><br />
+<span class="wrd">red</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">rgb_r</span><span class="oth">(</span><span class="wrd">c</span><span class="oth">)</span><br />
+<span class="wrd">green</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">rgb_g</span><span class="oth">(</span><span class="wrd">c</span><span class="oth">)</span><br />
+<span class="wrd">blue</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">rgb_b</span><span class="oth">(</span><span class="wrd">c</span><span class="oth">)</span><br />
+<span class="key">Alpha</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">rgb_a</span><span class="oth">(</span><span class="wrd">c</span><span class="oth">)</span><br />
+</div></tt><br />
+<br \>
+<a href="#item0">Back to top</a><br \>
+<br \>
+<a name="item6"></a><b>How can I make the 'x' button in the window header close my application?</b><br \>
+<div class="fb_indent">In windowed graphics mode you can test for the press of the window's X (close) button with <tt><a href="KeyPgInkey.html">Inkey</a></tt>. This applies to Win32 and Linux, in DOS there is no "X" button.<br \>
+<br \>
+Here is a small example:<br \>
+<br \>
+</div><tt><div class="freebasic">
+<span class="com">''&nbsp;"X"&nbsp;close&nbsp;button&nbsp;example&nbsp;,&nbsp;Win32&nbsp;and&nbsp;Linux&nbsp;only</span><br />
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span>&nbsp;<span class="wrd">key</span><br />
+<span class="key">Screen</span>&nbsp;<span class="num">13</span><br />
+<span class="key">Do</span><br />
+&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"Click&nbsp;the&nbsp;'x'&nbsp;to&nbsp;close&nbsp;this&nbsp;app."</span><br />
+&nbsp;&nbsp;<span class="key">Sleep</span><br />
+&nbsp;&nbsp;<span class="wrd">key</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">Inkey</span><br />
+<span class="key">Loop</span>&nbsp;<span class="key">Until</span>&nbsp;<span class="wrd">key</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">Chr</span><span class="oth">(</span><span class="num">27</span><span class="oth">)</span>&nbsp;<span class="key">Or</span>&nbsp;<span class="wrd">key</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">Chr</span><span class="oth">(</span><span class="num">255</span><span class="oth">,</span>&nbsp;<span class="num">107</span><span class="oth">)</span>&nbsp;<span class="com">'escape&nbsp;or&nbsp;x-button</span><br />
+</div></tt><br />
+<br \>
+<div class="fb_indent">NOTE: If you use an old version of FreeBASIC, you may have to use Chr( 255 ) + "X"<br \>
+<br \>
+</div><a href="#item0">Back to top</a><br \>
+<br \>
+<a name="item7"></a><b>Can't run programs using SCREEN 13 or 14 in fullscreen !</b><br \>
+<div class="fb_indent">It's a hardware/driver limitation (Win32 and Linux only ?). Video cards don't implement those low resolution graphic modes nowadays. If fullscreen is required you should rewrite it using at least SCREEN 17 or 18, or a resolution of 640x480 or higher to be sure modern hardware can handle it.<br \>
+<br \>
+</div><a href="#item0">Back to top</a><br \>
+<br \>
+<div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <a href="CompilerFAQ.html">Compiler FAQ</a>.<br \>
+<li> <a href="FaqPgrtlib.html">FB Runtime Library FAQ</a>.<br \>
+<li> <a href="FaqPggfxlib2.html">Frequently Asked FreeBASIC Graphics Library Questions</a><br \>
+<br \>
+</ul><br \>
+   <br \>
+</div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

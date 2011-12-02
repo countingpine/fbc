@@ -1,0 +1,77 @@
+<html>
+<head>
+<title>Field</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Field</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Specifies alignment.<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<a href="KeyPgType.html">Type</a> <i>typename</i> <b>Field</b> = { 1 | 2 | 4 }<br \>
+...<br \>
+End <a href="KeyPgType.html">Type</a><br \>
+</tt><br \>
+</div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+<i>Note: The following information is likely incorrect, FB follows the GCC padding rules, which these next sentences do not describe.  The source file symb-struct.bas of the compiler shows the exact method.</i><br \>
+<br \>
+A <tt><a href="KeyPgType.html">Type</a></tt> variable has its fields aligned to the word length of the system, 4 bytes presently. <tt><b>Field</b></tt> modifies the default alignment to one byte (<tt><b>Field</b></tt> 1) or two bytes (<tt><b>Field</b></tt> 2). This helps FreeBASIC maintain compatibility with structures created in other languages.<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="key">Type</span>&nbsp;<span class="wrd">bitmap_header</span>&nbsp;<span class="key">Field</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">1</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">bfType</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">As</span>&nbsp;<span class="key">UShort</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">bfsize</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">As</span>&nbsp;<span class="key">UInteger</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">bfReserved1</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">As</span>&nbsp;<span class="key">UShort</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">bfReserved2</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">As</span>&nbsp;<span class="key">UShort</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">bfOffBits</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">As</span>&nbsp;<span class="key">UInteger</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">biSize</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">As</span>&nbsp;<span class="key">UInteger</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">biWidth</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">As</span>&nbsp;<span class="key">UInteger</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">biHeight</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">As</span>&nbsp;<span class="key">UInteger</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">biPlanes</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">As</span>&nbsp;<span class="key">UShort</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">biBitCount</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">As</span>&nbsp;<span class="key">UShort</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">biCompression</span>&nbsp;&nbsp;&nbsp;<span class="key">As</span>&nbsp;<span class="key">UInteger</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">biSizeImage</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">As</span>&nbsp;<span class="key">UInteger</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">biXPelsPerMeter</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">UInteger</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">biYPelsPerMeter</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">UInteger</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">biClrUsed</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">As</span>&nbsp;<span class="key">UInteger</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">biClrImportant</span>&nbsp;&nbsp;<span class="key">As</span>&nbsp;<span class="key">UInteger</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Type</span><br />
+<br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">bmp_header</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">bitmap_header</span><br />
+<br />
+<span class="com">'Open&nbsp;up&nbsp;bmp.bmp&nbsp;and&nbsp;get&nbsp;its&nbsp;header&nbsp;data:</span><br />
+<span class="com">'Note:&nbsp;Will&nbsp;not&nbsp;work&nbsp;without&nbsp;a&nbsp;bmp.bmp&nbsp;to&nbsp;load&nbsp;.&nbsp;.&nbsp;.</span><br />
+<span class="key">Open</span>&nbsp;<span class="quo">"bmp.bmp"</span>&nbsp;<span class="key">For</span>&nbsp;<span class="key">Binary</span>&nbsp;<span class="key">As</span>&nbsp;<span class="oth">#</span><span class="num">1</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Get</span>&nbsp;<span class="oth">#</span><span class="num">1</span><span class="oth">,</span>&nbsp;<span class="oth">,</span>&nbsp;<span class="wrd">bmp_header</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+<span class="key">Close</span>&nbsp;<span class="oth">#</span><span class="num">1</span><br />
+<br />
+<span class="key">Print</span>&nbsp;<span class="wrd">bmp_header.biWidth</span><span class="oth">,</span>&nbsp;<span class="wrd">bmp_header.biHeight</span><br />
+<br />
+<span class="key">Sleep</span><br />
+<br />
+</div></tt><br />
+<br \>
+</div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
+<ul><li>In the <i><a href="CompilerOptlang.html">-lang qb</a></i> dialect, the <tt><b>Field</b></tt> alignment is always one, no padding is ever done, as in QB.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> In QB <tt><b>Field</b></tt>  was used to define fields in a file buffer at run time. This feature is not implemented in FB, so the keyword has been redefined. To define fields in a file buffer, <tt><b><a href="KeyPgType.html">Type</a>s</b></tt> must be used.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgType.html">Type</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

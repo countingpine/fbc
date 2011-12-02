@@ -1,0 +1,130 @@
+<html>
+<head>
+<title>Open Lpt</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Open Lpt</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Open a printer device<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<b>Open Lpt</b> ["[LPT[x]:][<i>Printer_Name</i>][,<i>TITLE=Doc_Title</i>][,<i>EMU=TTY</i>]"] [For Input|Output] <a href="KeyPgAs.html">As</a> #<i>filenum</i><br \>
+</tt><br \>
+</div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
+<b>Open Lpt</b> "LPT..." <a href="KeyPgAs.html">As</a> [#]<i>filenum</i><br \>
+<div class="fb_indent"><i>or</i><br \>
+</div><i>result</i> = <b>Open Lpt</b>( "LPT..." <a href="KeyPgAs.html">As</a> [#]<i>filenum</i> )<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+<tt><i>x</i></tt><br \>
+<div class="fb_indent">Specifies a port number.  If omitted, output is sent to the system print spooler.<br \>
+</div><tt><i>Printer_Name</i></tt><br \>
+<div class="fb_indent">Name of printer to open.  This parameter is ignored on DOS.<br \>
+</div><tt><i>TITLE=Doc_Title</i></tt><br \>
+<div class="fb_indent">Title of the print job as seen by the printer spooler.  This parameter is ignored on DOS.<br \>
+</div><tt><i>EMU=TTY</i></tt><br \>
+<div class="fb_indent">Emulation of TTY output on a windows GDI printer, using driver text imaging.  This parameter is ignored on DOS and Linux.<br \>
+</div><tt>For Input|Output</tt><br \>
+<div class="fb_indent">clause is allowed for compatibility, but it is ignored.<br \>
+</div><tt><i>filenum</i></tt><br \>
+<div class="fb_indent">An unused file number to assign to the device.<br \>
+<br \>
+</div></div><div class="fb_sect_title">Return Value</div><div class="fb_sect_cont"><br \>
+Zero is returned if <b>Open Lpt</b> completed successfully, otherwise a non-zero value is returned to indicate failure.<br \>
+<br \>
+</div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+<b>Open Lpt</b> opens a connection to a printer device.  The connection is treated like a file, so data may be written to the printer using <tt><a href="KeyPgPrint.html">Print</a></tt> and <tt><a href="KeyPgPutfileio.html">Put #</a></tt> commands.  <br \>
+<br \>
+Any printer attached to the system may be opened with <b>Open Lpt</b><br \>
+<br \>
+<tt><b>Open Lpt</b> "LPT:" ...</tt> will try to open the default printer on Windows and Linux, and "LPT1:" on DOS.<br \>
+<br \>
+<tt><a href="KeyPgLprint.html">LPrint</a></tt> will automatically try to open the default printer on Windows and Linux, and <tt>"LPT1:"</tt> on DOS.<br \>
+<br \>
+Platform specific notes:<br \>
+<br \>
+<b>Windows</b><br \>
+<div class="fb_indent">The argument EMU=TTY assumes printable ASCII or Unicode text, and applies printer driver text imaging to the input.  EMU=TTY also allows the usage of CR, LF, BS, TAB, FF, etc., for virtual print-head movement...even when the printer is a GDI printer and therefore doesn't itself understand these special characters.  If ",EMU=TTY" is omitted, the data must be sent in the printer's language (ESC/P, HPGL, PostScript, etc...).  Other useful emulation modes aren't supported yet.<br \>
+<br \>
+</div><b>Linux</b><br \>
+<div class="fb_indent">A printer spooler available through <tt>lp</tt> must be installed to access printers by name or a default printer.  Spooler access was tested only with CUPS, but other spoolers may work that are invoked through <tt>lp</tt>.  Port are zero based on linux. <tt>"LPT1:"</tt> corresponds with <tt>"/dev/lp0"</tt>.<br \>
+<br \>
+The data must be sent in the printer's language (ESC/P, HPGL, PostScript, etc...). Emulation modes aren't supported yet.<br \>
+<br \>
+</div><b>DOS</b><br \>
+<div class="fb_indent">FreeBASIC does not support print spoolers on DOS.  Printers must be accessible through <tt>"LPTx:"</tt>.<br \>
+<br \>
+The data must be sent in the printer's language (ESC/P, HPGL, PostScript, etc...).  Emulation modes aren't supported yet.<br \>
+<br \>
+</div></div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="com">'&nbsp;Send&nbsp;some&nbsp;text&nbsp;to&nbsp;the&nbsp;Windows&nbsp;printer&nbsp;on&nbsp;LPT1:,&nbsp;using&nbsp;driver&nbsp;text&nbsp;imaging.</span><br />
+<span class="key">Open</span>&nbsp;<span class="key">Lpt</span>&nbsp;<span class="quo">"LPT1:EMU=TTY"</span>&nbsp;<span class="key">For</span>&nbsp;<span class="key">Output</span>&nbsp;&nbsp;<span class="key">As</span>&nbsp;<span class="oth">#</span><span class="num">1</span><br />
+<span class="key">Print</span>&nbsp;<span class="oth">#</span><span class="num">1</span><span class="oth">,</span>&nbsp;<span class="quo">"Testing!"</span>&nbsp;<br />
+<span class="key">Close</span><br />
+</div></tt><br />
+<tt><div class="freebasic">
+<span class="com">'&nbsp;Sends&nbsp;contents&nbsp;of&nbsp;text&nbsp;file&nbsp;test.txt&nbsp;to&nbsp;Windows&nbsp;printer&nbsp;named&nbsp;"ReceiptPrinter"</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">RptInput</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">PrintFileNum</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">,</span>&nbsp;<span class="wrd">RptFileFileNum</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+<br />
+<span class="wrd">RptFileFileNum</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">FreeFile</span><br />
+<span class="key">Open</span>&nbsp;<span class="quo">"test.txt"</span>&nbsp;<span class="key">For</span>&nbsp;<span class="key">Input</span>&nbsp;<span class="key">As</span>&nbsp;<span class="oth">#</span><span class="wrd">RptFileFileNum</span><br />
+<br />
+<span class="wrd">PrintFileNum</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">FreeFile</span><br />
+<span class="key">Open</span>&nbsp;<span class="key">Lpt</span>&nbsp;<span class="quo">"LPT:ReceiptPrinter,TITLE=ReceiptWinTitle,EMU=TTY"</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">_</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="def">#PrintFilenum<br />
+</span><br />
+<span class="key">While</span>&nbsp;<span class="oth">(</span><span class="key">EOF</span><span class="oth">(</span><span class="wrd">RptFileFileNum</span><span class="oth">)</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Line</span>&nbsp;<span class="key">Input</span>&nbsp;<span class="oth">#</span><span class="wrd">RptFileFileNum</span><span class="oth">,</span>&nbsp;<span class="wrd">RptInput</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="oth">#</span><span class="wrd">PrintFileNum</span><span class="oth">,</span>&nbsp;<span class="wrd">RptInput</span><br />
+<span class="key">Wend</span><br />
+<br />
+<span class="key">Close</span>&nbsp;<span class="oth">#</span><span class="wrd">PrintFileNum</span>&nbsp;&nbsp;<span class="com">'&nbsp;Interestingly,&nbsp;does&nbsp;not&nbsp;require&nbsp;CHR(12).&nbsp;&nbsp;But&nbsp;if&nbsp;pagination&nbsp;is&nbsp;desired,&nbsp;CHR(12)&nbsp;is&nbsp;the&nbsp;way.</span><br />
+<br />
+<span class="key">Close</span>&nbsp;<span class="oth">#</span><span class="wrd">RptFileFileNum</span><br />
+<br />
+<span class="key">Print</span>&nbsp;<span class="quo">"Press&nbsp;any&nbsp;key&nbsp;to&nbsp;end&nbsp;program..."</span><br />
+<span class="key">GetKey</span><br />
+<br />
+<span class="key">End</span><br />
+</div></tt><br />
+<br \>
+<tt><div class="freebasic">
+<span class="com">'This&nbsp;simple&nbsp;program&nbsp;will&nbsp;print&nbsp;a&nbsp;PostScript&nbsp;file&nbsp;to&nbsp;a&nbsp;PostScript&nbsp;compatible&nbsp;printer.</span><br />
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">UByte</span>&nbsp;<span class="wrd">FFI</span><span class="oth">,</span>&nbsp;<span class="wrd">PPO</span><br />
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span>&nbsp;<span class="wrd">temp</span><br />
+<br />
+<span class="wrd">FFI</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">FreeFile</span><span class="oth">()</span><br />
+<span class="key">Open</span>&nbsp;<span class="quo">"sample.ps"</span>&nbsp;<span class="key">For</span>&nbsp;<span class="key">Input</span>&nbsp;<span class="key">Access</span>&nbsp;<span class="key">Read</span>&nbsp;<span class="key">As</span>&nbsp;<span class="oth">#</span><span class="wrd">FFI</span><br />
+<span class="wrd">PPO</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">FreeFile</span><span class="oth">()</span><br />
+<span class="key">Open</span>&nbsp;<span class="key">Lpt</span>&nbsp;<span class="quo">"LPT1:"</span>&nbsp;<span class="key">For</span>&nbsp;<span class="key">Output</span>&nbsp;<span class="key">As</span>&nbsp;<span class="oth">#</span><span class="wrd">PPO</span><br />
+<span class="key">While</span>&nbsp;<span class="oth">(</span><span class="key">EOF</span><span class="oth">(</span><span class="wrd">FFI</span><span class="oth">)</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span><span class="oth">)</span><br />
+<span class="key">Line</span>&nbsp;<span class="key">Input</span>&nbsp;<span class="oth">#</span><span class="wrd">FFI</span><span class="oth">,</span>&nbsp;<span class="wrd">temp</span><br />
+<span class="key">Print</span>&nbsp;<span class="oth">#</span><span class="wrd">PPO</span><span class="oth">,</span>&nbsp;<span class="wrd">temp</span><br />
+<span class="key">Wend</span><br />
+<br />
+<span class="key">Close</span>&nbsp;<span class="oth">#</span><span class="wrd">FFI</span><br />
+<span class="key">Close</span>&nbsp;<span class="oth">#</span><span class="wrd">PPO</span><br />
+<br />
+<span class="key">Print</span>&nbsp;<span class="quo">"Printing&nbsp;Completed!"</span><br />
+</div></tt><br />
+<br \>
+</div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
+<ul><li> In the <i><a href="CompilerOptlang.html">-lang qb</a></i> dialect the old syntax is supported OPEN "LPT:..." . This syntax used in the other dialects will open a regular file.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgLprint.html">LPrint</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

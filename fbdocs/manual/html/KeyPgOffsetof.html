@@ -1,0 +1,70 @@
+<html>
+<head>
+<title>OffsetOf</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">OffsetOf</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Returns the offset of a field within a type.<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<a href="KeyPgPpdefine.html">#define</a> <b>OffsetOf</b>(<i>typename</i>, <i>fieldname</i>) <a href="KeyPgCint.html">CInt</a>( @<a href="KeyPgCast.html">Cast</a>( <i>typename</i> <a href="KeyPgPtr.html">Ptr</a>, 0 )-&gt;<i>fieldname</i> )	<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
+<i>result</i> = <b>OffsetOf</b>( <i>typename</i>, <i>fieldname</i> )<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+<tt><i>typename</i></tt><br \>
+<div class="fb_indent">Name of the type as defined using the <tt><a href="KeyPgType.html">Type...End Type</a></tt> statements.<br \>
+</div><tt><i>fieldname</i></tt><br \>
+<div class="fb_indent">Name of the field as defined within the type.<br \>
+<br \>
+</div></div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+<tt><b>OffsetOf</b></tt> will return the location <tt><i>fieldname</i></tt> as offset in bytes from the beginning of <tt><i>typename</i></tt>.<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="key">Type</span>&nbsp;<span class="wrd">MyType</span><br />
+&nbsp;&nbsp;<span class="wrd">x</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Single</span><br />
+&nbsp;&nbsp;<span class="wrd">y</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Single</span><br />
+&nbsp;&nbsp;<span class="key">Union</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">b</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Byte</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">i</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;<span class="key">End</span>&nbsp;<span class="key">Union</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Type</span><br />
+<br />
+<span class="key">Print</span>&nbsp;<span class="quo">"OffsetOf&nbsp;x&nbsp;=&nbsp;"</span><span class="oth">;</span>&nbsp;<span class="key">OffsetOf</span><span class="oth">(</span><span class="wrd">MyType</span><span class="oth">,</span>&nbsp;<span class="wrd">x</span><span class="oth">)</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"OffsetOf&nbsp;y&nbsp;=&nbsp;"</span><span class="oth">;</span>&nbsp;<span class="key">OffsetOf</span><span class="oth">(</span><span class="wrd">MyType</span><span class="oth">,</span>&nbsp;<span class="wrd">y</span><span class="oth">)</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"OffsetOf&nbsp;b&nbsp;=&nbsp;"</span><span class="oth">;</span>&nbsp;<span class="key">OffsetOf</span><span class="oth">(</span><span class="wrd">MyType</span><span class="oth">,</span>&nbsp;<span class="wrd">b</span><span class="oth">)</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"OffsetOf&nbsp;i&nbsp;=&nbsp;"</span><span class="oth">;</span>&nbsp;<span class="key">OffsetOf</span><span class="oth">(</span><span class="wrd">MyType</span><span class="oth">,</span>&nbsp;<span class="wrd">i</span><span class="oth">)</span><br />
+</div></tt><br />
+<br \>
+<b>Output</b><br \>
+<pre class="fb_pre">OffsetOf x =  0
+OffsetOf y =  4
+OffsetOf b =  8
+OffsetOf i =  8
+</pre><br \>
+<br \>
+</div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
+<ul><li> Not available in the <i><a href="CompilerOptlang.html">-lang qb</a></i> dialect unless referenced with the alias <tt><b>__Offsetof</b></tt>.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> New to FreeBASIC<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgType.html">Type...End Type</a></tt><br \>
+<li> <tt><a href="KeyPgSizeof.html">SizeOf</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

@@ -1,0 +1,178 @@
+<html>
+<head>
+<title>Property</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Property</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Declares or defines a property in a type or class<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+{ <a href="KeyPgType.html">Type</a> | <a href="KeyPgClass.html">Class</a> } <i>typename</i><br \>
+<div class="fb_indent"><a href="KeyPgDeclare.html">Declare</a> <b>Property</b> <i>fieldname</i> () <a href="KeyPgAs.html">As</a> <a href="DataType.html">datatype</a><br \>
+<a href="KeyPgDeclare.html">Declare</a> <b>Property</b> <i>fieldname</i> ( [ <a href="KeyPgByref.html">ByRef</a> | <a href="KeyPgByval.html">ByVal</a> ] <i>new_value</i> <a href="KeyPgAs.html">As</a> <a href="DataType.html">datatype</a> )<br \>
+<a href="KeyPgDeclare.html">Declare</a> <b>Property</b> <i>fieldname</i> ( [ <a href="KeyPgByref.html">ByRef</a> | <a href="KeyPgByval.html">ByVal</a> ] <i>index</i> <a href="KeyPgAs.html">As</a> <a href="DataType.html">datatype</a> ) <a href="KeyPgAs.html">As</a> <a href="DataType.html">datatype</a><br \>
+<a href="KeyPgDeclare.html">Declare</a> <b>Property</b> <i>fieldname</i> ( [ <a href="KeyPgByref.html">ByRef</a> | <a href="KeyPgByval.html">ByVal</a> ] <i>index</i> <a href="KeyPgAs.html">As</a> <a href="DataType.html">datatype</a>, [ <a href="KeyPgByref.html">ByRef</a> | <a href="KeyPgByval.html">ByVal</a> ] <i>new_value</i> <a href="KeyPgAs.html">As</a> <a href="DataType.html">datatype</a> )<br \>
+</div>End { <a href="KeyPgType.html">Type</a> | <a href="KeyPgClass.html">Class</a> }<br \>
+<br \>
+<b>Property</b> <i>typename</i>.<i>fieldname</i> () <a href="KeyPgAs.html">As</a> <a href="DataType.html">datatype</a><br \>
+<div class="fb_indent"><i>statements</i><br \>
+</div><b>End Property</b><br \>
+<br \>
+<b>Property</b> <i>typename</i>.<i>fieldname</i> ( [ <a href="KeyPgByref.html">ByRef</a> | <a href="KeyPgByval.html">ByVal</a> ] <i>new_value</i> <a href="KeyPgAs.html">As</a> <a href="DataType.html">datatype</a> )<br \>
+<div class="fb_indent"><i>statements</i><br \>
+</div><b>End Property</b><br \>
+<br \>
+<b>Property</b> <i>typename</i>.<i>fieldname</i> (  [ <a href="KeyPgByref.html">ByRef</a> | <a href="KeyPgByval.html">ByVal</a> ] <i>index</i> <a href="KeyPgAs.html">As</a> <a href="DataType.html">datatype</a> ) <a href="KeyPgAs.html">As</a> <a href="DataType.html">datatype</a><br \>
+<div class="fb_indent"><i>statements</i><br \>
+</div><b>End Property</b><br \>
+<br \>
+<b>Property</b> <i>typename</i>.<i>fieldname</i> (  [ <a href="KeyPgByref.html">ByRef</a> | <a href="KeyPgByval.html">ByVal</a> ] <i>index</i> <a href="KeyPgAs.html">As</a> <a href="DataType.html">datatype</a>, [ <a href="KeyPgByref.html">ByRef</a> | <a href="KeyPgByval.html">ByVal</a> ] <i>new_value</i> <a href="KeyPgAs.html">As</a> <a href="DataType.html">datatype</a> )<br \>
+<div class="fb_indent"><i>statements</i><br \>
+</div><b>End Property</b><br \>
+</tt><br \>
+</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+<tt><i>typename</i></tt> <br \>
+<div class="fb_indent">name of the <tt><a href="KeyPgType.html">Type</a></tt> or <tt><a href="KeyPgClass.html">Class</a></tt><br \>
+</div><tt><i>fieldname</i></tt> <br \>
+<div class="fb_indent">name of the property<br \>
+</div><tt><i>new_value</i></tt> <br \>
+<div class="fb_indent">the value passed to property to be assigned<br \>
+</div><tt><i>index</i></tt> <br \>
+<div class="fb_indent">the property index value<br \>
+<br \>
+</div></div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+<tt><b>Property</b></tt> fields are used to get and set values of a <tt><a href="KeyPgType.html">Type</a></tt> or <tt><a href="KeyPgClass.html">Class</a></tt> in the same way as other data fields except instead of a simple assignment to a field or a value retrieved from field, a procedure is executed.<br \>
+<br \>
+<tt><i>typename</i></tt> is the name of the type for which the <tt><b>Property</b></tt> method is declared and defined.  Name resolution for <tt><i>typename</i></tt> follows the same rules as procedures when used in a <tt><a href="KeyPgNamespace.html">Namespace</a></tt>.<br \>
+<br \>
+A <b>Property</b> may optionally have one index parameter.  When indexed, properties are accessed as Property(Index) = Value.<br \>
+<br \>
+A hidden <tt><a href="KeyPgThis.html">This</a></tt> parameter having the same type as <tt><i>typename</i></tt> is passed to the property procedure.  <tt><a href="KeyPgThis.html">This</a></tt> is used to access the fields of the <tt><a href="KeyPgType.html">Type</a></tt> or <tt><a href="KeyPgClass.html">Class</a></tt>.<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="key">Type</span>&nbsp;<span class="wrd">Vector2D</span><br />
+&nbsp;&nbsp;<span class="key">As</span>&nbsp;<span class="key">Single</span>&nbsp;<span class="wrd">x</span><span class="oth">,</span>&nbsp;<span class="wrd">y</span><br />
+&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Operator</span>&nbsp;<span class="key">Cast</span><span class="oth">()</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span><br />
+&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Property</span>&nbsp;<span class="wrd">Length</span><span class="oth">()</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Single</span><br />
+&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Property</span>&nbsp;<span class="wrd">Length</span><span class="oth">(</span>&nbsp;<span class="key">ByVal</span>&nbsp;<span class="wrd">new_length</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Single</span>&nbsp;<span class="oth">)</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Type</span><br />
+<br />
+<span class="key">Operator</span>&nbsp;<span class="wrd">Vector2D.cast</span>&nbsp;<span class="oth">()</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span><br />
+&nbsp;&nbsp;<span class="key">Return</span>&nbsp;<span class="quo">"("</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="key">Str</span><span class="oth">(</span><span class="wrd">x</span><span class="oth">)</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="quo">",&nbsp;"</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="key">Str</span><span class="oth">(</span><span class="wrd">y</span><span class="oth">)</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="quo">")"</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Operator</span><br />
+<br />
+<span class="key">Property</span>&nbsp;<span class="wrd">Vector2D.Length</span><span class="oth">()</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Single</span><br />
+&nbsp;&nbsp;<span class="wrd">Length</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">Sqr</span><span class="oth">(</span>&nbsp;<span class="wrd">x</span>&nbsp;<span class="oth">*</span>&nbsp;<span class="wrd">x</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="wrd">y</span>&nbsp;<span class="oth">*</span>&nbsp;<span class="wrd">y</span>&nbsp;<span class="oth">)</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Property</span><br />
+<br />
+<span class="key">Property</span>&nbsp;<span class="wrd">Vector2D.Length</span><span class="oth">(</span>&nbsp;<span class="key">ByVal</span>&nbsp;<span class="wrd">new_length</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Single</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="wrd">m</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Single</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">Length</span><br />
+&nbsp;&nbsp;<span class="key">If</span>&nbsp;<span class="wrd">m</span>&nbsp;<span class="oth">&lt;&gt;</span>&nbsp;<span class="num">0</span>&nbsp;<span class="key">Then</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;new&nbsp;vector&nbsp;=&nbsp;old&nbsp;/&nbsp;length&nbsp;*&nbsp;new_length</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">x</span>&nbsp;<span class="oth">*=</span>&nbsp;<span class="wrd">new_length</span>&nbsp;<span class="oth">/</span>&nbsp;<span class="wrd">m</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">y</span>&nbsp;<span class="oth">*=</span>&nbsp;<span class="wrd">new_length</span>&nbsp;<span class="oth">/</span>&nbsp;<span class="wrd">m</span><br />
+&nbsp;&nbsp;<span class="key">End</span>&nbsp;<span class="key">If</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Property</span><br />
+<br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">a</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">Vector2D</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="num">3</span><span class="oth">,</span>&nbsp;<span class="num">4</span>&nbsp;<span class="oth">)</span><br />
+<br />
+<span class="key">Print</span>&nbsp;<span class="quo">"a&nbsp;=&nbsp;"</span><span class="oth">;</span>&nbsp;<span class="wrd">a</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"a.length&nbsp;=&nbsp;"</span><span class="oth">;</span>&nbsp;<span class="wrd">a.length</span><br />
+<span class="key">Print</span><br />
+<br />
+<span class="wrd">a.length</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">10</span><br />
+<br />
+<span class="key">Print</span>&nbsp;<span class="quo">"a&nbsp;=&nbsp;"</span><span class="oth">;</span>&nbsp;<span class="wrd">a</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"a.length&nbsp;=&nbsp;"</span><span class="oth">;</span>&nbsp;<span class="wrd">a.length</span><br />
+</div></tt><br />
+Output:<br \>
+<pre class="fb_pre">
+a = (3, 4)
+a.length =  5
+
+a = (6, 8)
+a.length =  10
+</pre>Property Indexing:<br \>
+<tt><div class="freebasic">
+&nbsp;&nbsp;<span class="com">''&nbsp;True/False</span><br />
+<span class="key">Namespace</span>&nbsp;<span class="wrd">BOOL</span><br />
+&nbsp;&nbsp;<span class="key">Const</span>&nbsp;<span class="wrd">FALSE</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span><br />
+&nbsp;&nbsp;<span class="key">Const</span>&nbsp;<span class="wrd">TRUE</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">Not</span>&nbsp;<span class="wrd">FALSE</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Namespace</span><br />
+<br />
+<span class="key">Type</span>&nbsp;<span class="wrd">BitNum</span><br />
+&nbsp;&nbsp;<span class="wrd">Num</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">UInteger</span><br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;Get/Set&nbsp;Properties&nbsp;each&nbsp;with&nbsp;an&nbsp;Index.</span><br />
+&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Property</span>&nbsp;<span class="wrd">NumBit</span><span class="oth">(</span>&nbsp;<span class="key">ByVal</span>&nbsp;<span class="wrd">Index</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Property</span>&nbsp;<span class="wrd">NumBit</span><span class="oth">(</span>&nbsp;<span class="key">ByVal</span>&nbsp;<span class="wrd">Index</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">,</span>&nbsp;<span class="key">ByVal</span>&nbsp;<span class="wrd">Value</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Byte</span>&nbsp;<span class="oth">)</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Type</span><br />
+<br />
+&nbsp;&nbsp;<span class="com">''&nbsp;Get&nbsp;a&nbsp;bit&nbsp;by&nbsp;it's&nbsp;index.</span><br />
+<span class="key">Property</span>&nbsp;<span class="wrd">BitNum.NumBit</span><span class="oth">(</span>&nbsp;<span class="key">ByVal</span>&nbsp;<span class="wrd">Index</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;<span class="key">Return</span>&nbsp;<span class="key">Bit</span><span class="oth">(</span>&nbsp;<span class="wrd">This.Num</span><span class="oth">,</span>&nbsp;<span class="wrd">Index</span>&nbsp;<span class="oth">)</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Property</span><br />
+<br />
+&nbsp;&nbsp;<span class="com">''&nbsp;Set&nbsp;a&nbsp;bit&nbsp;by&nbsp;it's&nbsp;index.</span><br />
+<span class="key">Property</span>&nbsp;<span class="wrd">BitNum.NumBit</span><span class="oth">(</span>&nbsp;<span class="key">ByVal</span>&nbsp;<span class="wrd">Index</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">,</span>&nbsp;<span class="key">ByVal</span>&nbsp;<span class="wrd">Value</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Byte</span>&nbsp;<span class="oth">)</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;Make&nbsp;sure&nbsp;index&nbsp;is&nbsp;in&nbsp;Integer&nbsp;range.</span><br />
+&nbsp;&nbsp;<span class="key">If</span>&nbsp;<span class="wrd">Index</span>&nbsp;<span class="oth">&gt;=</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="key">SizeOf</span><span class="oth">(</span><span class="wrd">This.Num</span><span class="oth">)</span>&nbsp;<span class="oth">*</span>&nbsp;<span class="num">8</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="key">Then</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"Out&nbsp;of&nbsp;uInteger&nbsp;Range!"</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Exit</span>&nbsp;<span class="key">Property</span><br />
+&nbsp;&nbsp;<span class="key">Else</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">If</span>&nbsp;<span class="wrd">Index</span>&nbsp;<span class="oth">&lt;</span>&nbsp;<span class="num">0</span>&nbsp;<span class="key">Then</span>&nbsp;<span class="key">Exit</span>&nbsp;<span class="key">Property</span><br />
+&nbsp;&nbsp;<span class="key">End</span>&nbsp;<span class="key">If</span><br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;<span class="key">If</span>&nbsp;<span class="wrd">Value</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">BOOL.FALSE</span>&nbsp;<span class="key">Then</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">This.Num</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">BitReset</span><span class="oth">(</span>&nbsp;<span class="wrd">This.Num</span><span class="oth">,</span>&nbsp;<span class="wrd">Index</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;<span class="key">End</span>&nbsp;<span class="key">If</span><br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;<span class="key">If</span>&nbsp;<span class="wrd">Value</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">BOOL.TRUE</span>&nbsp;<span class="key">Then</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">This.Num</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">BitSet</span><span class="oth">(</span>&nbsp;<span class="wrd">This.Num</span><span class="oth">,</span>&nbsp;<span class="wrd">Index</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;<span class="key">End</span>&nbsp;<span class="key">If</span><br />
+&nbsp;&nbsp;<br />
+<span class="key">End</span>&nbsp;<span class="key">Property</span><br />
+<br />
+<br />
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">BitNum</span>&nbsp;<span class="wrd">Foo</span><br />
+<br />
+<br />
+<span class="key">Print</span>&nbsp;<span class="quo">"Testing&nbsp;property&nbsp;indexing&nbsp;with&nbsp;data&nbsp;types:"</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"FOO&nbsp;Number's&nbsp;Value:&nbsp;"</span>&nbsp;<span class="oth">&amp;</span>&nbsp;<span class="wrd">Foo.Num</span><br />
+<br />
+&nbsp;&nbsp;<span class="com">''&nbsp;Set&nbsp;the&nbsp;bit&nbsp;in&nbsp;the&nbsp;number&nbsp;as&nbsp;true.</span><br />
+<span class="wrd">Foo.NumBit</span><span class="oth">(</span><span class="num">31</span><span class="oth">)</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">BOOL.TRUE</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"Set&nbsp;the&nbsp;31st&nbsp;bit&nbsp;of&nbsp;FOO"</span><br />
+<br />
+&nbsp;&nbsp;<span class="com">''&nbsp;Print&nbsp;to&nbsp;see&nbsp;if&nbsp;our&nbsp;bit&nbsp;has&nbsp;been&nbsp;changed.</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"FOO&nbsp;Number's&nbsp;Value:&nbsp;"</span>&nbsp;<span class="oth">&amp;</span>&nbsp;<span class="wrd">Foo.Num</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"FOO&nbsp;31st&nbsp;Bit&nbsp;Set?&nbsp;"</span>&nbsp;<span class="oth">&amp;</span>&nbsp;<span class="wrd">Foo.NumBit</span><span class="oth">(</span><span class="num">31</span><span class="oth">)</span><br />
+<span class="key">Sleep</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">""</span><br />
+</div></tt><br />
+Output:<br \>
+<pre class="fb_pre">
+Testing property indexing with data types:
+FOO Number's Value: 0
+Set the 31st bit of FOO
+FOO Number's Value: 2147483648
+FOO 31st Bit Set? -1
+</pre></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgType.html">Class</a></tt><br \>
+<li> <tt><a href="KeyPgType.html">Type</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

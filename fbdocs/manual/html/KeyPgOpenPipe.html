@@ -1,0 +1,86 @@
+<html>
+<head>
+<title>Open Pipe</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Open Pipe</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Opens an external process' standard input (<i>stdin</i>) or output (<i>stdout</i>) stream for file operations.<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<b>Open Pipe</b> <i>shell_command</i> <b>For</b> <b><a href="KeyPgInputfilemode.html">Input</a></b> <b>As</b> [<b>#</b>]<i>filenumber</i><br \>
+<b>Open Pipe</b> <i>shell_command</i> <b>For</b> <b><a href="KeyPgOutput.html">Output</a></b> <b>As</b> [<b>#</b>]<i>filenumber</i><br \>
+<b>Open Pipe</b> <i>shell_command</i> <b>For</b> <b><a href="KeyPgBinary.html">Binary</a></b> <i>access_type</i> [<b>#</b>]<i>filenumber</i><br \>
+</tt><br \>
+</div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
+<i>result</i> = <b>Open Pipe</b>( <i>command</i>, <b>For</b> {<b><a href="KeyPgInputfilemode.html">Input</a></b>|<b><a href="KeyPgOutput.html">Output</a></b>}, <b>As</b> <i>filenumber</i> )<br \>
+<div class="fb_indent"></tt><i>or,</i><tt><br \>
+</div><i>result</i> = <b>Open Pipe</b>( <i>command</i>, <b>For</b> <b><a href="KeyPgBinary.html">Binary</a></b>, <i>access_type</i>, <b>As</b> <i>filenumber</i> )<br \>
+<div class="fb_indent"></tt><i>(or in the QB-like syntax,)</i><tt><br \>
+</div><b>Open Pipe</b> <i>filename</i> <b>For</b> {<b><a href="KeyPgInputfilemode.html">Input</a></b>|<b><a href="KeyPgOutput.html">Output</a></b>} <b>As</b> <i>filenumber</i><br \>
+<div class="fb_indent"></tt><i>(or,)</i><tt><br \>
+</div><b>Open Pipe</b> <i>filename</i> <b>For</b> <b><a href="KeyPgBinary.html">Binary</a></b> <i>access_type</i> <b>As</b> <i>filenumber</i><br \>
+</tt><br \>
+</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+<tt><i>shell_command</i></tt><br \>
+<div class="fb_indent">The external process to execute in the operating system command shell. Relative file paths are relative to the current directory (see <tt><a href="KeyPgCurdir.html">CurDir</a></tt>).  When opening a pipe for a process that requires double quotes in either its executable path, or its arguments, the entire pipe string should be nested inside of double quotes.<br \>
+</div><tt><i>access_type</i></tt><br \>
+<div class="fb_indent">The type of read or write access requested by the calling process.<br \>
+</div><ul><ul><ul><li> <tt><a href="KeyPgAccess.html">Access</a></tt> {<tt>Read</tt>|<tt>Write</tt>} <i>(either the </i>stdin<i> or </i>stdout<i> stream of the external process can be opened)</i><br \>
+</ul></ul></ul><tt><i>filenumber</i></tt><br \>
+<div class="fb_indent">An available file number to bind to the external process' <i>stdin</i> or <i>stdout</i> stream.<br \>
+<br \>
+</div></div><div class="fb_sect_title">Return Value</div><div class="fb_sect_cont"><br \>
+In the first usage, <tt><b>Open Pipe</b></tt> returns zero (0) on success and a non-zero error code otherwise.<br \>
+<br \>
+</div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+<tt><b>Open Pipe</b></tt> executes another process in the command shell and opens either its <i>stdin</i> or <i>stdout</i> streams for reading or writing. A <i>file number</i> is bound to the stream, which is used in subsequent file operations, such as <tt><a href="KeyPgInputPp.html">Input #</a></tt>. An available <tt><i>filenumber</i></tt> can be retrieved with <tt><a href="KeyPgFreefile.html">FreeFile</a></tt>. If the external process does not exist, a runtime error is thrown.<br \>
+<br \>
+The <tt><a href="KeyPgInputfilemode.html">Input</a></tt> and <tt><a href="KeyPgOutput.html">Output</a></tt> <i>file modes</i> open the external process' <i>stdin</i> and <i>stdout</i> streams, respectively, for sequential text I/O, useful for reading or writing plain text. Characters, words or whole lines can then be read or written using text-mode file operations, such as <tt><a href="KeyPgLineinput.html">Line Input #</a></tt> and <tt><a href="KeyPgPrintPp.html">Print #</a></tt>.<br \>
+<br \>
+The <tt><a href="KeyPgBinary.html">Binary</a></tt> <i>file mode</i> opens the external process' <i>stdin</i> or <i>stdout</i> streams - depending on the <i>access type</i> specified (see description of the <tt><i>access_type</i></tt> parameter above) - for random-access reading or writing of arbitrarily sized and interpreted raw data. Simple data type values, like <tt><a href="KeyPgByte.html">Byte</a></tt> and <tt><a href="KeyPgLongint.html">LongInt</a></tt>, and whole chunks of memory can be read from or written to the streams with binary-mode file operations like <tt><a href="KeyPgGetfileio.html">Get #</a></tt> and <tt><a href="KeyPgPutfileio.html">Put #</a></tt>.<br \>
+Bidirectional pipes are not supported by FB and must be implemented using the OS' API functions.<br \>
+</div><div class="fb_sect_title">Platform Differences</div><div class="fb_sect_cont"><br \>
+<ul><li> The <tt><a href="KeyPgBinary.html">Binary</a></tt> <i>file mode</i> is not supported on all platforms; <tt><b>Open Pipe</b></tt> will throw an error if it is unable to open the external process' <i>stdin</i> or <i>stdout</i> streams in binary mode.<br \>
+<br \>
+<br \>
+<br \>
+</ul><b>Runtime errors:</b><br \>
+    <tt><b>Open Pipe</b></tt> throws one of the following <a href="ProPgErrorHandling.html">runtime errors</a>:<br \>
+<br \>
+<i>(<tt>1</tt>) Illegal function call</i><br \>
+<ul><ul><li> Filenumber was not free at the time. use <tt><a href="KeyPgFreefile.html">FreeFile</a></tt> to ensure that filenumber is free.<br \>
+<br \>
+<br \>
+</ul></ul></div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="key">Dim</span>&nbsp;<span class="wrd">text</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span><br />
+<span class="key">Open</span>&nbsp;<span class="key">Pipe</span>&nbsp;<span class="quo">"fbc.exe"</span>&nbsp;<span class="key">For</span>&nbsp;<span class="key">Input</span>&nbsp;<span class="key">As</span>&nbsp;<span class="oth">#</span><span class="num">1</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"Output&nbsp;of&nbsp;fbc:"</span><br />
+<span class="key">Do</span>&nbsp;<span class="key">While</span>&nbsp;<span class="key">Not</span>&nbsp;<span class="key">EOF</span><span class="oth">(</span><span class="num">1</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;<span class="key">Line</span>&nbsp;<span class="key">Input</span>&nbsp;<span class="oth">#</span><span class="num">1</span><span class="oth">,</span>&nbsp;<span class="wrd">text</span><br />
+&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="wrd">text</span><br />
+<span class="key">Loop</span><br />
+<span class="key">Close</span>&nbsp;<span class="oth">#</span><span class="num">1</span><br />
+</div></tt><br />
+<br \>
+</div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> New to FreeBASIC<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgOpenCons.html">Open Cons</a></tt><br \>
+<li> <tt><a href="KeyPgOpenErr.html">Open Err</a></tt><br \>
+<li> <tt><a href="KeyPgFreefile.html">FreeFile</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

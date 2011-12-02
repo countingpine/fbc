@@ -1,0 +1,91 @@
+<html>
+<head>
+<title>Dynamic Arrays</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Dynamic Arrays</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	<br \>
+Hello, this page explains the proper use of dynamic arrays in FreeBASIC. While it isn't a very long tutorial, many people have had some troubles with this and I felt it was worth putting into the "Getting Started" tutorial page.<br \>
+<br \>
+Arrays are neat; they can be used and resized throughout a program, with little difficulties. Firstly, we should discuss both ways a dynamic array can be created. In the same code, I will explain how to redimension a Dynamic Shared Array within a sub or function. Read the comments within the code to understand it better.<br \>
+<br \>
+<tt><div class="freebasic">
+<span class="key">Declare</span>&nbsp;<span class="key">Sub</span>&nbsp;<span class="wrd">mySub</span>&nbsp;<span class="oth">()</span><br />
+<br />
+<span class="com">'&nbsp;as&nbsp;of&nbsp;0.17,&nbsp;OPTION&nbsp;DYNAMIC&nbsp;and&nbsp;'$DYNAMIC&nbsp;are&nbsp;unecessary.&nbsp;you&nbsp;must&nbsp;define&nbsp;an&nbsp;array&nbsp;to&nbsp;be&nbsp;dynamic&nbsp;each&nbsp;time</span><br />
+<span class="com">'&nbsp;as&nbsp;you&nbsp;can&nbsp;see,&nbsp;both&nbsp;following&nbsp;ways&nbsp;are&nbsp;successful&nbsp;at&nbsp;creating&nbsp;a&nbsp;dynamic&nbsp;array</span><br />
+<span class="key">Dim</span>&nbsp;<span class="key">Shared</span>&nbsp;<span class="wrd">myArray1</span><span class="oth">()</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">UByte</span><br />
+<span class="key">ReDim</span>&nbsp;<span class="key">Shared</span>&nbsp;<span class="wrd">myArray2</span><span class="oth">(</span><span class="num">0</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">UByte</span><br />
+<br />
+<span class="wrd">mySub</span><br />
+<br />
+<span class="com">'&nbsp;because&nbsp;we&nbsp;shared&nbsp;the&nbsp;arrays,&nbsp;they&nbsp;are&nbsp;accessable&nbsp;from&nbsp;anywhere&nbsp;within&nbsp;the&nbsp;module</span><br />
+<span class="key">Print</span>&nbsp;<span class="wrd">myArray1</span><span class="oth">(</span><span class="num">5</span><span class="oth">)</span>&nbsp;<span class="com">'&nbsp;will&nbsp;print&nbsp;2</span><br />
+<span class="key">Print</span>&nbsp;<span class="wrd">myArray2</span><span class="oth">(</span><span class="num">6</span><span class="oth">)</span>&nbsp;<span class="com">'&nbsp;will&nbsp;print&nbsp;3</span><br />
+<br />
+<span class="key">Sub</span>&nbsp;<span class="wrd">mySub</span>&nbsp;<span class="oth">()</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">'&nbsp;do&nbsp;NOT&nbsp;use&nbsp;"redim&nbsp;shared"&nbsp;within&nbsp;a&nbsp;sub&nbsp;or&nbsp;function!&nbsp;even&nbsp;if&nbsp;it&nbsp;is&nbsp;shared,&nbsp;you&nbsp;must&nbsp;omit&nbsp;the&nbsp;word&nbsp;"shared"&nbsp;for&nbsp;it&nbsp;to&nbsp;work</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">ReDim</span>&nbsp;<span class="wrd">myArray1</span><span class="oth">(</span><span class="num">0</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">9</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">UByte</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">ReDim</span>&nbsp;<span class="wrd">myArray2</span><span class="oth">(</span><span class="num">0</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">9</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">UByte</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">myArray1</span><span class="oth">(</span><span class="num">5</span><span class="oth">)</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">2</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">myArray2</span><span class="oth">(</span><span class="num">6</span><span class="oth">)</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">3</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Sub</span><br />
+</div></tt><br />
+<br \>
+Now, you may be wondering how you can redimension an array while using the PRESERVE keyword. Normally, you simply add PRESERVE as the syntax for REDIM will state. Yet in fact, this only works if the first array dimension is the only one changing! For example, the following program would not work properly:<br \>
+<br \>
+<tt><div class="freebasic">
+<span class="com">'&nbsp;declare&nbsp;the&nbsp;dynamic&nbsp;array&nbsp;the&nbsp;cleaner&nbsp;way</span><br />
+<span class="key">ReDim</span>&nbsp;<span class="key">Shared</span>&nbsp;<span class="wrd">myArray</span><span class="oth">(</span><span class="num">0</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">9</span><span class="oth">,</span>&nbsp;<span class="num">0</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">9</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">UByte</span><br />
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">UByte</span>&nbsp;<span class="wrd">x</span><span class="oth">,</span>&nbsp;<span class="wrd">y</span><span class="oth">,</span>&nbsp;<span class="wrd">i</span><br />
+<br />
+<span class="com">'&nbsp;fill&nbsp;the&nbsp;array&nbsp;with&nbsp;values</span><br />
+<span class="key">For</span>&nbsp;<span class="wrd">y</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">9</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">For</span>&nbsp;<span class="wrd">x</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">9</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">i</span>&nbsp;<span class="oth">+=</span>&nbsp;<span class="num">1</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">myArray</span><span class="oth">(</span><span class="wrd">x</span><span class="oth">,</span>&nbsp;<span class="wrd">y</span><span class="oth">)</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">i</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Next</span>&nbsp;<span class="wrd">x</span><br />
+<span class="key">Next</span>&nbsp;<span class="wrd">y</span><br />
+<br />
+<span class="com">'&nbsp;proves&nbsp;the&nbsp;values&nbsp;are&nbsp;good&nbsp;originally:</span><br />
+<span class="key">For</span>&nbsp;<span class="wrd">y</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">9</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">For</span>&nbsp;<span class="wrd">x</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">9</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="key">Using</span>&nbsp;<span class="quo">"##,"</span><span class="oth">;</span>&nbsp;<span class="wrd">myArray</span><span class="oth">(</span><span class="wrd">x</span><span class="oth">,</span>&nbsp;<span class="wrd">y</span><span class="oth">);</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Next</span>&nbsp;<span class="wrd">x</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span><br />
+<span class="key">Next</span>&nbsp;<span class="wrd">y</span><br />
+<span class="key">Print</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"Press&nbsp;a&nbsp;key..."</span><br />
+<span class="key">Sleep</span><br />
+<span class="key">Cls</span><br />
+<br />
+<span class="com">'&nbsp;redimension&nbsp;the&nbsp;arrays</span><br />
+<span class="key">ReDim</span>&nbsp;<span class="key">Preserve</span>&nbsp;<span class="wrd">myArray</span><span class="oth">(</span><span class="num">0</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">18</span><span class="oth">,</span>&nbsp;<span class="num">0</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">12</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">UByte</span><br />
+<br />
+<span class="com">'&nbsp;the&nbsp;values&nbsp;have&nbsp;not&nbsp;been&nbsp;preserved&nbsp;properly!</span><br />
+<span class="key">For</span>&nbsp;<span class="wrd">y</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">9</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">For</span>&nbsp;<span class="wrd">x</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">9</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="key">Using</span>&nbsp;<span class="quo">"##,"</span><span class="oth">;</span>&nbsp;<span class="wrd">myArray</span><span class="oth">(</span><span class="wrd">x</span><span class="oth">,</span>&nbsp;<span class="wrd">y</span><span class="oth">);</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Next</span>&nbsp;<span class="wrd">x</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span><br />
+<span class="key">Next</span>&nbsp;<span class="wrd">y</span><br />
+<br />
+<span class="key">Sleep</span><br />
+<span class="key">End</span><br />
+</div></tt><br />
+<br \>
+Try it out! You can see that it does not work properly. This is because only the first dimension in an array may change sizes, while the rest remain the same size, in order for PRESERVE to work properly.<br \>
+<br \>
+There is a workaround, which I will post later, after I edit it in order to make sense to any program, not just mine, and make some revisions so it does not go out of bounds. For the moment, get creative ;)
+</div>
+</div> 
+</div> 
+</body>
+</html>

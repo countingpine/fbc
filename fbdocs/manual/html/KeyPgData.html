@@ -1,0 +1,88 @@
+<html>
+<head>
+<title>Data</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Data</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Statement to store data at compile time.<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<b>Data</b> <i>constant_expression1</i> [,<i>constant_expression2</i>]...<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+<tt>Data</tt> stores a list of constant numeric or alphabetical expressions that are evaluated at compile time (except with <i><a href="CompilerOptlang.html">-lang qb</a></i>) and stored as constants that can be read into variables by using <tt><a href="KeyPgRead.html">Read</a></tt>.<br \>
+<br \>
+All the <tt><b>Data</b></tt> statements in the program behave as a single chained list; after the last element of one <tt><b>Data</b></tt> statement is read, the first element of the following <tt><b>Data</b></tt> statement will be read.<br \>
+The program should not attempt to <tt><a href="KeyPgRead.html">Read</a></tt> after the last <tt><b>Data</b></tt> element.  The results are (in all dialects) undefined,  and the program may crash (Page Fault).<br \>
+<br \>
+<tt><b>Data</b></tt> statements are only visible from within the module in which they are defined.<br \>
+<br \>
+<tt><b>Data</b></tt> constants can only be of simple types (numeric or string).  A numeric value can be read as a numeric literal into a string. A string read into a numeric variable will be evaluated by the <tt><a href="KeyPgVal.html">Val</a></tt> function.  <tt><a href="KeyPgConst.html">Const</a></tt>s can be used as items of data except in the <i><a href="CompilerOptlang.html">-lang qb</a></i> dialect, where their names are considered as normal text.<br \>
+<br \>
+The "<tt><b><a href="KeyPgRestore.html">Restore</a></b> <i>label</i></tt>" statement makes the first <tt><b>Data</b></tt> item after the <tt><i>label</i></tt> the next item to be read, allowing the user to choose specific sections of data to read.<br \>
+<br \>
+<tt><b>Data</b></tt> is normally used to initialize variables. FreeBASIC also allows the initialization of static variables when they are <tt><a href="KeyPgDim.html">Dim</a></tt>ensioned - see <a href="ProPgInitialization.html">Variable Initializers</a> for more information.<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="com">'&nbsp;Create&nbsp;an&nbsp;array&nbsp;of&nbsp;5&nbsp;integers&nbsp;and&nbsp;a&nbsp;string&nbsp;to&nbsp;hold&nbsp;the&nbsp;data.</span><br />
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="wrd">h</span><span class="oth">(</span><span class="num">4</span><span class="oth">)</span><br />
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span>&nbsp;<span class="wrd">hs</span><br />
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="wrd">readindex</span><br />
+<br />
+<span class="com">'&nbsp;Set&nbsp;up&nbsp;to&nbsp;loop&nbsp;5&nbsp;times&nbsp;(for&nbsp;5&nbsp;numbers...&nbsp;check&nbsp;the&nbsp;data)</span><br />
+<span class="key">For</span>&nbsp;<span class="wrd">readindex</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">4</span><br />
+<br />
+&nbsp;&nbsp;<span class="com">'&nbsp;Read&nbsp;in&nbsp;an&nbsp;integer.</span><br />
+&nbsp;&nbsp;<span class="key">Read</span>&nbsp;<span class="wrd">h</span><span class="oth">(</span><span class="wrd">readindex</span><span class="oth">)</span><br />
+<br />
+&nbsp;&nbsp;<span class="com">'&nbsp;Display&nbsp;it.</span><br />
+&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"Number"</span>&nbsp;<span class="oth">;</span>&nbsp;<span class="wrd">readindex</span>&nbsp;<span class="oth">;</span>&nbsp;<span class="quo">"&nbsp;=&nbsp;"</span>&nbsp;<span class="oth">;</span>&nbsp;<span class="wrd">h</span><span class="oth">(</span><span class="wrd">readindex</span><span class="oth">)</span><br />
+<br />
+<span class="key">Next</span>&nbsp;<span class="wrd">readindex</span><br />
+<br />
+<span class="com">'&nbsp;Spacer.</span><br />
+<span class="key">Print</span><br />
+<br />
+<span class="com">'&nbsp;Read&nbsp;in&nbsp;a&nbsp;string.</span><br />
+<span class="key">Read</span>&nbsp;<span class="wrd">hs</span><br />
+<br />
+<span class="com">'&nbsp;Print&nbsp;it.</span><br />
+<span class="key">Print</span>&nbsp;&nbsp;<span class="quo">"String&nbsp;=&nbsp;"</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="wrd">hs</span><br />
+<br />
+<span class="com">'&nbsp;Await&nbsp;a&nbsp;keypress.</span><br />
+<span class="key">Sleep</span><br />
+<br />
+<span class="com">'&nbsp;Exit&nbsp;program.</span><br />
+<span class="key">End</span><br />
+<br />
+<span class="com">'&nbsp;Block&nbsp;of&nbsp;data.</span><br />
+<span class="key">Data</span>&nbsp;<span class="num">3</span><span class="oth">,</span>&nbsp;<span class="num">234</span><span class="oth">,</span>&nbsp;<span class="num">435</span><span class="oth">/</span><span class="num">4</span><span class="oth">,</span>&nbsp;<span class="num">23</span><span class="oth">+</span><span class="num">433</span><span class="oth">,</span>&nbsp;<span class="num">87643</span><span class="oth">,</span>&nbsp;<span class="quo">"Good"</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="quo">"Bye!"</span><br />
+</div></tt><br />
+<br \>
+</div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
+<ul><li> <i><a href="CompilerOptlang.html">-lang fb</a></i> and <i><a href="CompilerOptlang.html">-lang fblite</a></i> considers data items as constant expressions that are evaluated during compilation and its result stored in the program.<br \>
+<li> <i><a href="CompilerOptlang.html">-lang qb</a></i> considers unquoted words, including names of variables and constants, as literal strings, and stores them without change, as in QBASIC.  Unquoted strings are delimited by commas, and a colon or a line-break signifies the end of the <tt><b>Data</b></tt> statement.  Unquoted strings are trimmed of whitespace at the beginning and end.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> Outside of the <i><a href="CompilerOptlang.html">-lang qb</a></i> dialect, alphabetic string literals must be enclosed within quotation marks, in QBASIC this was optional.<br \>
+<li> In QBASIC empty items evaluated to number <tt>0</tt> or to empty strings, in FreeBASIC they give a compile error. In QBASIC a comma at the end of the statement made an additional, empty item, evaluated to <tt>0</tt> or an empty string. In FreeBASIC they give a compile error.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgRead.html">Read</a></tt><br \>
+<li> <tt><a href="KeyPgRestore.html">Restore</a></tt><br \>
+<br \>
+</ul><br \>
+</div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

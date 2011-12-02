@@ -1,0 +1,147 @@
+<html>
+<head>
+<title>Open</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Open</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Opens a disk file for reading or writing using file operations<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<b>Open</b> <i>filename</i> <b>For</b> <b><a href="KeyPgInputfilemode.html">Input</a></b> [<i>encoding_type</i>] [<i>lock_type</i>] <b>As</b> [<b>#</b>]<i>filenumber</i><br \>
+<b>Open</b> <i>filename</i> <b>For</b> <b><a href="KeyPgOutput.html">Output</a></b> [<i>encoding_type</i>] [<i>lock_type</i>] <b>As</b> [<b>#</b>]<i>filenumber</i><br \>
+<b>Open</b> <i>filename</i> <b>For</b> <b><a href="KeyPgAppend.html">Append</a></b> [<i>encoding_type</i>] [<i>lock_type</i>] <b>As</b> [<b>#</b>]<i>filenumber</i><br \>
+<br \>
+<b>Open</b> <i>filename</i> <b>For</b> <b><a href="KeyPgBinary.html">Binary</a></b> [<i>access_type</i>] [<i>lock_type</i>] <b>As</b> [<b>#</b>]<i>filenumber</i><br \>
+<b>Open</b> <i>filename</i> <b>For</b> <b><a href="KeyPgRandom.html">Random</a></b> [<i>access_type</i>] [<i>lock_type</i>] <b>As</b> [<b>#</b>]<i>filenumber</i> [<b>Len =</b> <i>record_length</i>]<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
+<i>result</i> = <b>Open</b> (<i>filename</i>, <b>For</b> {<b><a href="KeyPgInputfilemode.html">Input</a></b>|<b><a href="KeyPgOutput.html">Output</a></b>|<b><a href="KeyPgAppend.html">Append</a></b>}, <b>As</b> <i>filenumber</i> )<br \>
+<div class="fb_indent"></tt><i>or</i><tt><br \>
+</div><i>result</i> = <b>Open</b> (<i>filename</i>, <b>For</b> <b><a href="KeyPgBinary.html">Binary</a></b>, <b><a href="KeyPgAccess.html">Access</a></b> {<b>Read</b>|<b>Write</b>}, <b>As</b> <i>filenumber</i> )<br \>
+<div class="fb_indent"></tt><i>or</i><tt><br \>
+</div><i>result</i> = <b>Open</b> (<i>filename</i>, <b>For</b> <b><a href="KeyPgRandom.html">Random</a></b>, <b><a href="KeyPgAccess.html">Access</a></b> {<b>Read</b>|<b>Write</b>}, <b>As</b> <i>filenumber</i> [, <b>Len = </b> <i>record_length</i>] )<br \>
+<div class="fb_indent"></tt><i>or</i><tt><br \>
+</div><b>Open</b> <i>filename</i> <b>For</b> {<b><a href="KeyPgInputfilemode.html">Input</a></b>|<b><a href="KeyPgOutput.html">Output</a></b>|<b><a href="KeyPgAppend.html">Append</a></b>} <b>As</b> <i>filenumber</i><br \>
+<div class="fb_indent"></tt><i>or</i><tt><br \>
+</div><b>Open</b> <i>filename</i> <b>For</b> <b><a href="KeyPgBinary.html">Binary</a></b> <b><a href="KeyPgAccess.html">Access</a></b> {<b>Read</b>|<b>Write</b>} <b>As</b> <i>filenumber</i><br \>
+<div class="fb_indent"></tt><i>or</i><tt><br \>
+</div><b>Open</b> <i>filename</i> <b>For</b> <b><a href="KeyPgRandom.html">Random</a></b> <b><a href="KeyPgAccess.html">Access</a></b> {<b>Read</b>|<b>Write</b>} <b>As</b> <i>filenumber</i> [<b>Len = </b> <i>record_length</i>]<br \>
+<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+<tt><i>filename</i></tt><br \>
+<div class="fb_indent">A string value of the name of the disk file to open. Relative file paths are relative to the current directory (see <tt><a href="KeyPgCurdir.html">CurDir</a></tt>).<br \>
+</div><tt><i>encoding_type</i></tt><br \>
+<div class="fb_indent">The encoding to be used when reading or writing text, can be one of:<br \>
+</div><ul><ul><ul><li> <tt>Encoding "ascii"</tt> <i>(ASCII encoding is used, default)</i><br \>
+<li> <tt>Encoding "utf8"</tt> <i>(8-bit Unicode encoding is used)</i><br \>
+<li> <tt>Encoding "utf16"</tt> <i>(16-bit Unicode encoding is used)</i><br \>
+<li> <tt>Encoding "utf32"</tt> <i>(32-bit Unicode encoding  is used)</i><br \>
+</ul></ul></ul><tt><i>access_type</i></tt><br \>
+<div class="fb_indent">The type of access requested by the calling process.<br \>
+</div><ul><ul><ul><li> <tt>Access</tt> [<tt>Read</tt>] [<tt>Write</tt>] <i>(both read and write access can be used, which is the default)</i><br \>
+</ul></ul></ul><tt><i>lock_type</i></tt><br \>
+<div class="fb_indent">Imposes restrictions on disk file access from other processes (threads or programs), can be either:<br \>
+</div><ul><ul><ul><li> <tt>Shared</tt> <i>(the file can be freely accessed by other processes)</i><br \>
+<li> <tt>Lock</tt> [<tt>Read</tt>] [<tt>Write</tt>] <i>(both read and write access can be denied to other processes)</i><br \>
+</ul></ul></ul><tt><i>filenum</i></tt><br \>
+<div class="fb_indent">An available file number to bind to the disk file, which can be found with <tt><a href="KeyPgFreefile.html">FreeFile</a></tt>.<br \>
+</div><tt><i>record_length</i></tt><br \>
+<div class="fb_indent">The size, in bytes, of each record read from or written to the disk file. The default is 128.<br \>
+<br \>
+</div></div><div class="fb_sect_title">Return Value</div><div class="fb_sect_cont"><br \>
+In the first usage, <tt><b>Open</b></tt> returns zero (<tt>0</tt>) on success and a non-zero error code otherwise.<br \>
+<br \>
+</div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+Opens a disk file for reading and/or writing. The file number <tt><i>file_num</i></tt> is bound to the file on disk, for use in subsequent file operations, such as <tt><a href="KeyPgInputPp.html">Input #</a></tt> and <tt><a href="KeyPgLock.html">Lock</a></tt>. The next available file number can be retrieved with <tt><a href="KeyPgFreefile.html">FreeFile</a></tt>.<br \>
+<br \>
+The <tt><a href="KeyPgInputfilemode.html">Input</a></tt>, <tt><a href="KeyPgOutput.html">Output</a></tt> and <tt><a href="KeyPgAppend.html">Append</a></tt> file modes open disk files for sequential text I/O, useful for reading or writing plain text files. When the <tt><a href="KeyPgInputfilemode.html">Input</a></tt> mode is specified, only reading file operations can be used, like <tt><a href="KeyPgLineinput.html">Line Input #</a></tt> and <tt><a href="KeyPgGetfileio.html">Get #</a></tt>. If the disk file does not exist a runtime error will be thrown. The <tt><a href="KeyPgOutput.html">Output</a></tt> mode specifies that only writing operations can be used, like <tt><a href="KeyPgPrintPp.html">Print #</a></tt> and <tt><a href="KeyPgPutfileio.html">Put #</a></tt>. If the disk file does not exist it is created empty. The <tt><a href="KeyPgAppend.html">Append</a></tt> mode is like the <tt><a href="KeyPgOutput.html">Output</a></tt> mode, except that writing operations will begin at the end of the disk file, if it exists.<br \>
+<br \>
+The <tt><a href="KeyPgInputfilemode.html">Input</a></tt>, <tt><a href="KeyPgOutput.html">Output</a></tt> and <tt><a href="KeyPgAppend.html">Append</a></tt> file modes also allow selection of a character encoding to be used when reading from or writing text to the disk file. ASCII or a Unicode encoding may be specified (see the description of the <tt><i>encoding_type</i></tt> parameter above).<br \>
+<br \>
+The <tt><a href="KeyPgBinary.html">Binary</a></tt> and <tt><a href="KeyPgRandom.html">Random</a></tt> file modes open disk files for random-access reading or writing of arbitrary sized binary data. The <tt><a href="KeyPgBinary.html">Binary</a></tt> file mode allows reading and writing of simple data type values, like <tt><a href="KeyPgByte.html">Byte</a></tt> or <tt><a href="KeyPgLongint.html">LongInt</a></tt>, using binary read or write operations, like <tt><a href="KeyPgGetfileio.html">Get #</a></tt>. <tt><a href="KeyPgLoc.html">LOC</a></tt> and <tt><a href="KeyPgSeekreturn.html">Seek</a></tt> are among the procedures used for reading and writing to arbitrary locations in the disk file. The <tt><a href="KeyPgRandom.html">Random</a></tt> file mode is similar to <tt><a href="KeyPgBinary.html">Binary</a></tt>, except that file I/O operations always use a constant data size when reading or writing.<br \>
+<br \>
+By default, the <tt><a href="KeyPgBinary.html">Binary</a></tt> and <tt><a href="KeyPgRandom.html">Random</a></tt> file modes allow both reading and writing operations on the opened disk file, but this can be changed by specifying an access type (see the description for the <tt><i>access_type</i></tt> parameter above).<br \>
+<br \>
+For any file mode, access to the opened disk file can be restricted or granted to other threads or programs by specifying a lock type (see the description for the <tt><i>lock_type</i></tt> parameter above). If no lock type is specified, other threads of the current program can freely open the disk file (<tt>Shared</tt>), while other programs cannot (<tt>Lock Read Write</tt>). <tt><a href="KeyPgLock.html">Lock</a></tt> and <tt><a href="KeyPgUnlock.html">Unlock</a></tt> can be used to temporarily restrict access to parts of a file.<br \>
+<br \>
+The error code returned by <tt><b>Open</b></tt>  can be checked using <tt><a href="KeyPgErr.html">Err</a></tt> in the next line. The function version of  <tt><b>Open</b></tt> returns directly the error code as an integer. <br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="com">'&nbsp;Create&nbsp;a&nbsp;string&nbsp;and&nbsp;fill&nbsp;it.</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">buffer</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span><span class="oth">,</span>&nbsp;<span class="wrd">f</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+<span class="wrd">buffer</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="quo">"Hello&nbsp;World&nbsp;within&nbsp;a&nbsp;file."</span><br />
+<br />
+<span class="com">'&nbsp;Find&nbsp;the&nbsp;first&nbsp;free&nbsp;file&nbsp;number.</span><br />
+<span class="wrd">f</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">FreeFile</span><br />
+<br />
+<span class="com">'&nbsp;Open&nbsp;the&nbsp;file&nbsp;"file.ext"&nbsp;for&nbsp;binary&nbsp;usage,&nbsp;using&nbsp;the&nbsp;file&nbsp;number&nbsp;"f".</span><br />
+<span class="key">Open</span>&nbsp;<span class="quo">"file.ext"</span>&nbsp;<span class="key">For</span>&nbsp;<span class="key">Binary</span>&nbsp;<span class="key">As</span>&nbsp;<span class="oth">#</span><span class="wrd">f</span><br />
+<span class="key">If</span>&nbsp;<span class="key">Err</span><span class="oth">&gt;</span><span class="num">0</span>&nbsp;<span class="key">Then</span>&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"Error&nbsp;opening&nbsp;the&nbsp;file"</span><span class="oth">:</span><span class="key">End</span><br />
+<br />
+<span class="com">'&nbsp;Place&nbsp;our&nbsp;string&nbsp;inside&nbsp;the&nbsp;file,&nbsp;using&nbsp;number&nbsp;"f".</span><br />
+<span class="key">Put</span>&nbsp;<span class="oth">#</span><span class="wrd">f</span><span class="oth">,</span>&nbsp;<span class="oth">,</span>&nbsp;<span class="wrd">buffer</span><br />
+<br />
+<span class="com">'&nbsp;Close&nbsp;all&nbsp;open&nbsp;files.&nbsp;&nbsp;</span><br />
+<span class="key">Close</span><br />
+<br />
+<span class="com">'&nbsp;End&nbsp;the&nbsp;program.&nbsp;(Check&nbsp;the&nbsp;file&nbsp;"file.ext"&nbsp;upon&nbsp;running&nbsp;to&nbsp;see&nbsp;the&nbsp;output.)</span><br />
+<span class="key">End</span><br />
+</div></tt><br />
+<br \>
+<tt><div class="freebasic">
+<span class="com">'OPEN&nbsp;A&nbsp;COM&nbsp;PORT</span><br />
+<span class="key">Open</span>&nbsp;<span class="key">Com</span>&nbsp;<span class="quo">"COM1:9600,N,8,1"</span>&nbsp;<span class="key">As</span>&nbsp;<span class="oth">#</span><span class="num">1</span><br />
+<span class="key">If</span>&nbsp;<span class="key">Err</span><span class="oth">&gt;</span><span class="num">0</span>&nbsp;<span class="key">Then</span>&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"The&nbsp;port&nbsp;could&nbsp;not&nbsp;be&nbsp;opened."</span><br />
+<br />
+<span class="com">'COM1,&nbsp;9600&nbsp;BAUD,&nbsp;NO&nbsp;PARITY&nbsp;BIT,&nbsp;EIGHT&nbsp;DATA&nbsp;BITS,&nbsp;ONE&nbsp;STOP&nbsp;BIT</span><br />
+</div></tt><br />
+<tt><div class="freebasic">
+<span class="com">'function&nbsp;version&nbsp;of&nbsp;OPEN</span><br />
+<span class="key">If</span>&nbsp;<span class="key">Open</span><span class="oth">(</span><span class="quo">"file.ext"</span>&nbsp;<span class="key">For</span>&nbsp;<span class="key">Binary</span>&nbsp;<span class="key">Access</span>&nbsp;<span class="key">Read</span>&nbsp;<span class="key">As</span>&nbsp;<span class="oth">#</span><span class="num">1</span><span class="oth">)</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span>&nbsp;<span class="key">Then</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"Successfully&nbsp;opened&nbsp;file"</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;...</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Close</span>&nbsp;<span class="oth">#</span><span class="num">1</span><br />
+<br />
+<span class="key">Else</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"Error&nbsp;opening&nbsp;file"</span><br />
+<br />
+<span class="key">End</span>&nbsp;<span class="key">If</span><br />
+</div></tt><br />
+<br \>
+</div><div class="fb_sect_title">Platform Differences</div><div class="fb_sect_cont"><br \>
+<ul><li> Linux requires the <tt><i>filename</i></tt> case matches the real name of the file. Windows and DOS are case insensitive. <br \>
+<li> Path separators in Linux are forward slashes <tt>/</tt>. Windows uses backward slashes <tt>\</tt> but it allows for forward slashes .  DOS uses backward slashes <tt>\</tt>. <br \>
+<li> On Windows, a file number used in a dynamic link library is not the same as an identical file number used in the main program.  File numbers can not be passed or returned and then used between a DLL and an executable.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> Using MS-DOS device names to open streams or hardware devices (<tt>"LPT:"</tt>, <tt>"SCR:"</tt>, etc.) is  supported only in the <i><a href="CompilerOptlang.html">-lang qb</a></i> dialect; for other modes FreeBASIC's new composite keywords must be used: see <tt><a href="KeyPgOpenCom.html">Open Com</a></tt>,  <tt><a href="KeyPgOpenCons.html">Open Cons</a></tt>,  <tt><a href="KeyPgOpenErr.html">Open Err</a></tt>,  <tt><a href="KeyPgOpenPipe.html">Open Pipe</a></tt>,  <tt><a href="KeyPgOpenLpt.html">Open Lpt</a></tt>,  <tt><a href="KeyPgOpenScrn.html">Open Scrn</a></tt>.<br \>
+<li> <tt><b>Open</b></tt> can be called as a procedure that returns an error code.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
+<ul><li> The <i><a href="CompilerOptlang.html">-lang qb</a></i> dialect supports the old GW-BASIC-style syntax <tt>OPEN mode_string, #filenum, filename [length]</tt> with mode_string being <tt>"I"</tt> for input, <tt>"O"</tt> for output, <tt>"A"</tt> for append, <tt>"R"</tt> for random, <tt>"B"</tt> for binary. <br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgErr.html">Err With A List Of Error Codes</a></tt><br \>
+<li> <tt><a href="KeyPgClose.html">Close</a></tt><br \>
+<li> <tt><a href="KeyPgFreefile.html">FreeFile</a></tt><br \>
+<li> <tt><a href="KeyPgOpenCons.html">Open Cons</a></tt>, <tt><a href="KeyPgOpenErr.html">Open Err</a></tt>, <tt><a href="KeyPgOpenPipe.html">Open Pipe</a></tt>, <tt><a href="KeyPgOpenLpt.html">Open Lpt</a></tt>, <tt><a href="KeyPgOpenCom.html">Open Com</a></tt>, <tt><a href="KeyPgOpenScrn.html">Open Scrn</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

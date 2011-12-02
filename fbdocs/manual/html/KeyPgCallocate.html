@@ -1,0 +1,73 @@
+<html>
+<head>
+<title>CAllocate</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">CAllocate</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Allocates memory for a certain number of elements from the free store and clears the contents<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgFunction.html">Function</a> <b>CAllocate</b> <a href="KeyPgCdecl.html">cdecl</a> ( <a href="KeyPgByval.html">ByVal</a> <i>num_elements</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a>, <a href="KeyPgByval.html">ByVal</a> <i>size</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a> = 1 ) <a href="KeyPgAs.html">As</a> <a href="KeyPgAny.html">Any</a> <a href="KeyPgPtr.html">Ptr</a><br \>
+</tt><br \>
+</div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
+<i>result</i> = <b>CAllocate</b>( <i>num_elements</i> [, <i>size</i> ] )<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+<tt><i>num_elements</i></tt><br \>
+<div class="fb_indent">The number of elements to allocate memory for.<br \>
+</div><tt><i>size</i></tt><br \>
+<div class="fb_indent">The size, in bytes, of each element.<br \>
+<br \>
+</div></div><div class="fb_sect_title">Return Value</div><div class="fb_sect_cont"><br \>
+If successful, the address of the start of the allocated memory is returned. Otherwise, the null pointer (<tt>0</tt>) is returned.<br \>
+<br \>
+</div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+<tt><b>CAllocate</b></tt> initializes the allocated memory with zeros.<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="com">'&nbsp;Allocate&nbsp;and&nbsp;initialize&nbsp;space&nbsp;for&nbsp;10&nbsp;integer&nbsp;elements.</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">p</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="key">Ptr</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">CAllocate</span><span class="oth">(</span><span class="num">10</span><span class="oth">,</span>&nbsp;<span class="key">SizeOf</span><span class="oth">(</span><span class="key">Integer</span><span class="oth">))</span><br />
+<br />
+<span class="com">'&nbsp;Fill&nbsp;the&nbsp;memory&nbsp;with&nbsp;integer&nbsp;values.</span><br />
+<span class="key">For</span>&nbsp;<span class="wrd">index</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">9</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">p</span><span class="oth">[</span><span class="wrd">index</span><span class="oth">]</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="oth">(</span><span class="wrd">index</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="num">1</span><span class="oth">)</span>&nbsp;<span class="oth">*</span>&nbsp;<span class="num">10</span><br />
+<span class="key">Next</span><br />
+<br />
+<span class="com">'&nbsp;Display&nbsp;the&nbsp;integer&nbsp;values.</span><br />
+<span class="key">For</span>&nbsp;<span class="wrd">index</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">9</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="wrd">p</span><span class="oth">[</span><span class="wrd">index</span><span class="oth">]</span>&nbsp;<span class="oth">;</span><br />
+<span class="key">Next</span><br />
+<br />
+<span class="com">'&nbsp;Free&nbsp;the&nbsp;memory.</span><br />
+<span class="key">Deallocate</span><span class="oth">(</span><span class="wrd">p</span><span class="oth">)</span><br />
+</div></tt><br />
+Outputs:<br \>
+<pre class="fb_pre"> 10 20 30 40 50 60 70 80 90 100</pre><br \>
+</div><div class="fb_sect_title">Platform Differences</div><div class="fb_sect_cont"><br \>
+<ul><li> This procedure is not guaranteed to be thread-safe.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
+<ul><li> Not available in the <i><a href="CompilerOptlang.html">-lang qb</a></i> dialect unless referenced with the alias <tt><b>__Callocate</b></tt>.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> New to FreeBASIC<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgAllocate.html">Allocate</a></tt><br \>
+<li> <tt><a href="KeyPgDeallocate.html">Deallocate</a></tt><br \>
+<li> <tt><a href="KeyPgReallocate.html">Reallocate</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

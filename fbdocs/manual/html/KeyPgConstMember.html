@@ -1,0 +1,105 @@
+<html>
+<head>
+<title>Const (Member)</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Const (Member)</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Specifies that a member procedure is read only.<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<a href="KeyPgType.html">Type</a> <i>typename</i><br \>
+<div class="fb_indent"><a href="KeyPgDeclare.html">Declare</a> <b>Const</b> <i>membertype</i> <i>membername</i> ...<br \>
+</div>End Type<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+<tt><i>typename</i></tt><br \>
+<div class="fb_indent">Name of a user defined data type.<br \>
+</div><tt><i>membertype</i></tt><br \>
+<div class="fb_indent"><tt><a href="KeyPgMemberSub.html">Sub</a></tt> or <tt><a href="KeyPgMemberFunction.html">Function</a></tt>.<br \>
+</div><tt><i>membername</i> ...</tt><br \>
+<div class="fb_indent">Name of the member to declare or define with parameter list or return value following.<br \>
+<br \>
+</div></div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+Specifies that the <tt><i>membertype</i></tt> immediately to the right of the <tt><b>Const</b></tt> qualifier is to be considered as read only.  Read-only (<tt><b>Const</b></tt>) declarations are a measure of type safety that can be read as 'promises not to change.'  The compiler uses the const declarations to check operations on variables and parameters and generate an error at compile time if their data could potentially change.  There is no runtime overhead for using <tt><b>Const</b></tt> qualifiers since all of the checks are made at compile time.<br \>
+<br \>
+<tt><b>Const</b></tt>, when used preceding <tt><i>membertype</i></tt> at the beginning of a declaration indicates that the hidden <tt><a href="KeyPgThis.html">This</a></tt> parameter is considered read-only.  The declaration can be read as 'invoking <tt><i>membertype</i></tt> promises not to change <tt><i>typename</i></tt>', and the compiler will error if the member procedure tries to change any of the data fields, or calls a non-const member procedure.  Member procedures can not be both <tt><b>Const</b></tt> and <tt><a href="KeyPgStaticMember.html">Static</a></tt> since static member procedures do not have a hidden <tt><a href="KeyPgThis.html">This</a></tt> parameter.<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="com">''&nbsp;Const&nbsp;Member&nbsp;Procedures</span><br />
+<br />
+<span class="key">Type</span>&nbsp;<span class="wrd">foo</span><br />
+&nbsp;&nbsp;<span class="wrd">x</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;<span class="wrd">c</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Const</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span><br />
+&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Const</span>&nbsp;<span class="key">Sub</span>&nbsp;<span class="wrd">Inspect1</span><span class="oth">()</span><br />
+&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Const</span>&nbsp;<span class="key">Sub</span>&nbsp;<span class="wrd">Inspect2</span><span class="oth">()</span><br />
+&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Sub</span>&nbsp;<span class="wrd">Mutate1</span><span class="oth">()</span><br />
+&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Sub</span>&nbsp;<span class="wrd">Mutate2</span><span class="oth">()</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Type</span><br />
+<br />
+<span class="com">''</span><br />
+<span class="key">Sub</span>&nbsp;<span class="wrd">foo.Mutate1</span><span class="oth">()</span><br />
+&nbsp;&nbsp;<span class="com">''&nbsp;we&nbsp;can&nbsp;change&nbsp;non-const&nbsp;data&nbsp;fields</span><br />
+&nbsp;&nbsp;<span class="wrd">x</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">1</span><br />
+<br />
+&nbsp;&nbsp;<span class="com">''&nbsp;but&nbsp;we&nbsp;still&nbsp;can't&nbsp;change&nbsp;const&nbsp;data</span><br />
+&nbsp;&nbsp;<span class="com">''&nbsp;fields,&nbsp;they&nbsp;are&nbsp;promised&nbsp;not&nbsp;to&nbsp;change</span><br />
+&nbsp;&nbsp;<span class="com">''&nbsp;c&nbsp;=&nbsp;1&nbsp;''&nbsp;Compile&nbsp;error</span><br />
+<br />
+<span class="key">End</span>&nbsp;<span class="key">Sub</span><br />
+<br />
+<span class="com">''</span><br />
+<span class="key">Sub</span>&nbsp;<span class="wrd">foo.Mutate2</span><span class="oth">()</span><br />
+&nbsp;&nbsp;<span class="com">''&nbsp;we&nbsp;can&nbsp;call&nbsp;const&nbsp;members</span><br />
+&nbsp;&nbsp;<span class="wrd">Inspect1</span><span class="oth">()</span><br />
+<br />
+&nbsp;&nbsp;<span class="com">''&nbsp;and&nbsp;non-const&nbsp;members</span><br />
+&nbsp;&nbsp;<span class="wrd">Mutate1</span><span class="oth">()</span><br />
+<br />
+<span class="key">End</span>&nbsp;<span class="key">Sub</span><br />
+<br />
+<span class="com">''</span><br />
+<span class="key">Sub</span>&nbsp;<span class="wrd">foo.Inspect1</span><span class="oth">()</span><br />
+&nbsp;&nbsp;<span class="com">''&nbsp;can&nbsp;use&nbsp;data&nbsp;members</span><br />
+&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="wrd">y</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;<span class="wrd">y</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">c</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="wrd">x</span><br />
+<br />
+&nbsp;&nbsp;<span class="com">''&nbsp;but&nbsp;not&nbsp;change&nbsp;them&nbsp;because&nbsp;Inspect1()</span><br />
+&nbsp;&nbsp;<span class="com">''&nbsp;is&nbsp;const&nbsp;and&nbsp;promises&nbsp;not&nbsp;to&nbsp;change&nbsp;foo</span><br />
+&nbsp;&nbsp;<span class="com">''&nbsp;x&nbsp;=&nbsp;10&nbsp;''&nbsp;Compile&nbsp;error</span><br />
+<br />
+<span class="key">End</span>&nbsp;<span class="key">Sub</span><br />
+<br />
+<span class="com">''</span><br />
+<span class="key">Sub</span>&nbsp;<span class="wrd">foo.Inspect2</span><span class="oth">()</span><br />
+&nbsp;&nbsp;<span class="com">''&nbsp;we&nbsp;can&nbsp;call&nbsp;const&nbsp;members</span><br />
+&nbsp;&nbsp;<span class="wrd">Inspect1</span><span class="oth">()</span><br />
+<br />
+&nbsp;&nbsp;<span class="com">''&nbsp;but&nbsp;not&nbsp;non-const&nbsp;members</span><br />
+&nbsp;&nbsp;<span class="com">''&nbsp;Mutate1()&nbsp;''&nbsp;Compile&nbsp;error</span><br />
+<br />
+<span class="key">End</span>&nbsp;<span class="key">Sub</span><br />
+</div></tt><br />
+<br \>
+</div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> New to FreeBASIC<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgConst.html">Const</a></tt><br \>
+<li> <tt><a href="KeyPgConstQualifier.html">Const (Qualifier)</a></tt><br \>
+<li> <tt><a href="KeyPgDim.html">Dim</a></tt><br \>
+<li> <tt><a href="KeyPgType.html">Type</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

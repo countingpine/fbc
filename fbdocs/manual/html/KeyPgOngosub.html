@@ -1,0 +1,69 @@
+<html>
+<head>
+<title>On...Gosub</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">On...Gosub</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Calls a label based on an expression<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<b>On</b> <i>expression</i> <b>GoSub</b> <i>label1</i>[, ...]<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+Branches to different labels depending on the value of <i>expression</i>. An expression value of 1 will branch to the first label, a value of 2 to the second, etc.  If the value of <i>expression</i> is zero (0) or greater than the number of items in the list, execution continues on the next statement following the <tt><b>On...Gosub</b></tt>.<br \>
+<br \>
+This statement behaves exactly like <tt><a href="KeyPgGosub.html">GoSub</a></tt> and execution may return to the statement following the <tt><b>On...Gosub</b></tt> using <tt><a href="KeyPgReturn.html">Return</a></tt>.<br \>
+<br \>
+It is recommended that the structured <tt><a href="KeyPgSelectcase.html">Select Case</a></tt> conditional statement be used instead of <tt><b>On...Gosub</b></tt>.<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="com">''&nbsp;Compile&nbsp;with&nbsp;-lang&nbsp;qb</span><br />
+<br />
+<span class="com">'$lang:&nbsp;"qb"</span><br />
+<br />
+<span class="wrd">choice</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">3</span><br />
+<span class="key">On</span>&nbsp;<span class="wrd">choice</span>&nbsp;<span class="key">GoSub</span>&nbsp;<span class="wrd">labela</span><span class="oth">,</span>&nbsp;<span class="wrd">labelb</span><span class="oth">,</span>&nbsp;<span class="wrd">labelc</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"Good&nbsp;bye."</span><br />
+<span class="key">End</span><br />
+<br />
+<span class="wrd">labela</span><span class="oth">:</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"choice&nbsp;a"</span><br />
+<span class="key">Return</span><br />
+<br />
+<span class="wrd">labelb</span><span class="oth">:</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"choice&nbsp;b"</span><br />
+<span class="key">Return</span><br />
+<br />
+<span class="wrd">labelc</span><span class="oth">:</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"choice&nbsp;c"</span><br />
+<span class="key">Return</span><br />
+</div></tt><br />
+<br \>
+</div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
+<ul><li> Only available in the <i><a href="CompilerOptlang.html">-lang qb</a></i> and <i><a href="CompilerOptlang.html">-lang fblite</a></i> dialects.<br \>
+<li> <tt><b>On Gosub</b></tt> support is disabled by default in the <i><a href="CompilerOptlang.html">-lang fblite</a></i> unless the <tt><a href="KeyPgOptiongosub.html">Option Gosub</a></tt> statement is used.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> FreeBASIC does not generate a run-time error if <tt><i>expression</i></tt> is negative or greater than 255.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgSelectcase.html">Select Case</a></tt><br \>
+<li> <tt><a href="KeyPgOngoto.html">On...Goto</a></tt><br \>
+<li> <tt><a href="KeyPgGosub.html">GoSub</a></tt><br \>
+<li> <tt><a href="KeyPgReturn.html">Return</a></tt><br \>
+<li> <tt><a href="KeyPgOptiongosub.html">Option Gosub</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

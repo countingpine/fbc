@@ -1,0 +1,152 @@
+<html>
+<head>
+<title>Paint</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Paint</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Fills an area delimited by a border of a specified color<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<b>Paint</b> [<i>target</i>,] [STEP] (<i>x</i>, <i>y</i>)[, [<i>paint</i>][, [<i>border_color</i>]]]<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+<tt><i>target</i></tt><br \>
+<div class="fb_indent">specifies buffer to draw on.  <br \>
+</div><tt>STEP</tt><br \>
+<div class="fb_indent">indicates that coordinates are relative<br \>
+</div><tt>(<i>x</i>, <i>y</i>)</tt><br \>
+<div class="fb_indent">coordinates of the pixel on which to start the flood fill (paint)<br \>
+</div><tt><i>paint</i></tt><br \>
+<div class="fb_indent">the color attribute or fill pattern<br \>
+a numeric value indicates a color, while a string indicates a fill pattern<br \>
+</div><tt><i>border_color</i></tt><br \>
+<div class="fb_indent">boundary color for the fill<br \>
+<br \>
+</div></div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+Graphics command to fill an area delimited by a border of specified color. Also known as 'flood-fill' or 'paint bucket'.<br \>
+<br \>
+<tt><b>Paint</b></tt> can operate on the current work page as set by the <tt><a href="KeyPgScreenset.html">ScreenSet</a></tt> statement or on the target <tt><a href="KeyPgGetgraphics.html">Get</a></tt>/<tt><a href="KeyPgPutgraphics.html">Put</a></tt> buffer, if specified.<br \>
+<br \>
+Filling starts at specified <tt>(<i>x</i>,<i>y</i>)</tt> coordinates; if <tt>STEP</tt> is specified, these are relative to the last graphics cursor position. Coordinates are also affected by custom coordinates system set up by <tt><a href="KeyPgWindow.html">Window</a></tt> and/or <tt><a href="KeyPgViewgraphics.html">View (Graphics)</a></tt> statements; clipping set by <tt><a href="KeyPgViewgraphics.html">View</a></tt> also applies.<br \>
+<br \>
+If the <tt><i>paint</i></tt> argument is a number, it is assumed a color in the same format used by the <tt><a href="KeyPgColor.html">Color</a></tt> statement, and the region is flood-filled using that color. If <tt><i>paint</i></tt> is a <tt><a href="KeyPgString.html">String</a></tt>, the region will be filled using a pattern; the pattern is always 8*8 pixels, and the passed string must hold pixels data in a format dependent on the current color depth. The string holds pattern pixels row by row, and its size should be as follows:<br \>
+<br \>
+For color depths 1, 2, 4 and 8:<br \>
+<tt>size = 8 * 8 = 64</tt><br \>
+For color depths 15 and 16:<br \>
+<tt>size = (8 * 8) * 2 = 128</tt><br \>
+For color depths 24 and 32:<br \>
+<tt>size = (8 * 8) * 4 = 256</tt><br \>
+<br \>
+If the passed string is smaller, missing pixels will be 0. If the <tt><i>paint</i></tt> argument is omitted, normal filling is performed using the current foreground color set by <tt><a href="KeyPgColor.html">Color</a></tt>. Flood-filling continues until pixels of the specified border color are found; if <tt><i>border_color</i></tt> is omitted, the current background color is assumed.<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="com">'&nbsp;draws&nbsp;a&nbsp;white&nbsp;circle&nbsp;painted&nbsp;blue&nbsp;inside</span><br />
+<span class="key">Screen</span>&nbsp;<span class="num">13</span><br />
+<span class="key">Circle</span>&nbsp;<span class="oth">(</span><span class="num">160</span><span class="oth">,</span>&nbsp;<span class="num">100</span><span class="oth">),</span>&nbsp;<span class="num">30</span><span class="oth">,</span>&nbsp;<span class="num">15</span><br />
+<span class="key">Paint</span>&nbsp;<span class="oth">(</span><span class="num">160</span><span class="oth">,</span>&nbsp;<span class="num">100</span><span class="oth">),</span>&nbsp;<span class="num">1</span><span class="oth">,</span>&nbsp;<span class="num">15</span><br />
+<span class="key">Sleep</span><br />
+</div></tt><br />
+<br \>
+<tt><div class="freebasic">
+<span class="com">'&nbsp;draws&nbsp;a&nbsp;circle&nbsp;and&nbsp;fills&nbsp;it&nbsp;with&nbsp;a&nbsp;checkered&nbsp;pattern</span><br />
+<br />
+<span class="com">''&nbsp;choose&nbsp;the&nbsp;bit&nbsp;depth&nbsp;for&nbsp;the&nbsp;Screen</span><br />
+<span class="com">''&nbsp;try&nbsp;setting&nbsp;this&nbsp;to&nbsp;other&nbsp;values:&nbsp;8,&nbsp;16&nbsp;or&nbsp;32</span><br />
+<br />
+<span class="key">Const</span>&nbsp;<span class="wrd">bit_depth</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">8</span><br />
+<br />
+<span class="com">''&nbsp;function&nbsp;for&nbsp;returning&nbsp;a&nbsp;pixel&nbsp;color,&nbsp;represented&nbsp;as&nbsp;a&nbsp;string</span><br />
+<span class="com">''&nbsp;returns&nbsp;a&nbsp;the&nbsp;string&nbsp;in&nbsp;the&nbsp;appropriate&nbsp;format&nbsp;for&nbsp;the&nbsp;current&nbsp;bit&nbsp;depth</span><br />
+<span class="key">Function</span>&nbsp;<span class="wrd">paint_pixel</span><span class="oth">(</span>&nbsp;<span class="key">ByVal</span>&nbsp;<span class="wrd">c</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">UInteger</span><span class="oth">,</span>&nbsp;<span class="key">ByVal</span>&nbsp;<span class="wrd">bit_depth_</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">If</span>&nbsp;<span class="wrd">bit_depth_</span>&nbsp;<span class="oth">&lt;=</span>&nbsp;<span class="num">8</span>&nbsp;<span class="key">Then</span>&nbsp;<span class="com">''&nbsp;8-bit:</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Function</span>&nbsp;<span class="oth">=</span>&nbsp;&nbsp;<span class="key">Chr</span><span class="oth">(</span>&nbsp;<span class="key">CUByte</span><span class="oth">(</span><span class="wrd">c</span><span class="oth">)</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">ElseIf</span>&nbsp;<span class="wrd">bit_depth_</span>&nbsp;<span class="oth">&lt;=</span>&nbsp;<span class="num">16</span>&nbsp;<span class="key">Then</span>&nbsp;<span class="com">''&nbsp;16-bit:</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Function</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">MKShort</span><span class="oth">(</span>&nbsp;<span class="wrd">c</span>&nbsp;<span class="key">Shr</span>&nbsp;<span class="num">3</span>&nbsp;<span class="key">And</span>&nbsp;<span class="num">&amp;h1f</span>&nbsp;<span class="key">Or</span>&nbsp;<span class="wrd">_</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">c</span>&nbsp;<span class="key">Shr</span>&nbsp;<span class="num">5</span>&nbsp;<span class="key">And</span>&nbsp;<span class="num">&amp;h7e0</span>&nbsp;<span class="key">Or</span>&nbsp;<span class="wrd">_</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">c</span>&nbsp;<span class="key">Shr</span>&nbsp;<span class="num">8</span>&nbsp;<span class="key">And</span>&nbsp;<span class="num">&amp;hf800</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">ElseIf</span>&nbsp;<span class="wrd">bit_depth_</span>&nbsp;<span class="oth">&lt;=</span>&nbsp;<span class="num">32</span>&nbsp;<span class="key">Then</span>&nbsp;<span class="com">''&nbsp;32-bit:</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Function</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">MKL</span><span class="oth">(</span><span class="wrd">c</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">End</span>&nbsp;<span class="key">If</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+<span class="key">End</span>&nbsp;<span class="key">Function</span><br />
+<br />
+<br />
+<span class="com">''&nbsp;open&nbsp;a&nbsp;graphics&nbsp;window&nbsp;at&nbsp;the&nbsp;chosen&nbsp;bit&nbsp;depth</span><br />
+<span class="key">ScreenRes</span>&nbsp;<span class="num">320</span><span class="oth">,</span>&nbsp;<span class="num">200</span><span class="oth">,</span>&nbsp;<span class="wrd">bit_depth</span><br />
+<br />
+<span class="com">''&nbsp;declare&nbsp;variables&nbsp;for&nbsp;holding&nbsp;colors</span><br />
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">UInteger</span>&nbsp;<span class="wrd">c</span><span class="oth">,</span>&nbsp;<span class="wrd">c1</span><span class="oth">,</span>&nbsp;<span class="wrd">c2</span><span class="oth">,</span>&nbsp;<span class="wrd">cb</span><br />
+<br />
+<span class="com">''&nbsp;declare&nbsp;string&nbsp;variable&nbsp;for&nbsp;holding&nbsp;the&nbsp;pattern&nbsp;used&nbsp;in&nbsp;Paint</span><br />
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span>&nbsp;<span class="wrd">paint_pattern</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="quo">""</span><br />
+<br />
+<span class="com">''&nbsp;set&nbsp;colors</span><br />
+<span class="key">If</span>&nbsp;<span class="wrd">bit_depth</span>&nbsp;<span class="oth">&lt;=</span>&nbsp;<span class="num">8</span>&nbsp;<span class="key">Then</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">c1</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">7</span>&nbsp;&nbsp;<span class="com">''pattern&nbsp;color&nbsp;1</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">c2</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">8</span>&nbsp;&nbsp;<span class="com">''pattern&nbsp;color&nbsp;2</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">cb</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">15</span>&nbsp;<span class="com">''border&nbsp;color</span><br />
+<span class="key">Else</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">c1</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">RGB</span><span class="oth">(</span><span class="num">192</span><span class="oth">,</span>&nbsp;<span class="num">192</span><span class="oth">,</span>&nbsp;<span class="num">192</span><span class="oth">)</span>&nbsp;<span class="com">''&nbsp;pattern&nbsp;color&nbsp;1</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">c2</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">RGB</span><span class="oth">(</span><span class="num">128</span><span class="oth">,</span>&nbsp;<span class="num">128</span><span class="oth">,</span>&nbsp;<span class="num">128</span><span class="oth">)</span>&nbsp;<span class="com">''&nbsp;pattern&nbsp;color&nbsp;2</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">cb</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">RGB</span><span class="oth">(</span><span class="num">255</span><span class="oth">,</span>&nbsp;<span class="num">255</span><span class="oth">,</span>&nbsp;<span class="num">255</span><span class="oth">)</span>&nbsp;<span class="com">''&nbsp;border&nbsp;color</span><br />
+<span class="key">End</span>&nbsp;<span class="key">If</span><br />
+<br />
+<span class="com">''&nbsp;make&nbsp;the&nbsp;pattern&nbsp;to&nbsp;be&nbsp;used&nbsp;in&nbsp;Paint</span><br />
+<span class="key">For</span>&nbsp;<span class="wrd">y</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">UInteger</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">7</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">For</span>&nbsp;<span class="wrd">x</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">UInteger</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">7</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;choose&nbsp;the&nbsp;color&nbsp;of&nbsp;the&nbsp;pixel&nbsp;(c)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">If</span>&nbsp;<span class="oth">(</span><span class="wrd">x</span>&nbsp;<span class="oth">\</span>&nbsp;<span class="num">4</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="wrd">y</span>&nbsp;<span class="oth">\</span>&nbsp;<span class="num">4</span><span class="oth">)</span>&nbsp;<span class="key">Mod</span>&nbsp;<span class="num">2</span>&nbsp;<span class="oth">&gt;</span>&nbsp;<span class="num">0</span>&nbsp;<span class="key">Then</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">c</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">c1</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Else</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">c</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">c2</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">End</span>&nbsp;<span class="key">If</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;add&nbsp;the&nbsp;pixel&nbsp;to&nbsp;the&nbsp;pattern</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">paint_pattern</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">paint_pattern</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="wrd">paint_pixel</span><span class="oth">(</span><span class="wrd">c</span><span class="oth">,</span>&nbsp;<span class="wrd">bit_depth</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;the&nbsp;following&nbsp;line&nbsp;can&nbsp;be&nbsp;used&nbsp;if&nbsp;you&nbsp;want&nbsp;to&nbsp;draw&nbsp;the&nbsp;</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;pattern&nbsp;tile&nbsp;in&nbsp;the&nbsp;top&nbsp;left&nbsp;hand&nbsp;corner&nbsp;of&nbsp;the&nbsp;screen:</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">'&nbsp;pset&nbsp;(x,&nbsp;y),&nbsp;c</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Next</span>&nbsp;<span class="wrd">x</span><br />
+<span class="key">Next</span>&nbsp;<span class="wrd">y</span><br />
+<br />
+<span class="com">''&nbsp;draw&nbsp;a&nbsp;circle&nbsp;with&nbsp;the&nbsp;border&nbsp;color</span><br />
+<span class="key">Circle</span>&nbsp;<span class="oth">(</span><span class="num">160</span><span class="oth">,</span>&nbsp;<span class="num">100</span><span class="oth">),</span>&nbsp;<span class="num">50</span><span class="oth">,</span>&nbsp;<span class="wrd">cb</span><span class="oth">,</span>&nbsp;<span class="oth">,</span>&nbsp;<span class="oth">,</span>&nbsp;<span class="num">1.0</span><br />
+<br />
+<span class="com">''&nbsp;paint&nbsp;the&nbsp;circle&nbsp;region&nbsp;with&nbsp;paint_pattern,&nbsp;stopping&nbsp;at&nbsp;the&nbsp;border&nbsp;color</span><br />
+<span class="key">Paint</span>&nbsp;<span class="oth">(</span><span class="num">160</span><span class="oth">,</span>&nbsp;<span class="num">100</span><span class="oth">),</span>&nbsp;<span class="wrd">paint_pattern</span><span class="oth">,</span>&nbsp;<span class="wrd">cb</span><br />
+<br />
+<span class="com">''&nbsp;pause&nbsp;before&nbsp;ending&nbsp;the&nbsp;program</span><br />
+<span class="key">Sleep</span><br />
+</div></tt><br />
+<br \>
+</div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><i>target</i></tt> is new to FreeBASIC<br \>
+<li> In QB, the fill pattern was always 8-bits wide, and the height was the length of the string (up to 64). In FreeBASIC, the fill pattern is 8 pixels wide, independent of the color depth, and the height is always 8<br \>
+<li> The background color parameter supported by QB is not supported by the FreeBASIC version<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgScreengraphics.html">Screen</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

@@ -1,0 +1,92 @@
+<html>
+<head>
+<title>Var</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Var</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Declares a variable whose type is implied from the initializer expression<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<b>Var</b> [<a href="KeyPgShared.html">Shared</a>] <i>symbolname</i> = <i>expression</i>[, <i>symbolname</i> = <i>expression</i>]<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+<tt><b>Var</b></tt> declares a variable whose type is implied from the initializer expression. It is illegal to specify an explicit type in a <tt><b>Var</b></tt> declaration. The initializer expression does not have to be a constant, it can be, or, it can be any variable of any type. Note: <tt><a href="KeyPgWstring.html">WString</a></tt> is not supported with <tt><b>Var</b></tt>, due to the fact that there is no var-len <tt><a href="KeyPgWstring.html">WString</a></tt> type. This isn't likely to change, due to the complexities involved with handling Unicode.<br \>
+<br \>
+Since the type of the variable is inferred from what you assign into it, it's helpful to know how literals work. Any literal number without a decimal point defaults to <tt><a href="KeyPgInteger.html">Integer</a></tt>. A literal number <i>with</i> a decimal point defaults to <tt><a href="KeyPgDouble.html">Double</a></tt>.<br \>
+<br \>
+All <tt><a href="KeyPgZstring.html">ZString</a></tt> expressions, including string literals and dereferenced <tt><a href="KeyPgZstring.html">ZString</a></tt> <tt><a href="KeyPgPtr.html">Ptr</a></tt>s, will be given the <tt><a href="KeyPgString.html">String</a></tt> variable type.<br \>
+<br \>
+Explicit suffixes may be used on literal variables, to change/clarify their type. See <a href="ProPgLiterals.html">Literals</a> and <a href="TblVarTypes.html">Variable Types</a> for some more information about suffixes that can be used on literals.<br \>
+<br \>
+Note: Suffixes must appear on the initializer, not on the variable. Trying to use <tt><b>Var</b></tt> with a variable that has a suffix will throw a compile error.<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="key">Var</span>&nbsp;<span class="wrd">a</span>&nbsp;&nbsp;<span class="oth">=</span>&nbsp;<span class="key">Cast</span><span class="oth">(</span><span class="key">Byte</span><span class="oth">,</span>&nbsp;<span class="num">0</span><span class="oth">)</span><br />
+<span class="key">Var</span>&nbsp;<span class="wrd">b</span>&nbsp;&nbsp;<span class="oth">=</span>&nbsp;<span class="key">Cast</span><span class="oth">(</span><span class="key">Short</span><span class="oth">,</span>&nbsp;<span class="num">0</span><span class="oth">)</span><br />
+<span class="key">Var</span>&nbsp;<span class="wrd">c</span>&nbsp;&nbsp;<span class="oth">=</span>&nbsp;<span class="key">Cast</span><span class="oth">(</span><span class="key">Integer</span><span class="oth">,</span>&nbsp;<span class="num">0</span><span class="oth">)</span><br />
+<span class="key">Var</span>&nbsp;<span class="wrd">d</span>&nbsp;&nbsp;<span class="oth">=</span>&nbsp;<span class="key">Cast</span><span class="oth">(</span><span class="key">LongInt</span><span class="oth">,</span>&nbsp;<span class="num">0</span><span class="oth">)</span><br />
+<span class="key">Var</span>&nbsp;<span class="wrd">au</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">Cast</span><span class="oth">(</span><span class="key">UByte</span><span class="oth">,</span>&nbsp;<span class="num">0</span><span class="oth">)</span>&nbsp;&nbsp;&nbsp;<br />
+<span class="key">Var</span>&nbsp;<span class="wrd">bu</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">Cast</span><span class="oth">(</span><span class="key">UShort</span><span class="oth">,</span>&nbsp;<span class="num">0</span><span class="oth">)</span>&nbsp;&nbsp;<br />
+<span class="key">Var</span>&nbsp;<span class="wrd">cu</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">Cast</span><span class="oth">(</span><span class="key">UInteger</span><span class="oth">,</span>&nbsp;<span class="num">0</span><span class="oth">)</span><br />
+<span class="key">Var</span>&nbsp;<span class="wrd">du</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">Cast</span><span class="oth">(</span><span class="key">ULongInt</span><span class="oth">,</span>&nbsp;<span class="num">0</span><span class="oth">)</span><br />
+<span class="key">Var</span>&nbsp;<span class="wrd">e</span>&nbsp;&nbsp;<span class="oth">=</span>&nbsp;<span class="key">Cast</span><span class="oth">(</span><span class="key">Single</span><span class="oth">,</span>&nbsp;<span class="num">0.0</span><span class="oth">)</span><br />
+<span class="key">Var</span>&nbsp;<span class="wrd">f</span>&nbsp;&nbsp;<span class="oth">=</span>&nbsp;<span class="key">Cast</span><span class="oth">(</span><span class="key">Double</span><span class="oth">,</span>&nbsp;<span class="num">0.0</span><span class="oth">)</span><br />
+<span class="key">Var</span>&nbsp;<span class="wrd">g</span>&nbsp;&nbsp;<span class="oth">=</span>&nbsp;<span class="oth">@</span><span class="wrd">c</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;integer&nbsp;ptr</span><br />
+<span class="key">Var</span>&nbsp;<span class="wrd">h</span>&nbsp;&nbsp;<span class="oth">=</span>&nbsp;<span class="oth">@</span><span class="wrd">a</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;byte&nbsp;ptr</span><br />
+<span class="key">Var</span>&nbsp;<span class="wrd">s2</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="quo">"hello"</span>&nbsp;<span class="com">''&nbsp;var-len&nbsp;string</span><br />
+<br />
+<span class="key">Var</span>&nbsp;<span class="wrd">ii</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">6728</span>&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;implicit&nbsp;integer</span><br />
+<span class="key">Var</span>&nbsp;<span class="wrd">id</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">6728.0</span>&nbsp;<span class="com">''&nbsp;implicit&nbsp;double</span><br />
+<br />
+<span class="key">Print</span>&nbsp;<span class="quo">"Byte:&nbsp;"</span><span class="oth">;</span><span class="key">Len</span><span class="oth">(</span><span class="wrd">a</span><span class="oth">)</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"Short:&nbsp;"</span><span class="oth">;</span><span class="key">Len</span><span class="oth">(</span><span class="wrd">b</span><span class="oth">)</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"Integer:&nbsp;"</span><span class="oth">;</span><span class="key">Len</span><span class="oth">(</span><span class="wrd">c</span><span class="oth">)</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"Longint:&nbsp;"</span><span class="oth">;</span><span class="key">Len</span><span class="oth">(</span><span class="wrd">d</span><span class="oth">)</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"UByte:&nbsp;"</span><span class="oth">;</span><span class="key">Len</span><span class="oth">(</span><span class="wrd">au</span><span class="oth">)</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"UShort:&nbsp;"</span><span class="oth">;</span><span class="key">Len</span><span class="oth">(</span><span class="wrd">bu</span><span class="oth">)</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"UInteger:&nbsp;"</span><span class="oth">;</span><span class="key">Len</span><span class="oth">(</span><span class="wrd">cu</span><span class="oth">)</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"ULongint:&nbsp;"</span><span class="oth">;</span><span class="key">Len</span><span class="oth">(</span><span class="wrd">du</span><span class="oth">)</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"Single:&nbsp;"</span><span class="oth">;</span><span class="key">Len</span><span class="oth">(</span><span class="wrd">e</span><span class="oth">)</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"Double:&nbsp;"</span><span class="oth">;</span><span class="key">Len</span><span class="oth">(</span><span class="wrd">f</span><span class="oth">)</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"Integer&nbsp;Pointer:&nbsp;"</span><span class="oth">;</span><span class="key">Len</span><span class="oth">(</span><span class="wrd">g</span><span class="oth">)</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"Byte&nbsp;Pointer:&nbsp;"</span><span class="oth">;</span><span class="key">Len</span><span class="oth">(</span><span class="wrd">h</span><span class="oth">)</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"Variable&nbsp;String:&nbsp;"</span><span class="oth">;</span><span class="key">Len</span><span class="oth">(</span><span class="wrd">s2</span><span class="oth">)</span><br />
+<span class="key">Print</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"Integer:&nbsp;"</span><span class="oth">;</span><span class="key">Len</span><span class="oth">(</span><span class="wrd">ii</span><span class="oth">)</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"Double:&nbsp;"</span><span class="oth">;</span><span class="key">Len</span><span class="oth">(</span><span class="wrd">id</span><span class="oth">)</span><br />
+<br />
+<span class="key">Sleep</span><br />
+</div></tt><br />
+<br \>
+</div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> New to FreeBASIC 0.17<br \>
+<br \>
+</ul></div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
+<ul><li> Not available in the <i><a href="CompilerOptlang.html">-lang qb</a></i> dialect unless referenced with the alias <tt><b>__Var</b></tt>.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgCommon.html">Common</a></tt><br \>
+<li> <tt><a href="KeyPgDim.html">Dim</a></tt><br \>
+<li> <tt><a href="KeyPgErase.html">Erase</a></tt><br \>
+<li> <tt><a href="KeyPgExtern.html">Extern</a></tt><br \>
+<li> <tt><a href="KeyPgLbound.html">LBound</a></tt><br \>
+<li> <tt><a href="KeyPgRedim.html">ReDim</a></tt><br \>
+<li> <tt><a href="KeyPgPreserve.html">Preserve</a></tt><br \>
+<li> <tt><a href="KeyPgShared.html">Shared</a></tt><br \>
+<li> <tt><a href="KeyPgStatic.html">Static</a></tt><br \>
+<li> <tt><a href="KeyPgUbound.html">UBound</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

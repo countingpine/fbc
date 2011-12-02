@@ -1,0 +1,122 @@
+<html>
+<head>
+<title>Deallocate</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Deallocate</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Frees previously allocated memory<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgSub.html">Sub</a> <b>Deallocate</b> <a href="KeyPgCdecl.html">cdecl</a> ( <a href="KeyPgByval.html">ByVal</a> <i>pointer</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgAny.html">Any</a> <a href="KeyPgPtr.html">Ptr</a> )<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
+<b>Deallocate</b>( <i>pointer</i> )<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+<tt><i>pointer</i></tt><br \>
+<div class="fb_indent">the address of the previously allocated buffer.<br \>
+<br \>
+</div></div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+This procedure frees memory that was previously allocated with <tt><a href="KeyPgAllocate.html">Allocate</a></tt>. <tt><i>pointer</i></tt> must be a valid pointer. After the procedure returns, <tt><i>pointer</i></tt> will be rendered invalid (pointing to an invalid memory address), and its use will result in undefined behavior.<br \>
+<br \>
+<b><tt>Deallocate</tt></b> is an alias for the C runtime library's <b><tt>free</tt></b>, so it's not guaranteed to be thread safe in all platforms.<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+The following example shows how to free previously allocated memory. Note that the pointer is set to null following the deallocation:<br \>
+<br \>
+<tt><div class="freebasic">
+<span class="key">Sub</span>&nbsp;<span class="wrd">DeallocateExample1</span><span class="oth">()</span><br />
+&nbsp;&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="key">Ptr</span>&nbsp;<span class="wrd">integerPtr</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">Allocate</span><span class="oth">(</span>&nbsp;<span class="key">Len</span><span class="oth">(</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="oth">)</span>&nbsp;&nbsp;<span class="com">''&nbsp;initialize&nbsp;pointer&nbsp;to</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;new&nbsp;memory&nbsp;address</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;<span class="oth">*</span><span class="wrd">integerPtr</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">420</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;use&nbsp;pointer</span><br />
+&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="oth">*</span><span class="wrd">integerPtr</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;<span class="key">Deallocate</span><span class="oth">(</span>&nbsp;<span class="wrd">integerPtr</span>&nbsp;<span class="oth">)</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;free&nbsp;memory&nbsp;back&nbsp;to&nbsp;system</span><br />
+&nbsp;&nbsp;&nbsp;<span class="wrd">integerPtr</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;and&nbsp;zero&nbsp;the&nbsp;pointer</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Sub</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;<span class="wrd">DeallocateExample1</span><span class="oth">()</span><br />
+&nbsp;&nbsp;&nbsp;<span class="key">End</span>&nbsp;<span class="num">0</span><br />
+</div></tt><br />
+<br \>
+Although in this case it is unnecessary - since 1. the pointer is not a reference to another pointer, 2. no other pointers point to the deallocated memory and 3. the function immediately exits afterward - setting the pointer to null is a good habit to get into. If the function deallocated memory from a pointer that was passed in by reference, for instance, the pointer that was used in the function call will be rendered invalid, and it is up to the caller to either reassign the pointer or set it to null. Example 3 shows how to correctly handle this kind of situation, and the next example shows the effects of deallocating memory with multiple references.<br \>
+<br \>
+In the following example, a different pointer is used to free previously allocated memory.<br \>
+<br \>
+<tt><div class="freebasic">
+<span class="com">''&nbsp;WARNING:&nbsp;"evil"&nbsp;example&nbsp;showing&nbsp;how&nbsp;things&nbsp;should&nbsp;NOT&nbsp;be&nbsp;done</span><br />
+<br />
+<span class="key">Sub</span>&nbsp;<span class="wrd">DeallocateExample2</span><span class="oth">()</span><br />
+&nbsp;&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="key">Ptr</span>&nbsp;<span class="wrd">integerPtr</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">Allocate</span><span class="oth">(</span>&nbsp;<span class="key">Len</span><span class="oth">(</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="oth">)</span>&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;initialize&nbsp;^^^&nbsp;pointer&nbsp;to&nbsp;new&nbsp;memory</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="key">Ptr</span>&nbsp;<span class="wrd">anotherIntegerPtr</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">integerPtr</span><br />
+&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;initialize&nbsp;^^^&nbsp;another&nbsp;pointer&nbsp;to&nbsp;the&nbsp;same&nbsp;memory</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;<span class="oth">*</span><span class="wrd">anotherIntegerPtr</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">69</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;use&nbsp;other&nbsp;pointer</span><br />
+&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="oth">*</span><span class="wrd">anotherIntegerPtr</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;<span class="key">Deallocate</span><span class="oth">(</span>&nbsp;<span class="wrd">anotherIntegerPtr</span>&nbsp;<span class="oth">)</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;free&nbsp;memory&nbsp;back&nbsp;to&nbsp;system</span><br />
+&nbsp;&nbsp;&nbsp;<span class="wrd">anotherIntegerPtr</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;and&nbsp;zero&nbsp;other&nbsp;pointer</span><br />
+<br />
+<span class="com">''&nbsp;*integerPtr&nbsp;=&nbsp;420&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;''&nbsp;undefined&nbsp;behavior;&nbsp;original</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;pointer&nbsp;is&nbsp;invalid</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Sub</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;<span class="wrd">DeallocateExample2</span><span class="oth">()</span><br />
+&nbsp;&nbsp;&nbsp;<span class="key">End</span>&nbsp;<span class="num">0</span><br />
+</div></tt><br />
+<br \>
+Note that after the deallocation, <i>both</i> pointers are rendered invalid. This illustrates another one of the ways that bugs can arise when working with pointers. As a general rule, only deallocate memory previously allocated when you know that there is only one (1) pointer currently pointing at it.<br \>
+<br \>
+<tt><div class="freebasic">
+<span class="key">Function</span>&nbsp;<span class="wrd">createInteger</span><span class="oth">()</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="key">Ptr</span><br />
+&nbsp;&nbsp;&nbsp;<span class="key">Return</span>&nbsp;<span class="key">Allocate</span><span class="oth">(</span>&nbsp;<span class="key">Len</span><span class="oth">(</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="oth">)</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;return&nbsp;pointer&nbsp;to&nbsp;newly</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Function</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;allocated&nbsp;memory</span><br />
+<br />
+<span class="key">Sub</span>&nbsp;<span class="wrd">destroyInteger</span><span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">someIntegerPtr</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="key">Ptr</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;<span class="key">Deallocate</span><span class="oth">(</span>&nbsp;<span class="wrd">someIntegerPtr</span>&nbsp;<span class="oth">)</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;free&nbsp;memory&nbsp;back&nbsp;to&nbsp;system</span><br />
+&nbsp;&nbsp;&nbsp;<span class="wrd">someIntegerPtr</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;null&nbsp;original&nbsp;pointer</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Sub</span><br />
+<br />
+<span class="key">Sub</span>&nbsp;<span class="wrd">DeallocateExample3</span><span class="oth">()</span><br />
+&nbsp;&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="key">Ptr</span>&nbsp;<span class="wrd">integerPtr</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">createInteger</span><span class="oth">()</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;initialize&nbsp;pointer&nbsp;to</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;new&nbsp;memory&nbsp;address</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;<span class="oth">*</span><span class="wrd">integerPtr</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">420</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;use&nbsp;pointer</span><br />
+&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="oth">*</span><span class="wrd">integerPtr</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;<span class="wrd">destroyInteger</span><span class="oth">(</span>&nbsp;<span class="wrd">integerPtr</span>&nbsp;<span class="oth">)</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;pass&nbsp;pointer&nbsp;by&nbsp;reference</span><br />
+&nbsp;&nbsp;&nbsp;<span class="key">Assert</span><span class="oth">(</span>&nbsp;<span class="wrd">integerPtr</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span>&nbsp;<span class="oth">)</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;pointer&nbsp;should&nbsp;now&nbsp;be&nbsp;null</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Sub</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;<span class="wrd">DeallocateExample3</span><span class="oth">()</span><br />
+&nbsp;&nbsp;&nbsp;<span class="key">End</span>&nbsp;<span class="num">0</span><br />
+</div></tt><br />
+<br \>
+In the program above, a reference pointer in a function is set to null after deallocating the memory it points to. An <tt><a href="KeyPgAssert.html">Assert</a></tt> macro is used to test if the original pointer is in fact null after the function call. This example implies the correct way to pass pointers to functions that deallocate the memory they point to is by reference.<br \>
+<br \>
+</div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
+<ul><li> Not available in the <i><a href="CompilerOptlang.html">-lang qb</a></i> dialect unless referenced with the alias <tt><b>__Deallocate</b></tt>.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> New to FreeBASIC<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgAllocate.html">Allocate</a></tt><br \>
+<li> <tt><a href="KeyPgReallocate.html">Reallocate</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

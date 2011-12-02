@@ -1,0 +1,59 @@
+<html>
+<head>
+<title>Wait</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Wait</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Reads from a hardware port with a mask.<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgFunction.html">Function</a> <b>Wait</b> ( <a href="KeyPgByval.html">ByVal</a> <i>port</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgUshort.html">UShort</a> , <a href="KeyPgByval.html">ByVal</a> <i>and_mask</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a> , <a href="KeyPgByval.html">ByVal</a> <i>xor_mask</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a> = 0 ) <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a><br \>
+</tt><br \>
+</div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
+<b>Wait</b> <i>port,</i> <i>and_value</i> [, <i>xor_value</i>]<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+<tt><i>port</i></tt><br \>
+<div class="fb_indent">Port to read.<br \>
+</div><tt><i>and_mask</i></tt><br \>
+<div class="fb_indent">Mask value to <a href="KeyPgOpAnd.html">And</a> the port value with.<br \>
+</div><tt><i>xor_mask</i></tt><br \>
+<div class="fb_indent">Mask value to <a href="KeyPgOpXor.html">Xor</a> the port value with.<br \>
+<br \>
+</div></div><div class="fb_sect_title">Return Value</div><div class="fb_sect_cont"><br \>
+0 if successful, -1 on failure.<br \>
+<br \>
+</div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+<tt><b>Wait</b></tt> keeps reading <tt><i>port</i></tt> until the reading ANDed with <tt><i>and_mask</i></tt> and optionally XORed with <tt><i>xor_mask</i></tt> gives a non-zero result.<br \>
+<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="key">Wait</span>&nbsp;<span class="num">&amp;h3da</span><span class="oth">,</span>&nbsp;<span class="num">&amp;h8</span>&nbsp;<span class="com">'Old&nbsp;Qbasic&nbsp;way&nbsp;of&nbsp;waiting&nbsp;for&nbsp;the&nbsp;monitor's&nbsp;vsync</span><br />
+<span class="key">ScreenSync</span>&nbsp;<span class="com">'FreeBASIC&nbsp;way&nbsp;of&nbsp;accomplishing&nbsp;the&nbsp;same&nbsp;thing</span><br />
+</div></tt><br />
+<br \>
+</div><div class="fb_sect_title">Platform Differences</div><div class="fb_sect_cont"><br \>
+<ul><li> In the Windows and Linux versions three port numbers (&H3C7, &H3C8, &H3C9) are hooked by the graphics library when a graphics mode is in use to emulate VGA palette handling as in QB. This use is deprecated; use <tt><a href="KeyPgPalette.html">Palette</a></tt> to retrieve and set palette colors.<br \>
+<br \>
+<li> Using true port access in the Windows version requires the program to install a device driver for the present session. For that reason, Windows executables using hardware port access should be run with administrator permits each time the computer is restarted. Further runs don't require admin rights as they just use the already installed driver. The driver is only 3K in size and is embedded in the executable.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgInp.html">Inp</a></tt><br \>
+<li> <tt><a href="KeyPgOut.html">Out</a></tt><br \>
+<br \>
+</ul><br \>
+   <br \>
+</div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

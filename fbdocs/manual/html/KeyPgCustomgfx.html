@@ -1,0 +1,112 @@
+<html>
+<head>
+<title>Custom</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Custom</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Parameter to the <tt><a href="KeyPgPutgraphics.html">Put</a></tt> graphics statement which selects a custom method<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<b>Put</b> [ <i>target</i>, ] [ STEP ] ( <i>x</i>,<i>y</i> ), <i>source</i> [ ,( <i>x1</i>,<i>y1</i> )-( <i>x2</i>,<i>y2</i> ) ], <b>Custom</b>, <i>custom_function_ptr</i> [, <i>parameter</i>]<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+<tt><b>Custom</b></tt><br \>
+<div class="fb_indent">Required.<br \>
+</div><tt><i>custom_function_ptr</i></tt><br \>
+<div class="fb_indent">name of the custom user defined function.<br \>
+</div><tt><i>parameter</i></tt><br \>
+<div class="fb_indent">optional <tt><a href="KeyPgPointer.html">Pointer</a></tt> to be passed to the custom function; if omitted, the default value is zero (<tt>0</tt>).<br \>
+<br \>
+</div></div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+<tt><b>Custom</b></tt> selects a custom user defined function as the method for blitting an image buffer.<br \>
+<br \>
+The <tt>Custom</tt> method uses a user-defined function to calculate the final pixel values to be drawn to the destination buffer. This function will be called once for every pixel of the source image, and will receive the source and destination pixel values, and a data pointer passed by the <tt><a href="KeyPgPutgraphics.html">Put</a></tt> function. The pixel value returned will be the value used to draw to the destination buffer. The function has the form:<br \>
+<br \>
+<tt><a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgFunction.html">Function</a> <i>identifier</i> ( _<br \>
+<div class="fb_indent"><a href="KeyPgByval.html">ByVal</a> <i>source_pixel</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgUinteger.html">UInteger</a>, _<br \>
+<a href="KeyPgByval.html">ByVal</a> <i>destination_pixel</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgUinteger.html">UInteger</a>, _<br \>
+<a href="KeyPgByval.html">ByVal</a> <i>parameter</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgAny.html">Any</a> <a href="KeyPgPtr.html">Ptr</a> _<br \>
+) <a href="KeyPgAs.html">As</a> <a href="KeyPgUinteger.html">UInteger</a></tt><br \>
+<br \>
+</div><tt><i>identifier</i></tt> is the name of the function.<br \>
+<tt><i>source_pixel</i></tt> is the current pixel value of the source image.<br \>
+<tt><i>destination_pixel</i></tt> is the current pixel value of the destination image.<br \>
+<tt><i>parameter</i></tt> is the parameter that is passed by the <tt><a href="KeyPgPutgraphics.html">Put</a></tt> command.  If it was omitted, its value will be zero.<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="key">Function</span>&nbsp;<span class="wrd">dither</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="key">ByVal</span>&nbsp;<span class="wrd">source_pixel</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">UInteger</span><span class="oth">,</span>&nbsp;<span class="key">ByVal</span>&nbsp;<span class="wrd">destination_pixel</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">UInteger</span><span class="oth">,</span>&nbsp;<span class="key">ByVal</span>&nbsp;<span class="wrd">parameter</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Any</span>&nbsp;<span class="key">Ptr</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">UInteger</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''either&nbsp;returns&nbsp;the&nbsp;source&nbsp;pixel&nbsp;or&nbsp;the&nbsp;destination&nbsp;pixel,&nbsp;depending&nbsp;on&nbsp;the&nbsp;outcome&nbsp;of&nbsp;rnd</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="wrd">threshold</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Single</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0.5</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">If</span>&nbsp;<span class="wrd">parameter</span>&nbsp;<span class="oth">&lt;&gt;</span>&nbsp;<span class="num">0</span>&nbsp;<span class="key">Then</span>&nbsp;<span class="wrd">threshold</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="oth">*</span><span class="key">CPtr</span><span class="oth">(</span><span class="key">Single</span>&nbsp;<span class="key">Ptr</span><span class="oth">,</span>&nbsp;<span class="wrd">parameter</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">If</span>&nbsp;<span class="key">Rnd</span><span class="oth">()</span>&nbsp;<span class="oth">&lt;</span>&nbsp;<span class="wrd">threshold</span>&nbsp;<span class="key">Then</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Return</span>&nbsp;<span class="wrd">source_pixel</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Else</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Return</span>&nbsp;<span class="wrd">destination_pixel</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">End</span>&nbsp;<span class="key">If</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+<span class="key">End</span>&nbsp;<span class="key">Function</span><br />
+<br />
+<br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">img</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Any</span>&nbsp;<span class="key">Ptr</span><span class="oth">,</span>&nbsp;<span class="wrd">threshold</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Single</span><br />
+<br />
+<span class="com">''&nbsp;set&nbsp;up&nbsp;a&nbsp;screen</span><br />
+<span class="key">ScreenRes</span>&nbsp;<span class="num">320</span><span class="oth">,</span>&nbsp;<span class="num">200</span><span class="oth">,</span>&nbsp;<span class="num">16</span><span class="oth">,</span>&nbsp;<span class="num">2</span><br />
+<span class="key">ScreenSet</span>&nbsp;<span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">1</span><br />
+<br />
+<span class="com">''&nbsp;create&nbsp;an&nbsp;image</span><br />
+<span class="wrd">img</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">ImageCreate</span><span class="oth">(</span><span class="num">32</span><span class="oth">,</span>&nbsp;<span class="num">32</span><span class="oth">)</span><br />
+<span class="key">Line</span>&nbsp;<span class="wrd">img</span><span class="oth">,</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="num">0</span><span class="oth">,</span>&nbsp;&nbsp;<span class="num">0</span><span class="oth">)-(</span><span class="num">15</span><span class="oth">,</span>&nbsp;&nbsp;<span class="num">15</span><span class="oth">),</span>&nbsp;<span class="key">RGB</span><span class="oth">(</span><span class="num">255</span><span class="oth">,</span>&nbsp;&nbsp;&nbsp;<span class="num">0</span><span class="oth">,</span>&nbsp;&nbsp;&nbsp;<span class="num">0</span><span class="oth">),</span>&nbsp;<span class="wrd">bf</span><br />
+<span class="key">Line</span>&nbsp;<span class="wrd">img</span><span class="oth">,</span>&nbsp;<span class="oth">(</span><span class="num">16</span><span class="oth">,</span>&nbsp;&nbsp;<span class="num">0</span><span class="oth">)-(</span><span class="num">31</span><span class="oth">,</span>&nbsp;&nbsp;<span class="num">15</span><span class="oth">),</span>&nbsp;<span class="key">RGB</span><span class="oth">(</span>&nbsp;&nbsp;<span class="num">0</span><span class="oth">,</span>&nbsp;&nbsp;&nbsp;<span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">255</span><span class="oth">),</span>&nbsp;<span class="wrd">bf</span><br />
+<span class="key">Line</span>&nbsp;<span class="wrd">img</span><span class="oth">,</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">16</span><span class="oth">)-(</span><span class="num">15</span><span class="oth">,</span>&nbsp;&nbsp;<span class="num">31</span><span class="oth">),</span>&nbsp;<span class="key">RGB</span><span class="oth">(</span>&nbsp;&nbsp;<span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">255</span><span class="oth">,</span>&nbsp;&nbsp;&nbsp;<span class="num">0</span><span class="oth">),</span>&nbsp;<span class="wrd">bf</span><br />
+<span class="key">Line</span>&nbsp;<span class="wrd">img</span><span class="oth">,</span>&nbsp;<span class="oth">(</span><span class="num">16</span><span class="oth">,</span>&nbsp;<span class="num">16</span><span class="oth">)-(</span><span class="num">31</span><span class="oth">,</span>&nbsp;&nbsp;<span class="num">31</span><span class="oth">),</span>&nbsp;<span class="key">RGB</span><span class="oth">(</span><span class="num">255</span><span class="oth">,</span>&nbsp;&nbsp;&nbsp;<span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">255</span><span class="oth">),</span>&nbsp;<span class="wrd">bf</span><br />
+<br />
+<span class="com">''&nbsp;dither&nbsp;the&nbsp;image&nbsp;with&nbsp;varying&nbsp;thresholds</span><br />
+<span class="key">Do</span>&nbsp;<span class="key">Until</span>&nbsp;<span class="key">Len</span><span class="oth">(</span><span class="key">Inkey</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Cls</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">threshold</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0.2</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Put</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="num">80</span>&nbsp;<span class="oth">-</span>&nbsp;<span class="num">16</span><span class="oth">,</span>&nbsp;<span class="num">100</span>&nbsp;<span class="oth">-</span>&nbsp;<span class="num">16</span><span class="oth">),</span>&nbsp;<span class="wrd">img</span><span class="oth">,</span>&nbsp;<span class="key">Custom</span><span class="oth">,</span>&nbsp;<span class="oth">@</span><span class="wrd">dither</span><span class="oth">,</span>&nbsp;<span class="oth">@</span><span class="wrd">threshold</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;default&nbsp;threshold&nbsp;=&nbsp;0.5</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Put</span>&nbsp;<span class="oth">(</span><span class="num">160</span>&nbsp;<span class="oth">-</span>&nbsp;<span class="num">16</span><span class="oth">,</span>&nbsp;<span class="num">100</span>&nbsp;<span class="oth">-</span>&nbsp;<span class="num">16</span><span class="oth">),</span>&nbsp;<span class="wrd">img</span><span class="oth">,</span>&nbsp;<span class="key">Custom</span><span class="oth">,</span>&nbsp;<span class="oth">@</span><span class="wrd">dither</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">threshold</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0.8</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Put</span>&nbsp;<span class="oth">(</span><span class="num">240</span>&nbsp;<span class="oth">-</span>&nbsp;<span class="num">16</span><span class="oth">,</span>&nbsp;<span class="num">100</span>&nbsp;<span class="oth">-</span>&nbsp;<span class="num">16</span><span class="oth">),</span>&nbsp;<span class="wrd">img</span><span class="oth">,</span>&nbsp;<span class="key">Custom</span><span class="oth">,</span>&nbsp;<span class="oth">@</span><span class="wrd">dither</span><span class="oth">,</span>&nbsp;<span class="oth">@</span><span class="wrd">threshold</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">ScreenCopy</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Sleep</span>&nbsp;<span class="num">25</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+<span class="key">Loop</span><br />
+<br />
+<span class="com">''&nbsp;free&nbsp;the&nbsp;image&nbsp;memory</span><br />
+<span class="key">ImageDestroy</span>&nbsp;<span class="wrd">img</span><br />
+</div></tt><br />
+<div class="fb_img"><img src="images/custom.png" /></div><br \>
+<br \>
+</div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
+<ul><li> Not available in the <i><a href="CompilerOptlang.html">-lang qb</a></i> dialect.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> New to FreeBASIC<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgPutgraphics.html">Put (Graphics)</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

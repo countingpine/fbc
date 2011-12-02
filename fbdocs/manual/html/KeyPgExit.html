@@ -1,0 +1,75 @@
+<html>
+<head>
+<title>Exit</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Exit</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Control flow statement to exit a compound statement block<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<b>Exit</b> {<a href="KeyPgDoloop.html">Do</a> | <a href="KeyPgFornext.html">For</a> | <a href="KeyPgWhilewend.html">While</a> | <a href="KeyPgSelectcase.html">Select</a> }<br \>
+<b>Exit</b> {<a href="KeyPgSub.html">Sub</a> | <a href="KeyPgFunction.html">Function</a> | <a href="KeyPgOperator.html">Operator</a> | <a href="KeyPgProperty.html">Property</a> }<br \>
+<br \>
+<b>Exit</b> {<a href="KeyPgDoloop.html">Do</a> [, <a href="KeyPgDoloop.html">Do</a> [ , ...] ] |<br \>
+<div class="fb_indent"><div class="fb_indent"><a href="KeyPgFornext.html">For</a> [, <a href="KeyPgFornext.html">For</a> [ , ...] ] | <br \>
+<a href="KeyPgWhilewend.html">While</a> [, <a href="KeyPgWhilewend.html">While</a>, [...] ] | <br \>
+<a href="KeyPgSelectcase.html">Select</a> [, <a href="KeyPgSelectcase.html">Select</a> [ , ...] ] }<br \>
+<br \>
+</div></div></tt><br \>
+</div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+Leaves a code block such as a <tt><a href="KeyPgSub.html">Sub</a></tt>, <tt><a href="KeyPgFunction.html">Function</a></tt>, <tt><a href="KeyPgDoloop.html">Do...Loop</a></tt>, <tt><a href="KeyPgFornext.html">For...Next</a></tt>, <tt><a href="KeyPgWhilewend.html">While...Wend</a></tt>, or a  <tt><a href="KeyPgSelectcase.html">Select Case</a></tt> block. The execution skips the rest of the block and goes to the line after its end.<br \>
+<br \>
+Where there are multiple <tt><a href="KeyPgDoloop.html">Do</a></tt> / <tt><a href="KeyPgFornext.html">For</a></tt> / <tt><a href="KeyPgWhilewend.html">While</a></tt> / <tt><a href="KeyPgSelectcase.html">Select</a></tt> blocks nested, it will skip to the end of the innermost block of that type.  You can skip to the end of multiple blocks of that type by giving the word multiple times, separated by commas.<br \>
+For example: <tt><b>Exit While, While</b></tt><br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="com">'e.g.&nbsp;the&nbsp;print&nbsp;command&nbsp;will&nbsp;not&nbsp;be&nbsp;seen</span><br />
+<br />
+<span class="key">Do</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Exit</span>&nbsp;<span class="key">Do</span>&nbsp;<span class="com">'&nbsp;Exit&nbsp;the&nbsp;Do...Loop&nbsp;and&nbsp;continues&nbsp;to&nbsp;run&nbsp;the&nbsp;code&nbsp;after&nbsp;Loop</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"I&nbsp;will&nbsp;never&nbsp;be&nbsp;shown"</span><br />
+<span class="key">Loop</span><br />
+</div></tt><br />
+<br \>
+<tt><div class="freebasic">
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="wrd">i</span><span class="oth">,</span>&nbsp;<span class="wrd">j</span><br />
+<span class="key">For</span>&nbsp;<span class="wrd">i</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">1</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">10</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">For</span>&nbsp;<span class="wrd">j</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">1</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">10</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Exit</span>&nbsp;<span class="key">For</span><span class="oth">,</span>&nbsp;<span class="key">For</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Next</span>&nbsp;<span class="wrd">j</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"I&nbsp;will&nbsp;never&nbsp;be&nbsp;shown"</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+<span class="key">Next</span>&nbsp;<span class="wrd">i</span><br />
+</div></tt><br />
+<br \>
+</div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> EXIT WHILE and EXIT SELECT are new to FreeBASIC.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgSub.html">Sub</a></tt><br \>
+<li> <tt><a href="KeyPgFunction.html">Function</a></tt><br \>
+<li> <tt><a href="KeyPgDoloop.html">Do...Loop</a></tt><br \>
+<li> <tt><a href="KeyPgFornext.html">For...Next</a></tt><br \>
+<li> <tt><a href="KeyPgWhilewend.html">While...Wend</a></tt><br \>
+<li> <tt><a href="KeyPgContinue.html">Continue</a></tt><br \>
+<br \>
+</ul><br \>
+   <br \>
+</div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

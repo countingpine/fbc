@@ -1,0 +1,66 @@
+<html>
+<head>
+<title>va_first</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">va_first</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Returns the first argument in a variable argument list<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<i>pointer_variable</i> = <b>va_first</b>()<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+The <tt><b>va_first</b></tt> function initializes a <a href="ProPgPointers.html">pointer</a>, <i>pointer_variable</i>, to point to the first variable argument passed to a function.<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="key">Function</span>&nbsp;<span class="wrd">Avg</span>&nbsp;<span class="key">cdecl</span>&nbsp;<span class="oth">(</span><span class="wrd">Count</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">,</span>&nbsp;<span class="oth">...</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Double</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="wrd">ARG</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Any</span>&nbsp;<span class="key">Ptr</span>&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="wrd">SUM</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Double</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="wrd">i</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">ARG</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">va_first</span><span class="oth">()</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">For</span>&nbsp;<span class="wrd">i</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">1</span>&nbsp;<span class="key">To</span>&nbsp;<span class="wrd">COUNT</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">SUM</span>&nbsp;<span class="oth">+=</span>&nbsp;<span class="key">va_arg</span><span class="oth">(</span><span class="wrd">ARG</span><span class="oth">,</span>&nbsp;<span class="key">Double</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">ARG</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">va_next</span><span class="oth">(</span><span class="wrd">ARG</span><span class="oth">,</span><span class="key">Double</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Next</span>&nbsp;<span class="wrd">i</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Return</span>&nbsp;<span class="wrd">SUM</span><span class="oth">/</span><span class="wrd">COUNT</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Function</span><br />
+<br />
+<span class="key">Print</span>&nbsp;<span class="wrd">AVG</span>&nbsp;<span class="oth">(</span><span class="num">4</span><span class="oth">,</span>&nbsp;<span class="num">3.4</span><span class="oth">,</span><span class="num">5.0</span><span class="oth">,</span><span class="num">3.2</span><span class="oth">,</span><span class="num">4.1</span><span class="oth">)</span><br />
+<span class="key">Print</span>&nbsp;<span class="wrd">AVG</span>&nbsp;<span class="oth">(</span><span class="num">2</span><span class="oth">,</span>&nbsp;<span class="num">65.2</span><span class="oth">,</span><span class="num">454.65481</span><span class="oth">)</span><br />
+<br />
+<span class="key">Sleep</span><br />
+</div></tt><br />
+<br \>
+The output would look like:<br \>
+<pre class="fb_pre">
+3.925
+259.927405
+</pre><br \>
+<br \>
+</div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
+<ul><li> Not available in the <i><a href="CompilerOptlang.html">-lang qb</a></i> dialect unless referenced with the alias <tt><b>__Va_first</b></tt>.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> New to FreeBASIC<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <a href="KeyPgDots.html">... (Ellipsis)</a><br \>
+<li> <tt><a href="KeyPgVaArg.html">va_arg</a></tt><br \>
+<li> <tt><a href="KeyPgVaNext.html">va_next</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

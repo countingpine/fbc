@@ -1,0 +1,54 @@
+<html>
+<head>
+<title>CondBroadcast</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">CondBroadcast</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Restarts all threads <tt><a href="KeyPgCondWait.html">CondWait</a></tt>ing for the handle<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgSub.html">Sub</a> <b>CondBroadcast</b> ( <a href="KeyPgByval.html">ByVal</a> <i>handle</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgAny.html">Any</a> <a href="KeyPgPtr.html">Ptr</a> )<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
+<b>CondBroadcast</b> ( <i>handle</i> )<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+<tt><i>handle</i></tt><br \>
+<div class="fb_indent">The handle of a conditional variable, or the null pointer (0) on failure.<br \>
+<br \>
+</div></div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+Once the conditional is <tt><a href="KeyPgCondCreate.html">CondCreate</a></tt> and the threads are started, one of more of them can be set to <tt><a href="KeyPgCondWait.html">CondWait</a></tt> for the conditional, they will be stopped until some other thread <tt><a href="KeyPgCondSignal.html">CondSignal</a></tt>s that the waiting thread can restart. <tt><a href="KeyPgCondBroadcast.html">CondBroadcast</a></tt> can be used to restart all threads waiting for the conditional. At the end of the program <tt><a href="KeyPgCondDestroy.html">CondDestroy</a></tt> must be used to avoid leaking resources in the OS.<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+See <tt><a href="KeyPgCondCreate.html">CondCreate</a></tt><br \>
+<br \>
+</div><div class="fb_sect_title">Platform Differences</div><div class="fb_sect_cont"><br \>
+<ul><li> <b>Condbroadcast</b> is not available with the DOS version / target of FreeBASIC, because multithreading is not supported by DOS kernel nor the used extender.<br \>
+<li> In Linux the threads are always started in the order they are created, this can't be assumed in Win32. It's an OS, not a FreeBASIC issue. <br \>
+<br \>
+</ul></div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
+<ul><li> Threading is not allowed in <i><a href="CompilerOptlang.html">-lang qb</a></i><br \>
+<br \>
+</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> New to FreeBASIC<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgCondCreate.html">CondCreate</a></tt><br \>
+<li> <tt><a href="KeyPgCondDestroy.html">CondDestroy</a></tt><br \>
+<li> <tt><a href="KeyPgCondSignal.html">CondSignal</a></tt><br \>
+<li> <tt><a href="KeyPgCondWait.html">CondWait</a></tt><br \>
+<li> <tt><a href="KeyPgThreadCreate.html">ThreadCreate</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

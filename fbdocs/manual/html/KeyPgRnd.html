@@ -1,0 +1,81 @@
+<html>
+<head>
+<title>Rnd</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Rnd</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Returns a random <a href="KeyPgDouble.html">Double</a> precision number in the range <tt>[0, 1)</tt><br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgFunction.html">Function</a> <b>Rnd</b> ( <a href="KeyPgByval.html">ByVal</a> <i>seed</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgSingle.html">Single</a> = 1.0 ) <a href="KeyPgAs.html">As</a> <a href="KeyPgDouble.html">Double</a><br \>
+</tt><br \>
+</div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
+<i>result</i> = <b>Rnd</b>( <i>seed</i> )<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+<tt><i>number</i></tt><br \>
+<div class="fb_indent">Optional <tt><a href="KeyPgSingle.html">Single</a></tt> argument. If <tt><i>seed</i></tt> has a value of zero, the last random number generated is repeated, for any other number a new random number is returned. With the QB-compatible algorithm, a negative number fully reseeds the generator.  The default for no argument is to return a new random number.<br \>
+<br \>
+</div></div><div class="fb_sect_title">Return Value</div><div class="fb_sect_cont"><br \>
+Returns the random number generated.<br \>
+<br \>
+</div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+Returns a number of type <tt><a href="KeyPgDouble.html">Double</a></tt> in the range <tt>[0, 1)</tt> (i.e. <tt>0 &lt;= <b>Rnd</b> &lt; 1</tt>), based on a random seed (see <tt><a href="KeyPgRandomize.html">Randomize</a></tt>).<br \>
+<br \>
+<tt><b>Rnd</b></tt> can use a variety of different algorithms - see <tt><a href="KeyPgRandomize.html">Randomize</a></tt> for details of the default and selectable algorithms.<br \>
+<br \>
+<tt><b>Rnd</b></tt> will return the same sequence of numbers every time a program is run.  This sequence can be changed by reseeding the generator.<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="com">''&nbsp;Function&nbsp;to&nbsp;a&nbsp;random&nbsp;number&nbsp;in&nbsp;the&nbsp;range&nbsp;[first,&nbsp;last),&nbsp;or&nbsp;{first&nbsp;&lt;=&nbsp;x&nbsp;&lt;&nbsp;last}.</span><br />
+<span class="key">Function</span>&nbsp;<span class="wrd">rnd_range</span>&nbsp;<span class="oth">(</span><span class="wrd">first</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Double</span><span class="oth">,</span>&nbsp;<span class="wrd">last</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Double</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Double</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Function</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">Rnd</span>&nbsp;<span class="oth">*</span>&nbsp;<span class="oth">(</span><span class="wrd">last</span>&nbsp;<span class="oth">-</span>&nbsp;<span class="wrd">first</span><span class="oth">)</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="wrd">first</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Function</span><br />
+<br />
+<span class="com">''&nbsp;seed&nbsp;the&nbsp;random&nbsp;number&nbsp;generator,&nbsp;so&nbsp;the&nbsp;sequence&nbsp;is&nbsp;not&nbsp;the&nbsp;same&nbsp;each&nbsp;time</span><br />
+<span class="key">Randomize</span><br />
+<br />
+<span class="com">''&nbsp;prints&nbsp;a&nbsp;random&nbsp;number&nbsp;in&nbsp;the&nbsp;range&nbsp;[0,&nbsp;1),&nbsp;or&nbsp;{0&nbsp;&lt;=&nbsp;x&nbsp;&lt;&nbsp;1}.</span><br />
+<span class="key">Print</span>&nbsp;<span class="key">Rnd</span><br />
+<br />
+<span class="com">''&nbsp;prints&nbsp;a&nbsp;random&nbsp;number&nbsp;in&nbsp;the&nbsp;range&nbsp;[0,&nbsp;10),&nbsp;or&nbsp;&nbsp;{0&nbsp;&lt;=&nbsp;x&nbsp;&lt;&nbsp;10}.</span><br />
+<span class="key">Print</span>&nbsp;<span class="key">Rnd</span>&nbsp;<span class="oth">*</span>&nbsp;<span class="num">10</span><br />
+<br />
+<span class="com">''&nbsp;prints&nbsp;a&nbsp;random&nbsp;integral&nbsp;number&nbsp;in&nbsp;the&nbsp;range&nbsp;[1,&nbsp;11),&nbsp;or&nbsp;&nbsp;{1&nbsp;&lt;=&nbsp;x&nbsp;&lt;&nbsp;11}.</span><br />
+<span class="com">''&nbsp;with&nbsp;integers,&nbsp;this&nbsp;is&nbsp;equivalent&nbsp;to&nbsp;[1,&nbsp;10],&nbsp;or&nbsp;{1&nbsp;&lt;=&nbsp;n&nbsp;&lt;=&nbsp;10}.</span><br />
+<span class="key">Print</span>&nbsp;<span class="key">Int</span><span class="oth">(</span><span class="key">Rnd</span>&nbsp;<span class="oth">*</span>&nbsp;<span class="num">10</span><span class="oth">)</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="num">1</span><br />
+<br />
+<span class="com">''&nbsp;prints&nbsp;a&nbsp;random&nbsp;integral&nbsp;number&nbsp;in&nbsp;the&nbsp;range&nbsp;[69,&nbsp;421),&nbsp;or&nbsp;{69&nbsp;&lt;=&nbsp;x&nbsp;&lt;&nbsp;421}.</span><br />
+<span class="com">''&nbsp;this&nbsp;is&nbsp;equivalent&nbsp;to&nbsp;[69,&nbsp;420],&nbsp;or&nbsp;{69&nbsp;&lt;=&nbsp;n&nbsp;&lt;=&nbsp;420}.</span><br />
+<span class="key">Print</span>&nbsp;<span class="key">Int</span><span class="oth">(</span><span class="wrd">rnd_range</span><span class="oth">(</span><span class="num">69</span><span class="oth">,</span>&nbsp;<span class="num">421</span><span class="oth">))</span><br />
+</div></tt><br />
+<br \>
+</div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
+The default algorithm used depends on the current dialect in use:<br \>
+<ul><ul><li> With the <i><a href="CompilerOptlang.html">-lang fb</a></i> dialect, a 32 bit Mersenne Twister function with a granularity of 32 bits is used.<br \>
+<li> With the <i><a href="CompilerOptlang.html">-lang qb</a></i> dialect, a function giving the same output as <tt><b>Rnd</b></tt> in QB is used. The granularity is 24 bits.<br \>
+<li> With the <i><a href="CompilerOptlang.html">-lang deprecated</a></i> and <i><a href="CompilerOptlang.html">-lang fblite</a></i> dialects, the function in the C runtime available in the system is used. The function available in Win32 has a granularity of 15 bits, and 32 bits in Linux and DOS.<br \>
+<br \>
+</ul></ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> None, if compiled in the <i><a href="CompilerOptlang.html">-lang qb</a></i> dialect.  Other dialects can also use the same seeding and generating algorithms by calling <tt><a href="KeyPgRandomize.html">Randomize</a></tt> with the appropriate parameter.<br \>
+<li> For the non-QB-compatible algorithms, if the optional argument is less than 0, it has the same meaning as passing an argument of 1.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgRandomize.html">Randomize</a></tt><br \>
+<li> <tt><a href="KeyPgTimer.html">Timer</a></tt><br \>
+<li> <tt><a href="KeyPgInt.html">Int</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

@@ -1,0 +1,69 @@
+<html>
+<head>
+<title>String</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">String</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Standard data type: 8 bit character string<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<a href="KeyPgDim.html">Dim</a> <i>variable</i> <a href="KeyPgAs.html">As</a> <b>String</b> [ * <i>size</i>]<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+A <tt><b>String</b></tt> is an array of characters.<br \>
+<br \>
+A <tt><b>String</b></tt> declared without the <tt><i>size</i></tt> parameter is dynamically resized depending on the length of the string. The length can range from 0 bytes to 2 gigabytes. A descriptor contains a pointer to the actual string and the length of the string. <tt><a href="KeyPgOpVarptr.html">VarPtr</a></tt> will return a pointer to the descriptor, while <tt><a href="KeyPgOpStrptr.html">StrPtr</a></tt> will point to the actual string.<br \>
+Despite the use of the descriptor, an implicit <tt>NULL</tt> character (<tt><a href="KeyPgChr.html">Chr</a>(0)</tt>) is added to the end of the string, to allow passing them to functions in external libraries without making slow copies.  FreeBASIC's internal functions will ignore this character, and not treat it as part of the string.<br \>
+<br \>
+A <tt><b>String</b></tt> declared with a <tt><i>fixed size</i></tt> is a QB-style fixed length string, with the exception that unused characters are set to 0, regardless of what "-lang" compiler option is used. It has no descriptor and it is not resized to fit its contents. As in QB, if data overflows the size of the string, it is truncated on the right side.<br \>
+Fixed length strings are also terminated with a <tt>NULL</tt> character, and so they use <tt><i>size</i> + 1</tt> bytes of space.  This <tt>NULL</tt> terminator may be removed in future, to prevent the redundant character complicating data layout in user-defined <tt><a href="KeyPgType.html">Type</a></tt>s.<br \>
+<br \>
+String variable names need not end in a dollar sign <tt>$</tt> as in other dialects of BASIC.  In <i><a href="CompilerDialects.html">lang fb</a></i> variable suffixes, including the dollar sign, are disallowed entirely.<br \>
+<br \>
+Note: When passing <tt><b>String</b></tt>s as parameters to <tt><a href="KeyPgSub.html">Sub</a></tt>s, they should always be passed by reference (<tt><a href="KeyPgByref.html">ByRef</a></tt>).  Currently, <tt><a href="KeyPgByval.html">ByVal</a></tt> does not pass a copy of the string, but a <tt><a href="KeyPgPtr.html">Pointer</a></tt> to the string data.  This can cause unexpected behavior.<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="com">''&nbsp;Compile&nbsp;with&nbsp;-lang&nbsp;fblite&nbsp;or&nbsp;qb</span><br />
+<br />
+<span class="def">#lang&nbsp;"fblite"<br />
+</span><br />
+<span class="com">''&nbsp;Variable-length</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">a</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span><br />
+<span class="wrd">a</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="quo">"Hello"</span><br />
+<br />
+<span class="com">''&nbsp;Or</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">b$</span><br />
+<span class="wrd">b$</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="quo">"World"</span><br />
+<br />
+<span class="com">''&nbsp;Fixed-length</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">c</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span>&nbsp;<span class="oth">*</span>&nbsp;<span class="num">32</span><br />
+<span class="wrd">c</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="quo">"Hello&nbsp;World"</span><br />
+</div></tt><br />
+<br \>
+</div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> In QB the strings were limited to 32767 characters.<br \>
+<li> In QB, the unused characters of a fixed-length string were initialized with 32 (space, or " ", in ASCII).<br \>
+<li> In QB static or fixed-size strings were often used in records to represent a number of bytes of data;  for example, a string of 1 length to represent 1 byte in a UDT read from a file.  This is not possible in FreeBASIC since strings always have an <tt>NULL</tt> character following.  When converting QBasic code that reads UDTs from files, make sure all instances of "<tt>As String * <i>n</i></tt>" are replaced with "<tt>As uByte (0 to <i>n</i> - 1)</tt>" or your files will be incompatible.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgStringFunction.html">String (Function)</a></tt><br \>
+<li> <tt><a href="KeyPgZstring.html">ZString</a></tt><br \>
+<li> <tt><a href="KeyPgWstring.html">WString</a></tt><br \>
+<li> <tt><a href="KeyPgStr.html">Str</a></tt><br \>
+<li> <tt><a href="KeyPgOpStrptr.html">StrPtr</a></tt><br \>
+<li> <tt><a href="KeyPgOpVarptr.html">VarPtr</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

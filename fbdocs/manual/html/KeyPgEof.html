@@ -1,0 +1,80 @@
+<html>
+<head>
+<title>EOF</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">EOF</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Checks to see if the end of an open file has been reached<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgFunction.html">Function</a> <b>EOF</b> ( <a href="KeyPgByval.html">ByVal</a> <i>filenum</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a> ) <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a><br \>
+</tt><br \>
+</div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
+<i>result</i> = <b>EOF</b>( <i>filenum</i> )<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+<tt><i>filenum</i></tt><br \>
+<div class="fb_indent">An <tt><a href="KeyPgInteger.html">Integer</a></tt> file number of an open file.<br \>
+<br \>
+</div></div><div class="fb_sect_title">Return Value</div><div class="fb_sect_cont"><br \>
+Returns true (-1) if end-of-file has been reached, zero (0) otherwise.<br \>
+<br \>
+</div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+When reading from files opened for <tt><a href="KeyPgInputfilemode.html">Input (File Mode)</a></tt>, it is useful to know when the end of the file has been reached, thus avoiding errors caused by reading past the ends of files. Use EOF to determine this. EOF expects a valid file number from an already opened file. Use <tt><a href="KeyPgFreefile.html">FreeFile</a></tt> to retrieve an available file file number.<br \>
+<br \>
+For file numbers bound to files opened for <tt><a href="KeyPgOutput.html">Output</a></tt>, EOF always returns 0.<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="com">''&nbsp;This&nbsp;code&nbsp;finds&nbsp;a&nbsp;free&nbsp;file&nbsp;number&nbsp;to&nbsp;use&nbsp;and&nbsp;attempts&nbsp;to&nbsp;open&nbsp;the&nbsp;file</span><br />
+<span class="com">''&nbsp;"file.ext"&nbsp;and&nbsp;if&nbsp;successful,&nbsp;binds&nbsp;our&nbsp;file&nbsp;number&nbsp;to&nbsp;the&nbsp;opened&nbsp;file.&nbsp;It</span><br />
+<span class="com">''&nbsp;reads&nbsp;the&nbsp;file&nbsp;line&nbsp;by&nbsp;line,&nbsp;outputting&nbsp;it&nbsp;to&nbsp;the&nbsp;screen.&nbsp;We&nbsp;loop&nbsp;until&nbsp;eof()</span><br />
+<span class="com">''&nbsp;returns&nbsp;true,&nbsp;in&nbsp;this&nbsp;case&nbsp;we&nbsp;ignore&nbsp;the&nbsp;loop&nbsp;if&nbsp;file&nbsp;is&nbsp;empty.</span><br />
+<br />
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span>&nbsp;<span class="wrd">file_name</span><br />
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="wrd">file_num</span><br />
+<br />
+<span class="wrd">file_name</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="quo">"file.ext"</span><br />
+<span class="wrd">file_num</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">FreeFile</span><span class="oth">(</span>&nbsp;<span class="oth">)</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;retrieve&nbsp;an&nbsp;available&nbsp;file&nbsp;number</span><br />
+<br />
+<span class="com">''&nbsp;open&nbsp;our&nbsp;file&nbsp;and&nbsp;bind&nbsp;our&nbsp;file&nbsp;number&nbsp;to&nbsp;it,&nbsp;exit&nbsp;on&nbsp;error</span><br />
+<span class="key">If</span><span class="oth">(</span>&nbsp;<span class="key">Open</span><span class="oth">(</span>&nbsp;<span class="wrd">file_name</span>&nbsp;<span class="key">For</span>&nbsp;<span class="key">Input</span>&nbsp;<span class="key">As</span>&nbsp;<span class="oth">#</span><span class="wrd">file_num</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="key">Then</span><br />
+&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"ERROR:&nbsp;opening&nbsp;file&nbsp;"</span>&nbsp;<span class="oth">;</span>&nbsp;<span class="wrd">file_name</span><br />
+&nbsp;&nbsp;&nbsp;<span class="key">End</span>&nbsp;<span class="oth">-</span><span class="num">1</span><br />
+<span class="key">End</span>&nbsp;<span class="key">If</span><br />
+<br />
+<span class="key">Do</span>&nbsp;<span class="key">Until</span>&nbsp;<span class="key">EOF</span><span class="oth">(</span>&nbsp;<span class="wrd">file_num</span>&nbsp;<span class="oth">)</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;loop&nbsp;until&nbsp;we&nbsp;have&nbsp;reached&nbsp;the&nbsp;end&nbsp;of&nbsp;the&nbsp;file</span><br />
+&nbsp;&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span>&nbsp;<span class="wrd">text</span><br />
+&nbsp;&nbsp;&nbsp;<span class="key">Line</span>&nbsp;<span class="key">Input</span>&nbsp;<span class="oth">#</span><span class="wrd">file_num</span><span class="oth">,</span>&nbsp;<span class="wrd">text</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;read&nbsp;a&nbsp;line&nbsp;of&nbsp;text&nbsp;...</span><br />
+&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="wrd">text</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;...&nbsp;and&nbsp;output&nbsp;it&nbsp;to&nbsp;the&nbsp;screen</span><br />
+<span class="key">Loop</span><br />
+<br />
+<span class="key">Close</span>&nbsp;<span class="oth">#</span><span class="wrd">file_num</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;close&nbsp;file&nbsp;via&nbsp;our&nbsp;file&nbsp;number</span><br />
+<br />
+<span class="key">End</span>&nbsp;<span class="num">0</span><br />
+</div></tt><br />
+<br \>
+Because of underlying differences in the libraries used by the compiler on different platforms, the EOF function can be unreliable when reading text files created in Linux (with LF line endings) in the Windows version of the compiler. The DOS and Linux compilers do not have this problem. One solution is to open the file for Binary access instead of for Input. Line Input# and EOF can still be used as in the above example, and the EOF function will work reliably. This solution will not detect the end of file character, but this is only used to mark the end of text streams that are not disk files.<br \>
+<br \>
+</div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> In QB the comm port signaled an EOF when there were no chars waiting to be read.<br \>
+<li> In QB, for files opened in RANDOM or BINARY mode, EOF returned non-zero only after a read past the end of file has been attempted.  In FreeBASIC, EOF returns true after the last item is read.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgLof.html">LOF</a></tt><br \>
+<li> <tt><a href="KeyPgLoc.html">LOC</a></tt><br \>
+<li> <tt><a href="KeyPgFreefile.html">FreeFile</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

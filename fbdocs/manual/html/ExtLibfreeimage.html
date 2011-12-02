@@ -1,0 +1,115 @@
+<html>
+<head>
+<title>FreeImage</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">FreeImage</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	FreeImage is an Open Source library project for developers who would like to support popular graphics image formats like PNG, BMP, JPEG, TIFF and others as needed by today's multimedia applications. FreeImage is easy to use, fast, multithreading safe, compatible with all 32-bit versions of Windows, and cross-platform (works both with Linux and Mac OS X).<br \>
+<br \>
+Website: http://freeimage.sourceforge.net/<br \>
+Platforms supported: Win32, Linux<br \>
+Headers to include: FreeImage.bi<br \>
+Example included: yes, in examples/gfx/freeimage.bas<br \>
+<br \>
+Here follows an example of using FreeImage in FreeBASIC.  If using Windows you will require freeimage.dll which is available from the <a href="http://freeimage.sourceforge.net/">FreeImage site</a>.<br \>
+<br \>
+<tt><tt><div class="freebasic">
+<span class="com">''&nbsp;Code&nbsp;example&nbsp;for&nbsp;loading&nbsp;all&nbsp;common&nbsp;image&nbsp;types&nbsp;using&nbsp;FreeImage.</span><br />
+<span class="com">''&nbsp;The&nbsp;example&nbsp;loads&nbsp;an&nbsp;image&nbsp;passed&nbsp;as&nbsp;a&nbsp;command&nbsp;line&nbsp;argument.</span><br />
+<br />
+<span class="com">''&nbsp;The&nbsp;function&nbsp;FI_Load&nbsp;returns&nbsp;a&nbsp;null&nbsp;pointer&nbsp;(0)&nbsp;if&nbsp;there&nbsp;was&nbsp;an&nbsp;error&nbsp;during</span><br />
+<span class="com">''&nbsp;loading.&nbsp;&nbsp;Otherwise&nbsp;it&nbsp;returns&nbsp;a&nbsp;32-bit&nbsp;PUT&nbsp;compatible&nbsp;buffer.</span><br />
+<br />
+<span class="def">#include&nbsp;"FreeImage.bi"<br />
+#include&nbsp;"crt.bi"<br />
+#include&nbsp;"fbgfx.bi"<br />
+</span><br />
+<span class="key">Function</span>&nbsp;<span class="wrd">FI_Load</span><span class="oth">(</span><span class="wrd">filename</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Any</span>&nbsp;<span class="key">Ptr</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">If</span>&nbsp;<span class="key">Len</span><span class="oth">(</span><span class="wrd">filename</span><span class="oth">)</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span>&nbsp;<span class="key">Then</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Return</span>&nbsp;<span class="wrd">NULL</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">End</span>&nbsp;<span class="key">If</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;Find&nbsp;out&nbsp;the&nbsp;image&nbsp;format</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">FREE_IMAGE_FORMAT</span>&nbsp;<span class="wrd">form</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">FreeImage_GetFileType</span><span class="oth">(</span><span class="key">StrPtr</span><span class="oth">(</span><span class="wrd">filename</span><span class="oth">),</span>&nbsp;<span class="num">0</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">If</span>&nbsp;<span class="wrd">form</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">FIF_UNKNOWN</span>&nbsp;<span class="key">Then</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">form</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">FreeImage_GetFIFFromFilename</span><span class="oth">(</span><span class="key">StrPtr</span><span class="oth">(</span><span class="wrd">filename</span><span class="oth">))</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">End</span>&nbsp;<span class="key">If</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;Exit&nbsp;if&nbsp;unknown</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">If</span>&nbsp;<span class="wrd">form</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">FIF_UNKNOWN</span>&nbsp;<span class="key">Then</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Return</span>&nbsp;<span class="wrd">NULL</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">End</span>&nbsp;<span class="key">If</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;Always&nbsp;load&nbsp;jpegs&nbsp;accurately</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">UInteger</span>&nbsp;<span class="wrd">flags</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">If</span>&nbsp;<span class="wrd">form</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">FIF_JPEG</span>&nbsp;<span class="key">Then</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">flags</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">JPEG_ACCURATE</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">End</span>&nbsp;<span class="key">If</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;Load&nbsp;the&nbsp;image&nbsp;into&nbsp;memory</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">FIBITMAP</span>&nbsp;<span class="key">Ptr</span>&nbsp;<span class="wrd">image</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">FreeImage_Load</span><span class="oth">(</span><span class="wrd">form</span><span class="oth">,</span>&nbsp;<span class="key">StrPtr</span><span class="oth">(</span><span class="wrd">filename</span><span class="oth">),</span>&nbsp;<span class="wrd">flags</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">If</span>&nbsp;<span class="wrd">image</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">NULL</span>&nbsp;<span class="key">Then</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;FreeImage&nbsp;failed&nbsp;to&nbsp;read&nbsp;in&nbsp;the&nbsp;image</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Return</span>&nbsp;<span class="wrd">NULL</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">End</span>&nbsp;<span class="key">If</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;Flip&nbsp;the&nbsp;image&nbsp;so&nbsp;it&nbsp;matches&nbsp;FB's&nbsp;coordinate&nbsp;system</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">FreeImage_FlipVertical</span><span class="oth">(</span><span class="wrd">image</span><span class="oth">)</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;Convert&nbsp;to&nbsp;32&nbsp;bits&nbsp;per&nbsp;pixel</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">FIBITMAP</span>&nbsp;<span class="key">Ptr</span>&nbsp;<span class="wrd">image32</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">FreeImage_ConvertTo32Bits</span><span class="oth">(</span><span class="wrd">image</span><span class="oth">)</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;Get&nbsp;the&nbsp;image's&nbsp;size</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">UInteger</span>&nbsp;<span class="wrd">w</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">FreeImage_GetWidth</span><span class="oth">(</span><span class="wrd">image</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">UInteger</span>&nbsp;<span class="wrd">h</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">FreeImage_GetHeight</span><span class="oth">(</span><span class="wrd">image</span><span class="oth">)</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;Create&nbsp;an&nbsp;FB&nbsp;image&nbsp;of&nbsp;the&nbsp;same&nbsp;size</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">fb.Image</span>&nbsp;<span class="key">Ptr</span>&nbsp;<span class="wrd">sprite</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">ImageCreate</span><span class="oth">(</span><span class="wrd">w</span><span class="oth">,</span>&nbsp;<span class="wrd">h</span><span class="oth">)</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Byte</span>&nbsp;<span class="key">Ptr</span>&nbsp;<span class="wrd">target</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">CPtr</span><span class="oth">(</span><span class="key">Byte</span>&nbsp;<span class="key">Ptr</span><span class="oth">,</span>&nbsp;<span class="wrd">sprite</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="num">1</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="wrd">target_pitch</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">sprite</span><span class="oth">-&gt;</span><span class="wrd">pitch</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Any</span>&nbsp;<span class="key">Ptr</span>&nbsp;<span class="wrd">source</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">FreeImage_GetBits</span><span class="oth">(</span><span class="wrd">image32</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="wrd">source_pitch</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">FreeImage_GetPitch</span><span class="oth">(</span><span class="wrd">image32</span><span class="oth">)</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;And&nbsp;copy&nbsp;over&nbsp;the&nbsp;pixels,&nbsp;row&nbsp;by&nbsp;row</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">For</span>&nbsp;<span class="wrd">y</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span>&nbsp;<span class="key">To</span>&nbsp;<span class="oth">(</span><span class="wrd">h</span>&nbsp;<span class="oth">-</span>&nbsp;<span class="num">1</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">memcpy</span><span class="oth">(</span><span class="wrd">target</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="oth">(</span><span class="wrd">y</span>&nbsp;<span class="oth">*</span>&nbsp;<span class="wrd">target_pitch</span><span class="oth">),</span>&nbsp;<span class="wrd">_</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">source</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="oth">(</span><span class="wrd">y</span>&nbsp;<span class="oth">*</span>&nbsp;<span class="wrd">source_pitch</span><span class="oth">),</span>&nbsp;<span class="wrd">_</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">w</span>&nbsp;<span class="oth">*</span>&nbsp;<span class="num">4</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Next</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">FreeImage_Unload</span><span class="oth">(</span><span class="wrd">image32</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">FreeImage_Unload</span><span class="oth">(</span><span class="wrd">image</span><span class="oth">)</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Return</span>&nbsp;<span class="wrd">sprite</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Function</span><br />
+<br />
+<span class="key">ScreenRes</span>&nbsp;<span class="num">640</span><span class="oth">,</span>&nbsp;<span class="num">480</span><span class="oth">,</span>&nbsp;<span class="num">32</span><br />
+<br />
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span>&nbsp;<span class="wrd">filename</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">Command</span><span class="oth">(</span><span class="num">1</span><span class="oth">)</span><br />
+<br />
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Any</span>&nbsp;<span class="key">Ptr</span>&nbsp;<span class="wrd">image</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">FI_Load</span><span class="oth">(</span><span class="wrd">filename</span><span class="oth">)</span><br />
+<span class="key">If</span>&nbsp;<span class="wrd">image</span>&nbsp;<span class="oth">&lt;&gt;</span>&nbsp;<span class="num">0</span>&nbsp;<span class="key">Then</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Put</span>&nbsp;<span class="oth">(</span><span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">0</span><span class="oth">),</span>&nbsp;<span class="wrd">image</span><br />
+<span class="key">Else</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"Problem&nbsp;while&nbsp;loading&nbsp;file&nbsp;:&nbsp;"</span>&nbsp;<span class="oth">&amp;</span>&nbsp;<span class="wrd">filename</span><br />
+<span class="key">End</span>&nbsp;<span class="key">If</span><br />
+<br />
+<span class="key">Sleep</span><br />
+</div></tt><br />
+</tt><br \>
+<br \>
+
+</div>
+</div> 
+</div> 
+</body>
+</html>

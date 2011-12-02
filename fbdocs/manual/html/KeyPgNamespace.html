@@ -1,0 +1,80 @@
+<html>
+<head>
+<title>Namespace</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Namespace</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Declares a namespace block<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<b>Namespace</b> <i>identifier</i> [ <a href="KeyPgAlias.html">Alias</a> "<i>aliasname</i>" ]<br \>
+<div class="fb_indent"><i>statements</i><br \>
+</div><b>End Namespace</b><br \>
+</tt><br \>
+</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+<tt><i>identifier</i></tt><br \>
+<div class="fb_indent">The name of the namespace.<br \>
+</div><tt><i>aliasname</i></tt><br \>
+<div class="fb_indent">An alternate external name for the namespace.<br \>
+<br \>
+</div></div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+Namespaces are commonly used in libraries where you don't want all the symbols from that library to crowd the user's space (called the Global Namespace). <br \>
+<br \>
+For example, if you used the "Forms" library, it might define the Point type for describing an X and Y coordinate, and you might also define it for another purpose. This can be resolved by creating the namespace Forms for the library, and then referring to its Point type as Forms.Point, and yours as just Point. <br \>
+<br \>
+To access duplicated symbols defined in the global namespace use: <tt>.SomeSymbol</tt> (or <tt>..SomeSymbol</tt> if inside a <a href="KeyPgWith.html">With..End With</a> block).<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="key">Namespace</span>&nbsp;<span class="wrd">Forms</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Type</span>&nbsp;<span class="key">Point</span>&nbsp;<span class="com">''&nbsp;A&nbsp;2D&nbsp;point</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="wrd">x</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="wrd">y</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">End</span>&nbsp;<span class="key">Type</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;Since&nbsp;we&nbsp;are&nbsp;inside&nbsp;of&nbsp;the&nbsp;namespace,&nbsp;Point&nbsp;resolves&nbsp;to&nbsp;Forms.Point.</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Sub</span>&nbsp;<span class="wrd">AdjustPoint</span><span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">pt</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Point</span><span class="oth">,</span>&nbsp;<span class="key">ByVal</span>&nbsp;<span class="wrd">newx</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">,</span>&nbsp;<span class="key">ByVal</span>&nbsp;<span class="wrd">newy</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">pt.x</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">newx</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">pt.y</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">newy</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">End</span>&nbsp;<span class="key">Sub</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Namespace</span><br />
+<br />
+<span class="key">Type</span>&nbsp;<span class="key">Point</span>&nbsp;<span class="com">''&nbsp;A&nbsp;3D&nbsp;point</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="wrd">x</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="wrd">y</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="wrd">z</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Type</span><br />
+<br />
+<span class="key">Sub</span>&nbsp;<span class="wrd">AdjustPoint</span><span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">pt</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Point</span><span class="oth">,</span>&nbsp;<span class="key">ByVal</span>&nbsp;<span class="wrd">newx</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">,</span>&nbsp;<span class="key">ByVal</span>&nbsp;<span class="wrd">newy</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">,</span>&nbsp;<span class="key">ByVal</span>&nbsp;<span class="wrd">newz</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">pt.x</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">newx</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">pt.y</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">newy</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">pt.z</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">newz</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Sub</span><br />
+<br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">pt1</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Point</span><br />
+<span class="wrd">AdjustPoint</span><span class="oth">(</span>&nbsp;<span class="wrd">pt1</span><span class="oth">,</span>&nbsp;<span class="num">1</span><span class="oth">,</span>&nbsp;<span class="num">1</span><span class="oth">,</span>&nbsp;<span class="num">1</span>&nbsp;<span class="oth">)</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">pt2</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">Forms.Point</span><br />
+<span class="wrd">Forms.AdjustPoint</span><span class="oth">(</span>&nbsp;<span class="wrd">pt2</span><span class="oth">,</span>&nbsp;<span class="num">1</span><span class="oth">,</span>&nbsp;<span class="num">1</span>&nbsp;<span class="oth">)</span><br />
+</div></tt><br />
+<br \>
+</div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
+<ul><li> Namespaces are not supported in the <i><a href="CompilerOptlang.html">-lang qb</a></i> dialect.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> New to FreeBASIC<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <a href="KeyPgUsing.html">Using (Namespaces)</a><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

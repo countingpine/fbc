@@ -1,0 +1,75 @@
+<html>
+<head>
+<title>Point</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Point</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Returns the color attribute of a specified pixel coordinate<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<i>result</i> = <b>Point</b>( <i>coord_x</i>, <i>coord_y</i> [,<i>buffer</i>] )<br \>
+or <br \>
+<i>result</i> = <b>Point</b>( <i>function_index</i> )<br \>
+<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><br \>
+<tt><i>coord_x</i></tt><br \>
+<div class="fb_indent">x coordinate of the pixel<br \>
+</div><tt><i>coord_y</i></tt><br \>
+<div class="fb_indent">y coordinate of the pixel<br \>
+</div><tt><i>buffer</i></tt><br \>
+<div class="fb_indent">the image buffer to read from<br \>
+</div><tt><i>function_index</i></tt><br \>
+<div class="fb_indent">the type of screen coordinate to return: one of the values <tt>0</tt>, <tt>1</tt>, <tt>2</tt>, <tt>3</tt><br \>
+<br \>
+</div></div><div class="fb_sect_title">Return Value</div><div class="fb_sect_cont"><br \>
+If the <tt><i>x</i>, <i>y</i></tt> coordinates of a pixel are provided <b><tt>Point</tt></b> returns the color attribute at the specified coordinates.<br \>
+If the argument is a function index, <b><tt>Point</tt></b> returns one of the graphics cursor coordinates set by the last graphics command. <br \>
+ <br \>
+<div class="fb_table"><table><tr><td>Argument</td><td> Value Returned </td></tr><tr><td> 0</td><td>The current physical x coordinate.</td></tr><tr><td>1</td><td>The current physical y coordinate.</td></tr><tr><td> 2</td><td>The current view x coordinate. This returns the same value as the POINT(0) function if the WINDOW statement has not been used.</td></tr><tr><td>3</td><td>The current view y coordinate. This returns the same value as the POINT(1) function if the WINDOW statement has not been used.</td></tr></table></div><br \>
+<br \>
+<br \>
+</div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+GfxLib Function with two different uses. <br \>
+If supplied with two coordinates it reads the color of the pixel at the coordinate <tt><i>coord_x</i></tt>, <tt><i>coord_y</i></tt> of the screen, or of the <tt><i>buffer</i></tt>, if supplied. <br \>
+The value return is a color index in a 256 or less color <tt><a href="KeyPgScreengraphics.html">Screen</a></tt>, and an <tt><a href="KeyPgRgb.html">RGB</a></tt> value in true color modes. If the coordinates are off-screen or off-buffer, <tt>-1</tt> is returned<br \>
+<br \>
+If supplied with a single value it returns the one of the coordinates of the graphics cursor as set by the last graphics command executed. If the last command was executed in a buffer, the values returned will be coordinates in the buffer. Arguments out of the range <tt>0</tt>-<tt>3</tt> will return <tt>0</tt>.<br \>
+<br \>
+The function <tt><b>Point</b></tt> does not work in text modes. <br \>
+<br \>
+Optimization note: while <b>Point</b> and the opposite <tt><a href="KeyPgPset.html">PSet</a></tt> provide valid results, they are very slow. Much better performance can be achieved by using <tt><a href="KeyPgPeek.html">Peek</a></tt> after calculating the address yourself from values obtained from <tt><a href="KeyPgImageinfo.html">ImageInfo</a></tt> and <tt><a href="KeyPgScreeninfo.html">ScreenInfo</a></tt>, or even more usig inline ASM.<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="key">Screen</span>&nbsp;<span class="num">13</span>&nbsp;<br />
+<span class="key">Line</span>&nbsp;<span class="oth">(</span><span class="num">10</span><span class="oth">,</span><span class="num">10</span><span class="oth">)-(</span><span class="num">100</span><span class="oth">,</span><span class="num">100</span><span class="oth">),</span><span class="num">12</span><br />
+<span class="key">Print</span>&nbsp;<span class="key">Point</span><span class="oth">(</span><span class="num">20</span><span class="oth">,</span><span class="num">20</span><span class="oth">)</span><br />
+</div></tt><br />
+<b>Output:</b><br \>
+<pre class="fb_pre">
+12
+</pre></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><i>buffer</i></tt> is new to FreeBASIC<br \>
+<li> In SVGA modes, a 32-bit RGB value is returned<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgPset.html">PSet</a></tt><br \>
+<li> <tt><a href="KeyPgPmap.html">PMap</a></tt><br \>
+<li> <tt><a href="KeyPgColor.html">Color</a></tt><br \>
+<li> <tt><a href="KeyPgViewgraphics.html">View (Graphics)</a></tt><br \>
+<li> <tt><a href="KeyPgWindow.html">Window</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

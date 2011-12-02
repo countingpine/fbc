@@ -1,0 +1,125 @@
+<html>
+<head>
+<title>Temporary Types</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Temporary Types</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Creates a temporary copy of a user defined type<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<i>result</i> = <b>Type</b>( <i>initializers</i>, ... )<br \>
+<div class="fb_indent"><i>or</i><br \>
+</div><i>result</i> = <b>Type</b>&lt;<i>typename</i>&gt;( <i>initializers</i>, ... )<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+<tt><i>initializers</i></tt><br \>
+<div class="fb_indent">Initial values for the type<br \>
+</div><tt><i>typename</i></tt><br \>
+<div class="fb_indent">The name of the <tt><a href="KeyPgType.html">Type</a></tt> or <tt><a href="KeyPgUnion.html">Union</a></tt><br \>
+<br \>
+</div></div><div class="fb_sect_title">Return Value</div><div class="fb_sect_cont"><br \>
+A temporary copy of the type.<br \>
+<br \>
+</div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+Used to create an anonymous and temporary type.  If <tt><i>typename</i></tt> is not explicitly given, it will be inferred from its usage.  Usage of the temporary copy may include assigning it to a variable, passing it as a parameter to a procedure, or returning it as a value from a procedure.<br \>
+<br \>
+The <tt><a href="KeyPgConstructor.html">Constructor</a></tt> for the type, if there is one, will be called when the temporary copy is created.  And the <tt><a href="KeyPgDestructor.html">Destructor</a></tt> for the type, if there is one, will be called immediately after its use.<br \>
+<br \>
+It can also be used as an even shorter shortcut than <tt><a href="KeyPgWith.html">With</a></tt> (see below) if you are changing all the records.<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="key">Type</span>&nbsp;<span class="wrd">Example</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="wrd">field1</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="wrd">field2</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Type</span><br />
+<br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">ex</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">Example</span><br />
+<br />
+<span class="com">''&nbsp;Filling&nbsp;the&nbsp;type&nbsp;by&nbsp;setting&nbsp;each&nbsp;field</span><br />
+<span class="wrd">ex.field1</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">1</span><br />
+<span class="wrd">ex.field2</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">2</span><br />
+<br />
+<span class="com">''&nbsp;Filling&nbsp;the&nbsp;type&nbsp;by&nbsp;setting&nbsp;each&nbsp;field&nbsp;using&nbsp;WITH</span><br />
+<span class="key">With</span>&nbsp;<span class="wrd">ex</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">.</span><span class="wrd">field1</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">1</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">.</span><span class="wrd">field2</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">2</span><br />
+<span class="key">End</span>&nbsp;<span class="key">With</span><br />
+<br />
+<span class="com">''&nbsp;Fill&nbsp;the&nbsp;variable's&nbsp;fields&nbsp;with&nbsp;a&nbsp;&nbsp;temporary&nbsp;type</span><br />
+<span class="wrd">ex</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">Type</span><span class="oth">(</span>&nbsp;<span class="num">1</span><span class="oth">,</span>&nbsp;<span class="num">2</span>&nbsp;<span class="oth">)</span><br />
+</div></tt><br />
+<br \>
+<tt><div class="freebasic">
+<span class="com">''&nbsp;Passing&nbsp;a&nbsp;user-defined&nbsp;types&nbsp;to&nbsp;a&nbsp;procedure&nbsp;using&nbsp;a&nbsp;temporary&nbsp;type</span><br />
+<span class="com">''&nbsp;where&nbsp;the&nbsp;type&nbsp;can&nbsp;be&nbsp;inferred.</span><br />
+<br />
+<span class="key">Type</span>&nbsp;<span class="wrd">S</span><br />
+&nbsp;&nbsp;<span class="key">As</span>&nbsp;<span class="key">Single</span>&nbsp;<span class="wrd">x</span><span class="oth">,</span>&nbsp;<span class="wrd">y</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Type</span><br />
+<br />
+<span class="key">Sub</span>&nbsp;<span class="wrd">test</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="wrd">v</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">S</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"S"</span><span class="oth">,</span>&nbsp;<span class="wrd">v.x</span><span class="oth">,</span>&nbsp;<span class="wrd">v.y</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Sub</span><br />
+<br />
+<span class="wrd">test</span><span class="oth">(</span>&nbsp;<span class="key">Type</span><span class="oth">(</span>&nbsp;<span class="num">1</span><span class="oth">,</span>&nbsp;<span class="num">2</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="oth">)</span><br />
+</div></tt><br />
+<br \>
+<tt><div class="freebasic">
+<span class="com">''&nbsp;Passing&nbsp;a&nbsp;user-defined&nbsp;type&nbsp;to&nbsp;a&nbsp;procedure&nbsp;using&nbsp;temporary&nbsp;types</span><br />
+<span class="com">''&nbsp;where&nbsp;the&nbsp;type&nbsp;is&nbsp;ambiguous&nbsp;and&nbsp;the&nbsp;name&nbsp;of&nbsp;the&nbsp;type&nbsp;must&nbsp;be&nbsp;specified.</span><br />
+<br />
+<span class="key">Type</span>&nbsp;<span class="wrd">S</span><br />
+&nbsp;&nbsp;<span class="key">As</span>&nbsp;<span class="key">Single</span>&nbsp;<span class="wrd">x</span><span class="oth">,</span>&nbsp;<span class="wrd">y</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Type</span><br />
+<br />
+<span class="key">Type</span>&nbsp;<span class="wrd">T</span><br />
+&nbsp;&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="wrd">x</span><span class="oth">,</span>&nbsp;<span class="wrd">y</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Type</span><br />
+<br />
+<span class="key">Union</span>&nbsp;<span class="wrd">U</span><br />
+&nbsp;&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="wrd">x</span><span class="oth">,</span>&nbsp;<span class="wrd">y</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Union</span><br />
+<br />
+<span class="com">''&nbsp;Overloaded&nbsp;procedure&nbsp;test()</span><br />
+<span class="key">Sub</span>&nbsp;<span class="wrd">test</span>&nbsp;<span class="key">Overload</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="wrd">v</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">S</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"S"</span><span class="oth">,</span>&nbsp;<span class="wrd">v.x</span><span class="oth">,</span>&nbsp;<span class="wrd">v.y</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Sub</span><br />
+<br />
+<span class="key">Sub</span>&nbsp;<span class="wrd">test</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="wrd">v</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">T</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"T"</span><span class="oth">,</span>&nbsp;<span class="wrd">v.x</span><span class="oth">,</span>&nbsp;<span class="wrd">v.y</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Sub</span><br />
+<br />
+<span class="key">Sub</span>&nbsp;<span class="wrd">test</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="wrd">v</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">U</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"U"</span><span class="oth">,</span>&nbsp;<span class="wrd">v.x</span><span class="oth">,</span>&nbsp;<span class="wrd">v.y</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Sub</span><br />
+<br />
+<span class="com">''&nbsp;Won't&nbsp;work:&nbsp;ambiguous</span><br />
+<span class="com">''&nbsp;test(&nbsp;type(&nbsp;1,&nbsp;2&nbsp;)&nbsp;)</span><br />
+<br />
+<span class="com">''&nbsp;Specify&nbsp;name&nbsp;of&nbsp;type&nbsp;instead</span><br />
+<span class="wrd">test</span><span class="oth">(</span>&nbsp;<span class="key">Type</span><span class="oth">&lt;</span><span class="wrd">S</span><span class="oth">&gt;(</span>&nbsp;<span class="num">1</span><span class="oth">,</span>&nbsp;<span class="num">2</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="oth">)</span><br />
+<span class="wrd">test</span><span class="oth">(</span>&nbsp;<span class="key">Type</span><span class="oth">&lt;</span><span class="wrd">T</span><span class="oth">&gt;(</span>&nbsp;<span class="num">1</span><span class="oth">,</span>&nbsp;<span class="num">2</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="oth">)</span><br />
+<span class="wrd">test</span><span class="oth">(</span>&nbsp;<span class="key">Type</span><span class="oth">&lt;</span><span class="wrd">U</span><span class="oth">&gt;(</span>&nbsp;<span class="num">1</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="oth">)</span><br />
+</div></tt><br />
+<br \>
+</div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> New to FreeBASIC<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgType.html">Type...End Type</a></tt><br \>
+<li> <tt><a href="KeyPgTypeAlias.html">Type (Alias)</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

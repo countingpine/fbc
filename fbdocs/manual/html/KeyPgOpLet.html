@@ -1,0 +1,91 @@
+<html>
+<head>
+<title>Operator Let (Assign)</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Operator Let (Assign)</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Indicates the assignment operator when overloading <a href="KeyPgOpAssignment.html">Operator = (Assignment)</a><br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+{ <a href="KeyPgType.html">Type</a> | <a href="KeyPgClass.html">Class</a> | <a href="KeyPgUnion.html">Union</a> | <a href="KeyPgEnum.html">Enum</a> } <i>typename</i><br \>
+<div class="fb_indent"><a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgOperator.html">Operator</a> <b>Let</b> ( [ <a href="KeyPgByref.html">ByRef</a> | <a href="KeyPgByval.html">ByVal</a> ] <i>rhs</i> <a href="KeyPgAs.html">As</a> <a href="DataType.html">datatype</a> )<br \>
+</div>End { <a href="KeyPgType.html">Type</a> | <a href="KeyPgClass.html">Class</a> | <a href="KeyPgUnion.html">Union</a> }<br \>
+<br \>
+<a href="KeyPgOperator.html">Operator</a> <i>typename</i>.<b>Let</b> ( [ <a href="KeyPgByref.html">ByRef</a> | <a href="KeyPgByval.html">ByVal</a> ] <i>rhs</i> <a href="KeyPgAs.html">As</a> <a href="DataType.html">datatype</a> )<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
+<i>lhs</i> <b>=</b> <i>rhs</i><br \>
+</tt><br \>
+</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+<tt><i>typename</i></tt> <br \>
+<div class="fb_indent">name of the <tt><a href="KeyPgType.html">Type</a></tt>, <tt><a href="KeyPgClass.html">Class</a></tt>, <tt><a href="KeyPgUnion.html">Union</a></tt>, or <tt><a href="KeyPgEnum.html">Enum</a></tt><br \>
+</div><tt><i>lhs</i></tt><br \>
+<div class="fb_indent">The variable to assign to.<br \>
+</div><tt><i>rhs</i></tt><br \>
+<div class="fb_indent">The value to assign.<br \>
+<br \>
+</div></div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+<tt><b>Let</b></tt> is used to overload the <tt><a href="KeyPgOpAssignment.html">Operator = (Assignment)</a></tt> operator and to distinguish it from the comparison operator <tt><a href="KeyPgOpEqual.html">Operator = (Equal)</a></tt>.<br \>
+<br \>
+<tt><i>lhs</i> <b>=</b> <i>rhs</i></tt> will assign the <tt><i>rhs</i></tt> to <tt><i>lhs</i></tt> by invoking the <b>Let</b> operator procedure defined int <tt><i>typename</i></tt>.<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="key">Type</span>&nbsp;<span class="wrd">T</span><br />
+&nbsp;&nbsp;<span class="wrd">x</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;<span class="wrd">y</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Operator</span>&nbsp;<span class="key">Let</span><span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">rhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">T</span>&nbsp;<span class="oth">)</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Type</span><br />
+<br />
+<span class="key">Operator</span>&nbsp;<span class="wrd">T.let</span><span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">rhs</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">T</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;<span class="wrd">x</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">rhs.x</span><br />
+&nbsp;&nbsp;<span class="wrd">y</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">rhs.y</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Operator</span><br />
+<br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">a</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">T</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="num">5</span><span class="oth">,</span>&nbsp;<span class="num">7</span>&nbsp;<span class="oth">)</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">b</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">T</span><br />
+<br />
+<span class="com">''&nbsp;Do&nbsp;the&nbsp;assignment&nbsp;invoking&nbsp;the&nbsp;LET</span><br />
+<span class="com">''&nbsp;operator&nbsp;procedure</span><br />
+<span class="wrd">b</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">a</span><br />
+<br />
+<span class="key">Print</span>&nbsp;<span class="quo">"a.x&nbsp;=&nbsp;"</span><span class="oth">;</span>&nbsp;<span class="wrd">a.x</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"a.y&nbsp;=&nbsp;"</span><span class="oth">;</span>&nbsp;<span class="wrd">a.y</span><br />
+<span class="key">Print</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"b.x&nbsp;=&nbsp;"</span><span class="oth">;</span>&nbsp;<span class="wrd">b.x</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"b.y&nbsp;=&nbsp;"</span><span class="oth">;</span>&nbsp;<span class="wrd">b.y</span><br />
+</div></tt><br />
+Output:<br \>
+<pre class="fb_pre">
+a.x =  5
+a.y =  7
+
+b.x =  5
+b.y =  7
+</pre><br \>
+</div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
+<ul><li> In the <i><a href="CompilerOptlang.html">-lang qb</a></i> and <i><a href="CompilerOptlang.html">-lang fblite</a></i> dialects, this operator cannot be overloaded.<br \>
+<li> In the <i><a href="CompilerOptlang.html">-lang qb</a></i> and <i><a href="CompilerOptlang.html">-lang fblite</a></i> dialects, an assignment expression can be preceded by the <tt><a href="KeyPgLet.html">Let</a></tt> keyword.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> None<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgLet.html">Let</a></tt><br \>
+<li> <tt><a href="KeyPgOpLetlist.html">Operator Let() (Assignment)</a></tt><br \>
+<li> <tt><a href="KeyPgOpAssignment.html">Operator = (Assignment)</a></tt><br \>
+<li> <tt><a href="KeyPgOpEqual.html">Operator = (Equal)</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

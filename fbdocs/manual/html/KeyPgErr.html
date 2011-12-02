@@ -1,0 +1,79 @@
+<html>
+<head>
+<title>Err</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Err</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Error handling function to return the error number of the last error<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgFunction.html">Function</a> <b>Err</b> ( ) <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a><br \>
+</tt><br \>
+</div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
+<i>result</i> = <b>Err</b><br \>
+</tt><br \>
+</div><div class="fb_sect_title">Return Value</div><div class="fb_sect_cont"><br \>
+After an error, returns the error code that occurred. <br \>
+<br \>
+</div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+<tt><b>Err</b></tt> can always be used, even if QB-like error handling is not enabled.<br \>
+<br \>
+<tt><b>Err</b></tt> is reset by <tt><a href="KeyPgResume.html">Resume</a></tt> and <tt><a href="KeyPgResumenext.html">Resume Next</a></tt>.<br \>
+<br \>
+    NOTE: Care should be taken when calling an internal function (such as <tt><a href="KeyPgPrint.html">Print</a></tt>) after an error occurs because it will reset the error value with its own error status.  To preserve the <tt><b>Err</b></tt> value, it is a good idea to store it in a variable as soon as the error handler is entered.<br \>
+<br \>
+See <a href="TblRuntimeErrors.html">Runtime Error Codes</a> for a listing of runtime error numbers and their associated meaning.<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+An example using QBasic style error handling (compile with -ex option)<br \>
+<tt><div class="freebasic">
+<span class="com">''&nbsp;Compile&nbsp;with&nbsp;-lang&nbsp;fblite&nbsp;or&nbsp;qb</span><br />
+<br />
+<span class="def">#lang&nbsp;"fblite"<br />
+</span><br />
+<span class="key">On</span>&nbsp;<span class="key">Error</span>&nbsp;<span class="key">Goto</span>&nbsp;<span class="wrd">Error_Handler</span><br />
+<span class="key">Error</span>&nbsp;<span class="num">150</span><br />
+<span class="key">End</span><br />
+<br />
+<span class="wrd">Error_Handler</span><span class="oth">:</span><br />
+&nbsp;&nbsp;<span class="wrd">n</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">Err</span><span class="oth">()</span><br />
+&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"Error&nbsp;#"</span><span class="oth">;</span>&nbsp;<span class="wrd">n</span><br />
+&nbsp;&nbsp;<span class="key">Resume</span>&nbsp;<span class="key">Next</span><br />
+</div></tt><br />
+An example using inline error handling (note: <tt><a href="KeyPgOpen.html">Open</a></tt> can also return its own error status when called as a function)<br \>
+<tt><div class="freebasic">
+<span class="com">''&nbsp;compile&nbsp;without&nbsp;-e&nbsp;switch</span><br />
+<br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">filename</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span><br />
+<br />
+<span class="key">Do</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Line</span>&nbsp;<span class="key">Input</span>&nbsp;<span class="quo">"Input&nbsp;filename:&nbsp;"</span><span class="oth">,</span>&nbsp;<span class="wrd">filename</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">If</span>&nbsp;<span class="wrd">filename</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="quo">""</span>&nbsp;<span class="key">Then</span>&nbsp;<span class="key">End</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Open</span>&nbsp;<span class="wrd">filename</span>&nbsp;<span class="key">For</span>&nbsp;<span class="key">Input</span>&nbsp;<span class="key">As</span>&nbsp;<span class="oth">#</span><span class="num">1</span><br />
+<span class="key">Loop</span>&nbsp;<span class="key">Until</span>&nbsp;<span class="key">Err</span><span class="oth">()</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span><br />
+<br />
+<span class="key">Print</span>&nbsp;<span class="key">Using</span>&nbsp;<span class="quo">"File&nbsp;'&amp;'&nbsp;opened&nbsp;successfully"</span><span class="oth">;</span>&nbsp;<span class="wrd">filename</span><br />
+<span class="key">Close</span>&nbsp;<span class="oth">#</span><span class="num">1</span><br />
+</div></tt><br />
+<br \>
+</div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> Error numbers are not the same as in QB.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgOnerror.html">On Error</a></tt><br \>
+<li> <a href="ProPgErrorHandling.html">Error Handling</a> <br \>
+<li> <a href="TblRuntimeErrors.html">Runtime Error Codes</a><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

@@ -1,0 +1,90 @@
+<html>
+<head>
+<title>Window</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Window</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Sets new view coordinates mapping for current viewport<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<b>Window</b> [ [<b>Screen</b>] ( <i>x1</i>, <i>y1</i> )-( <i>x2</i>, <i>y2</i> ) ]<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+<tt><b>Screen</b></tt><br \>
+<div class="fb_indent">Optional argument specifying y coordinates increase from top to bottom.<br \>
+</div><tt>( <i>x1</i>, <i>y1</i> )-( <i>x2</i>, <i>y2</i> )</tt><br \>
+<div class="fb_indent">New floating point values corresponding to the opposite corners of the current viewport.  If omitted, the <tt><b>Window</b></tt> coordinate mapping is removed.<br \>
+<br \>
+</div></div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+<tt><b>Window</b></tt> is used to define a new coordinates system. <tt>(<i>x1</i>, <i>y1</i>)</tt> and <tt>(<i>x2</i>, <i>y2</i>)</tt> are the new coordinates to be mapped to the opposite corners of the current viewport; all future coordinates passed to graphics primitive statements will be affected by this new mapping. If <tt><b>Screen</b></tt> is omitted, the new coordinates system will be Cartesian, that is, with y coordinates increasing from bottom to top. Call <tt><b>Window</b></tt> with no argument to disable the coordinates transformation.<br \>
+<br \>
+FreeBASIC's current behavior is to keep track of the corners of the <tt><b>Window</b></tt>, rather than a specific coordinate mapping.  This means that the coordinate mapping can change after calls to <tt><a href="KeyPgViewgraphics.html">View</a></tt>.<br \>
+The <tt><b>Window</b></tt> corners are also currently taken into account when working on image buffers, so when a <tt><b>Window</b></tt> is in effect, the cooridnate mapping will be different from image to image.<br \>
+<br \>
+When there is no <tt><b>Window</b></tt> in effect, there is no coordinate mapping in effect, so the effective coordinate system is constant, independent of image buffer sizes or <tt><a href="KeyPgViewgraphics.html">View</a></tt> coordinates (if any).<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="key">Screen</span>&nbsp;<span class="num">13</span><br />
+<br />
+<span class="com">''&nbsp;define&nbsp;clipping&nbsp;area</span><br />
+<span class="key">View</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="num">10</span><span class="oth">,</span>&nbsp;<span class="num">10</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="oth">-</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="num">310</span><span class="oth">,</span>&nbsp;<span class="num">150</span>&nbsp;<span class="oth">),</span>&nbsp;<span class="num">1</span><span class="oth">,</span>&nbsp;<span class="num">15</span>&nbsp;&nbsp;&nbsp;&nbsp;<br />
+<br />
+<span class="com">''&nbsp;set&nbsp;view&nbsp;coordinates</span><br />
+<span class="key">Window</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="oth">-</span><span class="num">1</span><span class="oth">,</span>&nbsp;<span class="oth">-</span><span class="num">1</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="oth">-</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="num">1</span><span class="oth">,</span>&nbsp;<span class="num">1</span>&nbsp;<span class="oth">)</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+<br />
+<span class="com">''&nbsp;Draw&nbsp;X&nbsp;axis</span><br />
+<span class="key">Line</span>&nbsp;<span class="oth">(-</span><span class="num">1</span><span class="oth">,</span><span class="num">0</span><span class="oth">)-(</span><span class="num">1</span><span class="oth">,</span><span class="num">0</span><span class="oth">),</span><span class="num">7</span><br />
+<span class="key">Draw</span>&nbsp;<span class="key">String</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="num">0.8</span><span class="oth">,</span>&nbsp;<span class="oth">-</span><span class="num">0.1</span>&nbsp;<span class="oth">),</span>&nbsp;<span class="quo">"X"</span><br />
+<br />
+<span class="com">''&nbsp;Draw&nbsp;Y&nbsp;axis</span><br />
+<span class="key">Line</span>&nbsp;<span class="oth">(</span><span class="num">0</span><span class="oth">,-</span><span class="num">1</span><span class="oth">)-(</span><span class="num">0</span><span class="oth">,</span><span class="num">1</span><span class="oth">),</span><span class="num">7</span><br />
+<span class="key">Draw</span>&nbsp;<span class="key">String</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="num">0.1</span><span class="oth">,</span>&nbsp;<span class="num">0.8</span>&nbsp;<span class="oth">),</span>&nbsp;<span class="quo">"Y"</span><br />
+<br />
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Single</span>&nbsp;<span class="wrd">x</span><span class="oth">,</span>&nbsp;<span class="wrd">y</span><span class="oth">,</span>&nbsp;<span class="wrd">s</span><br />
+<br />
+<span class="com">''&nbsp;compute&nbsp;step&nbsp;size</span><br />
+<span class="wrd">s</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">2</span>&nbsp;<span class="oth">/</span>&nbsp;<span class="key">PMap</span><span class="oth">(</span>&nbsp;<span class="num">1</span><span class="oth">,</span>&nbsp;<span class="num">0</span>&nbsp;<span class="oth">)</span><br />
+<br />
+<span class="com">''&nbsp;plot&nbsp;the&nbsp;function</span><br />
+<span class="key">For</span>&nbsp;<span class="wrd">x</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="oth">-</span><span class="num">1</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">1</span>&nbsp;<span class="key">Step</span>&nbsp;<span class="wrd">s</span><br />
+&nbsp;&nbsp;<span class="wrd">y</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">x</span>&nbsp;<span class="oth">^</span>&nbsp;<span class="num">3</span><br />
+&nbsp;&nbsp;<span class="key">PSet</span><span class="oth">(</span>&nbsp;<span class="wrd">x</span><span class="oth">,</span>&nbsp;<span class="wrd">y</span>&nbsp;<span class="oth">),</span>&nbsp;<span class="num">14</span><br />
+<span class="key">Next</span>&nbsp;<span class="wrd">x</span><br />
+<br />
+<span class="com">''&nbsp;revert&nbsp;to&nbsp;screen&nbsp;coordinates</span><br />
+<span class="key">Window</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+<br />
+<span class="com">''&nbsp;remove&nbsp;the&nbsp;clipping&nbsp;area</span><br />
+<span class="key">View</span>&nbsp;<span class="key">Screen</span>&nbsp;&nbsp;<br />
+<br />
+<span class="com">''&nbsp;draw&nbsp;title</span><br />
+<span class="key">Draw</span>&nbsp;<span class="key">String</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="num">120</span><span class="oth">,</span>&nbsp;<span class="num">160</span>&nbsp;<span class="oth">),</span>&nbsp;<span class="quo">"Y&nbsp;=&nbsp;X&nbsp;^&nbsp;3"</span><br />
+<br />
+<span class="key">Sleep</span><br />
+</div></tt><br />
+<br \>
+<div class="fb_img"><img src="images/window.png" /></div><br \>
+<br \>
+</div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> QBASIC preserves the coordinate mapping after subsequent calls to VIEW.<br \>
+<li> FreeBASIC's current behavior is to preserve the WINDOW coordinates after calls to VIEW, or when working on images, meaning that the coordinate mapping may undergo scaling/translations. (If a WINDOW hasn't been set, there is no coordinate mapping, and so it doesn't change after calls to VIEW.)  The behavior may change in future, but consistent behavior can be be assured over inconstent viewport coordinates by re-calling WINDOW when you change the VIEW.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgScreengraphics.html">Screen (Graphics)</a></tt><br \>
+<li> <tt><a href="KeyPgViewgraphics.html">View (Graphics)</a></tt><br \>
+<li> <tt><a href="KeyPgPmap.html">PMap</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

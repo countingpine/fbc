@@ -1,0 +1,81 @@
+<html>
+<head>
+<title>Extern...End Extern</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Extern...End Extern</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Statement block to allow calling of functions compiled for specific languages or platforms.<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<b>Extern { "C" | "C++" | "Windows" | "Windows-MS" }</b> [ <b><a href="KeyPgLib.html">Lib</a></b> "<i>libname</i>" ]<br \>
+<div class="fb_indent"><i>declarative statements</i><br \>
+</div><b>End Extern</b><br \>
+</tt><br \>
+</div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+<tt><b>Extern</b></tt> blocks provide default calling conventions for procedures and mandate a certain name decoration.<br \>
+<br \>
+<tt><b>Extern "C"</b></tt> blocks provide a default <tt><a href="KeyPgCdecl.html">cdecl</a></tt> calling convention to procedures, and also preserve the case of all names declared within them. The same effect can be achieved without the EXTERN block by using <tt><a href="KeyPgCdecl.html">cdecl</a></tt> together with an <tt><a href="KeyPgAlias.html">Alias</a></tt> string containing the exact procedure name.<br \>
+<br \>
+<tt><b>Extern "C++"</b></tt> blocks are exactly like <tt><b>Extern "C"</b></tt> blocks but they also mangle the names declared within them in a way compatible to that of <i>g++-4.x</i>.<br \>
+<br \>
+<tt><b>Extern "Windows"</b></tt> blocks provide a default <tt><a href="KeyPgStdcall.html">stdcall</a></tt> calling convention to procedures, preserve the case of all names declared within them, and on the Windows platform, append an <tt>"@<i>N</i>"</tt> suffix to procedure names, where <tt><i>N</i></tt> is the total size in bytes of any procedure parameters. Similar to the <tt><b>Extern "C"</b></tt> block, the same effect can be achieved by using <tt><a href="KeyPgStdcall.html">stdcall</a></tt> and <tt><a href="KeyPgAlias.html">Alias</a></tt>.<br \>
+<br \>
+<tt><b>Extern "Windows-MS"</b></tt> blocks are exactly like <tt><b>Extern "Windows"</b></tt> blocks but do not append the <tt>"@<i>N</i>"</tt> suffix to procedure names on Windows.<br \>
+<br \>
+<tt><a href="KeyPgLib.html">Lib</a> "<i>libname</i>"</tt> can be used to specify a library which will be linked in as if <tt><a href="KeyPgInclib.html">#Inclib "Libname"</a></tt> or <tt><a href="CompilerOptl.html">-l libname</a></tt> had been used. Additionally, all procedure declarations inside the <b>Extern</b> block will use the specified <tt><a href="KeyPgLib.html">Lib</a> "<i>libname</i>"</tt> as if it was specified as part of their declarations (but it can still be overridden with an explicit <tt><a href="KeyPgLib.html">Lib</a> "<i>libname</i>"</tt>).<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="key">Extern</span>&nbsp;<span class="quo">"C"</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;This&nbsp;procedure&nbsp;uses&nbsp;the&nbsp;CDECL&nbsp;convention&nbsp;and&nbsp;is&nbsp;seen&nbsp;externally</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;as&nbsp;"SomeProcedure".</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Sub</span>&nbsp;<span class="wrd">SomeProcedure</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="key">ByVal</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="oth">)</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Extern</span><br />
+<br />
+<span class="key">Extern</span>&nbsp;<span class="quo">"C++"</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;This&nbsp;procedure&nbsp;uses&nbsp;the&nbsp;CDECL&nbsp;convention&nbsp;and&nbsp;its&nbsp;name&nbsp;is&nbsp;mangled</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;compatible&nbsp;to&nbsp;that&nbsp;of&nbsp;g++-4.x.</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Function</span>&nbsp;<span class="wrd">AnotherProcedure</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="key">ByVal</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Extern</span><br />
+<br />
+<span class="key">Extern</span>&nbsp;<span class="quo">"Windows"</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;This&nbsp;procedure&nbsp;uses&nbsp;the&nbsp;STDCALL&nbsp;convention&nbsp;and&nbsp;is&nbsp;seen&nbsp;externally</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;as&nbsp;"YetAnotherProcedure@4"&nbsp;on&nbsp;Windows,&nbsp;and</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;"YetAnotherProcedure"&nbsp;on&nbsp;Linux,&nbsp;*BSD&nbsp;and&nbsp;DOS.</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Function</span>&nbsp;<span class="wrd">YetAnotherProcedure</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="key">ByVal</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Extern</span><br />
+<br />
+<span class="key">Extern</span>&nbsp;<span class="quo">"Windows-MS"</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;This&nbsp;procedure&nbsp;uses&nbsp;the&nbsp;STDCALL&nbsp;convention&nbsp;and&nbsp;is&nbsp;seen&nbsp;externally</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;as&nbsp;"YetAnotherProcedure".</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Declare</span>&nbsp;<span class="key">Function</span>&nbsp;<span class="wrd">YetAnotherProcedure</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="key">ByVal</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Extern</span><br />
+</div></tt><br />
+<br \>
+</div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><b>Extern</b></tt> blocks are only available in the <i><a href="CompilerOptlang.html">-lang fb</a></i> dialect.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> New to FreeBASIC<br \>
+<br \>
+</ul></div><div class="fb_sect_title">Platform Differences</div><div class="fb_sect_cont"><br \>
+<ul><li> On Linux, *BSD and DOS platforms, <tt><b>Extern "Windows"</b></tt> blocks never append a <tt>"@<i>N</i>"</tt> suffix to procedure names, and thus are equal to <tt><b>Extern "Windows-MS"</b></tt>.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgCdecl.html">cdecl</a></tt><br \>
+<li> <tt><a href="KeyPgStdcall.html">stdcall</a></tt><br \>
+<li> <tt><a href="KeyPgExtern.html">Extern</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

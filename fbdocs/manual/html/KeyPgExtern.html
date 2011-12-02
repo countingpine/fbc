@@ -1,0 +1,77 @@
+<html>
+<head>
+<title>Extern</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Extern</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Declares a variable, array or object having external linkage<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<b>Extern</b> [ <a href="KeyPgImport.html">Import</a> ] <i>symbolname</i>[ (<i>subscripts</i>) ] [ <a href="KeyPgAlias.html">Alias</a> "<i>aliasname</i>" ] <a href="KeyPgAs.html">As</a> <i><a href="DataType.html">DataType</a></i> [, ...]<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+<tt><i>symbolname</i></tt><br \>
+<div class="fb_indent">The name of the variable, array or object.<br \>
+</div><tt><i>aliasname</i></tt><br \>
+<div class="fb_indent">An alternate external name for the variable, array or object.<br \>
+<br \>
+</div></div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+Declares <tt><i>symbolname</i></tt> as an external name, meaning it is global to external modules. <tt><b>Extern</b></tt> only declares variables, arrays and objects, and does not define them (different from <tt><a href="KeyPgCommon.html">Common</a></tt> or <tt><a href="KeyPgDim.html">Dim</a></tt>). It also has the effect of making <tt><i>symbolname</i></tt> a <i>shared</i> name, meaning it is visible within procedures (see <tt><a href="KeyPgShared.html">Shared</a></tt>).<br \>
+<br \>
+If <tt><a href="KeyPgAlias.html">Alias</a></tt> is used, <tt><i>aliasname</i></tt> will be used as the external name rather than <tt><i>symbolname</i></tt>, and its case will be preserved.<br \>
+<br \>
+If <tt><a href="KeyPgImport.html">Import</a></tt> is used, the name will be added to the dynamic library import list so its address can be fixed at run-time.<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="com">''&nbsp;extern1.bas</span><br />
+<br />
+<span class="key">Extern</span>&nbsp;<span class="wrd">Foo</span>&nbsp;<span class="key">Alias</span>&nbsp;<span class="quo">"foo"</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+<br />
+<span class="key">Sub</span>&nbsp;<span class="wrd">SetFoo</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">foo</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">1234</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Sub</span><br />
+</div></tt><br />
+<br \>
+<tt><div class="freebasic">
+<span class="com">''&nbsp;extern2.bas</span><br />
+<br />
+<span class="key">Declare</span>&nbsp;<span class="key">Sub</span>&nbsp;<span class="wrd">SetFoo</span><br />
+<br />
+<span class="key">Extern</span>&nbsp;<span class="wrd">Foo</span>&nbsp;<span class="key">Alias</span>&nbsp;<span class="quo">"foo"</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+<br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">foo</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span><br />
+<br />
+<span class="wrd">SetFoo</span><br />
+<br />
+<span class="key">Print</span>&nbsp;<span class="wrd">Foo</span><br />
+</div></tt><br />
+Output:<br \>
+<pre class="fb_pre">
+ 1234
+</pre><br \>
+</div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
+<ul><li> Not available in the <i><a href="CompilerOptlang.html">-lang qb</a></i> dialect.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> New to FreeBASIC<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgExternBlock.html">Extern...End Extern</a></tt><br \>
+<li> <tt><a href="KeyPgCommon.html">Common</a></tt><br \>
+<li> <tt><a href="KeyPgDim.html">Dim</a></tt><br \>
+<li> <tt><a href="KeyPgShared.html">Shared</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

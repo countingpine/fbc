@@ -1,0 +1,72 @@
+<html>
+<head>
+<title>Naked</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Naked</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Write functions without prolog/epilog code<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<a href="KeyPgSub.html">Sub</a> <i>identifier</i> <b>Naked</b> [<i>calling_convention</i>] ( <i>param_list</i> )<br \>
+<div class="fb_indent"><i>asm_statements</i><br \>
+</div><a href="KeyPgEndblock.html">End</a> <a href="KeyPgSub.html">Sub</a><br \>
+<a href="KeyPgFunction.html">Function</a> <i>identifier</i> <b>Naked</b> [<i>calling_convention</i>] ( <i>param_list</i> ) <a href="KeyPgAs.html">As</a> <i>data_type</i><br \>
+<div class="fb_indent"><i>asm_statements</i><br \>
+</div><a href="KeyPgEndblock.html">End</a> <a href="KeyPgFunction.html">Function</a><br \>
+</tt><br \>
+</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+<tt><i>identifier</i></tt> - name of the procedure.<br \>
+<tt><i>calling_convention</i></tt> - calling convention of the procedure - can be <tt><a href="KeyPgCdecl.html">cdecl</a></tt>, <tt><a href="KeyPgPascal.html">pascal</a></tt>, or <tt><a href="KeyPgStdcall.html">stdcall</a></tt><br \>
+<tt><i>asm_statements</i></tt> - the code in the procedure body.  The code for handling parameters and returning values must all be done manually.  Note that the methods for doing these can change, depending on the calling convention.<br \>
+<tt><i>param_list</i></tt> - parameters to be passed to the procedure.<br \>
+<tt><i>data_type</i></tt> - the <a href="DataType.html">data type</a> of the function.<br \>
+<br \>
+</div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+<tt><b>Naked</b></tt> allows the programmer to write procedures without the compiler generating any prolog/epilog code.  This is useful when writing small, fast functions in <tt><a href="KeyPgAsm.html">Asm</a></tt> without any unnecessary overhead.<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="com">''&nbsp;Naked&nbsp;cdecl&nbsp;function</span><br />
+<span class="key">Function</span>&nbsp;<span class="wrd">add</span>&nbsp;<span class="wrd">naked</span>&nbsp;<span class="key">cdecl</span>&nbsp;<span class="wrd">_</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">(</span>&nbsp;<span class="wrd">_</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">ByVal</span>&nbsp;<span class="wrd">a</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">,</span>&nbsp;<span class="wrd">_</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">ByVal</span>&nbsp;<span class="wrd">b</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="wrd">_</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Asm</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">mov</span>&nbsp;<span class="wrd">eax</span><span class="oth">,</span>&nbsp;<span class="wrd">dword</span>&nbsp;<span class="key">Ptr</span>&nbsp;<span class="oth">[</span><span class="wrd">esp</span><span class="oth">+</span><span class="num">4</span><span class="oth">]</span>&nbsp;<span class="com">''&nbsp;a</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">add</span>&nbsp;<span class="wrd">eax</span><span class="oth">,</span>&nbsp;<span class="wrd">dword</span>&nbsp;<span class="key">Ptr</span>&nbsp;<span class="oth">[</span><span class="wrd">esp</span><span class="oth">+</span><span class="num">8</span><span class="oth">]</span>&nbsp;<span class="com">''&nbsp;+&nbsp;b</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">ret</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;return&nbsp;result&nbsp;in&nbsp;eax</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">End</span>&nbsp;<span class="key">Asm</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+<span class="key">End</span>&nbsp;<span class="key">Function</span><br />
+<br />
+<span class="key">Print</span>&nbsp;<span class="wrd">add</span><span class="oth">(</span>&nbsp;<span class="num">1</span><span class="oth">,</span>&nbsp;<span class="num">5</span>&nbsp;<span class="oth">)</span></div></tt><br />
+<br \>
+</div><div class="fb_sect_title">Platform Differences</div><div class="fb_sect_cont"><br \>
+<ul><li> The default calling convention can change depending on the platform used.  Additionally, <tt><a href="KeyPgStdcall.html">stdcall</a></tt> does not behave the same on all platforms - on Linux, it behaves like <tt><a href="KeyPgCdecl.html">cdecl</a></tt>.  It may be necessary to check the <a href="CatPgDddefines.html">Intrinsic Defines</a> (such as <tt><a href="KeyPgDdfbwin32.html">__FB_WIN32__</a></tt>), and write different code depending on them.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> New to FreeBASIC<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgAsm.html">Asm</a></tt><br \>
+<li> <tt><a href="KeyPgFunction.html">Function</a></tt><br \>
+<li> <tt><a href="KeyPgSub.html">Sub</a></tt><br \>
+<li> <tt><a href="KeyPgCdecl.html">cdecl</a></tt><br \>
+<li> <tt><a href="KeyPgPascal.html">pascal</a></tt><br \>
+<li> <tt><a href="KeyPgStdcall.html">stdcall</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

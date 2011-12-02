@@ -1,0 +1,122 @@
+<html>
+<head>
+<title>Pointers to Procedures</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Pointers to Procedures</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Pointers that point to procedures<br \>
+<br \>
+Just as pointers can be made to point to an <tt><a href="KeyPgInteger.html">Integer</a></tt> or <tt><a href="KeyPgSingle.html">Single</a></tt> type, pointers can also point to procedures, that is, they can store the address of a procedure.<br \>
+<br \>
+<div class="fb_sect_title">Declaration</div><div class="fb_sect_cont"><br \>
+To declare a pointer to procedure, use the <tt><a href="KeyPgSub.html">Sub</a></tt> or <tt><a href="KeyPgFunction.html">Function</a></tt> keywords, followed by any parameters and return value type:<br \>
+<br \>
+<tt><div class="freebasic">
+<span class="com">'&nbsp;declares&nbsp;a&nbsp;pointer&nbsp;to&nbsp;sub&nbsp;procedure&nbsp;that&nbsp;takes&nbsp;no&nbsp;arguments</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">pointerToProcedure</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Sub</span><br />
+</div></tt><br />
+Procedure pointers store procedure addresses, which are retrieved using <tt><a href="KeyPgOpAt.html">Operator @</a></tt> (Address of) or the <tt><a href="KeyPgOpProcptr.html">Procptr Operator</a></tt>:<br \>
+<br \>
+<tt><div class="freebasic">
+<span class="key">Function</span>&nbsp;<span class="wrd">Add</span>&nbsp;<span class="oth">(</span><span class="wrd">a</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">,</span>&nbsp;<span class="wrd">b</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Return</span>&nbsp;<span class="wrd">a</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="wrd">b</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Function</span><br />
+<br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">pFunc</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Function</span>&nbsp;<span class="oth">(</span><span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">,</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="oth">@</span><span class="wrd">Add</span><br />
+</div></tt><br />
+<br \>
+</div><div class="fb_sect_title">Calling a procedure pointer</div><div class="fb_sect_cont"><br \>
+The interesting thing about procedure pointers is that they can be called just like a procedure:<br \>
+<br \>
+<tt><div class="freebasic">
+<span class="com">''&nbsp;..&nbsp;Add&nbsp;and&nbsp;pFunc&nbsp;as&nbsp;before&nbsp;..</span><br />
+<span class="def">#include&nbsp;once&nbsp;"pfunc.bi"<br />
+</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"3&nbsp;+&nbsp;4&nbsp;=&nbsp;"</span>&nbsp;<span class="oth">&amp;</span>&nbsp;<span class="wrd">pFunc</span><span class="oth">(</span><span class="num">3</span><span class="oth">,</span>&nbsp;<span class="num">4</span><span class="oth">)</span><br />
+</div></tt><br />
+<br \>
+</div><div class="fb_sect_title">Passing procedure pointers to procedures</div><div class="fb_sect_cont"><br \>
+Passing procedure pointers to other procedures is similar as well:<br \>
+<br \>
+<tt><div class="freebasic">
+<span class="com">''&nbsp;..&nbsp;Add&nbsp;and&nbsp;pFunc&nbsp;as&nbsp;before&nbsp;..</span><br />
+<span class="def">#include&nbsp;once&nbsp;"pfunc.bi"<br />
+</span><br />
+<span class="key">Function</span>&nbsp;<span class="wrd">DoOperation</span>&nbsp;<span class="oth">(</span><span class="wrd">a</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">,</span>&nbsp;<span class="wrd">b</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">,</span>&nbsp;<span class="wrd">operation</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Function</span>&nbsp;<span class="oth">(</span><span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">,</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Return</span>&nbsp;<span class="wrd">operation</span><span class="oth">(</span><span class="wrd">a</span><span class="oth">,</span>&nbsp;<span class="wrd">b</span><span class="oth">)</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Function</span><br />
+<br />
+<span class="key">Print</span>&nbsp;<span class="quo">"3&nbsp;+&nbsp;4&nbsp;=&nbsp;"</span>&nbsp;<span class="oth">&amp;</span>&nbsp;<span class="wrd">DoOperation</span><span class="oth">(</span><span class="num">3</span><span class="oth">,</span>&nbsp;<span class="num">4</span><span class="oth">,</span>&nbsp;<span class="oth">@</span><span class="wrd">Add</span><span class="oth">)</span><br />
+</div></tt><br />
+Because procedure pointer declarations can be lengthy, it often helps to create a type alias for the procedure pointer, in an effort to make clearer code:<br \>
+<br \>
+<tt><div class="freebasic">
+<span class="com">''&nbsp;..&nbsp;Add&nbsp;and&nbsp;pFunc&nbsp;as&nbsp;before&nbsp;..</span><br />
+<span class="def">#include&nbsp;once&nbsp;"pfunc.bi"<br />
+</span><br />
+<span class="key">Type</span>&nbsp;<span class="wrd">operation</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Function</span>&nbsp;<span class="oth">(</span><span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">,</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+<br />
+<span class="key">Function</span>&nbsp;<span class="wrd">DoOperation</span>&nbsp;<span class="oth">(</span><span class="wrd">a</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">,</span>&nbsp;<span class="wrd">b</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">,</span>&nbsp;<span class="wrd">op</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">operation</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Return</span>&nbsp;<span class="wrd">op</span><span class="oth">(</span><span class="wrd">a</span><span class="oth">,</span>&nbsp;<span class="wrd">b</span><span class="oth">)</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Function</span><br />
+<br />
+<span class="key">Print</span>&nbsp;<span class="quo">"3&nbsp;+&nbsp;4&nbsp;=&nbsp;"</span>&nbsp;<span class="oth">&amp;</span>&nbsp;<span class="wrd">DoOperation</span><span class="oth">(</span><span class="num">3</span><span class="oth">,</span>&nbsp;<span class="num">4</span><span class="oth">,</span>&nbsp;<span class="oth">@</span><span class="wrd">Add</span><span class="oth">)</span><br />
+</div></tt><br />
+<br \>
+</div><div class="fb_sect_title">Pointers to procedure pointers</div><div class="fb_sect_cont"><br \>
+Because the syntax of a procedure pointer does not allow declaration of a pointer to procedure pointer, a type alias is used. Notice how it is necessary to surround a dereferenced pointer to procedure pointer by parenthesis when calling the procedure. This is because the function-call operator '()' has higher precedence than <tt><a href="KeyPgOpValueOf.html">Operator *</a></tt> (Value of):<br \>
+<br \>
+<tt><div class="freebasic">
+<span class="key">Sub</span>&nbsp;<span class="wrd">Halve</span>&nbsp;<span class="oth">(</span><span class="key">ByRef</span>&nbsp;<span class="wrd">i</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">i</span>&nbsp;<span class="oth">/=</span>&nbsp;<span class="num">2</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Sub</span><br />
+<br />
+<span class="key">Sub</span>&nbsp;<span class="wrd">Triple</span>&nbsp;<span class="oth">(</span><span class="key">ByRef</span>&nbsp;<span class="wrd">i</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">i</span>&nbsp;<span class="oth">*=</span>&nbsp;<span class="num">3</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Sub</span><br />
+<br />
+<span class="key">Type</span>&nbsp;<span class="wrd">operation</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Sub</span>&nbsp;<span class="oth">(</span><span class="key">ByRef</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">)</span><br />
+<br />
+<span class="com">'&nbsp;an&nbsp;array&nbsp;of&nbsp;procedure&nbsp;pointers,&nbsp;NULL&nbsp;indicates&nbsp;the</span><br />
+<span class="com">'&nbsp;end&nbsp;of&nbsp;the&nbsp;array</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">operations</span><span class="oth">(</span><span class="num">20</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">operation</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">_</span><br />
+<span class="oth">{</span>&nbsp;<span class="oth">@</span><span class="wrd">Halve</span><span class="oth">,</span>&nbsp;<span class="oth">@</span><span class="wrd">Triple</span><span class="oth">,</span>&nbsp;<span class="num">0</span>&nbsp;<span class="oth">}</span><br />
+<br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">i</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">280</span><br />
+<br />
+<span class="com">'&nbsp;apply&nbsp;all&nbsp;of&nbsp;the&nbsp;operations&nbsp;to&nbsp;a&nbsp;variable&nbsp;by&nbsp;iterating&nbsp;through&nbsp;the&nbsp;array</span><br />
+<span class="com">'&nbsp;with&nbsp;a&nbsp;pointer&nbsp;to&nbsp;procedure&nbsp;pointer</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">op</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">operation</span>&nbsp;<span class="key">Ptr</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="oth">@</span><span class="wrd">operations</span><span class="oth">(</span><span class="num">0</span><span class="oth">)</span><br />
+<span class="key">While</span>&nbsp;<span class="oth">(</span><span class="num">0</span>&nbsp;<span class="oth">&lt;&gt;</span>&nbsp;<span class="oth">*</span><span class="wrd">op</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">'&nbsp;call&nbsp;the&nbsp;procedure&nbsp;that&nbsp;is&nbsp;pointed&nbsp;to,&nbsp;note&nbsp;the&nbsp;extra&nbsp;parenthesis</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">(*</span><span class="wrd">op</span><span class="oth">)(</span><span class="wrd">i</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">op</span>&nbsp;<span class="oth">+=</span>&nbsp;<span class="num">1</span><br />
+<span class="key">Wend</span><br />
+<br />
+<span class="key">Print</span>&nbsp;<span class="quo">"Value&nbsp;of&nbsp;'i'&nbsp;after&nbsp;all&nbsp;operations&nbsp;performed:&nbsp;"</span>&nbsp;<span class="oth">&amp;</span>&nbsp;<span class="wrd">i</span><br />
+</div></tt><br />
+<br \>
+</div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgSub.html">Sub</a></tt><br \>
+<li> <tt><a href="KeyPgFunction.html">Function</a></tt><br \>
+<li> <tt><a href="KeyPgPointer.html">Pointer</a></tt><br \>
+<li> <tt><a href="KeyPgOpAt.html">Operator * (Address Of)</a></tt><br \>
+<li> <tt><a href="KeyPgOpProcptr.html">Procptr Operator</a></tt><br \>
+<br \>
+</ul><br \>
+   <br \>
+<br \>
+   <br \>
+</div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

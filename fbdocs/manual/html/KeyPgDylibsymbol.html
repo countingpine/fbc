@@ -1,0 +1,100 @@
+<html>
+<head>
+<title>DyLibSymbol</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">DyLibSymbol</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Returns the address of a function or variable in a dll<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgFunction.html">Function</a> <b>DyLibSymbol</b> ( <a href="KeyPgByval.html">ByVal</a> <i>library</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgAny.html">Any</a> <a href="KeyPgPtr.html">Ptr</a>, <a href="KeyPgByref.html">ByRef</a> <i>symbol</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgString.html">String</a> ) <a href="KeyPgAs.html">As</a> <a href="KeyPgAny.html">Any</a> <a href="KeyPgPtr.html">Ptr</a><br \>
+<a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgFunction.html">Function</a> <b>DyLibSymbol</b> ( <a href="KeyPgByval.html">ByVal</a> <i>library</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgAny.html">Any</a> <a href="KeyPgPtr.html">Ptr</a>, <a href="KeyPgByval.html">ByVal</a> <i>symbol</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgShort.html">Short</a> ) <a href="KeyPgAs.html">As</a> <a href="KeyPgAny.html">Any</a> <a href="KeyPgPtr.html">Ptr</a><br \>
+</tt><br \>
+</div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
+<i>result</i> = <b>DyLibSymbol</b> ( <i>library</i>, <i>symbol</i> )<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+<tt><i>library</i></tt><br \>
+<div class="fb_indent">The <a href="KeyPgAny.html">Any</a> <a href="KeyPgPtr.html">Ptr</a> handle of a DLL returned by <tt><a href="KeyPgDylibload.html">DyLibLoad</a></tt><br \>
+</div><tt><i>symbol</i></tt><br \>
+<div class="fb_indent">A <a href="KeyPgString.html">String</a> containing name of the function, or variable in the library to return the address of.  In Windows only, can also be a <tt><a href="KeyPgShort.html">Short</a></tt> containing the ordinal of the function/variable.<br \>
+<br \>
+</div></div><div class="fb_sect_title">Return Value</div><div class="fb_sect_cont"><br \>
+A <tt><a href="KeyPgPtr.html">Pointer</a></tt> to the function or variable in the library.<br \>
+<br \>
+If the function fails, the return value is 0.<br \>
+<br \>
+</div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+<tt><b>DyLibSymbol</b></tt> returns a pointer to the variable or function named <tt><i>symbol</i></tt> , in the dll pointed by <tt><i>libhandle</i></tt>. <tt><i>libhandle</i></tt> is obtained by loading the dll with <tt><a href="KeyPgDylibload.html">DyLibLoad</a></tt>. The symbol must have been <tt><a href="KeyPgExport.html">Export</a></tt>ed in the dll.<br \>
+If <tt><i>libhandle</i></tt> is 0, the symbol is searched in the current executable or dll.<br \>
+<br \>
+If using <tt><a href="KeyPgCdecl.html">cdecl</a></tt> functions, only the name of the procedure needs to be specified. If dynamically linking to a function created using STDCALL (default in windows), then the function must be decorated. To decorate a function, use its name, '@', then the number of bytes passed as arguments. For instance if the function <tt>FOO</tt> takes 3 integer arguments, the decorated function would be 'FOO@12'. Remember, without an explicit <tt><a href="KeyPgAlias.html">Alias</a></tt>, the procedure name will be uppercase.<br \>
+<br \>
+If linking to a dll created in Visual C++(tm), decoration need not be used. For GCC, decoration is needed.<br \>
+<br \>
+<b>Note:</b> The dylibsymbol, if failing, will attempt to automatically decorate the procedure, from @0 to @256, in 4 byte increments.<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="com">''&nbsp;mydll.dll</span><br />
+<br />
+<span class="com">''&nbsp;in&nbsp;the&nbsp;DLL&nbsp;the&nbsp;function&nbsp;must&nbsp;be&nbsp;declared&nbsp;as&nbsp;CDECL&nbsp;and&nbsp;export</span><br />
+<br />
+<span class="key">Function</span>&nbsp;<span class="wrd">AddNumbers</span>&nbsp;<span class="key">cdecl</span>&nbsp;<span class="key">Alias</span>&nbsp;<span class="quo">"AddNumbers"</span>&nbsp;<span class="wrd">_</span><br />
+&nbsp;&nbsp;<span class="oth">(</span>&nbsp;<span class="wrd">_</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">ByVal</span>&nbsp;<span class="wrd">operand1</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">,</span>&nbsp;<span class="key">ByVal</span>&nbsp;<span class="wrd">operand2</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="wrd">_</span><br />
+&nbsp;&nbsp;<span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="key">Export</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;<span class="wrd">AddNumbers</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">operand1</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="wrd">operand2</span><br />
+<br />
+<span class="key">End</span>&nbsp;<span class="key">Function</span><br />
+</div></tt><br />
+<br \>
+<tt><div class="freebasic">
+<span class="com">''&nbsp;create&nbsp;a&nbsp;function&nbsp;pointer,&nbsp;arguments&nbsp;must&nbsp;be&nbsp;the&nbsp;same</span><br />
+<span class="com">''&nbsp;as&nbsp;in&nbsp;the&nbsp;original&nbsp;function</span><br />
+<br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">AddNumbers</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Function</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="key">ByVal</span>&nbsp;<span class="wrd">operand1</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">,</span>&nbsp;<span class="key">ByVal</span>&nbsp;<span class="wrd">operand2</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+<br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">hndl</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Any</span>&nbsp;<span class="key">Ptr</span><br />
+<br />
+<span class="wrd">hndl</span><span class="oth">=</span><span class="key">DyLibLoad</span><span class="oth">(</span><span class="quo">"mydll.dll"</span><span class="oth">)</span><br />
+<br />
+<span class="com">''&nbsp;find&nbsp;the&nbsp;procedure&nbsp;address&nbsp;(case&nbsp;matters!)</span><br />
+<span class="wrd">AddNumbers</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">DyLibSymbol</span><span class="oth">(</span>&nbsp;<span class="wrd">hndl</span><span class="oth">,</span>&nbsp;<span class="quo">"AddNumbers"</span>&nbsp;<span class="oth">)</span><br />
+<br />
+<span class="com">''&nbsp;then&nbsp;call&nbsp;it..</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"1&nbsp;+&nbsp;2&nbsp;="</span><span class="oth">;</span>&nbsp;<span class="wrd">AddNumbers</span><span class="oth">(</span>&nbsp;<span class="num">1</span><span class="oth">,</span>&nbsp;<span class="num">2</span>&nbsp;<span class="oth">)</span><br />
+<br />
+<span class="key">DyLibFree</span>&nbsp;<span class="wrd">hndl</span><br />
+<br />
+<span class="key">Sleep</span><br />
+</div></tt><br />
+<br \>
+</div><div class="fb_sect_title">Platform Differences</div><div class="fb_sect_cont"><br \>
+<ul><li> Dynamic link libraries are not available in DOS ,as the OS doesn't support them.<br \>
+<li> Ordinals are not supported on Linux, 0 is always returned.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
+<ul><li> Not available in the <i><a href="CompilerOptlang.html">-lang qb</a></i> dialect unless referenced with the alias <tt><b>__Dylibsymbol</b></tt>.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> New to FreeBASIC<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgDylibload.html">DyLibLoad</a></tt><br \>
+<li> <tt><a href="KeyPgExport.html">Export</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

@@ -1,0 +1,76 @@
+<html>
+<head>
+<title>Mid (Function)</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Mid (Function)</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Returns a substring of a string<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgFunction.html">Function</a> <b>Mid</b> ( <a href="KeyPgByref.html">ByRef</a> <i>str</i> as <a href="KeyPgConstQualifier.html">Const</a> <a href="KeyPgString.html">String</a>, <a href="KeyPgByval.html">ByVal</a> <i>start</i> as integer ) as <a href="KeyPgString.html">String</a><br \>
+<a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgFunction.html">Function</a> <b>Mid</b> ( <a href="KeyPgByval.html">ByVal</a> <i>str</i> as <a href="KeyPgConstQualifier.html">Const</a> <a href="KeyPgWstring.html">WString</a> <a href="KeyPgPtr.html">Ptr</a>, <a href="KeyPgByval.html">ByVal</a> <i>start</i> as integer ) as <a href="KeyPgWstring.html">WString</a><br \>
+<a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgFunction.html">Function</a> <b>Mid</b> ( <a href="KeyPgByref.html">ByRef</a> <i>str</i> as <a href="KeyPgConstQualifier.html">Const</a> <a href="KeyPgString.html">String</a>, <a href="KeyPgByval.html">ByVal</a> <i>start</i> as integer, <a href="KeyPgByval.html">ByVal</a> <i>n</i> as integer ) as <a href="KeyPgString.html">String</a><br \>
+<a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgFunction.html">Function</a> <b>Mid</b> ( <a href="KeyPgByval.html">ByVal</a> <i>str</i> as <a href="KeyPgConstQualifier.html">Const</a> <a href="KeyPgWstring.html">WString</a> <a href="KeyPgPtr.html">Ptr</a>, <a href="KeyPgByval.html">ByVal</a> <i>start</i> as integer, <a href="KeyPgByval.html">ByVal</a> <i>n</i> as integer ) as <a href="KeyPgWstring.html">WString</a><br \>
+</tt><br \>
+</div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
+<i>result</i> = <b>Mid</b>[$]( <i>str</i>, <i>start</i> [, <i>n</i> ] )<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+<tt><i>str</i></tt><br \>
+<div class="fb_indent">The source string.<br \>
+</div><tt><i>start</i></tt><br \>
+<div class="fb_indent">The start position in <tt><i>str</i></tt> of the substring.<br \>
+</div><tt><i>n</i></tt><br \>
+<div class="fb_indent">The substring length, in characters.<br \>
+<br \>
+</div></div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+Returns a substring starting from <tt><i>start</i></tt> in <tt><i>str</i></tt>. If <tt><i>str</i></tt> is empty then the null string (<tt>"</tt><tt>"</tt>) is returned. If <tt><i>start</i> &lt;= 0</tt> then the null string (<tt>"</tt><tt>"</tt>) is returned.<br \>
+<br \>
+In the first form of <tt><b>Mid</b></tt>, all of the remaining characters are returned. In the second form, if <tt><i>n</i> &lt; 0</tt> or <tt><i>n</i> &gt;= len(<i>str</i>)</tt> then all of the remaining characters are returned.<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="key">Print</span>&nbsp;<span class="key">Mid</span><span class="oth">(</span><span class="quo">"abcdefg"</span><span class="oth">,</span>&nbsp;<span class="num">3</span><span class="oth">,</span>&nbsp;<span class="num">2</span><span class="oth">)</span><br />
+<span class="key">Print</span>&nbsp;<span class="key">Mid</span><span class="oth">(</span><span class="quo">"abcdefg"</span><span class="oth">,</span>&nbsp;<span class="num">3</span><span class="oth">)</span><br />
+<span class="key">Print</span>&nbsp;<span class="key">Mid</span><span class="oth">(</span><span class="quo">"abcdefg"</span><span class="oth">,</span>&nbsp;<span class="num">2</span><span class="oth">,</span>&nbsp;<span class="num">1</span><span class="oth">)</span><br />
+</div></tt><br />
+will produce the output:<br \>
+<pre class="fb_pre">cd
+cdefg
+b
+</pre>A Unicode example:<br \>
+Wiki: code rendered this way to allow display of the Unicode characters.<br \>
+<br \>
+<table class="fb_box"><tr><td>dim text as wstring * 20<br \>
+text = "&#1055;&#1088;&#1080;&#1074;&#1077;&#1090;, &#1084;&#1080;&#1088;!"<br \>
+print mid(text, 6, 4) ' displays "&#1090;, &#1084;"</td><div style="clear:both">&nbsp;</div><br \>
+</div><div class="fb_sect_title">Platform Differences</div><div class="fb_sect_cont"><br \>
+<ul><li> DOS does not support the wide-character string versions of <b><tt>Mid</tt></b>.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
+<ul><li> The string type suffix "<tt>$</tt>" is obligatory in the <i><a href="CompilerOptlang.html">-lang qb</a></i> dialect.<br \>
+<li> The string type suffix "<tt>$</tt>" is optional in the <i><a href="CompilerOptlang.html">-lang fblite</a></i> and <i><a href="CompilerOptlang.html">-lang fb</a></i> dialects.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> QB does not support Unicode.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgInstr.html">InStr</a></tt><br \>
+<li> <tt><a href="KeyPgMidstatement.html">Mid (Statement)</a></tt><br \>
+<li> <tt><a href="KeyPgLeft.html">Left</a></tt><br \>
+<li> <tt><a href="KeyPgRight.html">Right</a></tt><br \>
+<li> <tt><a href="KeyPgAsc.html">Asc</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

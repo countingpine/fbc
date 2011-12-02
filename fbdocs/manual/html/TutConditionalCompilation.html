@@ -1,0 +1,86 @@
+<html>
+<head>
+<title>Conditional Compilation And You</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Conditional Compilation And You</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	<br \>
+<i>Written by aetherFox for <a href="http://petesqbsite.com/sections/express/issue9/index.html#compilation">QB Express Issue #9</a></i><br \>
+<br \>
+Conditional Compilation is one of those parts of programming that sit in the dusty corners of the knowledge banks of programmers world-over, yet is one of the most ingenious additions to any language. Usually something that was reserved for C programmers, with the power of freeBASIC's new preprocessor, you can now use conditional compilation to help your program. <br \>
+<br \>
+The preprocessor allows you flexibility in changing the way code is generated through the use of conditional compilation. Take this scenario: you are debugging the code in your program, and you want to add some extra code to output a few variables, but remove them in the final version. The code would be something like this: <br \>
+<br \>
+<tt><tt><div class="freebasic">
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="def">#define&nbsp;DEBUG<br />
+</span>&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="def">#ifdef&nbsp;DEBUG<br />
+</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"Debug&nbsp;Value"</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="def">#endif&nbsp;'DEBUG<br />
+</span></div></tt><br />
+</tt><br \>
+<br \>
+<b>Note</b> you do not need the comment after the <tt><a href="KeyPgEndif.html">#endif</a></tt>, but is it good practice.<br \>
+<br \>
+Basically, the above code checks to see whether <tt>DEBUG</tt> has been defined, and if it has, then the code between the <tt><a href="KeyPgPpifdef.html">#ifdef</a>...<a href="KeyPgPpendif.html">#endif</a></tt> will be executed. While this may seem silly, the uses this has are amazing. If you simply remove one line at the top of your program (<tt><a href="KeyPgPpdefine.html">#define</a> DEBUG</tt>), then all the 'debug code' that you've added won't be sent to the compiler -- the preprocessor removes it, reducing the bloat of the final executable.<br \>
+<br \>
+<tt><tt><div class="freebasic">
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">'Turn&nbsp;on&nbsp;debugging</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="def">#define&nbsp;DEBUG<br />
+</span>&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">'Turn&nbsp;off&nbsp;debugging&nbsp;</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="def">#undef&nbsp;DEBUG<br />
+</span></div></tt><br />
+</tt><br \>
+<br \>
+The <tt><a href="KeyPgPpundef.html">#undef</a></tt> directive is a way of 'undefining' something, in this case <tt>DEBUG</tt>. While it is strictly not needed (just commenting out the line '<tt><a href="KeyPgPpdefine.html">#define</a> DEBUG</tt>' is enough), it makes the code much clearer, and has other uses:<br \>
+<br \>
+<tt><tt><div class="freebasic">
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="def">#ifndef&nbsp;DEBUG<br />
+</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"Production&nbsp;Version"</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="def">#endif&nbsp;'DEBUG<br />
+</span></div></tt><br />
+</tt><br \>
+<br \>
+While not the most useful example, this demonstrates the use of another directive: <tt><a href="KeyPgPpifndef.html">#ifndef</a></tt>. This directive will cause the code to be compiled if the symbol is not defined. <br \>
+<br \>
+Much like a normal programming language, the sense of the conditional can be reversed using a variant of else, <tt><a href="KeyPgElse.html">#else</a></tt>:<br \>
+<br \>
+<tt><tt><div class="freebasic">
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="def">#ifdef&nbsp;DEBUG<br />
+</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"Test&nbsp;Version"</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="def">#else<br />
+</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"Production&nbsp;Version"</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="def">#endif&nbsp;'DEBUG&nbsp;<br />
+</span></div></tt><br />
+</tt><br \>
+<br \>
+Of course, there are many applications to this. Who says you need to do this on debug code only? You could actually check the effect of a new piece of code, or some test routines by simply defining a name like <tt>TESTCODE</tt> and using the preprocessor directives to encompass your code for conditional compilation:<br \>
+<br \>
+<tt><tt><div class="freebasic">
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="def">#define&nbsp;TESTCODE<br />
+</span>&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="def">#ifdef&nbsp;TESTCODE<br />
+</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">BulletRoutine</span><span class="oth">()</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">TestFireRoutine</span><span class="oth">()</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="def">#endif&nbsp;<br />
+</span></div></tt><br />
+</tt><br \>
+<br \>
+The scope of this tutorial is a limited one, but this method is used by professionals. It makes life easy when programming. I have used this method in my own code. To see this code in action, view the source <a href="http://avinash.apeshell.net/stuff/ship/flyaround.bas">here</a>.<br \>
+<br \>
+Avinash 'aetherFox' Vora <br \>
+<b>avinashvora</b> [at] <b>gmail</b> [dot] <b>com</b>.<br \>
+http://avinash.apeshell.net
+</div>
+</div> 
+</div> 
+</body>
+</html>

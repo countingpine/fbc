@@ -1,0 +1,61 @@
+<html>
+<head>
+<title>ScreenSync</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">ScreenSync</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Synchronizes display updates with hardware<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgFunction.html">Function</a> <b>ScreenSync</b> ( ) <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a><br \>
+</tt><br \>
+</div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
+<i>result</i> = <b>ScreenSync</b><br \>
+</tt><br \>
+</div><div class="fb_sect_title">Return Value</div><div class="fb_sect_cont"><br \>
+Zero if successful, or non-zero if a graphics mode was not previously set.<br \>
+<br \>
+</div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+This GfxLib statement stops the execution of the program until the graphics card signals it has ended tracing a frame and is going to start the new one. If the program uses the small interval of time between frames to redraw the image, the flickering is greatly reduced.<br \>
+<br \>
+The use of the QB-compatible form WAIT &H3DA,8 is deprecated.<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="com">'main&nbsp;loop</span><br />
+<span class="key">Do</span><br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;<span class="com">'&nbsp;do&nbsp;user&nbsp;input</span><br />
+&nbsp;&nbsp;<span class="com">'&nbsp;calculate_a_frame</span><br />
+&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;<span class="key">ScreenSync</span><br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;<span class="com">'&nbsp;draw_&nbsp;a_&nbsp;frame&nbsp;&nbsp;</span><br />
+&nbsp;&nbsp;<br />
+<span class="key">Loop</span>&nbsp;<span class="key">Until</span>&nbsp;<span class="key">Inkey</span>&nbsp;<span class="oth">&lt;&gt;</span>&nbsp;<span class="quo">""</span><br />
+</div></tt><br />
+<br \>
+<br \>
+</div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
+<ul><li> Not available in the <i><a href="CompilerOptlang.html">-lang qb</a></i> dialect unless referenced with the alias <tt><b>__Screensync</b></tt>.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> New to FreeBASIC. <br \>
+<li> QBasic used WAIT &H3DA,8 for this purpose.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgWait.html">Wait</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

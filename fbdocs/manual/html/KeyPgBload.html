@@ -1,0 +1,153 @@
+<html>
+<head>
+<title>BLoad</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">BLoad</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Loads arbitrary data from a file created with <tt><a href="KeyPgBsave.html">BSave</a></tt>, or a compatible BMP image file.<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgFunction.html">Function</a> <b>BLoad</b> ( <a href="KeyPgByref.html">ByRef</a> <i>filename</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgConstQualifier.html">Const</a> <a href="KeyPgString.html">String</a>, <a href="KeyPgByval.html">ByVal</a> <i>dest</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgAny.html">Any</a> <a href="KeyPgPtr.html">Ptr</a> = 0, <a href="KeyPgByval.html">ByVal</a> <i>pal</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgAny.html">Any</a> <a href="KeyPgPtr.html">Ptr</a> = 0 ) <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a><br \>
+</tt><br \>
+</div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
+<i>result</i> = <b>BLoad</b>( <i>filename</i> [, [ <i>dest</i> ] [, <i>pal</i> ] ] )<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+<tt><i>filename</i></tt><br \>
+<div class="fb_indent">the name of the file to load the image from; can include a file path<br \>
+</div><tt><i>dest</i></tt><br \>
+<div class="fb_indent">the memory location to load the image to, or null (<tt>0</tt>) to copy the image to the current graphics screen work page<br \>
+</div><tt><i>pal</i></tt><br \>
+<div class="fb_indent">the memory location to load the palette to, or null (<tt>0</tt>) to change the current graphics screen palette, if it uses one<br \>
+<br \>
+</div></div><div class="fb_sect_title">Return Value</div><div class="fb_sect_cont"><br \>
+Returns zero (<tt>0</tt>) if successful, or a non-zero error code to indicate a failure. <i><a href="ProPgErrorHandling.html">(throws a runtime error)</a></i><br \>
+<br \>
+</div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+<tt><b>BLoad</b></tt> can be used to load image data or any other data from a file created with <tt><a href="KeyPgBsave.html">BSave</a></tt>, and store that data in an array or paste it to the screen. If <tt><i>dest</i></tt> is absent or null (<tt>0</tt>), the image data is pasted to the current graphics screen work page.  Otherwise it is loaded as image data to the address given by <tt><i>dest</i></tt>.<br \>
+<br \>
+<tt><b>BLoad</b></tt> can load 3 different types of files:<br \>
+<ul><ul><li> Old QB-like data files, saved with <tt>BSAVE</tt> from QB code, containing "raw" data preceded by a 7-byte header, beginning with <tt>&HFD</tt>, up to 64 KiB in size<br \>
+<li> New FB-like data files, saved with <tt><a href="KeyPgBsave.html">BSave</a></tt> from FB code, containing "raw" data preceded by a 5-byte header, beginning with <tt>&HFE</tt>. There is no 64 KiB limit with this format<br \>
+<li> BMP image files, supports a subset of valid ("Windows") .BMP files, beginning with <tt>"BM"</tt>, saved from FB code with <tt><a href="KeyPgBsave.html">BSave</a></tt>, or created / saved in a compatible format using a graphics editor / converter.<br \>
+</ul></ul>QB-like data files and BMP files are converted to an FB-compatible image format when opened.<br \>
+<br \>
+Image files with 8-bit per pixel resolution or lower contain a palette that describes the color values used in the images. If <tt><i>pal</i></tt> is not null (<tt>0</tt>), the palette is copied to memory starting at the address specified. Otherwise, if the current graphics screen uses a palette then its palette is changed to match that of the image file.<br \>
+<br \>
+When using one of the 2 "non-BMP" file formats to save images, the image files must have been created with <tt><a href="KeyPgBsave.html">BSave</a></tt> in the same graphics screen mode as it is being loaded into. When using the BMP file format, this restriction doesn't apply. <br \>
+<br \>
+When loading a BMP file using <tt><b>BLoad</b></tt>,  the images must be true-color (15-, 16-, 24- or 32-bits per pixel) or palettized/indexed (8-bit or lower). The image data will be converted to the proper pixel format for the current color depth, except that true-color can't be reduced to a palettized image. <tt><b>BLoad</b></tt> doesn't support BMP files using RLE compression or other image file types (PNG, JPG, GIF, ...).  <tt><b>BLoad</b></tt> will load alpha channel information, if available, from 32-bit BMP files with <tt>BITMAPV4HEADER</tt> or <tt>BITMAPV5HEADER</tt> file headers.<br \>
+<br \>
+<b>Runtime errors:</b><br \>
+<tt><b>BLoad</b></tt> throws one of the following <a href="ProPgErrorHandling.html">runtime errors</a>:<br \>
+<br \>
+<i>(<tt>1</tt>) Illegal function call</i><br \>
+<ul><ul><li> <tt><i>dest</i></tt> was not specified or was null (<tt>0</tt>), and no graphics screen was set.<br \>
+<li> The Bitmap uses an unsupported BMP file compression type (<tt>BI_RLE4</tt>, <tt>BI_RLE8</tt>)<br \>
+<li> The Bitmap is true-color (16, 24, or 32 bits per pixel) and the current graphics screen uses a palette (8 bits per pixel or lower).<br \>
+</ul></ul><i>(<tt>2</tt>) File not found</i><br \>
+<ul><ul><li> The file <tt><i>filename</i></tt> could not be found.<br \>
+</ul></ul><i>(<tt>3</tt>) File I/O error</i><br \>
+<ul><ul><li> The file doesn't have any of the supported types <br \>
+<li> A general read error occurred.<br \>
+<br \>
+</ul></ul><i>Note: When you use <tt><b>BLoad</b></tt> to load a BMP file into an image buffer, the original dimensions of the image are not changed.  If you want the image buffer to have the same dimensions as the BMP file, you have to find out the dimensions beforehand, and create an image of the right size yourself.  See <a href="#bmp_load">the example below</a> for an example of how to do this.</i><br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="com">'Load&nbsp;a&nbsp;graphic&nbsp;to&nbsp;current&nbsp;work&nbsp;page</span><br />
+<span class="key">Screen</span>&nbsp;<span class="num">18</span><span class="oth">,</span>&nbsp;<span class="num">32</span><br />
+<span class="key">Cls</span><br />
+<span class="key">BLoad</span>&nbsp;<span class="quo">"picture.bmp"</span><br />
+<span class="key">Sleep</span><br />
+</div></tt><br />
+<br \>
+<tt><div class="freebasic">
+<span class="com">'Load&nbsp;a&nbsp;48x48&nbsp;bitmap&nbsp;into&nbsp;an&nbsp;image</span><br />
+<span class="key">ScreenRes</span>&nbsp;<span class="num">320</span><span class="oth">,</span>&nbsp;<span class="num">200</span><span class="oth">,</span>&nbsp;<span class="num">32</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">myImage</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Any</span>&nbsp;<span class="key">Ptr</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">ImageCreate</span><span class="oth">(</span>&nbsp;<span class="num">48</span><span class="oth">,</span>&nbsp;<span class="num">48</span>&nbsp;<span class="oth">)</span><br />
+<span class="key">BLoad</span>&nbsp;<span class="quo">"picture.bmp"</span><span class="oth">,</span>&nbsp;<span class="wrd">myImage</span><br />
+<span class="key">Put</span>&nbsp;<span class="oth">(</span><span class="num">10</span><span class="oth">,</span><span class="num">10</span><span class="oth">),</span>&nbsp;<span class="wrd">myImage</span><br />
+<span class="key">ImageDestroy</span><span class="oth">(</span>&nbsp;<span class="wrd">myImage</span>&nbsp;<span class="oth">)</span><br />
+<span class="key">Sleep</span><br />
+</div></tt><br />
+<br \>
+<a name="bmp_load"></a><br \>
+<tt><div class="freebasic">
+<span class="com">''&nbsp;A&nbsp;function&nbsp;that&nbsp;creates&nbsp;an&nbsp;image&nbsp;buffer&nbsp;with&nbsp;the&nbsp;same&nbsp;</span><br />
+<span class="com">''&nbsp;dimensions&nbsp;as&nbsp;a&nbsp;BMP&nbsp;image,&nbsp;and&nbsp;loads&nbsp;a&nbsp;file&nbsp;into&nbsp;it.</span><br />
+<br />
+<span class="key">Const</span>&nbsp;<span class="wrd">NULL</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Any</span>&nbsp;<span class="key">Ptr</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span><br />
+<br />
+<span class="key">Function</span>&nbsp;<span class="wrd">bmp_load</span><span class="oth">(</span>&nbsp;<span class="key">ByRef</span>&nbsp;<span class="wrd">filename</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Const</span>&nbsp;<span class="key">String</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Any</span>&nbsp;<span class="key">Ptr</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="wrd">filenum</span><span class="oth">,</span>&nbsp;<span class="wrd">bmpwidth</span><span class="oth">,</span>&nbsp;<span class="wrd">bmpheight</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Any</span>&nbsp;<span class="key">Ptr</span>&nbsp;<span class="wrd">img</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;open&nbsp;BMP&nbsp;file</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">filenum</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">FreeFile</span><span class="oth">()</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">If</span>&nbsp;<span class="key">Open</span><span class="oth">(</span>&nbsp;<span class="wrd">filename</span>&nbsp;<span class="key">For</span>&nbsp;<span class="key">Binary</span>&nbsp;<span class="key">Access</span>&nbsp;<span class="key">Read</span>&nbsp;<span class="key">As</span>&nbsp;<span class="oth">#</span><span class="wrd">filenum</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="oth">&lt;&gt;</span>&nbsp;<span class="num">0</span>&nbsp;<span class="key">Then</span>&nbsp;<span class="key">Return</span>&nbsp;<span class="wrd">NULL</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;retrieve&nbsp;BMP&nbsp;dimensions</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Get</span>&nbsp;<span class="oth">#</span><span class="wrd">filenum</span><span class="oth">,</span>&nbsp;<span class="num">19</span><span class="oth">,</span>&nbsp;<span class="wrd">bmpwidth</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Get</span>&nbsp;<span class="oth">#</span><span class="wrd">filenum</span><span class="oth">,</span>&nbsp;<span class="num">23</span><span class="oth">,</span>&nbsp;<span class="wrd">bmpheight</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Close</span>&nbsp;<span class="oth">#</span><span class="wrd">filenum</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;create&nbsp;image&nbsp;with&nbsp;BMP&nbsp;dimensions</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">img</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">ImageCreate</span><span class="oth">(</span>&nbsp;<span class="wrd">bmpwidth</span><span class="oth">,</span>&nbsp;<span class="key">Abs</span><span class="oth">(</span><span class="wrd">bmpheight</span><span class="oth">)</span>&nbsp;<span class="oth">)</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">If</span>&nbsp;<span class="wrd">img</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">NULL</span>&nbsp;<span class="key">Then</span>&nbsp;<span class="key">Return</span>&nbsp;<span class="wrd">NULL</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">''&nbsp;load&nbsp;BMP&nbsp;file&nbsp;into&nbsp;image&nbsp;buffer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">If</span>&nbsp;<span class="key">BLoad</span><span class="oth">(</span>&nbsp;<span class="wrd">filename</span><span class="oth">,</span>&nbsp;<span class="wrd">img</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="oth">&lt;&gt;</span>&nbsp;<span class="num">0</span>&nbsp;<span class="key">Then</span>&nbsp;<span class="key">ImageDestroy</span><span class="oth">(</span>&nbsp;<span class="wrd">img</span>&nbsp;<span class="oth">):</span>&nbsp;<span class="key">Return</span>&nbsp;<span class="wrd">NULL</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Return</span>&nbsp;<span class="wrd">img</span><br />
+<br />
+<span class="key">End</span>&nbsp;<span class="key">Function</span><br />
+<br />
+<br />
+<br />
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Any</span>&nbsp;<span class="key">Ptr</span>&nbsp;<span class="wrd">img</span><br />
+<br />
+<span class="key">ScreenRes</span>&nbsp;<span class="num">640</span><span class="oth">,</span>&nbsp;<span class="num">480</span><span class="oth">,</span>&nbsp;<span class="num">32</span><br />
+<br />
+<span class="wrd">img</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">bmp_load</span><span class="oth">(</span>&nbsp;<span class="quo">"picture.bmp"</span>&nbsp;<span class="oth">)</span><br />
+<br />
+<span class="key">If</span>&nbsp;<span class="wrd">img</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">NULL</span>&nbsp;<span class="key">Then</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"bmp_load&nbsp;failed"</span><br />
+<br />
+<span class="key">Else</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Put</span>&nbsp;<span class="oth">(</span><span class="num">10</span><span class="oth">,</span>&nbsp;<span class="num">10</span><span class="oth">),</span>&nbsp;<span class="wrd">img</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">ImageDestroy</span><span class="oth">(</span>&nbsp;<span class="wrd">img</span>&nbsp;<span class="oth">)</span><br />
+<br />
+<span class="key">End</span>&nbsp;<span class="key">If</span><br />
+<br />
+<span class="key">Sleep</span></div></tt><br />
+</div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> Support for loading BMP files is new to FreeBASIC.<br \>
+<li> Support for retrieving the palette from BMP files is new to FreeBASIC.<br \>
+<li> FreeBASIC uses a different file format from QBASIC internally, which doesn't have the 64 KiB limit, and is unsupported by QBASIC.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgBsave.html">BSave</a></tt><br \>
+<li> <tt><a href="KeyPgPalette.html">Palette</a></tt><br \>
+<li> <tt><a href="KeyPgImagecreate.html">ImageCreate</a></tt><br \>
+<li> <tt><a href="KeyPgImageDestroy.html">ImageDestroy</a></tt><br \>
+<li> <a href="GfxInternalFormats.html">Internal Graphics Formats</a><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

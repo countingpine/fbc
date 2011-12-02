@@ -1,0 +1,59 @@
+<html>
+<head>
+<title>Variable Initializers</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Variable Initializers</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Variable initializers are supported for initializing Arrays, variables and UDTs.<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<div class="fb_indent"><a href="KeyPgDim.html">Dim</a> <i>scalar_symbol</i> [AS <a href="DataType.html">DataType</a>] = <i>expression</i><br \>
+<a href="KeyPgDim.html">Dim</a> <i>array_symbol</i> ([<i>lbound</i> TO] <i>ubound</i>) [AS <a href="DataType.html">DataType</a>] =&gt; { <i>expression</i> [, ...] }<br \>
+<a href="KeyPgDim.html">Dim</a> <i>udt_symbol</i> AS <a href="DataType.html">DataType</a> = ( <i>expression</i> [, ...] )<br \>
+</div></tt><br \>
+</div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+Arrays, variables and UDTs may be given a value at the time of their declaration using <tt><a href="KeyPgDim.html">Dim</a></tt>, with the syntax shown above.  Please note the important differences between initializing different types.  Scalar variables are initialized as they would in a normal assignment, using an equals sign.  UDTs and arrays are assigned with an equal sign followed by a greater than symbol (=&gt;).  Array values are given in comma delimited values enclosed by curly brackets, and UDT values are given in comma delimited values enclosed by parenthesis.<br \>
+<br \>
+These methods of initializing variables can be nested within one another for complex assignments.  For instance, to initialize a multidimensional array:<br \>
+<br \>
+<tt><div class="freebasic">
+<span class="key">Dim</span>&nbsp;<span class="wrd">array</span><span class="oth">(</span><span class="num">1</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">2</span><span class="oth">,</span>&nbsp;<span class="num">1</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">5</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="oth">=&gt;</span>&nbsp;<span class="oth">{{</span><span class="num">1</span><span class="oth">,</span>&nbsp;<span class="num">2</span><span class="oth">,</span>&nbsp;<span class="num">3</span><span class="oth">,</span>&nbsp;<span class="num">4</span><span class="oth">,</span>&nbsp;<span class="num">5</span><span class="oth">},</span>&nbsp;<span class="oth">{</span><span class="num">1</span><span class="oth">,</span>&nbsp;<span class="num">2</span><span class="oth">,</span>&nbsp;<span class="num">3</span><span class="oth">,</span>&nbsp;<span class="num">4</span><span class="oth">,</span>&nbsp;<span class="num">5</span><span class="oth">}}</span><br />
+</div></tt><br />
+In this declaration, the values for the left-most dimension are given as 5-index arrays.  Nesting allows for arrays of any dimension to be initialized.<br \>
+<br \>
+UDTs and arrays can be nested within each other as well.  For instance, the following code declares and initializes an array of UDTs.<br \>
+<br \>
+<tt><div class="freebasic">
+<span class="key">Type</span>&nbsp;<span class="wrd">mytype</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">var1</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Double</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">var2</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">var3</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">ZString</span>&nbsp;<span class="key">Ptr</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Type</span><br />
+<br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">MyVar</span><span class="oth">(</span><span class="num">2</span><span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">mytype</span>&nbsp;<span class="oth">=&gt;</span>&nbsp;<span class="wrd">_</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">{</span>&nbsp;<span class="wrd">_</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">(</span><span class="num">1.0</span><span class="oth">,</span>&nbsp;<span class="num">1</span><span class="oth">,</span>&nbsp;<span class="oth">@</span><span class="quo">"Hello"</span><span class="oth">),</span>&nbsp;<span class="wrd">_</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">(</span><span class="num">2.0</span><span class="oth">,</span>&nbsp;<span class="num">2</span><span class="oth">,</span>&nbsp;<span class="oth">@</span><span class="quo">"GoodBye"</span><span class="oth">)</span>&nbsp;<span class="wrd">_</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">}</span><br />
+</div></tt><br />
+For module-level, static, or global variables, initialized values must be constant expressions.  FreeBASIC will report a compile-time error if otherwise.<br \>
+<br \>
+</div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> Variable Initializers are new to FreeBASIC<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgDim.html">Dim</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

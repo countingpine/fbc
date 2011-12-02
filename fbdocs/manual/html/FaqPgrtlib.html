@@ -1,0 +1,87 @@
+<html>
+<head>
+<title>Frequently Asked FB Runtime Library Questions</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Frequently Asked FB Runtime Library Questions</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	<br \>
+<a name="item0"></a><br \>
+<b>FreeBASIC Runtime Library questions:</b><br \>
+<br \>
+<div class="fb_indent"><b>- <a href="#item1">How do I play sound?</a></b><br \>
+<b>- <a href="#item2">How do I access the serial ports?</a></b><br \>
+<b>- <a href="#item3">How do I print?</a></b><br \>
+<b>- <a href="#item4">How do I access the hardware ports?</a></b><br \>
+<b>- <a href="#item5">What is the behavior of strings passed byval?</a></b><br \>
+<br \>
+</div><br \>
+<br \>
+<br \>
+<div style="text-align: center;"><b>FreeBASIC Runtime Library questions</b></div><br \>
+<br \>
+<a name="item1"></a><b> How do I play sound?</b><br \>
+<div class="fb_indent">Of the QB's sound keywords only BEEP is implemented in FB. <br \>
+If PC speaker sound is required, it should be programmed using IN and OUT. See the example in the OUT keyword for a replacement of SOUND. <br \>
+There is a library called QBSound that allows to emulate qb's ability to PLAY in the background tunes encoded in strings, it uses the soundcard's synthesizer.<br \>
+If what's required is to play .wav or .mp3 files thru a soundcard, external libraries as FMOD or BASS can be used in Linux and Windows. For DOS see the <a href="FaqDOS.html">DOS FAQ section</a>.<br \>
+<br \>
+</div><a href="#item0">Back to top</a><br \>
+<br \>
+<a name="item2"></a><b>How do I access the serial ports?</b><br \>
+<br \>
+<div class="fb_indent"><b>DOS</b><br \>
+See <a href="FaqDOS.html">DOS FAQ section</a>.<br \>
+<br \>
+<b>Windows and Linux</b><br \>
+See <a href="KeyPgOpenCom.html">Open Com</a>.<br \>
+<br \>
+</div><a href="#item0">Back to top</a><br \>
+<br \>
+<a name="item3"></a><b>How do I print?</b><br \>
+<div class="fb_indent">Since version 0.15 FB supports character output to printer. <br \>
+To print graphics two approaches are possible:<br \>
+</div><ul><li> Preprocess the graphics, program the printer and send the pixels in FB. This is OS-portable but depends on the printer model. The only way for DOS, see also <a href="FaqDOS.html">DOS FAQ section</a>.<br \>
+<li> In Windows and Linux there are specific API calls. This is not OS-portable but the OS's printer driver makes it printer-independent <br \>
+<br \>
+</ul><a href="#item0">Back to top</a><br \>
+<br \>
+<a name="item4"></a><b>How do I access the hardware ports?</b><br \>
+<br \>
+<div class="fb_indent">As of V0.15 QB's INP, OUT and WAIT are implemented. <br \>
+The GfxLib intercepts the calls to some VGA ports to emulate the widely used QB's palete manipulation and vsync methods. So ports &H3DA, &H3C7, &H3C8 and &H3C9 can't be accessed it GfxLib is used. All other ports are accessible. <br \>
+No further care is required to use INP and OUT in Linux or DOS. For the Windows version the required device driver is installed each first time the program is run in a windows session; this requires Administrator rights for this first run or the program will end with an error. <br \>
+<br \>
+</div><a href="#item0">Back to top</a><br \>
+<br \>
+<a name="item5"></a><b>What is the behavior of strings passed byval?</b><br \>
+<br \>
+<div class="fb_indent">This item is written as of 01.30.2007.<br \>
+<br \>
+A FreeBASIC <a href="KeyPgString.html">String</a> is essentially a built-in user-defined type that, among other things, contains a pointer to the string data and it's length. This type is called a 'descriptor' internally, and it is this descriptor that is passed to procedures when it's parameters are passed by reference.<br \>
+When passed by value, however, the actual string data is passed, not the descriptor. Internally, the string data is terminated with the NULL character (chr(0)). When the temporary <a href="KeyPgString.html">String</a> is created for the procedure, FreeBASIC copies the string data passed up until the first NULL character. If the <a href="KeyPgString.html">String</a> argument passed contained NULL characters within the string, then the rest of the string data after the first NULL is not copied, and the string is truncated. You also run the risk of writing outside the bounds of the allocated memory.<br \>
+This behavior will eventually be fixed to act as it should: a temporary descriptor will be created for the procedure and a 'deep copy' of it's fields will be made (notably, the entire string data itself will be copied into new memory, and the new descriptor will point to that memory).<br \>
+To be safe, pass <a href="KeyPgString.html">Strings</a> by reference. If you need to simulate the correct behavior of passing a <a href="KeyPgString.html">String</a> by value, either 1) create a temporary <a href="KeyPgString.html">String</a>, initialize it with the <a href="KeyPgString.html">String</a> you want to pass and pass the temporary by reference, or 2) pass the <a href="KeyPgString.html">String</a> by reference and have the procedure create and initialize a temporary <a href="KeyPgString.html">String</a> and work with the temporary.<br \>
+<br \>
+</div><a href="#item0">Back to top</a><br \>
+<br \>
+See also:<br \>
+<ul><li> <a href="CompilerFAQ.html">Compiler FAQ</a><br \>
+<li> <a href="FaqPggfxlib2.html">Frequently Asked FreeBASIC Graphics Library Questions</a><br \>
+</ul>and<br \>
+<ul><li> <a href="FaqPgWin32.html">Win32 related FAQ</a><br \>
+<li> <a href="FaqDOS.html">DOS related FAQ</a><br \>
+<br \>
+</ul><br \>
+
+</div>
+</div> 
+</div> 
+</body>
+</html>

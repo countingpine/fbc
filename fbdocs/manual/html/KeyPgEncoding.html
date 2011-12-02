@@ -1,0 +1,135 @@
+<html>
+<head>
+<title>Encoding</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Encoding</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Specifies character format of a text file<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<a href="KeyPgOpen.html">Open</a> <i>filename</i> for {Input|Output|Append} <b>Encoding</b> "<i>utf-8</i>"|"<i>utf-16</i>"|"<i>utf-32</i>"|"<i>ascii</i>" as [#]<i>filenum</i> <br \>
+</tt><br \>
+</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+<tt><i>filename</i></tt> for {Input|Output|Append}<br \>
+<div class="fb_indent">file name to open for <tt><a href="KeyPgInputfilemode.html">Input</a></tt>, <tt><a href="KeyPgOutput.html">Output</a></tt>, or <tt><a href="KeyPgAppend.html">Append</a></tt><br \>
+</div><tt><b>Encoding</b> "<i>utf-8</i>"|"<i>utf-16</i>"|"<i>utf-32</i>"|"<i>ascii</i>"</tt><br \>
+<div class="fb_indent">indicates encoding type for the file<br \>
+</div><tt><i>filenum</i></tt><br \>
+<div class="fb_indent">unused file number to associate with the open file<br \>
+<br \>
+</div></div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+<tt><b>Encoding</b></tt> specifies the format for an Unicode text file, so <tt><a href="KeyPgWinput.html">Winput #</a></tt> and <tt><a href="KeyPgPrintPp.html">Print #</a></tt> use the correct encoding.  If omitted from an <tt><a href="KeyPgOpen.html">Open</a></tt> statement, "ascii" encoding is the default.<br \>
+<br \>
+Only little endian character encodings are supported at the moment. <br \>
+<ul><ul><li>"utf8", <br \>
+<li>"utf16" <br \>
+<li>"utf32" <br \>
+<li>"ascii" (the default)<br \>
+<br \>
+</ul></ul></div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="com">''&nbsp;This&nbsp;example&nbsp;will:</span><br />
+<span class="com">''&nbsp;1)&nbsp;Write&nbsp;a&nbsp;string&nbsp;to&nbsp;a&nbsp;text&nbsp;file&nbsp;with&nbsp;utf-16&nbsp;encoding</span><br />
+<span class="com">''&nbsp;2)&nbsp;Display&nbsp;the&nbsp;byte&nbsp;contents&nbsp;of&nbsp;the&nbsp;file</span><br />
+<span class="com">''&nbsp;3)&nbsp;Read&nbsp;the&nbsp;text&nbsp;back&nbsp;from&nbsp;the&nbsp;file</span><br />
+<span class="com">''</span><br />
+<span class="com">''&nbsp;WSTRING's&nbsp;will&nbsp;work&nbsp;as&nbsp;well&nbsp;but&nbsp;STRING&nbsp;has&nbsp;been</span><br />
+<span class="com">''&nbsp;used&nbsp;in&nbsp;this&nbsp;example&nbsp;since&nbsp;not&nbsp;all&nbsp;consoles&nbsp;support</span><br />
+<span class="com">''&nbsp;printing&nbsp;WSTRING's.</span><br />
+<br />
+<span class="com">''&nbsp;The&nbsp;name&nbsp;of&nbsp;the&nbsp;file&nbsp;to&nbsp;use&nbsp;in&nbsp;this&nbsp;example</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">f</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span><br />
+<span class="wrd">f</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="quo">"sample.txt"</span><br />
+<br />
+<span class="com">''</span><br />
+<span class="key">Scope</span><br />
+&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="wrd">s</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span><br />
+&nbsp;&nbsp;<span class="wrd">s</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="quo">"FreeBASIC"</span><br />
+<br />
+&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"Text&nbsp;to&nbsp;write&nbsp;to&nbsp;"</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="wrd">f</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="quo">":"</span><br />
+&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="wrd">s</span><br />
+&nbsp;&nbsp;<span class="key">Print</span><br />
+<br />
+&nbsp;&nbsp;<span class="com">''&nbsp;open&nbsp;a&nbsp;file&nbsp;for&nbsp;output&nbsp;using&nbsp;utf-16&nbsp;encoding</span><br />
+&nbsp;&nbsp;<span class="com">''&nbsp;and&nbsp;print&nbsp;a&nbsp;short&nbsp;message</span><br />
+&nbsp;&nbsp;<span class="key">Open</span>&nbsp;<span class="wrd">f</span>&nbsp;<span class="key">For</span>&nbsp;<span class="key">Output</span>&nbsp;<span class="key">Encoding</span>&nbsp;<span class="quo">"utf-16"</span>&nbsp;<span class="key">As</span>&nbsp;<span class="oth">#</span><span class="num">1</span><br />
+<br />
+&nbsp;&nbsp;<span class="com">''&nbsp;The&nbsp;ascii&nbsp;string&nbsp;is&nbsp;converted&nbsp;to&nbsp;utf-16</span><br />
+&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="oth">#</span><span class="num">1</span><span class="oth">,</span>&nbsp;<span class="wrd">s</span><br />
+&nbsp;&nbsp;<span class="key">Close</span>&nbsp;<span class="oth">#</span><span class="num">1</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Scope</span><br />
+<br />
+<span class="com">''</span><br />
+<span class="key">Scope</span><br />
+&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="wrd">s</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span><span class="oth">,</span>&nbsp;<span class="wrd">n</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+<br />
+&nbsp;&nbsp;<span class="com">''&nbsp;open&nbsp;the&nbsp;same&nbsp;file&nbsp;for&nbsp;binary&nbsp;and&nbsp;read&nbsp;all&nbsp;the&nbsp;bytes</span><br />
+&nbsp;&nbsp;<span class="key">Open</span>&nbsp;<span class="wrd">f</span>&nbsp;<span class="key">For</span>&nbsp;<span class="key">Binary</span>&nbsp;<span class="key">As</span>&nbsp;<span class="oth">#</span><span class="num">1</span><br />
+&nbsp;&nbsp;<span class="wrd">n</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">LOF</span><span class="oth">(</span><span class="num">1</span><span class="oth">)</span><br />
+&nbsp;&nbsp;<span class="wrd">s</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">Space</span><span class="oth">(</span>&nbsp;<span class="wrd">n</span>&nbsp;<span class="oth">)</span><br />
+&nbsp;&nbsp;<span class="key">Get</span>&nbsp;<span class="oth">#</span><span class="num">1</span><span class="oth">,,</span><span class="wrd">s</span><br />
+&nbsp;&nbsp;<span class="key">Close</span>&nbsp;<span class="oth">#</span><span class="num">1</span><br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"Binary&nbsp;contents&nbsp;of&nbsp;"</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="wrd">f</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="quo">":"</span><br />
+&nbsp;&nbsp;<span class="key">For</span>&nbsp;<span class="wrd">i</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">1</span>&nbsp;<span class="key">To</span>&nbsp;<span class="wrd">n</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="key">Hex</span><span class="oth">(</span>&nbsp;<span class="key">Asc</span><span class="oth">(</span>&nbsp;<span class="key">Mid</span><span class="oth">(</span>&nbsp;<span class="wrd">s</span><span class="oth">,</span>&nbsp;<span class="wrd">i</span><span class="oth">,</span>&nbsp;<span class="num">1</span>&nbsp;<span class="oth">)),</span>&nbsp;<span class="num">2</span><span class="oth">);</span>&nbsp;<span class="quo">"&nbsp;"</span><span class="oth">;</span><br />
+&nbsp;&nbsp;<span class="key">Next</span><br />
+&nbsp;&nbsp;<span class="key">Print</span><br />
+&nbsp;&nbsp;<span class="key">Print</span><br />
+<br />
+<span class="key">End</span>&nbsp;<span class="key">Scope</span><br />
+<br />
+<span class="com">''</span><br />
+<span class="key">Scope</span><br />
+&nbsp;&nbsp;<span class="key">Dim</span>&nbsp;<span class="wrd">s</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span><br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;<span class="com">''&nbsp;open&nbsp;a&nbsp;file&nbsp;for&nbsp;input&nbsp;using&nbsp;utf-16&nbsp;encoding</span><br />
+&nbsp;&nbsp;<span class="com">''&nbsp;and&nbsp;read&nbsp;back&nbsp;the&nbsp;message</span><br />
+&nbsp;&nbsp;<span class="key">Open</span>&nbsp;<span class="wrd">f</span>&nbsp;<span class="key">For</span>&nbsp;<span class="key">Input</span>&nbsp;<span class="key">Encoding</span>&nbsp;<span class="quo">"utf-16"</span>&nbsp;<span class="key">As</span>&nbsp;<span class="oth">#</span><span class="num">1</span><br />
+<br />
+&nbsp;&nbsp;<span class="com">''&nbsp;The&nbsp;ascii&nbsp;string&nbsp;is&nbsp;converted&nbsp;from&nbsp;utf-16</span><br />
+&nbsp;&nbsp;<span class="key">Line</span>&nbsp;<span class="key">Input</span>&nbsp;<span class="oth">#</span><span class="num">1</span><span class="oth">,</span>&nbsp;<span class="wrd">s</span><br />
+&nbsp;&nbsp;<span class="key">Close</span>&nbsp;<span class="oth">#</span><span class="num">1</span><br />
+<br />
+&nbsp;&nbsp;<span class="com">''&nbsp;Display&nbsp;the&nbsp;text</span><br />
+&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"Text&nbsp;read&nbsp;from&nbsp;"</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="wrd">f</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="quo">":"</span><br />
+&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="wrd">s</span><br />
+&nbsp;&nbsp;<span class="key">Print</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Scope</span><br />
+</div></tt><br />
+Output:<br \>
+<pre class="fb_pre">
+Text to write to sample.txt:
+FreeBASIC
+
+Binary contents of sample.txt:
+FF FE 46 00 72 00 65 00 65 00 42 00 41 00 53 00 49 00 43 00 0D 00 0A 00 
+
+Text read from sample.txt:
+FreeBASIC
+</pre><br \>
+</div><div class="fb_sect_title">Platform Differences</div><div class="fb_sect_cont"><br \>
+<ul><li> Unicode (w)strings are not supported in the DOS port of FreeBASIC<br \>
+<br \>
+</ul></div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
+<ul><li> Not available in the <i><a href="CompilerOptlang.html">-lang qb</a></i> dialect unless referenced with the alias <tt><b>__Encoding</b></tt>.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> QB had no support for Unicode<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgOpen.html">Open</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

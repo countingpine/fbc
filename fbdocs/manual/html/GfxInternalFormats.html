@@ -1,0 +1,64 @@
+<html>
+<head>
+<title>Internal graphics formats</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Internal graphics formats</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	<br \>
+<b>Pixel formats</b><br \>
+<br \>
+<div class="fb_indent">When a graphics mode is set via the <tt><a href="KeyPgScreengraphics.html">Screen</a></tt> or <tt><a href="KeyPgScreenres.html">ScreenRes</a></tt> functions, GfxLib creates also a framebuffer in standard system memory and sets an appropriate internal pixel format for the mode. There are basically three internal pixel formats, selected depending on the screen depth, as described in the following table:<br \>
+<br \>
+<div class="fb_table"><table><tr><td>Screen depth</td><td>Internal bytes per pixel</td><td>Range bitmask</td><td>Pixel format</td></tr><tr><td>1bpp</td><td> 1</td><td> &amp;h1</td><td>palette color index</td></tr><tr><td>2bpp</td><td> 1</td><td> &amp;h3</td><td>palette color index</td></tr><tr><td>4bpp</td><td> 1</td><td> &amp;hF</td><td>palette color index</td></tr><tr><td>8bpp</td><td> 1</td><td> &amp;hFF</td><td>palette color index</td></tr><tr><td>15/16bpp</td><td> 2</td><td> &amp;hFFFF</td><td>RRRRRGGGGGGBBBBB</td></tr><tr><td>24/32bpp</td><td> 4</td><td> &amp;hFFFFFFFF</td><td>AAAAAAAARRRRRRRRGGGGGGGGBBBBBBBB</td></tr></table></div><br \>
+<br \>
+All drawing operations work on this RAM framebuffer; when the actual display needs to be updated, GfxLib copies the contents of the framebuffer to the real display memory, automatically converting in the process from the current internal pixel format to whatever pixel format the real display uses. By limiting the internal pixel formats to 3, the library prevents you having to deal with the plethora of real display formats.<br \>
+<br \>
+</div><b>Color values</b><br \>
+<br \>
+<div class="fb_indent">When calling a graphics primitive that accepts a color, this can be specified in two ways. In 8bpp or less modes, the color value must be a direct 8 bits color index in the current palette, and this matches the internal pixel format for those modes. In higher color depths, the color value should always have the form <tt>&hAARRGGBB</tt>; this is what the <tt><a href="KeyPgRgb.html">RGB</a></tt> and <tt><a href="KeyPgRgba.html">RGBA</a></tt> macros return, and is equivalent to the 24/32bpp internal pixel format representation. If the current color depth is 24 or 32bpp, this means the color value passes in unaltered. If a 15/16bpp mode is in use, internally each primitive automatically converts the color from the <tt>&hAARRGGBB</tt> form into the <tt>RRRRRGGGGGGBBBBB</tt> internal pixel format (note that in this process the alpha channel is lost, as 15/16bpp modes do not support it). Once the color value is in one of the three pixel formats, the primitive limits its range to the range supported by the current color depth, by using a bitwise <tt><a href="KeyPgOpAnd.html">And</a></tt> operation with a range bitmask. So if in 8bpp, the color value passed is <tt><a href="KeyPgOpAnd.html">And</a></tt>ed by <tt>&hFF</tt> for example.<br \>
+<br \>
+</div><b>Notes on transparency</b><br \>
+<br \>
+<div class="fb_indent">For 8bpp or less modes, color index 0 is always treated as the transparent color for the <tt><a href="KeyPgPutgraphics.html">Put</a></tt> modes that support transparency. For higher depths, <tt><a href="KeyPgRgb.html">RGB</a>(255, 0, 255)</tt> always represents the transparent color. In 15/16bpp modes, this translates to the internal value <tt>&hF81F</tt>, whereas in 24/32bpp modes it becomes <tt>&hFFFF00FF</tt>. Note that in 24/32bpp modes, <tt><a href="KeyPgPutgraphics.html">Put</a></tt> identifies the transparent color by looking just at the red, green and blue components of the color value, while the alpha value can assume any value. This means that in 24/32bpp modes, <tt>&h00FF00FF</tt>, <tt>&h10FF00FF</tt>, <tt>&hABFF00FF</tt> and <tt>&hFFFF00FF</tt> for example all represent the transparent color, since the lower 24 bits are always <tt>&hFF00FF</tt>.<br \>
+<br \>
+</div><b>Buffer formats</b><br \>
+<br \>
+<div class="fb_indent">In FreeBASIC, images can be used as arrays (as in QB) or as pointers. Either way, the image data is contained in one continuous chunk. The chunk consists of an header followed by the image data. The header can be of two types (old-style and new-style) and determines the format of the following image data.<br \>
+<br \>
+<div class="fb_indent"><b>Old-style</b> chunk header consists of 4 bytes (32 bits, or 4 bytes). The first 3 bits contain the image color depth in bytes per pixel (8-bit color depth -&gt; 1; 16-bit color depth -&gt; 2; 32-bit color depth -&gt; 4). The next 13 bits contain the image width. The last 16 bits contain the image's height. Please note the intrinsic nature of the header allows only for sizes up to <tt>8191 * 65535</tt> pixels. The actual pixel data follows the header, and is compacted one row of pixels after another; no data alignment is assumed. The final size of the chunk can then be computed using the formula:<br \>
+<br \>
+<div class="fb_indent"><tt>size = 4 + ( width * height * bytes_per_pixel )</tt><br \>
+<br \>
+</div><b>New-style</b> chunk header consists of 32 bytes. The first dword (32 bits) must be equal to the value 7, allowing GfxLib to identify the new type of chunk. The second dword contains the image color depth in bytes per pixel. The third and fourth dwords contain the image width and height respectively, effectively removing the image size limit enforced by the old-style image chunks. The fifth dword contains the pixel row pitch in bytes; this tells how many bytes a row of pixels in the image takes up. The pitch in new-style chunks is always padded to a multiple of 16, to allow pixels' row data to be aligned on the paragraph boundary. The remaining 3 dwords (total 12 bytes) of the header are currently unused and reserved for future use. The final size of the image is:<br \>
+<br \>
+<div class="fb_indent"><tt>size = 32 + ( ( ( ( width * bytes_per_pixel ) + &hF ) and not &hF ) * height )</tt><br \>
+<br \>
+</div></div>The format of images created by <tt><a href="KeyPgImagecreate.html">ImageCreate</a></tt> and <tt><a href="KeyPgGetgraphics.html">Get</a></tt> depend on the dialect used. In the <i><a href="CompilerOptlang.html">-lang fb</a></i> dialect, images will be created with the new-style header.  In the <i><a href="CompilerOptlang.html">-lang fblite</a></i> and <i><a href="CompilerOptlang.html">-lang qb</a></i> dialects, the old-style image header is created.<br \>
+<br \>
+All graphics primitives can work with both old-style and new-style image chunks.  For easy access to image information, <tt><a href="KeyPgImageInfo.html">ImageInfo</a></tt> can be used to obtain useful properties of an image buffer - such as its dimensions, color depth, pitch, and a pointer to the pixel data - whichever format is used.<br \>
+It is also possible to access the image header directly to access this information.  For more information on acessing the header structure, please refer to <a href="FaqPggetputstructure.html">this example</a>.<br \>
+<br \>
+</div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgScreengraphics.html">Screen (Graphics)</a></tt><br \>
+<li> <tt><a href="KeyPgScreenres.html">ScreenRes</a></tt><br \>
+<li> <tt><a href="KeyPgGetgraphics.html">Get (Graphics)</a></tt><br \>
+<li> <tt><a href="KeyPgPutgraphics.html">Put (Graphics)</a></tt><br \>
+<li> <tt><a href="KeyPgImagecreate.html">ImageCreate</a></tt><br \>
+<li> <tt><a href="KeyPgImageInfo.html">ImageInfo</a></tt><br \>
+<li> <tt><a href="KeyPgTransGfx.html">Trans</a></tt><br \>
+<li> <tt><a href="KeyPgAlphaGfx.html">Alpha</a></tt><br \>
+<br \>
+</ul><br \>
+</div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

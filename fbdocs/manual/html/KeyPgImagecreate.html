@@ -1,0 +1,91 @@
+<html>
+<head>
+<title>ImageCreate</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">ImageCreate</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Allocates and initializes storage for an image<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgFunction.html">Function</a> <b>ImageCreate</b> <a href="KeyPgOverload.html">Overload</a> ( <a href="KeyPgByval.html">ByVal</a> <i>width</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a>, <a href="KeyPgByval.html">ByVal</a> <i>height</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a>, <a href="KeyPgByval.html">ByVal</a> <i>color</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgUinteger.html">UInteger</a> = <b>transparent_color</b> ) <a href="KeyPgAs.html">As</a> <a href="KeyPgAny.html">Any</a> <a href="KeyPgPtr.html">Ptr</a><br \>
+<a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgFunction.html">Function</a> <b>ImageCreate</b> ( <a href="KeyPgByval.html">ByVal</a> <i>width</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a>, <a href="KeyPgByval.html">ByVal</a> <i>height</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a>, <a href="KeyPgByval.html">ByVal</a> <i>color</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgUinteger.html">UInteger</a> = <b>transparent_color</b>, <a href="KeyPgByval.html">ByVal</a> <i>depth</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgInteger.html">Integer</a> ) <a href="KeyPgAs.html">As</a> <a href="KeyPgAny.html">Any</a> <a href="KeyPgPtr.html">Ptr</a><br \>
+</tt><br \>
+</div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
+<i>result</i> = <b>ImageCreate</b>( <i>width</i>, <i>height</i> [, [ <i>color</i> ][, <i>depth</i> ]] )<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+<tt><i>width</i></tt><br \>
+<div class="fb_indent">The desired width, in number of pixels.<br \>
+</div><tt><i>height</i></tt><br \>
+<div class="fb_indent">The desired height, in number of pixels.<br \>
+</div><tt><i>color</i></tt><br \>
+<div class="fb_indent">The pixel value to fill the area of the image.<br \>
+</div><tt><i>depth</i></tt><br \>
+<div class="fb_indent">The desired color depth, in bits per pixel.<br \>
+<br \>
+</div></div><div class="fb_sect_title">Return Value</div><div class="fb_sect_cont"><br \>
+If the image could not be created, NULL (<tt>0</tt>) is returned. Otherwise, the address of the image is returned.<br \>
+<br \>
+</div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+Both procedures attempt to allocate memory for an image of the specified <tt><i>width</i></tt> and <tt><i>height</i></tt>. If not successful, NULL (<tt>0</tt>) is returned. Otherwise, an image of that size is created and initialized by filling the entire area of pixels with the value <tt><i>color</i></tt>. If not specified, <tt><i>color</i></tt> assumes the value of the transparent color for the current graphics screen, which can be found by calling <tt><a href="KeyPgScreencontrol.html">ScreenControl</a></tt>. In any case, the address of the image is returned, which is then controlled by the user, and must be destroyed using <tt><a href="KeyPgImageDestroy.html">ImageDestroy</a></tt>.<br \>
+<br \>
+The first procedure creates an image with a color depth matching that of the current graphics screen, which can be found by calling <tt><a href="KeyPgScreencontrol.html">ScreenControl</a></tt>. The second procedure creates an image with a color depth of <tt><i>depth</i></tt>, in bits per pixel. For both procedures, the resulting image can be used in drawing procedures while in any screen mode -- and across mode changes -- as long as the color depth of the image matches that of the graphics screen.<br \>
+<br \>
+<tt><b>ImageCreate</b></tt> is the recommended way to allocate memory for new images. The memory layout -- size, structure, etc. -- while documented, may change from version to version, making manual calculation of the sizes involved error-prone. However, <tt><a href="KeyPgImageInfo.html">ImageInfo</a></tt> can be used to retrieve, among other things, the size, in bytes, of an existing image, allowing memory to be manually allocated for a copy of an image, or to be read from or written to a file or device.<br \>
+<br \>
+<tt><a href="KeyPgGetgraphics.html">Get (Graphics)</a></tt> can be used to initialize an image using pre-allocated memory.<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="com">''&nbsp;Create&nbsp;a&nbsp;graphics&nbsp;screen.</span><br />
+<span class="key">ScreenRes</span>&nbsp;<span class="num">320</span><span class="oth">,</span>&nbsp;<span class="num">200</span><span class="oth">,</span>&nbsp;<span class="num">32</span><br />
+<br />
+<span class="com">''&nbsp;Create&nbsp;a&nbsp;64x64&nbsp;pixel&nbsp;image&nbsp;with&nbsp;a&nbsp;darkish&nbsp;green&nbsp;background.</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">image</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Any</span>&nbsp;<span class="key">Ptr</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">ImageCreate</span><span class="oth">(</span>&nbsp;<span class="num">64</span><span class="oth">,</span>&nbsp;<span class="num">64</span><span class="oth">,</span>&nbsp;<span class="key">RGB</span><span class="oth">(</span><span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">128</span><span class="oth">,</span>&nbsp;<span class="num">0</span><span class="oth">)</span>&nbsp;<span class="oth">)</span><br />
+<br />
+<span class="key">If</span>&nbsp;<span class="wrd">image</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span>&nbsp;<span class="key">Then</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"Failed&nbsp;to&nbsp;create&nbsp;image."</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Sleep</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">End</span>&nbsp;<span class="oth">-</span><span class="num">1</span><br />
+<span class="key">End</span>&nbsp;<span class="key">If</span><br />
+<br />
+<span class="com">''&nbsp;Draw&nbsp;a&nbsp;semi-transparent,&nbsp;red&nbsp;circle&nbsp;in&nbsp;the&nbsp;center&nbsp;of&nbsp;the&nbsp;image.</span><br />
+<span class="key">Circle</span>&nbsp;<span class="wrd">image</span><span class="oth">,</span>&nbsp;<span class="oth">(</span><span class="num">32</span><span class="oth">,</span>&nbsp;<span class="num">32</span><span class="oth">),</span>&nbsp;<span class="num">28</span><span class="oth">,</span>&nbsp;<span class="key">RGBA</span><span class="oth">(</span><span class="num">255</span><span class="oth">,</span>&nbsp;<span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">0</span><span class="oth">,</span>&nbsp;<span class="num">128</span><span class="oth">),,,</span>&nbsp;<span class="num">1.0</span><span class="oth">,</span>&nbsp;<span class="wrd">f</span><br />
+<br />
+<span class="com">''&nbsp;Draw&nbsp;the&nbsp;image&nbsp;onto&nbsp;the&nbsp;screen&nbsp;using&nbsp;various&nbsp;blitting&nbsp;methods.</span><br />
+<span class="key">Put</span>&nbsp;<span class="oth">(</span><span class="num">120</span><span class="oth">,</span>&nbsp;<span class="num">60</span><span class="oth">),</span>&nbsp;<span class="wrd">image</span><span class="oth">,</span>&nbsp;<span class="key">PSet</span><br />
+<span class="key">Put</span>&nbsp;<span class="oth">(</span><span class="num">140</span><span class="oth">,</span>&nbsp;<span class="num">80</span><span class="oth">),</span>&nbsp;<span class="wrd">image</span><span class="oth">,</span>&nbsp;<span class="key">Alpha</span><br />
+<br />
+<span class="com">''&nbsp;Destroy&nbsp;the&nbsp;image.</span><br />
+<span class="key">ImageDestroy</span>&nbsp;<span class="wrd">image</span><br />
+<br />
+<span class="key">Sleep</span><br />
+</div></tt><br />
+<div class="fb_img"><img src="images/imagecreate.png" /></div><br \>
+<br \>
+<br \>
+</div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
+<ul><li> Not available in the <i><a href="CompilerOptlang.html">-lang qb</a></i> dialect unless referenced with the alias <tt><b>__Imagecreate</b></tt>.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> New to FreeBASIC<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgImageDestroy.html">ImageDestroy</a></tt><br \>
+<li> <tt><a href="KeyPgImageInfo.html">ImageInfo</a></tt><br \>
+<li> <tt><a href="KeyPgGetgraphics.html">Get (Graphics)</a></tt><br \>
+<li> <a href="GfxInternalFormats.html">Internal pixel formats</a><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

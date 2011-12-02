@@ -1,0 +1,88 @@
+<html>
+<head>
+<title>Format</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Format</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Formats a number in a specified format<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgFunction.html">Function</a> <b>Format</b> ( <a href="KeyPgByval.html">ByVal</a> <i>numerical_expression</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgDouble.html">Double</a>, <a href="KeyPgByref.html">ByRef</a> <i>formatting_expression</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgConstQualifier.html">Const</a> <a href="KeyPgString.html">String</a> = "</tt><tt>" ) <a href="KeyPgAs.html">As</a> <a href="KeyPgString.html">String</a><br \>
+</tt><br \>
+</div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
+#include "string.bi"<br \>
+<i>result</i> = <b>Format</b>[$]( <i>numerical_expression</i>, <i>formatting_expression</i> )<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+<tt><i>numerical_expression</i></tt><br \>
+<div class="fb_indent">number to format<br \>
+</div><tt><i>formatting_expression</i></tt><br \>
+<div class="fb_indent">formatting pattern pattern <br \>
+<br \>
+</div></div><div class="fb_sect_title">Return Value</div><div class="fb_sect_cont"><br \>
+<tt><b>Format</b></tt> returns a string with the result of the numerical expression formatted as indicated in the formatting expression.<br \>
+The formatting expression is a string that can yield numeric or date-time values.<br \>
+<br \>
+</div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+To recover meaningful date-time values the numerical expression must be a date serial obtained from the appropriate functions.<br \>
+This function is part of FreeBASIC, however it is not recognized by the compiler unless <tt>vbcompat.bi</tt> is included.<br \>
+<br \>
+"Numeric Formats"<br \>
+<div class="fb_indent"><div class="fb_table"><table><tr><td>Symbol </td><td> Description</td></tr><tr><td> Null string</td><td> General format (no formatting)</td></tr><tr><td>0</td><td> Digit placeholder: If the number has fewer digits than there are           zeros (on either side of the decimal) in the format expression, leading or trailing zeros are displayed. If there are more digits to the right of the decimal than zeros in the format, the number is rounded. If there are more digits to the left of the decimal than zeros in the format the digits are all displayed </td></tr><tr><td> #</td><td> Digit placeholder: Follows the same rules as for the 0 digit except the leading or trailing zeros are not displayed</td></tr><tr><td>.</td><td> Placeholder for decimal point.If the format contains only #'s to the left of . then numbers smaller than 1  are begun with a decimal point.</td></tr><tr><td> % </td><td> Percentage :The expression is multiplied by 100 and the % character is inserted.</td></tr><tr><td>,</td><td> Thousands separator. Two adjacent commas, or a comma immediately to the left of the decimal point location (whether there is a decimal specified or not) means 'Omit the three digits that fall between these  commas, or between the comma and the decimal point, rounding as needed.' </td></tr><tr><td> E- E+ e- e+ </td><td>Scientific format: If a format contains one digit placeholder (0 or #) to the right of an E-, E+, e-, or e+, the number is displayed in scientific  format and an E or e is inserted between the number and its exponent.The number of 0's or #'s to the right determines the number of digits in the exponent. Use E- or e- to place a minus sign next to negative exponents. Use a E+ or e+ to place a minus sign next to negative exponents and a plus sign next to positive exponents.</td></tr><tr><td> : ? + $ () space</td><td>   Display literal character  To display a character other than one of these, precede the character with a backslash (\) or enclose the character(s) in double quotation marks</td></tr><tr><td>\</td><td> Display next character in format string as it is </td></tr><tr><td>text between double quotes</td><td>  Displays the text inside the double quotes.</td></tr><tr><td> :</td><td> Time separator is used to separate hours, minutes, and seconds when time values are formatted.</td></tr><tr><td> /</td><td> The date separator is used to separate day,month, and year when date values are formatted.</td></tr></table></div><br \>
+<br \>
+</div>"Date-Time formats:"<br \>
+<div class="fb_indent"><div class="fb_table"><table><tr><td>Symbol </td><td> Description</td></tr><tr><td>d, dd</td><td> Display the day as a one-digit/two-digit number (1-31/01-31)</td></tr><tr><td>ddd</td><td> Display the day as an abbreviation (Sun-Sat)</td></tr><tr><td>dddd</td><td> Display the day as a full name (Sunday-Saturday)</td></tr><tr><td>ddddd</td><td>  Display a serial date number as a complete date (including day, month and year)</td></tr><tr><td>m, mm</td><td> Display the month as a one-digit/two-digit number (1-12/01-12).  If immediately following h or hh, the minute rather than the month is displayed</td></tr><tr><td>M, MM</td><td> Display the month as a one-digit/two-digit number (1-12/01-12), even if immediately following h or hh</td></tr><tr><td>mmm</td><td> Display the month as an abbreviation (Jan-Dec)</td></tr><tr><td>mmmm</td><td> Display the month as a full name (January-December)</td></tr><tr><td>y, yy</td><td> Display the year as a two-digit number (00-99)</td></tr><tr><td>yyyy</td><td> Display the year as a four-digit number (1900-2040)</td></tr><tr><td>h, hh</td><td> Display the hour as a one-digit/two-digit number (0-23/00-23)</td></tr><tr><td>m, mm</td><td> Display the minute as a one-digit/two-digit number (0-59/00-59).  If not immediately following h or hh, the month rather than the minute is displayed</td></tr><tr><td>n, nn</td><td> Display the minute as a one-digit/two-digit number (0-59/00-59), even if not immediately following h or hh</td></tr><tr><td>s, ss</td><td> Display the second as a one-digit/two-digit number (0-59/00-59)</td></tr><tr><td>ttttt</td><td> Display a time serial number as a complete time, including hour, minute and second</td></tr><tr><td>AM/PM (Default), am/pm</td><td> Use the 12-hour clock displaying AM or am with any hour before noon, PM or pm with any hour between noon and 11:59</td></tr><tr><td>A/P, a/p</td><td>  Use the 12-hour clock displaying A or a with any hour before noon, P or p with any hour between noon and 11:59 </td></tr></table></div><br \>
+<br \>
+<br \>
+</div></div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<pre class="fb_pre">
+Sample numeric formats
+Format (fmt)                  5             -5            .5
+	    
+	    Null String                   5             -5            0.5
+	    0                             5             -5            1
+	    0.00                          5.00          -5.00         0.50
+	    #,##0                         5             -5            1
+	    #,##0.00                      5.00          -5.00         0.50
+	    $#,##0;($#,##0)               $5            ($5)          $1
+	    $#,##0.00;($#,##0.00)         $5.00         ($5.00)       $0.50
+	    0%                            500%          -500%         50%
+	    0.00%                         500.00%       -500.00%      50.00%
+	    0.00E+00                      5.00E+00      -5.00E+00     5.00E-01
+	    0.00E-00                      5.00E00       -5.00E00      5.00E-01
+ Sample Date And Time Formats
+The following are examples of Date And Time formats:
+	     Format  Expression     Display
+	     m/d/yy                 12/7/58
+	     d-mmmm-yy              7-December-58
+	     d-mmmm                 7-December
+	     mmmm-yy                December-58
+	     h:mm AM/PM             8:50 PM
+	     h:mm:ss AM/PM          8:50:35 PM
+	     h:mm                   20:50
+	     h:mm:ss                20:50:35
+	     m/d/yy h:mm            12/7/58 20:50 
+</pre><br \>
+</div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
+None<br \>
+<br \>
+</div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> Does not exist in QB 4.5. This function appeared first in PDS 7.1<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgPrintusing.html">Print Using</a></tt><br \>
+<li> <tt><a href="KeyPgStr.html">Str</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

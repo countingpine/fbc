@@ -1,0 +1,120 @@
+<html>
+<head>
+<title>Get (Graphics)</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Get (Graphics)</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Gets a copy of a portion of the current work page or an image buffer<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<b>Get</b> [<i>source</i>,] [Step] (<i>x1</i>, <i>y1</i>) - [STEP] (<i>x2</i>, <i>y2</i>), <i>dest</i>]<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+<tt><i>source</i></tt><br \>
+<div class="fb_indent">the address of an image buffer.<br \>
+</div><tt>Step</tt><br \>
+<div class="fb_indent">indicates that the following co-ordinates are not absolute co-ordinates.<br \>
+</div><tt><i>x1</i></tt>,  <tt><i>y1</i></tt><br \>
+<div class="fb_indent">co-ordinates of the upper-left corner of the sub-image to copy.<br \>
+</div><tt><i>x2</i></tt>,  <tt><i>y2</i></tt><br \>
+<div class="fb_indent">co-ordinates of the lower-right corner of the sub-image to copy.<br \>
+</div><tt><i>dest</i></tt><br \>
+<div class="fb_indent">the address of a previously allocated buffer to store the image data.<br \>
+<br \>
+</div></div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+<tt><b>Get</b></tt> copies a rectangular portion of the current work page specified by the co-ordinates (<tt><i>x1</i></tt>,  <tt><i>y1</i></tt>) and (<tt><i>x2</i></tt>,  <tt><i>y2</i></tt>), which represent the upper-left and lower-right corners of the rectangle, respectively. <tt><b>Step</b></tt> specifies that the upper-left co-ordinates are relative to the current graphics pen location, and/or that the lower-right co-ordinates are relative to the upper-left co-ordinates. The new image buffer is formatted to match the current screen mode <a href="GfxInternalFormats.html">pixel format</a>.<br \>
+<br \>
+<tt><i>dest</i></tt> can be an address, an <a href="ProPgArrays.html">array</a>, or a reference to the first element in an <a href="ProPgArrays.html">array</a> that will receive the new image buffer. This memory must be sufficiently allocated to hold the image buffer; the number of bytes required varies with the <a href="CompilerOptlang.html">-lang dialect</a> used to compile the program.<br \>
+<br \>
+<tt><i>source</i></tt> can be an address, an <a href="ProPgArrays.html">array</a>, or a reference to the first element in an <a href="ProPgArrays.html">array</a> that holds an image buffer to retrieve a portion of. <tt><i>x1</i></tt>,  <tt><i>y1</i></tt>, <tt><i>x2</i></tt>,  <tt><i>y2</i></tt>, <tt><b>Step</b></tt> and <tt><i>dest</i></tt> have the same meaning in this case.<br \>
+<br \>
+The co-ordinates of the rectangle are affected by the most recent <tt><a href="KeyPgWindow.html">Window</a></tt> and <tt><a href="KeyPgViewgraphics.html">View (Graphics)</a></tt> statements, and must both be within the current clipping region set by <tt><a href="KeyPgViewgraphics.html">View (Graphics)</a></tt>, otherwise an illegal function call runtime error will be triggered, and the function will have no effect.<br \>
+<br \>
+<b>Runtime errors:</b><br \>
+<tt><b>Get</b></tt> throws one of the following <a href="ProPgErrorHandling.html">runtime errors</a>:<br \>
+<br \>
+<i>(<tt>1</tt>) Illegal function call</i><br \>
+<ul><ul><li> <tt><i>dest</i></tt> is an array, but is not big enough to hold the image buffer.<br \>
+<li> The upper-left or lower-right co-ordinates of the rectangle are outside the current clipping region. See <tt><a href="KeyPgViewgraphics.html">View (Graphics)</a></tt>.<br \>
+<br \>
+</ul></ul></div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
+There are 2 types of buffers (details see GfxInternalFormats) depending from FB dialect used:<br \>
+<br \>
+<ul><li> In the <i><a href="CompilerOptlang.html">-lang fb</a></i> dialect, <tt><i>dest</i></tt> receives a new-style image buffer, which consists of a 32-byte image header followed by pixel data which is row-padded to the next paragraph boundary (16 bytes). Use the following formula to calculate the total size, in bytes, required to store the image buffer, where <tt>w</tt> and <tt>h</tt> are the respective width and height of the rectangular portion of the current work page or source image buffer, and <tt>bpp</tt> is the number of bytes per pixel of the current screen mode:<br \>
+</ul><div class="fb_indent"><tt>size = 32 + (((w * bpp + &hF) and not &hF) * h)</tt><br \>
+<br \>
+</div><ul><li> In the <i><a href="CompilerOptlang.html">-lang qb</a></i> and <i><a href="CompilerOptlang.html">-lang fblite</a></i> dialects, <tt><i>dest</i></tt> receives a QB-style image buffer, which consists of a 4-byte image header followed by pixel data which is not row-padded. Use the following formula to calculate the total size, in bytes, required to store the image buffer, where <tt>w</tt> and <tt>h</tt> are the respective width and height of the rectangular portion of the current work page or source image buffer, and <tt>bpp</tt> is the number of bytes per pixel of the current screen mode:<br \>
+</ul><div class="fb_indent"><tt>size = 4 + (w * h * bpp)</tt><br \>
+<br \>
+</div></div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="def">#include&nbsp;once&nbsp;"fbgfx.bi"<br />
+</span><br />
+<span class="com">''&nbsp;Setup&nbsp;a&nbsp;400x300&nbsp;32bit&nbsp;screen</span><br />
+<span class="key">ScreenRes</span>&nbsp;<span class="num">400</span><span class="oth">,</span>&nbsp;<span class="num">300</span><span class="oth">,</span>&nbsp;<span class="num">32</span><br />
+<br />
+<span class="com">''&nbsp;First&nbsp;draw&nbsp;funny&nbsp;stuff...</span><br />
+<span class="key">Line</span>&nbsp;<span class="oth">(</span><span class="num">10</span><span class="oth">,</span><span class="num">10</span><span class="oth">)-(</span><span class="num">140</span><span class="oth">,</span><span class="num">30</span><span class="oth">),</span>&nbsp;<span class="key">RGB</span><span class="oth">(</span><span class="num">255</span><span class="oth">,</span><span class="num">255</span><span class="oth">,</span><span class="num">0</span><span class="oth">),</span>&nbsp;<span class="wrd">bf</span><br />
+<span class="key">Draw</span>&nbsp;<span class="key">String</span>&nbsp;<span class="oth">(</span><span class="num">20</span><span class="oth">,</span>&nbsp;<span class="num">20</span><span class="oth">),</span>&nbsp;<span class="quo">"Hello&nbsp;there!"</span><span class="oth">,</span>&nbsp;<span class="key">RGB</span><span class="oth">(</span><span class="num">255</span><span class="oth">,</span><span class="num">0</span><span class="oth">,</span><span class="num">0</span><span class="oth">)</span><br />
+<br />
+<span class="com">''&nbsp;Now&nbsp;capture&nbsp;a&nbsp;150x50&nbsp;block&nbsp;from&nbsp;the&nbsp;top-left&nbsp;of&nbsp;the&nbsp;screen&nbsp;into&nbsp;an&nbsp;image</span><br />
+<span class="com">''&nbsp;buffer&nbsp;with&nbsp;GET...</span><br />
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">fb.Image</span>&nbsp;<span class="key">Ptr</span>&nbsp;<span class="wrd">image</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">ImageCreate</span><span class="oth">(</span><span class="num">150</span><span class="oth">,</span>&nbsp;<span class="num">50</span><span class="oth">)</span><br />
+<span class="key">Get</span>&nbsp;<span class="oth">(</span><span class="num">1</span><span class="oth">,</span><span class="num">1</span><span class="oth">)-(</span><span class="num">150</span><span class="oth">,</span><span class="num">50</span><span class="oth">),</span>&nbsp;<span class="wrd">image</span><br />
+<br />
+<span class="com">''&nbsp;And&nbsp;duplicate&nbsp;it&nbsp;all&nbsp;over&nbsp;the&nbsp;place!</span><br />
+<span class="key">Put</span>&nbsp;<span class="oth">(</span><span class="num">1</span><span class="oth">,</span><span class="num">50</span><span class="oth">),</span>&nbsp;<span class="wrd">image</span><br />
+<span class="key">Put</span>&nbsp;<span class="oth">(</span><span class="num">1</span><span class="oth">,</span><span class="num">100</span><span class="oth">),</span>&nbsp;<span class="wrd">image</span><br />
+<span class="key">Put</span>&nbsp;<span class="oth">(</span><span class="num">1</span><span class="oth">,</span><span class="num">150</span><span class="oth">),</span>&nbsp;<span class="wrd">image</span><br />
+<span class="key">Put</span>&nbsp;<span class="oth">(</span><span class="num">1</span><span class="oth">,</span><span class="num">200</span><span class="oth">),</span>&nbsp;<span class="wrd">image</span><br />
+<span class="key">Put</span>&nbsp;<span class="oth">(</span><span class="num">1</span><span class="oth">,</span><span class="num">250</span><span class="oth">),</span>&nbsp;<span class="wrd">image</span><br />
+<span class="key">Put</span>&nbsp;<span class="oth">(</span><span class="num">150</span><span class="oth">,</span><span class="num">1</span><span class="oth">),</span>&nbsp;<span class="wrd">image</span><br />
+<span class="key">Put</span>&nbsp;<span class="oth">(</span><span class="num">150</span><span class="oth">,</span><span class="num">50</span><span class="oth">),</span>&nbsp;<span class="wrd">image</span><br />
+<span class="key">Put</span>&nbsp;<span class="oth">(</span><span class="num">150</span><span class="oth">,</span><span class="num">100</span><span class="oth">),</span>&nbsp;<span class="wrd">image</span><br />
+<span class="key">Put</span>&nbsp;<span class="oth">(</span><span class="num">150</span><span class="oth">,</span><span class="num">150</span><span class="oth">),</span>&nbsp;<span class="wrd">image</span><br />
+<span class="key">Put</span>&nbsp;<span class="oth">(</span><span class="num">150</span><span class="oth">,</span><span class="num">200</span><span class="oth">),</span>&nbsp;<span class="wrd">image</span><br />
+<span class="key">Put</span>&nbsp;<span class="oth">(</span><span class="num">150</span><span class="oth">,</span><span class="num">250</span><span class="oth">),</span>&nbsp;<span class="wrd">image</span><br />
+<br />
+<span class="com">''&nbsp;And&nbsp;a&nbsp;frame&nbsp;around&nbsp;a&nbsp;whole&nbsp;screen..</span><br />
+<span class="key">Line</span>&nbsp;<span class="oth">(</span><span class="num">1</span><span class="oth">,</span><span class="num">1</span><span class="oth">)-(</span><span class="num">400</span><span class="oth">-</span><span class="num">1</span><span class="oth">,</span><span class="num">300</span><span class="oth">-</span><span class="num">1</span><span class="oth">),</span>&nbsp;<span class="key">RGB</span><span class="oth">(</span><span class="num">255</span><span class="oth">,</span><span class="num">255</span><span class="oth">,</span><span class="num">0</span><span class="oth">),</span>&nbsp;<span class="wrd">b</span><br />
+<br />
+<span class="com">''&nbsp;Now&nbsp;get&nbsp;the&nbsp;whole&nbsp;screen...</span><br />
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">fb.Image</span>&nbsp;<span class="key">Ptr</span>&nbsp;<span class="wrd">big</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">ImageCreate</span><span class="oth">(</span><span class="num">400</span><span class="oth">,</span>&nbsp;<span class="num">300</span><span class="oth">)</span><br />
+<span class="key">Get</span>&nbsp;<span class="oth">(</span><span class="num">1</span><span class="oth">,</span><span class="num">1</span><span class="oth">)-(</span><span class="num">400</span><span class="oth">-</span><span class="num">1</span><span class="oth">,</span><span class="num">300</span><span class="oth">-</span><span class="num">1</span><span class="oth">),</span>&nbsp;<span class="wrd">big</span><br />
+<br />
+<span class="com">''&nbsp;And&nbsp;display&nbsp;that&nbsp;"screenshot"&nbsp;as&nbsp;if&nbsp;it&nbsp;was&nbsp;scrolling&nbsp;by...</span><br />
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="wrd">x</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="oth">-</span><span class="num">350</span><br />
+<span class="key">While</span>&nbsp;<span class="oth">((</span><span class="key">Inkey</span><span class="oth">()</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="quo">""</span><span class="oth">)</span>&nbsp;<span class="key">And</span>&nbsp;<span class="oth">(</span><span class="wrd">x</span>&nbsp;<span class="oth">&lt;</span>&nbsp;<span class="num">350</span><span class="oth">))</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">ScreenLock</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Cls</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Put</span>&nbsp;<span class="oth">(</span><span class="wrd">x</span><span class="oth">,</span><span class="num">1</span><span class="oth">),</span>&nbsp;<span class="wrd">big</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">ScreenUnlock</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Sleep</span>&nbsp;<span class="num">100</span><span class="oth">,</span>&nbsp;<span class="num">1</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">x</span>&nbsp;<span class="oth">+=</span>&nbsp;<span class="num">10</span><br />
+<span class="key">Wend</span><br />
+</div></tt><br />
+<br \>
+</div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgPutgraphics.html">Put (Graphics)</a></tt><br \>
+<li> <tt><a href="KeyPgGetfileio.html">Get (File I/O)</a></tt><br \>
+<li> <tt><a href="KeyPgScreengraphics.html">Screen (Graphics)</a></tt><br \>
+<li> <tt><a href="KeyPgWindow.html">Window</a></tt><br \>
+<li> <tt><a href="KeyPgViewgraphics.html">View (Graphics)</a></tt><br \>
+<li> <a href="GfxInternalFormats.html">Internal graphics formats</a><br \>
+<br \>
+</ul><br \>
+</div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

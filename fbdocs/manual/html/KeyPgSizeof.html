@@ -1,0 +1,55 @@
+<html>
+<head>
+<title>SizeOf</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">SizeOf</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Returns the size of a variable or type in bytes.<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<b>SizeOf</b> ( <i>variable</i> | <a href="DataType.html">DataType</a> )<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+The <tt><b>SizeOf</b></tt> operator returns the number of bytes taken up by a <tt><i>variable</i></tt> or <tt><a href="DataType.html">DataType</a></tt>.<br \>
+<br \>
+Different from <tt><a href="KeyPgLen.html">Len</a></tt>, when used with fixed-length strings (including fixed-length <tt><a href="KeyPgZstring.html">ZString</a></tt>s and <tt><a href="KeyPgWstring.html">WString</a></tt>s) it will return the number of bytes they use, and when used with variable-length strings, it will return the size of the string descriptor.<br \>
+<br \>
+Note: When used with arrays, <tt><b>SizeOf</b></tt> returns the size of a single element of the array.  This differs from its behavior in C, where arrays could only be a fixed size, and <tt>sizeof()</tt> would return the number of it used.<br \>
+For clarity, it is recommended that you avoid this potential confusion, and use <tt><b>SizeOf</b></tt> directly on an array element, rather than the whole array.<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="key">Print</span>&nbsp;<span class="key">SizeOf</span><span class="oth">(</span><span class="key">Byte</span><span class="oth">)</span>&nbsp;<span class="com">'&nbsp;returns&nbsp;1</span><br />
+</div></tt><br />
+<tt><div class="freebasic">
+<span class="key">Type</span>&nbsp;<span class="wrd">bar</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">a</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">b</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Double</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Type</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">foo</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">bar</span><br />
+<span class="key">Print</span>&nbsp;<span class="key">SizeOf</span><span class="oth">(</span><span class="wrd">foo</span><span class="oth">)</span><br />
+</div></tt><br />
+<br \>
+<br \>
+</div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
+<ul><li> Not available in the <i><a href="CompilerOptlang.html">-lang qb</a></i> dialect unless referenced with the alias <tt><b>__Sizeof</b></tt>.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> New to FreeBASIC<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgLen.html">Len</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

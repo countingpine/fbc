@@ -1,0 +1,67 @@
+<html>
+<head>
+<title>#include</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">#include</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Preprocessor statement to include contents of another source file<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<b>#include</b> [once] <i>"file"</i><br \>
+</tt><br \>
+</div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+<tt><b>#include</b></tt> inserts source code from another file at the point where the <tt><b>#include</b></tt> directive appears.  This has the effect of compiling the source code from the include file as though it were part of the source file that includes it.  Once the compiler has reached the end of the include file, the original source file continues to be compiled.<br \>
+<br \>
+This is useful to remove code from a file and separate it into more files. It is useful to have a single file with declarations in a program formed by several modules. You may include files within an include file, although avoid including the original file into itself, this will not produce valid results. Typically, include files will have an extension of <tt>.bi</tt> and are mainly used for declaring subs/functions/variables of a library, but any valid source code may be present in an include file.<br \>
+<br \>
+The <tt><b>once</b></tt> specifier tells the compiler to include the file only once even if it is included several times by the source code.<br \>
+<br \>
+<tt><a href="KeyPgMetaInclude.html">$Include</a></tt> is an alternative form of <tt><b>include</b></tt>, existing only for compatibility with QuickBASIC. It is recommended to use <tt><b>#include</b></tt> instead.<br \>
+<br \>
+The compiler will automatically convert path separator characters ( '<b><tt>/</tt></b>' and '<b><tt>\</tt></b>' ) as needed to properly load the file.  The filename name may be an absolute or relative path.  <br \>
+<br \>
+For relative paths, or where no path is given at all, the include file is search for in the following order:<br \>
+<ul><li> Relative from the directory of the source file<br \>
+<li> Relative from the current working directory<br \>
+<li> Relative from addition directories specified with the <i><a href="CompilerOpti.html">-i</a></i> command line option<br \>
+<li> The include folder of the FreeBASIC installation (<tt><b>FreeBASIC\inc</b></tt>, where <tt><b>FreeBASIC</b></tt> is the folder where the <tt><b>fbc</b></tt> executable is located)<br \>
+<br \>
+</ul></div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="com">'&nbsp;header.bi&nbsp;file</span><br />
+<span class="key">Type</span>&nbsp;<span class="wrd">FooType</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">Bar</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Byte</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">Barbeque</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Byte</span>&nbsp;<br />
+<span class="key">End</span>&nbsp;<span class="key">Type</span><br />
+</div></tt><br />
+<br \>
+<tt><div class="freebasic">
+<span class="com">'&nbsp;main.bas&nbsp;file</span><br />
+<span class="def">#include&nbsp;"header.bi"<br />
+</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">Foo</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">FooType</span><br />
+<br />
+<span class="wrd">Foo.Bar</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">1</span><br />
+<span class="wrd">Foo.Barbeque</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">2</span><br />
+</div></tt><br />
+</div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> New to FreeBASIC<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgPpdefine.html">#define</a></tt><br \>
+<li> <tt><a href="KeyPgInclib.html">#inclib</a></tt><br \>
+<li> <a href="CompilerOpti.html">Compiler Option: -i</a><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

@@ -1,0 +1,78 @@
+<html>
+<head>
+<title>FileDateTime</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">FileDateTime</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Returns the last modified date and time of a file as <a href="ProPgDates.html">Date Serial</a> <br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgFunction.html">Function</a> <b>FileDateTime</b> ( <a href="KeyPgByval.html">ByVal</a> <i>filename</i> <a href="KeyPgAs.html">As</a> <a href="KeyPgZstring.html">ZString</a> <a href="KeyPgPtr.html">Ptr</a> ) <a href="KeyPgAs.html">As</a> <a href="KeyPgDouble.html">Double</a><br \>
+</tt><br \>
+</div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
+#include "file.bi"<br \>
+<i>result</i> = <b>FileDateTime</b>( <i>filename</i> )<br \>
+</tt><br \>
+<i>or</i><br \>
+<tt><br \>
+#include "vbcompat.bi"<br \>
+<i>result</i> = <b>FileDateTime</b>( <i>filename</i> )<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+<tt><i>filename</i></tt><br \>
+<div class="fb_indent">Filename to retrieve date and time for.<br \>
+<br \>
+</div></div><div class="fb_sect_title">Return Value</div><div class="fb_sect_cont"><br \>
+Returns a <a href="ProPgDates.html">Date Serial</a>.<br \>
+<br \>
+</div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+Returns the file's last modified date and time as <a href="ProPgDates.html">Date Serial</a>.<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="def">#include&nbsp;"vbcompat.bi"<br />
+</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">filename</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span><span class="oth">,</span>&nbsp;<span class="wrd">d</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Double</span><br />
+<br />
+<span class="key">Print</span>&nbsp;<span class="quo">"Enter&nbsp;a&nbsp;filename:&nbsp;"</span><br />
+<span class="key">Line</span>&nbsp;<span class="key">Input</span>&nbsp;<span class="wrd">filename</span><br />
+<br />
+<span class="key">If</span>&nbsp;<span class="key">FileExists</span><span class="oth">(</span>&nbsp;<span class="wrd">filename</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="key">Then</span><br />
+<br />
+&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"File&nbsp;last&nbsp;modified:&nbsp;"</span><span class="oth">;</span><br />
+<br />
+&nbsp;&nbsp;<span class="wrd">d</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">FileDateTime</span><span class="oth">(</span>&nbsp;<span class="wrd">filename</span>&nbsp;<span class="oth">)</span><br />
+<br />
+&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="key">Format</span><span class="oth">(</span>&nbsp;<span class="wrd">d</span><span class="oth">,</span>&nbsp;<span class="quo">"yyyy-mm-dd&nbsp;hh:mm&nbsp;AM/PM"</span>&nbsp;<span class="oth">)</span><br />
+<br />
+<span class="key">Else</span><br />
+<br />
+&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"File&nbsp;not&nbsp;found"</span><br />
+<br />
+<span class="key">End</span>&nbsp;<span class="key">If</span><br />
+</div></tt><br />
+<br \>
+</div><div class="fb_sect_title">Platform Differences</div><div class="fb_sect_cont"><br \>
+<ul><li> Linux requires the <tt><i>filename</i></tt> case matches the real name of the file. Windows and DOS are case insensitive. <br \>
+<li> Path separators in Linux are forward slashes <tt>/</tt> . Windows uses backward slashes <tt>\</tt> but it allows forward slashes.  DOS uses backward slashes <tt>/</tt>.<br \>
+<br \>
+<br \>
+</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> New to FreeBASIC<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <a href="ProPgDates.html">Date Serials</a><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

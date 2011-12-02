@@ -1,0 +1,75 @@
+<html>
+<head>
+<title>Export</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Export</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Declaration specifier to indicate that a procedure in a DLL should be visible from other programs<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+{ <a href="KeyPgSub.html">Sub</a> | <a href="KeyPgFunction.html">Function</a> } <i>proc_name</i> ( <i>argumentlist</i> ) [ <a href="KeyPgAs.html">As</a> <a href="DataType.html">datatype</a> ] <b>Export</b><br \>
+</tt><br \>
+</div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+If a function is declared with this clause in a DLL, it is added to the public export table, so external programs can dynamically link to it using <a href="KeyPgDylibsymbol.html">DyLibSymbol</a>.<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="com">''&nbsp;mydll.dll</span><br />
+<br />
+<span class="com">''&nbsp;in&nbsp;the&nbsp;DLL&nbsp;the&nbsp;function&nbsp;must&nbsp;be&nbsp;declared&nbsp;as&nbsp;export</span><br />
+<br />
+<span class="key">Function</span>&nbsp;<span class="wrd">AddNumbers</span>&nbsp;<span class="key">Alias</span>&nbsp;<span class="quo">"AddNumbers"</span>&nbsp;<span class="wrd">_</span><br />
+&nbsp;&nbsp;<span class="oth">(</span>&nbsp;<span class="wrd">_</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">ByVal</span>&nbsp;<span class="wrd">operand1</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">,</span>&nbsp;<span class="key">ByVal</span>&nbsp;<span class="wrd">operand2</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="wrd">_</span><br />
+&nbsp;&nbsp;<span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="key">Export</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;<span class="wrd">AddNumbers</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="wrd">operand1</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="wrd">operand2</span><br />
+<br />
+<span class="key">End</span>&nbsp;<span class="key">Function</span><br />
+</div></tt><br />
+<br \>
+<tt><div class="freebasic">
+<span class="com">''&nbsp;create&nbsp;a&nbsp;function&nbsp;pointer,&nbsp;arguments&nbsp;must&nbsp;be&nbsp;the&nbsp;same&nbsp;type</span><br />
+<span class="com">''&nbsp;as&nbsp;in&nbsp;the&nbsp;original&nbsp;function</span><br />
+<br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">AddNumbers</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Function</span>&nbsp;<span class="oth">(</span>&nbsp;<span class="key">ByVal</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><span class="oth">,</span>&nbsp;<span class="key">ByVal</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">hndl</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Any</span>&nbsp;<span class="key">Ptr</span><br />
+<br />
+<span class="wrd">hndl</span><span class="oth">=</span><span class="key">DyLibLoad</span><span class="oth">(</span><span class="quo">"mydll.dll"</span><span class="oth">)</span><br />
+<br />
+<span class="com">''&nbsp;find&nbsp;the&nbsp;proc&nbsp;address&nbsp;(case&nbsp;matters!)</span><br />
+<span class="wrd">AddNumbers</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">DyLibSymbol</span><span class="oth">(</span>&nbsp;<span class="wrd">hndl</span><span class="oth">,</span>&nbsp;<span class="quo">"AddNumbers"</span>&nbsp;<span class="oth">)</span><br />
+<br />
+<span class="com">''&nbsp;then&nbsp;call&nbsp;it&nbsp;...</span><br />
+<span class="key">Print</span>&nbsp;<span class="quo">"1&nbsp;+&nbsp;2&nbsp;=&nbsp;"</span>&nbsp;<span class="oth">&amp;</span>&nbsp;<span class="wrd">AddNumbers</span><span class="oth">(</span>&nbsp;<span class="num">1</span><span class="oth">,</span>&nbsp;<span class="num">2</span>&nbsp;<span class="oth">)</span><br />
+<br />
+<span class="key">Sleep</span><br />
+</div></tt><br />
+<br \>
+</div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
+<ul><li> Not available in the <i><a href="CompilerOptlang.html">-lang qb</a></i> dialect unless referenced with the alias <tt><b>__Export</b></tt>.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">Platform Differences</div><div class="fb_sect_cont"><br \>
+<ul><li> Dynamic link libraries are not available in DOS, as the OS doesn't support them.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> New to Freebasic<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgDylibload.html">DyLibLoad</a></tt><br \>
+<li> <tt><a href="KeyPgDylibsymbol.html">DyLibSymbol</a></tt><br \>
+<li> <tt><a href="KeyPgAlias.html">Alias</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

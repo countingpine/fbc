@@ -1,0 +1,54 @@
+<html>
+<head>
+<title>Coercion and Conversion</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Coercion and Conversion</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Coercion of Numeric Data Types in Expressions.<br \>
+<br \>
+When two different data types are used in a binary operation, like <tt><i>+</i></tt> (Addition) or <tt><i>=</i></tt> (Assignment), the smaller data type is automatically promoted to the larger data type regardless of the order in which the arguments are given.  <br \>
+<br \>
+Promotions are as follows:<br \>
+<ul><li> where both arguments are each one of byte, ubyte, short, ushort, or integer: the smaller sized argument is promoted to have the same size as the larger sized argument.<br \>
+<li> where one of the arguments is longint or ulongint, and the other argument is of any integer type, the smaller sized argument is promoted to have the same size as the larger sized argument.<br \>
+<li> where one of the arguments is a single or a double, both arguments are converted and/or promoted to double<br \>
+<br \>
+</ul>All unsigned integer types are handling like signed integer types for the purpose of promotion, and the most significant bit is extended (sign extension).<br \>
+<br \>
+<b>Conversion of Numeric Data Types</b><br \>
+<br \>
+A type conversion will occur implicitly when an expression or variable is assigned, passed as a parameter to a procedure, or returned as a result from a procedure. Conversions may also be explicit when using CAST or one of the built-in conversion functions.<br \>
+<br \>
+<u>Integer To Integer, any combination of Signed and Unsigned</u><br \>
+<ul><li> Any integer type to a smaller integer type: least significant bits are retained<br \>
+<li> Any integer type to a larger integer type: sign extended to fill most significant bits<br \>
+<br \>
+</ul><u>Integer to Single or Double</u><br \>
+<ul><li> Possible loss of precision<br \>
+<br \>
+</ul><u>Double to Single</u><br \>
+<ul><li> Possible loss of precision<br \>
+<li> If the value of the Double exceeds the range of a Single result is +/- INF<br \>
+<br \>
+</ul><u>Double or Single to Integer</u><br \>
+<ul><li> Possible loss of precision<br \>
+<li> If the value of the floating point number exceeds the range of the target type are results are undefined.  A run-time error is not raised.<br \>
+<br \>
+</ul><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <a href="CatPgStdDataTypes.html">Standard Data Types</a><br \>
+<li> <a href="TblVarTypes.html">Variable Types</a><br \>
+<li> <a href="CatPgCasting.html">Casting and Conversion Functions</a><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

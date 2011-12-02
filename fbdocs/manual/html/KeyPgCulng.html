@@ -1,0 +1,85 @@
+<html>
+<head>
+<title>CULng</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">CULng</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Converts numeric or string expression to <tt><a href="KeyPgUlong.html">Ulong</a></tt> having the same size as <tt><a href="KeyPgSizeof.html">SizeOf</a>(<a href="KeyPgAny.html">Any</a> <a href="KeyPgPtr.html">Ptr</a>)</tt><br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgFunction.html">Function</a> <b>CULng</b> ( <a href="KeyPgByval.html">ByVal</a> <i>expression</i> <a href="KeyPgAs.html">As</a> <a href="DataType.html">datatype</a> ) <a href="KeyPgAs.html">As</a> <a href="KeyPgUlong.html">Ulong</a><br \>
+<br \>
+<a href="KeyPgType.html">Type</a> <i>typename</i><br \>
+<div class="fb_indent"><a href="KeyPgDeclare.html">Declare</a> <a href="KeyPgOperator.html">Operator</a> <a href="KeyPgCast.html">Cast</a> ( ) <a href="KeyPgAs.html">As</a> <a href="KeyPgUlong.html">Ulong</a><br \>
+</div>End Type<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Usage</div><div class="fb_sect_cont"><tt><br \>
+<i>result</i> = <b>CULng</b>( <i>numeric expression</i> )<br \>
+<i>result</i> = <b>CULng</b>( <i>string expression</i> )<br \>
+<i>result</i> = <b>CULng</b>( <i>user defined type</i> )<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+<tt><i>expression</i></tt><br \>
+<div class="fb_indent">a numeric, string, or pointer expression to cast to a <tt><a href="KeyPgUlong.html">Ulong</a></tt> value<br \>
+</div><tt><i>datatype</i></tt><br \>
+<div class="fb_indent">any numeric, string, or pointer data type<br \>
+</div><tt><i>typename</i></tt><br \>
+<div class="fb_indent">a user defined type<br \>
+<br \>
+</div></div><div class="fb_sect_title">Return Value</div><div class="fb_sect_cont"><br \>
+A <tt><a href="KeyPgUlong.html">Ulong</a></tt> value.<br \>
+<br \>
+</div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+The <tt><b>CULng</b></tt> function rounds off the decimal part and returns a 32 bit <tt><a href="KeyPgUinteger.html">UInteger</a></tt> or 64 bit <tt><a href="KeyPgUlongint.html">ULongInt</a></tt> value. The function does not check for an overflow. The name can be explained as 'Convert to Unsigned LoNG'.<br \>
+<br \>
+If the argument is a string expression, it is converted to numeric by using <tt><a href="KeyPgValuint.html">ValUInt</a></tt> or <tt><a href="KeyPgValulng.html">ValULng</a></tt>.<br \>
+<br \>
+<tt><a href="KeyPgUlong.html">Ulong</a></tt> has the same size as <tt><a href="KeyPgSizeof.html">SizeOf</a>(<a href="KeyPgAny.html">Any</a> <a href="KeyPgPtr.html">Ptr</a>)</tt>.<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="com">'&nbsp;Using&nbsp;the&nbsp;CULNG&nbsp;function&nbsp;to&nbsp;convert&nbsp;a&nbsp;numeric&nbsp;value</span><br />
+<br />
+<span class="com">'Create&nbsp;an&nbsp;UNSIGNED&nbsp;LONG&nbsp;variable</span><br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">numeric_value</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">ULONG</span><br />
+<br />
+<span class="com">'Convert&nbsp;a&nbsp;numeric&nbsp;value</span><br />
+<span class="wrd">numeric_value</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">CULng</span><span class="oth">(</span><span class="num">300.23</span><span class="oth">)</span><br />
+<br />
+<span class="com">'Print&nbsp;the&nbsp;result&nbsp;=&nbsp;300</span><br />
+<span class="key">Print</span>&nbsp;<span class="wrd">numeric_value</span><br />
+<span class="key">Sleep</span><br />
+</div></tt><br />
+<br \>
+</div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
+<ul><li> Not available in the <i><a href="CompilerOptlang.html">-lang qb</a></i> dialect unless referenced with the alias <tt><b>__Culng</b></tt>.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> New to FreeBASIC<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgCbyte.html">CByte</a></tt><br \>
+<li> <tt><a href="KeyPgCubyte.html">CUByte</a></tt><br \>
+<li> <tt><a href="KeyPgCshort.html">CShort</a></tt><br \>
+<li> <tt><a href="KeyPgCushort.html">CUShort</a></tt><br \>
+<li> <tt><a href="KeyPgCint.html">CInt</a></tt><br \>
+<li> <tt><a href="KeyPgCuint.html">CUInt</a></tt><br \>
+<li> <tt><a href="KeyPgClng.html">CLng</a></tt><br \>
+<li> <tt><a href="KeyPgClngint.html">CLngInt</a></tt><br \>
+<li> <tt><a href="KeyPgCulngint.html">CULngInt</a></tt><br \>
+<li> <tt><a href="KeyPgCsng.html">CSng</a></tt><br \>
+<li> <tt><a href="KeyPgCdbl.html">CDbl</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

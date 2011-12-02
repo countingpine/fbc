@@ -1,0 +1,113 @@
+<html>
+<head>
+<title>With</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">With</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Statement block to allow implicit access to fields in a user defined type variable<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<b>With</b> <i>user_defined_var</i><br \>
+<div class="fb_indent"><i>statements</i><br \>
+</div><b>End With</b><br \>
+</tt><br \>
+</div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+The <tt><b>With...End With</b></tt> block allows the omission of the name of a variable of a user-defined <tt><a href="KeyPgType.html">Type</a></tt> when referring to its fields. The fields may then be accessed with just a single period (<tt>.</tt>) before them, e.g. if the <tt><a href="KeyPgType.html">Type</a></tt> contains an field element called "<i><tt>element</tt></i>", then it could be accessed within the <tt><b>With</b></tt> block as "<tt><i>.element</i></tt>".<br \>
+<br \>
+It can be used as a shorthand to save typing and avoid cluttering the source. <tt><b>With</b></tt> can also be used with dereferenced pointers, as the second example shows.<br \>
+<br \>
+<tt><b>With</b></tt> blocks may be nested.  In this case, only the innermost <tt><b>With</b></tt> block is active, and any outer ones are ignored until the inner one is closed again.  See the third example for an illustration of this.<br \>
+<br \>
+Internally, a reference to the variable is taken at the start of the <tt><b>With</b></tt> block, and then is used to calculate any element accesses within the block.  Note that this means that <tt><a href="KeyPgGoto.html">Goto</a></tt> should not be used to jump into a <tt><b>With</b></tt> block, otherwise the reference will not have been set, and the results of trying to access it will be undefined.<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="key">Type</span>&nbsp;<span class="wrd">rect_type</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">x</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Single</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">y</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Single</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Type</span><br />
+<br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">the_rectangle</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">rect_type</span><br />
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="wrd">temp</span><span class="oth">,</span>&nbsp;<span class="wrd">t</span><br />
+<br />
+<span class="key">With</span>&nbsp;<span class="wrd">the_rectangle</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">temp</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="oth">.</span><span class="wrd">x</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">.</span><span class="wrd">x</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">234</span>&nbsp;<span class="oth">*</span>&nbsp;<span class="wrd">t</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="num">48</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="oth">.</span><span class="wrd">y</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">.</span><span class="wrd">y</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">321</span>&nbsp;<span class="oth">*</span>&nbsp;<span class="wrd">t</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="num">2</span><br />
+<span class="key">End</span>&nbsp;<span class="key">With</span><br />
+</div></tt><br />
+<br \>
+<tt><div class="freebasic">
+<span class="key">Type</span>&nbsp;<span class="wrd">rect_type</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">x</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Single</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">y</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Single</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Type</span><br />
+<br />
+<span class="key">Dim</span>&nbsp;<span class="wrd">the_rectangle</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">rect_type</span>&nbsp;<span class="key">Ptr</span><br />
+<br />
+<span class="wrd">the_rectangle</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">CAllocate</span><span class="oth">(</span>&nbsp;<span class="num">5</span>&nbsp;<span class="oth">*</span>&nbsp;<span class="key">Len</span><span class="oth">(</span>&nbsp;<span class="wrd">rect_type</span>&nbsp;<span class="oth">)</span>&nbsp;<span class="oth">)</span><br />
+<br />
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span>&nbsp;<span class="wrd">loopvar</span><span class="oth">,</span>&nbsp;<span class="wrd">temp</span><span class="oth">,</span>&nbsp;<span class="wrd">t</span><br />
+<br />
+<span class="key">For</span>&nbsp;<span class="wrd">loopvar</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">0</span>&nbsp;<span class="key">To</span>&nbsp;<span class="num">4</span><br />
+<br />
+&nbsp;&nbsp;<span class="key">With</span>&nbsp;<span class="wrd">the_rectangle</span><span class="oth">[</span><span class="wrd">loopvar</span><span class="oth">]</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">temp</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="oth">.</span><span class="wrd">x</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">.</span><span class="wrd">x</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">234</span>&nbsp;<span class="oth">*</span>&nbsp;<span class="wrd">t</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="num">48</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="oth">.</span><span class="wrd">y</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">.</span><span class="wrd">y</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">321</span>&nbsp;<span class="oth">*</span>&nbsp;<span class="wrd">t</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="num">2</span><br />
+<br />
+&nbsp;&nbsp;<span class="key">End</span>&nbsp;<span class="key">With</span><br />
+<br />
+<span class="key">Next</span><br />
+</div></tt><br />
+<br \>
+<tt><div class="freebasic">
+<span class="key">Type</span>&nbsp;<span class="wrd">rect_type</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">x</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Single</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">y</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Single</span><br />
+<span class="key">End</span>&nbsp;<span class="key">Type</span><br />
+<br />
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="wrd">rect_type</span>&nbsp;<span class="wrd">rect1</span><span class="oth">,</span>&nbsp;<span class="wrd">rect2</span><br />
+<br />
+<span class="com">''&nbsp;Nested&nbsp;With&nbsp;blocks</span><br />
+<span class="key">With</span>&nbsp;<span class="wrd">rect1</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">.</span><span class="wrd">x</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">1</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">.</span><span class="wrd">y</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">2</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">With</span>&nbsp;<span class="wrd">rect2</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">.</span><span class="wrd">x</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">3</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="oth">.</span><span class="wrd">y</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="num">4</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">End</span>&nbsp;<span class="key">With</span><br />
+<br />
+<span class="key">End</span>&nbsp;<span class="key">With</span><br />
+<br />
+<span class="key">Print</span>&nbsp;<span class="wrd">rect1.x</span><span class="oth">,</span>&nbsp;<span class="wrd">rect1.y</span>&nbsp;<span class="com">''&nbsp;1,&nbsp;&nbsp;2</span><br />
+<span class="key">Print</span>&nbsp;<span class="wrd">rect2.x</span><span class="oth">,</span>&nbsp;<span class="wrd">rect2.y</span>&nbsp;<span class="com">''&nbsp;3,&nbsp;&nbsp;4</span><br />
+</div></tt><br />
+<br \>
+</div><div class="fb_sect_title">Dialect Differences</div><div class="fb_sect_cont"><br \>
+<ul><li> Not available in the <i><a href="CompilerOptlang.html">-lang qb</a></i> dialect unless referenced with the alias <tt><b>__With</b></tt>.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> New to FreeBASIC<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgType.html">Type</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>

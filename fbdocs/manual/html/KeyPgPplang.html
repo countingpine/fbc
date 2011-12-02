@@ -1,0 +1,52 @@
+<html>
+<head>
+<title>#lang</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">#lang</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div> 
+</div> 
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+	Preprocessor statement to set the compiler dialect.<br \>
+<br \>
+<div class="fb_sect_title">Syntax</div><div class="fb_sect_cont"><tt><br \>
+<b>#lang</b> "<i>lang</i>"<br \>
+</tt><br \>
+</div><div class="fb_sect_title">Parameters</div><div class="fb_sect_cont"><br \>
+<tt>"<i>lang</i>"</tt><br \>
+<div class="fb_indent">The dialect to set, enclosed in double quotes, and must be one of <tt>"fb"</tt>, <tt>"fblite"</tt>, <tt>"qb"</tt>, or <tt>"deprecated"</tt>.<br \>
+<br \>
+</div></div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+If the <i><a href="CompilerOptforcelang.html">-forcelang</a></i> option was not given on the command line, <tt><b>#lang</b></tt> can be used to set the dialect for the source module in which it appears.  At most two passes will be made on the source module.  On the first pass, if the specified dialect is anything other than the default dialect (chosen with <i><a href="CompilerOptlang.html">-lang</a></i>, or <tt>"fb"</tt> by default), the compiler will reset the parser for another pass and restart compilation at the beginning of the source module.  If this directive is encountered again on the second pass, and the specified dialect does not match the new current dialect, a warning is issued and compilation continues.  If any errors were encountered on the first pass, the compiler will not attempt a second pass."<br \>
+<br \>
+<tt><b>#lang</b></tt> may not be used in any compound statement, scope, or subroutine.  However, it may be nested in module level preprocessor statements or used in an include file.<br \>
+<br \>
+There is currently no restriction on where this directive may be placed in a source module.  In future this may change, therefore best practice would be to use this directive before the first declaration, definition, or executable statement in the source.<br \>
+<br \>
+This directive overrides the <i><a href="CompilerOptlang.html">-lang</a></i> option if it was given on the command line.  However, if the <i><a href="CompilerOptforcelang.html">-forcelang</a></i> option was given on the command line, this directive will have no effect.  A warning is issued, the directive is ignored, and compilation will continue.  This allows the user to explicitly override <tt><b>#lang</b></tt> directives.<br \>
+<br \>
+</div><div class="fb_sect_title">Example</div><div class="fb_sect_cont"><br \>
+<tt><div class="freebasic">
+<span class="def">#lang&nbsp;"fblite"<br />
+</span></div></tt><br />
+<br \>
+</div><div class="fb_sect_title">Differences from QB</div><div class="fb_sect_cont"><br \>
+<ul><li> New to FreeBASIC<br \>
+<br \>
+</ul></div><div class="fb_sect_title">See also</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgMetaLang.html">$Lang</a></tt><br \>
+<li> <tt><a href="KeyPgDdfblang.html">__FB_LANG__</a></tt><br \>
+<li> <a href="CompilerOptlang.html">Compiler Option: -lang</a><br \>
+<li> <a href="CompilerOptforcelang.html">Compiler Option: -forcelang</a><br \>
+<li> <a href="CompilerDialects.html">FreeBASIC Dialects</a><br \>
+<br \>
+</ul></div>
+</div>
+</div> 
+</div> 
+</body>
+</html>
