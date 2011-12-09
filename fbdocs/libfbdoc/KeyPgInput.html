@@ -1,0 +1,89 @@
+<html>
+<head>
+<title>Input</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="fb_body_wrapper">
+<div id="fb_tab">
+<div id="fb_tab_l">Input</div>
+<div id="fb_tab_r">&nbsp;<img src="images/fblogo_mini.gif" /></div>
+</div>
+<div id="fb_pg_wrapper">
+<div id="fb_pg_body">
+        Lit une liste de valeurs &agrave; partir du clavier<br \>
+<br \>
+<div class="fb_sect_title">Syntaxe</div><div class="fb_sect_cont"><tt><br \>
+<b>Input</b> [;] ["<i>prompt</i>" <i>separator</i>] <i>variable_list</i><br \>
+</tt><br \>
+</div><div class="fb_sect_title">Param&egrave;tres</div><div class="fb_sect_cont"><br \>
+<tt><i>prompt</i></tt><br \>
+<div class="fb_indent">une cha&icirc;ne litt&eacute;rale facultative qui est &eacute;crite &agrave; l'&eacute;cran.<br \>
+</div><tt><i>separator</i></tt><br \>
+<div class="fb_indent">un point-virgule (<tt>;</tt>), qui ajoute <tt>"? "</tt>&agrave; l'invite, ou une virgule (<tt>,</tt>), qui n'ajoute rien.<br \>
+</div><tt><i>variable_list</i></tt><br \>
+<div class="fb_indent">une liste de variables s&eacute;par&eacute;es par des virgules utilis&eacute;es pour stocker les valeurs lues par l'utilisateur.<br \>
+<br \>
+</div></div><div class="fb_sect_title">Description</div><div class="fb_sect_cont"><br \>
+Lit une liste de valeurs &agrave; partir du clavier jusqu'au premier retour chariot (Touche Entr&eacute;e). Les valeurs num&eacute;riques sont converties &agrave; partir de leur repr&eacute;sentation cha&icirc;ne dans le type correspondant dans la liste des variables. Les caract&egrave;res sont affich&eacute;s &agrave; l'&eacute;cran au fur et &agrave; mesure qu'ils sont tap&eacute;s au clavier.<br \>
+S'il y a plus d'une valeur dans la liste d'entr&eacute;e, l'utilisateur doit, lors de la frappe, s&eacute;parer chaque valeur par des virgules ou des espaces.  Les espaces ayant servi &agrave; s&eacute;parer seront &eacute;limin&eacute;s des valeurs cha&icirc;ne. Si une cha&icirc;ne entr&eacute;e contient une virgule, celle-ci doit &ecirc;tre entre guillemets (<tt>"..."</tt>) pour &eacute;viter qu'elle ne soit &eacute;limin&eacute;e.  <br \>
+Sinon, <tt><a href="KeyPgLineinput.html">Line Input</a></tt> peut &ecirc;tre utilis&eacute; pour entrer une ligne enti&egrave;re en une seule cha&icirc;ne sans d&eacute;limitation.<br \>
+<br \>
+L'invite (prompt) - le cas &eacute;ch&eacute;ant - est &eacute;crit &agrave; l'&eacute;cran &agrave; la position courante du curseur et les caract&egrave;res lus sont &eacute;crits &agrave; l'&eacute;cran imm&eacute;diatement apr&egrave;s l'invite. Si aucune invite n'est sp&eacute;cifi&eacute;e, les caract&egrave;res sont affich&eacute;s &agrave; la position courante du curseur.<br \>
+<br \>
+Le point-virgule facultatif en premier apr&egrave;s <tt><b>Input</b></tt> est similaire au point-virgule facultatif &agrave; la fin d'une instruction <tt><a href="KeyPgPrint.html">Print</a></tt>: le curseur restera sur la m&ecirc;me ligne apr&egrave;s que tous les caract&egrave;res auront &eacute;t&eacute; affich&eacute;s,sinon, le curseur se d&eacute;placera vers le d&eacute;but de la ligne suivante.<br \>
+<br \>
+Si les valeurs lues sont plus nombreuses que celles qui sont &eacute;num&eacute;r&eacute;es dans la liste des variables, les valeurs suppl&eacute;mentaires sont ignor&eacute;es; si les valeurs lues ne sont pas assez nombreuses (&agrave; savoir, l'utilisateur appuie sur entr&eacute;e avant d'avoir saisi toutes les valeurs), toutes les valeurs des variables restantes seront initialis&eacute;es - les variables num&eacute;riques &agrave; z&eacute;ro (<tt>0</tt>) et les cha&icirc;nes en une cha&icirc;ne vide (<tt>"</tt><tt>"</tt>).<br \>
+<br \>
+Les valeurs num&eacute;riques sont converties comme avec les proc&eacute;dures  <tt><a href="KeyPgVal.html">Val</a></tt> et <tt><a href="KeyPgVallng.html">ValLng</a></tt>, en utilisant la fonction la plus appropri&eacute;e pour le format de nombre, convertissant le plus possible de caract&egrave;res num&eacute;riques.<br \>
+<br \>
+<tt><b>Input</b></tt> a une capacit&eacute; d'&eacute;dition limit&eacute;e: il permet d'effacer les caract&egrave;res en utilisant la touche "Retour Arri&egrave;re".  Si une meilleure interface utilisateur est n&eacute;cessaire, une routine d'entr&eacute;e personnalis&eacute;e doit &ecirc;tre utilis&eacute;e.<br \>
+<br \>
+</div><div class="fb_sect_title">Exemple</div><div class="fb_sect_cont"><br \>
+<br \>
+<b>Exemple #1</b><br \>
+<tt><div class="freebasic">
+<span class="key">Dim</span>&nbsp;<span class="wrd">n</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span><span class="oth">,</span>&nbsp;<span class="wrd">a</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Integer</span><br />
+<span class="key">Input</span>&nbsp;<span class="quo">"Enter&nbsp;[Name,&nbsp;Age]:&nbsp;"</span><span class="oth">,</span>&nbsp;<span class="wrd">n</span><span class="oth">,</span>&nbsp;<span class="wrd">a</span><br />
+<span class="key">Print</span>&nbsp;<span class="wrd">n</span><br />
+<span class="key">Print</span>&nbsp;<span class="wrd">a</span><br />
+</div></tt><br />
+<br \>
+<b>Exemple #2</b><br \>
+<tt><div class="freebasic">
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">Double</span>&nbsp;<span class="wrd">a</span><span class="oth">,</span>&nbsp;<span class="wrd">b</span><br />
+<span class="key">Dim</span>&nbsp;<span class="key">As</span>&nbsp;<span class="key">String</span>&nbsp;<span class="wrd">yn</span><br />
+<br />
+<span class="key">Do</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Input</span>&nbsp;&nbsp;&nbsp;<span class="quo">"Please&nbsp;enter&nbsp;a&nbsp;number:&nbsp;"</span><span class="oth">,</span>&nbsp;<span class="wrd">a</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Input</span>&nbsp;<span class="oth">;</span>&nbsp;<span class="quo">"And&nbsp;another:&nbsp;"</span><span class="oth">,</span>&nbsp;<span class="wrd">b</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="oth">,</span>&nbsp;<span class="quo">"Thank&nbsp;you"</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Sleep</span>&nbsp;<span class="num">500</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span>&nbsp;<span class="quo">"The&nbsp;total&nbsp;is&nbsp;"</span><span class="oth">;</span>&nbsp;<span class="wrd">a</span>&nbsp;<span class="oth">+</span>&nbsp;<span class="wrd">b</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Print</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Do</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Input</span>&nbsp;<span class="quo">"Would&nbsp;you&nbsp;like&nbsp;to&nbsp;enter&nbsp;some&nbsp;more&nbsp;numbers"</span><span class="oth">;</span>&nbsp;<span class="wrd">yn</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="wrd">yn</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="key">LCase</span><span class="oth">(</span><span class="wrd">yn</span><span class="oth">)</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">Loop</span>&nbsp;<span class="key">Until</span>&nbsp;<span class="wrd">yn</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="quo">"y"</span>&nbsp;<span class="key">Or</span>&nbsp;<span class="wrd">yn</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="quo">"n"</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+<span class="key">Loop</span>&nbsp;<span class="key">While</span>&nbsp;<span class="key">LCase</span><span class="oth">(</span><span class="wrd">yn</span><span class="oth">)</span>&nbsp;<span class="oth">=</span>&nbsp;<span class="quo">"y"</span><br />
+</div></tt><br />
+<br \>
+</ul></div><div class="fb_sect_title">Diff&eacute;rences avec QB</div><div class="fb_sect_cont"><br \>
+<ul><li> Si l'utilisateur entre un nombre incorrect de valeurs ou s'il attend un nombre pour une valeur et obtient une cha&icirc;ne qui n'est pas un nombre valide, alors QBASIC affiche le message "Redo from start" (Refaire du d&eacute;but) et ne continuera pas plus loin tant qu'il n'aura pas re&ccedil;u une entr&eacute;e valable.<br \>
+<li> QB ne traitera  pas l'espace comme d&eacute;limiteur lorsque vous entrez un nombre &agrave; partir de la console.<br \>
+<br \>
+</ul></div><div class="fb_sect_title">Voir aussi</div><div class="fb_sect_cont"><br \>
+<ul><li> <tt><a href="KeyPgInputPp.html">Input #</a></tt><br \>
+<li> <tt><a href="KeyPgInputnum.html">Input()</a></tt><br \>
+<li> <tt><a href="KeyPgLineinput.html">Line Input</a></tt><br \>
+<br \>
+</ul></div>
+</div>
+</div>
+</div>
+</body>
+</html>
