@@ -1,37 +1,37 @@
 {{fbdoc item="title" value="OPEN ERR"}}----
-Opens both the standard input (//stdin//) and standard error (//stderr//) streams for file operations.
+Ouvre le flux d'entr&eacute;e standard (//stdin//) et le flux d'erreur standard (//stderr//) pour des op&eacute;rations sur les fichiers.
 
 {{fbdoc item="syntax"}}##
 	**[[KeyPgOpen Open]] Err** [for //mode//] [[KeyPgAs as]] [#]//filenum// [[KeyPgAs as]] [[KeyPgInteger integer]]
 ##
 {{fbdoc item="usage"}}##
 	**Open Err** [for //mode//] as [#]//filenum//
-		//or//
+		//ou//
 	//result// = **Open Err**( [for //mode//] as [#]//filenum// )
 ##
 {{fbdoc item="param"}}
 	##//mode//##
-		Ignored.
+		Ignor&eacute;.
 	##//filenum//##
-		An unused file number.
+		Un num&eacute;ro de fichier inutilis&eacute;.
 
-{{fbdoc item="ret"}}
-	Zero is returned if ##**Open Err**## completed successfully, otherwise a non-zero value is returned to indicate failure.
+{{fbdoc item="section" value="Valeur retourn&eacute;e
+	Z&eacute;ro est retourn&eacute; si ##**Open Err**## a fonctionn&eacute; avec succ&egrave;s, sinon une valeur non nulle est renvoy&eacute;e pour indiquer un &eacute;chec.
 
 {{fbdoc item="desc"}}
-	This command opens ##stdin## to read from and ##stderr## to write to the console allowing read and write operations with normal file commands.
+	Cette commande ouvre ##//stdin//## pour une op&eacute;ration de lecture et ##stderr## pour une op&eacute;ration d'&eacute;criture sur la console permettant des op&eacute;rations de lecture et d'&eacute;criture avec des commandes de fichiers normales.
 	
-	##stderr## is an output stream different from ##stdout## allowing error messages to be redirected separately from the main console output.
+	##//stderr//## est un flux de sortie diff&eacute;rent de ##//stdout//## permettant la redirection s&eacute;par&eacute;e des messages d'erreur &agrave; partir de la sortie principale de la console.
 	
-	The normal console commands, such as ##[[KeyPgColor Color]]## and ##[[KeyPgLocate Locate]]##, do not work in this mode, because they do not accept a file number.
+	Les commandes de la console normales, comme ##[[KeyPgColor Color]]## et ##[[KeyPgLocate Locate]]##, ne fonctionnent pas dans ce mode, parce qu'ells n'acceptent pas un num&eacute;ro de fichier.
 
-	The ##[For Input|Output]## ##//mode//## is allowed for compatibility, but is ignored.
+	Le ##//mode//## ##[For Input|Output]## n'existe que pour la compatibilit&eacute;, mais il est ignor&eacute;.
 	
-**Runtime errors:**
-	    ##**Open Err**## throws one of the following [[ProPgErrorHandling runtime errors]]:
+**Erreurs de fonctionnement:**
+	    ##**Open Err**## produit l'une des [[ProPgErrorHandling erreurs de fonctionnement]] suivantes:
 
-	//(##1##) Illegal function call//
-		- Filenumber was not free at the time. use ##[[KeyPgFreefile Freefile]]## to ensure that filenumber is free.
+	//(##1##) Illegal function call : Appel ill&eacute;gal de fonction//
+		<li>//filenumber// n'est pas libre actuellement. Utilisez ##[[KeyPgFreefile FreeFile]]## pour vous assurer que //filenumber// est libre.
 
 		
 {{fbdoc item="ex"}}
@@ -46,7 +46,7 @@ sleep
 %%
 
 {{fbdoc item="diff"}}
-	- New to ""FreeBASIC""
+	- Nouveau pour FreeBASIC
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgOpen Open]]##

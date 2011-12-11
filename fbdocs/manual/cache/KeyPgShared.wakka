@@ -1,5 +1,5 @@
 {{fbdoc item="title" value="SHARED"}}----
-Variable declaration modifier specifying visibility throughout a module
+Modificateur de d&eacute;claration de variable sp&eacute;cifiant sa visibilit&eacute; &agrave; travers un module
 
 {{fbdoc item="syntax"}}##
 	[[KeyPgDim Dim]] **Shared** ...
@@ -7,9 +7,9 @@ Variable declaration modifier specifying visibility throughout a module
 	[[KeyPgCommon Common]] **Shared** ...
 ##
 {{fbdoc item="desc"}}
-	##Shared## makes module-level variables visible inside ##[[KeyPgSub Sub]]##s and ##[[KeyPgFunction Function]]##s.  If ##Shared## is not used on a module-level variable's declaration, it is stored on the stack of the implicit main function and therefore only visible to the module-level code in that file.
+	##**Shared**## rend les variables de niveau module visibles &agrave; l'int&eacute;rieur des ##[[KeyPgSub Sub]]##s et des ##[[KeyPgFunction Function]]##s.  Si ##**Shared**## n'est pas utilis&eacute; dans une d&eacute;claration de variable de niveau module, elle est stock&eacute;e sur la pile de la fonction "main" implicite et donc visible uniquement pour le code au niveau du module dans ce fichier.
 
-	Note: A shared variable may only be initialised with a constant value: its starting value is set at the start of the program before any code is run, and so it cannot depend on any variables or functions in it.
+	Note: Une variable "shared"(partag&eacute;e) peut &ecirc;tre initialis&eacute;e seulement avec une valeur constante:   may only be initialised with a constant value: sa valeur de d&eacute;part est fix&eacute;e au d&eacute;but du programme avant qu'aucun code ne soit ex&eacute;cut&eacute;, et ainsi il ne peut pas d&eacute;pendre des variables ou des fonctions contenues dans ce programme.
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/variable/shared.bas"}}%%(freebasic)
@@ -33,7 +33,7 @@ End Sub
 %%
 
 {{fbdoc item="diff"}}
-	- The ##Shared## statement inside scope blocks -- functions, subs, if/thens, and loops -- is not supported. Use ##Dim##|##Redim##|##Common Shared## in the main program instead.  Or if you're inside a scope block and ##Redim##ming a variable or array previously set up with ##Shared##, just do a ##Redim## without ##Shared##; it will work fine and won't ruin anything.
+	- La d&eacute;claration ##//Shared//## &agrave; l'int&eacute;rieur de blocs de visibilit&eacute; -- fonctions, sub, if/then, et boucles -- n'est pas support&eacute;. Utilisez plut&ocirc;t ##//Dim//##|##//Redim//##|##//Common Shared//## dans le programme principal.  Si vous &ecirc;tes dans un bloc de visibilit&eacute; et que vous ##//Redim//##ensionnez une variable ou un tableau pr&eacute;c&eacute;demment mis en place avec ##//Shared//##, ex&eacute;cutez seulement un ##//Redim//## sans ##//Shared//##; cela fonctionnera tr&egrave;s bien et ne d&eacute;truira rien.
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgCommon Common]]##

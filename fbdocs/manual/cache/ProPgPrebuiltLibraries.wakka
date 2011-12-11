@@ -1,28 +1,28 @@
 {{fbdoc item="title" value="Using Prebuilt Libraries"}}----
-FreeBASIC is distributed with many headers for common or popular libraries.  The headers allow a programmer to use functions available in these existing static or shared libraries (DLLs).  
+FreeBasic est distribu&eacute; avec de nombreuses en-t&ecirc;tes pour des biblioth&egrave;ques communes ou populaires.  Les en-t&ecirc;tes permettent &agrave; un programmeur d'utiliser les fonctions disponibles dans ces biblioth&egrave;ques existantes statiques ou partag&eacute;es (DLL).  
 
-The libraries themselves are not distributed with FreeBASIC, but most can be downloaded from the web and readily installed.  Some other libraries may need to be first compiled from sources to be used.  Please see the documentation for the specific library on how to configure, install, and use them.
+Les biblioth&egrave;ques elles-m&ecirc;mes ne sont pas distribu&eacute;es avec FreeBasic, mais la plupart peuvent &ecirc;tre t&eacute;l&eacute;charg&eacute;es &agrave; partir du web et install&eacute;es facilement.  D'autres biblioth&egrave;ques peuvent avoir besoin, en premier, d'&ecirc;tre compil&eacute;es &agrave; partir de sources avant d'&ecirc;tre utilis&eacute;es.  S'il vous pla&icirc;t, consultez la documentation des biblioth&egrave;ques sp&eacute;cifiques sur la fa&ccedil;on de les configurer, de les installer et les utiliser.
 
-Some static or shared libraries (DLLs) may be already present on the system since they might be part of FreeBASIC itself or the operating system.
+Certaines biblioth&egrave;ques statiques ou partag&eacute;es (DLL) peuvent &ecirc;tre d&eacute;j&agrave; pr&eacute;sentes sur le syst&egrave;me car elles peuvent faire partie de FreeBasic lui-m&ecirc;me ou du syst&egrave;me d'exploitation.
 
-Although many headers can be used on any of the platforms supported by FreeBASIC, some headers are platform specific and will not be usable on other platforms.
+Bien que de nombreuses en-t&ecirc;tes peuvent &ecirc;tre utilis&eacute;es sur n'importe quelle plate-forme support&eacute;e par FreeBasic, certaines sont sp&eacute;cifiques &agrave; certaines plate-formes et non-utilisables sur d'autres.
 
-{{fbdoc item="section" value="FreeBASIC headers"}}
-	There are a few headers that are specific to FreeBASIC and expose some functions that are otherwise not available:
-	- ##datetime.bi## - Declarations for ##[[KeyPgDateSerial DateSerial]]##, ##[[KeyPgDateValue DateValue]]##, ##[[KeyPgIsDate IsDate]]##, ##[[KeyPgYear Year]]##, ##[[KeyPgMonth Month]]##, ##[[KeyPgDay Day]]##, ##[[KeyPgWeekday Weekday]]##, ##[[KeyPgTimeserial TimeSerial]]##, ##[[KeyPgTimeValue TimeValue]]##, ##[[KeyPgHour Hour]]##, ##[[KeyPgMinute Minute]]##, ##[[KeyPgSecond Second]]##, ##[[KeyPgNow Now]]##, ##[[KeyPgDateAdd DateAdd]]##, ##[[KeyPgDatePart DatePart]]##, ##[[KeyPgDateDiff DateDiff]]##, ##[[KeyPgMonthname MonthName]]##, ##[[KeyPgWeekdayname WeekdayName]]##
-	- ##dir.bi## - Constants to be used with ##[[KeyPgDir Dir]]##
-	- ##fbgfx.bi## - Additional constants and structures to be used with graphics commands such as ##[[KeyPgMultikey Multikey]]##,  ##[[KeyPgScreencontrol Screencontrol]]##, and ##[[KeyPgScreenevent Screenevent]]##, ##[[KeyPgImagecreate Imagecreate]]##.
-	- ##file.bi## - Declarations for ##[[KeyPgFilecopy FileCopy]]##, ##[[KeyPgFileattr FileAttr]]##, ##[[KeyPgFilelen FileLen]]##, ##[[KeyPgFileexists Fileexists]]##, ##[[KeyPgFiledatetime FileDateTime]]##
-	- ##string.bi## - Declarations for ##[[KeyPgFormat format]]##
-	- ##vbcompat.bi## - Includes datetime.bi, dir.bi, file.bi, and string.bi plus additional constants compatible with Microsoft Visual Basic.
+{{fbdoc item="section" value="En-t&ecirc;tes FreeBASIC
+	Il y a quelques en-t&ecirc;tes qui sont sp&eacute;cifiques &agrave; FreeBasic et proposent certaines fonctions qui, autrement, ne sont pas disponibles:
+	- ##datetime.bi## - D&eacute;clarations pour ##[[KeyPgDateSerial DateSerial]]##, ##[[KeyPgDateValue DateValue]]##, ##[[KeyPgIsDate IsDate]]##, ##[[KeyPgYear Year]]##, ##[[KeyPgMonth Month]]##, ##[[KeyPgDay Day]]##, ##[[KeyPgWeekday Weekday]]##, ##[[KeyPgTimeserial TimeSerial]]##, ##[[KeyPgTimeValue TimeValue]]##, ##[[KeyPgHour Hour]]##, ##[[KeyPgMinute Minute]]##, ##[[KeyPgSecond Second]]##, ##[[KeyPgNow Now]]##, ##[[KeyPgDateAdd DateAdd]]##, ##[[KeyPgDatePart DatePart]]##, ##[[KeyPgDateDiff DateDiff]]##, ##[[KeyPgMonthname MonthName]]##, ##[[KeyPgWeekdayname WeekdayName]]##
+	- ##dir.bi## - Constantes &agrave; utiliser avec ##[[KeyPgDir Dir]]##
+	- ##fbgfx.bi## - Constantes et structures suppl&eacute;mentaires &agrave; utiliser avec les commandes graphiques telles que ##[[KeyPgMultikey MultiKey]]##,  ##[[KeyPgScreencontrol ScreenControl]]##, et ##[[KeyPgScreenevent ScreenEvent]]##, ##[[KeyPgImagecreate ImageCreate]]##.
+	- ##file.bi## - D&eacute;clarations pour ##[[KeyPgFilecopy FileCopy]]##, ##[[KeyPgFileattr FileAttr]]##, ##[[KeyPgFilelen FileLen]]##, ##[[KeyPgFileexists FileExists]]##, ##[[KeyPgFiledatetime FileDateTime]]##
+	- ##string.bi## - D&eacute;clarations pour ##[[KeyPgFormat Format]]##
+	- ##vbcompat.bi## - Inclut datetime.bi, dir.bi, file.bi, et string.bi plus des constantes suppl&eacute;mentaires compatibles avec Microsoft Visual Basic.
 
-{{fbdoc item="section" value="C Runtime (CRT)"}}
-	Where possible cross-platform compatible headers have been provided for the C runtime (CRT).  For example,
+{{fbdoc item="section" value="C Runtime (CRT)
+	Lorsque cela est possible des en-t&ecirc;tes compatibles multiplateformes ont &eacute;t&eacute; fournies pour C run-time (CRT).  Par exemple,
 {{fbdoc item="filename" value="examples/manual/proguide/libs/libs1.bas"}}%%(freebasic)
 #include once "crt.bi"
 printf( !"Hello World\n" )
 %%
-	To include a specific CRT header, prefix the name of the header file with ##"crt/"##.  For example:
+	Pour inclure un fichier d'en-t&ecirc;te CRT sp&eacute;cifique, pr&eacute;fixer le nom du fichier d'en-t&ecirc;te avec ##"crt/"##.  Par exemple:
 {{fbdoc item="filename" value="examples/manual/proguide/libs/libs2.bas"}}%%(freebasic)
 #include once "crt/stdio.bi"
 Dim f As FILE Ptr
@@ -31,20 +31,20 @@ fprintf( f, "Hello File\n")
 fclose( f )
 %%
 
-{{fbdoc item="section" value="Windows API"}}
-	Many (many) headers for the Windows API are available for inclusion in FreeBASIC source code.  In most cases the only include file needed is "windows.bi".  For example,
+{{fbdoc item="section" value="Windows API
+	Beaucoup (de nombreuses) en-t&ecirc;tes pour les API Windows sont disponibles pour inclusion dans le code source FreeBasic.  Dans la plupart des cas le seul fichier n&eacute;cessaire &agrave; inclure est "windows.bi".  Par exemple,
 {{fbdoc item="filename" value="examples/manual/proguide/libs/libs3.bas"}}%%(freebasic)
 #include once "windows.bi"
 MessageBox( null, "Hello World", "FreeBASIC", MB_OK )
 %%
-	To include a specific Windows API header, prefix the name of the header with "win/" for example:
+	Pour inclure une l'en-t&ecirc;te sp&eacute;cifique de l'API Windows, pr&eacute;fixer nom de l'en-t&ecirc;te avec "win/" par exemple:
 {{fbdoc item="filename" value="examples/manual/proguide/libs/libs4.bas"}}%%(freebasic)
 #include once "win/ddraw.bi"
 %%
-	Browse the "./inc/win/" directory where FreeBASIC was installed to see all of the available Windows API headers.
+	Examinez le r&eacute;pertoire "./inc/win/" o&ugrave; FreeBASIC a &eacute;t&eacute; install&eacute; pour voir tous les en-t&ecirc;tes disponibles pour les API Windows.
 
-{{fbdoc item="section" value="Other Headers Provided"}}
-	Browse the "./inc/" directory located where FreeBASIC was installed to find other headers.  It is possible that headers might be available for a library you need to use.  Some headers are located in "./inc/" and others might be located in a sub-directory.  To include headers located in a subdirectory of "./inc/", prefix the name of the header with the name of the directory where it is located.  For example:
+{{fbdoc item="section" value="Autres en-t&ecirc;tes fournis
+	Examinez le r&eacute;pertoire "./inc/" o&ugrave; FreeBASIC a &eacute;t&eacute; install&eacute; pour voir tous les autres  en-t&ecirc;tes disponibles.  Il est possible que des en-t&ecirc;tes soient disponibles pour une biblioth&egrave;que, vous devez utiliser.  Certaines en-t&ecirc;tes sont situ&eacute;es dans "./inc/" et les autres peuvent se trouver un sous-r&eacute;pertoire.  Pour inclure les en-t&ecirc;tes situ&eacute;es dans un sous-r&eacute;pertoire "./inc/", pr&eacute;fixez le nom de l'en-t&ecirc;te avec le nom du r&eacute;pertoire o&ugrave; il se trouve.  Par exemple:
 {{fbdoc item="filename" value="examples/manual/proguide/libs/libs5.bas"}}%%(freebasic)
 '' located in ./inc/
 #include once "curl.bi"
@@ -53,12 +53,12 @@ MessageBox( null, "Hello World", "FreeBASIC", MB_OK )
 #include once "GL/gl.bi"
 %%
 
-{{fbdoc item="section" value="Requirements for Using Prebuilt Static Libraries"}}
-	- The source code must include the appropriate headers using ##[[KeyPgInclude #include]]##.
-	- The static library must be linked at compile time by using either ##[[KeyPgInclib #inclib]]## in the source code or by using the //-l// option on the command line to specify the name of the library.
+{{fbdoc item="section" value="Exigences pour l'utilisation de biblioth&egrave;ques statiques pr&eacute;d&eacute;finies
+	- Le code source doit inclure les en-t&ecirc;tes appropri&eacute;es &agrave; l'aide de ##[[KeyPgInclude #include]]##.
+	- Une biblioth&egrave;que statique doit &ecirc;tre li&eacute;e &agrave; la compilation en utilisant ##[[KeyPgInclib #inclib]]## dans le code source ou en utilisant l'option //-l// sur ligne de commande pour sp&eacute;cifier le nom de la biblioth&egrave;que.
 
-{{fbdoc item="section" value="Requirements for Using Prebuilt Shared Libraries"}}
-	- The source code must include the appropriate headers using ##[[KeyPgInclude #include]]##.
-	- The shared library (.DLL) must be present on the host computer where the compiled program will run.
+{{fbdoc item="section" value="Exigences pour l'utilisation de biblioth&egrave;ques partag&eacute;es pr&eacute;d&eacute;finies
+	- Le code source doit inclure les en-t&ecirc;tes appropri&eacute;es &agrave; l'aide de ##[[KeyPgInclude #include]]##.
+	- La biblioth&egrave;que partag&eacute;e (.DLL) doit &ecirc;tre pr&eacute;sente sur l'ordinateur h&ocirc;te sur lequel programme compil&eacute; s'ex&eacute;cute.
 
 {{fbdoc item="back" value="CatPgProgrammer|Programmer's Guide"}}

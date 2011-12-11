@@ -1,16 +1,16 @@
 {{fbdoc item="title" value="Pointers to Procedures"}}----
-Pointers that point to procedures
+Pointeurs qui pointent vers des proc&eacute;dures
 
-	Just as pointers can be made to point to an ##[[KeyPgInteger Integer]]## or ##[[KeyPgSingle Single]]## type, pointers can also point to procedures, that is, they can store the address of a procedure.
+	Tout comme les pointeurs peuvent &ecirc;tre faits pour pointer vers un type ##[[KeyPgInteger Integer]]## ou ##[[KeyPgSingle Single]]##, les pointeurs peuvent aussi pointer vers des proc&eacute;dures, c'est &agrave; dire qu'ils peuvent stocker l'adresse d'une proc&eacute;dure.
 
-{{fbdoc item="section" value="Declaration"}}
-	To declare a pointer to procedure, use the ##[[KeyPgSub Sub]]## or ##[[KeyPgFunction Function]]## keywords, followed by any parameters and return value type:
+{{fbdoc item="section" value="D&eacute;claration
+	Pour d&eacute;clarer un pointeur vers une proc&eacute;dure, utilisez les mots-clefs ##[[KeyPgSub Sub]]## ou ##[[KeyPgFunction Function]]##, suivi de param&egrave;tres et du type de la valeur de retour:
 
 {{fbdoc item="filename" value="examples/manual/proguide/procptrs/dimptr.bas"}}%%(freebasic)
-' declares a pointer to sub procedure that takes no arguments
+' d&eacute;clare un pointeur vers une proc&eacute;dure Sub qui n'a aucun argument
 dim pointerToProcedure as sub
 %%
-	Procedure pointers store procedure addresses, which are retrieved using ##[[KeyPgOpAt Operator @]]## (Address of) or the ##[[KeyPgOpProcptr ProcPtr operator]]##:
+	Les pointeurs de proc&eacute;dure stockent l'adresse de la proc&eacute;dure, qui est r&eacute;cup&eacute;r&eacute;e &agrave; l'aide de ##[[KeyPgOpAt Operator @]]## (Adresse de) ou de ##[[KeyPgOpProcptr Procptr Operator]]##:
 
 {{fbdoc item="filename" value="examples/manual/proguide/procptrs/pfunc.bi"}}%%(freebasic)
 function Add (a as integer, b as integer) as integer
@@ -20,21 +20,21 @@ end function
 dim pFunc as function (as integer, as integer) as integer = @Add
 %%
 
-{{fbdoc item="section" value="Calling a procedure pointer"}}
-	The interesting thing about procedure pointers is that they can be called just like a procedure:
+{{fbdoc item="section" value="Appel d'un pointeur de proc&eacute;dure
+	La chose int&eacute;ressante &agrave; propos des pointeurs proc&eacute;dure est qu'ils peuvent &ecirc;tre appel&eacute;s tout comme une proc&eacute;dure:
 
 {{fbdoc item="filename" value="examples/manual/proguide/procptrs/calling.bas"}}%%(freebasic)
-'' .. Add and pFunc as before ..
+'' .. Add et pFunc comme avant ..
 #include once "pfunc.bi"
 
 print "3 + 4 = " & pFunc(3, 4)
 %%
 
-{{fbdoc item="section" value="Passing procedure pointers to procedures"}}
-	Passing procedure pointers to other procedures is similar as well:
+{{fbdoc item="section" value="Passage de pointeur de proc&eacute;dure &agrave; d'autres proc&eacute;dures
+	Passage de pointeurs de proc&eacute;dure &agrave; d'autres proc&eacute;dures est similaires &agrave;:
 
 {{fbdoc item="filename" value="examples/manual/proguide/procptrs/passing.bas"}}%%(freebasic)
-'' .. Add and pFunc as before ..
+'' .. Add et pFunc comme avant ..
 #include once "pfunc.bi"
 
 function DoOperation (a as integer, b as integer, operation as function (as integer, as integer) as integer) as integer
@@ -43,10 +43,10 @@ end function
 
 print "3 + 4 = " & DoOperation(3, 4, @Add)
 %%
-	Because procedure pointer declarations can be lengthy, it often helps to create a type alias for the procedure pointer, in an effort to make clearer code:
+	Parce que les d&eacute;clarations de pointeur de proc&eacute;dure peuvent &ecirc;tre longues, il est souvent utile de cr&eacute;er un alias de type pour le pointeur de proc&eacute;dure, dans un effort de clarification du code:
 
 {{fbdoc item="filename" value="examples/manual/proguide/procptrs/alias.bas"}}%%(freebasic)
-'' .. Add and pFunc as before ..
+'' .. Add et pFunc comme avant ..
 #include once "pfunc.bi"
 
 type operation as function (as integer, as integer) as integer
@@ -58,8 +58,8 @@ end function
 print "3 + 4 = " & DoOperation(3, 4, @Add)
 %%
 
-{{fbdoc item="section" value="Pointers to procedure pointers"}}
-	Because the syntax of a procedure pointer does not allow declaration of a pointer to procedure pointer, a type alias is used. Notice how it is necessary to surround a dereferenced pointer to procedure pointer by parenthesis when calling the procedure. This is because the function-call operator '()' has higher precedence than ##[[KeyPgOpValueOf Operator *]]## (Value of):
+{{fbdoc item="section" value="Pointeurs de pointeurs de proc&eacute;dure
+	Parce que la syntaxe d'un pointeur de proc&eacute;dure ne permet pas de d&eacute;claration d'un pointeur vers un pointeur de proc&eacute;dure, un alias de type est utilis&eacute;. Notez comment il est n&eacute;cessaire d'entourer un pointeur d&eacute;r&eacute;f&eacute;renc&eacute; vers un pointeur de proc&eacute;dure par des parenth&egrave;ses lors de l'appel de la proc&eacute;dure. C'est parce que l'op&eacute;rateur d'appel de fonction "()" a une priorit&eacute; sup&eacute;rieure &agrave; ##[[KeyPgOpValueOf Operator *]]## (Valeur de):
 
 {{fbdoc item="filename" value="examples/manual/proguide/procptrs/procptrs.bas"}}%%(freebasic)
 sub Halve (byref i as integer)
@@ -89,6 +89,40 @@ while (0 <> *op)
 wend
 
 print "Value of 'i' after all operations performed: " & i
+%%
+
+{{fbdoc item="see"}}
+	- ##[[KeyPgSub Sub]]##
+
+- ##[[KeyPgFunction Function]]##
+- ##[[KeyPgPointer Pointer]]##
+ - ##[[KeyPgOpAt Op&eacute;rateur * (Adresse de)]]##
+ - ##[[KeyPgOpProcptr Procptr Operator]]##
+ '
+ ' When this is supported, you will only need to remove the static wrapper
+ ' function presented here, to maintain compatibility. 
+ '/
+
+type T
+	declare function test(byval number as integer) as integer
+	declare static function test(byref this as T, byval number as integer) as integer
+	dim as integer i = 420
+end type
+
+function T.test(byval number as integer) as integer
+	return i + number
+end function
+
+function T.test(byref this as T, byval number as integer) as integer
+	return this.test(number)
+end function
+
+dim p as function(byref as T, byval as integer) as integer
+p = @T.test
+
+dim as T obj
+
+print p(obj, 69) '' prints 489
 %%
 
 {{fbdoc item="see"}}

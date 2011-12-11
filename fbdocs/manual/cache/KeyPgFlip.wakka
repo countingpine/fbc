@@ -1,15 +1,15 @@
-{{fbdoc item="title" value="FLIP"}}----
-Changes the current video display page
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">{{fbdoc item="title" value="Flip"}}----<div id="fb_tab_r"> <img src="images/fblogo_mini.gif">
+Change la page courante de l'affichage vid&eacute;o<br \=""><br \="">{{fbdoc item="syntax"}}##<br \="">[[KeyPgDeclare Declare]] [[KeyPgSub Sub]] **Flip** ( [[KeyPgByval ByVal]] //frompage// [[KeyPgAs As]] [[KeyPgInteger Integer]] = -1, [[KeyPgByval ByVal]] //topage// [[KeyPgAs As]] [[KeyPgInteger Integer]] = -1 )<br \="">##<br \="">
 
-{{fbdoc item="syntax"}}##
-	[[KeyPgDeclare declare]] [[KeyPgSub sub]] **Flip** ( [[KeyPgByval byval]] //frompage// [[KeyPgAs as]] [[KeyPgInteger integer]] = -1, [[KeyPgByval byval]] //topage// [[KeyPgAs as]] [[KeyPgInteger integer]] = -1 )
-##
-{{fbdoc item="usage"}}##
-	**Flip** [ //frompage// ] [, //topage// ]
-##
-{{fbdoc item="param"}}
-	##//frompage//##
-		previous page
+{{fbdoc item="usage"}}##<br \="">**Flip** [ //frompage// ] [, //topage// ]<br \="">##<br \="">
+	{{fbdoc item="param"}}<br \="">##//frompage//##<br \="">		page pr&eacute;c&eacute;dente<br \="">
+##//topage//##<br \="">		nouvelle page &agrave; afficher<br \=""><br \="">
+{{fbdoc item="desc"}}<br \="">En mode graphique normal, ##**Flip**## est un alias de ##[[KeyPgPcopy PCopy]]## et ##[[KeyPgScreencopy ScreenCopy]]##. Voir ##[[KeyPgScreencopy ScreenCopy]]## pour les d&eacute;tails.<br \=""><br \="">En mode OpenGL, ##**Flip**## change la page "hardware" et affiche le contenu du "backbuffer". Il est recommand&eacute; d'appeler ##**Flip**## reguli&egrave;rement en mode OpenGL, autrement votre application risque de devenir instable.<br \=""><br \="">
+	{{fbdoc item="ex"}}<br \="">%%(freebasic)
+ScreenRes 320, 240, 32, 2    'Valide ecran 320x240 en 32-bit couleur avec 2 pages video.<br><br><br>For n As Integer = 50 To 270<br><br>    ScreenSet 2,1     'Valide la page travail a 2 et la page affichage a 1<br>    Cls<br>    Circle (n, 50),50 ,RGB(255,255,0) 'Dessine un cercle avec rayon de 50 pixels en jaune sur page 2<br>    ScreenSet 1,1    'Valide la page travail a 1 et la page affichee a 1<br>    ScreenSync    'Attend rafraichissement vertical<br>    Flip 2,1    'Copie du cercle de page 2 vers page 1<br><br>    Sleep 25<br>Next<br><br>Print "Now wasn't that neat!"<br>Print "Push any key."<br>Sleep<br>
+##<br><br \=""><br \="">
+	{{fbdoc item="lang"}}<br \="">  	- Non disponible dans le dialecte //[[CompilerOptlang -lang qb]]// sauf si r&eacute;f&eacute;renc&eacute; avec l'alias ##**__Flip**##.<br \=""><br \="">  </li>
+		{{fbdoc item="diff"}}<br \="">	- Nouveau pour FreeBASIC<br \=""><br \=""></li>
 	##//topage//##
 		new page to display
 
@@ -25,12 +25,10 @@ ScreenRes 320, 240, 32, 2    'Sets up the screen to be 320x240 in 32-bit color w
 
 for n as integer = 50 to 270
 
-	ScreenSet 2,1     'Sets the working page to 2 and the displayed page to 1
+	ScreenSet 1,0     'Sets the working page to 1 and the displayed page to 0
 	Cls
-	Circle (n, 50),50 ,rgb(255,255,0) 'Draws a circle with a 50 pixel radius in yellow on page 2
-	ScreenSet 1,1    'Sets the working page to 1 and the displayed page to 1
-	ScreenSync    'Waits for vertical refresh
-	flip 2,1    'Copies our circle from page 2 to page 1
+	Circle (n, 50),50 ,rgb(255,255,0) 'Draws a circle with a 50 pixel radius in yellow on page 1
+	flip 1,0    'Copies our circle from page 1 to page 0
 
 	Sleep 25
 next

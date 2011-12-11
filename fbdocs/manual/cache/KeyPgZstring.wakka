@@ -1,20 +1,20 @@
 {{fbdoc item="title" value="ZSTRING"}}----
-Standard data type: 8 bit character string
+Type de donn&eacute;es standard : cha&icirc;ne de caract&egrave;res 8 bits
 
 {{fbdoc item="syntax"}}##
 	[[KeyPgDim dim]] //variable// [[KeyPgAs as]] **Zstring** * //size//
 	[[KeyPgDim dim]] //variable// [[KeyPgAs as]] **Zstring** [[KeyPgPtr ptr]]
 ##
 {{fbdoc item="desc"}}
-	A ##**Zstring**## is a C-style fixed-size array of chars.  It has no descriptor so it's faster to pass it as an argument to functions. FreeBASIC avoids any overflow that could occur, by truncating the contents.
+	Une ##**ZString**## est un tableau C-style &agrave; taille fixe de caract&egrave;res qui n'a pas de descripteur donc plus rapide &agrave; passer comme argument d'une fonction. FreeBasic &eacute;vite tout d&eacute;bordement qui pourrait se produire, en tronquant le contenu.
 
-	A ##**Zstring**## [[KeyPgPtr ptr]] can point to a standard ##**Zstring**##, also can be used to implement an "user-managed" ##**Zstring**##, in this case ##[[KeyPgAllocate Allocate]]##/##[[KeyPgReallocate Reallocate]]##/##[[KeyPgDeallocate Deallocate]]## must be used to size-resize-dispose it and is up  to the user to avoid overflows . 
+	Un [[KeyPgPtr Ptr]] ##**ZString**## peut pointer sur une ##**ZString**## standard , peut &eacute;galement &ecirc;tre utilis&eacute; pour mettre en &oelig;uvre une ##**ZString**## "g&eacute;r&eacute;e par l'utilisateur", dans ce cas ##[[KeyPgAllocate Allocate]]##/##[[KeyPgReallocate Reallocate]]##/##[[KeyPgDeallocate Deallocate]]## doivent &ecirc;tre utilis&eacute;s pour la dimensionner/redimensionner/lib&eacute;rer et c'est &agrave; l'utilisateur de g&eacute;rer les d&eacute;bordements. 
 	
-	The end of the string is marked by a character 0 ASCII, this is automatically managed by the FreeBASIC string handling functions. A character 0 ASCII must never enter in the text of a ##**Zstring**## or it will be truncated, as no descriptor exists . 
+	La fin de la cha&icirc;ne est marqu&eacute;e avec le caract&egrave;re ASCII 0, ceci est g&eacute;r&eacute; automatiquement par les fonctions FreeBASIC de gestion des cha&icirc;nes. Le caract&egrave;re ASCII 0 ne doit jamais faire partie du texte de la ##**ZString**## sinon il sera tronqu&eacute;, car il n'y a pas de descripteur. 
 	
-	In a ##**Zstring**##, ##[[KeyPgLen Len]]## returns the size of the contained string and ##[[KeyPgSizeof Sizeof]]## returns the space allocated to the ##**Zstring**##.
+	Pour une ##**ZString**##, ##[[KeyPgLen Len]]## retourne la taille du contenu de la cha&icirc;ne et ##[[KeyPgSizeof SizeOf]]## retourne l'espace allou&eacute; &agrave; la ##**ZString**##.
 	
-	This type is provided for easy interfacing with C libraries and to also replace the fixed-length strings, that can't be managed through pointers. Any intrinsic string functions like ##[[KeyPgLeft Left]]## will work with ##**Zstring**##'s too, plus any string operator.
+	Ce type existe pour un interfa&ccedil;age plus ais&eacute; avec les biblioth&egrave;ques du langage C et aussi pour remplacer les cha&icirc;nes de longueur fixe, qui ne peuvent &ecirc;tre g&eacute;r&eacute;es par des pointeurs. Toutes les fonctions intrins&egrave;ques de cha&icirc;nes comme ##[[KeyPgLeft Left]]##, ainsi que tout op&eacute;rateur de cha&icirc;ne, fonctionnent aussi avec ##**ZString**##.
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/datatype/zstring.bas"}}%%(freebasic)
@@ -34,10 +34,10 @@ print sizeof(*str2)  'returns len(zstring), the size of the variable
 %%
 
 {{fbdoc item="lang"}}
-	- Not available in the //[[CompilerOptlang -lang qb]]// dialect unless referenced with the alias ##**""__Zstring""**##.
+	- Non disponible dans le dialecte //[[CompilerOptlang -lang qb]]// sauf si r&eacute;f&eacute;renc&eacute; avec l'alias ##**__Zstring**##.
 
 {{fbdoc item="diff"}}
-	- New to ""FreeBASIC""
+	- Nouveau pour FreeBASIC
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgString String]]##

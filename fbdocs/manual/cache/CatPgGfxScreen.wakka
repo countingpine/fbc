@@ -1,58 +1,58 @@
 {{fbdoc item="title" value="Screen Functions"}}----
-Statements and procedures that work with the graphics display.
+D&eacute;clarations et proc&eacute;dures qui travaillent avec l'affichage graphique.
 
 {{fbdoc item="desc"}}
-	These statements and procedures control the graphics capabilities of the ""FreeBASIC"" graphics library. Screen modes can be set with varying resolutions and color depths, window events can be handled, and specific OpenGL procedures can be retrieved.
+	Ces d&eacute;clarations et proc&eacute;dures contr&ocirc;lent les capacit&eacute;s graphiques de la biblioth&egrave;que graphique FreeBasic. Les modes &eacute;cran peuvent &ecirc;tre r&eacute;gl&eacute;s avec des r&eacute;solutions et profondeurs de couleur vari&eacute;es, les &eacute;v&eacute;nements de fen&ecirc;tre peuvent &ecirc;tre g&eacute;r&eacute;s et des proc&eacute;dures OpenGL sp&eacute;cifiques peuvent &ecirc;tre r&eacute;cup&eacute;r&eacute;es.
 
-**{{anchor name="MODES|Working with screen modes"}}**
-	Procedures for setting and retrieving information about screen modes.
-**{{anchor name="PAGES|Working with pages"}}**
-	Procedures that manipulate screen pages.
-**{{anchor name="MEMORY|Working video memory"}}**
-	Procedures that provide direct access to framebuffer memory.
-**{{anchor name="METRICS|Screen Metrics"}}**
-	Procedures that control the way coordinates are interpreted.
+**[[#MODES">Travailler avec les modes &eacute;cran]]**
+	Proc&eacute;dures pour d&eacute;finir et r&eacute;cup&eacute;rer des informations sur les modes &eacute;cran.
+**[[#PAGES">Travailler avec des pages &eacute;cran]]**
+	Proc&eacute;dures qui manipulent les pages &eacute;cran.
+**[[#MEMORY">Travailler avec la m&eacute;moire vid&eacute;o]]**
+	Les proc&eacute;dures qui permettent d'acc&eacute;der directement au tampon m&eacute;moire.
+**[[#METRICS">M&eacute;trique &eacute;cran.]]**
+	Les proc&eacute;dures qui contr&ocirc;lent la fa&ccedil;on dont les coordonn&eacute;es sont interpr&eacute;t&eacute;es.
 
-<<{{anchor name="MODES"}}{{fbdoc item="section" value="Working with screen modes"}}
-	=={{fbdoc item="keyword" value="KeyPgScreenlist|SCREENLIST"}}==
-		Gets the available fullscreen resolutions.
-	=={{fbdoc item="keyword" value="KeyPgScreengraphics|SCREEN"}} and {{fbdoc item="keyword" value="KeyPgScreenres|SCREENRES"}}==
-		Sets a new graphics display mode.
-	=={{fbdoc item="keyword" value="KeyPgScreeninfo|SCREENINFO"}}==
-		Gets information about the system desktop or current display mode.
-	=={{fbdoc item="keyword" value="KeyPgScreencontrol|SCREENCONTROL"}}==
-		Gets or sets internal graphics library settings.
-	=={{fbdoc item="keyword" value="KeyPgScreenevent|SCREENEVENT"}}==
-		Gets system events.
-	=={{fbdoc item="keyword" value="KeyPgScreenglproc|SCREENGLPROC"}}==
-		Returns the address of an OpenGL procedure.
-	=={{fbdoc item="keyword" value="KeyPgWindowtitle|WINDOWTITLE"}}==
-		Sets the running program's window caption.
+<table class="fb_box"><a name="MODES"></a>**<u>Travailler avec les modes &eacute;cran</u>**
+	**[[KeyPgScreenlist ScreenList]]**
+		Obtient les r&eacute;solutions disponibles en plein &eacute;cran.
+	**[[KeyPgScreengraphics Screen]] et [[KeyPgScreenres ScreenRes]]**
+		D&eacute;finit un nouveau mode d'affichage graphique.
+	**[[KeyPgScreeninfo ScreenInfo]]**
+		Obtient des informations sur le bureau du syst&egrave;me ou le mode d'affichage actuel.
+	**[[KeyPgScreencontrol ScreenControl]]**
+		Obtient ou d&eacute;finit les param&egrave;tres internes de la biblioth&egrave;que de graphique.
+	**[[KeyPgScreenevent ScreenEvent]]**
+		Obtient les &eacute;v&eacute;nements du syst&egrave;me.
+	**[[KeyPgScreenglproc ScreenGLProc]]**
+		Renvoie l'adresse d'une proc&eacute;dure d'OpenGL.
+	**[[KeyPgWindowtitle WindowTitle]]**
+		D&eacute;finit la l&eacute;gende de la fen&ecirc;tre du programme en cours.
 
-{{anchor name="PAGES"}}{{fbdoc item="section" value="Working with pages"}}
-	=={{fbdoc item="keyword" value="KeyPgCls|CLS"}}==
-		Clears the entire screen or viewport.
-	=={{fbdoc item="keyword" value="KeyPgScreenset|SCREENSET"}}==
-		Sets the current work and visible pages.
-	=={{fbdoc item="keyword" value="KeyPgScreencopy|SCREENCOPY"}} and {{fbdoc item="keyword" value="KeyPgPcopy|PCOPY"}} and {{fbdoc item="keyword" value="KeyPgFlip|FLIP"}}==
-		Copies pixel data from one page to another.
-	=={{fbdoc item="keyword" value="KeyPgScreensync|SCREENSYNC"}}==
-		Waits for the vertical refresh of the monitor.
-<<>>{{anchor name="MEMORY"}}{{fbdoc item="section" value="Working video memory"}}
-	=={{fbdoc item="keyword" value="KeyPgScreenptr|SCREENPTR"}}==
-		Gets the address of the working page's framebuffer.
-	=={{fbdoc item="keyword" value="KeyPgScreenlock|SCREENLOCK"}}==
-		Locks the current working page's framebuffer for direct access.
-	=={{fbdoc item="keyword" value="KeyPgScreenunlock|SCREENUNLOCK"}}==
-		Reverts a previous [[KeyPgScreenlock ScreenLock]] command.
+<a name="PAGES"></a>**<u>Travailler avec des pages &eacute;cran</u>**
+	**[[KeyPgCls Cls]]**
+		Efface la totalit&eacute; de l'&eacute;cran ou de la fen&ecirc;tre.
+	**[[KeyPgScreenset ScreenSet]]**
+		D&eacute;finit la page de travail courante et les pages visibles.
+	**[[KeyPgScreencopy ScreenCopy]] et [[KeyPgPcopy PCopy]] et [[KeyPgFlip Flip]]**
+		Copie des donn&eacute;es pixels d'une page &agrave; une autre.
+	**[[KeyPgScreensync ScreenSync]]**
+		Attend le rafra&icirc;chissement vertical de l'&eacute;cran.
+;<a name="MEMORY"></a>**<u>Travailler avec la m&eacute;moire vid&eacute;o</u>**
+	**[[KeyPgScreenptr ScreenPtr]]**
+		Obtient l'adresse de la page de travail du tampon image.
+	**[[KeyPgScreenlock ScreenLock]]**
+		Verrouille la page courante de travail du tampon image pour un acc&egrave;s direct.
+	**[[KeyPgScreenunlock ScreenUnlock]]**
+		Annule la commande [[KeyPgScreenlock ScreenLock]] pr&eacute;c&eacute;dente.
 
-{{anchor name="METRICS"}}{{fbdoc item="section" value="Screen Metrics"}}
-	=={{fbdoc item="keyword" value="KeyPgViewgraphics|VIEW (GRAPHICS)"}}==
-		Sets a clipping region for all drawing and blitting procedures.
-	=={{fbdoc item="keyword" value="KeyPgWindow|WINDOW"}}==
-		Sets a new coordinate mapping for the current viewport.
-	=={{fbdoc item="keyword" value="KeyPgPmap|PMAP"}}==
-		Converts coordinates between physical and view mappings.
->>::c::
+<a name="METRICS"></a>**<u>M&eacute;trique &eacute;cran</u>**
+	**[[KeyPgViewgraphics View (Graphics)]]**
+		D&eacute;finit une zone de d&eacute;coupage pour toutes les proc&eacute;dures de dessin et de "blitting".
+	**[[KeyPgWindow Window]]**
+		D&eacute;finit une nouvelle cartographie pour les coordonn&eacute;es de la fen&ecirc;tre actuelle.
+	**[[KeyPgPmap PMap]]**
+		Convertit des coordonn&eacute;es entre les mappages physiques et vue.
+;</table><div style="clear:both"> 
 
 {{fbdoc item="back" value="DocToc|Table of Contents"}}

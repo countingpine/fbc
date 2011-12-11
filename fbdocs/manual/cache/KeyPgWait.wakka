@@ -1,5 +1,5 @@
 {{fbdoc item="title" value="WAIT"}}----
-Reads from a hardware port with a mask.
+Lecture d'un port "hardware" avec un masque.
 
 {{fbdoc item="syntax"}}##
 	[[KeyPgDeclare declare]] [[KeyPgFunction function]] **Wait** ( [[KeyPgByval byval]] //port// [[KeyPgAs as]] [[KeyPgUshort ushort]] , [[KeyPgByval byval]] //and_mask// [[KeyPgAs as]] [[KeyPgInteger integer]] , [[KeyPgByval byval]] //xor_mask// [[KeyPgAs as]] [[KeyPgInteger integer]] = 0 ) [[KeyPgAs as]] [[KeyPgInteger integer]]
@@ -9,17 +9,17 @@ Reads from a hardware port with a mask.
 ##
 {{fbdoc item="param"}}
 	##//port//##
-		Port to read.
+		Port &agrave; lire.
 	##//and_mask//##
-		Mask value to [[KeyPgOpAnd And]] the port value with.
+		Valeur du masque pour effectuer un [[KeyPgOpAnd And]] avec la valeur du port.
 	##//xor_mask//##
-		Mask value to [[KeyPgOpXor Xor]] the port value with.
+		Valeur du masque pour effectuer un [[KeyPgOpAnd Xor]] avec la valeur du port.
 
-{{fbdoc item="ret"}}
-	0 if successful, -1 on failure.
+{{fbdoc item="section" value="Valeur retourn&eacute;e
+	0 si succ&egrave;s, -1 si &eacute;chec.
 
 {{fbdoc item="desc"}}
-	##**Wait**## keeps reading ##//port//## until the reading ANDed with ##//and_mask//## and optionally XORed with ##//xor_mask//## gives a non-zero result.
+	##**Wait**## lit en boucle le ##//port//## jusqu'&agrave; ce que la valeur lue combin&eacute;e par un AND avec ##//and_mask//## ou &eacute;ventuellement combin&eacute;e par un XOR avec ##//xor_mask//## donne un r&eacute;sultat non-nul (non-z&eacute;ro).
 
 	
 {{fbdoc item="ex"}}
@@ -29,9 +29,9 @@ screensync 'FreeBASIC way of accomplishing the same thing
 %%
 
 {{fbdoc item="target"}}
-	- In the Windows and Linux versions three port numbers (&H3C7, &H3C8, &H3C9) are hooked by the graphics library when a graphics mode is in use to emulate VGA palette handling as in QB. This use is deprecated; use ##[[KeyPgPalette Palette]]## to retrieve and set palette colors.
+	- Sous Windows et Linux trois num&eacute;ros de port (&H3C7, &H3C8, &H3C9) sont utilis&eacute;s par la biblioth&egrave;que graphique quand un mode graphique est en cours d'utilisation pour &eacute;muler la gestion de la palette VGA comme dans QB. Cette utilisation est obsol&egrave;te; utilisez ##[[KeyPgPalette Palette]]## pour r&eacute;cup&eacute;rer et d&eacute;finir la palette des couleurs.
 	
-	- Using true port access in the Windows version requires the program to install a device driver for the present session. For that reason, Windows executables using hardware port access should be run with administrator permits each time the computer is restarted. Further runs don't require admin rights as they just use the already installed driver. The driver is only 3K in size and is embedded in the executable.
+	- L'utilisation de l'acc&egrave;s au direct port (non &eacute;mul&eacute;) dans la version Windows n&eacute;cessite l'installation du pilote de p&eacute;riph&eacute;rique pour la pr&eacute;sente session. Pour cette raison, les ex&eacute;cutables Windows utilisant l'acc&egrave;s au port du mat&eacute;riel doivent &ecirc;tre ex&eacute;cut&eacute;s avec les droits administrateur chaque fois que l'ordinateur est red&eacute;marr&eacute;. D'autres lancements ne n&eacute;cessiteront pas de droits administrateur car ils n'auront qu'&agrave; utiliser le pilote d&eacute;j&agrave; install&eacute;. Le pilote n'a qu'une taille de 3K et est int&eacute;gr&eacute; dans l'ex&eacute;cutable.
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgInp Inp]]##

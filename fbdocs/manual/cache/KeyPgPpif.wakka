@@ -1,39 +1,39 @@
 {{fbdoc item="title" value="#IF"}}----
-Preprocessor conditional directive
+Directive conditionnelle du pr&eacute;processeur
 
-{{fbdoc item="syntax"}}##
-	**#if** (expression)
-		' Conditionally included statements
+{{fbdoc item="syntax"}}
+	##**#if**## (expression)
+		' D&eacute;clarations incluses sous condition
 	[[KeyPgPpendif #endif]]
-##
 {{fbdoc item="desc"}}
-	Conditionally includes statements at compile time.
+D&eacute;clarations incluses sous condition au moment de la compilation.
+	Les d&eacute;clarations contenues dans le bloc ##**#if**## / ##[[KeyPgPpendif #endif]]## sont incluses si ##//expression//## est &eacute;valu&eacute;e comme Vrai (True) (non-z&eacute;ro) et exclues (ignor&eacute;es) si ##//expression//## est &eacute;valu&eacute;e comme Faux (False) (0).
 
-	Statements contained within the ##**#if**## / ##[[KeyPgPpendif #endif]]## block are included if ##//expression//## evaluates to True (non-zero) and excluded (ignored) if ##//expression//## evaluates to False (0).
+	Cette directive conditionnelle diff&egrave;re de la d&eacute;claration conditionnelle ##[[KeyPgIfthen If]]## car ##**#if**## est &eacute;valu&eacute; au moment de la compilation alors que ##[[KeyPgIfthen If]]## est &eacute;valu&eacute; &agrave; l'ex&eacute;cution du programme.
 
-	This conditional directive differs from the ##[[KeyPgIfthen If]]## conditional statement in that ##**#if**## is evaluated at compile-time and ##[[KeyPgIfthen If]]## is evaluated at run-time.
+	{{fbdoc item="ex"}}
 
 {{fbdoc item="ex"}}
-{{fbdoc item="filename" value="examples/manual/prepro/if.bas"}}%%(freebasic)
 #define DEBUG_LEVEL 1
-#IF (DEBUG_LEVEL >= 2)
-  ' This line is not compiled since the expression is False
+#if (DEBUG_LEVEL >= 2)
+' This line is not compiled since the expression is False
   Print "Starting application"
-#ENDIF
+  #endif
 %%
-
 {{fbdoc item="diff"}}
-	- New to ""FreeBASIC""
 
-{{fbdoc item="see"}}
-	- ##[[KeyPgPpdefine #define]]##
+- Nouveau pour Freebasic
+	{{fbdoc item="see"}}
+
+- ##[[KeyPgPpdefine #define]]##
 	- ##[[KeyPgPpmacro #macro]]##
 	- ##[[KeyPgPpelse #else]]## 
-	- ##[[KeyPgPpelseif #elseIf]]## 
+	- ##[[KeyPgPpelseif #elseif]]## 
 	- ##[[KeyPgPpendif #endif]]## 
 	- ##[[KeyPgPpifdef #ifdef]]##
 	- ##[[KeyPgPpifndef #ifndef]]##
 	- ##[[KeyPgPpundef #undef]]##
+	- ##[[KeyPgDefined defined]]##
 	- ##[[KeyPgDefined defined]]##
 
 {{fbdoc item="back" value="CatPgPreProcess|Preprocessor"}}

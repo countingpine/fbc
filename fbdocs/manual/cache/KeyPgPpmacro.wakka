@@ -1,5 +1,5 @@
 {{fbdoc item="title" value="#MACRO...#ENDMACRO"}}----
-Preprocessor directive to define a multiline macro
+Directive du pr&eacute;processeur pour d&eacute;finir une macro multi-ligne
 
 {{fbdoc item="syntax"}}##
 	**#macro** //macro_name//( [ //parameters// ] )
@@ -11,57 +11,42 @@ Preprocessor directive to define a multiline macro
 	**#endmacro**
 ##
 {{fbdoc item="desc"}}
-	##**#macro**## defines a function like macro where ##//macro body//## may span multiple lines.
+	##**#macro**## d&eacute;finit une fonction comme macro o&ugrave; ##//macro body (corps de la macro)//## peut s'&eacute;tendre sur plusieurs lignes.
 
-	Parameters supplied to the function like macro are substituted where they occur in the ##//macro body//##.  The entire ##//macro body//## is substituted where ever ##//macro_name//## appears in the source code.  The number of parameters supplied to a macro must match the number of parameters in its ##**#macro**## definition.
-	
-	Using ##[[KeyPgDots ...]]## (an ellipsis) behind the last parameter of a macro allows to create a variadic macro, see [[KeyPgPpdefine #define]].
-
-	The ##[[KeyPgPpifdef #ifdef]]## and ##[[KeyPgPpifndef #ifndef]]## preprocessor conditionals can test if ##//macro_name//## exists or does not exist.
-
-	The ##[[KeyPgPpundef #undef]]## preprocessor directive will undefine a macro so that it may be redefined with another definition.
-	Macro substitution can be checked by using the -g -r switches. The compiler doesn't erase the intermediate .asm file where the code actually sent to the compiler can be seen close to its translation into assembler.
-
+Les param&egrave;tres fournis &agrave; la fonction comme macro sont mis &agrave; la place o&ugrave; ils fonctionnent dans ##//macro body//##.  Le ##//macro body//## est plac&eacute; en entier chaque fois que ##//macro_name//## appara&icirc;t dans le code source.  Le nombre de param&egrave;tres transmis &agrave; la macro doit correspondre au nombre de param&egrave;tres dans sa ##**#macro**## d&eacute;finition.
+Utiliser ##[[KeyPgDots ...]]## (une ellipse) derri&egrave;re le dernier param&egrave;tre d'une macro permet de cr&eacute;er une macro variadique, voir [[KeyPgPpdefine #define]].
+Les conditionnels du pr&eacute;processeur ##[[KeyPgPpifdef #ifdef]]## et ##[[KeyPgPpifndef #ifndef]]## peuvent tester si ##//macro_name//## existe ou n'existe pas.
+La directive pr&eacute;processeur ##[[KeyPgPpundef #undef]]## peut annuler la d&eacute;finition d'une macro de fa&ccedil;on &agrave; pouvoir la red&eacute;finir avec une autre d&eacute;finition.
+  La substitution de macro peut &ecirc;tre v&eacute;rifi&eacute;e en utilisant les options -g -r. Le compilateur n'effacera pas le fichier .asm interm&eacute;diaire dans lequel le code r&eacute;ellement envoy&eacute; au compilateur peut &ecirc;tre vu &agrave; c&ocirc;t&eacute; de sa traduction en assembleur.
 {{fbdoc item="ex"}}
-{{fbdoc item="filename" value="examples/manual/prepro/macro.bas"}}%%(freebasic)
-'' macro as an expression value
-#macro Print1( a, b )
-  a + b
-#endmacro
 
 print Print1( "Hello", "World" )
 
-'' Output :
-'' Hello World!
-%%
+'' macro as an expression value
+#macro Print1( a, b )
+a + b
 
-{{fbdoc item="filename" value="examples/manual/prepro/macro2.bas"}}%%(freebasic)
-'' macro as multiple statements
-#macro Print2( a, b )
-  print a;
-  print " ";
-  print b;
-  print "!"
 #endmacro
+Print Print1( "Hello", "World" )
+'' Output :
+	'' Hello World!
+	%%
+	%%(freebasic)
+	'' macro as multiple statements
+#macro Print2( a, b )
 
-Print2( "Hello", "World" )
+Print a;
+
+Print " ";
+Print b;
+Print "!"
+
+#endmacro
+	Print2( "Hello", "World" )
 
 '' Output :
-'' Hello World!
-%%
+	'' Hello World!
+	%%
+	{{fbdoc item="diff"}}
 
-{{fbdoc item="diff"}}
-	- New to ""FreeBASIC""
-
-{{fbdoc item="see"}}
-	- ##[[KeyPgPpdefine #define]]##
-	- ##[[KeyPgPpif #if]]##
-	- ##[[KeyPgPpelse #else]]## 
-	- ##[[KeyPgPpelseif #elseif]]## 
-	- ##[[KeyPgPpendif #endif]]## 
-	- ##[[KeyPgPpifdef #ifdef]]##
-	- ##[[KeyPgPpifndef #ifndef]]##
-	- ##[[KeyPgPpundef #undef]]##
-	- ##[[KeyPgDefined defined]]##
-
-{{fbdoc item="back" value="CatPgPreProcess|Preprocessor"}}
+- Nouveau pour Freebasic

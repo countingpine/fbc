@@ -1,5 +1,5 @@
 {{fbdoc item="title" value="SCREEN (Console)"}}----
-Gets the character or color attribute at a given location
+Renvoie le caract&egrave;re ou l&apos;attribut de couleur &agrave; la position donn&eacute;e
 
 {{fbdoc item="syntax"}}##
 	[[KeyPgDeclare declare]] [[KeyPgFunction function]] **Screen** ( [[KeyPgByval byval]] row [[KeyPgAs as]] [[KeyPgInteger integer]], [[KeyPgByval byval]] column [[KeyPgAs as]] [[KeyPgInteger integer]], [[KeyPgByval byval]] colorflag [[KeyPgAs as]] [[KeyPgInteger integer]] = 0 ) [[KeyPgAs as]] [[KeyPgInteger integer]]
@@ -9,31 +9,31 @@ Gets the character or color attribute at a given location
 ##
 {{fbdoc item="param"}}
 	##//row//##
-		1-based offset from the top left corner of the console.
+		d&eacute;calage vertical depuis le coin en haut &agrave; gauche de la console (base = 1).
 	##//column//##
-		1-based offset from the top left corner of the console.
+		d&eacute;calage horizontal depuis le coin en haut &agrave; gauche de la console (base = 1).
 	##//colorflag//##
-		If equal to 0, the [[CptAscii ASCII]] code is returned, otherwise the color attribute is returned.  If omitted, it defaults to 0.
+		Si &eacute;gal &agrave; 0, le code [[CptAscii ASCII]] est renvoy&eacute;, uatrement c&apos;est l&apos;attribut de couleur qui est renvoy&eacute;.  S&apos;il est omis, sa valeur par d&eacute;faut est 0.
 
-{{fbdoc item="ret"}}
-	The [[CptAscii ASCII]] or color attribute of the character.
-	At the moment (v0.18.5), if coordinates are out of screen, no error number is set and the value returned is not reliable.
+{{fbdoc item="section" value="Valeur retourn&eacute;e
+	Le code [[CptAscii ASCII]] ou l&apos;attribut de couleur du caract&egrave;re.
+	A ce moment (v0.18.5), si les coordonn&eacute;es sont hors de l&apos;&eacute;cran, aucun no d&apos;erreur n&apos;est attribu&eacute; et la valeur retourn&eacute;e n&apos;est pas fiable.
 
 {{fbdoc item="desc"}}
-	##**Screen**## returns the character or the color attribute found at a given position of a console output. It works in console mode and in graphics mode.
+	##**Screen**## rtourne le caract&egrave;re ou l&apos;attribut de couleur trouv&eacute; &agrave; la position donn&eacute;e d&apos;une sortie console. Fonctionne en mode console ou graphique.
 	
-	The format of the color attribute depends on the current color depth:
+	Le format de l&apos;attribut de couleur d&eacute;pend de la profondeur de la couleur :
 	
-	If the color type is a palette type with up to 4 bits per pixel (such as the Win32 console), then the color attribute is an 8-bit value, where the higher four bits hold the cell background color and the lower four bits hold the foreground (character) color.
+	Si le type de couleur est une palette de 4 bits par pixel (comme la console Win32), alors l&apos;attribut de couleur est une valeur 8-bit, dans laquelle les 4 bits de poids fort correspondent &agrave; la couleur d&apos;arri&egrave;re-plan et les 4 bits de poids faible correspondent &agrave; la couleur de premier-plan (caract&egrave;re).
 	
-	If the color type is an 8-bit palette, then the color attribute is a 16-bit value, where the high byte holds the background color and the low byte holds the foreground color.
+	Si le type de couleur est une palette de 8 bits par pixel, alors l&apos;attribut de couleur est une valeur 16-bit, dans laquelle l&apos;octet de poids fort correspond &agrave; la couleur d&apos;arri&egrave;re-plan et l&apos;octet de poids faible &agrave; la couleur de premier-plan.
 
-	If the color type is full color, then the color attribute is a 32-bit integer, holding a single color value.  If ##//colorflag//## is equal to 1, then the foreground color is returned; if ##//colorflag//## is equal to 2, then the background color is returned.
+	Si nous sommes en ##//pleine couleur//##, alors l&apos;attribut de couleur est un entier 32-bit, correspondant &agrave; une unique valeur de couleur.  Si ##//colorflag//## est &agrave; 1, alors c&apos;est la couleur d&apos;arri&egrave;re-plan qui est renvoy&eacute;e; si ##//colorflag//## est &agrave; 2, alors c&apos;est la couleur de premier-plan qui est renvoy&eacute;e.
 	
 	
-	The color values for the standard 16 color palette are:
+	Les valeurs de couleur pour une palette standard de 16 couleurs sont :
 
-		{{table columns="4" cellpadding="2" cells="Value;Color;Value;Color;0;Black;8;Gray;1;Blue;9;Bright Blue;2;Green;10;Bright Green;3;Cyan;11;Bright Cyan;4;Red;12;Bright Red;5;Magenta;13;Pink;6;Brown;14;Yellow;7;White;15;Bright White"}}
+		{{table columns="" cellpadding="2" cells="<table>Valeur;Couleur;Valeur;Couleur;0;Noir;8;Gris;1;Bleu;9;Bleu Clair;2;Vert;10;Vert Clair;3;Cyan;11;Cyan Clair;4;Rouge;12;Rouge Clair;5;Magenta;13;Rose;6;Marron;14;Jaune;7;Blanc;15;Blanc Brillant;</table>
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/console/screen-func.bas"}}%%(freebasic)
@@ -50,20 +50,20 @@ cell_color = attribute and &hf
 %%
 
 {{fbdoc item="filename" value="examples/manual/gfx/screen-func1.bas"}}%%(freebasic)
-'' open a graphics screen with 4 bits per pixel
-'' (alternatively, omit this line to use the console)
+&apos;&apos; ouvre un ecran graphique avec 4 bits par pixel
+&apos;&apos; (alternativement, omettez cette ligne pour utiliser la console)
 screenres 320, 200, 4
 
-'' print a character
+&apos;&apos; affiche un caractere
 color 7, 1
 print "A"
 
 dim as uinteger char, col, fg, bg
 
-'' get the ASCII value of the character we've just printed
+&apos;&apos; obtient la valeur ASCII du caractere que nous&apos;avons affiche
 char = screen(1, 1, 0)
 
-''get the color attributes
+&apos;&apos;obtient les attributs de couleur
 col = screen(1, 1, 1)
 fg = col and &HF
 bg = (col shr 4) and &HF
@@ -75,19 +75,19 @@ sleep
 %%
 
 {{fbdoc item="filename" value="examples/manual/gfx/screen-func2.bas"}}%%(freebasic)
-'' open a graphics screen with 8 bits per pixel
+&apos;&apos; ouvre ecran graphique avec 8 bits par pixel
 screenres 320, 200, 8
 
-'' print a character
+&apos;&apos; affiche un caractere
 color 30, 16
 print "Z"
 
 dim as uinteger char, col, fg, bg
 
-'' get the ASCII value of the character we've just printed
+&apos;&apos; obtient la valeur ASCII du caractere que nous&apos;avons affiche
 char = screen(1, 1, 0)
 
-''get the color attributes
+&apos;&apos;obtient les attributs de couleur
 col = screen(1, 1, 1)
 fg = col and &HFF
 bg = (col shr 8) and &HFF
@@ -99,19 +99,19 @@ sleep
 %%
 
 {{fbdoc item="filename" value="examples/manual/gfx/screen-func3.bas"}}%%(freebasic)
-'' open a full-color graphics screen
+&apos;&apos; ouvre ecran graphique pleine-couleur
 screenres 320, 200, 32
 
-'' print a character
-color rgb(255, 255, 0), rgb(0, 0, 255) 'yellow on blue
+&apos;&apos; affiche un caractere
+Color RGB(255, 255, 0), RGB(0, 0, 255) &apos;jaune sur bleu
 print "M"
 
 dim as integer char, fg, bg
 
-'' get the ASCII value of the character we've just printed
+&apos;&apos; obtient la valeur ASCII du caractere que nous&apos;avons affiche
 char = screen(1, 1, 0)
 
-''get the color attributes
+&apos;&apos;obtient les attributs de couleur
 fg = screen(1, 1, 1)
 bg = screen(1, 1, 2)
 
@@ -121,13 +121,13 @@ print using "Background color: &"; hex(bg, 8)
 sleep
 %%
 {{fbdoc item="target"}}
-	- On the Linux version, the value returned can differ from the character shown on the console.  For example, unprintable control codes - such as the ##LF## character (##10##) that implicitly occurs after the end of ##[[KeyPgPrint Print]]##ed text - may be picked up instead of the untouched character in its place.
+	- Dans la version Linux, la valeur retourn&eacute;e peut diff&eacute;rer du caract&egrave;re affich&eacute; &agrave; l'&eacute;cran.  Par exemple, les codes de contr&ocirc;le non-imprimables - comme le caract&egrave;re ##LF## (##10##) qui appara&icirc; implicitement &agrave; la fin d'une ligne de texte affich&eacute; par ##[[KeyPgPrint Print]]## - peuvent &ecirc;tre utilis&eacute;s &agrave; la place du caract&egrave;re initial.
 
-{{fbdoc item="diff"}}
-	- In QB ##**Screen**## triggered an error if the coordinates were out of screen.
+</br>
+	{{fbdoc item="section" value="Diff&eacute;rences par rapport &agrave; QB
 
-{{fbdoc item="see"}}
-	- ##[[KeyPgScreengraphics Screen (Graphics)]]##
-	- ##[[KeyPgColor Color]]##
+- Dans QB ##**Screen**## d&eacute;clanche une erreur si les coordonn&eacute;es sont hors de l&apos;&eacute;cran.
+	</br>
+	{{fbdoc item="see"}}
 
-{{fbdoc item="back" value="CatPgConsole|Console Functions"}}
+- ##[[KeyPgScreengraphics Screen (Graphics)]]##

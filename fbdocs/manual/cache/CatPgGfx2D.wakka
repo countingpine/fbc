@@ -1,82 +1,82 @@
 {{fbdoc item="title" value="2D Drawing Functions"}}----
-Statements and procedures for working with 2D graphics.
+D&eacute;clarations et proc&eacute;dures pour travailler avec des graphiques 2D.
 
 {{fbdoc item="desc"}}
-	The statements and procedures listed here provide ways of drawing to the screen. Image buffers can be created and blitted to the screen using a variety of blending methods. Palette colors can be retrieved or set in graphics modes that support them.
+	Les d&eacute;clarations et les proc&eacute;dures &eacute;num&eacute;r&eacute;es ici fournissent des moyens de dessin &agrave; l'&eacute;cran. Des tampons images peuvent &ecirc;tre cr&eacute;&eacute;s et affich&eacute;s &agrave; l'&eacute;cran en utilisant une vari&eacute;t&eacute; de m&eacute;thodes de transformation et manipulation. Les palettes de couleurs peuvent &ecirc;tre r&eacute;cup&eacute;r&eacute;es ou d&eacute;finies dans les modes graphiques qui les supportent.
 
-**{{anchor name="COLOR|Working with Color"}}**
-	Procedures that control the color used by other drawing procedures.
-**{{anchor name="DRAWING|Drawing to Image Buffers"}}**
-	Procedures that draw shapes and text onto image buffers or to the screen.
-**{{anchor name="IMGBUF|Image Buffer Creation"}}**
-	Procedures that create, free and save image buffers.
-**{{anchor name="BLITTING|Blitting Image Buffers"}}**
-	Procedures that draw image buffers onto other image buffers or to the screen.
+**[[#COLOR">Travailler avec la couleur]]**
+	Proc&eacute;dures qui contr&ocirc;lent la couleur utilis&eacute;e par d'autres proc&eacute;dures de dessin.
+**[[#DRAWING">Dessin dans les tampons images]]**
+	Proc&eacute;dures qui dessinent des formes et du texte dans des tampons images ou &agrave; l'&eacute;cran.
+**[[#IMGBUF">Cr&eacute;ation de tampons images]]**
+	Proc&eacute;dures qui cr&eacute;ent, lib&egrave;rent et sauvegardent les tampons images.
+**[[#BLITTING">Manipulation/transformation de tampons images]]**
+	Proc&eacute;dures qui appliquent des tampons images sur d'autres tampons images ou &agrave; l'&eacute;cran.
 
-<<{{anchor name="COLOR"}}{{fbdoc item="section" value="Working with Color"}}
-	=={{fbdoc item="keyword" value="KeyPgColor|COLOR"}}==
-		Sets the foreground and background color to use with the drawing procedures.
-	=={{fbdoc item="keyword" value="KeyPgPalette|PALETTE"}}==
-		Gets or sets color table information in paletted modes.
-	=={{fbdoc item="keyword" value="KeyPgRgb|RGB"}}==
-		Returns a color value for hi/truecolor modes.
-	=={{fbdoc item="keyword" value="KeyPgRgba|RGBA"}}==
-		Returns a color value including alpha (transparency) for hi/truecolor modes.
-	=={{fbdoc item="keyword" value="KeyPgPoint|POINT"}}==
-		Gets a pixel value from an image buffer or screen.
+<table class="fb_box"><a name="COLOR"></a>**<u>Travailler avec la couleur</u>**
+	**[[KeyPgColor Color]]**
+		D&eacute;finit la couleur de premier plan et d'arri&egrave;re-plan &agrave; utiliser avec les proc&eacute;dures de dessin.
+	**[[KeyPgPalette Palette]]**
+		Obtient ou d&eacute;finit la table d'informations des couleurs dans les modes palettis&eacute;es.
+	**[[KeyPgRgb RGB]]**
+		Retourne une valeur de couleur pour les modes "hi/truecolor".
+	**[[KeyPgRgba RGBA]]**
+		Retourne une valeur de couleur dont la transparence (alpha) pour les modes "hi/truecolor".
+	**[[KeyPgPoint Point]]**
+		Obtient la valeur d'un pixel d'un tampon image ou de l'&eacute;cran.
 
-{{anchor name="DRAWING"}}{{fbdoc item="section" value="Drawing to Image Buffers"}}
-	=={{fbdoc item="keyword" value="KeyPgPset|PSET"}} and {{fbdoc item="keyword" value="KeyPgPreset|PRESET"}}==
-		Plots a single pixel on an image buffer or screen.
-	=={{fbdoc item="keyword" value="KeyPgLinegraphics|LINE (GRAPHICS)"}}==
-		Plots a line of pixels on an image buffer or screen.
-	=={{fbdoc item="keyword" value="KeyPgCircle|CIRCLE"}}==
-		Plots circles and ellipses on an image buffer or screen.
-	=={{fbdoc item="keyword" value="KeyPgDraw|DRAW"}}==
-		Draws in a sequence of commands on an image buffer or screen.
-	=={{fbdoc item="keyword" value="KeyPgDrawString|DRAW STRING"}}==
-		Writes text to an image buffer or screen.
-	=={{fbdoc item="keyword" value="KeyPgPaint|PAINT"}}==
-		Fills an area with color on an image buffer or screen.
+<a name="DRAWING"></a>**<u>Dessin dans les tampons images</u>**
+	**[[KeyPgPset PSet]] et [[KeyPgPreset PReset]]**
+		Place un seul pixel sur un tampon image ou &agrave; l'&eacute;cran.
+	**[[KeyPgLinegraphics Line (Graphics)]]**
+		Trace une ligne de pixels sur un tampon image ou &agrave; l'&eacute;cran.
+	**[[KeyPgCircle Circle]]**
+		Trace des cercles et des ellipses sur un tampon image ou &agrave; l'&eacute;cran.
+	**[[KeyPgDraw Draw]]**
+		Dessine &agrave; l'aide d'une s&eacute;quence de commandes sur un tampon image ou &agrave; l'&eacute;cran.
+	**[[KeyPgDrawString Draw String]]**
+		&eacute;crit du texte dans un tampon image ou &agrave; l'&eacute;cran.
+	**[[KeyPgPaint Paint]]**
+		Remplit un espace avec une couleur sur un tampon image ou &agrave; l'&eacute;cran.
 
-{{anchor name="IMGBUF"}}{{fbdoc item="section" value="Image Buffer Creation"}}
-	=={{fbdoc item="keyword" value="KeyPgGetgraphics|GET (GRAPHICS)"}}==
-		Creates an image buffer from a portion of another image buffer or screen.
-	=={{fbdoc item="keyword" value="KeyPgImagecreate|IMAGECREATE"}}==
-		Creates an image buffer of a certain size and pixel depth.
-	=={{fbdoc item="keyword" value="KeyPgImageDestroy|IMAGEDESTROY"}}==
-		Frees an image buffer resource.
-	=={{fbdoc item="keyword" value="KeyPgImageConvertRow|IMAGECONVERTROW"}}==
-		Converts a row of pixels in an image buffer to a different color depth.
-	=={{fbdoc item="keyword" value="KeyPgImageInfo|IMAGEINFO"}}==
-		Retrieves useful information about an image buffer
-	=={{fbdoc item="keyword" value="KeyPgBload|BLOAD"}}==
-		Creates an image buffer from a file.
-	=={{fbdoc item="keyword" value="KeyPgBsave|BSAVE"}}==
-		Saves an image buffer to a file.
+<a name="IMGBUF"></a>**<u>Cr&eacute;ation de tampons images</u>**
+	**[[KeyPgGetgraphics Get (Graphiques)]]**
+		Cr&eacute;e un tampon image &agrave; partir d'une portion d'un autre tampon d'image ou de l'&eacute;cran.
+	**[[KeyPgImagecreate ImageCreate]]**
+		Cr&eacute;e un tampon image d'une certaine taille et profondeur de pixel.
+	**[[KeyPgImageDestroy ImageDestroy]]**
+		Lib&egrave;re une ressource tampon image.
+	**[[KeyPgImageConvertRow ImageConvertRow]]**
+		Convertit une rang&eacute;e de pixels d'un tampon image avec une profondeur de couleur diff&eacute;rente.
+	**[[KeyPgImageInfo ImageInfo]]**
+		R&eacute;cup&egrave;re des informations utiles sur un tampon image.
+	**[[KeyPgBload BLoad]]**
+		Cr&eacute;e un tampon image &agrave; partir d'un fichier.
+	**[[KeyPgBsave BSave]]**
+		Enregistre un tampon image dans un fichier.
 
-<<>>{{anchor name="BLITTING"}}{{fbdoc item="section" value="Blitting Image Buffers"}}
-	=={{fbdoc item="keyword" value="KeyPgPutgraphics|PUT (GRAPHICS)"}}==
-		Blits an image buffer to another image buffer or screen.
+;<a name="BLITTING"></a>**<u>Manipulation/transformation de tampons images</u>**
+	**[[KeyPgPutgraphics Put (Graphiques)]]**
+		Affiche un tampon image sur un autre tampon image ou &agrave; l'&eacute;cran.
 
-	{{fbdoc item="subsect" value="Blending Methods"}}
-		=={{fbdoc item="keyword" value="KeyPgAddGfx|ADD"}}==
-			Saturated addition of the source and target components.
-		=={{fbdoc item="keyword" value="KeyPgAlphaGfx|ALPHA"}}==
-			Blend using a uniform transparency or the image buffer's alpha channel.
-		=={{fbdoc item="keyword" value="KeyPgAndGfx|AND"}}==
-			Combine the source and target components using a bitwise ##[[KeyPgOpAnd And]]##
-		=={{fbdoc item="keyword" value="KeyPgOrGfx|OR"}}==
-			Combine the source and target components using a bitwise ##[[KeyPgOpOr Or]]##
-		=={{fbdoc item="keyword" value="KeyPgPsetGfx|PSET"}}==
-			Directly copy pixel colors from the source to the destination.
-		=={{fbdoc item="keyword" value="KeyPgTransGfx|TRANS"}}==
-			Pixels matching the transparent mask color are not blitted.
-		=={{fbdoc item="keyword" value="KeyPgCustomgfx|CUSTOM"}}==
-			Allows a custom blending procedure to be used.
-		=={{fbdoc item="keyword" value="KeyPgXorGfx|XOR"}}==
-			Combine the source and target components using a bitwise ##[[KeyPgOpXor Xor]]##
+	**M&eacute;thodes de Manipulation/transformation**
+		**[[KeyPgAddGfx Add]]**
+			Addition satur&eacute;e des composants cible et source.
+		**[[KeyPgAlphaGfx Alpha]]**
+			M&eacute;langer &agrave; l'aide d'une transparence uniforme ou le canal alpha du tampon image.
+		**[[KeyPgAndGfx And]]**
+			M&eacute;langer les composants source et cible en utilisant la manipulation ##[[KeyPgOpAnd And]]## au niveau des bits
+		**[[KeyPgOrGfx Or]]**
+			M&eacute;langer les composants source et cible en utilisant la manipulation ##[[KeyPgOpOr Or]]## au niveau des bits
+		**[[KeyPgPsetGfx PSet]]**
+			Copier directement les couleurs des pixels de la source vers la destination.
+		**[[KeyPgTransGfx Trans]]**
+			Les pixels correspondant &agrave; la couleur du masque transparent ne sont pas transform&eacute;s.
+		**[[KeyPgCustomgfx Custom]]**
+			Permet d'utiliser une proc&eacute;dure personnalis&eacute;e de m&eacute;lange.
+		**[[KeyPgXorGfx Xor]]**
+			M&eacute;langer les composants source et cible en utilisant la manipulation ##[[KeyPgOpXor Xor]]## au niveau des bits
 
->>::c::
+;</table><div style="clear:both"> 
 
 {{fbdoc item="back" value="DocToc|Table of Contents"}}

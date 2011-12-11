@@ -1,25 +1,25 @@
 {{fbdoc item="title" value="PRINT"}}----
-Writes text to the screen
+Ecrire du texte &agrave; l'&eacute;cran
 
 {{fbdoc item="syntax"}}##
 	**Print** [ //expressionlist// ] [ , | ; ]
 ##
 {{fbdoc item="param"}}
 	##//expressionlist//##
-		list of items to print
+		liste des items &agrave; afficher
 
 {{fbdoc item="desc"}}
-	##**Print**## outputs a list of values to the screen. Numeric values are converted to their string representation, with left padding for the sign. Objects of user-defined types must overload ##Operator Cast () As String##.
+	##**Print**## envoie une liste de valeurs &agrave; l'&eacute;cran. Les valeurs num&eacute;riques sont converties vers leur repr&eacute;sentation cha&icirc;ne, avec un remplissage &agrave; gauche pour le signe. Des objets de types d&eacute;finis par l'utilisateur doivent surcharger **Operator Cast () As String**.
 
-	Consecutive values in the expression list are separated either by a comma (##,##) or semicolon (##;##). A comma indicates printing should take place at the next 14 column boundary, while a semicolon indicates values are printed with no space between them.  This has a similar effect to concatenating expressions using ##[[KeyPgOpConcat +]]## or ##[[KeyPgOpConcatConvert &]]##.
+	Les valeurs cons&eacute;cutives dans la liste d'expressions sont s&eacute;par&eacute;es par une virgule (##,##) ou point-virgule (##;##). Une virgule indique que l'affichage suivant devrait avoir lieu  14 colonnes plus loin, alors que point-virgule indique que toutes les valeurs sont affich&eacute;es &agrave; la suite sans espace entre elles.  Cela a le m&ecirc;me effet que la concat&eacute;nation d'expressions en utilisant ##[[KeyPgOpConcat +]]## ou ##[[KeyPgOpConcatConvert &]]##.
 
-	##**Print**## also supports the special expressions, ##[[KeyPgSpc Spc]]()## and ##[[KeyPgTab Tab]]()##.  These can be used to space out expressions, or to align the printing to a specific column.
+	##**Print**## supporte aussi les expressions sp&eacute;ciales, ##[[KeyPgSpc Spc]]()## et ##[[KeyPgTab Tab]]()##.  Celles-ci peuvent &ecirc;tre utilis&eacute;es pour espacer les expressions ou pour aligner l'affichage sur une colonne sp&eacute;cifique.
 
-	A new-line character is printed after the values in the expression list unless the expression list is followed by a comma or semicolon.  A ##**Print**## without any expressions or separators following it will just print a new-line.
+	Un caract&egrave;re "nouvelle ligne" est affich&eacute; apr&egrave;s les valeurs de la liste des expressions &agrave; moins que la liste des expressions ne soit termin&eacute;e par une virgule ou un point-virgule.  Un ##**Print**## sans aucune expression ou s&eacute;parateur, affichera seulement un caract&egrave;re "nouvelle ligne".
 
-	    NOTE: ##**Print**## resets the ##[[KeyPgErr Err]]## value after each expression is printed.
+	    NOTE: ##**Print**## r&eacute;-initialise la valeur ##[[KeyPgErr Err]]## d&egrave;s chaque expression est imprim&eacute;e.
 	    
-	For more control over character style and text position in graphics modes, consider using ##[[KeyPgDrawString Draw String]]##.
+	Pour plus de contr&ocirc;le sur le style des caract&egrave;res et la position du texte dans les modes graphiques, pensez &agrave; utiliser ##[[KeyPgDrawString Draw String]]##.
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/console/print.bas"}}%%(freebasic)
@@ -46,12 +46,12 @@ Print s; " is great!"
 %%
 
 {{fbdoc item="lang"}}
-	- In the //[[CompilerOptlang -lang qb]]// dialect, an extra space is printed after numbers.
+	- Dans le dialecte //[[CompilerOptlang -lang qb]]//, un espace suppl&eacute;mentaire est affich&eacute; apr&egrave;s les nombres.
 
 {{fbdoc item="diff"}}
-	- None, when using QBASIC's variable types in //[[CompilerOptlang -lang qb]]//.
-	- Unsigned numbers are printed without a space before them.
-	- QB did not support casting for UDTs, so didn't allow them to be ##**Print**##ed.
+	- Aucune, si vous utilisez des types de variables QBASIC dans //[[CompilerOptlang -lang qb]]//.
+	- Les nombres non-sign&eacute;s sont affich&eacute;s sans espace devant eux.
+	- QB ne supporte pas le "casting" pour les types d&eacute;finis par l'utilisateur (UDT = User-Defined Type), alors on ne peut utiliser ##**Print**## avec eux.
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgSpc Spc]]##

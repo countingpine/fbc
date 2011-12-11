@@ -1,5 +1,5 @@
 {{fbdoc item="title" value="FREEFILE"}}----
-Returns a free file number
+Retourne un num&eacute;ro de fichier libre
 
 {{fbdoc item="syntax"}}##
 	[[KeyPgDeclare declare]] [[KeyPgFunction function]] **Freefile** ( ) [[KeyPgAs as]] [[KeyPgInteger integer]]
@@ -7,13 +7,13 @@ Returns a free file number
 {{fbdoc item="usage"}}##
 	//result// = **Freefile**
 ##
-{{fbdoc item="ret"}}
-	The next available file number, if any, otherwise zero (##0##).
+{{fbdoc item="section" value="Valeur retourn&eacute;e
+	Le premier num&eacute;ro de fichier libre, s'il existe, sinon z&eacute;ro (##0##).
 
 {{fbdoc item="desc"}}
-	Returns the number of the next free file number with valid values ##1## to ##255##, or ##0## if there are already 255 files opened. This value is a required argument to ##[[KeyPgOpen Open]]## a file. ##**Freefile**## is useful when opening files in complex programs where the programmer can't keep track of the used file numbers.
-	Make sure to always close files when no longer needed, otherwise you will get a file number leak, and won't be able to open any files anymore after 255 filenumbers are exhausted while your program is running.
-	##**Freefile**## will always return the smallest free file number.  The file number returned by ##**Freefile**## will not change until that file number is ##[[KeyPgOpen Open]]##ed, or until a smaller file number is ##[[KeyPgClose Close]]##d.  For this reason, it is wise to use ##**Freefile**## immediately before its corresponding ##[[KeyPgOpen Open]]##, to ensure that the file number is not returned and opened elsewhere first.
+	Retourne le num&eacute;ro de fichier libre suivant avec des valeurs valides de ##1## &agrave; ##255##, ou ##0## s'il y a d&eacute;j&agrave; 255 fichiers ouverts. Cette valeur est un argument obligatoire de ##[[KeyPgOpen Open]]## un fichier. ##**FreeFile**## est utile lors de l'ouverture de fichiers dans des programmes complexes o&ugrave; le programmeur ne peut pas garder une trace des num&eacute;ros de fichiers utilis&eacute;s.
+	Assurez-vous de toujours fermer les fichiers lorsqu'ils ne sont plus n&eacute;cessaires, sinon vous aurez une perte de num&eacute;ros de fichiers, et vous ne serez pas en mesure d'ouvrir des fichiers d&egrave;s que 255 num&eacute;ros de fichiers seront utilis&eacute;s pendant le fonctionnement de votre programme.
+	##**FreeFile**## retourne toujours le num&eacute;ro de fichier libre le plus prtit possible. Le num&eacute;ro de fichier retourn&eacute; par ##**FreeFile**## ne changera pas tant que le fichier correspondant reste ##[[KeyPgOpen ouvert  (Open)]]##, ou jusqu'&agrave; ce qu'un fichier de num&eacute;ros de fichier plus petit soit ##[[KeyPgClose ferm&eacute; (Close)]]##. Pour cette raison, il est sage d'utiliser ##** FreeFile**##, imm&eacute;diatement avant son ##[[KeyPgOpen Open]]## correspondant, afin de s'assurer que le num&eacute;ro de fichier retourn&eacute; n'a pas &eacute;t&eacute; ouvert ailleurs en premier.
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/fileio/freefile.bas"}}%%(freebasic)
@@ -37,7 +37,7 @@ Close #f
 End
 %%
 
-	When using multiple ##**Freefile**## statements, ##**Freefile**## should be used immediately before the ##[[KeyPgOpen Open]]## statement:
+	Lors de l'ouverture de plusieurs ##**FreeFile**##, ##**FreeFile**## doit &ecirc;tre utilis&eacute; imm&eacute;diatement avant ##[[KeyPgOpen Open]]##:
 {{fbdoc item="filename" value="examples/manual/fileio/freefile-good.bas"}}%%(freebasic)
 dim fr as integer, fs as integer
 ' The CORRECT way:
@@ -48,23 +48,23 @@ fs = FREEFILE
 OPEN "File2" FOR INPUT AS #fs
 %%
 
-	As opposed to:
+	Par opposition &agrave;:
 {{fbdoc item="filename" value="examples/manual/fileio/freefile-bad.bas"}}%%(freebasic)
 dim fr as integer, fs as integer
 ' The WRONG way:
-fr = FREEFILE
-fs = FREEFILE '' fs has taken the same file number as fr
+Open "file1" For Input As #fr
+Open "file2" For Input As #fs '' error: file number already opened
 
 OPEN "file1" FOR INPUT AS #fr
-OPEN "file2" FOR INPUT AS #fs '' error: file number already opened
+Open "file2" For Input As #fs
 %%
 
 {{fbdoc item="target"}}
-	- On Windows, a file number used in a dynamic link library is not the same as an identical file number used in the main program.  File numbers can not be passed or returned and then used between a DLL and an executable.
-	- Besides ""FreeBASIC's"" limit of 255 files per program opened at same time, there is an OS limit of total amount of opened files, but usually you won't touch it except in DOS, where the limit may be as low as 15 files total.
+	- Sous Windows, un num&eacute;ro de fichier utilis&eacute; dans une biblioth&egrave;que de liens dynamiques n'est pas identique &agrave; celui utilis&eacute; dans le programme principal.  Les num&eacute;ros de fichier ne peuvent &ecirc;tre pass&eacute;s ou renvoy&eacute;s, puis utilis&eacute;s entre une DLL et un fichier ex&eacute;cutable.
+	- Outre la limite FreeBASIC de 255 fichiers ouverts en m&ecirc;me temps par le programme, il y a une limite OS du nombre total de fichiers ouverts, mais g&eacute;n&eacute;ralement vous n'aurez pas le modifier, sauf dans le DOS, o&ugrave; la limite peut &ecirc;tre tr&egrave;s basse (15 fichiers au total).
 
 {{fbdoc item="diff"}}
-	- None
+	- Aucune
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgOpen Open]]##

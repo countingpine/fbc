@@ -1,78 +1,80 @@
 {{fbdoc item="title" value="Operator Placement New"}}----
-Operator to construct an object at a specified memory address.
+Op&eacute;rateur pour construire un object &agrave; l'adresse m&eacute;moire sp&eacute;cifi&eacute;e.
 
 {{fbdoc item="syntax"}}##
 	//result// = **New(//address//)** //[[DataType datatype]]//
-		//or//
+		//ou//
 	//result// = **New(//address//)** //[[DataType datatype]]// ( //initializers//, ... )
-		//or//
+		//ou//
 	//result// = **New(//address//)** //[[DataType datatype]]//**[** //count// **]**
 ##
 {{fbdoc item="param"}}
 	##//address//## 
-		the location in memory to construct. the parenthesis are **not** optional.
+		La position m&eacute;moire o&ugrave; construire. Les parenth&egrave;ses **ne sont pas** facultatives.
 	##//size//## 
-		number of bytes to allocate.
+		Le nombre d'octets &agrave; allouer.
 	##//initializers//##
-		Initial value(s) for the variable.
+		La valeur initiale de la variable.
 	##//datatype//##
-		name of the data type to create.
+		Le nom du type de donn&eacute;e &agrave; cr&eacute;er.
 	##//count//##
-		Number of elements to allocate.
+		Le nombre d'&eacute;l&eacute;ments &agrave; allouer.
 
-{{fbdoc item="ret"}}
-	A pointer of type [[DataType datatype]] to the newly allocated data.
+{{fbdoc item="section" value="Valeur retourn&eacute;e
+	Un pointeur du type [[DataType datatype]] vers la nouvelle donn&eacute;e allou&eacute;e.
 
 {{fbdoc item="desc"}}
-	The ##**Placement New**## operator constructs a specified data type at the specified memory location. 
+	L'op&eacute;rateur ##**New (Emplacement m&eacute;moire)**## construit un type de donn&eacute;e sp&eacute;cifique &agrave; l'emplacement m&eacute;moire sp&eacute;cifi&eacute;. 
 
-	For simple types, like integers, an initial value can be given. For types without constructors, initial values can be specified for each field. Types that have constructors can have their constructors called by ##**Placement New**## as well. If no initializers are given, the default values for those types will be set.
+	Pour des types simples, comme les entiers, une valeur initiale peut &ecirc;tre donn&eacute;e. Pour des types sans constructeur, des valeurs initiales peuvent &ecirc;tre sp&eacute;cifi&eacute;es pour chacun des champs. Pour les types ayant des constructeurs ceux-ci peuvent &ecirc;tre appel&eacute;s par ##**New (Emplacement m&eacute;moire)**##. Si aucun initialiseur n'est fourni, les valeurs par d&eacute;faut seront utilis&eacute;es.
 
-	Memory is **not** allocated when using the ##**Placement New**## operator. Instead, the memory at the specified ##//address//## is used.  It is incorrect to call ##[[KeyPgOpDelete Delete]]## on the address. See examples below for proper //placement new// usage.
+	La m&eacute;moire **n'est pas** allou&eacute;e quand on utilise l'op&eacute;rateur ##**Placement New**##. Au lieu de cela, la m&eacute;moire &agrave; l'##//address//##e sp&eacute;cifi&eacute;e est utilis&eacute;e.  Il est incorrect d'appeler ##[[KeyPgOpDelete Delete]]## pour cette adresse. Voir les exemples ci-dssous pour utiliser correctement //new (emplacement m&eacute;moire)//.
 
-	Specifying an initial value of ##[[KeyPgAny Any]]##, as in ##new(address) datatype(any)## will not initialize the data.  This is only valid on data types that do not have constructors.
+	Sp&eacute;cifier une valeur initiale ##[[KeyPgAny Any]]##, comme dans ##new(address) datatype(any)## n'initialisera pas les donn&eacute;es.  Ceci n'est valide que pour des types de donn&eacute;e n'ayant pas de constructeur.
 
-	Specifying an initial value of ##[[KeyPgAny Any]]##, as in ##new(address) datatype[count]{any}## will not initialize the data.  This is only valid on data types that do not have constructors.
+	Sp&eacute;cifier une valeur initiale ##[[KeyPgAny Any]]##, comme dans ##new(address) datatype[count]{any}## n'initialisera pas les donn&eacute;es.  Ceci n'est valide que pour des types de donn&eacute;e n'ayant pas de constructeur.
+
+	{{fbdoc item="ex"}}
 
 {{fbdoc item="ex"}}
-{{fbdoc item="filename" value="examples/manual/operator/placement_new.bas"}}%%(freebasic)
 '' "placement new" example
+Type Rational
 
-type Rational
-	as integer	numerator, denominator
-end type
+As Integer    numerator, denominator
+	End Type
+Scope
 
-scope
+'' allocate some memory to construct as a Rational
 	
-	'' allocate some memory to construct as a Rational
-	dim as any ptr ap = callocate(len(Rational))
-	
+	Dim As Any Ptr ap = CAllocate(Len(Rational))
 	'' make the placement new call
-	dim as Rational ptr r = new (ap) Rational( 3, 4 )
 	
+	Dim As Rational Ptr r = New (ap) Rational( 3, 4 )
 	'' you can see, the addresses are the same, just having different types in the compiler
-	print ap, r
 	
+	Print ap, r
 	'' confirm all is okay
-	print r->numerator & "/" & r->denominator
-
-	'' destroying must be done explicitly, because delete will automatically free the memory
-	'' and that isn't always okay when using placement new. ALWAYS explicitly call the destructor.
-	r->destructor( )
 	
-	'' we explicitly allocated, so we explicitly deallocate
-	deallocate( ap )
+	Print r->numerator & "/" & r->denominator
+	'' destroying must be done explicitly, because delete will automatically free the memory
 
-end scope
+	'' and that isn't always okay when using placement new. ALWAYS explicitly call the destructor.
+	r->Destructor( )
+	'' we explicitly allocated, so we explicitly deallocate
+	
+	Deallocate( ap )
+	End Scope
+
 %%
 {{fbdoc item="lang"}}
-	- Only available in the //[[CompilerOptlang -lang fb]]// dialect.
+- Utilisable seulement dans le dialecte //[[CompilerOptlang -lang fb]]//.
+	{{fbdoc item="diff"}}
 
-{{fbdoc item="diff"}}
-	- New to ""FreeBASIC""
+- Nouveau pour FreeBASIC
+	{{fbdoc item="see"}}
 
-{{fbdoc item="see"}}
-	- ##[[KeyPgOpDelete Delete]]##
+- ##[[KeyPgOpDelete Delete]]##
+	- ##[[KeyPgOpNew New]]##
 	- ##[[KeyPgOpNew New]]##
 
 {{fbdoc item="back" value="CatPgOpMemory|Memory Operators"}}{{fbdoc item="back" value="CatPgOperators|Operators"}}

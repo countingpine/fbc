@@ -1,51 +1,24 @@
 {{fbdoc item="title" value="VA_ARG"}}----
-Returns the current argument from a variable argument list.
+Retourne l'argument courant &agrave; partir d'une liste variable d'arguments.
 
 {{fbdoc item="syntax"}}##
 	//variable// = **va_arg** ( //argument_list//, [[DataType datatype]] )
 ##
 {{fbdoc item="desc"}}
-	The ##**va_arg**## macro allows the use of a variable number of arguments within a function. ##**va_arg**## returns the current argument in the list, ##//argument_list//##, with an expected data type of ##//datatype//##. Before ##**va_arg**## can be used, it must be Initialized with the command ##[[KeyPgVaFirst va_first]]##. Unlike the C macro with the same name, ##**va_arg**## does not automatically increment ##//argument_list//## to the next argument within the list. The command ##[[KeyPgVaNext va_next]]## must be used for this purpose.
+	La macro ##**va_arg**## permet l'utilisation d'un nombre variable d'arguments dans une fonction. ##**va_arg**## retourne l'argument en cours dans la liste, ##//argument_list//##, avec un type de donn&eacute;es attendu ##//datatype//##. Avant que ##**va_arg**## puisse &ecirc;tre utilis&eacute;, il doit &ecirc;tre initialis&eacute; ##[[KeyPgVaFirst va_first]]##. Contrairement &agrave; la macro C ayant le m&ecirc;me nom, ##**va_arg**## n'incr&eacute;mente pas automatiquement ##//argument_list//## sur l'argument suivant dans la liste. La commande ##[[KeyPgVaNext va_next]]## doit &ecirc;tre utilis&eacute;e pour cela.
 
 {{fbdoc item="ex"}}
-{{fbdoc item="filename" value="examples/manual/procs/va_arg.bas"}}%%(freebasic)
+	%%(freebasic)
 
 ' Note that CDECL is used here --> it must be used with an ellipsis argument (...).
-FUNCTION Avg cdecl (Count as INTEGER, ... ) AS DOUBLE
-	DIM ARG AS ANY PTR 
-	DIM SUM AS DOUBLE = 0
-	DIM i AS INTEGER
-	
-	ARG = VA_FIRST()
+	Function Avg cdecl (Count As Integer, ... ) As Double
 
-	FOR i = 1 TO COUNT
-	    SUM += VA_ARG(ARG, DOUBLE)
-	    ARG = VA_NEXT(ARG,DOUBLE)
-	NEXT i
-	RETURN SUM/COUNT
-end function
+Dim ARG As Any Ptr 
+	Dim SUM As Double = 0
 
-PRINT AVG (4, 3.4,5.0,3.2,4.1)
-PRINT AVG (2, 65.2,454.65481)
+Dim i As Integer
+	ARG = va_first()
+	For i = 1 To COUNT
+	SUM += va_arg(ARG, Double)
 
-SLEEP
-%%
-
-The output would look like:
-%%
-3.925
-259.927405
-%%
-
-{{fbdoc item="lang"}}
-	- Not available in the //[[CompilerOptlang -lang qb]]// dialect unless referenced with the alias ##**""__va_arg""**##.
-
-{{fbdoc item="diff"}}
-	- New to ""FreeBASIC""
-
-{{fbdoc item="see"}}
-	- ##[[KeyPgDots ... (Ellipsis)]]##
-	- ##[[KeyPgVaFirst va_first]]##
-	- ##[[KeyPgVaNext va_next]]##
-
-{{fbdoc item="back" value="CatPgProcedures|Procedures"}}{{fbdoc item="back" value="CatPgVarArg|Variable Argument list"}}
+ARG = va_next(ARG,Double)

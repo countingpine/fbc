@@ -1,31 +1,31 @@
 {{fbdoc item="title" value="STATIC"}}----
-Defines variables, objects and arrays having static storage
+D&eacute;finit les variables, les objets et les tableaux ayant un stockage statique
 
 {{fbdoc item="syntax"}}##
 	**Static** //symbol// [ ( [ //subscripts// ] ) ] [ [[KeyPgAs as]] [[DataType DataType]] ] [ , ... ]
-		//or//
+		//ou//
 	{ [[KeyPgSub sub]]|[[KeyPgFunction function]] } //proc_header// **Static**
 		[ ... ]
 	[[KeyPgEndblock end]] { [[KeyPgSub sub]]|[[KeyPgFunction function]] }
 ##
 {{fbdoc item="param"}}
 	##//symbol//##
-		variable or array symbol name.
+		nom symbole d'une variable ou d'un tableau.
 	##//subscripts//##
-		a comma-separated list of subscript ranges.
+		une liste de "subscript ranges" s&eacute;par&eacute;s par des virgules.
 	##//proc_header//##
-		procedure header for a procedure definition.
+		ent&ecirc;te de proc&eacute;dure pour une d&eacute;finition de la proc&eacute;dure.
 
 {{fbdoc item="desc"}}
-	Specifies [[ProPgStorageClasses static storage]] for variables, objects and arrays; they are allocated at program startup and deallocated upon exit. Objects are constructed once when they are defined, and destructed upon program exit.
+	Sp&eacute;cifie [[ProPgStorageClasses stockage statique]] pour des variables, des objets et des tableaux; l'allocation ayant lieu au d&eacute;marrage du programme et la d&eacute;sallocation &agrave; sa fermeture. Les objets sont construits d&egrave;s qu'ils sont d&eacute;finis et d&eacute;truits &agrave; la fermeture du programme.
 
-	When declaring static arrays, only [[ProPgLiterals numeric literals]], [[KeyPgConst constants]] or [[KeyPgEnum enumerations]] may be used as subscript range values. Static variable-length arrays must be declared empty (no subscript range list) and resized using ##[[KeyPgRedim Redim]]## before used.
+	Lors de la d&eacute;claration de tableaux statiques, seuls les [[ProPgLiterals litt&eacute;raux num&eacute;riques]], les [[KeyPgConst Constantes]] ou les [[KeyPgEnum Enum&eacute;rations]] peuvent &ecirc;tre utilis&eacute;s comme valeurs de la plage d'indices. Les tableaux statiques de longueur variable doivent &ecirc;tre d&eacute;clar&eacute;s vides (pas de liste de plage d'indices) et redimensionn&eacute;s en utilisant ##[[KeyPgRedim ReDim]]## avant utilisation.
 
-	In both iterative and recursive blocks, like looping [[CatPgControlFlow control flow statements]] or procedures, static variables, objects and arrays local to the block are guaranteed to occupy the same storage across all instantiations of the block. For example, procedures that call themselves - either directly or indirectly - share the same instances of their local static variables.
+	Dans les blocs it&eacute;ratifs et r&eacute;cursifs, comme les boucles de [[CatPgControlFlow d&eacute;claration de contr&ocirc;le de flux]] ou les proc&eacute;dures, les variables statiques, les objets et les tableaux locaux du bloc sont garantis d'occuper le m&ecirc;me espace de stockage dans toutes les instanciations du bloc. Par exemple, des proc&eacute;dures qui s'appellent elles-m&ecirc;mes - que ce soit directement ou indirectement - partagent les m&ecirc;mes instances de leurs variables locales statiques.
 
-	When used with module-level and member procedure declarations, ##**Static**## specifies [[ProPgStorageClasses static storage]] for all local variables, objects and arrays.
+	Lorsqu'il est utilis&eacute; au niveau module et de d&eacute;clarations de proc&eacute;dure membre, ##**Static**## sp&eacute;cifie [[ProPgStorageClasses stockage statique]] pour toutes les variables locales, objets et tableaux.
 
-	##[[KeyPgStaticMember Static (Member)]]## is also used in member procedure declarations to specify static member procedures.
+	##[[KeyPgStaticMember Static (Membre)]]## est aussi utilis&eacute; pour des d&eacute;clarations de proc&eacute;dure membre pour sp&eacute;cifier des proc&eacute;dures membre statiques.
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/variable/static.bas"}}%%(freebasic)
@@ -49,16 +49,16 @@ Number of times called: 2
 %%
 
 {{fbdoc item="diff"}}
-	- ""QuickBASIC"" allows variables and arrays to be declared using the ##**Static**## keyword within procedures and ##DEF FN## routines only.
-	- ##**Static**## forces local visibility of variables and arrays in ""QuickBASIC"" ##DEF FN## routines. ""FreeBASIC"" supports neither ##DEF FN## routines nor this usage of ##**Static**##.
-	- Using ##[[KeyPgStaticMember Static]]## to specify static member procedures is new to ""FreeBASIC"".
+	- QuickBASIC permet de d&eacute;clarer les variables et les tableaux en utilisant le mot cl&eacute; ##**Static**## seulement dans les proc&eacute;dures et les routines ##DEF FN##.	- ##**Static**## force la visibilit&eacute; locale des variables et des tableaux dans les routines QuickBASIC ##DEF FN##. FreeBASIC ne supporte ni les routines ##DEF FN## ni cette utilisation de ##**Static**##.
+	- Utiliser ##[[KeyPgStaticMember Static]]## pour sp&eacute;cifier des membres de proc&eacute;dures statiques est nouveau pour FreeBASIC.
+	{{fbdoc item="see"}}
 
-{{fbdoc item="see"}}
-	- ##[[KeyPgStaticMember Static (Member)]]##
-	- ##[[KeyPgDim Dim]]##, ##[[KeyPgRedim Redim]]##
+- ##[[KeyPgStaticMember Static (Member)]]##
+	- ##[[KeyPgDim Dim]]##, ##[[KeyPgRedim ReDim]]##
 	- ##[[KeyPgSub Sub (Module)]]##, ##[[KeyPgFunction Function (Module)]]##
 	- ##[[KeyPgMemberSub Sub (Member)]]##, ##[[KeyPgMemberFunction Function (Member)]]##
 	- ##[[KeyPgOptionstatic Option Static]]##
+	- ##[[ProPgStorageClasses Storage Classes]]##
 	- ##[[ProPgStorageClasses Storage Classes]]##
 
 {{fbdoc item="back" value="CatPgProcedures|Procedures"}}{{fbdoc item="back" value="CatPgVariables|Variable Declarations"}}

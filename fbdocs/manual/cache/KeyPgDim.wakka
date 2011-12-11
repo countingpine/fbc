@@ -1,33 +1,33 @@
 {{fbdoc item="title" value="DIM"}}----
-Declares a variable
+D&eacute;clare une variable
 
 {{fbdoc item="syntax"}}
-	Declaring a Single Variable:
+	D&eacute;claration d'une variable unique:
 		##**Dim** [[[KeyPgShared Shared]]] //symbolname// [As [[DataType DataType]]] [, ...]##
 		##**Dim** [[[KeyPgShared Shared]]] As [[DataType DataType]] //symbolname// [, ...]##
 
-	Declaring Arrays:
+	D&eacute;claration de tableaux:
 		##**Dim** [[[KeyPgShared Shared]]] //symbolname// ( [//lbound// To] //ubound// [, ...] ) [As [[DataType DataType]]] [,...]##
 		##**Dim** [[[KeyPgShared Shared]]] As [[DataType DataType]] //symbolname// ( [//lbound// To] //ubound// [, ...] ) [,...]##
 	
-	Initializing Values:
+	Initialisation de variables:
 		##**Dim** //scalar_symbol// As [[DataType DataType]]] = //expression// | [[KeyPgAny Any]]##
 		##**Dim** //array_symbol// ([//lbound// To] //ubound//) [AS [[DataType DataType]]] => { //expression// [, ...] } | [[KeyPgAny Any]]##
 		##**Dim** //udt_symbol// As [[DataType DataType]] = ( //expression// [, ...] ) | [[KeyPgAny Any]]##
 
 {{fbdoc item="desc"}}
-	Declares a variable by name and reserves memory to accommodate it.
+	D&eacute;clare une variable par son nom et r&eacute;serve de la m&eacute;moire pour la stocker.
 
-	Variables must be declared before they can be used in the //[[CompilerOptlang -lang fb]]// dialect or when using ##[[KeyPgOptionexplicit Option Explicit]]## in the other dialects.  Only in the //[[CompilerOptlang -lang qb]]// and //[[CompilerOptlang -lang fblite]]// dialects variables may be used without first declaring them, in such a case they are called implicit variables.
+	Les variables doivent &ecirc;tre d&eacute;clar&eacute;es avant leur utilisation dans le dialecte //[[CompilerOptlang -lang fb]]// ou lors de leur utilisation si vous utilisez l'##[[KeyPgOptionexplicit Option Explicit]]## des autres dialectes.  Seuls les dialectes //[[CompilerOptlang -lang qb]]// et //[[CompilerOptlang -lang fblite]]// acceptent que les variables soient utilis&eacute;es sans d&eacute;claration pr&eacute;alable, dans ce cas elles sont appel&eacute;es en tant que variables implicites.
 
-	##**Dim**## can be used to declare and assign variables of any of the supported data types, user defined types, or enumerations.
+	##**Dim**## peut &ecirc;tre utilis&eacute; pour d&eacute;clarer et affecter des variables de l'un des types de donn&eacute;es pris en charge, types d&eacute;finis par l'utilisateur ou &eacute;num&eacute;rations.
 
-	Depending on where and how a variable or array is declared can change how it is allocated in memory.  See //[[ProPgStorageClasses Storage Classes]]//.
+	Selon l'endroit, o&ugrave; et comment une variable ou un tableau est d&eacute;clar&eacute; peut changer la fa&ccedil;on dont il(elle) est allou&eacute;(e) dans la m&eacute;moire.  Voir //[[ProPgStorageClasses Classes de stockage]]//.
 
-{{fbdoc item="section" value="Explicit Variables with Explicit Data Types"}}
-	In the default dialect //[[CompilerOptlang -lang fb]]//, each variable must be explicitly declared with a desired data type. Type suffixes are not allowed.
+{{fbdoc item="section" value="Variables explicites avec des donn&eacute;es de type explicite
+	Dans le dialecte par d&eacute;faut //[[CompilerOptlang -lang fb]]//, chaque variable doit &ecirc;tre explicitement d&eacute;clar&eacute;e avec le type de donn&eacute;es d&eacute;sir&eacute;. Les suffixes de type ne sont pas permis.
 
-	More than one variable may be declared in a single ##**Dim**## statement by separating each variable declaration with a comma.
+	Plus d'une variable peut &ecirc;tre d&eacute;clar&eacute;e dans un seul ##**Dim**## en s&eacute;parant les d&eacute;clarations de variable par des virgules.
 
 {{fbdoc item="filename" value="examples/manual/check/KeyPgDim_1.bas"}}%%(freebasic)
 '' Variable declaration examples
@@ -46,8 +46,8 @@ dim as integer mx, my, mz ,mb
 dim px as double ptr = @x
 %%
 
-{{fbdoc item="section" value="Explicit Variables with Implicit Data Types"}}
-	In the //[[CompilerOptlang -lang qb]]// and //[[CompilerOptlang -lang fblite]]// dialects, even if the variable is declared explicitly, it will be given a default data type if the data type is not explicitly given either by name or by type suffix.  The default data type is ##[[KeyPgSingle Single]]## in the //[[CompilerOptlang -lang qb]]// dialect and ##[[KeyPgInteger Integer]]## in the //[[CompilerOptlang -lang fblite]]// dialect.  The default data type can be changed throughout a source listing by use of the ##**Def""###""**## statements. (for example, ##[[KeyPgDefint DefInt]]##, ##[[KeyPgDefstr DefStr]]##, ##[[KeyPgDefsng DefSng]]##)
+{{fbdoc item="section" value="Variables explicites avec des types de donn&eacute;es implicites
+	Dans les dialectes //[[CompilerOptlang -lang qb]]// et //[[CompilerOptlang -lang fblite]]//, m&ecirc;me si la variable est d&eacute;clar&eacute;e explicitement, un type sera automatiquement attribu&eacute; si le type de donn&eacute;es n'est pas explicitement donn&eacute;, soit par le nom, soit par le suffixe.  Le type de donn&eacute;es par defaut est ##[[KeyPgSingle Single]]## dans le dialecte //[[CompilerOptlang -lang qb]]// et ##[[KeyPgInteger Integer]]## dans le dialecte //[[CompilerOptlang -lang fblite]]//.  Le type de donn&eacute;es par d&eacute;faut peut &ecirc;tre chang&eacute; au cours du listing du code source par l'utilisation des d&eacute;clarations du style ##**Def###**##. (par exemple, ##[[KeyPgDefint DefInt]]##, ##[[KeyPgDefstr DefStr]]##, ##[[KeyPgDefsng DefSng]]##)
 
 {{fbdoc item="filename" value="examples/manual/check/KeyPgDim_2.bas"}}%%(freebasic)
 '' Compile with -lang qb
@@ -66,8 +66,8 @@ DefInt I-N
 Dim I, J, X, Y, T$, D As Double
 %%
 
-{{fbdoc item="section" value="Arrays"}}
-	As with most BASIC dialects, ""FreeBASIC"" supports arrays with indexes ranging from a lower bound to an upper bound.  In the syntaxes shown, ##//lbound//## refers to the lower bound, or the smallest index.  And ##//Ubound//## refers to the upper bound, or the largest index.  If a lower bound is not specified, it is assumed to be zero by default, unless ##[[KeyPgOptionbase Option Base]]## is used.
+{{fbdoc item="section" value="Tableaux
+	Comme avec la plupart des dialectes BASIC, FreeBasic supporte les tableaux avec des indices allant d'une limite inf&eacute;rieure &agrave; une limite sup&eacute;rieure.  Dans les diff&eacute;rentes syntaxes ci-dessus, ##//lbound//## se r&eacute;f&egrave;re &agrave; la limite inf&eacute;rieure, ou au plus petit indice.  Et ##//Ubound//## se r&eacute;f&egrave;re &agrave; la limite sup&eacute;rieure, ou au plus grand indice.  Si la limite inf&eacute;rieure n'est pas sp&eacute;cifi&eacute;e, elle sera z&eacute;ro par d&eacute;faut, &agrave; moins que ##[[KeyPgOptionbase Option Base]]## ne soit utilis&eacute;e.
 
 {{fbdoc item="filename" value="examples/manual/check/KeyPgDim_3.bas"}}%%(freebasic)
 Const upperbound = 10
@@ -77,7 +77,7 @@ Const upperbound = 10
 Dim array(upperbound) As Single
 %%
 
-	Multidimensional arrays can be declared as well.  and are stored in row-major order: values with the same last index are contiguous. (This is different from QB's default).  The maximum number of dimensions of a multidimensional array is 8. 
+	Les tableaux multi-dimensionnels peuvent &ecirc;tre d&eacute;clar&eacute;s ainsi et sont stock&eacute;s dans l'ordre des lignes: les valeurs avec le m&ecirc;me dernier indice sont contigu&euml;s. (Ceci est diff&eacute;rent de QB par d&eacute;faut.  Le nombre maximum de dimensions d'un tableau multi-dimensionnel est de 8. 
 
 {{fbdoc item="filename" value="examples/manual/check/KeyPgDim_4.bas"}}%%(freebasic)
 '' declare a three-dimensional array of single 
@@ -87,36 +87,36 @@ Dim array(1 To 2, 6, 3 To 5) As Single
 '' The first dimension of the declared array 
 '' has indices from 1 to 2, the second, 0 to 6, 
 '' and the third, 3 to 5.
-%%			
+%%
 
-	For more information on arrays see [[ProPgArrays Arrays Overview]].
+	Pour plus d'informations sur les tableaux voir [[ProPgArrays Vue d'ensemble sur les tableaux ]].
 
-	If the values used  with ##**Dim**## to declare the dimensions of an array are all constants, the array will be created ##[[KeyPgOptionstatic Static]]## (unless ##[[KeyPgOptiondynamic Option Dynamic]]## is specified), while using one or more variables to declare the dimensions of an array makes it variable length, even if ##[[KeyPgOptionstatic Option Static]]## is in effect.
+	Si les valeurs utilis&eacute;es avec ##**Dim**## pour d&eacute;clarer les dimensions d'un tableau sont toutes des constantes, le tableau sera cr&eacute;&eacute; ##[[KeyPgOptionstatic Static]]## (sauf si l'##[[KeyPgOptiondynamic Option Dynamic]]## est sp&eacute;cifi&eacute;e), bien qu'en utilisant une ou plusieurs variables pour d&eacute;clarer les dimensions d'un tableau cela le rende de longueur variable, m&ecirc;me si l'##[[KeyPgOptionstatic Option Static]]## est effective.
 
-	Arrays can be declared as variable length in several ways: Using ##**Dim**## with an empty set of indexes (##**Dim** x()##), using ##**Dim**## with indexes that are variables or using the keyword ##[[KeyPgRedim Redim]]##, or declaring it past the metacommand ##[[KeyPgMetaDynamic $Dynamic]]##. Variable length arrays can't use initializers.
+	Les tableaux peuvent &ecirc;tre d&eacute;clar&eacute;s de longueur variable de plusieurs fa&ccedil;ons: en utilisant ##**Dim**## avec un ensemble vide d'indices (##**Dim** x()##), en utilisant ##**Dim**## avec des indices qui sont des variables ou en utilisant le mot-clef ##[[KeyPgRedim ReDim]]##, ou le en d&eacute;clarant par la m&eacute;ta-commande ##[[KeyPgMetaDynamic $Dynamic]]##. les tableaux de longueur variable ne peuvent pas utiliser des initialiseurs.
 
-	Arrays declared with ##**Dim**## having constant indexes and not preceeded by ##[[KeyPgOptiondynamic Option Dynamic]]## are fixed length (not resizable at runtime) and can use initializers.
+	Les tableaux d&eacute;clar&eacute;s avec ##**Dim**## ayant des indices constants et non pr&eacute;c&eacute;d&eacute;s par ##[[KeyPgOptiondynamic Option Dynamic]]## sont de longueur fixe (non redimensionnables pendant l'ex&eacute;cution) et peuvent utiliser des initialiseurs.
 
-	The upper bound can be an ellipsis (##[[KeyPgDots ...]]##, 3 dots).  This will cause to upper bound to be set automatically based on the number of elements found in the initializer.  When ellipsis is used in this manner, an initializer must be used, and it may not be ##**Any**##.  See the [[KeyPgDots Ellipsis]] page for a short example.
+	La limite sup&eacute;rieure peut &ecirc;tre sugg&eacute;r&eacute;e (##[[KeyPgDots ...]]##, 3 points).  Ainsi la limite sup&eacute;rieure sera r&eacute;gl&eacute;e automatiquement en fonction du nombre d'&eacute;l&eacute;ments pr&eacute;sents lors de l'initialisation.  Lorsque l'ellipse est utilis&eacute;e de cette mani&egrave;re, un initialiseur doit &ecirc;tre utilis&eacute;, et il ne peut pas &ecirc;tre ##**Any**##.  Voir la page [[KeyPgDots Ellipse - suggestion]] pour un court exemple.
 
-	See also //[[ProPgFixLenArrays Fixed-Length Arrays]]// and //[[ProPgVarLenArrays Variable-Length Arrays]]//.
+	Voir aussi //[[ProPgFixLenArrays Tableaux de longueur fixe]]// et //[[ProPgVarLenArrays Tableaux de longueur variable]]//.
 
-{{fbdoc item="section" value="Initializers"}}
-	Arrays, variables, strings, and user defined types (UDTs) are initialized to zero or null strings by default when they are created.
+{{fbdoc item="section" value="Initialiseurs
+	Tableaux, variables, cha&icirc;nes et types d&eacute;finis par l'utilisateur sont initialis&eacute;s &agrave; z&eacute;ro ou avec des cha&icirc;nes nulles par d&eacute;faut lors de leur cr&eacute;ation.
 
-	To avoid the overhead of initializing the variables the ##**Any**## initializer can be used with ##**Dim**## to tell the compiler to only reserve the place for the variable in memory but don't initialize it, so the variable will contain garbage. In this case the programmer should not make assumptions about the initial values.
+	Pour &eacute;viter la surcharge des variables &agrave; l'initialisation, l'initialiseur ##**Any**## peut &ecirc;tre utilis&eacute; avec ##**Dim**## pour dire au compilateur de seulement r&eacute;server de la place en m&eacute;moire pour la variable, mais qu'elle ne doit pas &ecirc;tre initialis&eacute;e, de sorte que la variable contiendra n'importe quoi. Dans ce cas, le programmeur ne doit pas tenir compte des valeurs initiales.
 
-	Fixed-length arrays, variables, zstrings and UDTs may be given a value at the time of their declaration by following the variable declaration with an initializer.  Note the difference between initializing different types. Arrays, variables and UDTs are initialized as they would in a normal assignment, using an equal ( ##=## ) sign.  The ##=>## sign can be used with fixed length strings to avoid the declaration resembling an expression.
+	Les tableaux &agrave; longueur fixe, les variables, les zstrings et les types d&eacute;finis par l'utilisateur peuvent recevoir une valeur au moment de leur d&eacute;claration, en faisantsuivre la d&eacute;claration de la variable par un initialiseur.  Notez la diff&eacute;rence entre les diff&eacute;rents types d'initialisation. Les tableaux, les variables et les types d&eacute;finis par l'utilisateur sont initialis&eacute;s comme dans une affectation normale, en utilisant un signe d'&eacute;galit&eacute; ( ##=## ).  Le signe ##=>## peut &ecirc;tre utilis&eacute; avec des cha&icirc;nes de longueur fixe, pour &eacute;viter que la d&eacute;claration ne ressemble &agrave; une expression.
 
-	 Array values are given in comma-delimited values enclosed by curly brackets, and UDT values are given in comma delimited values enclosed by parenthesis.  These methods of initializing variables can be nested within one another for complex assignments. Nesting allows for arrays of any dimension to be initialized.
+	 Les valeurs d'un tableau sont donn&eacute;es par des valeurs s&eacute;par&eacute;es par des virgules, l'ensemble d&eacute;limit&eacute; par des accolades, et les valeurs des types utilisateur sont donn&eacute;es par des valeurs s&eacute;par&eacute;es par des virgules, le tout d&eacute;limit&eacute; par des parenth&egrave;ses.  Ces m&eacute;thodes d'initialisation des variables peuvent &ecirc;tre imbriqu&eacute;es les unes dans les autres pour des t&acirc;ches complexes. L'imbrication permet l'initialisation de tableaux de n'importe quelle dimension.
 
 {{fbdoc item="filename" value="examples/manual/check/KeyPgDim_5.bas"}}%%(freebasic)
 '' Declare an array of 2 by 5 elements
 '' and initialize
 Dim array(1 To 2, 1 To 5) As Integer => {{1, 2, 3, 4, 5}, {1, 2, 3, 4, 5}}
-%%			
+%%
 
-	{{fbdoc item="filename" value="examples/manual/check/KeyPgDim_6.bas"}}%%(freebasic)
+	%%(freebasic)
 '' declare a simple UDT
 Type mytype
 	var1 As Double
@@ -126,13 +126,13 @@ End Type
 '' declare a 3 element array and initialize the first
 '' 2 mytype elements
 Dim myvar(0 To 2) As mytype => {(1.0, 1), (2.0, 2)}
-%%	
-	For module-level, fixed-length, or global variables, initialized values must be constant expressions.  ""FreeBASIC"" will report a compile-time error if otherwise.
+%%
+	Au niveau module, de longueur fixe ou variables globales, les valeurs d'initialisation doivent &ecirc;tre des expressions constantes.  FreeBasic signalera autrement une erreur de compilation.
 
-	Note: Initializing UDT's with strings is not supported at this time.
+	Note: L'initialisation de types de donn&eacute;es utilisateur avec des cha&icirc;nes n'est pas support&eacute;e pour le moment.
 
-{{fbdoc item="section" value="Explicit Variables with Type Suffixes"}}
-	In the //[[CompilerOptlang -lang qb]]// and //[[CompilerOptlang -lang fblite]]// dialects, the data type of a variable may be indicated with a type suffix ( ##$## ##%## ##""#""## ##!## ##&## ).
+{{fbdoc item="section" value="Variables explicites avec type suffixes
+	Dans les dialectes //[[CompilerOptlang -lang qb]]// et //[[CompilerOptlang -lang fblite]]//, le type de donn&eacute;es d'une variable peut &ecirc;tre indiqu&eacute;e par un suffixe de type ( ##$## ##%## ##### ##!## ##&## ).
 
 {{fbdoc item="filename" value="examples/manual/check/KeyPgDim_7.bas"}}%%(freebasic)
 '' Compile with -lang qb or fblite
@@ -197,17 +197,17 @@ Print "ZString: "; Len(*s3)
 Deallocate(s3)
 %%
 
-{{fbdoc item="lang"}}
-	- In the //[[CompilerOptlang -lang qb]]// and //[[CompilerOptlang -lang fblite]]// dialects, variables have procedure scope if the variable is defined inside a procedure, and for the entire module if the variable is defined with ##**Dim Shared**##.
-	- In the //[[CompilerOptlang -lang fb]]// and //[[CompilerOptlang -lang deprecated]]// dialects, variables defined inside compound block statements (##[[KeyPgFornext For..Next]]##, ##[[KeyPgWhilewend While..Wend]]##, ##[[KeyPgDoloop Do..Loop]]##, ##[[KeyPgScope Scope..End Scope]]##) have local [[ProPgVariableScope scopes]], and are visible only within these blocks.
-	- In the //[[CompilerOptlang -lang fb]]// dialect, ##**Option**## statements (e.g. ##[[KeyPgOptionbase Option Base]]##, ##[[KeyPgOptiondynamic Option Dynamic]]##), metacommands(e.g. ##[[KeyPgMetaStatic $Static]]##) and ##**Def""###""**## statements (e.g. ##[[KeyPgDefint DefInt]]##) are not allowed.
+{{fbdoc item="section" value="Differences de dialectes
+	- Dans les dialectes //[[CompilerOptlang -lang qb]]// et //[[CompilerOptlang -lang fblite]]//, les variables ont une port&eacute;e proc&eacute;dure si elles sont d&eacute;finies dans une proc&eacute;dure, et pour l'ensemble du module si elles sont d&eacute;finies avec ##**Dim Shared**##.
+	- Dans les dialectes //[[CompilerOptlang -lang fb]]// et //[[CompilerOptlang -lang deprecated]]//, les variables d&eacute;finies &agrave; l'int&eacute;rieur de blocs compos&eacute;s (##[[KeyPgFornext For..Next]]##, ##[[KeyPgWhilewend While..Wend]]##, ##[[KeyPgDoloop Do..Loop]]##, ##[[KeyPgScope Scope..End Scope]]##) ont une [[ProPgVariableScope port&eacute;e]] locale, et ne sont visibles que dans ces blocs.
+	- Dans le dialecte //[[CompilerOptlang -lang fb]]//, la d&eacute;claration ##**Option**## (par exemple ##[[KeyPgOptionbase Option Base]]##, ##[[KeyPgOptiondynamic Option Dynamic]]##), les m&eacute;tacommandes (par exemple ##[[KeyPgMetaStatic $Static]]##) et les ##**Def###**## (par exemple ##[[KeyPgDefint DefInt]]##) ne sont pas permises.
 
 {{fbdoc item="diff"}}
-	- Variable Initializers are new to ""FreeBASIC"".
-	- The alternate syntax ##Dim As DataType //symbolname//, [...]## is new to ""FreeBASIC"".
-	- Multidimensional arrays are stored in row-major order in ""FreeBASIC"", they were stored in column-major order in QB by default. Row major order: values with the same last index are contiguous. Column-major order: values with the same first index are contiguous.
-	- Variable length arrays up to 2 ""GiB"" in size are possible in ""FreeBASIC"". In QB, ##$STATIC## arrays were limited to 64 ""KiB"" , or to the DOS memory available (several 100 ""KiB"" at best) if made ##$DYNAMIC## and ///AH// was used.
-	- The ellipsis form for upper bounds is new to ""FreeBASIC"".
+	- Les initialiseurs de variables sont nouveaux pour FreeBASIC
+	- La syntaxe alternative ##Dim As DataType //symbolname//, [...]## est nouvelle pour FreeBASIC
+	- Les tableaux multidimensionnels sont stock&eacute;s dans l'ordre ligne-prioritaire dans FreeBASIC, ils sont stock&eacute;s dans l'ordre des colonnes-prioritaire dans QB par d&eacute;faut. Ordre ligne-prioritaire: les valeurs avec le m&ecirc;me indice de fin sont contigu&euml;s. Ordre colonne-prioritaire: les valeurs avec le m&ecirc;me indice de d&eacute;but sont contigu&euml;s.
+	- Des tableaux de longueur variable jusqu'&agrave; 2 Go de taille sont possibles dans FreeBASIC. Dans QB, ##$STATIC## les tableaux sont limit&eacute;s &agrave; 64 KiB , ou &agrave; la m&eacute;moire DOS libre (quelques 100 KiB, au mieux) si ##$DYNAMIC## et ///AH// sont utilis&eacute;s.
+	- La forme elliptique pour les limites sup&eacute;rieures est nouvelle pour FreeBASIC.
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgVar Var]]##

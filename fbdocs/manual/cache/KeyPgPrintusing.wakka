@@ -1,35 +1,35 @@
 {{fbdoc item="title" value="PRINT USING"}}----
-Outputs formatted text to the screen
+Ecrire du texte format&eacute; &agrave; l'&eacute;cran
 
 {{fbdoc item="syntax"}}##
 	**Print Using** //formatstring// **;** [ //expressionlist// ]
 ##
 {{fbdoc item="param"}}
 	##//formatstring//##
-		Format string to use.
+		La cha&icirc;ne de formatage &agrave; utiliser.
 	##//expressionlist//##
-		List of items to print, separated by semi-colons.
+		Liste des items &agrave; afficher, s&eacute;par&eacute;s par des point-virgule.
 
 {{fbdoc item="desc"}}
-	Print to screen various expressions using a format determined by the ##//formatstring//## parameter. Internally, ##**Print Using**## uses a buffer size of 2048 bytes: while it is highly unlikely that this buffer would be filled, it should be noted that output would be truncated should this limit be reached.
+	Affiche &agrave; l'&eacute;cran des expressions vari&eacute;es en utilisant un format d&eacute;termin&eacute; par le param&egrave;tre ##//formatstring//##. En interne, ##**Print Using**## utilise une taille de tampon de 2048 octets: alors qu'il est tr&egrave;s peu probable que ce tampon soit rempli, il convient de noter que la sortie &eacute;cran sera tronqu&eacute;e si cette limite est atteinte.
 
-	If no expression list is given, the format string will be printed up to the first special marker.  Note that the semi-colon after the format string is still necessary, even if no expression list is given.
+	Si aucune liste d'expressions n'est donn&eacute;e, la cha&icirc;ne de format sera imprim&eacute;e jusqu'au premier marqueur sp&eacute;cial.  Notez que le point-virgule apr&egrave;s la cha&icirc;ne de format est toujours n&eacute;cessaire, m&ecirc;me si aucune liste d'expressions n'est donn&eacute;e.
 
-	The format string dictates how the expressions are to be formatted when output to the screen, indicated by the use of special marker characters. There are markers for formatting both string and numeric output:
+	La cha&icirc;ne de format d&eacute;termine la fa&ccedil;on dont les expressions sont format&eacute;es lors de la sortie &agrave; l'&eacute;cran, ceci &eacute;tant indiqu&eacute; par l'utilisation de caract&egrave;res marqueurs sp&eacute;ciaux. Il y a des marqueurs pour le formatage de cha&icirc;ne et de sortie num&eacute;rique:
 
-	{{fbdoc item="section" value="String formatting"}}
+	{{fbdoc item="section" value="Formatage de cha&icirc;ne
 
-		{{table columns="2" cellpadding="2" cells="Marker;Formatting;!;prints the first character of a string;\   \;prints as many characters of a string as occuppied between the pair \ \;&;prints the entire string"}}
+		{{table columns="" cellpadding="2" cells="<table>Marqueur;Formatage;!;affiche le 1er caract&egravere d'une cha&icircne;\   \;imprime autant de caract&egraveres d'une cha&icircne qu'il y en a entre les deux \ \;&affiche la cha&icircne enti&egravere;</table>
 
-	{{fbdoc item="section" value="Numeric formatting"}}
+	{{fbdoc item="section" value="Formatage num&eacute;rique
 
-		{{table columns="2" cellpadding="2" cells="Marker;Formatting;#;placeholder for either an integer digit, or a decimal digit if a decimal point precedes it;,;placed after integer digit indicates groups of 3 digits should be separated by commas in fixed-point notation;.;placed near # indicates place for the decimal point;^^^^;uses exponential notation (E+/-###) when placed after the digit characters;+;placed before/after the format string, controls whether the sign of a number is prepended/appended, and causes an explicit '+' sign to be printed for positive numbers;-;placed after the format string, causes the sign of the number to be appended rather than prepended, appending a space/negative sign for positive/negative numbers;$$;placed at the start of integer digits, causes a dollar sign to be prepended to the number (after the sign if one is prepended);**;placed at the start of integer digits, causes any padding on the left to be changed from spaces to asterisks;**$;placed at the start of integer digits, pads on the left with asterisks, and prepends a dollar sign after the asterisks;&;prints a number intelligently, using the exact number of digits required (new to version 0.21.0b)"}}
+		{{table columns="" cellpadding="2" cells="<table>Marqueur;Formatage;#;espace r&eacuteserv&eacute soit pour un chiffre d'un entier ou un chiffre d'un d&eacutecimal si pr&eacutec&eacuted&eacute d'un point;,; plac&eacute apr&egraves un chiffre d'un entier indique que les groupes de 3 chiffres doivent &ecirctre s&eacutepar&eacutes par des virgules en notation &agrave virgule fixe;.;plac&eacute &agrave proximit&eacute d'un # indique la place pour le point d&eacutecimal;^^^^;utilise la notation exponentielle (E+/-###) s'il est plac&eacute &agrave doite d'un format num&eacuterique;+;plac&eacute avant/apr&egraves la cha&icircne format&eacutee, contr&ocircle si le signe d'un nombre est pr&eacutefix&eacute/suffix&eacute, et implique qu'un explicite signe '+' soit afich&eacute pour les nombres positifs;-;plac&eacute apr&egraves la cha&icircne format&eacutee, implique que le signe du nombre est suffix&eacute plut&ocirct que pr&eacutefix&eacute, fait suivre un espace/signe n&eacutegatif pour les nombres positifs/n&eacutegatifs;$$;plac&eacute au d&eacutebut de chiffres entiers, provoque l'&eacutecriture d'un signe de dollar plac&eacute avant le nombre (apr&egraves le signe si l'on est pr&eacutefix&eacute);**;plac&eacute au d&eacutebut de chiffres entiers, provoque le remplacement sur la gauche des espaces par des ast&eacuterisques;**$;plac&eacute au d&eacutebut de chiffres entiers, remplit sur la gauche avec des ast&eacuterisques et pr&eacutefixe un signe dollar apr&egraves les ast&eacuterisques;&affiche un nombre intelligemment, en utilisant le nombre exact de chiffres requis (nouveaut&eacute version 0.21.0b);</table>
 
-	All of the special marker characters can be escaped by preceding them with the underscore character ##"_"##, allowing them to be printed directly.  For example, ##"_!"## is printed as ##"!"##, and ##"_""""_"## is printed as ##"_"##.
+	Tous les caract&egrave;res marqueurs sp&eacute;ciaux peuvent &ecirc;tre pr&eacute;c&eacute;d&eacute;s du caract&egrave;re de soulignement ##"_"##, ce qui permettra de les afficher directement. Par exemple, ##"_!"## affichera ##"!"## et ##"__"## affichera##"_"##.
 
-	If a numerical value cannot fit in the number of digits indicated by the format string, the formatting is adapted to fit the number, possibly switching to sientific notation, and the number is printed preceded by the percent ##"%"## character. E.g., the number ##1234## with a ##//formatstring//## of ##"""##.##"""## would be printed as ##"%1234.00"##.
+	Si une valeur num&eacute;rique ne correspond pas &agrave; la forme indiqu&eacute;e par la cha&icirc;ne de format, le formatage est adapt&eacute; au nombre, &eacute;ventuellement en passant &agrave; la notation scientifique, et le nombre est pr&eacute;c&eacute;d&eacute; par le caract&egrave;re pour cent ## "%"</tt >. Par exemple, le nombre ##1234## avec un ##//formatstring//## de ##"##.##"## sera affich&eacute; ##"%1234.00"##.
 
-	All other characters within the format string are printed as they appear.
+	Tous les autres caract&egrave;res dans la cha&icirc;ne de format sont imprim&eacute;s tels qu'ils apparaissent.
 
 {{fbdoc item="ex"}}
 
@@ -38,14 +38,14 @@ Print Using "The value is #.## seconds"; 1.019
 Print Using "The ASCII code for the pound sign (_#) is ###"; Asc("#")
 Print Using "The last day in the year is & \ \"; 31; "December"
 %%
-	will produce the output:
+	produira la sortie:
 
 %%The value is 1.02 seconds
 The ASCII code for the pound sign (#) is  35
 The last day in the year is 31 Dec%%
 
 {{fbdoc item="diff"}}
-	- QB didn't allow ##"&"## to be used for printing numbers.
+	- QB ne permet pas l'utilisation de ##"&"## pour afficher des nombres.
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgPrint Print]]##

@@ -1,94 +1,94 @@
 {{fbdoc item="title" value="Function Overloading"}}----
-//written by [[LaananFisher :stylin:]]//
+//Ecrit par [[LaananFisher :stylin:]]//
 
-----
+<div class="fb_header">Qu'est-ce que c'est?
 
-====What is It?====
+La surcharge de fonction est aussi pr&egrave;s que vous pouvez venir &agrave; la programmation g&eacute;n&eacute;rique sans avoir de mod&egrave;les. En programmation fonctionnelle (ou modulaire), l'accent est mis sur la valeur, tandis que dans la programmation g&eacute;n&eacute;rique, l'accent est mis sur le //type//. Des fonctions similaires sont appel&eacute;es en fonction du type de l'argument pass&eacute;. La surcharge de fonction est un pas de c&ocirc;t&eacute; dans la programmation g&eacute;n&eacute;rique, permettant &agrave; un identifiant de fonction d'&ecirc;tre associ&eacute; &agrave; une vari&eacute;t&eacute; de fonctions qui fonctionnent avec une vari&eacute;t&eacute; de types diff&eacute;rents - et de le rendre totalement transparent pour le client (vous).
 
 
-Function overloading is as close as you can come to generic programming without having templates. In functional (or modular) programming, the emphasis is on value, while in generic programming, the emphasis is on //type//. Similar functions are called based on the type of the argument passed. Function overloading is a side-step into generic programming, allowing a function identifier to be associated with a variety of functions that work with a variety of different types - and making it all transparent to the client (you).
-
-Simply put, function overloading involves defining functions that have the same name, but different //signatures//. A function's signature is a combination of all the information needed to correctly reference the function, and includes the function's parameter list and return type. These are what we redefine, or overload. Let's start off with a small example. Say we need functions that output the string respresentation of a number. We simply write:
-
+Autrement dit, la surcharge de fonction consiste &agrave; d&eacute;finir des fonctions qui ont le m&ecirc;me nom, mais des //signatures// diff&eacute;rentes. La signature d'une fonction est une combinaison de toutes les informations n&eacute;cessaires pour r&eacute;f&eacute;rencer correctement la fonction et inclut la liste des param&egrave;tres de la fonction et le type de retour. Ceci est ce que nous red&eacute;finissons, ou de surchargeons. Commen&ccedil;ons avec un petit exemple. Supposons que nous avons besoin de fonctions affichant la cha&icirc;ne repr&eacute;sentatant un certain nombre. Nous &eacute;crivons tout simplement:
 
 ##%%(freebasic)
-option explicit      '' force explicit declaration of variables
-option byval         '' default passing convention as by value
 
+
+Option Explicit      '' force explicit declaration of variables
+Option ByVal         '' default passing convention as by value
 '' to declare functions with similar functionality but that accept different argument types,
+
 '' we 'simply' create new function names :(
-declare function print_byte( as byte )      '' outputs a stringified byte
-declare function print_short( as short )    '' outputs a stringified short
+Declare Function print_byte( As Byte )      '' outputs a stringified byte
+Declare Function print_short( As Short )    '' outputs a stringified short
+Dim As Byte b = 102
 
-dim as byte b = 102
-dim as short s = 10240
-
+Dim As Short s = 10240
 print_byte( b )
-print_short( s )
 
-sleep : end 0
+print_short( s )
+Sleep : End 0
 
 '' function definitions squished for brevity - don't do this outside a space-constrained  tutorial ;}
-function print_byte( n as byte ) : print str( n ) : return : end function
-function print_short( n as short ) : print str( n ) : return : end function
-%%##
 
-----
+Function print_byte( n As Byte ) : Print Str( n ) : Return : End Function
+Function print_short( n As Short ) : Print Str( n ) : Return : End Function
+%%
+##
 
-====What Does It Do For Me?====
+<div class="fb_header">Que fait-elle pour moi?
+
+Le probl&egrave;me ici est que non seulement nous avons deux signatures de fonction diff&eacute;rentes, mais nous avons deux //identifiants// de fonction diff&eacute;rents, ainsi, nous - et non le compilateur - devons nous souvenir d'appeler la fonction convenable. Comme vous l'imaginez peut-&ecirc;tre, cela peut &ecirc;tre assez d&eacute;routant si vous d&eacute;cidez que vous voulez manipuler des INTEGER, SINGLE et DOUBLE. De plus, pour &ecirc;tre complet, vous pouvez avoir des fonctions qui acceptent &agrave; la fois les versions sign&eacute;es et non sign&eacute;es de chacun de ces cas. De toute &eacute;vidence, vous allez avoir une sorte de nommage de configuration syst&egrave;me &agrave; faire pour rendre ceci plus facile pour vous-m&ecirc;me. Et, bien s&ucirc;r, vous aurez envie de manipuler aussi vos propres types, et - oh, attendez, nous avons oubli&eacute; les pointeurs. OK, maintenant vous aurez besoin de doubler la liste des noms de fonction, vous devez non seulement trouver ces noms, mais aussi essayer de vous en souvenir quand vous &eacute;crirez le code qui utilisera ces fonctions. Et puis, apr&egrave;s tout, vous avez les conversions implicites disponibles / impos&eacute;es &agrave; vous, et le compilateur se fera un plaisir de vous laisser glisser un DOUBLE dans votre fonction "print_integer" - woops! Bug-ville, nous voil&agrave;! Il doit s&ucirc;rement y avoir une meilleure m&eacute;thode?
 
 
-The problem here is that not only do we have two different function signatures, but we have two different function //identifiers// as well; we - not the compiler - have to remember both in order to call the right function. As you may be able to imagine, this can be pretty confusing if you decide you want to support INTEGERs, SINGLEs and DOUBLEs as well. Plus, for completeness, you may want to have functions that accept both the signed and unsigned versions of each of these. Clearly, you're going to have some kind of naming-scheme setup to make this easier on yourself. And, of course you'll want to support your own TYPEs as well, and - oh wait, we forgot about pointers. OK, now you'll need to double the list of function names you not only need to come up with, but also try and remember when you're actually writing code that uses these functions. Since, after all, you do have implicit conversions available to/forced upon you, and the compiler will happily let you slip a DOUBLE in to your print_integer function - woops! Bug-city, here we come! Surely there must be a better way?
-
-There is, and don't call me Shirley. I mentioned before that the compiler uses two primary components to establish a function signature: the parameter list and the return type. I also mentioned that through overloading, we can define multiple functions with different signatures, and still keep the same function name for all of them. You may be thinking this is our way out of our dilema, convoluted name space and all. Well, you're right - check this out:
-
+Ceci &eacute;tant, ne m'appelez pas Shirley. J'ai d&eacute;j&agrave; mentionn&eacute; que le compilateur utilise deux composants principaux pour &eacute;tablir une signature de fonction: la liste des param&egrave;tres et le type de retour. J'ai aussi mentionn&eacute; que gr&acirc;ce &agrave; la surcharge, on peut d&eacute;finir des fonctions multiples avec des signatures diff&eacute;rentes, en gardant toujours le m&ecirc;me nom de fonction pour chacun d'elles. Vous pouvez penser que c'est notre moyen de sortir de notre dilemme, espace de nom alambiqu&eacute; et autres. Eh bien, vous avez raison - jetez un oeil sur ceci:
 
 ##%%(freebasic)
-option explicit      '' force explicit declaration of variables
-option byval         '' default passing convention as by value
 
+
+Option Explicit      '' force explicit declaration of variables
+Option ByVal         '' default passing convention as by value
 '' to overload function print_numeric that we can redefine to accept different argument
+
 '' types while keeping the name intact, we use the OVERLOAD keyword on our intial function:
-declare function print_numeric overload( as byte )      '' outputs a stringified byte
-declare function print_numeric( as short )              '' outputs a stringified short
-declare function print_numeric( as integer )            '' outputs a stringified integer
-declare function print_numeric( as longint )            '' outputs a stringified longint
-
+Declare Function print_numeric Overload( As Byte )      '' outputs a stringified byte
+Declare Function print_numeric( As Short )              '' outputs a stringified short
+Declare Function print_numeric( As Integer )            '' outputs a stringified integer
+Declare Function print_numeric( As LongInt )            '' outputs a stringified longint
 '' define some variables
-dim as byte b = 102
-dim as short s = 10240
-dim as integer i = 1024000000
-dim as longint li = 1024000000000000000
 
+Dim As Byte b = 102
+Dim As Short s = 10240
+Dim As Integer i = 1024000000
+Dim As LongInt li = 1024000000000000000
 '' enter the wonderful world of function overloading :)
+
 print_numeric( b )
 print_numeric( s )
 print_numeric( i )
 print_numeric( li )
-
-sleep : end 0
+Sleep : End 0
 
 '' define our function overloads
-function print_numeric( n as byte ) : print str( n ) : return : end function
-function print_numeric( n as short ) : print str( n ) : return : end function
-function print_numeric( n as integer ) : print str( n ) : return : end function
-function print_numeric( n as longint ) : print str( n ) : return : end function
-%%##
 
-----
+Function print_numeric( n As Byte ) : Print Str( n ) : Return : End Function
+Function print_numeric( n As Short ) : Print Str( n ) : Return : End Function
+Function print_numeric( n As Integer ) : Print Str( n ) : Return : End Function
+Function print_numeric( n As LongInt ) : Print Str( n ) : Return : End Function
+%%
+##
 
-====What does It Mean?====
+<div class="fb_header">Qu'est-ce que cela signifie?
+
+Une chose qui devrait se remarquer d'embl&eacute;e est de voir comment il est incroyablement facile de faire cela. Cela peut sembler &eacute;trange compte tenu de la libert&eacute;, la flexibilit&eacute; et la s&eacute;curit&eacute; de type, qui s'offre &agrave; vous, mais l&agrave; encore les constructions de niveau le plus &eacute;lev&eacute; sont comme &ccedil;a. En un mot, en utiliser des m&eacute;thodes comme celle-ci ne rendra pas seulement de votre vie beaucoup plus facile, mais vous passerez moins de temps dans le d&eacute;bogage et c'est une bonne chose, peu importe le type de code que vous &eacute;criviez.
 
 
-One thing that should stand out right away is how incredibly easy it is to do this. That might seem strange considering the freedom, flexibility and //type-safety// if offers you, but then again most higher-level constructs are like that. In a nutshell, using methods like this will not only make your life a whole lot easier, but you'll be spending less time debugging, and that's a good thing no matter what kind of code you write.
+Cela signifie //flexibilit&eacute;//. La surcharge de fonction offre la possibilit&eacute; d'ajouter plus de fonctionnalit&eacute;s (print_numeric( f as fraction)) tout en gardant intact votre code actuel. Votre code ne casse pas parce que vous voulez soutenir l'impression de la repr&eacute;sentation num&eacute;rique d'un mouchoir, d'une armure ou de tout autre chose. Vous pourriez maintenant penser que le code ci-dessus n'est pas si trivial que &ccedil;a et que ce qui semble tr&egrave;s simple - parce que &ccedil;a l'est - est vraiment le fondement de l'&eacute;criture d'un meilleur code. Et vous auriez raison.
 
-It means //flexibility//. Function overloading offers the ability to add more features ( print_numeric( f as fraction) ) while still keeping your current code intact. Your code doesn't break because you want to support printing the numeric representation of a handkerchief, or armor, or whatever else. You may now be thinking that the above code is not so trivial anymore, and that what seems really simple - because it is - is really the foundation of writing better code. You'd be right.
+Cela signifie //maintenabilit&eacute;//: Donc, vous avez vos 80 fonctions d'&eacute;criture_d'un_certain_nom_que_vous_devez_v&eacute;rifier_chaque_fois_que_vous_en_avez_besoin_pour_l'&eacute;criture_ou_le_d&eacute;bogage. Tout est grand dans votre petit monde tortueux et d'auto-d&eacute;go&ucirc;t. Qu'est-ce qui se passe quand quelque chose doit changer? Si seulement une de ces fonctions doit changer, BAM! Un cauchemar de maintenance. Vous allez avoir &agrave; rechercher dans l'ensemble code de base pour &ecirc;tre //compl&egrave;tement// s&ucirc;r que vous n'avez pas rat&eacute; une fonction ici ou l&agrave;; triste fa&ccedil;on de passer un samedi soir, mon ami.
 
-It means //maintainability//: So you've got your 80 functions of print_some_long_name_you_need_to_look_up_everytime_you_want_to_use_it written and debugged. Everything's great in your little torturous, self-loathing world. What happens when something needs to change? Even if only 1 of those functions needs to change, BAM! A maintenence nightmare. You're going to have to search the entire code-base to be //completely// sure you haven't missed a function here or there; sad way to spend a Saturday night, my friend.
+Cela signifie //s&eacute;curit&eacute;//: Vous pouvez remarquer que j'utilise deux options dans ces exemples: [[KeyPgOptionexplicit Option Explicit]] et [[KeyPgOptionbyval Option ByVal]]. Je suis fort sur la s&eacute;curit&eacute;, et je le suis encore plus en demandant au compilateur de surveiller mes arri&egrave;res. J'utilise ceci parce que c'est plus s&ucirc;r et je vais demander toute la s&eacute;curit&eacute; que je peux obtenir. La surcharge de fonction met &eacute;galement en s&eacute;curit&eacute; - s&eacute;curit&eacute; contre le mal (lire: accidentelle) les conversions implicites. Consid&eacute;rez que nous sommes r&eacute;ellement en mesure de retourner, &agrave; partir de ces fonctions, une valeur qui repose sur l'argument que nous lui passons. Comme pr&eacute;c&eacute;demment, si un double a &eacute;t&eacute; autoris&eacute; &agrave; &ecirc;tre tronquer &agrave; notre insu, cela signifie que de nombreux comprim&eacute;s d'Excedrin essaieront de faire dispara&icirc;tre les maux de t&ecirc;te d&eacute;bogage. C'est tout au sujet de la chose de s&eacute;curit&eacute; de type, quelque chose qui force certains &agrave; se moquer de C//pp//.
 
-It means //safety//: You may notice that I utilize two OPTIONs in these examples: [[KeyPgOptionexplicit OPTION EXPLICIT]] and [[KeyPgOptionbyval OPTION BYVAL]]. I'm big on safety, and I'm even bigger on having the compiler watch my back for me. I use these because it is safer to, and I'll take all the safety I can get. Function overloading also affords you safety - safety against evil (read: accidental) implicit conversions. Consider if we were actually returning a value from these functions that was dependent on the argument we passed to it. As above, if a double were allowed to get truncated without our knowledge, that spells many pills of excedrin trying to make that debugging headache go away. It's all about the type-safety, something which cause many to scoff at C//pp//.
+<div class="fb_header">Conclusion
 
-----
+J'esp&egrave;re que vous avez appris au moins les rudiments de la surcharge de fonction (puisque c'est tout ce que je couvert). Et j'esp&egrave;re que vous commencez &agrave; penser &agrave; des th&egrave;mes que j'ai soulev&eacute;, si ce n'&eacute;tait pas le cas auparavant. La prochaine fois je discuterai des fonctions surcharg&eacute;es avec diff&eacute;rents nombres de param&egrave;tres, diff&eacute;rents types de retour, ainsi que des joies et des pi&egrave;ges des deux. Restez &agrave; l'&eacute;coute.
 
 ====Wrapping Up====
 

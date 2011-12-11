@@ -1,5 +1,5 @@
 {{fbdoc item="title" value="LINE (GRAPHICS)"}}----
-Draws a line
+Dessine une ligne
 
 {{fbdoc item="syntax"}}##
 	**Line** [//target//,] [[STEP] (//x1//, //y1//)]-[STEP] (//x2, y2//) [, [//color//][, [B|BF][, //style//]]]
@@ -8,36 +8,36 @@ Draws a line
 ##
 {{fbdoc item="param"}}
 	##//target//##
-		specifies buffer to draw on
+		sp&eacute;cifie le tampon sur lequel dessiner
 	##STEP##
-		indicates that the starting coordinates are relative
+		indique que les coordonn&eacute;es de d&eacute;part sont relatives
 	##//(x1, y1)//##
-		starting coordinates of the line
+		coordonn&eacute;es de d&eacute;part de la ligne
 	##STEP##
-		indicates that ending coordinates are relative
+		indique que les coordonn&eacute;es de fin sont relatives
 	##//(x2, y2)//##
-		ending coordinates of the line
+		coordonn&eacute;es de fin de la ligne
 	##//color//##
-		the color attribute.
+		l'attribut de couleur.
 	##B|BF##
-		specifies box or box filled mode
+		sp&eacute;cifie bo&icirc;te ou bo&icirc;te remplie
 	##//style//##
-		line style
+		style de la ligne
 
 {{fbdoc item="desc"}}
-	Graphics statement that draws a straight line or a box between two points. The action will take place on the current work page set via [[KeyPgScreenset ScreenSet]], or onto the buffer [[KeyPgGetgraphics Get]]/[[KeyPgPutgraphics Put]] buffer if specified.
+	D&eacute;claration graphique qui dessine une ligne droite ou une bo&icirc;te entre deux points. Cela se passera sur la page de travail courante via [[KeyPgScreenset ScreenSet]] ou sur un tampon [[KeyPgGetgraphics Get]]/[[KeyPgPutgraphics Put]] si c'est sp&eacute;cifi&eacute;.
 	
-	**Line** coordinates are affected by custom coordinates system set via [[KeyPgWindow Window]] and [[KeyPgViewgraphics View (Graphics)]] statements, and respect clipping rectangle set by [[KeyPgViewgraphics View (Graphics)]]. If a pair of coordinates is preceded by the ##STEP## keyword, the coordinates are assumed to be relative to the last graphics cursor position. If the ##B## flag is specified, a rectangle will be drawn instead of a line, with ##(//x1//,//y1//)-(//x2//,//y2//)## as the coordinates of the opposite rectangle corners. If ##BF## is specified, a filled rectangle will be drawn.
+	Les coordonn&eacute;es de **Line** sont affect&eacute;es par le syst&egrave;me de coordonn&eacute;es personnel &eacute;tabli via [[KeyPgWindow Window]] et [[KeyPgViewgraphics View (Graphique)]] et respecte le rectangle de d&eacute;coupage (clipping rectangle) &eacute;tabli par [[KeyPgViewgraphics View (Graphics)]]. Si une paire de coordonn&eacute;es est pr&eacute;c&eacute;d&eacute;e par le mot-clef ##STEP##, les coordonn&eacute;es sont consid&eacute;r&eacute;es comme relatives &agrave; la derni&egrave;re position du curseur graphique. Si l'indicateur ##B## est sp&eacute;cifi&eacute;, un rectangle sera trac&eacute; au lieu d'une ligne, avec ##(//x1//,//y1//)-(//x2//,//y2//)## comme coordonn&eacute;es des coins oppos&eacute;s du rectangle. Si ##BF## est sp&eacute;cifi&eacute;, un rectangle plein sera trac&eacute;.
 	
-	##//Color//## denotes the color attribute, which is mode specific (see [[KeyPgColor Color]] and [[KeyPgScreengraphics Screen (Graphics)]] for details). If omitted, the current foreground color as set by the [[KeyPgColor Color]] statement is used.
+	##//Color//## correspond &agrave; l'attribut de couleur, qui est sp&eacute;cifique au mode (voir [[KeyPgColor Color]] et [[KeyPgScreengraphics Screen (Graphique)]] pour plus de d&eacute;tails). Si omis, la couleur courante d'avant-plan valid&eacute;e par [[KeyPgColor Color]] sera utilis&eacute;e.
 	
-	##//Style//##, if specified, allows styled line drawing; its value is interpreted as a 16bit bitmask, and **Line** will use it to skip pixel drawing. Starting at ##(//x1//,//y1//)##, the most significant bit of the style mask is checked: if 1, the pixel is drawn, if 0, it's skipped. This repeats for all the line pixels with the other bits, with the mask being reused when the 16 bits are all checked.
+	Si ##//Style//## est sp&eacute;cifi&eacute;, cela permet de tracer une ligne avec un certain style; sa valeur est interpr&eacute;t&eacute;e comme un masque de 16 bits et **Line** sera utilis&eacute; pour interpr&eacute;ter le dessin de pixels. D&eacute;butant &agrave; ##(//x1//,//y1//)##, le bit de poids le plus fort du masque de style est utilis&eacute;: s'il est &agrave; 1, le pixel est dessin&eacute;, s'il est &agrave; 0, il ne l'est pas. Ceci sera r&eacute;p&eacute;t&eacute; pour tous les pixels de la ligne en utilisant les autres bits, le masque &eacute;tant r&eacute;utilis&eacute; depuis le d&eacute;but quand ses 16 bits auront &eacute;t&eacute; utilis&eacute;s.
 
-	When **Line** is used as //Line - (x2, y2)//, a line is drawn from the current cursor position to the ##(//x2//,//y2//)## coordinates specified by LINE. Alternatively, [[KeyPgPoint Point]] can be used to get the current cursor position.
+	Quand **Line** est utilis&eacute; de cette fa&ccedil;on: //Line - (x2, y2)//, une ligne est trac&eacute;e de la position courante du curseur aux coordonn&eacute;es ##(//x2//,//y2//)## sp&eacute;cifi&eacute;es par LINE. Alternativement, [[KeyPgPoint Point]] peut &ecirc;tre utilis&eacute; pour obtenir la position courante du curseur.
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/gfx/line.bas"}}%%(freebasic)
-'' draws a diagonal red line with a white box, and waits for 3 seconds
+'' Dessine une ligne diagonale rouge avec une boite blanche, et attend 3 secondes
 screen 13
 line (20, 20)-(300, 180), 4
 line (140, 80)-(180, 120), 15, b
@@ -46,23 +46,23 @@ sleep 3000
 %%
 
 {{fbdoc item="filename" value="examples/manual/gfx/line_style.bas"}}%%(freebasic)
-' Draws 2 lines with 2 different line styles in 2 different colors
+' Dessine 2 lignes avec 2 styles de ligne differents dans 2 couleurs differentes
 screenres 320, 240
 
-Line (10, 100)-(309, 140),  4, B, &b1010101010101010 ' red box with dashed border
+Line (10, 100)-(309, 140),  4, B, &b1010101010101010 ' boite rouge avec bords pointilles
 
-Line (20, 115)-(299, 115),  9,  , &b1111000011111111 ' blue dashed line
-Line (20, 125)-(299, 125), 10,  , &b0000000011110000 ' green dashed line
+Line (20, 115)-(299, 115),  9,  , &b1111000011111111 ' ligne bleue tirets
+Line (20, 125)-(299, 125), 10,  , &b0000000011110000 ' ligne verte tirets
 
 Sleep
 %%
 
 {{fbdoc item="diff"}}
-	- ##//target//## is new to ""FreeBASIC""
+	- ##//target//## est nouveau pour FreeBASIC
 
 {{fbdoc item="see"}}
 	- [[KeyPgCircle Circle]]
 	- [[KeyPgWindow Window]]
-	- [[KeyPgViewgraphics View (Graphics)]]
+	- [[KeyPgViewgraphics View (Graphique)]]
 
 {{fbdoc item="back" value="CatPgGfx2D|2D Drawing Functions"}}

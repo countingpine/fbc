@@ -1,58 +1,27 @@
 {{fbdoc item="title" value="EXPORT"}}----
-Declaration specifier to indicate that a procedure in a DLL should be visible from other programs
+Sp&eacute;cificateur de d&eacute;claration qui indique qu'une proc&eacute;dure dans une DLL doit &ecirc;tre visible &agrave; partir d'autres programmes
 
 {{fbdoc item="syntax"}}##
 	{ [[KeyPgSub sub]] | [[KeyPgFunction function]] } //proc_name// ( //argumentlist// ) [ [[KeyPgAs as]] [[DataType datatype]] ] **Export**
 ##
 {{fbdoc item="desc"}}
-	If a function is declared with this clause in a DLL, it is added to the public export table, so external programs can dynamically link to it using [[KeyPgDylibsymbol Dylibsymbol]].
+	Si une fonction est d&eacute;clar&eacute;e avec cette clause dans une DLL, elle est ajout&eacute;e &agrave; la table des exportations publiques, afin que les programmes externes puissent &ecirc;tre li&eacute;s dynamiquement &agrave; elle en utilisant [[KeyPgDylibsymbol DyLibSymbol]].
 
 {{fbdoc item="ex"}}
-{{fbdoc item="filename" value="examples/manual/module/mydll.bas"}}%%(freebasic)
-'' mydll.dll
+	%%(freebasic)
 
-'' in the DLL the function must be declared as export
+'' mydll.dll
+	'' in the DLL the function must be declared as export
 
 Function AddNumbers Alias "AddNumbers" _
-  ( _
-	ByVal operand1 As Integer, ByVal operand2 As Integer _
-  ) As Integer Export
+	( _
 
-   AddNumbers = operand1 + operand2
+ByVal operand1 As Integer, ByVal operand2 As Integer _
+	) As Integer Export
 
-End Function
-%%
+AddNumbers = operand1 + operand2
+	End Function
+	%%
+	%%(freebasic)
 
-{{fbdoc item="filename" value="examples/manual/module/export.bas"}}%%(freebasic)
 '' create a function pointer, arguments must be the same type
-'' as in the original function
-
-Dim AddNumbers As Function ( ByVal As Integer, ByVal As Integer ) As Integer
-Dim hndl As Any Ptr
-
-hndl=DyLibLoad("mydll.dll")
-
-'' find the proc address (case matters!)
-AddNumbers = DyLibSymbol( hndl, "AddNumbers" )
-
-'' then call it ...
-Print "1 + 2 = " & AddNumbers( 1, 2 )
-
-Sleep
-%%
-
-{{fbdoc item="lang"}}
-	- Not available in the //[[CompilerOptlang -lang qb]]// dialect unless referenced with the alias ##**""__Export""**##.
-
-{{fbdoc item="target"}}
-	- Dynamic link libraries are not available in DOS, as the OS doesn't support them.
-
-{{fbdoc item="diff"}}
-	- New to Freebasic
-
-{{fbdoc item="see"}}
-	- ##[[KeyPgDylibload Dylibload]]##
-	- ##[[KeyPgDylibsymbol Dylibsymbol]]##
-	- ##[[KeyPgAlias Alias]]##
-
-{{fbdoc item="back" value="CatPgModularizing|Modularizing"}}{{fbdoc item="back" value="CatPgProcedures|Procedures"}}

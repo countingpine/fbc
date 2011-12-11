@@ -1,99 +1,99 @@
-{{fbdoc item="title" value="DRAW"}}----
-Statement for sequenced pixel plotting
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">{{fbdoc item="title" value="Draw"}}----<div id="fb_tab_r"> <img src="images/fblogo_mini.gif">
+D&eacute;claration pour l'&eacute;criture s&eacute;quentielle de pixel<br \=""><br \="">{{fbdoc item="syntax"}}##<br \="">**Draw** [//target//,] //cmd//<br \="">##<br \="">
 
-{{fbdoc item="syntax"}}##
-	**Draw** [//target//,] //cmd//
-##
-{{fbdoc item="param"}}
-	##//target//##
-		the buffer to draw on
-	##//cmd//##
-		a string containing the sequence of commands
+{{fbdoc item="param"}}<br \="">##//target//##<br \="">		le tampon o&ugrave; dessiner<br \="">
+	##//cmd//##<br \="">		une cha&icirc;ne contenant une s&eacute;quence de commandes<br \=""><br \="">
+{{fbdoc item="desc"}}<br \="">Le dessin sera sur la page courante de travail valid&eacute;e par ##[[KeyPgScreenset ScreenSet]]## ou sur le tampon ##//cible (target)//## ##[[KeyPgGetgraphics Get]]##/##[[KeyPgPutgraphics Put]]## s'il est sp&eacute;ecifi&eacute;.<br \="">La d&eacute;claration ##**Draw**##peut &ecirc;tre utilis&eacute;e pour ex&eacute;cuter plusieurs commandes de dessin d'unseul coup; c'est tr&egrave;s utile pour dessiner rapidement des figures. Lacha&icirc;ne contenant les commandes accepte les commandes suivantes:<br \=""><br \="">Commandes pour &eacute;crire des pixels:<br \="">
+{{table columns="" cellpadding="2" cells="<table><tbody>Commande;Description; Commandes pour &eacutecrire des pixels:;B;Pr&eacutefixe facultatif: d&eacuteplace mais n'&eacutecrit pas.;N;Pr&eacutefixe facultatif: &eacutecrit mais ne d&eacuteplace pas.;Mx,y;D&eacuteplace &agrave la position &eacutecran sp&eacutecifi&eacutee. Si + ou - pr&eacutec&egravede x, le mouvement est relatif &agrave la position courante du curseur.;U[n];D&eacuteplace de n unit&eacutes vers le haut. Si n est omis, n = 1 par d&eacutefaut.;D[n];D&eacuteplace de n unit&eacutes vers le bas. Si n est omis, n = 1 par d&eacutefaut.;L[n];D&eacuteplace de n unit&eacutes vers la gauche. Si n est omis, n = 1 par d&eacutefaut.;R[n];D&eacuteplace de n unit&eacutes vers la droite. Si n est omis, n = 1 par d&eacutefaut.;E[n];D&eacuteplace de n unit&eacutes vers le haut et la droite. Si n est omis, n = 1 par d&eacutefaut.;F[n];D&eacuteplace de n unit&eacutes vers le bas et la droite. Si n est omis, n = 1 par d&eacutefaut..;G[n];D&eacuteplace de n unit&eacutes vers le bas et la gauche. Si n est omis, n = 1 par d&eacutefaut.;H[n];D&eacuteplace de n unit&eacutes vers le haut et la gauche. Si n est omis, n = 1 par d&eacutefaut.; Commandes de couleur:;Cn;La couleur de premier-plan courante devient n.;Pp,b;Remplit la r&eacutegion avec une bordure de couleur b en utilisant la couleur p.; Commandes pour modifier la taille et effectuer une rotation:;Sn;Valide l'unit&eacute courante de longueur, 4 par d&eacutefaut.  Une unit&eacute de longueur 4 est &eacutegale &agrave 1 pixel.;An;Rotation de n*90 degr&eacutes (n de 0 &agrave 3).;TAn;Rotation de n degr&eacutes (n de 0 &agrave 359); Commande suppl&eacutementaire:;Xp;Ex&eacutecute la commande &agrave l'addresse p, o&ugrave p est un STRING PTR.;</tbody></table>
+	<br \=""><br \="">
+		Les commandes pour r&eacute;gler la couleur, la taille et l'angle auront une incidence sur toutes les op&eacute;rations ##**Draw**## ult&eacute;rieures.
+	{{fbdoc item="ex"}}<br \="">%%(freebasic)
+		Screen 13
 
-{{fbdoc item="desc"}}
-	Drawing will take place onto the current work page set via ##[[KeyPgScreenset ScreenSet]]## or onto the ##//target//## ##[[KeyPgGetgraphics Get]]##/##[[KeyPgPutgraphics Put]]## buffer if specified.
-	The ##**Draw**## statement can be used to issue several drawing commands all at once; it is useful to quickly draw figures. The command string accepts the following commands:
+'Deplace vers (50,50) sans dessin
+	Draw "BM 50,50"
+	'Valide couleur dessin a 2 (vert)
 
-	Commands to plot pixels:
-	{{table columns="2" cellpadding="1" cells="Command;Description;###;Commands to plot pixels:;B;Optional prefix: move but do not draw.;N;Optional prefix: draw but do not move.;M x,y;Move to specified screen location. if a '+' or '-' sign precedes x, movement is relative to current cursor position.  x's sign has no effect on the sign of y.;U [n];Move n units up. If n is omitted, 1 is assumed.;D [n];Move n units down. If n is omitted, 1 is assumed.;L [n];Move n units left. If n is omitted, 1 is assumed.;R [n];Move n units right. If n is omitted, 1 is assumed.;E [n];Move n units up and right. If n is omitted, 1 is assumed.;F [n];Move n units down and right. If n is omitted, 1 is assumed.;G [n];Move n units down and left. If n is omitted, 1 is assumed.;H [n];Move n units up and left. If n is omitted, 1 is assumed.;###;Commands to color:;C n;Changes current foreground color to n.;P p,b;PAINTs (flood fills) region of border color b with color p.;###;Commands to scale and rotate:;S n;Sets the current unit length, default is 4.  A unit length of 4 is equal to 1 pixel.;A n;Rotate n*90 degrees (n ranges 0-3).;TA n;Rotate n degrees (n ranges 0-359).;###;Extra commands:;X p;Executes commands at p, where p is a STRING PTR."}}
+	Draw "C2"
+	'Dessine une boite
 	
-Commands to set the color, size and angle will take affect all subsequent ##**Draw**## operations.
+Draw "R50 D30 L50 U30"
 
-{{fbdoc item="ex"}}
-{{fbdoc item="filename" value="examples/manual/gfx/draw.bas"}}%%(freebasic)
-screen 13
+'Deplace dans la boite
+Draw "BM +1,1"
+'Remplit couleur 1 (bleu) jusqu'aux bords couleur 2 
 
-'Move to (50,50) without drawing
-draw "BM 50,50"
+Draw "P 1,2"
+Sleep
 
-'Set drawing color to 2 (green)
-draw "C2"
+%%
+<div class="fb_img"><img src="images/draw1.png" />
 
 'Draw a box
-draw "R50 D30 L50 U30"
+'' Dessine une fleur sur ecran
 
-'Move inside the box
-draw "BM +1,1"
+Dim As Integer i, a, c
+Dim As String fill, setangle
 
-'Flood fill with color 1 (blue) up to border color 2 
-draw "P 1,2"
+'' motif pour chaque petale
+Dim As Const String petal = _
 
-sleep
-%%
-{{image class="center" title="Draw example output" url="/images/draw1.png"}}
+_
+("X" & VarPtr(setangle)) _ '' link to angle-setting string
+_
 
-{{fbdoc item="filename" value="examples/manual/gfx/draw2.bas"}}%%(freebasic)
-'' Draws a flower on-screen
+& "C15" _       '' set outline color (white)
+& "M+100,+10" _ '' draw outline
 
-dim as integer i, a, c
-dim as string fill, setangle
+"M +15,-10" _
+"M -15,-10" _
 
-'' pattern for each petal
-dim as const string petal = _
-	_
-	("X" & varptr(setangle)) _ '' link to angle-setting string
-	_
-	& "C15" _       '' set outline color (white)
-	& "M+100,+10" _ '' draw outline
-	"M +15,-10" _
-	"M -15,-10" _
-	"M-100,+10" _
-	_
+"M-100,+10" _
+_
 	& "BM+100,0" _              '' move inside petal
-	& ("X" & varptr(fill)) _    '' flood-fill petal (by linking to fill string)
+	& ("X" & VarPtr(fill)) _    '' flood-fill petal (by linking to fill string)
 	& "BM-100,0"                '' move back out
-
-
-
-'' set screen
-screenres 320, 240, 8
-
-'' move to center
-draw "BM 160, 120"
-
-'' set initial angle and color number
-a = 0: c = 32
-
-for i = 1 to 24
-
+	'' set screen
+	ScreenRes 320, 240, 8
+	'' move to center
+	Draw "BM 160, 120"
+	'' set initial angle and color number
+	a = 0: c = 32
+	For i = 1 To 24
 	'' make angle-setting and filling command strings
 	setangle = "TA" & a
-	fill = "P" & c & ",15"
 
-	'' draw the petal pattern, which links to angle-setting and filling strings
-	draw petal
+
+
+fill = "P" & c & ",15"
+'' draw the petal pattern, which links to angle-setting and filling strings
+
+Draw petal
+'' short delay
+
+Sleep 100
+'' increment angle and color number
+
+a += 15: c += 1
+
+	Next i
+	Sleep
+	##<br><div class="fb_img"><img src="images/draw2.png" />
+
+	<br \="">
+	{{fbdoc item="diff"}}
 	
-	'' short delay
-	sleep 100
+	- ##//target//## est nouveau pour FreeBASIC
+	- QB utilise le pointeur sp&eacute;cial VARPTR$ avec la commande ##X p##.
 
-	'' increment angle and color number
-	a += 15: c += 1
+	- FB ne permet pas actuellement de mouvements de sous-pixels: tous les mouvements sont arrondis &agrave; l'entier de coordonn&eacute;e le plus proche .
+	{{fbdoc item="see"}}
 
-next i
+- ##[[KeyPgDrawString Draw String]]##
 
-sleep
-%%
-{{image class="center" title="Draw example output" url="/images/draw2.png"}}
+- ##[[KeyPgScreengraphics Screen (Graphique)]]##
+- ##[[KeyPgOpVarptr VarPtr]]##
+- ##[[KeyPgPaint Paint]]##
 
 {{fbdoc item="diff"}}
 	- ##//target//## is new to ""FreeBASIC""

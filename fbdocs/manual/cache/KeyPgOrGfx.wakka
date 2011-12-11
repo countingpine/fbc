@@ -1,25 +1,25 @@
 {{fbdoc item="title" value="OR"}}----
-Parameter to the ##[[KeyPgPutgraphics Put]]## graphics statement which uses a bit-wise ##[[KeyPgOpOr Or]]## as the blitting method
+Param&egrave;tre de la d&eacute;claration graphique ##[[KeyPgPutgraphics Put]]## qui utilise la manipulation de bits ##[[KeyPgOpOr Or]]## comme m&eacute;thode de transformation image
 
 {{fbdoc item="syntax"}}##
 	**Put** [ //target//, ] [ STEP ] ( //x//,//y// ), //source// [ ,( //x1//,//y1// )-( //x2//,//y2// ) ], **Or**
 ##
 {{fbdoc item="param"}}
 	##**Or**##
-		Required.
+		Obligatoire.
 
 {{fbdoc item="desc"}}
-	The ##**Or**## method combines each source pixel with the corresponding destination pixel, using the bit-wise ##[[KeyPgOpOr Or]]## function.  The result of this is output as the destination pixel.
-	This method works in all graphics modes.  There is no mask color, although color values of ##0## (##[[KeyPgRgba RGBA]](0, 0, 0, 0)## in full-color modes) will have no effect, because of the behavior of ##[[KeyPgOpOr Or]]##.
+	La m&eacute;thode ##**Or**## combine chaque pixel source avec chaque pixel correspondant de la destination, en utilisant la fonction de manipulation de bits ##[[KeyPgOpOr Or]]##.  Le r&eacute;sultat est renvoy&eacute; comme pixel destination.
+	Cette m&eacute;thode fonctionne dans tous les modes graphiques.  Il n'y a pas de masque de couleur, donc les valeurs de couleur de ##0## (##[[KeyPgRgba RGBA]](0, 0, 0, 0)## en modes pleine couleur) n'auront aucun effet, en raison du comportement de ##[[KeyPgOpOr Or]]##.
 
-	In full-color modes, each component (red, green, blue and alpha) is kept in a discrete set of bits, so the operation can be made to only affect some of the channels, by making sure the all the values of the other channels are set to ##0##.
+	En mode pleine couleur, chaque composante (rouge, vert, bleu et alpha) est conserv&eacute;e dans un ensemble discret de bits, ainsi l'op&eacute;ration peut affecter seulement certains canaux, en s'assurant que toutes les valeurs des autres canaux sont mises &agrave; ##0##.
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/gfx/put-or.bas"}}%%(freebasic)
-''open a graphics window
+''Ouvre une fenetre graphique
 ScreenRes 320, 200, 16
 
-''create 3 sprites containing red, green and blue circles
+''Cree 3 sprites contenant cercles rouges, verts et bleus
 Const As Integer r = 32
 dim as any ptr cr, cg, cb
 cr = ImageCreate(r * 2 + 1, r * 2 + 1, RGBA(0, 0, 0, 0))
@@ -29,26 +29,26 @@ Circle cr, (r, r), r, RGB(255, 0, 0), , , 1, f
 Circle cg, (r, r), r, RGB(0, 255, 0), , , 1, f
 Circle cb, (r, r), r, RGB(0, 0, 255), , , 1, f
 
-''put the sprite at three different multipier
-''levels, overlapping each other in the middle
+''Put le sprite avec trois niveaux multiplieur
+''differents, se recouvrant dans le milieu
 Put (146 - r, 108 - r), cr, or
 Put (174 - r, 108 - r), cg, or
 Put (160 - r,  84 - r), cb, or
 
-''free the memory used by the sprites
+''Libere la memoire utilisee par les sprites
 ImageDestroy cr
 ImageDestroy cg
 ImageDestroy cb
 
-''pause the program before closing
+''Pause du programme avant fermeture
 Sleep
 %%
-{{image class="center" title="Put Or example output" url="/images/put-or.png"}}
+<div class="fb_img"><img src="images/put-or.png" />
 {{fbdoc item="diff"}}
-	- None
+	- Aucune
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgOpOr Or]]##
-	- ##[[KeyPgPutgraphics Put (Graphics)]]##
+	- ##[[KeyPgPutgraphics Put (Graphique)]]##
 
 {{fbdoc item="back" value="CatPgGfx2D|2D Drawing Functions"}}

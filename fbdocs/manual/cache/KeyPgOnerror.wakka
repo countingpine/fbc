@@ -1,5 +1,5 @@
 {{fbdoc item="title" value="ON ERROR"}}----
-Error handling statement to set the current error handler
+Instruction de gestion des erreurs pour d&eacute;finir le gestionnaire d'erreur courant
 
 {{fbdoc item="syntax"}}##
 	**On [Local] Error Goto** //label//
@@ -9,18 +9,18 @@ Error handling statement to set the current error handler
 ##
 {{fbdoc item="param"}}
 	##//label//##
-		label to jump to when error occurs
+		label o&ugrave; sauter en cas d'erreur
 
 {{fbdoc item="desc"}}
-	##[[KeyPgOnerror On Error]]## triggers a jump to an error handler when an error occurs. 
+	##[[KeyPgOnerror On Error]]## d&eacute;clenche un saut vers un gestionnaire d'erreur lorsqu'une erreur se produit. 
 
-	If ##[[KeyPgLocal Local]]## is not used the handler must be in the main part of the module. Using ##[[KeyPgLocal Local]]## allows to have the error handler inside the ##[[KeyPgSub Sub]]##/##[[KeyPgFunction Function]]## where the ##**On Error**## is located.
+	Si ##[[KeyPgLocal Local]]## n'est pas utilis&eacute; le gestionnaire doit &ecirc;tre dans la partie principale du module. L'utilisation de ##[[KeyPgLocal Local]]## permet d'avoir un gestionnaire d'erreur dans ##[[KeyPgSub Sub]]##/##[[KeyPgFunction Function]]## o&ugrave; ##**On Error**## est situ&eacute;.
 
-	##**On Error GOTO 0**## deactivates the current error handler.
+	##**On Error GOTO 0**## d&eacute;sactive le gestionnaire d'erreur courant.
 
-	The use of QB-like error handling requires compilation with switch //[[CompilerOpte -e]]//, //[[CompilerOptex -ex]]// or //[[CompilerOptexx -exx]]// activated.
+	L'utilisation d'un gestionnaire d'erreur de type QB n&eacute;cessite une compilation avec le commutateur //[[CompilerOpte -e]]//, //[[CompilerOptex -ex]]// ou //[[CompilerOptexx -exx]]// activ&eacute;.
 
-	See [[TblRuntimeErrors Runtime Error Codes]] for a listing of runtime error numbers and their associated meaning.
+	Voir [[TblRuntimeErrors Codes des erreurs de fonctionnement]] pour une liste des erreurs de fonctionnement et de leurs num&eacute;ros, ainsi que de leur signification.
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/error/onerror.bas"}}%%(freebasic)
@@ -38,7 +38,44 @@ End
 %%
 
 {{fbdoc item="lang"}}
-	- ON ERROR is supported in the //[[CompilerOptlang -lang qb]]// dialect only. In the //[[CompilerOptlang -lang fb]]// dialect, statements can be used in function form to return an error code
+- ON ERROR n'est utilisable que dans le dialecte //[[CompilerOptlang -lang qb]]//. Dans le dialecte //[[CompilerOptlang -lang fb]]//, des d&eacute;clarations peuvent &ecirc;tre utilis&eacute;es sous forme de fonction pour retourner un code d'erreur.
+
+#lang "fblite"
+
+'' Compile with FB default (-lang fb) dialect 
+	If Open( "text" For Input As #1 ) <> 0 Then
+
+	Print "Unable to open file"
+
+	End If
+
+	%%
+	{{fbdoc item="diff"}}
+	
+	- QB n'a pas de clause LOCAL et n&eacute;cessite que le label soit dans la partie principale du module. 
+
+	{{fbdoc item="see"}}
+
+- ##[[KeyPgError Error]]##
+	- ##[[KeyPgLocal Local]]##
+- ##[[KeyPgErr Err]]##
+
+
+	- [[TblRuntimeErrors Codes des erreur de fonctionnement]]
+
+	on error goto errhandler
+	error 1234
+	print "back from resume next"
+	end 0
+
+errhandler:
+	print "error number: " + str( err ) + " at line: " + str( erl )
+	resume next
+%%
+
+{{fbdoc item="lang"}}
+	- ON ERROR is supported in any //[[CompilerOptlang -lang]]// dialect.
+	- In the //[[CompilerOptlang -lang fb]]// dialect, statements can be used preferably in function form to return an error code: in that case ON ERROR being ineffective but consuming CPU time must be unused.
 {{fbdoc item="filename" value="examples/manual/check/KeyPgOnerror_2.bas"}}%%(freebasic)
 '' Compile with FB default (-lang fb) dialect 
 If Open( "text" For Input As #1 ) <> 0 Then
@@ -55,5 +92,6 @@ End If
 	- ##[[KeyPgLocal Local]]##
 	- ##[[KeyPgErr Err]]##
 	- [[TblRuntimeErrors Runtime Error Codes]]
+	- {{fbdoc item="keyword" value="ProPgErrorHandling|Error Handling"}}
 
 {{fbdoc item="back" value="CatPgError|Error Handling Functions"}}

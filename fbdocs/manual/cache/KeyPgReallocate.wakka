@@ -1,5 +1,5 @@
 {{fbdoc item="title" value="REALLOCATE"}}----
-Reallocates storage for an existing reserved block of memory
+R&eacute;affecte au stockage un bloc existant et r&eacute;serv&eacute; de la m&eacute;moire
 
 {{fbdoc item="syntax"}}##
 	[[KeyPgDeclare declare]] [[KeyPgFunction function]] **Reallocate** [[KeyPgCdecl cdecl]] ( [[KeyPgByval byval]] //pointer// [[KeyPgAs as]] [[KeyPgAny any]] [[KeyPgPtr ptr]], [[KeyPgByval byval]] //count// [[KeyPgAs as]] [[KeyPgInteger integer]] ) [[KeyPgAs as]] [[KeyPgAny any]] [[KeyPgPtr ptr]]
@@ -9,73 +9,77 @@ Reallocates storage for an existing reserved block of memory
 ##
 {{fbdoc item="param"}}
 	##//pointer//##
-		The address of allocated memory to be reallocated.
+		L'adresse de m&eacute;moire allou&eacute;e qui doit &ecirc;tre r&eacute;affect&eacute;e.
 	##//count//##
-		The number of bytes, in total, to be reallocated.
+		Le nombre total d'octets qui doivent &ecirc;tre r&eacute;affect&eacute;s.
 
-{{fbdoc item="ret"}}
-	The address of the reallocated memory. A null (##0##) pointer is returned if reallocation was unsuccessful, and the original memory pointed to by ##//pointer//## remains unchanged.
+{{fbdoc item="section" value="Valeur retourn&eacute;e
+	L'adresse de la m&eacute;moire r&eacute;affect&eacute;e. Un pointeur nul (##0##) est retourn&eacute; si la r&eacute;allocation a &eacute;chou&eacute; et la m&eacute;moire d'origine point&eacute;e par ##//pointer//## reste inchang&eacute;e.
 
 {{fbdoc item="desc"}}
-	Attempts to reallocate, or resize, memory previously allocated with ##[[KeyPgAllocate Allocate]]##. The contents of the buffer are preserved, although if ##//count//## is less than the original size of the memory block, the buffer will be truncated.
+	Essaye de r&eacute;affecter ou de redimensionner, la m&eacute;moire pr&eacute;c&eacute;demment r&eacute;serv&eacute;e avec ##[[KeyPgAllocate Allocate]]##. Le contenu de la m&eacute;moire tampon est conserv&eacute;, mais si ##//count//## est inf&eacute;rieur &agrave; la taille d'origine du bloc de m&eacute;moire, la m&eacute;moire tampon sera tronqu&eacute;e.
 
-	If ##//pointer//## is null (##0##), then ##""ReAllocate""## behaves identically to ##[[KeyPgAllocate Allocate]]##.
+	Si ##//pointer//## est nul (##0##), alors le comportement de ##ReAllocate## est identique &agrave; celui de ##[[KeyPgAllocate Allocate]]##.
 
-	Reallocated memory must be deallocated, or freed, with ##[[KeyPgDeallocate Deallocate]]## when no longer needed.
+	La m&eacute;moire r&eacute;allou&eacute;e doit &ecirc;tre d&eacute;sallou&eacute;e ou lib&eacute;r&eacute;e, avec ##[[KeyPgDeallocate Deallocate]]## quand elle n'est plus utilis&eacute;e.
 
-	This function is not part of the FreeBASIC runtime library, it is an alias for the C runtime library's ##//realloc//##, so it's not guaranteed to be thread safe in all platforms.
+	Cette fonction ne fait pas partie de la biblioth&egrave;que d'ex&eacute;cution de FreeBASIC, c'est un alias pour ##//realloc//## de la biblioth&egrave;que d'ex&eacute;cution du langage C, ce n'est donc pas garanti d'&ecirc;tre "thread-safe" sur toutes les plates-formes.
+
+	**NOTE**: La r&eacute;affectation d'un pointeur dans une fonction d'objet, quand ce pointeur contient l'objet parent de la fonction, est ind&eacute;finie et entra&icirc;nera probablement dans des accidents horribles.
+
+	{{fbdoc item="ex"}}
 	
-	**NOTE**: Reallocating a pointer inside an object function, when that pointer contains the parent object of the function, is undefined, and will likely result in horrible crashes.
+	%%(freebasic)
 
-{{fbdoc item="ex"}}
-{{fbdoc item="filename" value="examples/manual/memory/reallocate.bas"}}%%(freebasic)
-Dim a as Integer Ptr, b as Integer Ptr, i As Integer
-
+Dim a As Integer Ptr, b As Integer Ptr, i As Integer
 a = Allocate( 5 * SizeOf(Integer) )   ' Allocate memory for 5 integers
-
 If a = 0 Then Print "Error Allocating a": End
 
-For i = 0 to 4
-  a[i] = (i + 1) * 2   ' Assign integers to the buffer
+For i = 0 To 4
+
+a[i] = (i + 1) * 2   ' Assign integers to the buffer
+
 Next i
-
-b = ReAllocate( a, 10 * SizeOf(Integer) )   ' Reallocate memory for 5 additional integers
-
+  b = Reallocate( a, 10 * SizeOf(Integer) )   ' Reallocate memory for 5 additional integers
 If b <> 0 Then
 
-	a = b
+a = b
 
-	For i = 5 to 9
-	  a[i] = (i + 1) * 2   ' Assign more integers to the buffer
+For i = 5 To 9
+
+	a[i] = (i + 1) * 2   ' Assign more integers to the buffer
+
 	Next i
+	  For i = 0 To 9   ' Print the integers
+	Print i, a[i]
 
-	For i = 0 to 9   ' Print the integers
-	  Print i, a[i]
 	Next i
-	Print
-
-else '' Reallocate failed, memory unchanged
-
+	  Print
+	Else '' Reallocate failed, memory unchanged
 	Print "Error Reallocating a"
 
-	For i = 0 to 4   ' Print the integers
-	  Print i, a[i]
+For i = 0 To 4   ' Print the integers
+
+	Print i, a[i]
+
 	Next i
-	Print
+	  Print
+	End If
+	Deallocate a   ' Clean up
 
-end if
-
-Deallocate a   ' Clean up
 %%
 
 {{fbdoc item="lang"}}
-	- Not available in the //[[CompilerOptlang -lang qb]]// dialect unless referenced with the alias ##**""__Reallocate""**##.
+- Non disponible dans le dialecte //[[CompilerOptlang -lang qb]]// sauf si r&eacute;f&eacute;renc&eacute; avec l'alias ##**__Reallocate**##.
 
 {{fbdoc item="diff"}}
-	- New to ""FreeBASIC""
+	- Nouveau pour FreeBASIC
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgAllocate Allocate]]##
+
+- ##[[KeyPgCallocate CAllocate]]##
+	- ##[[KeyPgDeallocate Deallocate]]##
 	- ##[[KeyPgCallocate Callocate]]##
 	- ##[[KeyPgDeallocate Deallocate]]##
 

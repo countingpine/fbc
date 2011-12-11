@@ -1,25 +1,25 @@
 {{fbdoc item="title" value="$LANG"}}----
-Metacommand statement to set the compiler dialect.
+M&eacute;tacommande pour d&eacute;finir le dialecte du compilateur.
 
 {{fbdoc item="syntax"}}##
 	**'$lang:** "//lang//"
-		//or//
+		//ou//
 	[[KeyPgRem rem]] **$lang:** "//lang//"
 ##
 {{fbdoc item="param"}}
 	##"//lang//"##
-		The dialect to set, enclosed in double quotes, and must be one of ##"fb"##, ##"fblite"##, ##"qb"##, or ##"deprecated"##.
+		Le dialecte &agrave; fixer, entre guillemets, doit &ecirc;tre l'un de ceux-ci: ##"fb"##, ##"fblite"##, ##"qb"##, ou ##"deprecated"##.
 
 {{fbdoc item="desc"}}
-	If the //[[CompilerOptforcelang -forcelang]]// option was not given on the command line, ##**$lang**## can be used to set the dialect for the source module in which it appears.  At most two passes will be made on the source module.  On the first pass, if the specified dialect is anything other than the default dialect (chosen with //[[CompilerOptlang -lang]]//, or ##"fb"## by default), the compiler will reset the parser for another pass and restart compilation at the beginning of the source module.  If this metacommand is encountered again on the second pass, and the specified dialect does not match the new current dialect, a warning is issued and compilation continues.  If any errors were encountered on the first pass, the compiler will not attempt a second pass.
+	Si l'option //[[CompilerOptforcelang -forcelang]]// n'est pas donn&eacute;e sur la ligne de commande, ##**$Lang**## peut &ecirc;tre utilis&eacute; pour fixer le dialecte du module source dans lequel il appara&icirc;t.  Tout au plus deux passes seront effectu&eacute;es sur le module source.  Au premier passage, si le dialecte sp&eacute;cifi&eacute; est est diff&eacute;rent du dialecte par d&eacute;faut (choisi avec //[[CompilerOptlang -lang]]//, ou ##"fb"## par d&eacute;faut), le compilateur r&eacute;initialisera l'analyseur pour un nouveau passage et red&eacute;marrera la compilation au d&eacute;but du module source.  Si cette m&eacute;tacommande est rencontr&eacute;e &agrave; nouveau lors du second passage, et que le dialecte sp&eacute;cifi&eacute; ne correspond pas au nouveau dialecte courant, un avertissement est &eacute;mis et la compilation continue.  Si des erreurs ont &eacute;t&eacute; rencontr&eacute;es lors du premier passage, le compilateur ne tentera pas une seconde passe.
 
-	##**$lang**##  may not be used in any compound statement, scope, or subroutine.  However, it may be nested in module level preprocessor statements or used in an include file.
+	##**$Lang**## ne peut pas &ecirc;tre utilis&eacute; dans toute instruction compos&eacute;e, port&eacute;e ou sous-routine.  Cependant, il peut &ecirc;tre imbriqu&eacute; dans le module niveau pr&eacute;processeur ou utilis&eacute; dans un fichier inclus.
 
-	There is currently no restriction on where this directive may be placed in a source module.  In future this may change, therefore best practice would be to use this directive before the first declaration, definition, or executable statement in the source.
+	Il n'existe actuellement aucune restriction sur l'endroit o&ugrave; cette directive peut &ecirc;tre plac&eacute;e dans un module source.  &Agrave; l'avenir, cela pourrait changer, la meilleure pratique serait donc d'utiliser cette directive avant la premi&egrave;re d&eacute;claration, d&eacute;finition ou d&eacute;claration ex&eacute;cutable dans la source.
 
-	This directive overrides the //[[CompilerOptlang -lang]]// option if it was given on the command line.  However, if the //[[CompilerOptforcelang -forcelang]]// option was given on the command line, this directive will have no effect.  A warning is issued, the directive is ignored, and compilation will continue.  This allows the user to explicitly override ##**$lang**## metacommands.
+	Cette directive remplace l'option //[[CompilerOptlang -lang]]//, si elle a &eacute;t&eacute; donn&eacute;e sur la ligne de commande.  Toutefois, si l'option //[[CompilerOptforcelang -forcelang]]// a &eacute;t&eacute; donn&eacute;e sur la ligne de commande, cette directive n'aura aucun effet.  Un avertissement est &eacute;mis, la directive est ignor&eacute;e et la compilation va se poursuivre.  Cela permet &agrave; l'utilisateur de remplacer explicitement les m&eacute;tacommandes ##**$Lang**##.
 
-	This metacommand was introduced in ""FreeBASIC"" version 0.20.0.  Older versions of FB, and ""QuickBASIC"", will treat it as a comment and silently ignore it.
+	Cette m&eacute;tacommande a &eacute;t&eacute; introduite dans la version 0.20.0 de FreeBasic. Dans les anciennes versions de FB et QuickBASIC, elle sera trait&eacute;e comme un commentaire et ignor&eacute;e silencieusement .
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/meta/lang.bas"}}%%(freebasic)
@@ -27,8 +27,8 @@ Metacommand statement to set the compiler dialect.
 %%
 
 {{fbdoc item="diff"}}
-	- New to ""FreeBASIC""
-	- QB handles ##'$lang:## as a normal comment
+	- Nouveau pour FreeBASIC
+	- QB consid&egrave;re ##'$lang:## comme un commentaire normal
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgPplang #lang]]##

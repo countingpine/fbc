@@ -1,123 +1,125 @@
 {{fbdoc item="title" value="Intrinsic Defines"}}----
-Preprocessor symbols defined by the compiler.
+Symboles de pr&eacute;processeur d&eacute;finis par le compilateur.
 
 {{fbdoc item="desc"}}
-	Intrinsic defines are set by the compiler and may be used as any other defined symbol.  Intrinsic defines often convey information about the state of the compiler, either in general or at a specific point in the compilation process.  Most intrinsic defines are associated with a value.
+	Les d&eacute;finitions intrins&egrave;ques sont fix&eacute;es par le compilateur et peuvent &ecirc;tre utilis&eacute;es comme n'importe quel autre symbole d&eacute;fini.  Les d&eacute;finitions intrins&egrave;ques souvent transmettre des informations sur l'&eacute;tat du compilateur, soit en g&eacute;n&eacute;ral, soit &agrave; un moment pr&eacute;cis dans le processus de compilation.  La plupart des d&eacute;finitions intrins&egrave;ques sont associ&eacute;es &agrave; une valeur.
 
-**{{anchor name="PLATFORM|Platform Information"}}**
-	Defines that provide information on the system.
-**{{anchor name="VERSION|Version Information"}}**
-	Defines that provide information on the ##**fbc**## compiler version being used.
-**{{anchor name="CMDLINE|Command-line switches"}}**
-	Defines that provide information with the command-line switches used with ##**fbc**##.
-**{{anchor name="ENVIRONMENT|Environment Information"}}**
-	Defines that provide information about the operating system environment.
-**{{anchor name="CONTEXT|Context-specific Information"}}**
-	Defines that provide context information about the compilation process.
+**[[#PLATFORM">Information sur la plate-forme]]**
+	D&eacute;finitions qui fournissent des informations sur le syst&egrave;me.
+**[[#VERSION">Information sur la version]]**
+	D&eacute;finitions qui fournissent des informations sur la version du compilateur ##**fbc**## en usage.
+**[[#CMDLINE">Commutateurs de ligne de commande]]**
+	D&eacute;finitions qui fournissent des informations sur les commutateurs de ligne de commande utilis&eacute;s avec ##**fbc**##.
+**[[#ENVIRONMENT">Information sur l'environnement]]**
+	D&eacute;finitions qui fournissent des informations sur l'environnement du syst&egrave;me d'exploitation.
+**[[#CONTEXT">Information sur le contexte sp&eacute;cifique]]**
+	D&eacute;finitions qui fournissent des informations sur le contexte sp&eacute;cifique du processus de compilation.
 
-<<{{anchor name="PLATFORM"}}{{fbdoc item="section" value="Platform Information"}}
-	=={{fbdoc item="keyword" value="KeyPgDdfbwin32|__FB_WIN32__"}}==
-		Defined if compiling for Windows.
-	=={{fbdoc item="keyword" value="KeyPgDdfblinux|__FB_LINUX__"}}==
-		Defined if compiling for Linux.
-	=={{fbdoc item="keyword" value="KeyPgDdfbdos|__FB_DOS__"}}==
-		Defined if compiling for DOS.
-	=={{fbdoc item="keyword" value="KeyPgDdfbcygwin|__FB_CYGWIN__"}}==
-		Defined if compiling for Cygwin.
-	=={{fbdoc item="keyword" value="KeyPgDdfbfreebsd|__FB_FREEBSD__"}}==
-		Defined if compiling for ""FreeBSD"".
-	=={{fbdoc item="keyword" value="KeyPgDdfbnetbsd|__FB_NETBSD__"}}==
-		Defined if compiling for ""NetBSD"".
-	=={{fbdoc item="keyword" value="KeyPgDdfbopenbsd|__FB_OPENBSD__"}}==
-		Defined if compiling for ""OpenBSD"".
-	=={{fbdoc item="keyword" value="KeyPgDdfbdarwin|__FB_DARWIN__"}}==
-		Defined if compiling for Darwin.
-	=={{fbdoc item="keyword" value="KeyPgDdfbxbox|__FB_XBOX__"}}==
-		Defined if compiling for Xbox.
-	=={{fbdoc item="keyword" value="KeyPgDdFBBigEndian|__FB_BIGENDIAN__"}}==
-		Defined if compiling on a system using big-endian byte-order.
-	=={{fbdoc item="keyword" value="KeyPgDdfbpcos|__FB_PCOS__"}}==
-		Defined if compiling for a common PC OS (e.g. DOS, Windows, OS/2).
-	=={{fbdoc item="keyword" value="KeyPgDdfbunix|__FB_UNIX__"}}==
-		Defined if compiling for a Unix-like OS.
+<table class="fb_box"><a name="PLATFORM"></a>**<u>Information sur la plate-forme</u>**
+	**[[KeyPgDdfbwin32 __FB_WIN32__]]**
+		D&eacute;fini si compilation pour Windows.
+	**[[KeyPgDdfblinux __FB_LINUX__]]**
+		D&eacute;fini si compilation pour Linux.
+	**[[KeyPgDdfbdos __FB_DOS__]]**
+		D&eacute;fini si compilation pour DOS.
+	**[[KeyPgDdfbcygwin __FB_CYGWIN__]]**
+		D&eacute;fini si compilation pour Cygwin.
+	**[[KeyPgDdfbfreebsd __FB_FREEBSD__]]**
+		D&eacute;fini si compilation pour FreeBSD.
+	**[[KeyPgDdfbnetbsd __FB_NETBSD__]]**
+		D&eacute;fini si compilation pour NetBSD.
+	**[[KeyPgDdfbopenbsd __FB_OPENBSD__]]**
+		D&eacute;fini si compilation pour OpenBSD.
+	**[[KeyPgDdfbdarwin __FB_DARWIN__]]**
+		D&eacute;fini si compilation pour Darwin.
+	**[[KeyPgDdfbxbox __FB_XBOX__]]**
+		D&eacute;fini si compilation pour Xbox.
+	**[[KeyPgDdFBBigEndian __FB_BIGENDIAN__]]**
+		D&eacute;fini si compilation pour un syst&egrave;me utilisant un ordre des octets "big-endian".
+	**[[KeyPgDdfbpcos __Fb_Pcos__]]**
+		D&eacute;fini si compilation pour un OS PC commun (e.g. DOS, Windows, OS/2).
+	**[[KeyPgDdfbunix __Fb_Unix__]]**
+		D&eacute;fini si compilation pour un OS Unix.
 
-{{anchor name="VERSION"}}{{fbdoc item="section" value="Version Information"}}
-	=={{fbdoc item="keyword" value="KeyPgDdfbversion|__FB_VERSION__"}}==
-		Defined as a string literal of the compiler version.
-	=={{fbdoc item="keyword" value="KeyPgDdFBVerMajor|__FB_VER_MAJOR__"}}==
-		Defined as an integral literal of the compiler major version number.
-	=={{fbdoc item="keyword" value="KeyPgDdFBVerMinor|__FB_VER_MINOR__"}}==
-		Defined as an integral literal of the compiler minor version number.
-	=={{fbdoc item="keyword" value="KeyPgDdFBVerPatch|__FB_VER_PATCH__"}}==
-		Defined as an integral literal of the compiler patch number.
-	=={{fbdoc item="keyword" value="KeyPgDdFBMinVersion|__FB_MIN_VERSION__"}}==
-		Macro to check for a minimum compiler version.
-	=={{fbdoc item="keyword" value="KeyPgDdFBBuildDate|__FB_BUILD_DATE__"}}==
-		Defined as a string literal of the compiler build date.
-	=={{fbdoc item="keyword" value="KeyPgDdfbsignature|__FB_SIGNATURE__"}}== 
-		Defined as a string literal of the compiler signature.
+<a name="VERSION"></a>**<u>Information sur la version</u>**
+	**[[KeyPgDdfbversion __FB_VERSION__]]**
+		D&eacute;fini comme une cha&icirc;ne litt&eacute;rale de la version du compilateur.
+	**[[KeyPgDdFBVerMajor __FB_VER_MAJOR__]]**
+		D&eacute;fini comme le num&eacute;ro de version majeure du compilateur.
+	**[[KeyPgDdFBVerMinor __FB_VER_MINOR__]]**
+		D&eacute;fini comme le num&eacute;ro de version mineure du compilateur.
+	**[[KeyPgDdFBVerPatch __FB_VER_PATCH__]]**
+		D&eacute;fini comme le num&eacute;ro de r&eacute;vision de la version du compilateur.
+	**[[KeyPgDdFBMinVersion __FB_MIN_VERSION__]]**
+		Macro pour tester la version minimum du compilateur.
+	**[[KeyPgDdFBBuildDate __FB_BUILD_DATE__]]**
+		D&eacute;fini comme la date de compilation du compilateur.
+	**[[KeyPgDdfbsignature __FB_SIGNATURE__]]** 
+		D&eacute;fini comme la signature du compilateur.
 
-{{anchor name="CMDLINE"}}{{fbdoc item="section" value="Command-line switches"}}
-	=={{fbdoc item="keyword" value="KeyPgDdFBBackend|__FB_BACKEND__"}}==
-		Defined to either ##"gas"## or ##"gcc"## depending on [[CompilerOptgen -gen]].
-	=={{fbdoc item="keyword" value="KeyPgDdfbgcc|__FB_GCC__"}}==
-		True (##-1##) if -gen gcc is used, false (##0##) otherwise.
-	=={{fbdoc item="keyword" value="KeyPgDdFBMain|__FB_MAIN__"}}==
-		Defined if compiling a module with an entry point.
-	=={{fbdoc item="keyword" value="KeyPgDdfbdebug|__FB_DEBUG__"}}==
-		True (##-1##) if the ##"-g"## switch was used, false (##0##) otherwise.
-	=={{fbdoc item="keyword" value="KeyPgDdfberr|__FB_ERR__"}}==
-		Zero (##0##) if neither the ##"-e"##, ##"-ex"## or ##"-exx"## switches were used.
-	=={{fbdoc item="keyword" value="KeyPgDdfbfpmode|__FB_FPMODE__"}}==
-		Defined as ##"fast"## if compiling for fast SSE math, ##"precise"## otherwise.
-	=={{fbdoc item="keyword" value="KeyPgDdfbfpu|__FB_FPU__"}}==
-		Defined as ##"sse"## if compiling for SSE floating point unit, or ##"x87"## for normal x87 floating-point unit.
-	=={{fbdoc item="keyword" value="KeyPgDdfblang|__FB_LANG__"}}==
-		Defined to a string literal of the ##"-lang"## dialect used.
-	=={{fbdoc item="keyword" value="KeyPgDdfbmt|__FB_MT__"}}==
-		True (##-1##) if the ##"-mt"## switch was used, false (##0##) otherwise.
-	=={{fbdoc item="keyword" value="KeyPgDdfboutdll|__FB_OUT_DLL__"}}==
-		True (##-1##) in a module being compiled and linked into a shared library, false (##0##) otherwise.
-	=={{fbdoc item="keyword" value="KeyPgDdfboutexe|__FB_OUT_EXE__"}}==
-		True (##-1##) in a module being compiled and linked into an executable, false (##0##) otherwise.
-	=={{fbdoc item="keyword" value="KeyPgDdfboutlib|__FB_OUT_LIB__"}}==
-		True (##-1##) in a module being compiled and linked into a static library, zero (##0##) otherwise.
-	=={{fbdoc item="keyword" value="KeyPgDdfboutobj|__FB_OUT_OBJ__"}}==
-		True (##-1##) in a module being compiled only, zero (##0##) otherwise.
-	=={{fbdoc item="keyword" value="KeyPgDdfbsse|__FB_SSE__"}}==
-		Defined if compiling for SSE floating point unit.
-	=={{fbdoc item="keyword" value="KeyPgDdfbvectorize|__FB_VECTORIZE__"}}==
-		Defined as the level of automatic vectorization (##0## to ##2##)
-<<>>{{anchor name="ENVIRONMENT"}}{{fbdoc item="section" value="Environment Information"}}
-	=={{fbdoc item="keyword" value="KeyPgDdfbargc|__FB_ARGC__"}}==
-		Defined as an integer literal of the number of command-line arguments passed to the program.
-	=={{fbdoc item="keyword" value="KeyPgDdfbargv|__FB_ARGV__"}}==
-		Defined as a ##[[KeyPgZstring Zstring]] [[KeyPgPtr Ptr]] [[KeyPgPtr Ptr]]## to the command line arguments passed to the program.
-	=={{fbdoc item="keyword" value="KeyPgDddate|__DATE__"}}==
-		Defined as a string literal of the compilation date.
-	=={{fbdoc item="keyword" value="KeyPgDdtime|__TIME__"}}==
-		Defined as a string literal of the compilation time.
-	=={{fbdoc item="keyword" value="KeyPgDdpath|__PATH__"}}==
-		Defined as a string literal of the absolute path of the module.
+<a name="CMDLINE"></a>**<u>Commutateurs de ligne de commande</u>**
+	**[[KeyPgDdFBBackend __FB_Backend__]]**
+		D&eacute;fini si ##"gas"## ou ##"gcc"## d&eacute;pendent de [[CompilerOptgen -gen]].
+	**[[KeyPgDdfbgcc __Fb_Gcc__]]**
+		Vrai (True) (##-1##) si -gen gcc est utilis&eacute;, sinon faux (false) (##0##).
+	**[[KeyPgDdFBMain __FB_MAIN__]]**
+		D&eacute;fini si compilation d'un module avec un point d'entr&eacute;e.
+	**[[KeyPgDdfbdebug __FB_DEBUG__]]**
+		Vrai (##-1##) si l'option ##"-g"## est utilis&eacute;e, sinon faux (##0##).
+	**[[KeyPgDdfberr __FB_ERR__]]**
+		Z&eacute;ro (##0##) si aucun des commutateurs ##"-e"##, ##"-ex"## ou ##"-exx"## n'est utilis&eacute;.
+	**[[KeyPgDdfbfpmode __Fb_Fpmode__]]**
+		D&eacute;fini comme ##"fast"## si compilation pour les math&eacute;matiques SSE rapides, sinon ##"precise"##.
+	**[[KeyPgDdfbfpu __Fb_Fpu__]]**
+		D&eacute;fini comme ##"sse"## si compilation unit&eacute; SSE &agrave; virgule flottante, ou ##"x87"## pour une unit&eacute; x87 normale &agrave; virgule flottante.
+	**[[KeyPgDdfblang __FB_LANG__]]**
+		D&eacute;fini comme une cha&icirc;ne litt&eacute;rale du dialecte ##"-lang"## utilis&eacute;.
+	**[[KeyPgDdfbmt __FB_MT__]]**
+		Vrai (##-1##) si le commutateur ##"-mt"## est utilis&eacute;, sinon faux (##0##).
+	**[[KeyPgDdfboutdll __FB_OUT_DLL__]]**
+		Vrai (##-1##) dans un module qui est compil&eacute; et li&eacute; dans une biblioth&egrave;que partag&eacute;e, sinon faux (##0##).
+	**[[KeyPgDdfboutexe __FB_OUT_EXE__]]**
+		Vrai (##-1##) dans un module qui est compil&eacute; et li&eacute; dans un fichier ex&eacute;cutable, sinon faux (##0##).
+	**[[KeyPgDdfboutlib __FB_OUT_LIB__]]**
+		Vrai (##-1##) dans un module qui est compil&eacute; et li&eacute; dans une biblioth&egrave;que statique, sinon z&eacute;ro (##0##).
+	**[[KeyPgDdfboutobj __FB_OUT_OBJ__]]**
+		Vrai (##-1##) dans un module qui est seulement compil&eacute;, sinon z&eacute;ro (##0##).
+	**[[KeyPgDdfbsse __FB_SSE__]]**
+		D&eacute;fini si compilation pour unit&eacute; SSE &agrave; virgule flottante.
+	**[[KeyPgDdfbvectorize __Fb_Vectorize__]]**
+		D&eacute;fini comme niveau de vectorisation automatique (##0## &agrave; ##2##)
+;<a name="ENVIRONMENT"></a>**<u>Information sur l'environnement</u>**
+	**[[KeyPgDdfbargc __FB_ARGC__]]**
+		D&eacute;fini comme un litt&eacute;ral entier repr&eacute;sentant le nombre d'arguments pass&eacute;s au programme par la ligne de commande .
+	**[[KeyPgDdfbargv __FB_ARGV__]]**
+		D&eacute;fini comme un ##[[KeyPgZstring ZString]] [[KeyPgPtr Ptr]] [[KeyPgPtr Ptr]]## vers les arguments de la ligne de commande pass&eacute;s au programme.
+	**[[KeyPgDddate __DATE__]]**
+		D&eacute;fini comme une cha&icirc;ne litt&eacute;rale de la date de compilation.
+	**[[KeyPgDdtime __TIME__]]**
+		D&eacute;fini comme une cha&icirc;ne litt&eacute;rale de l'heure de la compilation.
+	**[[KeyPgDdpath __PATH__]]**
+		D&eacute;fini comme une cha&icirc;ne litt&eacute;rale du chemin absolu du module.
+	<a name="CONTEXT"></a>**<u>Information sur le contexte sp&eacute;cifique</u>**
+		**[[KeyPgDdfile __FILE__]] et [[KeyPgDdfilenq __FILE_NQ__]]**
 
-{{anchor name="CONTEXT"}}{{fbdoc item="section" value="Context-specific Information"}}
-	=={{fbdoc item="keyword" value="KeyPgDdfile|__FILE__"}} and {{fbdoc item="keyword" value="KeyPgDdfilenq|__FILE_NQ__"}}==
-		Defined as the name of the module.
-	=={{fbdoc item="keyword" value="KeyPgDdfunction|__FUNCTION__"}} and {{fbdoc item="keyword" value="KeyPgDdfunctionnq|__FUNCTION_NQ__"}}==
-		Defined as the name of the procedure where it's used.
-	=={{fbdoc item="keyword" value="KeyPgDdline|__LINE__"}}==
-		Defined as an integer literal of the line of the module where it's used.
-	=={{fbdoc item="keyword" value="KeyPgDdfboptionbyval|__FB_OPTION_BYVAL__"}}==
-		True (##-1##) if parameters are declared by value by default, zero (##0##) otherwise.
-	=={{fbdoc item="keyword" value="KeyPgDdfboptiondynamic|__FB_OPTION_DYNAMIC__"}}==
-		True (##-1##) if all arrays are variable-length, zero (##0##) otherwise.
-	=={{fbdoc item="keyword" value="KeyPgDdfboptionescape|__FB_OPTION_ESCAPE__"}}==
-		True (##-1##) if string literals are processed for escape sequences, zero (##0##) otherwise.
-	=={{fbdoc item="keyword" value="KeyPgDdfboptiongosub|__FB_OPTION_GOSUB__"}}==
-		True (##-1##) if gosub support is enabled, zero (##0##) otherwise.
-	=={{fbdoc item="keyword" value="KeyPgDdfboptionexplicit|__FB_OPTION_EXPLICIT__"}}==
-		True (##-1##) if variables and objects need to be explicitly declared, zero (##0##) otherwise.
-	=={{fbdoc item="keyword" value="KeyPgDdfboptionprivate|__FB_OPTION_PRIVATE__"}}==
+D&eacute;fini comme le nom du module.
+	**[[KeyPgDdfunction __FUNCTION__]] et [[KeyPgDdfunctionnq __FUNCTION_NQ__]]**
+		D&eacute;fini comme le nom de la proc&eacute;dure o&ugrave; il est utilis&eacute;.
+	**[[KeyPgDdline __LINE__]]**
+		D&eacute;fini comme un litt&eacute;ral entier de la ligne du module o&ugrave; il est utilis&eacute;.
+	**[[KeyPgDdfboptionbyval __FB_OPTION_BYVAL__]]**
+		Vrai (##-1##) si les param&egrave;tres sont d&eacute;clar&eacute;s par la valeur, par d&eacute;faut, sinon z&eacute;ro (##0##).
+	**[[KeyPgDdfboptiondynamic __FB_OPTION_DYNAMIC__]]**
+		Vrai (##-1##) si tous les tableaux sont de longueur variable, sinon z&eacute;ro (##0##).
+	**[[KeyPgDdfboptionescape __FB_OPTION_ESCAPE__]]**
+		Vrai (##-1##) si les cha&icirc;nes litt&eacute;rales sont trait&eacute;es avec des s&eacute;quences d'&eacute;chappement, sinon z&eacute;ro (##0##).
+	**[[KeyPgDdfboptiongosub __Fb_Option_Gosub__]]**
+		Vrai (##-1##) si le support de gosub est activ&eacute;, sinon z&eacute;ro (##0##).
+	**[[KeyPgDdfboptionexplicit __FB_OPTION_EXPLICIT__]]**
+		Vrai (##-1##) si les variables et les objets doivent &ecirc;tre explicitement d&eacute;clar&eacute;s, sinon z&eacute;ro (##0##).
+	**[[KeyPgDdfboptionprivate __FB_OPTION_PRIVATE__]]**
+		Vrai (##-1##) si toutes les proc&eacute;dures sont priv&eacute;es (private) par d&eacute;faut, sinon z&eacute;ro (##0##).
+	;</table><div style="clear:both"> 
 		True (##-1##) if all procedures are private by default, zero (##0##) otherwise.
 >>::c::
 

@@ -1,56 +1,56 @@
 {{fbdoc item="title" value="BLOAD"}}----
-Loads arbitrary data from a file created with ##[[KeyPgBsave Bsave]]##, or a compatible BMP image file.
+Charge des donn&eacute;es arbitraires &agrave; partir d&apos;un fichier cr&eacute;&eacute; avec ##[[KeyPgBsave BSave]]##, ou un fichier image BMP compatible.
 
 {{fbdoc item="syntax"}}##
-	[[KeyPgDeclare declare]] [[KeyPgFunction function]] **Bload** ( [[KeyPgByref byref]] //filename// [[KeyPgAs as]] [[KeyPgConstQualifier const]] [[KeyPgString string]], [[KeyPgByval byval]] //dest// [[KeyPgAs as]] [[KeyPgAny any]] [[KeyPgPtr ptr]] = 0, [[KeyPgByval byval]] //pal// [[KeyPgAs as]] [[KeyPgAny any]] [[KeyPgPtr ptr]] = 0 ) [[KeyPgAs as]] [[KeyPgInteger integer]]
+	[[KeyPgDeclare Declare]] [[KeyPgFunction Function]] **BLoad** ( [[KeyPgByref ByRef]] //filename// [[KeyPgAs As]] [[KeyPgString String]], [[KeyPgByval ByVal]] //dest// [[KeyPgAs As]] [[KeyPgAny Any]] [[KeyPgPtr Ptr]] = 0, [[KeyPgByval ByVal]] //pal// [[KeyPgAs As]] [[KeyPgAny Any]] [[KeyPgPtr Ptr]] = 0 ) [[KeyPgAs As]] [[KeyPgInteger Integer]]
 ##
 {{fbdoc item="usage"}}##
 	//result// = **Bload**( //filename// [, [ //dest// ] [, //pal// ] ] )
 ##
 {{fbdoc item="param"}}
 	##//filename//##
-		the name of the file to load the image from; can include a file path
+		le nom du fichier de l&apos;image &agrave; charger; peut inclure un chemin de fichier
 	##//dest//##
-		the memory location to load the image to, or null (##0##) to copy the image to the current graphics screen work page
+		l&apos;emplacement m&eacute;moire o&ugrave; charger l&apos;image, ou nul (##0##) pour copier l&apos;image sur la page de travail de l&apos;&eacute;cran graphique
 	##//pal//##
-		the memory location to load the palette to, or null (##0##) to change the current graphics screen palette, if it uses one
+		l&apos;emplacement m&eacute;moire o&ugrave; charger la palette, ou nul (##0##) pour changer la palette courante de l&apos;&eacute;cran graphique, s&apos;il y en a une
 
-{{fbdoc item="ret"}}
-	Returns zero (##0##) if successful, or a non-zero error code to indicate a failure. //[[ProPgErrorHandling (throws a runtime error)]]//
+{{fbdoc item="section" value="Valeur renvoy&eacute;e
+	Retourne z&eacute;ro (##0##) si r&eacute;ussite, ou un code d&apos;erreur diff&eacute;rent de z&eacute;ro pour indiquer un &eacute;chec. //[[ProPgErrorHandling (&eacute;mission d'une erreur de fonctionnement)]]//
 
 {{fbdoc item="desc"}}
-	##**Bload**## can be used to load image data or any other data from a file created with ##[[KeyPgBsave Bsave]]##, and store that data in an array or paste it to the screen. If ##//dest//## is absent or null (##0##), the image data is pasted to the current graphics screen work page.  Otherwise it is loaded as image data to the address given by ##//dest//##.
+	##**BLoad**## peut &ecirc;tre utilis&eacute; pour charger une image ou tout autre fichier de donne&eacute;s cr&eacute;&eacute; avec ##[[KeyPgBsave BSave]]##, et stocker ces donn&eacute;es dans un "array" ou les copier &agrave; l&apos;&eacute;cran. Si ##//dest//## n&apos;est pas nul (##0##), l&apos;image est copi&eacute;e sur la page active de l&apos;&eacute;cran graphique. Autrement, elle est copi&eacute;e &agrave; l&apos;adresse m&eacute;moire indiqu&eacute;e par ##//dest//##.
 
-	##**Bload**## can load 3 different types of files:
-		- Old QB-like data files, saved with ##BSAVE## from QB code, containing "raw" data preceded by a 7-byte header, beginning with ##&HFD##, up to 64 ""KiB"" in size
-		- New FB-like data files, saved with ##[[KeyPgBsave Bsave]]## from FB code, containing "raw" data preceded by a 5-byte header, beginning with ##&HFE##. There is no 64 ""KiB"" limit with this format
-		- BMP image files, supports a subset of valid ("Windows") .BMP files, beginning with ##"BM"##, saved from FB code with ##[[KeyPgBsave Bsave]]##, or created / saved in a compatible format using a graphics editor / converter.
-	QB-like data files and BMP files are converted to an FB-compatible image format when opened.
+	##**BLoad**## peut charger 3 types diff&eacute;rents de fichiers :
+		- Anciens fichiers QB de donn&eacute;es, sauv&eacute;s avec ##[[KeyPgBsave BSave]]## &agrave; partir du code QB, contenant des donn&eacute;es "raw" pr&eacute;c&eacute;d&eacute;es d&apos;un ent&ecirc;te 7-byte, commen&ccedil;ant par ##&HFD##, jusqu&apos;&agrave; 64 KiB de taille
+		- Nouveaux fichiers FB de donn&eacute;es, sauv&eacute;s avec ##[[KeyPgBsave BSave]]## &agrave; partir du code FB, contenant des donn&eacute;es "raw" pr&eacute;c&eacute;d&eacute;es d&apos;un ent&ecirc;te 5-byte, commen&ccedil;ant par ##&HFE##, sans limite de 64 KiB
+		- Fichiers image BMP, supportant un sous-ensemble de validit&eacute; ("Windows") .Fichiers BMP, commen&ccedil;ant par "BM", sauv&eacute;s avec ##[[KeyPgBsave BSave]]## &agrave; partir du code FB, ou cr&eacute;&eacute;s / sauv&eacute;s dans un format compatible en utilisant un &eacute;diteur / convertisseur graphique.  
+	Les fichiers QB-like de donn&eacute;es et les fichiers BMP sont convertis en un format image FB-compatible quand ils sont ouverts.
 
-	Image files with 8-bit per pixel resolution or lower contain a palette that describes the color values used in the images. If ##//pal//## is not null (##0##), the palette is copied to memory starting at the address specified. Otherwise, if the current graphics screen uses a palette then its palette is changed to match that of the image file.
+	Fichiers image avec une r&eacute;solution de 8-bit maxi par pixel contenant une palette d&eacute;crivant les valeurs de couleurs utilis&eacute;es dans l&apos;image. Si ##//pal//## est non nul (##0##), la palette est copi&eacute;e en m&eacute;moire &agrave; partir de l&apos;adresse sp&eacute;cifi&eacute;e. Par ailleurs, si l&apos;&eacute;cran graphique utilise une palette celle-ci est modifi&eacute;e pour correspondre &agrave; celle de l&apos;image.
 
-	When using one of the 2 "non-BMP" file formats to save images, the image files must have been created with ##[[KeyPgBsave Bsave]]## in the same graphics screen mode as it is being loaded into. When using the BMP file format, this restriction doesn't apply. 
+	Lors de l&apos;utilisation d&apos;un des 2 formats "non-BMP" de fichiers pour sauver une image, le fichier image doit avoir &eacute;t&eacute; cr&eacute;&eacute; avec ##[[KeyPgBsave BSave]]## dans le m&ecirc;me mode graphique &eacute;cran utilis&eacute; pour son chargement. Cette restriction ne s&apos;applique pas lors de l&apos;utilisation d&apos;un fichier de format BMP. 
 
-	When loading a BMP file using ##**Bload**##,  the images must be true-color (15-, 16-, 24- or 32-bits per pixel) or palettized/indexed (8-bit or lower). The image data will be converted to the proper pixel format for the current color depth, except that true-color can't be reduced to a palettized image. ##**Bload**## doesn't support BMP files using RLE compression or other image file types (PNG, JPG, GIF, ...).  ##**Bload**## will load alpha channel information, if available, from 32-bit BMP files with ##BITMAPV4HEADER## or ##BITMAPV5HEADER## file headers.
+	Lors du chargement d&apos;un fichier BMP en utilisant ##**BLoad**##,  l&apos;image doit &ecirc;tre true-color (15-, 16-, 24- or 32-bits par pixel) ou palettis&eacute;e/index&eacute;e (8-bit ou moins). Les donn&eacute;es de l&apos;image seront converties dans le format pixel appropri&eacute; pour la profondeur de couleur courante, sauf en cas de true-color pas de r&eacute;duction &agrave; une image palettis&eacute;e. ##**BLoad**## ne supporte pas les fichiers BMP avec compression RLE ou les autres types de fichiers image (PNG, JPG, GIF, ...).  ##**BLoad**## chargera les information du canal alpha, si elles existent, &agrave; partir de fichiers BMP 32-bit avec des ent&ecirc;tes de fichier ##BITMAPV4HEADER## ou ##BITMAPV5HEADER##.
 
-**Runtime errors:**
-	##**Bload**## throws one of the following [[ProPgErrorHandling runtime errors]]:
+**Erreurs de fonctionnement:**
+	##**BLoad**## produit une des [[ProPgErrorHandling erreurs de fonctionnement]] suivantes :
 
 	//(##1##) Illegal function call//
-		- ##//dest//## was not specified or was null (##0##), and no graphics screen was set.
-		- The Bitmap uses an unsupported BMP file compression type (##BI_RLE4##, ##BI_RLE8##)
-		- The Bitmap is true-color (16, 24, or 32 bits per pixel) and the current graphics screen uses a palette (8 bits per pixel or lower).
+		- ##//dest//## n&apos;est pas pr&eacute;cis&eacute; ou null (##0##), aucun &eacute;cran graphique n&apos;existe.
+		- Le Bitmap utilise un type de compression de fichier BMP non support&eacute; (##BI_RLE4##, ##BI_RLE8##)
+		- Le Bitmap est true-color (16, 24, or 32 bits per pixel) et l&apos;&eacute;cran graphique utilise une palette (8 bits par pixel ou moins).
 	//(##2##) File not found//
-		- The file ##//filename//## could not be found.
+		- Le fichier ##//filename//## ne peut &ecirc;tre trouv&eacute;.
 	//(##3##) File I/O error//
-		- The file doesn't have any of the supported types 
-		- A general read error occurred.
+		- Le fichier n&apos;est pas d&apos;un type support&eacute; 
+		- Une erreur g&eacute;n&eacute;rale de lecture est survenue.
 
-~&//Note: When you use ##**BLoad**## to load a BMP file into an image buffer, the original dimensions of the image are not changed.  If you want the image buffer to have the same dimensions as the BMP file, you have to find out the dimensions beforehand, and create an image of the right size yourself.  See {{anchor name="bmp_load|the example below"}} for an example of how to do this.//
+//Note: Quand vous utilisez ##**BLoad**## pour charger un fichier BMP dans un tampon image, les dimensions originales de cette image ne sont pas chang&eacute;es.  Si vous voulez que le tampon image ait les m&ecirc;mes dimensions que le fichier BMP, vous devez d&eacute;couvrir celles-ci avant, et cr&eacute;er vous-m&ecirc;me une image de la bonne taille.  Voir ci-dessous un exemple expliquant comment proc&eacute;der.//
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/gfx/bload.bas"}}%%(freebasic)
-'Load a graphic to current work page
+&apos;Charge un graphique dans page travail courante
 SCREEN 18, 32
 cls
 bload "picture.bmp"
@@ -58,8 +58,8 @@ sleep
 %%
 
 {{fbdoc item="filename" value="examples/manual/gfx/bload2.bas"}}%%(freebasic)
-'Load a 48x48 bitmap into an image
-screenres 320, 200, 32
+&apos;Charge un bitmap 48x48 dans un array
+Screen 18, 32
 dim myImage as any ptr = imagecreate( 48, 48 )
 bload "picture.bmp", myImage
 put (10,10), myImage
@@ -68,69 +68,69 @@ sleep
 %%
 
 {{anchor name="bmp_load"}}
-{{fbdoc item="filename" value="examples/manual/gfx/bload3.bas"}}%%(freebasic)
-'' A function that creates an image buffer with the same 
-'' dimensions as a BMP image, and loads a file into it.
+'' Une fonction qui cr&eacute;e un tampon image avec les m&ecirc;mes 
+'' dimensions que l' image BMP, et charge un fichier dedans.
+Const NULL As Any Ptr = 0
 
-const NULL as any ptr = 0
+Function bmp_load( ByRef filename As String ) As Any Ptr
 
-function bmp_load( byref filename as const string ) as any ptr
+Dim As Integer filenum, bmpwidth, bmpheight
 
-	dim as integer filenum, bmpwidth, bmpheight
-	dim as any ptr img
+	Dim As Any Ptr img
+	'' ouvre fichier BMP
 
-	'' open BMP file
-	filenum = freefile()
-	if open( filename for binary access read as #filenum ) <> 0 then return NULL
+	filenum = FreeFile()
+	If Open( filename For Binary Access Read As #filenum ) <> 0 Then Return NULL
+	'' retrouve dimensions BMP
 
-		'' retrieve BMP dimensions
-		get #filenum, 19, bmpwidth
-		get #filenum, 23, bmpheight
+		Get #filenum, 19, bmpwidth
+		Get #filenum, 23, bmpheight
+		Close #filenum
 
-	close #filenum
+	'' cr&eacute;e image avec dimensions BMP
 
-	'' create image with BMP dimensions
-	img = imagecreate( bmpwidth, abs(bmpheight) )
+	img = ImageCreate( bmpwidth, Abs(bmpheight) )
+	If img = NULL Then Return NULL
 
-	if img = NULL then return NULL
+	'' charge fichier BMP dans tampon image
 
-	'' load BMP file into image buffer
-	if bload( filename, img ) <> 0 then imagedestroy( img ): return NULL
+	If BLoad( filename, img ) <> 0 Then ImageDestroy( img ): Return NULL
+	Return img
 
-	return img
+	End Function
 
-end function
+Dim As Any Ptr img
 
 
 
-dim as any ptr img
-
-screenres 640, 480, 32
+ScreenRes 640, 480, 32
 
 img = bmp_load( "picture.bmp" )
 
-if img = NULL then
-	print "bmp_load failed"
+If img = NULL Then
 
-else
+Print "bmp_load failed"
+	Else
 
-	put (10, 10), img
+Put (10, 10), img
 
-	imagedestroy( img )
+	ImageDestroy( img )
 
-end if
+	End If
 
-sleep%%
+Sleep%%
+
 {{fbdoc item="diff"}}
-	- Support for loading BMP files is new to ""FreeBASIC"".
-	- Support for retrieving the palette from BMP files is new to ""FreeBASIC"".
-	- ""FreeBASIC"" uses a different file format from QBASIC internally, which doesn't have the 64 ""KiB"" limit, and is unsupported by QBASIC.
+- Le support du chargement des fichiers BMP est nouveau pour FreeBASIC.
+	- La r&eacute;cup&eacute;ration de la palette &agrave; partir des fichiers BMP est nouveau pour FreeBASIC.
+	- Pour les fichiers non-BMP, FB utilise un format de fichier diff&eacute;rent, sans limite 64 KiB, et non-support&eacute; par QB.
+	{{fbdoc item="see"}}
 
-{{fbdoc item="see"}}
-	- ##[[KeyPgBsave Bsave]]##
+- ##[[KeyPgBsave BSave]]##
 	- ##[[KeyPgPalette Palette]]##
 	- ##[[KeyPgImagecreate ImageCreate]]##
 	- ##[[KeyPgImageDestroy ImageDestroy]]##
+	- [[GfxInternalFormats Formats graphiques internes]]
 	- [[GfxInternalFormats Internal Graphics Formats]]
 
 {{fbdoc item="back" value="CatPgGfx2D|2D Drawing Functions"}}

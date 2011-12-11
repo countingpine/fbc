@@ -1,5 +1,5 @@
 {{fbdoc item="title" value="IMAGEINFO"}}----
-Retrieves information about an image
+R&eacute;cup&egrave;re les informations sur une image
 
 {{fbdoc item="syntax"}}##
 	[[KeyPgDeclare declare]] [[KeyPgFunction function]] **Imageinfo** ( [[KeyPgByval byval]] //image// [[KeyPgAs as]] [[KeyPgAny any]] [[KeyPgPtr ptr]], [[KeyPgByref byref]] //width// [[KeyPgAs as]] [[KeyPgInteger integer]] = 0, [[KeyPgByref byref]] //height// [[KeyPgAs as]] [[KeyPgInteger integer]] = 0, [[KeyPgByref byref]] //bypp// [[KeyPgAs as]] [[KeyPgInteger integer]] = 0, [[KeyPgByref byref]] //pitch// [[KeyPgAs as]] [[KeyPgInteger integer]] = 0, [[KeyPgByref byref]] //pixdata// [[KeyPgAs as]] [[KeyPgAny any]] [[KeyPgPtr ptr]] = 0, [[KeyPgByref byref]] //size// [[KeyPgAs as]] [[KeyPgInteger integer]] = 0 ) [[KeyPgAs as]] [[KeyPgInteger integer]]
@@ -9,29 +9,94 @@ Retrieves information about an image
 ##
 {{fbdoc item="param"}}
 	##//image//##
-		The address of the image.
+		L'addresse de l'image.
 	##//width//##
-		Stores the width of the image, in pixels.
+		Stocke la largeur de l'image, en pixels.
 	##//height//##
-		Stores the height of the image, in pixels.
+		Stocke la hauteur de l'image, en pixels.
 	##//bypp//##
-		Stores the bytes per pixel of the image - i.e. the size of a single pixel, in bytes.
+		Stocke le nombre d'octets par pixel de l'image - c.a.d. la taille d'un seul pixel, en octets.
 	##//pitch//##
-		Stores the pitch of the image - i.e. the size of each scanline (row), in bytes.  Note that this may be more than just ##//width// * //bypp//##, because the scanlines may be padded to allow them to be aligned better in memory.
-	##//pixdata//##
-		Stores the address of the start of the first scanline of the image.
-	##//size//##
-		Stores the size of the image in memory, in bytes.
+		Stocke le "pitch" de l'image - c.a.d. la taille de chaque ligne (row), en octets.
+	Notez que ceci est meilleur que simplement ##//width (largeur)// * //bypp//##, car les lignes peuvent &ecirc;tre modifi&eacute;es pour un meilleur alignement en m&eacute;moire.
+		##//pixdata//##
+	Stocke l'adresse de d&eacute;but de la premi&egrave;re ligne de l'image.
+		##//size//##
 
-{{fbdoc item="ret"}}
-	If ##//image//## doesn't point to a valid image, one (##1##) is returned. Otherwise, ##//width//##, ##//height//##, ##//bypp//##, ##//pitch//##, ##//pixdata//## and ##//size//## are assigned appropriate values, and zero (##0##) is returned.
+Stocke la taille de la m&eacute;moire image, en octets.
+	{{fbdoc item="section" value="Valeur Retourn&eacute;e
 
-{{fbdoc item="desc"}}
-	##**""ImageInfo""**## provides various information about an image, such as its dimensions and color depth, but also provides you with the information you need to directly access all the pixel data in the pixel buffer.
+Si ##//image//## ne pointe pas sur une image valide, un (##1##) est retourn&eacute;. Sinon, ##//width//##, ##//height//##, ##//bypp//##, ##//pitch//##, ##//pixdata//## et ##//size//## re&ccedil;oivent les valeurs appropri&eacute;es, et z&eacute;ro (##0##) est retourn&eacute;.
+	{{fbdoc item="desc"}}
 
-	It can also provide the size of the image in memory, which is useful for allocating memory to copy the existing image, or to write the image to a file.
+	##**ImageInfo**## procure des informations vari&eacute;es sur une image, comme ses dimensions et sa profondeur de couleur, mais aussi les informations n&eacute;cessaires pour acc&eacute;der directement &agrave; toutes les donn&eacute;es pixel du tampon.
 
+##**ImageInfo**## procure aussi la taille de l'image en m&eacute;moire, ce qui est utile pour l'allocation de m&eacute;moire pour copier l'image existante, ou pour &eacute;crire l'image dans un fichier.
 {{fbdoc item="ex"}}
+'' pixelptr(): use imageinfo() to find the pointer to a pixel in the image
+'' Cree ecran graphique 32-bit et image.
+ScreenRes 320, 200, 32
+
+	Dim image As Any Ptr = ImageCreate( 64, 64 )
+	Dim pitch As Integer
+	Dim pixels As Any Ptr
+	
+	'' Obtient assez d'informations pour se deplacer dans donnees pixel.
+	
+	If 0 <> ImageInfo( image, ,,, pitch, pixels ) Then
+	    Print "unable to retrieve image information."
+	    Sleep
+	    End
+	End If
+	    '' Dessine un motif sur l'image en manipulant directement pixel en memoire.
+	For y As Integer = 0 To 63
+	
+Dim row As UInteger Ptr = pixels + y * pitch
+
+For x As Integer = 0 To 63
+
+row[x] = RGB(x * 4, y * 4, (x Xor y) * 4)
+Next x
+
+Next y
+
+'' Dessine l'image sur l'screen.
+
+Put (10, 10), image
+
+ImageDestroy( image )
+
+	Sleep
+	%%
+
+	    <div class="fb_img"><img src="images/imageinfo.png" />
+
+	        {{fbdoc item="lang"}}
+	        - Non accessible en dialecte //[[CompilerOptlang -lang qb]]// saut si r&eacute;f&eacute;renc&eacute; avec l'alias ##**__Imageinfo**##.
+	        {{fbdoc item="diff"}}
+
+	        - Nouveau pour FreeBASIC
+	        {{fbdoc item="see"}}
+
+	    - ##[[KeyPgImagecreate ImageCreate]]##
+
+	- ##[[KeyPgImageDestroy ImageDestroy]]##
+
+	- ##[[KeyPgImageConvertRow ImageConvertRow]]##
+	- ##[[KeyPgGetgraphics Get (Graphique)]]##
+	- ##[[KeyPgPutgraphics Put (Graphique)]]##
+
+	- [[GfxInternalFormats Formats graphiques internes]]
+	imagedestroy ip
+
+else
+	print "Error creating image!"
+end if
+
+sleep
+%%
+{{image class="center" title="Output image for pixelptr() example" url="/images/pixelptr.png"}}
+
 {{fbdoc item="filename" value="examples/manual/gfx/imageinfo.bas"}}%%(freebasic)
 '' Create 32-bit graphics screen and image.
 screenres 320, 200, 32
@@ -64,7 +129,6 @@ imagedestroy( image )
 sleep
 %%
 {{image class="center" title="Output image for ImageInfo example" url="/images/imageinfo.png"}}
-
 
 {{fbdoc item="lang"}}
 	- Not available in the //[[CompilerOptlang -lang qb]]// dialect unless referenced with the alias ##**""__Imageinfo""**##.

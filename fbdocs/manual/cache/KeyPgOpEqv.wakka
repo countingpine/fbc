@@ -1,5 +1,5 @@
 {{fbdoc item="title" value="Operator EQV (Equivalence)"}}----
-Returns the bitwise-and (equivalence) of two numeric values
+Retourne la manipulation de bits &eacute;quivalence de deux valeurs num&eacute;riques
 
 {{fbdoc item="syntax"}}##
 	[[KeyPgDeclare declare]] [[KeyPgOperator operator]] **Eqv** ( [[KeyPgByref byref]] //lhs// [[KeyPgAs as]] //T1//, [[KeyPgByref byref]] //rhs// [[KeyPgAs as]] //T2// ) [[KeyPgAs as]] //Ret//
@@ -9,31 +9,31 @@ Returns the bitwise-and (equivalence) of two numeric values
 ##
 {{fbdoc item="param"}}
 	##//lhs//##
-		The left-hand side expression.
+		C&ocirc;t&eacute; gauche de l'expression.
 	##//T1//##
-		Any numeric type.
+		Tout type num&eacute;rique.
 	##//rhs//##
-		The right-hand side expression.
+		C&ocirc;t&eacute; droit de l'expression.
 	##//T2//##
-		Any numeric type.
+		Tout type num&eacute;rique.
 	##//Ret//##
-		A numeric type (varies with ##//T1//## and ##//T2//##).
+		Un type num&eacute;rique. (varie avec ##//T1//## et ##//T2//##).
 
-{{fbdoc item="ret"}}
-	Returns the bitwise-equivalence of the two operands.
+{{fbdoc item="section" value="Valeur retourn&eacute;e
+	Retourne la manipulation de bits &eacute;quivalence de deux op&eacute;randes.
 
 {{fbdoc item="desc"}}
-	This operator returns the bitwise-equivalence of its operands, a logical operation that results in a value with bits set depending on the bits of the operands.
+	Cet op&eacute;rateur retourne la manipulation de bits &eacute;quivalence de ses op&eacute;randes, une op&eacute;ration logique dont le r&eacute;sultat est une valeur dont les bits &agrave; 1 d&eacute;pendent des bits des deux op&eacute;randes.
 
-	The truth table below demonstrates all combinations of a boolean-equivalence operation:
+	La table de v&eacute;rit&eacute; ci-dessous montre toutes les combinaisons de l'op&eacute;ration d'&eacute;quivalence bool&eacute;enne:
 
-	{{table columns="3" cellpadding="2" cells="Lhs Bit;Rhs Bit;Result;0;0;1;1;0;0;0;1;0;1;1;1"}}
+	{{table columns="" cellpadding="2" cells="<table>Bit c&ocirct&eacute gauche;Bit c&ocirct&eacute droit;R&eacutesultat;0;0;1;1;0;0;0;1;0;1;1;1;</table>
 
-	No short-circuiting is performed - both expressions are always evaluated.
+	Pas de possibilit&eacute; de court-circuit - les deux expressions sont toujours &eacute;valu&eacute;es.
 	
-	The return type depends on the types of values passed. ##[[KeyPgByte Byte]]##, ##[[KeyPgUbyte Ubyte]]## and floating-point type values are first converted to ##[[KeyPgInteger Integer]]##. If the left and right-hand side types differ only in signedness, then the return type is the same as the left-hand side type (##//T1//##), otherwise, the larger of the two types is returned.
+	Le type de la valeur retourn&eacute;e d&eacute;pend des types des deux valeurs pass&eacute;es. Les valeurs de type ##[[KeyPgByte Byte]]##, ##[[KeyPgUbyte UByte]]## et &agrave; virgule flottante sont en premier converties en ##[[KeyPgInteger Integer]]##. Si les types des c&ocirc;t&eacute;s gauche et droit diff&egrave;rent seulement par le manque de signe, le type de retour sera celui du c&ocirc;t&eacute; gauche (##//T1//##), autrement, le plus grand des deux est retourn&eacute;.
 
-	This operator can be overloaded for user-defined types.
+	Cet op&eacute;rateur peut &ecirc;tre surcharg&eacute; pour les types d&eacute;finis par l'utilisateur.
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/operator/eqv-bitwise.bas"}}%%(freebasic)
@@ -43,12 +43,12 @@ c = a eqv b '' c = &b10011001
 %%
 
 {{fbdoc item="lang"}}
-	- In the //[[CompilerOptlang -lang qb]]// dialect, this operator cannot be overloaded.
+	- Dans le dialecte //[[CompilerOptlang -lang qb]]//, cet op&eacute;rateur ne peut pas &ecirc;tre surcharg&eacute;.
 
 {{fbdoc item="diff"}}
-	- None
+	- Aucune
 
 {{fbdoc item="see"}}
-	- [[TblTruth Operator Truth Tables]]
+	- [[TblTruth Tables de v&eacute;rit&eacute; des op&eacute;rateurs]]
 
 {{fbdoc item="back" value="CatPgOpLogical|Logical Operators"}}{{fbdoc item="back" value="CatPgOperators|Operators"}}

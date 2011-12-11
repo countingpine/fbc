@@ -1,5 +1,5 @@
 {{fbdoc item="title" value="VALINT"}}----
-Converts a string to an integer number
+Conversion d'une cha&icirc;ne en nombre entier
 
 {{fbdoc item="syntax"}}##
 	[[KeyPgDeclare declare]] [[KeyPgFunction function]] **Valint** [[KeyPgOverload overload]] ( [[KeyPgByref byref]] //strnum// [[KeyPgAs as]] [[KeyPgConstQualifier const]] [[KeyPgString string]] ) [[KeyPgAs as]] [[KeyPgInteger integer]]
@@ -10,19 +10,19 @@ Converts a string to an integer number
 ##
 {{fbdoc item="param"}}
 	##//strnum//##
-		the string to convert
+		la cha&icirc;ne &agrave; convertir
 
-{{fbdoc item="ret"}}
-	Returns an ##[[KeyPgInteger Integer]]## of the converted string
+{{fbdoc item="section" value="Valeur retourn&eacute;e
+	Retourne un ##[[KeyPgInteger Integer (entier)]]## de la cha&icirc;ne convertie
 
-	If the first character of the string is invalid, ##**Valint**## will return ##0##.
+	Si le premier caract&egrave;re de la cha&icirc;ne n'est pas valide, ##**ValInt**## retournera ##0##.
 
 {{fbdoc item="desc"}}
-	For example, ##**Valint**("10")## will return ##10##, and ##**Valint**("10.60")## will return ##10## as well. The function parses the string from the left, skipping any white space, and returns the longest number it can read, stopping at the first non-suitable character it finds.  Any non-numeric characters, including decimal points and exponent specifiers, are considered non-suitable, for example, ##**Valint**("23.1E+6")## will just return ##23##.
+	Par exemple, ##**ValInt**("10")## retournera ##10##, et ##**ValInt**("10.60")## retournera ##10##. La fonction analyse la cha&icirc;ne &agrave; partir de la gauche, en sautant tout espace blanc, et retourne le plus long nombre qu'elle peut lire, s'arr&ecirc;tant au premier caract&egrave;re non-appropri&eacute;, qu'elle trouve.  Tout caract&egrave;re non-num&eacute;rique, inclus les points d&eacute;cimaux et les sp&eacute;cificateurs d'exposant, sont consid&eacute;r&eacute;s comme non-appropri&eacute;s. Par exemple, ##**ValInt**("23.1E+6")## retournera seulement ##23##.
 
-	##**Valint**## can be used to convert integer numbers in [[KeyPgBin binary]] / [[KeyPgOct octal]] / [[KeyPgHex hexadecimal]] format, if they have the relevant identifier (##"&B"## / ##"&O"## / ##"&H"##) prefixed, for example: ##**Valint**("&HFF")## returns ##255##.
+	##**ValInt**## peut convertir des nombres entiers en format [[KeyPgBin Binaire]] / [[KeyPgOct Octal]] / [[KeyPgHex Hexad&eacute;cimal]], s'il y a devant l'identificateur pertinent (##"&B"## / ##"&O"## / ##"&H"##), par exemple: ##**ValInt**("&HFF")## retourne ##255##.
 
-	If you want to convert a number into string format, use the ##[[KeyPgStr Str]]## function.
+	Si vous voulez convertir un nombre en une cha&icirc;ne, utilisez la fonction ##[[KeyPgStr Str]]##.
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/strings/valint.bas"}}%%(freebasic)
@@ -38,10 +38,10 @@ print a, b
 
 
 {{fbdoc item="lang"}}
-	- Not available in the //[[CompilerOptlang -lang qb]]// dialect unless referenced with the alias ##**""__Valint""**##.
+	- Non disponible dans le dialecte //[[CompilerOptlang -lang qb]]// sauf si r&eacute;f&eacute;renc&eacute; avec l'alias ##**__Valint**##.
 
 {{fbdoc item="diff"}}
-	- New to ""FreeBASIC""
+	- Nouveau pour FreeBASIC
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgCint Cint]]##

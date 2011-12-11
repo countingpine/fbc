@@ -1,99 +1,99 @@
 {{fbdoc item="title" value="Most Important Features"}}----
 
-{{fbdoc item="section" value="BASIC compatibility"}}
-	- FreeBASIC is not a "new" BASIC language. You don't need to learn much new if you are familiar with any Microsoft-BASIC variant. You can use either ##"-lang qb"## for compatibility, or (default) ##"-lang fb"##  for some of the new features, but it also brings some restrictions and some similarity with the "C" programming language. See also [[CompilerDialects]].
-	- FreeBASIC is case-insensitive; explicit "main" procedure is not required; most of the graphic and console statements and procedures found in Microsoft QuickBASIC are implemented, et cetera.
-	- Only with ##"-lang qb"##: scalar variables don't need to be dimensioned and suffixes can be used; line numbers are supported; ##[[KeyPgOnerror On Error]]## and ##[[KeyPgGosub Gosub]]## supported.
+**<u>Compatibilit&eacute; avec le BASIC</u>**
+	- FreeBASIC n'est pas un "nouveau" langage BASIC. Vous n'avez pas besoin d'apprendre beaucoup de nouveaut&eacute;s si vous &ecirc;tes familier avec toutes les variantes de Microsoft BASIC. Vous pouvez utiliser soit ##"-lang qb"## pour la compatibilit&eacute;, soit (par d&eacute;faut) ##"-lang fb"## pour quelques nouveaut&eacute;s, mais il apporte &eacute;galement certaines restrictions et une certaine similitude avec le langage "C" de programmation. Voir aussi ##[[CompilerDialects Les dialectes du FreeBASIC]]##.
+	- FreeBASIC n'est pas sensible &agrave; la casse; une proc&eacute;dure "main" explicite n'est pas requise; la plupart des d&eacute;clarations et proc&eacute;dures graphiques et console de Microsoft QuickBASIC sont impl&eacute;ment&eacute;es, etc.
+	- Seulement avec ##"-lang qb"##: les variables scalaires n'ont pas besoin d'&ecirc;tre dimensionn&eacute;es et des suffixes peuvent &ecirc;tre utilis&eacute;es; les num&eacute;ros de ligne sont pris en charge; ##[[KeyPgOnerror On Error]]## and ##[[KeyPgGosub GoSub]]## sont utilisables.
 
-{{fbdoc item="section" value="Clean syntax"}}
-	- Only a small number of keywords have been added. All procedures are implemented as libraries, so for the most part, there are no new intrinsic routines, and therefore there is a low chance of having name duplication with old code.
+**<u>Syntaxe "propre"</u>**
+	- Seul un petit nombre de mots-cl&eacute;s ont &eacute;t&eacute; ajout&eacute;s. Toutes les proc&eacute;dures sont mises en oeuvre sous forme de biblioth&egrave;ques, donc pour la plus grande partie, il n'y a pas de nouvelles routines intrins&egrave;ques et donc il y a peu de risque d'avoir des chevauchements de nom avec l'ancien code.
 
-{{fbdoc item="section" value="Thin bindings (header files) to existing C libraries and APIs"}}
-	- No wrappers or helpers are necessary, just a ported header file, making usage of external C libraries very easy
-	- The official distribution comes with several bindings to existing C libraries already, see [[ExtLibTOC External Libraries TOC]] for a complete up-to-date list
+**<u>Relations (fichier en-t&ecirc;te) avec les biblioth&egrave;ques C et les existantes</u>**
+	- Pas de "wrappers" ou "helpers" n&eacute;cesaires, juste un fichier d'en-t&ecirc;te port&eacute;, rendant tr&egrave;s facile l'usage de biblioth&egrave;ques C externes.
+	- La distribution officielle est d&eacute;j&agrave; fournie avec plusieurs liaisons existantes aux biblioth&egrave;ques C, voir [[ExtLibTOC Index des en-t&ecirc;tes de biblioth&egrave;ques externes]] pour une liste compl&egrave;te et mise &agrave; jour
 
-{{fbdoc item="section" value="Multi-platform"}}
-	- FreeBASIC currently runs on 32-bit Windows, Linux, and DOS (a 16-bit DOS is good enough, although FreeBASIC itself and compiler output are 32-bit) and also creates applications for the Xbox console. More platforms to come.
-	- The runtime library was written with portability in mind. All third-party tools used exist on most operating systems already as they are from the GNU binutils. The compiler is written in 100% FreeBASIC code (that is, FreeBASIC compiles itself.), which makes it simple to be bootstrapped as it doesn't depend on non-portable tools.
+**<u>Multi-plateforme</u>**
+	- FreeBASIC fonctionne actuellement sur Windows 32-bit, Linux et DOS (un DOS 16-bit est suffisant, bien que FreeBASIC lui-m&ecirc;me et ses sorties compilateur soient 32-bit) et cr&eacute;e &eacute;galement des applications pour la console Xbox. D'autres plates-formes &agrave; venir.
+	- La biblioth&egrave;que d'ex&eacute;cution a &eacute;t&eacute; &eacute;crite avec la portabilit&eacute; &agrave; l'esprit. Tous les outils tiers utilis&eacute;s existent d&eacute;j&agrave; sur la plupart des syst&egrave;mes d'exploitation en tant que GNU binutils. Le compilateur est &eacute;crit &agrave; 100% en code FreeBASIC (donc, FreeBASIC se compile lui-m&ecirc;me), ce qui le rend simple &agrave; &ecirc;tre lanc&eacute; car il ne d&eacute;pend pas d'outils non portatables.
 
-{{fbdoc item="section" value="Unicode support"}}
-	- Besides ASCII files with [[Unicode Unicode]] escape sequences (\u), FreeBASIC can parse UTF-8, UTF-16LE, UTF-16BE, UTF-32LE and UTF-32BE source (.bas) or header (.bi) files, they can be freely mixed with other sources/headers in the same project (also with other ASCII files).
-	- Literal strings can be typed in the original non-Latin alphabet, just use a text-editor that supports some of the [[Unicode Unicode]] formats listed above.
-	- The ##[[KeyPgWstring Wstring]]## type holds wide-characters, all string procedures (like ##[[KeyPgLeft Left]]##, ##[[KeyPgTrim Trim]]##, etc) will work with wide-strings too.
-	- ##[[KeyPgOpen Open]]## was extended to support UTF-8, UTF-16LE and UTF-32LE files with the ##[[KeyPgEncoding Encoding]]## specifier. ##[[KeyPgInputPp Input #]]## and ##[[KeyPgLineinputPp Line Input #]]##, as well as ##[[KeyPgPrintPp Print #]]## and ##[[KeyPgWritePp Write #]]## can be used normally, and any conversion between [[Unicode Unicode]] to ASCII is done automatically if necessary.
-	- ##[[KeyPgPrint Print]]## also supports [[Unicode Unicode]] output (see Requirements).
+**<u>Support d'Unicode</u>**
+	- Outre les fichiers ASCII avec des s&eacute;quences d'&eacute;chappement (\u) [[Unicode Unicode]], FreeBASIC peut analyser les fichiers source (.bas) ou en-t&ecirc;te (.bi) UTF-8, UTF-16LE, UTF-16BE, UTF-32LE et UTF-32BE, ils peuvent &ecirc;tre librement m&eacute;lang&eacute;s avec d'autres sources/en-t&ecirc;tes dans le m&ecirc;me projet (&eacute;galement avec d'autres fichiers ASCII).
+	- Les cha&icirc;nes litt&eacute;rales peuvent &ecirc;tre tap&eacute;es dans leur alphabet original non-latin, il suffit d'utiliser un &eacute;diteur de texte qui supporte une partie des formats [[Unicode Unicode]] list&eacute;s ci-dessus.
+	- Le type ##[[KeyPgWstring WString]]## contient des caract&egrave;res "larges", toutes les proc&eacute;dures cha&icirc;nes (comme ##[[KeyPgLeft Left]]##, ##[[KeyPgTrim Trim]]##, etc) fonctioneront aussi avec les cha&icirc;nes &agrave; caract&egrave;res "larges".
+	- ##[[KeyPgOpen Open]]## a &eacute;t&eacute; &eacute;tendu pour supporter les fichiers UTF-8, UTF-16LE and UTF-32LE avec le sp&eacute;cificateur ##[[KeyPgEncoding Encoding]]##. ##[[KeyPgInputPp Input #]]## et ##[[KeyPgLineinputPp Line Input #]]##, ainsi que ##[[KeyPgPrintPp Print #]]## et ##[[KeyPgWritePp Write #]]## peuvent &ecirc;tre utilis&eacute;s normalement, et toute conversion de [[Unicode Unicode]] vers ASCII est effectu&eacute;e si n&eacute;cessaire.
+	- ##[[KeyPgPrint Print]]## supporte aussi les sorties [[Unicode Unicode]] (voir ##[[CompilerRequirements Exigences]]##).
 
-{{fbdoc item="section" value="A large number of built-in data types"}}
-	- Integer: ##[[KeyPgByte Byte]]##, ##[[KeyPgUbyte Ubyte]]##, ##[[KeyPgShort Short]]##, ##[[KeyPgUshort Ushort]]##, ##[[KeyPgInteger Integer]]##, ##[[KeyPgUinteger UInteger]]##, ##[[KeyPgLong Long]]##, ##[[KeyPgUlong ULong]]##, ##[[KeyPgLongint Longint]]##, ##[[KeyPgUlongint Ulongint]]##
-	- Floating-point: ##[[KeyPgSingle Single]]##, ##[[KeyPgDouble Double]]##
-	- String: fixed, variable-length or null-terminated (##[[KeyPgZstring Zstring]]##), up to 2GB long
-	- [[Unicode Unicode]] strings (##[[KeyPgWstring Wstring]]##), like ##[[KeyPgZstring Zstring]]##, but with support for wide characters. Use the Windows [[Unicode Unicode]] API procedures directly, etc.
+**<u>Un grand nombre de types de donn&eacute;es pr&eacute;d&eacute;finis</u>**
+	- Entiers: ##[[KeyPgByte Byte]]##, ##[[KeyPgUbyte UByte]]##, ##[[KeyPgShort Short]]##, ##[[KeyPgUshort UShort]]##, ##[[KeyPgInteger Integer]]##, ##[[KeyPgUinteger UInteger]]##, ##[[KeyPgLong Long]]##, ##[[KeyPgUlong Ulong]]##, ##[[KeyPgLongint LongInt]]##, ##[[KeyPgUlongint ULongInt]]##
+	- A virgule flottante: ##[[KeyPgSingle Single]]##, ##[[KeyPgDouble Double]]##
+	- Cha&icirc;nes: fix&eacute;e, longueur variable ou termin&eacute;e par NULL (##[[KeyPgZstring ZString]]##), jusqu'&agrave; 2GB de long
+	- Les cha&icirc;nes [[Unicode Unicode]] (##[[KeyPgWstring WString]]##), comme ##[[KeyPgZstring ZString]]##, mais avec le support de caract&egrave;res "larges". Utilisation directe des API [[Unicode Unicode]], etc.
 
-{{fbdoc item="section" value="User-defined types (UDTs)"}}
-	- Unlimited nesting.
-	- BASIC's ##[[KeyPgType Type]]## statement is supported, along with the new ##[[KeyPgUnion Union]]## statement (including anonymous nested unions).
-	- Array fields utilizing up to eight dimensions can be used.
-	- Procedure pointer fields.
-	- Bit fields.
+**<u>Les types d&eacute;finis par l'utilisateur (UDT)</u>**
+	- Nombre illimit&eacute; d'imbrications.
+	- Prise en charge de l'instruction ##[[KeyPgType Type]]## du BASIC, avec la nouvelle d&eacute;claration ##[[KeyPgUnion Union]]## (y compris les unions anonymes imbriqu&eacute;es).
+	- Les tableaux utilisant jusqu'&agrave; huit dimensions peuvent &ecirc;tre utilis&eacute;s.
+	- Les pointeurs de proc&eacute;dure.
+	- Les champs de bits.
   	
-{{fbdoc item="section" value="Enumerations (enums)"}}
-	- Easily declare a list of constants with sequential values with ##[[KeyPgEnum Enum]]##.
+**<u>Enum&eacute;rations (enums)</u>**
+	- D&eacute;claration facile d'une liste de constantes avec des valeurs s&eacute;quentielles avec ##[[KeyPgEnum Enum]]##.
 
-{{fbdoc item="section" value="Arrays"}}
-	- Fixed- and variable- length arrays are supported, up to 2 GB in size.
-	- Up to eight dimensions, including arrays with unknown dimensions.
-	- Any lower and upper boundaries.
-	- Element data can be preserved during a re-size of variable-length arrays with ##[[KeyPgRedim Redim]]## using the new ##[[KeyPgPreserve Preserve]]## specifier.
+**<u>Tableaux</u>**
+	- Les tableaux de longueur fixe ou variable sont admis, jusqu'&agrave; 2 GB de taille.
+	- Jusqu'&agrave; huit dimensions, y compris les tableaux avec des dimensions ind&eacute;termin&eacute;es.
+	- Toutes possibilit&eacute;s de limites inf&eacute;rieures et sup&eacute;rieures.
+	- Pr&eacute;servation des &eacute;l&eacute;ments de donn&eacute;es pendant un redimensionnement de tableau avec ##[[KeyPgRedim ReDim]]## en utilisant le nouveau sp&eacute;cificateur ##[[KeyPgPreserve Preserve]]##.
 
-{{fbdoc item="section" value="Pointers"}}
-	- Pointers to any of the data types listed above, including string characters, array elements and UDT's.
-	- Uses the same syntax as C.
-	- Unlimited indirection levels (e.g., pointer to pointer to ...).
-	- Procedure pointers.
-	- Indexing []'s (including string indexing).
-	- Type casting.
+**<u>Pointeurs</u>**
+	- Pointeurs vers tout type de donn&eacute;es list&eacute; pr&eacute;c&eacute;demment, y compris les cha&icirc;nes de caract&egrave;res, les &eacute;l&eacute;ments de tableau et les types d&eacute;finis par l'utilisateur.
+	- Utilisation de la m&ecirc;me syntaxe que le langage C.
+	- Niveaux d'indirection illimit&eacute; (par ex., pointeur vers pointeur vers ...).
+	- Pointeurs de proc&eacute;dures.
+	- Indexation avec [ ] (y compris l'indexation de cha&icirc;nes).
+	- Transtypage.
   
-{{fbdoc item="section" value="Variable, object and array initialization"}}
-	- For static, module-level or local variables, arrays and UDT's.
+**<u>Initialisation de variables, objets et tableaux</u>**
+	- Pour les variables de niveau module ou locales statiques, les tableaux et les types d&eacute;finis par l'utilisateur.
 
-{{fbdoc item="section" value="Default procedure parameter values"}}
-	- For numeric, string and UDT parameter types.
+**<u>Les valeurs par d&eacute;faut des param&egrave;tres de proc&eacute;dure</u>**
+	- Pour les param&egrave;tres des types num&eacute;riques, les cha&icirc;nes et les types d&eacute;finis par l'utilisateur.
   
-{{fbdoc item="section" value="Procedure overloading"}}
-	- Including procedures with default parameter values.
+**<u>Surcharge de proc&eacute;dure</u>**
+	- Y compris les proc&eacute;dures avec des valeurs par d&eacute;faut de certains param&egrave;tres.
 
-{{fbdoc item="section" value="In-line assembly"}}
-	- Intel syntax.
-	- Reference variables directly by name; no "trick code" needed.
+**<u>Assemblage en ligne</u>**
+	- Syntaxe Intel.
+	- R&eacute;f&eacute;rence aux variables directement par leur nom, pas de "code truc" n&eacute;cessaire.
 
-{{fbdoc item="section" value="Traditional preprocessor support"}}
-	- Same syntax as in C.
-	- Single-line macros supported with the ##[[KeyPgPpdefine #Define]]## command, including parameters.
-	- Multi-line macros supported with the ##[[KeyPgPpmacro #Macro]]## command.
+**<u>Support traditionnel du pr&eacute;processeur</u>**
+	- M&ecirc;me syntaxe qu'en C.
+	- Support des macros mono-ligne avec la commande ##[[KeyPgPpdefine #define]]##, y compris les param&egrave;tres.
+	- Support des macros multi-ligne avec la commande  ##[[KeyPgPpmacro #macro]]##.
 
-{{fbdoc item="section" value="Type aliases"}}
-	- Supporting forward referencing as in C, including UDT and procedure pointer types.
+**<u>Alias de Type </u>**
+	- Support du "forward referencing" (r&eacute;f&eacute;rencement en avance) comme en C, y compris les types d&eacute;finis par l'utilisateur et pointeurs de proc&eacute;dure.
 
-{{fbdoc item="section" value="C-like escape sequences for string literals"}}
-	- Same as in C (except numbers are interpreted as decimal, not octal).
+**<u>S&eacute;quences d'&eacute;chappement, comme en C, pour les cha&icirc;nes de caract&egrave;res</u>**
+	- Comme en C (mis &agrave; part que les nombres sont interpr&eacute;t&eacute;s comme des d&eacute;cimaux, non en octal).
 
-{{fbdoc item="section" value="Debugging support"}}
-	- Full debugging support with //GDB// (the GNU debugger) or //Insight// (a //GDB// GUI frontend).
+**<u>Support du d&eacute;bogage</u>**
+	- Prise en charge compl&egrave;te du d&eacute;bogage avec //GDB// (le d&eacute;bogueur de GNU) ou //Insight// (un GUI pour //GDB//).
 	- Array bounds checking (only enabled by the ##-exx## command-line option).
-	- Null pointer checking (same as above).
+	- V&eacute;rifier pointeur nul (comme pr&eacute;c&eacute;demment).
 
-{{fbdoc item="section" value="Create OBJ's, LIB's, DLL's, and console or GUI EXE's"}}
-	- You are in no way locked to an IDE or editor of any kind.
-	- You can create static and dynamic/shared libraries adding just one command-line option (##-lib## or ##-dylib/-dll##).
+**<u>Cr&eacute;er OBJ, LIB, DLL et console ou GUI EXE</u>**
+	- Vous n'&ecirc;tes en aucune mani&egrave;re bloqu&eacute; sur un IDE ou un &eacute;diteur.
+	- Vous pouvez cr&eacute;er des biblioth&egrave;ques statiques et dynamiques / partag&eacute;es en ajoutant juste une option ligne de commande (##-lib## ou ##-dylib/-dll##).
 
-{{fbdoc item="section" value="As a 32-bit application"}}
-	- FreeBASIC can compile source code files up to 2 GB in size.
-	- The number of symbols (variables, constants, et cetera) is only limited by the total memory available during compile time. (You can, for example, include OpenGL, GTK/SDL, BASS, simultaneously in your source code.)
+**<u>Comme une application 32-bit</u>**
+	- FreeBASIC peut compiler des fichiers code source jusqu'&agrave; 2 GB.
+	- Le nombre de symboles (variables, constantes, etc) est seulement limit&eacute; par la m&eacute;moire totale disponible pendant la compilation. (Vous pouvez, par exemple, inclure OpenGL, GTK/SDL, BASS, simultan&eacute;ment dans votre code source.)
 
-{{fbdoc item="section" value="Optimized code generation"}}
-	- While FreeBASIC is not an optimizing compiler, it does many kinds of general optimizations to generate the fastest possible code on x86 CPU's, not losing to other BASIC alternatives, including the commercial ones.
+**<u>G&eacute;n&eacute;ration de code optimis&eacute;</u>**
+	- Bien FreeBasic ne soit pas un compilateur qui optimise le code, il fournit de nombreux types d'optimisations g&eacute;n&eacute;rales pour g&eacute;n&eacute;rer le code le plus efficace possible sur x86 CPU, sans oublier d'autres alternatives de base, notamment les commerciales.
 
-{{fbdoc item="section" value="Completely free"}}
-	- All third-party tools are also free. No piece of abandoned or copyrighted software is used (except GoRC on Win32). The assembler, linker, archiver, and other command-line applications come from the GNU binutils programming tools.
+**<u>Compl&egrave;tement libre</u>**
+	- Tous les outils tiers sont &eacute;galement libres. Aucun morceau de logiciel abandonn&eacute; ou sous copyright n'est utilis&eacute; (except&eacute; GoRC sous Win32). L'assembleur, le linker, l'archiveur et d'autres applications en ligne de commande proviennent des outils de programmation GNU binutils.
 
 {{fbdoc item="back" value="FBWiki|Main Page"}}

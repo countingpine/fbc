@@ -1,5 +1,5 @@
 {{fbdoc item="title" value="RGB"}}----
-Computes a valid color value for hi/truecolor modes
+Calcule une valeur de couleur valide pour les modes "hi/truecolor"
 
 {{fbdoc item="syntax"}}##
 	[[KeyPgPpdefine #define]] **RGB**(//r//,//g//,//b//) (([[KeyPgCuint cuint]](r) [[KeyPgOpShiftLeft shl]] 16) [[KeyPgOpOr or]] ([[KeyPgCuint cuint]](g) [[KeyPgOpShiftLeft shl]] 8) [[KeyPgOpOr or]] [[KeyPgCuint cuint]](b) [[KeyPgOpOr or]] &hFF000000)
@@ -9,36 +9,36 @@ Computes a valid color value for hi/truecolor modes
 ##
 {{fbdoc item="param"}}
 	##//red//##
-		red color component value
+		valeur de la composante de couleur rouge
 	##//green//##
-		green color component value
+		valeur de la composante de couleur vert
 	##//blue//##
-		blue color component value
+		valeur de la composante de couleur bleu
 
-{{fbdoc item="ret"}}
-	The combined color.
+{{fbdoc item="section" value="Valeur renvoy&eacute;e
+	La couleur correspondant &agrave; la combinaison.
 
 {{fbdoc item="desc"}}
-	##//red//##, ##//green//## and ##//blue//## are components ranging ##0##..##255##.
+	##//red//##, ##//green//## et ##//blue//## sont les composantes de la couleur - valeurs de ##0## &agrave; ##255##.
 
-	The ##**RGB**## function can be used to compute a valid color value for use while in hi/truecolor modes. It returns an unsigned integer  in the format ##&hAARRGGBB##, where ##RR##, ##GG## and ##BB## equal the values passed to this function, in hexadecimal format. ##AA## is the implicit alpha value and is automatically set to ##&hFF## (opaque).
-	It is possible to retrieve the red, green, blue and alpha values from a color value, by using a combination of ##[[KeyPgOpAnd And]]## and ##[[KeyPgOpShiftRight Shr]]##.  The second example below shows how to ##[[KeyPgPpdefine #Define]]## and use macros to do this.
+	La fonction ##**RGB**## est utilis&eacute;e pour calculer une valeur de couleur valide pour les modes "hi/truecolor". Elle renvoie un entier non sign&eacute; dans le format ##&hAARRVVBB##, o&ugrave; ##RR##, ##VV## et ##BB## sont &eacute;gales aux valeurs pass&eacute;es &agrave; la fonction, dans le format hexad&eacute;cimal. ##AA## est la valeur implicite de la transparence qui est automatiquement mise &agrave; ##&hFF## (opaque).
+	Il est possible de r&eacute;cup&eacute;rer les valeurs rouge, vert, bleu et alpha &agrave; partir d'une valeur de couleur, en utilisant une combinaision de ##[[KeyPgOpAnd And]]## et ##[[KeyPgOpShiftRight Shr]]##.  Le second exemple ci-dessous montre comment ##[[KeyPgPpdefine #define]]## et l'utilisation de macros permettent cela.
 
-	**Note for Windows API programmers**: The macro named ##RGB## in the Windows references has been renamed ##BGR## in the FB headers for Windows to avoid collisions. 
+	**Note pour les programmeurs d'API Windows**: La macro nomm&eacute;e ##RGB## dans les r&eacute;f&eacute;rences Windows a &eacute;t&eacute; renomm&eacute;e ##BGR## dans les en-t&ecirc;tes FB pour Windows pour &eacute;viter des collisions. 
 
 {{fbdoc item="ex"}}
-	See ##[[KeyPgPutgraphics Put (Graphics)]]## example in addition.
+	Voir aussi l'exemple de ##[[KeyPgPutgraphics Put (Graphique)]]##.
 	
 {{fbdoc item="filename" value="examples/manual/gfx/rgb.bas"}}%%(freebasic)
-ScreenRes 640,480,32  '32 bit color
-Line(0,0)-(319,479), Rgb(255,0,0) 'draws a bright red box on the left side of the window
-Line(639,0)-(320,479), Rgb(0,0,255) 'draws a bright blue box on the right side of the window
+ScreenRes 640,480,32  'couleur 32 bits
+Line(0,0)-(319,479), RGB(255,0,0) 'dessine une boite rouge vif sur le cote gauche de la fenetre
+Line(639,0)-(320,479), RGB(0,0,255) 'dessine une boite bleu vif sur le cote droit de la fenetre
 
-Sleep 'wait before exiting
+Sleep 'attend avant sortie
 %%
 
 {{fbdoc item="filename" value="examples/manual/gfx/rgb_get.bas"}}%%(freebasic)
-'' setting and retrieving Red, Green, Blue and Alpha values
+'' Valide et recupere  valeurs;Rouge, Vert, Bleu et Alpha
 
 #define RGBA_R( c ) ( CUInt( c ) Shr 16 And 255 )
 #define RGBA_G( c ) ( CUInt( c ) Shr  8 And 255 )
@@ -64,10 +64,10 @@ Print Using "Alpha:       _&H\\ = ###"; Hex(a, 2); a
 %%
 
 {{fbdoc item="lang"}}
-	- Not available in the //[[CompilerOptlang -lang qb]]// dialect.
+	- Non disponible dans le dialecte //[[CompilerOptlang -lang qb]]//.
 
 {{fbdoc item="diff"}}
-	- New to ""FreeBASIC""
+	- Nouveau pour FreeBASIC
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgRgba RGBA]]##

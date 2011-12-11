@@ -1,11 +1,11 @@
 {{fbdoc item="title" value="User Defined Types"}}----
-Custom types.
+Types personnalis&eacute;s.
 
-{{fbdoc item="section" value="Overview"}}
-	//User-Defined Types// are special kinds of [[ProPgVariables variables]] which can be created by the programmer.  A User-Defined Type (UDT) is really just a container that contains a bunch of other variables, like an [[ProPgArrays array]], but unlike arrays UDTs can hold //different// variable types (whereas arrays always hold many variables of the //same// type).  In fact, UDTs can even have [[ProPgProcedures procedures]] inside of them!
+{{fbdoc item="section" value="Vue d'ensemble
+	//Les types d&eacute;finis par l'utilisateur// sont des types particuliers de [[ProPgVariables variables]] qui peuvent &ecirc;tre cr&eacute;&eacute;s par le programmeur.  Un type d&eacute;fini par l'utilisateur (User-Defined Type = UDT) est r&eacute;ellement juste un conteneur qui contient un tas d'autres variables, comme un [[ProPgArrays tableau]], mais au contraire des tableaux les types d&eacute;finis par l'utilisateur peuvent contenir //diff&eacute;rents// types de variables (alors que les tableaux contiennent toujours de nombreuses variables du //m&ecirc;me// de type).  En fait, les types d&eacute;finis par l'utilisateur peuvent m&ecirc;me avoir des [[ProPgProcedures proc&eacute;dures]] &agrave; l'int&eacute;rieur d'eux!
 
-{{fbdoc item="section" value="Members"}}
-	The different variables and/or procedures stored inside a UDT are called "members", or more generally, items.  Members can be variables of just about any type, including numerical types, strings, [[ProPgPointers pointers]], [[KeyPgEnum enums]], and even arrays (the only exception being [[ProPgVarLenArrays variable-length arrays]] declared using [[KeyPgRedim ReDim]], which cannot be used in UDTs because of the way they are used internally.  Variables are created in UDTs much the same way variables are created 	normally, except that the Dim keyword is optional.  UDT members are accessed via the [[KeyPgOpMemberAccess . operator]], so for example if you created a variable called someVar in a UDT you would access it with the name of the UDT variable followed by ".someVar".  Here is an example:
+{{fbdoc item="section" value="Membres
+	Les diff&eacute;rentes variables et/ou proc&eacute;dures stock&eacute;es dans un type d&eacute;fini par l'utilisateur sont appel&eacute;es "membres", ou, plus g&eacute;n&eacute;ralement, les &eacute;l&eacute;ments.  Les membres peuvent &ecirc;tre des variables de n'importe quel type, y compris les types num&eacute;riques, les cha&icirc;nes, les [[ProPgPointers pointeurs]], [[KeyPgEnum les Enums]], et, m&ecirc;me, les tableaux (la seule exception &eacute;tant [[ProPgVarLenArrays les tableaux de longueur variable]] d&eacute;clar&eacute;s avec [[KeyPgRedim ReDim]], qui ne peuvent &ecirc;tre utilis&eacute;s dans les types d&eacute;finis par l'utilisateur en raison de le fa&ccedil;on dont ils sont utilis&eacute;s en interne).  Les variables sont cr&eacute;&eacute;es dans les types d&eacute;finis par l'utilisateur de la m&ecirc;me fa&ccedil;on que les variables sont cr&eacute;&eacute;es normalement, sauf que le mot cl&eacute; [[KeyPgDim Dim]] est facultatif.  Les membres d'un type d&eacute;fini par l'utilisateur sont accessibles via [[KeyPgOpMemberAccess . Operator]], ainsi, par exemple si vous avez cr&eacute;&eacute; une variable appel&eacute;e //someVar// dans un type d&eacute;fini par l'utilisateur vous pouvez y acc&eacute;der avec le nom de votre variable de type d&eacute;fini par l'utilisateur suivi de ".someVar".  Voici un exemple:
 
 {{fbdoc item="filename" value="examples/manual/proguide/udt/simple.bas"}}%%(freebasic)
 'Define a UDT called myType, with an Integer member named someVar
@@ -21,10 +21,10 @@ myUDT.someVar = 23
 Print myUDT.someVar
 %%
 
-	Notice that the [[KeyPgType Type...End Type]] does not actually create a variable of that type, it only defines what variables of that type contain.  You must create a variable of that type to actually use it!
+	Notez que [[KeyPgType Type...End Type]] ne cr&eacute;e pas r&eacute;ellement une variable de ce type, il d&eacute;finit seulement ce que contiennent les variables de ce type.  Vous devez cr&eacute;er une variable de ce type pour l'utiliser effectivement!
 
-{{fbdoc item="section" value="UDT Pointers"}}
-	UDT Pointers are, as the name implies, pointers to UDTs.  They are created like regular pointers, but there is a special way to use them.  To access the member of a UDT pointed to by a pointer, you use the [[KeyPgOpPtrMemberAccess -> operator]].  For example, if myUDTPtr is a pointer to a UDT which has a member someVar, you would access the member as myUDTPtr->someVar, which is a much cleaner shorthand for the equally valid *(myUDTPtr).someVar.
+{{fbdoc item="section" value="Pointeurs de types d&eacute;finis par l'utilisateur
+	Les pointeurs de types d&eacute;finis par l'utilisateur sont, comme leur nom l'indique, des pointeurs vers des types d&eacute;finis par l'utilisateur.  Ils sont cr&eacute;&eacute;s comme des pointeurs habituels, mais il y a une fa&ccedil;on particuli&egrave;re de les utiliser.  Pour acc&eacute;der &agrave; un membre d'un type d&eacute;fini par l'utilisateur point&eacute; par un pointeur, vous devez utiliser [[KeyPgOpPtrMemberAccess -> Operator]].  Par exemple, si //myUDTPtr// est un pointeur vers un type d&eacute;fini par l'utilisateur qui a un membre //someVar//, vous acc&eacute;der &agrave; celui-ci comme cela //**myUDTPtr->someVar**//, qui est un raccourci bien plus clair que //*(myUDTPtr).someVar//.
 
 {{fbdoc item="filename" value="examples/manual/proguide/udt/ptr-access.bas"}}%%(freebasic)
 Type rect
@@ -44,12 +44,12 @@ Sleep
 
 
 {{fbdoc item="see"}}
-	- [[ProPgTypeAliases Type Aliases]]
-	- [[KeyPgTypeTemp Temporary Types]]
-	- [[ProPgCtorsDtors Constructors and Destructors]]
-	- [[ProPgMemberProcedures Member Procedures]]
-	- [[ProPgMemberAccessRights Member Access Rights]]
-	- [[ProPgOperatorOverloading Operator Overloading]]
+	- [[ProPgTypeAliases Alias de type]]
+	- [[KeyPgTypeTemp Types temporaire]]
+	- [[ProPgCtorsDtors Constructeurs et destructeurs]]
+	- [[ProPgMemberProcedures Membres des proc&eacute;dures]]
+	- [[ProPgMemberAccessRights Droits d'acc&egrave;s aux membres]]
+	- [[ProPgOperatorOverloading Surcharge d'op&eacute;rateur]]
 
 
 {{fbdoc item="back" value="CatPgProgrammer|Programmer's Guide"}}

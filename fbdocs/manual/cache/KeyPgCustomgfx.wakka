@@ -1,26 +1,26 @@
-{{fbdoc item="title" value="CUSTOM"}}----
-Parameter to the ##[[KeyPgPutgraphics Put]]## graphics statement which selects a custom method
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">{{fbdoc item="title" value="Custom"}}----<div id="fb_tab_r"> <img src="images/fblogo_mini.gif">
+Param&egrave;tre de la d&eacute;claration graphique ##[[KeyPgPutgraphics Put]]## qui s&eacute;lectionne une m&eacute;thode d&eacute;finie par l'utilisateur<br \=""><br \="">{{fbdoc item="syntax"}}##<br \="">**Put** [ //target//, ] [ STEP ] ( //x//,//y// ), //source// [ ,( //x1//,//y1// )-( //x2//,//y2// ) ], **Custom**, //custom_function_ptr// [, //parameter//]<br \="">##<br \="">
 
-{{fbdoc item="syntax"}}##
-	**Put** [ //target//, ] [ STEP ] ( //x//,//y// ), //source// [ ,( //x1//,//y1// )-( //x2//,//y2// ) ], **Custom**, //custom_function_ptr// [, //parameter//]
-##
-{{fbdoc item="param"}}
-	##**Custom**##
-		Required.
-	##//custom_function_ptr//##
-		name of the custom user defined function.
-	##//parameter//##
-		optional ##[[KeyPgPointer pointer]]## to be passed to the custom function; if omitted, the default value is zero (##0##).
+{{fbdoc item="param"}}<br \="">##**Custom**##<br \="">		Obligatoire.<br \="">
+	##//custom_function_ptr//##<br \="">		nom de la fonction d&eacute;finie par l'utilisateur.<br \="">
+##//parameter//##<br \="">		optional ##[[KeyPgPointer Pointeur]]## facultatif &agrave; passer &agrave; la fonction; si omis, la valeur par d&eacute;faut est z&eacute;ro (##0##).<br \=""><br \="">
+{{fbdoc item="desc"}}<br \="">##**Custom**## s&eacute;lectionne une fonction d&eacute;finie par l'utilisateur comme m&eacute;thode utilis&eacute;e pour modifier (blitting) un tampon image.<br \=""><br \="">La m&eacute;thode ##Custom## utilise une fonction d&eacute;finie parl'utilisateur pour calculer la valeur finale des pixels &agrave; dessiner dansle tampon destination. Cette fonction sera appel&eacute;e une fois pour chaquepixel de l'image source , et recevra les valeurs des pixels source etdestination, et un pointeur de donn&eacute;es pass&eacute; par la fonction ##[[KeyPgPutgraphics Put]]##. La valeur du pixel renvoy&eacute;e sera la valeur utilis&eacute;e pour le trac&eacute; dans le tampon destination. La fonction &agrave; la forme:<br \=""><br \="">##[[KeyPgDeclare Declare]] [[KeyPgFunction Function]] //identifier// ( _
+	[[KeyPgByval ByVal]] //source_pixel// [[KeyPgAs As]] [[KeyPgUinteger UInteger]], _
+		[[KeyPgByval ByVal]] //destination_pixel// [[KeyPgAs As]] [[KeyPgUinteger UInteger]], _
+	[[KeyPgByval ByVal]] //parameter// [[KeyPgAs As]] [[KeyPgAny Any]] [[KeyPgPtr Ptr]] _
+		) [[KeyPgAs As]] [[KeyPgUinteger UInteger]]##
+	<br \="">##//identifier//## est le nom de la fonction.<br \="">##//source_pixel//## est la valeur courante du pixel de l'image source.<br \="">##//destination_pixel//## est la valeur courante du pixel de l'image destination.<br \="">##//parameter//## est le param&egrave;tre qui est pass&eacute; par la commande ##[[KeyPgPutgraphics Put]]##.  Si omis, sa valeur sera z&eacute;ro.<br \=""><br \="">
+		{{fbdoc item="ex"}}<br \="">%%(freebasic)
 
-{{fbdoc item="desc"}}
-	##**Custom**## selects a custom user defined function as the method for blitting an image buffer.
+Function dither ( ByVal source_pixel As UInteger, ByVal destination_pixel As UInteger, ByVal parameter As Any Ptr ) As UInteger<br>    <br>    ''Retourne soit le pixel source soit le pixel destination, en fonction de la valeur du rnd<br>    <br>    Dim threshold As Single = 0.5<br>    If parameter <> 0 Then threshold = *CPtr(Single Ptr, parameter)<br>    <br>    If Rnd() < threshold Then<br>        Return source_pixel<br>    Else<br>        Return destination_pixel<br>    End If<br>    <br>End Function<br><br><br>Dim img As Any Ptr, threshold As Single<br><br>'' Valide un ecran<br>ScreenRes 320, 200, 16, 2<br>ScreenSet 0, 1<br><br>'' Cree une image<br>img = ImageCreate(32, 32)<br>Line img, ( 0,  0)-(15,  15), RGB(255,   0,   0), bf<br>Line img, (16,  0)-(31,  15), RGB(  0,   0, 255), bf<br>Line img, ( 0, 16)-(15,  31), RGB(  0, 255,   0), bf<br>Line img, (16, 16)-(31,  31), RGB(255,   0, 255), bf<br><br>'' fonction dither image avec differents thresholds<br>Do Until Len(Inkey)<br>    <br>    Cls<br>    <br>    threshold = 0.2<br>    Put ( 80 - 16, 100 - 16), img, Custom, @dither, @threshold<br>    <br>    '' default threshold = 0.5<br>    Put (160 - 16, 100 - 16), img, Custom, @dither<br>    <br>    threshold = 0.8<br>    Put (240 - 16, 100 - 16), img, Custom, @dither, @threshold<br>    <br>    ScreenCopy<br>    Sleep 25<br>    <br>Loop<br><br>'' free the image memory<br>ImageDestroy img<br>
+	##<br><div class="fb_img"><img src="images/custom.png">
 
-	The ##Custom## method uses a user-defined function to calculate the final pixel values to be drawn to the destination buffer. This function will be called once for every pixel of the source image, and will receive the source and destination pixel values, and a data pointer passed by the ##[[KeyPgPutgraphics Put]]## function. The pixel value returned will be the value used to draw to the destination buffer. The function has the form:
+	<br \=""><br \="">
 
-	##[[KeyPgDeclare declare]] [[KeyPgFunction function]] //identifier// ( _
-		[[KeyPgByval byval]] //source_pixel// [[KeyPgAs as]] [[KeyPgUinteger uinteger]], _
-		[[KeyPgByval byval]] //destination_pixel// [[KeyPgAs as]] [[KeyPgUinteger uinteger]], _
-		[[KeyPgByval byval]] //parameter// [[KeyPgAs as]] [[KeyPgAny any]] [[KeyPgPtr ptr]] _
+	{{fbdoc item="section" value="Differences de dialecte
+		<br \="">  	- Non utilisable dans le dialecte //[[CompilerOptlang -lang qb]]//.<br \=""><br \="">  </li>
+		{{fbdoc item="diff"}}<br \="">  	- Nouveau pour FreeBASIC<br \=""><br \="">  </li>
+		{{fbdoc item="see"}}<br \="">	- ##[[KeyPgPutgraphics Put (Graphique)]]##<br \=""><br \=""></li>
 		) [[KeyPgAs as]] [[KeyPgUinteger uinteger]]##
 
 	##//identifier//## is the name of the function.

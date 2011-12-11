@@ -1,43 +1,43 @@
 {{fbdoc item="title" value="XOR"}}----
-Parameter to the ##[[KeyPgPutgraphics Put]]## graphics statement which uses a bit-wise ##[[KeyPgOpXor Xor]]## as the blitting method
+Param&egrave;tre de la fonction graphique ##[[KeyPgPutgraphics Put]]## qui utilise le traitement bit-&agrave;-bit ##[[KeyPgOpXor Xor]]## comme m&eacute;thode d'&eacute;criture &eacute;cran
 
 {{fbdoc item="syntax"}}##
 	**Put** [ //target//, ] [ STEP ] ( //x//,//y// ), //source// [ ,( //x1//,//y1// )-( //x2//,//y2// ) ], **Xor**
 ##
 {{fbdoc item="param"}}
 	##**Xor**##
-		Required.
+		Requis.
 
 {{fbdoc item="desc"}}
-	The ##**Xor**## method combines each source pixel with the corresponding destination pixel, using the bit-wise ##[[KeyPgOpXor Xor]]## function.  The result of this is output as the destination pixel.
-	This method works in all graphics modes.  There is no mask color, although color values of ##0## (##[[KeyPgRgba RGBA]](0, 0, 0, 0)## in full-color modes) will have no effect, because of the behavior of ##[[KeyPgOpXor Xor]]##.
+	La m&eacute;thode ##**Xor**## combine chaque pixel source avec le pixel correspondant de la destination, en utilisant la fonction de traitement bit-&agrave;-bit ##[[KeyPgOpXor Xor]]##.  Le r&eacute;sultat de cette manipulation &eacute;tant envoy&eacute; comme pixel destination.
+	Cette m&eacute;thode fonctionne dans tous les modes graphiques.  Il n'y a pas de masque de couleur, cependant les valeurs de couleur ##0## (##[[KeyPgRgba RGBA]](0, 0, 0, 0)## dans les modes pleine couleur) n'auront aucun effet, en raison du comportement de ##[[KeyPgOpXor Xor]]##.
 
-	In full-color modes, each component (red, green, blue and alpha) is kept in a discrete set of bits, so the operation can be made to only affect some of the channels, by making sure the all the values of the other channels are set to ##0##.
+	Dans les modes pleine couleur, chaque composante (rouge, vert, bleu et alpha) est conserv&eacute; dans un ensemble discret de bits, donc l'op&eacute;ration peut ne concerner qu'une partie des canaux, en s'assurant que les valeurs de tous les autres canaux sont mis &agrave; ##0##.
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/gfx/put-xor.bas"}}%%(freebasic)
-''open a graphics window
+''ouvrir une fenetre graphique
 ScreenRes 320, 200, 16
 
-''create a sprite containing a circle
+''cree un sprite contenant un cercle
 Const As Integer r = 32
 Dim c As Any Ptr = ImageCreate(r * 2 + 1, r * 2 + 1, 0)
 Circle c, (r, r), r, RGBA(255, 255, 255, 0), , , 1, f
 
-''put the three sprites, overlapping each other in the middle
+''"Put" les trois sprites, se chevauchant au centre de l'ecran
 Put (146 - r, 108 - r), c, xor
 Put (174 - r, 108 - r), c, xor
 Put (160 - r,  84 - r), c, xor
 
-''free the memory used by the sprite
+''libere la memoire utilisee par le sprite
 ImageDestroy c
 
-''pause the program before closing
+''pause le programme avant cloture
 Sleep
 %%
-{{image class="center" title="Put Xor example output" url="/images/put-xor.png"}}
+<div class="fb_img"><img src="images/put-xor.png" />
 {{fbdoc item="diff"}}
-	- None
+	- Aucune
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgOpXor Xor]]##

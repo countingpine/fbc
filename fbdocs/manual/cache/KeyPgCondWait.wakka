@@ -1,5 +1,5 @@
 {{fbdoc item="title" value="CONDWAIT"}}----
-Stops execution of current thread until some condition becomes true
+Arr&ecirc;te l'ex&eacute;cution du "thread" courant jusqu'&agrave; ce qu'une condition devienne vraie
 
 {{fbdoc item="syntax"}}##
 	[[KeyPgDeclare declare]] [[KeyPgSub sub]] **Condwait** ( [[KeyPgByval byval]] //handle// [[KeyPgAs as]] [[KeyPgAny any]] [[KeyPgPtr ptr]], [[KeyPgByval byval]] //mutex// [[KeyPgAs as]] [[KeyPgAny any]] [[KeyPgPtr ptr]] )
@@ -9,29 +9,29 @@ Stops execution of current thread until some condition becomes true
 ##
 {{fbdoc item="param"}}
 	##//handle//##
-		The handle of a conditional variable, or the null pointer (0) on failure.
+		Le "handle" d'une variable conditionnelle, ou le pointeur nul (0) en cas d'&eacute;chec.
 	##//mutex//##
-		The mutex associated with this conditional variable, which must be locked when testing the condition and calling ##**Condwait**##
+		Le "mutex" associ&eacute; &agrave; cette variable conditionnelle, qui doit &ecirc;tre verrouill&eacute; lors de la v&eacute;rification de la condition et l'appel &agrave; ##**CondWait**##
 
 {{fbdoc item="desc"}}
-	Function that stops the thread where it is called until some other thread  ##[[KeyPgCondSignal Condsignal]]##s or ##[[KeyPgCondBroadcast Condbroadcast]]##s  the handle.
+	Fonction qui arr&ecirc;te le "thread" o&ugrave; elle est appel&eacute;e jusqu'&agrave; ce qu'un autre thread ou ##[[KeyPgCondSignal CondSignal]]##s ou ##[[KeyPgCondBroadcast CondBroadcast]]## le "handle".
 
-	Once the conditional variable is created with ##[[KeyPgCondCreate Condcreate]]## and the threads are started, one of more of them can be set to ##**Condwait**## for the conditional; they will be stopped until some other thread ##[[KeyPgCondSignal Condsignal]]##s that the waiting thread can restart. ##[[KeyPgCondBroadcast Condbroadcast]]## can be used to restart all threads waiting for the conditional. At the end of the program ##[[KeyPgCondDestroy Conddestroy]]## must be used to avoid leaking resources in the OS.
+	Une fois que le conditionnel est ##[[KeyPgCondCreate CondCreate]]## et les "threads" d&eacute;marr&eacute;s, l'un (ou plusieurs) d'entre eux peut &ecirc;tre fix&eacute; &agrave; ##**CondWait**## pour le conditionnel, ils seront arr&ecirc;t&eacute;s jusqu'&agrave; un autre "thread" ##[[KeyPgCondSignal CondSignal]]## que le "thread" en attente puisse red&eacute;marrer. ##[[KeyPgCondBroadcast CondBroadcast]]## peut &ecirc;tre utilis&eacute; pour red&eacute;marrer tous les "threads" qui attendent le conditionnel. A la fin du programme ##[[KeyPgCondDestroy CondDestroy]]## doit &ecirc;tre utilis&eacute; pour &eacute;viter les fuites de ressources dans le syst&egrave;me d'exploitation.
 
-	When calling ##**Condwait**##, ##//mutex//## should already be locked.  An atomic unlock of the mutex and wait on the conditional variable will occur.  When the condition variable becomes signaled, ##//mutex//## will be locked again and then execution will return to the thread after the ##**Condwait**## call.
+	A l'appel de ##**CondWait**##, ##//mutex//## doit toujours &ecirc;tre verrouill&eacute;.  Un d&eacute;blocage "atomique" des mutex et une veille sur la variable conditionnelle auront lieu. Lorsque la variable de condition est signal&eacute;e, ##//mutex//## est verrouill&eacute; &agrave; nouveau, puis l'ex&eacute;cution retournera au "thread" apr&egrave;s l'appel de ##**CondWait**##.
 
 {{fbdoc item="ex"}}
-	See ##[[KeyPgCondCreate Condcreate]]##
+	Voir ##[[KeyPgCondCreate CondCreate]]##
 
 {{fbdoc item="target"}}
-	- **Condwait** is not available with the DOS version / target of FreeBASIC, because multithreading is not supported by DOS kernel nor the used extender.
-	- In Linux the threads are always started in the order they are created, this can't be assumed in Win32. It's an OS, not a FreeBASIC issue. 
+	- **Condwait** n'est pas utilisable avec la version/cible DOS de FreeBASIC, parce que le "multithreading" n'est pas support&eacute; par le noyau DOS, ni l'extension utilis&eacute;e.
+	- Sous Linux les "threads" sont toujours d&eacute;marr&eacute;s dans l'ordre de leur cr&eacute;ation, ceci n'est pas vrai sous Win32. C'est une question d'OS, pas de FreeBasic. 
 
 {{fbdoc item="lang"}}
-	- Threading is not allowed in //[[CompilerOptlang -lang qb]]//
+	- "Threading" n'est pas utilisable dans le dialecte //[[CompilerOptlang -lang qb]]//
 
 {{fbdoc item="diff"}}
-	- New to ""FreeBASIC""
+	- Nouveau pour FreeBASIC
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgCondCreate Condcreate]]##

@@ -1,5 +1,5 @@
 {{fbdoc item="title" value="SCREENLOCK"}}----
-Locks the working page's framebuffer
+Verrouille le tampon image de la page de travail
 
 {{fbdoc item="syntax"}}##
 	[[KeyPgDeclare declare]] [[KeyPgSub sub]] **Screenlock** ( )
@@ -9,24 +9,24 @@ Locks the working page's framebuffer
 ##
 {{fbdoc item="desc"}}
 
-	All of ""FreeBASIC's"" Graphics Library functions draw to a framebuffer and an automatic routine copies the framebuffer to the actual screen memory at each draw. If the user program does a lot of drawing, the automatic refreshes may take a significant amount of time.
+	Toutes les fonctions des librairies graphiques &eacute;crivent dans un tampon image (framebuffer) et une "routine" automatique copie le contenu du tampon image vers la m&eacute;moire r&eacute;elle de l'&eacute;cran pour chaque dessin. Si le programme utilisateur effectue de nombreuses &eacute;critures successives, le rafra&icirc;chissement automatique risque de prendre beaucoup de temps.
 
-	The ##**Screenlock**## function locks the automatic refresh, so several drawing operations may be done before the screen refresh is performed, thus increasing the speed of execution, and preventing the user from seeing partial results. 
+	La fonction ##**ScreenLock**## interdit le rafra&icirc;chissement automatique, ainsi plusieurs op&eacute;rations de dessin seront ex&eacute;cut&eacute;es en une seule fois lorsque le rafra&icirc;chissement sera autoris&eacute;, ceci augmentera la vitesse d'ex&eacute;cution, et &eacute;vitera l'affichage de r&eacute;sultats partiels. 
 	
-	Framebuffer memory may be freely accessed by using pointers (see [[KeyPgScreenptr ScreenPtr]]) ONLY while the screen is locked. Primitive graphics statements (##[[KeyPgLinegraphics Line]]##, ##[[KeyPgPset PSet]]##, ##[[KeyPgDrawString Draw String]]##, ...)  may be used at any time.
+	La m&eacute;moire du tampon image est accessible facilement en utilisant des pointeurs (see [[KeyPgScreenptr ScreenPtr]]) SEULEMENT quand l'&eacute;cran est verrouill&eacute;. Les primitives graphiques (##[[KeyPgLinegraphics Line]]##, ##[[KeyPgPset PSet]]##, ##[[KeyPgDrawString Draw String]]##, ...)  sont utilisables &agrave; n'importe quel moment.
 
-	The screen refresh remains locked until the use of ##[[KeyPgScreenunlock Screenunlock]]## statement, which resumes it.  
+	Le rafra&icirc;chissement de l'&eacute;cran est interdit jusqu'&agrave; l'utilisation de ##[[KeyPgScreenunlock ScreenUnlock]]##, qui l'autorise &agrave; nouveau.  
 	
-	Calls to ##**Screenlock**## must be paired with a matching call to ##**[[KeyPgScreenunlock Screenunlock]]**##.  The graphics driver keeps track of how many times ##**Screenlock**## has been called using a counter.  Only the first call to ##**Screenlock**## actually performs a locking operation.  Subsequent calls to ##**Screenlock**## only increment the counter.  Conversely, ##**[[KeyPgScreenunlock Screenunlock]]**## only decrements the lock counter until it reaches zero at which time the actual unlock operation will be performed.  Using ##[[KeyPgScreengraphics Screen]]## or ##[[KeyPgScreenres Screenres]]## will release all locks and set the lock counter back to zero before changing screen modes.
+	Des appels &agrave; ##**ScreenLock**## doivent &ecirc;tre coupl&eacute;s &agrave; des appels &agrave; ##**[[KeyPgScreenunlock ScreenUnlock]]**##.  Le pilote graphique garde la trace du nombre d'appels &agrave; ##**ScreenLock**## en utilisant un compteur.  Seul le premier appel &agrave; ##**ScreenLock**## produit r&eacute;ellement une op&eacute;ration de verrouillage.  Les appels suivants &agrave; ##**ScreenLock**## incr&eacute;mentent seulement le compteur.  Inversement, ##**[[KeyPgScreenunlock ScreenUnlock]]**## d&eacute;cr&eacute;mente seulement le compteur jusqu'&agrave; ce qu'il atteigne z&eacute;ro et c'est &agrave; ce moment-l&agrave; que l'op&eacute;ration de d&eacute;verrouillage aura r&eacute;ellement lieu.  L'utilisation de ##[[KeyPgScreengraphics Screen]]## ou ##[[KeyPgScreenres ScreenRes]]## annulera tous les verrouillages et mettra le compteur de verrouillage &agrave; z&eacute;ro avant de changer de mode &eacute;cran.
 	
-	It is strongly recommended that the lock on a page be held for as short a time as possible. Only screen drawing should occur while the screen is locked, input/output and waiting must be avoided. In ""Win32"" and Linux the screen is locked by stopping the thread that processes also the OS' events. If the screen is kept locked for a long time the event queue could overflow and make the system unstable. 
+	Il est fortement recommand&eacute; que le verrouillage d'une page soit le plus bref possible. Seul le dessin &agrave; l'&eacute;cran est possible pendant qu'il est verrouill&eacute;, entr&eacute;es/sorties et attentes doivent &ecirc;tre &eacute;vit&eacute;es. Sous Win32 et Linux l'&eacute;cran est verrouill&eacute; en stoppant le "thread" qui s'occupe aussi des &eacute;v&eacute;nement de l'OS'. Si l'&eacute;cran est verrouill&eacute; trop longtemps la file d'attente des &eacute;v&eacute;nements va d&eacute;border et rendre le syst&egrave;me instable. 
 
-	The automatic refresh takes place only in the visible page of the framebuffer. ##**Screenlock**## has no effect when drawing to pages other than the visible one. 	
+	Le rafra&icirc;chissement automatique n'a lieu que dans la page visible du tampon image. ##**ScreenLock**## n'a aucun effet pour des dessins sur des pages autres que la page visible. 	
 
 {{fbdoc item="ex"}}
 
 {{fbdoc item="filename" value="examples/manual/gfx/screenlock.bas"}}%%(freebasic)
-'' Draws a circle on-screen at the mouse cursor
+'' Dessine un cercle a l'ecran au curseur souris
 Dim As Integer mx, my
 Dim As String key
 
@@ -38,7 +38,7 @@ Do
   Getmouse(mx, my)
   key = Inkey()
 
-  'draw
+  'dessin
   Screenlock()
   Cls()
   Circle (mx, my), 8, Rgb(255, 255, 255)
@@ -50,18 +50,18 @@ Do
 Loop Until key = Chr(27) Or key = Chr(255, 107)
 %%
 
-{{fbdoc item="target"}}
-	- In DOS, the mouse arrow does not react to mouse movements while the screen is locked
+{{fbdoc item="section" value="Diff&eacute;rences de plates-formes
+	- Sous DOS, la fl&egrave;che souris ne r&eacute;agit pas aux mouvements tant que l'&eacute;cran est verrouill&eacute;
 
 {{fbdoc item="lang"}}
-	- Not available in the //[[CompilerOptlang -lang qb]]// dialect unless referenced with the alias ##**""__Screenlock""**##.
+	- Non disponible dans le dialecte //[[CompilerOptlang -lang qb]]// sauf si r&eacute;f&eacute;renc&eacute; avec l'alias ##**__Screenlock**##.
 
 {{fbdoc item="diff"}}
-	- New to ""FreeBASIC""
+	- Nouveau pour FreeBASIC
 
 {{fbdoc item="see"}}
-	- ##[[KeyPgScreengraphics Screen (Graphics)]]## - Setting mode
-	- ##[[KeyPgScreenres Screenres]]## - Setting mode
+	- ##[[KeyPgScreengraphics Screen (Graphics)]]## - R&eacute;glage du mode
+	- ##[[KeyPgScreenres ScreenRes]]## - R&eacute;glage du mode
 	- ##[[KeyPgScreenunlock Screenunlock]]##
 	- ##[[KeyPgScreenptr Screenptr]]##
 

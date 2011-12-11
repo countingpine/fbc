@@ -1,5 +1,5 @@
 {{fbdoc item="title" value="SHELL"}}----
-Sends a command to the system command interpreter
+Envoie une commande &agrave; l'interpr&eacute;teur de commandes du syst&egrave;me
 
 {{fbdoc item="syntax"}}##
 	[[KeyPgDeclare declare]] [[KeyPgFunction function]] **Shell** ( [[KeyPgByref byref]] //command// [[KeyPgAs as]] [[KeyPgConstQualifier const]] [[KeyPgString string]] ) [[KeyPgAs as]] [[KeyPgInteger integer]]
@@ -9,13 +9,13 @@ Sends a command to the system command interpreter
 ##
 {{fbdoc item="param"}}
 	##//command//##
-		A string specifying the command to send to the command interpreter.
+		Une cha&icirc;ne sp&eacute;cifiant la commande &agrave; envoyer &agrave; l'interpr&eacute;teur de commandes.
 
-{{fbdoc item="ret"}}
-	If ##//command// = ""##, or else the command could not be executed, -1 is returned. Otherwise, the command is executed and its exit code is returned.
+{{fbdoc item="section" value="Valeur retourn&eacute;e
+	Si ##//command// = ""##, ou encore la commande n'a pas pu &ecirc;tre ex&eacute;cut&eacute;e, -1 est renvoy&eacute;. Sinon, la commande est ex&eacute;cut&eacute;e et son code de sortie est renvoy&eacute;.
 
 {{fbdoc item="desc"}}
-	Program execution will be suspended until the command interpreter exits.
+	L'ex&eacute;cution du programme sera suspendu jusqu'&agrave; ce que l'interpr&eacute;teur de commandes s'arr&ecirc;te.
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/system/shell.bas"}}%%(freebasic)
@@ -27,15 +27,15 @@ shell "ls"
 %%
 
 {{fbdoc item="target"}}
-	- Linux requires the //command// case matches the real name of the command. Windows and DOS  are case insensitive. The program being shelled may be case sensitive for its command line parameters. 
-	- Path separators in Linux are forward slashes / . Windows uses backward slashes \ but it allows for forward slashes .  DOS uses backward  \ slashes. 
+	- Linux n&eacute;cessite que la casse de ##//command//## corresponde au nom r&eacute;el de la commande. Windows et DOS ne sont pas sensibles &agrave; la casse. Le programme ex&eacute;cut&eacute; dans le "shell" peut &ecirc;tre sensible &agrave; la casse pour ses param&egrave;tres de ligne de commande.	- Les s&eacute;parateurs de chemin de Linux sont des barres obliques /. Windows utilise des barres obliques vers l'arri&egrave;re \ mais il admet des barres obliques .  DOS utilise des barres obliques en arri&egrave;re \. 
+	{{fbdoc item="diff"}}
 
 
-{{fbdoc item="diff"}}
-	- QB allowed SHELL on its own without a "command" argument which caused a default command shell to be started.  Execution in the main program would suspend until exit from the command shell.
+- QB permet SHELL de sa propre initiative, sans un argument "commande" qui d&eacute;marre une commande "shell", par d&eacute;faut.  L'ex&eacute;cution dans le programme principal sera suspendue jusqu'&agrave; la sortie de l'interpr&eacute;teur de commandes.
+	{{fbdoc item="see"}}
 
-{{fbdoc item="see"}}
-	- ##[[KeyPgExec Exec]]##
+- ##[[KeyPgExec Exec]]##
+	- ##[[KeyPgRun Run]]##
 	- ##[[KeyPgRun Run]]##
 
 {{fbdoc item="back" value="CatPgOpsys|Operating System Functions"}}

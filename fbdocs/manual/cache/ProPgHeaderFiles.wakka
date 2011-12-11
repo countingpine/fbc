@@ -1,10 +1,10 @@
 {{fbdoc item="title" value="Header Files (.bi)"}}----
-Provides an interface for a module.
+Fournit une interface pour un module.
 
-A header file is a special kind of source file that typically only contains preprocessor statements, defines, declarations, prototypes, constants, enumerations, or similar types of statements, however, a header file can contain any valid source code if the purpose suits.  What makes them different from other module (.bas) source files, is instead of being compiled directly, they are included by another source file (module or header) using the ##[[KeyPgInclude #include]]## preprocessor directive.  All compiled libraries typically have one or more header files that can be included in another source file and will introduce to the compiler all the names of the procedures usable in a particular library.
+Un fichier d'en-t&ecirc;te est un type sp&eacute;cial de fichier source qui g&eacute;n&eacute;ralement ne contient que des d&eacute;clarations pr&eacute;-processeur, des d&eacute;finitions, des d&eacute;clarations, des prototypes, des constantes, des &eacute;num&eacute;rations ou des types similaires de d&eacute;clarations; cependant, un fichier d'en-t&ecirc;te peut contenir n'importe quel code source valable si cela est n&eacute;cessaire.  Ce qui les rend diff&eacute;rents des des fichiers source (. bas) , c'est d'&ecirc;tre compil&eacute;s directement, ils sont inclus par un autre fichier source (module ou en-t&ecirc;te) en utilisant la directive ##[[KeyPgInclude #include]]## du pr&eacute;processeur.  Toutes les biblioth&egrave;ques compil&eacute;es ont g&eacute;n&eacute;ralement un (ou plusieurs) fichier(s) en-t&ecirc;te qui peut &ecirc;tre inclus dans un autre fichier source et fera d&eacute;couvrir au compilateur tous les noms des proc&eacute;dures utilisables dans une biblioth&egrave;que particuli&egrave;re.
 
-{{fbdoc item="section" value="FreeBASIC Header Files"}}
-	Some of the keywords, constants, and procedures documented in this manual are not normally available when compiling a source code unless a specific header file is included in the source first.
+{{fbdoc item="section" value="Fichiers d'en-t&ecirc;te FreeBasic
+	Quelques-uns des mots-cl&eacute;s, des constantes et des proc&eacute;dures document&eacute;es dans ce manuel ne sont normalement pas disponibles lors de la compilation d'un code source, sauf si un fichier en-t&ecirc;te sp&eacute;cifique est inclus dans la premi&egrave;re source.
 	- ##datetime.bi##
 	- ##dir.bi##
 	- ##fbgfx.bi##
@@ -12,20 +12,20 @@ A header file is a special kind of source file that typically only contains prep
 	- ##string.bi##
 	- ##vbcompat.bi##
 
-{{fbdoc item="section" value="Case Sensitivity"}}
-	Although the FreeBASIC language itself is not case-sensitive, the file system on which it is running might be.  If a header file can not be found, check that FreeBASIC is searching for it the correct location and ensure that name of both the directory and filename of the header file specified in the ##[[KeyPgInclude #include]]## statement is using the correct upper and lower case letters.
+{{fbdoc item="section" value="Sensibilit&eacute; &agrave; la casse
+	Bien que la langage FreeBasic lui-m&ecirc;me, ne soit pas sensible &agrave; la casse, le syst&egrave;me de fichiers sur lequel il est ex&eacute;cut&eacute; peut l'&ecirc;tre.  Si un fichier d'en-t&ecirc;te ne peut pas &ecirc;tre trouv&eacute;, v&eacute;rifiez que FreeBasic le recherche au bon endroit et v&eacute;rifiez que les noms du r&eacute;pertoire et du fichier en-t&ecirc;te sp&eacute;cifi&eacute;s dans la d&eacute;claration ##[[KeyPgInclude #include]]## utilise correctement les lettres majuscules et minuscules.
 
-{{fbdoc item="section" value="Path Separators"}}
-	FreeBASIC will automatically switch backslash ( \ ) and forward slash ( / ) characters as needed for a given platform.  This allows source code to be easily cross compatible.
+{{fbdoc item="section" value="S&eacute;parateurs de chemin
+	FreeBasic passera automatiquement aux caract&egrave;res barre oblique inverse (\) et barre oblique (/) en fonction de la plate-forme utilis&eacute;e.  Cela permet aux codes source d'&ecirc;tre facilement compatibles entre eux.
 
-{{fbdoc item="section" value="Including a header only once"}}
-	It is common that header files need to ##[[KeyPgInclude #include]]## other header files to compile correctly.  FreeBASIC offers three methods for guarding against including a header file more than once.
-	- ##[[KeyPgPpifndef #ifndef]]## guards in the header file
-	- ##[[KeyPgInclude #include]] **once**## where the file is included
-	- ##[[KeyPgPragma #pragma]] **once**## in the header file itself
+{{fbdoc item="section" value="Inclure une seule fois un fichier en-t&ecirc;te
+	Il est fr&eacute;quent que des fichiers d'en-t&ecirc;te doivent ##[[KeyPgInclude #include]]## d'autres fichiers d'en-t&ecirc;te pour &ecirc;tre compil&eacute;s correctement.  FreeBasic propose trois m&eacute;thodes pour se pr&eacute;munir contre l'inclusion multiple d'un fichier d'en-t&ecirc;te.
+	- ##[[KeyPgPpifndef #ifndef]]##: v&eacute;rifie et limite l'inclusion du fichier d'ent&ecirc;te
+	- ##[[KeyPgInclude #include]]##: le fichier est inclus **une fois** dans le fichier o&ugrave; on se trouve
+	- ##[[KeyPgPragma #pragma]]##: le fichier est inclus **une fois** dans le fichier d'en-t&ecirc;te lui-m&ecirc;me
 
-{{fbdoc item="section" value="#ifndef guards in the header file"}}
-	The use of ##[[KeyPgPpifndef #ifndef]]## and ##[[KeyPgPpdefine #define]]## is a common practice in nearly any language that supports preprocessing.  The first time a file is included, a unique symbol is defined.  The next time the same header file is included, the definition of the symbol is checked, and if it is already defined, the contents of the header file are skipped.
+{{fbdoc item="section" value="#ifndef surveille l'inclusion du fichier d'ent&ecirc;te
+	L'utilisation de ##[[KeyPgPpifndef #ifndef]]## et ##[[KeyPgPpdefine #define]]## est une pratique courante dans tout langage supportant le tra&icirc;tement du pr&eacute;processeur.  La premi&egrave;re fois qu'un fichier est inclus, un symbole unique est d&eacute;fini.  Lorsque le m&ecirc;me fichier d'en-t&ecirc;te est inclus &agrave; nouveau, la d&eacute;finition du symbole est v&eacute;rifi&eacute;e et si elle est d&eacute;j&agrave; d&eacute;finie, le contenu du fichier d'en-t&ecirc;te est ignor&eacute;.
 %%(freebasic)
 '' header.bi
 #ifndef __HEADER_BI__
@@ -38,8 +38,8 @@ A header file is a special kind of source file that typically only contains prep
 #endif
 %%
 
-{{fbdoc item="section" value="#include once"}}
-	At the point in the source code where the header file is included, the optional ##"once"## specifier of the ##[[KeyPgInclude #include]]## directive can tell the compiler to only include the source file one time.
+{{fbdoc item="section" value="#include une seule fois
+	Dans le code source, &agrave; l'endroit o&ugrave; le fichier d'en-t&ecirc;te est inclus, le sp&eacute;cificateur facultatif ##"once"## de la directive ##[[KeyPgInclude #include]]## peut indiquer au compilateur de n'inclure qu'une seule fois le fichier source.
 %%(freebasic)
 '' header.bi
 #include once "fbgfx.bi"
@@ -50,8 +50,8 @@ A header file is a special kind of source file that typically only contains prep
 #include once "header.bi"
 %%
 
-{{fbdoc item="section" value="#pragma once"}}
-	##[[KeyPgPragma #pragma]] **once**## can be used in a header file to indicate that the header file should only be included once.  
+{{fbdoc item="section" value="#pragma une seule fois
+	##[[KeyPgPragma #pragma]] **once**## peut &ecirc;tre utilis&eacute; pour indiquer que le fichier d'en-t&ecirc;te ne doit &ecirc;tre inclus qu'une seule fois.  
 %%(freebasic)
 '' header.bi
 #pragma once
@@ -59,7 +59,7 @@ A header file is a special kind of source file that typically only contains prep
 %%
 
 {{fbdoc item="see"}}
-	- [[ProPgSourceFiles Source Files (.bas)]]
-	- [[ExtLibTOC Header Files Index]]
+	- [[ProPgSourceFiles Les fichiers sources (.bas)]]
+	- [[ExtLibTOC Index des fichiers d'en-t&ecirc;te]]
 
 {{fbdoc item="back" value="CatPgProgrammer|Programmer's Guide"}}

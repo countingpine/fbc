@@ -1,139 +1,139 @@
 {{fbdoc item="title" value="Type Aliases"}}----
-Additional names for variable or object types
+D'autres noms pour les types de variable ou d'objet
 
-**{{anchor name="OVERVIEW|Overview"}}**
-**{{anchor name="DECL|Declaration"}}**
-**{{anchor name="OVERLOAD|Overload resolution"}}**
-**{{anchor name="PROCPTRPTR|Pointers to procedure pointers"}}**
-**{{anchor name="TYPEFORWARD|Type forwarding"}}**
-**{{anchor name="INCTYPES|Incomplete types"}}**
+**[[#OVERVIEW">Vue d'ensemble]]**
+**[[#DECL">D&eacute;claration]]**
+**[[#OVERLOAD">R&eacute;solution de la surcharge]]**
+**[[#PROCPTRPTR">Pointeurs de pointeurs de proc&eacute;dure]]**
+**[[#TYPEFORWARD">Transmission de type]]**
+**[[#INCTYPES">Types incomplets]]**
 
-{{anchor name="OVERVIEW"}}{{fbdoc item="section" value="Overview"}}
-	Type aliases are alternative names for a type. They can be used to facilitate a mass change from one type to another, save typing, or make circular dependency possible.
+<a name="OVERVIEW"></a>{{fbdoc item="section" value="Vue d'ensemble
+	Les alias de type sont d'autres noms pour un type. Ils peuvent &ecirc;tre utilis&eacute;s pour faciliter un changement en masse d'un type &agrave; un autre, en diminuant la frappe ou rendre possible une d&eacute;pendance circulaire.
 
-{{anchor name="DECL"}}{{fbdoc item="section" value="Declaration"}}
-	Type aliases are declared using the ##[[KeyPgTypeAlias Type]]## keyword much like declaring variables or objects with [[KeyPgExtern Extern]] or [[KeyPgDim Dim]].
+<a name="DECL"></a>
+	{{fbdoc item="section" value="D&eacute;claration
 
-	The following example declares a type alias to ##[[KeyPgSingle Single]]## called "##//float//##", a procedure, and defines and initializes two variables of that type:
+	Les alias de type sont d&eacute;clar&eacute;s en utilisant le mot-cl&eacute; ##[[KeyPgTypeAlias Type]]## un peu comme la d&eacute;claration de variables ou d'objects avec [[KeyPgExtern Extern]] ou [[KeyPgDim Dim]].
 
-	{{fbdoc item="filename" value="examples/manual/proguide/typalias/builtin.bas"}}%%(freebasic)
+	L'exemple suivant d&eacute;clare un alias de type ##[[KeyPgSingle Single]]## appel&eacute; "##//float//##", une proc&eacute;dure et d&eacute;finit et initialise deux variables de ce type:
 type float as single
 
-declare function add (a as float, b as float) as float
+Type float As Single
 
-dim foo as float = 1.23
-dim bar as float = -4.56
-		%%
+Declare Function add (a As float, b As float) As float
+Dim foo As float = 1.23
+		Dim bar As float = -4.56
 
-	Procedure pointer type aliases are declared in the same fashion, as shown in the following example:
+	%%
 
-	{{fbdoc item="filename" value="examples/manual/proguide/typalias/procptr_1.bas"}}%%(freebasic)
+	Les alias de type de pointeur de proc&eacute;dure sont d&eacute;clar&eacute;s de la m&ecirc;me fa&ccedil;on, comme le montre l'exemple suivant:
+Declare Function f (ByRef As String) As Integer
+
 Declare Function f (ByRef As String) As Integer
 
 Type func_t As Function (ByRef As String) As Integer
-
-Dim func As func_t = @f
 		
-Function f (Byref arg as String) as Integer
-	Function = Cint(arg)
+Dim func As func_t = @f
+	Function f (ByRef arg As String) As Integer
+Function = CInt(arg)
 End Function
+
 %%
+	<a name="OVERLOAD"></a>
 
-{{anchor name="OVERLOAD"}}{{fbdoc item="section" value="Overload resolution"}}
-	Type aliases are just that - aliases. For all intents and purposes, a type alias **is** the type it aliases. So as far as procedure overload resolution is concerned, a procedure declared with a parameter of type "##//alias_to_T//##" is the same as a procedure declared with a parameter of type "##//T//##" (the same applies to overloading member procedures as well).
+	{{fbdoc item="section" value="R&eacute;solution de la surcharge
 
-	In other words, it is an error - duplicated definition - to declare a procedure where parameters differ only in a type and its alias, as the following example shows:
-
-	{{fbdoc item="filename" value="examples/manual/proguide/typalias/overload.bas"}}%%(freebasic)
-Type float As Single
+	Les alias de type ne sont que cela - des alias. A toutes fins utiles, un alias de type **est** du type qu'il remplace. Ainsi dans le cas o&ugrave; la r&eacute;solution de la surcharge de proc&eacute;dure est concern&eacute;e, une proc&eacute;dure d&eacute;clar&eacute;e avec un param&egrave;tre de type "##//alias_vers_T//##" est la m&ecirc;me qu'une proc&eacute;dure d&eacute;clar&eacute;e avec un param&egrave;tre de type "##//T//##" (la m&ecirc;me chose s'applique ainsi &agrave; la surcharge membres des proc&eacute;dures).
+En d'autres termes, c'est une erreur -double d&eacute;finition- de d&eacute;clarer une proc&eacute;dure o&ugrave; les param&egrave;tres ne diff&egrave;rent que par un type et son alias, comme l'exemple suivant le montre:
 
 Declare Sub f Overload (a As Single)
 
+Type float As Single
+Declare Sub f Overload (a As Single)
 '' If uncommented, this will generate a duplicated definition error
+
 '' Declare Sub f (a As float)
-%%
+	%%
 
-{{anchor name="PROCPTRPTR"}}{{fbdoc item="section" value="Pointers to procedure pointers"}}
-	Pointers to procedure pointers are just like any other pointer type, except they point to procedure pointers. Because the syntax for declaring procedure pointers doesn't allow directly creating a pointer to procedure pointer, a type alias is used.
+	<a name="PROCPTRPTR"></a>
 
-	The following example declares a pointer to a procedure returning an integer pointer, and then a pointer to a pointer to a procedure returning an integer:
+	{{fbdoc item="section" value="Pointeurs de pointeurs de proc&eacute;dure
+Les pointeurs de pointeurs de proc&eacute;dure sont comme n'importe quel autre type de pointeur, sauf qu'ils pointent vers des pointeurs de proc&eacute;dure. Parce que la syntaxe pour d&eacute;clarer des pointeurs de proc&eacute;dure ne permet pas de cr&eacute;er directement un pointeur sur pointeur de proc&eacute;dure, un alias de type est utilis&eacute;.
 
-	{{fbdoc item="filename" value="examples/manual/proguide/typalias/procptr_2.bas"}}%%(freebasic)
-dim pf as function() as integer ptr
-
-type pf_t as function() as integer
+L'exemple suivant d&eacute;clare un pointeur vers une de proc&eacute;dure retournant un pointeur d'entier, puis un pointeur vers un pointeur vers une de proc&eacute;dure retournant un entier:
 dim ppf as pf_t ptr
+	Dim pf As Function() As Integer Ptr
+
+Type pf_t As Function() As Integer
+	Dim ppf As pf_t Ptr
+
 	%%
+<a name="TYPEFORWARD"></a>
 
-{{anchor name="TYPEFORWARD"}}{{fbdoc item="section" value="Type forwarding"}}
-	Type aliases can be forward referencing: an alias can refer to some other type not yet fully defined.
-
-	{{fbdoc item="filename" value="examples/manual/proguide/typalias/fwd_1.bas"}}%%(freebasic)
-TYPE foo AS bar
-
-TYPE sometype
-  f   AS foo PTR
+{{fbdoc item="section" value="Transmission de type
+  Des alias de type peuvent &ecirc;tre avant le r&eacute;f&eacute;rencement: un alias peut faire r&eacute;f&eacute;rence &agrave; un autre type qui n'est pas encore enti&egrave;rement d&eacute;fini.
 END TYPE
 
-TYPE bar
-  st  AS sometype
-  a   AS INTEGER
+Type foo As bar
+  Type sometype
+  f   As foo Ptr
 END TYPE
-	%%
+	Type bar
 
-	Using a type alias and forward referencing allows circular dependencies between types.
+	st  As sometype
 
-	{{fbdoc item="filename" value="examples/manual/proguide/typalias/fwd_2.bas"}}%%(freebasic)
-TYPE list as list_
+	a   As Integer
+End Type
 
-TYPE listnode
-  parent AS list PTR
-  text AS string
+%%
+  En utilisant un alias de type et un r&eacute;f&eacute;rencement pr&eacute;coce permet des d&eacute;pendances circulaires entre les types.
+  %%(freebasic)
+Type list As list_
+
+Type listnode
+  parent As list Ptr
+  text As String
 END TYPE
+	Type list_
 
-TYPE list_
-  first AS listnode PTR
-  count AS integer
-END TYPE
-	%%
-
-{{anchor name="INCTYPES"}}{{fbdoc item="section" value="Incomplete types"}}
-	 A type is considered incomplete until the size of it, that is the number of bytes it would need to occupy in memory is known, and the offsets of all of its fields are known.  It is not possible to allocate space for an incomplete type.  It is not possible to declare a variable having the data type of an incomplete type, pass an incomplete type as a parameter, or access the members of an incomplete type.
+first As listnode Ptr
+	 count As Integer
 	
-	However, pointers to incomplete types may be allocated, declared as members in other types, or passed as parameters to a procedures since the size of a pointer is known.
+	End Type
 
-	{{fbdoc item="filename" value="examples/manual/proguide/typalias/incomp.bas"}}%%(freebasic)
-TYPE sometype AS sometype_
+	%%
+<a name="INCTYPES"></a>
 
+{{fbdoc item="section" value="Types incomplets
+Un type est consid&eacute;r&eacute; comme incomplet jusqu'&agrave; ce que la taille de celui-ci (c'est le nombre d'octets qui lui sont n&eacute;cessaires en m&eacute;moire) soit connue ainsi que les positions de tous ses champs.  Il n'est pas possible d'allouer de l'espace m&eacute;moire pour un type incomplet.  Il n'est pas possible de d&eacute;clarer une variable ayant un type de donn&eacute;es incomplet, de passer un type incomplet comme param&egrave;tre ou d'acc&eacute;der aux membres d'un type incomplet.
+Toutefois, des pointeurs vers des types incomplets peuvent &ecirc;tre attribu&eacute;s, d&eacute;clar&eacute;s comme membres dans d'autres types ou pass&eacute;s comme param&egrave;tres &agrave; une proc&eacute;dure, d&egrave;s lors que la taille d'un pointeur est connue.
+'' END TYPE
+
+Type sometype As sometype_
 '' Not allowed since size of sometype is unknown
-'' TYPE incomplete
+  '' TYPE incomplete
 ''   a AS sometype
 '' END TYPE
 
 '' Allowed since size of a pointer is known
-TYPE complete
-  a AS sometype ptr
-END TYPE
-DIM x AS complete
+Type complete
 
+a As sometype Ptr
+End Type
+  Dim x As complete
 '' Not allowed since size of sometype is still unknown
-'' DIM size_sometype AS INTEGER = SIZEOF( sometype )
 
+'' DIM size_sometype AS INTEGER = SIZEOF( sometype )
 '' Complete the type
-TYPE sometype_
-  value as integer
+
+Type sometype_
+  value As Integer
 END TYPE
 
 '' Allowed since the types are now completed
-DIM size_sometype AS INTEGER = SIZEOF( sometype )
-
-TYPE completed
-  a AS sometype
-END TYPE
-
-DIM size_completed AS INTEGER = SIZEOF( completed )
-	%%
+	Dim size_sometype As Integer = SizeOf( sometype )
 
 
-{{fbdoc item="back" value="CatPgProgrammer|Programmer's Guide"}}
+Type completed
    

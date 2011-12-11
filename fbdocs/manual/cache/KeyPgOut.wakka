@@ -1,5 +1,5 @@
 {{fbdoc item="title" value="OUT"}}----
-Outputs a value to a hardware port.
+Envoie une valeur sur un port "hardware".
 
 {{fbdoc item="syntax"}}##
 	[[KeyPgDeclare declare]] [[KeyPgFunction function]] **Out** ( [[KeyPgByval byval]] //port// [[KeyPgAs as]] [[KeyPgUshort ushort]] , [[KeyPgByval byval]] //data// [[KeyPgAs as]] [[KeyPgUbyte ubyte]] ) [[KeyPgAs as]] [[KeyPgInteger integer]]
@@ -9,12 +9,12 @@ Outputs a value to a hardware port.
 ##
 {{fbdoc item="param"}}
 	##//port//##
-		Hardware port to write to.
+		Port hardware sur lequel &eacute;crire.
 	##//data//##
-		Data value to write.
+		Donn&eacute;e &agrave; &eacute;crire.
 
 {{fbdoc item="desc"}}
-	This function sends ##//value//## to ##//port//## and returns immediately.
+	Cette fonction envoie ##//value//## sur ##//port//## et retourne imm&eacute;diatement.
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/hardware/out.bas"}}%%(freebasic)
@@ -41,12 +41,12 @@ Sound(784, 60)  'G5
 Sound(880, 60)  'A5
 Sound(988, 60)  'B5
 Sound(1046, 60) 'C6 
-%%	
+%%
 	
-{{fbdoc item="target"}}
-	- In the Windows and Linux versions three port numbers (&H3C7, &H3C8, &H3C9) are hooked by the graphics library when a graphics mode is in use to emulate QB's VGA palette handling. This use  is deprecated; use ##[[KeyPgPalette Palette]]## to retrieve and set palette colors.
+{{fbdoc item="section" value="Diff&eacute;rences de plates-formes
+	- Dans les versions Windows et Linux trois num&eacute;ros de port (&H3C7, &H3C8, &H3C9) sont r&eacute;serv&eacute;s par la librairie graphique quand un mode graphique est utilis&eacute; pour &eacute;muler une palette VGA QB. Cette utilisation est obsol&egrave;te; utilisez ##[[KeyPgPalette Palette]]## pour r&eacute;cup&eacute;rer ou valider une palette de couleurs.
 	
-	- Using true port access in the Windows version requires the program to install a device driver for the present session. For that reason, Windows executables using hardware port access should be run with administrator permits each time the computer is restarted. Further runs don't require admin rights as they just use the already installed driver. The driver is only 3K in size and is embedded in the executable.
+	- L'utilisation d'un acc&egrave;s "true port" dans la version Windows implique que le programme installe un "driver" de "device" pour la session en cours. Pour cette raison, les ex&eacute;cutables Windows utilisant un acc&egrave;s port "hardware" doivent &ecirc;tre lanc&eacute;s avec des permissions administrateur pour chaque red&eacute;marrage de l'ordinateur. Les lancements ult&eacute;rieurs n'auront pas besoin de ces droits car il ne font qu'utiliser le driver d&eacute;j&agrave; install&eacute;. Le driver n'a qu'une taille de 3K et est int&eacute;gr&eacute; dans l'ex&eacute;cutable.
 
 
 {{fbdoc item="see"}}

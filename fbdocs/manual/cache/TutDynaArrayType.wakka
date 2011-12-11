@@ -1,17 +1,17 @@
 {{fbdoc item="title" value="Dynamic Arrays in Types"}}----
-//Written by [[WikiRick rdc]]//
+//Ecrit par [[WikiRick rdc]]//
 
-=== Introduction ===
+<div class="fb_header"> Introduction 
 
-A dynamic array in a type definition is a very useful feature, but FreeBasic doesn't support it. Or rather, it doesn't support it directly. However, you can create dynamic arrays by using pointers and the associated memory functions.
+Un tableau dynamique dans une d&eacute;finition de type est une fonctionnalit&eacute; tr&egrave;s utile, mais FreeBASIC ne le supporte pas. Ou plut&ocirc;t, il ne le supporte pas directement. Cependant, vous pouvez cr&eacute;er des tableaux dynamiques en utilisant les pointeurs et les fonctions associ&eacute;es &agrave; la m&eacute;moire.
 
-An array is simply a contiguous block of memory that holds a certain data type. Arrays in FreeBasic use an array descriptor to describe the data contained within the array, and you can use this same technique to build a dynamic array within a type. The two elements you need within your type-def are a pointer to a particular data type, and a size indicator. 
+Un tableau est simplement un bloc contigu de m&eacute;moire qui contient un certain type de donn&eacute;es. Les tableaux en FreeBASIC utilisent un descripteur de tableau pour d&eacute;crire les donn&eacute;es contenues dans celui-ci et vous pouvez utiliser cette m&ecirc;me technique pour construire un tableau dynamique dans un type. Les deux &eacute;l&eacute;ments dont vous avez besoin dans votre "type def" sont un pointeur sur un type particulier de donn&eacute;es et un indicateur de taille.
 
-You can then use the ptr field to allocate a block of memory to the needed size, and save that size in the size indicator field. The size field is used to tell you how many elements are currently in the array. Once the array has been initialized, you can then use pointer indexing to access each element in the array.
+Vous pouvez ensuite utiliser le "champ ptr" pour allouer un bloc de m&eacute;moire de la taille n&eacute;cessaire et enregistrer cette taille dans le champ de l'indicateur de taille. Le champ de taille est utilis&eacute; pour vous dire combien d'&eacute;l&eacute;ments sont actuellement dans le tableau. Une fois que le tableau a &eacute;t&eacute; initialis&eacute;, vous pouvez ensuite utiliser l'indexation pointeur pour acc&eacute;der &agrave; chaque &eacute;l&eacute;ment du tableau.
 
-=== Getting the Point(er) in Code ===
+<div class="fb_header">Obtenir le Pointeur dans le Code
 
-The following program illustrates the steps in creating, initializing and resizing a dynamic type-def array.
+Le programme suivant illustre les &eacute;tapes de la cr&eacute;ation, l'initialisation et le redimensionnement dynamique d'un tableau "type def".
 %%(freebasic)
 'Define type:
 'size is current size of array
@@ -69,9 +69,9 @@ Deallocate myType.darray
 End
 %%
 
-=== How it Works ===
+<div class="fb_header">Comment &ccedil;a marche?
 
-The first step is, of course, to define the type-def:
+La premi&egrave;re &eacute;tape est, bien s&ucirc;r, de d&eacute;finir le "type-def":
 %%(freebasic)
 Type DType
 	size As Integer
@@ -79,63 +79,63 @@ Type DType
 End Type
 %%
 
-Since this is just an example there are only two elements within the type, a size indicator and the array pointer. Notice that the array pointer is defined as an Integer ptr. When you define a pointer to a particular type, you are creating a "typed" pointer. The compiler can use this type information to check to make sure the values being placed into the array are valid, and will also use this information for pointer arithmetic.
+Comme ce n'est qu'un exemple, il y a seulement deux &eacute;l&eacute;ments dans le type, un indicateur de taille et le pointeur de tableau. Notez que le pointeur de tableau est d&eacute;fini comme un "ptr Integer". Lorsque vous d&eacute;finissez un pointeur sur un type particulier, vous cr&eacute;ez un pointeur typ&eacute;. Le compilateur peut utiliser ces informations de type pour v&eacute;rifier et s'assurer que les valeurs plac&eacute;es dans le tableau sont valides et utilisera ces informations pour l'arithm&eacute;tique des pointeurs.
 
-The next step is to define the working variables.
+La prochaine &eacute;tape est de d&eacute;finir les variables de travail.
 %%(freebasic)
 Dim myType As DType
 Dim As Integer i, tmp
 %%
-Here an instance of the type is created, as well as some working variables that are used in the following code. WARNING: You must initialize the array pointer before you can use it; using an uninitialized ptr can cause program crashes, system lockups and all sorts of bad things. 
+Voici un exemple du type qui a &eacute;t&eacute; cr&eacute;&eacute;, ainsi que certaines variables de travail qui sont utilis&eacute;es dans le code suivant. ATTENTION: Vous devez initialiser le pointeur de tableau avant que vous puissiez l'utiliser; utiliser un pointeur non initialis&eacute; peut provoquer des plantages du programme, des blocages du syst&egrave;me et toutes sortes de mauvaises choses.
 %%(freebasic)
 myType.darray = Callocate(5, Sizeof(Integer))
 myType.size = 5
 %%
-These two lines of code initialize the array pointer to hold 5 integers. Callocate is used to allocate the memory segment, since Callocate will initialize the segment to zeros.
+Ces deux lignes de code initialisent le pointeur de tableau pour contenir 5 entiers. "Callocate" est utilis&eacute; pour allouer le segment de m&eacute;moire, "Callocate" va initialiser le segment avec des z&eacute;ros.
 
-The size field stores the current length of the array. Now, of course, you could calculate the size of the array by simply dividing the number of bytes in the allocation by the size of an integer, but using a size indicator within the type is much cleaner and saves you a calculation in your program.
+Le champ de la taille stocke la longueur courante du tableau. Maintenant, bien s&ucirc;r, vous pouvez calculer la taille du tableau en divisant simplement le nombre d'octets dans l'allocation par la taille d'un entier, mais en utilisant un indicateur de taille dans le type est beaucoup plus propre et vous fait gagner un calcul dans votre programme.
 %%(freebasic)
 For i = 0 To myType.Size - 1 
 	myType.darray[i] = i
 Next
 %%
-This section of code loads the array with some values. You can see why saving the size of the array simplifies the coding process. Since the array is a typed pointer, you can access the array using the pointer indexing method, which is almost like accessing a predefined array.
+Cette section de code charge le tableau avec quelques valeurs. Vous pouvez voir que sauver la taille du tableau simplifie le processus de codage. Comme le tableau est un pointeur typ&eacute;, vous pouvez acc&eacute;der au tableau en utilisant la m&eacute;thode d'indexation pointeur, qui est presque comme l'acc&egrave;s &agrave; un tableau pr&eacute;d&eacute;fini.
 %%(freebasic)
 For i = 0 To myType.Size - 1
 	Print "darray[";i;" ]:";myType.darray[i]
 Next
 %%
-This section simply prints out the values using the same method that was used to load the array.
+Cette section affiche simplement les valeurs en utilisant la m&ecirc;me m&eacute;thode qui a &eacute;t&eacute; utilis&eacute;e pour charger le tableau.
 
-Of course, this should be a dynamic array, so you should be able to resize the array, and this is exactly what the next section of code will do.
+Bien s&ucirc;r, cela doit &ecirc;tre un tableau dynamique, donc vous devriez &ecirc;tre capable de redimensionner le tableau et c'est exactement ce que la section de code suivante va faire.
 %%(freebasic)
 tmp = myType.size
 myType.darray = Reallocate(myType.darray, 10)
 myType.size = 10
 %%
-The first line of code saves the current size of the array so that the new memory segment can be initialized while not overwriting any existing data. You will see this in a moment.
+La premi&egrave;re ligne de code enregistre la taille actuelle du tableau de sorte que le nouveau segment de m&eacute;moire peut &ecirc;tre initialis&eacute; sans &eacute;craser les donn&eacute;es existantes. Vous verrez dans un instant.
 
-The second line uses the Reallocate function to resize the memory segment, that is, resize the array. In this case, the array is being made larger; you could of course make the array smaller. If you were to make the array smaller, any data not in the new segment would be lost, as you would expect.
+La seconde ligne utilise la fonction "Reallocate" pour redimensionner le segment de m&eacute;moire, c'est-&agrave; dire redimensionner le tableau. Dans ce cas, le tableau est plus grand; vous pourriez bien s&ucirc;r faire le tableau plus petit. Si vous deviez faire le tableau plus petit, toutes les donn&eacute;es en-dehors du nouveau segment seraient perdues, comme vous le souhaitiez.
 
-The last line of code above saves the new array size in the size indicator.
+La derni&egrave;re ligne de code ci-dessus enregistre la taille du tableau nouveau dans l'indicateur de taille.
 %%(freebasic)
 For i = tmp - 1 To myType.Size - 1
 	myType.darray[i] = i
 Next
 %%
-Here, you can see why the old array size was saved. In the For statement, the initialization procedure starts from the old index and iterates through the newly added indexes, storing data within the memory segment. This is like using the Redim Preserve statement on a normal array.
+Ici, vous pouvez voir pourquoi l'ancienne taille du tableau a &eacute;t&eacute; enregistr&eacute;e. Dans l'instruction "For", la proc&eacute;dure d'initialisation commence &agrave; partir de l'ancien indice et parcourt les indices nouvellement ajout&eacute;s, stockant les donn&eacute;es dans le segment de m&eacute;moire. C'est comme utiliser la d&eacute;claration "Redim Preserve" sur un tableau normal.
 %%(freebasic)
 For i = 0 To myType.Size - 1
 	Print "darray[";i;" ]:";myType.darray[i]
 Next
 %%
-This code section simply prints out the new values. 
+Cette section de code affiche simplement les nouvelles valeurs. 
 %%(freebasic)
 Deallocate myType.darray
 %%
-This is vitally important. You should always deallocate any allocated memory that you have created in your program to prevent memory leaks.
+Ceci est d'une importance vitale. Vous devez toujours lib&eacute;rer toute la m&eacute;moire allou&eacute;e que vous avez cr&eacute;&eacute; dans votre programme afin de pr&eacute;venir les fuites de m&eacute;moire.
 
-When you run the program you should see the following output:
+Lorsque vous ex&eacute;cutez le programme, vous devriez avoir l'affichage suivant:
 %%(freebasic)
 darray[ 0 ]: 0
 darray[ 1 ]: 1
@@ -156,4 +156,4 @@ darray[ 8 ]: 8
 darray[ 9 ]: 9
 Press any key...
 %%
-The first print out shows the original array. The second print out shows the newly resized array.
+Le premier affichage montre le tableau original. Le second affichage montre le tableau nouvellement redimensionn&eacute;.

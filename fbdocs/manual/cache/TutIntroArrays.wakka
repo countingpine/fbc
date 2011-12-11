@@ -1,87 +1,87 @@
-{{fbdoc item="title" value="Introduction To Arrays"}}----
-//Written by [[WikiRick rdc]]//
+{{fbdoc item="title" value="Introduction To Arrays"}}----<div id="fb_tab_r"> <img src="images/fblogo_mini.gif">
+//Ecrit par [[WikiRick rdc]]//<br \=""><br \="">Les tableaux sont sans doute la seule construction de programmation la plus utile qui est &agrave; votre disposition dans FreeBasic. Beaucoup de probl&egrave;mes que vous allez essayer de r&eacute;soudre avec une solution de programmation portent sur des donn&eacute;es organis&eacute;es dans un format tabulaire, et les tableaux sont parfaits pour la gestion de ce type de donn&eacute;es. Comprendre les tableaux est une comp&eacute;tence essentielle pour devenir un programmeur comp&eacute;tent.<br \=""><br \="">Les tableaux sont des segments de m&eacute;moire contigus d'un seul type ou de donn&eacute;es composites. Vous pouvez penser un tableau comme une table, avec des lignes et des colonnes de donn&eacute;es. Un tableau peut avoir une ou plusieurs lignes, et chaque ligne peut avoir une ou plusieurs colonnes. Le nombre de lignes et de colonnes d&eacute;finissent les dimensions du tableau. FreeBasic utilise le sch&eacute;ma de "ligne-majeur" pour les tableaux, ce qui signifie que la premi&egrave;re r&eacute;f&eacute;rence de dimension, est la ligne, dans un tableau qui a plus d'une dimension. FreeBasic prend en charge jusqu'&agrave; huit dimensions dans un tableau.<br \=""><br \=""><div class="fb_header"> Tableaux uni-dimensionnels 
 
-Arrays are probably the single most useful programming construct  that is available to you in FreeBasic. Many problems that you will try to solve with a programming solution involve data arranged in tabular format, and arrays are perfect for managing this type of data. Understanding arrays is a crucial skill in becoming a competent programmer.
+<br \=""><br \="">Un tableau avec une seule ligne est appel&eacute; tableau uni-dimensionnel. Si un tableau est uni-dimensionnel, alors la ligne n'est pas d&eacute;finie dans la d&eacute;claration, seulement le nombre de colonnes dans la ligne. Comme un tableau n&eacute;cessite un minimum d'une ligne, la ligne est pr&eacute;sum&eacute;e exister dans ce cas. Les extraits de code suivants cr&eacute;ent un tableau d'entiers &agrave; une seule dimension en utilisant les diff&eacute;rents syst&egrave;mes de d&eacute;finition d'un tableau disponibles dans FreeBasic.<br \=""><br \="">%%(freebasic)
 
-Arrays are contiguous memory segments of a single or composite data type. You can think of an array as a table, with rows and columns of data. An array can have one or more rows, and each row can have one or more columns. The number of rows and columns define the dimensions of the array. FreeBasic uses the row-major scheme for arrays, which means that the first dimension references the row in an array that has more than one dimension. FreeBasic supports up to eight dimensions in an array.
+Dim myArray(10) As Integer<br><br>Dim myArray(1 To 10) As Integer<br>
 
-=== One-Dimensional Arrays ===
+##<br><br \="">La premi&egrave;re m&eacute;thode d&eacute;finira un tableau avec une seule rang&eacute;e et 11 colonnes, avec des indices de colonne (num&eacute;ros) allant de 0 &agrave; 10. La seconde m&eacute;thode d&eacute;finit les limites inf&eacute;rieure et sup&eacute;rieure en utilisant le mot-cl&eacute; ##**To**##. Ici les indices varieront de 1 &agrave; 10.<br \=""><br \=""><div class="fb_header"> Les indices des tableaux uni-dimensionnels 
 
-An array with a single row is called a one-dimensional array. If an array is a single-dimensional array, then the row is not defined in the declaration, only the number of columns in the row. Since an array requires a minimum of one row, the row is understood to exist in this case. The following code snippets create a single-dimension integer array using the different array definition schemes available in FreeBasic.
+<br \=""><br \="">Vous pouvez acc&eacute;der &agrave; chaque &eacute;l&eacute;ment d'un tableau en utilisant une valeur d'indice. Dans le cas d'un tableau &agrave; une dimension, l'indice se r&eacute;f&egrave;re &agrave; un num&eacute;ro de colonne dans la ligne par d&eacute;faut. Le format est d'utiliser le nom de la variable tableau suivi de l'indice entre parenth&egrave;ses.<br \=""><br \="">%%(freebasic)
 
-%%(freebasic)
-Dim myArray(10) as Integer
+myArray(5) = 7<br>
+##<br><br \="">Cela mettra la colonne 5 du tableau &agrave; 7.<br \=""><br \="">%%(freebasic)
 
-Dim myArray(1 To 10) as Integer
-%%
+myInt = myArray(5)<br>
+##<br><br \="">##**myInt**## sera affect&eacute;e avec la valeur courante de la colonne 5 de ##**myArray**##.<br \=""><br \=""><div class="fb_header"> Les tableaux bi-dimensionnels 
 
-The first method will define an array with a single row and 11 columns, with column indexes (numbers) ranging from 0 to 10. The second method defines the lower and upper bounds using the ##To## keyword. Here the indexes will range from 1 to 10.
+<br \=""><br \="">Un tableau bi-dimensionnel est un tableau qui a plus d'une rang&eacute;e, avec des colonnes d&eacute;finies. Un tableau bi-dimensionnel est comme une table, avec un nombre d&eacute;fini de lignes, o&ugrave; chacune a un nombre d&eacute;fini de colonnes. L'extrait de code suivant d&eacute;finit un tableau en utilisant la m&eacute;thode par d&eacute;faut.<br \=""><br \="">%%(freebasic)
 
-=== One-Dimensional Array Indexes ===
+Dim myArray(2, 10) As Integer<br>
 
-You access each element of an array using an index value. In the case of a single-dimension array, the index would refer to a column number in the default row. The format is to use the array variable, with the index surrounded by parenthesis.
+##<br><br \="">La premi&egrave;re dimension d&eacute;finit le nombre de lignes du tableau, alors que la deuxi&egrave;me d&eacute;finit le nombre de colonnes de chaque ligne. Dans cet exemple, le tableau a 3 lignes, num&eacute;rot&eacute;es de 0 &agrave; 2 et chaque ligne a 11 colonnes, num&eacute;rot&eacute;es de 0 &agrave; 10.<br \=""><br \="">Vous pouvez aussi d&eacute;finir les bornes inf&eacute;rieure et sup&eacute;rieure d'un tableau.<br \=""><br \="">%%(freebasic)
 
-%%(freebasic)
-myArray(5) = 7
-%%
+Dim myArray(1 To 2, 1 To 10) As Integer<br>
+##<br><br \="">Cette d&eacute;finition positionne le nombre de lignes &agrave; 2, num&eacute;rot&eacute;es de 1 &agrave; 2 et le nombre de colonnes &agrave; 10, num&eacute;rot&eacute;es de 1 &agrave; 10.<br \=""><br \=""><div class="fb_header"> Les indices des tableaux bi-dimensionnels 
+<br \=""><br \="">Pour acc&eacute;der aux &eacute;l&eacute;ments d'un tableau bi-dimensionnel, vous devez utiliser deux index. Le premier s&eacute;lectionne la ligne et le second la colonne de cette ligne.<br \=""><br \="">%%(freebasic)
 
-This would set column 5 in the array to 7.
+myArray(1, 5) = 7<br>
 
-%%(freebasic)
-myInt = myArray(5)
-%%
+##<br><br \="">Ce code met &agrave; 7 la colonne 5 de la ligne 1.<br \=""><br \="">%%(freebasic)
+myInt = myArray(1, 5)<br>
+##<br><br \="">##**myInt**## sera affect&eacute; avec la valeur courante contenue dans la colonne 5 de la ligne 1 du tableau.<br \=""><br \=""><div class="fb_header"> Tableaux multi-dimensionnels 
 
-This will set the value of ##myInt## to the current value of column 5 in ##myArray##.
+<br \=""><br \="">Pour les tableaux de trois dimensions ou plus, vous devez utiliser le m&ecirc;me format que ci-dessus, en tenant compte de la progression des dimensions de tableau. Pour un tableau &agrave; trois dimensions, la premi&egrave;re dimension serait la ligne, la deuxi&egrave;me la colonne, la troisi&egrave;me serait l'ordre-z, ou la profondeur, pour chaque colonne. <br \=""><br \="">Par exemple, pour d&eacute;finir un cube dans l'espace, vous devez utiliser les formats y, x, z, o&ugrave; y d&eacute;finit l'axe vertical, x l'axe horizontal et z l'axe de la profondeur. Pour cr&eacute;er un tableau dans ce format, vous pouvez d&eacute;finir le tableau ainsi: <br \=""><br \="">%%(freebasic)
 
-=== Two-Dimensional Arrays ===
+Dim myCube(y, x, z) As Integer. <br>
 
-A two-dimensional array is an array that has more than one row, along with the defined columns. A two-dimensional array is like a table, with a defined number of rows, where each row has a defined number of columns. The following code snippet defines an array using the default method.
+##<br><br \="">##**MyCube(10, 10, 10)**## cr&eacute;era un cube de 11 unit&eacute;s verticalement, 0 &agrave; 10, 11  unit&eacute;s horizontalement, 0 &agrave; 10 et 10 unit&eacute;s en profondeur, 0 &agrave; 10. Pour acc&eacute;der au centre du cube, vous pouvez utiliser ##**iCenter = myCube(5, 5, 5)**##. <br \=""><br \="">Vous n'aurez probablement jamais besoin d'utiliser des tableaux de plus de trois dimensions, &agrave; moins que vous accomplissiez des calculs math&eacute;matiques avanc&eacute;s. Toutefois, si vous avez besoin d'utiliser des tableaux de dimensions sup&eacute;rieures, les m&ecirc;mes principes s'appliquent.<br \=""><br \=""><div class="fb_header"> Les tableaux dynamiques 
 
-%%(freebasic)
-Dim myArray(2, 10) as Integer
-%%
+<br \=""><br \="">Les tableaux d&eacute;crits ci-dessus sont des tableaux statiques; la taille du tableau ne peut pas changer au cours de l'ex&eacute;cution du programme. Vous pouvez &eacute;galement cr&eacute;er des tableaux dynamiques qui peuvent changer de taille au cours de l'ex&eacute;cution. Les tableaux dynamiques sont utiles pour cr&eacute;er des structures de donn&eacute;es telles que les piles ou les files d'attente.<br \=""><br \="">Les tableaux statiques, ceux d&eacute;crits ci-dessus, sont conserv&eacute;s sur le tas (heap), alors que les tableaux dynamiques sont attribu&eacute;es partir du stock (pool) de m&eacute;moire de l'ordinateur. Le compilateur alloue dynamiquement la m&eacute;moire pour le tableau sur la base des dimensions demand&eacute;es par le tableau.<br \=""><br \="">Vous sp&eacute;cifiez un tableau dynamique en utilisant le mot-clef ##**ReDim**##.<br \=""><br \="">%%(freebasic)
+ReDim myArray(1 To 5, 1 To 5) As Integer<br>
+##<br><br \="">Si vous ne connaissez pas les limites du tableau n&eacute;cessaires au d&eacute;but de l'ex&eacute;cution du programme, vous pouvez d&eacute;finir un tableau avec des des indices vides.<br \=""><br \="">%%(freebasic)
 
-The first dimension defines the number of rows in the array, while the second dimension defines the number of columns in each row. In this example, the array has 3 rows, numbered 0 to 2, and each row has 11 columns, numbered 0 to 10.
+Dim myArray() As Integer<br>
 
-You can also define the lower and upper bounds of the array.
+##<br><br \="">Dans ce cas, le compilateur d&eacute;finit une valeur par d&eacute;faut de 0 pour la taille du tableau. Vous pouvez ensuite utiliser le mot-clef ##**ReDim**## &agrave; un moment donn&eacute; dans le programme pour d&eacute;finir les limites de tableau.<br \=""><br \=""><div class="fb_header"> ReDim et ReDim Preserve 
 
-%%(freebasic)
-Dim myArray(1 to 2, 1 to 10) as Integer
-%%
+<br \=""><br \="">Les tableaux dynamiques peuvent changer de taille pendant l'ex&eacute;cution. ##**ReDim**## efface le contenu du tableau avec les valeurs par d&eacute;faut du type de donn&eacute;es, alors que ##**ReDim Preserve**## conservera intact le contenu existant, &agrave; moins que la taille du tableau ne soit plus petite que la taille pr&eacute;c&eacute;dente.<br \=""><br \=""><div class="fb_header"> Fonctions sur les tableaux 
+<br \=""><br \="">Il ya un certain nombre de [[CatPgArray fonctions]] que vous pouvez utiliser avec des tableaux.<br \=""><br \=""><div class="fb_header"> Tableaux de Types composites 
+<br \=""><br \="">Les d&eacute;finitions de ##**Type**## vous permettent de regrouper des donn&eacute;es li&eacute;es en une seule entit&eacute;, et souvent vous aurez besoin de plus d'une instance d'un ##**Type**## pour exprimer pleinement vos donn&eacute;es. Des tableaux de ##**Type**## vous permettent de cr&eacute;er plusieurs instances d'une d&eacute;finition de ##**Type**## qui peuvent &ecirc;tre facilement g&eacute;r&eacute;es &agrave; l'aide des fonctions tableaux. Un exemple de cet usage peut &ecirc;tre un syst&egrave;me d'inventaire pour votre RPG (Role Playing Game = Jeu de r&ocirc;les), une s&eacute;rie de descriptions de documents dans un &eacute;diteur et un ensemble de fiches d'employ&eacute;s d'une base de donn&eacute;es &agrave; acc&egrave;s al&eacute;atoire.<br \=""><br \="">Vous cr&eacute;ez des tableaux de ##**Type**##s comme vous le feriez avec n'importe quel type de donn&eacute;es intrins&egrave;ques. L'extrait de code suivant illustre la syntaxe.<br \=""><br \="">%%(freebasic)
 
-This definition would set the number of rows to 2, numbered 1 to 2 and the number of columns to 10, numbered 1 to 10.
+Type myPoint<br>    row As Integer<br>    col As Integer<br>End Type<br><br>Type myLine<br>    p1 As myPoint<br>    p2 As myPoint<br>    char As String * 1<br>End Type<br><br>Dim myLineSet (1 To 3) As myLine<br>
 
-=== Two-Dimensional Array Indexes ===
+##<br><br \="">Le code d&eacute;finit un ensemble de 3 lignes, avec les points d'extr&eacute;mit&eacute;s ##**p1**## et ##**p2**##, o&ugrave; chaque point d'extr&eacute;mit&eacute; se situe &agrave; ##**row**## et ##**col**##. Vous pouvez acc&eacute;der aux &eacute;l&eacute;ments du tableau en utilisant une combinaison d'indice de tableau et d'op&eacute;rateur point.<br \=""><br \="">%%(freebasic)
 
-To access the array elements of a two-dimensional array, you would use two indexes. The first index selects the row, and the second index selects a column within that row.
+myLineSet(1).p1.row = 1<br>myLineSet(1).p1.col = 1<br>myLineSet(1).p2.row = 10<br>myLineSet(1).p2.col = 10<br>myLineSet(1).char = Chr(219)<br>
 
-%%(freebasic)
-myArray(1, 5) = 7
-%%
+##<br><br \=""><div class="fb_header"> Les tableaux dans les ##**Type**##s 
+<br \=""><br \="">Non seulement vous pouvez cr&eacute;er un tableau de ##**Type**## composite, vous pouvez avoir un tableau comme champ dans un ##**Type**## composite. L'exemple ci-dessus peut &ecirc;tre &eacute;crit de mani&egrave;re plus efficace en rempla&ccedil;ant ##**p1**## et ##**p2**## avec un tableau.<br \=""><br \="">%%(freebasic)
+Type myPoint<br>    row As Integer<br>    col As Integer<br>End Type<br><br>Type myLine<br>    pts(1 To 2) As myPoint<br>    char As String * 1<br>End Type<br><br>Dim myLineSet (1 To 3) As myLine<br>
 
-This code would set column 5 in row 1 to 7.
+##<br><br \="">Ici ##**pts**## est un tableau de ##**myPoint**##. Pour acc&eacute;der &agrave; cette structure vous pouvez utiliser une combinaison d'indices et d'op&eacute;rateurs points.<br \=""><br \="">%%(freebasic)
 
-%%(freebasic)
-myInt = myArray(1, 5)
-%%
+myLineSet(1).pts(1).row = 1<br>myLineSet(1).pts(1).col = 1<br>myLineSet(1).pts(2).row = 10<br>myLineSet(1).pts(2).col = 10<br>myLineSet(1).char = Chr(219)<br>
+##<br><br \="">##**myLineSet**## est un tableau, donc vous utilisez une valeur d'indice. ##**pts**## est un &eacute;l&eacute;ment du ##**Type**##, donc vous devez le qualifier avec l'op&eacute;rateur point. Cependant, ##**pts**## est aussi un tableau, donc vous devez utiliser un indice pour s&eacute;lectionner chaque &eacute;l&eacute;ment ##**pts**## du tableau. ##**Row**## et ##**col**## sont des &eacute;l&eacute;ments du ##**Type**## "##**myPoint**##" et sont accessibles avec l'op&eacute;rateur point.<br \=""><br \="">Utiliser un tableau pour les points de terminaison vous permet d'&eacute;tendre facilement la d&eacute;finition de la ligne pour supporter autre chose que des lignes, par exemple des triangles et des carr&eacute;s. L'extrait de code suivant montre une d&eacute;finition possible.<br \=""><br \="">%%(freebasic)
+Type myObj<br>    objid As Integer<br>    Union<br>            myLine(1 To 2) As myPoint<br>        myTriangle(1 To 3) As myPoint<br>        mySquare(1 To 4) As myPoint<br>    End Union<br>    char As String * 1<br>End Type<br>
 
-This code would set myInt to the current value contained within column 5 of row 1 of the array.
+##<br><br \="">Le champ ##**objid**## indique quel ##**Type**## d'objet est contenu dans la d&eacute;finition de l'##**Union**##. C'est &agrave; dire qu' un 1 peut indiquer une ligne, un 2 un triangle et un 3 un carr&eacute;. Puisque la d&eacute;finition d&eacute;finit un objet unique, une ##**Union**## est utilis&eacute;e pour inclure les tableaux des points d'extr&eacute;mit&eacute;s pour maximiser l'utilisation de la m&eacute;moire. <br \=""><br \="">Pour afficher l'objet &agrave; l'&eacute;cran, examiner ##**objid**## puis utiliser ##**objid**## et ##**Ubound**## de la d&eacute;finition appropri&eacute;e du tableau des points-extr&eacute;mit&eacute;s, afficher le nombre de lignes qui correspondent au type d'objet. <br \=""><br \="">L'une des am&eacute;liorations suppl&eacute;mentaires que vous pouvez apporter &agrave; ce programme est d'ajouter un pointeur de fonction vers la d&eacute;finition de type puis &eacute;crire des routines d'affichage qui correspondent au type d'objet affich&eacute;. Cette technique vous permettra d'&eacute;tendre encore l'utilit&eacute; du code en simplifiant le processus d'ajout de nouveaux objets &agrave; la d&eacute;finition de type. <br \=""><br \="">Par exemple, si vous avez besoin de d&eacute;crire un cube, vous pouvez tout simplement ajouter un nouveau tableau &agrave; l'##**Union**##, ajouter une fonction d'affichage de cube, et la d&eacute;finition du type serait en mesure d'afficher un cube en ajoutant simplement quelques lignes de code, tout en conservant la fonctionnalit&eacute; d'origine intacte.<br \=""><br \=""><div class="fb_header"> Initialisation de tableau 
 
-=== Multi-Dimensional Arrays ===
+<br \=""><br \="">Vous pouvez initialiser un tableau avec des valeurs en utilisant la d&eacute;claration ##**Dim**## d'une mani&egrave;re similaire &agrave; l'initialisation de tous les autres types de donn&eacute;es intrins&egrave;ques et de d&eacute;finitions de type. L'extrait de code suivant illustre la syntaxe en utilisant un tableau uni-dimensionnel.<br \=""><br \="">%%(freebasic)
 
-For arrays of three or more dimensions, you would use the same format as listed above, taking into account the progression of the array dimensions. For a three-dimensional array, the first dimension would be the row, the second the column, the third would be the z-order, or depth, of each column. 
+Dim aArray(1 To 5) As Integer => {1, 2, 3, 4, 5}<br>
 
-For example, to define a cube in space, you would use the y,x,z format, where y defines the vertical axis, x defines the horizontal axis and z defines the depth axis. To create an array in this format you could define the array as: 
+##<br><br \="">Cet extrait de code dimensionne un tableau d'entiers avec 5 &eacute;l&eacute;ments, puis d&eacute;finit les &eacute;l&eacute;ments avec la liste contenue dans les accolades. L'op&eacute;rateur fl&egrave;che, ##**=>**## indique au compilateur que la liste qui suit l'instruction ##**Dim**## doit &ecirc;tre utilis&eacute;e pour initialiser le tableau. <br \=""><br \="">Vous pouvez &eacute;galement dimensionner des tableaux multi-dimensionnels de la m&ecirc;me mani&egrave;re, en sp&eacute;cifiant des blocs de donn&eacute;es figurant dans des accolades comme l'extrait de code suivant l'illustre.<br \=""><br \="">%%(freebasic)
 
-%%(freebasic)
-Dim myCube(y, x, z) as Integer. 
-%%
+Dim bArray(1 To 2, 1 To 5) As Integer => {{1, 2, 3, 4, 5},{6, 7, 8, 9, 10}}<br>
+##<br><br \="">Dans cet exemple, le premier bloc, ##**{1, 2, 3, 4, 5}**##, correspond &agrave; la ligne 1, et le deuxi&egrave;me bloc, ##**{6, 7, 8, 9, 10}**##, correspond &agrave; la ligne 2. Rappelez-vous que les tableaux FreeBasic sont "ligne-majeur", ainsi la ligne est sp&eacute;cifi&eacute;e avant la colonne. Lorsque vous initialisez un tableau de cette mani&egrave;re, vous devez &ecirc;tre s&ucirc;r que le nombre d'&eacute;l&eacute;ments d&eacute;finis s'int&eacute;grera dans le tableau.<br \=""><br \=""><div class="fb_header"> Initialisation de tableau de ##**Type**## 
+<br \=""><br \="">Non seulement vous pouvez initialiser un tableau de ##**Type**##s de donn&eacute;es simples, Vous pouvez &eacute;galement initialiser un tableau avec des ##**Type**##s composites. L'extrait de code suivant illustre un tableau de ##**Type**##s qui contient lui-m&ecirc;me un tableau comme un &eacute;l&eacute;ment.<br \=""><br \="">%%(freebasic)
 
-##MyCube(10, 10, 10)## would create a cube with 11 vertical units, 0 to 10, 11 horizontal units, 0 to 10 and 10 depth units, 0 to 10. To access the center of the cube, you would use ##iCenter = myCube(5, 5, 5)##. 
+Type aType<br>    a As Integer<br>    b As Byte<br>    c(1 To 2) As String * 10<br>End Type<br><br>Dim As aType myType(1 To 2) => { (1234, 12, {"Hello", "World"}), (5678, 24, {"From", "Freebasic"})} <br>
 
-You will probably never need to use arrays of more than three dimensions, unless you are doing some advanced mathematical calculations. However, if you need to use higher-dimensional arrays, the same principles apply.
+##<br><br \="">Les accolades signifient qu'il s'agit d'une initialisation de tableau, tandis que les parenth&egrave;ses indiquent l'initialisation d'un ##**Type**##. Comme le ##**Type**## contient un tableau, vous pouvez utiliser les accolades pour charger les donn&eacute;es dans ce tableau incorpor&eacute;, comme vous le feriez avec un tableau autonome. Si le tableau incorpor&eacute; est un tableau multi-dimensionnel, vous aurez alors besoin d'envelopper chaque ligne avec ##**{**## et ##**}**## comme vous le feriez pour un tableau autonome. <br \=""><br \=""><div class="fb_header"> Utilisation du commutateur de compilation -exx 
 
-=== Dynamic Arrays ===
+<br \=""><br \="">Le commutateur de compilation ##**-exx**## permettra le contr&ocirc;le des erreurs et la v&eacute;rification des limites de tableau au sein de votre programme. Si vous allez &agrave; l'ext&eacute;rieur des limites d'un tableau dans votre programme, le compilateur g&eacute;n&egrave;re une erreur "##**out of bounds**##" lorsque le programme est en cours d'ex&eacute;cution. <br \=""><br \="">Ceci est une grande aide dans le d&eacute;bogage de votre programme et pour trouver des probl&egrave;mes li&eacute;s aux tableaux. ##**-exx**## vous informera &eacute;galement des assignations de pointeur NULL, il est donc aussi tr&egrave;s utile lorsque vous travaillez avec des pointeurs. <br \=""><br \="">Utiliser ##**-exx**## ajoute un peu de code suppl&eacute;mentaire &agrave; votre programme, donc une fois que votre programme fonctionne correctement, compilez-le sans ##**-exx**##.
 
 The arrays described above are static arrays; the array size cannot change during program execution. You can also create dynamic arrays that can change size during execution. Dynamic arrays are useful for creating data structures such as stacks or queues.
 
@@ -228,7 +228,7 @@ The curly brackets signify that this is an array initialization, while the paren
 
 === Using the -exx Compiler Switch ===
 
-The -exx compiler switch will enable error and bounds checking within your program. If you go outside the bounds of an array within your program, the compiler will generate an “out of bounds” error while the program is running. 
+The -exx compiler switch will enable error and bounds checking within your program. If you go outside the bounds of an array within your program, the compiler will generate an "out of bounds" error while the program is running. 
 
 This is a great help in debugging your program, and finding problems associated with arrays. -exx will also  inform of you of Null pointer assignments, so it is quite useful when working with pointers as well. 
 

@@ -1,88 +1,88 @@
 {{fbdoc item="title" value="ANY"}}----
-##**Any**## is not a real type, but it's used as a placeholder in various ways.
+##**Any**## n'est pas un type r&eacute;el, mais il est utilis&eacute; comme un espace r&eacute;serv&eacute; de diverses mani&egrave;res.
 
 {{fbdoc item="syntax"}}##
 	//identifier// [[KeyPgAs as]] **Any** [[KeyPgPointer Pointer]]|[[KeyPgPtr ptr]]
-//or//
+//ou//
 	[[KeyPgDeclare declare]] { [[KeyPgSub sub]] | [[KeyPgFunction function]] } //identifier// ( [ ..., ] [[KeyPgByref byref]] //identifier// [[KeyPgAs as]] **Any** [ , ... ] )
-//or//
+//ou//
 	[[KeyPgDim Dim]] //identifier// [[KeyPgAs as]] [[DataType datatype]] = **Any**
 ##
 {{fbdoc item="usage"}}##
 	**##1)**## Dim //identifier// as **Any** ptr
-//or//
+//ou//
 	**##1)**## Declare Sub //identifier// ( [ byval | byref ] //identifier// as **Any** ptr )
-//or//
+//ou//
 	**##2)**## Dim //identifier// As //datatype// = **Any**
-//or//
+//ou//
 	**##3)**## Declare Sub //identifier// ( byref //identifier// as **Any** )
 ##
 {{fbdoc item="desc"}}
-	##**1)**## A special pointer type called the ##**Any [[KeyPgPtr Pointer]]**## allows pointing to any variable type. If you cast it to an ##[[KeyPgInteger Integer]] [[KeyPgPtr Pointer]]##, it will operate on the subject as though it were an ##[[KeyPgInteger Integer]]##, etc.
+	##**Any**## peut &ecirc;tre utilis&eacute; dans trois contextes: pointeurs, initialiseur de variable, arguments pointeur de fonctions et d&eacute;clarations de fonction pour indiquer un type de donn&eacute;es inconnu.
 
-	You may not create variables of the type ##**Any**##. It is illegal to dereference an ##**Any Pointer**##, but an ##**Any Pointer Pointer**## may be dereferenced, because doing so will result in an ##**Any Pointer**##. Trying to dereference that resulting ##**Any Pointer**## would be illegal.
+	##**1)**## Un type pointeur sp&eacute;cial appel&eacute; le ##**[[KeyPgPtr Pointer]] Any**## permet de pointer vers n'importe quel type de variable. Si vous le convertissez (cast) en un ##[[KeyPgInteger Integer]] [[KeyPgPtr Pointer]]##, il fonctionnera sur le sujet comme s'il s'agissait d'un ##[[KeyPgInteger Integer]]##, etc.
 
-	This should not be confused with ##Variant##, a Visual Basic data type which can contain any type of variable. ""FreeBASIC"" does not natively support the ##Variant## type.
+	Vous ne pouvez pas cr&eacute;er des variables de type ##**Any**##. Il est ill&eacute;gal de d&eacute;r&eacute;f&eacute;rencer un ##**Any Pointer**##, mais un ##**Any Pointer Pointer**## peut &ecirc;tre d&eacute;r&eacute;f&eacute;renc&eacute;, parce que cela se traduira par un ##**Any Pointer**##. Essayer de d&eacute;r&eacute;f&eacute;rencer ce ##**Any Pointer**## qui en r&eacute;sulte serait ill&eacute;gal.
 	
-	##**2) **## ##**Any**## can be used as a fake initializer to disable the default initialization to ##0## of the variables. This may save time in critical sections of the programs. It is up to the program to fill the variables with significant data. You may recognize this as the default behavior of C.
+	Cela ne doit pas &ecirc;tre confondu avec ##**Variant**##, un type de donn&eacute;es Visual Basic qui peut contenir tout type de variable. FreeBASIC ne supporte pas nativement le type ##**Variant**##.
 	
-	##**3) **## **##Any##** can be used  in function prototypes (in a ##[[KeyPgDeclare Declare]]## statement) with ##[[KeyPgByref ByRef]]## arguments to disable the compiler checking for the correct type of the variable passed. This use of ##**Any**## is deprecated and it is only there for compatibility with QB, where it was the only way of passing arrays as arguments.
+	##**2) **## ##**Any**## peut &ecirc;tre utilis&eacute; comme un faux initialiseur pour d&eacute;sactiver l'initialisation par d&eacute;faut &agrave; ##0## des variables. Cela peut faire gagner du temps dans les sections critiques des programmes. Il appartient au programme de remplir les variables avec des donn&eacute;es significatives. Vous pouvez reconna&icirc;tre que c'est le comportement par d&eacute;faut du langage C.
 
+##**3) **## **##Any##** peut &ecirc;tre utilis&eacute; dans les prototypes de fonctions (dans une d&eacute;claration ##[[KeyPgDeclare Declare]]##) avec des arguments ##[[KeyPgByref ByRef]]## pour d&eacute;sactiver la v&eacute;rification du compilateur du bon type de variable pass&eacute;e. Cette utilisation de ##**Any**## est obsol&egrave;te et n'est l&agrave; que pour la compatibilit&eacute; avec QB, o&ugrave; c'&eacute;tait le seul moyen de passer des tableaux comme arguments.
 {{fbdoc item="ex"}}
-{{fbdoc item="filename" value="examples/manual/misc/any.bas"}}%%(freebasic)
 Declare Sub echo(ByVal x As Any Ptr) '' echo will accept any pointer type
 
+Declare Sub echo(ByVal x As Any Ptr) '' echo will accept any pointer type
 Dim As Integer a(0 To 9) = Any '' this variable is not initialized
+
 Dim As Double  d(0 To 4)
 
 Dim p As Any Ptr
-
 Dim pa As Integer Ptr = @a(0)
 Print "Not initialized ";
-echo pa       '' pass to echo a pointer to integer
 
+echo pa       '' pass to echo a pointer to integer
 Dim pd As Double Ptr = @d(0)
 Print "Initialized ";
-echo pd       '' pass to echo a pointer to double
 
+echo pd       '' pass to echo a pointer to double
 p = pa     '' assign to p a pointer to integer
+
 p = pd     '' assign to p a pointer to double      
 
 Sleep
-
-Sub echo (ByVal x As Any Ptr)
+	Sub echo (ByVal x As Any Ptr)
 	Dim As Integer i
-	For i = 0 To 39
+	    For i = 0 To 39
 	    'echo interprets the data in the pointer as bytes
-	    Print Cast(UByte Ptr, x)[i] & " ";
+	Print Cast(UByte Ptr, x)[i] & " ";
 	Next
-	Print
+Print
 End Sub
+
 %%
-
-{{fbdoc item="filename" value="examples/manual/misc/any-param.bas"}}%%(freebasic)
 'Example of ANY disabling the variable type checking
-Declare Sub echo (ByRef a As Any) '' ANY disables the checking for the type of data passed to the function
+'Example of ANY disabling the variable type checking
 
+Declare Sub echo (ByRef a As Any) '' ANY disables the checking for the type of data passed to the function
 Dim x As Single
 x = -15
 echo x                  '' Passing a single to a function that expects an integer. The compiler does not complain!!             
-Sleep
 
-Sub echo (ByRef a As Integer)
-  Print Hex(a)         
+Sleep
+  Sub echo (ByRef a As Integer)
+Print Hex(a)         
+
 End Sub
 
 %%
+	{{fbdoc item="lang"}}
 
-{{fbdoc item="lang"}}
-	- Not available in the //[[CompilerOptlang -lang qb]]// dialect.
+- Non disponible dans le dialecte //[[CompilerOptlang -lang qb]]//.
+	{{fbdoc item="diff"}}
 
-{{fbdoc item="diff"}}
-	- Pointers and initializers are new to ""FreeBASIC"".
-
-{{fbdoc item="see"}}
+- Pointeurs et initialiseurs sont nouveaux pour FreeBASIC.
+	{{fbdoc item="see"}}
 	- ##[[KeyPgDim Dim]]##
-	- ##[[KeyPgDeclare Declare]]##
 
-{{fbdoc item="back" value="CatPgProcedures|Procedures"}}
+- ##[[KeyPgDeclare Declare]]##

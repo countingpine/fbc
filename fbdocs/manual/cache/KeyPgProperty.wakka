@@ -1,5 +1,5 @@
 {{fbdoc item="title" value="PROPERTY"}}----
-Declares or defines a property in a type or class
+D&eacute;clare ou d&eacute;finit une propri&eacute;t&eacute; dans un type ou une classe
 
 {{fbdoc item="syntax"}}##
 	{ [[KeyPgType Type]] | [[KeyPgClass Class]] } //typename//
@@ -27,22 +27,22 @@ Declares or defines a property in a type or class
 ##
 {{fbdoc item="param"}}
 	##//typename//## 
-		name of the ##[[KeyPgType Type]]## or ##[[KeyPgClass Class]]##
+		nom de ##[[KeyPgType Type]]## ou ##[[KeyPgClass Class]]##
 	##//fieldname//## 
-		name of the property
+		nom de la propri&eacute;t&eacute;
 	##//new_value//## 
-		the value passed to property to be assigned
+		la valeur pass&eacute;e &agrave; la propri&eacute;t&eacute; pour &ecirc;tre affect&eacute;e
 	##//index//## 
-		the property index value
+		la valeur de l'indice de la propri&eacute;t&eacute;
 
 {{fbdoc item="desc"}}
-	##**Property**## fields are used to get and set values of a ##[[KeyPgType Type]]## or ##[[KeyPgClass Class]]## in the same way as other data fields except instead of a simple assignment to a field or a value retrieved from field, a procedure is executed.
+	Les champs de la ##**Property**## sont utilis&eacute;s pour obtenir et d&eacute;finir les valeurs de ##[[KeyPgType Type]]## ou ##[[KeyPgClass Class]]## de la m&ecirc;me mani&egrave;re que les champs de donn&eacute;es, sauf qu'au lieu d'une simple affectation &agrave; un champ ou une valeur r&eacute;cup&eacute;r&eacute;e &agrave; partir du champ, une proc&eacute;dure est ex&eacute;cut&eacute;e.
 
-	##//typename//## is the name of the type for which the ##**Property**## method is declared and defined.  Name resolution for ##//typename//## follows the same rules as procedures when used in a ##[[KeyPgNamespace Namespace]]##.
+	##//typename//## est le nom du type sous lequel la m&eacute;thode ##**Property**## est d&eacute;clar&eacute;e et d&eacute;finie.  La r&eacute;solution de noms pour ##//typename//## suit les m&ecirc;mes r&egrave;gles que les proc&eacute;dures en cas d'utilisation dans un ##[[KeyPgNamespace Namespace]]##.
 
-	A **Property** may optionally have one index parameter.  When indexed, properties are accessed as Property(Index) = Value.
+	Une **Property** peut &eacute;ventuellement avoir un index de param&egrave;tres. Quand elles sont index&eacute;es, les **Property**s sont accessibles de cette fa&ccedil;on: Property(Indice) = Value.
 
-	A hidden ##[[KeyPgThis this]]## parameter having the same type as ##//typename//## is passed to the property procedure.  ##[[KeyPgThis this]]## is used to access the fields of the ##[[KeyPgType Type]]## or ##[[KeyPgClass Class]]##.
+	Un param&egrave;tre cach&eacute; ##[[KeyPgThis This]]## ayant le m&ecirc;me type que ##//typename//## est pass&eacute; &agrave; la proc&eacute;dure ##**Property**##.  ##[[KeyPgThis This]]## est utilis&eacute; pour acc&eacute;der aux champs de ##[[KeyPgType Type]]## ou ##[[KeyPgClass Class]]##.
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/udt/property.bas"}}%%(freebasic)
@@ -81,74 +81,73 @@ a.length = 10
 print "a = "; a
 print "a.length = "; a.length
 %%
-Output:
+Affichage:
 %%
 a = (3, 4)
 a.length =  5
 
 a = (6, 8)
 a.length =  10
-%%
+%%Property Index&eacute;:
 Property Indexing:
-{{fbdoc item="filename" value="examples/manual/udt/property2.bas"}}%%(freebasic)
-  '' True/False
-Namespace BOOL
-  Const FALSE = 0
-  Const TRUE = NOT FALSE
-End Namespace
-
+'' True/False
+  Namespace BOOL
+Const FALSE = 0
+  Const TRUE = Not FALSE
+  End Namespace
 Type BitNum
-  Num as uInteger
+
+Num As UInteger
+  '' Get/Set Properties each with an Index.
   
-	'' Get/Set Properties each with an Index.
-  Declare Property NumBit( ByVal Index as Integer ) as Integer
-  Declare Property NumBit( ByVal Index as Integer, ByVal Value as Byte )
-End Type
+	Declare Property NumBit( ByVal Index As Integer ) As Integer
+  Declare Property NumBit( ByVal Index As Integer, ByVal Value As Byte )
+  End Type
+'' Get a bit by it's index.
 
-  '' Get a bit by it's index.
-Property BitNum.NumBit( ByVal Index as Integer ) as Integer
-  Return Bit( This.Num, Index )
-End Property
+  Property BitNum.NumBit( ByVal Index As Integer ) As Integer
+Return Bit( This.Num, Index )
+  End Property
+'' Set a bit by it's index.
 
-  '' Set a bit by it's index.
-Property BitNum.NumBit( ByVal Index as Integer, ByVal Value as Byte )
+  Property BitNum.NumBit( ByVal Index As Integer, ByVal Value As Byte )
+'' Make sure index is in Integer range.
 
-	'' Make sure index is in Integer range.
-  If Index >= ( Sizeof(This.Num) * 8 ) then
-	Print "Out of uInteger Range!"
-	exit property
-  else
-	If Index < 0 then exit property
-  End if
+	If Index >= ( SizeOf(This.Num) * 8 ) Then
+  Print "Out of uInteger Range!"
+	Exit Property
+	Else
+  If Index < 0 Then Exit Property
+	End If
+  If Value = BOOL.FALSE Then
   
-  If Value = BOOL.FALSE then
-	This.Num = BitReSet( This.Num, Index )
-  End if
+  This.Num = BitReset( This.Num, Index )
+	End If
+  If Value = BOOL.TRUE Then
   
-  If Value = BOOL.TRUE then
-	This.Num = BitSet( This.Num, Index )
-  End if
+  This.Num = BitSet( This.Num, Index )
+	End If
+  End Property
   
-End Property
-
-
-Dim as BitNum Foo
+Dim As BitNum Foo
 
 
 Print "Testing property indexing with data types:"
-Print "FOO Number's Value: " & Foo.Num
 
-  '' Set the bit in the number as true.
-Foo.NumBit(31) = BOOL.TRUE
+
+Print "FOO Number's Value: " & Foo.Num
+'' Set the bit in the number as true.
+
+  Foo.NumBit(31) = BOOL.TRUE
 Print "Set the 31st bit of FOO"
+'' Print to see if our bit has been changed.
 
-  '' Print to see if our bit has been changed.
-Print "FOO Number's Value: " & Foo.Num
+  Print "FOO Number's Value: " & Foo.Num
 Print "FOO 31st Bit Set? " & Foo.NumBit(31)
-sleep
+Sleep
 Print ""
 %%
-Output:
+Affichage:
 %%
 Testing property indexing with data types:
 FOO Number's Value: 0
@@ -157,7 +156,8 @@ FOO Number's Value: 2147483648
 FOO 31st Bit Set? -1
 %%
 {{fbdoc item="see"}}
-	- ##[[KeyPgType Class]]##
+- ##[[KeyPgType Class]]##
+	- ##[[KeyPgType Type]]##
 	- ##[[KeyPgType Type]]##
 
 {{fbdoc item="back" value="CatPgUserDefTypes|User Defined Types"}}

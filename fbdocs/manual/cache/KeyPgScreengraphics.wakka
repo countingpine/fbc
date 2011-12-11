@@ -1,93 +1,93 @@
 {{fbdoc item="title" value="SCREEN (GRAPHICS)"}}----
-Initializes a graphics mode using QB-like mode numbers
+Initialise un mode graphique avec des nombres comme dans QB
 
 {{fbdoc item="syntax"}}##
 	**Screen** //mode// [, [ //depth// ] [, [ //num_pages// ] [, [ //flags// ] [, [ //refresh_rate// ]]]]]
  ##
 {{fbdoc item="param"}}
 	##//mode//## 
-		is a QB style graphics screen mode number (see below).  If ##//mode//## is ##0##, then any currently set graphics mode is closed, and all functions resume their normal console-mode functionality.  See below for available modes.
+		est un mode graphique exprim&eacute; par un nombre comme dans QB (voir ci-dessous).  Si ##//mode//## est ##0##, alors tout mode graphique courant est clos, et toutes les fonctions reprennent leurs fonctionnalit&eacute; de mode console.  Voir ci-dessous les modes disponibles.
 	##//depth//##
-		is the color depth in bits per pixel.  This only has an effect for modes ##14## and higher.  Values of ##8##, ##16## and ##32## are allowed.  ##15## and ##24## are also allowed as aliases for ##16## and ##32##, respectively.  If omitted, it defaults to ##8##.
+		est la profondeur de couleur en bits par pixel (bpp).  Ceci n&apos;a d&apos;effet que pour les modes ##14## ou sup&eacute;rieurs.  Les valeurs ##8##, ##16## and ##32## sont admises.  ##15## et ##24## sont admises comme alias respectivement de ##16## et ##32##.  Si omise, la valeur par d&eacute;faut est ##8##.
 	##//num_pages//##
-		is the number of video pages you want, see below.  If omitted, it defaults to ##1##.
+		est le nombre de pages vid&eacute;o que vous d&eacute;sirez, voir ci-dessous.  S&apos;il est omis, &agrave; ##1## par d&eacute;faut.
 	##//flags//##
-		Are used to select several things as graphics driver, fullscreen mode. There are constants predefined in the ##fbgfx.bi## file ready to use.  See below for available flags.
+		Sont utilis&eacute;s pour s&eacute;lectionner diff&eacute;rentes choses telles que le driver graphique, le mode plein &eacute;cran. Ce sont des constantes pr&eacute;d&eacute;finies dans le fichier ##fbgfx.bi## pr&ecirc;t &agrave; l&apos;usage.  Voir ci-dessous les drapeaux (flags) disponibles. 
 	##//refresh_rate//##
-		requests a refresh rate.  If it is not available in the present card or the parameter is omitted, ""FreeBASIC"" chooses the rate automatically.
+		d&eacute;termine une vitesse de rafra&icirc;chissement.  Si ce choix n&apos;est pas possible pour la carte graphique ou si le param&egrave;tre est omis, FreeBASIC choisit automatiquement cette vitesse.
 
 {{fbdoc item="desc"}}
-	##**Screen**## tells the compiler to link the GfxLib and initializes a QB-only, QB-on-GUI or OpenGL graphics mode, depending on the ##//flags//## setting.
+	##**Screen**## indique au compilateur de lier la GfxLib et initialise un mode graphique QB-only, QB-on-GUI ou OpenGL, en fonction du r&eacute;glage de drapeaux ##//flags//## setting.
 
-	In QB-only modes a dumb window or fullscreen resolution is set, one or more buffers in standard memory are created, console commands are redirected to their graphic versions, a [[GfxDefPalettes default palette]] is set and an automatic screen refresh thread is started.  QB-like graphics and console statements can be used.
+	Dans les modes de QB-only une fen&ecirc;tre simple ou plein &eacute;cran est activ&eacute;e, un ou plusieurs tampons en m&eacute;moire standard sont cr&eacute;&eacute;s, les commandes de la console sont redirig&eacute;es vers leur version graphique, [[GfxDefPalettes une palette par d&eacute;faut]] est fix&eacute;e et un rafra&icirc;chissement automatique de l&apos;&eacute;cran est d&eacute;marr&eacute;. Les d&eacute;clarations QB-like graphiques et de la console peuvent &ecirc;tre utilis&eacute;es.
 
-	 In QB-on-GUI modes one or more buffers in standard memory are created, console commands are redirected to their graphic versions and a [[GfxDefPalettes default palette]] is set.  QB-like graphics and console statements can be used.  It is up to the user to create a window and to refresh it with the contents of the graphics buffers.
+	 En modes QB-on-GUI, un ou plusieurs tampons en m&eacute;moire standard sont cr&eacute;&eacute;s, les commandes de la console sont redirig&eacute;es vers leur version graphique et une [[GfxDefPalettes palette par d&eacute;faut]] est fix&eacute;e.  Les d&eacute;clarations QB-like graphiques et de la console peuvent &ecirc;tre utilis&eacute;es.  C&apos;est &agrave; l&apos;utilisateur de cr&eacute;er une fen&ecirc;tre et de la rafra&icirc;chir avec le contenu des tampons graphiques.
 
-	In OpenGL modes a dumb window or fullscreen resolution is set, one or more buffers in standard memory are created, and the OS's OpenGL library is initialized.  From here OpenGL only OpenGL commands can be used; QB-like and console commands are forbidden.  This allows to initialize OpenGL in a portable way; you can then also use [[KeyPgScreencontrol ScreenControl]] to properly customize the GL pixel format to be used before ##**Screen**## is called or to retrieve the list of supported OpenGL extensions after a mode has been set, and [[KeyPgScreenglproc ScreenGLProc]] to obtain extension function pointers.
+	En modes OpenGL, une fen&ecirc;tre simple ou plein &eacute;cran est activ&eacute;e, un ou plusieurs tampons en m&eacute;moire standard sont cr&eacute;&eacute;s, et les librairies OpenGL de l&apos;OS sont initialis&eacute;es.  A partir de l&agrave;, seules les commandes OpenGL sont utilisables; les commandes QB-like et console sont interdites.  Ceci permet d&apos;initialiser OpenGL de fa&ccedil;on portable; vous pouvez &eacute;galement utiliser [[KeyPgScreencontrol ScreenControl]] pour personnaliser le format GL de pixel utilis&eacute; avant que ##**Screen**## soit appel&eacute; ou de r&eacute;cup&eacute;rer la liste des extensions OpenGL permises apr&egrave;s un mode ait &eacute;t&eacute; mis en place, et [[KeyPgScreenglproc ScreenGLProc]] d&apos;obtenir des pointeurs fonction d&apos;extension.
 
-	Any buffer that is created in standard memory uses one of three supported internal pixel formats, depending on the desired color depth; see [[GfxInternalFormats Internal pixel formats]] for details.
+	Tout tampon m&eacute;moire qui est cr&eacute;&eacute; dans la m&eacute;moire standard utilise l&apos;un des trois formats pixel internes support&eacute;s, d&eacute;pendant de la profondeur de couleur d&eacute;sir&eacute;e; voir [[GfxInternalFormats Formats internes de pixel ]] pour plus de d&eacute;tails.
 
-	If ##**Screen**## fails to set the required mode, an "Illegal function call" error is issued and the screen pointer is set to ##0##. Thus ##**Screen**## failures can be detected using standard ##[[KeyPgOnerror On Error]]## processing or retrieving the screen pointer with ##[[KeyPgScreenptr Screenptr]]##.
+	Si ##**Screen**## ne peut valider le mode requis, une erreur "Illegal function call" est affich&eacute;e et le pointeur &eacute;cran est mis &agrave; ##0##. Ces &eacute;checs de ##**Screen**## peuvent &ecirc;tre d&eacute;tect&eacute;s en utilisant le processus standard ##[[KeyPgOnerror On Error]]## ou en r&eacute;cup&eacute;rant le pointeur &eacute;cran avec ##[[KeyPgScreenptr ScreenPtr]]##.
 
-	Before setting a fullscreen mode the program should check if that mode is available in the graphics card using ##[[KeyPgScreenlist Screenlist]]##.
+	Avant de valider un mode plein &eacute;cran le programme doit tester si ce mode est accessible par la carte graphique en utilisant ##[[KeyPgScreenlist ScreenList]]##.
 
-__mode details__
-	Available modes list:
-	QB compatibility modes:
-{{table columns="6" cellpadding="1" cells="Mode nr;Resolution;Emulation;Text;char size;colors on screen;1;320x200;CGA ;40X25;8x8;16 background, 1 of four sets foreground;2;640x200;CGA;80x25;8x8;16 colors to 2 attributes;7;320x200;EGA;40x25;8x8;16 colors to 16 attributes;8;640x200;EGA;40x25;8x8;16 colors to 16 attributes;9;640x350;EGA;80x25 0r 80x43;8x14 or 8x8;16 colors to 16 attributes;11;640x480;VGA;80x30 or 80x60;8x16 or 8x8;256K colors to 2 attributes;12;640x480;VGA;80x30 or 80x60;8x16 or 8x8;256K colors to 16 attributes;13;320x200;MCGA;40X25;8X8;256K colors to 256 attributes"}}
-	New ""FreeBASIC"" modes:
-{{table columns="6" cellpadding="1" cells="Mode nr;Resolution;Emulation;Text;char size;colors on screen;14;320x240;###;40x30;8x8;256K colors to 256 attributes or direct color; 15;400x300;###;50x37;8x8;256K colors to 256 attributes or direct color; 16;512x384;###;64x24 or 64x48;8x16 or 8x8;256K colors to 256 attributes or direct color;17;640x400;###;80x25 or 80x50;8x16 or 8x8;256K colors to 256 attributes or direct color;18;640x480;###;80x30 or 80x60;8x16 or 8x8;256K colors to 256 attributes or direct color; 19;800x600;###;100x37 or 100x75;8x16 or 8x8;256K colors to 256 attributes or direct color;20;1024x768;###;128x48 or 128x96;8x16 or 8x8;256K colors to 256 attributes or direct color; 21;1280x1024;###;160x64 or 160x128;8x16 or 8x8;256K colors to 256 attributes or direct color"}} 
+<u>Informations sur le mode</u>
+	Liste des modes disponibles:
+	Compatibilit&eacute; avec les modes QB:
+{{table columns="" cellpadding="2" cells="<table>Mode nr;R&eacutesolution;Emulation;Texte;taille car;couleurs &agrave l&apos&eacutecran;1;320x200;CGA ;40X25;8x8;16 background, 1 of four sets foreground;2;640x200;CGA;80x25;8x8;16 colors to 2 attributes;7;320x200;EGA;40x25;8x8;16 colors to 16 attributes;8;640x200;EGA;40x25;8x8;16 colors to 16 attributes;9;640x350;EGA;80x25 0r 80x43;8x14 or 8x8;16 colors to 16 attributes;11;640x480;VGA;80x30 or 80x60;8x16 or 8x8;256K colors to 2 attributes;12;640x480;VGA;80x30 or 80x60;8x16 or 8x8;256K colors to 16 attributes;13;320x200;MCGA;40X25;8X8;256K colors to 256 attributes;</table>
+	Nouveaux modes FreeBASIC:
+{{table columns="" cellpadding="2" cells="<table>Mode nr;Resolution;Emulation;Text;char size;colors on screen;14;320x240; 40x30;8x8;256K colors to 256 attributes or direct color; 15;400x300; 50x37;8x8;256K colors to 256 attributes or direct color; 16;512x384; 64x24 or 64x48;8x16 or 8x8;256K colors to 256 attributes or direct color;17;640x400; 80x25 or 80x50;8x16 or 8x8;256K colors to 256 attributes or direct color;18;640x480; 80x30 or 80x60;8x16 or 8x8;256K colors to 256 attributes or direct color; 19;800x600; 100x37 or 100x75;8x16 or 8x8;256K colors to 256 attributes or direct color;20;1024x768; 128x48 or 128x96;8x16 or 8x8;256K colors to 256 attributes or direct color; 21;1280x1024; 160x64 or 160x128;8x16 or 8x8;256K colors to 256 attributes or direct color;</table>
 
-__##depth## details__
-	For modes ##14## and up, the depth parameter changes the color depth to the specified new one; if depth is not specified, these modes run in 8bpp.  For modes ##13## and below, ##//depth//## has no effect.
+<u>pr&eacute;cisions sur ##depth (profondeur)##</u>
+	Pour les modes ##14## et suivants, le param&egrave;tre depth (profondeur) change la profondeur de couleur par celle indiqu&eacute;e; si elle n&apos;est pas sp&eacute;cifi&eacute;e, ces modes fonctionnent en 8bpp.  Pour les modes ##13## et avant, ##//depth//## n&apos;a aucun effet.
 
-__##num_pages## details__
-	    You can request any number of pages for any video mode; if you omit the parameter, only the visible page (number ##0##) will be available.  A page is either the visible screen or an offscreen buffer, you can show a page while working on another one; see the ##[[KeyPgScreenset Screenset]]## statement for details.  All pages are created in standard memory, the video card memory is never used for video buffering.
+<u>pr&eacute;cisions sur ##num_pages##</u>
+	    Vous pouvez demander n&apos;importe quel nombre de pages, pour un mode vid&eacute;o; si vous omettez le param&egrave;tre, seule la page visible (num&eacute;ro ##0##) sera disponible.  Une page est soit l&apos;&eacute;cran visible ou un tampon hors-&eacute;cran, vous pouvez afficher une page tout en travaillant sur un autre; voir la d&eacute;claration ##[[KeyPgScreenset ScreenSet]]## pour plus de d&eacute;tails.  Toutes les pages sont cr&eacute;&eacute;es dans la m&eacute;moire standard, la m&eacute;moire de la carte vid&eacute;o n&apos;est jamais utilis&eacute;e pour la vid&eacute;o en m&eacute;moire tampon.
 
-__##flags## details:__
+<u>pr&eacute;cisions sur ##flags##:</u>
 
-~If flags are omitted, ""FreeBASIC"" uses QB-compatible graphics in windowed (except in DOS) mode.  These constants are defined in ##fbgfx.bi##.  In the //[[CompilerOptlang -lang fb]]// dialect, these constants are part of the ##FB## ##[[KeyPgNamespace Namespace]]##. Note that most of the flags are not supported in DOS.
+Si ##//flags//## est omis, FreeBASIC utilise un mode graphique fen&ecirc;tr&eacute; QB-compatible (sauf sous DOS).  Ces constantes sont d&eacute;finies dans ##fbgfx.bi## . Dans le dialecte //[[CompilerOptlang -lang fb]]//, ces constantes font partie de ##FB## ##[[KeyPgNamespace Namespace]]##. Notez que la plupart des flags ne sont pas support&eacute;s sous DOS.
 
-~Available flags:
+flags utilisables:
 
-~__graphic mode flags__
-~~-##GFX_NULL##: Starts a QB-on-GUI graphics mode.  It creates a graphics buffer but not a window.  User must implement the  window, the events manager and and refresh screen as needed.  This mode allows to mix ""FreeBASIC"" drawing functions with API-driven windows. This flag overrides all other mode flags.  See an [[SrcPgGfxNull Example of GFX_NULL]] in Windows.
-~~-##GFX_OPENGL##: Initializes OpenGL to draw in a dumb window. ""FreeBASIC"" graphic functions can't be used.  The screen is not automatically updated, ##[[KeyPgFlip Flip]]## must be used.  This option provides a portable way to initialize the OpenGL Library.
-~~-If none of the above options is specified, ""FreeBASIC"" enters the QB-only graphics mode: it creates a buffer and a dumb window and sets a thread that automatically updates the screen and manages keyboard and mouse.  The ""FreeBASIC"" drawing functions can be used. 
+<u>flags mode graphique </u>
+##GFX_NULL##: D&eacute;marre un mode graphique QB-on-GUI.  Il cr&eacute;e un tampon graphique mais pas une fen&ecirc;tre.  L&apos;utilisateur doit r&eacute;aliser la fen&ecirc;tre, le gestionnaire d&apos;&eacute;v&eacute;nements et rafra&icirc;chir l&apos;&eacute;cran quand c&apos;est n&eacute;cessaire.  Ce mode permet de mixer les fonctions graphiques de dessin avec des fen&ecirc;tres "API-driven". Cet indicateur remplace tous les autres indicateurs de mode.  Voir un [[SrcPgGfxNull Exemple de GFX_NULL]] sous Windows.
+##GFX_OPENGL##: Initialise OpenGL pour dessiner dans une simple fen&ecirc;tre. Les fonctions graphiques FreeBasic ne peuvent pas &ecirc;tre utilis&eacute;es.  L&apos;&eacute;cran n&apos;est pas mis &agrave; jour automatiquement, il faut utiliser ##[[KeyPgFlip Flip]]##.  Cette option procure une m&eacute;thode portable pour initialiser la libririe OpenGL.
+Si aucune des options ci-dessus n&apos;est sp&eacute;cifi&eacute;e, FreeBasic passe en mode graphiques QB-only: il cr&eacute;e une m&eacute;moire tampon et une simple fen&ecirc;tre et d&eacute;finit un thread qui met automatiquement &agrave; jour l&apos;&eacute;cran et g&egrave;re le clavier et la souris.  Les fonctions de dessin de FreeBASIC drawing sont accessibles. 
 
-~__window mode flags__
-~~Window mode flags are meaningless if  ##GFX_NULL## mode is used
-~~-##GFX_WINDOWED##: If windowed mode is supported, ""FreeBASIC"" opens a window of the requested size in the present desktop
-~~-##GFX_FULLSCREEN##: The graphics card switch mode is switched to the requested mode and color depth and OS fullscreen mode is used.  If the mode is not available in the present card ""FreeBASIC"" switches to windowed mode.
-~~-If ##GFX_FULLSCREEN## is not specified, the behavior for ##GFX_WINDOWED## is assumed.
-~~-##GFX_NO_SWITCH##: Prevents the user from changing to fullscreen or to windowed mode by pressing Alt-Enter.
-~~-##GFX_NO_FRAME##: Creates a window without a border.
-~~-##GFX_SHAPED_WINDOW##: Creates transparent regions wherever RGBA(255, 0, 255, 0) is drawn on the screen.
-~~-##GFX_ALWAYS_ON_TOP##: Creates a window that stays always on top.
+<u>flags en mode Fen&ecirc;tre</u>
+Les drapeaux du mode Fen&ecirc;tre n&apos;ont aucun sens si mode ##GFX_NULL##est utilis&eacute;
+##GFX_WINDOWED##: Si le mode fen&ecirc;tr&eacute; est support&eacute;, FreeBASIC ouvre une fen&ecirc;tre de la taille requise sur le bureau actuel
+##GFX_FULLSCREEN##: Le commutateur de mode graphique carte est commut&eacute; sur le mode demand&eacute; et la profondeur de couleur et le mode OS plein &eacute;cran est utilis&eacute;.  Si ce mode n&apos;est pas utilisable avec la carte pr&eacute;sente FreeBASIC commute le mode fen&ecirc;tr&eacute;.
+Si ##GFX_FULLSCREEN## n&apos;est pas pr&eacute;cis&eacute;, le comportement pour ##GFX_WINDOWED## est assur&eacute;.
+##GFX_NO_SWITCH##: Emp&ecirc;che l&apos;utilisateur de passer en mode plein &eacute;cran ou en mode fen&ecirc;tr&eacute; en appuyant sur Alt-Enter.
+##GFX_NO_FRAME##: Cr&eacute;e une fen&ecirc;tre sans bord.
+##GFX_SHAPED_WINDOW##: Cr&eacute;e des zones transparentes o&ugrave; RGBA (255, 0, 255, 0) est dessin&eacute; sur l&apos;&eacute;cran.
+##GFX_ALWAYS_ON_TOP##: Cr&eacute;e une fen&ecirc;tre qui reste toujours sur le dessus: donc toujours visible.
 
-~__option flags__
-~~Flags working in any mode, they activate special behaviors
-~~-##GFX_ALPHA_PRIMITIVES##: Tells the graphics library to enable alpha channel support for all drawing primitives. This means the alpha specified in a color value (via either the [[KeyPgRgba RGBA]] macro or direct color in the form &hAARRGGBB) will always be used by all primitives.
-~~-##GFX_HIGH_PRIORITY##: Tells the graphics library to enable a higher priority for graphics processing.  Only has an effect on ##gdi## and ##DirectX## drivers on Win32 platform.
+<u>option drapeaux</u>
+Drapeaux travaillant dans n&apos;importe quel mode, ils activent des comportements sp&eacute;ciaux
+##GFX_ALPHA_PRIMITIVES##: Indique &agrave; la biblioth&egrave;que graphique pour activer le support du canal alpha pour toutes les primitives de dessin. Cela signifie que l&apos;alpha sp&eacute;cifi&eacute; dans une valeur de couleur (via [[KeyPgRgba RGBA]] une macro ou directement une couleur sous la forme &hAARRGGBB) sera toujours utilis&eacute; par toutes les primitives.
+##GFX_HIGH_PRIORITY##: Indique &agrave; la biblioth&egrave;que graphique de permettre une plus grande priorit&eacute; pour les processus graphiques.  A un effet seulement sur les "drivers" ##gdi## et ##DirectX## d&apos;une plate-forme Win32.
 
-~__OpenGL Buffer flags__
-~~These flags work only in OpenGL graphics mode, must be combined with GFX_OPENGL
-~~-##GFX_STENCIL_BUFFER##: Forces OpenGL to use Stencil buffer 
-~~-##GFX_ACCUMULATION_BUFFER##: Forces OpenGL to use Accumulation buffer
-~~-##GFX_MULTISAMPLE##: Requests fullscreen anti-aliasing through the ARB_multisample extension
+<u>drapeaux Tampon OpenGL Buffer</u>
+Ces drapeaux ne fonctionnent qu&apos;en mode graphique OpenGL, ils doivent &ecirc;tre combin&eacute;s avec GFX_OPENGL
+##GFX_STENCIL_BUFFER##: Force OpenGL &agrave; utiliser le Tampon Stencil
+##GFX_ACCUMULATION_BUFFER##: Force OpenGL &agrave; utiliser le Tampon Accumulation
+##GFX_MULTISAMPLE##: Demande plein &eacute;cran anti-aliasing &agrave; travers l&apos;extension ARB_multisample
 
-	Depending on whether the ##GFX_FULLSCREEN## parameter is present or not, ##**Screen**## will try to set the specified video mode in fullscreen or windowed mode, respectively.  If fullscreen mode is set and the system cannot set specified mode in fullscreen, it'll try in windowed mode. If windowed mode is set and the system fails to open a window for specified mode, it will try fullscreen.  If everything fails, ##**Screen**## will have no effect and execution will resume from the statement following the ##**Screen**## call.  You should take care of checking if a graphics mode has been set or not, and behave accordingly; a way to check if ##**Screen**## is successful is to test the return value of the ##[[KeyPgScreenptr Screenptr]]## function; see its page for details.
+	D&eacute;pendant de la pr&eacute;sence ou non du param&egrave;tre ##GFX_FULLSCREEN##, ##**Screen**## essaiera de valider le mode vid&eacute;o sp&eacute;cifi&eacute; en mode plein &eacute;cran ou fen&ecirc;tr&eacute;, respectivement.  Si le mode plein &eacute;cran est valid&eacute; et que le syst&egrave;me ne peut valider le mode sp&eacute;cifi&eacute; en plein &eacute;cran, il essaiera en mode fen&ecirc;tr&eacute;. Si le mode fen&ecirc;tr&eacute; est valid&eacute; et que le syst&egrave;me ne peut pas ouvrir une fen&ecirc;tre dans le mode sp&eacute;cifi&eacute;, il essaiera en plein &eacute;cran.  Si rien ne fonctionne, ##**Screen**## n&apos;aura aucun effet et l&apos;ex&eacute;cution reprend &agrave; la d&eacute;claration suivant l&apos;appel &agrave; ##**Screen**##.  Vous devez prendre soin de v&eacute;rifier si un mode graphique a &eacute;t&eacute; valid&eacute; ou pas, et r&eacute;agir en cons&eacute;quence; une m&eacute;thode pour v&eacute;rifier si ##**Screen**## a r&eacute;ussi est de tester la valeur retourn&eacute;e du ##[[KeyPgScreenptr ScreenPtr]]## de la fonction; voir sa page pour plus de d&eacute;tails.
 
-__Graphics mode console__
-	Console commands (##[[KeyPgLocate Locate]]##, ##[[KeyPgPrint Print]]##), input can be used both with standard QB ##**Screen**## modes and with the extended ones too, provided the standard color depth is not modified by using the second argument of ##**Screen**##. Where the table says more than one text resolution is available for the text mode, the required text resolution can be requested by using ##[[KeyPgWidth Width]]##.  Any characters ##[[KeyPgPrint Print]]##ed will erase the background around them; it does not use a transparent background.
+<u>Mode graphique console</u>
+	Les commandes console (##[[KeyPgLocate Locate]]##, ##[[KeyPgPrint Print]]##), peuvent &ecirc;tre utilis&eacute;es aussi bien avec les modes standard QB ##**Screen**## qu&apos;avec les extensions, &agrave; condition que la profondeur de couleur standard ne soit pas modifi&eacute;e &agrave; l&apos;aide du second argument de ##**Screen**##. Lorsque le tableau indique que plusieurs r&eacute;solutions du texte sont disponibles pour le mode texte, la r&eacute;solution de texte demand&eacute;e peut &ecirc;tre obtenue avec ##[[KeyPgWidth Width]]##.  Tous les caract&egrave;res affich&eacute;s par ##[[KeyPgPrint Print]]## effacent l&apos;arriere-plan autour d&apos;eux; pas d&apos;utilisation d&apos;un arriere-plan transparent.
 
-__Other details__
+<u>Autres d&eacute;tails</u>
 
-	While in windowed mode, clicking on the window close button will add a keypress of ##[[KeyPgChr Chr]](255)&"k"## to the ##[[KeyPgInkey Inkey]]## buffer.  Clicking on the Maximize window button will switch to fullscreen mode if possible.  A successful ##**Screen**## call sets currently visible and working pages both to page number ##0##, resets the palette to the specified mode one (see Default palettes), resets the clipping region to the size of the screen, disables custom coordinates mappings, moves the graphics cursor to the center of the screen, moves the text cursor to the top-left corner of the screen and sets foreground and background colors to bright white and black respectively.
+	En mode fen&ecirc;tr&eacute;, cliquer sur le bouton "fermeture" de la fen&ecirc;tre ajoute un "touche appuy&eacute;e" (keypress) ##[[KeyPgChr Chr]](255)&"k"## dans le tampon ##[[KeyPgInkey Inkey]]##.  Cliquer sur le bouton "Maximiser" validera le mode plein &eacute;cran si c&apos;est possible.  Un appel r&eacute;ussi de ##**Screen**## valide les pages visible et de travail, toutes lesdeux, &agrave; la page num&eacute;ro ##0##, r&eacute;initialise la palette &agrave; celle du mode sp&eacute;cifi&eacute; (voir Palettes par d&eacute;faut), r&eacute;initialise la r&eacute;gion de d&eacute;coupage (clipping) &agrave; la taille de l&apos;&eacute;cran, d&eacute;sactive les mappages utilisateur de coordonn&eacute;es, place le curseur graphique au centre de l&apos;&eacute;cran, place le curseur texte dans le coin en haut &agrave; gauche de l&apos;&eacute;cran et et valide les couleurs d&apos;avant-plan et d&apos;arri&egrave;re-plan respectivement vers le blanc brillant et le noir.
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/gfx/screen.bas"}}%%(freebasic)
-' Sets screen mode 13 (320*200, 8bpp)
+&apos; Valide mode ecran 13 (320*200, 8bpp)
 Screen 13
 Print "Screen mode 13 set"
 
@@ -97,14 +97,14 @@ Sleep
 {{fbdoc item="filename" value="examples/manual/gfx/screen2.bas"}}%%(freebasic)
 #include "fbgfx.bi"
 #if __FB_LANG__ = "fb"
-Using FB '' Screen mode flags are in the FB namespace in lang FB
+Using FB &apos;&apos; Drapeaux mode ecran sont dans espace de nom FB en langage FB
 #endif
 
 
-' Sets screen mode 18 (640*480) with 32bpp color depth and 4 pages, in windowed mode; switching disabled
+&apos; Valide mode ecran 18 (640*480) avec profondeur couleur 32bpp et 4 pages, en mode fenetre commutation desactivee
 Screen 18, 32, 4, (GFX_WINDOWED or GFX_NO_SWITCH)
 
-' Check to make sure Screen was opened successfully
+&apos; Verifie que ecran ouvert avec succes
 If ScreenPtr = 0 Then
 	Print "Error setting video mode!"
 	End
@@ -114,32 +114,32 @@ Print "Successfully set video mode"
 Sleep
 %%
 
-{{fbdoc item="target"}}
-	- In DOS, Windowing and OpenGL related switches are not available, see also [[GfxLib GfxLib overview]]
+{{fbdoc item="section" value="Diff&eacute;rences de plates-formes
+	- En DOS, Fen&ecirc;trage et OpenGL et les interrupteurs connexes ne sont pas disponibles, voir aussi [[GfxLib Vue d&apos;ensemble de GfxLib]]
 
 {{fbdoc item="lang"}}
-	- In the //[[CompilerOptlang -lang fb]]// and //[[CompilerOptlang -lang fblite]]// dialects, the usage is:
+	- Dans les dialectes //[[CompilerOptlang -lang fb]]// et //[[CompilerOptlang -lang fblite]]//, l&apos;usage est:
 		##**Screen** //mode// [, [ //depth// ] [, [ //num_pages// ] [, [ //flags// ] [, [ //refresh_rate// ]]]]]##
-	- In the //[[CompilerOptlang -lang qb]]// dialect, the usage is:
+	- Dans le dialecte //[[CompilerOptlang -lang qb]]//, l&apos;usage est:
 		##**Screen** [//mode//] [,[//active_page//][,[//visible_page//]]]##
 
 {{fbdoc item="diff"}}
-	- None in the //[[CompilerOptlang -lang qb]]// dialect.
-	- In QB the syntax was ##**Screen** //mode//,//colormode//,//active_page//,//visible_page//##. Of those parameters ""FreeBASIC"" supports only //mode// and redefines the rest. The use of ##**Screen** ,,apage,vpage## to swap screen pages is only available in the //[[CompilerOptlang -lang qb]]// dialect. 
-	- ##[[KeyPgScreenset Screenset]]## should be used in the //[[CompilerOptlang -lang fb]]// and //[[CompilerOptlang -lang fblite]]// dialects.
+	- Aucune dans le dialecte //[[CompilerOptlang -lang qb]]//.
+	- Dans QB la syntaxe est ##**Screen** //mode//,//colormode//,//active_page//,//visible_page//##. De ces param&egrave;tres FreeBASIC supporte seulement //mode// et red&eacute;finit le rest. L&apos;utilisation de ##**Screen** ,,apage,vpage## pour permuter les pages est utilisable seulement dans le dialecte //[[CompilerOptlang -lang qb]]//. 
+	- ##[[KeyPgScreenset ScreenSet]]## est utilisable dans les dialectes //[[CompilerOptlang -lang fb]]// et //[[CompilerOptlang -lang fblite]]//.
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgScreenCons Screen (Console)]]##
-	- ##[[KeyPgScreenres Screenres]]## More flexible alternative to ##**Screen**##
-	- ##[[KeyPgScreenlist Screenlist]]## Check display modes available for FB ""GfxLib"" to use
-	- ##[[KeyPgScreencontrol Screencontrol]]## Select driver and more 
+	- ##[[KeyPgScreenres ScreenRes]]## Alternative plus flexible &agrave; ##**Screen**##
+	- ##[[KeyPgScreenlist ScreenList]]## Recherche les modes utilisables pour FB GfxLib
+	- ##[[KeyPgScreencontrol ScreenControl]]## Selection driver et plus 
 	- ##[[KeyPgScreenlock Screenlock]]##
 	- ##[[KeyPgScreenunlock Screenunlock]]##
-	- ##[[KeyPgScreenptr Screenptr]]## Semi-low level access
+	- ##[[KeyPgScreenptr ScreenPtr]]## Acc&egrave;s au niveau "Semi-low"
 	- ##[[KeyPgScreenset Screenset]]##
 	- ##[[KeyPgScreencopy Screencopy]]##
 	- ##[[KeyPgScreeninfo Screeninfo]]##
 	- ##[[KeyPgScreenglproc Screenglproc]]##
-	- ##[[GfxInternalFormats Internal pixel formats]]##
+	- ##[[GfxInternalFormats Formats internes des pixels]]##
 
 {{fbdoc item="back" value="CatPgGfxScreen|Screen Functions"}}

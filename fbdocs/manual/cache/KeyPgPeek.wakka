@@ -1,26 +1,26 @@
 {{fbdoc item="title" value="PEEK"}}----
-Gets the value of an arbitrary type at an address in memory
+Obtient la valeur d'un type arbitraire &agrave; une adresse dans la m&eacute;moire
 
 {{fbdoc item="syntax"}}##
 	[[KeyPgDeclare declare]] [[KeyPgFunction function]] **Peek** ( [[KeyPgByval byval]] //address// [[KeyPgAs as]] [[KeyPgAny any]] [[KeyPgPtr ptr]] ) [[KeyPgAs as]] [[KeyPgUbyte ubyte]]
 	[[KeyPgDeclare declare]] [[KeyPgFunction function]] **Peek** ( //datatype//, [[KeyPgByval byval]] //address// [[KeyPgAs as]] [[KeyPgAny any]] [[KeyPgPtr ptr]] ) [[KeyPgAs as]] //datatype//
 ##
-~&//Note: ##**Peek**## returns a reference to the value at the specified address. See [[CompilerFAQ Compiler FAQ]].//
+//Note: ##**Peek**## retourne une r&eacute;f&eacute;rence &agrave; la valeur &agrave; l'adresse indiqu&eacute;e. Voir [[CompilerFAQ FAQ du compilateur]].//
 
 {{fbdoc item="usage"}}##
 	**Peek**( [ //datatype//, ] //address// )
 ##
 {{fbdoc item="param"}}
 	##//address//##
-		The address in memory to get the value from.
+		L'adresse m&eacute;moire dont on veut obtenir la valeur.
 	##//datatype//##
-		The type of value to get.  If omitted, it defaults to the type of the pointer passed; or to ##[[KeyPgUbyte ubyte]]##, if the address is an ##[[KeyPgInteger integer]]## or an ##[[KeyPgAny any]] [[KeyPgPtr ptr]]##.
+		Le type de valeur &agrave; obtenir.  En cas d'omission, la valeur par d&eacute;faut correspond au type du pointeur pass&eacute; ou &agrave; ##[[KeyPgUbyte UByte]]##, si l'adresse est un ##[[KeyPgInteger Integer]]## ou un ##[[KeyPgAny Any]] [[KeyPgPtr Ptr]]##.
 
 {{fbdoc item="desc"}}
-	This procedure returns a reference to the value in memory given by a memory address, and is equivalent to
+	Cette proc&eacute;dure renvoie une r&eacute;f&eacute;rence &agrave; la valeur en m&eacute;moire donn&eacute;e par une adresse m&eacute;moire, et est &eacute;quivalente &agrave;:
 
 		##*cast(ubyte ptr, //address//)##
-			or
+			ou
 		##*cast(//datatype// ptr, //address//)##
 
 {{fbdoc item="ex"}}
@@ -31,15 +31,15 @@ p = @i
 Poke Integer, p, 420
 Print Peek(Integer, p)
 %%
-	will produce the output:
+	affichera:
 
 %%420
 %%
 
 {{fbdoc item="diff"}}
-	- **##Peek##** did not support the ##//datatype//## parameter in QB, and could only return individual bytes.
-	- **##Peek##** returns a reference in FB, so can be used to set the memory contents of the address, like with ##[[KeyPgOpValueOf Operator * (Value of)]]##.
-	- ##DEF SEG## isn't needed anymore because the address space is 32-bit flat in ""FreeBASIC"".
+	- **##Peek##** ne supportait pas le param&egrave;tre ##//datatype//## dans QB, et ne pouvait retourner des octets  individuels.
+	- **##Peek##** retourne une r&eacute;f&eacute;rence dans FB et peut donc &ecirc;tre utilis&eacute; pour d&eacute;finir le contenu de la m&eacute;moire &agrave; l'adresse, comme avec ##[[KeyPgOpValueOf Operator * (Value Of)]]##.
+	- ##DEF SEG## n'est pas n&eacute;cessaire parce que l'espace d'adressage est "32-bit flat" dans FreeBASIC.
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgPoke Poke]]##

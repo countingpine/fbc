@@ -1,29 +1,29 @@
 {{fbdoc item="title" value="Operator * (Value of)"}}----
-Dereferences a pointer
+D&eacute;r&eacute;f&eacute;rence un pointeur
 
 {{fbdoc item="syntax"}}##
 	[[KeyPgDeclare declare]] [[KeyPgOperator operator]] ***** ( [[KeyPgByref byref]] //rhs// [[KeyPgAs as]] //T// [[KeyPgPointer pointer]] ) [[KeyPgAs as]] //T//
 ##
-~&//Note that **##Operator *## (Value of)** returns a reference. As of 02.27.07, ""FreeBASIC"" syntax does not support returning references.  When it does, this syntax will need to be changed.//
+//Notez que **##Op&eacute;rateur *## (Valeur de)** retourne une r&eacute;f&eacute;rence. En date du 27/02/07, la syntaxe FreeBASIC ne supporte pas le retour de r&eacute;f&eacute;rences. Lorsque c'est le cas, cette syntaxe devra &ecirc;tre chang&eacute;e.//
 
 {{fbdoc item="usage"}}##
 	//result// = * //rhs//
 ##
 {{fbdoc item="param"}}
 	##//rhs//##
-		The address to dereference.
+		L'adresse &agrave; d&eacute;r&eacute;f&eacute;rencer.
 	##//T//##
-		Any [[CatPgStdDataTypes standard]], [[CatPgUserDefTypes user-defined]] or procedure type.
+		Tout type [[CatPgStdDataTypes standard]], [[CatPgUserDefTypes d&eacute;fini par l'utilisateur]] ou proc&eacute;dure.
 
-{{fbdoc item="ret"}}
-	Returns a reference to the value stored at the address ##//rhs//##.
+{{fbdoc item="section" value="Valeur retourn&eacute;e
+	Retourne une r&eacute;f&eacute;rence &agrave; une valeur stock&eacute;e &agrave; l'adresse ##//rhs//##.
 
 {{fbdoc item="desc"}}
-	**##Operator *## (Value of)** returns a reference to the value stored at an address, and is often called the dereference operator. The operand is not modified in any way.
+	**##Op&eacute;rateur *## (Valeur de)** retourne une r&eacute;f&eacute;rence &agrave; une valeur stock&eacute;e une certaine adresse et est souvent appel&eacute; op&eacute;rateur de d&eacute;r&eacute;f&eacute;rencement. L'op&eacute;rande n'est en aucune mani&egrave;re modifi&eacute;.
 
-	As a reference, the result of this operator can be used on the left-hand side of assignments.
+	Comme r&eacute;f&eacute;rence, le r&eacute;sultat de cet op&eacute;rateur peut &ecirc;tre utilis&eacute; sur le c&ocirc;t&eacute; gauche d'affectations.
 
-	This operator can be overloaded for user-defined types.
+	Cet op&eacute;rateur peut &ecirc;tre surcharg&eacute; pour des types utilisateurs.
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/operator/valueof.bas"}}%%(freebasic)
@@ -31,30 +31,30 @@ Dereferences a pointer
 Dim a As Integer
 Dim pa As Integer Ptr
 
+See also
 pa=@a 'Here, we use the @ operator to point our integer ptr at 'a'.
+
 ' 'a' is, in this case, a standard integer variable.
 
 a=9     'Here we give 'a' a value of 9.
 
 Print "The value of 'a' is";*pa 'Here, we display the value of 'a' using a pointer. 
-
 *pa = 1 'Here we use our pointer to change the value of 'a'
 Print "The new value of 'a' is";a 'Here we display the new value of 'a'.
 %%
-Output:
+Affiche:
 %%
 The value of 'a' is 9
 The new value of 'a' is 1
+
 %%
+	{{fbdoc item="lang"}}
 
-{{fbdoc item="lang"}}
-	- In the //[[CompilerOptlang -lang qb]]// dialect, this operator cannot be overloaded.
+- Dans le dialecte //[[CompilerOptlang -lang qb]]//, cet op&eacute;rateur ne peut pas &ecirc;tre surcharg&eacute;.
+	{{fbdoc item="diff"}}
 
-{{fbdoc item="diff"}}
-	- New to ""FreeBASIC""
-
-{{fbdoc item="see"}}
-	- ##[[KeyPgOpAt Operator @ (Address of)]]##
-	- [[ProPgPointers Pointers]]
+- Nouveau pour FreeBASIC
+	{{fbdoc item="see"}}
+	- ##[[KeyPgOpAt Op&eacute;rateur @ (Adresse de)]]##
 	
-{{fbdoc item="back" value="CatPgOpPoint|Pointer Operators"}}{{fbdoc item="back" value="CatPgOperators|Operators"}}
+- [[ProPgPointers Pointeurs]]

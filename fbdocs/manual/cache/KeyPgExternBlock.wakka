@@ -1,23 +1,23 @@
 {{fbdoc item="title" value="EXTERN...END EXTERN"}}----
-Statement block to allow calling of functions compiled for specific languages or platforms.
+Bloc d'instructions permettant d'appeler des fonctions compil&eacute;es pour des langages ou des plates-formes sp&eacute;cifiques.
 
 {{fbdoc item="syntax"}}##
-	**Extern { """C""" | """C++""" | """Windows""" | """Windows-MS""" }** [ **[[KeyPgLib Lib]]** "//libname//" ]
+	**Extern { "C" | "C++" | "Windows" | "Windows-MS" }** [ **[[KeyPgLib Lib]]** "//libname//" ]
 		//declarative statements//
 	**End Extern**
 ##
 {{fbdoc item="desc"}}
-	##**Extern**## blocks provide default calling conventions for procedures and mandate a certain name decoration.
+	Les blocs ##**Extern**## fournissent par d&eacute;faut des conventions d'appel pour les proc&eacute;dures et mandatent une certaine "name decoration".
 
-	##**Extern """C"""**## blocks provide a default ##[[KeyPgCdecl cdecl]]## calling convention to procedures, and also preserve the case of all names declared within them. The same effect can be achieved without the EXTERN block by using ##[[KeyPgCdecl cdecl]]## together with an ##[[KeyPgAlias alias]]## string containing the exact procedure name.
+	Les blocs ##**Extern "C"**## fournissent par d&eacute;faut une convention d'appel ##[[KeyPgCdecl cdecl]]## pour les proc&eacute;dures et pr&eacute;servent aussi la casse de tous les noms d&eacute;clar&eacute;s dans celles-ci. Le m&ecirc;me r&eacute;sultat peut &ecirc;tre obtenu en utilisant ##[[KeyPgCdecl cdecl]]## en m&ecirc;me temps qu'un ##[[KeyPgAlias Alias]]## cha&icirc;ne contenant le nom exact de la proc&eacute;dure.
 
-	##**Extern """C++"""**## blocks are exactly like ##**Extern """C"""**## blocks but they also mangle the names declared within them in a way compatible to that of //g""++""-4.x//.
+	Les blocs ##**Extern "C++"**## sont exactement comme les blocs ##**Extern "C"**## mais ils transforment aussi les noms d&eacute;clar&eacute;s &agrave; l'int&eacute;rieur d'une mani&egrave;re compatible avec celle de //g++-4.x//.
 
-	##**Extern """Windows"""**## blocks provide a default ##[[KeyPgStdcall Stdcall]]## calling convention to procedures, preserve the case of all names declared within them, and on the Windows platform, append an ##"@//N//"## suffix to procedure names, where ##//N//## is the total size in bytes of any procedure parameters. Similar to the ##**Extern """C"""**## block, the same effect can be achieved by using ##[[KeyPgStdcall stdcall]]## and ##[[KeyPgAlias alias]]##.
+	Les blocs ##**Extern "Windows"**## fournissent par d&eacute;faut une convention d'appel ##[[KeyPgStdcall stdcall]]## pour les proc&eacute;dures, pr&eacute;servent la casse de tous les noms d&eacute;clar&eacute;s &agrave; l'int&eacute;rieur de celles-ci et sur les plates-formes Windows, ajoutent un suffixe ##"@//N//"## aux noms des proc&eacute;dures, o&ugrave; ##//N//## est la taille totale en octets des param&egrave;tres de la proc&eacute;dure. Similaire au bloc ##**Extern "C"**##, le m&ecirc;me effet est obtenu en utilisant ##[[KeyPgStdcall stdcall]]## et ##[[KeyPgAlias Alias]]##. 
 
-	##**Extern """Windows-MS"""**## blocks are exactly like ##**Extern """Windows"""**## blocks but do not append the ##"@//N//"## suffix to procedure names on Windows.
+	Les blocs ##**Extern "Windows-MS"**## sont identiques aux blocs ##**Extern "Windows"**## mais n'ajoutent pas le suffixe ##"@//N//"## aux noms de proc&eacute;dure sur les plates-formes Windows.
 	
-	##[[KeyPgLib Lib]] "//libname//"## can be used to specify a library which will be linked in as if ##[[KeyPgInclib #inclib "libname"]]## or ##[[CompilerOptl -l libname]]## had been used. Additionally, all procedure declarations inside the **Extern** block will use the specified ##[[KeyPgLib Lib]] "//libname//"## as if it was specified as part of their declarations (but it can still be overridden with an explicit ##[[KeyPgLib Lib]] "//libname//"##).
+	##[[KeyPgLib Lib]] "//libname//"## peut &ecirc;tre utilis&eacute; pour sp&eacute;cifier une librairie qui sera li&eacute;e comme si on avait utilis&eacute; ##[[KeyPgInclib #Inclib "Libname"]]## ou ##[[CompilerOptl -l libname]]##. De plus, toutes les d&eacute;clarations de proc&eacute;dures &agrave; l'int&eacute;rieur du bloc **Extern** utiliseront ##[[KeyPgLib Lib]] "//libname//"## comme si cela avait &eacute;t&eacute; sp&eacute;cifi&eacute; dans le cadre de leurs d&eacute;clarations (mais cela peut &ecirc;tre modifi&eacute; par un ##[[KeyPgLib Lib]] "//libname//"## explicite.
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/module/extern-block.bas"}}%%(freebasic)
@@ -48,13 +48,13 @@ end extern
 %%
 
 {{fbdoc item="lang"}}
-	- ##**Extern**## blocks are only available in the //[[CompilerOptlang -lang fb]]// dialect.
+	<li>Les blocs ##**Extern**## sont disponibles seulement en dialecte //[[CompilerOptlang -lang fb]]//.
 
 {{fbdoc item="diff"}}
-	- New to ""FreeBASIC""
+	- Nouveau pour FreeBASIC
 
 {{fbdoc item="target"}}
-	- On Linux, *BSD and DOS platforms, ##**Extern "Windows"**## blocks never append a ##"@//N//"## suffix to procedure names, and thus are equal to ##**Extern "Windows-MS"**##.
+	- Dans les plates-formes Linux, *BSD and DOS les blocs ##**Extern "Windows"**## n'ajoutent jamais le suffixe ##"@//N//"## aux noms des proc&eacute;dures et sont donc &eacute;quivalents &agrave; ##**Extern "Windows-MS"**##.
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgCdecl Cdecl]]##

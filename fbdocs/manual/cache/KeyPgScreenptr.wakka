@@ -1,5 +1,5 @@
 {{fbdoc item="title" value="SCREENPTR"}}----
-Returns a pointer to the current work page's framebuffer
+Retourne un pointeur sur la page de travail courante du tampon image
 
 {{fbdoc item="syntax"}}##
 	[[KeyPgDeclare declare]] [[KeyPgFunction function]] **Screenptr** ( ) [[KeyPgAs as]] [[KeyPgAny any]] [[KeyPgPtr ptr]]
@@ -7,32 +7,32 @@ Returns a pointer to the current work page's framebuffer
 {{fbdoc item="usage"}}##
 	//result// = **Screenptr**
 ##
-{{fbdoc item="ret"}}
-	a pointer to the current work page framebuffer memory, or NULL (0) if no graphics mode is set.
+{{fbdoc item="section" value="Valeur retourn&eacute;e
+	Un pointeur m&eacute;moire sur la page de travail courante du tampon image, ou NULL (0) si aucun mode graphique n'est valide.
 
 {{fbdoc item="desc"}}
-	##**Screenptr**## provides a way to directly read/write the working page's framebuffer. ##[[KeyPgScreenlock Screenlock]]## should be used before any read or writes are attempted. The pointer returned is valid up until any subsequent call to ##[[KeyPgScreengraphics Screen]]## or ##[[KeyPgScreenres Screenres]]##, which invalidates it.
+	##**ScreenPtr**## procure un m&eacute;thode pour lire/&eacute;crire directement sur la page de travail courante du tampon image. ##[[KeyPgScreenlock ScreenLock]]## doit &ecirc;tre utilis&eacute; avant toute tentative de lecture ou d'&eacute;criture. Le pointeur est valide jusqu'&agrave; l'appel suivant &agrave; ##[[KeyPgScreengraphics Screen]]## ou ##[[KeyPgScreenres ScreenRes]]##, qui l'invalidera.
 	
-	##**Screenptr**## can also be used to test if a call to ##[[KeyPgScreengraphics Screen]]## or ##[[KeyPgScreenres Screenres]]## was successful, indicated by a non-NULL (<> 0) return value.
+	##**ScreenPtr**## peut &ecirc;tre utilis&eacute; pour v&eacute;rifier si un appel &agrave; ##[[KeyPgScreengraphics Screen]]## ou ##[[KeyPgScreenres ScreenRes]]## a r&eacute;ussi, r&eacute;ussite indiqu&eacute;e par une valeur retoun&eacute;e non-NULL (<> 0).
 
-	In order to access a pixel in the screen buffer, you will need to know the screen's width, height, bytes per pixel and pitch (bytes per row).  This information can be found out using ##[[KeyPgScreeninfo Screeninfo]]##.
-	Each row in the frame buffer is ##//pitch//## bytes long.  The frame buffer consists of ##//height//## rows, stored in order of their position on the screen, running from top to bottom, left to right.
+	Afin d'acc&eacute;der &agrave; un pixel dans le tampon &eacute;cran, vous devez conna&icirc;tre la largeur, la hauteur, le nombre de bits par pixel et d'octets par ligne (pitch) de l'&eacute;cran.  Ces informations sont donn&eacute;es par ##[[KeyPgScreeninfo ScreenInfo]]##.
+	Chaque ligne du tampon image a ##//pitch//## octets de longueur.  Le tampon image est constitu&eacute; de ##//height//## lignes, stock&eacute;es dans l'ordre de leur position &agrave; l'&eacute;cran, en allant du haut vers le bas et de la gauche vers la droite.
 
-	Because of the design of ""FreeBasic"" graphics library, ##**Screenptr**## (if non-ZERO) will always point to the backbuffer, and never to actual video RAM.
+	En raison de la conception de la biblioth&egrave;que de graphique FreeBasic, ##**ScreenPtr**## (si non-ZERO) pointe toujours vers le tampon et non vers la RAM vid&eacute;o r&eacute;elle.
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/gfx/screenptr.bas"}}%%(freebasic)
 Const SCREEN_WIDTH = 640, SCREEN_HEIGHT = 480
 Dim As Integer w, h, bypp, pitch
 
-'' Make 8-bit screen.
+'' Ecran 8-bit.
 Screenres SCREEN_WIDTH, SCREEN_HEIGHT, 8
 
-'' Get screen info (w and h should match the constants above, bypp should be 1)
+'' Recupere info ecran (w et h doivent correspondre aux constantes ci-dessus, bypp doit etre 1)
 Screeninfo w, h, , bypp, pitch
 
-'' Get the address of the frame buffer. An Any Ptr 
-'' is used here to allow simple pointer arithmetic
+'' Recupere adresse du tampon image. Un pointeur "Any Ptr" 
+'' est utilise ici pour allouer un simple pointeur arithmetique
 Dim buffer As Any Ptr = Screenptr()
 If (buffer = 0) Then
 	Print "Error: graphics screen not initialized."
@@ -40,36 +40,36 @@ If (buffer = 0) Then
 	End -1
 End If
 
-'' Lock the screen to allow direct framebuffer access
+'' Verrouille ecran pour acceder directement au tampon
 Screenlock()
 	
-	'' Find the address of the pixel in the centre of the screen
-	'' It's an 8-bit pixel, so use a UByte Ptr.
+	'' Recupere addresse du pixel au centre ecran
+	'' C'est un pixel 8-bit, donc utilisation pointeur UByte.
 	Dim As Integer x = w \ 2, y = h \ 2
 	Dim As Ubyte Ptr pixel = buffer + (y * pitch) + (x * bypp)
 	
 	
-	'' Set the pixel color to 10 (light green).
+	'' Couleur pixel a 10 (vert clair).
 	*pixel = 10
 
-'' Unlock the screen.
+'' Deverrouille ecran.
 Screenunlock()
 
-'' Wait for the user to press a key before closing the program
+'' Attend touche appuyee pour clore programme
 Sleep
 %%
 {{fbdoc item="filename" value="examples/manual/gfx/screenptr2.bas"}}%%(freebasic)
 Const SCREEN_WIDTH = 256, SCREEN_HEIGHT = 256
 Dim As Integer w, h, bypp, pitch
 
-'' Make 32-bit screen.
+'' Ecran 32-bit.
 ScreenRes SCREEN_WIDTH, SCREEN_HEIGHT, 32
 
-'' Get screen info (w and h should match the constants above, bypp should be 4)
+'' Recupere info ecran (w et h doivent correspondre aux constantes ci-dessus, bypp doit etre 4)
 ScreenInfo w, h, , bypp, pitch
 
-'' Get the address of the frame buffer. An Any Ptr 
-'' is used here to allow simple pointer arithmetic
+'' Recupere adresse du tampon image. Un pointeur "Any Ptr" 
+'' est utilise ici pour allouer un simple pointeur arithmetique
 Dim buffer As Any Ptr = Screenptr()
 If (buffer = 0) Then
 	Print "Error: graphics screen not initialized."
@@ -77,48 +77,48 @@ If (buffer = 0) Then
 	End -1
 End If
 
-'' Lock the screen to allow direct framebuffer access
+'' Verrouille ecran pour acceder directement au tampon
 ScreenLock()
 	
-	'' Set row address to the start of the buffer
+	'' Adresse ligne debut tampon
 	Dim As Any Ptr row = buffer
 	
-	'' Iterate over all the pixels in the screen:
+	'' Boucle sur tous pixels ecran:
 	
 	For y As Integer = 0 To h - 1
 	    
-	    '' Set pixel address to the start of the row
-	    '' It's a 32-bit pixel, so use a UInteger Ptr
+	    '' Adresse pixel sur ligne
+	    '' c'est un pixel 32-bit, donc utilisation pointeur UInteger Ptr
 	    Dim As UInteger Ptr pixel = row
 	    
 	    For x As Integer = 0 To w - 1
 	        
-	        '' Set the pixel value
+	        '' Place valeur pixel
 	        *pixel = Rgb(x, x Xor y, y) 
 	        
-	        '' Get the next pixel address 
-	        '' (UInteger Ptr will increment by 4 bytes)
+	        '' Adresse pixel suivant 
+	        '' (UInteger Ptr incrementera par 4 octets)
 	        pixel += 1
 	        
 	    Next x
 	    
-	    '' Go to the next row
+	    '' Ligne suivante
 	    row += pitch
 	    
 	Next y
 
-'' Unlock the screen.
+'' Deverrouille ecran.
 ScreenUnlock()
 
-'' Wait for the user to press a key before closing the program
+'' Attend appui sur touche avant fermer programme
 Sleep
 %%
 
 {{fbdoc item="lang"}}
-	- Not available in the //[[CompilerOptlang -lang qb]]// dialect unless referenced with the alias ##**""__Screenptr""**##.
+	- Non disponible dans le dialecte //[[CompilerOptlang -lang qb]]// sauf si r&eacute;f&eacute;renc&eacute; avec l'alias ##**__Screenptr**##.
 
 {{fbdoc item="diff"}}
-	- New to ""FreeBASIC""
+	- Nouveau pour FreeBASIC
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgScreengraphics Screen (Graphics)]]##

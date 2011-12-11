@@ -1,5 +1,5 @@
 {{fbdoc item="title" value="Operator Imp (Implication)"}}----
-Returns the bitwise-and (implication) of two numeric values
+Retourne la manipulation de bits implication de deux valeurs num&eacute;riques
 
 {{fbdoc item="syntax"}}##
 	[[KeyPgDeclare declare]] [[KeyPgOperator operator]] **Imp** ( [[KeyPgByref byref]] //lhs// [[KeyPgAs as]] //T1//, [[KeyPgByref byref]] //rhs// [[KeyPgAs as]] //T2// ) [[KeyPgAs as]] //Ret//
@@ -9,31 +9,31 @@ Returns the bitwise-and (implication) of two numeric values
 ##
 {{fbdoc item="param"}}
 	##//lhs//##
-		The left-hand side expression.
+		Expression c&ocirc;t&eacute; gauche.
 	##//T1//##
-		Any numeric type.
+		Tout type num&eacute;rique.
 	##//rhs//##
-		The right-hand side expression.
+		Expression c&ocirc;t&eacute; droit.
 	##//T2//##
-		Any numeric type.
+		Tout type num&eacute;rique.
 	##//Ret//##
-		A numeric type (varies with ##//T1//## and ##//T2//##).
+		Un type num&eacute;rique (varie avec ##//T1//## et ##//T2//##).
 
-{{fbdoc item="ret"}}
-	Returns the bitwise-implication of the two operands.
+{{fbdoc item="section" value="Valeur retourn&eacute;e
+	Retourne la manipulation de bits implication de deux op&eacute;randes.
 
 {{fbdoc item="desc"}}
-	This operator returns the bitwise-implication of its operands, a logical operation that results in a value with bits set depending on the bits of the operands.
+	Cet op&eacute;rateur retourne la manipulation de bits implication de ses op&eacute;randes, une op&eacute;ration logique qui donne une valeur avec ses bits positionn&eacute;s en fonction des bits des op&eacute;randes.
 
-	The truth table below demonstrates all combinations of a boolean-implication operation:
+	La table de v&eacute;rit&eacute; ci-dessous donne toutes les combinaisons d'une op&eacute;ration d'implication bool&eacute;enne:
 
-	{{table columns="3" cellpadding="2" cells="Lhs Bit;Rhs Bit;Result;0;0;1;1;0;0;0;1;1;1;1;1"}}
+	{{table columns="" cellpadding="2" cells="<table>Bit c&ocirct&eacute gauche;Bit c&ocirct&eacute droit;R&eacutesultat;0;0;1;1;0;0;0;1;1;1;1;1;</table>
 
-	No short-circuiting is performed - both expressions are always evaluated.
+	Aucun court-circuit n'est possible - les deux expressions sont toujours &eacute;valu&eacute;es.
 	
-	The return type depends on the types of values passed. ##[[KeyPgByte Byte]]##, ##[[KeyPgUbyte Ubyte]]## and floating-point type values are first converted to ##[[KeyPgInteger Integer]]##. If the left and right-hand side types differ only in signedness, then the return type is the same as the left-hand side type (##//T1//##), otherwise, the larger of the two types is returned.
+	Le type de la valeur retourn&eacute;e d&eacute;pend des types des valeurs pass&eacute;es. Les valeurs ##[[KeyPgByte Byte]]##, ##[[KeyPgUbyte UByte]]## et &agrave; virgule flottante sont, en premier, converties en ##[[KeyPgInteger Integer]]##. Si les types des deux c&ocirc;t&eacute;s diff&egrave;rent seulement par leur manque de signe, le type de retour sera celui du c&ocirc;t&eacute; gauche (##//T1//##), autrement, le plus grand des deux est retourn&eacute;.
 
-	This operator can be overloaded for user-defined types.
+	Cet op&eacute;rateur peut &ecirc;tre surcharg&eacute; pour des types d&eacute;finis par l'utilisateur.
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/operator/imp-bitwise.bas"}}%%(freebasic)
@@ -44,12 +44,12 @@ c = a imp b '' c = &b11110101
 %%
 
 {{fbdoc item="lang"}}
-	- In the //[[CompilerOptlang -lang qb]]// dialect, this operator cannot be overloaded.
+	- Dans le dialecte //[[CompilerOptlang -lang qb]]//, cet op&eacute;rateur ne peut pas &ecirc;tre surcharg&eacute;.
 
 {{fbdoc item="diff"}}
-	- None
+	- Aucune
 
 {{fbdoc item="see"}}
-	- [[TblTruth Operator Truth Tables]]
+	- [[TblTruth Tables de v&eacute;rit&eacute; des op&eacute;rateurs]]
 
 {{fbdoc item="back" value="CatPgOpLogical|Logical Operators"}}{{fbdoc item="back" value="CatPgOperators|Operators"}}

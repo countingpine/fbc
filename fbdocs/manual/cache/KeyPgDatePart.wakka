@@ -1,41 +1,41 @@
 {{fbdoc item="title" value="DatePart"}}----
-Gets an interval from a date
+Obtient un intervalle &agrave; partir d'une date
 
 {{fbdoc item="syntax"}}##
-	[[KeyPgDeclare declare]] [[KeyPgFunction function]] **""DatePart""** ( [[KeyPgByref byref]] //interval// [[KeyPgAs as]] [[KeyPgConstQualifier const]] [[KeyPgString string]], [[KeyPgByval byval]] //date_serial// [[KeyPgAs as]] [[KeyPgDouble double]], [[KeyPgByval byval]] //firstdayofweek// [[KeyPgAs as]] [[KeyPgInteger integer]] = fbUseSystem, [[KeyPgByval byval]] //firstdayofyear// [[KeyPgAs as]] [[KeyPgInteger integer]] = fbUseSystem ) [[KeyPgAs as]] [[KeyPgInteger integer]]
+	[[KeyPgDeclare Declare]] [[KeyPgFunction Function]] **DatePart** ( [[KeyPgByref ByRef]] //interval// [[KeyPgAs As]] [[KeyPgConstQualifier Const]] [[KeyPgString String]], [[KeyPgByval ByVal]] //date_serial// [[KeyPgAs As]] [[KeyPgDouble Double]], [[KeyPgByval ByVal]] //firstdayofweek// [[KeyPgAs As]] [[KeyPgInteger Integer]] = fbUseSystem, [[KeyPgByval ByVal]] //firstdayofyear// [[KeyPgAs As]] [[KeyPgInteger Integer]] = fbUseSystem ) [[KeyPgAs As]] [[KeyPgInteger Integer]]
 ##
 {{fbdoc item="usage"}}##
 	#include "vbcompat.bi"
-	//result// = **""DatePart""**( //interval//, //date_serial//, //first_dayofWeek// [, //first_week_of_year// ] )
+	//result// = **DatePart**( //interval//, //date_serial//, //first_dayofWeek// [, //first_week_of_year// ] )
 ##
 {{fbdoc item="param"}}
 	##//interval//##
-		string indicating which part of the date is required
+		cha&icirc;ne indiquant quelle partie de la date est requise
 	##//date_serial//##
-		the date serial to decode 
+		la "date serial" &agrave; d&eacute;coder 
 	##//firstdayofweek//##
-		first day of the week
+		1er jour de la semaine
 	##//firstdayofyear//##
-		first day of the year
+		1er jour de l'ann&eacute;e
 
-{{fbdoc item="ret"}}
-	Return an integer representing  the ##//interval//## in the [[ProPgDates Date Serial]].
+{{fbdoc item="section" value="Valeur retourn&eacute;e
+	Retourne un nombre entier repr&eacute;sentant un intervalle ##//interval//## dans la [[ProPgDates Date Serial]].
 
 {{fbdoc item="desc"}}
 
-	##//interval//## string indicating which part of the date is required is specified as follows:
+	La cha&icirc;ne ##//interval//## indique quelle partie de la date est requise; elle est sp&eacute;cifi&eacute;e comme ci-dessous:
 
-		{{table columns="2" cellpadding="1" cells="value;interval;yyyy;years;q;quarter(three months);m;months; w; weekday; ww; week of the year;y;day of the year;d;day of the month;h;hours;n;minutes;s;seconds"}}  
+		{{table columns="" cellpadding="2" cells="<table>valeur;intervalle;yyyy;ann&eacutees;q;trimestres;m;mois; w; jour de la semaine; ww; semaine de l'ann&eacutee;y;jour de l'ann&eacutee;d;jour du mois;h;heures;n;minutes;s;secondes;</table>
 
-	##//first_dayofweek//## Affects the output when 'w' interval is required.
+	##//first_dayofweek//## Affecte la sortie quand l'intervalle 'w' est requis.
 
-		{{table columns="3" cellpadding="1" cells="value;first day of week;constant;omitted;sunday;###;0;local settings;fbUseSystem;1;sunday;fbSunday;2;monday;fbMonday;3;tuesday;fbTuesday;4;wednesday;fbWednesday;5;thursday;fbThursday;6;friday;fbFriday;7;saturday;fbSaturday"}}
+		{{table columns="" cellpadding="2" cells="<table>valeur;1er jour de la semaine;constante;omis;sunday = dimanche; 0;param&egravetres locaux;fbUseSystem;1;sunday = dimanche;fbSunday;2;monday = lundi;fbMonday;3;tuesday = mardi;fbTuesday;4;wednesday = mercredi;fbWednesday;5;thursday = jeudi;fbThursday;6;friday = vendredi;fbFriday;7;saturday = samedi;fbSaturday;</table>
 
-	##//first_weekofyear//##  specifies which year (previous or next) that the week which spans the end of one year and the beginning of the next should included with. Affects the output when ##'ww'## interval is required.
+	##//first_weekofyear//##  sp&eacute;cifie quelle ann&eacute;e (pr&eacute;c&eacute;dente ou suivante) dont la semaine qui est "&agrave; cheval" sur la fin d'une ann&eacute;e et le d&eacute;but de la suivante doit &ecirc;tre incluse. Affecte la sortie quand l'intervalle ##'ww'## est requis.
 
-		{{table columns="3" cellpadding="1" cells="value;first week of year;constant;0;local settings;fbUseSystem;1;January 1's week;fbFirstJan1;2;first weeks having 4 days in the year;fbFirstFourDays;3;first full week of year;fbFirstFullWeek"}}
+		{{table columns="" cellpadding="2" cells="<table>valeur;1&egravere semaine de l'ann&eacutee;constante;0;param&egravetres locaux;fbUseSystem;1;semaine du 1er janvier;fbFirstJan1;2;1&egravere semaine qui a 4 jours dans l'ann&eacutee;fbFirstFourDays;3;1&egravere semaine compl&egravete de l'ann&eacutee;fbFirstFullWeek;</table>
 
-	The compiler will not recognize this function unless ##vbcompat.bi## or ##datetime.bi## is included.
+	Le compilateur ne reconna&icirc;t cette fonction que si ##vbcompat.bi## ou ##datetime.bi## est inclus.
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/dates/datepart.bas"}}%%(freebasic)
@@ -51,7 +51,7 @@ print " of the year " & DatePart( "yyyy", d )
 %%
 
 {{fbdoc item="diff"}}
-	- Did not exist in QB. This function appeared in Visual Basic.
+	- N'existe pas dans QB. Cette fonction est apparue dans PDS et VBDOS
 
 {{fbdoc item="see"}}
 	- [[ProPgDates Date Serials]]

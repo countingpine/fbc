@@ -1,69 +1,69 @@
 {{fbdoc item="title" value="Frequently Asked FB Runtime Library Questions"}}----
 
-{{anchor name="item0"}}
-**FreeBASIC Runtime Library questions:**
+<a name="item0"></a>
+**Questions sur la biblioth&egrave;que d'ex&eacute;cution de FreeBASIC:**
 
-	==- {{anchor name="item1|How do I play sound?"}}==
-	==- {{anchor name="item2|How do I access the serial ports?"}}==
-	==- {{anchor name="item3|How do I print?"}}==
-	==- {{anchor name="item4|How do I access the hardware ports?"}}==
-	==- {{anchor name="item5|What is the behavior of strings passed byval?"}}==
+	**- [[#item1">Comment puis-je jouer des sons?]]**
+	**- [[#item2">Comment puis-je acc&eacute;der aux ports s&eacute;rie?]]**
+	**- [[#item3">Comment puis-je imprimer?]]**
+	**- [[#item4">Comment puis-je acc&eacute;der aux ports mat&eacute;riels?]]**
+	**- [[#item5">Quel est le comportement de cha&icirc;nes pass&eacute;es "byval"?]]**
 
-{{fbdoc item="back" value="DocToc|Table of Contents"}}
+<div style="text-align: center;">**Questions sur la biblioth&egrave;que d'ex&eacute;cution de FreeBASIC**
 
-----
+<a name="item1"></a>** Comment puis-je jouer des sons?**
 
-@@**FreeBASIC Runtime Library questions**@@
+Des mots-cl&eacute;s sonores de QB seul BEEP est g&eacute;r&eacute; dans FB. 
 
-{{anchor name="item1"}}== How do I play sound?==
-	Of the QB's sound keywords only BEEP is implemented in FB. 
-	If PC speaker sound is required, it should be programmed using IN and OUT. See the example in the OUT keyword for a replacement of SOUND. 
-	There is a library called QBSound that allows to emulate qb's ability to PLAY in the background tunes encoded in strings, it uses the soundcard's synthesizer.
-	If what's required is to play .wav or .mp3 files thru a soundcard, external libraries as FMOD or BASS can be used in Linux and Windows. For DOS see the [[FaqDOS DOS FAQ section]].
+Si le haut-parleur PC est n&eacute;cessaire, il doit &ecirc;tre programm&eacute; en utilisant IN et OUT. Voir l'exemple dans le mot-cl&eacute; OUT pour un remplacement de SOUND.
+	Il existe une biblioth&egrave;que appel&eacute;e QBSound qui permet d'&eacute;muler la capacit&eacute; de QB d'utiliser PLAY en fond sonore, pour des airs dans des cha&icirc;nes cod&eacute;es, en utilisant la carte son de synth&eacute;tiseur.
+	Si c'est de jouer des fichiers .wav ou .mp3 gr&acirc;ce &agrave; une carte son, des biblioth&egrave;ques externes comme FMOD ou BASS peut &ecirc;tre utilis&eacute;es sous Linux et Windows. Pour DOS voir la [[FaqDOS FAQ DOS]].
+	[[#item0">Retour en haut de la page]]
+	<a name="item2"></a>**Comment puis-je acc&eacute;der aux ports s&eacute;rie?**
 
-{{anchor name="item0|Back to top"}}
+**DOS**
 
-{{anchor name="item2"}}==How do I access the serial ports?==
+Voir la [[FaqDOS FAQ DOS]].
 
-	**DOS**
-	See [[FaqDOS DOS FAQ section]].
+	**Windows et Linux**
+	Voir [[KeyPgOpenCom Open Com]].
 
-	**Windows and Linux**
-	See [[KeyPgOpenCom Open Com]].
+	[[#item0">Retour en haut de la page]]
+	<a name="item3"></a>**Comment puis-je imprimer?**
 
-{{anchor name="item0|Back to top"}}
+Depuis la version 0.15, FB accepte la sortie de caract&egrave;res vers l'imprimante. 
 
-{{anchor name="item3"}}==How do I print?==
-	Since version 0.15 FB supports character output to printer. 
-	To print graphics two approaches are possible:
-	- Preprocess the graphics, program the printer and send the pixels in FB. This is OS-portable but depends on the printer model. The only way for DOS, see also [[FaqDOS DOS FAQ section]].
-	- In Windows and Linux there are specific API calls. This is not OS-portable but the OS's printer driver makes it printer-independent 
+Pour imprimer des graphiques deux approches sont possibles:
+	- Pr&eacute;traiter les graphismes, programmer l'imprimante et envoyer les pixels dans FB. Ceci est portable c&ocirc;t&eacute; OS mais d&eacute;pend du mod&egrave;le d'imprimante. La seule fa&ccedil;on pour DOS, voir aussi [[FaqDOS FAQ DOS]].
+	- Dans Windows et Linux il existe des appels d'API sp&eacute;cifiques. Ceci n'est pas portable c&ocirc;t&eacute; OS mais le pilote OS de l'imprimante rend l'imprimante independante. 
+	[[#item0">Retour en haut de la page]]
+	<a name="item4"></a>**Comment puis-je acc&eacute;der aux ports mat&eacute;riels?**
 
-{{anchor name="item0|Back to top"}}
+INP, OUT et WAIT V0.15 QB sont impl&eacute;ment&eacute;s. 
 
-{{anchor name="item4"}}==How do I access the hardware ports?==
+GfxLib intercepte les appels &agrave; certains ports VGA pour &eacute;muler la large utilisation de la manipulation de la Palete dans QB et les m&eacute;thodes de vsync. Ainsi les ports &H3DA, &H3C7, &H3C8 et &H3C9 ne sont pas accessibles si GfxLib est utilis&eacute;. Tous les autres ports sont accessibles.
 
-	As of V0.15 QB's INP, OUT and WAIT are implemented. 
-	The GfxLib intercepts the calls to some VGA ports to emulate the widely used QB's palete manipulation and vsync methods. So ports &H3DA, &H3C7, &H3C8 and &H3C9 can't be accessed it GfxLib is used. All other ports are accessible. 
-	No further care is required to use INP and OUT in Linux or DOS. For the Windows version the required device driver is installed each first time the program is run in a windows session; this requires Administrator rights for this first run or the program will end with an error. 
+	Aucun soin suppl&eacute;mentaire n'est n&eacute;cessaire pour utiliser INP et OUT sous Linux ou DOS. Pour que la version Windows le pilote de p&eacute;riph&eacute;rique requis est install&eacute; &agrave; chaque fois que le premier programme est ex&eacute;cut&eacute; dans une session Windows; cela n&eacute;cessite des droits d'administrateur pour cette premi&egrave;re ex&eacute;cution ou le programme se terminera avec une erreur.
+	[[#item0">Retour en haut de la page]]
+	<a name="item5"></a>**Quel est le comportement de cha&icirc;nes pass&eacute;es "byval"?**
 
-{{anchor name="item0|Back to top"}}
+Cet article a &eacute;t&eacute; &eacute;crit le 30.01.2007.
 
-{{anchor name="item5"}}==What is the behavior of strings passed byval?==
+Une [[KeyPgString String]] FreeBASIC est essentiellement un type int&eacute;gr&eacute; d&eacute;fini par l'utilisateur qui, entre autres choses, contient un pointeur vers les donn&eacute;es cha&icirc;ne et sa longueur. Ce type est appel&eacute; un "descripteur" en interne, et c'est ce descripteur qui est pass&eacute; aux proc&eacute;dures quand les param&egrave;tres sont pass&eacute;s par r&eacute;f&eacute;rence.
 
-~&This item is written as of 01.30.2007.
+Lorsqu'ils sont pass&eacute;s par valeur, cependant, ce sont les donn&eacute;es r&eacute;elles de la cha&icirc;ne qui sont pass&eacute;es, et non pas le descripteur. En interne, la cha&icirc;ne de donn&eacute;es est termin&eacute;e par le caract&egrave;re NULL (chr(0)). Lorsqu'une [[KeyPgString String]] temporaire est cr&eacute;&eacute;e pour une proc&eacute;dure, FreeBASIC copie les donn&eacute;es de la cha&icirc;ne transmise jusqu'au premier caract&egrave;re NULL. Si l'argument pass&eacute; [[KeyPgString String]] contient des caract&egrave;res NULL dans la cha&icirc;ne, alors le reste de la cha&icirc;ne de donn&eacute;es apr&egrave;s le premier NULL n'est pas copi&eacute; et la cha&icirc;ne est tronqu&eacute;e. Vous courez &eacute;galement le risque d'&eacute;crire en dehors des limites de la m&eacute;moire allou&eacute;e.
 
-	A FreeBASIC [[KeyPgString String]] is essentially a built-in user-defined type that, among other things, contains a pointer to the string data and it's length. This type is called a 'descriptor' internally, and it is this descriptor that is passed to procedures when it's parameters are passed by reference.
-	When passed by value, however, the actual string data is passed, not the descriptor. Internally, the string data is terminated with the NULL character (chr(0)). When the temporary [[KeyPgString String]] is created for the procedure, FreeBASIC copies the string data passed up until the first NULL character. If the [[KeyPgString String]] argument passed contained NULL characters within the string, then the rest of the string data after the first NULL is not copied, and the string is truncated. You also run the risk of writing outside the bounds of the allocated memory.
-	This behavior will eventually be fixed to act as it should: a temporary descriptor will be created for the procedure and a 'deep copy' of it's fields will be made (notably, the entire string data itself will be copied into new memory, and the new descriptor will point to that memory).
-	To be safe, pass [[KeyPgString Strings]] by reference. If you need to simulate the correct behavior of passing a [[KeyPgString String]] by value, either 1) create a temporary [[KeyPgString String]], initialize it with the [[KeyPgString String]] you want to pass and pass the temporary by reference, or 2) pass the [[KeyPgString String]] by reference and have the procedure create and initialize a temporary [[KeyPgString String]] and work with the temporary.
+	Ce comportement sera corrig&eacute; et agira comme il se doit: un descripteur temporaire sera cr&eacute;&eacute; pour la proc&eacute;dure et une "copie en profondeur" de ses champs sera effectu&eacute;e (notamment, les donn&eacute;es de la cha&icirc;ne enti&egrave;re se seront copi&eacute;es dans la nouvelle m&eacute;moire et le nouveau descripteur pointera vers cette m&eacute;moire).
+	Pour plus de s&eacute;curit&eacute;, passez les [[KeyPgString String]] par r&eacute;f&eacute;rence. Si vous voulez simuler le comportement correct de passer une [[KeyPgString String]] par valeur, soit 1) cr&eacute;er une [[KeyPgString String]] temporaire, l'initialiser avec la [[KeyPgString String]] que vous d&eacute;sirez passer et passer la [[KeyPgString String]] temporaire par r&eacute;f&eacute;rence, ou 2) passer la [[KeyPgString String]] par r&eacute;f&eacute;rence et cr&eacute;er la proc&eacute;dure et l'initialiser avec une [[KeyPgString String]] temporaire et travailler avec la [[KeyPgString String]] temporaire.
+	[[#item0">Retour en haut de la page]]
+	Voir aussi:
 
-{{anchor name="item0|Back to top"}}
+- [[CompilerFAQ FAQ du compilateur]]
 
-See also:
-	- [[CompilerFAQ Compiler FAQ]]
-	- [[FaqPggfxlib2 Frequently Asked FreeBASIC Graphics Library Questions]]
-and
+- [[FaqPggfxlib2 FAQ de la biblioth&egrave;que graphique de FreeBASIC]]
+	et
+	- [[FaqPgWin32 FAQ Win32]]
+- [[FaqDOS FAQ DOS]]
 	- [[FaqPgWin32 Win32 related FAQ]]
 	- [[FaqDOS DOS related FAQ]]
 

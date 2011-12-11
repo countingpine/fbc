@@ -1,22 +1,22 @@
 {{fbdoc item="title" value="WSTRING"}}----
-Standard data type: wide character string
+Type de donn&eacute;es standard : cha&icirc;nes de caract&egrave;res larges (2 octets)
 
 {{fbdoc item="syntax"}}##
 	[[KeyPgDim dim]] //variable// [[KeyPgAs as]] **Wstring** * //size//
 	[[KeyPgDim dim]] //variable// [[KeyPgAs as]] **Wstring** [[KeyPgPtr ptr]]
 ##
 {{fbdoc item="desc"}}
-	A ##**Wstring**## is a fixed-size array of wide-chars that never overflows if the size is known at compile-time. It has no descriptor, and does never resize unless it's a pointer and ##[[KeyPgAllocate Allocate]]##/##[[KeyPgReallocate Reallocate]]##/##[[KeyPgDeallocate Deallocate]]## are used directly.
+	Une ##**WString**## est un tableau &agrave; taille fixe de caract&egrave;res larges qui ne d&eacute;borde jamais si la taille est connue au moment de la compilation. Il n'y a pas de descripteur, et ne peut &ecirc;tre redimensionn&eacute; sauf si c'est un pointeur et que ##[[KeyPgAllocate Allocate]]##/##[[KeyPgReallocate Reallocate]]##/##[[KeyPgDeallocate Deallocate]]## sont utilis&eacute;s directement.
 
-	The end of the string is marked by the character 0, so that character must never be part of a ##**Wstring**## or the content will be truncated.
+	La fin de la cha&icirc;ne est marqu&eacute;e avec le caract&egrave;re 0, donc ce caract&egrave;re ne doit jamais faire partie du contenu de ##**WString**## ou ce contenu sera tronqu&eacute;.
 
-	This type is provided for support non-Latin based alphabets. Any intrinsic string function like ##[[KeyPgLeft Left]]## will work with ##**Wstring**##s too, as will any string operator.
+	Ce type existe pour supporter les alphabets avec une base non-Latin. Toutes les fonctions intrins&egrave;ques de cha&icirc;nes comme ##[[KeyPgLeft Left]]## , ainsi que tout op&eacute;rateur de cha&icirc;ne, fontionnent aussi avec ##**WString**##.
 
-	Besides ASCII files with Unicode escape sequences (\u), FreeBASIC can parse UTF-8, UTF-16LE, UTF-16BE, UTF-32LE and UTF-32BE source files.
+	En plus des fichiers ASCII avec des s&eacute;quences d'&eacute;chappement Unicode (\u), FreeBasic peut analyser les fichiers source UTF-8, UTF-16LE, UTF-16BE, UTF-32LE et UTF-32BE.
 
-	The FreeBASIC text file functions can read and write Unicode files in different encodings, provided the ##[[KeyPgEncoding encoding]]## is specified when the file is opened. The text is automatically converted to the internal encoding at read and converted back to the file encoding at write. 
+	Les fonctions de fichier texte de FreeBasic peuvent lire et &eacute;crire des fichiers Unicode dans des codages diff&eacute;rents, &agrave; condition que le codage = ##[[KeyPgEncoding Encoding]]## soit sp&eacute;cifi&eacute; lorsque le fichier est ouvert. Le texte est automatiquement converti dans le codage interne &agrave; la lecture et reconverti dans le codage du fichier lors de l'&eacute;criture. 
 	
-	##[[KeyPgSizeof sizeof]]##( ##**Wstring**## ) returns the number of bytes used by a ##**Wstring**## character in the current platform.
+	##[[KeyPgSizeof SizeOf]]##( ##**WString**## ) retourne le nombre d'octets utilis&eacute;s par ##**WString**## dans la plate-forme courante.
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/datatype/wstring.bas"}}%%(freebasic)
@@ -36,15 +36,15 @@ print len(*str2)      'returns 12, the length of the string it points to
 
 {{fbdoc item="target"}}
 	Support for wstrings relies in the C runtime library available in the platform and the internal format may vary.
-		- Unicode is not supported in the DOS port of FreeBASIC. In this port a character takes up always 1 byte and ##[[KeyPgWstring Wstrings]]## will behave as standard ASCII ##[[KeyPgZstring Zstrings]]##
-		- On Win32 wstrings are encoded in UCS-2 (UTF-16 LE) and a character takes up 2 bytes.
-		- On Linux wstrings are encoded in UCS-4 and a character takes up 4 bytes.
+		- Unicode n'est pas support&eacute; dans le portage DOS de FreeBASIC. Dans ce portage un caract&egrave;re vaut toujours 1 octet et ##[[KeyPgWstring Wstrings]]## va se comporter en tant que norme ASCII ##[[KeyPgZstring Zstrings]]##
+		- Sous Win32 wstrings sont encod&eacute;es en UCS-2 (UTF-16 LE) et un caract&egrave;re vaut 2 octets.
+		- Sous Linux wstrings sont encod&eacute;es en UCS-4 et un caract&egrave;re vaut 4 octets.
 
 {{fbdoc item="lang"}}
-	- Not available in the //[[CompilerOptlang -lang qb]]// dialect unless referenced with the alias ##**""__Wstring""**##.
+	- Non disponible dans le dialecte //[[CompilerOptlang -lang qb]]// sauf si r&eacute;f&eacute;renc&eacute; avec l'alias ##**__Wstring**##.
 
 {{fbdoc item="diff"}}
-	- New to ""FreeBASIC""
+	- Nouveau pour FreeBASIC
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgString String]]## (data type)

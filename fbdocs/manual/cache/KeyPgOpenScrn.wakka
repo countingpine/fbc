@@ -1,42 +1,42 @@
 {{fbdoc item="title" value="OPEN SCRN"}}----
-Opens the console directly for input and output as a file
+Ouvre la console directement pour des op&eacute;rations d'entr&eacute;e ou de sortie comme pour un fichier
 
 {{fbdoc item="syntax"}}##
 	**[[KeyPgOpen Open]] Scrn** [for //mode//] [[KeyPgAs as]] [#]//filenum// [[KeyPgAs as]] [[KeyPgInteger integer]]
 ##
 {{fbdoc item="usage"}}##
 	**Open Scrn** [for //mode//] as [#]//filenum//
-		//or//
+		//ou//
 	//result// = **Open Scrn**( [for //mode//] as [#]//filenum// )
 ##
 {{fbdoc item="param"}}
 	##//mode//##
-		Either ##[[KeyPgInputfilemode Input]]## or ##[[KeyPgOutput Output]]##.  If omitted, ##[[KeyPgOutput Output]]## is assumed.
+		Soit ##[[KeyPgInputfilemode Input]]## ou ##[[KeyPgOutput Output]]##.  Si omis, ##[[KeyPgOutput Output]]## est utilis&eacute;.
 	##//filenum//##
-		An unused file number.
+		Un num&eacute;ro de fichier inutilis&eacute;.
 
-{{fbdoc item="ret"}}
-	Zero is returned if ##**Open Err**## completed successfully, otherwise a non-zero value is returned to indicate failure.
+{{fbdoc item="section" value="Valeur retourn&eacute;e
+	Retourne z&eacute;ro si ##**Open Err**## s'acheve avec succ&egrave;s, sinon une valeur non nulle est renvoy&eacute;e pour indiquer un &eacute;chec.
 
 {{fbdoc item="desc"}}
-	This command opens the console for both input and output as a file, allowing to read/write from/to it with normal file commands.
+	Cette commande ouvre la console en entr&eacute;e ou sortie comme pour un fichier, permettant de lire/&eacute;crire &agrave; partir de/vers celle-ci &agrave; l'aide des commandes normales d'acc&egrave;s fichier.
 
-	This command may use direct access to the console for speed in some implementations, so  it should not be used when the input / output is required to be redirected or piped with OS commands.    
+	Cette commande peut utiliser l'acc&egrave;s direct &agrave; la console pour plus de vitesse dans certaines impl&eacute;mentations, elle ne doit pas &ecirc;tre utilis&eacute;e lorsque l'entr&eacute;e/sortie doit &ecirc;tre redirig&eacute;e ou //pipe// par des commandes OS.    
 
-	The normal console commands, such as ##[[KeyPgColor Color]]## and ##[[KeyPgLocate Locate]]##, do not work in this mode, because they do not accept a file number.
+	Les commandes normales de la console, comme ##[[KeyPgColor Color]]## et ##[[KeyPgLocate Locate]]##, ne fonctionnent pas dans ce mode, parce qu'elles n'acceptent pas un num&eacute;ro de fichier.
 
-	The ##[For Input|Output]## clause is allowed for compatibility, but is ignored.
+	La clause ##[For Input|Output]## existe pour la compatibilit&eacute;, mais elle est ignor&eacute;e.
 
-	##//filenum//## is an unused file number.
+	##//filenum//## est un num&eacute;ro de fichier inutilis&eacute;.
 
-	An unused file number can be found using ##[[KeyPgFreefile FreeFile]]##.
+	Un num&eacute;ro de fichier inutilis&eacute; peut &ecirc;tre trouv&eacute; en utilisant ##[[KeyPgFreefile FreeFile]]##.
 
 	
-**Runtime errors:**
-	    ##**Open Cons**## throws one of the following [[ProPgErrorHandling runtime errors]]:
+**Erreurs de fonctionnement:**
+	    ##**Open Cons**## produit l'une des [[ProPgErrorHandling erreurs de fonctionnement]] suivantes:
 
-	//(##1##) Illegal function call//
-		- Filenumber was not free at the time. use ##[[KeyPgFreefile Freefile]]## to ensure that filenumber is free.
+	//(##1##) Illegal function call : Appel ill&eacute;gal de fonction//
+		<li>//filenumber// n'est pas libre actuellement. Utilisez ##[[KeyPgFreefile FreeFile]]## pour vous assurer que //filenumber// est libre.
 		
 		
 
@@ -52,7 +52,7 @@ sleep
 %%
 
 {{fbdoc item="diff"}}
-	- QB used OPEN "SCRN:" ...
+	- QB utilise OPEN "SCRN:" ...
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgOpenCons Open Cons]]##

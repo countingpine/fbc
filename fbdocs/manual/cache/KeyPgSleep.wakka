@@ -1,5 +1,5 @@
 {{fbdoc item="title" value="SLEEP"}}----
-Waits until a specified time has elapsed, or a key is pressed.
+Attend jusqu'&agrave; ce qu'un certain d&eacute;lai soit &eacute;coul&eacute; ouqu'une touche soit appuy&eacute;e.
 
 {{fbdoc item="syntax"}}##
 	[[KeyPgDeclare declare]] [[KeyPgFunction function]] **Sleep** [[KeyPgOverload overload]] ( [[KeyPgByval byval]] //amount// [[KeyPgAs as]] [[KeyPgInteger integer]] = -1 ) [[KeyPgAs as]] [[KeyPgInteger integer]]
@@ -10,20 +10,20 @@ Waits until a specified time has elapsed, or a key is pressed.
 ##
 {{fbdoc item="param"}}
 	##//amount//##
-		Optional number of milliseconds to wait (default is to wait for a key press).
+		Nombre facultatif de millisecondes &agrave; attendre (par d&eacute;faut on attend qu'une touche soit appuy&eacute;e).
 	##//keyflag//##
-		Optional flag; give it a value of 1 to specify that the wait cannot be interrupted by a key press.
+		Drapeau optionnel; lui donner une valeur de 1 sert &agrave; pr&eacute;ciser que l'attente ne peut &ecirc;tre interrompue par une touche.
 
 {{fbdoc item="desc"}}
-	##**Sleep**## will wait until ##//amount//## milliseconds (can be seconds in //[[CompilerOptlang -lang qb]]//, see below) given elapsed (if any value was passed) or until the user presses a key. If ##//amount//## is below 100 ms then ##**Sleep**## will always wait the full requested amount (key presses are ignored).
+	##**Sleep**## attendra jusqu'&agrave; ce que ##//amount//## millisecondes (peut &ecirc;tre en secondes dans //[[CompilerOptlang -lang qb]]//, voir plus loin) soit &eacute;coul&eacute; (si une valeur a &eacute;t&eacute; pass&eacute;e) ou jusqu'&agrave; ce que l'utilisateur appuie sur une touche. Si ##//amount//## est inf&eacute;rieur &agrave; 100 ms, alors ##**Sleep**## attendra toujours le temps demand&eacute; au complet (appui sur touche ignor&eacute;).
 
-	Include the second parameter, ##1##, for a "deep" sleep, which cannot be interrupted by pressing a key.
+	Inclure le second param&egrave;tre, ##1##, pour un "profond" du sommeil, qui ne peut &ecirc;tre interrompu en appuyant sur une touche.
 
-	The accuracy of ##**Sleep**## is variable depending on the OS cycle time (Windows NT/2K/XP: 15 ms, 9x/Me: 50 ms, Linux 10ms, DOS 55 ms).
+	La pr&eacute;cision de ##**Sleep**## est variable en fonction de la dur&eacute;e du cycle du syst&egrave;me d'exploitation (Windows NT/2K/XP: 15 ms, 9x/Me: 50 ms, Linux 10ms, DOS 55 ms).
 
-	Call ##**Sleep**## with 25ms or less to release time-slice when waiting for user input or looping inside a thread.  This will prevent the program from unnecessarily hogging the CPU.
+	Appeler ##**Sleep**## avec 25ms ou moins pour r&eacute;aliser un d&eacute;coupage du temps lors de l'attente d'une entr&eacute;e utilisateur ou d'une boucle dans un "thread".  Cela permettra d'&eacute;viter que le programme monopolise inutilement le CPU.
 
-	##**Sleep**## does not clear the keyboard buffer and any keys pressed during a call to ##**Sleep**## are retained and can be read using ##[[KeyPgInkey Inkey]]##.  In order to wait for a key press, and remove the key from the buffer, ##[[KeyPgGetkey Getkey]]## can be used instead.
+	##**Sleep**## n'efface pas la m&eacute;moire tampon du clavier et les touches press&eacute;es lors d'un appel &agrave; ##**Sleep**## sont conserv&eacute;e et peuvent &ecirc;tre lues avec ##[[KeyPgInkey Inkey]]##.  Afin d'attendre l'appui sur une touche et retirer la cl&eacute; du tampon m&eacute;moire, ##[[KeyPgGetkey GetKey]]## peut &ecirc;tre utilis&eacute; &agrave; la place.
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/system/sleep.bas"}}%%(freebasic)
@@ -35,12 +35,12 @@ sleep 500
 %%
 
 {{fbdoc item="lang"}}
-	- In the //[[CompilerOptlang -lang fb]]// and //[[CompilerOptlang -lang fblite]]// dialects, the ##//amount//## value is in **milliseconds**.
-	- In the //[[CompilerOptlang -lang qb]]// dialect, the ##//amount//## value is in **seconds** as in QB. If the second parameter ##//keyflag//## is given, or the keyword is written as ##**""__Sleep""**##  the value is expected to be in **milliseconds**.
+	- Dans les dialectes //[[CompilerOptlang -lang fb]]// et //[[CompilerOptlang -lang fblite]]//, la valeur de ##//amount//## est en **millisecondes**.
+	- Dans le dialecte //[[CompilerOptlang -lang qb]]//, la valeur de ##//amount//## est en **secondes** comme dans QB. Si le deuxi&egrave;me param&egrave;tre ##//keyflag//## est donn&eacute;, ou le mot-cl&eacute; ##**__Sleep**## est donn&eacute;, la valeur est attendue en **millisecondes**.
 
 {{fbdoc item="diff"}}
-	- None in the //[[CompilerOptlang -lang qb]]// dialect.
-	- In QB, the delay was given in whole seconds only and did not support the ##//keyflag//## parameter.
+	- Aucune dans le dialecte //[[CompilerOptlang -lang qb]]//.
+	- Dans QB, le d&eacute;lai est donn&eacute; secondes et le param&egrave;tre ##//keyflag//## n'est pas support&eacute;.
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgTimer Timer]]##

@@ -1,73 +1,73 @@
 {{fbdoc item="title" value="WINDOW"}}----
-Sets new view coordinates mapping for current viewport
+Valide la nouvelle cartographie des coordonn&eacute;es de la zone de visualisation graphique courante
 
 {{fbdoc item="syntax"}}##
 	**Window** [ [**Screen**] ( //x1//, //y1// )-( //x2//, //y2// ) ]
 ##
 {{fbdoc item="param"}}
 	##**Screen**##
-		Optional argument specifying y coordinates increase from top to bottom.
+		Argument facultatif specifiant les coordonn&eacute;es //y1// augmentant du haut vers le bas.
 	##( //x1//, //y1// )-( //x2//, //y2// )##
-		New floating point values corresponding to the opposite corners of the current viewport.  If omitted, the ##**Window**## coordinate mapping is removed.
+		Les nouvelles valeurs (en virgule flottante) correspondent &agrave; des coins oppos&eacute;s de la fen&ecirc;tre actuelle.  S'il est omis, la cartographie des coordonn&eacute;es de la fen&ecirc;tre graphique est supprim&eacute;e.
 
 {{fbdoc item="desc"}}
-	##**Window**## is used to define a new coordinates system. ##(//x1//, //y1//)## and ##(//x2//, //y2//)## are the new coordinates to be mapped to the opposite corners of the current viewport; all future coordinates passed to graphics primitive statements will be affected by this new mapping. If ##**Screen**## is omitted, the new coordinates system will be Cartesian, that is, with y coordinates increasing from bottom to top. Call ##**Window**## with no argument to disable the coordinates transformation.
+	##**Window**## est utilis&eacute; pour d&eacute;finir un nouveau syst&egrave;me de coordonn&eacute;es. ##(//x1//, //y1//)## et ##(//x2//, //y2//)## sont les nouvelles coordonn&eacute;es, &agrave; cartographier, des deux coins oppos&eacute;s de la zone de visualisation graphique courante; toutes les futures utilisations de coordonn&eacute;es pass&eacute;es aux fonctions graphiques seront affect&eacute;es par cette nouvelle cartographie, &agrave; partir de ce moment-l&agrave;. Si ##**Screen**## est omis, le nouveau syst&egrave;me de coordonn&eacute;es est Cartesien, c'est &agrave; dire, avec des coordonn&eacute;es //y// augmentant du bas vers le haut. Appeler ##**Window**## sans argument pour annuler la transformation des coordonn&eacute;es.
 
-	""FreeBASIC's"" current behavior is to keep track of the corners of the ##**Window**##, rather than a specific coordinate mapping.  This means that the coordinate mapping can change after calls to ##[[KeyPgViewgraphics View]]##.
-	The ##**Window**## corners are also currently taken into account when working on image buffers, so when a ##**Window**## is in effect, the cooridnate mapping will be different from image to image.
+	Le comportement actuel de FreeBasic est de pr&eacute;server les coordonn&eacute;es des coins de ##**Window**##, plut&ocirc;t que celles sp&eacute;cifiques de la cartographie.  Ceci signifie que la cartographie des coordonn&eacute;es peut changer apr&egrave;s des appels &agrave; ##[[KeyPgViewgraphics View]]##.Les coins de ##**Window**## sont actuellement pris en compte lorsque l'on travaille sur les tampons d'image, donc quand un ##**Window**## est vakide, la cartographie des coordonn&eacute;es pourra &ecirc;tre diff&eacute;rente d'une image &agrave; une autre.
+	Quand il n'y a pas de ##**Window**## en cours, il n'y a pas de cartographie valide, ainsi le syst&egrave;me de coordonn&eacute;es effectif est, ind&eacute;pendent de la taille du tampon image ou des coordonn&eacute;es ##[[KeyPgViewgraphics View]]## coordinates (s'il y en a).
 
-	When there is no ##**Window**## in effect, there is no coordinate mapping in effect, so the effective coordinate system is constant, independent of image buffer sizes or ##[[KeyPgViewgraphics View]]## coordinates (if any).
+	{{fbdoc item="ex"}}
 
 {{fbdoc item="ex"}}
-{{fbdoc item="filename" value="examples/manual/gfx/window.bas"}}%%(freebasic)
-screen 13
+Screen 13
+'' definition zone clipping
 
-'' define clipping area
-view ( 10, 10 ) - ( 310, 150 ), 1, 15    
+View ( 10, 10 ) - ( 310, 150 ), 1, 15    
+'' coordonn&eacute;es vue
 
-'' set view coordinates
-window ( -1, -1 ) - ( 1, 1 )             
+Window ( -1, -1 ) - ( 1, 1 )             
+'' Dessin axe X
 
-'' Draw X axis
-line (-1,0)-(1,0),7
-draw string ( 0.8, -0.1 ), "X"
+Line (-1,0)-(1,0),7
+Draw String ( 0.8, -0.1 ), "X"
+'' Dessin axe Y
 
-'' Draw Y axis
-line (0,-1)-(0,1),7
-draw string ( 0.1, 0.8 ), "Y"
-
-dim as single x, y, s
+Line (0,-1)-(0,1),7
+Draw String ( 0.1, 0.8 ), "Y"
+Dim As Single x, y, s
 
 '' compute step size
-s = 2 / pmap( 1, 0 )
 
-'' plot the function
-for x = -1 to 1 step s
-  y = x ^ 3
-  pset( x, y ), 14
-next x
+s = 2 / PMap( 1, 0 )
+'' graphique de la function
 
-'' revert to screen coordinates
-window       
+For x = -1 To 1 Step s
+y = x ^ 3
+  PSet( x, y ), 14
+  Next x
+'' retour aux coordonn&eacute;es ecran
 
-'' remove the clipping area
-view screen  
+Window       
+'' annule zone clipping
 
-'' draw title
-draw string ( 120, 160 ), "Y = X ^ 3"
+View Screen  
+'' dessin titre
 
-sleep
+Draw String ( 120, 160 ), "Y = X ^ 3"
+Sleep
+
 %%
-
-{{image class="center" title="Window example output" url="/images/window.png"}}
+<div class="fb_img"><img src="images/window.png" />
 
 {{fbdoc item="diff"}}
-	- QBASIC preserves the coordinate mapping after subsequent calls to VIEW.
-	- ""FreeBASIC's"" current behavior is to preserve the WINDOW coordinates after calls to VIEW, or when working on images, meaning that the coordinate mapping may undergo scaling/translations. (If a WINDOW hasn't been set, there is no coordinate mapping, and so it doesn't change after calls to VIEW.)  The behavior may change in future, but consistent behavior can be be assured over inconstent viewport coordinates by re-calling WINDOW when you change the VIEW.
 
-{{fbdoc item="see"}}
-	- ##[[KeyPgScreengraphics Screen (Graphics)]]##
+- QBASIC pr&eacute;serve la cartographie des coordonn&eacute;es apr&egrave;s des appels successifs &agrave; VIEW.
+	- Actuellement FreeBASIC pr&eacute;serve les coordonn&eacute;es WINDOW apr&egrave;s des appels successifs &agrave; VIEW, ou lors d'un travail sur des images, ce qui signifie que les coordonn&eacute;es de cartographie peuvent faire l'objet de mise &agrave; &eacute;chelle/translations. (Si un WINDOW n'a pas &eacute;t&eacute; valid&eacute;, il n'existe pas de cartographie des coordonn&eacute;es, et ainsi elle ne peut changer apr&egrave;s des appels &agrave; VIEW.)  Ce comportement peut changer &agrave; l'avenir, mais un comportement coh&eacute;rent peut &ecirc;tre assur&eacute; au cours de la visualisation de coordonn&eacute;es inconsistantes de la zone de visualisation graphique par un rappel de ##WINDOW## lorsque vous changez ##VIEW##.
+	{{fbdoc item="see"}}
+
+- ##[[KeyPgScreengraphics Screen (Graphics)]]##
 	- ##[[KeyPgViewgraphics View (Graphics)]]##
+	- ##[[KeyPgPmap PMap]]##
 	- ##[[KeyPgPmap PMap]]##
 
 {{fbdoc item="back" value="CatPgGfxScreen|Screen Functions"}}

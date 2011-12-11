@@ -1,28 +1,28 @@
 {{fbdoc item="title" value="DO...LOOP"}}----
-Control flow statement for looping
+D&eacute;claration de contr&ocirc;le de flux pour une boucle.
 
 {{fbdoc item="syntax"}}##
 	**Do** [ { **Until** | **While** } //condition// ]
 		[ //statement block// ]
 	**Loop**
-//or//
+//ou//
 	**Do**
 		[ //statement block// ]
 	**Loop** [ { **Until** | **While** } //condition// ]
 ##
 {{fbdoc item="desc"}}
-	The ##**Do**## statement executes the statements in the following //statement block// until/while the //condition//, if any,  evaluates to true.
+	L'instruction ##**Do**## ex&eacute;cute les instructions dans le //statement block (= bloc d'instructions)// jusqu'&agrave; ce que / tandis que la //condition//, s'il y en a une,  soit vraie.
 
-	If ##**Until**## is used, the ##**Do**## statement stops repetition of the //statement block// when //condition// evaluates to true. The ##**While**## keyword has opposite effect, stopping the loop if //condition// evaluates to false. If both //condition// and either ##**Until**## or ##**While**## are omitted, the ##**Do**## statement loops indefinitely.
+	Si ##**Until**## est utilis&eacute;, la d&eacute;claration ##**Do**## arr&ecirc;te la r&eacute;p&eacute;tition du //statement block (= bloc d'instructions)// quand //condition// devient vraie. Le mot-cl&eacute; ##**While**## a un effet contraire, il arr&ecirc;te la boucle si //condition// est vraie. Si les deux //condition// et soit ##**Until**## ou ##**While**## sont omis, l'instruction ##**Do**## boucle ind&eacute;finiment.
 
-	If an ##[[KeyPgExit Exit]]## ##**Do**## statement is encountered inside the //statement block//, the loop is terminated, and execution resumes immediately following the enclosing ##**Loop**## statement. If a ##[[KeyPgContinue Continue]]## ##**Do**## statement is encountered, the rest of the //statement block// is skipped and execution resumes at the ##**Do**## statement.
+	Si une instruction ##[[KeyPgExit Exit]]## ##**Do**## est rencontr&eacute;e &agrave; l'int&eacute;rieur du //statement block (= bloc d'instructions)//, la boucle est termin&eacute;e, et l'ex&eacute;cution reprend imm&eacute;diatement apr&egrave;s la d&eacute;claration ##**Loop**## qui l'enferme. Si une d&eacute;claration ##[[KeyPgContinue Continue]]## ##**Do**## est rencontr&eacute;e, le reste du //statement block (= bloc d'instructions) // est ignor&eacute; et l'ex&eacute;cution reprend &agrave; l'instruction ##**Do**##.
 
-	In the first syntax, the //condition// is checked when the ##**Do**## statement is first encountered, and if the //condition// is met, the //statement block// will be skipped. In the second syntax, //condition// is initially checked //after// the //statement block// is executed. This means that the //statement block// is always guaranteed to execute //at least// once.
+	Dans la premi&egrave;re syntaxe, la //condition// est v&eacute;rifi&eacute;e lorsque l'instruction ##**Do**## est rencontr&eacute;e pour la premi&egrave;re fois et si la //condition// est remplie, le //statement block (= bloc d'instructions)// sera ignor&eacute;. Dans la seconde syntaxe, la //condition// est d'abord v&eacute;rifi&eacute;e //apr&egrave;s// l'ex&eacute;cution du //statement block (= bloc d'instructions)//. Cela signifie que le //statement block (= bloc d'instructions)// est toujours garanti d'&ecirc;tre ex&eacute;cut&eacute; //au moins// une fois.
 
-	//condition// may be any valid expression that evaluates to False (zero) or True (non-zero).
+	//condition// peut &ecirc;tre n'importe quelle expression valide qui a la valeur False (z&eacute;ro) ou True (non nul).
 
 {{fbdoc item="ex"}}
-	In this example, a ##**Do**## loop is used to count the total number of odd numbers from 1 to 10. It will repeat //until// it's //n > 10// condition is met:
+	Dans cet exemple, une boucle ##**Do**## est utilis&eacute;e pour compter le nombre total de nombres impairs de 1 &agrave; 10. La boucle sera r&eacute;p&eacute;t&eacute;e //until = jusqu'&agrave;// ce que la condition //n > 10// soit remplie:
 {{fbdoc item="filename" value="examples/manual/control/do-loop.bas"}}%%(freebasic)
 dim as integer n = 1                            '' number to check
 dim as integer total_odd = 0                    '' running total of odd numbers
@@ -35,7 +35,7 @@ print "total odd numbers: " ; total_odd         '' prints '5'
 end 0
 %%
 
-	Here, an infinite DO loop is used to count the total number of evens. We place the conditional check inside the loop via an ##[[KeyPgIfthen If...Then]]## statement, which exits the loop if and when //n > 10// becomes true:
+	Ici, une boucle DO infinie est utilis&eacute;e pour compter le nombre total de nombres pairs. Nous pla&ccedil;ons le test de condition dans la boucle par l'interm&eacute;diaire de ##[[KeyPgIfthen If...Then]]##, qui fait sortir de la boucle quand //n > 10// devient vrai:
 {{fbdoc item="filename" value="examples/manual/control/do-loop2.bas"}}%%(freebasic)
    dim as integer n = 1                            '' number to check
    dim as integer total_even = 0                   '' running total of even numbers
@@ -51,11 +51,11 @@ end 0
 %%
 
 {{fbdoc item="lang"}}
-	- In the //[[CompilerOptlang -lang qb]]// and //[[CompilerOptlang -lang fblite]]// dialects, variables declared inside a DO..LOOP block have a function-wide [[ProPgVariableScope scope]]  as in QB 
-	- In the //[[CompilerOptlang -lang fb]]// and //[[CompilerOptlang -lang deprecated]]// dialects, variables declared inside a FOR..NEXT block are visible only inside the block, and can't be accessed outside it.
+	- Dans les dialectes //[[CompilerOptlang -lang qb]]// et //[[CompilerOptlang -lang fblite]]//, les variables d&eacute;clar&eacute;es dans le bloc de la boucle DO..LOOP ont une [[ProPgVariableScope port&eacute;e]] &agrave; l'&eacute;chelle de la fonction comme dans QB.
+	- Dans les dialectes //[[CompilerOptlang -lang fb]]// et //[[CompilerOptlang -lang deprecated]]//, les variables d&eacute;clar&eacute;es dans un bloc FOR..NEXT ne sont visibles que dans ce bloc et ne peut &ecirc;tre consult&eacute;es &agrave; l'ext&eacute;rieur.
 
 {{fbdoc item="diff"}}
-	- None
+	- Aucune
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgContinue Continue]]##

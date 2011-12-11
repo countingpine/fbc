@@ -1,5 +1,5 @@
 {{fbdoc item="title" value="BITRESET"}}----
-Gets the value of an integer with a specified bit cleared.
+Obtient la valeur d'un entier dont on a positionn&eacute; un certain bit &agrave; z&eacute;ro (0).
 
 {{fbdoc item="syntax"}}##
 	[[KeyPgPpdefine #define]] **Bitreset**( //value//, //bit_number// ) ((//value//) [[KeyPgOpAnd and]] [[KeyPgOpNot not]] ([[KeyPgCast Cast]]([[KeyPgTypeof TypeOf]](//Value//), 1) [[KeyPgOpShiftLeft shl]] (//bit_number//)))
@@ -9,37 +9,37 @@ Gets the value of an integer with a specified bit cleared.
 ##
 {{fbdoc item="param"}}
 	##//value//##
-		The integer value.
+		La valeur enti&egrave;re.
 	##//bit_number//##
-		The index of the bit to clear.
+		L'indice du bit &agrave; mettre &agrave; z&eacute;ro.
 
-{{fbdoc item="ret"}}
-	Returns the integer value with the specified bit cleared.
+{{fbdoc item="section" value="Valeur retourn&eacute;e
+	Retourne la valeur enti&egrave;re avec le bit sp&eacute;cifi&eacute; mis &agrave; z&eacute;ro.
 
 {{fbdoc item="desc"}}
-	This macro expands to a copy of the integer ##//value//## with the specified ##//bit_number//## cleared (to //off//, or `##0##`). Behaves as `##//value// [[KeyPgOpAnd And]] [[KeyPgOpNot Not]] (1 [[KeyPgOpShiftLeft Shl]] //bit_number//)##`.
+	Cette macro se d&eacute;veloppe en une copie de la valeur enti&egrave;re ##//value//## avec le bit ##//bit_number//## "nettoy&eacute;" (&agrave; //off//, ou `##0##`). Se comporte comme `##//value// [[KeyPgOpAnd And]] [[KeyPgOpNot Not]] (1 [[KeyPgOpShiftLeft Shl]] //bit_number//)##`.
 
-	The valid range of values for ##//bit_number//## depends on the size, in bits, of `##[[KeyPgTypeof Typeof]](//value//)##`, which is `##0##` through `##[[KeyPgSizeof Sizeof]](//value//) * 8 - 1##`. See [[TblVarTypes Standard Datatype Limits]] for a table of the standard datatypes and their sizes.
+	La plage valide de valeurs pour ##//bit_number//## d&eacute;pend de la taille, en bits, de`##[[KeyPgTypeof TypeOf]](//value//)##`, qui est `##0##` par le biais de `##[[KeyPgSizeof SizeOf]](//value//) * 8 - 1##`. Voir [[TblVarTypes Limites des types de donn&eacute;es standard]] pour un tableau des types de donn&eacute;es standard et leurs tailles.
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/bits/bitreset.bas"}}%%(freebasic)
 print bitreset(5,0)
 print hex(bitreset(&h8000000000000001,63))
 %%
-	will produce the output:
+	produira la sortie:
 
-%% 4
-1
 %%
+4
+1
 
-{{fbdoc item="lang"}}
-	- Not available in the //[[CompilerOptlang -lang qb]]// dialect.
+%%
+	{{fbdoc item="lang"}}
 
-{{fbdoc item="diff"}}
-	- New to ""FreeBASIC"".
+- Non disponible dans le dialecte //[[CompilerOptlang -lang qb]]//.
+	{{fbdoc item="diff"}}
 
-{{fbdoc item="see"}}
+- Nouveau pour FreeBASIC
+	{{fbdoc item="see"}}
 	- ##[[KeyPgBit Bit]]##
-	- ##[[KeyPgBitset Bitset]]##
 	
-{{fbdoc item="back" value="CatPgBits|Bit Manipulation"}}
+- ##[[KeyPgBitset BitSet]]##

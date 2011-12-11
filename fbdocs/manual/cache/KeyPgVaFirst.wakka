@@ -1,40 +1,110 @@
 {{fbdoc item="title" value="VA_FIRST"}}----
-Returns the first argument in a variable argument list
+Retourne le premier argument dans une liste d'arguments variable
 
 {{fbdoc item="syntax"}}##
 	//pointer_variable// = **va_first**()
 ##
 {{fbdoc item="desc"}}
-	The ##**va_first**## function initializes a [[ProPgPointers pointer]], //pointer_variable//, to point to the first variable argument passed to a function.
+	La fonction ##**va_first**## initialise un [[ProPgPointers pointer]], //pointer_variable//, qui pointe sur le premier argument variable pass&eacute; &agrave; la fonction.
 
 {{fbdoc item="ex"}}
-{{fbdoc item="filename" value="examples/manual/procs/va_first.bas"}}%%(freebasic)
-FUNCTION Avg cdecl (Count as INTEGER, ... ) AS DOUBLE
-	DIM ARG AS ANY PTR 
-	DIM SUM AS DOUBLE = 0
-	DIM i AS INTEGER
+{{fbdoc item="filename" value="examples/manual/procs/vararg1.bas"}}%%(freebasic)
+Function Avg cdecl (Count As Integer, ... ) As Double
+	Dim ARG As Any Ptr 
+	Dim sum As Double = 0
+	Dim i As Integer
 	
-	ARG = VA_FIRST()
+	arg = Va_First()
 
-	FOR i = 1 TO COUNT
-	    SUM += VA_ARG(ARG, DOUBLE)
-	    ARG = VA_NEXT(ARG,DOUBLE)
-	NEXT i
-	RETURN SUM/COUNT
+	For i = 1 To count
+	    sum += Va_Arg(arg, Double)
+	    ARG = va_next(ARG,Double)
+	Next i
+	
+	Return SUM/COUNT
 end function
 
-PRINT AVG (4, 3.4,5.0,3.2,4.1)
-PRINT AVG (2, 65.2,454.65481)
-
-SLEEP
+Print AVG (4, 3.4,5.0,3.2,4.1)
+Print AVG (2, 65.2,454.65481)
+Sleep
 %%
 
-The output would look like:
+Le r&eacute;sultat devrait ressembler &agrave;:
 %%
 3.925
 259.927405
 %%
 
+{{fbdoc item="lang"}}
+- Non disponible dans le dialecte //[[CompilerOptlang -lang qb]]// sauf si r&eacute;f&eacute;renc&eacute; avec l'alias ##**__Va_first**##.
+{{fbdoc item="diff"}}
+	- Nouveau pour FreeBASIC
+	{{fbdoc item="see"}}
+
+	- ##[[KeyPgDots ... (Ellipse - suggestion)]]##
+	- ##[[KeyPgVaArg va_arg]]##
+	- ##[[KeyPgVaNext va_next]]##
+	while (todo > 0)
+		dim as integer char = *p
+		p += 1
+		todo -= 1
+
+		'' Is it a format char?
+		if (char = asc("%")) then
+			if (todo = 0) then
+				'' % at the end
+				print "%";
+				exit while
+			end if
+
+			'' The next char should tell the type
+			char = *p
+			p += 1
+			todo -= 1
+
+			'' Print var-arg, depending on the type
+			select case char
+			'' integer?
+			case asc("i")
+				print str(va_arg(arg, integer));
+				'' Note, different from C: va_next() must be
+				'' used as va_arg() won't update the pointer.
+				arg = va_next(arg, integer)
+
+			'' long integer? (64-bit)
+			case asc("l")
+				print str(va_arg(arg, longint));
+				arg = va_next(arg, longint)
+
+			'' single or double?
+			'' Note: because the C ABI, all singles passed on
+			'' var-args are converted to doubles.
+			case asc( "f" ), asc( "d" )
+				print str(va_arg(arg, double));
+				arg = va_next(arg, double)
+
+			'' string?
+			case asc("s")
+				'' Strings are passed byval, so the length is unknown
+				print *va_arg(arg, zstring ptr);
+				arg = va_next(arg, zstring ptr)
+
+			end select
+
+		'' Ordinary char, just print as-is
+		else
+			print chr( char );
+		end if
+	wend
+end sub
+
+	dim as string s = "bar"
+
+	myprintf(!"integer=%i, longint=%l single=%f, double=%d, string=%s, string=%s\n", _
+	         1, 1ll shl 32, 2.2, 3.3, "foo", s)
+
+	sleep
+%%
 
 {{fbdoc item="lang"}}
 	- Not available in the //[[CompilerOptlang -lang qb]]// dialect unless referenced with the alias ##**""__Va_first""**##.

@@ -1,5 +1,5 @@
 {{fbdoc item="title" value="THREADCREATE"}}----
-Starts a user-defined procedure in a separate execution thread
+D&eacute;marre une proc&eacute;dure d&eacute;finie par l'utilisateur dans un "thread" d'ex&eacute;cution distinct
 
 {{fbdoc item="syntax"}}##
 	[[KeyPgDeclare declare]] [[KeyPgFunction function]] **Threadcreate** ( [[KeyPgByval byval]] //proc// [[KeyPgAs as]] [[KeyPgSub sub]] ( [[KeyPgByval byval]] [[KeyPgAs as]] [[KeyPgAny any]] [[KeyPgPtr ptr]] ), [[KeyPgByval byval]] //param// [[KeyPgAs as]] [[KeyPgAny any]] [[KeyPgPtr ptr]] = 0, [[KeyPgByval byval]] //stack_size// [[KeyPgAs as]] [[KeyPgInteger integer]] = 0 ) [[KeyPgAs as]] [[KeyPgAny any]] [[KeyPgPtr ptr]]
@@ -9,82 +9,175 @@ Starts a user-defined procedure in a separate execution thread
 ##
 {{fbdoc item="param"}}
 	##//proc//##
-		A pointer to the ##[[KeyPgSub Sub]]## intended to work as a thread.
+		Un pointeur vers le ##[[KeyPgSub Sub]]## pr&eacute;vue pour travailler comme un "thread".
 	##//param//##
-		Optional [[KeyPgAny any]] [[KeyPgPtr ptr]] argument for the ##[[KeyPgSub Sub]]## pointed to by ##//proc//## (it can be a pointer to a structure or an array if more arguments are needed).
+		Argument facultatif [[KeyPgAny Any]] [[KeyPgPtr Ptr]] pour la ##[[KeyPgSub Sub]]## point&eacute;e par ##//proc//## (peut &ecirc;tre un pointeur vers une structure ou un tableau si plusieurs arguments sont n&eacute;cessaires).
 	##//stack_size//##
-		Optional number of bytes to reserve for this thread's stack.
+		Nombre (facultatif) d'octets &agrave; r&eacute;server pour la pile de ce "thread".
 
-{{fbdoc item="ret"}}
-	**Threadcreate** returns an ##[[KeyPgAny any]] [[KeyPgPtr ptr]]## handle to the thread created, or the null pointer (0) on failure.
+{{fbdoc item="section" value="Valeur retourn&eacute;e
+	**Threadcreate** retourne un "handle" ##[[KeyPgAny Any]] [[KeyPgPtr Ptr]]## vers le "thread" cr&eacute;&eacute;, ou le pointeur nul (0) en cas d'&eacute;chec.
 
 {{fbdoc item="desc"}}
-	The user function is started as a thread executes in parallel with the main part of the program. The OS achieves this by assigning it to a different processor if it exists, or using the waiting times in the main program.
+	La fonction utilisateur est lanc&eacute;e comme un "thread" ex&eacute;cut&eacute; en parall&egrave;le avec la partie principale du programme. Le syst&egrave;me d'exploitation atteint cet objectif en l'assignant &agrave; un processeur diff&eacute;rent si il existe, ou en utilisant les temps d'attente dans le programme principal.
 
-	Before closing, a program must wait for the termination of all the threads it has launched; see ##[[KeyPgThreadWait Threadwait]]##.
+	Avant fermeture, un programme doit attendre l'ach&egrave;vement de tous les "threads" qu'il a lanc&eacute;s; voir ##[[KeyPgThreadWait ThreadWait]]##.
 
-	To avoid simultaneous access to shared resources from different threads, FreeBASIC implements mutexes, mutual exclusion locks that can be "owned" by a single thread when doing critical work. See ##[[KeyPgMutexCreate Mutexcreate]]##, ##[[KeyPgMutexLock Mutexlock]]##, ##[[KeyPgMutexUnlock Mutexunlock]]##, ##[[KeyPgMutexDestroy Mutexdestroy]]##.
+	Pour &eacute;viter l'acc&egrave;s simultan&eacute; aux ressources partag&eacute;es &agrave; partir de "threads" diff&eacute;rents, FreeBasic met en &oelig;uvre les "mutex", les verrous d'exclusion mutuelle qui peuvent &ecirc;tre "poss&eacute;d&eacute;s" par un seul "thread" lors d'un travail critique. Voir ##[[KeyPgMutexCreate MutexCreate]]##, ##[[KeyPgMutexLock MutexLock]]##, ##[[KeyPgMutexUnlock MutexUnlock]]##, ##[[KeyPgMutexDestroy MutexDestroy]]##.
 
-	On some systems, the stack automatically grows beyond ##//stack_size//## if more space is needed; on others, this is the fixed maximum allowed. Behavior is undefined when more stack is used than the reserved size on systems where stacks are not able to grow.
+	Sur certains syst&egrave;mes, la pile augmente automatiquement au-del&agrave; de ##//stack_size//## si plus d'espace est n&eacute;cessaire; sur les autres, c'est le maximum permis. Le comportement est impr&eacute;visible en cas de d&eacute;passement de pile, par rapport &agrave; ce qui &eacute;tait r&eacute;serv&eacute;, dans les cas o&ugrave; la pile n'est pas capable de s'agrandir.
 
 {{fbdoc item="ex"}}
-{{fbdoc item="filename" value="examples/manual/threads/threadcreate.bas"}}%%(freebasic)
+
+	%%(freebasic)
 Dim Shared terminate As Integer = 0
+Sub mythread (param As Any Ptr)    
+Dim As Double t = Timer
+While( 1 )
 
-Sub mythread (param As Any Ptr)	
-	
-	dim as double t = timer
-	While( 1 )
-		
-		Print "*";
-		
-		'' pause for .1 second
-		while( abs( timer - t ) < .1 )
-			sleep 1, 1
-		wend
-		t = timer
-		
-		If terminate=1 Then Exit Sub
+Print "*";
+
+'' pause for .1 second
+
+While( Abs( Timer - t ) < .1 )
+Sleep 1, 1
 	Wend
-	
-End Sub
+	t = Timer
+	If terminate=1 Then Exit Sub
+	Wend
+	End Sub
+	Dim thread As Any Ptr
+	Dim b As Integer
+	Dim As Double t
+	Print "Main program prints dots"
+	Print "Thread prints asterisks"
+	thread = ThreadCreate( @mythread, 0 )
 
-Dim thread As Any Ptr
-Dim b As Integer
-dim as double t
+	Print "Thread launched";
+		While b < 30
+		Print ".";
+		'' pause for .1 second
+	While( Abs( Timer - t ) < .1 )
 
-Print "Main program prints dots"
-Print "Thread prints asterisks"
-thread = ThreadCreate( @mythread, 0 )
-Print "Thread launched";
+	Sleep 1, 1
+	Wend
+t = Timer
 
-While b < 30
-	
-	Print ".";
-	
-	'' pause for .1 second
-	while( abs( timer - t ) < .1 )
-		sleep 1, 1
-	wend
-	t = timer
-	
-	b += 1
-	
-Wend
-
-terminate=1
+b += 1
+	Wend
+	terminate=1
 Print "Terminate launched";
-ThreadWait (thread)
-Print "Thread terminated"
-Sleep
+
+	ThreadWait (thread)
+	Print "Thread terminated"
+
+	Sleep
+	%%
+	{{fbdoc item="lang"}}
+		- Les "Thread" n'existent pas dans le dialecte //[[CompilerOptlang -lang qb]]//.
+		{{fbdoc item="target"}}
+			- La version DOS de FreeBASIC ne permet pas les "threads", car l'OS ne les supporte pas.
+			- Dans Linux les "threads" sont toujours d&eacute;marr&eacute;s dans l'ordre de leur cr&eacute;ation, ceci n'est pas possible sous Win32. Il s'agit de l'OS, pas une question FreeBasic.
+		{{fbdoc item="diff"}}
+	- Nouveau pour FreeBASIC
+
+	{{fbdoc item="see"}}
+	- ##[[KeyPgThreadWait ThreadWait]]##
+		- ##[[KeyPgMutexCreate MutexCreate]]##
+			- ##[[KeyPgMutexLock MutexLock]]##
+		- ##[[KeyPgMutexUnlock MutexUnlock]]##
+	- ##[[KeyPgMutexDestroy MutexDestroy]]##
+
+	'' Clean up when finished
+	MutexDestroy(ttylock)
+%%
+	
+	{{fbdoc item="filename" value="examples/manual/threads/threads2.bas"}}%%(freebasic)
+sub print_dots(byref char as string)
+	for i as integer = 0 to 29
+		print char;
+		sleep cint(rnd() * 100), 1
+	next
+end sub
+
+sub mythread(param as any ptr)
+	'' Work (other thread)
+	print_dots("*")
+end sub
+
+	randomize(timer())
+
+	print " main thread: ."
+	print "other thread: *"
+
+	'' Launch another thread
+	dim as any ptr thread = threadcreate(@mythread, 0)
+
+	'' Work (main thread)
+	print_dots(".")
+
+	'' Wait until other thread has finished, if needed
+	threadwait(thread)
+	print
+	sleep
+%%
+	
+	{{fbdoc item="filename" value="examples/manual/threads/threads3.bas"}}%%(freebasic)
+'' Threaded consumer/producer example using mutexes
+
+dim shared as any ptr produced, consumed 
+
+sub consumer( byval param as any ptr )
+	for i as integer = 0 to 9
+		mutexlock produced
+		print ", consumer gets:", i
+		sleep 500
+		mutexunlock consumed
+	next
+end sub
+
+sub producer( byval param as any ptr )
+	for i as integer = 0 to 9
+		print "Producer puts:", i;
+		sleep 500
+		mutexunlock produced
+		mutexlock consumed
+	next i
+end sub
+
+	dim as any ptr consumer_id, producer_id
+
+	produced = mutexcreate
+	consumed = mutexcreate
+	if( ( produced = 0 ) or ( consumed = 0 ) ) then
+		print "Error creating mutexes! Exiting..."
+		end 1
+	end if
+
+	mutexlock produced
+	mutexlock consumed
+	consumer_id = threadcreate(@consumer)
+	producer_id = threadcreate(@producer)
+	if( ( producer_id = 0 ) or ( consumer_id = 0 ) ) then
+		print "Error creating threads! Exiting..."
+		end 1
+	end if
+
+	threadwait consumer_id
+	threadwait producer_id
+
+	mutexdestroy consumed
+	mutexdestroy produced
+
+	sleep
 %%
 
 {{fbdoc item="lang"}}
 	- Threading is not allowed in ##-lang qb##
 
 {{fbdoc item="target"}}
-	- **Threadcreate** is not available with the DOS version / target of FreeBASIC, because multithreading is not supported by DOS kernel nor the used extender.
-	- In Linux the threads are always started in the order they are created, this can't be assumed in Win32. It's an OS, not a FreeBASIC issue. 
+	- **Threadcreate** is not available with the DOS version / target of ""FreeBASIC"", because multithreading is not supported by DOS kernel nor the used extender.
+	- In Linux the threads are always started in the order they are created, this can't be assumed in ""Win32"". It's an OS, not a ""FreeBASIC"" issue. 
 
 {{fbdoc item="diff"}}
 	- New to ""FreeBASIC""

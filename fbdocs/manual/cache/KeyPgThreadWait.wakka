@@ -1,5 +1,5 @@
 {{fbdoc item="title" value="THREADWAIT"}}----
-Waits until the designated thread has been completed before returning
+Attend jusqu'&agrave; ce que le "thread" d&eacute;sign&eacute; ait termin&eacute; son ex&eacute;cution avant de retourner
 
 {{fbdoc item="syntax"}}##
 	[[KeyPgDeclare declare]] [[KeyPgSub sub]] **Threadwait** ( [[KeyPgByval byval]] //id// [[KeyPgAs as]] [[KeyPgAny any]] [[KeyPgPtr ptr]] )
@@ -9,87 +9,33 @@ Waits until the designated thread has been completed before returning
 ##
 {{fbdoc item="param"}}
 	##//id//##
-		##[[KeyPgAny any]] [[KeyPgPtr ptr]]## handle of a thread created by ##[[KeyPgThreadCreate Threadcreate]]##
+		Le handle ##[[KeyPgAny Any]] [[KeyPgPtr Ptr]]## d'un "thread" cr&eacute;&eacute; par ##[[KeyPgThreadCreate ThreadCreate]]##
 
 {{fbdoc item="desc"}}
-	##Threadwait## doesn't return until the thread designated by ##//id//## ends. ##Threadwait## does not force the thread to end; if a thread requires a signal to force its end, a mechanism such as shared variables must be used.
+	##Threadwait## ne retourne pas tant que le "thread" d&eacute;sign&eacute; par ##//id//## se termine. ##Threadwait## ne force pas le "thread" &agrave; terminer son ex&eacute;cution; si un "thread" a besoin d'un signal pour terminer son ex&eacute;cution, un m&eacute;canisme tel qu'une variable partag&eacute;e doit &ecirc;tre utilis&eacute;.
 
-	Threads are launched by the ##[[KeyPgThreadCreate Threadcreate]]## function.
+	Les "threads" sont lanc&eacute;s par la fonction ##[[KeyPgThreadCreate ThreadCreate]]##.
 
-	To avoid simultaneous access to shared resources from different threads, FreeBASIC implements mutexes, mutual exclusion locks that can be "owned" by a single thread when doing critical work. See ##[[KeyPgMutexCreate Mutexcreate]]##, ##[[KeyPgMutexLock Mutexlock]]##, ##[[KeyPgMutexUnlock Mutexunlock]]##, ##[[KeyPgMutexDestroy Mutexdestroy]]##
+	Pour &eacute;viter l'acc&egrave;s simultan&eacute; aux ressources partag&eacute;es &agrave; partir de "threads" diff&eacute;rents, FreeBASIC met en &oelig;uvre les mutex, les verrous d'exclusion mutuelle qui peut &ecirc;tre "poss&eacute;d&eacute;" par un seul "thread" lors d'une t&ocirc;che critique. Voir ##[[KeyPgMutexCreate MutexCreate]]##, ##[[KeyPgMutexLock MutexLock]]##, ##[[KeyPgMutexUnlock MutexUnlock]]##, ##[[KeyPgMutexDestroy MutexDestroy]]##
 
 {{fbdoc item="ex"}}
-{{fbdoc item="filename" value="examples/manual/threads/threadwait.bas"}}%%(freebasic)
-dim shared printsync as any ptr
+	%%(freebasic)
 
-sub mythread(byval idp as any ptr)
-  var id = cint(idp)
-  dim as double t, w
-  dim as integer i, n
+Dim Shared printsync As Any Ptr
+	Sub mythread(ByVal idp As Any Ptr)
 
-  if( id = 1 ) then
+Var id = CInt(idp)
+	Dim As Double t, w
+	Dim As Integer i, n
+
+If( id = 1 ) Then
 	w = 1
-	n = 10
-  else
+
+n = 10
+	Else
 	w = 0.3
 	n = 5
-  end if
+	End If
+	For i = 1 To n
 
-  for i = 1 to n
-
-	mutexlock printsync
-	print "Thread #"; id; ": on step #"; i
-	mutexunlock printsync
-
-	'' simulate some work
-	t = timer
-	while( timer - t ) < w
-	wend
-
-  next i
-
-  mutexlock printsync
-  print "Thread #"; id; " is done "
-  mutexunlock printsync
-
-end sub
-
-dim as any ptr t1, t2
-
-print "Starting threads ... "
-
-'' create a mutex to sync printing
-printsync = MutexCreate()
-
-'' create 2 threads, each taking a different
-'' amount of time to complete
-t1 = threadcreate( @mythread, cast(any ptr, 1) )
-t2 = threadcreate( @mythread, cast(any ptr, 2) )
-
-'' wait for threads to complete
-threadwait( t1 )
-threadwait( t2 )
-
-mutexdestroy printsync
-
-print "All done."
-%%
-
-{{fbdoc item="lang"}}
-	- Threading is not allowed in ##-lang qb##
-
-{{fbdoc item="target"}}
-	- **Threadwait** is not available with the DOS version / target of FreeBASIC, because multithreading is not supported by DOS kernel nor the used extender.
-	- In Linux the threads are always started in the order they are created, this can't be assumed in Win32. It's an OS, not a FreeBASIC issue. 
-
-{{fbdoc item="diff"}}
-	- New to Freebasic
-
-{{fbdoc item="see"}}
-	- ##[[KeyPgThreadCreate Threadcreate]]##
-	- ##[[KeyPgMutexCreate Mutexcreate]]##
-	- ##[[KeyPgMutexLock Mutexlock]]##
-	- ##[[KeyPgMutexUnlock Mutexunlock]]##
-	- ##[[KeyPgMutexDestroy Mutexdestroy]]##
-
-{{fbdoc item="back" value="CatPgThreading|Threading Support Functions"}}
+MutexLock printsync

@@ -2,255 +2,259 @@
 
 **DOS**
 
-The ""FreeBASIC"" port to DOS is based on the [[http://www.delorie.com/djgpp/ DJGPP]] port of the GNU toolchain to 32-bit protected-mode DOS.
+Le portage de FreeBASIC sous DOS est bas&eacute; sur le portage [[http://www.delorie.com/djgpp/">DJGPP]] de la cha&icirc;ne d'outils GNU en DOS mode-prot&eacute;ge 32-bit.
 
-The current maintainer of this port is [[DrV DrV]].
+Le responsable actuel de ce portage est [[DrV DrV]].
 
-//To be written: platform-specific information, differences from ""Win32""/Linux, differences from QB?, tutorials, etc. //
+//A &eacute;crire: information sp&eacute;cifique &agrave; la plateforme, les diff&eacute;rences Win32/Linux, les diff&eacute;rences avec QB, des tutoriels, etc... //
 
-**WANTED TESTERS** 
+**Nous RECHERCHONS des TESTEURS** 
 
-The DOS version/target of ""FreeBASIC"" needs more testers. If you are interested in using ""FreeBASIC"" on DOS, please don't wait for 1.0 release, give it a try now. Tests from running in DOS on both old and new PC's are welcome (graphics, file I/O, serial port, ...). If something doesn't work, please place a detailed bug report into the forum or bug Tracker. If all works well, you can write about your success as well. Make sure to test a recent version of FB (reports from FB older than 0.18 will be probably considered as obsolete and useless), and check this document **before** complaining about anything.
+La version/cible DOS de FreeBASIC besoin de plus de testeurs. Si vous &ecirc;tes int&eacute;ress&eacute; par l'utilisation de FreeBASIC sous DOS, s'il vous pla&icirc;t, n'attendez pas la version 1.0, essayez-le d&egrave;s aujourd'hui. Les tests de fonctionnement sous DOS sur les anciens et nouveaux PC sont les bienvenus (graphiques, E/S fichiers, port s&eacute;rie, ...). Si quelque chose ne fonctionne pas, s'il vous pla&icirc;t placez un rapport de bug d&eacute;taill&eacute; dans le forum ou le traqueur de bogues. Si tout fonctionne bien, vous pouvez aussi &eacute;crire sur votre succ&egrave;s. Veillez &agrave; tester une version r&eacute;cente de FB (les rapports plus anciens que la version 0,18 de FB seront probablement consid&eacute;r&eacute;s comme obsol&egrave;tes et inutiles) et d'&eacute;tudier ce document **avant** de se plaindre de quelque chose.
 
 **Limitations**
 
-The DOS target is fairly well working and supported by ""FreeBASIC"", and up-to-date. A few differences compared to other platforms exist, however. The features missing are mostly those not supported by the operating system or DOS extender or C runtime:
-	- Cross-compiling to an other target
+La cible DOS fonctionne correctement et est assez bien soutenue par FreeBASIC et est mise &agrave; jour. Quelques diff&eacute;rences existent, cependant, par rapport aux autres plates-formes. Les fonctionnalit&eacute;s manquantes sont principalement celles qui ne sont pas prises en charge par le syst&egrave;me d'exploitation ou d'extension DOS ou d'ex&eacute;cution C:
+	- Compilation crois&eacute;e vers une autre cible
 	- Multithreading (see FAQ 23)
-	- Graphics in windowed mode or using ""OpenGL""
-	- Setting ##[[KeyPgScreenres Screenres]]## to a size not matching any resolution supported by the graphics card  
-	- Unicode isn't supported in DOS, ##[[KeyPgWstring Wstring]]## will be the same as ##[[KeyPgZstring Zstring]]##, character sets other than latin aren't supported. (do it yourself)
-	- Shared libraries (DLL's) can't be created/used (at least not "easily"), amount of available static external libraries usable with DOS is limited
+	- Graphisme en mode fen&ecirc;tr&eacute; ou en utilisant OpenGL
+	- R&eacute;glage de ##[[KeyPgScreenres ScreenRes]]## &agrave; une taille ne correspondant &agrave; aucune r&eacute;solution prise en charge par la carte graphique
+	- Unicode n'est pas support&eacute; sous DOS, ##[[KeyPgWstring WString]]## sera le m&ecirc;me que ##[[KeyPgZstring ZString]]##, les jeux de caract&egrave;res autres que latins ne sont pas pris en charge. (faites-le vous-m&ecirc;me)
+	<li>Les biblioth&egrave;ques partag&eacute;es (DLL) ne peuvent &ecirc;tre cr&eacute;&eacute;es/utilis&eacute;es (du moins pas "facilement"), la quantit&eacute; de biblioth&egrave;ques externes statiques disponibles et utilisables avec DOS est limit&eacute;e
 
-**""FreeBASIC"" DOS related questions:**
+**Questions relatives &agrave; FreeBASIC DOS:**
 
-	==- {{anchor name="item1|1. FB is a 32-bit compiler - do I need a 32-bit DOS?"}}==
-	==- {{anchor name="item2|2. What about FreeDOS-32? Does/will FB work, is/will there be a version?"}}==
-	==- {{anchor name="item3|3. When running FreeBASIC in DOS, I get a 'Error: No DPMI' message!"}}==
-	==- {{anchor name="item4|4. Is there a possibility how to get rid of this CWSDPMI.EXE and CWSDPMI.SWP?"}}==
-	==- {{anchor name="item5|5. Can I use other DOS extenders, like DOS/4GW, Causeway, DOS/32A?"}}==
-	==- {{anchor name="item6|6. Where is the nice blue screen with all the ... / where is the IDE?"}}==
-	==- {{anchor name="item7|7. How can I view the documentation in CHM or PDF format in DOS?"}}==
-	==- {{anchor name="item8|8. How can I write/edit my source code?"}}==
-	==- {{anchor name="item9|9. How can I play sound in DOS?"}}==
-	==- {{anchor name="item10|10. How can I use USB in DOS?"}}==
-	==- {{anchor name="item11|11. How can I use graphics in DOS?"}}==
-	==- {{anchor name="item12|12. DEF SEG is missing in FB! How can I workaround this in my code?"}}==	
-	==- {{anchor name="item13|13. How can I rewrite QB's CALL INTERRUPT / access the DOS and BIOS interrupts?"}}==
-	==- {{anchor name="item14|14. How can I rewrite QB's XMS/EMS handling?"}}==
-	==- {{anchor name="item15|15. FBC gives me a 'cannot find lsupcxx' error!"}}==
-	==- {{anchor name="item16|16. How can I use the serial or parallel port?"}}==
-	==- {{anchor name="item17|17. How can I use a printer?"}}==
-	==- {{anchor name="item18|18. How can I make a screenshot of a FreeBASIC program running in DOS?"}}==
-	==- {{anchor name="item19|19. Graphics mode doesn't work  (freeze / black screen / garbage output)!"}}==
-	==- {{anchor name="item20|20. Mouse trouble! Mouse doesn't work at all in DOS / arrow 'jumps' / etc. ..."}}==
-	==- {{anchor name="item21|21. What about the 64 KiB and 640 KiB problems / how much memory is supported by FB in DOS?"}}==
-	==- {{anchor name="item22|22. My program crashes when I try to use more than cca 1 MiB RAM! Is this a bug in FreeBASIC?"}}==
-	==- {{anchor name="item23|23. Threading functions are disallowed in DOS? Help!"}}==
-	==- {{anchor name="item24|24. Executables made with FB DOS are bloated!"}}==
-	==- {{anchor name="item25|25. Compilation is very slow with FB!"}}==
-	==- {{anchor name="item26|26. SLEEP doesn't work! How can I cause a delay?"}}==
-	==- {{anchor name="item27|27. The performance is very bad in DOS!"}}==
-	==- {{anchor name="item28|28. Can I access disk sectors with FB?"}}==
+	**- [[#item1">1. FB est un compilateur 32-bit - ai-je besoin d'un DOS 32 bits?]]**
+	**- [[#item2">2. 2. Qu'en est-il FreeDOS-32? Est-ce que FB fonctionne/era, y-a/aura-t-il une version?]]**
+	**- [[#item3">3. Quand j'utilise FreeBASIC sous DOS, j'obtiens un message d'erreur 'Error: No DPMI'!]]**
+	**- [[#item4">4. Est-il possible se d&eacute;barrasser de ces CWSDPMI.EXE et CWSDPMI.SWP et comment?]]**
+	**- [[#item5">5. Puis-je utiliser d'autres DOS "extenders", comme DOS/4GW, Causeway, DOS/32A?]]**
+	**- [[#item6">6. O&ugrave; est le bel &eacute;cran bleu avec tous les ... / O&ugrave; est l'IDE?]]**
+	**- [[#item7">7. Comment puis-je consulter la documentation au format CHM ou PDF sous DOS?]]**
+	**- [[#item8">8. Comment puis-je &eacute;crire/modifier mon code source?]]**
+	**- [[#item9">9. Comment puis-je jouer des sons sous DOS?]]**
+	**- [[#item10">10. Comment puis-je utiliser un port USB sous DOS?]]**
+	**- [[#item11">11. Comment puis-je utiliser les graphiques sous DOS?]]**
+	**- [[#item12">12. DEF SEG est manquant dans FB! Comment puis-je contourner ceci dans mon code?]]**	
+	**- [[#item13">13. Comment puis-je r&eacute;&eacute;crire CALL INTERRUPT de QB / l'acc&egrave;s aux interruptions DOS et BIOS?]]**
+	**- [[#item14">14. Comment puis-je r&eacute;&eacute;crire la gestion XMS/EMS de QB?]]**
+	**- [[#item15">15. FBC gives me a 'cannot find lsupcxx' error!]]**
+	**- [[#item16">16. Comment puis-je utiliser le port s&eacute;rie ou parall&egrave;le?]]**
+	**- [[#item17">17. Comment puis-je utiliser une imprimante?]]**
+	**- [[#item18">18. Comment puis-je faire une copie d'&eacute;cran d'un programme DOS fonctionnant en FreeBASIC?]]**
+	**- [[#item19">19. Le mode graphique ne fonctionne pas (bloquage &eacute;cran/&eacute;cran noir/donn&eacute;es incorrectes en sortie )!]]**
+	**- [[#item20">20. Des ennuis de souris! La souris ne fonctionne pas du tout sous DOS/"sauts" de la fl&egrave;che/etc...]]**
+	**- [[#item21">21. Qu'en est-il des probl&egrave;mes des 64K et 640K / quelle quantit&eacute; de m&eacute;moire FB peut-il g&eacute;rer sous DOS?]]**
+	**- [[#item22">22. Mon programme se bloque lorsque je tente d'utiliser plus cca 1 MiB de m&eacute;moire RAM! Est-ce un bogue dans FreeBASIC?]]**
+	**- [[#item23">23. Les fonctions de Threading sont invalides dans DOS? A l'aide!]]**
+	**- [[#item24">24. Les ex&eacute;cutables faits avec FB DOS sont "gonfl&eacute;s"!]]**
+	**- [[#item25">25. La compilation est tr&egrave;s lente avec FB!]]**
+	**- [[#item26">26. SLEEP ne fonctionne pas! Comment puis-je provoquer un d&eacute;lai?]]**
+	**- [[#item27">27. Les performances sont tr&egrave;s mauvaises sous DOS!]]**
+	**- [[#item28">28. Puis-je acc&eacute;der &agrave; des secteurs de disque avec FB?]]**
+	[[#item999">Voir aussi]]
 
-{{anchor name="item999|See also"}}
+<div style="text-align: center;">**Questions relatives &agrave; FreeBASIC DOS**
 
-{{fbdoc item="back" value="DocToc|Table of Contents"}}
-----
+<a name="item1"></a>**1. FB est un compilateur 32-bit - ai-je besoin d'un DOS 32 bits?**
+Non, la version DOS de FreeBASIC utilise une extension DOS, vous permettant d'ex&eacute;cuter du code 32 bits sur un noyau 16 bits DOS. Vous pouvez utiliser FreeDOS (16-bit), Enhanced-Dr-DOS, l'ancien D--DOS, ou m&ecirc;me MS-DOS jusqu'&agrave; la version cca 4.
 
-@@**""FreeBASIC"" DOS related questions**@@
+<a name="item2"></a>**2. Qu'en est-il FreeDOS-32? Est-ce que FB fonctionne/era, y-a/aura-t-il une version?**
 
-{{anchor name="item1"}}==1. FB is a 32-bit compiler - do I need a 32-bit DOS?==
-	No, the DOS version of ""FreeBASIC"" uses a **DOS extender**, allowing you to execute 32-bit code on top of a 16 bit DOS kernel. You can use ""FreeDOS"" (16-bit), Enhanced-Dr-DOS, old closed Dr-DOS, or even MS-DOS down to version cca 4.
+FreeDOS-32 est exp&eacute;rimental au moment de l'&eacute;criture, mais il doit ex&eacute;cuter FreeBASIC et les applications g&eacute;n&egrave;r&eacute;es sans aucun changement. Alors que le support de FB DOS fonctionne d&eacute;j&agrave; sur FreeDOS(16), il devrait &ecirc;tre pr&ecirc;t aussi pour FreeDOS-32.
+	<a name="item3"></a>**3. Quand j'utilise FreeBASIC sous DOS, j'obtiens un message d'erreur 'Error: No DPMI'!**
 
-{{anchor name="item2"}}==2. What about ""FreeDOS-32""? Does/will FB work, is/will there be a version?==
-	""FreeDOS-32"" is experimental at time of writing, but it should execute ""FreeBASIC"" and applications generated by it with no change. While FB DOS support already works on ""FreeDOS"" (16), it should be ready for ""FreeDOS-32"" as well. 
+Vous avez besoin d'un h&ocirc;te DPMI (DPMI noyau, DPMI serveur), cela signifie "CWSDPMI.EXE" (cca 20 KiB) ou HDPMI32.EXE (cca 34 KiB). Voir les exigences et la FAQ 4 pour plus de d&eacute;tails.  
+	<a name="item4"></a>**4. Est-il possible se d&eacute;barrasser de ces CWSDPMI.EXE et CWSDPMI.SWP et comment?**
 
-{{anchor name="item3"}}==3. When running ""FreeBASIC"" in DOS, I get a 'Error: No DPMI' message!==
-	You need a DPMI host (DPMI kernel, DPMI server), means the file "CWSDPMI.EXE" (cca 20 ""KiB"") or HDPMI32.EXE (cca 34 ""KiB""). See requirements, and FAQ 4 for more details.  
+Oui, il existe 2 possibilit&eacute;s. Pour vous d&eacute;barrasser de CWSDPMI.EXE et cr&eacute;ez un ex&eacute;cutable DOS autonome embarquant CWSDPMI, vous avez besoin du CWSDPMI paquet et du fichier "EXE2COFF.EXE". En utilisant EXE2COFF, vous supprimez le chargeur CWSDPMI.EXE (le fichier perd 2 Kio de taille, il en r&eacute;sulte en un fichier "COFF" sans extension), puis collez le fichier "CWSDSTUB.EXE" avant ce COFF. Le nouvel ex&eacute;cutable est "cca 21 Kio" plus grand que celui d'origine, mais il est autonome, aucun fichier suppl&eacute;mentaire n'est n&eacute;cessaire. D&eacute;barrassez-vous de CWSDPMI.SWP, vous pouvez ensuite modifier votre ex&eacute;cutable avec CWSPARAM.EXE, et d&eacute;sactiver le "swap" (appel&eacute; aussi parfois - &agrave; tort - "paging").  Notez, cependant, que cela va limiter la m&eacute;moire qui peut &ecirc;tre attribu&eacute;e &agrave; la quantit&eacute; de m&eacute;moire physique qui est install&eacute;e dans le syst&egrave;me. Ce travail peut &ecirc;tre fait &agrave; la fois avec le fichier FBC.EXE et tous les ex&eacute;cutables cr&eacute;&eacute;s par la FBC. La m&eacute;thode est &eacute;galement d&eacute;crite dans les docs du le paquet CWSDPMI. Alternativement, vous pouvez utiliser **WDOSX** ou **D3X** extendeur. Ils n'ont pas de swap et de cr&eacute;eent des ex&eacute;cutables autonomes. Puisque qu'ils ex&eacute;cutent votre ex&eacute;cutable dans "Ring 0", leur gestion de "crash" n'est pas tr&egrave;s bonne et peut causer des bloquages ou des red&eacute;marrages lors des bogues, o&ugrave; d'autres h&ocirc;tes quitter fa&ccedil;on "civile" avec un vidage de registre. De plus, le "spawning" pourrait ne pas bien/pas du tout fonctionner avec WDOSX ou D3X. Enfin, vous pouvez utiliser **HDPMI**. T&eacute;l&eacute;chargez le "HXRT.ZIP" fichier (ici: [[http://japheth.de/HX  japheth.de / HX.html ]]), extrayez de "HDPMI32.EXE" (cca 34 Kio) et "HDPMI.TXT" (non requis par le code, juste pour votre information), et incluez-le &agrave; votre d&eacute;marrage DOS ("HDPMI32-r"). Cela rendra HDPMI r&eacute;sident et &eacute;vitera que tous les programmes FreeBASIC (&eacute;galement FreePASCAL et DJGPP) ne protestent du manque de DPMI et "swapping". HDPMI **ne peut pas** &ecirc;tre inclus (facilement/encore) dans vos ex&eacute;cutables. L'ex&eacute;cution d'un ex&eacute;cutable contenant D3X, CWSDPMI ou certains h&ocirc;tes DPMI sous HDPMI ou d'autres h&ocirc;tes externes est tr&egrave;s correcte - l'h&ocirc;te interne sera tout simplement ignor&eacute;. Utiliser DPMI est d&eacute;finitivement n&eacute;cessaire pour FreeBASIC, car il ne peut pas g&eacute;n&eacute;rer le code 16 bits en mode r&eacute;el, et il n'y a pas d'autre moyen valable d'ex&eacute;cuter du code 32 bits en mode DOS.
+	<a name="item5"></a>**5. Puis-je utiliser d'autres DOS "extenders", comme DOS/4GW, Causeway, DOS/32A?**
 
-{{anchor name="item4"}}==4. Is there a possibility how to get rid of this CWSDPMI.EXE and CWSDPMI.SWP?==
-	Yes, 2 possibilities. To get rid of CWSDPMI.EXE and create a standalone DOS executable embedding CWSDPMI, you need the CWSDPMI package and the "EXE2COFF.EXE" file. Using EXE2COFF, you remove the CWSDPMI.EXE loader (file loses 2 ""KiB"" of size, resulting in a "COFF" file without extension), and then glue the file "CWSDSTUB.EXE" before this COFF. The new executable is cca 21 ""KiB"" bigger than the original one, but it is standalone, no additional files are needed. To get rid of CWSDPMI.SWP, you can then edit your executable with CWSPARAM.EXE, and disable the swapping (occasionally also - incorrectly - referred as paging).  Note, however, that this will limit the memory that can be allocated to the amount of physical memory that is installed in a system. This work can be done both with the FBC.EXE file and all executables created by FBC. The method is also described in the CWSDPMI docs in the package. Alternatively, you can use the **WDOSX** or **D3X** extender. They don't swap and create standalone executables. Since they run your executable in Ring 0, the crash handling of them is not very good and can cause freezers or reboots on bugs where other hosts exit the "civil" way with a register dump. Also, spawning might not work well / at all with WDOSX or D3X. Finally, you can use **HDPMI** . Download the "HXRT.ZIP" file (here: [[http://japheth.de/HX.html japheth.de/HX.html]]), extract "HDPMI32.EXE" (cca 34 ""KiB"") and "HDPMI.TXT" (not required by the code, just for your information), and include it to your DOS startup ("HDPMI32 -r"). This will make HDPMI resident and prevent all ""FreeBASIC"" (also ""FreePASCAL"" and DJGPP) programs from both crying about missing DPMI and swapping. HDPMI can **not** (easily / yet) be included into your executables. Running an executable containing D3X, CWSDPMI or some DPMI host inside under HDPMI or other external host is fine - the built-in host will be simply skipped. Using DPMI is definitely required for ""FreeBASIC"", since it can't generate 16-bit real mode code, and there is no other good way to execute 32-bit code in DOS.
+Aucun "extender". Les soi-disant "WATCOM-like extender" ne peut pas &ecirc;tre utilis&eacute; en raison de diff&eacute;rences importantes dans la gestion de la m&eacute;moire et la structure ex&eacute;cutable. WDOSX et D3X doivent fonctionner, car ils ont des "extenders" multi-standard, pas que "WATCOM-like". Vous pouvez aussi utiliser PMODE/DJ (pas "original" Tran's PMODE, ni PMODE/W (!), sauve "cca 5 KiB" compar&eacute; &agrave; CWSDPMI, peut &ecirc;tre inclus dans les EXE, mais peut affecter la sensibilit&eacute; ou les performances) ou comme le susmentionn&eacute;, HDPMI.
+	<a name="item6"></a>**6. O&ugrave; est le bel &eacute;cran bleu avec tous les ... / O&ugrave; est l'IDE?**
 
-{{anchor name="item5"}}==5. Can I use other DOS extenders, like DOS/4GW, Causeway, DOS/32A?==
-	Not any extender around. So-called WATCOM-like extenders can't be used because of important differences in memory management and executable structure. WDOSX and D3X do work, since they are a multi-standard extenders, not only WATCOM-like. You also can use PMODE/DJ (not "original" Tran's PMODE, nor PMODE/W (!), saves cca 5 ""KiB"" compared to CWSDPMI, can be included into the EXE, but might affect stability or performance) or, as aforementioned, HDPMI.
+Le projet FreeBASIC se concentre sur le compilateur, g&eacute;n&eacute;rant des ex&eacute;cutables &agrave; partir de vos sources BAS. Il semble peu spectaculaire, mais le plus important c'est la qualit&eacute; des logiciels que vous d&eacute;veloppez. TLe projet ne comprend pas un IDE. Il existe plusieurs IDE pour FreeBASIC, mais probablement aucune ne dispose actuellement d'une version DOS. Si vous en avez vraiment besoin, vous pouvez essayer "Rhide", mais notez qu'il est compliqu&eacute; et "bugg&eacute;", donc utilisez-le &agrave; vos propres risques. Voir aussi les FAQ 7 et 8.
+	<a name="item7"></a>**7. Comment puis-je consulter la documentation au format CHM ou PDF sous DOS?**
 
-{{anchor name="item6"}}==6. Where is the nice blue screen with all the ... / where is the IDE?==
-	The ""FreeBASIC"" project focuses on the compiler, generating the executables from your BAS sources. It looks unspectacular, but is most important for the quality of software developed by you. The project does not include an IDE. There are several external IDEs for ""FreeBASIC"", but probably none does have a DOS version by now.  If you really need one, you could try Rhide, but note that it is complicated and buggy, so use it at your own risk. See also FAQ 7 and 8.
+Il n'y a pas actuellement de bonne fa&ccedil;on d'afficher les fichiers CHM ou PDF sous DOS. Mais, n&eacute;anmoins, vous pouvez consulter la documentation FreeBASIC. Un des d&eacute;vellopeurs FreeBASIC, coderJeff fournit une visionneuse de documentation FreeBASIC avec les docs incluses dans un format sp&eacute;cial, il y a aussi une version DOS. Elle est semblable &agrave; la visionneuse de documentation d'aide int&eacute;gr&eacute;e de QB, mais ne contient pas d'&eacute;diteur ou d'IDE. T&eacute;l&eacute;chargement: [[http://www.execulink.com/~coder/FreeBASIC/docs Downloads coderJeff's Home Page]]
+	<a name="item8"></a>**8. Comment puis-je &eacute;crire/modifier mon code source?**
 
-{{anchor name="item7"}}==7. How can I view the documentation in CHM or PDF format in DOS?==
-	There is no good way to view CHM or PDF files in DOS by now. But you can view the ""FreeBASIC"" documentation nevertheless. One of the ""FreeBASIC"" developers, ""coderJeff"" provides a ""FreeBASIC"" documentation viewer with the docs included in a special format, and having also a DOS version. It looks similar the QB's built-in help viewer, but does not contain an editor or IDE. Download here: [[http://www.execulink.com/~coder/FreeBASIC/docs.html]]
+Il y a de nombreux &eacute;diteurs pour DOS, mais seulement peu d'entre eux sont bons - quelques possibilit&eacute;s sont FreeDOS EDIT (utiliser la version 0.7d (!!), limite de 64 Kio, stabilit&eacute; sous-optimale (enregistrez votre travail r&eacute;guli&egrave;rement)), SETEDIT, INFOPAD (livr&eacute; avec le compilateur CC386, peut &eacute;diter aussi les grands textes, a la coloration syntaxique pour le C et ASM, mais pas pour BASIC).
+	<a name="item9"></a>**9. Comment puis-je jouer des sons sous DOS?**
 
-{{anchor name="item8"}}==8. How can I write/edit my source code?==
-	There are many editors for DOS around, but only few of them are **good** - some possibilities are ""FreeDOS"" EDIT (use version 0.7d (!!), 64 ""KiB"" limit, suboptimal stability (save your work regularly) ), SETEDIT, INFOPAD (comes with CC386 compiler, can edit big texts also, has syntax highlighting for C and ASM, but not for BASIC).
+Il y a 2 mani&egrave;res de jouer du son sous DOS: soit le haut-parleur PC ("archa&iuml;que"), c&eacute;l&egrave;bre pour son bip si quelque chose se passe mal ou une carte son. Le haut-parleur est facile &agrave; contr&ocirc;ler, il a plus de possibilit&eacute;s que l'on pourrait le penser, m&ecirc;me de lire des fichiers audio (WAV, avec code de d&eacute;compression aussi OGG Vorbis, MP3, etc...), vous pouvez r&eacute;-utiliser facilement la plupart des codes QB existants (exemple: [[http://www.o-bizz.de/qbdown/qbsound/speaker.zip">o-bizz.de/qb...speaker.zip]]) ou du code ASM via inline ASM,  mais fournit seulement un canal et 6 bits, et bien s&ucirc;r une qualit&eacute; nettement moins bonne que la carte son, et, sur certains PC plus r&eacute;cents (P4) la qualit&eacute; du haut-parleur est tr&egrave;s mauvaise ou il n'y a pas du tout de haut-parleurs. Pour les anciennes cartes son ISA, il y a beaucoup d'exemples de code, une carte son PCI plus r&eacute;cente peut &ecirc;tre utilis&eacute;e (supposant "bare DOS" dans cette cat&eacute;gorie) soit en utilisant un pilote ("&eacute;mulation" SB16 compatible), si disponible pour votre carte (malheureusement, ce devient de plus en plus un probl&egrave;me, les pilotes DOS sont pauvres, voire inexistantes), ou acc&eacute;der &agrave; la carte directement (ce qui est de la programmation de bas niveau, li&eacute;e au mat&eacute;riel, l'assembleur est &eacute;galement n&eacute;cessaire, et vous avez besoin des docs techniques sur la carte). Il y a quelques sources d'inspiration comme le lecteur audio DOS MPXPLAY (&eacute;crit en C avec un peu d'ASM), soutenir les deux m&eacute;thodes (natif + "emu" pilotes), voir une liste &agrave; jour ici: [[http://www.unet.univie.ac.at/~a0503736/php/drdoswiki/index.php?n=Main.SoundCardChip">drdos.org/...wiki...SoundCardChip]]. La prise en charge du son sous DOS **n'est pas** l'affaire du portage FB DOS, actuellement FB ne supporte pas le son sur Win32 ni sous Linux - les jeux "se connectent &agrave; l'API" plut&ocirc;t que d'utiliser les commandes ou biblioth&egrave;ques de FreeBASIC. Pour jouer des fichiers compress&eacute;s (MP3, OGG Vorbis, FLAC, ...) , vous avez besoin en plus du code d&eacute;compress&eacute;, les portages DJGPP existants de ces biblioth&egrave;ques devraient &ecirc;tre utilisables &agrave; cet effet.  
+	<a name="item10"></a>**10. Comment puis-je utiliser un port USB sous DOS?**
 
-{{anchor name="item9"}}==9. How can I play sound in DOS?==
-	There are 2 ways how to play sound in DOS: either the ("archaic") PC speaker, famous for beeping if something goes wrong, or a soundcard. The speaker is easy to control, allows more than one might think, even to play audio files (WAV, with decompression code also OGG Vorbis, MP3 etc.), you can re-use most of existing QB code easily (example: [[http://www.o-bizz.de/qbdown/qbsound/speaker.zip o-bizz.de/qb...speaker.zip]]) or ASM code via inline ASM,  but provides one channel and 6 bits only, and of course significantly worse quality than a soundcard, and, on some newest (P4) PC's the speaker quality is **very** bad or there is no speaker at all. For old ISA soundcards, there is much example code around, a newer PCI soundcard can be accessed (supposing bare DOS in this category) either using a ( "emulation" SB16 compatible) driver, if it is available for your card (unfortunately, this is becoming more and more a problem, the DOS drivers are poor or even inexistent), or access the card directly (this is low-level programming, hardware-related, assembler is also needed, and you need technical docs about the card). There are a few sources of inspiration like the DOS audio player MPXPLAY (written in C with some ASM), supporting both methods (native + "emu" drivers), see an up-to-date list here: [[http://www.unet.univie.ac.at/~a0503736/php/drdoswiki/index.php?n=Main.SoundCardChip drdos.org/...wiki...SoundCardChip]]. Support of sound in DOS is **not** business FB DOS port, actually FB doesn't "support" sound on ""Win32"" and Linux either - the games "connect to the API" rather than use ""FreeBASIC"" commands or libraries. To play compressed files (MP3, OGG Vorbis, FLAC, ...) , you additionally need the decompressing code, existing DJGPP ports of those libraries should be usable for this.  
+Encore une fois, ce n'est pas le but de FB, vous avez besoin d'un pilote, FB n'a pas de "support" USB sur Win32 et sur Linux non plus, voir  d'autres Wiki: [[http://www.unet.univie.ac.at/~a0503736/php/drdoswiki/index.php?n=Main.USB">drdos.org/...wiki...USB]] sur les possibilit&eacute;s d'utilisation de l'USB sous DOS.
+	<a name="item11"></a>**11. Comment puis-je utiliser les graphiques sous DOS?**
 
-{{anchor name="item10"}}==10. How can I use USB in DOS?==
-	Again, not business of FB, you need a driver, FB doesn't "support" USB on ""Win32"" or Linux either, see other Wiki: [[http://www.unet.univie.ac.at/~a0503736/php/drdoswiki/index.php?n=Main.USB drdos.org/...wiki...USB]] about possibilities of USB usage in DOS.
+Les GUI ou les graphiques en mode DOS sont tout &agrave; fait possibles, il existe plusieurs approches: 
+	<li>Utilisation de la biblioth&egrave;que graphique de FB. Elle utilise VESA (pr&eacute;f&eacute;rence lin&eacute;aire, mais supporte &eacute;galement "banked") pour acc&eacute;der &agrave; la carte vid&eacute;o et supporte toutes les r&eacute;solutions VESA rapport&eacute;es par le pilote  VESA VBE de la carte, en plus des modes VGA standard.
 
-{{anchor name="item11"}}==11. How can I use graphics in DOS?==
-	GUI or graphics in DOS is definitely possible, there are several approaches: 
-		-Use the FB graphics library. It uses VESA (preferably linear, but also supports banked) to access the video card and supports any resolution reported by the card's VESA VBE driver, in addition to standard VGA modes.
-		Note: use preferably FB version **0.20** or newer, the FB DOS graphics works not as good on **0.17**, and does **not work at all** in previous releases.
-		-VGA mode 320x200x8bpp: very simple, maximum reliability and compatibility, but low resolution and 256 colours only, see example.
-		-VGA """ModeX""" 320x240x8bpp: similar to above, less easy, good reliability and compatibility, but low resolution and 256 colours only, see example.
-		-VGA "planed" mode 640x480x4bpp: difficult to set pixels, maximum reliability and compatibility, but low resolution and 16 colours only, no public example yet (?).
-		-Some other "odd" VGA """ModeX""" modes (like 360x240x8bpp) : possible, but for freaks only ;-)
-		-Write your own VESA code: More difficult, good compatibility, high-res and true color possible, there might be reliability problems if not implemented carefully.
-		-Use an external library (DUGL, Allegro, MGL, ""WxWidgets""): Allows to create "expensive" graphics & GUI's, bloats EXE size, need to respect library license, potential loss of reliability.
+Note: utilisez de pr&eacute;f&eacute;rence FB version **0.20** ou plus r&eacute;cente, les graphiques FB DOS ne sont pas tr&egrave;s bons sur la version **0.17** et **ne fonctionnent pas du tout** dans les versions pr&eacute;c&eacute;dentes.
+	<li>mode VGA 320x200x8bpp: tr&egrave;s simple, une fiabilit&eacute; et une compatibilit&eacute; maximales, mais faible r&eacute;solution et 256 couleurs uniquement, voir exemple.
+		<li>VGA "ModeX" 320x240x8bpp: similaire &agrave; ci-dessus, moins facile, une bonne fiabilit&eacute; et de compatibilit&eacute;, mais faible r&eacute;solution et 256 couleurs uniquement, voir exemple.
+		<li>VGA "planed" mode 640x480x4bpp: difficile d'&eacute;tablir les pixels, une fiabilit&eacute; et une compatibilit&eacute; maximales, mais faible r&eacute;solution et 16 couleurs seulement, encore aucun exemple public (?).
+		<li>Quelques autres modes "odd" VGA "ModeX" (comme 360x240x8bpp): possible, mais seulement pour les fous ;-)
+		<li>&Eacute;crire votre propre code VESA: Plus difficile, bonne compatibilit&eacute;, haute r&eacute;solution et couleur vraie possibles, il pourrait y avoir des probl&egrave;mes de fiabilit&eacute; si cela n'est pas mis en oeuvre avec soin.
+		<li>Utiliser une biblioth&egrave;que externe (DUGL, Allegro, MGL, WxWidgets): Permet de cr&eacute;er des graphiques et GUI "couteux", gonflement de la taille des EXE, obligation de respecter les licences des biblioth&egrave;ques, perte potentielle de fiabilit&eacute;.
+		<a name="item12"></a>**12. DEF SEG est manquant dans FB! Comment puis-je contourner ceci dans mon code?**
+		DEF SEG est li&eacute; &agrave; l'adressage 16-bits RM et a &eacute;t&eacute; retir&eacute; &agrave; cause de cela. L'acc&egrave;s "direct" l'acc&egrave;s &agrave; VGA ou d'autres zones de  m&eacute;moire basse n'est pas possible, parce que le mod&egrave;le de m&eacute;moire de FreeBASIC's (identique &agrave; celui de DJGPP) n'est pas bas&eacute; sur z&eacute;ro. Pour acc&eacute;der &agrave; la m&eacute;moire basse du DOS, utilisez DOSMEMGET et DOSMEMPUT , voir l'exemple "vga13h.bas" ou "_dos_ds" s&eacute;lecteur pour "inline ASM", voir exemple:
+		%%(""FreeBASIC"")
+	'' DOS only example of inline ASM accessing low memory
 
-{{anchor name="item12"}}==12. DEF SEG is missing in FB! How can I workaround this in my code?==
-	DEF SEG is related to 16-bit RM addressing and was removed because of this. "direct" access to VGA or other low memory areas is not possible, because ""FreeBASIC""'s memory model (same as DJGPP's) is not zero-based. For accessing low DOS memory, use DOSMEMGET and DOSMEMPUT , see "vga13h.bas" example, or "_dos_ds" selector for inline ASM, see example:
-
-{{fbdoc item="filename" value="examples/manual/faq/dos/lowmemas.bas"}}%%(""FreeBASIC"")
-'' DOS only example of inline ASM accessing low memory 
 '' Run in text mode 80x25 only
-''
+	''
 
 '' Including dos/go32.bi will define "_dos_ds"
 '' "pointing" into GO32 block
-
-#include "dos/go32.bi" 
+#include "dos/go32.bi"
 
 Dim As UInteger DDS
-
 DDS=_dos_ds
 
 ? : ? "Hello world !"
-? "_dos_ds=$";Hex$(DDS) 
+
+? "_dos_ds=$";Hex$(DDS)
+
 ? "This is just a tEst - abcd ABCD XYZ xyz @[`{ - press any key ..."
 
 Do
-  Sleep 1000
-  If Inkey$<>"" Then Exit Do
-  Asm
-	mov  eax,[DDS] '' Directly using "_dos_ds" won't work here !!!
-	push eax
-	pop  gs        '' Just to get sure, it is usually set anyway
+Sleep 1000
+If Inkey$<>"" Then Exit Do
+
+Asm
+  mov  eax,[DDS] '' Directly using "_dos_ds" won't work here !!!
+  push eax
+  pop  gs        '' Just to get sure, it is usually set anyway
 	Xor  ebx,ebx
 	aa3:
 	mov  al,[gs:0xB8000+2*ebx]
 	cmp  al,65  '' "a"
 	jb   aa1
 	cmp  al,122 '' "z"
-	ja   aa1   
+	ja   aa1
 	cmp  al,90  '' "Z"
 	jbe  aa2
-	cmp  al,97  '' "a"    
-	jb   aa1 
-	aa2: 
+	cmp  al,97  '' "a"
+	jb   aa1
+	aa2:
 	Xor  al,32  '' Swap case
 	aa1:
 	mov  [gs:0xB8000+2*ebx],al
 	inc  ebx
 	cmp  ebx,2000
 	jne  aa3
-  End Asm  
-Loop
-? : ? "Bye"
-End
+	End Asm
+	Loop
+	? : ? "Bye"
+  End
 %%
+<a name="item13"></a>**13. Comment puis-je r&eacute;&eacute;crire CALL INTERRUPT de QB / l'acc&egrave;s aux interruptions DOS et BIOS?**
+Ces interruptions sont accessibles seulement en utilisant la version/cible DOS de FB.
+L'acc&egrave;s aux interruptions est plus lent que dans QB: avec FB l'h&ocirc;te DPMI devra faire deux changements de contexte, passer en mode r&eacute;el et en revenir. Tout cela va "manger" des centaines de cycles d'horloge dans le DOS "raw" et des milliers de cycles d'horloge si emm386 est charg&eacute; ou est &agrave; l'int&eacute;rieur d'une "box DOS de Windows". Le ralentissement pourrait &ecirc;tre n&eacute;gligeable ou perceptible, &ccedil;a d&eacute;pend. Vous devriez essayer de minimiser le nombre de ces appels, et traiter plus de donn&eacute;es par appel - au moins plusieurs Kio, et pas seulement un octet ou quelques octets.
 
-{{anchor name="item13"}}==13. How can I rewrite QB's CALL INTERRUPT / access the DOS and BIOS interrupts?==
-	Those interrupts can be accessed only using the DOS version/target of FB.
+Utilisation du "wrapper DPMI de DJGPP":
+	%%(""FreeBASIC"")
 
-	The access to interrupts is slower than in QB: with FB the DPMI host will have to do 2 context switches, going to real-mode and coming back. All of that will eat hundreds of clocks in raw DOS and thousands of clocks if emm386 is loaded or if inside a Windows' DOS box. The slow down might be negligible or relevant, it depends. You should try to minimize the number of such calls, and process more data per call  - at least several ""KiB"", not just one byte or a few bytes.
+	#include "dos/dpmi.bi"
  
-	Use DJGPP's DPMI wrapper:
-
-{{fbdoc item="filename" value="examples/manual/faq/dos/call-int.bas"}}%%(""FreeBASIC"")
-#include "dos/dpmi.bi"
-
-type RegTypeX as __dpmi_regs
+	type RegTypeX as __dpmi_regs
 
 #define INTERRUPTX(v,r) __dpmi_int( v, @r )
 %%
 
-	Alternatively you can call INT's via inline ASM, 2 important things you have to care about are the fact that FB's memory model is not zero-based (see also FAQ 12, "DEF SEG" issues), and additionally "direct" passing of addresses (like DS:[E]DX) to an INT will not work except you have a DPMI host with "DOS API translation".  
+Sinon, vous pouvez appeler les INT via "inline ASM", 2 choses importantes auxquelles vous devez faire attention sont le fait que le mod&egrave;le dde m&eacute;moire de FB n'est pas bas&eacute; sur z&eacute;ro (voir aussi FAQ 12, questions sur "DEF SEG"), et de plus passer "directement" des adresses (comme DS:[E]DX) &agrave; une INT will ne fonctionnera pas, sauf que vous avez un h&ocirc;te DPMI avec "DOS API translation".  
 
-{{anchor name="item14"}}==14. How can I rewrite QB's XMS/EMS handling?==
-	Depends why original code uses it. If it's just to bypass low memory limits, simply remove it and use "ordinary" FB's data types / memory handling features instead. If it is used for (sound) DMA, you are out of luck and have to redesign the code completely, about sound see FAQ 9. For DMA use preferably the low memory (should be no big problem, since the application code and most buffers are in DPMI memory instead), DMA in DPMI memory is possible but more difficult.  
+<a name="item14"></a>**14. Comment puis-je r&eacute;&eacute;crire la gestion XMS/EMS de QB?**
+Cela d&eacute;pend pourquoi le code original l'utilise. Si c'est juste pour contourner les limites de la m&eacute;moire basse, il suffit de la retirer et d'utiliser des types de donn&eacute;es FB "ordinaires"/fonctions de gestion de la m&eacute;moire &agrave; la place. Si elle est utilis&eacute;e pour le DMA (son), vous n'avez pas de chance et devez de refondre compl&egrave;tement le code, sur le son voir FAQ 9. Pour le DMA utiliser de pr&eacute;f&eacute;rence la m&eacute;moire basse (cela ne devrait pas &ecirc;tre un gros probl&egrave;me, puisque le code d'application et la plupart des tampons sont dans la m&eacute;moire DPMI), le DMA dans la m&eacute;moire DPMI est possible mais plus difficile.
 
-{{anchor name="item15"}}==15. FBC gives me a 'cannot find lsupcxx' error!==
-	The source of this problem is the **libsupcxx.a** file in **LIB\DOS\** directory, having 9 characters in the name. Your fault is to have extracted the ZIP with long file names enabled, usually in Windows, and then using FB in DOS with no LFN support, resulting in this file looks **LIBSUP~1.A** and can't be found. Rename the file in **LIBSUPCX.A** (one **X** only) or extract the ZIP again in DOS. Note: changes in FB 0.18, retest needed. 
+	<a name="item15"></a>**15. FBC me donne un ne peut pas trouver "lsupcxx' error"!**
 
-{{anchor name="item16"}}==16. How can I use the serial or parallel port?==
-	The DOS INT14 is not very useful/efficient as it sends/reads a single char in each call. So it's better to use an external DOS32 comms library. /* does someone know a good one ? */ FB up to 0.18.2 doesn't support OPEN COM on DOS target, ""coderJeff"" has an experimental library/driver available, included with FB since 0.18.3. 
+L'origine de ce probl&egrave;me est le fichier **libsupcxx.a** dans le r&eacute;pertoire **LIB\DOS\**, il a 9 caract&egrave;res dans son nom. Votre faute est d'avoir extrait le fichier ZIP avec la permission des noms de fichiers longs, g&eacute;n&eacute;ralement sous Windows et puis vous utilisez FB dans le DOS sans prise en charge des noms de fichiers longs, il en r&eacute;sulte que ce fichier appara&icirc;t **LIBSUP~1.A** et ne peut &ecirc;tre trouv&eacute;. Renommez le fichier **LIBSUPCX.A** (un seul **X**) ou extrayez &agrave; nouveau le fichier ZIP en DOS. Note: change dans FB 0.18, il est n&eacute;cessaire de re-tester. 
+	<a name="item16"></a>**16. Comment puis-je utiliser le port s&eacute;rie ou parall&egrave;le?**
 
-{{anchor name="item17"}}==17. How can I use a printer?==
-	DOS kernel won't help you here, so you have to prepare the text (trivial) or bitmap data (acceptably easy for printers compatible with the "ESC/P" standard) yourself and send in to the printer via the parallel port or USB using an additional driver (see FAQ 10). So-called "GDI" or "Windows" printers can't be made working in DOS with reasonable effort.
+L'interruption DOS INT14 n'est pas tr&egrave;s utile/efficace car elle envoie/lit un seul caract&egrave;re &agrave; chaque appel. Il est donc pr&eacute;f&eacute;rable d'utiliser une biblioth&egrave;que externe "DOS32 comms". /* quelqu'un en conna&icirc;t-il une bonne? */ FB jusqu'&agrave; 0.18.2 ne supporte pas OPEN COM sur la cible DOS, coderJeff a un(e) biblioth&egrave;que/pilote exp&eacute;rimental(e) de disponible, inclus(e) dans FB version 0.18.3 et versions suivantes. 
+	<a name="item17"></a>**17. Comment puis-je utiliser une imprimante?**
 
-{{anchor name="item18"}}==18. How can I make a screenshot of a ""FreeBASIC"" program running in DOS?==
-	Ideally include this feature into your own code. DOS TSR based screenshooters like SNARF mostly will work with text based screens, but probably none of them with ""FreeBASIC""'s GFX library. It's not really a bug on one or other side, it's a problem "by design".
+Le noyau DOS ne vous aidera pas ici, donc vous avez &agrave; pr&eacute;parer vous-m&ecirc;me le texte (trivial) ou des donn&eacute;es "bitmap" ( facilement acceptable pour les imprimantes compatibles avec le standar "ESC/P") et les envoyer &agrave; l'imprimante via le port parall&egrave;le ou USB en utilisant un pilote suppl&eacute;mentaire (voir FAQ 10). On ne peut pas faire fonctionner sous DOS, avec un effort raisonnable, les imprimantes dites "GDI" ou "Windows".
+	<a name="item18"></a>**18. Comment puis-je faire une copie d'&eacute;cran d'un programme DOS fonctionnant en FreeBASIC?**
 
-{{anchor name="item19"}}==19. Graphics mode doesn't work  (freeze / black screen / garbage output)!==
-	Place a bug report into the forum. To make it as useful and productive as possible, please beware of the following, proceed given steps and provide all related information:
-		- The graphics might not work well / at all on very old PC's. If your CPU has less than cca 500 MHz, provide exact info about it, if you don't know, use ""RayeR""'s CPUID or similar program to test. 
-		- Exact info about your graphics card is needed. Test on DOS using [[DrV DrV]]'s VBEDIAG (reports info only) and ""RayeR's"" VESATEST (also tries to set mode, allows visual inspection of the result). Find out what "useful" modes (640x480, 800x600) are supported and with what bitdepths (8, 16, 24, 32 bpp), and whether they can be set and look correctly.  
-		- Find out and describe exactly what's wrong ("mode works with VESATEST but not with FB", "no graphics but no error either", "black screen and freezer", "graphics is messy/incomplete", ...).
-		- If some sophisticated program doesn't work, try also a minimal test like placing a circle in middle of the screen.
-		- Try without a mouse driver (this reduces the CPU "cost").
-		- Find out what modes are affected. If a mode doesn't work, reduce the resolution or bitdeph, make sure to test the "cheapest"/safest modes 640x480 with 32/24/16/8 bpp, 640x480 with 4 bpp, and 320x200 with 8bpp.
-		- For some old cards there are VESA drivers available (S3VBE/UVIVBE). Test both with and without, and include this info into your report. 
-		- Remove potentially problematic content (memory managers, drivers) from DOS startup files. Nothing of such is required for FB, except a DPMI host (see also FAQ 4.).
-		- Post info about your graphics card, CPU (if old), DOS type and version, bug symptoms, and a simple example code.
-	""RayeR""'s VESATEST and CPUID can be downloaded here: [[http://rayer.ic.cz/programm/programe.htm rayer.ic.cz/programm/programe.htm]] , VBEDIAG here [[http://drv.nu/vbediag/ drv.nu/vbediag/]].
+L'id&eacute;al est inclure cette fonctionnalit&eacute; dans votre propre code. Les copieurs d'&eacute;cran DOS bas&eacute;s sur TSR, comme SNARF, pour la plupart vont fonctionner avec des &eacute;crans en mode texte, mais probablement aucun d'entre eux avec la biblioth&egrave;que FreeBASIC de GFX. Ce n'est pas vraiment un bug sur un c&ocirc;t&eacute; ou un autre, c'est un probl&egrave;me "de par leur conception" (by design).
+	<a name="item19"></a>**19. Le mode graphique ne fonctionne pas (bloquage &eacute;cran/&eacute;cran noir/donn&eacute;es incorrectes en sortie )!**
 
-{{anchor name="item20"}}==20. Mouse trouble! Mouse doesn't work at all in DOS / arrow 'jumps' / etc. ...==
-	To use a mouse in DOS, you need a compatible driver, recognizing your mouse, and recognized by ""FreeBASIC"" library. For optimal results, you need a **good** driver and a **suitable** mouse. 
+Placez un rapport de bogue dans le forum. Pour le rendre aussi utile et productif que possible, s'il vous pla&icirc;t m&eacute;fiez-vous de ce qui suit, suivez les &eacute;tapes donn&eacute;es et de fournissez toutes les informations relatives:
+	- Les graphiques pourraient ne pas bien (ne pas) fonctionner (du tout) sur de tr&egrave;s anciens PC. Si votre CPU a moins de 500 MHz de cca, fournissez des informations exactes &agrave; son sujet, si vous ne savez pas, utilisez le programme "RayeR's CPUID" ou similaire pour tester.
 
-	Mouse: the optimal choice, and pretty well available nowadays, is a PS/2 mouse. The old type would be a serial mouse, also this one should work. The newest is USB mouse - but is not very suitable for use in DOS, since it would need a compatible (INT33) high quality native USB mouse driver (none available by now, only some experimental), or rely on BIOS emulation (not always available, or "unprecise").
+- Des informations exactes sur votre carte graphique sont n&eacute;cessaires. Testez sur DOS en utilisant VBEDIAG de [[DrV DrV]] (ne rapportez que les informations) et VESATEST de RayeR (essayer aussi de d&eacute;finir le mode, permet l'inspection visuelle du r&eacute;sultat). D&eacute;terminez si les modes "utiles" (640x480, 800x600) sont support&eacute;s et avec quelles profondeur (8, 16, 24, 32 bpp), et si cela peut &ecirc;tre r&eacute;gl&eacute; et est visible correctement.
+	- D&eacute;terminez et d&eacute;crivez exactement ce qui est faux ("mode fonctionne avec VESATEST mais pas avec FB", "aucun graphique mais aucune erreur non plus", "&eacute;cran noir et bloquage &eacute;cran", "graphismes mauvais/incomplets", ...).
+		- Si certains programmes sophistiqu&eacute;s ne fonctionnent pas, essayez aussi un test minimal comme placer un cercle au milieu de l'&eacute;cran.
+		- Essayez sans pilote de la souris (ce qui r&eacute;duit le "co&ucirc;t" CPU).
+		- D&eacute;terminez quels modes sont touch&eacute;s. Si un mode ne fonctionne pas, r&eacute;duisez la r&eacute;solution ou la profondeur, veillez &agrave; tester les modes les plus s&ucirc;rs / les moins "lourds" 640x480 avec 32/24/16/8 bpp, 640x480 avec 4 bpp et 320x200 avec 8bpp.
+		- Pour certaines cartes anciennes il y a des pilotes VESA disponibles (S3VBE/UVIVBE). Testez avec et sans, et incluez cette information dans votre rapport. 
+		- Retirez le contenu potentiellement probl&eacute;matique (gestionnaires de m&eacute;moire, les pilotes) des fichiers DOS de d&eacute;marrage. Rien de tel n'est n&eacute;cessaire pour FB, &agrave; l'exception d'un h&ocirc;te DPMI (voir aussi FAQ 4.).
+		- Postez l'info sur votre carte graphique, processeur (si ancien), le type et la version du DOS, les sympt&ocirc;mes de bugs et un exemple de code simple.
+		VESATEST et CPUID de RayeR peuvent &ecirc;tre t&eacute;l&eacute;charg&eacute;s ici: [[http://rayer.ic.cz/programm/programe.htm">rayer.ic.cz/programm/programe.htm]] et VBEDIAG ici [[http://drv.nu/vbediag/">drv.nu/vbediag/]].
+		<a name="item20"></a>**20. Des ennuis de souris! La souris ne fonctionne pas du tout sous DOS/"sauts" de la fl&egrave;che/etc...**
+		Pour utiliser une souris dans le DOS, vous avez besoin d'un pilote compatible, reconnaissant votre souris et reconnu par une biblioth&egrave;que FreeBASIC. Pour des r&eacute;sultats optimaux, il vous faut un **bon** pilote et une souris **adapt&eacute;e**.
+	Souris: le choix optimal et aujourd'hui facilement disponible, est une souris PS/2. L'ancien type d'une souris s&eacute;rie devrait fonctionner lui aussi. Le plus r&eacute;cent est la souris USB - mais n'est pas tr&egrave;s appropri&eacute; pour une utilisation en mode DOS, car serait n&eacute;cessaire pour la compatibilit&eacute; un pilote (INT33) de haute qualit&eacute; natif de souris USB (non disponible &agrave; ce jour, seuls quelques exp&eacute;rimentaux), ou compter sur l'&eacute;mulation du BIOS (pas toujours disponible, ou "impr&eacute;cise").
 
-	Driver: the preferred choice is CTMOUSE from ""FreeDOS"" project. There are versions 1.9a1, 2.0a4, and 2.1b4 from 2008-July available. It is included with (but not limited to) ""FreeDOS"", or download a version from here: [[http://www.ibiblio.org/pub/micro/pc-stuff/freedos/files/dos/mouse/ ibiblio.org/pub/...mouse]] . None of them is perfect, but still they are well usable and better than most competitors. 1.9xx and 2.1xx will cooperate with BIOS, allowing USB emulation, 2.0xx bypasses BIOS and thus USB emulation will **NOT** work. Also Logitech mouse drivers usually do a good job, download from here: [[http://www.uwe-sieber.de/util_e.html uwe-sieber.de/util_e.html]] - version 6.50 is a good start. Known for problems are DRMOUSE and some (old ?) versions of MSMOUSE.
+Pilote: le choix pr&eacute;f&eacute;r&eacute; est CTMOUSE du projet FreeDOS. Les versions 1.9a1, 2.0a4 et 2.1b4 de Juillet 2008 sont disponibles. Inclus avec (mais non limit&eacute; &agrave;) FreeDOS ou t&eacute;l&eacute;charger une version ici: [[http://www.ibiblio.org/pub/micro/pc-stuff/freedos/files/dos/mouse/">ibiblio.org/pub/...mouse]]. Aucun d'eux n'est parfait, mais ils sont encore tr&egrave;s utilisables et meilleurs que la plupart des concurrents. 1.9xx and 2.1xx will collabore avec BIOS, permettant l'&eacute;mulation USB, 2.0xx ignore le BIOS et ainsi l'&eacute;mulation USB **NE fonctionne PAS**.Les pilotes de souris Logitech &eacute;galement fonctionnent souvent correctement, &agrave; t&eacute;l&eacute;charger ici: [[http://www.uwe-sieber.de/util_e uwe-sieber.de/util_e.html]] - la version 6.50 est un bon d&eacute;but. Connus pour des probl&egrave;mes il y a DRMOUSE et certaines versions (anciennes?) de MSMOUSE.
+	Si la souris ne fonctionne pas du tout, alors tr&egrave;s probablement le pilote n'est pas charg&eacute;, ne reconna&icirc;t pas la souris (voir les messages du pilote) ou n'est pas compatible avec l'INT33 "standard". Pour la souris USB, l'activation de "l'&eacute;mulation de la souris USB" dans les param&egrave;tres du BIOS peut vous aider.
 
-	If the mouse does not work at all, then most likely the driver is not loaded, doesn't recognize the mouse (see driver messages), or is not compatible with the INT33 "standard". For USB mouse, activating the "USB mouse emulation" in BIOS settings can help. 
+	Si le contr&ocirc;le de la souris est "impr&eacute;cis", la fl&egrave;che "saute", alors soit vous avez un mauvais pilote - utilisez-en un meilleur ou l'&eacute;mulation du BIOS est mauvaise - alors, la solution est d'acheter une souris PS/2.
 
-	If the mouse control is "unprecise", the arrow "jumps" , then you either have a bad driver - use a better one, or the BIOS emulation is bad - the solution is to buy a PS/2 mouse then.
+	<a name="item21"></a>**21. Qu'en est-il des probl&egrave;mes des 64K et 640K / quelle quantit&eacute; de m&eacute;moire FB peut-il g&eacute;rer sous DOS?**
 
-{{anchor name="item21"}}==21. What about the 64 ""KiB"" and 640 ""KiB"" problems / how much memory is supported by FB in DOS?==
-	Memory management is business of the DPMI host, rather than the compiler. ""FreeBASIC"" and executables generated by it do **not** suffer from this problem, since they use 32-bit DPMI code, rather than real mode. You can use almost all the memory of your PC, with some limitations, but they are **far** above 64 or 640 ""KiB"". CWSDPMI **r5** is verified to work well up to 512 ""MiB"" only, additional memory does not crash it (unlike some older versions), but is silently ignored. HDPMI is supposed to support more: up to 4 ""GiB"" (the limit of 32-bit addressing), but there was not much testing on such huge machines - verified up to cca 1.5 ""GiB"". ""FreeBASIC"" and code generated by it do **not** require classical DOS based memory managers (HIMEM/XMS and EMM386/EMS), but are supposed to coexist with them if they are present. All this of course applies to true DOS only, things like "Dos Box" will keep the control over the memory management and provide only a small piece of memory (depends, up to cca 64 ""MiB"") to your DOS code. 
+	La gestion de la m&eacute;moire est l'affaire de l'h&ocirc;te DPMI, plut&ocirc;t que du compilateur. FreeBASIC et les ex&eacute;cutables qu'il g&eacute;n&egrave;re **ne** souffre **pas** de ce probl&egrave;me, car du code 32 bits DPMI est utils&eacute;, plut&ocirc;t que le mode r&eacute;el. Vous pouvez utiliser presque toute la m&eacute;moire de votre PC, avec quelques limitations, mais on est largement **au-dessus** des 64 ou 640 Kio. CWSDPMI **r5** est v&eacute;rifi&eacute;e pour bien fonctionner jusqu'&agrave; 512 MiB seulement, toute la m&eacute;moire suppl&eacute;mentaire ne plante pas le syst&egrave;me (contrairement &agrave; certaines anciennes versions), mais est tout simplement ignor&eacute;e. HDPMI est cens&eacute; g&eacute;rer plus: jusqu'&agrave; 4 Gio (la limite de l'adressage 32 bits), mais il n'y a pas eu beaucoup d'essais sur ces &eacute;normes machines - v&eacute;rifi&eacute; jusqu'&agrave; cca 1,5 Gio. FreeBASIC et le code g&eacute;n&eacute;r&eacute; **ne** n&eacute;cessitent **pas** les classiques gestionnaires DOS de m&eacute;moire (HIMEM / XMS et EMM386/EMS), mais sont cens&eacute;s coexister avec eux s'ils sont pr&eacute;sents. Tout cela s'applique bien s&ucirc;r seulement au vrai DOS, des choses comme "Dos Box" garderont le contr&ocirc;le sur la gestion de la m&eacute;moire et de fourniront seulement un petit morceau de la m&eacute;moire (cela d&eacute;pend, jusqu'&agrave; cca 64 MiB) &agrave; votre code DOS. 
 
-{{anchor name="item22"}}==22. My program crashes when I try to use more than cca 1 ""MiB"" RAM! Is this a bug in ""FreeBASIC""?==
-	No, it's not a bug in ""FreeBASIC"" and it's not really DOS specific, see also [[CompilerFAQ Compiler FAQ]]. For a beginner, the easy solution is to use ##[[KeyPgShared Shared]]## for arrays. More advanced users could consider using memory management functions like ##[[KeyPgAllocate Allocate]]##. This is even more important in DOS, since it allows the application to run on low memory PCs (and still edit at least small texts for example), as well as to use all huge RAM if available (and edit huge texts for example).  
+	<a name="item22"></a>**22. Mon programme se bloque lorsque je tente d'utiliser plus cca 1 MiB de m&eacute;moire RAM! Est-ce un bogue dans FreeBASIC?**
 
-{{anchor name="item23"}}==23. Threading functions are disallowed in DOS? Help!==
-	The [[CatPgThreading Threading Support Functions]] are not supported for DOS target, and most likely won't be soon/ever. The reason is simple: neither the DOS kernel, nor the DPMI host/standard, nor "GO32" DOS Extender support threading, unlike the ""Win32"" or Linux kernel. However nothing is impossible in DOS: you can set up your threading on the top of DPMI. There are multiple possibilities, two of which are: 
-		- Set up an ISR, see "ISR_TIMER.BAS" example. This is not a "full" replacement, but sufficient in some cases.
-		- There is a **pthreads** library for DJGPP allowing to "emulate" Linux-like threading to some degree. It works acceptably for [P]7-ZIP DJGPP port (written in C+ + ), no tests with FB yet.
+Non, ce n'est pas un bogue dans FreeBASIC et ce n'est pas vraiment sp&eacute;cifique au DOS, voir aussi [[CompilerFAQ FAQ du Compilateur]]. Pour un d&eacute;butant, la meilleure solution est d'utiliser ##[[KeyPgShared Shared]]## pour les tableaux. Les utilisateurs plus avanc&eacute;s peuvent envisager d'utiliser les fonctions de gestion de la m&eacute;moire, comme ##[[KeyPgAllocate Allocate]]##. Ceci est encore plus important dans le DOS, car cela permet d'ex&eacute;cuter l'application sur les ordinateurs ayant peu de m&eacute;moire (tout en permettant au moins d'&eacute;diter petits textes, par exemple), ainsi que d'utiliser toute la RAM &eacute;norme si disponibles (et &eacute;diter des textes &eacute;normes, par exemple).
+	<a name="item23"></a>**23. Les fonctions de Threading sont invalides dans DOS? A l'aide!**
 
-{{anchor name="item24"}}==24. Executables made with FB DOS are bloated!==
-	This is true but there is no easy/fast way to fix. FB is a 32-bit HLL compiler, and most of the size is imported from DJGPP. !writeme! ( see forum: [[http://freebasic.net/forum/viewtopic.php?t=11757 freebasic.net/forum/viewtopic.php?t=11757]] )
+Les [[CatPgThreading fonctions de gestion du Threading]] ne sont pas prises en charge pour la cible, pour le moment, et tr&egrave;s probablement ne le seront pas bient&ocirc;t/jamais. La raison est simple: ni le noyau DOS, ni le DPMI host/standard, ni "GO32" DOS Extender ne les g&egrave;rent, contrairement au noyau Win32 ou Linux. Comme d'habitude, DOS ne vous alertera pas ici, mais d'autre part rien n'est impossible d'autre part dans le DOS: vous pouvez configurer votre "threading" en haut de DPMI, il y a de multiples possibilit&eacute;s: 
+	- Mettez en place un ISR, voir l'exemple "ISR_TIMER.BAS". Ce n'est pas un de remplacement "complet", mais suffisant dans certains cas.
 
-{{anchor name="item25"}}==25. Compilation is very slow with FB!==
-	Problem: "FBC takes 10 seconds to compile a "Hello world" program ! ""TurboBASIC"" / QBASIC / VBDOS / ""PowerBASIC"" do take < 1 second for the same job ..."
+- Il y a une biblioth&egrave;que **pthreads** pour DJGPP permettant d'"&eacute;muler" un certain degr&eacute; de threading comme-dans-Linux-like. Il fonctionne de fa&ccedil;on acceptable pour le  portage [P]7-ZIP DJGPP (&eacute;crit en C++), pas encore de tests avec FB.
+	<a name="item24"></a>**24. Les ex&eacute;cutables faits avec FB DOS sont "gonfl&eacute;s"!**
+		C'est vrai, mais il n'y a pas de moyen facile/rapide de correction. FB est un compilateur 32 bits HLL et la plupart de la taille est import&eacute;e de DJGPP. !&agrave; &eacute;crire! ( voir le forum: [[http://freebasic.net/forum/viewtopic.php?t=11757">freebasic.net/forum/viewtopic.php?t=11757]] )
+		<a name="item25"></a>**25. La compilation est tr&egrave;s lente avec FB!**
 
-	True, but this is "by design" : FB compiles your sources in 3 steps, saving the intermediate files, as described in [[CompilerCmdLine]] , while many older compilers do just 1 pass in memory. This is related mostly to file I/O performance, see FAQ 27 below about possibilities of improvements, additionally a small improvement can be achieved here by making the DPMI host resident ( **HDPMI32 -r** or **CWSDPMI -p** , see FAQ 4 above). Note that the delay is mostly "additive" , so it won't hurt too much with bigger projects.
+Probl&egrave;me: "FBC prend 10 secondes pour compiler un programme "Hello world" program"! TurboBASIC/QBASIC/VBDOS/PowerBASIC mettent < 1 seconde pour cela..."
+	C'est vrai, mais cela est un probl&egrave;me de conception ("by design"): FB compile vos sources en 3 &eacute;tapes, enregistrement des fichiers interm&eacute;diaires, tel que d&eacute;crit dans CompilerCmdLine, alors que de nombreux compilateurs plus anciens ne font qu'une seule passe en m&eacute;moire. Ceci est li&eacute; essentiellement aux performances E/S fichiers, voir FAQ 27 ci-dessous sur les possibilit&eacute;s d'am&eacute;liorations, deplus une petite am&eacute;lioration peut &ecirc;tre obtenue ici en rendant l'h&ocirc;te DPMI r&eacute;sident (**HDPMI32 -r** ou **CWSDPMI -p** , voir FAQ 4 ci-dessus). Notez que le d&eacute;lai est de essentiellement "additif", de sorte qu'il ne sera pas trop "douloureux" avec les grands projets.
 
-{{anchor name="item26"}}==26. SLEEP doesn't work! How can I cause a delay?==
-	##[[KeyPgSleep Sleep]]## does work ... but has a resolution of cca 55ms = 1/18s only, thus "SLEEP 500" is fine, while for example using "SLEEP 2" for 2 milliseconds won't work. !writeme! / !fixme! 
-		- PIT / BIOS timer (runs at 18.2 Hz by default), peek the BIOS timer or set your own, see "ISR_TIMER.BAS" example, raise PIT frequency (use with care)
-		- Poll the BIOS timer + PIT counter, method from TIMERHLP.ASM from DKRNL32, allows to enhance precision of above without raising the PIT frequency 
-		- RDTSC instruction (Pentium and newer)
-		- RTC clock
-		- Delay loops
+<a name="item26"></a>**26. SLEEP ne fonctionne pas! Comment puis-je provoquer un d&eacute;lai?**
+	##[[KeyPgSleep Sleep]]## fonctionne ... mais il a seulement une r&eacute;solution de cca 55ms = 1/18s, ainsi "SLEEP 500" est tr&egrave;s bien, tandis que par exemple en utilisant "SLEEP 2" pour 2 millisecondes ne fonctionnera pas. !&agrave; &eacute;crire! / !&agrave; corriger! 
 
-{{anchor name="item27"}}==27. The performance is very bad in DOS!==
-	Problem: "The performance in DOS is poor compared to ""Win32"" / Linux binary compiled from the very same source !" or "Even worse, the very same DOS binary runs much faster in NTVDM than in DOS !"
+	- Le "timer PIT/BIOS" (tourne &agrave; 18.2 Hz par d&eacute;faut), PEEK le timer BIOS ou d&eacute;finissez le votre propre, voir l'exemple "ISR_TIMER.BAS", augmentez la fr&eacute;quence PIT (&agrave; utiliser avec pr&eacute;caution)
 
-	Both indeed can happen, nevertheless, DOS is no way predestined to be slow, the inefficiencies can be fixed. First you have to identify the area where you code looses performance. 
+- Sonder le "timer BIOS + PIT counter", m&eacute;thode de TIMERHLP.ASM &agrave; partir de DKRNL32, permet d'am&eacute;liorer la pr&eacute;cision de ce qui pr&eacute;c&egrave;de, sans &eacute;lever la fr&eacute;quence PIT 
+	- L'iinstruction RDTSC (Pentium et plus r&eacute;cents)
+		- L'horloge RTC
+		- Les boucles de d&eacute;lai
+		<a name="item27"></a>**27. Les performances sont tr&egrave;s mauvaises sous DOS!**
+		Probl&egrave;me: "Les performances sous DOS sont m&eacute;diocres par rapport aux binaires Win32/Linux compil&eacute;s &agrave; partir de la m&ecirc;me source!" ou "Pire encore, le m&ecirc;me binaire DOS fonctionne beaucoup plus rapidement dans NTVDM que dans DOS!"
+		Les deux effet peuvent arriver, n&eacute;anmoins, DOS n'est rien pr&eacute;destin&eacute; &agrave; &ecirc;tre lent, les inefficacit&eacute;s peuvent &ecirc;tre corrig&eacute;es. Vous devez d'abord identifier la zone o&ugrave; le code affaiblit les performanCan I access disk sectors with FBces.
 
-		**File I/O** : DOS by default uses very little memory for its buffers, while other systems use much more and are "aggressive" with file caching. When dealing with many small files, this results in serious performance degrade. The solution is to install a filecache, for example **LBACache**, or you can install a RAMDISK (a good one: **SRDISK** ) and copy the "offending" files (for example ""FreeBASIC"" installation) there in and work there (make sure to backup your work to a more durable media regularly). Both will need an XMS host (use **HIMEMX** ). Also DOS by default uses BIOS to access the hard drives, while other systems try hard to find and use DMA. Test util: IDECHECK by Japheth (Download: [[http://www.japheth.de/Download/IDECheck.zip japheth.de/Download/IDECheck.zip]]) - run it in "I13" and "DMA" modes and compare results. If "DMA" is much faster (can be 1...10 times, depends from PC model), then installing a DOS DMA driver (for example **XDMA 3.1** is worth to try) can bring a big speedup on large files. Also make sure to read and write data in large pieces (16 ""KiB"" at least), not just single bytes. Other OSes are more forgiving here, but on DOS every single file I/O call causes a small "additive" delay, thus an efficient code design with good buffering is crucial.
+**E/S fichier** : DOS utilise par d&eacute;faut tr&egrave;s peu de m&eacute;moire pour ses tampons, tandis que d'autres syst&egrave;mes en utilisent beaucoup plus et sont "agressifs" avec la mise en cache de fichiers. Lorsque vous traitez beaucoup de petits fichiers, il en r&eacute;sulte les performances se d&eacute;gradent s&eacute;rieusement. La solution est d'installer un cache de fichiers, par exemple, **LBACache**, ou vous pouvez installer un RAMDISK (un bon: **SRDISK** ) et copier les fichiers "fautifs" &agrave; l'int&eacute;rieur (par exemple l'installation FreeBASIC) et travailler dessus (veillez &agrave; sauvegarder votre travail sur un support plus durable r&eacute;guli&egrave;rement). Les deux n&eacute;cessitent un h&ocirc;te XMS (utilisez **HIMEMX** ). En outre DOS utilise par d&eacute;faut le BIOS pour acc&eacute;der aux disques durs, tandis que les autres syst&egrave;mes s'efforcent de trouver et d'utiliser DMA. Un test utile: IDECHECK de Japheth (T&eacute;l&eacute;chargement: [[http://www.japheth.de/Download/IDECheck.zip">japheth.de/Download/IDECheck.zip]]) - lancez-le en modes "I13" et "DMA" et comparez les r&eacute;sultats. Si "DMA" est plus rapider (peut &ecirc;tre 1 ... 10 fois, d&eacute;pend du mod&egrave;le de PC), puis installer un pilote DOS DMA (par exemple **XDMA 3.1** vaut la peine d're essay&eacute;) peut apporter une grande acc&eacute;l&eacute;ration sur de gros fichiers. Assurez-vous &eacute;galement de lire et d'&eacute;crire les donn&eacute;es par gros fragments (16 Kio au moins), pas seulement quelques octets. Les autres syst&egrave;mes d'exploitation sont plus indulgents ici, mais sous DOS chaque appel d'E/S fichier provoque un petit d&eacute;lai "additif", donc une conception efficace du code avec mise en tampon m&eacute;moire bonne est cruciale.
+	**Graphiques** : Pentium 2 et les CPU plus r&eacute;cents ont une fonction cache similaire appel&eacute;e "MTRR" pour acc&eacute;l&eacute;rer l'&eacute;criture sur la RAM vid&eacute;o. Les pilotes des autres syst&egrave;mes d'exploitation l'active g&eacute;n&eacute;ralement.  Ni DOS (car il ne traite pas des graphismes), ni FB GFX ne le font. Utilisez l'outil "VESAMTRR" de Japheth (contenu dans le paquet "HXGUI.ZIP"), il permettra &agrave; l'acc&eacute;l&eacute;ration, survivant aussi aux commutateurs de mode et &agrave; la plupart des plantages "non-fatal" d'applications, jusqu'&agrave; un red&eacute;marrage. Le facteur d' acc&eacute;l&eacute;ration possible varie beaucoup en fonction du mod&egrave;le de PC, jusqu'&agrave; cca 20 fois. En outre la manipulation de la souris mobilise des performances du processeur (trop) sous DOS, c'est un point faible connu (la conception du DOS FB GFX n'est pas "tr&egrave;s mauvaise", c'est juste le "standard" commun - ce qui n'est pas tr&egrave;s bon), la correction est th&eacute;oriquement possible mais pas facile, vous pouvez seulement essayer plusieurs pilotes de la souris (voir FAQ 20).
 
-		**Graphics** : Pentium 2 and newer CPU's have a cache related feature called "MTRR" to speed up writes to video RAM. Drivers of other OSes usually do enable it.  DOS doesn't (since it doesn't deal with graphics at all), neither does FB GFX. Use "VESAMTRR" tool by Japheth (contained in "HXGUI.ZIP" package), it will enable the speedup, surviving also mode switches and most "non-fatal" application crashes, up to a reboot. The possible speedup factor varies much depending from the PC model, up to cca 20 times. Also the mouse handling eats some (too much) CPU performance on DOS, this is a known weak point (the design of DOS FB GFX is not "very bad", it's just the common "standard" - which is not very good), fixing is theoretically possible but not easy, you just can try several mouse drivers (see FAQ 20).
+	<a name="item28"></a>**28. Puis-je acc&eacute;der &agrave; des secteurs de disque avec FB?**
 
-{{anchor name="item28"}}==28. Can I access disk sectors with FB?==
-	You can ... but ""FreeBASIC"" won't help you too much here: no "portable" solution, use OS specific low level way. For DOS 3 methods are possible 
-		- Use logical disk access features of DOS for sector access bypassing the filesystem, see example in the forum: [[http://freebasic.net/forum/viewtopic.php?t=11830 freebasic.net/forum/viewtopic.php?t=11830]]
-		- Use physical disk BIOS INT 13, bypassing DOS
-		- Use CPU ports, lowest level, bypassing both DOS and BIOS (no FB example yet, see source of IDECHECK from FAQ 27 above, FASM forum or some OS development resources)
-	Note that such experiments are a bit "dangerous" - you can easily loose data or make your PC unbootable if something goes wrong.
+		Vous pouvez ... mais FreeBASIC ne vous aidera pas trop ici: pas de solution "portable", utilisez une m&eacute;thode de faible niveau sp&eacute;cifique &agrave; l'OS. Pour DOS, 3 m&eacute;thodes sont possibles: 
+
+		- Utilisez les fonctionnalit&eacute;s logiques d'acc&egrave;s au disque du DOS pour l'acc&egrave;s du secteur en contournant le syst&egrave;me de fichiers, voir par exemple dans le forum: [[http://freebasic.net/forum/viewtopic.php?t=11830">freebasic.net/forum/viewtopic.php?t=11830]]
+
+- Utilisez l'interruption BIOS INT 13 sur les disques physiques, contournant le DOS
+	- Utilisez les ports CPU, de niveau le plus bas, contournant &agrave; la fois DOS et BIOS (encore aucun exemple FB, voir le source de IDECHECK de la FAQ 27 ci-dessus, le forum FASM ou des ressources de d&eacute;veloppement des OS)
+		Notez que ces exp&eacute;riences sont quelque peu "dangereuses" - vous pouvez facilement perdre des donn&eacute;es ou rendre votre PC ind&eacute;marrable, si quelque chose fonctionne mal.
+		<a name="item999"></a>{{fbdoc item="see"}}
+		- [[CompilerFAQ FAQ du compilateur]].
+	- [[FaqPgrtlib FAQ de la biblioth&egrave;que d'ex&eacute;cution de FB]].
+
+- [[FaqPggfxlib2 Questions Fr&eacute;quemment Pos&eacute;es sur la biblioth&egrave;que graphique de FreeBASIC]]
+	You can ... but SSE2 and above need to get enabled before. This is usually considered as business of the DPMI host, HDPMI32 and CWSDPMI 7 will do that, most other hosts won't. Make sure to properly CPUID for such instructions before using them. It's a good idea to provide a code branch compatible with older CPU's (early Pentium, 80386) besides supporting latest instructions, and to avoid CMOV in those too.
 
 {{anchor name="item999"}}{{fbdoc item="see"}}
 	- [[CompilerFAQ Compiler FAQ]].

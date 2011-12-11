@@ -1,37 +1,37 @@
 {{fbdoc item="title" value="Coercion and Conversion"}}----
-Coercion of Numeric Data Types in Expressions.
+Promotion de types de donn&eacute;es num&eacute;riques dans des expressions.
 
-When two different data types are used in a binary operation, like ##//+//## (Addition) or ##//=//## (Assignment), the smaller data type is automatically promoted to the larger data type regardless of the order in which the arguments are given.  
+Lorsque deux types de donn&eacute;es diff&eacute;rents sont utilis&eacute;s dans une op&eacute;ration binaire, comme ##//+//## (Addition) ou ##//=//## (Affectation), le type de donn&eacute;es le plus faible est automatiquement promu vers le type de donn&eacute;es le plus fort quel que soit l'ordre dans lequel arguments sont donn&eacute;s.  
 
-Promotions are as follows:
-	- where both arguments are each one of byte, ubyte, short, ushort, or integer: the smaller sized argument is promoted to have the same size as the larger sized argument.
-	- where one of the arguments is longint or ulongint, and the other argument is of any integer type, the smaller sized argument is promoted to have the same size as the larger sized argument.
-	- where one of the arguments is a single or a double, both arguments are converted and/or promoted to double
+Les promotions sont comme suit:
+	- si les deux arguments sont de type byte, ubyte, short, ushort ou integer: plus petit argument (en type de taille) est promu pour avoir la m&ecirc;me taille (en type de taille) que le plus grand argument (en type de taille).
+	- si un des arguments est de type longint ou ulongint, et l'autre argument est d'un type entier (integer), plus petit argument (en type de taille) est promu pour avoir la m&ecirc;me taille (en type de taille) que le plus grand argument (en type de taille).
+	- si un des arguments est de type single ou double, les deux arguments sont convertis et/ou promus vers double
 
-All unsigned integer types are handling like signed integer types for the purpose of promotion, and the most significant bit is extended (sign extension).
+Tous les types entiers non sign&eacute;s sont manipul&eacute;s comme des types entiers sign&eacute;s aux fins de promotion et bit le plus significatif est &eacute;tendu (extension de signe).
 
-==Conversion of Numeric Data Types==
+**Conversion de types de donn&eacute;es num&eacute;riques**
 
-A type conversion will occur implicitly when an expression or variable is assigned, passed as a parameter to a procedure, or returned as a result from a procedure. Conversions may also be explicit when using CAST or one of the built-in conversion functions.
+Une conversion de type se produit implicitement lorsqu'une expression ou une variable est affect&eacute;e, pass&eacute;e comme param&egrave;tre d'une proc&eacute;dure ou return&eacute;e comme r&eacute;sultat d'une proc&eacute;dure. Les conversions peuvent aussi &ecirc;tre explicites lorsque vous utilisez CAST ou l'une des fonctions int&eacute;gr&eacute;es de conversion.
 
-__Integer To Integer, any combination of Signed and Unsigned__
-	- Any integer type to a smaller integer type: least significant bits are retained
-	- Any integer type to a larger integer type: sign extended to fill most significant bits
+<u>Integer (entier) vers Integer (entier), n'importe quelle combinaison de nombres sign&eacute;s et non-sign&eacute;s</u>
+	- Tout type d'entier vers un type d'entier plus faible: les bits les moins significatifs sont conserv&eacute;s
+	- Tout type d'entier vers un type d'entier plus fort: extension de signe pour remplir bits les plus significatifs
 
-__Integer to Single or Double__
-	- Possible loss of precision
+<u>Integer vers Single ou Double</u>
+	- Perte possible de pr&eacute;cision
 
-__Double to Single__
-	- Possible loss of precision
-	- If the value of the Double exceeds the range of a Single result is +/- INF
+<u>Double vers Single</u>
+	- Perte possible de pr&eacute;cision
+	- Si la valeur du Double d&eacute;passe le champ d'un Single le r&eacute;sultat est +/- INF
 
-__Double or Single to Integer__
-	- Possible loss of precision
-	- If the value of the floating point number exceeds the range of the target type are results are undefined.  A run-time error is not raised.
+<u>Double ou Single vers Integer</u>
+	- Perte possible de pr&eacute;cision
+	- Si la valeur du nombre &agrave; virgule flottante d&eacute;passe la plage du type de la cible les r&eacute;sultats sont ind&eacute;finis. Pas d'erreur d'ex&eacute;cution d'affich&eacute;e.
 
 {{fbdoc item="see"}}
-	- [[CatPgStdDataTypes Standard Data Types]]
-	- [[TblVarTypes Variable Types]]
-	- [[CatPgCasting Casting and Conversion Functions]]
+	- [[CatPgStdDataTypes Types de donn&eacute;es standard]]
+	- [[TblVarTypes Types de variables]]
+	- [[CatPgCasting Conversion entre types de donn&eacute;es]]
 
 {{fbdoc item="back" value="CatPgProgrammer|Programmer's Guide"}}

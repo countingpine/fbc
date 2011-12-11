@@ -1,106 +1,106 @@
 {{fbdoc item="title" value="Compiler Options"}}----
-Command line compiler options for the fbc compiler:
+Les options de commande en ligne du compilateur pour le compilateur fbc:
 
-	{{fbdoc item="keyword" value="CompilerOptoptfile|@< file >"}}
-		- Read (additional) command-line options from the file
-	{{fbdoc item="keyword" value="CompilerOpta|-a < name >"}}
-		- Add an object file to linker's list
-	{{fbdoc item="keyword" value="CompilerOptarch|-arch < type >"}}
-		- Set target architecture (default: 486)
-	{{fbdoc item="keyword" value="CompilerOptb|-b < name >"}}
-		- Add a source file to compilation
-	{{fbdoc item="keyword" value="CompilerOptc|-c"}}
-		- Compile only, do not link
-	{{fbdoc item="keyword" value="CompilerOptcupp|-C"}}
-		- Do not delete the object file(s)
-	{{fbdoc item="keyword" value="CompilerOptd|-d < name=val >"}}
-		- Add a preprocessor's define
-	{{fbdoc item="keyword" value="CompilerOptdll|-dll"}}
-		- Create a DLL, including the import library.  (Same as ##-dylib##)
-	{{fbdoc item="keyword" value="CompilerOptdylib|-dylib"}}
-		- Create a DLL, including the import library
-	{{fbdoc item="keyword" value="CompilerOpte|-e"}}
-		- Add error checking
-	{{fbdoc item="keyword" value="CompilerOptex|-ex"}}
-		- Add error checking with RESUME support
-	{{fbdoc item="keyword" value="CompilerOptexx|-exx"}}
-		- Same as -ex plus array bounds and null-pointer checking
-	{{fbdoc item="keyword" value="CompilerOptexport|-export"}}
-		- Export symbols for dynamic linkage
-	{{fbdoc item="keyword" value="CompilerOptforcelang|-forcelang <name>"}}
-		- Select language compatibility, overriding #lang/$lang in code
-	{{fbdoc item="keyword" value="compileroptfpmode|-fpmode < type >"}}
-		- Select between fast and accurate floating-point operations (default: PRECISE)
-	{{fbdoc item="keyword" value="CompilerOptfpu|-fpu < type >"}}
-		- Set the floating point arithmetics unit (default: FPU)
-	{{fbdoc item="keyword" value="CompilerOptg|-g"}}
-		- Add debug info
-	{{fbdoc item="keyword" value="CompilerOptgen|-gen < backend >"}}
-		- Sets the compiler backend (default is 'gas')
-	{{fbdoc item="keyword" value="CompilerOpti|-i < name >"}}
-		- Add a path to search for include files
-	{{fbdoc item="keyword" value="CompilerOptinclude|-include < name >"}}
-		- Include a header file on each source compiled
-	{{fbdoc item="keyword" value="CompilerOptl|-l < name >"}}
-		- Add a library file to linker's list
-	{{fbdoc item="keyword" value="CompilerOptlang|-lang < name >"}}
-		- Select language compatibility: ##fb##, ##fblite##, ##qb##, ##deprecated##
-	{{fbdoc item="keyword" value="CompilerOptlib|-lib"}}
-		- Create a static library
-	{{fbdoc item="keyword" value="CompilerOptm|-m < name >"}}
-		- Main file without extension, the entry point (default is the first .bas file on the command line)
-	{{fbdoc item="keyword" value="CompilerOptmap|-map < name >"}}
-		- Save the linking map to file name
-	{{fbdoc item="keyword" value="CompilerOptmaxerr|-maxerr < val >"}}
-		- Only stop parsing if <val> errors occurred
-	{{fbdoc item="keyword" value="CompilerOptmt|-mt"}}
-		- Link with thread-safe runtime library
-	{{fbdoc item="keyword" value="CompilerOptnodeflibs|-nodeflibs"}}
-		- Do not include the default libraries
-	{{fbdoc item="keyword" value="CompilerOptnoerrline|-noerrline"}}
-		- Do not show source line where error occurred
-	{{fbdoc item="keyword" value="CompilerOpto|-o < name >"}}
-		- Set object file path/name (must be passed after the .bas file)
-	{{fbdoc item="keyword" value="CompilerOptoptimization|-O < level >"}}
-		- Set the optimization level (-gen gcc)
-	{{fbdoc item="keyword" value="CompilerOptp|-p < name >"}}
-		- Add a path to search for libraries
-	{{fbdoc item="keyword" value="CompilerOptpp|-pp"}}
-		- Emit the preprocessed input file only, do not compile
-	{{fbdoc item="keyword" value="CompilerOptprefix|-prefix < path >"}}
-		- Set the compiler prefix path
-	{{fbdoc item="keyword" value="CompilerOptprofile|-profile"}}
-		- Enable function profiling
-	{{fbdoc item="keyword" value="CompilerOptr|-r"}}
-		- Write asm file(s) only, do not compile or link
-	{{fbdoc item="keyword" value="CompilerOptrupp|-R"}}
-		- Do not delete the asm file(s)
-	{{fbdoc item="keyword" value="CompilerOpts|-s < name >"}}
-		- Set subsystem (##gui##, ##console##)
-	{{fbdoc item="keyword" value="CompilerOpttarget|-target < platform >"}}
-		- Set the target platform for cross compilation
-	{{fbdoc item="keyword" value="CompilerOptt|-t < value >"}}
-		- Set stack size in kbytes (default: 1M)
-	{{fbdoc item="keyword" value="CompilerOptv|-v"}}
-		- Be verbose
-	{{fbdoc item="keyword" value="CompilerOptvec|-vec < level >"}}
-		- Set level of vector optimizations enabled by the compiler (default: 0)
-	{{fbdoc item="keyword" value="CompilerOptversion|-version"}}
-		- Show compiler version
-	{{fbdoc item="keyword" value="CompilerOptw|-w < value >"}}
-		- Set min warning level: all, pedantic or a value
-	{{fbdoc item="keyword" value="CompilerOptWa|-Wa < opt >"}}
-		- Pass options to GAS (separated by commas)
-	{{fbdoc item="keyword" value="CompilerOptWc|-Wc < opt >"}}
-		- Pass options to GCC (separated by commas)
-	{{fbdoc item="keyword" value="CompilerOptWl|-Wl < opt >"}}
-		- Pass options to LD (separated by commas)
-	{{fbdoc item="keyword" value="CompilerOptx|-x < name >"}}
-		- Set executable/library path/name
-	{{fbdoc item="keyword" value="CompilerOptz|-z < value >"}}
-		- Sets miscellaneous or experimental options
+	[[CompilerOptoptfile @< file >]]
+		- Lire options de ligne de commande (suppl&eacute;mentaires) &agrave; partir du fichier
+	[[CompilerOpta -a < name >]]
+		- Ajouter un fichier objet &agrave; la liste &eacute;diteur de liens
+	[[CompilerOptarch -arch < type >]]
+		- D&eacute;finir l'architecture cible (d&eacute;faut: 486)
+	[[CompilerOptb -b < name >]]
+		- Ajouter un fichier source &agrave; la compilation
+	[[CompilerOptc -c]]
+		- Compiler seulement, ne pas lier
+	[[CompilerOptcupp -C]]
+		- Ne pas supprimer le(s) fichier(s) objet
+	[[CompilerOptd -d < name=val >]]
+		- Ajouter un "define" pr&eacute;processeur
+	[[CompilerOptdll -dll]]
+		- Cr&eacute;er une DLL, y compris la biblioth&egrave;que d'importation. (Identique &agrave; ##-dylib##)
+	[[CompilerOptdylib -dylib]]
+		- Cr&eacute;er une DLL, y compris la biblioth&egrave;que d'importation
+	[[CompilerOpte -e]]
+		- Ajouter la v&eacute;rification des erreurs
+	[[CompilerOptex -ex]]
+		- Ajouter la v&eacute;rification des erreurs avec le support de RESUME
+	[[CompilerOptexx -exx]]
+		- Identique &agrave; -ex plus v&eacute;rification des limites de tableaux et de pointeurs NULL
+	[[CompilerOptexport -export]]
+		- Exporter les symboles pour la liaison dynamique
+	[[CompilerOptforcelang -forcelang <name>]]
+		- Compatibilit&eacute; de s&eacute;lection de langage, annule #lang/$lang dans le code
+	[[compileroptfpmode -fpmode < type >]]
+		- Choix entre rapide et pr&eacute;cise pour les op&eacute;rations &agrave; virgule flottante (d&eacute;faut: PRECISE)
+	[[CompilerOptfpu -fpu < type >]]
+		- R&eacute;gle l'unit&eacute; arithm&eacute;tique virgule flottante (d&eacute;faut: FPU)
+	[[CompilerOptg -g]]
+		- Ajouter les informations de d&eacute;bogage
+	[[CompilerOptgen -gen < backend >]]
+		- D&eacute;finit le compilateur "backend" (d&eacute;faut est 'gas')
+	[[CompilerOpti -i < name >]]
+		- Ajouter un chemin de recherche pour les fichiers include
+	[[CompilerOptinclude -include < name >]]
+		- Inclure un fichier en-t&ecirc;te pour chaque source compil&eacute;
+	[[CompilerOptl -l < name >]]
+		- Ajouter un fichier de biblioth&egrave;que &agrave; la liste &eacute;diteur de liens
+	[[CompilerOptlang -lang < name >]]
+		- S&eacute;lectionne compatibilit&eacute; de langage: ##fb##, ##fblite##, ##qb##, ##deprecated##
+	[[CompilerOptlib -lib]]
+		- Cr&eacute;er une biblioth&egrave;que statique
+	[[CompilerOptm -m < name >]]
+		- Fichier principal sans extension, le point d'entr&eacute;e (par d&eacute;faut est le premier fichier. bas sur la ligne de commande)
+	[[CompilerOptmap -map < name >]]
+		- Enregistrer la carte de l'&eacute;dition des liens sous un nom de fichier
+	[[CompilerOptmaxerr -maxerr < val >]]
+		- Stoppe l'analyse d'erreurs seulement si survient l'erreur <val>
+	[[CompilerOptmt -mt]]
+		- Lien avec biblioth&egrave;que "thread-safe runtime"
+	[[CompilerOptnodeflibs -nodeflibs]]
+		- Ne pas inclure les biblioth&egrave;ques par d&eacute;faut
+	[[CompilerOptnoerrline -noerrline]]
+		- Ne pas afficher la ligne du source o&ugrave; l'erreur s'est produite
+	[[CompilerOpto -o < name >]]
+		- D&eacute;finir le chemin/nom du fichier objet (doit &ecirc;tre pass&eacute; apr&egrave;s le fichier. bas)
+	[[CompilerOptoptimization -O < level >]]
+		- D&eacute;finir le niveau d'optimisation (-gen gcc)
+	[[CompilerOptp -p < name >]]
+		- Ajouter un chemin de recherche pour les biblioth&egrave;ques
+	[[CompilerOptpp -pp]]
+		- Produire seulement le fichier d'entr&eacute;e pr&eacute;tra&icirc;t&eacute;, ne pas compiler
+	[[CompilerOptprefix -prefix < path >]]
+		- D&eacute;finir le pr&eacute;fixe du chemin du compilateur
+	[[CompilerOptprofile -profile]]
+		- Activer la fonction de profilage
+	[[CompilerOptr -r]]
+		- Ecrire seulement des fichiers asm, ne pas compiler ou lier
+	[[CompilerOptrupp -R]]
+		- Ne pas supprimer le(s) fichier(s) asm 
+	[[CompilerOpts -s < name >]]
+		- D&eacute;finir le sous-syst&egrave;me (##gui##, ##console##)
+	[[CompilerOpttarget -target < platform >]]
+		- D&eacute;finir la plate-forme cible pour la compilation crois&eacute;e
+	[[CompilerOptt -t < value >]]
+		- D&eacute;finir la taille de la pile en kilo-octets (d&eacute;faut: 1M)
+	[[CompilerOptv -v]]
+		- Mode "bavard"
+	[[CompilerOptvec -vec < level >]]
+		- Indiquer le niveau des optimisations permises par le compilateur (d&eacute;faut: 0)
+	[[CompilerOptversion -version]]
+		- Affiche la version du compilateur
+	[[CompilerOptw -w < value >]]
+		- Indiquer le niveau d'alerte min: all, pedantic ou une valeur
+	[[CompilerOptWa -Wa < opt >]]
+		- Passe les options &agrave; GAS (s&eacute;par&eacute;es par des virgules)
+	[[CompilerOptWc -Wc < opt >]]
+		- Passe les options &agrave; GCC (s&eacute;par&eacute;es par des virgules)
+	[[CompilerOptWl -Wl < opt >]]
+		- Passe les options &agrave; LD (s&eacute;par&eacute;es par des virgules)
+	[[CompilerOptx -x < name >]]
+		- D&eacute;finir ex&eacute;cutable/biblioth&egrave;que chemin/nom
+	[[CompilerOptz -z < value >]]
+		- D&eacute;finit des options diverses ou exp&eacute;rimentales
 
 {{fbdoc item="see"}}
-	- [[CompilerCmdLine Using the Command Line]]
+	- [[CompilerCmdLine Utilisation de la ligne de commande]]
 
 {{fbdoc item="back" value="DocToc|Table of Contents"}}

@@ -1,5 +1,5 @@
 {{fbdoc item="title" value="HEX"}}----
-Returns the hexadecimal of the given number
+Retourne la valeur hexad&eacute;cimale du nombre donn&eacute;
 
 {{fbdoc item="syntax"}}##
 	[[KeyPgDeclare declare]] [[KeyPgFunction function]] **Hex** [[KeyPgOverload overload]] ( [[KeyPgByval byval]] //number// [[KeyPgAs as]] [[KeyPgByte byte]] ) [[KeyPgAs as]] [[KeyPgString string]]
@@ -18,21 +18,21 @@ Returns the hexadecimal of the given number
 ##
 {{fbdoc item="param"}}
 	##//number//##
-		A number or expression evaluating to a number.  A floating-point number will be converted to a ##[[KeyPgLongint longint]]##.
+		Un nombre ou expression &eacute;valu&eacute; comme nombre.  Un nombre &agrave; virgule flottante sera converti en ##[[KeyPgLongint LongInt]]##.
 	##//digits//##
-		Optional number of digits to return.
+		Facultatif: nombre de chiffres &agrave; retourner.
 
-{{fbdoc item="ret"}}
-	A [[KeyPgString string]] containing the unsigned hexadecimal representation of ##//number//##.
+{{fbdoc item="section" value="Valeur retourn&eacute;e
+	Une [[KeyPgString String (cha&icirc;ne)]] contenant la repr&eacute;sentation hexad&eacute;cimale non-sign&eacute;e de ##//number//##.
 
 {{fbdoc item="desc"}}
-	Returns the unsigned hexadecimal string representation of the integer ##//number//##. Hexadecimal digits range from 0-9, or A-F.
+	Retourne la repr&eacute;sentation hexad&eacute;cimale non-sign&eacute;e de l'entier ##//number//##. Chiffres h&eacute;xad&eacute;cimaux de 0 &agrave; 9, ou A &agrave; F.
 
-	If you specify ##//digits//## > 0, the result string will be exactly that length.  It will be truncated or padded with zeros on the left, if necessary.
+	Si vous sp&eacute;cifiez ##//digits//## > 0, la cha&icirc;ne r&eacute;sultat aura exactement cette longueur.  Elle sera tronqu&eacute;e ou compl&egrave;t&eacute;e avec des z&eacute;ros sur la gauche, si n&eacute;cessaire.
 
-	The length of the string will not go longer than the maximum number of digits required for the type of ##//number//## (8 for an ##[[KeyPgInteger integer]]##, 16 for a ##[[KeyPgLongint longint]])##.
+	La longueur de la cha&icirc;ne ne d&eacute;passera pas le nombre de bits maximum requis pour le type de ##//number//## (8 pour un ##[[KeyPgInteger Integer (entier)]]##, 16 pour un ##[[KeyPgLongint LongInt (entier long)]])##.
 
-	If you want to do the opposite, i.e. convert a hexadecimal string back into a number, the easiest way to do it is to prepend the string with ##"&H"##, and convert it using ##[[KeyPgValint Valint]]## or ##[[KeyPgVallng Vallng]]##, similarly to a normal numeric string.  E.g. ##[[KeyPgValint Valint]]("&HFF")##
+	Si vous d&eacute;sirez l'oppos&eacute;, par exemple convertir une cha&icirc;ne binaire vers un nombre, la meilleure fa&ccedil;on de le faire est d'ajouter ##"&H"##, au d&eacute;but de la cha&icirc;ne, et la convertir en utilisant ##[[KeyPgValint ValInt]]## ou ##[[KeyPgVallng ValLng]]##, de fa&ccedil;on similaire &agrave; une cha&icirc;ne num&eacute;rique normale.  Par exemple ##[[KeyPgValint ValInt]]("&HFF")##
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/strings/hex.bas"}}%%(freebasic)
@@ -41,7 +41,7 @@ Print Hex(54321)
 Print Hex(54321, 2)
 Print Hex(54321, 5)
 %%
-	will produce the output:
+	produira la sortie:
 
 %%D431
 31
@@ -49,12 +49,12 @@ Print Hex(54321, 5)
 %%
 
 {{fbdoc item="lang"}}
-	- The string type suffix ##"$"## is obligatory in the //[[CompilerOptlang -lang qb]]// dialect.
-	- The string type suffix ##"$"## is optional in the //[[CompilerOptlang -lang fblite]]// and //[[CompilerOptlang -lang fb]]// dialects.
+	- Le suffixe de type cha&icirc;ne ##"$"## est obligatoire dans le dialecte //[[CompilerOptlang -lang qb]]//.
+	- Le suffixe de type cha&icirc;ne ##"$"## est facultatif dans les dialectes //[[CompilerOptlang -lang fblite]]// et //[[CompilerOptlang -lang fb]]//.
 
 {{fbdoc item="diff"}}
-	- In QBASIC, there was no way to specify the number of digits returned.
-	- The size of the string returned was limited to 32 bits, or 8 hexadecimal digits.
+	- Dans QBASIC, il n'y avait aucun moyen de sp&eacute;cifier le nombre de chiffres retourn&eacute;s.
+	- La taille de la cha&icirc;ne retourn&eacute;e &eacute;tait limit&eacute;e &agrave; 32 bits, ou 8 chiffres hexad&eacute;cimaux.
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgBin Bin]]##

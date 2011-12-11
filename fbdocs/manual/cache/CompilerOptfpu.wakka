@@ -1,24 +1,24 @@
 {{fbdoc item="title" value="Compiler Option: -fpu"}}----
-Sets the math unit to be used for floating point arithmetics.
+D&eacute;finit l'unit&eacute; de math&eacute;matique &agrave; utiliser pour les op&eacute;rations arithm&eacute;tiques en virgule flottante.
 
 {{fbdoc item="syntax"}}##
 	**-fpu** < //type// >
 ##
 {{fbdoc item="param"}}
 	##//type//##
-		The floating point unit: ##X87## | ##SSE##.
+		L'unit&eacute; de virgule flottante: ##X87## | ##SSE##.
 
 {{fbdoc item="desc"}}
-	The ##-fpu## compiler option sets the math unit to be used for floating point arithmetics.  If this option is not specified, the default is ##-fpu X87##.
+	L'option du compilateur ##-fpu## d&eacute;finit l'unit&eacute; de math&eacute;matique &agrave; utiliser pour l'arithm&eacute;tique en virgule flottante.  Si cette option n'est pas sp&eacute;cifi&eacute;e, la valeur par d&eacute;faut est ##-fpu X87##.
 
-	##-fpu X87## will generate floating point instructions for the 387.
+	##-fpu X87## va g&eacute;n&eacute;rer des instructions en virgule flottante pour le 387.
 
-	##-fpu SSE## will generate floating point instructions for SSE and SSE2 with some math support still done by the 387.
+	##-fpu SSE## va g&eacute;n&eacute;rer des instructions en virgule flottante pour les SSE et SSE2 avec un certain support en math&eacute;matique d&eacute;j&agrave; produit par le 387.
 
-	Functions normally return a floating point value (##[[KeyPgSingle Single]]## or ##[[KeyPgDouble Double]]##) in the ##st(0)## register.  Sometimes, this may be optimized by returning the value in the ##xmm0## register instead.  This can be specified with ##[[KeyPgOption Option("SSE")]]## after the return type in a function's declaration or definition.  ##[[KeyPgOption Option("SSE")]]## is ignored unless the source is compiled with the ##-fpu SSE## command line option.
+	Les fonctions normalement retournent une valeur &agrave; virgule flottante (##[[KeyPgSingle Single]]## ou ##[[KeyPgDouble Double]]##) dans le registre ##st(0)##.  Parfois, cela peut &ecirc;tre optimis&eacute; en retournant la valeur plut&ocirc;t dans le registre ##xmm0##.  Cela peut &ecirc;tre sp&eacute;cifi&eacute; avec l'##[[KeyPgOption Option("Sse")]]## apr&egrave;s le type de retour dans la d&eacute;claration ou la d&eacute;finition d'une fonction.  ##[[KeyPgOption Option("Sse")]]## est ignor&eacute;e sauf si la source est compil&eacute;e avec l'option de ligne de commande ##-fpu SSE##.
 
 {{fbdoc item="see"}}
-	- [[CompilerCmdLine Using the Command Line]]
+	- [[CompilerCmdLine Utilisation de la ligne de commande]]
 	- ##[[KeyPgOption Option()]]##
 	- ##[[KeyPgDdfbfpu __FB_FPU__]]##
 

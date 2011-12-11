@@ -1,5 +1,5 @@
 {{fbdoc item="title" value="MID (Function)"}}----
-Returns a substring of a string
+Retourne une sous-cha&icirc;ne d'une cha&icirc;ne
 
 {{fbdoc item="syntax"}}##
 	[[KeyPgDeclare declare]] [[KeyPgFunction function]] **Mid** ( [[KeyPgByref byref]] //str// as [[KeyPgConstQualifier const]] [[KeyPgString string]], [[KeyPgByval byval]] //start// as integer ) as [[KeyPgString string]]
@@ -12,16 +12,16 @@ Returns a substring of a string
 ##
 {{fbdoc item="param"}}
 	##//str//##
-		The source string.
+		La cha&icirc;ne source.
 	##//start//##
-		The start position in ##//str//## of the substring.
+		La position de d&eacute;part de la sous-cha&icirc;ne dans ##//str//##.
 	##//n//##
-		The substring length, in characters.
+		La longueur de la sous-cha&icirc;ne, en caract&egrave;res.
 
 {{fbdoc item="desc"}}
-	Returns a substring starting from ##//start//## in ##//str//##. If ##//str//## is empty then the null string (##"####"##) is returned. If ##//start// <= 0## then the null string (##"####"##) is returned.
+	Retourne une sous-cha&icirc;ne commen&ccedil;ant &agrave; ##//start//## dans ##//str//##. Si ##//str//## est vide, la cha&icirc;ne nulle (##"####"##) est retourn&eacute;e. Si ##//start// <= 0##, la cha&icirc;ne nulle (##"####"##) est retourn&eacute;e.
 	
-	In the first form of ##**Mid**##, all of the remaining characters are returned. In the second form, if ##//n// < 0## or ##//n// >= len(//str//)## then all of the remaining characters are returned.
+	Dans la premi&egrave;re forme de ##**Mid**##, tous les autres caract&egrave;res sont retourn&eacute;s. Dans la seconde forme, si ##//n// < 0## ou ##//n// >= len(//str//)## alors tous les autres caract&egrave;res sont retourn&eacute;s.
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/strings/mid-func.bas"}}%%(freebasic)
@@ -29,31 +29,31 @@ PRINT MID("abcdefg", 3, 2)
 PRINT MID("abcdefg", 3)
 PRINT MID("abcdefg", 2, 1)
 %%
-	will produce the output:
+	produira la sortie:
 %%cd
 cdefg
 b
-%%
-A Unicode example:
-~&Wiki: code rendered this way to allow display of the Unicode characters.
+%%Un exemple Unicode:
+Wiki: Code rendu de cette fa&ccedil;on pour permettre l'affichage des caract&egrave;res Unicode.
+<div class="fb_box">
 
-	<<dim text as wstring * 20
+	dim text as wstring * 20
 	text = "&#1055;&#1088;&#1080;&#1074;&#1077;&#1090;, &#1084;&#1080;&#1088;!"
-	print mid(text, 6, 4) ' displays "&#1090;, &#1084;"<<::c::
+	print mid(text, 6, 4) ' displays "&#1090;, &#1084;";
 
-{{fbdoc item="target"}}
-	- DOS does not support the wide-character string versions of **##Mid##**.
+{{fbdoc item="section" value="Diff&eacute;rences de plate-formes
+	- DOS ne supporte pas la version cha&icirc;ne larges-caract&egrave;res de **##Mid##**.
 
 {{fbdoc item="lang"}}
-	- The string type suffix "##$##" is obligatory in the //[[CompilerOptlang -lang qb]]// dialect.
-	- The string type suffix "##$##" is optional in the //[[CompilerOptlang -lang fblite]]// and //[[CompilerOptlang -lang fb]]// dialects.
+	- Le suffixe de type de cha&icirc;ne "##$##" est obligatoire dans le dialecte //[[CompilerOptlang -lang qb]]//.
+	- Le suffixe de type de cha&icirc;ne "##$##" est facultatif dans  in the les dialectes //[[CompilerOptlang -lang fblite]]// et //[[CompilerOptlang -lang fb]]//.
 
 {{fbdoc item="diff"}}
-	- QB does not support Unicode.
+	- QB ne supporte pas Unicode.
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgInstr Instr]]##
-	- ##[[KeyPgMidstatement Mid (Statement)]]##
+	- ##[[KeyPgMidstatement Mid (D&eacute;claration)]]##
 	- ##[[KeyPgLeft Left]]##
 	- ##[[KeyPgRight Right]]##
 	- ##[[KeyPgAsc Asc]]##

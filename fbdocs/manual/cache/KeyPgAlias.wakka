@@ -1,37 +1,37 @@
 {{fbdoc item="title" value="ALIAS"}}----
-Clause of the ##[[KeyPgSub Sub]]## and ##[[KeyPgFunction Function]]## statements that provides an alternate internal name
+Clause de ##[[KeyPgSub Sub]]## et ##[[KeyPgFunction Function]]## qui donne un autre nom interne
 
 {{fbdoc item="syntax"}}##
 	[[[KeyPgDeclare declare]]] { [[KeyPgSub sub]] | [[KeyPgFunction function]] } //usablename// **Alias "//alternatename//"** (...)
 ##
 {{fbdoc item="usage"}}##
 	declare sub //usablename// Alias "//alternatename//" ( ... )
-		##//or//##
+		##//ou//##
 	declare function //usablename// Alias "//alternatename//" ( ... )
-		##//or//##
+		##//ou//##
 	sub //usablename// Alias "//alternatename//" ( ... )
 		...
 	end sub
-		##//or//##
+		##//ou//##
 	function //usablename// Alias "//alternatename//" ( ... )
 		...
 	end function
 ##
 {{fbdoc item="desc"}}
-	##Alias## gives an alternate name to a procedure.  This alternate name cannot be used within the program to call the procedure, but it is visible (if the function is not private) to the linker when linking with code written in other languages.
+	##**Alias**## donne un autre nom &agrave; une proc&eacute;dure.  Ce nom de remplacement ne peut pas &ecirc;tre utilis&eacute; dans le programme pour appeler la proc&eacute;dure, mais il est visible (si la fonction n'est pas priv&eacute;e (private)) &agrave; l'&eacute;diteur de liens lors de la liaison avec le code &eacute;crit dans d'autres langues.
 	
-	##Alias## is commonly used for procedures in libraries written in other languages when such procedure names are valid in the other language but invalid in BASIC.  When using ##Alias## with ##[[KeyPgDeclare Declare]]##, only the alternate name is used by the linker.
+	##**Alias**## est couramment utilis&eacute; pour les proc&eacute;dures dans les biblioth&egrave;ques &eacute;crites dans d'autres langages lorsque les noms de ces proc&eacute;dures sont valables dans l'autre langage, mais non-valides dans le BASIC.  En utilisant ##Alias## avec ##[[KeyPgDeclare Declare]]##, seul le nom de remplacement est utilis&eacute; par l'&eacute;diteur de liens.
 	
-	Differently from normal procedure names, ##Alias## does not change the case of the alternate name, so it is useful when external code requires an exported function with a particular name or with a particular case.
+	A la diff&eacute;rence des noms normaux de proc&eacute;dure, ##**Alias**## ne change pas la casse de l'autre nom, c'est donc tr&egrave;s utile lorsque le code externe n&eacute;cessite une fonction export&eacute;e avec un nom particulier ou un cas particulier.
 
 {{fbdoc item="ex"}}
 
-If there is a sub called ##xClearScreen## in an external library and you want to reference it with the name ##""ClearVideoScreen""##, here is sample code to do so:
+Si il y a un sous-programme appel&eacute; ##//xClearScreen//## dans une biblioth&egrave;que externe et que vous souhaitez la r&eacute;f&eacute;rencer avec le nom ##//ClearVideoScreen//##, voici un exemple de code pour le faire:
 {{fbdoc item="filename" value="examples/manual/procs/alias.bas"}}%%(freebasic)
 DECLARE SUB ClearVideoScreen ALIAS "xClearScreen" ()
 %%
 
-A procedure meant to be used by external C code, exported as ##""MyExportedProc""##:
+Une proc&eacute;dure destin&eacute;e &agrave; &ecirc;tre utilis&eacute;e par du code C externe, export&eacute;e sous forme de ##//MyExportedPro//c##:
 {{fbdoc item="filename" value="examples/manual/procs/alias2.bas"}}%%(freebasic)
 FUNCTION MultiplyByFive CDECL ALIAS "MyExportedProc" (BYVAL Parameter AS INTEGER) AS INTEGER EXPORT
   RETURN Parameter * 5
@@ -39,7 +39,7 @@ END FUNCTION
 %%
 
 {{fbdoc item="diff"}}
-	- In QB, ##Alias## only worked with ##[[KeyPgDeclare Declare]]##.
+	- Dans QB, ##**Alias**## ne fonctionne qu'avec ##[[KeyPgDeclare Declare]]##.
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgDeclare Declare]]##

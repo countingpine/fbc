@@ -1,22 +1,22 @@
 {{fbdoc item="title" value="RETURN"}}----
-Control flow statement to return from a procedure or ##[[KeyPgGosub Gosub]]##.
+D&eacute;claration de contr&ocirc;le de flux pour revenir d'une proc&eacute;dure ou d'un ##[[KeyPgGosub GoSub]]##.
 
 {{fbdoc item="syntax"}}##
 	**Return** [ //expression// ]
-//or//
+//ou//
 	**Return** [ //label// ]
 
 ##
 {{fbdoc item="desc"}}
-	##**Return**## is used to return from a procedure or return from a gosub ##[[KeyPgGosub Gosub]]##.
+	##**Return**## est utilis&eacute; pour revenir d'une proc&eacute;dure ou d'un ##[[KeyPgGosub GoSub]]##.
 
-	Because ##[[KeyPgReturn Return]]## could mean return-from-gosub or return-from-procedure, ##[[KeyPgOptiongosub Option Gosub]]## and ##[[KeyPgOptionnogosub Option Nogosub]]## can be used to enable and disable ##[[KeyPgGosub Gosub]]## support.  When ##[[KeyPgGosub Gosub]]## support is disabled, ##[[KeyPgReturn Return]]## is then recognized as return-from-procedure.  When ##[[KeyPgGosub Gosub]]## support is enabled, ##[[KeyPgReturn Return]]## is then recognized as return-from-gosub.
+	Comme ##[[KeyPgReturn Return]]## signifie retour-d'un-gosub ou retour-d'une-proc&eacute;dure, ##[[KeyPgOptiongosub Option Gosub]]## et ##[[KeyPgOptionnogosub Option Nogosub]]## peuvent &ecirc;tre utilis&eacute;s pour activer et d&eacute;sactiver le support de ##[[KeyPgGosub GoSub]]##.  Quand le support de ##[[KeyPgGosub GoSub]]## est d&eacute;sactiv&eacute;, ##[[KeyPgReturn Return]]## est alors reconnu comme retour-d'une-proc&eacute;dure.  Quand le support de ##[[KeyPgGosub GoSub]]## est activ&eacute;, ##[[KeyPgReturn Return]]## est alors reconnu comme retour-d'un-gosub.
 
-	##**Return**## (from procedure) is used inside a procedure to exit the procedure possibly with a return value. A ##[[KeyPgSub Sub]]## cannot specify a return return value.  In a ##[[KeyPgFunction Function]]##, ##**Return**## must specify its return value.  ##**Return** //expression//## is roughly equivalent to the ##Function = //expression// : [[KeyPgExit Exit]] Function## idiom.
+	##**Return**## (d'une proc&eacute;dure) est utilis&eacute; dans une proc&eacute;dure pour sortir de la proc&eacute;dure peut-&ecirc;tre avec une valeur de retour. Un ##[[KeyPgSub Sub]]## ne peut pas sp&eacute;cifier une valeur de retour.  Dans une ##[[KeyPgFunction Function]]##, ##**Return**## doit pr&eacute;ciser sa valeur de retour.  ##**Return** //expression//## est &agrave; peu pr&egrave;s &eacute;quivalent &agrave; ##Function = //expression// : [[KeyPgExit Exit]] Function##.
 
-	##**Return**## (from gosub) is used to return control back to the statement immediately following a previous ##[[KeyPgGosub Gosub]]## call. When used in combination with ##[[KeyPgGosub Gosub]]##, no return value can be specified.  If the optional ##//label//## is specified, execution continues at the specified label.  If no ##[[KeyPgGosub Gosub]]## was made, a runtime error is generated, and execution continues immediately after ##**Return**##.
+	##**Return**## (d'un gosub) est utilis&eacute; pour redonner le contr&ocirc;le &agrave; l'instruction qui suit imm&eacute;diatement le dernier appel &agrave; ##[[KeyPgGosub GoSub]]##. Lorsqu'il est utilis&eacute; en combinaison avec ##[[KeyPgGosub GoSub]]##, aucune valeur de retour ne peut &ecirc;tre sp&eacute;cifi&eacute;e.  Si l'option ##//label//## est sp&eacute;cifi&eacute;e, l'ex&eacute;cution se poursuit &agrave; l'&eacute;tiquette sp&eacute;cifi&eacute;e.  Si aucun ##[[KeyPgGosub GoSub]]## n'avait &eacute;t&eacute; ex&eacute;cut&eacute;, une erreur d'ex&eacute;cution est g&eacute;n&eacute;r&eacute;e et l'ex&eacute;cution continue imm&eacute;diatement apr&egrave;s ##**Return**##.
 
-	A ##[[KeyPgGosub Gosub]]## should always have a matching ##**Return**## statement.  However, if ##**Return**## (from gosub) is used where no ##[[KeyPgGosub Gosub]]## was made, a run-time error is generated.
+	Un ##[[KeyPgGosub GoSub]]## devrait toujours avoir un ##**Return**## correspondant.  Toutefois, si ##**Return**## (depuis un gosub) est utilis&eacute; lorsqu'aucun ##[[KeyPgGosub GoSub]]## n'a &eacute;t&eacute; ex&eacute;cut&eacute;, une erreur d'ex&eacute;cution est g&eacute;n&eacute;r&eacute;e.
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/control/return.bas"}}%%(freebasic)
@@ -68,12 +68,12 @@ print r2.numerator & "/" & r2.denominator; " = ";
 print r3.numerator & "/" & r3.denominator%%
 
 {{fbdoc item="lang"}}
-	- In the //[[CompilerOptlang -lang fb]]// dialect ##**Return**## always means return-from-procedure.
-	- In the //[[CompilerOptlang -lang qb]]// dialect, ##**Return**## means return-from-gosub by default unless changed with ##[[KeyPgOptionnogosub Option Nogosub]]##, in which case the compiler will recognize ##**Return**## as return-from-procedure.
-	- In the //[[CompilerOptlang -lang fblite]]// dialect, ##**Return**## means return-from-procedure by default unless changed with ##[[KeyPgOptiongosub Option Gosub]]##, in which case the compiler will recognize ##**Return**## as return-from-gosub.
+	- Dans le dialecte //[[CompilerOptlang -lang fb]]// ##**Return**## signifie toujours retour-d'une-proc&eacute;dure.
+	- Dans le dialecte //[[CompilerOptlang -lang qb]]//, ##**Return**## signifie retour-d'un-gosub par d&eacute;faut sauf si cela a &eacute;t&eacute; chang&eacute; avec ##[[KeyPgOptionnogosub Option Nogosub]]##, auquel cas le compilateur reconna&icirc;tra ##**Return**## comme retour-d'une-proc&eacute;dure.
+	- Dans le dialecte //[[CompilerOptlang -lang fblite]]//, ##**Return**## signifie retour-d'une-proc&eacute;dure par d&eacute;faut sauf si cela a &eacute;t&eacute; chang&eacute; avec ##[[KeyPgOptiongosub Option Gosub]]##, auquel cas le compilateur reconna&icirc;tra ##**Return**## comme retour-d'un-gosub.
 
 {{fbdoc item="diff"}}
-	- None when using the //[[CompilerOptlang -lang qb]]// dialect.
+	- Aucune en utilisant le dialecte //[[CompilerOptlang -lang qb]]//.
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgSub Sub]]##

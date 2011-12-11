@@ -1,5 +1,5 @@
 {{fbdoc item="title" value="GET (File I/O)"}}----
-Reads data from a file to a buffer
+Lit les donn&eacute;es d'un fichier vers un tampon
 
 {{fbdoc item="syntax"}}##
 	**Get** #//filenum// [[KeyPgAs As]] [[KeyPgInteger Integer]], [//position// [[KeyPgAs As]] [[KeyPgLongint longint]]], [[KeyPgByref ByRef]] //data// [[KeyPgAs As]] [[KeyPgAny Any]] [, [//amount// [[KeyPgAs As]] [[KeyPgInteger Integer]]] [, [[KeyPgByref ByRef]] //bytesread// [[KeyPgAs As]] [[KeyPgUinteger Uinteger]]] ]
@@ -12,29 +12,29 @@ Reads data from a file to a buffer
 ##
 {{fbdoc item="param"}}
 	##//filenum//##
-		The value passed to ##[[KeyPgOpen Open]]## when the file was opened.
+		La valeur pass&eacute;e &agrave; ##[[KeyPgOpen Open]]## quand le fichier a &eacute;t&eacute; ouvert.
 	##//position//##
-		The position where the read must start. If the file was opened ##[[KeyPgRandom For Random]]##, the position is in records; otherwise, it is in bytes. If omitted, reading starts at the present file pointer position.  The position is 1-based: i.e. first record or byte of a file is at position ##1##.
-		If ##//position//## is omitted or zero (##0##), file reading will start from the current file position.
+		La position o&ugrave; la lecture doit commencer. Si le fichier a &eacute;t&eacute; ouvert ##[[KeyPgRandom For Random]]##, la position est en enregistrements; autrement, elle est en octets. Si omise, la lecture commence &agrave; la position actuelle du pointeur.  La position est bas&eacute;e sur 1: c'est &agrave; dire que le premier enregistrement ou octet est &agrave; la position ##1##.
+		Si ##//position//## est omise ou z&eacute;ro (##0##), la lecture du fichier commencera &agrave; la position courante dans le fichier.
 	##//data//##
-		The buffer where data is written. It can be a numeric variable, a string, an array, a user defined type or a dereferenced pointer. The read operation will try to fill completely the variable, unless the ##[[KeyPgEof EOF]]## is reached.
-		When getting arrays, ##//data//## should be followed by an empty pair of brackets: "##()##".  ##**Get**## will read data for all of the values in the array.  ##//amount//## is not allowed.
-		When getting ##[[KeyPgString String]]##s, the number of bytes read is the same as the number of bytes in the string data. ##//amount//## is not allowed.
-		Note: If you want to read values into a buffer, you should NOT pass a pointer to the buffer; instead you should pass the first variable in the buffer. (This can be done by dereferencing the pointer with ##[[KeyPgOpValueOf Operator * (Value of)]]##.) If you pass a pointer directly, then ##**Get**## will overwrite the pointer variable, not the memory it points to.
+		Le tampon o&ugrave; les donn&eacute;es sont &eacute;crites. Il peut &ecirc;tre une variable num&eacute;rique, une cha&icirc;ne, un tableau, un type d&eacute;fini par l'utilisateur ou un pointeur d&eacute;r&eacute;f&eacute;renc&eacute;. L'op&eacute;ration de lecture va essayer de remplir compl&egrave;tement la variable, &agrave; moins que ##[[KeyPgEof EOF]]## ne soit atteint.
+		Lors de l'utilisation de tableaux, ##//data//## doit &ecirc;tre suivi par une paire de parenth&egrave;ses vides: "##()##".  ##**Get**## lira les donn&eacute;es pour toutes les valeurs dans le tableau.  ##//amount//## (quantit&eacute;) n'est pas autoris&eacute;.
+		Lors de l'utilisation de ##[[KeyPgString String]]##s, le nombre d'octets lus est le m&ecirc;me que le nombre d'octets dans les donn&eacute;es de cha&icirc;ne. ##//amount//## (quantit&eacute;) n'est pas autoris&eacute;.
+		Note: Si vous voulez lire des valeurs dans une m&eacute;moire tampon, vous NE devez PAS passer un pointeur vers la m&eacute;moire tampon; au lieu de cela vous devez passer la premi&egrave;re variable dans la m&eacute;moire tampon.  (Cela peut &ecirc;tre fait par le d&eacute;r&eacute;f&eacute;rencement du pointeur avec ##[[KeyPgOpValueOf Operator * (Value Of)]]##.)  ##**Get**##  comprendra automatiquement que le reste de la m&eacute;moire tampon se poursuit apr&egrave;s la premi&egrave;re variable..  Si vous passez un pointeur directement, alors ##**Get**## &eacute;crira sur la variable et non &agrave; l'emplacement m&eacute;moire vers lequel elle pointe.
 	##//amount//##
-		Makes ##**Get**## read ##//amount//## consecutive variables from file to memory, i.e. it reads ##(//amount// * [[KeyPgSizeof Sizeof]](//data//) )## bytes of data from file into the memory starting at ##//data//##'s memory location.  If ##//amount//## is omitted it defaults to ##1##, meaning that ##**Get**## just reads a single variable.
+		##**Get**## lit ##//amount//## variables cons&eacute;cutives du fichier vers la m&eacute;moire, c'est &agrave; dire qu'il lit ##(//amount// * [[KeyPgSizeof SizeOf]](//data//) )## octets ou donn&eacute;es depuis le fichier vers la m&eacute;moire commen&ccedil;ant &agrave; la position ##//data//##.  Si ##//amount//## est omis il sera de ##1## par d&eacute;faut, ce qui signifie que ##**Get**## ne lira qu'une seule variable.
 	##//bytesread//##
-		An unsigned integer variable to accept the result of the number of bytes read successfully from the file.
+		Une variable enti&egrave;re non sign&eacute;e qui contiendra le nombre d'octets lus avec succ&egrave;s &agrave; partir du fichier.
 
-{{fbdoc item="ret"}}
-	Zero (##0##) on success; non-zero on error. Note: if ##[[KeyPgEof EOF]]## (end of file) is reached while reading, ##**Get**## will return success.  The amount of bytes actually read can be checked by passing a ##//bytesread//## variable.
+{{fbdoc item="section" value="Valeur retourn&eacute;e
+	Z&eacute;ro (##0##) si succ&egrave;s; non-z&eacute;ro si erreur. Note: Si ##[[KeyPgEof EOF]]## (End Of File) est atteint pendant la lecture, ##**Get**## retournera "succ&egrave;s".  La quantit&eacute; d'octets r&eacute;ellement lus peut &ecirc;tre v&eacute;rifi&eacute;e en passant une variable ##//bytesread//##.
 
 {{fbdoc item="desc"}}
-	Reads binary data from a file to a buffer variable
+	Lit les donn&eacute;es binaires &agrave; partir d'un fichier vers une variable tampon
 
-	##**Get**## can be used as a function, and will return ##0## on success or an error code on failure.	
+	##**Get**## peut &ecirc;tre utilis&eacute; comme une fonction, et retournera ##0## si succ&egrave;s ou un code d'erreur si &eacute;chec.
 
-	For files opened in ##[[KeyPgRandom Random]]## mode, the size in bytes of the data to read must match the specified record size.
+	Pour les fichiers ouverts en mode ##[[KeyPgRandom Random]]##, la taille en octets des donn&eacute;es &agrave; lire doit correspondre &agrave; la taille d'enregistrement sp&eacute;cifi&eacute;e.
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/fileio/get.bas"}}%%(freebasic)
@@ -136,18 +136,18 @@ Print ExampleStr
 %%
 
 {{fbdoc item="diff"}}
-	- ##**Get**## in FB can read full arrays as in VB or, alternatively, read a multiple of the data size into the memory.
-	- ##**Get**## can be used as a function in FB, to find the success/error code returned without having to use error handling procedures.
-	- FB allows the ##//bytesread//## parameter, to check how many bytes have been successfully read in.
+	<li>Dans FB, ##**Get**## peut lire des tableaux pleins comme dans VB ou, alternativement, lire un multiple de la taille des donn&eacute;es dans la m&eacute;moire.
+	- ##**Get**## peut &ecirc;tre utilis&eacute; comme une fonction dans FB, pour obtenir le code succ&egrave;s/erreur renvoy&eacute; sans avoir &agrave; utiliser les proc&eacute;dures de gestion des erreurs.
+	- FB permet le param&egrave;tre ##//bytesread//##, pour v&eacute;rifier combien d'octets ont &eacute;t&eacute; lus avec succ&egrave;s.
 
 {{fbdoc item="see"}}
-	- ##[[KeyPgGetgraphics Get (Graphics)]]## different usage of same keyword 
-	- ##[[KeyPgPutfileio Put (File I/O)]]##
+	- ##[[KeyPgGetgraphics Get (Graphiques)]]## utilisation diff&eacute;rente du m&ecirc;me mot-cl&eacute; 
+	- ##[[KeyPgPutfileio Put (Entr&eacute;e/sortie fichiers)]]##
 	- ##[[KeyPgOpen Open]]##
 	- ##[[KeyPgClose Close]]##
 	- ##[[KeyPgBinary Binary]]##
 	- ##[[KeyPgRandom Random]]##
 	- ##[[KeyPgFreefile Freefile]]##
-	- ##[[ProPgFileIO File I/O methods comparison]]##
+	- ##[[ProPgFileIO Comparaison des m&eacute;thodes d'entr&eacute;e/sortie des fichiers]]##
 
 {{fbdoc item="back" value="CatPgFile|File I/O Functions"}}

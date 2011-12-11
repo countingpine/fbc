@@ -1,5 +1,5 @@
 {{fbdoc item="title" value="RUN"}}----
-Transfers execution to an external program
+Transf&egrave;re l'ex&eacute;cution vers un programme externe
 
 {{fbdoc item="syntax"}}##
 	[[KeyPgDeclare declare]] [[KeyPgSub function]] **Run** ( [[KeyPgByref byref]] //program// [[KeyPgAs as]] [[KeyPgConstQualifier const]] [[KeyPgString string]], [[KeyPgByref byref]] //arguments// [[KeyPgAs as]] [[KeyPgConstQualifier const]] [[KeyPgString string]] = "####" ) [[KeyPgAs as]] [[KeyPgString integer]]
@@ -9,17 +9,17 @@ Transfers execution to an external program
 ##
 {{fbdoc item="param"}}
 	##//program//##
-		The file name (including file path) of the program (executable) to transfer control to.
+		Le nom du fichier (y compris le chemin du fichier) du programme (ex&eacute;cutable) &agrave; qui on transf&egrave;re le contr&ocirc;le.
 	##//arguments//##
-		The command-line arguments to be passed to the program.
+		Les arguments de ligne de commande &agrave; passer au programme.
 
-{{fbdoc item="ret"}}
-	Returns negative one (##-1##) if the program could not be executed.
+{{fbdoc item="section" value="Valeur retourn&eacute;e
+	Retourne (##-1##) si le programme ne peut &ecirc;tre ex&eacute;cut&eacute;.
 
 {{fbdoc item="desc"}}
-	Transfers control over to an external program. When the program exits, execution will return to the system.
+	Transf&egrave;re le contr&ocirc;le &agrave; un programme externe. Quand ce programme se termine, l'ex&eacute;cution retourne au syst&egrave;me.
 
-{{fbdoc item="ex"}}
+{{fbdoc item="section" value="Exmple
 {{fbdoc item="filename" value="examples/manual/system/run.bas"}}%%(freebasic)
 '' Attempt to transfer control to "program.exe" in the current directory.
 Dim result As Integer = Run("program.exe")
@@ -29,16 +29,16 @@ Dim result As Integer = Run("program.exe")
 %%
 
 {{fbdoc item="target"}}
-	- Linux requires the //program// case matches the real name of the file. Windows and DOS  are case insensitive. The program being run may be case sensitive for its command line parameters.
-	- Path separators in Linux are forward slashes ("##/##"). Windows uses backward slashes ("##\##") although some versions of Windows allow forward slashes.  DOS uses backward slashes. 
+	- Linux n&eacute;cessite que la casse de ##//program//## corresponde au nom r&eacute;el du fichier. Windows et DOS ne sont pas sensibles &agrave; la casse. Le programme ex&eacute;cut&eacute; peut &ecirc;tre sensible &agrave; la casse pour ses param&egrave;tres de ligne de commande.
+	- Les s&eacute;parateurs de chemin de Linux sont des barres obliques /. Windows utilise des barres obliques vers l'arri&egrave;re \ mais il admet des barres obliques .  DOS utilise des barres obliques en arri&egrave;re \. 
 
 {{fbdoc item="diff"}}
-	- ##**Run**## needs the full executable name, including extension (##.exe##) on platforms that have one (""Win32"", DOS).
-	- Returning an error code is new to ""FreeBASIC"".
+	- ##**Run**## n&eacute;cessite le nom complet de l'ex&eacute;cutable, y compris l'extension (##.exe##) sur les plateformes qui ont un (Win32, DOS).
+	- Returner un code d'erreur est nouveau pour FreeBASIC.
 
 {{fbdoc item="see"}}
-	- ##[[KeyPgExec Exec]]## transfer temporarily, with arguments  
-	- ##[[KeyPgChain Chain]]## transfer temporarily, without arguments
-	- ##[[KeyPgCommand Command]]## pick arguments
+	- ##[[KeyPgExec Exec]]## transf&egrave;re temporairement, avec arguments
+	- ##[[KeyPgChain Chain]]## transf&egrave;re temporairement, sans argument
+	- ##[[KeyPgCommand Command]]## chercher des arguments
 
 {{fbdoc item="back" value="CatPgOpsys|Operating System Functions"}}

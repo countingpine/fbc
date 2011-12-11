@@ -1,5 +1,5 @@
 {{fbdoc item="title" value="DESTRUCTOR"}}----
-Called automatically when a class or user defined type goes out of scope or is destroyed
+Appel&eacute; automatiquement lorsqu'une classe ou un type  d&eacute;fini par l'utilisateur est hors de port&eacute;e ou est d&eacute;truit
 
 {{fbdoc item="syntax"}}##
 	[[KeyPgType Type]] //typename//
@@ -13,18 +13,18 @@ Called automatically when a class or user defined type goes out of scope or is d
 ##
 {{fbdoc item="param"}}
 	##//typename//## 
-		name of the ##[[KeyPgType Type]]## of ##[[KeyPgClass Class]]##
+		nom du ##[[KeyPgType Type]]## ou ##[[KeyPgClass Class]]##
 
 {{fbdoc item="desc"}}
-	The destructor method is called when a user defined ##[[KeyPgType Type]]## or ##[[KeyPgClass Class]]## variable goes out of scope or is destroyed explicitly with the ##[[KeyPgOpDelete Delete]]## operator.
+	La m&eacute;thode ##**Destructor**## est appel&eacute;e lorsqu'un ##[[KeyPgType Type]]## d&eacute;fini par l'utilisateur ou une variable ##[[KeyPgClass Class]]## est hors de port&eacute;e ou est d&eacute;truit explicitement avec l'op&eacute;rateur ##[[KeyPgOpDelete Delete]]##.
 
-	The ##**Destructor**## method is passed a hidden ##[[KeyPgThis this]]## parameter having the same type as ##//typename//##.
+	La m&eacute;thode ##**Destructor**## est pass&eacute;e &agrave; un param&egrave;tre cach&eacute; ##[[KeyPgThis This]]## qui a le m&ecirc;me type que ##//typename//##.
 
-	The destructor in a type is called before the destructors on any of its fields.  Therefore, all fields are accessible with the hidden ##[[KeyPgThis this]]## parameter in the destructor body.
+	Le ##**Destructor**## dans un type est appel&eacute; avant les ##**Destructor**##s de ses propres champs.  Par cons&eacute;quent, tous les champs sont accessibles avec le param&egrave;tre cach&eacute; ##[[KeyPgThis This]]## dans le corps du destructeur.
 
-	Only one destructor may be declared and defined per type.
+	Un seul destructeur peut &ecirc;tre d&eacute;clar&eacute; et d&eacute;fini par type.
 
-	Since the ##[[KeyPgEnd End]]## statement does not close any scope, object destructors will not automatically be called if the ##[[KeyPgEnd End]]## statement is used to terminate the program.
+	Comme la d&eacute;claration ##[[KeyPgEnd End]]## ne ferme aucune port&eacute;e, les destructeurs d'objet ne seront pas automatiquement appel&eacute;s si l'instruction ##[[KeyPgEnd End]]## est utilis&eacute;e pour terminer le programme.
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/udt/destructor.bas"}}%%(freebasic)
@@ -55,7 +55,7 @@ end scope
 
 MySub
 %%
-Output:
+Affichera:
 %%
 Creating: main.x
 Creating: main.scope.x
@@ -63,18 +63,18 @@ Destroying: main.scope.x
 Creating: A.x
 Destroying: A.x
 Destroying: main.x
-%%
 {{fbdoc item="lang"}}
-	- Object-related features are supported only in the //[[CompilerOptlang -lang fb]]// dialect.
+- Les caract&eacute;ristiques li&eacute;es &agrave; l'objet sont prises en charge uniquement dans le dialecte //[[CompilerOptlang -lang fb]]//
+	{{fbdoc item="diff"}}
 
-{{fbdoc item="diff"}}
-	- New to ""FreeBASIC""
+- Nouveau pour FreeBASIC
+	{{fbdoc item="see"}}
 
-{{fbdoc item="see"}}
-	- ##[[KeyPgClass Class]]##
+- ##[[KeyPgClass Class]]##
 	- ##[[KeyPgConstructor Constructor]]##
 	- ##[[KeyPgOpDelete Delete]]##
 	- ##[[KeyPgModuleDestructor Destructor (Module)]]##
+	- ##[[KeyPgType Type]]##
 	- ##[[KeyPgType Type]]##
 
 {{fbdoc item="back" value="CatPgUserDefTypes|User Defined Types"}}

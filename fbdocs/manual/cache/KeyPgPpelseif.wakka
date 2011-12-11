@@ -1,36 +1,35 @@
 {{fbdoc item="title" value="#ELSEIF"}}----
-Preprocessor conditional directive
+Directive conditionnelle du pr&eacute;processeur
 
-{{fbdoc item="syntax"}}##
+{{fbdoc item="syntax"}}
 	[[KeyPgPpif #if]] (expression1)
-		' Conditionally included statements if expression1 is True
+		' D&eacute;clarations incluses &agrave; condition qu'//expression1// soit Vrai (True)
 	**#elseif** (expression2)
-		' Conditionally included statements if expression2 is True
+		' D&eacute;clarations incluses &agrave; condition qu'//expression2// soit Vrai (True)
 	[[KeyPgPpelse #else]]
-		' Conditionally included statements if both
-		' expression1 and expression2 are False
+		' D&eacute;clarations incluses &agrave; condition que les deux
+		' //expression1// et //expression2// soient Faux (False)
 	[[KeyPgPpendif #endif]]
-##
 {{fbdoc item="desc"}}
-	**#elseif** can be added to an ##[[KeyPgPpif #if]]## block to provide an additional conditions.
+**#elseif** peut &ecirc;tre ajout&eacute; &agrave; un bloc ##[[KeyPgPpif #if]]## pour procurer une condition additionnelle.
+	{{fbdoc item="ex"}}
 
 {{fbdoc item="ex"}}
-{{fbdoc item="filename" value="examples/manual/prepro/elseif.bas"}}%%(freebasic)
-#DEFINE WORDSIZE 16
-#IF (WORDSIZE = 16)
-  ' Do some some 16 bit stuff
-#ELSEIF (WORDSIZE = 32)
-  ' Do some some 32 bit stuff
-#ELSE
-  #ERROR WORDSIZE must be set to 16 or 32
-#ENDIF
+#define WORDSIZE 16
+#if (WORDSIZE = 16)
+' Do some some 16 bit stuff
+  #elseif (WORDSIZE = 32)
+' Do some some 32 bit stuff
+  #else
+#error WORDSIZE must be set To 16 Or 32
+  #endif
 %%
-
 {{fbdoc item="diff"}}
-	- New to Freebasic
 
-{{fbdoc item="see"}}
-	- ##[[KeyPgPpdefine #define]]##
+- Nouveau pour Freebasic
+	{{fbdoc item="see"}}
+
+- ##[[KeyPgPpdefine #define]]##
 	- ##[[KeyPgPpmacro #macro]]##
 	- ##[[KeyPgPpif #if]]##
 	- ##[[KeyPgPpelse #else]]## 
@@ -38,6 +37,7 @@ Preprocessor conditional directive
 	- ##[[KeyPgPpifdef #ifdef]]##
 	- ##[[KeyPgPpifndef #ifndef]]##
 	- ##[[KeyPgPpundef #undef]]##
+	- ##[[KeyPgDefined defined]]##
 	- ##[[KeyPgDefined defined]]##
 
 

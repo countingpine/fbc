@@ -1,5 +1,5 @@
 {{fbdoc item="title" value="EXEC"}}----
-Temporarily transfers execution to an external program
+Transf&egrave;re temporairement l'ex&eacute;cution &agrave; un programme externe
 
 {{fbdoc item="syntax"}}##
 	[[KeyPgDeclare declare]] [[KeyPgSub function]] **Exec** ( [[KeyPgByref byref]] //program// [[KeyPgAs as]] [[KeyPgConstQualifier const]] [[KeyPgString string]], [[KeyPgByref byref]] //arguments// [[KeyPgAs as]] [[KeyPgConstQualifier const]] [[KeyPgString string]] ) [[KeyPgAs as]] [[KeyPgInteger integer]]
@@ -9,15 +9,15 @@ Temporarily transfers execution to an external program
 ##
 {{fbdoc item="param"}}
 	##//program//##
-		The file name (including file path) of the program (executable) to transfer control to.
+		Le nom de fichier (avec le chemin du fichier) du programme (ex&eacute;cutable) auquel on transf&egrave;re le contr&ocirc;le.
 	##//arguments//##
-		The command-line arguments to be passed to the program.
+		Les arguments de la ligne de commande &agrave; passer au programme.
 
-{{fbdoc item="ret"}}
-	The exit status of the program, or negative one (-1) if the program could not be executed.
+{{fbdoc item="section" value="Valeur retourn&eacute;e
+	L'&eacute;tat de sortie du programme, ou une valeur negative (-1) si le programme ne peut pas &ecirc;tre ex&eacute;cut&eacute;.
 
 {{fbdoc item="desc"}}
-	Transfers control over to an external program. When the program exits, execution resumes immediately after the call to ##**Exec**##.
+	Transf&egrave;re le contr&ocirc;le &agrave; un programme externe. Lorsque le programme se termine, l'ex&eacute;cution reprend imm&eacute;diatement apr&egrave;s l'appel &agrave; ##**Exec**##.
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/system/exec.bas"}}%%(freebasic)
@@ -33,19 +33,19 @@ ELSE
 END IF
 %%
 {{fbdoc item="target"}}
-	- Linux requires the //program// case matches the real name of the file. Windows and DOS  are case insensitive. The program being executed may be case sensitive for its command line parameters.
-	- Path separators in Linux are forward slashes / . Windows uses backward slashes \ but it allows for forward slashes .  DOS uses backward  \ slashes. 
-	- Exit code is limited to 8 bits in DOS.
+	- Linux n&eacute;cessite que la casse de //program// corresponde au nom r&eacute;el du fichier. Windows et DOS ne sont pas sensibles &agrave; la casse. Le programme en cours d'ex&eacute;cution peut &ecirc;tre sensible &agrave; la casse pour ses param&egrave;tres de ligne de commande.
+	- Les s&eacute;parateurs de chemin de Linux sont des barres obliques /. Windows utilise des barres obliques vers l'arri&egrave;re \ mais il admet des barres obliques .  DOS utilise des barres obliques en arri&egrave;re \. 
+	- Le code de sortie est limit&eacute; &agrave; 8 bits sous DOS.
 
 {{fbdoc item="lang"}}
-	- Not available in the //[[CompilerOptlang -lang qb]]// dialect unless referenced with the alias ##**""__Exec""**##.
+	- Non disponible dans le dialecte //[[CompilerOptlang -lang qb]]// sauf si r&eacute;f&eacute;renc&eacute; avec l'alias ##**__Exec**##.
 
 {{fbdoc item="diff"}}
-	- New to ""FreeBASIC""
+	- Nouveau pour FreeBASIC
 
 {{fbdoc item="see"}}
-	- ##[[KeyPgChain Chain]]## transfer temporarily, without arguments
-	- ##[[KeyPgRun Run]]## one-way transfer
-	- ##[[KeyPgCommand Command]]## pick arguments
+	- ##[[KeyPgChain Chain]]## transf&egrave;re temporairement, sans argument
+	- ##[[KeyPgRun Run]]## transfert une-voie
+	- ##[[KeyPgCommand Command]]## chercher des arguments
 
 {{fbdoc item="back" value="CatPgOpsys|Operating System Functions"}}

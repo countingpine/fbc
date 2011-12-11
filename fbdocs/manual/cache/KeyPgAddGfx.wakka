@@ -1,51 +1,51 @@
 {{fbdoc item="title" value="ADD"}}----
-Parameter to the ##[[KeyPgPutgraphics Put]]## graphics statement which selects addition as the blitting method
+Param&egrave;tre de la d&eacute;claration graphique ##[[KeyPgPutgraphics Put]]## qui choisit l&apos;addition comme m&eacute;thode de transformation
 
 {{fbdoc item="syntax"}}##
 	**Put** [ //target//, ] [ STEP ] ( //x//,//y// ), //source// [ ,( //x1//,//y1// )-( //x2//,//y2// ) ], **Add**[ ,//multiplier// ]
 ##
 {{fbdoc item="param"}}
 	##**Add**##
-		Required.
+		Obligatoire.
 	##//multiplier//##
-		Optional value between 0 and 255.  The source pixels are premultiplied by ##(//multiplier// / 256)## before being added.  If omitted, this value defaults to 255.
+		Valeur facultative entre 0 et 255. Les pixels source sont multipli&eacute;s par ##(//multiplier// / 256)## avant d&apos;&ecirc;tre additionn&eacute;s.  Si omise, la valeur par d&eacute;faut est 255.
 
 {{fbdoc item="desc"}}
-	##**Add**## selects addition as the method for blitting an image buffer.  For each source and target pixel, the values of each respective component are added together to produce the result.
-	The addition is saturated - i.e. if the sum of the two values is 256 or more, then it will be cropped down to 255.
+	##**Add**## s&eacute;lectionne l&apos;addition comme m&eacute;thode de transformation d&apos;un buffer image.  Pour chaque pixel source et cible, les valeurs respectives de chaque composant sont additionn&eacute;es pour donner le r&eacute;sultat.
+	L&apos;addition est satur&eacute;e - par exemple, si la somme des 2 valeurs d&eacute;passe 255, elle est ramen&eacute;e &agrave; cette valeur de 255.
 	
-	This method will work in all color modes.  Mask colors (color 0 for indexed images, magenta (##[[KeyPgRgb RGB]](255, 0, 255)##) for full color images) will be skipped, though full color values of 0 (##[[KeyPgRgba RGBA]](0, 0, 0, 0)##) will have also have no effect.
+	Cette m&eacute;thode fonctionne dans tous les modes de couleur. Les masques de couleur (color 0 pour les images index&eacute;es, magenta (##[[KeyPgRgb RGB]](255, 0, 255)##) pour les images pleine couleur) seront &eacute;cart&eacute;s, cependant des valeurs 0 en pleine couleur (##[[KeyPgRgba RGBA]](0, 0, 0, 0)##) n&apos;auront aussi aucun effet.
 
 {{fbdoc item="ex"}}
-	{{fbdoc item="filename" value="examples/manual/gfx/put-add.bas"}}%%(freebasic)
-''open a graphics window
+	%%(freebasic)
+&apos;&apos;ouvre une fenetre graphique
 screenres 320, 200, 16
 
-''create a sprite containing a circle
+&apos;&apos;cree un sprite contenant un cercle
 const as integer r = 32
 dim c as any ptr = imagecreate(r * 2 + 1, r * 2 + 1, 0)
 circle c, (r, r), r, rgb(255, 255, 192), , , 1, f
 
-''put the sprite at three different multipier
-''levels, overlapping each other in the middle
+&apos;&apos;place le sprite avec trois niveaux differents de multiplieurs
+&apos;&apos;se recouvrant au milieu
 put (146 - r, 108 - r), c, add,  64
 put (174 - r, 108 - r), c, add, 128
 put (160 - r,  84 - r), c, add, 192
 
-''free the memory used by the sprite
+&apos;&apos;libere la memoire utilisee par le sprite
 imagedestroy c
 
-''pause the program before closing
+&apos;&apos;pause du programme avant fermeture
 sleep
 %%
-{{image class="center" title="Put Add example output" url="/images/add.png"}}
+<div class="fb_img"><img src="images/add.png" />
 {{fbdoc item="diff"}}
-	- New to ""FreeBASIC""
+	- Nouveaut&eacute; FreeBASIC
 
 {{fbdoc item="see"}}
-	-##[[KeyPgTransGfx Trans]]##
-	-##[[KeyPgAlphaGfx Alpha]]##
-	-##[[KeyPgCustomgfx Custom]]##
+	<li>##[[KeyPgTransGfx Trans]]##
+	<li>##[[KeyPgAlphaGfx Alpha]]##
+	<li>##[[KeyPgCustomgfx Custom]]##
 	- ##[[KeyPgPutgraphics Put (Graphics)]]##
 
 {{fbdoc item="back" value="CatPgGfx2D|2D Drawing Functions"}}

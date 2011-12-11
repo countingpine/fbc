@@ -1,101 +1,178 @@
 {{fbdoc item="title" value="Shared Libraries"}}----
-A shared library is compiled code that can loaded and used later used when running an executable.
+Une biblioth&egrave;que partag&eacute;e c'est du code compil&eacute; qui pourra &ecirc;tre charg&eacute; et utilis&eacute; plus tard lors de l'ex&eacute;cution d'un ex&eacute;cutable.
 
-When the compiler makes an executable, the basic source files are first turned in to object files.  The object files are then linked together to make an executable.  A shared library is much like a static library in that it contains object files.  But a shared library is also like an executable in that it only gets loaded when the executable is running.  
+Lorsque le compilateur g&eacute;n&egrave;re un ex&eacute;cutable, les fichiers sources de base sont d'abord transform&eacute;s en fichiers objets.  Les fichiers objets sont ensuite li&eacute;s ensemble pour cr&eacute;er un ex&eacute;cutable.  Une biblioth&egrave;que partag&eacute;e c'est un peu comme une biblioth&egrave;que statique en ce qu'elle contient des fichiers objet.  Mais une biblioth&egrave;que partag&eacute;e est aussi comme un fichier ex&eacute;cutable en ce qu'elle est charg&eacute;e uniquement lorsque l'ex&eacute;cutable est en cours d'ex&eacute;cution.  
 
-The library is referred to as shared, because the code in the library is loaded by an executable at runtime and can be loaded by more than one executable, even though there might only be one copy of the shared library.
+La biblioth&egrave;que est d&eacute;nomm&eacute;e partag&eacute;e, parce que le code dans la biblioth&egrave;que est charg&eacute; par un fichier ex&eacute;cutable &agrave; l'ex&eacute;cution et peut &ecirc;tre charg&eacute; par plus d'un ex&eacute;cutable, m&ecirc;me s'il peut n'y avoir qu'une seule copie de la biblioth&egrave;que partag&eacute;e.
 
-Once the library is made, we can then use the code that it contains just as if we were compiling the source directly with our program.
+Une fois que la biblioth&egrave;que est g&eacute;n&eacute;r&eacute;e, on peut alors utiliser le code qu'elle contient comme si nous avions compil&eacute; les sources directement avec notre programme.
 
-{{fbdoc item="section" value="Shared Library Example"}}
-	Following is a simple example of creating a shared library using these three files:
-	- ##mylib.bas## - the source for the library
-	- ##mylib.bi## - the header for the library
-	- ##mytest.bas## - a test program
+{{fbdoc item="section" value="Exemple de biblioth&egrave;que partag&eacute;e
+Voici un exemple simple de cr&eacute;ation d'une biblioth&egrave;que partag&eacute;e en utilisant ces trois fichiers:
+- ##mylib.bas## - le source de la biblioth&egrave;que
+- ##mylib.bi## - l'en-t&ecirc;te de la biblioth&egrave;que
+- ##mytest.bas## - un programme de test
 
-	Our library will be a single module providing a single function:
+Notre biblioth&egrave;que aura un module unique assurant une fonction unique:
 
-	{{fbdoc item="filename" value="examples/manual/proguide/shared-lib/mylib.bas"}}%%(freebasic)
-'' mylib.bas
-'' compile with: fbc -dll mylib.bas
+	%%(freebasic)
 
-'' Add two numbers together and return the result
-Public Function Add2( ByVal x As Integer, ByVal y As Integer ) As Integer Export
-  Return( x + y )
+	'' mylib.bas
+	'' compiler avec: fbc -dll mylib.bas
+	'' Additionne deux nombres ensemble et retourne le r&eacute;sultat
+
+	Public Function Add2( ByVal x As Integer, ByVal y As Integer ) As Integer Export
+	
+	Return( x + y )
 End Function
 %%
-	Compile the library with:
-	##fbc -dll mylib.bas##
 
-	The ##-dll## option tells the compiler to take the source code, ##mylib.bas##, and turn it in to an object file ##mylib.o##, then store the object file in to a shared library.  The name of the shared library will have a ##.so## extension or ##.dll## extension depending on if the platform is the linux or windows version. A library might contain many modules (source files) each with many functions, but for this simple example, it is just one each.
-
-	Making a shared library is almost identical to making a static library except for the addition of ##[[KeyPgExport Export]]## declaration specifier.  ##**Export**## tells the compiler to make the function visible to other executables loading the shared library.
-
-	To make use of the library in some other source code, we need some way of telling the compiler what exactly is in the library.  A good way to do this is to put the declarations ( also called an interface, or API ) for the library in to a header file.
-
-	{{fbdoc item="filename" value="examples/manual/proguide/shared-lib/mylib.bi"}}%%(freebasic)
-'' mylib.bi
-#inclib "mylib"
-Declare Function Add2( ByVal x As Integer, ByVal y As Integer ) As Integer
-%%
-	There is no need to compile the header.  We want this in its source form so it can be included with other source files.  The ##[[KeyPgInclib #inclib]]## statement will tell the compiler the name of a shared library that we need to link with at runtime running an executable that needs it.
-
-	With our library (.dll / .so file) and a header (.bi file) we can try them out in a test program:
-
-	{{fbdoc item="filename" value="examples/manual/proguide/shared-lib/mytest.bas"}}%%(freebasic)
-'' mytest.bas
-'' compile with: fbc mytest.bas
-#include once "mylib.bi"
-Print Add2(1,2)
-%%
-	The ##[[KeyPgInclude #include]]## statement tells the compiler to include the source code from ##mylib.bi## just as if we had typed it in to the original source.  With the way we have written our include file, it tells the compiler everything it needs to know about the library.
-
-	We compile this with:
-	##fbc mytest.bas##
-
-	Then when we run the ##mytest## executable, we should get the result of:
-	##3##
-
-	More than one source module can be used when making a library.  And basic programs can use more than one library by including each needed header.  Some libraries are so large that they might use several headers.  On very large projects, making shared libraries out of some code modules that seldom change can improve compile times and link times dramatically.
-
-	Shared libraries can optionally contain debugging information specified with the //[[CompilerOptg -g]]// command line option.
-
-	Object files, and therefore shared libraries, are platform specific and in some cases specific to a particular version of the compiler and FreeBASIC runtime library.
-
-{{fbdoc item="section" value="Using Shared Libraries on Windows"}}
-	On windows, the shared library must be stored in a location where it can be found by the executable that needs it a run-time.  
-
-	The operating system may search the following directories:
-	- The directory from which the executable was loaded.
-	- The current directory.
-	- The windows and windows system folder.
-	- Directories list in the ##PATH## environment variable.
-
-	The order in which directories are searched may depend on the Windows version in use, and on what settings that the operating system is configured with.
-
-{{fbdoc item="section" value="Using Shared Libraries on Linux"}}
-
-	By default, linux will not normally search the current directory or the directory from which the executable was loaded.  You will need to either:
-	- copy the .so file to a directory that has shared libraries (e.g. ##/usr/lib##) and run ##ldconfig## to configure the library.
-	- modify the environment variable LD_LIBRARY_PATH to search the current directory or a specific directory for the newly created shared library.
-
-	To run the executable ##./mytest/## and temporarily tell linux to search the current directory, use the following shell command:
+Compiler la biblioth&egrave;que avec:
+##fbc -dll mylib.bas##
+  L'option ##-dll## indique au compilateur de prendre le code source, ##mylib.bas##, et de le transformer en un fichier objet ##mylib.o##, puis stocker le fichier objet dans une biblioth&egrave;que partag&eacute;e.  Le nom de la biblioth&egrave;que partag&eacute;e aura l' extension ##.so## ou ##.dll## selon que la plate-forme est la version Linux ou Windows. Une biblioth&egrave;que peut contenir de nombreux modules (fichiers source), chacun avec de nombreuses fonctions, mais pour cet exemple simple, il n'y en a simplement qu'un seul.
+Cr&eacute;er une biblioth&egrave;que partag&eacute;e est presque identique &agrave; cr&eacute;er une biblioth&egrave;que statique &agrave; l'exception de l'ajout de sp&eacute;cificateur de d&eacute;claration ##[[KeyPgExport Export]]##.  ##**Export**## indique au compilateur de rendre la fonction visible aux autres ex&eacute;cutables chargeant la biblioth&egrave;que partag&eacute;e.
+Pour faire usage de la biblioth&egrave;que dans un autre code source, nous avons besoin d'une certaine fa&ccedil;on de dire au compilateur ce qui est exactement dans la biblioth&egrave;que.  Une bonne fa&ccedil;on pour y parvenir est de mettre les d&eacute;clarations (&eacute;galement appel&eacute;e une interface ou API) de la biblioth&egrave;que dans un fichier d'en-t&ecirc;te.
+	
+	%%(freebasic)
+	'' mylib.bi
+	
+	#inclib "mylib"
+	
+	Declare Function Add2( ByVal x As Integer, ByVal y As Integer ) As Integer
+	
 	%%
-LD_LIBRARY_PATH=.:$LD_LIBRARY_PATH ./mytest
+	
+	Il n'est pas n&eacute;cessaire de compiler le fichier d'en-t&ecirc;te.  Nous le souhaitons sous sa forme de source pour qu'il puisse &ecirc;tre inclus avec les autres fichiers source.  L' instruction ##[[KeyPgInclib #inclib]]## donnera au compilateur le nom de la biblioth&egrave;que partag&eacute;e que nous devons lier &agrave; l'ex&eacute;cution d'un ex&eacute;cutable qui en a besoin.
+Gr&acirc;ce &agrave; notre biblioth&egrave;que (fichier .dll / .so) et un fichier en-t&ecirc;te (.bi file) nous pouvons les essayer dans un programme de test:
+#inclib "mylib"
+'' mytest.bas
+'' compiler avec: fbc mytest.bas
+	
+	#include once "mylib.bi"
+	
+	Print Add2(1,2)
+	
+	%%
+L'instruction ##[[KeyPgInclude #include]]## indique au compilateur d'inclure le code de source &agrave; partir de ##mylib.bi## comme si nous l'avions tap&eacute; dans le source original.  De la mani&egrave;re dont nous avons &eacute;crit notre fichier d'inclusion, il indique au compilateurtout ce qu'il doit savoir sur la biblioth&egrave;que.
+Nous compilons ceci avec:
+##fbc mytest.bas##
+Puis, quand nous lan&ccedil;ons l'ex&eacute;cutable ##mytest##, nous devrions obtenir le r&eacute;sultat:
+##3##
+	
+	Plus d'un module source peut &ecirc;tre utilis&eacute; lors de la compilation de la biblioth&egrave;que.  Et les programmes de base peuvent utiliser plus d'une biblioth&egrave;que en incluant les fichiers en-t&ecirc;te n&eacute;cessaires.  Certaines biblioth&egrave;ques sont si importantes qu'elles peuvent utiliser plusieurs en-t&ecirc;tes.  Pour de tr&egrave;s grands projets, la cr&eacute;ation de biblioth&egrave;ques partag&eacute;es avec certains modules de code qui ne changent que rarement peut am&eacute;liorer consid&eacute;rablement les temps de compilation.
+	
+	Les biblioth&egrave;ques partag&eacute;es peut &eacute;ventuellement contenir des informations de d&eacute;bogage sp&eacute;cifi&eacute;es avec l'option de ligne de commande //[[CompilerOptg -g]]//.
+	Les fichiers objets, et donc les biblioth&egrave;ques partag&eacute;es, sont sp&eacute;cifique &agrave; la plate-forme et dans certains cas sp&eacute;cifiques &agrave; une version particuli&egrave;re du compilateur et de la biblioth&egrave;que d'ex&eacute;cution FreeBASIC.
+	
+	{{fbdoc item="section" value="Utilisation des biblioth&egrave;ques partag&eacute;es sous Windows
+	Sous Windows, la biblioth&egrave;que partag&eacute;e doit &ecirc;tre stock&eacute;e dans un endroit o&ugrave; elle peut &ecirc;tre trouv&eacute;e par l'ex&eacute;cutable qui en a besoin &agrave; l'ex&eacute;cution.  
+	
+	Le syst&egrave;me d'exploitation peut rechercher dans les r&eacute;pertoires suivants:
+	
+	- Le r&eacute;pertoire &agrave; partir duquel l'ex&eacute;cutable a &eacute;t&eacute; charg&eacute;.
+	
+	- Le r&eacute;pertoire courant.
+
+- Le r&eacute;pertoire Windows et le dossier syst&egrave;me de Windows.
+
+	- La liste des r&eacute;pertoires dans la variable d'environnement ##PATH##.
+	
+	L'ordre dans lequel les r&eacute;pertoires sont parcourus peut d&eacute;pendre de la version Windows en cours d'utilisation et avec quels param&egrave;tres le syst&egrave;me d'exploitation est configur&eacute;.
+
+	{{fbdoc item="section" value="Utilisation des biblioth&egrave;ques partag&eacute;es sous Linux
+	Par d&eacute;faut, Linux normalement ne cherchera pas dans le r&eacute;pertoire courant ou dans le r&eacute;pertoire &agrave; partir duquel l'ex&eacute;cutable a &eacute;t&eacute; charg&eacute;.  Vous devrez soit:
+	- copier le fichier .so copier le fichier dans un r&eacute;pertoire qui contient les biblioth&egrave;ques partag&eacute;es (par exemple, ##/usr/lib##) et lancer ##ldconfig## pour configurer la biblioth&egrave;que.
+	- modifier la variable d'environnement LD_LIBRARY_PATH pour rechercher le r&eacute;pertoire courant ou dans un r&eacute;pertoire sp&eacute;cifique pour la biblioth&egrave;que partag&eacute;e nouvellement cr&eacute;&eacute;e.
+
+	Pour lancer l'ex&eacute;cutable ##./mytest/## et dire &agrave; Linux de rechercher temporairement dans le r&eacute;pertoire courant, utilisez la commande suivante:
+
 %%
 
-{{fbdoc item="section" value="Executables that export symbols"}}
-	If an executable has symbols that must be available to other shared libraries when those shared libraries are loaded, use the ##[[KeyPgExport Export]]## procedure declaration specifier, and the //[[CompilerOptexport -export]]// command line option when making (linking) the executable.
+	LD_LIBRARY_PATH=.:$LD_LIBRARY_PATH ./mytest
 
-	The //[[CompilerOptexport -export]]// option has no extra effect when used with the //[[CompilerOptdylib -dylib]]// or //[[CompilerOptdll -dll]]// command line options.
+	%%
+	{{fbdoc item="section" value="Executables that export symbols
 
-{{fbdoc item="section" value="Loading Shared Libraries Dynamically"}}
-	Shared libraries can be loaded and used at run time by dynamically loading the library and its symbols at runtime.
-	- ##[[KeyPgDylibload Dylibload]]## can be used to load and obtain a handle to a shared library.
-	- ##[[KeyPgDylibsymbol Dylibsymbol]]## is used to obtain the address of a symbol in a loaded shared library.
-	- ##[[KeyPgDylibfree Dylibfree]]## is used to unload a shared library when it is no longer needed.
+	Si un fichier ex&eacute;cutable contient des symboles qui doivent &ecirc;tre disponibles pour d'autres biblioth&egrave;ques partag&eacute;es lorsque ces biblioth&egrave;ques partag&eacute;es sont charg&eacute;s, utilisez le sp&eacute;cificateur de d&eacute;claration de proc&eacute;dure ##[[KeyPgExport Export]]## et l'option //[[CompilerOptexport -export]]// de la ligne de commande lors de la compilation (linkage) de l'ex&eacute;cutable.
+	L'option //[[CompilerOptexport -export]]// n'a aucun effet suppl&eacute;mentaire lorsqu'elle est utilis&eacute;e avec les options de ligne de commande //[[CompilerOptdylib -dylib]]// ou //[[CompilerOptdll -dll]]//.
 
-	Procedures in the shared library must use the ##[[KeyPgExport Export]]## specifier to ensure that the symbols name is placed in the shared library's export table.
+{{fbdoc item="section" value="Chargement dynamique des biblioth&egrave;ques partag&eacute;es
+
+	Les biblioth&egrave;ques partag&eacute;es peuvent &ecirc;tre charg&eacute;es et utilis&eacute;es lors de l'ex&eacute;cution par chargement dynamique de la biblioth&egrave;que et de ses symboles, &agrave; l'ex&eacute;cution.
+	
+	- ##[[KeyPgDylibload DyLibLoad]]## peut &ecirc;tre utilis&eacute; pour charger et obtenir un "handle" (identifiant num&eacute;rique) &agrave; une biblioth&egrave;que partag&eacute;e.
+
+- ##[[KeyPgDylibsymbol DyLibSymbol]]## est utilis&eacute; pour obtenir l'adresse d'un symbole dans une biblioth&egrave;que partag&eacute;e qui a &eacute;t&eacute; charg&eacute;e.
+
+	- ##[[KeyPgDylibfree DyLibFree]]## est utilis&eacute; pour d&eacute;charger une biblioth&egrave;que partag&eacute;e quand elle n'est plus n&eacute;cessaire.
+
+	Les proc&eacute;dures dans une biblioth&egrave;que partag&eacute;e doivent utiliser le sp&eacute;cificateur ##[[KeyPgExport Export]]## afin de s'assurer que le nom des symboles est plac&eacute; dans le tableau des exportations de la librairie partag&eacute;e.
+	{{fbdoc item="see"}}
+	- [[ProPgStaticLibraries Biblioth&egrave;ques statiques]]
+
+	- ##[[KeyPgInclib #inclib]]##
+	
+	- ##[[KeyPgInclude #include]]##
+- [[CompilerOptdll Option du compilateur: -dll]]
+- [[CompilerOptexport Option du compilateur: -export]]
+- [[CompilerOptdylib Option du compilateur: -dylib]]
+'' and libmydll.so on Linux.
+''
+'' Note: libmydll.dll.a is an import library, it's only needed when creating 
+'' an executable that calls any of mydll's functions, only distribute 
+'' the DLL files with your apps, do not include the import libraries, 
+'' they are useless to end-users.
+
+'' Simple exported function; the <alias "..."> disables FB's default
+'' all-upper-case name mangling, so the DLL will export AddNumbers() instead of
+'' ADDNUMBERS().
+function AddNumbers alias "AddNumbers"( byval a as integer, byval b as integer ) as integer export
+	function = a + b
+end function
+%%
+	
+	{{fbdoc item="filename" value="examples/manual/proguide/shared-lib/mydll.bas"}}%%(freebasic)
+'' load.bas: Loads mydll.dll (or libmydll.so) at runtime, calls one of mydll's
+'' functions and prints the result. mydll is not needed at compile time.
+'' compile as: fbc test.bas
+''
+'' Note: The compiled mydll.dll (or libmydll.so) dynamic library is expected
+'' to be available in the current directory.
+
+'' Note we specify just "mydll" as library file name; this is to ensure
+'' compatibility between Windows and Linux, where a dynamic library
+'' has different file name and extension.
+dim as any ptr library = dylibload( "mydll" )
+if( library = 0 ) then
+	print "Failed to load the mydll dynamic library, aborting program..."
+	end 1
+end if
+
+'' This function pointer will be used to call the function from mydll, after
+'' the address has been found. Note: It must have the same calling
+'' convention and parameters.
+dim AddNumbers as function( byval as integer, byval as integer ) as integer
+AddNumbers = dylibsymbol( library, "AddNumbers" )
+if( AddNumbers = 0 ) then
+	print "Could not retrieve the AddNumbers() function's address from the mydll library, aborting program..."
+	end 1
+end if
+
+randomize timer
+
+dim as integer x = rnd * 10
+dim as integer y = rnd * 10
+
+print x; " +"; y; " ="; AddNumbers( x, y )
+
+'' Done with the library; the OS will automatically unload libraries loaded
+'' by a process when it terminates, but we can also force unloading during
+'' our program execution to save resources; this is what the next line does.
+'' Remember that once you unload a previously loaded library, all the symbols
+'' you got from it via dylibsymbol will become invalid, and accessing them
+'' will cause the application to crash.
+dylibfree( library )
+%%
 
 {{fbdoc item="see"}}
 	- [[ProPgStaticLibraries Static Libraries]]

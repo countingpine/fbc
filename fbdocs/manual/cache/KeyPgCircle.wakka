@@ -1,21 +1,21 @@
-{{fbdoc item="title" value="CIRCLE"}}----
-Graphics statement to draw a circle
+{{fbdoc item="title" value="Circle"}}----<div id="fb_tab_r"> <img src="images/fblogo_mini.gif">
+Instruction graphique pour tracer un cercle<br \=""><br \="">{{fbdoc item="syntax"}}##<br \="">**Circle** [//target//,] [STEP] (x,y), radius[, [color][,[start][, [end][, [aspect][, F]]]]]<br \="">##<br \="">
 
-{{fbdoc item="syntax"}}##
-	**Circle** [//target//,] [STEP] (x,y), radius[, [color][, [start][, [end][, [aspect][, F]]]]]
-##
-{{fbdoc item="param"}}
-	##//target//##
-		specifies buffer to draw on.  
-	##STEP##
-		indicates that coordinates are relative
-	##(//x, y//)##
-		coordinates of the circle's center.
-	##//radius//##
-		radius	
-	##//color//##
-		the color attribute.
-	##//start//##
+{{fbdoc item="param"}}<br \="">##//target//##<br \="">		sp&eacute;cifie le tampon sur lequel on dessine. <br \="">
+	##STEP##<br \="">		indique que les coordonn&eacute;es sont relatives<br \="">
+##(//x, y//)##<br \="">		coordonn&eacute;es du centre du cercle.<br \="">
+##//radius//##<br \="">		rayon <br \="">
+	##//color//##<br \="">		l'attribut de couleur.<br \="">
+		##//start//##<br \="">		l'angle de d&eacute;part<br \="">
+	##//end//##<br \="">		l'angle de fin<br \="">
+		##//aspect//##<br \="">		aspect ratio<br \="">
+	##F##<br \="">		indicateur de mode de remplissage<br \=""><br \="">
+		{{fbdoc item="desc"}}<br \="">##**Circle**## trace un cercle, une ellipse ou un arc de cercled'apr&egrave;s les param&egrave;tres fournis. <br \=""><br \="">##//target//## sp&eacute;cifie le buffer o&ugrave;l'on dessine. ##//target//## peut &ecirc;tre une imagecr&eacute;&eacute;e avec ##<a href="KeyPgImagecreate.html">ImageCreate</a>## ou ##<a href="KeyPgGetgraphics.html">Get (Graphics)</a>##. Si omis, ##//target//##est par d&eacute;faut la page valide de l'&eacute;cran detravail. (Voir ##[[KeyPgScreenset ScreenSet]]##)<br \=""><br \="">Le centre de la figure est plac&eacute; sur la surfacedestination en ##(//X//,//Y//)##. <br \=""><br \="">##//Radius//## donne le rayon de la figure. Si ##//aspectratio//## est utilis&eacute;, le plus grand rayon doit&ecirc;tre indiqu&eacute; ici.<br \=""><br \="">##//Color//## correspond &agrave; l'attribut de couleur,qui est sp&eacute;cifique au mode (voir ##<a href="KeyPgColor.html">Color</a>## et ##<a href="KeyPgScreengraphics.html">Screen (Graphics)</a>## pour desd&eacute;tails). Si omis, la couleur de premier-pland&eacute;finie par ##[[KeyPgColor Color]]##est utilis&eacute;e.<br \=""><br \="">L'option ##STEP## sp&eacute;cifie que ##//X//## et##//Y//## sont relatifs &agrave; la position du curseurgraphique.<br \=""><br \="">##//start//## et ##//end//## sont des angles en ##<a href="ProPgRadians.html">radians</a>##.Valeurs de -2PI &agrave; 2PI; si vous sp&eacute;cifiez unangle n&eacute;gatif, savaleur change de signe et une ligne est trac&eacute;e du centrejusqu'aupoint de l'arc de cercle. ##//end//## angle peut&ecirc;tre inf&eacute;rieur &agrave; ##//start//##angle. Si vous omettez ##//start//## et ##//end//##,un cercle/ellipse complet est trac&eacute;; si voussp&eacute;cifiez ##//start//## mais pas ##//end//##,##//end//## prend la valeur 2PI; si vous sp&eacute;cifiez##//end//## mais pas ##//start//##, ##//start//##prend la valeur 0.<br \=""><br \="">##//aspect//## est le ratio d'aspect, ou le ratio du y sur le xdu rayon. La valeur par d&eacute;faut est la valeur requise pour tracerun cercle parfait &agrave; l'&eacute;cran, en gardant le ratio d'aspectdes pixels. Cette valeur peut &ecirc;tre calcul&eacute;e comme ceci:<br \=""><br \="">##ratio = (y_radius / x_radius) * pixel_aspect_ratio##<br \=""><br \="">O&ugrave; ##//pixel_aspect_ratio//## est le ratio de la largeur sur la hauteurdans le mode courant, correspondant &agrave; un moniteur 4:3 standard. Si le ratio d'aspectest inf&eacute;rieur &agrave; 1, le rayon est le rayon x; s'il est sup&eacute;rieur ou &eacute;gal &agrave; 1,le rayon est le rayon y.<br \=""><br \="">F est l'indicateur de remplissage. Si vous le sp&eacute;cifiez, le cercle/ellipse serarempli avec la couleur s&eacute;lectionn&eacute;e. Ceci est sans effet dans le cas d'un arc decercle.<br \=""><br \="">Le syst&egrave;me de coordonn&eacute;es mis en place par ##[[KeyPgWindow Window]]##et/ou ##[[KeyPgViewgraphics View (Graphics)]]##modifie l'op&eacute;ration de dessin; le d&eacute;coupage (clipping) mis en place par ##<a href="KeyPgViewgraphics.html">View</a>## s'applique aussi. Quand ##**Circle**##termine le trac&eacute;, le curseur graphique courant est positionn&eacute; sur le centre donn&eacute;.<br \=""><br \="">
+	{{fbdoc item="ex"}}<br \="">##<div class="freebasic">' Valide mode 640x480, 256 couleurs<br>Screen 18<br><br>' Trace un cercle au centre<br>Circle (<span class="num">320, 240<span class="oth">), 200<span class="oth">, 15<br><br>' Trace une ellipse pleine<br>Circle (<span class="num">320, 240<span class="oth">), 200<span class="oth">, 2, <span class="oth">, , <span class="num">0.2, F<br><br>' Trace un petit arc<br>Circle (<span class="num">320, 240<span class="oth">), 200<span class="oth">, 4, <span class="num">0.83, <span class="num">1.67, <span class="num">3<br><br>Sleep<br>
+		##<br><br \=""><div class="fb_img"><img src="images/circle.png">
+	<br \=""><br \="">
+		{{fbdoc item="diff"}}<br \="">  	- FreeBASIC utilisant un algorithme diff&eacute;rent de QB pour le trac&eacute; ellipse/arc,le r&eacute;sultat peut &ecirc;tre l&eacute;g&egrave;rement diff&eacute;rent pour chaque pixel.<br \="">  </li>  	- L'indicateur F pour remplir les cercles/ellipses est nouveau dans FreeBASIC.<br \="">  </li>  	- ##//target//## Nouveau pour FreeBASIC<br \="">    <br \="">  </li>
+	{{fbdoc item="see"}}<br \="">  	- ##[[KeyPgScreengraphics Screen (Graphics)]]##<br \="">  </li>  	- ##[[KeyPgColor Color]]##<br \="">    <br \="">  </li>
 		starting angle
 	##//end//##
 		ending angle

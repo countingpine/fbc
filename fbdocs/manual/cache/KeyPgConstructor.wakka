@@ -1,5 +1,5 @@
 {{fbdoc item="title" value="CONSTRUCTOR"}}----
-Called automatically when a class or user defined type is created
+Appel&eacute; automatiquement lorsqu'une classe ou un type d&eacute;fini par l'utilisateur est cr&eacute;&eacute;
 
 {{fbdoc item="syntax"}}##
 	[[KeyPgType Type]] //typename//
@@ -13,23 +13,23 @@ Called automatically when a class or user defined type is created
 ##
 {{fbdoc item="param"}}
 	##//typename//## 
-		name of the ##[[KeyPgType Type]]## of ##[[KeyPgClass Class]]##
+		nom du ##[[KeyPgType Type]]## ou ##[[KeyPgClass Class]]##
 
 {{fbdoc item="desc"}}
-	##**Constructor**## methods are called when a user defined ##[[KeyPgType Type]]## or ##[[KeyPgClass Class]]## variable is created.
+	Les m&eacute;thodes ##**Constructor**## sont appel&eacute;es lorsqu'un ##[[KeyPgType Type]]## d&eacute;fini par l'utilisateur ou une variable de ##[[KeyPgClass Class]]## est cr&eacute;&eacute;.
 
-	##//typename//## is the name of the type for which the ##**Constructor**## method is declared and defined.  Name resolution for ##//typename//## follows the same rules as procedures when used in a ##[[KeyPgNamespace Namespace]]##.
+	##//typename//## est le nom du type pour lequel la m&eacute;thode ##**Constructor**## est d&eacute;clar&eacute;e et d&eacute;finie.  La r&eacute;solution de noms pour ##//typename//## suit les m&ecirc;mes r&egrave;gles que les proc&eacute;dures en cas d'utilisation dans un ##[[KeyPgNamespace espace de noms]]##.
 
-	More than one constructor may exist for a type or class.  The exact constructor method called depends on the ##//parameter//## signature matched when the variable is initialized.  More than one ##//parameter//## may exist in a constructor method declaration.
+	Plus d'un constructeur peut exister pour un type ou une classe.  La m&eacute;thode constructeur exacte appel&eacute;e d&eacute;pend de la signature ##//parameter//## correspondant quand la variable est initialis&eacute;e.  Plus d'un ##//parameter//## peut exister dans la d&eacute;claration de la m&eacute;thode ##**Constructor**##.
 
-	A constructor method is passed a hidden ##[[KeyPgThis this]]## parameter having the same type as ##//typename//##.  ##[[KeyPgThis this]]## is optionally used to access the fields of the ##[[KeyPgType Type]]## or ##[[KeyPgClass Class]]## which is to be initialized in the ##**Constructor**## method.
+	Une m&eacute;thode constructeur est pass&eacute;e &agrave; un param&egrave;tre ##[[KeyPgThis This]]## cach&eacute; qui est du m&ecirc;me type que ##//typename//##.  ##[[KeyPgThis This]]## est &eacute;ventuellement utilis&eacute; pour acc&eacute;der aux champs du ##[[KeyPgType Type]]## ou de la ##[[KeyPgClass Class]]## qui a &eacute;t&eacute; initialis&eacute; dans la m&eacute;thode ##**Constructor**##.
 
-	Chaining of constructors in nested types is supported.  Any fields that have their own default constructor are called first.
+	Le cha&icirc;nage des constructeurs dans les types imbriqu&eacute;s est pris en charge.  Tous les champs qui ont leur propre constructeur par d&eacute;faut sont appel&eacute;s en premier.
 
-	Constructors are called when declaring global or local static instances of ##//typename//## and when allocating ##//typename//## dynamically using the ##[[KeyPgOpNew New]]## operator.
+	Les constructeurs sont appel&eacute;s lors de la d&eacute;claration d'instances statiques globales ou locales de ##//typename//## et lors de l'allocation dynamique de ##//typename//## en utilisant l'op&eacute;rateur ##[[KeyPgOpNew New]]##.
 
 {{fbdoc item="ex"}}
-Simple constructor example for beginners.
+Exemple de constructeur simple pour d&eacute;butants.
 {{fbdoc item="filename" value="examples/manual/udt/constructor-ptr.bas"}}%%(freebasic)
 Type MyObj
   Foo As Integer Ptr
@@ -76,7 +76,7 @@ End Scope
   '' Because our objects are being deleted.
 Sleep
 %%
-More advanced construction example, showing constructor overloading among other things.
+Exemple de construction plus avanc&eacute;e, montrant une surcharge constructeur entre autres choses.
 {{fbdoc item="filename" value="examples/manual/udt/constructor.bas"}}%%(freebasic)
 type sample
 
@@ -119,7 +119,7 @@ constructor sample ( a as string, b as byte )
   this._text = str(a) + "," + str(b)
 end constructor
 
-operator sample.cast () as string
+TheOperator sample.cast () As String
   return this._text
 end operator
 
@@ -142,10 +142,10 @@ print "  x3 = "; x3
 print "  x4 = "; x4
 %%
 {{fbdoc item="lang"}}
-	- Object-related features are supported only in the //[[CompilerOptlang -lang fb]]// option
+	- Les caract&eacute;ristiques li&eacute;es &agrave; l'objet sont prises en charge uniquement dans le dialecte //[[CompilerOptlang -lang fb]]//
 
 {{fbdoc item="diff"}}
-	- New to ""FreeBASIC""
+	- Nouveau pour FreeBASIC
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgType Class]]##

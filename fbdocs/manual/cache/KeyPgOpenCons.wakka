@@ -1,5 +1,5 @@
 {{fbdoc item="title" value="OPEN CONS"}}----
-Opens the console's standard input (//stdin//) or output (//stdout//) streams for use in file operations.
+Ouvre le flux d'entr&eacute;e (//stdin//) ou de sortie (//stdout//) standard de la console pour une utilisation dans des op&eacute;rations sur les fichiers.
 
 {{fbdoc item="syntax"}}##
 	**Open Cons** **As** [**#**]//filenumber//
@@ -13,26 +13,26 @@ Opens the console's standard input (//stdin//) or output (//stdout//) streams fo
 ##
 {{fbdoc item="param"}}
 	##//filenumber//##
-		An available //file number// to bind to the //stdin// or //stdout// stream, which can be found with ##[[KeyPgFreefile Freefile]]##.
+		Un //num&eacute;ro de fichier// disponible pour communiquer avec les flux //stdin// ou //stdout//, qui peut &ecirc;tre trouv&eacute; avec ##[[KeyPgFreefile FreeFile]]##.
 
-{{fbdoc item="ret"}}
-	In the first usage, ##**Open Cons**## returns zero (0) on success and a non-zero error code otherwise.
+{{fbdoc item="section" value="Valeur retourn&eacute;e
+	Dans le premier usage, ##**Open Cons**## retourne z&eacute;ro (0) en cas de succ&egrave;s et sinon un code erreur diff&eacute;rent de z&eacute;ro.
 
 {{fbdoc item="desc"}}
-	##**Open Cons**## opens the console's //stdin// or //stdout// streams for reading or writing. A //file number// is bound to the stream, which is used in subsequent file operations, such as ##[[KeyPgInputPp Input #]]##. An available //file number// can be retrieved with ##[[KeyPgFreefile Freefile]]##.
+	##**Open Cons**## ouvre les flux console //stdin// ou //stdout// pour une op&eacute;ration de lecture ou d'&eacute;criture. Un //num&eacute;ro de fichier// est li&eacute; au flux, qui est utilis&eacute; dans des op&eacute;rations de fichier ult&eacute;rieures, telles que ##[[KeyPgInputPp Input #]]##.  Un //num&eacute;ro de fichier// disponible peut &ecirc;tre r&eacute;cup&eacute;r&eacute; avec ##[[KeyPgFreefile FreeFile]]##.
 
-	The ##[[KeyPgInputfilemode Input]]## //file mode// opens the //stdin// stream for reading file operations, such as ##[[KeyPgInputPp Line Input #]]##, while the ##[[KeyPgOutput Output]]## //file mode// opens the //stdout// stream for writing file operations, such as ##[[KeyPgPrintPp Print #]]##. The ##[[KeyPgOutput Output]]## //file mode// is the default if not specified.
+	##[[KeyPgInputfilemode Input]]## //file mode// ouvre le flux //stdin// pour des op&eacute;rations de lecture de fichier, comme ##[[KeyPgInputPp Line Input #]]##, alors que ##[[KeyPgOutput Output]]## //file mode// ouvre le flux //stdout// pour des op&eacute;rations d'&eacute;criture de fichier, comme ##[[KeyPgPrintPp Print #]]##. Le //file mode// est ##[[KeyPgOutput Output]]## par d&eacute;faut s'il n'a pas &eacute;t&eacute; sp&eacute;cifi&eacute;.
 
-	The //stdin// and //stdout// streams are the ones used when the calling process' input or output is redirected (piped) by OS commands, or when it is opened with ##[[KeyPgOpenPipe Open Pipe]]##.
+	Les flux //stdin// et //stdout// sont ceux utilis&eacute;s lorsque le processus d'appel d'entr&eacute;e/sortie est redirig&eacute; par les commandes du syst&egrave;me d'exploitation, ou quand il est ouvert avec ##[[KeyPgOpenPipe Open Pipe]]##.
 
-	To open both the //stdin// and //stdout// streams for file operations, a process must use multiple //file numbers//.
+	Pour ouvrir &agrave; la fois //stdin// et //stdout// pour des op&eacute;rations sur les fichiers, un processus doit utiliser plusieurs //num&eacute;ros de fichier//s.
 	
 	
-**Runtime errors:**
-	    ##**Open Cons**## throws one of the following [[ProPgErrorHandling runtime errors]]:
+**Erreurs de fonctionnement:**
+	    ##**Open Cons**## produit l'une des [[ProPgErrorHandling erreurs de fonctionnement]] suivantes:
 
-	//(##1##) Illegal function call//
-		- Filenumber was not free at the time. use ##[[KeyPgFreefile Freefile]]## to ensure that filenumber is free.
+	//(##1##) Illegal function call : Appel ill&eacute;gal de fonction//
+		<li>//filenumber// n'est pas libre actuellement. Utilisez ##[[KeyPgFreefile FreeFile]]## pour vous assurer que //filenumber// est libre.
 		
 		
 {{fbdoc item="ex"}}
@@ -51,7 +51,7 @@ Sleep
 %%
 
 {{fbdoc item="diff"}}
-	- In QB the syntax was ##OPEN "CON:" FOR INPUT|OUTPUT AS [#] //filenum//##
+	- Dans QB la syntaxe est ##OPEN "CON:" FOR INPUT|OUTPUT AS [#] //filenum//##
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgOpenScrn Open Scrn]]##

@@ -1,107 +1,107 @@
 {{fbdoc item="title" value="The Pointer Data Type"}}----
-//Written by [[WikiRick rdc]]//
+//Ecrit par [[WikiRick rdc]]//
 
-The pointer data type is unique among the FreeBasic numeric data types. Instead of containing data, like the other numeric types, a pointer contains the memory address of data.
+Le type pointeur de donn&eacute;es est unique parmi les types donn&eacute;es num&eacute;riques de FreeBASIC. Au lieu de contenir des donn&eacute;es, comme les autres types num&eacute;riques, un pointeur contient l'adresse m&eacute;moire de donn&eacute;es.
 
-On a 32-bit system, the pointer data type is 4 bytes. FreeBasic uses pointers for a number of functions such as ImageCreate, and pointers are used heavily in external libraries such as the Windows API. Pointers are also quite fast, since the compiler can directly access the memory location that a pointer points to. A proper understanding of pointers is essential to effective programming in FreeBasic.
+Sur un syst&egrave;me 32 bits, le type  pointeurde donn&eacute;es occupe 4 octets. FreeBASIC utilise des pointeurs pour un certain nombre de fonctions telles que ImageCreate, et ils sont utilis&eacute;s massivement dans des biblioth&egrave;ques externes telles que l'API Windows. Les pointeurs sont aussi assez rapides, car le compilateur peut acc&eacute;der directement &agrave; l'emplacement m&eacute;moire point&eacute; par le pointeur. Une bonne compr&eacute;hension des pointeurs est essentielle pour une programmation efficace sous FreeBASIC.
 
-For many beginning programmers, pointers seem like a strange and mysterious beast. However, if you keep one rule in mind, you should not have any problems using pointers in your program. The rule is very simple: a pointer contains an address, not data. If you keep this simple rule in mind, you should have no problems using pointers.
+Pour de nombreux programmeurs d&eacute;butants les pointeurs semblent comme une b&ecirc;te &eacute;trange et myst&eacute;rieuse. Toutefois, si vous gardez &agrave; l'esprit une r&egrave;gle, vous ne devriez avoir aucun probl&egrave;me en utilisant des pointeurs dans votre programme. La r&egrave;gle est tr&egrave;s simple: un pointeur contient une adresse, pas de donn&eacute;es. Si vous gardez cette r&egrave;gle simple &agrave; l'esprit, vous devriez avoir aucun probl&egrave;me en utilisant des pointeurs.
 
-=== Pointers and Memory ===
+<div class="fb_header"> Pointeurs et m&eacute;moire 
 
-You can think of the memory in your computer as a set of post office boxes (P.O. Box) at your local post office. When you go in to rent a P.O. Box, the clerk will give you a number, such as 100. This is the address of your P.O. Box. You decide to write the number down an a slip of paper and put it in your wallet. The next day you go to the post office and pull out the slip of paper. You locate box 100 and look inside the box and find a nice stack of junk mail. Of course, you want to toss the junk mail, but there isn't a trash can handy, so you decide to just put the mail back in the box and toss it later. Working with pointers in FreeBasic is very similar to using a P.O. Box.
+Vous pouvez imaginer la m&eacute;moire de votre ordinateur comme un ensemble de bo&icirc;tes postales (PO Box) de votre bureau de poste local. Quand vous y allez pour louer une bo&icirc;te postale, le greffier vous donnera un num&eacute;ro, le 100 par exemple. C'est l'adresse de votre bo&icirc;te postale. Vous &eacute;crivez le nombre sur un feuillet de papier et vous le mettez dans votre portefeuille. Le lendemain, vous allez &agrave; la poste et sortez le bout de papier. Vous localisez la bo&icirc;te 100, regardez &agrave; l'int&eacute;rieur de la bo&icirc;te et trouvez une bonne pile de courrier ind&eacute;sirable. Bien s&ucirc;r, vous voulez jeter le courrier ind&eacute;sirable, mais il n'y a pas de poubelle &agrave; port&eacute;e de main, alors vous d&eacute;cidez simplement de remettre le courrier dans la bo&icirc;te et de le jeter plus tard. Travailler avec des pointeurs sous FreeBASIC est tr&egrave;s similaire &agrave; l'utilisation d'une bo&icirc;te postale.
 
-When you declare a pointer, it isn't pointing to anything which is analogous to the blank slip of paper. In order to use a pointer, it must be initialized to a memory address, which is the same as writing down the number 100 on the slip of paper.  Once you have the address, find the right P.O. Box, you can dereference the pointer, open the mail box, to add or retrieve data from the pointed-to memory location. As you can see there are three basic steps to using pointers.
+Lorsque vous d&eacute;clarez un pointeur, il ne pointe pas vers quelque chose ceci est analogue au morceau de papier blanc. Afin d'utiliser un pointeur, il doit &ecirc;tre initialis&eacute; avec une adresse m&eacute;moire, ce qui est identique &agrave; l'&eacute;criture du num&eacute;ro 100 sur le bout de papier. Une fois que vous avez l'adresse, trouvez la bonne bo&icirc;te postale, vous pouvez d&eacute;r&eacute;f&eacute;rencer le pointeur, ouvrir la bo&icirc;te aux lettres, ajouter ou r&eacute;cup&eacute;rer des donn&eacute;es point&eacute;es par l'emplacement m&eacute;moire. Comme vous pouvez le voir il y a trois &eacute;tapes de base pour utiliser des pointeurs.
 
-~1) Declare a pointer variable.
-~1) Initialize the pointer to a memory address.
-~1) Dereference the pointer to manipulate the data at the pointed-to memory location.
+D&eacute;clarer une variable pointeur.
+Initialiser le pointeur vers une adresse m&eacute;moire.
+D&eacute;r&eacute;f&eacute;rencement du pointeur pour manipuler les donn&eacute;es &agrave; l'emplacement m&eacute;moire point&eacute;.
 
-This isn't really any different than using a standard variable, and you use pointers in much the same way as standard variables. The only real difference between the two is that in a standard variable, you can access the data directly, and with a pointer you must dereference the pointer to interact with the data.
+Ce n'est pas vraiment diff&eacute;rent de l'utilisation d'une variable standard et vous utiliserez les pointeurs en grande partie de la m&ecirc;me mani&egrave;re que les variables standard. La seule vraie diff&eacute;rence entre les deux est que dans une variable standard, vous pouvez acc&eacute;der directement aux donn&eacute;es, et avec un pointeur, vous devez le d&eacute;r&eacute;f&eacute;rencer pour interagir avec les donn&eacute;es.
 
-=== Typed and Untyped Pointers ===
+<div class="fb_header"> Pointeurs typ&eacute;s et non typ&eacute;s 
 
-FreeBasic has two types of pointers, typed and untyped. A typed pointer is declared with an asscoaited data type.
+FreeBASIC a deux types de pointeurs: typ&eacute;s et non typ&eacute;s. Un pointeur typ&eacute; est d&eacute;clar&eacute; en association avec un type de donn&eacute;es.
 
 %%(freebasic)
 Dim myPointer as Integer Ptr
 %%
 
-This tells the compiler that this pointer will be used for integer data. Using typed pointers allows the compiler to do type checking to make sure that you are not using the wrong type of data with the pointer, and simplifies pointer arithmetic.
+Cela indique au compilateur que ce pointeur sera utilis&eacute; pour des donn&eacute;es nombres entiers. L'utilisation de pointeurs typ&eacute;s permet au compilateur de faire la v&eacute;rification du type pour s'assurer que vous n'utilisez pas le mauvais type de donn&eacute;es avec le pointeur et simplifie l'arithm&eacute;tique des pointeurs.
 
-Untyped pointers are declared using the Any keyword.
+Les pointeurs non typ&eacute;s sont d&eacute;clar&eacute;s en utilisant le mot-cl&eacute; "Any".
 
 %%(freebasic)
 Dim myPointer as Any Ptr
 %%
 
-Untyped pointers have no type checking and default to size of byte. Untyped pointers are used in the C Runtime Library and many third party libraries, such as the Win32 API, to accommodate the void pointer type in C. Unless you specifically need an untyped pointer, you should use typed pointers so that the compiler can check the pointer assignments.
+Les pointeurs non typ&eacute;s n'ont aucune v&eacute;rification de type et par d&eacute;faut la taille d'un octet. Les pointeurs non typ&eacute;s sont utilis&eacute;s dans la biblioth&egrave;que d'ex&eacute;cution C et de nombreuses librairies tierces, telles que l'API Win32, pour accueillir le type pointeur void en C. Sauf si vous avez sp&eacute;cifiquement besoin d'un pointeur non typ&eacute;, vous devriez utiliser des pointeurs typ&eacute;s afin que le compilateur peut v&eacute;rifier les affectations pointeur.
 
-=== Pointer Operators ===
+<div class="fb_header"> Les op&eacute;rateurs pointeur
 
-FreeBasic has the following [[CatPgOperators pointer operators]].
+FreeBASIC a les [[CatPgOpPoint op&eacute;rateurs pointeur]] suivants.
 
-You will notice that the addressof operator not only returns the memory address of a variable, but it can also return the address of a subroutine or function. You would use the address of a subroutine or function to create a callback function such as used in the CRT QSort function.
+Vous remarquerez que l'op&eacute;rateur @ (Adresse de) non seulement renvoie l'adresse m&eacute;moire d'une variable, mais il peut aussi renvoyer l'adresse d'un sous-programme ou d'une fonction. Vous pourriez utiliser l'adresse d'un sous-programme ou d'une fonction pour cr&eacute;er une fonction de rappel telle que celle utilis&eacute;e dans la fonction CRT qsort.
 
-=== Memory Functions ===
+<div class="fb_header"> Fonctions m&eacute;moire 
 
-FreeBasic also has a number of [[CatPgMemory memory functions]] that are used with pointers.
+FreeBASIC a &eacute;galement un certain nombre de [[CatPgMemory fonctions m&eacute;moire]] qui sont utilis&eacute;es avec des pointeurs.
 
-These functions are useful for creating a number of dynamic structures such as linked lists, ragged or dynamic arrays and buffers used with third party libraries.
+Ces fonctions sont utiles pour cr&eacute;er un certain nombre de structures dynamiques comme les listes cha&icirc;n&eacute;es, tableaux non-rectangulaires (ragged) ou dynamiques et les tampons utilis&eacute;s avec des librairies tierces.
 
-When using the Allocate function you must specify the storage size based on the data type using the equation number_of_elements * Sizeof(datatype). To allocate space for 10 integers your code would look like this: myPointer = Allocate(10 * Sizeof(Integer)). An integer is 4 bytes so allocating 10 integers will set aside 40 bytes of memory. Allocate does not clear the memory segment, so any data in the segment will be random, meaningless data until it is initialized.
+Lorsque vous utilisez la fonction "Allocate" vous devez sp&eacute;cifier la taille de stockage bas&eacute;e sur le type de donn&eacute;es en utilisant l'&eacute;quation nombre_d_elements * sizeof (type de donn&eacute;es). Pour allouer de l'espace pour 10 entiers votre code devrait ressembler &agrave; ceci: myPointer = Allocate (10 * sizeof (Integer)). Un entier occupe 4 octets donc pour allouer 10 entiers 40 octets seront mis de c&ocirc;t&eacute; en m&eacute;moire. "Allocate" n'efface pas le segment de m&eacute;moire, donc les donn&eacute;es dans le segment seront al&eacute;atoires, donn&eacute;es sans aucun sens jusqu'&agrave; l'initialisation.
 
-Callocate works in the same fashion, except that the calculation is done internally. To allocate the same 10 integers using Callocate your code would look like this: myPointer = Callocate(10, Sizeof(Integer)). Unlike Allocate, Callocate will clear the memory segment.
+"Callocate" fonctionne de la m&ecirc;me fa&ccedil;on, sauf que le calcul est fait en interne. Pour allouer les 10 m&ecirc;mes entiers en utilisant "Callocate" votre code ressemblera &agrave; cela: myPointer = Callocate(10, Sizeof(Integer)). Contrairement &agrave; "Allocate", "Callocate" va effacer le segment de m&eacute;moire.
 
-Reallocate will change the size of an existing memory segment, making it larger or smaller as needed. If the new segment is larger than the existing segment, then the data in the existing segment will be preserved. If the new segment is smaller than the existing segment, the data in the existing segment will be truncated. Reallocate does not clear the added memory or change any existing data.
+"Reallocate" change la taille d'un segment existant en m&eacute;moire, le rendant plus ou moins grand selon les besoins. Si le nouveau segment est plus grand que le segment existant, alors les donn&eacute;es dans le segment existant seront conserv&eacute;es. Si le nouveau segment est plus petit que le segment existant, les donn&eacute;es existantes dans le segment seront tronqu&eacute;es. "Reallocate" n'efface pas la m&eacute;moire ajout&eacute;e ou modifie toutes les donn&eacute;es existantes.
 
-All of these functions will return a memory address if successful. If the functions cannot allocate the memory segment, then a NULL pointer (0) is returned. You should check the return value each time you use these functions to be sure that the memory segment was successfully created. Trying to use a bad pointer will result in undesirable behavior or system crashes.
+Toutes ces fonctions renvoient une adresse m&eacute;moire en cas de succ&egrave;s. Si les fonctions ne peuvent pas allouer le segment de m&eacute;moire, alors un pointeur NULL (0) est retourn&eacute;. Vous devriez v&eacute;rifier la valeur retourn&eacute;e chaque fois que vous utilisez ces fonctions pour &ecirc;tre s&ucirc;r que le segment de m&eacute;moire a &eacute;t&eacute; cr&eacute;&eacute; correctement. Tenter d'utiliser un mauvais pointeur se traduira par un comportement ind&eacute;sirable ou plantage du syst&egrave;me.
 
-{{table columns="1" cellpadding="2" cells=" There is no intrinsic method for determining the size of an allocation. You must keep track of this information yourself."}}
+{{table columns="" cellpadding="2" cells="<table> Il n'y a pas de m&eacutethode intrins&egraveque pour d&eacuteterminer la taille d'une allocation. Vous devez garder une trace de cette information vous-m&ecircme.;</table>
 
-{{table columns="1" cellpadding="2" cells=" Be careful not to use the same pointer variable to allocate two or more memory segments. Reusing a pointer without first deallocating the segment it points to will result in the memory segment being lost causing a memory leak."}}
+{{table columns="" cellpadding="2" cells="<table>Attention &agrave ne pas utiliser la m&ecircme variable pointeur pour allouer deux ou plusieurs segments de m&eacutemoire. R&eacuteutiliser un pointeur, sans premi&egraverement le d&eacutesallouer, se traduira par la perte du segment de m&eacutemoire pr&eacutec&eacutedent, provoquant une perte de m&eacutemoire.;</table>
 
-=== Pointer Arithmetic and Pointer Indexing ===
+<div class="fb_header"> Arithm&eacute;tique des pointeurs et d'indexation de pointeur 
 
-When you create a memory segment using the allocation functions, you will need a way to access the data contained within the segment. In FreeBasic there are two methods for accessing data in the segment; using the indirection operator with pointer arithmetic, and pointer indexing.
+Lorsque vous cr&eacute;ez un segment de m&eacute;moire en utilisant les fonctions d'allocation, vous aurez besoin d'un moyen pour acc&eacute;der aux donn&eacute;es contenues dans le segment. En FreeBASIC, il existe deux m&eacute;thodes pour acc&eacute;der aux donn&eacute;es dans le segment; utiliser l'op&eacute;rateur d'indirection avec l'arithm&eacute;tique des pointeurs et l'indexation du pointeur.
 
-Pointer arithmetic, as the name suggests, adds and subtracts values to a pointer to access individual elements within a memory segment. When you create a typed pointer such as Dim myPointer as Integer ptr, the compiler knows that the data being used with this pointer is of size Integer or 4 bytes. The pointer, when initialized, points to the first element of the segment. You can express this as *(myPtr + 0). To access the second element, you need to add 1 to the pointer, which can be expressed as *(myPtr + 1).
+L'arithm&eacute;tique des pointeurs, comme son nom l'indique, ajoute et soustrait des valeurs &agrave; un pointeur pour acc&eacute;der aux &eacute;l&eacute;ments individuels au sein d'un segment de m&eacute;moire. Lorsque vous cr&eacute;ez un pointeur typ&eacute; comme "Dim myPointer as Integer ptr", le compilateur sait que les donn&eacute;es utilis&eacute;es avec ce pointeur ont la taille d'un entier ou 4 octets. Le pointeur, quand il est initialis&eacute;, pointe sur le premier &eacute;l&eacute;ment du segment. Vous pouvez exprimer ceci ainsi *(myPtr+0). Pour acc&eacute;der au deuxi&egrave;me &eacute;l&eacute;ment, vous devez ajouter 1 au pointeur, ce qui peut &ecirc;tre exprim&eacute; *(myPtr+1).
 
-Since the compiler knows that the pointer is an Integer pointer, adding 1 to the pointer reference will actually increment the address contained in myPtr by 4, the size of an Integer. This is why using typed pointers is preferable over untyped pointers. The compiler does much of the work for you in accessing the data in the memory segment.
+Comme le compilateur sait que le pointeur est un pointeur d'entier, ajouter 1 &agrave; la r&eacute;f&eacute;rence pointeur consistera effectivement &agrave; incr&eacute;menter l'adresse contenue dans "myPtr" de 4 (de la taille d'un Entier). C'est pourquoi l'utilisation de pointeurs typ&eacute;s est pr&eacute;f&eacute;rable &agrave; celle des pointeurs non typ&eacute;s. Le compilateur effectue une grande partie du travail pour vous dans l'acc&egrave;s aux donn&eacute;es dans le segment de m&eacute;moire.
 
-Notice that the construct is *(myPtr + 1) and not *myPtr + 1. The * operator has higher precedence than +, so *myPtr + 1 will actually increment the contents myPtr points to, and not the pointer address.
+Notez que la construction est *(myPtr+1) et non *myPtr+1. L'op&eacute;rateur * est plus prioritaire que +, donc *myPtr+1  incr&eacute;mentera effectivement le contenu de l'adresse point&eacute;e par myPtr, et non l'adresse du pointeur.
 
-~-myPtr will be evaluated first, which returns the contents of the memory location and then +1 will be evaluated, adding 1 to the memory location. By wrapping myPtr + 1 within parenthesis, you force the compiler to evaluate myPtr + 1 first, which increments the pointer address, and then the * is applied to return the contents of the new address.
+myPtr sera &eacute;valu&eacute; en premier, il renverra le contenu de l'emplacement m&eacute;moire, puis +1 sera &eacute;valu&eacute;, ajoutant 1 &agrave; l'emplacement de la m&eacute;moire. En encapsulant myPtr+1 entre parenth&egrave;ses, vous forcez le compilateur &agrave; &eacute;valuer myPtr+1 d'abord, ce qui incr&eacute;mente l'adresse du pointeur, puis le * est appliqu&eacute; pour retourner le contenu de la nouvelle adresse.
 
-Pointer indexing works the same way as pointer arithmetic, but the details are handled by the compiler. *(myPtr + 1) is equivalent to myPtr[1]. Again, since the compiler knows that myPtr is an integer pointer, it can calculate the correct memory offsets to return the proper values using the index. Which format you use if up to you, but the index method resembles the standard array access method and visually is easier to understand than the indirection operator.
+L'indexation de pointeurs fonctionne de la m&ecirc;me mani&egrave;re que l'arithm&eacute;tique des pointeurs, mais les d&eacute;tails sont tra&icirc;t&eacute;s par le compilateur. *(myPtr+1) est &eacute;quivalent &agrave; myPtr[1]. Encore une fois, puisque le compilateur sait que myPtr est un pointeur d'entier, il peut calculer les d&eacute;calages m&eacute;moire corrects pour retourner les valeurs correctes &agrave; l'aide de l'indice. Quel est le format que vous utiliserez, la r&eacute;ponse vous appartient, mais la m&eacute;thode avec indice ressemble &agrave; la m&eacute;thode standard d'acc&egrave;s aux tableau et est visuellement plus facile &agrave; comprendre que l'op&eacute;rateur d'indirection.
 
-=== Pointer Functions ===
+<div class="fb_header"> Fonctions pointeur 
 
-Freebasic has a set of pointer functions to complement the pointer operators.
+FreeBASIC a un ensemble de fonctions pointeur pour compl&eacute;ter les op&eacute;rateurs pointeur.
 
-~- [[KeyPgCptr Cptr]] Converts expression to a data_type pointer. Expression can be another pointer or an integer.
-~- [[KeyPgPeek Peek]] Peek returns the contents of memory location pointer to by pointer. Data_type specifies the type of expected data.
-~- [[KeyPgPoke Poke]] Puts the value of expression into the memory location pointed to by pointer. The data_type specifies the type of data being placed into the memory location.
-~- [[KeyPgSadd Sadd]] Returns the location in memory where the string data in a dynamic string is located.
-~- [[KeyPgOpStrptr Strptr]] The same as Sadd.
-~- [[KeyPgOpProcptr Procptr]] Returns the address of a function. This works the same way as the addressof operator @.
-~- [[KeyPgOpVarptr Varptr]] This function works the same way as the addressof operator @.
+[[KeyPgCptr CPtr]] Convertit une expression en un pointeur data_type. L'expression peut &ecirc;tre un autre pointeur ou un entier.
+[[KeyPgPeek Peek]] Peek retourne le contenu de l'emplacement m&eacute;moire point&eacute; par le pointeur. Data_type sp&eacute;cifie le type de donn&eacute;es attendues.
+[[KeyPgPoke Poke]] Met la valeur de l'expression dans l'emplacement m&eacute;moire point&eacute; par le pointeur. data_type sp&eacute;cifie le type de donn&eacute;es &agrave; placer dans l'emplacement m&eacute;moire.
+[[KeyPgSadd SAdd]] Renvoie l'emplacement m&eacute;moire o&ugrave; les donn&eacute;es de la cha&icirc;ne d'une cha&icirc;ne dynamique sont situ&eacute;es.
+[[KeyPgOpStrptr StrPtr]] Comme Sadd.
+[[KeyPgOpProcptr ProcPtr]] Renvoie l'adresse d'une fonction. Fnctionne de la m&ecirc;me mani&egrave;re que l'op&eacute;rateur @ (adresse de).
+[[KeyPgOpVarptr VarPtr]] Cette fonction fonctionne de la m&ecirc;me mani&egrave;re que l'op&eacute;rateur @ (adresse de).
 
-The Sadd and Strptr functions work with the string data types to return the address of the string data. The Peek and Poke functions have been added for the purposes of supporting legacy code. Procptr and Varptr both work just like the address of operator @, but Proptr only works on subroutines and functions and Varptr only works on variables. Cptr is useful for casting an untyped pointer to a typed pointer, such as a return value from a third party library.
+Les fonctions Sadd et StrPtr travaillent avec les donn&eacute;es des types cha&icirc;nes pour retourner l'adresse de donn&eacute;es de la cha&icirc;ne. Les fonctions Peek et Poke ont &eacute;t&eacute; ajout&eacute;es aux fins de soutenir le code h&eacute;rit&eacute;. Procptr et Varptr fonctionnent toutes les deux exactement comme l'op&eacute;rateur @ (adresse de), mais Proptr fonctionnent seulement sur les sous-programmes et  fonctions et Varptr seulement sur les variables. Cptr est utile pour changer (cast) un pointeur non typ&eacute; en un pointeur typ&eacute;, comme la valeur retourn&eacute;e d'une biblioth&egrave;que tierce partie.
 
-=== Subroutine and Function Pointers ===
+<div class="fb_header"> Pointeurs de sous-programmes et de fonctions 
 
-Subroutines and functions, like variables, reside in memory and have an address associated with their entry point. You can use these addresses to create events in your programs, to create pseudo-objects and are used in callback functions. You create a sub or function pointer just like any other pointer except you declare your variable as a pointer to a subroutine or function rather than as a pointer to a data type.
+Les sous-programmes et fonctions, comme les variables, r&eacute;sident en m&eacute;moire et ont une adresse associ&eacute;e &agrave; leur point d'entr&eacute;e. Vous pouvez utiliser ces adresses pour cr&eacute;er des &eacute;v&eacute;nements dans vos programmes, pour cr&eacute;er des pseudo-objets et sont utilis&eacute;s dans des fonctions de rappel. Vous cr&eacute;ez un pointeur de sous-programme ou de fonction comme tout autre pointeur, sauf vous d&eacute;clarez votre variable comme un pointeur vers un sous-programme ou une fonction, plut&ocirc;t que comme un pointeur vers un type de donn&eacute;es.
 
-Before using a function pointer, it must be initialized to the address of a subroutine or function using Procptr or @. Once initialized, you use the pointer in the same manner as calling the original subroutine or function.
+Avant d'utiliser un pointeur de fonction, il doit &ecirc;tre initialis&eacute; &agrave; l'adresse d'un sous-programme ou d'une fonction en utilisant "Procptr" ou @. Une fois initialis&eacute;, vous utilisez le pointeur de la m&ecirc;me mani&egrave;re que pour appeler le sous-programme ou la fonction original.
 
-You declare a function pointer using the anonymous declaration syntax.
+Vous d&eacute;clarez un pointeur de fonction en utilisant la syntaxe de d&eacute;claration anonyme.
 
 %%(freebasic)
 Dim FuncPtr As Function(x As Integer, y As Integer) As Integer
 %%
 
-You then need to asscoate this function pointer with an actual subroutine or function within your code.
+Vous devez ensuite associer ce pointeur de fonction avec un sous-programme ou une fonction r&eacute;el au sein de votre code.
 
 %%(freebasic)
 Function Power(number As Integer, pwr As Integer) As Integer
@@ -112,45 +112,45 @@ FuncPtr = @Power
 
 %%
 
-You can then call the function pointer much like you would call the real function.
+Vous pouvez alors appeler le pointeur de fonction un peu comme vous appelez la fonction r&eacute;elle.
 
 %%(freebasic)
 FuncPtr(2, 4)
 %%
 
-While this may not be useful at first glance, you can use this technique to implement polymorphic functions where a single variable instance can point to one of several different subroutine or functions.
+M&ecirc;me si cela peut ne pas &ecirc;tre utile &agrave; premi&egrave;re vue, vous pouvez utiliser cette technique pour mettre en oeuvre des fonctions polymorphes, o&ugrave; une seule instance variable peut pointer vers l'un des sous-programmes ou l'une des fonctions choisi(e)s parmi une s&eacute;rie de sous-programmes ou de fonctions diff&eacute;rent(e)s.
 
-For example, suppose you have a dog and cat object. Both objects need a Speak method. By defining Speak as a function pointer and associate Speak with a Bark subroutine for a dog and a Meow subroutine for a cat, you can make Speak either issue a "Woof!" or "Meow!" depending on the object type.
+Par exemple, supposons que vous avez des objets chien et de chat. Les deux objets ont besoin d'une m&eacute;thode Speak. En d&eacute;finissant Speak comme un pointeur de fonction et en associant Speak avec un sous-programme Bark (aboyer) pour un chien et un sous-programme Meow (miauler) pour un chat, vous pouvez faire parler et &eacute;mettre un "Woof!" ou "Miaou!" selon le type d'objet.
 
-=== Creating a Callback Function ===
+<div class="fb_header"> Cr&eacute;ation d'une fonction de rappel (callback) 
 
-One of the primary uses for function pointers is to create callback functions. A callback function is a function that you have created in your program that is called by another function or subroutine either in your own code space or in an external library. Windows uses callback functions to enumerate through Window objects like fonts, printers and forms.
+Une des utilisations principales pour les pointeurs de fonction est de cr&eacute;er des fonctions de rappel (callback). Une fonction de rappel (callback) est une fonction que vous avez cr&eacute;&eacute;e dans votre programme qui est appel&eacute;e par une autre fonction ou un sous-programme, soit dans votre propre espace de code ou dans une biblioth&egrave;que externe. Windows utilise des fonctions de rappel (callback) pour d&eacute;nombrer des objets Windows comme les polices, les imprimantes et les formes.
 
-The qsort, function contained within the C Runtime Library sorts the elements of an array using a callback function to determine the sort order. The prototype for the qsort function is contained in stdlib.bi:
+La fonction qsort contenue dans la Biblioth&egrave;que C Runtime trie les &eacute;l&eacute;ments d'un tableau en utilisant une fonction de rappel (callback) pour d&eacute;terminer l'ordre de tri. Le prototype de la fonction qsort est contenu dans stdlib.bi:
 
 %%(freebasic)
 declare sub qsort cdecl alias "qsort" (byval as any ptr, byval as size_t, byval as size_t, byval as function cdecl(byval as any ptr, byval as any ptr) as integer)
 %%
 
-The following lists the parameter information for the qsort subroutine.
+La liste suivante &eacute;num&egrave;re les informations sur les param&egrave;tres du sous-programme qsort.
 
-~1) The first parameter is the address to the first element of the array. The easiest way to pass this information to qsort is to append the address of operator to the first element index: @myArray(0).
-~1) The second parameter is the number of elements in the array, that is the array count.
-~1) The third parameter is the size of each element in bytes. For an array of integers, the element size would be 4 bytes.
-~1) The fourth parameter is a function pointer to the user created compare function. The function must be declared using the Cdecl passing model, as shown in this parameter.
+Le premier param&egrave;tre est l'adresse du premier &eacute;l&eacute;ment du tableau. La meilleure fa&ccedil;on de transmettre cette information &agrave; qsort est d'ajouter l'op&eacute;rateur "adresse de" &agrave; l'indice du premier &eacute;l&eacute;ment: @myArray(0).
+Le deuxi&egrave;me param&egrave;tre est le nombre d'&eacute;l&eacute;ments dans le tableau, c'est le compte des &eacute;l&eacute;ments du tableau.
+Le troisi&egrave;me param&egrave;tre est la taille de chaque &eacute;l&eacute;ment en octets. Pour un tableau d'entiers, la taille de l'&eacute;l&eacute;ment serait de 4 octets.
+Le quatri&egrave;me param&egrave;tre est un pointeur de fonction vers la fonction de comparaison cr&eacute;&eacute; par l'utilisateur. La fonction doit &ecirc;tre d&eacute;clar&eacute;e avec le mod&egrave;le de pasage Cdecl, comme indiqu&eacute; dans ce param&egrave;tre.
 
 
-Using this information, you can see how qsort works. By passing the address of the first element along with the count of elements, and the size of each element, qsort can iterate through the array using pointer arithmetic.
+En utilisant cette information, vous pouvez voir comment qsort fonctionne. En passant l'adresse du premier &eacute;l&eacute;ment avec le compte des &eacute;l&eacute;ments et la taille de chaque &eacute;l&eacute;ment, qsort peut parcourir le tableau en utilisant l'arithm&eacute;tique des pointeurs.
 
-Qsort will take two array elements, pass them to your user defined compare function and use the compare function's return value to sort the array elements. It does this repeatedly until each array element is in sorted order.
+Qsort prend deux &eacute;l&eacute;ments du tableau, les transmet &agrave; votre fonction de comparaison et utilise de valeur de retour de la fonction de comparaison pour trier les &eacute;l&eacute;ments du tableau. Elle r&eacute;p&egrave;te cela jusqu'&agrave; ce que chaque &eacute;l&eacute;ment du tableau soit dans l'ordre.
 
-You need to declare the function prototype as Cdecl which ensures that the parameters are passed in the correct order.
+Vous devez d&eacute;clarer le prototype de fonction Cdecl qui garantit la transmission des param&egrave;tres dans le bon ordre.
 
 %%(freebasic)
 Declare Function QCompare Cdecl (Byval e1 As Any Ptr, Byval e2 As Any Ptr) As Integer
 %%
 
-You would then define the function like the following.
+Vous pouvez ensuite d&eacute;finir la fonction comme ceci.
 
 %%(freebasic)
 'The qsort function expects three numbers
@@ -180,30 +180,30 @@ End If
 End Function
 %%
 
-You would then call the QSort function passing the address of the callback function.
+Vous pouvez ensuite appeler la fonction qsort en passant l'adresse de la fonction de rappel (callback).
 
 %%(freebasic)
 qsort @myArray(0), 10, Sizeof(Integer), @QCompare
 %%
 
-=== Pointer to Pointer ===
+<div class="fb_header"> Pointeur vers un pointeur 
 
-In FreeBasic you can create a pointer to any of the supported data types, including the pointer data type. A pointer to a pointer is useful in situations where you need to return a pointer to a function or in creating specialized data structures such as linked-lists and ragged arrays. A pointer to a pointer is called multi-level indirection.
+En FreeBASIC vous pouvez cr&eacute;er un pointeur vers un des types de donn&eacute;es pris en charge, y compris le type de donn&eacute;es pointeur. Un pointeur vers un pointeur est utile dans les situations o&ugrave; vous devez retourner un pointeur vers une fonction ou dans la cr&eacute;ation de structures sp&eacute;cialis&eacute;es de donn&eacute;es tels que les listes li&eacute;es et des tableaux non-rectangulaires. Un pointeur vers un pointeur est appel&eacute; indirection multi-niveau.
 
-One application of a pointer to pointer is the creation of a memory segment that behaves just like an array. For example, suppose you want to create a memory segment to hold an unknown number of integers. You can create a dynamic memory segment that you can resize as needed during runtime to handle as many integers as you need. You would start by creating a pointer-to-pointer variable.
+Une application d'un pointeur vers un pointeur est la cr&eacute;ation d'un segment de m&eacute;moire qui se comporte exactement comme un tableau. Par exemple, supposons que vous voulez cr&eacute;er un segment de m&eacute;moire pour contenir un nombre inconnu d'entiers. Vous pouvez cr&eacute;er un segment de m&eacute;moire dynamique que vous pouvez redimensionner si n&eacute;cessaire en cours d'ex&eacute;cution pour traiter  autant d'entiers que n&eacute;cessaire. Vous commencez par cr&eacute;er une variable pointeur-vers-pointeur.
 
 %%(freebasic)
 Dim myMemArray As Integer Ptr Ptr
 %%
 
-You would then initialize the pointer reference by using Allocate or Callocate.
+Vous pouvez ensuite initialiser la r&eacute;f&eacute;rence pointeur en utilisant Allocate ou Callocate.
 
 %%(freebasic)
 'Create 10 rows of integer pointers
 myMemArray = Callocate(10, Sizeof(Integer Ptr))
 %%
 
-Notice that the variable is initialized to an //Integer Ptr// since this list is going to point to another list; this is the pointer that points to another pointer. You can then initialize the individual pointer references just created to point to the needed memory segments.
+Notez que la variable est initialis&eacute;e ave un //Integer Ptr// car cette liste va pointer vers une autre liste; c'est le pointeur qui pointe vers un autre pointeur. Vous pouvez ensuite initialiser les r&eacute;f&eacute;rences individuelles des pointeurs qui viennent d'&ecirc;tre cr&eacute;&eacute;s pour pointer vers les segments de m&eacute;moire n&eacute;cessaires.
 
 %%(freebasic)
 'Add 10 columns of integers to each row
@@ -212,7 +212,7 @@ myMemArray[i] = Callocate(10, Sizeof(Integer))
 Next
 %%
 
-In this code snippet, the individual pointers in the list are initialized to 10 memory segments that will contain the actual integer data.
+Dans cet extrait de code, les pointeurs individuels de la liste sont initialis&eacute;s &agrave; 10 segments de m&eacute;moire qui contiendront des donn&eacute;es enti&egrave;res r&eacute;elles.
 
 %%(freebasic)
 'Add some data to the memory segment
@@ -223,9 +223,9 @@ Next
 Next
 %%
 
-This code snippet uses the index method to load the actual data into the memory segments. Notice that this looks and acts just like a two-dimensional array. While this may not seem useful within this context, you could use this code to create a dynamic array within a type definition. Since you cannot have a standard dynamic array within a type, this allows you get the same functionality.
+Cet extrait de code utilise la m&eacute;thode de l'indice pour charger les donn&eacute;es r&eacute;elles dans les segments de m&eacute;moire. Remarquez que cela ressemble et agit comme un tableau &agrave; deux dimensions. Tout cela ne semble pas utile dans ce contexte, vous pouvez utiliser ce code pour cr&eacute;er un tableau dynamique dans une d&eacute;finition de type. Puisque vous ne pouvez pas avoir un tableau standard dynamique au sein d'un type, ceci vous permet d'obtenir la m&ecirc;me fonctionnalit&eacute;.
 
-One thing you need to be aware of is how to deallocate a structure such as this. The rule is to just do the reverse of the allocation operations. Since the last allocate operation initialized the data memory segments, you deallocate these memory segments first and then you can deallocate the base pointer.
+Une chose dont vous devez &ecirc;tre conscient est de savoir comment lib&eacute;rer une telle structure. La r&egrave;gle est de simplement faire l'inverse des op&eacute;rations d'allocation. Depuis la derni&egrave;re op&eacute;ration d'allocation qui a initialis&eacute; les segments de m&eacute;moire de donn&eacute;es, vous d&eacute;sallouez d'abord ces segments de m&eacute;moire, puis vous pouvez d&eacute;sallouer le pointeur de base.
 
 %%(freebasic)
 'Free memory segment
@@ -237,4 +237,4 @@ Next
 Deallocate myMemArray
 %%
 
-You need to be sure that you deallocate in the right order, otherwise you will end up with memory segments that are not freed, but inaccessible. These are memory leaks and can cause a whole host of problems in your program.
+Vous devez &ecirc;tre s&ucirc;r que la d&eacute;sallocation se fait dans le bon ordre, sinon vous allez vous retrouver avec des segments de m&eacute;moire qui ne seront pas lib&eacute;r&eacute;s, mais inaccessibles. Ce seront des fuites de m&eacute;moire et pourront causer une multitude de probl&egrave;mes dans votre programme.

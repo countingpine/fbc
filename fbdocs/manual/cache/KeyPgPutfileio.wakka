@@ -1,5 +1,5 @@
 {{fbdoc item="title" value="PUT (File I/O)"}}----
-Writes data from a buffer to a file
+Ecrit des donn&eacute;es d'un tampon vers un fichier
 
 {{fbdoc item="syntax"}}##
 	**Put** #//filenum// [[KeyPgAs As]] [[KeyPgInteger integer]], [//position// [[KeyPgAs As]] [[KeyPgLongint longint]]], //data// [[KeyPgAs As]] [[KeyPgAny Any]] [, //amount// [[KeyPgAs As]] [[KeyPgInteger Integer]]]
@@ -12,27 +12,27 @@ Writes data from a buffer to a file
 ##
 {{fbdoc item="param"}}
 	##//filenum//##
-		The value passed to ##[[KeyPgOpen Open]]## when the file was opened.
+		La valeur pass&eacute;e &agrave; ##[[KeyPgOpen Open]]## lorsque le dossier a &eacute;t&eacute; ouvert.
 	##//position//##
-		Is the position where ##Put## must start in the file. If the file was opened ##For Random##, the position is in records, else it is given in bytes. If omitted, writing starts at the present file pointer position.  The position is 1-based: i.e. the first record or byte of a file is at position ##1##.
-		If ##//position//## is omitted or zero (##0##), file writing will start from the current file position.
+		Est la position o&ugrave; ##**Put**## doit commencer dans le fichier. Si le fichier a &eacute;t&eacute; ouvert en mode ##//For Random//##, la position est &eacute;valu&eacute;e en enregistrements, sinon elle est &eacute;valu&eacute;e en octets. Si omise, l'&eacute;criture commence &agrave; la position actuelle du pointeur.  La position est bas&eacute;e sur 1: par exemple le premier enregistrement ou octet est &agrave; la position ##1##.
+		Si ##//position//## est omise ou z&eacute;ro (##0##), l'&eacute;criture dans le fichier commencera &agrave; partir de la position courante dans le fichier.
 	##//data//##
-		Is the buffer where data is written from. It can be a numeric variable, a string, an array or a user-defined type. The operation will try to transfer to disk the complete variable, unless ##//amount//## is given.
-		When putting arrays, ##//data//## should be followed by an empty pair of brackets: '##()##'.  ##**Put**## will write all of the data in the array.  ##//amount//## is not allowed.
-		When putting ##[[KeyPgString String]]##s, the number of bytes written is the same as the number of bytes in the string data.  ##//amount//## is not allowed.
-		Note: If you want to write values from a buffer, you should NOT pass a pointer to the buffer; instead you should pass the first variable in the buffer.  (This can be done by dereferencing the pointer with ##[[KeyPgOpValueOf Operator * (Value of)]]##.) If you pass a pointer directly, then ##**Put**## will put the memory from the pointer variable, not the memory it points to.
+		Est le tampon m&eacute;moire &agrave; partir duquel les donn&eacute;es sont &eacute;crites. Il peut &ecirc;tre une variable num&eacute;rique, une cha&icirc;ne, un tableau ou un type d&eacute;fini par l'utilisateur. L'op&eacute;ration va essayer de transf&eacute;rer sur le disque la variable compl&egrave;te, sauf si ##//amount//## est pr&eacute;cis&eacute;.
+		Lorsque ##**Put**## concerne un tableau, ##//data//## doit &ecirc;tre suivi par une paire de parenth&egrave;ses vides: '##()##'.  ##**Put**## &eacute;crira toutes les donn&eacute;es du tableau.  ##//amount//## n'est pas permis.
+		Lorsque ##**Put**## concerne une ##[[KeyPgString String]]##, le nombre d'octets &eacute;crits est le m&ecirc;me que le nombre d'octets dans la cha&icirc;ne.  ##//amount//## n'est pas permis.
+		Note: Si vous voulez &eacute;crire des valeurs &agrave; partir d'un tampon, vous NE DEVEZ PAS passer un pointeur vers la m&eacute;moire tampon; au lieu de cela vous devez passer la premi&egrave;re variable dans la m&eacute;moire tampon.  (Cela peut &ecirc;tre fait par le d&eacute;r&eacute;f&eacute;rencement du pointeur avec ##[[KeyPgOpValueOf Operator * (Valeur de)]]##.)  ##**Put**## d&eacute;duira automatiquement que le reste de la m&eacute;moire tampon se poursuit apr&egrave;s la premi&egrave;re variable.  Si vous passez un pointeur directement, alors ##**Put**## utilisera la m&eacute;moire &agrave; partir de la variable pointeur et non pas la m&eacute;moire point&eacute;e par lui.
 	##//amount//##
-		Makes ##Put## write to file ##//amount//## consecutive variables to the file - i.e. it writes ##( //amount// * [[KeyPgSizeof Sizeof]](//data//) )## bytes of data, starting at ##//data//##'s location in memory, into the file.  If ##//amount//## is omitted it defaults to ##1##, meaning that ##**Put**## just writes a single variable.=====
+		##Put## &eacute;crira dans le fichier ##//amount//## variables cons&eacute;cutives - c'est &agrave; dire qu'il &eacute;crira, dans le fichier, ##( //amount// * [[KeyPgSizeof SizeOf]](//data//) )## octets de donn&eacute;es, commen&ccedil;ant &agrave; la position ##//data//## dans la m&eacute;moire.  Si ##//amount//## est omis sa valeur par d&eacute;faut est ##1##, ce qui signifie que ##**Put**## n'&eacute;crit qu'une seule variable.<div class="fb_header">
 
-{{fbdoc item="ret"}}
-	##0## on success; nonzero on error. "disk full" is considered as an error, and results in return code ##3##. An "exact" amount of data written before is not available, and wouldn't be really useful anyway. 
+{{fbdoc item="section" value="Valeur retourn&eacute;e
+	##0## si succ&egrave;s; non z&eacute;ro si erreur. "disk full" (disque complet) est consid&eacute;r&eacute; comme une erreur et il en r&eacute;sulte un code retour de ##3##. La quantit&eacute; "exacte" des donn&eacute;es &eacute;crites avant n'est pas disponible et ce ne serait pas vraiment utile de toute fa&ccedil;on. 
 
 {{fbdoc item="desc"}}
-	Writes binary data from a buffer variable to a file opened in ##[[KeyPgBinary Binary]]## or ##[[KeyPgRandom Random]]## mode.
+	&Eacute;crit des donn&eacute;es binaires &agrave; partir d'une variable tampon dans un fichier ouvert en mode ##[[KeyPgBinary Binary]]## ou ##[[KeyPgRandom Random]]##.
 
-	##**Put**## can be used as a function, and will return ##0## on success or an error code on failure.	
+	##**Put**## peut &ecirc;tre utilis&eacute; comme une fonction, et retournera ##0## si succ&egrave;s ou un code d'erreur si &eacute;chec.	
 
-	For files opened in ##[[KeyPgRandom Random]]## mode, the size in bytes of the data to write must match the specified record size.
+	Pour les fichiers ouverts en mode ##[[KeyPgRandom Random]]##, la taille en octets des donn&eacute;es &agrave; &eacute;crire doit correspondre &agrave; la taille sp&eacute;cifi&eacute;e de l'enregistrement.
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/fileio/put.bas"}}%%(freebasic)
@@ -108,12 +108,12 @@ Deallocate lpBuffer
 End
 %%
 {{fbdoc item="diff"}}
-	- ##**Put**## can write full arrays as in VB or, alternatively, write a multiple of the data size from ##//buffer//##'s memory location.
-	- ##**Put**## can be used as a function in FB, to find the success/error code returned without having to use error handling procedures.
+	- ##**Put**## peut &eacute;crire des tableaux pleins comme dans VB ou, &agrave; d&eacute;faut, &eacute;crire un multiple de la taille des donn&eacute;es &agrave; partir de la position m&eacute;moire ##//buffer//##.
+	- ##**Put**## peut &ecirc;tre utilis&eacute; comme une fonction dans FB, pour d&eacute;terminer s'il y a eu succ&egrave;s ou si un code d'erreur a &eacute;t&eacute; renvoy&eacute; sans avoir &agrave; utiliser les proc&eacute;dures de gestion des erreurs.
 
 {{fbdoc item="see"}}
-	- ##[[KeyPgPutgraphics Put (Graphics)]]## different usage of same keyword 
-	- ##[[KeyPgGetfileio Get (File I/O)]]##
+	- ##[[KeyPgPutgraphics Put (Graphique)]]## utilisation diff&eacute;rente du m&ecirc;me mot-cl&eacute;
+	- ##[[KeyPgGetfileio Get (Entr&eacute;e/Sortie fichiers)]]##
 	- ##[[KeyPgOpen Open]]##
 	- ##[[KeyPgClose Close]]##
 	- ##[[KeyPgRandom Random]]##

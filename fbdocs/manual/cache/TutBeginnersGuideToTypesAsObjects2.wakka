@@ -1,167 +1,162 @@
 {{fbdoc item="title" value="Beginners Guide to Types as Objects (Part 2)"}}----
 
 **Introduction.**
+Bienvenue dans la deuxi&egrave;me partie du tutoriel. Dans cette partie je suppose que vous avez lu la Partie 1, essay&eacute; les exemples et exp&eacute;riment&eacute; avec des tests de votre choix.  Je vais maintenant couvrir certains sujets que je n'ai pas inclus dans la Partie 1.
+
+**Property index&eacute;e.**
+
+Une ##**Property**## index&eacute;e est une ##**Property**## qui se comporte comme un tableau, sauf que comme dans le cas d'une ##**Property**## ordinaire, une fonction est appel&eacute;e lorsque vous y acc&eacute;dez.  Je vais commencer par un exemple tr&egrave;s court juste pour vous montrer la syntaxe.
 ----
 
-Welcome to the second part of the tutorial, In this part I assume that you have read through Part 1, tried the examples, and experimented with some tests of your own.  I'll now cover some topics that I didn't include in Part 1.
-
-**Indexed property.**
-----
-
-An indexed property is a property that behaves like an array, except that like in the case of a regular property, a function gets called when you access it.  I'll start with a very short example just to show the syntax.
-
-%%(freebasic)
 Type foo
-  Declare Property bar(ByVal index As Integer, ByVal value As Integer)
-  Declare Property bar(ByVal index As Integer) As Integer
+
+Declare Property bar(ByVal index As Integer, ByVal value As Integer)
+Declare Property bar(ByVal index As Integer) As Integer
   dummy As Integer
-End Type 
+  End Type 
+  Property foo.bar(ByVal index As Integer, ByVal value As Integer)
+Print "Property set, index=" & index & ", value=" & value 
 
-Property foo.bar(ByVal index As Integer, ByVal value As Integer)
-  Print "Property set, index=" & index & ", value=" & value 
 End Property
+  Property foo.bar(ByVal index As Integer) As Integer
+Print "Property get, index=" & index
 
-Property foo.bar(ByVal index As Integer) As Integer
-  Print "Property get, index=" & index
-  Property = 0
-End Property
-
-Dim baz As foo
-
+Property = 0
+  End Property
+  Dim baz As foo
 baz.bar(0) = 42
+
 Print baz.bar(0)
+
+%%
+Comme vous pouvez le voir la d&eacute;claration de notre ##**Property**## index&eacute;e est tr&egrave;s similaire &agrave; une ##**Property**## ordinaire, sauf que cette fois on ajoute un argument pour l'indice.  J'inclus un membre entier factice parce qu'un type doit avoir au moins un membre de donn&eacute;es.  Comme vous pouvez le voir la ##**Property**## est alors utilis&eacute; avec (0), pour indiquer que nous voulons obtenir/d&eacute;finir l'indice "z&eacute;roi&egrave;me", exactement comme on le ferait pour un tableau ordinaire.  Maintenant, je vais vous montrer un exemple un peu plus utile et je vais le d&eacute;crire:
 %%
 
-As you can see, the declaration for our indexed property is very similar to a regular one, except this time we add an argument for the index.  I include a dummy integer member, because a type must have at least one data member.  As you can see, the property is then used with (0), to denote we want to get/set the zeroth index, just the same as we would for an ordinary array.  Now I'll show you a slightly more useful example, and I will describe it:
-
-%%(freebasic)
 Type foo
-  Declare Constructor(ByVal num_elements As Integer)
-  Declare Destructor()
+
+Declare Constructor(ByVal num_elements As Integer)
+Declare Destructor()
   Declare Property bar(ByVal index As Integer, ByVal value As Integer)
   Declare Property bar(ByVal index As Integer) As Integer
-private:
-  x As Integer ptr
-  size As Integer
-End Type 
+  Private:
+  x As Integer Ptr
+size As Integer
+  End Type 
+  Constructor foo(ByVal num_elements As Integer)
+x = CAllocate(num_elements * SizeOf(Integer))
 
-Constructor foo(ByVal num_elements As Integer)
-  x = CAllocate(num_elements * sizeof(Integer))
-  size = num_elements
-End Constructor
+size = num_elements
+  End Constructor
+  Destructor foo()
+Deallocate(x)
 
-Destructor foo()
-  DeAllocate(x)
 End Destructor
+  Property foo.bar(ByVal index As Integer, ByVal value As Integer)
+If (index >= 0) And (index < size) Then
 
-Property foo.bar(ByVal index As Integer, ByVal value As Integer)
-  If (index >= 0) AND (index < size) Then
-	x[index] = value
+x[index] = value
   Else
 	Error 6
   End If
-End Property
+	End Property
+  Property foo.bar(ByVal index As Integer) As Integer
+If (index >= 0) And (index < size) Then
 
-Property foo.bar(ByVal index As Integer) As Integer
-  If (index >= 0) AND (index < size) Then
-	Property = x[index]
+Property = x[index]
   Else
 	Error 6
   End If
-End Property
-
-Dim baz As foo = foo(10)
-
+	End Property
+  Dim baz As foo = foo(10)
 baz.bar(1) = 42
-Print baz.bar(1)
-%%
 
-This time, I've added a constructor and destructor, which will allocate and deallocate a dynamic memory array, x, with the number of elements specified in the constructor.  Then when the property functions are invoked, I check if the index is within the bounds of the array, if it is then I perform the requested get or set.  If the index specified is out of bounds, then 'Error 6' occurs, which is a way to abort the program with FB's 'out of bounds error', you could replace this with your own error handling routines.  Try this out, by changing the code 'baz.bar(1) = 42' to 'baz.bar(10) = 42', and you'll see it in action, as we specified only 10 elements (index 0-9)
+Print baz.bar(1)
+
+%%
+Cette fois j'ai ajout&eacute; un ##**Constructor**## et un ##**Destructor**##, qui allouer et d&eacute;sallouer un tableau dynamique dans la m&eacute;moire, ##**x**##, avec le nombre d'&eacute;l&eacute;ments sp&eacute;cifi&eacute;s dans le ##**Constructor**##.  Puis, quand les fonctions de ##**Property**## sont invoqu&eacute;es, Je v&eacute;rifie si l'indice est dans les limites du tableau, s'il l'est alors j'effectue la demande obtenir/d&eacute;finir.  Si l'index sp&eacute;cifi&eacute; est hors limites, alors ##**'Error 6'**## se produit, qui est un moyen d'interrompre le programme avec ##**'out of bounds error'**## de FB, vous pouvez remplacer ceci par votre propre routine de traitement des erreurs.  Essayez ceci en modifiant le code ##**'baz.bar(1) = 42'**## par ##**'baz.bar(10) = 42'**##, et vous verrez ceci en action, car nous n'avons pr&eacute;cis&eacute; que 10 &eacute;l&eacute;ments (indice 0-9)
+**"Constructor" de copie.**
+
+Un ##**Constructor**## de copie est un type sp&eacute;cial de ##**Constructor**##, qui est utilis&eacute; pour faire une copie d'un objet existant.  Lorsque vous &eacute;crivez du code comme celui-ci:
 
 **Copy constructor.**
-----
-
-A copy constructor is a special type of constructor, that is used to make a copy from an existing object.  When you write code like this:
-
-%%(freebasic)
 Type foo
-...
-End Type
 
+...
+
+End Type
 Dim As foo a
 Dim As foo b = a
 %%
 
-What happens is FreeBASIC automatically generates hidden code to construct b, by making a copy of a, this is the default copy constructor, and simply copies the data fields (members) across.  We can define our own copy constructor, here's just a brief snippet to show how we declare it.
-
-%%(freebasic)
+Ce qui se passe c'est que FreeBasic g&eacute;n&egrave;re automatiquement du code cach&eacute; pour construire **b**, en faisant une copie de **a**, c'est le ##**Constructor**## de copie par d&eacute;faut, et il recopie simplement les champs de donn&eacute;es (membres).  Nous pouvons d&eacute;finir notre propre ##**Constructor**## de copie; voici juste un bref extrait pour montrer comment on le d&eacute;clare.
+Dim As foo b = a
 Type foo
-  Declare Constructor(ByRef obj As foo)
-  ...
+
+Declare Constructor(ByRef obj As foo)
+
+...
 End Type
-%%
+  %%
+  Ce sera tr&egrave;s utile pour une raison que je vais maintenant vous expliquer.
+**Copie profonde/superficielle.**
+Dans l'exemple pr&eacute;c&eacute;dent o&ugrave; nous avions le code ##**'Dim As foo b = a'**##, c'est ce qu'on appelle une copie superficielle, une simple recopie des champs de donn&eacute;es a &eacute;t&eacute; effectu&eacute;e, mais parfois ce n'est pas souhaitable, imaginez que l'un des membres soit un pointeur, ce qui va arriver, c'est que l'adresse vers laquelle pointe le pointeur sera recopi&eacute;e, ainsi les deux objets pointeront vers la m&ecirc;me zone m&eacute;moire.  L'exemple suivant illustre cela:
 
 This will come in very useful for a reason I will now explain.
 
-**Deep/Shallow copy.**
-----
-
-In that previous example, where we did the code 'Dim As foo b = a', that was what is known a shallow copy, it just simply copied the data fields across, however sometimes this is not desirable, imagine that one of the members is a pointer, what will happen is that the address that pointer points to will be copied across, so both objects will point to the same memory.  An example of this follows:
-
-%%(freebasic)
 Type foo
-  x As Integer ptr
+x As Integer Ptr
+
 End Type
 
 Dim As foo a
-
-a.x = Allocate(sizeof(Integer))
-*a.x = 42
-
+a.x = Allocate(SizeOf(Integer))
+  *a.x = 42
 Dim As foo b = a
 
 Print *a.x, *b.x
 
 *a.x = 420
+Print *a.x, *b.x
+
+Deallocate(a.x)
+
+%%
+
+Comme vous le voyez,  parce qu'ils pointent tous deux vers la m&ecirc;me m&eacute;moire, changer l'un affecte l'autre.  Comme expliqu&eacute; dans la section pr&eacute;c&eacute;dente sur le ##**Constructor**## de copie, FreeBASIC cr&eacute;e le code pour faire des copies superficielles par d&eacute;faut. Cela est &eacute;galement vrai si nous faisons une affectation comme:
 
 Print *a.x, *b.x
 
-DeAllocate(a.x)
+Dim As foo a, b
+b = a
+
 %%
 
-As you see, because they both point to the same memory, changing one affects the other.  As explained in the previous section on the copy constructor, FreeBASIC creates the code to do shallow copies by default.  This is also true if we do an assignment like:
-
-%%(freebasic)
+Dans ce cas &eacute;galement FreeBasic cr&eacute;e un op&eacute;rateur d'affectation par d&eacute;faut (Let) pour effectuer une copie superficielle.  Afin de faire des copies compl&egrave;tes nous avons besoin de d&eacute;finir un ##**Constructor**## de copie et un op&eacute;rateur d'assignation qui est surcharg&eacute; pour accepter notre ##**Type**##.  Voici un exemple qui les utilise.
 Dim As foo a, b
 
-b = a
-%%
-
-In this case also, FreeBASIC creates a default assignment operator (Let) to perform a shallow copy.  In order to do deep copies, we need to define a copy constructor, and an assignment operator, that is overloaded to accept our type.  Here's an example using them.
-
-%%(freebasic)
 Type foo
-  Declare Constructor()
-  Declare Constructor(ByRef obj As foo)
-  Declare Destructor()
-  Declare Operator Let(ByRef obj As foo)
-  x As Integer ptr
-End Type
+Declare Constructor()
 
-Constructor foo()
+Declare Constructor(ByRef obj As foo)
+
+Declare Destructor()
+Declare Operator Let(ByRef obj As foo)
+  x As Integer Ptr
+  End Type
+  Constructor foo()
   Print "Default ctor"
-  x = CAllocate(sizeof(Integer))
+  x = CAllocate(SizeOf(Integer))
 End Constructor
 
 Constructor foo(ByRef obj As foo)
   Print "Copy ctor"
   x = CAllocate(sizeof(Integer))
-  *x = *obj.x
-End Constructor
+*x = *obj.x
 
-Destructor foo()
+End Constructor
+  Destructor foo()
   Print "dtor"
-  DeAllocate(x)
+  Deallocate(x)
 End Destructor
 
 Operator foo.Let(ByRef obj As foo)
@@ -170,79 +165,77 @@ Operator foo.Let(ByRef obj As foo)
 End Operator
 
 Dim As foo a
-
-*a.x = 42
-
-Dim As foo b = a 'Uses the copy constructor
-
+  *a.x = 42
+  Dim As foo b = a 'Uses the copy constructor
 Print *a.x, *b.x
 
 *a.x = 420
 
 Print *a.x, *b.x
+
 %%
 
-As you can see, the copy constructor gets called on the line 'Dim As foo b = a' and this time, we allocate some memory, and copy the data in the new copy constructor, so that we can adjust x in one object without it affecting the other.  If we change the main code as follows:
+Comme vous pouvez le voir le ##**Constructor**## de copie est appel&eacute; sur la ligne '##**Dim As foo b = a**##' et cette fois, nous avons allou&eacute; de la m&eacute;moire, et copi&eacute; les donn&eacute;es dans le nouveau ##**Constructor**## de copie, de sorte que nous pouvons ajuster **x** dans un objet sans que cela affecte les autres.  Si nous modifions le code principal comme suit:
 
-%%(freebasic)
+*a.x = 420
+
 Dim As foo a, b
-
 *a.x = 42
+
 b = a    'The assignment operator (Let) gets used this time.
 
 Print *a.x, *b.x
-
 *a.x = 420
 
 Print *a.x, *b.x
 %%
 
-Then this time the assignment operator is used. Note that in the assignment operator code, we don't need to allocate any memory because it has already been allocated in the default constructor, we just need to copy the data across.  The line '*x = *obj.x' performs this copy.  If we had something more advanced, like a dynamic memory array, then we would need to reallocate the memory to be the correct size to fit the data being copied.  Here's a more advanced version just to show that.
+Alors, &agrave; ce moment-l&agrave;, l'op&eacute;rateur d'affectation est utilis&eacute;. Notez que dans le code de l'op&eacute;rateur d'affectation nous n'avons pas besoin d'allouer de la m&eacute;moire car elle a d&eacute;j&agrave; &eacute;t&eacute; allou&eacute;e dans le ##**Constructor**## par d&eacute;faut, il suffit de copier les donn&eacute;es dedans.  La ligne '##***x = *obj.x**##' effectue cette copie.  Si nous avions quelque chose de plus avanc&eacute; comme un tableau dynamique en m&eacute;moire, nous aurions besoin de r&eacute;allouer de la m&eacute;moire, pour avoir la bonne taille en fonction des donn&eacute;es qui sont copi&eacute;es.  Voici une version plus avanc&eacute;e juste pour montrer cela.
 
-%%(freebasic)
+*a.x = 420
+
 Type foo
-  Declare Constructor(ByVal num_elements As Integer)
-  Declare Constructor(ByRef obj As foo)
-  Declare Destructor()
-  Declare Operator Let(ByRef obj As foo)
-  x As Integer ptr
+Declare Constructor(ByVal num_elements As Integer)
+
+Declare Constructor(ByRef obj As foo)
+
+Declare Destructor()
+Declare Operator Let(ByRef obj As foo)
+  x As Integer Ptr
   size As Integer
-End Type
-
-Constructor foo(ByVal num_elements As Integer)
+  End Type
+  Constructor foo(ByVal num_elements As Integer)
   Print "Default ctor"
-  x = CAllocate(sizeof(Integer) * num_elements)
-  size = num_elements
-End Constructor
+  x = CAllocate(SizeOf(Integer) * num_elements)
+size = num_elements
 
-Constructor foo(ByRef obj As foo)
+End Constructor
+  Constructor foo(ByRef obj As foo)
   Print "Copy ctor"
-  x = CAllocate(sizeof(Integer) * obj.size)
-  size = obj.size
-  For i As Integer = 0 To size - 1
-	x[i] = obj.x[i]
-  Next i
-End Constructor
+  x = CAllocate(SizeOf(Integer) * obj.size)
+size = obj.size
 
-Destructor foo()
-  Print "dtor"
-  DeAllocate(x)
+For i As Integer = 0 To size - 1
+  x[i] = obj.x[i]
+  Next i
+  End Constructor
+  Destructor foo()
+	Print "dtor"
+  Deallocate(x)
 End Destructor
 
 Operator foo.Let(ByRef obj As foo)
   Print "Let"
-  x = ReAllocate(x, sizeof(Integer) * obj.size)
-  size = obj.size
-  For i As Integer = 0 To size - 1
-	x[i] = obj.x[i]
+  x = Reallocate(x, SizeOf(Integer) * obj.size)
+size = obj.size
+
+For i As Integer = 0 To size - 1
+  x[i] = obj.x[i]
   Next i
-End Operator
-
-Dim As foo a = foo(5)
-
-a.x[0] = 42
-a.x[1] = 420
-
+  End Operator
+  Dim As foo a = foo(5)
+	a.x[0] = 42
+  a.x[1] = 420
 Dim As foo b = a 'Uses the copy constructor
 
 Print a.x[0], a.x[1], b.x[0], b.x[1]
@@ -257,124 +250,119 @@ b = a ' Now using the assignment operator
 Print a.x[0], a.x[1], b.x[0], b.x[1]
 %%
 
-This may seem quite complex at first, it's worth just reading through it again, and experimenting with the examples, it's not too tricky once you're used to it.
+Cela peut para&icirc;tre assez complexe au premier abord, mais cela vaut la peine d'une relecture, et d'exp&eacute;rimenter avec les exemples, ce n'est pas trop compliqu&eacute; une fois qu'on a l'habitude de l'utiliser.
 
-**Passing objects to functions ByVal**
-----
+**Passage d'objets aux fonctions par valeur (ByVal)**
 
-The idea of deep and shallow copies also applies to passing an object to a function by value.  When you pass a reference to an object (ByRef), you can modify the object, and these modifications will persist, however you can also pass by value, which will mean you can modify it without the changes persisting outside of the function.  When an object is passed by value to a function, a new copy is created, and if that object has a copy constructor, then this is invoked, if it doesn't, then the hidden shallow copy is performed.  Once the function ends, the objects destructor is called.
-
+L'id&eacute;e de copies profondes et peu profondes s'applique &eacute;galement au passage par valeur d'un objet &agrave; une fonction.  Lorsque vous transmettez une r&eacute;f&eacute;rence &agrave; un objet (ByRef), vous pouvez modifier l'objet, et ces modifications persisteront, mais vous pouvez &eacute;galement le passer par la valeur, ce qui signifie que vous pouvez le modifier sans que les changements persistent en dehors de la fonction.  Quand un objet est pass&eacute; par valeur &agrave; une fonction, une nouvelle copie est cr&eacute;&eacute;e et si cet objet a un ##**Constructor**## de copie, alors celui-ci est invoqu&eacute;, s'il n'en a pas, alors une copie cach&eacute;e superficielle est effectu&eacute;e.  Une fois que la fonction se termine, le ##**Destructor**## des objets est appel&eacute;.
 **New/Delete**
+
+##**New**## et ##**Delete**## sont des op&eacute;rateurs sp&eacute;ciaux d'allocation dynamique de m&eacute;moire, puis ils la d&eacute;truisent.  Parce qu'ils sont utilis&eacute;s avec de la m&eacute;moire dynamique, ils sont utilis&eacute;s avec des pointeurs.  Dans tous les exemples jusqu'&agrave; pr&eacute;sent, nous avons juste utilis&eacute; ##**Dim**## pour cr&eacute;er nos objets, cela va les cr&eacute;er sur la pile, mais en utilisant ##**New**## nous pouvons les cr&eacute;er dynamiquement, ce qui peut permettre plus de flexibilit&eacute;, tout comme l'utilisation de ##**Allocate/DeAllocate**## avec la m&eacute;moire normale.  Une autre chose importante &agrave; propos de ##**New**##, est que vous n'avez pas besoin de v&eacute;rifier si le pointeur est NULL apr&egrave;s ##**New**##, comme vous le feriez si vous aviez utilis&eacute; ##**Allocate**##.  Si ##**New**## &eacute;choue, il provoque une exception, ce qui terminera le programme.  Dans les versions ult&eacute;rieures de FreeBasic, il est probable qu'un certain type de m&eacute;canisme ##**try..catch**## sera cr&eacute;&eacute; afin de permettre une meilleure gestion des exceptions, mais au moment o&ugrave; j'&eacute;cris, ce n'est pas encore mis en oeuvre.  
+
+Il existe deux variantes diff&eacute;rentes de ##**New**##/##**Delete**##.  Le premier type, cr&eacute;e seulement un seul &eacute;l&eacute;ment ou objet, par exemple:
 ----
 
-New and delete are special operators for dynamically allocating memory, then destroying it.  Because it is used with dynamic memory, it is used with pointers.  In all the examples up until now, we just used Dim to create our objects, this will create them on the stack, but by using new we can create them dynamically, which can allow more flexibility, just like using Allocate/DeAllocate with normal memory.  Another important thing about new, is that you don't need to check if the pointer is NULL after new, like you would if you did allocate.  If new fails, it causes an exception, which will end the program.  In later versions of FreeBASIC, it is likely that some kind of try..catch mechanism will be created to allow better exception handling, but as of the time of writing, this is not yet implemented.  
-
-There are two different varieties of the new/delete.  The first type, creates just a single element or object, for example:
-
-%%(freebasic)
-Dim As Integer ptr foo = new Integer
+Dim As Integer Ptr foo = New Integer
 
 *foo = 1
 Print *foo
 
 Delete foo
+
 %%
 
-This will create a new Integer, then destroy it when we call delete.  Remember I used ptr, because it is dynamic memory.  For simple data types you can also specify a default value, by placing it in parenthesis after the data type, ie:
+Cela va cr&eacute;er un ##**New Integer**##, puis le d&eacute;truire quand nous appelons ##**Delete**##.  Souvenez-vous j'ai utilis&eacute; ##**Ptr**##, parce que c'est de la m&eacute;moire dynamique.  Pour les types de donn&eacute;es simples vous pouvez &eacute;galement sp&eacute;cifier une valeur par d&eacute;faut, en la pla&ccedil;ant entre parenth&egrave;ses apr&egrave;s le type de donn&eacute;es, &agrave; savoir:
+Dim As Integer ptr foo = new Integer
 
-%%(freebasic)
-Dim As Integer ptr foo = new Integer(42)
-
+Dim As Integer Ptr foo = New Integer(42)
 Print *foo
 
 Delete foo
 %%
 
-This also works for UDT's with just simple data fields:
+Cela fonctionne &eacute;galement pour les types de donn&eacute;es utilisateur avec seulement de simples champs de donn&eacute;es:
 
 %%(freebasic)
 Type foo
-  x As Integer
-  y As Integer
+
+x As Integer
+
+y As Integer
 End Type
 
-Dim As foo ptr bar = new foo(1, 2)
-  
+Dim As foo Ptr bar = New foo(1, 2)
+
 Print bar->x, bar->y
-
 Delete bar
-%%
-
-This initialization won't work for more complex types involving constructors/destructors etc., however a useful feature is that when using new/delete with objects, it also calls the constructor and destructor, try the following example:
-
-%%(freebasic)
-Type foo
-  Declare Constructor()
-  Declare Destructor()
-  x As Integer
-  y As Integer
+  %%
+  Cette initialisation ne fonctionne pas pour les types plus complexes impliquant des ##**Constructor**##s/##**Destructor**##s etc, cependant il y a une fonctionnalit&eacute; utile, c'est que lors de l'utilisation ##**New**##/##**Delete**## avec des objets, il appelle &eacute;galement ##**Constructor**## et ##**Destructor**##, essayez l'exemple suivant:
 End Type
 
+Type foo
+  
+Declare Constructor()
+
+Declare Destructor()
+x As Integer
+
+y As Integer
+
+End Type
 Constructor foo()
   Print "ctor"
-End Constructor
-
-Destructor foo()
+  End Constructor
+  Destructor foo()
   Print "dtor"
 End Destructor
 
-Dim As foo ptr bar = new foo
-
-Delete bar
+Dim As foo Ptr bar = New foo
+  Delete bar
 %%
 
-You will see that the constructor and destructor for the object are called.
+Vous verrez que le ##**Constructor**## et le ##**Destructor**## de l'objet sont appel&eacute;s.
+  Le deuxi&egrave;me type de ##**New**##/##**Delete**## est pour la cr&eacute;ation de tableaux, cette fois le nombre d'&eacute;l&eacute;ments est plac&eacute; entre crochets '[]', apr&egrave;s le type de donn&eacute;e.  Lorsque vous utilisez la version tableau, vous devez &eacute;galement utiliser '##**delete[]**##' au lieu de '##**delete**##', de sorte que FreeBasic sait que vous supprimez un tableau, voici un exemple simple utilisant le type ##**Integer**##:
+End Destructor
 
-The second type of new/delete is for creating arrays, this time the number of elements is placed after the dataype in square brackets '[]'.  When using the array version, you must also use 'delete[]' instead of 'delete', so that FreeBASIC knows you are deleting an array, here is a simple example using the Integer type:
-
-%%(freebasic)
-Dim As Integer ptr foo = new Integer[20]
+Dim As Integer Ptr foo = New Integer[20]
 
 foo[1] = 1
 Print foo[1]
 
 Delete[] foo
+
 %%
 
-This will create a dynamic array, with 20 Integer elements.  It should be noted this is different from Allocate, which takes the number of bytes as its argument; using new, you should specify the number of elements.  The array method works just the same for objects:
+Cela va cr&eacute;er un tableau dynamique, avec 20 &eacute;l&eacute;ments entiers.  Il convient de noter que ceci est diff&eacute;rent de ##**Allocate**##, qui n&eacute;cessite le nombre d'octets comme argument; en utilisant ##**New**##, vous devez sp&eacute;cifier le nombre d'&eacute;l&eacute;ments.  La m&eacute;thode tableau fonctionne de la m&ecirc;me fa&ccedil;on pour les objets:
+Dim As Integer ptr foo = new Integer[20]
 
-%%(freebasic)
 Type foo
-  Declare Constructor()
-  Declare Destructor()
-  x As Integer
-  y As Integer
-End Type
+Declare Constructor()
 
+Declare Destructor()
+x As Integer
+
+y As Integer
+
+End Type
 Constructor foo()
   Print "ctor"
-End Constructor
-
-Destructor foo()
+  End Constructor
+  Destructor foo()
   Print "dtor"
 End Destructor
 
-Dim As foo ptr bar = new foo[3]
-
-Delete[] bar
+Dim As foo Ptr bar = New foo[3]
+  Delete[] bar
 %%
 
-When you run this code, you will see that three constructor/destructor pairs are called, because we created an array of three instances of foo.
-
-You must remember to call Delete, or Delete[] for any memory allocated with New, or you will cause a memory leak, just like the way you must rememeber to call DeAllocate for any memory you allocate with the Allocate function.
-
+Lorsque vous ex&eacute;cuterez ce code, vous verrez que trois paires de ##**Constructor**##/##**Destructor**## sont appel&eacute;s, parce que nous avons cr&eacute;&eacute; une gamme de trois instances de "foo".
+  Vous devez vous souvenir d'appeler ##**Delete**## ou ##**Delete[]**## pour toute m&eacute;moire allou&eacute;e avec ##**New**##, ou vous provoquerez une perte de m&eacute;moire, tout comme vous devez vous souvenir d'appeler ##**DeAllocate**## pour toute m&eacute;moire que vous allouez avec la fonction ##**Allocate**##.
 **Name Mangling**
-----
 
-Name mangling, also known as name decoration, is something that happens behind the scenes, at a lower level, and as such is not essential to know about.  The reason for name mangling is to resolve problems that are involved with more than one function sharing the same name, which happens when functions are overloaded, or are part of a type.  Take for example the overloaded subs shown below:
+##**Name mangling**##, aussi appel&eacute; ##**name decoration**##, est quelque chose qui se passe en coulisses, &agrave; un niveau inf&eacute;rieur, et en tant que tel n'est pas essentiel &agrave; conna&icirc;tre.  La raison du ##**Name mangling**## est de r&eacute;soudre les probl&egrave;mes provoqu&eacute;s par le fait que plusieurs fonctions ont le m&ecirc;me nom, ce qui arrive lorsque des fonctions sont surcharg&eacute;es ou font partie d'un type.  Prenez par exemple les ##**sub**##s surcharg&eacute;es ci-dessous:
 
-%%(freebasic)
-Sub foo overload ()
+Delete[] bar
+Sub foo Overload ()
 
 End Sub
 
@@ -383,89 +371,101 @@ Sub foo(ByVal i As Integer)
 End Sub
 %%
 
-If we didn't have name mangling, then both might be known at a lower level as FOO, which would cause a name clash, so they have to be decorated in order to know which one should be called when they are used.  For the first sub, the compiler actually creates a sub called _Z3FOOv, and for the second it creates a sub called _Z3FOOi.  The compiler then remembers these, and chooses the appropriate sub to call, depending on how you call it, for example 'foo()' will actually call _Z3FOOv, and 'foo(1)' will actually call _Z3FOOi.  We can spot something from this, that the 'v' stands for void (no argument), and 'i' stands for integer.  The full details of name mangling are quite complex, and vary between compilers, the Microsoft compilers use a different name mangling scheme to GNU compilers, and other compilers may use different schemes as well.  The main thing we need to know, is that FreeBASIC follows the GCC 3.x ABI (Application binary interface), meaning that any overloaded functions, or complex types will only be compatible with other compilers using the same scheme.  This is an unfortunate limitation, but it is not really a FreeBASIC problem, it is common of all the compilers that use advanced features, and even if all the compiler authors agreed on a common name mangling scheme, there are still other issues that would cause incompatability.
+Si nous n'avions pas le ##**name mangling**##, alors les deux pourraient &ecirc;tre connues &agrave; un niveau inf&eacute;rieur sous le nom de FOO, ce qui provoquerait un conflit de nom, elles doivent donc &ecirc;tre "d&eacute;cor&eacute;es" pour savoir laquelle doit &ecirc;tre appel&eacute;e quand ils sont utilis&eacute;es.  Pour la premi&egrave;re ##**sub**##, le compilateur cr&eacute;e en fait une ##**sub**## appel&eacute;e _Z3FOOv et pour la seconde, il cr&eacute;e une ##**sub**## appel&eacute;e _Z3FOOi.  Le compilateur se souvient alors de cela et choisit la ##**sub**## appropri&eacute;e &agrave; appeler, selon la fa&ccedil;on dont vous l'appelez, par exemple 'foo()' appellera effectivement _Z3FOOv, et 'foo(1)' appellera _Z3FOOi.  Nous pouvons deviner quelque chose, que 'v' est utilis&eacute; pour "void" (pas d'argument), et 'i' pour "integer".  Les d&eacute;tails complets de ##**name mangling**## sont assez complexes et varient entre les compilateurs, les compilateurs Microsoft utilisent un sch&eacute;ma de ##**name mangling**## diff&eacute;rent de celui des compilateurs GNU et d'autres compilateurs peuvent utiliser des syst&egrave;mes diff&eacute;rents, eux aussi.  La principale chose que nous devons savoir, La principale chose que nous devons savoir, c'est que FreeBasic suit GCC 3.x ABI (Application binary interface), ce qui signifie que toutes les fonctions surcharg&eacute;es, ou des types complexes ne seront compatibles qu'avec d'autres compilateurs utilisant le m&ecirc;me sch&eacute;ma.  Il s'agit d'une limitation malheureuse, mais ce n'est pas vraiment un probl&egrave;me FreeBasic, il est commun &agrave; tous les compilateurs qui utilisent des fonctionnalit&eacute;s avanc&eacute;es, et m&ecirc;me si tous les auteurs compilateur &eacute;taient sur un sch&eacute;ma commun de ##**name mangling**##, il y aurait d'autres questions qui seraient cause d'incompatibilit&eacute;.
 
-**Implicit this**
-----
+**"this" implicite**
+De nouveau, il n'est pas imp&eacute;ratif de tout conna&icirc;tre sur ce sujet, c'est quelque chose qui se passe en coulisses &agrave; un niveau inf&eacute;rieur.  Lorsque vous appelez une fonction membre d'un objet, ce qui se passe c'est qu'un param&egrave;tre cach&eacute; est pass&eacute;, de sorte que la fonction sait quelle instance de l'objet est vis&eacute;e.  Cela est &eacute;galement vrai pour les membres ##**property/constructor/destructor/operator**##.  Si nous regardons un exemple tr&egrave;s simple:
 
-This again is not necessary to know about mostly, its something that happens behind the scenes at a lower level.  When you call a member function of an object, what actually happens is a hidden first parameter is passed, so that the function knows which instance of the object is being refered to.  This is also true for the property/constructor/destructor/operator members.  If we look at a very simple example:
+End Sub
 
-%%(freebasic)
 Type foo
-  Declare Sub bar(ByVal n As Integer)
-  x As Integer
+
+Declare Sub bar(ByVal n As Integer)
+x As Integer
+
 End Type
 
 Sub foo.bar(ByVal n As Integer)
-  x = n
+x = n
+
 End Sub
 
 Dim baz As foo
 baz.bar(5)
-%%
+  %%
+  Ce qui se passe r&eacute;ellement dans les coulisses est quelque chose d'essentiellement &eacute;quivalent &agrave; cela:
+End Type
 
-What actually happens behind the scenes is something essentially equivalent to this:
-
-%%(freebasic)
 Type foo
   x As Integer
 End Type
 
 Sub foo_bar(ByRef _this As foo, ByVal n As Integer)
-  _this.x = n
+_this.x = n
 End Sub
 
 Dim baz As foo
+
 foo_bar(baz, 5)
 %%
+  Cette m&eacute;thode utilisant un '##**this**##' explicite est souvent utilis&eacute;e dans des langues qui ne disposent pas de moyens pour rendre cela plus facile.  OOP (Programmation Orient&eacute;e Objet) est tout simplement un ensemble de concepts, qui peuvent &ecirc;tre cod&eacute;s dans la plupart des langages, certaines choses sont plus difficiles &agrave; mettre en &oelig;uvre, comme les constructeurs, vous auriez &agrave;  appeler explicitement une fonction 'create' ou 'init'.  Pour certaines choses telles que la distinction public / priv&eacute;, c'est encore plus difficile, voire impossible, parce que le compilateur ne sait pas les faire respecter.  La raison de l'ajout de fonctionnalit&eacute;s &agrave; un langage orient&eacute; objet est de cacher beaucoup de cela, et d'ajouter le sucre syntaxique pour rendre cela plus simple &agrave; faire, ou plus transparent dans l'utilisation, comme la fa&ccedil;on dont nous pouvons utiliser les propri&eacute;t&eacute;s comme si elles &eacute;taient membres ordinaires de donn&eacute;es, plut&ocirc;t que des fonctions, qui est ce qu'elles sont vraiment.
+**Conseils pour le d&eacute;bogage/profilage**
 
-This method using an explicit 'this' is often used in languages that do not have facilities to make it easier.  OOP is really just a set of concepts, that can be mostly coded in almost any language, some things are more difficult to implement, such as constructors, you would have to explicitly call a 'create', or 'init' function.  For some things such as private/public distinction, it is even more difficult or impossible because the compiler does not know to enforce them.  The reason for adding OOP features to a language is to hide a lot of this, and add syntactic sugar to make it simpler to do, or more transparent in use, such as the way we can use properties as if they were ordinary data members, rather than functions, which is what they really are.
+Lorsque vous utilisez ##**GDB**## ou autres d&eacute;bogueurs, et l'outil de profilage ##**gprof**##, l'information est pr&eacute;sent&eacute;e dans la syntaxe C++ et tous vos noms de variables et autres symboles sont affich&eacute;s en majuscules, voici juste un tr&egrave;s bref tour d'horizon pour vous aider &agrave; comprendre comment ils sont affich&eacute;s:
+  Here's an example type:
+End Sub
 
-**Hints for debugging/profiling**
-----
-
-When using GDB or other debuggers, and the gprof profiling tool, the information shown is in the ""C++"" syntax, and all your variable names and other symbols are shown in upper case, here is just a very short overview to help you understand how these are shown:
-
-Here's an example type:
-
-%%(freebasic)
 Type bar
-  Declare Constructor()
-  Declare Constructor(ByRef obj As bar)
-  Declare Constructor(ByVal n As Integer)
-  Declare Destructor()
-  Declare Operator Cast() As Any ptr
-  Declare Operator Let(ByVal n As Integer)
-  Declare Property foo(ByVal n As Integer)
-  Declare Property foo() As Integer
-  member As Any Ptr
-End Type
-%%
+Declare Constructor()
+Declare Constructor(ByRef obj As bar)
 
-When using GDB, these will be shown as follows (note in ""C++"" they use :: where we would use . (dot), '::' is known as the scope resolution operator):
+Declare Constructor(ByVal n As Integer)
 
-  BAR::BAR()            - The default constructor
-  BAR::BAR(BAR&)        - The copy constructor (& in ""C++"" means a reference, like byref)
-  BAR::BAR(int)         - The constructor taking an integer argument (note there is no special symbol to denote ByVal, as this is the default passing method in C/""C++"")
-  BAR::~BAR()           - The destructor
-  BAR::operator void*() - A cast to Any ptr (void is similar to Any, * means pointer)
-  BAR::operator=(int)   - The assignment operator (Let), dentoted by '=', in C/""C++"" '=' is assignment, '""==""' is equality testing.
-  BAR::FOO(int)         - Property foo setter, taking an integer argument
-  BAR::FOO()            - Property foo getter
+Declare Destructor()
+Declare Operator Cast() As Any Ptr
 
-Member sub/functions are shown in the same way as properties, indexed properties are shown the same also, just with the extra argument for the index.
+Declare Operator Let(ByVal n As Integer)
 
-Here is how the FB data types will be shown:
+Declare Property foo(ByVal n As Integer)
 
-Any ptr     - void *
-ZString ptr - char *
-String      - FBSTRING
-byte        - signed char
-ubyte       - bool
-short       - short
-ushort      - unsigned short
+Declare Property foo() As Integer
+member As Any Ptr
+  End Type
+  %%
+  Si vous utilisez ##**GDB**##, ils seront affich&eacute;s comme suit (notez qu'en C++ on utilise :: o&ugrave; on devrait utiliser . (dot), '::' est connu comme l'op&eacute;rateur de r&eacute;solution de port&eacute;e):
+  BAR::BAR()            - Le constructeur par d&eacute;faut
+  BAR::BAR(BAR&)        - Le constructeur de copie (& en C++ signifie une r&eacute;f&eacute;rence, comme byref)
+  BAR::BAR(int)         - Le constructeur prenant un argument entier (notez qu'il n'y a aucun symbole sp&eacute;cial pour d&eacute;signer ByVal, car c'est la valeur de passage par d&eacute;faut dans les m&eacute;thodes C/C++)
+  BAR::~BAR()           - Le destructeur
+  BAR::operator void*() - Un "cast" vers "Any ptr" (void est similaire &agrave; Any, * signifie pointeur)
+  BAR::operator=(int)   - L'op&eacute;rateur d'affectation (Let), d&eacute;sign&eacute; par '=', en C/C++ '=' est une affectation, '==' teste l'&eacute;galit&eacute;.
+BAR::FOO(int)         - Validateur de Property foo, prenant un argument entier
+BAR::FOO()            - R&eacute;cup&eacute;rateur de Property foo
+
+Les sub/functions membres sont pr&eacute;sent&eacute;s de la m&ecirc;me mani&egrave;re que les propri&eacute;t&eacute;s, les propri&eacute;t&eacute;s index&eacute;es sont indiqu&eacute;es aussi de m&ecirc;me, juste avec un argument suppl&eacute;mentaire pour l'indice.
+
+  Voici comment les types de donn&eacute;es FB seront affich&eacute;s:
+  Any ptr     - void *
+  ZString ptr - char *
+  String      - FBSTRING
+  byte        - signed char
+  ubyte       - bool
+  short       - short
+  ushort      - unsigned short
+
 integer     - int
+
 uinteger    - unsigned int
+
+longint     - long long
+ulongint    - unsigned long long
+J'esp&egrave;re que ceci vous aura aid&eacute; &agrave; comprendre comment les choses sont affich&eacute;es dans GDB / gprof, un peu d'exp&eacute;rimentation facilitera les choses.
+**Autres lectures**
+http://www.freebasic.net/wiki/wikka.php?wakka=KeyPgOpNew
+http://www.freebasic.net/wiki/wikka.php?wakka=KeyPgOpDelete
+http://en.wikipedia.org/wiki/Copy_constructor
+http://en.wikipedia.org/wiki/Object_copy
+http://en.wikipedia.org/wiki/Name_mangling
 longint     - long long
 ulongint    - unsigned long long
 

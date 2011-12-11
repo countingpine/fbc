@@ -1,28 +1,28 @@
 {{fbdoc item="title" value="Standard Data Type Limits"}}----
-Standard variable types and limits.
+Types de variables standard et leurs limites.
 
-{{fbdoc item="section" value="Numeric Types"}}
+**<u>Types  Num&eacute;riques</u>**
 
-~~{{table columns="7" cellpadding="1" cells=" Type ; Size (in bits) ; Format ; Minimum Value ; Maximum Value ; Literal Suffix ; Sig. Digits ; BYTE; 8; signed   integer;-128 ;+127;;2+;UBYTE; 8; unsigned integer;0;+255;###;2+;SHORT;16;signed   integer;-32768 ;+32767;###;4+;USHORT;16; unsigned integer;0 ;65535;###;4+;INTEGER;32;signed   integer;-2147483648 ;+2147483647;%, l;9+;UINTEGER; 32;unsigned integer; 0;4294967295;ul;9+;LONG;[*]; signed   integer; [*] ;[*];&;[*];ULONG;[*]; unsigned integer; [*];[*];###;[*];LONGINT; 64; signed   integer; -9 223 372 036 854 775 808 ;+9 223 372 036 854 775 807; ll;18+;ULONGINT; 64; unsigned integer; 0 ;+18 446 744 073 709 551 615; ull ;19+;SINGLE; 32;floating point;[**]+/-1.401 298 E-45 ;[**]+/-3.402 823 E+38;!, f;6+;DOUBLE;64; floating point;[**]+/-4.940 656 458 412 465 E-324;[**]+/-1.797 693 134 862 316 E+308;#;15+"}}
+{{table columns="" cellpadding="2" cells="<table> Type ; Taille (en bits) ; Format ; Valeur Minimum ; Valeur Maximum ; Suffixe litt&eacuteral ; Sig. Digits ; BYTE; 8;entier sign&eacute;-128 ;+127;;2+;UBYTE; 8;entier non-sign&eacute;0;+255; 2+;SHORT;16;entier sign&eacute;-32768 ;+32767; 4+;USHORT;16;entier non-sign&eacute;0 ;65535; 4+;INTEGER;32;entier sign&eacute;-2147483648 ;+2147483647;%, l;9+;UINTEGER; 32;entier non-sign&eacute; 0;4294967295;ul;9+;LONG;[*];entier sign&eacute; [*] ;[*];&[*];ULONG;[*];entier non-sign&eacute; [*];[*]; [*];LONGINT; 64;entier sign&eacute; -9 223 372 036 854 775 808 ;+9 223 372 036 854 775 807; ll;18+;ULONGINT; 64;entier non-sign&eacute; 0 ;+18 446 744 073 709 551 615; ull ;19+;SINGLE; 32;virgule flottante;[**]+/-1.401 298 E-45 ;[**]+/-3.402 823 E+38;!, f;6+;DOUBLE;64;virgule flottante;[**]+/-4.940 656 458 412 465 E-324;[**]+/-1.797 693 134 862 310 E+308;#;15+;</table>
 
-~&[*] //##[[KeyPgLong Long]]## and ##[[KeyPgUlong Ulong]]## data types vary with platform. Currently, they are aliases to either ##[[KeyPgInteger Integer]]## or ##[[KeyPgLongint Longint]]## and their unsigned versions, respectively.//
-~&[""**""] //The minimum and maximum values for the floating-point types ##[[KeyPgSingle Single]]## and ##[[KeyPgDouble Double]]## are, respectively, the values closest to zero and the values closest to positive and negative infinity.//
+[*] Les types de donn&eacute;es //##[[KeyPgLong Long]]## et ##[[KeyPgUlong Ulong]]## varient avec la plate-forme. Actuellement, ils sont "alias&eacute;s" vers  ##[[KeyPgInteger Integer]]## ou ##[[KeyPgLongint LongInt]]## et leurs versions non-sign&eacute;, respectivement.//
+[**] //Les valeurs minimum et maximum pour les types &agrave; virgule flottante ##[[KeyPgSingle Single]]## et ##[[KeyPgDouble Double]]## sont, respectivement, les valeurs les plus proches de z&eacute;ro et les valeurs les plus proches de l'infini positif et n&eacute;gatif.//
 
-{{fbdoc item="section" value="String Types"}}
+**<u>Types cha&icirc;ne</u>**
 
-~~{{table columns="5" cellpadding="2" cells="Type ; Character Size (in bytes) ; Minimum Size (in characters) ; Maximum Size (in characters) ; Literal Suffix ; String ; 1 ; 0 ; [**]+2147483647 ; $ ; Zstring ; 1 ; 0 ; [**]+2147483647 ; [N/A] ; Wstring ; [*] ; [*]0 ; [*,**]+2147483647 ; [N/A]""}}
+{{table columns="" cellpadding="2" cells="<table>Type ; Taille caract&egravere (en octets) ;Taille Minimum (en caract&egraveres) ;Taille Maximum (en caract&egraveres) ;Suffixe Litt&eacuteral; String ; 1 ; 0 ; [**]+2147483647 ; $ ; Zstring ; 1 ; 0 ; [**]+2147483647 ; [N/A] ; Wstring ; [*] ; [*]0 ; [*,**]+2147483647 ; [N/A];</table>
 
-~&[*] //Unicode, or "wide", characters vary in both size and availability with platform.//
-~&[""**""] //All runtime library string procedures take and produce ##[[KeyPgInteger Integer]]## values for sizes and positions. The actual maximum size will vary (smaller) with storage location and/or platform.//
+[*] //Unicode, ou "large" ("wide"), caract&egrave;res varient en taille et en disponibilit&eacute; avec plate-forme..//
+[**] //Toutes les proc&eacute;dures de biblioth&egrave;que d'ex&eacute;cution de cha&icirc;ne de prennent et de produisent des valeurs ##[[KeyPgInteger Integer]]## pour les tailles et positions. La taille maximum r&eacute;elle varie (plus petite) avec l'emplacement de stockage et/ou la plate-forme.//
 
-{{fbdoc item="section" value="Arrays"}}
+**<u>Tableaux</u>**
 
-~~{{table columns="4" cellpadding="2" cells=" Maximum Subscript Range ; Maximum Elements per Dimension ; Minimum/Maximum Dimensions ; Maximum Size (in bytes) ; [*][-2147483648, +2147483647] ; [*]+2147483647 ; 1/9 ; [*]+2147483647 "}}
+{{table columns="" cellpadding="2" cells="<table>Plage maxi indices;Nbre maxi &eacutel&eacutements par dimension ;Dimensions Minimum/Maximum ;Taille Maximum (en octets) ; [*][-2147483648, +2147483647] ; [*]+2147483647 ; 1/9 ; [*]+2147483647 ;</table>
 
-~&[*] //All runtime library array procedures take and produce ##[[KeyPgInteger Integer]]## values for subscripts and indexes. The actual limits will vary (smaller) with the number of dimensions, element size, storage location and/or platform.//
+[*] //Toutes les proc&eacute;dures de biblioth&egrave;ques d'ex&eacute;cution prennent et produisent des valeurs ##[[KeyPgInteger Integer]]## pour les indices et les index. Les limites r&eacute;elles varieront (plus petites) en fonction du nombre de dimensions, de la taille des &eacute;l&eacute;ments, de l'emplacement de stockage et/ou de la plate-forme.//
 
 {{fbdoc item="see"}}
-	[[ProPgIdentifierRules]] usage of suffixes for variables
-	[[ProPgLiterals]] usage of suffixes for literals / numbers
+	##[[ProPgIdentifierRules Usage des suffixes pour les variables]]##
+	##[[ProPgLiterals Usage des suffixes pour les litt&eacute;raux/nombres]]##
 
 {{fbdoc item="back" value="DocToc|Table of Contents"}}

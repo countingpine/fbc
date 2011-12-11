@@ -1,31 +1,31 @@
 {{fbdoc item="title" value="FBgfx Image and Font Buffers"}}----
-Creating and understanding your FBgfx image and font buffers
+Cr&eacute;er et comprendre votre image FBgfx et les tampons de la police de caract&egrave;res
 
-The FBgfx Image Buffer
-	Creating Buffers
-	Buffer Format
-	Getting Pixels
-The FBgfx Font Header
-	Header Details
-	Creating a Font Buffer
-	Assigning Font Characters
-Tips & Tricks
-	Coloring your Custom Fonts
-	""ScrPtr vs ImgBuf""
+Le tampon d'image FBgfx
+	Cr&eacute;er des zones tampons
+	Format tampon
+	R&eacute;cup&eacute;rer des Pixels
+Le fichier en-t&ecirc;te FBgfx Font
+	D&eacute;tails du fichier en-t&ecirc;te
+	Cr&eacute;ation d'un tampon police de caract&egrave;res
+	Affectation des caract&egrave;res de la police
+Trucs et astuces
+	Coloriage de vos polices personnalis&eacute;es
+	ScrPtr vs ImgBuf
 
-**Download Accompanying Tutorial Files:  [[http://pritchard.hmcsoft.org/files/fb%20font%20tut.7z FreeBASIC Font Tutorial.7z]]**
+**T&eacute;l&eacute;charger les fichiers d'accompagnement du Tutoriel:  [[http://pritchard.hmcsoft.org/files/fb%20font%20tut.7z">FreeBASIC Font Tutorial.7z]]**
 
-===The FBgfx Image Buffer===
+<div class="fb_header">Le tampon d'image FBgfx
 
-FBgfx has a new data type in .17 and above.  This type is called ##IMAGE##.  You can use it by including the FBgfx Header in your program (##[[KeyPgInclude #include]] "fbgfx.bi"##) and then accessing the namespace for FBgfx, via ##FB.IMAGE##.  When we create buffers in this tutorial, we're going to be using the ##fb.Image [[KeyPgPtr ptr]]## type.  A pointer, because it's dynamic memory which we can resize.
+FBgfx a un nouveau type de donn&eacute;es depuis la version 0.17 et suivantes. Ce type est appel&eacute; IMAGE. Vous pouvez l'utiliser en incluant l'en-t&ecirc;te FBgfx dans votre programme (# include "fbgfx.bi") et ensuite acc&eacute;der &agrave; l'espace de noms pour FBgfx, via FB.IMAGE. Quand nous cr&eacute;erons des zones tampons dans ce tutoriel, nous utiliserons le type "fb.Image Ptr". Un pointeur, car c'est de la m&eacute;moire dynamique que l'on peut redimensionner.
 
-To use an image in the FBgfx Library, you have to create it via image buffer.  Your buffer is an area of memory allocated (created, made available) for your image.  You have to deallocate (free, make available to other programs) the buffer when you are done using it at the end of your program.  FBgfx has its own internal pixel format, as well as an image header at the beginning of every buffer created.  The image header contains information about your image.  Things like its width, height, bit depth, etc., while the pixel Buffer contains the actual colors for each individual pixel in RGB (red, blue, green) format.
+Pour utiliser une image dans la biblioth&egrave;que FBgfx, vous devez le cr&eacute;er via un tampon image. Votre tampon est une zone de m&eacute;moire allou&eacute;e (cr&eacute;&eacute;e, mis &agrave; disposition) pour votre image. Vous avez &agrave; d&eacute;sallouer (lib&eacute;rer, rendre disponible &agrave; d'autres programmes), la m&eacute;moire tampon lorsque vous avez termin&eacute; de l'utiliser &agrave; la fin de votre programme. FBgfx a son propre format de pixel interne, ainsi qu'une t&ecirc;te au d&eacute;but de chaque tampon image cr&eacute;&eacute;. L'en-t&ecirc;te de l'image contient des informations sur votre image. Comme sa largeur, hauteur, profondeur de bits, etc, tandis que le tampon pixel contient les couleurs r&eacute;elles, pour chaque pixel individuel en format RVB (rouge, bleu, vert).
 
-==Creating Buffers==
+**Cr&eacute;er des zones tampons**
 
-The size of the buffer you create will vary depending on screen depth.  Your bytes-per-pixel are the number of bytes needed to store individual pixels.  Thus, a 32-bit pixel depth screen will need 4 bytes per pixel (8 bits in a byte).  You don't need to worry about this, however, as using the ##fb.Image [[KeyPgPtr ptr]]## setup to create your buffer makes it very easy to get the information we need from our buffers.  You only need to know this information to understand how much size a buffer may take up total, for memory usage information.
+La taille du buffer que vous cr&eacute;ezt varie en fonction de la profondeur d'&eacute;cran. Le "bytes-per-pixel ou bpp = octets par pixel" est le nombre d'octets n&eacute;cessaires pour stocker les pixels individuels. Ainsi, un &eacute;cran 32-bit de profondeur de pixel aura besoin de 4 octets par pixel (8 bits dans un octet). Vous n'avez pas besoin de vous inqui&eacute;ter &agrave; ce sujet, cependant, l'utilisation de ##fb.Image [[KeyPgPtr Ptr]]## pour cr&eacute;er votre configuration m&eacute;moire tampon rend cela tr&egrave;s facile pour obtenir les informations n&eacute;cessaires &agrave; la cr&eacute;ation de nos tampons. Vous avez seulement besoin de conna&icirc;tre cette information pour comprendre quelle quantit&eacute; de m&eacute;moire la taille d'un tampon peut occuper au total, concernant les informations d'utilisation de la m&eacute;moire.
 
-Actually creating the buffer is very simple.  It's just a simple creation of an ##fb.Image [[KeyPgPtr ptr]]##, and a call to ##[[KeyPgImagecreate Imagecreate]]## (""Example1.bas""):
+En fait, la cr&eacute;ation du  tampon m&eacute;moire est tr&egrave;s simple. C'est juste une simple cr&eacute;ation d'un ##fb.Image [[KeyPgPtr Ptr]]## et un appel &agrave; ##[[KeyPgImagecreate ImageCreate]]## (Exemple1.bas):
 
 %%(freebasic)
 #include "fbgfx.bi"
@@ -50,13 +50,13 @@ Print "Our buffer was destroyed."
 sleep
 %%
 
-==Code Dissection==
+**Dissection du Code**
 
 %%(freebasic)
 #include "fbgfx.bi"
 %%
 
-This includes the header file which contains the definition for the ##fb.Image## type.
+Cela inclut le fichier d'en-t&ecirc;te qui contient la d&eacute;finition du type ##fb.Image##.
 
 %%(freebasic)
   '' Our image width/height
@@ -64,25 +64,25 @@ Const ImgW = 64
 Const ImgH = 64
 %%
 
-This creates constants which will be used to decide the size of our image.  FBgfx doesn't know about these.  We'll have to pass them to ##[[KeyPgImagecreate Imagecreate]]## when we use it.
+Ceci cr&eacute;e des constantes qui seront utilis&eacute;es pour d&eacute;cider de la taille de notre image. FBgfx ne conna&icirc;t rien &agrave; ce sujet. Nous devrons les passer &agrave; ##[[KeyPgImagecreate ImageCreate]]## lorsque nous l'utiliserons.
 
 %%(freebasic)
   '' Screens have to be created before a call to imagecreate
 Screenres 640, 480, 32
 %%
 
-This creates our FBgfx screen.  ##[[KeyPgImagecreate Imagecreate]]## needs to know our bit depth beforehand.  However, FBgfx's ##[[KeyPgImagecreate Imagecreate]]## now has an extra parameter allowing you to set the depth yourself.
+Ceci cr&eacute;e notre &eacute;cran FBgfx. ##[[KeyPgImagecreate ImageCreate]]## a besoin de conna&icirc;tre la profondeur de bit &agrave; l'avance. Toutefois, ##[[KeyPgImagecreate ImageCreate]]## FBgfx a maintenant un param&egrave;tre suppl&eacute;mentaire vous permettant de r&eacute;gler la profondeur soi-m&ecirc;me.
 
 %%(freebasic)
   '' Create our buffer
 Dim as FB.Image ptr myBuf = ImageCreate(ImgW, ImgH)
 %%
 
-This first of all creates a pointer that is of the ##fb.Image## type.  It's just a location of memory.  We haven't filled it with anything yet.  In fact, right now it equals zero, and could not be used.  That's considered to be null.
+Avant tout il faut cr&eacute;er un pointeur qui du type ##fb.Image##. C'est juste un emplacement m&eacute;moire. Nous n'avons encore rien rempli. En fait, actuellement, il est &eacute;gal &agrave; z&eacute;ro et ne peut pas &ecirc;tre utilis&eacute;. Il est consid&eacute;r&eacute; comme nul.
 
-The ##[[KeyPgImagecreate Imagecreate]]## call returns the address of an area in memory of a newly created ##fb.Image## which we initialize our pointer with.  The size of this buffer depends on the bit depth, but the width/height of the image contained in the buffer is going to be the ones we set earlier.  ##[[KeyPgImagecreate Imagecreate]]## can also take a fill color and depth as the third and fourth arguments, respectively; if not specified, the image will be created filled with the transparent color and match the current screen color depth.
+L'appel d'##[[KeyPgImagecreate ImageCreate]]## renvoie l'adresse d'une zone de la m&eacute;moire d'un ##fb.Image## nouvellement cr&eacute;&eacute; qui sert &agrave; l'initialisation de notre pointeur. La taille de ce tampon d&eacute;pend de la profondeur de bits, mais la largeur et la hauteur de l'image contenue dans le tampon seront celles que nous avons d&eacute;finies pr&eacute;c&eacute;demment. ##[[KeyPgImagecreate ImageCreate]]## peut aussi prendre une couleur de remplissage et de profondeur dans les troisi&egrave;me et quatri&egrave;me arguments, respectivement; si ce n'est pas sp&eacute;cifi&eacute;, l'image sera cr&eacute;&eacute;e remplie avec la couleur transparente et sa profondeur sera celle de la couleur courante de l'&eacute;cran.
 
-We now have allocated a space in memory.  It's enough space to hold an ""ImgWxImgH"" image, along with the data FBgfx holds within its ##fb.Image## type.  We'll need to destroy it later for proper memory management.
+Nous avons maintenant un espace allou&eacute; en m&eacute;moire. C'est un espace suffisant pour contenir une image "ImgWxImgH", avec les donn&eacute;es que "FBgfx" d&eacute;tient au sein de son type ##fb.Image##. Nous allons avoir besoin de le d&eacute;truire plus tard, pour une gestion appropri&eacute;e de la m&eacute;moire.
 
 %%(freebasic)
   '' Print the address of our buffer.
@@ -90,7 +90,7 @@ Print "Buffer created at: " & myBuf
 sleep
 %%
 
-This is just there to let you know what we've done.  We print the address of ##myBuf##.  If it's not ##0##, we can assume that ##[[KeyPgImagecreate Imagecreate]]## had worked.
+Ceci, juste pour vous faire savoir ce que nous avons fait. Nous affichons l'adresse de ##myBuf##. Si ce n'est pas ##0##, nous pouvons supposer que ##[[KeyPgImagecreate ImageCreate]]## a fonctionn&eacute;.
 
 %%(freebasic)
   '' Destroy our buffer.  Always DESTROY buffers you CREATE
@@ -99,15 +99,15 @@ Print "Our buffer was destroyed."
 sleep
 %%
 
-Here we destroy our buffer with a call to ##[[KeyPgImageDestroy Imagedestroy]]##.  We don't have to use ##[[KeyPgImageDestroy Imagedestroy]]## to deallocate our buffer, but it's best to use it for consistency and clarity.
+Ici, nous d&eacute;truisons notre tampon avec un appel &agrave; ##[[KeyPgImageDestroy ImageDestroy]]##. Nous n'avons pas &agrave; utiliser ##[[KeyPgImageDestroy ImageDestroy]]## pour d&eacute;sallouer notre tampon, mais il est pr&eacute;f&eacute;rable de l'utiliser pour la coh&eacute;rence et la clart&eacute;.
 
-==Buffer Format==
+**Format du tampon**
 
-Now that we know how to create buffers, we might want to know more information about what's being held inside of them.  You can open up the ##fbgfx.bi## header file and find the ##fb.Image## type, and you can see all of this cool stuff inside of it.
+Maintenant que nous savons comment cr&eacute;er des tampons, on peut vouloir avoir plus d'informations sur ce qui aura lieu &agrave; l'int&eacute;rieur. Vous pouvez ouvrir le fichier d'en-t&ecirc;te ##fbgfx.bi## et trouver le type ##fb.Image## et voir tous ces trucs excellents &agrave; l'int&eacute;rieur de celui-ci.
 
-We actually don't need to know much about the format itself.  The reason for this is, we used an ##fb.Image [[KeyPgPtr ptr]]##.  Everything after the ##Buf + [[KeyPgSizeof Sizeof]](fb.Image)## in memory belongs to pixels.  Everything before that is the header.  The header can be accessed very easily because we used the ##fb.Image [[KeyPgPtr ptr]]##.  All you have to know is what you want to look for.
+En fait, Nous  n'avons pas besoin d'en savoir beaucoup sur le format lui-m&ecirc;me. La raison en est que nous avons utilis&eacute; une ##fb.Image [[KeyPgPtr Ptr]]##. Dans la m&eacute;moire, tout ce qui suit ##Buf + [[KeyPgSizeof SizeOf]](fb.Image)##  correspond aux pixels. Tout ce qui est avant correspond &agrave; l'en-t&ecirc;te. L'en-t&ecirc;te est tr&egrave;s facilement accessible parce que nous avons utilis&eacute; un ##fb.Image [[KeyPgPtr Ptr]]##. Tout ce que vous devez savoir est ce que vous voulez chercher.
 
-==FB.IMAGE Data Type==
+**FB.IMAGE Data Type**
 
 %%(freebasic)
   '' Image buffer header, new style (incorporates old header)
@@ -124,20 +124,20 @@ type IMAGE field = 1
 end type
 %%
 
-This same information can be found in ##fbgfx.bi##.  As you can see, this data type saves a *lot* of neat information about your buffer.  The Width, Height, Pitch (bytes per row), and Bit Depth (bytes per pixel) are all contained.  In the union is included the type of header, and the old header itself within the same space.  The new header format is indicated by a type value of ##7##.  The old header format is not used in the default dialect in the newer versions of FB, so we're not going to cover it here.
+Cette m&ecirc;me information peut &ecirc;tre trouv&eacute;e dans ##fbgfx.bi##. Comme vous pouvez le voir, ce type de donn&eacute;es permet de stocker *beaucoup* d'information ordonn&eacute;e concernant votre tampon. La largeur, la hauteur, pitch (octets par ligne) et la profondeur de bits (octets par pixel) sont toutes int&eacute;gr&eacute;es. Dans l'union est inclus le type d'en-t&ecirc;te et l'ancienne en-t&ecirc;te elle-m&ecirc;me dans le m&ecirc;me espace. Le format de nouvel en-t&ecirc;te est indiqu&eacute;e par une valeur type de 7. Le format d'ancienne en-t&ecirc;te n'est pas utilis&eacute; dans le dialecte par d&eacute;faut dans les nouvelles versions de FB, alors nous n'allons pas le couvrir ici.
 
-How do we access that information within the header?  If you're familiar with pointers (which you should be, we used a pointer for our buffer in the first example), then all you have to do is access your buffer like a pointer, and directly access the data within.  This may leave you to believe that all that's contained in your buffer is the ##fb.Image## type itself, but that's just not true.  Using a ##fb.Image [[KeyPgPtr ptr]]## allows the compiler to think that's what's contained in the buffer, even though only the first part does so.
+Comment pouvons-nous acc&eacute;der &agrave; ces informations dans l'en-t&ecirc;te? Si vous connaissez bien les pointeurs (vous devriez l'&ecirc;tre, nous avons utilis&eacute; un pointeur pour notre tampon dans le premier exemple), alors tout ce que vous avez &agrave; faire est d'acc&eacute;der &agrave; votre tampon comme un pointeur, et acc&eacute;der directement aux donn&eacute;es &agrave; l'int&eacute;rieur. Cela peut vous laisser croire que tout ce qui est contenu dans votre m&eacute;moire tampon est le type ##fb.Image## lui-m&ecirc;me, mais ce n'est tout simplement pas vrai. L'utilisation d'une ##fb.Image [[KeyPgPtr Ptr]]## permet au compilateur de penser que c'est ce qui est contenu dans la m&eacute;moire tampon, m&ecirc;me si seule la premi&egrave;re partie le fait.
 
-==Getting Pixels==
+**R&eacute;cup&eacute;rer des Pixels**
 
-The first section of our buffer which FreeBASIC helps us out with contains the header information.  Add the size of the ##fb.Image## to our address, and the rest of our buffer contains pixels (""Example2.bas"").
+La premi&egrave;re section de notre tampon que FreeBASIC nous fournit contient les informations d'en-t&ecirc;te. Ajoutez la taille de la ##fb.Image## &agrave; notre adresse et le reste de notre tampon contient les pixels (Example2.bas).
 
 %%(freebasic)
   '' We have to include this to use our FB.IMAGE datatype, remember.
 #include "fbgfx.bi"
 %%
 
-Remember to include our ##fb.Image## data type!
+N'oubliez pas d'inclure notre type de donn&eacute;es ##fb.Image##!
 
 %%(freebasic)
   '' This one is very important.
@@ -147,19 +147,19 @@ Remember to include our ##fb.Image## data type!
 Dim as uInteger ptr myPix = cast( uInteger ptr, ( cast( ubyte ptr, myBuf ) + sizeof(FB.Image) ) )
 %%
 
-Phew.  Alright.  We have to make sure we get the exact address of our pixels.  An integer contains 4 bytes.  3 of these are used for our RGB, and the extra is generally used for alpha when you need it (some people are very resourceful and will use the alpha byte - or channel - to store all kinds of data).  If we're even ONE BYTE off, your Red can become your Green, and your Blue into your Red!  So we have to cast to a ##[[KeyPgUbyte ubyte]] [[KeyPgPtr ptr]]## first.
+Ouf. Tr&egrave;s bien. Nous devons nous assurer que nous obtenons bien l'adresse exacte de nos pixels. Un nombre entier contient 4 octets. 3 d'entre eux sont utilis&eacute;s pour nos RVB et l'extra est g&eacute;n&eacute;ralement utilis&eacute; pour le canal alpha lorsque vous en avez besoin (certaines personnes tr&egrave;s d&eacute;brouillardes et utiliseront l'octet alpha - ou canal alpha - pour stocker toutes sortes de donn&eacute;es). M&ecirc;me si nous avons seulement UN OCTET de d&eacute;calage, notre Rouge deviendra Vert et notre Beu deviendra Rouge! Nous devons donc appliquer un ##[[KeyPgUbyte UByte]] [[KeyPgPtr Ptr]]## en premier.
 
-You probably also noticed that we simply added ##sizeof(fb.Image)## to our address.  That's another perk of using ##fb.Image##!  If you add its size to the start of the buffer, we have just skipped all the memory addresses relating to the header and are now at our pixels.
+Vous avez sans doute &eacute;galement remarqu&eacute; que nous avons simplement ajout&eacute; ##sizeof(fb.Image)##&agrave; notre adresse. C'est un autre avantage de l'utilisation de ##fb.Image##! Si vous ajoutez sa taille au d&eacute;but du buffer, nous avons juste saut&eacute; toutes les adresses m&eacute;moire li&eacute;es &agrave; l'en-t&ecirc;te et nous sommes maintenant sur nos pixels.
 
-Finally, we cast it all to a ##[[KeyPgUinteger Uinteger]] [[KeyPgPtr Ptr]]##, mainly for safety.  We're in 32 bit depth mode, so we need 4 bytes per pixels.  A ##[[KeyPgUinteger Uinteger]]## has that.
+Finalement, nous effectuons un ##[[KeyPgUinteger UInteger]] [[KeyPgPtr Ptr]]## sur la tout, principalement pour la s&eacute;curit&eacute;. Nous sommes en mode 32 bits de profondeur, nous avons donc 4 octets par pixel.  Cela correspond &agrave; un ##[[KeyPgUinteger UInteger]]##.
 
-Here's a small line if you still don't understand how this works.  Here is our buffer:  |FB.IMAGE Header|Pixels|
+Voici une petite ligne si vous ne comprenez toujours pas comment cela fonctionne. Voici notre tampon: | FB.IMAGE Header | Pixels |
 
-If what's contained in the first section of our buffer is the ##fb.Image## Header, it's obviously going to be that big in size.  So, we can get our address for the pixels, simply by adding the size of the ##fb.Image## datatype onto our original address.
+Si ce qui est contenu dans la premi&egrave;re section de notre tampon est l'en-t&ecirc;te de ##fb.Image##, c'est bien &eacute;videmment qu'il va &ecirc;tre aussi grand en taille. Ainsi, nous pouvons obtenir notre adresse pour les pixels, simplement en ajoutant la taille de la  ##fb.Image## &agrave; l'adresse de notre type de donn&eacute;e d'origine.
 
-One problem though!  If we add that size to our buffer address, to try and get a new one, we end up with strange results.  This is because our datatype isn't one byte long.  We have to cast to a ##[[KeyPgUbyte Ubyte]] [[KeyPgPtr Ptr]]## first, then add the address.  A ##[[KeyPgUbyte Ubyte]]## is one byte long, so we'll get the exact byte we need in memory to work with.
+Un probl&egrave;me cependant! Si nous ajoutons cette taille du tampon &agrave; notre adresse, pour tenter d'en obtenir une nouvelle, nous nous retrouvons avec des r&eacute;sultats &eacute;tranges.  C'est parce que notre type de donn&eacute;es n'est pas d'un octet de longueur. Nous devons d'abord Cast ##[[KeyPgUbyte UByte]] [[KeyPgPtr Ptr]]## puis ajouter l'adresse. Un ##[[KeyPgUbyte UByte]]## a une longueur d'un octet, ainsi nous obtiendrons en m&eacute;moire l'octet exact n&eacute;cessaire pour les manipulatios.
 
-Finally, we're in 32-bits.  We just casted to a ##[[KeyPgUbyte Ubyte]] [[KeyPgPtr Ptr]]##.  Although we *can* just assign the uInteger ptr the address of the ##[[KeyPgUbyte Ubyte]]##, it's best practice to cast it to a ##[[KeyPgUinteger Uinteger]] [[KeyPgPtr Ptr]]## first.  We finally have the address of our pixels, in the right datatype (one per pixel!).  We could manipulate those pixels directly now, if we'd like.
+Enfin, nous sommes en 32-bits.  Nous avons seulement fait un Cast ##[[KeyPgUbyte UByte]] [[KeyPgPtr Ptr]]##.  Bien que nous puissions simplement attribuer au "uInteger ptr" l'adresse du ##[[KeyPgUbyte UByte]]##, c'est une meilleure pratique de Cast vers un ##[[KeyPgUinteger UInteger]] [[KeyPgPtr Ptr]]## en premier.  Nous avons enfin l'adresse de nos pixels, dans le type de donn&eacute;es convenable (un par pixel!). Nous pouvons manipuler les pixels directement maintenant, si nous le souhaitons.
 
 
 %%(freebasic)
@@ -171,33 +171,33 @@ Print "Image Pitch: " & myBuf->Pitch
 Print ""
 %%
 
-This is what I was talking about earlier.  FB will treat your pointer as if it's an ##fb.Image [[KeyPgPtr ptr]]##, so you can access the data in the header directly.  Since we have the size of the image as well as its pixels address now, we could edit and manipulate them as if they were a pointer to our screen buffer!  See ""ScrPtr vs ImgBuf.bas"" for an example on this.
+C'est ce dont je parlais plus t&ocirc;t. FB traitera votre pointeur comme si c'&eacute;tait un ##fb.Image [[KeyPgPtr Ptr]]##, vous pouvez donc acc&eacute;der aux donn&eacute;es de l'en-t&ecirc;te directement. Puisque nous avons maintenant la taille de l'image ainsi que son adresse pixels, nous pouvons les &eacute;diter et les manipuler comme s'ils &eacute;taient un pointeur sur notre tampon d'&eacute;cran! Voir ScrPtr ImgBuf.bas vs pour un exemple &agrave; ce sujet.
 
-===FBGfx Font Header===
+<div class="fb_header">L'en-t&ecirc;te FBGfx Font
 
-==Header Details==
+**D&eacute;tails de l'en-t&ecirc;te**
 
-The first row of an image buffer that will be used as a font contains the header information for your font, on a byte by byte basis (remember that the first row of pixels are going to be the first byes since it's stored in row->column).
+La premi&egrave;re ligne du tampon d'image qui sera utilis&eacute;e comme une police contient les informations d'en-t&ecirc;te de votre police, sur la base d'un octet par octet (rappelez-vous que la premi&egrave;re rang&eacute;e de pixels correspond aux premiers octets car il sont stock&eacute;s dans ligne -> colonne).
 
-The very first byte tells us what version of the header we're using.  Currently, only 0 is supported, as only one header version has been released.  The second byte tells us the first character supported in our font, and the third byte tells us the last.
+Le tout premier octet nous dit quelle version de l'en-t&ecirc;te que nous utilisons. Actuellement, seul 0 est pris en charge, car une seule version en-t&ecirc;te est autoris&eacute;e. Le deuxi&egrave;me octet nous indique le premier caract&egrave;re pris en charge dans notre police et le troisi&egrave;me octet nous indique le dernier.
 
-0; Byte; Header Version
-1; Byte; First Character Supported
-2; Byte; Last Character Supported
-3 to (3 + ""LastChar - FirstChar""); Byte; Width of each Character in our font.
+0; Octet; Version de l'en-t&ecirc;te
+1; Octet; Premier caract&egrave;re support&eacute;
+2; Octet; Dernier caract&egrave;re support&eacute;
+3 &agrave; (3 + DernierCaract&egrave;re - PremierCaract&egrave;re); Octet; Largeur de chaque caract&egrave;re dans notre police.
 
-==Creating a Font Buffer==
+**Cr&eacute;ation d'une zone tampon de police**
 
-If you had a font that supported character 37 as the first, and character 200 as the last, your bytes would contain:
+Si vous aviez une police de caract&egrave;res dont le premier est le caract&egrave;re 37 et le dernier le caract&egrave;re 200, vos octets devraient contenir:
 
-0 for the header version.  It's the current only version supported.
-37 for the first character supported.
-200 for the last character supported.
-94 bytes containing the widths of each character.
+0 pour la version en-t&ecirc;te. C'est la version actuelle uniquement pris en charge.
+37 pour le premier caract&egrave;re pris en charge.
+200 pour le dernier caract&egrave;re pris en charge.
+94 octets contenant les largeurs de chaque caract&egrave;re.
 
-Since the first row is taken up for header data, the font buffer will be an image buffer whose height is the font height plus one.  That is, if you have a font height of 8, you need a buffer height of 9.  You'll be putting the font in the second row of your buffer, rather than the first as you usually would.
+Puisque la premi&egrave;re ligne est prise pour les donn&eacute;es d'en-t&ecirc;te, le tampon de la police sera un tampon d'image dont la hauteur est la hauteur de la police, plus un. Donc, si vous avez une hauteur de police de 8, vous avez besoin d'une hauteur du tampon de 9. Vous mettrez la police dans la deuxi&egrave;me rang&eacute;e de votre tampon, plut&ocirc;t que la premi&egrave;re comme vous le feriez habituellement.
 
-Here's an example (""Example3.bas""), which creates a font buffer.  It only creates it and assigns header data right now, not the actual font:
+Voici un exemple (Exemple3.bas) qui cr&eacute;e une zone tampon de police. Il ne cr&eacute;e qu'elle et affecte seulement les donn&eacute;es d'en-t&ecirc;te, pas la police effective:
 
 %%(freebasic)
   '' The first supported character
@@ -208,7 +208,7 @@ Const LastChar = 190
 Const NumChar = (LastChar - FirstChar) + 1
 %%
 
-These constants help us.  It makes the code cleaner and faster.
+Ces constantes nous aident. Elles rendent le code plus propre et plus rapide.
 
 
 %%(freebasic)
@@ -217,7 +217,7 @@ These constants help us.  It makes the code cleaner and faster.
 Dim as FB.Image ptr myFont = ImageCreate( ( NumChar * 8 ), 8 + 1 )
 %%
 
-Create our font buffer.  Remember, we need to add horizontal space for each character in the font (8 pixels wide).  We also need to add an extra row for our font header information.
+Cr&eacute;er notre buffer de police. Rappelez-vous, nous avons besoin d'ajouter un espace horizontal pour chaque caract&egrave;re dans la police (8 pixels de large). Nous avons aussi besoin d'ajouter une rang&eacute;e suppl&eacute;mentaire pour notre information d'en-t&ecirc;te de police.
 
 
 %%(freebasic)
@@ -226,7 +226,7 @@ Create our font buffer.  Remember, we need to add horizontal space for each char
 Dim as uByte ptr myHeader = cast(uByte ptr, myFont )
 %%
 
-Get the exact, casted, and having no warnings address of our font buffer.  The header goes on a byte by byte basis, so we can't work on this with an ##fb.Image## type.
+Nous obtenons notre buffer de police, exact, dans le bon format et n'ayant pas d'avertissements concernant les adresses. L'en-t&ecirc;te est sur une base d'un octet pour un octet, donc nous ne pouvons pas travailler sur lui avec un type ##fb.Image##.
 
 
 %%(freebasic)
@@ -239,7 +239,7 @@ myHeader[1] = FirstChar
 myHeader[2] = LastChar
 %%
 
-Assign the header information described above, into the first three bytes.  The header version, the first supported character, and the last supported character.
+Attribuons &agrave; l'en-t&ecirc;te les informations d&eacute;crites ci-dessus, dans les trois premiers octets. La version d'en-t&ecirc;te, le premier caract&egrave;re  et le dernier caract&egrave;re pris en charge.
 
 
 %%(freebasic)
@@ -250,7 +250,7 @@ For DoVar as Integer = 0 to NumChar - 1
 Next
 %%
 
-Each character in our font can have its own width, so we have to assign these.  The ##3 +## skips the header information.  ""##DoVar##"" starts at 0, so the first time it runs through that code, we'll be at index 3.  Give all supported characters a width of 8.
+Chaque caract&egrave;re de notre police peut avoir sa propre largeur, nous devons donc les affecter. Le ##3 +## saute les information d'en-t&ecirc;te. ##DoVar## commence &agrave; 0, donc la premi&egrave;re fois qu'il utilise ce code, nous sommes &agrave; l'indice 3. Donnant &agrave; tous les caract&egrave;res pris en charge une largeur de 8.
 
 
 %%(freebasic)
@@ -258,13 +258,13 @@ Each character in our font can have its own width, so we have to assign these.  
 ImageDestroy( myFont )
 %%
 
-Just reminding you :D
+Juste pour vous rappeler
 
-==Assigning Font Characters==
+**Affectation des caract&egrave;res de la police**
 
-This is fairly simple.  We'll use ''FreeBASIC'''s default font to draw onto our buffer.  Remember to draw starting at column 1, rather than column 0, as the very first column is reserved for header data.  Start the character you're drawing at your first supported character, and give it the color you want.  Be warned, you can't have custom colors when drawing your font.  When you add a character to our buffer, it's stuck the color you draw it as!  See the tips & tricks section on how to get around this, however.
+C'est assez simple. Nous allons utiliser la police par d&eacute;faut de <span >FreeBASIC pour la dessiner sur notre tampon. N'oubliez pas que les dessins commencent &agrave; la colonne 1, non pas la colonne 0, parce que la toute premi&egrave;re colonne est r&eacute;serv&eacute;e pour les donn&eacute;es d'en-t&ecirc;te. D&eacute;marrer en dessinant d'abord le premier caract&egrave;re support&eacute; et donnez-lui la couleur que vous voulez. Attention, vous ne pouvez pas avoir de couleur personnalis&eacute;e lors de l'&eacute;laboration de votre de police. Lorsque vous ajoutez un caract&egrave;re &agrave; votre buffer, sa couleur est bloqu&eacute;e d&eacute;finitivement sur celle qui est utilis&eacute;e pour le dessiner! Voir la section "Conseils et astuces" pour contourner ce probl&egrave;me.
 
-Here's the modified code (""Example4.bas""), where we'll add the font drawing via FreeBASIC's default font onto our buffer.
+Voici le code modifi&eacute; (Exemple4.bas), o&ugrave; nous allons ajouter le dessin de la police via la police FreeBASIC par d&eacute;faut dans notre tampon.
 
 %%(freebasic)
   '' NEW!!!
@@ -272,21 +272,21 @@ Here's the modified code (""Example4.bas""), where we'll add the font drawing vi
 Dim as uByte CurChar
 %%
 
-Just to have a quick index of the current ASCII character we're drawing onto our font.
+Juste pour avoir un indice rapide du caract&egrave;re ASCII courant on dessine sur notre police.
 
 
 %%(freebasic)
 Draw String myFont, ( DoVar * 8, 1 ), chr(CurChar), rgb(rnd * 255, rnd * 255, rnd * 255)
 %%
 
-Skip the first row of our image buffer, as that contains font buffer information.  Draw our font using FBgfx's font as our custom font.  Fill it with a random color.  You should note that we're drawing right into our buffer, with "##Draw String myFont##...".
+Sautez la premi&egrave;re ligne du tampon image, car elle contient des informations sur la police. Utilisez la police police FBgfx pour dessiner notre police personnalis&eacute;e. Remplissez-la avec une couleur al&eacute;atoire. Notez que nous avons dessin&eacute; dans le tampon, avec "##Draw String myFont##...".
 
 
 %%(freebasic)
 Print chr(CurChar);
 %%
 
-Just for clarity, so you can see the characters we're drawing into the buffer.
+Pour plus de clart&eacute; seulement, de fa&ccedil;on &agrave; voir le dessin des caract&egrave;res que nous avons mis dans le tampon.
 
 
 %%(freebasic)
@@ -296,15 +296,15 @@ Draw String (0, 88), "HOW ARE ya DOIN Today?!  YA DOIN FINE?!", , myFont
 sleep
 %%
 
-Test out our new font.  Of course, it's the same one we're used to.  You could have created your own from your own custom font buffer somewhere.
+Testez notre nouvelle police. Bien s&ucirc;r, c'est la m&ecirc;me que celle &agrave; laquelle nous sommes habitu&eacute;s. Vous pourriez avoir cr&eacute;&eacute; la v&ocirc;tre &agrave; partir du tampon de votre propre police personnalis&eacute;e.
 
-===Tips & Tricks===
+<div class="fb_header">Trucs & astuces
 
-==Coloring Your Custom Fonts==
+**Colorisation de vos polices personnalis&eacute;es**
 
-Alright, so by now you have realized that once you color a custom font, you can't use ##[[KeyPgDrawString Draw String]]## to change that color.  Well, no fear, we can get around that (""CustFontCol.bas"").  It might be a bit slow, however.
+Bon, maintenant que vous avez r&eacute;alis&eacute; qu'une fois que vous colorisez une police personnalis&eacute;e, vous ne pouvez pas utiliser ##[[KeyPgDrawString Draw String]]## pour changer cette couleur. Eh bien, aucune crainte, nous pouvons contourner cela (CustFontCol.bas). Cependant, cela pourrait &ecirc;tre un peu lent.
 
-We can create a font object, which has a function to return a font buffer.  What the code does is it redraws the font buffer every time we change color, and returns the font buffer stored in the object.  This *could* in theory be sped up if we knew the range of characters to redraw, so we could only redraw from the lowest to the highest.  Figuring out that range in itself, could also be slow.
+Nous pouvons cr&eacute;er un objet police, contenant une fonction qui retourne un tampon police. Que fait ce code? il redessine le tampon de la police chaque fois que nous changeons de couleur et renvoie le tampon de la police stock&eacute;e dans l'objet. Cela *pourrait* th&eacute;oriquement &ecirc;tre acc&eacute;l&eacute;r&eacute; si l'on connaissait la gamme des caract&egrave;res &agrave; redessiner, alors nous pourrions redessiner que ceux-l&agrave; du plus bas au plus &eacute;lev&eacute;. Mais d&eacute;terminer cela, pourrait aussi &ecirc;tre tr&egrave;s lent.
 
 %%(freebasic)
 #include "fbgfx.bi"
@@ -426,9 +426,9 @@ Scope
 End Scope
 %%
 
-==""ScrPtr vs ImgBuf""==
+**ScrPtr vs ImgBuf**
 
-Comparison of how to draw onto image buffer pixels, versus how to draw on the screen's buffer (""ScrPtr vs ImgBuf.bas""):
+Comparaison sur comment dessiner des pixels dans le tampon d'image, par rapport &agrave; comment dessiner sur le tampon de l'&eacute;cran (ScrPtr vs ImgBuf.bas):
 
 %%(freebasic)
 #include "fbgfx.bi"
@@ -497,7 +497,7 @@ sleep
 	cast(ubyte ptr, mybuff) + Y * Pitch + X * Bpp
 	
 	Every Y contains PITCH number of bytes.  In order to reach your new Y, you 
-	have to	skip an entire row.
+	have to skip an entire row.
 	
 	It should be safe to do the pointer arithmetic in cases where the pointer's data
 	type is not one byte long, so you may find it easier to use a pointer type to
@@ -507,4 +507,4 @@ sleep
 	size. And, obviously, so will the BPP, which will just cancel to 1 :D
 	
 '/
-%%
+##

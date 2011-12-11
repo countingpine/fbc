@@ -1,5 +1,5 @@
 {{fbdoc item="title" value="CDBL"}}----
-Converts numeric or string expression to ##[[KeyPgDouble Double]]## precision floating point
+Convertit une expression num&eacute;rique ou une cha&icirc;ne en nombre ##[[KeyPgDouble Double]]## pr&eacute;cision &agrave; virgule flottante.
 
 {{fbdoc item="syntax"}}##
 	[[KeyPgDeclare declare]] [[KeyPgFunction function]] **Cdbl** ( [[KeyPgByval byval]] //expression// [[KeyPgAs as]] [[DataType datatype]] ) [[KeyPgAs as]] [[KeyPgDouble double]]
@@ -15,49 +15,49 @@ Converts numeric or string expression to ##[[KeyPgDouble Double]]## precision fl
 ##
 {{fbdoc item="param"}}
 	##//expression//##
-		a numeric, string, or pointer expression to cast to a ##[[KeyPgDouble Double]]## value
+		Une expression num&eacute;rique, cha&icirc;ne ou pointeur &agrave; transformer (cast) en valeur ##[[KeyPgDouble Double]]##
 	##//datatype//##
-		any numeric, string, or pointer data type
+		Tout type de donn&eacute;es num&eacute;rique, cha&icirc;ne ou pointeur.
 	##//typename//##
-		a user defined type
+		Un type d&eacute;fini par l'utilisateur.
 
-{{fbdoc item="ret"}}
-	A ##[[KeyPgDouble Double]]## precision value.
+##[[KeyPgDouble Double]]## pr&eacute;cision.
+	{{fbdoc item="desc"}}
 
-{{fbdoc item="desc"}}
-	The ##**CDbl**## function returns a 64-bit ##[[KeyPgDouble Double]]## value. The function does not check for an overflow, so be sure not to pass a value outside the representable range of the ##[[KeyPgDouble Double]]## data type. The name can be explained as 'Convert to ""DouBLe""'.
+La fonction ##**CDbl**## retourne une valeur ##[[KeyPgDouble Double]]## 64 bits. La fonction ne v&eacute;rifie pas s'il y a un d&eacute;passement, alors assurez-vous de ne pas avoir une valeur en dehors de l'intervalle correspondant au type de donn&eacute;es ##[[KeyPgDouble Double]]##. Le nom peut &ecirc;tre expliqu&eacute; par 'Convert to DouBLe'.
+	Si l'argument de ##**CDbl**## est une expression cha&icirc;ne, il est converti en valeur num&eacute;rique &agrave; l'aide de ##[[KeyPgVal Val]]##.
 
-	If the argument to ##**CDbl**## is a string expression, it is first converted to numeric by using ##[[KeyPgVal Val]]##.
+	{{fbdoc item="ex"}}
 
 {{fbdoc item="ex"}}
-{{fbdoc item="filename" value="examples/manual/casting/cdbl.bas"}}%%(freebasic)
 ' Using the CDBL function to convert a numeric value
-
 'Create an DOUBLE variable
-DIM numeric_value AS DOUBLE
 
+Dim numeric_value As Double
 'Convert a numeric value
-numeric_value = CDBL(-12345678.123)
 
+numeric_value = CDbl(-12345678.123)
 'Print the result, should return -12345678.123
-PRINT numeric_value
-SLEEP
+
+Print numeric_value
+Sleep
 %%
-
 {{fbdoc item="diff"}}
-	- None
 
-{{fbdoc item="see"}}
-	- ##[[KeyPgCbyte Cbyte]]##
-	- ##[[KeyPgCubyte Cubyte]]##
-	- ##[[KeyPgCshort Cshort]]##
-	- ##[[KeyPgCushort Cushort]]##
-	- ##[[KeyPgCint Cint]]##
-	- ##[[KeyPgCuint Cuint]]##
-	- ##[[KeyPgClng Clng]]##
-	- ##[[KeyPgCulng Culng]]##
-	- ##[[KeyPgClngint Clngint]]##
-	- ##[[KeyPgCulngint Culngint]]##
+- Aucune
+	{{fbdoc item="see"}}
+
+- ##[[KeyPgCbyte CByte]]##
+	- ##[[KeyPgCubyte CUByte]]##
+	- ##[[KeyPgCshort CShort]]##
+	- ##[[KeyPgCushort CUShort]]##
+	- ##[[KeyPgCint CInt]]##
+	- ##[[KeyPgCuint CUInt]]##
+	- ##[[KeyPgClng CLng]]##
+	- ##[[KeyPgCulng CULng]]##
+	- ##[[KeyPgClngint CLngInt]]##
+	- ##[[KeyPgCulngint CULngInt]]##
+	- ##[[KeyPgCsng CSng]]##
 	- ##[[KeyPgCsng Csng]]##
 
 {{fbdoc item="back" value="CatPgCasting|Converting Data Types"}}

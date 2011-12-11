@@ -2,7 +2,7 @@
 
 **Introduction**
 
-  This tutorial is aimed at people who want to know more about the new features added to ##Type##, commonly being referred to as 'types as objects', and 'that OOP stuff'.  It aims to walk you through these new features, so is aimed at people who don't really understand it yet, but want to learn.  A ##Type## in FreeBASIC is an aggregate data type, like a struct in C, or a record in Pascal.  Here's just a short sample of typical ##Type## usage.
+  Ce tutoriel est destin&eacute; aux personnes qui veulent en savoir plus sur les nouvelles fonctionnalit&eacute;s ajout&eacute;es &agrave; ##**Type**##, commun&eacute;ment d&eacute;nomm&eacute;es '//types comme des objets//' et '//du genre POO//' (Programmation Orient&eacute;e Objets).  Il vise &agrave; vous guider &agrave; travers ces nouvelles fonctionnalit&eacute;s, ainsi est il destin&eacute; aux personnes qui ne comprennent pas vraiment encore, mais qui veulent apprendre.  Un ##**Type**## en FreeBASIC est un type de donn&eacute;es agr&eacute;g&eacute;es, comme une structure en C ou un '//record//' en Pascal.  Voici un court exemple d'utilisation typique de ##**Type**##.
 
 %%(freebasic)
 Type person_info
@@ -14,11 +14,11 @@ Type person_info
 End Type
 %%
 
-In this usage it's used as a kind of container for related data; in this example it could be as an entry in an address book.  With the new features, however, it can be used more like the class in ""C++"", in that it can do much more than contain just simple fields of data.  It becomes a way to express an idea of an object, and this makes object oriented programming much simpler.  We will now look at these new features.
+Dans cette utilisation, il est employ&eacute; comme un type de conteneur pour les donn&eacute;es relatives; dans cet exemple, il pourrait &ecirc;tre aussi une entr&eacute;e dans un carnet d'adresses.  Avec les nouvelles fonctionnalit&eacute;s, cependant, il peut &ecirc;tre utilis&eacute; plus comme une classe en C++, car il peut faire beaucoup plus que contenir de simples champs de donn&eacute;es.  Il devient un moyen d'exprimer une id&eacute;e d'un objet, ce qui rend la programmation orient&eacute;e objet beaucoup plus simple.  Nous allons maintenant examiner ces nouvelles fonctionnalit&eacute;s.
 
 **Property**
 
-We'll start by looking at property.  When you add a property to a ##Type##, you access it as if it were an ordinary member, but what happens, is instead of just getting or setting a variable as normal, it calls a function instead.  Take a look at this example:
+Nous allons commencer par examiner la ##**Property**## (propri&eacute;t&eacute;).  Quand vous ajoutez une ##**Property**## &agrave; un ##**Type**##, vous y acc&eacute;der comme s'il s'agissait d'un membre ordinaire, mais que se passe-t-il, est-ce seulement pour obtenir ou d&eacute;finir une variable comme d'habitude, au lieu de cela il appelle une fonction.  Jetez un oeil &agrave; cet exemple:
 
 %%(freebasic)
 Type bar
@@ -45,17 +45,17 @@ foo.x = 5
 Print foo.x
 %%
 
-We include in our ##Type## some declarations for a ##Property##; they are very similar to ordinary function declarations.  The first one declares a getter, the second a setter.  The ##p_x## member is just an ordinary ##Integer## member.
+Nous incluons dans notre ##**Type**## certaines d&eacute;clarations de ##**Property**##; elles sont tr&egrave;s semblables aux d&eacute;clarations de fonction ordinaires.  La premi&egrave;re d&eacute;clare un procureur (getter), la seconde un fixeur (setter).  Le membre ##p_x## est simplement un nombre ##**Integer**##.
 
-Next we write the code for the properties; again, the syntax is very similar to that of normal functions.  Note the way we return a value: instead of ##Function = value##, we do ##Property = value##.  You can do ##Return value## as well.  Also note that you can refer to the member directly as ##p_x##; you can also use the keyword ##this##, for example ##this.p_x = n##; using ##this## isn't usually needed, but it can help in some ambiguous circumstances.
+Ensuite, nous &eacute;crivons le code pour les ##**Property**##; encore une fois, la syntaxe est tr&egrave;s similaire &agrave; celle des fonctions normales.  Notez la mani&egrave;re dont nous retournons une valeur: au lieu de ##**Function = valeur**##, nous faisons ##**Property = valeur**##.  Vous pouvez faire aussi ##**Return valeur**##.  Notez &eacute;galement que vous pouvez vous r&eacute;f&eacute;rer directement au membre ##**p_x**##; vous pouvez &eacute;galement utiliser le mot-cl&eacute; ##**this**##, par exemple ##**this.p_x = n**##; utiliser ##**this**## n'est g&eacute;n&eacute;ralement pas n&eacute;cessaire, mais il peut aider dans certaines circonstances ambigu&euml;s.
 
-Then follows some testing code; this shows how we can use the property as if it were any ordinary member.  When you run the program it will also print to screen to show that the property get/set code has been called.
+Vient ensuite un peu de code de test; cela montre comment nous pouvons utiliser ##**Property**## comme s'il s'agissait d'un membre ordinaire.  Lorsque vous ex&eacute;cutez le programme, il sera &eacute;galement affich&eacute; &agrave; l'&eacute;cran pour montrer quel code de ##**Property**## "get/set" a &eacute;t&eacute; appel&eacute;.
 
-Now this code is fairly trivial, but as you get used to the idea you'll see it can be put to some good uses.  Imagine as an example you are writing a GUI, and the TYPE represents a button on the screen, you could do ##button.text = "Hello World!"##, and make the property code update the screen to show the changes.  Or maybe you are using the ##Type## to maintain some kind of list; you could do ##list.size += 10## and then put some code in your property to make the list larger.
+Maintenant, ce code est assez trivial, mais comme on s'habitue &agrave; l'id&eacute;e vous verrez qu'il peut &ecirc;tre utilis&eacute; pour certains bons usages.  Imaginez, comme un exemple, que vous &eacute;crivez une interface graphique (GUI) et que le ##**Type**## repr&eacute;sente un bouton sur l'&eacute;cran, vous pourriez avoir ##**button.text = "Hello World!"**##, et faire que le code de ##**Property**## mette &agrave; jour l'&eacute;cran pour montrer les changements.  Ou peut-&ecirc;tre que vous utilisez ##**Type**## pour maintenir une sorte de liste; vous pouvez avoir ##**list.size += 10**## et puis mettre un peu de code dans votre ##**Property**## de rendre la liste plus grande.
 
-**Constructor/Destructor**
+**Constructeur/Destructeur**
 
-##Constructor##s are functions that are called when the ##Type## gets created - when you use ##Dim##, for example.  A ##Destructor## is a function that gets called when the ##Type## goes out of scope; this could be when the program ends, for a ##Type## in the main code, or when a function ends, for a local ##Type##.  Look at the following example, expanded from the last.
+Les ##**Constructor**##s sont des fonctions qui sont appel&eacute;es quand le ##**Type**## est cr&eacute;&eacute; - lorsque vous utilisez ##**Dim**##, par exemple.  Un ##**Destructor**## est une fonction appel&eacute;e quand ##**Type**## sort de la port&eacute;e; il peut s'agir de la fin du programme, pour un ##**Type**## dans le code principal ou quand une fonction se termine, pour un ##**Type**## local.  Regardez l'exemple suivant, expansion du pr&eacute;c&eacute;dent.
 
 %%(freebasic)
 Type bar
@@ -96,11 +96,11 @@ foo.x = 5
 Print foo.x
 %%
 
-Again the syntax is somewhat similar to normal functions.  Note that this time I changed ##p_x## to be an ##Integer ptr##.  The constructor then ##Allocate##s the memory for this when ##foo## is created, and gives it a default value; then it ##De-Allocate##s this memory once it is destroyed.  So you can use ##Constructor##s and ##Destructor##s to set things up for you, then clean up once its finished with.  Again a trivial example, but bring back the example of some kind of list, and having it set the list up for you, and clean it up when it's finished with can be quite handy.
+Encore une fois la syntaxe est quelque peu semblable &agrave; toutes les fonctions normales.  Notez que cette fois j'ai modifi&eacute; ##**p_x**## pour un ##**Integer ptr**##.  Le ##**Constructor**##, ensuite ##**Allocate**## de la m&eacute;moire pour lui quand ##**foo**## est cr&eacute;&eacute;, et lui donne une valeur par d&eacute;faut; puis le ##**Destructor**## ##**Deallocate**## cette m&eacute;moire.  Ainsi, vous pouvez utiliser ##**Constructor**##s et ##**Destructor**##s pour mettre les choses en place pour vous, puis nettoyer une fois termin&eacute;.  Retour sur un exemple trivial, ramenant l'exemple d'une certaine liste, la mettant en place pour vous et la nettoyant lorsque tout est fini, cela peut &ecirc;tre tr&egrave;s pratique.
 
-**Methods**
+**M&eacute;thodes**
 
-You can also have regular ##Sub##s and ##Function##s inside your ##Type##; in some terminology, these are referred to as methods.  We'll carry on our example:
+Vous pouvez &eacute;galement avoir des ##**Sub**##s et ##**Function**##s ordinaires dans votre ##**Type**##; dans une certaine terminologie, ce sont des m&eacute;thodes.  Nous allons poursuivre notre exemple:
 
 %%(freebasic)
 Type bar
@@ -154,11 +154,11 @@ Print foo.x
 Print "address p_x points to", foo.Addr()
 %%
 
-So this time we added a ##Sub##, that multiplies the integer pointed to by ##p_x## by five, and a function that gets the memory address that the pointer holds.
+Alors, cette fois nous avons ajout&eacute; une ##**Sub**##, qui multiplie par 5 l'entier point&eacute; par ##**p_x**## et une fonction qui r&eacute;cup&egrave;re l'adresse m&eacute;moire contenue dans ce pointeur.
 
 **Private/Public**
 
-By default all of the members of the bar type are public; that means that we can read/write or call them.  However, sometimes you might want to make them private.  Take for example our member ##p_x##; we can currently do ##Print *foo.p_x##, and it will allow us to print the value it points to.  We might want to make it private, so that only the members of the ##bar## type (the constructor, destructor, property, and methods) can access it.  That way we can make sure we only deal with ##p_x## by the ways we choose.  If for example we did '##""DeAllocate""(foo.p_x)##' in our main code, then when the destructor runs, it would try to free it again, known as a 'double free'.  Change the ##Type## declaration as follows:
+Par d&eacute;faut, tous les membres du ##**Type bar**## sont ##**Public**##; cela signifie que nous pouvons les lire/&eacute;crire ou appeler.  Cependant, parfois, vous voudrez peut-&ecirc;tre les rendre ##**Private**##.  Prenons l'exemple de notre membre ##**p_x**##; alors nous pouvons faire ##**Print *foo.p_x**## et cela nous permettra d'afficher la valeur vers laquelle il pointe.  Nous pourrions vouloir le rendre ##**Private**##, de sorte que seuls les membres du ##**Type bar**## (##**Constructor**##, ##**Destructor**##, ##**Property**## et ##**M&eacute;thodes**##) peuvent y acc&eacute;der.  De cette fa&ccedil;on, nous pouvons nous assurer que nous ne tra&icirc;tons avec ##**p_x**## que par les moyens que nous avons choisis.  Si par exemple on '##**Deallocate(foo.p_x)**##' dans notre code principal, lorsque le ##**Destructor**## fonctionnera, il essaiera de le lib&eacute;rer &agrave; nouveau, ce qui est connu sous le nom de "double lib&eacute;ration".  Modifiez la d&eacute;claration de ##**Type**## comme suit:
 
 %%(freebasic)
 Type bar
@@ -173,7 +173,7 @@ private:
 End Type
 %%
 
-Now try adding ##Print *foo.p_x## to the main code and compile it.  You'll get a message from fbc "##error 173: Illegal member access, found 'p_x' in 'Print *foo.p_x'##", showing that indeed the compiler is now enforcing the fact we made ##p_x## private.  When you use ##private:## or ##public:##, any members following that statement follow the rule.  Here's a rather pointless example just to show the syntax:
+Maintenant, essayez d'ajouter ##**Print *foo.p_x**## dans le code principal et compilez-le.  Vous recevrez un message de fbc ##**error 173: Illegal member access, found 'p_x' in 'Print *foo.p_x'**##, montrant bien que le compilateur est maintenant oblig&eacute; de faire respecter le fait que nous avons d&eacute;clar&eacute; ##**p_x Private**##.  Quand vous utilisez ##**Private:**## ou ##**Public:**##, tous les membres suivant cette d&eacute;claration suivent la r&egrave;gle.  Voici un exemple, assez inutile, juste pour montrer la syntaxe:
 
 %%(freebasic)
 Type bar
@@ -188,11 +188,11 @@ private:
 End Type
 %%
 
-In the above type, the members ##a##, ##b##, and ##e## are private; ##c## and ##d## are public.
+Dans le ##**Type**## ci-dessus, les membres ##a##, ##b## et ##e## sont ##**Private**##; ##c## et ##d## sont ##**Public**##.
 
-**Operator overloading**
+**Surcharge des op&eacute;rateurs**
 
-Operator overloading is a way of telling the compiler what to do in the case where we want to perform some kind of operation involving our ##Type##.  Take this example:
+La surcharge d'op&eacute;rateur est une fa&ccedil;on de dire au compilateur ce qu'il faut faire dans le cas o&ugrave; nous voulons effectuer une certaine sorte d'op&eacute;ration impliquant notre ##**Type**##.  Prenez cet exemple:
 
 %%(freebasic)
 Type bar
@@ -204,7 +204,7 @@ Dim As bar x, y, z
 z = x + y
 %%
 
-Now normally the compiler will throw an error when it sees this, as it has no idea how to add together two ##Type##s, but we can define what we want to happen.  Here's how:
+Maintenant, normalement le compilateur g&eacute;n&egrave;re une erreur lorsqu'il voit cela, car il n'a aucune id&eacute;e de comment ajouter ensemble deux ##**Type**##s, mais nous pouvons d&eacute;finir ce que nous voulons qu'il se produise.  Voici comment:
 
 %%(freebasic)
 Type bar
@@ -223,7 +223,7 @@ z = x + y
 Print z.n
 %%
 
-In this code, I use ##lhs## and ##rhs## to refer to the left and right hand side operands of the operator.  Note also the expression ##type(lhs.n + rhs.n)##; this builds the ##Type## that will be returned.  If you had a type like:
+Dans ce code, j'utilise ##**lhs**## (left-hand) et ##**rhs**## (right-hand) pour d&eacute;signer les op&eacute;randes du c&ocirc;t&eacute; gauche et du c&ocirc;t&eacute; droit de l'op&eacute;rateur.  Notez aussi l'expression ##**type(lhs.n + rhs.n)**##; ceci construit le ##**Type**## qui sera retourn&eacute;.  Si vous aviez un ##**Type**## comme:
 
 %%(freebasic)
 Type bar
@@ -233,13 +233,13 @@ Type bar
 End Type
 %%
 
-Then you would build it like ##type(xpart, ypart, zpart)##.
+Vous l'auriez construit ainsi ##**type(xpart, ypart, zpart)**##.
 
-Most or all operators can be overloaded, and most of them are binary ops, meaning they have two operands like the + example above.  Some are unary ops having only a right hand side, like ##Not## and unary minus.  They would be done like '##Operator Not(ByRef rhs As bar) As bar##'.
+La plupart ou tous les op&eacute;rateurs peuvent &ecirc;tre surcharg&eacute;s, et la plupart d'entre eux sont des op&eacute;rateurs binaires, ce qui signifie qu'ils ont deux op&eacute;randes comme dans l'exemple **+** ci-dessus.  Certains sont des op&eacute;rateurs unaires ayant seulement le c&ocirc;t&eacute; droit, comme ##**Not**## et ##**- unaire**##.  Ils seraient obtenus comme ceci ##**Operator Not(ByRef rhs As bar) As bar**##.
 
-There are some special cases where they have to be declared inside the ##Type##; these are the assignment operators and casts.
+Il y a quelques cas particuliers o&ugrave; ils doivent &ecirc;tre d&eacute;clar&eacute;s &agrave; l'int&eacute;rieur du ##**Type**##; ce sont les op&eacute;rateurs d'affectation et les "cast".
 
-Assignment operators are things like ##+= -= mod=## etc, and also ##Let##.  ##Let## is used when you do an assignment like:
+Les op&eacute;rateurs d'affectation sont comme ceci ##**+= -= mod=**## etc, et aussi ##**Let**##.  ##**Let**## est utilis&eacute; lorsque vous faites une t&acirc;che d'affectation comme:
 
 %%(freebasic)
 Dim As bar foo
@@ -247,7 +247,7 @@ Dim As Integer x
 foo = x
 %%
 
-And casts are kind of the reverse; they are used when you cast to another datatype like:
+Et "casts" sont des cas inverses, ils sont utilis&eacute;s lorsque vous "cast" vers un autre type de donn&eacute;es comme ceci:
 
 %%(freebasic)
 Dim As bar foo
@@ -255,7 +255,7 @@ Dim As Integer x
 x = foo
 %%
 
-Heres a short example using ##Let## and ##Cast##:
+Voici un court exemple utilisant ##**Let**## et ##**Cast**##:
 
 %%(freebasic)
 Type bar
@@ -289,18 +289,18 @@ z = x + y
 Print z
 %%
 
-You need to have separate lets and casts for each data type you want to support. The operators that need declaring within the type are known as non-static, and the ones that don't are known as global.  There is a technical reason for this; the non-static ones need to know which instance (in the technical jargon, in our example above, we would say that ##x## is an instance of ##bar##) of the ##Type## they are referring to, and this is accomplished by a hidden '##this##' reference.  This hidden '##this##' reference is how the other members like operators and methods know which instance of the ##Type## the call refers to.  Most operators can be overloaded; here's a list of the ones that currently can be:
+Vous devez avoir s&eacute;par&eacute; les **let**s et **cast**s pour chaque type de donn&eacute;es que vous voulez supporter. Les op&eacute;rateurs qui doivent &ecirc;tre d&eacute;clar&eacute;s dans le ##**Type**## sont connus comme non-statiques et ceux qui ne sont pas connus comme globals.  Il y a une raison technique pour cela; les non-statiques doivent savoir &agrave; quelle instance (dans le jargon technique, dans notre exemple pr&eacute;c&eacute;dent, nous dirions que ##**x**## est une instance de ##**bar**##) de ##**Type**## ils font r&eacute;f&eacute;rence et ceci est accompli par la r&eacute;f&eacute;rence cach&eacute;e ##**this**##.  Cette r&eacute;f&eacute;rence cach&eacute;e ##**this**## est le moyen pour que les autres membres comme les op&eacute;rateurs et les m&eacute;thodes sachent &agrave; quelle instance de ##**Type**## se r&eacute;f&egrave;re l'appel.  La plupart des op&eacute;rateurs peuvent &ecirc;tre surcharg&eacute;s; voici une liste de ceux qui actuellement peuvent l'&ecirc;tre:
 
-Assignment ops:
+op&eacute;rateurs d'affectation:
   ##let##, ##+=##, ##-=##, ##*=##, ##/=##, ##\=##, ##mod=##, ##shl=##, ##shr=##, ##and=##, ##or=##, ##xor=##, ##imp=##, ##eqv=##, ##^=##
-Unary ops:
+op&eacute;rateurs unaires:
   ##-##, ##not##, ##@##, ##*##, ##->##
-Binary ops:
+op&eacute;rateurs binaires:
   ##+##, ##-##, ##*##, ##/##, ##\##, ##mod##, ##shl##, ##shr##, ##and##, ##or##, ##xor##, ##imp##, ##eqv##, ##^##, ##=##, ##<>##, ##<##, ##>##, ##<=##, ##>=##
 
-**Overloaded Constructors/Methods**
+**Constructeurs/M&eacute;thodes surcharg&eacute;s**
 
-As with normal functions, our ##Type##'s constructor and methods can be overloaded.  For constructors, this provides a way to specify details on how the instance should be constructed.  Here's a short example:
+Comme pour les fonctions normales, le ##**Constructor**## et les m&eacute;thodes de notre ##**Type**## peuvent &ecirc;tre surcharg&eacute;s.  Pour les ##**Constructor**##s, cela fournit un moyen de sp&eacute;cifier les d&eacute;tails sur la fa&ccedil;on dont l'instance doit l'&ecirc;tre construite.  Voici un court exemple:
 
 %%(freebasic)
 Type bar
@@ -324,9 +324,9 @@ Dim baz As bar = bar(25)
 Print baz.x
 %%
 
-The first ##Constructor##, that had no arguments, is known as the default constructor.  This sets up ##foo.x## to an initial value of 10.  However, we have also specified another constructor that will accept an initial value.  Note the way we ask for this to be called ##Dim baz As bar = bar(25)##.  You can also leave out the default constructor, and then you will always have to specify the initial value using the constructor that takes an argument. You can't have an overloaded destructor, because there's no way to manually choose which one would be called.
+Le premier ##**Constructor**##, qui n'a aucun argument, est appel&eacute; le ##**Constructor**## par d&eacute;faut.  Il d&eacute;finit ##foo.x## avec une valeur initiale de 10.  Cependant, nous avons aussi sp&eacute;cifi&eacute; un autre ##**Constructor**## qui accepte une valeur initiale.  Notez la mani&egrave;re avec laquelle nous l'appelons ##**Dim baz As bar = bar(25)**##.  Vous pouvez &eacute;galement omettre le ##**Constructor**## par d&eacute;faut et alors vous devrez toujours sp&eacute;cifier une valeur initiale en utilisant le ##**Constructor**## qui n&eacute;cessite un argument. Vous ne pouvez pas avoir un ##**Destructor**## surcharg&eacute;, parce qu'il n'existe aucun moyen manuel de choisir celui que vous d&eacute;sirez appeler.
 
-Overloaded methods are very similar:
+Les m&eacute;thodes surcharg&eacute;es sont tr&egrave;s similaires:
 
 %%(freebasic)
 Type bar
@@ -337,21 +337,21 @@ Type bar
 End Type
 %%
 
-They work just they same as normal overloaded functions.
+Elles fonctionnent de la m&ecirc;me fa&ccedil;on que les fonctions normales surcharg&eacute;es.
 
-**Closing**
+**Cl&ocirc;ture**
 
-I hope this tutorial has been useful for you, although there are still a few things left to learn; if you've got this far, it shouldn't be too hard for you to pick them up.  There is some more information available in the wiki and on the forums, and also in part 2 of this tutorial, available here - [[TutBeginnersGuideToTypesAsObjects2 Beginners Guide to Types as Objects (Part 2)]]
+J'esp&egrave;re que ce tutoriel vous a &eacute;t&eacute; utile, mais il y a encore quelques petites choses &agrave; apprendre; si vous avez pu aller jusqu'ici, il ne devrait pas &ecirc;tre trop difficile pour vous de les int&eacute;grer.  Il y a quelques informations disponibles dans le wiki et sur les forums, et aussi dans la partie 2 de ce tutoriel qui est disponible ici - [[TutBeginnersGuideToTypesAsObjects2 Guide pour d&eacute;butants, de types en tant qu'objets (Partie 2)]]
 
-**More reading**
+**Lectures suppl&eacute;mentaires**
 
 	- ##[[KeyPgProperty Property]]##
 	- ##[[KeyPgConstructor Constructor]]##
 	- ##[[KeyPgDestructor Destructor]]##
 	- ##[[KeyPgOperator Operator]]##
 	- ##[[KeyPgThis This]]##
-	- [[KeyPgTypeTemp Anonymous Types]]
-	- [[ProPgTypeObjects Types as Objects]]
+	- [[KeyPgTypeTemp Types anonymes]]
+	- [[ProPgTypeObjects Types comme objets]]
 	- ##[[KeyPgVisPublic Public:]]##
 	- ##[[KeyPgVisPrivate Private:]]##
 	- ##[[KeyPgVisProtected Protected:]]##

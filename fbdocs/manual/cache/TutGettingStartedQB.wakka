@@ -1,41 +1,41 @@
 {{fbdoc item="title" value="Getting Started"}}----
-This is a good introduction to FB for QBasic programmers, based on SJ Zero's tutorial.
+C'est une bonne introduction &agrave; FB pour les programmeurs QBasic, sur la base d'un tutoriel de SJ Zero.
 
-==Getting started with the software==
+**Pour commencer avec le logiciel**
 
-You can download FreeBASIC here: [[http://www.freebasic.net/index.php/download]]
-And FBIDE here: [[http://fbide.sourceforge.net/]]
+Vous pouvez t&eacute;l&eacute;charger FreeBASIC ici: http://www.freebasic.net/index.php/download
+Et FBIDE ici: http://fbide.sourceforge.net/
 
-When installing FBIDE, select "FBIDE only," to not install the old version of FB included in that package.
-When running FBIDE the first time, you will have to browse to find the FB compiler on your computer.
+Lors de l'installation de FBIDE, s&eacute;lectionnez "FBIDE only," pour ne pas installer l'ancienne version de FB incluse dans ce paquet.
+Lors de l'ex&eacute;cution FBIDE la premi&egrave;re fois, vous aurez &agrave; parcourir les r&eacute;pertoires (browse) pour trouver le compilateur FB sur votre ordinateur.
 
-==Hello World!==
+**Hello World!**
 
-Open up FBIDE and type the following:
+Ouvrez FBIDE et tapez la commande suivante:
 
 %%
- PRINT "Hello World!"
+ PRINT "Bonjour le monde!"
  SLEEP
 %%
 
-Now press F5. Congratulations, you've just seen how much like QB FreeBASIC really is. Now you can use most console commands for QB just like you remember. For example: 
+Maintenant, appuyez sur F5. F&eacute;licitations, vous venez de voir comment FreeBasic est vraiment tout comme QB FreeBasic. Maintenant, vous pouvez utiliser la plupart des commandes de la console pour QB comme vous vous en souvenez. Par exemple: 
 
 %%
  LOCATE 10,10
- PRINT "I'm the center of the universe!"
+ PRINT "Je suis le centre de l'univers!"
  SLEEP
 %%
 
-==The Amazing Screen 13==
+**L'extraordinaire Screen 13**
 
-Now, put "SCREEN 13" before your code, to see how easy it is to use graphics modes:
+Maintenant, mettez "SCREEN 13" avant votre code, pour voir combien il est facile d'utiliser les modes graphiques:
 %%
  SCREEN 13
  PRINT "Hello World!"
  SLEEP
 %%
 
-From there, all of the standard QB graphics commands work as you remember, as you can see in this example:
+A partir de l&agrave;, toutes les commandes graphiques standard fonctionnent, comme vous pouvez le voir dans cet exemple:
 
 %%
  SCREEN 13
@@ -47,7 +47,7 @@ From there, all of the standard QB graphics commands work as you remember, as yo
  SLEEP
 %%
 
-FreeBASIC also has new graphics features. For example, QB has never had a screen 14 or greater. Try running this program:
+FreeBasic a &eacute;galement de nouvelles fonctionnalit&eacute;s graphiques. Par exemple, QB n'a jamais eu de SCREEN 14 ou plus. Essayez de lancer ce programme:
 %%
  SCREEN 15
  LINE (1,1)-(100,100),1,bf
@@ -58,9 +58,9 @@ FreeBASIC also has new graphics features. For example, QB has never had a screen
  SLEEP
 %%
 
-After opening a graphics window via the SCREEN command, you can also hit ALT-ENTER to change between windowed and fullscreen modes.
+Apr&egrave;s l'ouverture d'une fen&ecirc;tre graphique via la commande SCREEN, vous pouvez &eacute;galement appuyer sur ALT-ENTRER pour changer du mode fen&ecirc;tr&eacute; et au mode plein &eacute;cran.
 
-Another nice feature of the graphics library in FreeBASIC is that you can do page flipping in any video mode. The following code demonstrates this. 
+Une autre fonctionnalit&eacute; int&eacute;ressante de la biblioth&egrave;que graphique dans FreeBasic est que vous pouvez faire un changement de page dans n'importe quel mode vid&eacute;o. Le code suivant illustre cela. 
 
 %%
  DIM as integer page
@@ -78,7 +78,7 @@ Another nice feature of the graphics library in FreeBASIC is that you can do pag
   SCREENSET page, notpage 'This flips the page
 	
   CLS  'First we clear the screen
-  b = b + 1 
+  b = b + 1
   IF b > 100 THEN b = 0
   FOR a = 1 TO 128
    PSET (b,a),a 'Then we draw a line. It moves without flickering.
@@ -87,22 +87,22 @@ Another nice feature of the graphics library in FreeBASIC is that you can do pag
  LOOP UNTIL INKEY = CHR(27)
 %%
 
-This works for any mode, so you can use the high resolution modes for your programs with page flipping, using standard QB graphics commands! 
+Ceci fonctionne pour n'importe quel mode, vous pouvez donc utiliser les modes &agrave; haute r&eacute;solution pour vos programmes avec le changement de page, en utilisant des commandes graphiques QB! 
 
 
-==Why ASM is No Longer Required==
+**Pourquoi ASM n'est plus n&eacute;cessaire**
 
-I wouldn't be saying this if it wasn't true. Using ASM in BASIC to increase the functionality of your program is no longer necessary. Ignoring SDL, Allegro, DirectX, OpenGL, et. al. for a minute, you've got the above page flipping and advanced graphics modes at your disposal, as well as Inkey, which we've all grown to love or hate, but there are also two new input commands which do things QBers have had to resort to assembly code to do since the dawn of time:
+Je n'aurais pas dit cela si ce n'&eacute;tait pas vrai. Utilisation d' ASM dans BASIC pour augmenter la fonctionnalit&eacute; de votre programme n'est plus n&eacute;cessaire. Ignorant SDL, Allegro, DirectX, OpenGL, etc... pour une minute, vous avez le changement de page et des modes graphiques avanc&eacute;s &agrave; votre disposition, ainsi que Inkey, que nous avons tous appris &agrave; aimer ou d&eacute;tester, mais il y a &eacute;galement deux commandes d'entr&eacute;e nouvelles qui font des choses pour lesquelles les utilisateurs de QB devaient recourir &agrave; du code assembleur, depuis la nuit des temps:
 
 %%
  DIM as integer x, y, buttons
  CONST as integer escapeKey = 1
  SCREEN 12
 
- WHILE NOT MULTIKEY(escapeKey) 'this checks the escape key every frame
-  GETMOUSE x, y, , buttons 'This gets the mouse state 
-  PRINT x,y,buttons   
+ WHILE NOT MULTIKEY(escapeKey) 'Cela v&eacute;rifie la touche d'&eacute;chappement chaque passage
+  GETMOUSE x, y, , buttons 'Ceci obtient l'&eacute;tat de la souris
+  PRINT x,y,buttons
  WEND
 %%
 
-With this knowlege, you should be able to begin programming in FreeBASIC, with all the perks that it entails; Speed, power, and portability!
+Avec cette connaissance, vous devriez &ecirc;tre en mesure de commencer la programmation dans FreeBASIC, avec tous les avantages que cela comporte. Vitesse, puissance et la portabilit&eacute;!

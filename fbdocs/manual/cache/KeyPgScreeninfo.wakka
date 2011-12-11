@@ -1,5 +1,5 @@
 {{fbdoc item="title" value="SCREENINFO"}}----
-Retrieves information about current video mode or the desktop.
+R&eacute;cup&egrave;re les informations sur le mode vid&eacute;o courant ou le bureau.
 
 {{fbdoc item="syntax"}}##
 	[[KeyPgDeclare declare]] [[KeyPgSub sub]] **Screeninfo** ( [[KeyPgByref byref]] //w// [[KeyPgAs as]] [[KeyPgInteger integer]] = 0, [[KeyPgByref byref]] //h// [[KeyPgAs as]] [[KeyPgInteger integer]] = 0, [[KeyPgByref byref]] //depth// [[KeyPgAs as]] [[KeyPgInteger integer]] = 0, [[KeyPgByref byref]] //bpp// [[KeyPgAs as]] [[KeyPgInteger integer]] = 0, [[KeyPgByref byref]] //pitch// [[KeyPgAs as]] [[KeyPgInteger integer]] = 0, [[KeyPgByref byref]] //rate// [[KeyPgAs as]] [[KeyPgInteger integer]] = 0, [[KeyPgByref byref]] //driver// [[KeyPgAs as]] [[KeyPgString string]] = "####" )
@@ -9,28 +9,28 @@ Retrieves information about current video mode or the desktop.
 ##
 {{fbdoc item="param"}}
 	##//w//##
-		Width.
+		Largeur.
 	##//h//##
-		Height.
+		Hauteur.
 	##//depth//##
-		Color depth in bits.
+		Profondeur de couleur en bits.
 	##//bpp//##
-		Bytes per pixel.
+		Octets par pixel.
 	##//pitch//##
-		Bytes per scan line.
+		Octets par ligne de scan.
 	##//rate//##
-		Refresh rate.
+		Fr&eacute;quence de rafra&icirc;chissement.
 	##//driver//##
-		Driver name.
+		Nom du driver.
 
 {{fbdoc item="desc"}}
-	This function can be useful to get current mode informations like graphics driver name, color depth, screen size and more.
+	Cette fonction peut &ecirc;tre utile pour obtenir des informations sur le mode courant comme le nom du driver, la profondeur de couleur, la taille de l'&eacute;cran, entre autres.
 
-	If ##**Screeninfo**## is called when no graphics mode is set, it returns the information about the desktop.
+	Si ##**ScreenInfo**## est appel&eacute; et qu'aucun mode graphique n'est initialis&eacute;, l'information retourn&eacute;e concernera le bureau.
 
-	Here's a description of available fields:
+	Ci-dessous une description des diff&eacute;rents champs utilisables:
 
-	{{table columns="2" cellpadding="1" cells="w;Width of the screen in pixels;h;Height of the screen in pixels;depth;Current pixel format bits per pixel: this can be 1, 2, 4, 8, 16, or 32;pitch;Size of a framebuffer row in bytes;rate;Current refresh rate, or 0 if unknown;driver;Name of current graphics driver in use, like DirectX or X11"}}
+	{{table columns="" cellpadding="2" cells="<table>w;Largeur de l'&eacutecran en pixels;h;Hauteur de l'&eacutecran en pixels;depth;Format courant en bits par pixel: 1, 2, 4, 8, 16, or 32 sont possibles;pitch;Taille, en octets, d'une ligne du tampon image;rate;Fr&eacutequence de rafra&icircchissement courante, ou 0 si inconnue;driver;Nom du driver graphique courant utilis&eacute, comme DirectX ou X11;</table>
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/gfx/screeninfo.bas"}}%%(freebasic)
@@ -39,22 +39,22 @@ dim depth as integer
 dim driver_name as string
 
 SCREEN 15, 32 
-' Obtain info about current mode 
+' Obtient info sur mode  courant
 SCREENINFO w, h, depth,,,,driver_name
 PRINT STR(w) + "x" + STR(h) + "x" + STR(depth); 
 PRINT " using " + driver_name + " driver" 
 SLEEP 
-' Quit graphics mode and obtain info about desktop 
+' Quitte mode graphique et obtient info sur bureau 
 SCREEN 0 
 SCREENINFO w, h, depth 
 PRINT "Desktop running at " + STR(w) + "x" + STR(h) + "x" + STR(depth); 
 %%
 
 {{fbdoc item="lang"}}
-	- Not available in the //[[CompilerOptlang -lang qb]]// dialect unless referenced with the alias ##**""__Screeninfo""**##.
+	- Non disponible dans le dialecte //[[CompilerOptlang -lang qb]]// sauf si r&eacute;f&eacute;renc&eacute; avec l'alias ##**__Screeninfo**##.
 
 {{fbdoc item="diff"}}
-	- New to ""FreeBASIC""
+	- Nouveau pour FreeBASIC
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgScreengraphics Screen (Graphics)]]##

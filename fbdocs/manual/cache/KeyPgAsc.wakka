@@ -1,5 +1,5 @@
 {{fbdoc item="title" value="ASC"}}----
-Returns the corresponding ASCII or Unicode integer representation of a character
+Retourne l'entier correspondant &agrave; la repr&eacute;sentation ASCII ou Unicode d'un caract&egrave;re
 
 {{fbdoc item="syntax"}}##
 	[[KeyPgDeclare declare]] [[KeyPgFunction function]] **Asc** [[KeyPgOverload overload]] ( [[KeyPgByref byref]] //str// [[KeyPgAs as]] [[KeyPgConstQualifier const]] [[KeyPgString string]], [[KeyPgByval byval]] //position// [[KeyPgAs as]] [[KeyPgInteger integer]] = 1 ) [[KeyPgAs as]] [[KeyPgUinteger uinteger]]
@@ -11,52 +11,52 @@ Returns the corresponding ASCII or Unicode integer representation of a character
 ##
 {{fbdoc item="param"}}
 	##//str//##
-		The source string.
+		La cha&icirc;ne source.
 	##//position//##
-		The position in the string of a character.
+		La position d'un caract&egrave;re dans une cha&icirc;ne.
 
-{{fbdoc item="ret"}}
-	The ASCII or Unicode integer representation of the character at ##//position//## in ##//str//##.
+{{fbdoc item="section" value="Valeur retourn&eacute;e
+	L'entier correspondant &agrave; la repr&eacute;sentation ASCII ou Unicode d'un caract&egrave;re situ&eacute; &agrave; ##//position//## dans ##//str//##.
 
 {{fbdoc item="desc"}}
-	If ##//str//## is a ##[[KeyPgString String]]## or a ##[[KeyPgZstring ZString]]##, an [[CptAscii ASCII]] code value is returned.
+	Si ##//str//## est une ##[[KeyPgString String]]## ou une ##[[KeyPgZstring ZString]]##, un code [[CptAscii ASCII]] est retourn&eacute;.
 
-	If ##//str//## is a ##[[KeyPgWstring WString]]##, a [[CptAscii Unicode]] code value is returned.
+	Si ##//str//## est une ##[[KeyPgWstring WString]]##, un code [[CptAscii Unicode]] est retourn&eacute;.
 	
-	The function returns zero (0) if the string is a zero length string, ##//position//## is less than one (1), or ##//position//## is greater than the number of characters in ##//str//##.
+	La fonction retourne z&eacute;ro (0) si la cha&icirc;ne a une longueur nulle, si ##//position//## est inf&eacute;rieure &agrave; (1), ou si ##//position//## est sup&eacute;rieure au nombre de caract&egrave;res dans ##//str//##.
 	
-	##[[KeyPgChr Chr]]## performs the opposite function for ASCII strings, while ##[[KeyPgWchr WChr]]## is the opposite for Unicode strings, returning a string containing the character represented by the code passed as an argument.
+	##[[KeyPgChr Chr]]## ex&eacute;cute l'op&eacute;ration inverse pour les cha&icirc;nes de caract&egrave;res ASCII, alors que ##[[KeyPgWchr WChr]]## est l'oppos&eacute; pour les cha&icirc;nes Unicode, retournant une cha&icirc;ne de caract&egrave;res contenant le caract&egrave;re repr&eacute;sent&eacute; par le code pass&eacute; en argument.
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/strings/asc.bas"}}%%(freebasic)
 print "the ascii code of 'a' is:"; asc("a")
 print "the ascii code of 'b' is:"; asc("abc", 2)
 %%
-	will produce the output:
+	produira la sortie:
 
 %%the ascii code of 'a' is: 97
 the ascii code of 'b' is: 98
 %%
 
-Unicode example (Note to documentation editors: don't put inside ""%%(qbasic)"" markers or the Russian text will disappear!)
+ExempleUnicode (Note aux r&eacute;dacteurs de documentation: ne mettez pas dans %%(qbasic) marqueurs ou le texte russe va dispara&icirc;tre!)
 
-<<##dim a as wstring * 11
+<div class="fb_box">##dim a as wstring * 11
 a = "&#1055;&#1088;&#1080;&#1074;&#1077;&#1090;, &#1084;&#1080;&#1088;"
 print "the Unicode of the second char of " & a & " is: " & asc(a)
-##<<::c::	will produce the output:
-<<##the Unicode of the second char of &#1055;&#1088;&#1080;&#1074;&#1077;&#1090;, &#1084;&#1080;&#1088; is: 1088
-##<<::c::
-{{fbdoc item="target"}}
-	- DOS does not support the wide-character string version of ##**ASC**##.
+##;<div style="clear:both"> 
+produira la sortie:
+<div class="fb_box">##the Unicode of the second char of &#1055;&#1088;&#1080;&#1074;&#1077;&#1090;, &#1084;&#1080;&#1088; is: 1088
+##;<div style="clear:both"> 
+	{{fbdoc item="target"}}
 
-{{fbdoc item="diff"}}
-	- The optional ##//position//## argument is new to ""FreeBASIC"".
-	- QB does not support the wide-character string version of ##**ASC**##
+- DOS ne supporte pas la version cha&icirc;ne avec larges caract&egrave;res de ##**Asc**##.
+	{{fbdoc item="diff"}}
+	- L'argument optionnel ##//position//## est nouveau pour FreeBASIC.
 
-{{fbdoc item="see"}}
-	- [[CptAscii ASCII Character Codes]]
+- QB ne supporte pas la version cha&icirc;ne avec larges caract&egrave;res de ##**Asc**##
+	{{fbdoc item="see"}}
+	- [[CptAscii Codes ASCII des caract&egrave;res ]]
 	- ##[[KeyPgChr Chr]]##
 	- ##[[KeyPgStr Str]]##
-	- ##[[KeyPgVal Val]]##
 
-{{fbdoc item="back" value="CatPgString|String Functions"}}
+- ##[[KeyPgVal Val]]##

@@ -1,5 +1,5 @@
 {{fbdoc item="title" value="ALPHA"}}----
-Parameter to the ##[[KeyPgPutgraphics Put]]## graphics statement which selects alpha blending as the method
+Param&egrave;tre de la d&eacute;claration graphique ##[[KeyPgPutgraphics Put]]## qui s&eacute;lectionne //alpha blending// comme m&eacute;thode.     
 
 {{fbdoc item="syntax"}}##
 	**Put** [ //target//, ] [ STEP ] ( //x//,//y// ), //source// [ ,( //x1//,//y1// )-( //x2//,//y2// ) ], **Alpha**
@@ -7,87 +7,87 @@ Parameter to the ##[[KeyPgPutgraphics Put]]## graphics statement which selects a
 ##
 {{fbdoc item="param"}}
 	##**Alpha**##
-		Required.
+		Obligatoire.
 	##//alphaval//##
-		Optional alpha parameter in the range [0..255].  Overrides alpha values in individual pixels.
+		Param&egrave;tre alpha facultatif de 0 &agrave; 255.  Remplace les valeurs alpha en pixels individuels.
 
 {{fbdoc item="desc"}}
-	##**Alpha**## selects alpha blending as the method for ##[[KeyPgPutgraphics Put]]##ting an image.  If the ##//alphaval//## parameter is specified, it overrides the alpha value of each pixel, and the mask color (magenta) will be treated as transparent.  This works in 15, 16, 24, or 32-bit color depths.
+	##**Alpha**## s&eacute;lectionne //alpha blending// comme m&eacute;thode pour ##[[KeyPgPutgraphics Put]]## une image.  Si le param&egrave;tre ##//alphaval//## est sp&eacute;cifi&eacute;, il remplace la valeur alpha de chaque pixel, et le masque de couleur (magenta) sera consid&eacute;r&eacute; comme transparent.  Ceci fonctionne en profondeurs de couleur de 15, 16, 24, ou 32-bit.
 
-	If ##//alphaval//## is not specified, ##**Alpha**## will only work in 32-bit color depth, and ##[[KeyPgPutgraphics Put]]## will use the alpha value embedded within each pixel.  Pixels using the mask color will be treated as normal, and drawn with their given alpha value.
+	Si ##//alphaval//## n&apos;est pas sp&eacute;cifi&eacute;, ##**Alpha**## ne fonctionnera que pour une profondeur de couleur de 32-bit et ##[[KeyPgPutgraphics Put]]## utilisera la valeur alpha embarqu&eacute;e dans chaque pixel.  Les pixels utilisant le masque de couleur seront tra&icirc;t&eacute;s normalement et dessin&eacute;s avec leur valeur alpha.
 	
-	##**Alpha**## also has another mode which allows an 8-bit image to be ##[[KeyPgPutgraphics Put]]## on top of a 32-bit image.  In this case, it will replace the alpha channel of the 32-bit image with the contents of the 8-bit image.
+	##**Alpha**## a aussi un autre mode qui permet de ##[[KeyPgPutgraphics Put]]##er une image 8-bit au-dessus d&apos;une image 32-bit.  Dans ce cas, le canal alpha de l&apos;image 32-bit sera remplac&eacute; par le contenu de l&apos;image 8-bit.
 
-	    Alpha values range between 0 and 255.  An alpha value of 0 will not draw the image at all.  All other alpha values are incremented by 1 to get a range between 2 and 256, and the result is then divided by 256 to get a value between 1/128 and 1, which is used to calculate the exact value of each pixel from the source and destination pixels.  Thus, 255 is practically equivalent to drawing using Put with Trans blitting mode, 0 is equivalent to doing nothing at all, and all the other alpha values blend is expected.
+	    Les valeurs Alpha sont comprises entre 0 et 255.  Une valeur alpha de 0 ne modifiera pas l&apos;image.  Toutes les autres valeurs seront augment&eacute;es de 1 pour obtenir une fourchette de 2 &agrave; 256, puis le r&eacute;sultat sera divis&eacute; par 256 pour obtenir une valeur entre 1/128 et 1, qui sera utilis&eacute;e pour calculer la valeur exacte de chaque pixel, &agrave; partir des pixels de la source et de la destination.  Ainsi, 255 est pratiquement &eacute;quivalent &agrave; dessiner en utilisant ##[[KeyPgPutgraphics Put]]## avec le mode ##Transparence##, 0 ne faisant rien, et toutes les autres valeurs donnant des r&eacute;sultats &eacute;chelonn&eacute;s entre les deux.
 
 {{fbdoc item="ex"}}
-	This example compares the two different ##**Alpha**## modes, including how they react to the mask color
+	Cet exemple compare les deux modes ##**Alpha**##, incluant leur r&eacute;action au masque de couleur
 {{fbdoc item="filename" value="examples/manual/gfx/put-alpha.bas"}}%%(freebasic)
-'' Set up a 32-bit screen
+&apos;&apos; Valide un ecran 32-bit
 screenres 320, 200, 32
 
-'' Draw checkered background
+&apos;&apos; Dessine un fond a damier
 for y as integer = 0 to 199
 	for x as integer = 0 to 319
 	    pset (x, y), iif((x shr 2 xor y shr 2) and 1, rgb(160, 160, 160), rgb(128, 128, 128))
 	next x
 next y
 
-'' Make image sprite for Putting
+&apos;&apos; Fabrique image sprite a placer(Put)
 dim img as any ptr = imagecreate(32, 32, rgba(0, 0, 0, 0))
 for y as single = -15.5 to 15.5
 	for x as single = -15.5 to 15.5
 	    dim as integer r, g, b, a
 	    if y <= 0 then
 	        if x <= 0 then
-	            r = 255: g = 0: b = 0   '' red
+	            r = 255: g = 0: b = 0   &apos;&apos; rouge
 	        else
-	            r = 0: g = 0: b = 255   '' blue
+	            r = 0: g = 0: b = 255   &apos;&apos; bleu
 	        end if
 	    else
 	        if x <= 0 then
-	            r = 0: g = 255: b = 0   '' green
+	            r = 0: g = 255: b = 0   &apos;&apos; vert
 	        else
-	            r = 255: g = 0: b = 255 '' magenta (transparent mask color)
+	            r = 255: g = 0: b = 255 &apos;&apos; magenta (masque transparent de couleur)
 	        end if
 	    end if
 	    a = 255 - (x ^ 2 + y ^ 2)
-	    if a < 0 then a = 0': r = 255: g = 0: b = 255
+	    If a < 0 Then a = 0&apos;: r = 255: g = 0: b = 255
 	    pset img, (15.5 + x, 15.5 - y), rgba(r, g, b, a)
 	next x
 next y
 
-'' Put with single Alpha value, Trans for comparison
+&apos;&apos; Place avec valeur Alpha unique, Trans pour comparaison
 draw string (32, 10), "Single alpha"
 put (80 - 16,  50 - 16), img, alpha, 64
 put (80 - 16, 100 - 16), img, alpha, 192
 put (80 - 16, 150 - 16), img, trans
 
-'' Put with full Alpha channel
+&apos;&apos; Place avec plein canal Alpha
 draw string (200, 10), "Full alpha"
 put (240 - 16, 100 - 16), img, alpha
 
-'' Free the image memory
+&apos;&apos; Libere la memoire image
 imagedestroy img
 
-'' Wait for a keypress
+&apos;&apos; Attend touche appuyee
 sleep
 %%
-{{image class="center" title="Put Alpha example output"  url="/images/AL0.PNG"}}
+<div class="fb_img"><img src="images/AL0.PNG" />
 
-	This example shows the special method for setting a 32-bit alpha channel using an 8-bit image
+	Cet exemple montre l&apos;utilisation d&apos;une image 8-bit pour valider un canal alpha 32-bit
 {{fbdoc item="filename" value="examples/manual/gfx/put-alpha-8bit.bas"}}%%(freebasic)
 dim as any ptr img8, img32
 dim as integer x, y, i
 
-'' Set up an 8-bit graphics screen
+&apos;&apos; Valide un ecran graphique 8-bit
 screenres 320, 200, 8
 for i = 0 to 255
 	palette i,  i, i, i
 next i
 color 255, 0
 
-'' Create an 8-bit image
+&apos;&apos; Cree une image 8-bit
 img8 = imagecreate(64, 64, 0,  8)
 for y = 0 to 63
 	for x = 0 to 63
@@ -102,7 +102,7 @@ put (16, 16), img8
 sleep
 
 
-'' Set up a 32-bit graphics screen
+&apos;&apos; Valide un ecran graphique 32-bit
 screenres 320, 200, 32
 for y = 0 to 199
 	for x = 0 to 319
@@ -110,7 +110,7 @@ for y = 0 to 199
 	next x
 next y
 
-'' Create a 32-bit, fully opaque sprite
+&apos;&apos; Cree un sprite 32-bit entierement opaque
 img32 = imagecreate(64, 64, 0, 32)
 for y = 0 to 63
 	for x = 0 to 63
@@ -121,21 +121,21 @@ next y
 draw string (16, 4), "Original Alpha channel"
 put (16, 16), img32, alpha
 
-'' Put a new alpha channel using the 8-bit image
+&apos;&apos; Place un nouveau canal alpha utilisant une image 8-bit
 put img32, (0, 0), img8, alpha
 
 draw string (16, 104), "New Alpha channel"
 put (16, 116), img32, alpha
 
-''Free the memory for the two images
+&apos;&apos;Libere la memoire pour les deux images
 imagedestroy img8
 imagedestroy img32
 
 sleep%%
-{{image class="center" title="Put Alpha example 2 output" url="/images/AL1.PNG" }}
+<div class="fb_img"><img src="images/AL1.PNG" />
 
 {{fbdoc item="diff"}}
-	- New to Freebasic
+	- Nouveaut&eacute; Freebasic
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgPutgraphics Put (Graphics)]]##

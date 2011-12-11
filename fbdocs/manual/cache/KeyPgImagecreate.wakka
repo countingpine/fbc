@@ -1,53 +1,55 @@
-{{fbdoc item="title" value="IMAGECREATE"}}----
-Allocates and initializes storage for an image
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">{{fbdoc item="title" value="ImageCreate"}}----<div id="fb_tab_r"> <img src="images/fblogo_mini.gif">
+Alloue et initialise une image (stockage en m&eacute;moire)<br \=""><br \="">{{fbdoc item="syntax"}}##<br \="">[[KeyPgDeclare Declare]] [[KeyPgFunction Function]] **ImageCreate** [[KeyPgOverload Overload]] ( [[KeyPgByval ByVal]] //width// [[KeyPgAs As]] [[KeyPgInteger Integer]], [[KeyPgByval ByVal]] //height// [[KeyPgAs As]] [[KeyPgInteger Integer]], [[KeyPgByval ByVal]] //color// [[KeyPgAs As]] [[KeyPgUinteger UInteger]] = **transparent_color** ) [[KeyPgAs As]] [[KeyPgAny Any]] [[KeyPgPtr Ptr]]
 
-{{fbdoc item="syntax"}}##
-	[[KeyPgDeclare declare]] [[KeyPgFunction function]] **""ImageCreate""** [[KeyPgOverload overload]] ( [[KeyPgByval byval]] //width// [[KeyPgAs as]] [[KeyPgInteger integer]], [[KeyPgByval byval]] //height// [[KeyPgAs as]] [[KeyPgInteger integer]], [[KeyPgByval byval]] //color// [[KeyPgAs as]] [[KeyPgUinteger uinteger]] = **transparent_color** ) [[KeyPgAs as]] [[KeyPgAny any]] [[KeyPgPtr ptr]]
-	[[KeyPgDeclare declare]] [[KeyPgFunction function]] **""ImageCreate""** ( [[KeyPgByval byval]] //width// [[KeyPgAs as]] [[KeyPgInteger integer]], [[KeyPgByval byval]] //height// [[KeyPgAs as]] [[KeyPgInteger integer]], [[KeyPgByval byval]] //color// [[KeyPgAs as]] [[KeyPgUinteger uinteger]] = **transparent_color**, [[KeyPgByval byval]] //depth// [[KeyPgAs as]] [[KeyPgInteger integer]] ) [[KeyPgAs as]] [[KeyPgAny any]] [[KeyPgPtr ptr]]
-##
-{{fbdoc item="usage"}}##
-	//result// = **""ImageCreate""**( //width//, //height// [, [ //color// ][, //depth// ]] )
-##
-{{fbdoc item="param"}}
-	##//width//##
-		The desired width, in number of pixels.
-	##//height//##
-		The desired height, in number of pixels.
-	##//color//##
-		The pixel value to fill the area of the image.
-	##//depth//##
-		The desired color depth, in bits per pixel.
+[[KeyPgDeclare Declare]] [[KeyPgFunction Function]] **ImageCreate** ( [[KeyPgByval ByVal]] //width// [[KeyPgAs As]] [[KeyPgInteger Integer]], [[KeyPgByval ByVal]] //height// [[KeyPgAs As]] [[KeyPgInteger Integer]], [[KeyPgByval ByVal]] //color// [[KeyPgAs As]] [[KeyPgUinteger UInteger]] = **transparent_color**, [[KeyPgByval ByVal]] //depth// [[KeyPgAs As]] [[KeyPgInteger Integer]] ) [[KeyPgAs As]] [[KeyPgAny Any]] [[KeyPgPtr Ptr]]
+	##<br \="">
+	{{fbdoc item="usage"}}##<br \="">//result// = **ImageCreate**( //width//, //height// [, [ //color// ][, //depth// ]] )
+##<br \="">
+{{fbdoc item="param"}}<br \="">##//width//##<br \="">		La largeur d&eacute;sir&eacute;e, en nombre de pixels.<br \="">
+	##//height//##<br \="">		La hauteur d&eacute;sir&eacute;e, en nombre de pixels.<br \="">
+##//color//##<br \="">		Valeur du pixel pour remplir l'image.<br \="">
+##//depth//##<br \="">		La profondeur de couleur, en bits par pixel.<br \=""><br \="">
+	{{fbdoc item="section" value="Valeur renvoy&eacute;e
+		<br \="">Si l'image ne peut &ecirc;tre cr&eacute;&eacute;e NULL (##0##) est renvoy&eacute;. Sinon, c'est l'adresse de l'image qui est renvoy&eacute;e.<br \=""><br \="">
+	{{fbdoc item="desc"}}<br \="">Les deux proc&eacute;dures essaient d'allouer de la m&eacute;moire pour une image de dimensions: ##//width (largeur)//## et ##//height(hauteur)//##. Si &eacute;chec, un NULL (##0##) est renvoy&eacute;. Sinon, une image est cr&eacute;&eacute;e et initialis&eacute;e en la remplissant enti&egrave;rement avec des pixels de valeur ##//color//##. Si  omis, ##//color//## prend la valeur de la couleur transparente pour l'&eacute;cran graphique courant, qui peut &ecirc;tre d&eacute;termin&eacute;e en appelant ##[[KeyPgScreencontrol ScreenControl]]##. Dans tous les cas, l'adresse de l'image est retourn&eacute;e, qui est ensuite contr&ocirc;l&eacute;e par l'utilisateur, et peut &ecirc;tre d&eacute;truite en utilisant ##[[KeyPgImageDestroy ImageDestroy]]##.]]##.<br \=""><br \="">La premi&egrave;re proc&eacute;dure cr&eacute;e une image avec une profondeur de couleur correspondant &agrave; celle de l'&eacute;cran graphique courant, qui peut &ecirc;tre d&eacute;termin&eacute;e en appelant ##[[KeyPgScreencontrol ScreenControl]]##. La seconde proc&eacute;dure cr&eacute;e une image avec une profondeur de couleur ##//depth//##, en bits par pixel. Pour chaque proc&eacute;dure, l'image obtenue peut &ecirc;tre utilis&eacute;e dans l'&eacute;laboration de proc&eacute;dures dans n'importe quel mode &eacute;cran - et &agrave; travers les changements de mode - tant que la profondeur de couleur de l'image correspond &agrave; celle de l'&eacute;cran graphique.
+		<br \="">Les images inutiles seront d&eacute;truites avec ##[[KeyPgImageDestroy ImageDestroy]]##, pour &eacute;viter des probl&egrave;mes de m&eacute;moire.<br \=""><br \="">##**ImageCreate**## est la m&eacute;thode recommand&eacute;e pour allouer de la m&eacute;moire pour de nouvelles images. La disposition de la m&eacute;moire - la taille, structure, etc - bien que document&eacute;e, peut changer d'une version &agrave; une autre, rendant le calcul manuel des tailles difficile et sujet &agrave; erreurs. Cependant, ##[[KeyPgImageInfo ImageInfo]]## peut &ecirc;tre utilis&eacute; pour d&eacute;terminer, entre autres, la taille, en octets, d'une image existant, permettant ainsi d'allouer de la m&eacute;moire manuellement pour une copie d'image, ou pour une lecture ou une &eacute;criture &agrave; partir d'un fichier ou d'un "device".
+	<br \="">##[[KeyPgGetgraphics Get (Graphique)]]## peut &ecirc;tre utilis&eacute; pour initialiser une image en utilisant la m&eacute;moire pr&eacute;-allou&eacute;e.
+		<br \="">
+	{{fbdoc item="ex"}}<br \="">%%(freebasic)
+		'' Cree un ecran graphique.
 
-{{fbdoc item="ret"}}
-	If the image could not be created, NULL (##0##) is returned. Otherwise, the address of the image is returned.
+ScreenRes 320, 200, 32
+	'' Cree une image 64x64 pixels avec un arriere-plan vert fonce.
 
-{{fbdoc item="desc"}}
-	Both procedures attempt to allocate memory for an image of the specified ##//width//## and ##//height//##. If not successful, NULL (##0##) is returned. Otherwise, an image of that size is created and initialized by filling the entire area of pixels with the value ##//color//##. If not specified, ##//color//## assumes the value of the transparent color for the current graphics screen, which can be found by calling ##[[KeyPgScreencontrol ScreenControl]]##. In any case, the address of the image is returned, which is then controlled by the user, and must be destroyed using ##[[KeyPgImageDestroy ImageDestroy]]##.
+	Dim image As Any Ptr = ImageCreate( 64, 64, RGB(0, 128, 0) )
 
-	The first procedure creates an image with a color depth matching that of the current graphics screen, which can be found by calling ##[[KeyPgScreencontrol ScreenControl]]##. The second procedure creates an image with a color depth of ##//depth//##, in bits per pixel. For both procedures, the resulting image can be used in drawing procedures while in any screen mode -- and across mode changes -- as long as the color depth of the image matches that of the graphics screen.
+If image = 0 Then
+	Print "Failed to create image."
 
-	##**""ImageCreate""**## is the recommended way to allocate memory for new images. The memory layout -- size, structure, etc. -- while documented, may change from version to version, making manual calculation of the sizes involved error-prone. However, ##[[KeyPgImageInfo ImageInfo]]## can be used to retrieve, among other things, the size, in bytes, of an existing image, allowing memory to be manually allocated for a copy of an image, or to be read from or written to a file or device.
+	Sleep
 
-	##[[KeyPgGetgraphics Get (Graphics)]]## can be used to initialize an image using pre-allocated memory.
+	End -1
 
-{{fbdoc item="ex"}}
-{{fbdoc item="filename" value="examples/manual/gfx/imagecreate.bas"}}%%(freebasic)
-'' Create a graphics screen.
-screenres 320, 200, 32
+	End If
 
-'' Create a 64x64 pixel image with a darkish green background.
-dim image as any ptr = imagecreate( 64, 64, rgb(0, 128, 0) )
+'' Dessine un cercle rouge semi-transparent, au centre de l'image.
+Circle image, (32, 32), 28, RGBA(255, 0, 0, 128),,, 1.0, f
+'' Dessine l'image sur l'ecran en utilisant differentes methodes.
+Put (120, 60), image, PSet
 
-if image = 0 then
-	print "Failed to create image."
-	sleep
-	end -1
-end if
+Put (140, 80), image, Alpha
+'' Detruit l'image.
 
-'' Draw a semi-transparent, red circle in the center of the image.
-circle image, (32, 32), 28, rgba(255, 0, 0, 128),,, 1.0, f
+ImageDestroy image
+	Sleep
+	##<br><div class="fb_img"><img src="images/imagecreate.png">
+	<br \=""><br \=""><br \="">
+{{fbdoc item="section" value="Diff&eacute;rences de Dialecte 
 
-'' Draw the image onto the screen using various blitting methods.
+<br \="">	- Non disponible dans le dialecte //[[CompilerOptlang -lang qb]]// sauf r&eacute;f&eacute;renc&eacute; avec l'alias ##**__Imagecreate**##.<br \=""><br \=""></li>
+{{fbdoc item="diff"}}<br \="">	- Nouveau pour FreeBASIC<br \=""><br \=""></li>
+
+{{fbdoc item="see"}}<br \="">	- ##[[KeyPgGetgraphics Get (Graphique)]]##<br \=""></li>	- ##[[KeyPgImageInfo ImageInfo]]##<br \=""></li>	- ##[[KeyPgImageDestroy ImageDestroy]]##<br \=""></li>	- [[GfxInternalFormats Formats graphiques internes]]<br \=""><br \=""></li>
 put (120, 60), image, pset
 put (140, 80), image, alpha
 

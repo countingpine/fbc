@@ -1,40 +1,40 @@
 {{fbdoc item="title" value="INPUT (FILE MODE)"}}----
-Specifies text file to be opened for input mode
+Sp&eacute;cifie un fichier texte &agrave; ouvrir en mode entr&eacute;e
 
 {{fbdoc item="syntax"}}##
 	[[KeyPgOpen open]] //filename// for **Input** [[[KeyPgEncoding encoding]] //encoding_type//] [[[KeyPgLock lock]] //lock_type//] as [#]//filenum// 
 ##
 {{fbdoc item="param"}}
 	##//filename//##
-		file name to open for input
+		nom de fichier &agrave; ouvrir en entr&eacute;e
 	##//encoding_type//##
-		indicates encoding type for the file
+		indique le type d'encodage du fichier
 	##//lock_type//##
-		locking to be used while the file is open
+		verrouillage &agrave; utiliser pendant que le fichier est ouvert
 	##//filenum//##
-		unused file number to associate with the open file
+		num&eacute;ro de fichier &agrave; associer au fichier ouvert
 
 {{fbdoc item="desc"}}
-	A file mode used with ##[[KeyPgOpen Open]]## to open a text file for reading.
+	Un mode fichier utilis&eacute; avec ##[[KeyPgOpen Open]]## pour ouvrir un fichier texte en lecture.
 
-	This mode allows to read sequentially lines of text with ##[[KeyPgLineinputPp Line Input #]]##, or to read comma separated values with ##[[KeyPgInputPp Input #]]##. 
+	Ce mode permet de lire s&eacute;quentiellement les lignes de texte avec ##[[KeyPgLineinputPp Line Input #]]##, ou de lire des valeurs s&eacute;par&eacute;es par des virgules avec ##[[KeyPgInputPp Input #]]##. 
 
-	Text files can't be simultaneously read and written in ""FreeBASIC"", so if both functions are required on the same file, it must be opened twice.
+	Les fichiers texte ne peuvent pas &ecirc;tre simultan&eacute;ment en lecture et en &eacute;criture dans FreeBASIC, donc si les deux fonctions sont n&eacute;cessaires sur le m&ecirc;me fichier, il doit &ecirc;tre ouvert deux fois.
 	
-	##//filename//## must be a string expression resulting in a legal file name in the target OS, without wildcards. The file will be sought for in the present directory, unless the ##//filename//## contains a path . If the file does not exist, an error is issued. The pointer is set at the first character of the file.
+	##//filename//## doit &ecirc;tre une expression cha&icirc;ne contenant un nom de fichier acceptable dans l'OS cible, sans joker de remplacement. Le fichier sera recherch&eacute; dans le r&eacute;pertoire courant, sauf si ##//filename//## contient un chemin. Si le fichier n'existe pas, une erreur est &eacute;mise. Le pointeur est plac&eacute; sur le premier caract&egrave;re du fichier.
 	
-	##//Encoding_type//## indicates the Unicode ##[[KeyPgEncoding Encoding]]## of the file, so characters are correctly read. If omitted, "ascii" encoding is defaulted. Only little endian character encodings are supported at the moment. 
-		-##"utf8"##, 
-		-##"utf16"## 
-		-##"utf32" ##
-		-##"ascii"## (the default)
+	##//Encoding_type//## indique l'##[[KeyPgEncoding Encoding (= encodage)]]## Unicode du fichier, ainsi les caract&egrave;res sont correctement lus. Si omis, l'encodage "ascii" est employ&eacute; par d&eacute;faut. Seuls, les caract&egrave;res encod&eacute;s "little endian" sont pris en charge pour le moment. 
+		<li>##"utf8"##, 
+		<li>##"utf16"## 
+		<li>##"utf32" ##
+		<li>##"ascii"## (par d&eacute;faut)
 	
-	##//Lock_type//## indicates the way the file is locked  for other processes, it is one of:
-		- ##**Read**## - the file can be opened simultaneously by other processes, but not for reading
-		- ##**Write**## - the file can be opened simultaneously by other processes, but not for writing
-		- ##**Read Write**## - the file cannot be opened simultaneously by other processes (the default)
+	##//Lock_type//## indique la fa&ccedil;on dont le fichier est verrouill&eacute; pour d'autres processus:
+		- ##**Read**## - le fichier peut &ecirc;tre ouvert simultan&eacute;ment par d'autres processus, mais pas pour la lecture
+		- ##**Write**## - le fichier peut &ecirc;tre ouvert simultan&eacute;ment par d'autres processus, mais pas pour l'&eacute;criture
+		- ##**Read Write**## - le fichier ne peut pas &ecirc;tre ouvert simultan&eacute;ment par d'autres processus (par d&eacute;faut)
 
-	##//filenum//## is a valid ""FreeBASIC"" file number (in the range ##1..255##) not being used for any other file presently open. The file number identifies the file for the rest of file operations. A free file number can be found using the ##[[KeyPgFreefile Freefile]]## function.
+	##//filenum//## est un num&eacute;ro de fichier valide FreeBASIC (dans la plage ##1..255##) non utilis&eacute; actuellement par un autre fichier ouvert. Le num&eacute;ro de fichier identifie le fichier pour le reste des op&eacute;rations. Un num&eacute;ro de fichier libre peut &ecirc;tre trouv&eacute; par la fonction ##[[KeyPgFreefile FreeFile]]##.
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/fileio/for-input.bas"}}%%(freebasic)

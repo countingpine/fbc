@@ -1,5 +1,5 @@
 {{fbdoc item="title" value="WIDTH"}}----
-Sets or gets the number of rows and columns of the display
+Fixe ou retourne le nombre de lignes et colonnes d'affichage de la console
 
 {{fbdoc item="syntax"}}##
 	**Width** [//columns//] [, //rows//]
@@ -9,29 +9,29 @@ Sets or gets the number of rows and columns of the display
 ##
 {{fbdoc item="param"}}
 	##//columns//##
-		columns (in characters) for output
+		colonnes (en caract&egrave;res) pour l'affichage
 	##//rows//##
-		rows (in characters) for output
+		lignes (en caract&egrave;res) pour l'affichage
 	##//filenum//##
-		file number to apply to
+		num&eacute;ro du fichier sur lequel on op&egrave;re
 	##//devicename//##
-		device name to apply to
+		nom du p&eacute;riph&eacute;rique sur lequel on op&egrave;re
 
-{{fbdoc item="ret"}}
-	Returns a 32 bit ##[[KeyPgInteger Integer]]## where the [[KeyPgHiword high word]] is the number of rows and the [[KeyPgLoWord low word]] is the number of columns currently set.
+{{fbdoc item="section" value="Valeur retourn&eacute;e
+	Retourne un ##[[KeyPgInteger Integer = entier]]## 32 bit o&ugrave; le [[KeyPgHiword High Word = Mot fort]] est le nombre de lignes et le [[KeyPgLoWord Low Word = Mot faible]] est le nombre de colonnes fix&eacute; actuellement.
 
 {{fbdoc item="desc"}}
-	Sets the maximum number of columns of characters of an output device (console, printer or text file). If text sent to the device reaches the width an automatic carriage return is generated.  
+	Valide le nombre maximum de colonnes de caract&egrave;res d'un p&eacute;riph&eacute;rique de sortie (console, imprimante ou fichier texte). Si le texte envoy&eacute; au p&eacute;riph&eacute;rique atteint la largeur prescrite un retour chariot sera automatiquement g&eacute;n&eacute;r&eacute;.  
 
-	If the device is the console a second argument specifying maximum number of rows is allowed. On a Windows any values > 0 can be used in windowed mode. On DOS or Windows full-screen console, the valid dimensions depend on the capabilities of the hardware. Linux doesn't allow applications to change the console size.
+	Si le p&eacute;riph&eacute;rique est la console un second argument sp&eacute;cifie le nombre maximum de lignes qui sont allou&eacute;es. Dans Windows toute valeur > 0 peut &ecirc;tre utilis&eacute;e en mode fen&ecirc;tr&eacute;. Sous DOS ou Windows en mode console plein-&eacute;cran, les dimensions valides d&eacute;pendent des possibilit&eacute;s du "hardware". Linux ne permet pas aux applications de changer la taille de la console.
 
-	Using ##**Width**## as a function returns the current console width in the low word and the current height in the high word.
+	L'utilisation de ##**Width**## comme une fonction retourne la largeur courante de la console dans le mot de poids faible et la hauteur courante dans le mot de poids fort.
 
-	In graphics modes ##**Width**## is used to indirectly select the font size by setting one of the height * width pairs allowed (See ##[[KeyPgScreengraphics Screen (Graphics)]]##). If  ##//rows//## * ##//cols//## is an invalid combination, no changes are made to the screen display.
+	Dans les modes graphiques, ##**Width**## est utilis&eacute; pour s&eacute;lectionner indirectement la taille de la police de caract&egrave;res en validant une des paires hauteur * largeur possibles (Voir ##[[KeyPgScreengraphics Screen (Graphics)]]##). Si  ##//rows (lignes)//## * ##//cols (colonnes)//## est une combinaison invalide, il n'y aura aucun changement de l'affichage &eacute;cran.
 	
-	Valid font heights are 8 pixels, 14 pixels and 16 pixels.  The fonts all have a fixed width of 8 pixels.
+	Les hauteurs valides de polices de caract&egrave;res sont 8 pixels, 14 pixels et 16 pixels.  Toutes les polices de caract&egrave;res ayant une largeur fixe de 8 pixels.
 
-	Using the ##**Width**## command forces a screen clear (##[[KeyPgCls Cls]]##) 
+	L'utilisation de la commande ##**Width**## force une initialisation de l'&eacute;cran (##[[KeyPgCls Cls]]##) 
 
 {{fbdoc item="ex"}}
 
@@ -86,9 +86,14 @@ sleep
 %%
 
 {{fbdoc item="diff"}}
-	- ##//columns//## was limited to ##40## or ##80##, while ##//rows//## could be ##25##, ##30##, ##43##, ##50## or ##60##, depending on the graphics hardware and screen mode being used.
+	- ##//columns//## &eacute;tait limit&eacute; &agrave; ##40## ou ##80##, alors que ##//rows//## pouvait &ecirc;tre ##25##, ##30##, ##43##, ##50## ou ##60##, en fonction du "hardware" graphique et du mode &eacute;cran utilis&eacute;.
+	{{fbdoc item="see"}}
+	- ##[[KeyPgLoWord LoWord]]##
 
-{{fbdoc item="see"}}
+- ##[[KeyPgHiword HiWord]]##
+	- ##[[KeyPgCsrlin CsrLin]]##
+
+- ##[[KeyPgPos Pos]]##
 	- ##[[KeyPgLoWord Loword]]##
 	- ##[[KeyPgHiword Hiword]]##
 	- ##[[KeyPgCsrlin Csrlin]]##

@@ -1,5 +1,5 @@
 {{fbdoc item="title" value="SETMOUSE"}}----
-Sets the position and visibility of the mouse cursor
+G&egrave;re la position et la visibilit&eacute; du curseur de la souris
 
 {{fbdoc item="syntax"}}##
 	[[KeyPgDeclare declare]] [[KeyPgFunction function]] **Setmouse** ( [[KeyPgByval byval]] //x// [[KeyPgAs as]] [[KeyPgInteger integer]] = -1, [[KeyPgByval byval]] //y// [[KeyPgAs as]] [[KeyPgInteger integer]] = -1, [[KeyPgByval byval]] //visibility// [[KeyPgAs as]] [[KeyPgInteger integer]] = -1, [[KeyPgByval byval]] //clip// [[KeyPgAs as]] [[KeyPgInteger integer]] = -1 ) [[KeyPgAs as]] [[KeyPgInteger integer]]
@@ -8,49 +8,49 @@ Sets the position and visibility of the mouse cursor
 	//result// = **Setmouse**([ //x// ] [, [ //y// ] [, [ //visibility// ] [, [ //clip// ]]]])
 ##
 {{fbdoc item="param"}}
-	(For each parameter, ##-1## is a special value indicating "no changes.")
+	(Pour chaque param&egrave;tre, ##-1## est une valeur sp&eacute;ciale indiquant "pas de changements".)
 	##//x//##
-		optional - set x coordinate
+		facultatif - coordonn&eacute;e x
 	##//y//##
-		optional - set y coordinate
+		facultatif - coordonn&eacute;e y
 	##//visibility//##
-		optional - set visibility: ##1## indicates visible, ##0## indicates hidden
+		facultatif - visibilit&eacute;: ##1## signifie visible, ##0## signifie invisible
 	##//clip//##
-		optional - set clipping: ##1## indicates mouse is clipped to graphics window, ##0## indicates no clipping
+		facultatif - limitation fen&ecirc;tre: ##1## souris limit&eacute;e par rapport &agrave; la fen&ecirc;tre graphique, ##0## signifie pas de limitation
 
-{{fbdoc item="ret"}}
-	Zero (##0##) on success, non-zero to indicate failure.
+{{fbdoc item="section" value="Valeur retourn&eacute;e
+	Z&eacute;ro (##0##) si succ&egrave;s, non-z&eacute;ro pour indiquer un &eacute;chec.
 
 {{fbdoc item="desc"}}
-	##**Setmouse**## will set the (##//x//##, ##//y//##) coordinates of the mouse pointer, as well as setting its visibility.  THe mouse position is set using the ##//x//## and ##//y//## parameters.  The mouse will be visible if visibility is set to ##1##, and invisible if visibility is set to ##0##.  ##**Setmouse**## is intended for graphics modes initiated using the ##[[KeyPgScreengraphics Screen (Graphics)]]## statement only.
+	##**SetMouse**## validera les coordonn&eacute;es (##//x//##, ##//y//##) du pointeur de la souris, ainsi que la visibilit&eacute; de celui-ci.  La position de la souris est valid&eacute;e en utilisant les param&egrave;tres ##//x//## et ##//y//##.  La souris sera visible si ##//visibility//## est mise &agrave; ##1##, et invisible si mise &agrave; ##0##.  ##**SetMouse**## est destin&eacute; aux modes graphiques initialis&eacute;s seulement avec ##[[KeyPgScreengraphics Screen (Graphics)]]##.
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/input/setmouse.bas"}}%%(freebasic)
 Dim As Integer x, y, buttons
 
-' create a screen 640*480
+' cree un ecran 640*480
 ScreenRes 640, 480
 Print "Click the mouse button to center the mouse"
 
 Do
-	' get mouse x, y and button state (wait until mouse is onscreen)
+	' recupere etat x, y et bouton (attend tant que souris est sur ecran)
 	Do: Sleep 1: Loop While GetMouse( x, y , , buttons) <> 0
 
 	If buttons And 1 Then
-	    ' on left mouse click, center mouse
+	    ' si clique bouton gauche, souris centre
 	    SetMouse 320, 240
 	End If
 
-	' run loop until Escape is pressed
+	' boucle jusqu'a Escape est appuy&eacute;
 Loop Until Inkey = Chr(27)
 %%
 
 
 {{fbdoc item="lang"}}
-	- Not available in the //[[CompilerOptlang -lang qb]]// dialect unless referenced with the alias ##**""__Setmouse""**##.
+	- Non disponible en dialecte //[[CompilerOptlang -lang qb]]// sauf si r&eacute;f&eacute;renc&eacute; avec l'alias ##**__Setmouset**##.
 
 {{fbdoc item="diff"}}
-	- New to ""FreeBASIC""
+	- Nouveau pour FreeBASIC
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgGetmouse Getmouse]]##

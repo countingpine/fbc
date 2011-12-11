@@ -1,49 +1,52 @@
 {{fbdoc item="title" value="Operator [] (Pointer index)"}}----
-Returns a reference to memory offset from an address
+Renvoie une r&eacute;f&eacute;rence au d&eacute;calage m&eacute;moire par rapport &agrave; une adresse
 
 {{fbdoc item="syntax"}}##
 	[[KeyPgDeclare declare]] [[KeyPgOperator operator]] **[]** ( [[KeyPgByref byref]] //lhs// [[KeyPgAs as]] //T// [[KeyPgPointer pointer]], [[KeyPgByref byref]] //rhs// [[KeyPgAs as]] [[KeyPgInteger integer]] ) [[KeyPgAs as]] //T//
 ##
-~&//Note that **##Operator []## (Pointer index)** returns a reference. See [[CompilerFAQ CompilerFAQ]].//
+//Notez que **##Op&eacute;rateur [ ]## (Pointeur d'indice)** retourne une r&eacute;f&eacute;rence. Voir [[CompilerFAQ FAQ du Compilateur]].//
 
 {{fbdoc item="usage"}}##
 	//result// = //lhs// **[** //rhs// **]**
 ##
 {{fbdoc item="param"}}
 	##//lhs//##
-		The base address.
+		L'adresse de base.
 	##//rhs//##
-		A signed offset from ##//lhs//##.
+		Un d&eacute;calage (offset) &agrave; partir de ##//lhs//##.
 	##//T//##
-		Any data type.
+		Tout type de donn&eacute;e.
 
 {{fbdoc item="desc"}}
-	This operator returns a reference to a value some distance in memory from a base address. It is essentially shorthand for "##[[KeyPgOpValueOf *]](//lhs// [[KeyPgOpAdd +]] //rhs//)##"; both do exactly the same thing. Like pointer arithmetic, any type of ##[[KeyPgPointer POINTER]]## can be indexed except for an ##[[KeyPgAny ANY]]## ##[[KeyPgPointer POINTER]]##. Also, like pointer arithmetic, it is up to the user to make sure meaningful data is being accessed.
+	Cet op&eacute;rateur renvoie une r&eacute;f&eacute;rence &agrave; une valeur &agrave; une certaine distance dans la m&eacute;moire par rapport &agrave; une adresse de base. Il s'agit essentiellement d'un raccourci pour "##[[KeyPgOpValueOf *]](//lhs// [[KeyPgOpAdd +]] //rhs//)##"; les deux font exactement la m&ecirc;me chose. Comme un pointeur arithm&eacute;tique, tout type de ##[[KeyPgPointer Pointeur]]## peut &ecirc;tre index&eacute; sauf pour un  ##[[KeyPgPointer Pointeur]]## ##[[KeyPgAny Any]]##. Aussi, comme un pointeur arithm&eacute;tique, c'est &agrave; l'utilisateur de s'assurer les donn&eacute;es significatives sont accessibles.
 
-{{fbdoc item="ex"}}
-{{fbdoc item="filename" value="examples/manual/operator/pointer-index.bas"}}%%(freebasic)
+	{{fbdoc item="ex"}}
+	%%(freebasic)
+
 '' initialize a 5-element array
-dim array(4) as integer = { 0, 1, 2, 3, 4 }
-
+Dim array(4) As Integer = { 0, 1, 2, 3, 4 }
 '' point to the first element
-dim p as integer ptr = @array(0)
+Dim p As Integer Ptr = @array(0)
 
 '' use pointer indexing to output array elements
-for index as integer = 0 to 4
-	print p[index]
-next
-%%
+For index As Integer = 0 To 4
 
-	Will give the output,
-
+Print p[index]
+Next
+	%%
+Affichera,
 %%0 1 2 3 4
-%%
+
+	%%
 
 {{fbdoc item="diff"}}
-	- New to ""FreeBASIC""
+- Nouveau pour FreeBASIC
 
 {{fbdoc item="see"}}
-	- ##[[KeyPgOpAdd Operator + (Add)]]##
+	- ##[[KeyPgOpAdd Op&eacute;rateur + (Addition)]]##
+
+- ##[[KeyPgOpSubtract Op&eacute;rateur - (Soustraction)]]##
+	- [[CatPgOpPoint Pointeur Op&eacute;rateurs]]
 	- ##[[KeyPgOpSubtract Operator - (Subtract)]]##
 	- [[CatPgOpPoint Pointer Operators]]
 

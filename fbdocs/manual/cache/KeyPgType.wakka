@@ -1,5 +1,5 @@
 {{fbdoc item="title" value="TYPE"}}----
-Declares a user-defined type.
+D&eacute;clare un type d&eacute;fini par l'utilisateur.
 
 {{fbdoc item="syntax"}}##
 
@@ -26,134 +26,134 @@ Declares a user-defined type.
 ##
 {{fbdoc item="param"}}
 	##//alignment//##
-		Specifies the byte alignment for data fields.
+		Sp&eacute;cifie l'alignement d'octets pour les champs de donn&eacute;es.
 	##//fieldname//##
-		Name of the data field or member procedure.
+		Nom du champ de donn&eacute;es ou d'un membre de proc&eacute;dure.
 	##//external_name//##
-		Name of field as seen when externally linked.
+		Nom de domaine si liens externes.
 	##//parameters//##
-		The parameters to be passed to a member procedure.
+		Les param&egrave;tres &agrave; passer &agrave; un membre de proc&eacute;dure.
 	##//array subscripts//##
-		Subscripts to declare a fixed-length array.
+		Les indices pour d&eacute;clarer un tableau de longueur fixe.
 	##//bits//##
-		Number of bits a data field occupies.
+		Nombre de bits occup&eacute;s par un champ de donn&eacute;es.
 	##//initializer//##
-		Default initializer for the data field.
+		Initialisation par d&eacute;faut pour le champ de donn&eacute;es.
 	##//operatorname//##
-		The name of the operator to be overloaded.
+		Le nom de l'op&eacute;rateur &agrave; surcharger.
 	##//calling convention specifier//##
-		Can be ##[[KeyPgCdecl Cdecl]]##, ##[[KeyPgStdcall Stdcall]]## or ##[[KeyPgPascal Pascal]]##.
+		Peut &ecirc;tre ##[[KeyPgCdecl cdecl]]##, ##[[KeyPgStdcall stdcall]]## or ##[[KeyPgPascal pascal]]##.
 
 {{fbdoc item="desc"}}
-	##**Type**## is used to declare custom data types containing one or more bit, scalar, array or other ##**Type**## fields.
+	##**Type**## est utilis&eacute; pour d&eacute;clarer des types de donn&eacute;es contenant un ou plusieurs bits, scalaire, tableau ou d'autres champs de ##**Type**##.
 
-	Types support member functions including ##[[KeyPgConstructor Constructor]]##, ##[[KeyPgDestructor Destructor]]##, ##[[KeyPgMemberFunction Function]]##, ##[[KeyPgOperator Operator]]##, ##[[KeyPgProperty Property]]## and ##[[KeyPgMemberSub Sub]]##.
+	Supporte membre de fonctions incluant ##[[KeyPgConstructor Constructor]]##, ##[[KeyPgDestructor Destructor]]##, ##[[KeyPgMemberFunction Function]]##, ##[[KeyPgOperator Operator]]##, ##[[KeyPgProperty Property]]## et ##[[KeyPgMemberSub Sub]]##.
 
-	Fields default to ##[[KeyPgVisPublic Public:]]## member access unless, ##[[KeyPgVisPrivate Private:]]## or ##[[KeyPgVisProtected Protected:]]## is specified.
+	Les champs seront, par d&eacute;faut, des membres &agrave; acc&egrave;s ##[[KeyPgVisPublic Public:]]## sauf si, ##[[KeyPgVisPrivate Private:]]## ou ##[[KeyPgVisProtected Protected:]]## est sp&eacute;cifi&eacute;.
 
-	An anonymous ##[[KeyPgUnion Union]]## can be nested in a ##**Type**## declaration.
+	Une ##[[KeyPgUnion Union]]## anonyme peut &ecirc;tre imbriqu&eacute;e dans une d&eacute;claration de ##**Type**##.
 
-	The optional ##[[KeyPgField Field]]=//number//## when given will change the default field alignment. ##[[KeyPgField Field]]=1## will disable any alignment, making the ##**Type**## contiguous in memory. 
+	##[[KeyPgField Field]]=//number//## est facultatif, s'il existe, il change l'alignement par d&eacute;faut des champs. ##[[KeyPgField Field]]=1## annule tout alignement, rendant le ##**Type**## contigu en m&eacute;moire. 
 
-	##**Type**## can be used to return a temporary type variable.  See ##[[KeyPgTypeTemp Type()]]##.
+	##**Type**## peut &ecirc;tre utilis&eacute; pour retourner une variable de type temporaire. Voir ##[[KeyPgTypeTemp Type()]]##.
 
-	##**Type**## can be used to declare a type definition ( i.e. an alias or alternative name ) for an already declared or yet to be declared type.  See ##[[KeyPgTypeAlias Type (Alias)]]##
+	##**Type**## peut &ecirc;tre utilis&eacute; pour d&eacute;clarer une d&eacute;finition de type ( c'est &agrave; dire un alias ou un autre nom ) pour un type d&eacute;j&agrave; d&eacute;clar&eacute; ou qui va &ecirc;tre d&eacute;clar&eacute;.  Voir ##[[KeyPgTypeAlias Type (Alias)]]##
 
-	Data fields may have an optional default ##//initializer//## value.  This default value initializes the data field immediately before any constructor is called.
+	Les champs de donn&eacute;es peuvent avoir une valeur facultative ##//initializer//## par d&eacute;faut.  Cette valeur par d&eacute;faut initialise le champ de donn&eacute;es imm&eacute;diatement avant tout appel du constructeur.
 
-	##[[KeyPgStaticMember Static]]## immediately preceding ##[[KeyPgMemberSub Sub]]## or ##[[KeyPgMemberFunction Function]]## indicates that no hidden ##[[KeyPgThis This]]## parameter is to be passed to the member procedure.
+	##[[KeyPgStaticMember Static]]## qui pr&eacute;c&egrave;de imm&eacute;diatement ##[[KeyPgMemberSub Sub]]## ou ##[[KeyPgMemberFunction Function]]## indique qu'aucun param&egrave;tre cach&eacute; ##[[KeyPgThis This]]## doit &ecirc;tre transmis au membre de la proc&eacute;dure.
 
-	##[[KeyPgConstMember Const]]## immediately preceding ##[[KeyPgMemberSub Sub]]## or ##[[KeyPgMemberFunction Function]]## indicates that the hidden ##[[KeyPgThis This]]## parameter is to be considered read-only.
+	##[[KeyPgConstMember Const]]## qui pr&eacute;c&egrave;de imm&eacute;diatement ##[[KeyPgMemberSub Sub]]## ou ##[[KeyPgMemberFunction Function]]## indique que le param&egrave;tre cach&eacute; ##[[KeyPgThis This]]## est &agrave; consid&eacute;rer comme en lecture-seulement (read-only).
 
-	 **Warning** Special care must be taken when using a user defined type for file I/O.  It is recommended to use ##Field = 1## for such cases, and it may be required to read files created by other applications.
-	UDTs that contain pointers to data should not be written to file as-is: when the data is read later, the pointers will almost certainly be invalid, and the data they pointed to will no longer be available.  Instead, custom input/output routines should be used, to save the allocated data in a different format in the file.  This includes UDTs containing variable-length strings.
-	Additionally, reading fixed length strings in UDT's from files is problematic: at present, fixed-length strings contain an extra NULL character on the end.  To preserve alignment the field would need to be declared with one char less than the actual size and accessing the field by its name makes the last character unavailable.  It also means there may be potential problems passing the string to functions that expect the NULL character to be there.
-	A better solution is to use ubyte arrays, this requires a couple of auxiliary functions converting to/from string. See the example.
+	 **Avertissement:**
+	<li>Des pr&eacute;cautions particuli&egrave;res doivent &ecirc;tre prises lors de l'utilisation d'un type d&eacute;fini par l'utilisateur pour les entr&eacute;es/sorties (I / O) fichier.  Il est recommand&eacute; d'utiliser ##Field = 1## pour de tels cas, et cela peut &ecirc;tre n&eacute;cessaire pour lire les fichiers cr&eacute;&eacute;s par d'autres applications.
+	<li>Les types de donn&eacute;es utilisateur qui contiennent des pointeurs vers des donn&eacute;es ne doivent pas &ecirc;tre &eacute;crits dans le fichier tel quel: lorsque les donn&eacute;es sont lues plus tard, les pointeurs seront presque toujours invalides, et les donn&eacute;es qu'ils pointaient ne seront plus disponibles.  Au lieu de cela, des routines d'entr&eacute;e / sortie personnalis&eacute;s doivent &ecirc;tre utilis&eacute;es, pour sauver les donn&eacute;es allou&eacute;es dans un format diff&eacute;rent dans le fichier.  Cela inclut les types de donn&eacute;es utilisateur contenant des cha&icirc;nes de longueur variable.
+	<li>En outre, la lecture de cha&icirc;nes de longueur fixe dans un type utilisateur &agrave; partir de fichiers est probl&eacute;matique: &agrave; l'heure actuelle, les cha&icirc;nes de longueur fixe contiennent un caract&egrave;re NULL suppl&eacute;mentaires &agrave; la fin.  Afin de pr&eacute;server l'alignement le champ devra &ecirc;tre d&eacute;clar&eacute; avec un nombre de caract&egrave;res inf&eacute;rieur &agrave; la taille r&eacute;elle et l'acc&egrave;s au champ par son nom rendra le dernier caract&egrave;re indisponible.  Cela signifie &eacute;galement qu'il peut y avoir des probl&egrave;mes potentiels en passant la cha&icirc;ne aux fonctions qui attendent d'avoir l&agrave; un caract&egrave;re NULL.
 
+<li>Une meilleure solution consiste &agrave; utiliser des tableaux de type ##**UByte**##, cela n&eacute;cessite un couple de fonctions auxiliaires de conversion ##//'vers / &agrave; partir de'//## la cha&icirc;ne. Voir l'exemple.
 {{fbdoc item="ex"}}
-This is an example of a QB-style type, not including procedure definitions
-{{fbdoc item="filename" value="examples/manual/udt/type1.bas"}}%%(freebasic)
+Ceci est un exemple de style QB-style, ne comprenant pas des d&eacute;finitions de proc&eacute;dure
 TYPE clr
-	red AS UBYTE
-	green AS UBYTE
-	blue AS UBYTE
-END TYPE
+	Type clr
+	red As UByte
+	green As UByte
+blue As UByte
 
-DIM c AS clr
+End Type
+Dim c As clr
 c.red = 255
 c.green = 128
 c.blue = 64
-%%
 
-And this is an example of a type working as an object:
-{{fbdoc item="filename" value="examples/manual/udt/type2.bas"}}%%(freebasic)
+%%
+Et ceci un exemple d'un type fontionnant comme un objet:
+'' Example showing the problems with fixed length string fields in UDTs
 '' Example showing the problems with fixed length string fields in UDTs
 '' Suppose we have read a GIF header from a file
 ''                        signature         width        height
-dim as zstring*(10+1) z => "GIF89a" + mkshort(10) + mkshort(11)
 
-print "Using fixed-length string"
+Dim As ZString*(10+1) z => "GIF89a" + MKShort(10) + MKShort(11)
 
-type hdr1 field = 1
-   as string*(6-1) sig /' We have to dimension the string with 1 char
-	                    '  less to avoid misalignments '/
-   as ushort wid, hei
-end type
+Print "Using fixed-length string"
+   Type hdr1 Field = 1
+	                    As String*(6-1) sig /' We have to dimension the string with 1 char
+   '  less to avoid misalignments '/
+As UShort wid, hei
 
-dim as hdr1 ptr h1 = cptr(hdr1 ptr, @z)
-print h1->sig, h1->wid, h1->hei '' Prints GIF89 (misses a char!)  10  11
+End Type
+Dim As hdr1 Ptr h1 = CPtr(hdr1 Ptr, @z)
+
+Print h1->sig, h1->wid, h1->hei '' Prints GIF89 (misses a char!)  10  11
 
 '' We can do comparisons only with the 5 visible chars and creating a temporary string with LEFT
 
-if left(h1->sig, 5) = "GIF89" then print "ok" else print "error"
 
-
+If Left(h1->sig, 5) = "GIF89" Then Print "ok" Else Print "error"
 '' Using a ubyte array, we need an auxiliary function to convert it to a string
-function ub2str( ub() as ubyte ) as string
-	dim as integer length = ubound(ub) + 1
-	dim as string res = space(length)
-	for i as integer = 0 to length-1
-	    res[i] = ub(i): next
-	function = res
-end function
+	Function ub2str( ub() As UByte ) As String
+	Dim As Integer length = UBound(ub) + 1
+	Dim As String res = Space(length)
+	    For i As Integer = 0 To length-1
+	res[i] = ub(i): Next
+Function = res
 
 
-print
-print "Using an array of ubytes"
+End Function
+Print
 
-type hdr2 field = 1
-   sig(0 to 6-1) as ubyte '' Dimension 6
-   as ushort wid, hei
-end type
+Print "Using an array of ubytes"
+   Type hdr2 Field = 1
+   sig(0 To 6-1) As UByte '' Dimension 6
+As UShort wid, hei
 
-dim as hdr2 ptr h2 = cptr(hdr2 ptr, @z)
+End Type
+Dim As hdr2 Ptr h2 = CPtr(hdr2 Ptr, @z)
+
 '' Viewing and comparing is correct but a conversion to string is required
+Print ub2str(h2->sig()), h2->wid, h2->hei '' Prints GIF89a  10  11 (ok)
+If ub2str(h2->sig()) = "GIF89a" Then Print "ok" Else Print "error" '' Prints ok
 
-print ub2str(h2->sig()), h2->wid, h2->hei '' Prints GIF89a  10  11 (ok)
-if ub2str(h2->sig()) = "GIF89a" then print "ok" else print "error" '' Prints ok
 %%
-
-{{fbdoc item="target"}}
-	- The default field alignment is 4 bytes for DOS and Linux targets.
-	- The default field alignment is 8 bytes for Windows targets.
+	{{fbdoc item="target"}}
+	- L'alignement des champs par d&eacute;faut est de 4 octets pour les cibles DOS et Linux.
 	
-{{fbdoc item="lang"}}
-	- Object-related features such as functions declared inside ##**Type**## blocks are supported only with the //[[CompilerOptlang -lang fb]]// dialect since version 0.17b
-	- In the //[[CompilerOptlang -lang fb]]// and //[[CompilerOptlang -lang fblite]]// dialects, the default field alignment depends on the target platform.
-	- With the //[[CompilerOptlang -lang qb]]// dialect the fields are aligned to byte boundaries by default, unless otherwise specified.
-	- To force byte alignment use ##FIELD=1##.
+- L'alignement des champs par d&eacute;faut est de 8 octets pour les cibles Windows.
+	{{fbdoc item="lang"}}
+	<li>Les fonctionnalit&eacute;s relatives aux objets telles que les fonctions d&eacute;clar&eacute;es &agrave; l'int&eacute;rieur de blocs ##**Type**## sont prises en charge uniquement avec le dialecte //[[CompilerOptlang -lang fb]]// depuis la version 0.17b
+	- Dans les dialectes //[[CompilerOptlang -lang fb]]// et //[[CompilerOptlang -lang fblite]]//, l'alignement des champs par d&eacute;faut d&eacute;pend de la plate-forme cible.
+	- Avec le dialecte //[[CompilerOptlang -lang qb]]// les champs sont align&eacute;s &agrave; l'octet limites par d&eacute;faut, sauf indication contraire.
 
-{{fbdoc item="diff"}}
-	- At present, fixed-length strings have an extra, redundant character on the end, which means they take up one more byte than they do in QB.  For this reason, UDTs that use them are not compatible with QB when used for file I/O.
+- Pour forcer l'alignement octet utilisez ##FIELD=1##.
+	{{fbdoc item="diff"}}
 
-{{fbdoc item="see"}}
+- A l'heure actuelle, les cha&icirc;nes de longueur fixe ont un suppl&eacute;ment, le caract&egrave;re redondant de fin, ce qui signifie qu'elles prennent un octet suppl&eacute;mentaire par rapport &agrave; QB.  Pour cette raison, les types d&eacute;finis par l'utilisateur qui les utilisent ne sont pas compatibles avec QB lorsqu'ils les utilisent pour les Entr&eacute;es / Sories de fichier.
+	{{fbdoc item="see"}}
 	- ##[[KeyPgTypeAlias Type (Alias)]]##
 	- ##[[KeyPgTypeTemp Type (Temporary)]]##
 	- ##[[KeyPgUnion Union]]##
 	- ##[[KeyPgEnum Enum]]##
-	- ##[[KeyPgTypeof Typeof]]##
+	- ##[[KeyPgTypeof TypeOf]]##
 	- ##[[KeyPgOffsetof OffsetOf]]##
 	- ##[[KeyPgField Field]]##
-	- ##[[KeyPgWith With]]##
 
-{{fbdoc item="back" value="CatPgUserDefTypes|User Defined Types"}}
+- ##[[KeyPgWith With]]##

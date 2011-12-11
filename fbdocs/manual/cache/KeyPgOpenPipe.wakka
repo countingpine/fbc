@@ -1,5 +1,5 @@
 {{fbdoc item="title" value="OPEN PIPE"}}----
-Opens an external process' standard input (//stdin//) or output (//stdout//) stream for file operations.
+Ouvre un processus externe de flux d'entr&eacute;e (//stdin//) ou de sortie (//stdout//) pour des op&eacute;rations sur les fichier.
 
 {{fbdoc item="syntax"}}##
 	**Open Pipe** //shell_command// **For** **[[KeyPgInputfilemode Input]]** **As** [**#**]//filenumber//
@@ -8,57 +8,63 @@ Opens an external process' standard input (//stdin//) or output (//stdout//) str
 ##
 {{fbdoc item="usage"}}##
 	//result// = **Open Pipe**( //command//, **For** {**[[KeyPgInputfilemode Input]]**|**[[KeyPgOutput Output]]**}, **As** //filenumber// )
-		##//or,//##
+		##//ou,//##
 	//result// = **Open Pipe**( //command//, **For** **[[KeyPgBinary Binary]]**, //access_type//, **As** //filenumber// )
-		##//(or in the QB-like syntax,)//##
+		##//(ou dans la syntaxe QB-like,)//##
 	**Open Pipe** //filename// **For** {**[[KeyPgInputfilemode Input]]**|**[[KeyPgOutput Output]]**} **As** //filenumber//
-		##//(or,)//##
+		##//(ou,)//##
 	**Open Pipe** //filename// **For** **[[KeyPgBinary Binary]]** //access_type// **As** //filenumber//
 ##
 {{fbdoc item="param"}}
 	##//shell_command//##
-		The external process to execute in the operating system command shell. Relative file paths are relative to the current directory (see ##[[KeyPgCurdir Curdir]]##).  When opening a pipe for a process that requires double quotes in either its executable path, or its arguments, the entire pipe string should be nested inside of double quotes.
+		Le processus externe &agrave; ex&eacute;cuter dans le //shell// de commande du syst&egrave;me d'exploitation. Les chemins relatifs de fichiers sont relatifs au r&eacute;pertoire courant (voir ##[[KeyPgCurdir CurDir]]##).  Lors de l'ouverture d'un //pipe// pour un processus qui exige des guillemets doubles dans le chemin de son ex&eacute;cutable ou de ses arguments, la cha&icirc;ne compl&egrave;te du //pipe// doit &ecirc;tre imbriqu&eacute;e &agrave; l'int&eacute;rieur de guillemets doubles.
 	##//access_type//##
-		The type of read or write access requested by the calling process.
-			- ##[[KeyPgAccess Access]]## {##Read##|##Write##} //(either the //stdin// or //stdout// stream of the external process can be opened)//
+		Le type d'acc&egrave;s en lecture ou &eacute;criture demand&eacute; par le processus appelant.
+			- ##[[KeyPgAccess Access]]## {##Read##|##Write##} (le flux //stdin// ou //stdout// du processus externe sera ouvert)
 	##//filenumber//##
-		An available file number to bind to the external process' //stdin// or //stdout// stream.
+		Un num&eacute;ro de fichier disponible pour se lier au flux //stdin// ou //stdout// du processus externe.
 
 {{fbdoc item="ret"}}
-	In the first usage, ##**Open Pipe**## returns zero (0) on success and a non-zero error code otherwise.
+	Dans la premi&egrave;re utilisation, ##**Open Pipe**## retourne z&eacute;ro (0) si succ&egrave;s et sinon un code d'erreur diff&eacute;rent de z&eacute;ro.
 
 {{fbdoc item="desc"}}
-	##**Open Pipe**## executes another process in the command shell and opens either its //stdin// or //stdout// streams for reading or writing. A //file number// is bound to the stream, which is used in subsequent file operations, such as ##[[KeyPgInputPp Input #]]##. An available ##//filenumber//## can be retrieved with ##[[KeyPgFreefile Freefile]]##. If the external process does not exist, a runtime error is thrown.
+	##**Open Pipe**## ex&eacute;cute un autre processus dans le //shell// de commande et ouvre l'un des deux flux //stdin// ou //stdout// pour une lecture ou une &eacute;criture. Un //filenumber (= num&eacute;ro de fichier)// est li&eacute; au flux et est utilis&eacute; dans les op&eacute;rations de fichier ult&eacute;rieures, telles que ##[[KeyPgInputPp Input #]]##. Un ##//filenumber (= num&eacute;ro de fichier)//## utilisable peut &ecirc;tre d&eacute;termin&eacute; avec ##[[KeyPgFreefile FreeFile]]##. Si le processus externe n'existe pas, une erreur d'ex&eacute;cution est &eacute;mise.
 
-	The ##[[KeyPgInputfilemode Input]]## and ##[[KeyPgOutput Output]]## //file modes// open the external process' //stdin// and //stdout// streams, respectively, for sequential text I/O, useful for reading or writing plain text. Characters, words or whole lines can then be read or written using text-mode file operations, such as ##[[KeyPgLineinput Line Input #]]## and ##[[KeyPgPrintPp Print #]]##.
+	Les ## //file modes// ##[[KeyPgInputfilemode Input]]## et ##[[KeyPgOutput Output]]## ouvrent, respectivement, les flux //stdin// et //stdout// du processus externe, pour une entr&eacute;e/sortie texte, tr&egrave;s utile pour la lecture ou l'&eacute;criture du texte brut. Les caract&egrave;res, les mots ou lignes de caract&egrave;res peuvent ensuite &ecirc;tre lus ou &eacute;crits &agrave; l'aide des op&eacute;rations en mode texte sur les fichiers, commme ##[[KeyPgLineinput Line Input #]]## et ##[[KeyPgPrintPp Print #]]##.
 
-	The ##[[KeyPgBinary Binary]]## //file mode// opens the external process' //stdin// or //stdout// streams - depending on the //access type// specified (see description of the ##//access_type//## parameter above) - for random-access reading or writing of arbitrarily sized and interpreted raw data. Simple data type values, like ##[[KeyPgByte Byte]]## and ##[[KeyPgLongint Longint]]##, and whole chunks of memory can be read from or written to the streams with binary-mode file operations like ##[[KeyPgGetfileio Get #]]## and ##[[KeyPgPutfileio Put #]]##.
-	Bidirectional pipes are not supported by FB and must be implemented using the OS' API functions.
+	Le //file mode// ##[[KeyPgBinary Binary]]## ouvre les flux //stdin// ou //stdout// du processus externe - en fonction de l'//access type (= type d'acc&egrave;s)// sp&eacute;cifi&eacute; (voir plus loin la description du param&egrave;tre ##//access_type//##) - pour des acc&egrave;s-al&eacute;atoires (random-access) en lecture ou &eacute;criture de donn&eacute;es brutes de taille arbitraire. Des valeurs de donn&eacute;es de types simples, comme ##[[KeyPgByte Byte]]## et ##[[KeyPgLongint LongInt]]##, et des pans entiers de la m&eacute;moire peuvent &ecirc;tre lus ou &eacute;crits sur les flux avec des op&eacute;rations de fichier en mode binaire comme ##[[KeyPgGetfileio Get #]]## et ##[[KeyPgPutfileio Put #]]##. 
+	Les //pipes// bidirectionnels ne sont pas support&eacute;s par FB et doivent &ecirc;tre impl&eacute;ment&eacute;s en utilisant les fonctions API de l'OS.
+
 {{fbdoc item="target"}}
-	- The ##[[KeyPgBinary Binary]]## //file mode// is not supported on all platforms; ##**Open Pipe**## will throw an error if it is unable to open the external process' //stdin// or //stdout// streams in binary mode.
-	
-	
-	
-**Runtime errors:**
-	    ##**Open Pipe**## throws one of the following [[ProPgErrorHandling runtime errors]]:
+	    - Le //file mode// ##[[KeyPgBinary Binary]]## n'est pas support&eacute; par toutes les plates-formes; ##**Open Pipe**## produira une erreur s'il ne peut pas ouvrir les flux //stdin// ou //stdout// du processus externe en mode binaire.
 
-	//(##1##) Illegal function call//
-		- Filenumber was not free at the time. use ##[[KeyPgFreefile Freefile]]## to ensure that filenumber is free.
+	**Erreurs de fonctionnement:**
+		##**Open Pipe**## produit l'une des [[ProPgErrorHandling erreurs de fonctionnement]] suivantes:
 
-
+//(##1##) Illegal function call : Appel ill&eacute;gal de fonction//
+<li>//filenumber// n'est pas libre actuellement. Utilisez ##[[KeyPgFreefile FreeFile]]## pour vous assurer que //filenumber// est libre.
 {{fbdoc item="ex"}}
-{{fbdoc item="filename" value="examples/manual/fileio/openpipe.bas"}}%%(freebasic)
-dim text as string
-open pipe "fbc.exe" for input as #1
-print "Output of fbc:"
-do while not eof(1)
-   line input #1, text
-   print text
-loop
-close #1
-%%
+#ifdef __FB_UNIX__
+Dim text As String
+Open Pipe "fbc.exe" For Input As #1
+Print "Output of fbc:"
+Do While Not EOF(1)
 
+Line Input #1, text
+
+Print text
+Loop
+	Close #1
+	%%
 {{fbdoc item="diff"}}
+
+- Nouveau pour FreeBASIC
+{{fbdoc item="see"}}
+
+- ##[[KeyPgOpenCons Open Cons]]##
+	- ##[[KeyPgOpenErr Open Err]]##
+
+- ##[[KeyPgFreefile FreeFile]]##
 	- New to ""FreeBASIC""
 
 {{fbdoc item="see"}}

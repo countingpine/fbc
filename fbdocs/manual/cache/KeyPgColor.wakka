@@ -1,20 +1,20 @@
-{{fbdoc item="title" value="COLOR"}}----
-Sets the display foreground / background color that is used with console output and graphics output of text
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">  {{fbdoc item="title" value="Color"}}----<div id="fb_tab_r"> <img src="images/fblogo_mini.gif">
+D&eacute;finit la couleur d'affichage de premier-plan/ d'arri&egrave;re-plan qui est utilis&eacute;e en sortie console ou graphique pourle texte. <br \=""><br \="">{{fbdoc item="syntax"}}##<br \="">[[KeyPgDeclare Declare]] [[KeyPgFunction Function]]**Color** ( [[KeyPgByval ByVal]] //foreground// [[KeyPgAs As]] [[KeyPgInteger Integer]] , [[KeyPgByval ByVal]] //background// [[KeyPgAs As]] [[KeyPgInteger Integer]] ) [[KeyPgAs As]] [[KeyPgInteger Integer]]<br \="">##<br \="">
 
-{{fbdoc item="syntax"}}##
-	[[KeyPgDeclare declare]] [[KeyPgFunction function]] **Color** ( [[KeyPgByval byval]] //foreground// [[KeyPgAs as]] [[KeyPgInteger integer]] , [[KeyPgByval byval]] //background// [[KeyPgAs as]] [[KeyPgInteger integer]] ) [[KeyPgAs as]] [[KeyPgInteger integer]]
-##
-{{fbdoc item="usage"}}##
-	**Color** [//foreground//] [, //background//]
-	//result// = **Color** [( [//foreground//] [, //background//] )]
-##
-{{fbdoc item="param"}}
-	##//foreground//##
-		the foreground color to set
-	##//background//##
-		the background color to set
+{{fbdoc item="usage"}}##<br \="">**Color** [//foreground//] [, //background//]<br \="">//result// = **Color** [( [//foreground//] [, //background//])]<br \="">##<br \="">
+	{{fbdoc item="param"}}<br \="">##//foreground//##<br \="">		choix de la couleur de premier-plan<br \="">
+##//background//##<br \="">		choix de la couleur d'arri&egrave;re-plan<br \=""><br \="">
+{{fbdoc item="section" value="Valeur renvoy&eacute;e
+	<br \="">Renvoie un ##[[KeyPgInteger Entier]]## 32 bitscontenant la couleur courante de premier-plan dans le [[KeyPgLoWord Mot de Poids Faible]] et la couleur couranted'arri&egrave;re-plan dans le [[KeyPgHiword Mot de Poids Fort]].<span id="result_box" class="short_text"><span style="" title=""> Lesvaleurs des couleurs anciennes peuvent &ecirc;tre extraites en m&ecirc;me temps quela cr&eacute;ation de nouvelles.
+	{{fbdoc item="desc"}}<br \="">##**Color**## d&eacute;finit les couleurs courantes de premier-planet/ou d'arri&egrave;re-plan. ##[[KeyPgCircle Circle]]##, ##[[KeyPgDraw Draw]]##, ##[[KeyPgLinegraphics Line (Graphics)]]##, ##[[KeyPgCls Cls]]##, ##[[KeyPgPaint Paint]]##,##[[KeyPgPrint Print]]##, ##[[KeyPgPreset PReset]]## et ##[[KeyPgPset PSet]]## utilisent tous,quand vous ne leursp&eacute;cifiez pas de couleur particuli&egrave;re, les derni&egrave;res couleurspositionn&eacute;es par cette fonction. Les couleurs accept&eacute;es par ##**Color**##d&eacute;pendent du mode graphique courant.<br \=""><br \="">{{table columns="" cellpadding="2" cells="<table>  <tbody>      Mode;      Signification;      1;      foreground est la couleur d'&eacute;cran (de 0 &egrave; 15). backgroundmodulo 4 est la palette CGA &eacute;mul&eacute;e &agrave; utiliser: 0 (vert, rouge, etmarron), 1 (cyan, magenta et blanc), 2 (comme 0, mais avec des couleursvives) ou 3 (comme 1, mais avec des couleurs vives);      2, 11;      foreground est un indice de couleur dans la palette courante(de 0 &agrave; 1). background est un indice de couleur dans la palette courante(de 0 &agrave; 1).;      7, 8;      foreground est un indice de couleur dans la palette courante(de 0 &agrave; 15). background est un indice de couleur dans la palettecourante (de 0 &agrave; 15).;      9;      foreground est un indice de couleur dans la palette courante(de 0 &agrave; 63). background est un indice de couleur &eacute;cran dans la palettecourante (de 0 &agrave; 63).;      12;      foreground est un indice de couleur dans la palette courante(de 0 &agrave; 15). background est un indice de couleur dans la palettecourante (de 0 &agrave; 15).;      13 et plus;      foreground est un indice de couleur dans la palette courante(de 0 &agrave; 255). background est un indice de couleur dans la palettecourante (de 0 &agrave; 255).;  </tbody></table>
+<br \=""><br \="">Si vous utilisez une profondeur de couleur sup&eacute;rieure &agrave; 8bpp (bit parpixel), premier-plan et arri&egrave;re-plan ont directement des valeurs decouleur ##[[KeyPgRgb RGB]]## de la forme ##&hAARRVVBB##,o&ugrave; ##AA##, ##RR##, ##VV## et ##BB## sont lescomposantes alpha, rouge, vert et bleu ayant des valeurs de ##&h00&agrave; &hFF## (0-255 en notation d&eacute;cimale). Tandis qu'en modes"hi / true color", vous pouvez utiliser les macros ##[[KeyPgRgb RGB]]## ou ##[[KeyPgRgba RGBA]]##pour obtenir une valeur de couleur valide.<br \="">Une [[GfxDefPalettes Palette par D&eacute;faut]] estautomatiquement attribu&eacute;e quand vous entrez un ##[[KeyPgScreengraphics Screen]]## mode. <br \=""><br \="">
+{{fbdoc item="ex"}}<br \="">##<div class="freebasic">' Valide 320x240 en 32bpp profondeur couleur<br>Screen 14, 32<br><br>' Valide couleurs premier-plan orange et arriere-plan bleu fonce<br>Color RGB(255, 128, 0), RGB(0, 0, 64)<br><br>' Efface ecran avec couleur arriere-plan<br>Cls                     <br><br>' Affiche "Hello World!" au milieu de l'ecran<br>Locate 15, 14<br>Print "Hello World!"<br><br>Sleep<br>
+	##<br><div class="fb_img"><img src="images/color.png">
+		<br \="">##<div class="freebasic">Dim c As UInteger<br><br>'Recupere valeurs couleur courante<br>c = Color()<br><br>'Extraie valeur couleur dans c utilisant LOWORD et HIWORD<br>Print "Console colors:"<br>Print "Foreground: " & LoWord(c)<br>Print "Background: " & HiWord(c)<br>
+	##<br><br \="">
+		{{fbdoc item="diff"}}<br \="">  	- Les modes de couleur Direct ne sont pas support&eacute;s dans QB.<br \="">  </li>  <li>Il n'y a pas d'argument bordure.<br \="">    <br \="">  </li>
 
-{{fbdoc item="ret"}}
+{{fbdoc item="see"}}<br \="">  	- ##[[KeyPgRgb RGB]]##<br \="">  </li>  	- ##[[KeyPgRgba RGBA]]##<br \="">  </li>  	- ##[[KeyPgLoWord LoWord]]##<br \="">  </li>  	- ##[[KeyPgHiword HiWord]]##<br \="">  </li>  	- ##[[KeyPgLocate Locate]]##<br \="">  </li>  	- ##[[KeyPgPalette Palette]]##<br \="">  </li>  	- ##[[KeyPgScreengraphics Screen]]##<br \="">    <br \="">  </li>
 	Returns a 32 bit ##[[KeyPgInteger Integer]]## containing the current foreground color in the [[KeyPgLoWord low word]] and the current background color in the [[KeyPgHiword high word]].  The old color values can be retrieved at the same time as setting new ones.
 
 {{fbdoc item="desc"}}

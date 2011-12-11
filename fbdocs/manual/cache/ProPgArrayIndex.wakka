@@ -1,12 +1,12 @@
 {{fbdoc item="title" value="Array Index"}}----
-An array index is the number used to access an [[ProPgArrays Array]] of [[ProPgVariables Variables]] created using the ##[[KeyPgDim Dim]]## command.
+Un indice de tableau est le num&eacute;ro utilis&eacute; pour acc&eacute;der &agrave; un [[ProPgArrays tableau]] de [[ProPgVariables variables]] cr&eacute;&eacute; en utilisant la commande ##[[KeyPgDim Dim]]##.
 
 {{fbdoc item="desc"}}
-	The following examples illustrate the use of array elements.
+	Les exemples suivants illustrent l'utilisation d'&eacute;l&eacute;ments d'un tableau.
 
-	If we have an array ##myArray## with elements of 1 to 10, filled with random data:
+	Si nous avons un tableau ##//myArray//## avec des &eacute;l&eacute;ments de 1 &agrave; 10, rempli avec des donn&eacute;es al&eacute;atoires:
 %%
-Index        Data
+Indice       Donn&eacute;es
 1              5
 2              2
 3              6
@@ -19,86 +19,86 @@ Index        Data
 10             7
 %%
 
-	One can access each piece of data separately by pointing to the Index of the array element:
+	On peut acc&eacute;der &agrave; chaque &eacute;l&eacute;ment de donn&eacute;es s&eacute;par&eacute;ment en pointant l'indice de l'&eacute;l&eacute;ment de tableau:
 	%%(freebasic)
 	Print myArray(5)
 	%%
-	Printing the data contained in the fifth element of ##myArray## results in an output of:
+	Afficher les donn&eacute;es contenues dans le cinqui&egrave;me &eacute;l&eacute;ment de ##//myArray//## se traduit par l'affichage de:
 	%%
 	9
-	%%
-	To change the contents of an array, use it like any other [[ProPgVariables Variable]]:
+	%%Pour modifier le contenu d'un tableau, utilisez-le comme n'importe quelle autre [[ProPgVariables variable]]:
 	%%(freebasic)
 	myArray(3) = 0
 	%%
-	To print the contents of ##myArray(3)##, use the command:
+	Pour afficher le contenu de ##//myArray(3)//##, utilisez la commande:
 	%%(freebasic)
 	Print myArray(3)
 	%%
-	Which results in an output of:
+	ce qui affichera:
 	%%
 	0
-	%%
-	Array elements can be indexed using another [[ProPgVariables Variable]]. In this example we set all elements in our array to zero:
+	%%Les &eacute;l&eacute;ments du tableau peuvent &ecirc;tre index&eacute;s &agrave; l'aide d'une autre [[ProPgVariables variable]]. Dans cet exemple, nous avons mis tous les les &eacute;l&eacute;ments de notre tableau &agrave; z&eacute;ro:
 	%%(freebasic)
 	Dim a As Integer
-	for a = 1 to 10
-	  myArray(a) = 0
-	next a
-	%%
-	To change a random array element to a random value:
+	For a = 1 To 10
+	myArray(a) = 0
+	Next a
+	  %%
+	Pour modifier un &eacute;l&eacute;ment de tableau al&eacute;atoire par une valeur al&eacute;atoire:
 	%%(freebasic)
 	Dim Index As Integer
 	Dim Value As Integer
-	index = int(rnd(1) * 10) + 1 'This line will simply return a random value between 1 and 10
-	Value = int(rnd(1) * 10) + 1 'This line will do the same
+	index = Int(Rnd(1) * 10) + 1 'This line will simply return a random value between 1 and 10
+	Value = Int(Rnd(1) * 10) + 1 'This line will do the same
 	myArray(index) = Value
 	%%
+	{{fbdoc item="ex"}}
+	%%(freebasic)
 
 
-{{fbdoc item="ex"}}
-{{fbdoc item="filename" value="examples/manual/proguide/arrays/indexing.bas"}}%%(freebasic)
-DECLARE SUB PrintArray()
+Declare Sub PrintArray()
+Dim Numbers(1 To 10) As Integer
+Dim Shared OtherNumbers(1 To 10) As Integer
 
-DIM Numbers(1 to 10) AS INTEGER
-DIM SHARED OtherNumbers(1 to 10) as INTEGER
-dim a as integer
-
+Dim a As Integer
 Numbers(1) = 1
 Numbers(2) = 2
+
 OtherNumbers(1) = 3
 OtherNumbers(2) = 4
-
 PrintArray ()
+For a = 1 To 10
 
-for a = 1 to 10
- print Numbers(a)
-next a
+Print Numbers(a)
 
-print OtherNumbers(1)
-print OtherNumbers(2)
-print OtherNumbers(3)
-print OtherNumbers(4)
-print OtherNumbers(5)
-print OtherNumbers(6)
-print OtherNumbers(7)
-print OtherNumbers(8)
-print OtherNumbers(9)
-print OtherNumbers(10)
+Next a
+ Print OtherNumbers(1)
+Print OtherNumbers(2)
 
-SUB PrintArray ()
- dim a as integer
- for a = 1 to 10
-   print otherNumbers(a)
- next a
-END SUB
-%%
+Print OtherNumbers(3)
+Print OtherNumbers(4)
+Print OtherNumbers(5)
+Print OtherNumbers(6)
+Print OtherNumbers(7)
+Print OtherNumbers(8)
+Print OtherNumbers(9)
+Print OtherNumbers(10)
+Sub PrintArray ()
+Dim a As Integer
 
+For a = 1 To 10
+ Print otherNumbers(a)
+ Next a
+   End Sub
+ %%
 {{fbdoc item="see"}}
-	- [[ProPgArrays Arrays]]
-	- ##[[KeyPgDim Dim]]##
+- [[ProPgArrays Les tableaux]]
+
+- ##[[KeyPgDim Dim]]##
 	- ##[[KeyPgFunction Function]]##
 	- ##[[KeyPgSub Sub]]##
+	- [[ProPgVariables Variables]] 
+	- [[ProPgVariableScope Port&eacute;e des variables]]
 	- [[ProPgVariables Variables]] 
 	- [[ProPgVariableScope Variable Scope]]
 

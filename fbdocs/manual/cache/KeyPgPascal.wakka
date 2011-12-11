@@ -1,35 +1,37 @@
 {{fbdoc item="title" value="PASCAL"}}----
-Specifies a //Pascal//-style calling convention in a procedure declaration
+Sp&eacute;cifie une convention d'appel style-//Pascal// dans la d&eacute;claration d'une proc&eacute;dure
 
 {{fbdoc item="syntax"}}##
-	[[KeyPgDeclare Declare]] [[[KeyPgStatic Static]]] [[KeyPgSub Sub]] //procedure_name// [[[KeyPgOverload Overload]]] **Pascal** [[[KeyPgAlias Alias]] //"""external_name"""//] [([//parameter_list//])] [[[KeyPgModuleConstructor Constructor]] [//priority//]] [[[KeyPgStatic Static]]] [[[KeyPgExport Export]]]
+	[[KeyPgDeclare Declare]] [[[KeyPgStatic Static]]] [[KeyPgSub Sub]] //procedure_name// [[[KeyPgOverload Overload]]] **pascal** [[[KeyPgAlias Alias]] //"external_name"//] [([//parameter_list//])] [[[KeyPgModuleConstructor Constructor]] [//priority//]] [[[KeyPgStatic Static]]] [[[KeyPgExport Export]]]
 
-	[[KeyPgDeclare Declare]] [[[KeyPgStatic Static]]] [[KeyPgFunction Function]] //procedure_name// [[[KeyPgOverload Overload]]] **Pascal** [[[KeyPgAlias Alias]] //"""external_name"""//] [([//parameter_list//])] [[KeyPgAs as]] //return_type// [[[KeyPgStatic Static]]] [[[KeyPgExport Export]]]
+	[[KeyPgDeclare Declare]] [[[KeyPgStatic Static]]] [[KeyPgFunction Function]] //procedure_name// [[[KeyPgOverload Overload]]] **pascal** [[[KeyPgAlias Alias]] //"external_name"//] [([//parameter_list//])] [[KeyPgAs As]] //return_type// [[[KeyPgStatic Static]]] [[[KeyPgExport Export]]]
 
-	[[[KeyPgPublic Public]]|[[KeyPgPrivate Private]]] [[KeyPgSub Sub]] //procedure_name// [[[KeyPgOverload Overload]]] **Pascal** [[[KeyPgAlias Alias]] //"""external_name"""//] [([//parameter_list//])] [[[KeyPgModuleConstructor Constructor]] [//priority//]] [[[KeyPgStatic Static]]] [[[KeyPgExport Export]]]
+	[[[KeyPgPublic Public]]|[[KeyPgPrivate Private]]] [[KeyPgSub Sub]] //procedure_name// [[[KeyPgOverload Overload]]] **pascal** [[[KeyPgAlias Alias]] //"external_name"//] [([//parameter_list//])] [[[KeyPgModuleConstructor Constructor]] [//priority//]] [[[KeyPgStatic Static]]] [[[KeyPgExport Export]]]
 		//..procedure body..//
 	[[KeyPgEnd End]] [[KeyPgSub Sub]]
 	
-	[[[KeyPgPublic Public]]|[[KeyPgPrivate Private]]] [[KeyPgFunction Function]] //procedure_name// [[[KeyPgOverload Overload]]] **Pascal** [[[KeyPgAlias Alias]] //"""external_name"""//] [([//parameter_list//])] [[KeyPgAs as]] //return_type//  [[[KeyPgStatic Static]]] [[[KeyPgExport Export]]]
+	[[[KeyPgPublic Public]]|[[KeyPgPrivate Private]]] [[KeyPgFunction Function]] //procedure_name// [[[KeyPgOverload Overload]]] **pascal** [[[KeyPgAlias Alias]] //"external_name"//] [([//parameter_list//])] [[KeyPgAs As]] //return_type//  [[[KeyPgStatic Static]]] [[[KeyPgExport Export]]]
 		//..procedure body..//
 	[[KeyPgEnd End]] [[KeyPgFunction Function]]
 ##
 {{fbdoc item="desc"}}
-	In procedure declarations, ##**Pascal**## specifies that a procedure will use the //Pascal// calling convention. In the //Pascal// calling convention, any parameters are to be passed (pushed onto the stack) in the same order in which they are listed, that is, from left to right. The procedures need not preserve the ##EAX##, ##ECX## or ##EDX## registers, and must clean up the stack (pop any parameters) before it returns.
+	Dans les d&eacute;clarations de proc&eacute;dure, ##**pascal**## sp&eacute;cifie qu'une proc&eacute;dure utilisera une convention d'appel //Pascal//. Dans une convention d'appel //Pascal//, tous les param&egrave;tres doivent &ecirc;tre pass&eacute;s (plac&eacute;s sur la pile) dans l'ordre o&ugrave; ils ont &eacute;t&eacute; list&eacute;s, c'est &agrave; dire, de la gauche vers la droite. Les proc&eacute;dures n'ont pas besoin de pr&eacute;server les registres ##EAX##, ##ECX## ou ##EDX##, et doivent nettoyer la pile (sortie de tous les param&egrave;tres) avant le retour.
+	
+	//Pascal// est la convention d'appel par d&eacute;faut des proc&eacute;dures Microsoft QuickBASIC et la convention standard utilis&eacute;e par l'API Windows 3.1.
 
-	//Pascal// is the default calling convention for procedures in Microsoft ""QuickBASIC"", and is the standard convention used in the Windows 3.1 API.
+	{{fbdoc item="ex"}}
 
 {{fbdoc item="ex"}}
-{{fbdoc item="filename" value="examples/manual/procs/pascal.bas"}}%%(freebasic)
 Declare Function MyFunc pascal Alias "MyFunc" (MyParm As Integer) As Integer
 %%
-
 {{fbdoc item="diff"}}
-	- New to ""FreeBASIC""
 
-{{fbdoc item="see"}}
-	- [[KeyPgCdecl Cdecl]], [[KeyPgStdcall Stdcall]]
+- Nouveau pour FreeBASIC
+	{{fbdoc item="see"}}
+
+- [[KeyPgCdecl cdecl]], [[KeyPgStdcall stdcall]]
 	- [[KeyPgDeclare Declare]]
+	- [[KeyPgSub Sub]], [[KeyPgFunction Function]]
 	- [[KeyPgSub Sub]], [[KeyPgFunction Function]]
 
 {{fbdoc item="back" value="CatPgProcedures|Procedures"}}

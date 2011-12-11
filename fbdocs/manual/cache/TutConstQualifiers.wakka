@@ -1,82 +1,82 @@
 {{fbdoc item="title" value="Const Qualifiers and You"}}----
-Note:  As with all things regarding scope, Const qualifiers may be a bit difficult to understand.  You should have a thorough understanding of variable scope before attempting to understand Const qualfiers.
+Remarque: Comme pour tout ce qui concerne la port&eacute;e, les qualificatifs Const peuvent &ecirc;tre un peu difficile &agrave; comprendre. Vous devriez avoir une compr&eacute;hension approfondie de la port&eacute;e des variables avant de tenter de comprendre les qualficateurs Const.
 
-Also note my cliche title, which I chose because of it's clicheness.
+A noter &eacute;galement mon titre clich&eacute;, que j'ai choisi &agrave; cause de sa "clichetitude".
 
-What the heck are Const qualifiers?  Const qualifiers are a feature recently added to the language (fbc 0.18.3);  they're a standard part of C""++"" and now they exist in FreeBasic too.  Const qualifiers are yet another form of protection - they allow some "variables" to act like constants to certain parts of your program, in other words some parts of the program are allowed to access (read) them but not modify them.  Just another kind of type safety, really, but an extremely useful one.  In particular, they are very useful in OO situations, but you can probably benefit from them to some degree even if you aren't interested in OOP.
+Que diable sont les qualificatifs Const? Les qualificatifs Const sont une caract&eacute;ristique ajout&eacute;e r&eacute;cemment au langage (FBC 0.18.3), ils sont un &eacute;l&eacute;ment standard du C++ et maintenant, ils existent aussi dans FreeBASIC. Les qualificatifs Const sont encore une autre forme de protection - ils permettent &agrave; certaines "variables" d'agir comme des constantes dans certaines parties de votre programme, en d'autres termes certaines parties du programme sont autoris&eacute;s &agrave; acc&eacute;der &agrave; eux (en lecture), mais pas de les modifier. Juste un autre genre de type de s&eacute;curit&eacute;, vraiment, mais extr&ecirc;mement utile. Ils sont tr&egrave;s utiles, en particulier, dans les situations de OO (Orient&eacute;e Objet), mais vous pouvez probablement en b&eacute;n&eacute;ficier &agrave; un certain degr&eacute;, m&ecirc;me si vous n'&ecirc;tes pas int&eacute;ress&eacute; &agrave; la POO (Programmation Orient&eacute;e Objet).
 
-The Const qualifier in FreeBasic is essentially an extension to data type declarations, and they may be used with Dim, UDT members, and procedure parameters.  Generally you put it right after the "As" part of the variables's data type declaration:
+Le qualificatif Const dans FreeBASIC est essentiellement un prolongement des d&eacute;clarations de type de donn&eacute;es, et il peut &ecirc;tre utilis&eacute; avec Dim, les membres UDT (d&eacute;finis par l'utilisateur) et les param&egrave;tres de proc&eacute;dure. En g&eacute;n&eacute;ral, vous le mettez juste apr&egrave;s le ##//AS//## faisant partie de la d&eacute;claration des variables de type de donn&eacute;es:
 
 %%(freebasic)
 Dim As Const Integer my_const_int = 5
 %%
 
-(By the way, throughout this tutorial I use only Integers and Integer Ptrs as examples - however, Const qualifiers //should// work the same way with all other variable types, including Types, Enums, and anything else that declares something.  If for any reason it doesn't, it's probably a bug and you should report it.)
+(A propos, dans ce tutoriel, je n'utilise que des entiers et des pointeurs d'entiers comme exemples - cependant, les qualificatifs Const // doivent// fonctionner de la m&ecirc;me fa&ccedil;on avec tous les autres types de variables, y compris les types, &eacute;num&eacute;rations et bien d'autres qui d&eacute;clarent quelque chose. Si pour quelque raison ce n'est pas pas le cas, c'est probablement un bug et vous devez le signaler.)
 
-Note in this case we are allowed to change it once - when we create it.  But after that, you may not change it any more.  In fact, you //must// initialize it - the compiler will give an error if you don't (interestingly, you are allowed to set it equal to "Any", in which the contents are not guaranteed and could be anything).  But you may not do anything that modifies it after that.  It will actually give you an error if, for example, you try to do something like this:
+Notez que dans ce cas, nous sommes autoris&eacute;s &agrave; modifer sa valeur une fois - lors de la cr&eacute;ation. Mais apr&egrave;s cela, vous ne pouvez pas le changer plus. En fait, vous //devez// l'initialiser - le compilateur donnera une erreur si vous ne l'avez pas fait (fait int&eacute;ressant, vous &ecirc;tes autoris&eacute;s &agrave; le fixer &agrave; elle &eacute;gale &agrave; "//Any//", dans lequel le contenu n'est pas garanti et pourrait &ecirc;tre n'importe quoi). Mais vous ne pouvez pas faire quelque chose qu'il le modifie par la suite. Il vous donnera vraiment une erreur si, par exemple, vous essayez de faire quelque chose comme ceci:
 
 %%(freebasic)
 my_const_int = 3
 %%
 
-Yet, since this doesn't change the variable any, you can do
+Pourtant, puisque cela ne change pas la variable existante, vous pouvez le faire.
 
 %%(freebasic)
 Print my_const_int
 %%
 
-Now this is all very good, but it doesn't seem much different from the normal usage of Const.  That is, the following two lines so far seem to mean, for all practical purposes, the same thing:
+Maintenant tout cela est tr&egrave;s bon, mais ne semble pas tr&egrave;s diff&eacute;rent de l'utilisation normale de Const. Autrement dit, les deux lignes suivantes semblent dire jusqu'&agrave; pr&eacute;sent, &agrave; toutes fins pratiques, la m&ecirc;me chose:
 
 %%(freebasic)
 Dim As Const Integer my_const_int = 5
 Const my_int As Integer = 5
 %%
 
-Do they?  Not quite.  You see, the Const qualifier allows you to create consts that act as variables except that they can't be modified.  That means you can put them inside Types and other places.  What's more, you can put them inside Sub/Function declarations - and this is a very key reason for their existence:
+Est-ce vrai? Pas tout &agrave; fait. Vous voyez, le qualificatif Const vous permet de cr&eacute;er des constantes qui agissent comme des variables, sauf qu'elles ne peuvent pas &ecirc;tre modifi&eacute;es. Cela signifie que vous pouvez les mettre &agrave; l'int&eacute;rieur de Types et d'autres endroits. De plus, vous pouvez les mettre &agrave; l'int&eacute;rieur de d&eacute;clarations de Sub / Function - et c'est une raison tr&egrave;s essentielle de leur existence:
 
 %%(freebasic)
 Sub my_sub (some_num As Integer)
 End Sub
 %%
 
-Normally functions are allowed to modify the variables you send to them.  Of course, whether they modify the original variable or just a local copy of the variable depends on whether you use ByVal or ByRef (and of course pointers is a whole different things altogether), but they normally are allowed to modify a variable.  This may be undesirable, for whatever reason, and the Const qualifier exists to prevent that.  In the function given above, some_num can be modified by the function.  Normally it would only be a local copy that is modified, which is fine, since it won't affect the original Const Integer, but what if we declare the function like this?
+Normalement les fonctions sont autoris&eacute;es &agrave; modifier les variables que vous leur envoyez. Bien s&ucirc;r, soit elles modifient la variable d'origine, soit tout simplement une copie locale de la variable; cela d&eacute;pend de l'utilisation de ByVal ou ByRef (et bien s&ucirc;r de pointeurs, ce qui est tout &agrave; fait diff&eacute;rent), mais elles sont normalement autoris&eacute;es &agrave; modifier une variable. Cela peut &ecirc;tre ind&eacute;sirable, pour une raison quelconque, et le qualificatif Const existe pour emp&ecirc;cher cela. Dans la fonction ci-dessus, some_num peut &ecirc;tre modifi&eacute; par la fonction. Normalement, ce ne serait qu'une copie locale qui serait modifi&eacute;e, ce qui est bien, car elle n'affecte pas l'"Integer Const" original, mais si nous d&eacute;clarion la fonction comme cela?
 
 %%(freebasic)
 Sub my_sub (ByRef some_num As Integer)
 End Sub
 %%
 
-Now my_sub has direct access to whatever variable you pass to it, and for that reason you are not allowed to do this sort of thing
+Maintenant my_sub a un acc&egrave;s direct &agrave; toute variable que vous lui passez, et pour cette raison vous n'&ecirc;tes pas autoris&eacute; &agrave; faire ce genre de chose
 
 %%(freebasic)
 my_sub(my_const_int)
 %%
 
-Why?  Simply because the function may modify the variable.  We don't know for sure that it will, of course, but it might, so we can't do that.  In fact, the error you'll get if you try to compile that is "Invalid assignment/conversion."  It's almost as if the Const Integer is a different variable type, but only when it's ByRef.  In that case, it would act like trying to pass a string to an integer argument (or vice-versa).  Yet if it's not passed ByRef, we don't have a problem, since there's no way the function can possibly modify the variable!
+Pourquoi? Tout simplement parce que la fonction peut modifier la variable. Nous ne sommes pas certain qu'elle le fera, bien s&ucirc;r, mais elle le pourrait, donc nous ne pouvons pas faire cela. En fait, l'erreur que vous obtiendrez si vous essayez de compiler est "affectation / conversion invalide". C'est presque comme si l'entier Const &eacute;tait un autre type de variable, mais seulement quand il est ByRef. Dans ce cas, il agit comme s'il essayait de passer une cha&icirc;ne &agrave; un argument entier (ou vice-versa). Pourtant, s'il n'est pas pass&eacute; ByRef, nous n'avons pas de probl&egrave;me, car il n'y a aucun moyen pour que la fonction puisse &eacute;ventuellement modifier la variable!
 
-And of course, if we did something like this:
+Et bien s&ucirc;r, si nous faisions quelque chose comme ceci:
 
 %%(freebasic)
 Sub my_sub (ByRef some_num As Const Integer)
 End Sub
 %%
 
-Then it compiles just fine, but if you try to do the following within the function, you get an error:
+Ensuite la compilation se passe tr&egrave;s bien, mais si vous essayez de faire ce qui suit dans la fonction, vous obtiendrez une erreur:
 
 %%(freebasic)
 some_num = 3
 %%
 
-Why?  Once again, the original variable has been passed ByRef to the sub.  It's now in local scope, but because it's ByRef, any modifications to the variable would modify the original, which cannot be done.  Once again, it's entirely possible to create a copy of the variable and modify it all you want:
+Pourquoi? Une fois encore, la variable d'origine a &eacute;t&eacute; transmise ByRef &agrave; la Sub. Nous avons maintenant une port&eacute;e locale, mais parce que c'est ByRef, toute modification de la variable modifierait l'original, ce qui ne peut pas &ecirc;tre fait. Une fois encore, il est tout &agrave; fait possible de cr&eacute;er une copie de la variable et de la modifier tant que vous voulez:
 
 %%(freebasic)
 Dim As Integer copy_of_some_num = some_num
 copy_of_some_num = 3
 %%
 
-But you can't modify some_num itself!
+Mais vous ne pouvez pas modifier some_num lui-m&ecirc;me!
 
-Now we come to pointers.  What about them?  For pointers it's a bit more complicated;  it's possible to declare the pointer //itself// as Const, OR what the pointer points to - or even BOTH!  So all of the following are valid:
+Nous arrivons maintenant aux pointeurs. Qu'est-ce qui se passe pour eux? Pour les pointeurs, c'est un peu plus compliqu&eacute;, il est possible de d&eacute;clarer le pointeur //lui-m&ecirc;me// comme const OU ce que le pointeur pointe - ou m&ecirc;me LES DEUX! Donc toutes les d&eacute;clarations suivantes sont valables:
 
 %%(freebasic)
 Declare Sub my_sub_a (ByRef ptr_A As Const Byte Ptr)
@@ -86,88 +86,88 @@ Declare Sub my_sub_b (ByRef ptr_B As Byte Const Ptr)
 Declare Sub my_sub_c (ByRef ptr_C As Const Byte Const Ptr)
 %%
 
-The first one makes it so you can change the pointer itself all you want, but not the data that the pointer points to (even if you change *what* the pointer points to).  The second allows you to change what the pointer points to, but you can't make it point to anything else.  The third won't let you change what the pointer points to OR the pointer itself!  In all cases you can make a copy of the pointer - //but it must be a Const Integer Ptr or a Const Integer Const Ptr since otherwise you would be able to change the contents of whatever the original pointer points to!//  This is great protection against anything being modified!
+La premi&egrave;re fait en sorte que vous pouvez changer le pointeur lui-m&ecirc;me comme vous voulez, mais pas les donn&eacute;es vers lesquelles il pointe (m&ecirc;me si vous changez *ce que* le pointeur pointe). La seconde vous permet de changer ce que le pointeur pointe, mais vous ne pouvez pas le faire pointer vers autre chose. Le troisi&egrave;me ne vous laissera pas changer ce que le pointeur pointe OU le pointeur lui-m&ecirc;me! Dans tous les cas vous pouvez faire une copie du pointeur - // mais il doit &ecirc;tre un Ptr Integer Const ou un Const Integer Const Ptr car sinon vous seriez en mesure de modifier le contenu de ce vers quoi le pointeur original pointe!// Ceci est une excellente protection contre quoi que ce soit en cours de modification!
 
-In case the behaviour of the Const qualifier seems a bit strange to you, I'll explain exactly how it decides what's safe to allow and what isn't.  It can actually be summed up pretty quickly:  The Const qualifier aims to protect the original data.  It doesn't care if you make a copy of the data, or change that copy, it just doesn't want you to be able to change the original data.  Remembering this will help you a great deal.  Of course, it needs to know //what// the original data is, which is why when there's pointers involved there are so many different places to put the Const qualifier (and you can even put it in twice - or more, depending on how many pointers there are!)  So long as you remember what the Const qualifier is for, you'll never have any difficulty figuring out where to put it - or even if you need it at all (or if you need to //not// use it).
+Vous pouvez &eacute;galement utiliser le qualificatif Const dans types d&eacute;finis par l'utilisateur. En fait, c'est vraiment une chose tr&egrave;s importante pour la POO (de fa&ccedil;on similaire aux espaces de noms, qui tout en n'&eacute;tant pas directement partie de la POO sont n&eacute;anmoins tr&egrave;s li&eacute;s) - mais m&ecirc;me si vous n'utilisez pas la POO, vous pouvez toujours utiliser des qualificatifs Const dans vos types. Je n'ai m&ecirc;me pas vraiment besoin de vous montrer un exemple, maintenant que leur fonctionnement est assez &eacute;vident, mais voici quand m&ecirc;me un exemple pour vous:
 
 You can also use the Const qualifier in UDTs.  In fact, it's actually a very important thing to OOP (in a similar fashion to Namespaces, which while not a direct part of OOP nevertheless are very much related) - but even if you don't use OOP you can still use Const qualifiers in your Types.  I don't even really need to show you an example, as it's pretty obvious by now how it works, but here's an example for you:
 
-%%(freebasic)
 Type my_type
-  As Const Integer t_int= 5
-End Type
-
+As Const Integer t_int= 5
+  End Type
 Dim As my_type t
 
 t.t_int = 3
+
 %%
+Et, &eacute;videmment, la compilation &eacute;chouera, puisque le membre t_int est Const. En outre, vous pouvez aussi d&eacute;clarer la variable de ce type (dans ce cas, t) avec le qualificatif Const. Ce qui suit ne se compilera pas non plus, puisque TOUS les membres de t sont Const:
 
 And obviously this won't compile, since the member t_int is Const.  Furthermore, you can also declare the variable of that type (in this case, t) with the Const qualifier.  The following will not compile either, since ALL members of t are Const:
 
-%%(freebasic)
 Type my_type
-  As Integer t_int= 5
-End Type
-
+As Integer t_int= 5
+  End Type
 Dim As Const my_type t
 
 t.t_int = 3
+
 %%
+Comme pour le c&ocirc;t&eacute; POO des choses (et si vous n'&ecirc;tes pas int&eacute;ress&eacute; par la POO, vous pouvez sauter cette partie) - vous vous posez peut-&ecirc;tre des questions sur les m&eacute;thodes. Les m&eacute;thodes implicitement passe l'objet ByRef lorsqu'elles sont appel&eacute;es. Y-a-t-il un moyen de cr&eacute;er des objets constants? Bien s&ucirc;r! Nous avons d&eacute;j&agrave; vu cela. Mais certaines m&eacute;thodes modifieront l'objet, et d'autres non. Y-a-t-il une distinction? La r&eacute;ponse est oui. Le 23 Novembre 2007, nous avons maintenant des procs Const. Cela signifie que vous pouvez faire ceci:
 
 As for the OOP side of things (and if you aren't interested in OOP you can skip this part) - you may be wondering about methods.  Methods implicitly pass the object ByRef as this when called.  Is there a way to create constant objects?  Of course!  We've already seen that.  But some object methods will modify the object, and some won't.  Is there a distinction?  The answer is yes.  As of November 23, 2007, we now have Const procs.  That means you can do this:
 
-%%(freebasic)
 Type my_object
-  Public:
-	Declare Sub modifier_sub ()
-	
+Public:
+  Declare Sub modifier_sub ()
 	'Subs that do not modify the object are declared Const...
+	
 	Declare Const Sub non_modifier_sub ()
-  Private:
-	some_num As Integer = 3
-End Type
-
+	Private:
+  some_num As Integer = 3
+	End Type
 Sub my_object.modifier_sub ()
-  this.some_num = 3
-End Sub
 
+this.some_num = 3
+  End Sub
 Sub my_object.non_modifier_sub()
-  Print this.some_num
-End Sub
 
+Print this.some_num
+  End Sub
 'Note that only Const objects must be initialized (though in this case the non-Const object will also be),
+
 'just like variables.  Thus, you must either have a Constructor for the object, or else you must give all variables
 'default initial values (as I did here), in which case the compiler makes a default constructor for you.
 Dim As Const my_object t = my_object
 Dim As my_object u
-
 'Both of these will compile:
+
 t.non_modifier_sub()
 u.non_modifier_sub()
-
 '...but the first of these will not compile, since non-Const methods of Const objects may not be called!
+
 t.modifier_sub()
 u.modifier_sub()
-
 'Sleep so we can see the results
+
 Sleep
 %%
+Une fois encore, la fa&ccedil;on dont cela fonctionne est bas&eacute; sur la r&egrave;gle simple. Comme la copie implicite est pass&eacute;e ByRef, toute m&eacute;thode est normalement capable de modifier le contenu de l'objet - et si l'objet est d&eacute;clar&eacute; As Const, ce n'est pas cens&eacute; se produire! Ainsi, il existe essentiellement deux types de m&eacute;thode. Les deux types ont des noms donn&eacute;s dans la page de documentation C++ (list&eacute;es ci-dessous dans les r&eacute;f&eacute;rences): il y a des manipulateurs et des inspecteurs. Les mutateurs peuvent modifier les objets, mais les inspecteurs ne le peuvent pas. Ainsi, pour les objets d&eacute;clar&eacute;s As Const, seules les m&eacute;thodes inspecteurs peuvent &ecirc;tre utilis&eacute;es pour ces objets - alors que toutes les m&eacute;thodes peuvent &ecirc;tre appel&eacute;es en cas de objets non-Const. Les m&eacute;thodes inspecteurs sont, bien s&ucirc;r, celles d&eacute;clar&eacute;es comme des m&eacute;thodes Const. Ainsi, pour les objets Const seules leurs m&eacute;thodes Const peut &ecirc;tre utilis&eacute;es.
 
-Once again, the way this works is based on the simple rule.  Since the implicitly passed copy of this is passed ByRef, any method is normally able to modify the contents of the object - and if the object is declared As Const, that's not supposed to happen!  Thus, there are essentially two kinds of method.  The two kinds are given names in the C""++"" documentation page (listed below in the references):  there are mutators and inspectors.  Mutators may modify objects, but inspectors do not.  Thus, for objects declared As Const, only the inspector methods for those objects may be used - while all methods may be called for non-Const objects.  The inspector methods are, of course, the ones declared as Const methods.  Thus, for Const objects only their Const methods may be used.
-
-
-This is all very good, but some of you may be asking - Why do I need this?  Well, a direct answer would be out of the *scope* (heh) of this tutorial, so I'll counter - why do we need scope at all?  The reason for Const qualifiers (and the future Const methods) is the same as the reason for scope within procedures and modules, and the same reason for hiding of variables in objects:  because we want to be certain that something won't unexpectedly change in the middle of the program, when we least expect it.  Sometimes we want things to change, and that's when we //don't// use the Const qualifier.  But when you want something to stay what it is, you use the Const qualifier, and you can be certain it will not change (and the compiler won't compile the code if there is danger of it happening!)  This is the definition of Const, how it works, and it's the reason you use it!  And in general, it's the reason you use //any// scoping control or data hiding.
+Tout cela est tr&egrave;s bien, mais certains d'entre vous se demandent peut-&ecirc;tre - Pourquoi dois-je conna&icirc;tre cela? Eh bien, une r&eacute;ponse directe serait hors de la *port&eacute;e* (h&eacute;) de ce tutoriel, je vais donc aller &agrave; l'encontre - Pourquoi avons-nous besoin de la port&eacute;e du tout? La raison des qualificatifs Const (et des m&eacute;thodes Const futures) est la m&ecirc;me que la raison de la port&eacute;e dans les proc&eacute;dures et les modules, et la raison m&ecirc;me pour cacher des objets variables: parce que nous voulons &ecirc;tre certains que quelque chose ne changera pas de fa&ccedil;on inattendue au milieu du programme, quand on s'y attend le moins. Parfois, nous voulons que les choses changent et c'est pourquoi nous n'utilisons pas le qualificatif Const. Mais quand vous voulez les choses restent ce qu'elles sont, vous utilisez le qualificateur Const, et vous pouvez &ecirc;tre certain que rien ne changera (et le compilateur ne compilera pas le code s'il existe un danger que cela se produise!). Ceci est la d&eacute;finition de Const, comment il fonctionne, et c'est la raison pour laquelle vous l'utilisez! Et en g&eacute;n&eacute;ral, c'est la raison pour laquelle vous utilisez tout contr&ocirc;le de port&eacute;e ou de donn&eacute;es cach&eacute;es.
 
 
-**Some final notes**
-If you use Const qualifiers, remember that it is a relatively new feature.  There is very little documentation to tell us what is "wrong" or "right", so generally it will take some experimenting.  If you feel that it does something it shouldn't do (or doesn't do something it should), by all means report it on the forum!  If it is seen as a problem by anyone else, submit a bug report.  In general, however, it should work exactly as I've said and all the examples given should do as I say they will (compile if I say they will, not compile if I say they won't).  One very important thing to remember, of course, is that they aren't in the latest official release - you must have the latest SVN release for them to work (if the compiler gives an error about one of the examples given here that I told you will compile, then you'll know you need a newer version).
+**Quelques notes finales**
 
-If you have any other difficulties with Const qualifiers, remember that even though there's no documentation for them there are plenty of people on the forum who know about and understand them, and can help you with any questions you may have.
 
-If you still don't understand Const qualifiers, you probably are a newbie who doesn't know much about scope yet anyways - and that's fine, you'll learn as you go.  Eventually some decent documentation for this feature will be created, but until then this is all you have.  Bear in mind:  if you don't understand how they work, you probably won't need them.  I for one have written fine programs long before they were around, and I'll probably continue to do so without using them anywhere they aren't needed.  There are specific instances when they're useful, and if you understand those instances then you may as well use them when those instances arise.  But if you don't understand, that's fine!
+Si vous utilisez le qualificatif Const, n'oubliez pas que c'est un &eacute;l&eacute;ment relativement nouveau. Il y a tr&egrave;s peu de documentation pour nous dire ce qui est "mauvais" ou "correct", aussi g&eacute;n&eacute;ralement il faudra faire quelques exp&eacute;riences. Si vous sentez qu'il fait quelque chose qu'il ne doit pas faire (ou ne pas faire quelque chose qu'il doit faire), par tous moyens signaler-le sur le forum! Si c'est consid&eacute;r&eacute; comme un probl&egrave;me par quelqu'un d'autre, soumettez un rapport de bogue. En g&eacute;n&eacute;ral, cependant, il devrait fonctionner exactement comme je l'ai dit et tous les exemples donn&eacute;s devraient s'ex&eacute;cuter comme j'ai dit qu'ils le devraient (compil&eacute;s si je dis qu'ils le seront, non compil&eacute;s si je dis qu'ils ne le seront pas). Une chose tr&egrave;s importante &agrave; se rappeler, bien s&ucirc;r, c'est qu'ils ne sont pas dans la derni&egrave;re version officielle - vous devez avoir la derni&egrave;re version SVN pour en b&eacute;n&eacute;ficier (si le compilateur donne une erreur sur l'un des exemples donn&eacute;s ici que j'ai indiqu&eacute; comme compilable, alors vous saurez que vous avez besoin d'une version plus r&eacute;cente).
+Si vous avez d'autres difficult&eacute;s avec les qualificatifs Const, n'oubliez pas que m&ecirc;me s'il n'y a pas de documentation pour eux il, y a beaucoup de gens sur le forum qui les connaissent et les comprennent, et qui peuvent vous aider pour toutes les questions que vous pourriez poser.
 
-Finally, here are some links that should be helpful.  The first is a C""++"" documentation page about Const qualifiers in C""++"" - of course, it only makes sense if you understand C""++"", and they also talk about things we don't have yet (i.e., Const methods).  Nevertheless it's a fine place to start if you know any C""++"", so check it out if you like.  There is also a link to a forum topic in which I asked about FreeBasic development (and learned about Const qualifiers), and a link to the original SourceForge Feature Request page in which Const qualifiers were originally requested as a feature:
+Si vous ne comprenez toujours pas les qualificatifs Const, vous &ecirc;tes probablement un d&eacute;butant qui ne conna&icirc;t pas encore suffisamment la notion de port&eacute;e - et c'est tr&egrave;s bien, vous allez apprendre en pratiquant. Finalement certains documents convenables pour cette fonction seront cr&eacute;&eacute;s, mais jusque-l&agrave; c'est tout ce que vous avez. Gardez &agrave; l'esprit: si vous ne comprenez pas comment ils fonctionnent, vous n'aurez probablement pas besoin d'eux. Pour ma part, j'ai &eacute;crit des programmes corrects longtemps avant qu'ils n'apparaissent, et je vais probablement continuer &agrave; le faire sans les utiliser l&agrave; o&ugrave; ils ne sont pas n&eacute;cessaires. Il y a des cas sp&eacute;cifiques o&ugrave; ils sont utiles, et si vous comprenez ces cas, alors vous pouvez aussi bien les utiliser quand ces cas se pr&eacute;sentent. Mais si vous ne comprenez pas, ce n'est pas grave!
+
+Enfin, voici quelques liens qui devraient &ecirc;tre utiles. Le premier est une page de documentation C++ sur le qualificatif Const en C++ - bien s&ucirc;r, elle n'a de sens que si vous comprenez le C++, et elle parle de notions que nous n'avons pas encore (c'est &agrave; dire, les m&eacute;thodes Const). N&eacute;anmoins c'est une bonne fa&ccedil;on pour commencer si vous connaissez le C++, donc allez v&eacute;rifier si vous voulez. Il y a aussi un lien vers un sujet du forum dans lequel j'ai questionn&eacute; sur le d&eacute;veloppement FreeBASIC (et appris les qualificatifs Const), et un lien vers la page d'origine SourceForge Feature Request dans lequel qualificatifs Const ont initialement &eacute;t&eacute; demand&eacute;s comme une caract&eacute;ristique:
 
 http://www.parashift.com/c++-faq-lite/const-correctness.html
+
 http://www.freebasic.net/forum/viewtopic.php?t=9975&postdays=0&postorder=asc&start=0
+http://sourceforge.net/tracker/index.php?func=detail&aid=1480621&group_id=122342&atid=693199
 http://sourceforge.net/tracker/index.php?func=detail&aid=1480621&group_id=122342&atid=693199

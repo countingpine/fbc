@@ -1,5 +1,5 @@
 {{fbdoc item="title" value="LEN"}}----
-Returns the length of a variable or data type
+Retourne la longueur d'un type de variable ou de donn&eacute;es
 
 {{fbdoc item="syntax"}}##
 	[[KeyPgDeclare declare]] [[KeyPgFunction function]] **Len** ( [[KeyPgByref byref]] //variable// [[KeyPgAs as]] [[KeyPgAny any]] ) [[KeyPgAs as]] [[KeyPgInteger integer]]	
@@ -7,26 +7,26 @@ Returns the length of a variable or data type
 ##
 {{fbdoc item="usage"}}##
 	//result// = **Len**( //variable// )
-		##//or//##
+		##//ou//##
 	//result// = **Len**( [[DataType DataType]] )
 ##
 {{fbdoc item="param"}}
 	##//variable//##
-		A variable of any type.
+		Une variable de n'importe quel type.
 	##//datatype//##
-		A [[DataType DataType]].
+		Un [[DataType DataType]].
 
-{{fbdoc item="ret"}}
-	Returns the size of a variable or [[DataType DataType]] in bytes.
+{{fbdoc item="section" value="Valeur retourn&eacute;e
+	Retourne la taille en octets d'une variable ou d'un [[DataType DataType]].
 
 {{fbdoc item="desc"}}
-	##**Len**## returns the length of a variable or [[DataType DataType]], in bytes.
+	##**Len**## retourne la longueur en octets d'une variable ou d'un [[DataType DataType]].
 
-	In the first form, if ##//variable//## is of type ##[[KeyPgString String]]##, ##[[KeyPgWstring Wstring]]## or ##[[KeyPgZstring Zstring]]##, the length of the string in characters will be returned. Otherwise, the size of ##//variable//##'s type in bytes is returned.
+	Dans la premi&egrave;re forme, si ##//variable//## est du type ##[[KeyPgString String]]##, ##[[KeyPgWstring WString]]## ou ##[[KeyPgZstring ZString]]##, la longueur de la cha&icirc;ne, en caract&egrave;res, est retourn&eacute;e. Sinon, la taille du type de ##//variable//## est retourn&eacute;e.
 
-	In the second form, if ##//datatype//## is ##[[KeyPgZstring Zstring]]## or ##[[KeyPgWstring Wstring]]##, the size of an ASCII or Unicode character is returned, respectively. If ##//datatype//## is ##[[KeyPgString String]]##, the size of the string descriptor type is returned.
+	Dans la seconde forme, si ##//datatype//## est ##[[KeyPgZstring ZString]]## ou ##[[KeyPgWstring WString]]##, la taille d'un caract&egrave;re ASCII ou Unicode est retourn&eacute;e, respectivement. Si ##//datatype//## est ##[[KeyPgString String]]##, la taille du descripteur de type est retourn&eacute;e.
 
-	If there is both a user defined type and a variable both having the same name in the same scope, the user defined type takes precedence over the variable.  To ensure that the ##**Len**## takes the variable instead of the user defined type, wrap the argument to ##**Len**## with parentheses to force it to be seen as an expression.  For example ##Len((variable))##.
+	S'il y a, &agrave; la fois, un type d&eacute;fini par l'utilisateur et une variable qui ont le m&ecirc;me nom dans le m&ecirc;me champ d'application, le type d&eacute;fini par l'utilisateur a la priorit&eacute; sur la variable.  Pour s'assurer que ##**Len**## prend la variable au lieu du type d&eacute;fini par l'utilisateur, mettez l'argument de ##**Len**## entre parenth&egrave;ses pour le forcer &agrave; &ecirc;tre consid&eacute;r&eacute; comme une expression.  Par exemple ##Len((variable))##.
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/strings/len.bas"}}%%(freebasic)
@@ -42,12 +42,12 @@ print len(xyz) ' returns 8
 %%
 
 {{fbdoc item="lang"}}
-	- ##**Len**## only allows expressions in the //[[CompilerOptlang -lang qb]]// dialect. 
-	- Can be used with built-in types and user-defined types in the //[[CompilerOptlang -lang fb]]// and //[[CompilerOptlang -lang fblite]]// dialects.
+	- ##**Len**## n'admet que des expressions dans le dialecte //[[CompilerOptlang -lang qb]]//. 
+	- Peut &ecirc;tre utilis&eacute; avec les types int&eacute;gr&eacute;s et les types d&eacute;finis par l'utilisateur dans les dialectes //[[CompilerOptlang -lang fb]]// et //[[CompilerOptlang -lang fblite]]//.
 
 {{fbdoc item="diff"}}
-	- Can be used with built-in types and user-defined types in the //[[CompilerOptlang -lang fb]]// and //[[CompilerOptlang -lang fblite]]// dialects.
-	- None in the //[[CompilerOptlang -lang qb]]// dialect.
+	- Peut &ecirc;tre utilis&eacute; avec les types int&eacute;gr&eacute;s et les types d&eacute;finis par l'utilisateur dans les dialectes //[[CompilerOptlang -lang fb]]// et //[[CompilerOptlang -lang fblite]]//.
+	- Aucune dans le dialecte //[[CompilerOptlang -lang qb]]//.
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgSizeof Sizeof]]##

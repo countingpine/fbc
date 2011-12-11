@@ -1,7 +1,7 @@
 {{fbdoc item="title" value="INSTRREV"}}----
-Locates the last occurrence of a substring or character within a string
+Rep&egrave;re la position de la derni&egrave;re occurrence d'une sous-cha&icirc;ne ou d'un caract&egrave;re dans une cha&icirc;ne de caract&egrave;res
 
-~&//**Important note**: In versions up to and including v0.20.0b, ##**Instrrev**## contains a bug which may cause it to skip some matches.  This is corrected as of v0.21.0b.//
+//**Note importante**: Dans les versions jusqu'&agrave; et y compris v0.20.0b, ##**InStrRev**## contient un bug qui fait que certaines occurences sont omises.  Ceci est corrig&eacute; &agrave; partir de v0.21.0b.//
 
 {{fbdoc item="syntax"}}##
 	[[KeyPgDeclare declare]] [[KeyPgFunction function]] **Instrrev** ( [[KeyPgByref byref]] //str// [[KeyPgAs as]] [[KeyPgConstQualifier const]] [[KeyPgString string]], [ **Any** ] [[KeyPgByref byref]] //substring// [[KeyPgAs as]] [[KeyPgConstQualifier const]] [[KeyPgString string]], [[KeyPgByval byval]] //start// [[KeyPgAs as]] [[KeyPgInteger integer]] = -1 ) [[KeyPgAs as]] [[KeyPgInteger integer]]
@@ -12,28 +12,28 @@ Locates the last occurrence of a substring or character within a string
 ##
 {{fbdoc item="param"}}
 	##//str//##
-		The string to be searched.
+		La cha&icirc;ne o&ugrave; chercher.
 	##//substring//##
-		The substring to find.
+		La sous-cha&icirc;ne &agrave; trouver.
 	##//start//##
-		The position in ##//str//## at which the search will begin.
+		La position dans ##//str//## o&ugrave; la recherche va commencer.
 
-{{fbdoc item="ret"}}
-	The position of the last occurrence of ##//substring//## in ##//str//##.
+{{fbdoc item="section" value="Valeur retourn&eacute;e
+	La position de la derni&egrave;re occurrence de ##//substring//## dans ##//str//##.
 
 {{fbdoc item="desc"}}
-	Locates the position of the last occurrence of a substring or character within a string.  If ##//start//## parameter is not given or is -1, the search begins at the last character.
+	Rep&egrave;re la position de la derni&egrave;re occurence d'une sous-cha&icirc;ne ou d'un caract&egrave;re dans une cha&icirc;ne de caract&egrave;res.  Si le param&egrave;tre ##//start//## est omis ou est -1, la recherche commence au dernier caract&egrave;re.
 
-	Zero (0) is returned if ##//substring//## is not found, or either ##//str//## or ##//substring//## are empty strings, or ##//start//## is less than 1 (except for -1), or start is greater than the length of ##//str//##.
+	Z&eacute;ro (0) est retourn&eacute; si ##//substring//## n'est pas trouv&eacute;e, ou si ##//str//## ou ##//substring//## sont des cha&icirc;nes vides, ou ##//start//## est inf&eacute;rieur &agrave; 1 (sauf pour -1), ou ##//start//## est plus grand que la longueur de ##//str//##.
 
-	If the ##**Any**## keyword is specified, ##**Instrrev**## returns the last occurrence of any character in ##//substring//##.
+	Si le mot-clef ##**Any**## est specifi&eacute;, ##**InStrRev**## retourne la derni&egrave;re occurence de n'importe quel caract&egrave;re de ##//substring//##.
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/strings/instrrev.bas"}}%%(freebasic)
-' It will return 4
+' Retournera 4
 PRINT INSTRREV("abcdefg", "de")
 
-' It will return 0
+' Retournera 0
 PRINT INSTRREV("abcdefg", "h")
 %%
 {{fbdoc item="filename" value="examples/manual/strings/instrrev2.bas"}}%%(freebasic)
@@ -49,22 +49,22 @@ do while idx > 0 'if not found loop will be skipped
 loop
 %%
 
-<<'A Unicode example:
+##<div class="fb_box">'Un exemple Unicode:
 dim text as wstring*20
 text = "&#1055;&#1088;&#1080;&#1074;&#1077;&#1090;, &#1084;&#1080;&#1088;!"
-print instrrev(text,"&#1077;&#1090;") ' displays 5
-<<::c::
-{{fbdoc item="target"}}
-	- The wide-character string version of ##**Instrrev**## is not supported for DOS target.
+print instrrev(text,"&#1077;&#1090;") ' affiche 5
+%%
+;<div style="clear:both"> 
+	{{fbdoc item="target"}}
 
-{{fbdoc item="lang"}}
-	- Not available in the //[[CompilerOptlang -lang qb]]// dialect unless referenced with the alias ##**""__Instrrev""**##.
+- La version ##**WString**## (cha&icirc;ne large) de ##**InStrRev**## n'est pas support&eacute;e par la cible DOS.
+	{{fbdoc item="lang"}}
 
-{{fbdoc item="diff"}}
-	- New to ""FreeBASIC""
+- Non disponible dans le dialecte //[[CompilerOptlang -lang qb]]// sauf si r&eacute;f&eacute;renc&eacute; avec l'alias ##**__Instrrev**##.
+	{{fbdoc item="diff"}}
 
-{{fbdoc item="see"}}
-	- ##[[KeyPgInstr Instr]]##
-	- ##[[KeyPgMidfunction Mid (Function)]]##
+- Nouveau pour FreeBASIC
+	{{fbdoc item="see"}}
+	- ##[[KeyPgInstr InStr]]##
 
-{{fbdoc item="back" value="CatPgString|String Functions"}}
+- ##[[KeyPgMidfunction Mid (Fonction)]]##

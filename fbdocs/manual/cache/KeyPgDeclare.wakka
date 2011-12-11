@@ -1,5 +1,5 @@
 {{fbdoc item="title" value="DECLARE"}}----
-Declares a module-level or member procedure
+D&eacute;clare une proc&eacute;dure au niveau module ou un membre de proc&eacute;dure
 
 {{fbdoc item="syntax"}}##
 	**Declare** [[KeyPgSub Sub]] //name// [ //param_list// ] [ [[KeyPgModuleConstructor Constructor]] | [[KeyPgModuleDestructor Destructor]] ]
@@ -17,28 +17,28 @@ Declares a module-level or member procedure
 ##
 {{fbdoc item="param"}}
 	##//param_list//##
-		Parenthesized comma-separated list of parameters.
+		Liste entre parenth&egrave;ses de param&egrave;tres s&eacute;par&eacute;s par des virgules.
 	##//return_type//##
-		The return type of a ##[[KeyPgFunction Function]]##, ##[[KeyPgOperator Operator]]##, or ##[[KeyPgProperty Property]]## procedure.
+		Le type de retour d'une proc&eacute;dure ##[[KeyPgFunction Function]]##, ##[[KeyPgOperator Operator]]##, ou ##[[KeyPgProperty Property]]##.
 	##//name//##
-		The name or symbol of the routine.
+		Le nom ou le symbole de la routine.
 	##//op_symbol//##
-		The name or symbol of an operator.
+		Le nom ou le symbole d'un op&eacute;rateur.
 	##//T//##
-		The name of a new user-defined type.
+		Le nom d'un nouveau type d&eacute;fini par l'utilisateur.
 
 {{fbdoc item="desc"}}
-	The ##**Declare**## statement declares a ##[[KeyPgSub Sub]]##, ##[[KeyPgFunction Function]]##, ##[[KeyPgOperator Operator]]##, ##[[KeyPgConstructor Constructor]]##, or ##[[KeyPgDestructor Destructor]]##. We will refer to one of these as a routine. 
-	The routine can be referred to in code without seeing its definition, although it must be defined somewhere. Essentially, the ##**Declare**## statement introduces a routine, and states that its definition is elsewhere. For example, a function can be declared at the top of a source module, called, then defined at the bottom of the source file, as shown below the example.
+	L'instruction ##**Declare**## d&eacute;clare un(e) ##[[KeyPgSub Sub]]##, ##[[KeyPgFunction Function]]##, ##[[KeyPgOperator Operator]]##, ##[[KeyPgConstructor Constructor]]##, ou ##[[KeyPgDestructor Destructor]]##. Nous ferons r&eacute;f&eacute;rence &agrave; l'un d'entre eux comme une routine.
+	La routine peut &ecirc;tre mentionn&eacute;e dans le code sans voir sa d&eacute;finition, cependant elle doit &ecirc;tre d&eacute;finie quelque part. Essentiellement, l'instruction ##**Declare**## introduit une routine, et d&eacute;clare que sa d&eacute;finition est ailleurs. Par exemple, une fonction peut &ecirc;tre d&eacute;clar&eacute;e en haut d'un module source, appel&eacute;e, puis d&eacute;finie &agrave; la fin du fichier source, comme le montre l'exemple ci-dessous.
 
-	A routine's declaration is almost identical to the first line of its definition, except the declaration is preceded by the ##**Declare**## keyword and has no body. Also, attributes such as [[KeyPgExport Export]] are left off the declaration.
+	Une d&eacute;claration de routine est presque identique &agrave; la premi&egrave;re ligne de sa d&eacute;finition, sauf que la d&eacute;claration est pr&eacute;c&eacute;d&eacute;e par le mot-cl&eacute; ##**Declare**## et n'a pas de corps. De plus, des attributs tels que [[KeyPgExport Export]] sont laiss&eacute;s hors de la d&eacute;claration.
 
-	FreeBASIC, as QB, does not require the declaration of the functions unless they are defined in a different source file or in the same file past the point where they are called. This is no longer true for routines declared inside a [[KeyPgType Type]] body, which must **always** be declared first in the [[KeyPgType Type]]'s body before use. If you do not declare [[KeyPgType Type]] routines you will receive an error.
+	FreeBASIC, comme QB, n'exige pas la d&eacute;claration des fonctions &agrave; moins qu'elles soient d&eacute;finies dans un fichier source diff&eacute;rent ou dans le m&ecirc;me fichier apr&egrave;s le point o&ugrave; elles sont appel&eacute;es. Ce n'est pas vrai pour les routines d&eacute;clar&eacute;es &agrave; l'int&eacute;rieur d'un corps de [[KeyPgType Type]], qui doivent **toujours** &ecirc;tre d&eacute;clar&eacute;es en premier dans le corps du [[KeyPgType Type]] avant de les utiliser. Si vous ne d&eacute;clarez pas les routines [[KeyPgType Type]] vous recevrez un message d'erreur.
 
-	 As every file using a function must have its declaration, declarations are usually kept in one or more //include files// to allow usage of the function by any module that needs it using the ##[[KeyPgInclude #include]]## statement. 
+	 Comme chaque fichier utilisant une fonction doit avoir sa d&eacute;claration, les d&eacute;clarations sont habituellement group&eacute;e dans un ou plusieurs //fichiers include// pour permettre l'utilisation de la fonction par un module quelconque qui en a besoin en utilisant l'instruction ##[[KeyPgInclude #include]]##.
 
 {{fbdoc item="ex"}}
-Module-level Function:
+Fonction niveau module:
 {{fbdoc item="filename" value="examples/manual/procs/declare.bas"}}%%(freebasic)
 '' declare the function sum which takes two integers and returns an integer
 declare function sum( as integer, as integer ) as integer
@@ -51,7 +51,7 @@ function sum( a as integer, b as integer ) as integer
 end function
 %%
 
-Type-level Sub:
+Niveau type Sub:
 {{fbdoc item="filename" value="examples/manual/procs/declare2.bas"}}%%(freebasic)
 type my_type
 	my_data as integer
@@ -71,12 +71,12 @@ an_instance.increment_data( )
 Print an_instance.my_data
 %%
 {{fbdoc item="lang"}}
-	- In the //[[CompilerOptlang -lang fb]]// dialect, ##**Byval**## is the default parameter passing convention.
-	- In the //[[CompilerOptlang -lang qb]]// and //[[CompilerOptlang -lang deprecated]]// dialects, ##**Byref**## is the default parameter passing convention.
-	- Type-level ##[[KeyPgSub Sub]]##/##[[KeyPgFunction Function]]##/##[[KeyPgOperator Operator]]##/##[[KeyPgConstructor Constructor]]##/##[[KeyPgDestructor Destructor]]##'s are only allowed in //[[CompilerOptlang -lang fb]]//
+	- Dans le dialecte //[[CompilerOptlang -lang fb]]//, ##**ByVal**## est la convention par d&eacute;faut de passage de param&egrave;tre.
+	- Dans les dialectes //[[CompilerOptlang -lang qb]]// et //[[CompilerOptlang -lang deprecated]]//, ##**ByRef**## est la convention par d&eacute;faut de passage de param&egrave;tre.
+	- Niveaux type ##[[KeyPgSub Sub]]##/##[[KeyPgFunction Function]]##/##[[KeyPgOperator Operator]]##/##[[KeyPgConstructor Constructor]]##/##[[KeyPgDestructor Destructor]]## ne sont permis qu'en //[[CompilerOptlang -lang fb]]//
 
 {{fbdoc item="diff"}}
-	- In FreeBASIC, the parameter names are optional.
+	- Dans FreeBASIC, les noms de param&egrave;tres sont facultatifs.
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgSub Sub]]##

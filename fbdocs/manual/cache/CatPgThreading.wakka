@@ -1,45 +1,45 @@
 {{fbdoc item="title" value="Threading Support Functions"}}----
-Procedures for working with multithreaded applications.
+Proc&eacute;dures pour travailler avec des applications "multi-thread".
 
 {{fbdoc item="desc"}}
-	These procedures allow for multithreaded programming. Threads and conditional variables can be created and destroyed, and so-called //mutexes// can be obtained to protect thread-sensitive data.
+	Ces proc&eacute;dures permettent la programmation "multi-thread". "Threads" et variables conditionnelles peuvent &ecirc;tre cr&eacute;&eacute;s et d&eacute;truits, et les //mutexes// peuvent &ecirc;tre obtenus pour prot&eacute;ger les donn&eacute;es de "thread" sensibles..
 
-**{{anchor name="THREADS|Threads"}}**
-	Procedures that start and wait for threaded procedures.
-**{{anchor name="CONDVARS|Conditional Varables"}}**
-	Procedures that create and signal conditional variables.
-**{{anchor name="MUTEXES|Mutexes"}}**
-	Procedures that deal with mutexes.
+**[[#THREADS">Threads]]**
+	Les proc&eacute;dures de d&eacute;part et d'attente pour les proc&eacute;dures de "thread".
+**[[#CONDVARS">Varables conditionnelles]]**
+	Proc&eacute;dures qui cr&eacute;ent et signalent des variables conditionnelles.
+**[[#MUTEXES">Mutexes]]**
+	M&eacute;thodes qui tra&icirc;tent avec les "mutex".
 
-<<{{anchor name="THREADS"}}{{fbdoc item="section" value="Threads"}}
-	=={{fbdoc item="keyword" value="KeyPgThreadCreate|THREADCREATE"}}==
-		Starts a procedure in a separate thread of execution.
-	=={{fbdoc item="keyword" value="KeyPgThreadWait|THREADWAIT"}}==
-		Waits until a threaded procedure has finished.
+<table class="fb_box"><a name="THREADS"></a>**<u>Threads</u>**
+	**[[KeyPgThreadCreate ThreadCreate]]**
+		D&eacute;marre une proc&eacute;dure dans un "thread" s&eacute;par&eacute; de l'ex&eacute;cution.
+	**[[KeyPgThreadWait ThreadWait]]**
+		Attend jusqu'&agrave; ce que une proc&eacute;dure de "thread" soit termin&eacute;e.
 
-{{anchor name="CONDVARS"}}{{fbdoc item="section" value="Conditional Variables"}}
-	=={{fbdoc item="keyword" value="KeyPgCondCreate|CONDCREATE"}}==
-		Creates a conditional variable.
-	=={{fbdoc item="keyword" value="KeyPgCondWait|CONDWAIT"}}==
-		Pauses execution of a threaded procedure.
-	=={{fbdoc item="keyword" value="KeyPgCondSignal|CONDSIGNAL"}}==
-		Resumes execution of a threaded procedure waiting for a conditional.
-	=={{fbdoc item="keyword" value="KeyPgCondBroadcast|CONDBROADCAST"}}==
-		Resumes all threaded procedures waiting for a conditional.
-	=={{fbdoc item="keyword" value="KeyPgCondDestroy|CONDDESTROY"}}==
-		Destroys a conditional variable that is no longer needed.
+<a name="CONDVARS"></a>**<u>Conditional Variables</u>**
+	**[[KeyPgCondCreate CondCreate]]**
+		Cr&eacute;e une variable conditionnelle.
+	**[[KeyPgCondWait CondWait]]**
+		Suspend l'ex&eacute;cution d'une proc&eacute;dure de "thread".
+	**[[KeyPgCondSignal CondSignal]]**
+		Reprend l'ex&eacute;cution d'une proc&eacute;dure de "thread" en attente d'une valeur conditionnelle.
+	**[[KeyPgCondBroadcast CondBroadcast]]**
+		Reprend toutes les proc&eacute;duresde "thread" en attente d'une valeur conditionnelle.
+	**[[KeyPgCondDestroy CondDestroy]]**
+		D&eacute;truit une variable conditionnelle qui n'est plus n&eacute;cessaire.
 
-<<>>{{anchor name="MUTEXES"}}{{fbdoc item="section" value="Mutexes"}}
-	=={{fbdoc item="keyword" value="KeyPgMutexCreate|MUTEXCREATE"}}==
-		Creates a mutex.
-	=={{fbdoc item="keyword" value="KeyPgMutexLock|MUTEXLOCK"}}==
-		Acquires a lock on a mutex.
-	=={{fbdoc item="keyword" value="KeyPgMutexUnlock|MUTEXUNLOCK"}}==
-		Releases a lock on a mutex.
-	=={{fbdoc item="keyword" value="KeyPgMutexDestroy|MUTEXDESTROY"}}==
-		Destroys a mutex that is no longer needed.
->>::c::
+;<a name="MUTEXES"></a>**<u>Mutexes</u>**
+	**[[KeyPgMutexCreate MutexCreate]]**
+		Cr&eacute;e un "mutex".
+	**[[KeyPgMutexLock MutexLock]]**
+		Acquiert un verrou sur un "mutex".
+	**[[KeyPgMutexUnlock MutexUnlock]]**
+		Annule un verrou sur un "mutex".
+	**[[KeyPgMutexDestroy MutexDestroy]]**
+		D&eacute;truit un "mutex" qui n'est plus n&eacute;cessaire.
+;</table><div style="clear:both"> 
 {{fbdoc item="target"}}
-	- These procedures are not supported in DOS.
+	- Ces proc&eacute;dures ne sont pas support&eacute;es par le DOS.
 
 {{fbdoc item="back" value="DocToc|Table of Contents"}}

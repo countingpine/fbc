@@ -1,5 +1,5 @@
 {{fbdoc item="title" value="BITSET"}}----
-Gets the value of an integer with a specified bit set.
+Obtient la valeur d'un entier dont on a positionn&eacute; un certain bit &agrave; un (1).
 
 {{fbdoc item="syntax"}}##
 	[[KeyPgPpdefine #define]] **Bitset**( //value//, //bit_number// ) ((//value//) [[KeyPgOpOr or]] ([[KeyPgCast Cast]]([[KeyPgTypeof TypeOf]](//Value//), 1) [[KeyPgOpShiftLeft shl]] (//bit_number//)))
@@ -9,37 +9,37 @@ Gets the value of an integer with a specified bit set.
 ##
 {{fbdoc item="param"}}
 	##//value//##
-		The integer value.
+		La valeur enti&egrave;re.
 	##//bit_number//##
-		The index of the bit to set.
+		L'indice du bit &agrave; mettre &agrave; z&eacute;ro.
 
-{{fbdoc item="ret"}}
-	Returns the integer value with the specified bit set.
+{{fbdoc item="section" value="Valeur retourn&eacute;e
+	Retourne la valeur enti&egrave;re avec le bit sp&eacute;cifi&eacute; mis &agrave; 1.
 
 {{fbdoc item="desc"}}
-	This macro expands to a copy of the integer ##//value//## with the specified ##//bit_number//## set (to //on//, or `##1##`). Behaves as `##//value// [[KeyPgOpOr Or]] (1 [[KeyPgOpShiftLeft Shl]] //bit_number//)##`.
+	Cette macro se d&eacute;veloppe en une copie de la valeur enti&egrave;re ##//value//## avec le bit ##//bit_number//## "valid&eacute;" (&agrave; //on//, ou `##1##`). Se comporte comme `##//value// [[KeyPgOpOr Or]] (1 [[KeyPgOpShiftLeft Shl]] //bit_number//)##`.
 
-	The valid range of values for ##//bit_number//## depends on the size, in bits, of `##[[KeyPgTypeof Typeof]](//value//)##`, which is `##0##` through `##[[KeyPgSizeof Sizeof]](//value//) * 8 - 1##`. See [[TblVarTypes Standard Datatype Limits]] for a table of the standard datatypes and their sizes.
+	La plage valide de valeurs pour ##//bit_number//## d&eacute;pend de la taille, en bits, de`##[[KeyPgTypeof TypeOf]](//value//)##`, qui est `##0##` par le biais de `##[[KeyPgSizeof SizeOf]](//value//) * 8 - 1##`. Voir [[TblVarTypes Limites des types de donn&eacute;es standard]] pour un tableau des types de donn&eacute;es standard et leurs tailles.
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/bits/bitset.bas"}}%%(freebasic)
 print bitset(4, 0)
 print hex(bitset(1ull, 63))
 %%
-	will produce the output:
+	produira la sortie:
 
-%% 5
-8000000000000001
 %%
+5
+8000000000000001
 
-{{fbdoc item="lang"}}
-	- Not available in the //[[CompilerOptlang -lang qb]]// dialect.
+%%
+	{{fbdoc item="lang"}}
 
-{{fbdoc item="diff"}}
-	- New to ""FreeBASIC"".
+- Non disponible dans le dialecte //[[CompilerOptlang -lang qb]]//.
+	{{fbdoc item="diff"}}
 
-{{fbdoc item="see"}}
+- Nouveau pour FreeBASIC
+	{{fbdoc item="see"}}
 	- ##[[KeyPgBit Bit]]##
-	- ##[[KeyPgBitreset Bitreset]]##
 	
-{{fbdoc item="back" value="CatPgBits|Bit Manipulation"}}
+- ##[[KeyPgBitreset BitReset]]##

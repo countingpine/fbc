@@ -1,5 +1,5 @@
 {{fbdoc item="title" value="BIN"}}----
-Returns a binary (base 2) string representation of an integer
+Retourne une cha&icirc;ne binaire (base 2) repr&eacute;sentation d'un entier
 
 {{fbdoc item="syntax"}}##
 	[[KeyPgDeclare declare]] [[KeyPgFunction function]] **Bin** [[KeyPgOverload overload]] ( [[KeyPgByval byval]] //number// [[KeyPgAs as]] [[KeyPgByte byte]] ) [[KeyPgAs as]] [[KeyPgString string]]
@@ -17,21 +17,21 @@ Returns a binary (base 2) string representation of an integer
 ##
 {{fbdoc item="param"}}
 	##//number//##
-		A number or expression evaluating to a number.  A floating-point number will be converted to a ##[[KeyPgLongint longint]]##.
+		Un nombre ou une expression transform&eacute; en nombre. Un nombre en virgule flottante sera converti en ##[[KeyPgLongint LongInt]]##.
 	##//digits//##
-		Desired number of digits in the returned string.
+		Nombre de chiffres de la cha&icirc;ne renvoy&eacute;e.
 
-{{fbdoc item="ret"}}
-	A string containing the unsigned binary representation of ##//number//##.
+{{fbdoc item="section" value="Valeur retourn&eacute;e
+	Une cha&icirc;ne contenant la repr&eacute;sentation binaire non-sign&eacute;e de ##//number//##.
 
 {{fbdoc item="desc"}}
-	Returns a string representing the unsigned binary value of the integer ##//number//##. Binary digits range from 0 to 1.
+	Retourne une cha&icirc;ne binaire repr&eacute;sentation de la valeur binaire non-sign&eacute;e de l'entier ##//number//##. Chiffres binaires de 0 &agrave; 1.
 
-	If you specify ##//digits//## > 0, the result string will be exactly that length.  It will be truncated or padded with zeros on the left, if necessary.
+	Si vous sp&eacute;cifiez ##//digits//## > 0, la cha&icirc;ne r&eacute;sultat aura exactement cette longueur.  Elle sera tronqu&eacute;e ou compl&egrave;t&eacute;e par des z&eacute;ros sur la gauche, si n&eacute;cessaire.
 
-	The length of the string will not go longer than the maximum number of digits required for the type of ##//number//## (32 for an ##[[KeyPgInteger integer]]##, 64 for a ##[[KeyPgLongint Longint]])##.
+	La longueur de la cha&icirc;ne ne d&eacute;passera pas le nombre de bits maximum requis pour le type de ##//number//## (32 pour un ##[[KeyPgInteger Integer (entier)]]##, 64 pour un ##[[KeyPgLongint LongInt (entier long)]])##.
 
-	If you want to do the opposite, i.e. convert an binary string back into a number, the easiest way to do it is to prepend the string with ##"&B"##, and convert it using ##[[KeyPgValint Valint]]## or ##[[KeyPgVallng Vallng]]##, similarly to a normal numeric string.  E.g. ##[[KeyPgValint Valint]]("&B101")##
+	Si vous d&eacute;sirez l'oppos&eacute;, par exemple convertir une cha&icirc;ne binaire vers un nombre, la meilleure fa&ccedil;on de le faire est d'ajouter ##"&B"## au d&eacute;but de la cha&icirc;ne, et la convertir en utilisant ##[[KeyPgValint ValInt]]## ou ##[[KeyPgVallng ValLng]]##, de fa&ccedil;on similaire &agrave; une cha&icirc;ne num&eacute;rique normale.  Par exemple ##[[KeyPgValint ValInt]]("&B101")##
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/strings/bin.bas"}}%%(freebasic)
@@ -39,17 +39,17 @@ Print Bin(54321)
 Print Bin(54321, 5)
 Print Bin(54321, 20)
 %%
-	will produce the output:
+	produira la sortie:
 
 %%1101010000110001
 10001
 00001101010000110001
 %%
 {{fbdoc item="lang"}}
-	- Not available in the //[[CompilerOptlang -lang qb]]// dialect unless referenced with the alias ##**""__Bin""**##.
+	- Non disponible dans le dialecte //[[CompilerOptlang -lang qb]]// sauf si r&eacute;f&eacute;renc&eacute; avec l'alias ##**__Bin**##.
 
 {{fbdoc item="diff"}}
-	- New to ""FreeBASIC""
+	- Nouveau pour Freebasic
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgOct Oct]]##

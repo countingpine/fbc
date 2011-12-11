@@ -1,5 +1,5 @@
 {{fbdoc item="title" value="SCREENSYNC"}}----
-Synchronizes display updates with hardware
+Synchronises les mises &agrave; jour d'affichage avec le "hardware"
 
 {{fbdoc item="syntax"}}##
 	[[KeyPgDeclare declare]] [[KeyPgFunction function]] **Screensync** ( ) [[KeyPgAs as]] [[KeyPgInteger integer]]
@@ -7,36 +7,40 @@ Synchronizes display updates with hardware
 {{fbdoc item="usage"}}##
 	//result// = **Screensync**
 ##
-{{fbdoc item="ret"}}
-	Zero if successful, or non-zero if a graphics mode was not previously set.
+{{fbdoc item="section" value="Valeur retourn&eacute;e
+	Z&eacute;ro si r&eacute;ussi, ou non-z&eacute;ro si un mode graphique n'a pas encore &eacute;t&eacute; valid&eacute;.
 
 {{fbdoc item="desc"}}
-	This GfxLib statement stops the execution of the program until the graphics card signals it has ended tracing a frame and is going to start the new one. If the program uses the small interval of time between frames to redraw the image, the flickering is greatly reduced.
+	Cette fonction GfxLib arr&ecirc;tes l'ex&eacute;cution du programme tant que la carte graphique n'a pas termin&eacute; le balayage complet de l'&eacute;cran et va en commencer un autre. Si le programme utilise le tr&egrave;s petit intervalle de temps entre deux affichages pour redessiner l'image, le scintillement est grandement att&eacute;nu&eacute;.
 
-	The use of the QB-compatible form WAIT &H3DA,8 is deprecated.
+	L'utilisation de la forme QB-compatible WAIT &H3DA,8 est obsol&egrave;te.
 
-{{fbdoc item="ex"}}
-{{fbdoc item="filename" value="examples/manual/gfx/screensync.bas"}}%%(freebasic)
-'main loop
-DO
+	{{fbdoc item="ex"}}
+
+	%%(freebasic)
+
+'boucle principale
+Do
+' effectue entree utilisateur
+' calcule_une_frame
   
-  ' do user input
-  ' calculate_a_frame
+  ScreenSync
+  ' dessine_ une_ frame  
    
-  SCREENSYNC
+  Loop Until Inkey <> ""
   
-  ' draw_ a_ frame  
+  %%
   
-LOOP UNTIL INKEY <> ""
-%%
-
-
 {{fbdoc item="lang"}}
-	- Not available in the //[[CompilerOptlang -lang qb]]// dialect unless referenced with the alias ##**""__Screensync""**##.
+- Non disponible en dialecte //[[CompilerOptlang -lang qb]]// sauf si r&eacute;f&eacute;renc&eacute; avec l'alias ##**__Screensync**##.
+
 
 {{fbdoc item="diff"}}
-	- New to ""FreeBASIC"". 
-	- QBasic used WAIT &H3DA,8 for this purpose.
+	- Nouveau pour FreeBASIC. 
+
+- QBasic utilisait WAIT &H3DA,8 pour cela.
+	{{fbdoc item="see"}}
+	- ##[[KeyPgWait Wait]]##
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgWait Wait]]##

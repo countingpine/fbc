@@ -1,5 +1,5 @@
 {{fbdoc item="title" value="INSTR"}}----
-Locates the first occurrence of a substring or character within a string
+Rep&egrave;re la position de la premi&egrave;re occurence d'une sous-cha&icirc;ne ou d'un caract&egrave;re dans une cha&icirc;ne de caract&egrave;res
 
 {{fbdoc item="syntax"}}##
 	[[KeyPgDeclare declare]] [[KeyPgFunction function]] **Instr** [[KeyPgOverload overload]] ( [[KeyPgByref byref]] //str// [[KeyPgAs as]] [[KeyPgConstQualifier const]] [[KeyPgString string]],  [ **Any** ] [[KeyPgByref byref]] //substring// [[KeyPgAs as]] [[KeyPgConstQualifier const]] [[KeyPgString string]] ) [[KeyPgAs as]] [[KeyPgInteger integer]]
@@ -12,31 +12,31 @@ Locates the first occurrence of a substring or character within a string
 ##
 {{fbdoc item="param"}}
 	##//str//##
-		The string to be searched.
+		La cha&icirc;ne o&ugrave; chercher.
 	##//substring//##
-		The substring to find.
+		La sous-cha&icirc;ne &agrave; trouver.
 	##//start//##
-		The position in ##//str//## at which the search will begin.
+		La position dans ##//str//## o&ugrave; la recherche va commencer.
 
-{{fbdoc item="ret"}}
-	The position of the first occurrence of ##//substring//## in ##//str//##.
+{{fbdoc item="section" value="Valeur retourn&eacute;e
+	La position de la premi&egrave;re occurrence de ##//substring//## dans ##//str//##.
 
 {{fbdoc item="desc"}}
-	Locates the position of the first occurrence of a substring or character within a string. In the first form of ##**Instr**##, the search begins at the first character.
+	Rep&egrave;re la position de la premi&egrave;re occurence d'une sous-cha&icirc;ne ou d'un caract&egrave;re dans une cha&icirc;ne de caract&egrave;res. Dans la premi&egrave;re forme de ##**InStr**##, la recherche commence d&egrave;s le premier caract&egrave;re.
 	
-	Zero (0) is returned if ##//substring//## is not found, either ##//str//## or ##//substring//## are empty strings, or ##//start//## < 1.
+	Z&eacute;ro (0) est retourn&eacute; si ##//substring//## n'est pas trouv&eacute;e, soit ##//str//## ou ##//substring//## sont des cha&icirc;nes vides, ou ##//start//## < 1.
 
-	If the ##**Any**## keyword is specified, ##**Instr**## returns the first occurrence of any character in ##//substring//##.
+	Si le mot cl&eacute; ##**Any**## est sp&eacute;cifi&eacute;, ##**InStr**## renvoie la premi&egrave;re occurrence de n'importe quel caract&egrave;re dans ##//substring//##.
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/strings/instr.bas"}}%%(freebasic)
-' It will return 4
+' Retournera 4
 Print InStr("abcdefg", "de")
 
-' It will return 0
+' Retournera 0
 Print InStr("abcdefg", "h")
 
-' It will search for any of the characters "f", "b", "c", and return 2 as "b" is encountered first
+' Cherchera chacun des caracteres "f", "b", "c", et retournera 2 car "b" est rencontre en premier
 Print InStr("abcdefg", Any "fbc")
 %%
 {{fbdoc item="filename" value="examples/manual/strings/instr2.bas"}}%%(freebasic)
@@ -51,20 +51,20 @@ do while idx > 0 'if not found loop will be skipped
 	idx = instr(idx + 1, Test, "b")
 loop
 %%
-<<'A Unicode example:
+##<div class="fb_box">'Un exemple Unicode:
 dim text as wstring*20
 text = "&#1055;&#1088;&#1080;&#1074;&#1077;&#1090;, &#1084;&#1080;&#1088;!"
-print instr(text,"&#1077;&#1090;") ' displays 5
-<<::c::
-{{fbdoc item="target"}}
-	- The wide-character string version of ##**Instr**## is not supported for DOS target.
+print instr(text,"&#1077;&#1090;") ' affiche 5
+%%
+;<div style="clear:both"> 
+	{{fbdoc item="target"}}
 
-{{fbdoc item="diff"}}
-	- QB returns ##//start//## if ##//search//## is a zero length string.
-	- QB does not support Unicode.
+- La version ##**WString**## (cha&icirc;ne large) de ##**InStr**## n'est pas support&eacute;e par la cible DOS.
+	{{fbdoc item="diff"}}
+	- QB retourne ##//start//## si ##//search//## est une cha&icirc;ne de longueur z&eacute;ro.
 
-{{fbdoc item="see"}}
-	- ##[[KeyPgInstrrev Instrrev]]##
-	- ##[[KeyPgMidfunction Mid (Function)]]##
+- QB ne supporte pas Unicode.
+	{{fbdoc item="see"}}
+	- ##[[KeyPgInstrrev InStrRev]]##
 
-{{fbdoc item="back" value="CatPgString|String Functions"}}
+- ##[[KeyPgMidfunction Mid (Fonction)]]##

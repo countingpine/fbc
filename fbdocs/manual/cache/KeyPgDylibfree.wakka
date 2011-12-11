@@ -1,5 +1,5 @@
 {{fbdoc item="title" value="DYLIBFREE"}}----
-Unloads a dynamic link library from memory
+D&eacute;charge une biblioth&egrave;que &agrave; liens dynamiques de la m&eacute;moire
 
 {{fbdoc item="syntax"}}##
 	[[KeyPgDeclare declare]] [[KeyPgSub sub]] **Dylibfree** ( [[KeyPgByval byval]] //library// [[KeyPgAs as]] [[KeyPgAny any]] [[KeyPgPointer pointer]] )
@@ -9,33 +9,26 @@ Unloads a dynamic link library from memory
 ##
 {{fbdoc item="param"}}
 	##//library//##
-		The handle of a library to unload.
+		Le nom du pointeur d'une biblioth&egrave;que &agrave; d&eacute;charger.
 
 {{fbdoc item="desc"}}
-	##**Dylibfree**## is used to release at runtime libraries previously linked to your program with ##[[KeyPgDylibload Dylibload]]##. The argument is the handle to the library returned by ##[[KeyPgDylibload Dylibload]]##.
+	##**DyLibFree**## est utilis&eacute; pour lib&eacute;rer les biblioth&egrave;ques d'ex&eacute;cution pr&eacute;alablement li&eacute;es &agrave; votre programme avec ##[[KeyPgDylibload DyLibLoad]]##. L'argument est le nom du pointeur de la biblioth&egrave;que retourn&eacute; par ##[[KeyPgDylibload DyLibLoad]]##.
 
 {{fbdoc item="ex"}}
-{{fbdoc item="filename" value="examples/manual/module/dylibfree.bas"}}%%(freebasic)
-Dim hndl As Any Ptr
+	%%(freebasic)
 
-hndl=DyLibLoad("MYLIB.DLL")
+Dim hndl As Any Ptr
+	hndl=DyLibLoad("MYLIB.DLL")
+
 ' ...
-DyLibFree(hndl)
+	DyLibFree(hndl)
 
 %%
+	{{fbdoc item="target"}}
 
-{{fbdoc item="target"}}
-	- Dynamic link libraries are not available in DOS, as the OS doesn't support them.
+- Les biblioth&egrave;ques &agrave; liens dynamiques ne sont pas disponibles dans DOS, car le syst&egrave;me d'exploitation ne les prend pas en charge.
+	{{fbdoc item="lang"}}
+	- Non disponible dans le dialecte //[[CompilerOptlang -lang qb]]// sauf si r&eacute;f&eacute;renc&eacute; avec l'alias ##**__Dylibfree**##.
+	{{fbdoc item="diff"}}
 
-{{fbdoc item="lang"}}
-	- Not available in the //[[CompilerOptlang -lang qb]]// dialect unless referenced with the alias ##**""__Dylibfree""**##.
-
-{{fbdoc item="diff"}}
-	- New to ""FreeBASIC""
-
-{{fbdoc item="see"}}
-	- ##[[KeyPgDylibsymbol Dylibsymbol]]##
-	- ##[[KeyPgDylibload Dylibload]]##
-	- ##[[KeyPgExport Export]]##
-
-{{fbdoc item="back" value="CatPgModularizing|Modularizing"}}
+- Nouveau pour FreeBASIC

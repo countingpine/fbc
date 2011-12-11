@@ -1,5 +1,5 @@
 {{fbdoc item="title" value="TIMER"}}----
-Returns the amount of time that has passed since a static reference point.
+Retourne le temps &eacute;coul&eacute; par rapport &agrave; un point de r&eacute;f&eacute;rence fixe.
 
 {{fbdoc item="syntax"}}##
 	[[KeyPgDeclare declare]] [[KeyPgFunction function]] **Timer** ( ) [[KeyPgAs as]] [[KeyPgDouble double]]
@@ -7,14 +7,14 @@ Returns the amount of time that has passed since a static reference point.
 {{fbdoc item="usage"}}##
 	//result// = **Timer**
 ##
-{{fbdoc item="ret"}}
-	Returns a ##[[KeyPgDouble double]]## precision result with the time, in seconds, since a static reference point.
+{{fbdoc item="section" value="Valeur retourn&eacute;e
+	Retourne un r&eacute;sultat ##[[KeyPgDouble Double]]## pr&eacute;cision avec le temps &eacute;coul&eacute;, en secondes, par rapport &agrave; un point de r&eacute;f&eacute;rence statique.
 
 {{fbdoc item="desc"}}
 
-	The ##**Timer**## function is useful for finding out how long a section of code takes to run, or for control the timing of your code.  To find out how much time has passed between two points in your program, you can record the value of ##**Timer**## at the start and end points, and then subtract the start value from the end value.
+	La fonction ##**Timer**## est utile pour d&eacute;terminer quelle dur&eacute;e de temps s'&eacute;coule lors de l'ex&eacute;cution d'une portion de code, ou pour contr&ocirc;ler le d&eacute;roulement de votre code.  Pour d&eacute;terminer quel temps s'est &eacute;coul&eacute; entre deux points de votre programme, vous pouvez enregistrer la valeur de ##**Timer**## aux points de d&eacute;part et de fin, et puis soustraire la valeur de d&eacute;part &agrave; celle de fin.
 
-	On some platforms, the value of ##**Timer**## resets to zero at midnight (see below), so if the start and end time are on either side of the reset point, the difference will be negative.  This could cause unexpected behavior in some programs.  In those cases, adding ##86400## (the number of seconds in 24 hours) to the difference should return the correct result.  If the time taken is longer than a day, then it will be also be necessary to check the number of days that have elapsed.
+	Sur certaine plates-formes, la valeur de ##**Timer**## est remise &agrave; z&eacute;ro &agrave; minuit (voir ci-dessous), donc si les temps de d&eacute;part et de fin sont de chaque c&ocirc;t&eacute; du point de remise &agrave; z&eacute;ro, la diff&eacute;rence sera n&eacute;gative.  Ce qui peut produire des effets impr&eacute;vus dans certains programmes.  Dans ce cas, ajoutez ##86400## (nombre de secondes de 24 heures) &agrave; la diff&eacute;rence pour obtenir le r&eacute;sultat correct.  Si la dur&eacute;e d&eacute;passe un jour, il est alors n&eacute;cessaire de d&eacute;terminer le nombre de jours &eacute;coul&eacute;s.
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/dates/timer.bas"}}%%(freebasic)
@@ -29,18 +29,18 @@ Loop Until (Timer - Start) > 2.5
 Print "Done."
 %%
 
-{{fbdoc item="target"}}
-	- On ""Win32"" and Linux, if the program must wait for periods of 0.1 seconds or more, ##[[KeyPgSleep Sleep]]## should be used, this allows other programs to run during the waiting period. For shorter delays, a loop using TIMER can be more precise.
-	- The reference point chosen varies, depending on the platform.  On Windows, the time is measured relative to the point the computer was booted up.  On DOS, the time is measured relative to Jan 1 1970.
+{{fbdoc item="section" value="Diff&eacute;rences de plates-formes
+	- Sous Win32 et Linux, si le programme doit attendre pour des p&eacute;riodes de 0.1 seconde ou plus, ##[[KeyPgSleep Sleep]]## doit &ecirc;tre utilis&eacute;, ce qui permet aux autres programmes de fonctionner pendant la p&eacute;riode d'attente. Pour des d&eacute;lais plus courts, une boucle utilisant TIMER sera plus pr&eacute;cise.
+	- Le point de r&eacute;f&eacute;rence varie en fonction de la plate-forme.  Sous Windows, le temps est mesur&eacute; par rapport au point o&ugrave; l'ordinateur a &eacute;t&eacute; mis en route.  Sous DOS, le temps est mesur&eacute; par rapport au 1er Janvier 1970.
 
-~&//Note for DOS users: today, the number of seconds since 1970 is in excess of ##10^9##, and is therefore unsuitable for storing in ##[[KeyPgSingle Single]]##-precision variables, also it shouldn't be multiplied (to get 1/10 seconds or so) and stored in 32-bit integer variables then//
+//Note pour les utilisateurs DOS: actuellement, le nombre de secondes depuis 1970 d&eacute;passe ##10^9##, et il est donc impossible de le stocker dans une variable ##[[KeyPgSingle Single (simple)]]##-pr&eacute;cision, il ne peut pas non plus &ecirc;tre multipli&eacute; (pour obtenir les 1/10 de secondes ou plus) et stock&eacute; dans une variable enti&egrave;re, donc//
 
-	- The precision of TIMER varies, depending on the computer used.  If the processor has a precision timer (as the Performance Counter Pentium processors from Intel have) and the OS uses it, the precision is linked to the processor clock and microseconds can be expected. With older processors (386, 486), and always in DOS, the resolution is 1/18 second.
+	- La pr&eacute;cision de TIMER varie, en fonction de l'ordinateur utilis&eacute;.  Si le processeur dispose d'un compteur de pr&eacute;cision (comme les processeurs Performance Counter Pentium d'Intel) et que le syst&egrave;me d'exploitation l'utilise, la pr&eacute;cision est li&eacute;e &agrave; l'horloge du processeur et on peut esp&eacute;rer la micro-seconde. Avec des processeurs plus anciens (386, 486), et toujours sous DOS, la r&eacute;solution est de 1/18 de seconde.
 
-	- Usage of TIMER can cause disk accesses in DOS, see [[http://www.freebasic.net/forum/viewtopic.php?t=12985 forum]] for analysis and solutions
+	- L'utilisation de TIMER peut provoquer des acc&egrave;s disque sous DOS, voir [[http://www.freebasic.net/forum/viewtopic.php?t=12985">forum]] pour analyse et solutions
 
 {{fbdoc item="diff"}}
-	- In QB TIMER returned the number of seconds from last midnight, and its accuracy was 1/18 secs
+	- Dans QB, TIMER retourne le nombre de secondes &agrave; partir de minuit, et la pr&eacute;cision est de 1/18 s
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgTime Time]]##

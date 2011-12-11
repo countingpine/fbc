@@ -1,68 +1,68 @@
 {{fbdoc item="title" value="READ"}}----
-Reads values stored with the ##[[KeyPgData Data]]## statement.
+Lecture des valeurs stock&eacute;es avec ##[[KeyPgData Data]]##.
 
 {{fbdoc item="syntax"}}##
 	**Read** //variable_list//
 ##
 {{fbdoc item="desc"}}
-	Reads data stored in the application with the ##[[KeyPgData Data]]## command. 
+	Lit les donn&eacute;es stock&eacute;es dans l'application avec la commande ##[[KeyPgData Data]]##. 
 	
-	The elements of the ##//variable_list//## must be of basic types, numeric, strings or elements of arrays and user defined types.
+	Les &eacute;l&eacute;ments de ##//variable_list//## doivent &ecirc;tre des types basiques, num&eacute;riques, cha&icirc;nes ou &eacute;l&eacute;ments de tableaux et de types d&eacute;finis par l'utilisateur.
 
-	All the ##[[KeyPgData Data]]## statements in the program behave as a single list, after the last element of one ##[[KeyPgData Data]]## statement is read, the first element of the following ##[[KeyPgData Data]]## statement will be read.
-	The program should not attempt to ##[[KeyPgRead Read]]## after the last ##**Data**## element.  The results are (in all dialects) undefined,  and the program may crash (Page Fault).
+	Toutes les d&eacute;clarations donn&eacute;es ( ##[[KeyPgData Data]]## ) dans le programme constituent une liste unique, apr&egrave;s la lecture du dernier &eacute;l&eacute;ment d'une d&eacute;claration de donn&eacute;es, le premier &eacute;l&eacute;ment de la d&eacute;claration de donn&eacute;es suivante sera lu.Le programme ne doit pas tenter de lire ( ##[[KeyPgRead Read]]## ) apr&egrave;s le dernier &eacute;l&eacute;ment de donn&eacute;es. Si c'est le cas, les r&eacute;sultats sont (dans tous les dialectes) ind&eacute;finis, et le programme peut se "planter" (erreur de page).
+	Des donn&eacute;es constantes ne peuvent &ecirc;tre que des types simples (num&eacute;riques ou cha&icirc;nes). Une cha&icirc;ne lue dans une variable num&eacute;rique sera &eacute;valu&eacute;e par la fonction ##[[KeyPgVal Val]]##.
 
-	Data constants can only be of simple types (numeric or string).  A string read into a numeric variable will be evaluated by the ##[[KeyPgVal Val]]## function.
+	L'instruction "##[[KeyPgRestore Restore]]## ##//label//##" oblige la lecture du premier item de donn&eacute;es apr&egrave;s ##//label//##, permettant &agrave; l'utilisateur de choisir des sections sp&eacute;cifiques de donn&eacute;es &agrave; lire.
 
-	The "##[[KeyPgRestore Restore]] //label//##" statement makes the first ##[[KeyPgData Data]]## item after ##//label//## the next item to be read, allowing the user to choose specific sections of data to be read.
+	{{fbdoc item="ex"}}
 
 {{fbdoc item="ex"}}
-{{fbdoc item="filename" value="examples/manual/data/read.bas"}}%%(freebasic)
-' Create an array of 5 integers and a string to hold the data.
-DIM AS INTEGER h(4)
-DIM AS STRING hs
-DIM AS INTEGER readindex
+' Cree un tableau de 5 entiers et une chaine pour stocker les donnees.
+Dim As Integer h(4)
+Dim As String hs
+Dim As Integer readindex
+' Boucle 5 fois (pour 5 nombres... charge les donnees)
 
-' Set up to loop 5 times (for 5 numbers... check the data)
-FOR readindex = 0 TO 4
+For readindex = 0 To 4
+' Lecture d'un entier.
 
-  ' Read in an integer.
-  READ h(readindex)
+  Read h(readindex)
+  ' Affichage de celui-ci.
 
-  ' Display it.
-  PRINT "Number" ; readindex ; " = " ; h(readindex)
+  Print "Number" ; readindex ; " = " ; h(readindex)
+  Next readindex
 
-NEXT readindex
+' Separation.
 
-' Spacer.
-PRINT
+Print
+' Lecture d'une chaine.
 
-' Read in a string.
-READ hs
+Read hs
+' Affiche celle-ci.
 
-' Print it.
-PRINT  "String = " + hs
+Print  "String = " + hs
+' Attend appui sur touche.
 
-' Await a keypress.
-SLEEP
+Sleep
+' Sortie programme.
 
-' Exit program.
-END
+End
+' Block de donnees.
 
-' Block of data.
-DATA 3, 234, 4354, 23433, 87643, "Bye!"
+Data 3, 234, 4354, 23433, 87643, "Bye!"
 %%
-
 {{fbdoc item="lang"}}
-	- None in syntax and usage of ##**Read**##
-	- See the ##[[KeyPgData Data]]## page for more information on differences in storing the data
 
-{{fbdoc item="diff"}}
-	- None in syntax and usage of ##**Read**##
-	- See the ##[[KeyPgData Data]]## page for more information on differences in storing the data
+- Aucune dans la syntaxe et l'usage de ##**Read**##
+	- Voir la page ##[[KeyPgData Data]]## pour plus d'informations sur les diff&eacute;rences dans le stockage des donn&eacute;es
+	{{fbdoc item="diff"}}
 
-{{fbdoc item="see"}}
-	- ##[[KeyPgData Data]]##
+- Aucune dans la syntaxe et l'usage de ##**Read**##
+	- Voir la page ##[[KeyPgData Data]]## pour plus d'informations sur les diff&eacute;rences dans le stockage des donn&eacute;es
+	{{fbdoc item="see"}}
+
+- ##[[KeyPgData Data]]##
+	- ##[[KeyPgRestore Restore]]##
 	- ##[[KeyPgRestore Restore]]##
 
 {{fbdoc item="back" value="CatPgMisc|Miscellaneous"}}

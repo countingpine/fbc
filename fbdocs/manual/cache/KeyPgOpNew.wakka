@@ -1,5 +1,5 @@
 {{fbdoc item="title" value="Operator New"}}----
-Operator to dynamically allocate memory and construct data of a specified type
+Op&eacute;rateur qui alloue dynamiquement de la m&eacute;moire et construit une donn&eacute;e du type sp&eacute;cifi&eacute;
 
 {{fbdoc item="syntax"}}##
 	[[KeyPgDeclare declare]] [[KeyPgOperator operator]] **new** ( //size// [[KeyPgAs as]] [[KeyPgUinteger uinteger]] ) [[KeyPgAs as]] [[KeyPgAny any]] [[KeyPgPtr ptr]]
@@ -7,76 +7,78 @@ Operator to dynamically allocate memory and construct data of a specified type
 ##
 {{fbdoc item="usage"}}##
 	//result// = **New** //[[DataType datatype]]//
-		//or//
+		//ou//
 	//result// = **New** //[[DataType datatype]]// ( //initializers//, ... )
-		//or//
+		//ou//
 	//result// = **New** //[[DataType datatype]]//**[** //count// **]**
 ##
 {{fbdoc item="param"}}
 	##//size//## 
-		Number of bytes to allocate.
+		Nombre d'octets &agrave; allouer.
 	##//initializers//##
-		Initial value(s) for the variable.
+		Valeur(s) pour initialiser la variable.
 	##//datatype//##
-		Name of the data type to create.
+		Nom du type de donn&eacute;e &agrave; cr&eacute;er.
 	##//count//##
-		Exact number of elements to allocate.
+		Nombre exact d'&eacute;l&eacute;ments &agrave; allouer.
 
-{{fbdoc item="ret"}}
-	A pointer of type [[DataType datatype]] to the newly allocated data.
+{{fbdoc item="section" value="Valeur retourn&eacute;e
+	Un pointeur du type [[DataType datatype]] vers la nouvelle donn&eacute;e allou&eacute;e.
 
 {{fbdoc item="desc"}}
-	The ##**New**## operator dynamically allocates memory and constructs a specified data type. For simple types, like integers, an initial value can be given. For types without constructors, initial values can be specified for each field. Types that have constructors can have their constructors called by ##**New**## as well. If no initializers are given, the default values for those types will be set.
+	L'op&eacute;rateur ##**New**## alloue dynamiquement de la m&eacute;moire et construit une donn&eacute;e du type sp&eacute;cifi&eacute;. Pour des types simples, comme les entiers, une valeur initiale peut &ecirc;tre attribu&eacute;e. Pour des types sans constructeur(s), des valeurs initiales peuvent &ecirc;tre sp&eacute;cifi&eacute;es pour chaque champ. Les types qui ont des constructeurs, ceux-ci peuvent &ecirc;tre appel&eacute;s par ##**New**##. Si aucun initialiseur n'est fourni, les valeurs par d&eacute;faut seront attribu&eacute;es pour ces types.
 
-	##**New[]**## is the array-version of the ##**New**## operator and allocates enough memory for the specified number of objects.  The default constructor for the type will be used to set the initial values for each item.
+	##**New[]**## est la version pour les tableaux de l'op&eacute;rateur ##**New**## et alloue suffisamment de m&eacute;moire pour le nombre d'objets sp&eacute;cifi&eacute;.  Le constructeur par d&eacute;faut pour le type sera utilis&eacute; pour initialiser chacun des &eacute;l&eacute;ments.
 
-	Objects created with ##**New**## must be freed with ##[[KeyPgOpDelete Delete]]##. Memory allocated with ##**New[]**## must be freed with ##**Delete[]**##, the array-version of ##[[KeyPgOpDelete Delete]]##. You cannot mix and match the different versions of the operators.
+	Les objects cr&eacute;&eacute;s avec ##**New**## doivent &ecirc;tre lib&eacute;r&eacute;s avec ##[[KeyPgOpDelete Delete]]##. La m&eacute;moire allou&eacute;e avec ##**New[]**## doit &ecirc;tre lib&eacute;r&eacute;e avec ##**Delete[]**##, la version pour les tableaux de ##[[KeyPgOpDelete Delete]]##. Vous ne pouvez pas m&eacute;langer les deux versions de l'op&eacute;rateur.
 
-	Specifying an initial value of ##[[KeyPgAny Any]]##, as in ##new datatype(any)## will allocate memory for the type, but not initialize the data.  This is only valid on data types that do not have constructors.
+	Sp&eacute;cifier une valeur initiale ##[[KeyPgAny Any]]##, comme dans ##new datatype(any)## allouera de la m&eacute;moire pour le type, mais n'initialisera pas les donn&eacute;es.  Ceci n'est valide que pour les types qui n'ont pas de constructeur.
 
-	Specifying an initial value of ##[[KeyPgAny Any]]##, as in ##new datatype[count]{any}## will allocate memory for the array, but not initialize the data.  This is only valid on data types that do not have constructors.
+	Sp&eacute;cifier une valeur initiale ##[[KeyPgAny Any]]##, comme dans ##new datatype[count]{any}## allouera de la m&eacute;moire pour le tableau, mais n'initialisera pas les donn&eacute;es.  Ceci n'est valide que pour les types qui n'ont pas de constructeur.
+
+	{{fbdoc item="ex"}}
 
 {{fbdoc item="ex"}}
-{{fbdoc item="filename" value="examples/manual/operator/new.bas"}}%%(freebasic)
-type Rational
-	as integer	numerator, denominator
-end type
+Type Rational
+As Integer    numerator, denominator
+	End Type
+Scope
 
-scope
+' Create and initialize a Rational, and store it's address.
 
-	' Create and initialize a Rational, and store it's address.
-	dim p as Rational ptr = new Rational(3, 4)
-
-	print p->numerator & "/" & p->denominator
+	Dim p As Rational Ptr = New Rational(3, 4)
+	Print p->numerator & "/" & p->denominator
 
 	' Destroy the rational and give its memory back to the system. 
-	delete p
 
-end scope
+	Delete p
+	End Scope
 
-scope
+Scope
 
-	' Allocate memory for 100 integers, store the address of the first one.
-	dim p as integer ptr = new integer[100]
+' Allocate memory for 100 integers, store the address of the first one.
 
+	Dim p As Integer Ptr = New Integer[100]
 	' Assign some values to the integers in the array.
-	for i as integer = 0 to 99
-		p[i] = i
-	next
 
+	For i As Integer = 0 To 99
+	p[i] = i
+		Next
 	' Free the entire integer array.
-	delete[] p
 
-end scope
+	Delete[] p
+	End Scope
+
 %%
 {{fbdoc item="lang"}}
-	- Only available in the //[[CompilerOptlang -lang fb]]// dialect.
+- Utilisable seulement dans le dialecte //[[CompilerOptlang -lang fb]]//.
+	{{fbdoc item="diff"}}
 
-{{fbdoc item="diff"}}
-	- New to ""FreeBASIC""
+- Nouveau pour FreeBASIC
+	{{fbdoc item="see"}}
 
-{{fbdoc item="see"}}
-	- ##[[KeyPgOpDelete Delete]]##
+- ##[[KeyPgOpDelete Delete]]##
+	- ##[[KeyPgOpPlacementNew Placement New]]##
 	- ##[[KeyPgOpPlacementNew Placement New]]##
 
 {{fbdoc item="back" value="CatPgOpMemory|Memory Operators"}}{{fbdoc item="back" value="CatPgOperators|Operators"}}

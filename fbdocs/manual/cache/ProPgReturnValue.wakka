@@ -1,36 +1,36 @@
 {{fbdoc item="title" value="Returning Values"}}----
-**Returning Values** refers to the ability of a ##[[KeyPgFunction Function]]## procedure to have a value when the function finishes such that the value can be used in an expression or assigned to a variable.
+**Retourner une valeur** se r&eacute;f&egrave;re &agrave; la capacit&eacute; d'une ##[[KeyPgFunction Function]]## d'avoir une valeur lorsqu'elle se termine de telle sorte que cette valeur peut &ecirc;tre utilis&eacute;e dans une expression ou affect&eacute;e &agrave; une variable.
 
-The value of a function can be returned in three ways:
+La valeur d'une fonction peut &ecirc;tre retourn&eacute;e de trois fa&ccedil;ons:
 
 {{fbdoc item="filename" value="examples/manual/proguide/procs/return-methods.bas"}}%%(freebasic)
-'' Using the name of the function to set the return value and continue executing the function:
+'' En utilisant le nom de la fonction pour d&eacute;finir la valeur de retour et poursuivre l'ex&eacute;cution de la fonction:
 Function myfunc1() As Integer
    myfunc1 = 1
 End Function
 
-'' Using the keyword 'Function' to set the return value and continue executing the function:
+'' Utiliser le mot-clef 'Function' pour d&eacute;finir la valeur de retour et poursuivre l'ex&eacute;cution de la fonction:
 Function myfunc2() As Integer
    Function = 2
 End Function
 
-'' Using the keyword 'Return' to set the return value and immediately exit the function:
+'' Utiliser le mot-clef 'Return' pour d&eacute;finir la valeur de retour et quitter imm&eacute;diatement la fonction:
 Function myfunc3() As Integer
    Return 3
 End Function
 %%
 
 {{fbdoc item="filename" value="examples/manual/proguide/procs/returnval.bas"}}%%(freebasic)
-'' This program demonstrates a function returning a value.
+'' Ce programme illustre une fonction retournant une valeur.
 
 Declare Function myFunction () As Integer
 
 Dim a As Integer
 
-'Here we take what myFunction returns and add 10.
+'Ici on prend ce que retourne myFunction et on ajoute 10.
 a = myFunction() + 10
 
-'knowing that myFunction returns 10, we get 10+10=20 and will print 20.
+'sachant que myFunction retourne 10, nous obtenons 10+10=20 et afficherons 20.
 Print a 
 
 Function myFunction () As Integer

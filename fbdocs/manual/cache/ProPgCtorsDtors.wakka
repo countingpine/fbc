@@ -1,99 +1,99 @@
 {{fbdoc item="title" value="Constructors and Destructors"}}----
-In charge of the creation and destruction of objects.
+En charge de la cr&eacute;ation et la destruction d'objets.
 
-**{{anchor name="OVERVIEW|Overview"}}**
-**{{anchor name="DECLARATION|Declaration"}}**
-**{{anchor name="DEFCTOR|Default constructors"}}**
-**{{anchor name="COPYCTOR|Copy constructors"}}**
-**{{anchor name="CALLCTOR|Calling constructors"}}**
+**[[#OVERVIEW">Vue d'ensemble]]**
+**[[#DECLARATION">D&eacute;claration]]**
+**[[#DEFCTOR">Les constructeurs par d&eacute;faut]]**
+**[[#COPYCTOR">Constructeurs de copie]]**
+**[[#CALLCTOR">Appel des constructeurs]]**
 
-{{anchor name="OVERVIEW"}}{{fbdoc item="section" value="Overview"}}
-	Constructors and destructors are responsible for creating and destroying objects, respectively. In general, constructors give objects their initial state, that is, they give meaningful values to their objects' member data. Destructors perform the opposite function; they make sure any resources owned by their objects are properly freed.
+**[[#COMPCTORDTOR">Constructeurs et destructeurs fournis par le compilateur]]**
+	<a name="OVERVIEW"></a>{{fbdoc item="section" value="Vue d'ensemble
 
-	Simply, constructors are special member procedures that are called when an object is created, and destructors are special member procedures called when an object is destroyed. Both constructors and destructors are called automatically by the compiler whenever an object is created or destroyed, whether explicitly with the use of the ##[[KeyPgDim Dim]]## or ##[[KeyPgOpNew New]]## keywords, or implicitly by passing an object to a procedure by value or through an object going out of scope.
+	Les constructeurs et les destructeurs sont responsables, respectivement, de la cr&eacute;ation et de la destruction d'objets. En g&eacute;n&eacute;ral, les constructeurs donnent aux objets leur &eacute;tat initial, c'est &agrave; dire qu'ils donnent des valeurs significatives aux donn&eacute;es membres de leurs objets. Les destructeurs accomplissent la fonction inverse; ils s'assurent que les ressources qui appartiennent aux objets sont correctement lib&eacute;r&eacute;es.
 
-{{anchor name="DECLARATION"}}{{fbdoc item="section" value="Declaration"}}
-	Constructors and destructors are declared like member procedures but with the ##[[KeyPgConstructor Constructor]]## keyword instead of ##[[KeyPgMemberSub Sub]]## or ##[[KeyPgMemberFunction Function]]##, and without a name. Similarly, they are defined with only the name of the ##[[KeyPgType Type]]## or ##[[KeyPgClass Class]]## they are declared in.
+Simplement, les constructeurs sont des membres sp&eacute;ciaux des proc&eacute;dures qui sont appel&eacute;s lorsqu'un objet est cr&eacute;&eacute; et les destructeurs sont des membres sp&eacute;ciaux des proc&eacute;dures qui sont appel&eacute;s lorsqu'un objet est d&eacute;truit. Les constructeurs et destructeurs sont appel&eacute;s automatiquement par le compilateur chaque fois qu'un objet est cr&eacute;&eacute; ou d&eacute;truit, ou d&eacute;truit explicitement lors de l'utilisation des mots-cl&eacute;s ##[[KeyPgDim Dim]]## ou ##[[KeyPgOpNew New]]## ou ou implicitement par le passage d'un objet par valeur &agrave; une proc&eacute;dure ou via un objet sortant du champ d'application.
+	<a name="DECLARATION"></a>
 
-	A ##[[KeyPgType Type]]## or ##[[KeyPgClass Class]]## can have multiple constructors, but only one destructor.
+	{{fbdoc item="section" value="D&eacute;claration
 
-{{anchor name="DEFCTOR"}}{{fbdoc item="section" value="Default constructors"}}
-	Default constructors are constructors that either have no parameters, or all of their parameters have a default value. They are called when an object is defined but not initialized, or is created as part of an array, with the ##[[KeyPgDim Dim]]##, ##[[KeyPgRedim Redim]]## or ##[[KeyPgOpNew New]]##[] keywords. The first constructor declared in the example below is a default constructor.
+Les constructeurs et les destructeurs sont d&eacute;clar&eacute;s comme membres de proc&eacute;dures, mais avec les mots-clefs ##[[KeyPgConstructor Constructor]]## ou ##[[KeyPgDestructor Destructor]]## &agrave; la place de ##[[KeyPgMemberSub Sub]]## ou ##[[KeyPgMemberFunction Function]]## et sans nom. De m&ecirc;me, ils sont d&eacute;finis avec seulement le nom du ##[[KeyPgType Type]]## ou de la ##[[KeyPgClass Class]]## dans le(la)quel(le) ils sont d&eacute;clar&eacute;s.
+	Un ##[[KeyPgType Type]]## ou une ##[[KeyPgClass Class]]## peuvent avoir plusieurs constructeurs, mais seulement un destructeur.
 
-{{anchor name="COPYCTOR"}}{{fbdoc item="section" value="Copy constructors"}}
-	Copy constructors are constructors called when an object is created, or cloned, from another object of the same type (or an object that can be converted to that type). This happens explicitly when initializing an object with another object, or implicitly by passing an object to a procedure by value. Copy constructors are declared having one parameter: an object of the same type passed by reference.
+<a name="DEFCTOR"></a>
+	{{fbdoc item="section" value="Les constructeurs par d&eacute;faut
 
-	Copy constructors are only called when creating and initializing object instances. Assignment to objects is handled by the ##[[KeyPgOperator member operator let]]##.
+	Les constructeurs par d&eacute;faut sont des constructeurs qui soit n'ont pas de param&egrave;tres, soit la totalit&eacute; de leurs param&egrave;tres ont une valeur par d&eacute;faut. Ils sont appel&eacute;s quand un objet est d&eacute;fini, mais pas initialis&eacute;, ou cr&eacute;&eacute;s dans le cadre d'un tableau, avec les mots-clefs ##[[KeyPgDim Dim]]##, ##[[KeyPgRedim ReDim]]## ou ##[[KeyPgOpNew New]]##[]. Le premier constructeur d&eacute;clar&eacute; dans l'exemple ci-dessous est un constructeur par d&eacute;faut.
 
-{{anchor name="CALLCTOR"}}{{fbdoc item="section" value="Calling constructors"}}
-	Unlike other member procedures, constructors cannot be called directly from an object instance. Instead, a constructor is specified in a ##[[KeyPgDim Dim]]## statement either with an initializer or without one, or in a ##[[KeyPgOpNew New]]## statement with or without arguments.
+<a name="COPYCTOR"></a>
+	{{fbdoc item="section" value="Constructeurs de copie
 
-	When specifying an initializer for an object, the name of the type followed by any arguments it requires is used.
+	Les constructeurs de copie sont des constructeurs appel&eacute;s quand un objet est cr&eacute;&eacute;, ou clon&eacute;, &agrave; partir d'un autre objet du m&ecirc;me type (ou d'un objet qui peut &ecirc;tre converti dans ce type). Cela se produit explicitement lors de l'initialisation d'un objet avec un autre objet ou implicitement en passant par valeur un objet &agrave; une proc&eacute;dure. Les constructeurs de copie sont d&eacute;clar&eacute;s comme ayant un param&egrave;tre: un objet du m&ecirc;me type pass&eacute; par r&eacute;f&eacute;rence.
 
-{{fbdoc item="filename" value="examples/manual/proguide/udt/ctordtor.bas"}}%%(freebasic)
-type foo
+Les constructeurs de copie ne sont appel&eacute;s que lors de la cr&eacute;ation et l'initialisation d'instances d'objets. L'affectation &agrave; des objets est assur&eacute;e par ##[[KeyPgOperator Member Operator Let]]##.
+<a name="CALLCTOR"></a>
+	{{fbdoc item="section" value="Appel des constructeurs
+	Contrairement aux autres membres des proc&eacute;dures, les constructeurs ne peuvent pas &ecirc;tre appel&eacute;s directement &agrave; partir d'une instance d'objet. Au lieu de cela, un constructeur est pr&eacute;cis&eacute; dans une instruction ##[[KeyPgDim Dim]]## avec un initialiseur ou sans ou dans une instruction ##[[KeyPgOpNew New]]## avec ou sans arguments.
+	Lorsque vous sp&eacute;cifiez un initialiseur pour un objet, le nom du type suivi par tous les arguments qu'il exige est utilis&eacute;.
+	%%(freebasic)
+
+	Type foo
 	'' Declare a default ctor, copy ctor and normal ctor
-	declare constructor
-	declare constructor (byref as foo)
-	declare constructor (as integer)
 
-	'' Declare a destructor
-	declare destructor
+	Declare Constructor
+	Declare Constructor (ByRef As foo)
+Declare Constructor (As Integer)
 
-	ints as integer ptr
-	numints as integer
-end type
+'' Declare a destructor
+Declare Destructor
+	ints As Integer Ptr
+	numints As Integer
+End Type
 
 '' Define a constructor that creates 100 integers
-constructor foo
-	ints = new integer(100)
+Constructor foo
+	ints = New Integer(100)
 	numints = 100
 end constructor
 
 '' Define a constructor that copies the integers from another object
-constructor foo (byref x as foo)
-	ints = new integer(x.numints)
+Constructor foo (ByRef x As foo)
+	ints = New Integer(x.numints)
 	numints = x.numints
 end constructor
 
 '' Define a constructor that creates some integers based on a parameter
-constructor foo (n as integer)
-	ints = new integer(n)
-	numints = n
-end constructor
+Constructor foo (n As Integer)
+	ints = New Integer(n)
+numints = n
 
-'' Define a destructor that destroys those integers
-destructor foo
-	delete[] ints
-end destructor
+End Constructor
+	'' Define a destructor that destroys those integers
+	Destructor foo
+	Delete[] ints
 
-scope
+	End Destructor
+	Scope
 	'' calls foo's default ctor
-	dim a as foo
-	dim x as foo ptr = new foo
 
+	Dim a As foo
+	Dim x As foo Ptr = New foo
 	'' calls foo's copy ctor
-	dim b as foo = a
-	dim y as foo ptr = new foo(*x)
 
+	Dim b As foo = a
+	Dim y As foo Ptr = New foo(*x)
 	'' calls foo's normal ctor
-	dim c as foo = foo(20)
-	dim z as foo ptr = new foo(20)
+	Dim c As foo = foo(20)
+Dim z As foo Ptr = New foo(20)
+'' calls foo's dtor
 
-	'' calls foo's dtor
-	delete x
-	delete y
-	delete z
-end scope '' <- a, b and c are destroyed here as well
-%%
+Delete x
+	Delete y
 
-{{anchor name="COMPCTORDTOR"}}{{fbdoc item="section" value="Compiler-provided constructors and destructors"}}
-	If no copy constructor is declared for a ##[[KeyPgType Type]]## or ##[[KeyPgClass Class]]##, the compiler provides one. If no constructor has been declared, the compiler also provides a default constructor.
+	Delete z
 
-	The compiler-provided default constructor initializes member data to default values, that is, numeric and pointer members are set to zero (0), and object members are default-constructed. The copy constructor that the compiler declares shallow-copies all member data from one type to another: numeric and pointer types are initialized with the corresponding data members in the object that is copied, and object members are copy-constructed from their corresponding object members. This means that dynamic resources, such as memory pointed to by a pointer data member, is not copied; only the address is copied. So if an object owns a resource, meaning it is responsible for it's creation and destruction, then the compiler-generated copy constructor will not be sufficient.
+	End Scope '' <- a, b and c are destroyed here as well
 
-	If a destructor is not declared, the compiler generates one. This destructor calls object members' destructors and does nothing for numeric and pointer types. Again, if an object owns a dynamic resource, then the compiler-generated destructor will not be sufficient, as the resource will not be freed when the object is destroyed.
+	%%
 
-	This is commonly referred to as the "Rule of 3": If an object needs a custom copy constructor, assignment operator or destructor, chances are it needs all three.
-
-{{fbdoc item="back" value="CatPgProgrammer|Programmer's Guide"}}
+<a name="COMPCTORDTOR"></a>

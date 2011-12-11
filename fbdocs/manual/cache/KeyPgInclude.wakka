@@ -1,25 +1,25 @@
 {{fbdoc item="title" value="#INCLUDE"}}----
-Preprocessor statement to include contents of another source file
+Directive du pr&eacute;processeur pour inclure le contenu d'un autre fichier source
 
 {{fbdoc item="syntax"}}##
 	**#include** [once] //"file"//
 ##
 {{fbdoc item="desc"}}
-	##**#include**## inserts source code from another file at the point where the ##**#include**## directive appears.  This has the effect of compiling the source code from the include file as though it were part of the source file that includes it.  Once the compiler has reached the end of the include file, the original source file continues to be compiled.
+	##**#include**## ins&egrave;re le code source d'un autre fichier &agrave; l'endroit o&ugrave; la directive ##**#include**## appara&icirc;t.  Cela revient &agrave; compiler le code source du fichier inclus comme si c'&eacute;tait une partie du fichier source o&ugrave; il est inclus.  D&egrave;s que le compilateur a atteint la fin du fichier inclus, la compilation du fichier source d'origine continue.
 
-	This is useful to remove code from a file and separate it into more files. It is useful to have a single file with declarations in a program formed by several modules. You may include files within an include file, although avoid including the original file into itself, this will not produce valid results. Typically, include files will have an extension of ##.bi## and are mainly used for declaring subs/functions/variables of a library, but any valid source code may be present in an include file.
+	Ceci est utile pour supprimer du code d'un fichier et le s&eacute;parer en plusieurs fichiers. Il est utile d'avoir les d&eacute;clarations dans un seul fichier dans un programme constitu&eacute; de plusieurs modules. Vous pouvez inclure des fichiers dans un "fichier include", afin d'&eacute;viter d'inclure le fichier d'origine en lui-m&ecirc;me, cela pas produira pas des r&eacute;sultats valides. En r&egrave;gle g&eacute;n&eacute;rale, les fichiers "include" ont une extension ##.bi## et sont principalement utilis&eacute;s pour d&eacute;clarer des sous-programmes / fonctions / variables d'une librairie, mais n'importe quel code source valide peut &ecirc;tre pr&eacute;sent dans un "fichier include".
 
-	The ##**once**## specifier tells the compiler to include the file only once even if it is included several times by the source code.
+	Le sp&eacute;cificateur ##**once**## indique au compilateur de n'inclure le fichier qu'une seule fois, m&ecirc;me s'il est inclus &agrave; plusieurs reprises dans le code source.
 
-	##[[KeyPgMetaInclude $Include]]## is an alternative form of ##**include**##, existing only for compatibility with ""QuickBASIC"". It is recommended to use ##**#include**## instead.
+	##[[KeyPgMetaInclude $Include]]## est une forme alternative pour ##**include**## qui n'existe que pour la compatibilit&eacute; avec QuickBASIC. Il est recommand&eacute; d'utiliser ##**#include**## &agrave; la place.
 
-	The compiler will automatically convert path separator characters ( '**##/##**' and '**##\##**' ) as needed to properly load the file.  The filename name may be an absolute or relative path.  
+	Le compilateur va automatiquement convertir les caract&egrave;res s&eacute;parateur de chemin ( '**##/##**' et '**##\##**' ) comme n&eacute;cessaire pour charger correctement le fichier.  Le nom de fichier peut &ecirc;tre un chemin absolu ou relatif.  
 
-	For relative paths, or where no path is given at all, the include file is search for in the following order:
-	- Relative from the directory of the source file
-	- Relative from the current working directory
-	- Relative from addition directories specified with the //[[CompilerOpti -i]]// command line option
-	- The include folder of the ""FreeBASIC"" installation (##**""FreeBASIC""\inc**##, where ##**""FreeBASIC""**## is the folder where the ##**fbc**## executable is located)
+	Pour les chemins relatifs, ou si aucun chemin d'acc&egrave;s n'est donn&eacute;, le fichier d'inclusion est recherch&eacute; dans l'ordre suivant:
+	- Relatif par rapport au r&eacute;pertoire du fichier source
+	- Relatif par rapport au r&eacute;pertoire de travail courant
+	- Relatif par rapport aux r&eacute;pertoires additionnels specifi&eacute;s avec l'option //[[CompilerOpti -i]]// de la ligne de commande
+	- Le dossier "include" de l'installation de FreeBASIC (##**FreeBASIC\inc**##, o&ugrave; ##**FreeBASIC**## est le dossier o&ugrave; est situ&eacute; l'ex&eacute;cutable ##**fbc**##)
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/prepro/header.bi"}}%%(freebasic)
@@ -40,11 +40,11 @@ Foo.Bar = 1
 Foo.Barbeque = 2
 %%
 {{fbdoc item="diff"}}
-	- New to ""FreeBASIC""
+	- Nouveau pour Freebasic
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgPpdefine #define]]##
 	- ##[[KeyPgInclib #inclib]]##
-	- [[CompilerOpti Compiler Option: -i]]
+	- [[CompilerOpti Option du compilateur: -i]]
 
 {{fbdoc item="back" value="CatPgPreProcess|Preprocessor"}}

@@ -1,5 +1,5 @@
 {{fbdoc item="title" value="SCREENUNLOCK"}}----
-Unlocks work page's framebuffer
+D&eacute;verrouille le tampon de la page de travail
 
 {{fbdoc item="syntax"}}##
 	[[KeyPgDeclare declare]] [[KeyPgSub sub]] **Screenunlock** ( [[KeyPgByval byval]] //startline// [[KeyPgAs as]] [[KeyPgInteger integer]] = -1, [[KeyPgByval byval]] //endline// [[KeyPgAs as]] [[KeyPgInteger integer]] = -1 )
@@ -9,33 +9,33 @@ Unlocks work page's framebuffer
 ##
 {{fbdoc item="param"}}
 	##//startline//##
-		optional argument specifying first screen line to be updated. If omitted, top screen line is assumed.
+		param&egrave;tre optionnel sp&eacute;cifiant la premi&egrave;re ligne &eacute;cran &agrave; mettre &agrave; jour. Si omis, consid&egrave;re la premi&egrave;re ligne en haut de l'&eacute;cran.
 	##//endline//##
-		optional argument specifying last screen line to be updated. If omitted, bottom screen line is assumed.
+		param&egrave;tre optionnel sp&eacute;cifiant la derni&egrave;re ligne &eacute;cran &agrave; mettre &agrave; jour. Si omis, consid&egrave;re la derni&egrave;re ligne en bas de l'&eacute;cran.
 
 {{fbdoc item="desc"}}
-	##**Screenunlock**## unlocks the current work page assuming it was previously locked by calling ##[[KeyPgScreenlock Screenlock]]## and lets the system restart updating the screen regularly. When called with ##start_line## and ##end_line## , only the screen area between those lines is assumed to have changed, and will be updated. 
+	##**ScreenUnlock**## d&eacute;verrouille la page de travail courante &agrave; condition qu'elle ait &eacute;t&eacute; verrouill&eacute;e pr&eacute;c&eacute;demment en appelant ##[[KeyPgScreenlock ScreenLock]]## et permet le red&eacute;marrage du syst&egrave;me avec mise &agrave; jour de l'&eacute;cran r&eacute;guli&egrave;rement. Lors d'un appel avec ##start_line## et ##end_line## , seule la zone comprise entre ces deux lignes est prise en compte pour &ecirc;tre modifi&eacute;e, et sera mise &agrave; jour. 
 
-	An internal counter exists that remembers the screen lock state, thus ##**Screenunlock**## has an effect only on a screen that is locked.  A screen that has not been locked with ##**Screenlock**## cannot get unlocked, however ##**Screenunlock**## still will force an update of given area or full screen.   
+	Il existe un compteur interne qui m&eacute;morise l'&eacute;tat du verrouillage de l'&eacute;cran, donc ##**ScreenUnlock**## n'a d'effet que sur un &eacute;cran verrouill&eacute; pr&eacute;c&eacute;demment.  Un &eacute;cran qui n'a pas &eacute;t&eacute; verrouill&eacute; avec ##**ScreenLock**## ne peut &ecirc;tre d&eacute;verrouill&eacute;, cependant un nouveau ##**ScreenUnlock**## forcera la mise &agrave; jour d'une zone donn&eacute;e ou de l'&eacute;cran.   
 
-	Calls to ##**Screenunlock**## must be paired with matching calls to ##**[[KeyPgScreenlock Screenlock]]**##.  Only the first call to ##**[[KeyPgScreenlock Screenlock]]**## actually performs a locking operation.  Subsequent calls to ##**Screenlock**## only increment the lock counter.  Conversely, ##**Screenunlock**## only decrements the lock counter until it reaches zero at which time the actual unlock operation will be performed.  Using ##[[KeyPgScreengraphics Screen]]## or ##[[KeyPgScreenres Screenres]]## will release all locks and set the lock counter back to zero before changing screen modes.
+	A un certain nombre d'appels &agrave; ##**ScreenUnlock**## doit correspondre le m&ecirc;me nombre d'appels &agrave; ##**[[KeyPgScreenlock ScreenLock]]**##.  Seul le premier appel &agrave; ##**[[KeyPgScreenlock ScreenLock]]**## proc&egrave;de effectivement &agrave; une op&eacute;ration de verrouillage.  Les appels suivants &agrave; ##**ScreenLock**## incr&eacute;mentent seulement le compteur de verrouillage.  &Agrave; l'inverse, ##**ScreenUnlock**## d&eacute;cr&eacute;mente seulement le compteur de verrouillage jusqu'&agrave; ce qu'il atteigne z&eacute;ro, &agrave; ce moment-l&agrave; seulement, l'actuelle op&eacute;ration de d&eacute;verrouillage sera effectu&eacute;e.  L'utilisation de ##[[KeyPgScreengraphics Screen]]## ou ##[[KeyPgScreenres ScreenRes]]## annulera tous les verrouillages et mettra le compteur &agrave; z&eacute;ro avant de changer de mode &eacute;cran.
 
-	All graphic statements automatically lock the screen before the function call, and unlock the screen afterwards, so you do not need to do this explicitly using ##**[[KeyPgScreenlock Screenlock]]**## and ##**Screenunlock**##. You only need to lock the screen when you wish to access the screen (framebuffer) directly using ##[[KeyPgScreenptr Screenptr]]##  or when you wish to group several graphic statements together so their effects appear simultaneously on screen, thus avoiding potential screen flicker during screen updates.
+	Toutes les d&eacute;clarations graphiques verrouillent automatiquement l'&eacute;cran avant l'appel de fonction et d&eacute;verrouillent l'&eacute;cran par la suite, vous n'avez donc pas besoin de faire cela explicitement en utilisant ##**[[KeyPgScreenlock ScreenLock]]**## et ##**ScreenUnlock**##. Vous devez seulement verrouiller l'&eacute;cran lorsque vous d&eacute;sirez acc&eacute;der directement &agrave; l'&eacute;cran (framebuffer) &agrave; l'aide de ## [[KeyPgScreenptr  ScreenPtr ]] ## ou lorsque vous souhaitez regrouper plusieurs d&eacute;clarations graphiques ensemble afin que leurs effets apparaissent simultan&eacute;ment &agrave; l'&eacute;cran, &eacute;vitant ainsi les scintillements pendant les mises &agrave; jour de l'&eacute;cran.
 
-	Warning (Win32, Linux) : The screen is locked by stopping the thread that processes also the OS' events. This means the screen should be locked only for the short time required to redraw it, and no user input will be received while the screen is locked.
+	Apr&egrave;s l'appel de ##**ScreenUnlock**##, tous les &eacute;tats graphiques peuvent &ecirc;tre utilis&eacute;s en toute s&eacute;curit&eacute;, d'autre part acc&egrave;der directement au tampon image de la page de travail via ##[[KeyPgScreenptr ScreenPtr]]## peut &ecirc;tre utilis&eacute; seulement apr&egrave;s un nouveau verrouillage de l'&eacute;cran avec ##[[KeyPgScreenlock ScreenLock]]##.
 
-{{fbdoc item="ex"}}
-	See ##[[KeyPgScreenptr Screenptr]]## example.
+Attention (Win32, Linux) : l'&eacute;cran est verrouill&eacute; par arr&ecirc;t du "thread" qui g&egrave;re aussi les &eacute;v&eacute;nements de l'OS. Cela signifie que l'&eacute;cran ne doit &ecirc;tre verrouill&eacute; que pour un laps de temps le plus court possible pendant lequel il est redessin&eacute;, et aucune entr&eacute;e utilisateur n'est valide pendant que l'&eacute;cran est verrouill&eacute;.
+	{{fbdoc item="ex"}}
 
-{{fbdoc item="lang"}}
-	- Not available in the //[[CompilerOptlang -lang qb]]// dialect unless referenced with the alias ##**""__Screenunlock""**##.
+Voir l'exemple de ##[[KeyPgScreenptr ScreenPtr]]##.
+	{{fbdoc item="lang"}}
 
-{{fbdoc item="diff"}}
-	- New to ""FreeBASIC""
+- Non disponible en dialecte //[[CompilerOptlang -lang qb]]// sauf si r&eacute;f&eacute;renc&eacute; avec l'alias ##**__Screenunlock**##.
+	{{fbdoc item="diff"}}
 
-{{fbdoc item="see"}}
+- Nouveau pour FreeBASIC
+	{{fbdoc item="see"}}
 	- ##[[KeyPgScreengraphics Screen (Graphics)]]##
-	- ##[[KeyPgScreenlock Screenlock]]##
-	- ##[[KeyPgScreenptr Screenptr]]##
+	- ##[[KeyPgScreenlock ScreenLock]]##
 
-{{fbdoc item="back" value="CatPgGfxScreen|Screen Functions"}}
+- ##[[KeyPgScreenptr ScreenPtr]]##

@@ -1,56 +1,56 @@
 {{fbdoc item="title" value="Comments"}}----
-Comments are regions of text that the compiler will ignore but may contain information that is useful to the programmer.  One exception are metacommands which may appear in certain types of comments.
+Les commentaires sont des r&eacute;gions de texte dont le compilateur ne tiendra pas compte, mais qui peuvent contenir des informations qui sont utiles pour le programmeur.  Une exception sont les m&eacute;tacommandes qui peuvent appara&icirc;tre dans certains types de commentaires.
 
-{{fbdoc item="section" value="Single Line comments"}}
-	The single quote character (##**'**##) may be used to indicate a comment and may appear after other keywords on a source line.  The rest of the statement will be treated as a comment.
-	{{fbdoc item="filename" value="examples/manual/proguide/comments/comment1.bas"}}%%(freebasic)
-' comment text
+{{fbdoc item="section" value="Commentaires sur une seule ligne
+	Un caract&egrave;re apostrophe (##**'**##) peut &ecirc;tre utilis&eacute; pour indiquer un commentaire et peut appara&icirc;tre apr&egrave;s les mots-cl&eacute;s sur une ligne de source.  Le reste de d&eacute;claration sera trait&eacute;e comme un commentaire.
+	%%(freebasic)
+'texte de commentaire
 %%
 
-{{fbdoc item="section" value="The comment statement: Rem"}}
-	A source code statement beginning with ##[[KeyPgRem Rem]]## indicates that the rest of the line is comment and will not be compiled.  ##[[KeyPgRem Rem]]## behavior is the same as above, except it must be the first keyword in the statement.
-	{{fbdoc item="filename" value="examples/manual/proguide/comments/comment2.bas"}}%%(freebasic)
-Rem comment
+{{fbdoc item="section" value="L'instruction de commentaire: Rem
+	Une instruction de code source commen&ccedil;ant avec ##[[KeyPgRem Rem]]## indique que le reste de la ligne est un commentaire et ne sera pas compil&eacute;.  Le comportement de ##[[KeyPgRem Rem]]## est le m&ecirc;me que ci-dessus, sauf qu'il doit &ecirc;tre le premier mot de la la ligne d'instruction.
+	%%(freebasic)
+Rem commentaire
 %%
 
-{{fbdoc item="section" value="Multi-line comments"}}
-	Multi-line comments are marked with the tokens ##**/'**## and ##**'/**##.  All text between the two markers is considered comment text and is not compiled.
+{{fbdoc item="section" value="Commentaires sur plusieurs lignes
+	Les commentaires sur plusieurs lignes sont marqu&eacute;es avec ##**/'**## et ##**'/**##.  Tout le texte entre les deux marqueurs est consid&eacute;r&eacute; comme le texte du commentaire et n'est pas compil&eacute;.
 
-	Multi-line comments can span several lines, and can also be used in the middle of statements.  After the end of the comment, the statement will continue to be parsed as normal (even if the comment crosses line breaks).
-	{{fbdoc item="filename" value="examples/manual/proguide/comments/comment3.bas"}}%%(freebasic)
-/' Multi-line
-   comment '/
+	Les commentaires sur plusieurs lignes peuvent s'&eacute;tendre sur plusieurs lignes et peuvent &eacute;galement &ecirc;tre utilis&eacute;s au milieu de d&eacute;clarations.  Apr&egrave;s la fin du commentaire, l'instruction sera analys&eacute;e comme d'habitude (m&ecirc;me si le commentaire rencontre des sauts de ligne).
+	%%(freebasic)
+/'Commentaire 
+   multi-line '/
 
-Print "Hello" /' embedded comment'/ " world"
+Print "Hello" /' commentaire intercal&eacute;'/ " world"
 %%
-	Note: If ""FreeBASIC"" encounters a close-comment marker while it's not in a multi-line comment, it will treat it as a normal single-line comment due to the single quote.
+	Note: Si FreeBasic rencontre un marqueur de fin de commentaire alors qu'il n'est pas dans un commentaire multi-ligne, il sera trait&eacute; comme un commentaire sur une ligne normale &agrave; cause de l'apostrophe.
 
-{{fbdoc item="section" value="Nested Comments"}}
-	A multi-line comment can contain other multi-line comments inside it.  Each inner comment has its own open- and close-comment markers.
+{{fbdoc item="section" value="Commentaires imbriqu&eacute;s
+	Une commentaire multi-ligne peut contenir d'autres commentaires sur plusieurs lignes.  Chaque commentaire interne aura ses propres marqueurs d'ouverture et fermeture de commentaire.
 
-	{{fbdoc item="filename" value="examples/manual/proguide/comments/comment4.bas"}}%%(freebasic)
+	%%(freebasic)
 /'
-	This is a comment.
+	Ceci est un commentaire.
 	/'
-	 This is a comment inside a comment
+	 Ceci est un commentaire dans un commentaire
 	'/
 	This Is a comment.
 '/
 %%
-	A multi-line comment can contain unlimited levels of nested comments.  ""FreeBASIC"" will continue to parse the multi-line comment for more markers until the number of close-comment markers reaches the number of open-comment markers, i.e. when it has closed all the comments it has opened.
+	Une commentaire sur plusieurs lignes peut contenir des niveaux illimit&eacute;s de commentaires imbriqu&eacute;s.  FreeBASIC continuera d'analyser les marqueurs de commentaires multi-ligne tant que le nombre de marqueurs d'ouverture sera identique &agrave; celui des marqueurs de fermeture, c'est &agrave; dire quand il aura ferm&eacute; tous les commentaires qu'il a ouverts.
 
-{{fbdoc item="section" value="Comments after line continuation"}}
-	A single-line comment may appear after the line continuation character ( ##**_**## ) in a multi-line statement.  ""FreeBASIC"" does not parse the text after the line continuation character, though, so you can't open multi-line comments after them.
+{{fbdoc item="section" value="Commentaires apr&egrave;s continuation de ligne
+	Un commentaire sur une seule ligne peut appara&icirc;tre apr&egrave;s caract&egrave;re de continuation de ligne ( ##**_**## ) dans une instruction sur plusieurs lignes.  FreeBasic n'analysera pas le texte apr&egrave;s le caract&egrave;re de continuation de ligne, de sorte que vous ne pouvez pas ouvrir des commentaires sur plusieurs lignes apr&egrave;s.
 
-	{{fbdoc item="filename" value="examples/manual/proguide/comments/comment5.bas"}}%%(freebasic)
+	%%(freebasic)
 Print _ ' line
-	"This is part of the previous line's statement"
+	"Ceci fait partie de la ligne precedente"
 %%
 
-{{fbdoc item="section" value="Metacommands"}}
-	Metacommands, such as ##[[KeyPgMetaStatic $static]]## and ##[[KeyPgMetaInclude $include]]##, can be placed in single-line comments.  The ##**$**## sign and the keyword must be the first two things in the statement, not including white space.
+{{fbdoc item="section" value="M&eacute;tacommandes
+	Des m&eacute;tacommandes, telles que ##[[KeyPgMetaStatic $Static]]## et ##[[KeyPgMetaInclude $Include]]##, peuvent &ecirc;tre plac&eacute;es sur une seule ligne de commentaires.  Le signe ##**$**## et le mot-cl&eacute; doivent &ecirc;tre les deux premi&egrave;res choses dans l'instruction, ne comprenant pas d'espace blanc.
 
-	{{fbdoc item="filename" value="examples/manual/proguide/comments/comment6.bas"}}%%(freebasic)
+	%%(freebasic)
 Rem compile With -lang fblite Or qb
 
 #lang "fblite"
@@ -59,37 +59,37 @@ Rem $Static
 ' $include: 'vbcompat.bi'
 %%
 
-{{fbdoc item="section" value="Single-line comment parsing"}}
-	When you make a single-line comment, ""FreeBASIC"" will parse the comment, to check for a metacommand.  If it finds a multi-line comment, it will treat it as usual, and continue parsing the single-line comment after the close-comment marker.
+{{fbdoc item="section" value="Analyse de commentaire sur une seule ligne
+	Lorsque vous faites un commentaire sur une seule ligne, FreeBasic va analyser le commentaire, pour rechercher une m&eacute;tacommande.  S'il trouve un commentaire multi-ligne, il sera trait&eacute; comme d'habitude, puis il poursuivra l'analyse du commentaire sur une seule ligne apr&egrave;s le marqueur de fermeture.
 
-	If you want to prevent ""FreeBASIC"" parsing the single-line comment, put another single quote (##**'**##), at the start of the comment.  ""FreeBASIC"" will treat the rest of the line, including multi-line comment markers and metacommands, as ordinary text, and will ignore it.  Other words encountered in a comment will also stop the parsing.
-	~&//Note: As of version 0.21.0, this will not longer apply in the //[[CompilerOptlang -lang fb]]// dialect, and multi-line comment markers will be completely ignored inside single-line comments//
+	Si vous voulez &eacute;viter que FreeBasic analyse les commentaires sur une seule ligne, mettez une autre l'apostrophe (##**'**##), au d&eacute;but du commentaire.  FreeBASIC traitera le reste de la ligne, y compris les marqueurs de commentaires multi-ligne et les m&eacute;tacommandes, comme du texte ordinaire et donc l'ignorera.  D'autres mots rencontr&eacute;s dans un commentaire arr&ecirc;teront &eacute;galement l'analyse syntaxique.
+	<li>//Note: Depuis la version 0.21.0, ce ne sera plus applicable dans le dialecte //[[CompilerOptlang -lang fb]]// et les marqueurs de commentaire multi-lignes seront compl&egrave;tement ignor&eacute;s &agrave; l'int&eacute;rieur de commentaires sur une ligne.//
 
-	{{fbdoc item="filename" value="examples/manual/proguide/comments/comment7.bas"}}%%(freebasic)
-'' $static <-- will not get parsed
-'' this multiline comment marker ("/'") will be ignored
-Print "This line is not a comment."
+	%%(freebasic)
+'' $static <-- ne sera pas analyse
+'' ce marqueur de commentaire multi-lignes ("/'") sera ignore
+Print "Cette ligne nest pas un commentaire."
 %%
 
 {{fbdoc item="ex"}}
-	{{fbdoc item="filename" value="examples/manual/proguide/comments/comment8.bas"}}%%(freebasic)
-/' this is a multi line 
-comment as a header of
-this example '/
+	%%(freebasic)
+/' ceci est un commentaire 
+multi-lignes comme une en-tete 
+de cet exemple '/
 
 Rem This Is a Single Line comment
 
-'this is a single line comment
+'ceci est un commentaire une ligne
 
-Dim a As Integer   'comment following a statement
+Dim a As Integer   'commentaire apres une instruction
 
-Dim b As /' can comment in here also '/    Integer
+Dim b As /' commentaire possible ici aussi '/    Integer
 
 
 #if 0
-	before version 0.16, This was the
-	only way of commenting Out sections
-	With multiple lines of code.
+	Avant version 0.16, Ceci etait la
+	seule possibilite de commenter hors sections
+	avec multiple lignes de code.
 #endif
 
 %%
@@ -98,4 +98,3 @@ Dim b As /' can comment in here also '/    Integer
 	- ##[[KeyPgRem Rem]]##
 
 {{fbdoc item="back" value="CatPgProgrammer|Programmer's Guide"}}
-   

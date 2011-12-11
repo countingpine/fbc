@@ -1,13 +1,13 @@
 {{fbdoc item="title" value="RESUME"}}----
-Error handling statement to resume execution after a jump to an error handler
+D&eacute;claration de gestion des erreurs pour reprendre l'ex&eacute;cution apr&egrave;s un saut &agrave; un gestionnaire d'erreur
 
 {{fbdoc item="syntax"}}##
 	**Resume**
 ##
 {{fbdoc item="desc"}}
-	##**Resume**## is used in the traditional QB error handling mechanism within an error handler (called by ##[[KeyPgOnerror On Error]]##) to return execution to the line that caused the error.  Usually this is used after the error has been handled gracefully in order to try the previously erroneous operation again with corrected data.
+	##**Resume**## est utilis&eacute; dans le m&eacute;canisme traditionnel de gestion des erreurs de QB du gestionnaire d'erreurs (appel&eacute; par ##[[KeyPgOnerror On Error]]##) pour reprendre l'ex&eacute;cution &agrave; la ligne qui a provoqu&eacute; l'erreur.  Habituellement, cela est utilis&eacute; apr&egrave;s que l'erreur ait &eacute;t&eacute; g&eacute;r&eacute;e de fa&ccedil;on &eacute;l&eacute;gante pour ex&eacute;cuter de nouveau l'op&eacute;ration pr&eacute;c&eacute;demment erron&eacute;e avec des donn&eacute;es corrig&eacute;es.
 
-	##**Resume**## resets the ##[[KeyPgErr Err]]## value to 0
+	##**Resume**## r&eacute;initialise &agrave; 0 la valeur de ##[[KeyPgErr Err]]##
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/error/resume.bas"}}%%(freebasic)
@@ -33,20 +33,20 @@ Resume ' execution jumps back to 'j = 1 / i' line, which does not cause an error
 %%
 
 {{fbdoc item="lang"}}
-	-  ON ERROR is not supported in the //[[CompilerOptlang -lang fb]]// dialect. Statements can be used in its function form to return an error code
+	-  ON ERROR n'est pas support&eacute; dans le dialecte //[[CompilerOptlang -lang fb]]//. Des d&eacute;clarations peuvent &ecirc;tre utilis&eacute;es dans cette forme de fonction pour retourner un code d'erreur
 {{fbdoc item="filename" value="examples/manual/check/KeyPgResume_1.bas"}}%%(freebasic)
 If Open( "text" For Input As #1 ) <> 0 Then
   Print "Unable to open file"
 End If
-%% 
+%%
 
 {{fbdoc item="diff"}}
-	- Does not accept line numbers or labels
-	- Must compile with //[[CompilerOptex -ex]]// option
+	- N'accepte pas les num&eacute;ros de ligne ou les labels
+	- Doit &ecirc;tre compil&eacute; avec l'option //[[CompilerOptex -ex]]//
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgErr Err]]##
 	- ##[[KeyPgResumenext Resume Next]]##
-	- [[ProPgErrorHandling Error Handling]]
+	- [[ProPgErrorHandling Gestion des erreurs]]
 
 {{fbdoc item="back" value="CatPgError|Error Handling Functions"}}

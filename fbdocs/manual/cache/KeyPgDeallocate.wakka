@@ -1,5 +1,5 @@
 {{fbdoc item="title" value="DEALLOCATE"}}----
-Frees previously allocated memory
+Lib&egrave;re la m&eacute;moire pr&eacute;c&eacute;demment allou&eacute;e
 
 {{fbdoc item="syntax"}}##
 	[[KeyPgDeclare declare]] [[KeyPgSub sub]] **Deallocate** [[KeyPgCdecl cdecl]] ( [[KeyPgByval byval]] //pointer// [[KeyPgAs as]] [[KeyPgAny any]] [[KeyPgPtr ptr]] )
@@ -9,15 +9,15 @@ Frees previously allocated memory
 ##
 {{fbdoc item="param"}}
 	##//pointer//##
-		the address of the previously allocated buffer.
+		l'adresse de la m&eacute;moire tampon pr&eacute;c&eacute;demment allou&eacute;e.
 
 {{fbdoc item="desc"}}
-	This procedure frees memory that was previously allocated with ##[[KeyPgAllocate Allocate]]##. ##//pointer//## must be a valid pointer. After the procedure returns, ##//pointer//## will be rendered invalid (pointing to an invalid memory address), and its use will result in undefined behavior.
+	Cette proc&eacute;dure lib&egrave;re de la m&eacute;moire qui a &eacute;t&eacute; pr&eacute;c&eacute;demment allou&eacute;e avec ##[[KeyPgAllocate Allocate]]##. ##//pointer//## doit &ecirc;tre un pointeur valide. Apr&egrave;s le retour de proc&eacute;dure, ##//pointer//## sera consid&eacute;r&eacute; comme invalide  (pointant vers une adresse m&eacute;moire invalide) et son utilisation se traduira par un comportement non d&eacute;fini.
 
-~&**##Deallocate##** is an alias for the C runtime library's **##free##**, so it's not guaranteed to be thread safe in all platforms.
+**##Deallocate##** est un alias pour la biblioth&egrave;que d'ex&eacute;cution C **##libre##**, elle n'est donc pas garantie d'&ecirc;tre "thread-safe" sur toutes les plates-formes.
 
 {{fbdoc item="ex"}}
-The following example shows how to free previously allocated memory. Note that the pointer is set to null following the deallocation:
+L'exemple suivant montre comment lib&eacute;rer de la m&eacute;moire pr&eacute;c&eacute;demment allou&eacute;e. Notez que le pointeur a la valeur nulle apr&egrave;s la d&eacute;sallocation:
 
 {{fbdoc item="filename" value="examples/manual/memory/deallocate.bas"}}%%(freebasic)
 sub DeallocateExample1()
@@ -35,9 +35,9 @@ end sub
    end 0
 %%
 
-Although in this case it is unnecessary - since 1. the pointer is not a reference to another pointer, 2. no other pointers point to the deallocated memory and 3. the function immediately exits afterward - setting the pointer to null is a good habit to get into. If the function deallocated memory from a pointer that was passed in by reference, for instance, the pointer that was used in the function call will be rendered invalid, and it is up to the caller to either reassign the pointer or set it to null. Example 3 shows how to correctly handle this kind of situation, and the next example shows the effects of deallocating memory with multiple references.
+Bien que, dans ce cas, ce ne soit pas n&eacute;cessaire -##// puisque 1&deg;) le pointeur n'est pas une r&eacute;f&eacute;rence &agrave; un autre pointeur, 2&deg;) aucun autre pointeur ne pointe sur la m&eacute;moire lib&eacute;r&eacute;e et 3&deg;) la fonction quitte imm&eacute;diatement apr&egrave;s //##- fixer le pointeur &agrave; NULL est une bonne habitude &agrave; prendre. Si la fonction lib&egrave;re la m&eacute;moire &agrave; partir d'un pointeur qui a &eacute;t&eacute; pass&eacute; par r&eacute;f&eacute;rence, dans cette circonstance, le pointeur qui a &eacute;t&eacute; utilis&eacute; dans l'appel de la fonction sera consid&eacute;r&eacute; comme invalide, et il appartient &agrave; l'appelant soit de le r&eacute;affecter ou de le configurer pour qu'il soit nul. L'exemple 3 montre comment g&eacute;rer correctement ce genre de situation et l'exemple suivant montre les effets de la d&eacute;sallocation de m&eacute;moire avec de multiples r&eacute;f&eacute;rences.
 
-In the following example, a different pointer is used to free previously allocated memory.
+Dans l'exemple suivant, un pointeur diff&eacute;rent est utilis&eacute; pour lib&eacute;rer la m&eacute;moire pr&eacute;c&eacute;demment allou&eacute;e.
 
 {{fbdoc item="filename" value="examples/manual/memory/deallocate2.bas"}}%%(freebasic)
 '' WARNING: "evil" example showing how things should NOT be done
@@ -63,7 +63,7 @@ end sub
    end 0
 %%
 
-Note that after the deallocation, //both// pointers are rendered invalid. This illustrates another one of the ways that bugs can arise when working with pointers. As a general rule, only deallocate memory previously allocated when you know that there is only one (1) pointer currently pointing at it.
+Notez qu'apr&egrave;s la d&eacute;sallocation, //les deux// pointeurs sont invalid&eacute;s. Cela illustre une autre cause de bugs lorsque l'on travaille avec des pointeurs. En r&egrave;gle g&eacute;n&eacute;rale, ne lib&eacute;rez de la m&eacute;moire pr&eacute;c&eacute;demment allou&eacute;e que lorsque vous savez qu'il n'y a qu'un seul (1) pointeur qui pointe actuellement sur elle.
 
 {{fbdoc item="filename" value="examples/manual/memory/deallocate3.bas"}}%%(freebasic)
 function createInteger() as integer ptr
@@ -90,13 +90,13 @@ end sub
    end 0
 %%
 
-In the program above, a reference pointer in a function is set to null after deallocating the memory it points to. An ##[[KeyPgAssert ASSERT]]## macro is used to test if the original pointer is in fact null after the function call. This example implies the correct way to pass pointers to functions that deallocate the memory they point to is by reference.
+Dans le programme ci-dessus, un pointeur de r&eacute;f&eacute;rence dans une fonction est fix&eacute; &agrave; null apr&egrave;s lib&eacute;ration de la m&eacute;moire sur laquelle il il pointe. Une macro ##[[KeyPgAssert Assert]]## est utilis&eacute;e pour tester si le pointeur original est en fait nul apr&egrave;s l'appel de la fonction. Cet exemple implique que la bonne fa&ccedil;on de passer des pointeurs de fonctions qui d&eacute;sallouent la m&eacute;moire qu'ils pointent, est par r&eacute;f&eacute;rence.
 
 {{fbdoc item="lang"}}
-	- Not available in the //[[CompilerOptlang -lang qb]]// dialect unless referenced with the alias ##**""__Deallocate""**##.
+	- Non disponible dans le dialecte //[[CompilerOptlang -lang qb]]// sauf si r&eacute;f&eacute;renc&eacute; avec l'alias ##**__Deallocate**##.
 
 {{fbdoc item="diff"}}
-	- New to ""FreeBASIC""
+	- Nouveau pour FreeBASIC
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgAllocate Allocate]]##

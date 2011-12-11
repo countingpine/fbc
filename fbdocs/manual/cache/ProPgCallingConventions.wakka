@@ -1,36 +1,36 @@
 {{fbdoc item="title" value="Calling Conventions"}}----
-Specifying how procedures are called.
+Pr&eacute;cise la fa&ccedil;on dont les proc&eacute;dures sont appel&eacute;es.
 
-Calling conventions determine how calling code interacts with procedures when called. They specify rules about how parameters are pushed onto the call stack, how values are returned and when the call stack is cleaned up. This information is useful when interacting with code written in other languages, particularly assembly language. In some cases, calling conventions also apply some kind of name decoration to procedure names.
+Les conventions d'appel d&eacute;terminent comment le code appelant interagit avec les proc&eacute;dures quand elles sont appel&eacute;es. Elles pr&eacute;cisent les r&egrave;gles sur la fa&ccedil;on dont les param&egrave;tres sont charg&eacute;s sur la pile des appels, comment les valeurs sont retourn&eacute;es et quand la pile des appels est nettoy&eacute;e. Cette information est utile lors de l'interaction avec du code &eacute;crit dans d'autres langages, en particulier le langage d'assemblage. Dans certains cas, les conventions d'appel appliquent &eacute;galement une sorte de "d&eacute;coration" de nom pour les noms de proc&eacute;dure.
 
-FreeBASIC supports 3 calling conventions: **stdcall**, **cdecl** and **pascal**, specified with ##[[KeyPgStdcall Stdcall]]##, ##[[KeyPgCdecl Cdecl]]## and ##[[KeyPgPascal Pascal]]##, respectively. Calling convention can be specified in either a procedure declaration or definition immediately following the procedure name. The declaration of a procedure must have the same calling convention as the definition. The default convention is **stdcall** when not specified, or within ##[[KeyPgExternBlock Extern "Windows"]]## and ##[[KeyPgExternBlock Extern "Windows-MS"]]## blocks.
+FreeBasic supporte 3 conventions d'appel: **stdcall**, **cdecl** et **pascal**, sp&eacute;cifi&eacute;es respectivement avec ##[[KeyPgStdcall stdcall]]##, ##[[KeyPgCdecl cdecl]]## et ##[[KeyPgPascal pascal]]##. La Convention d'appel peut &ecirc;tre sp&eacute;cifi&eacute;e soit dans une d&eacute;claration de proc&eacute;dure soit dans la d&eacute;finition qui suit imm&eacute;diatement le nom de la proc&eacute;dure. La d&eacute;claration d'une proc&eacute;dure doit avoir la m&ecirc;me convention de nommage que la d&eacute;finition. La convention par d&eacute;faut est **stdcall** lorsqu'elle n'est pas sp&eacute;cifi&eacute;e ou dans les blocs ##[[KeyPgExternBlock Extern "Windows"]]## et ##[[KeyPgExternBlock Extern "Windows-Ms"]]## blocks.
 
-In all calling conventions, integral procedure return values are returned in the ##EAX##(, ##EDX##) register(s), and floating-point return values are stored in the ##ST(0)## register (the top of the floating-point stack). User-defined type (UDT) values are returned in the ##EAX##(, ##EDX##) register(s) if eight (8) bytes or less in size, otherwise they are returned in memory by having their address pushed onto the call stack after any parameters.
+Dans tous les conventions d'appel, l'int&eacute;gralit&eacute; des valeurs de retour de proc&eacute;dure est retourn&eacute;e dans le(s) registre(s) ##EAX##(, ##EDX##) et les valeurs de retour &agrave; virgule flottante sont stock&eacute;es dans le registre ##ST(0)## (le haut de la pile en virgule flottante). Les valeurs de types d&eacute;finis par l'utilisateur sont retourn&eacute;es dans le(s) registre(s) ##EAX##(, ##EDX##) si elles ont une taille de huit (8) octets ou moins, sinon, elles sont retourn&eacute;es en m&eacute;moire avec leur adresse pouss&eacute;e sur la pile des appels apr&egrave;s les param&egrave;tres.
 
-{{fbdoc item="section" value="stdcall"}}	
-	In the **stdcall** convention, procedure parameters are pushed onto the call stack in the reverse order they are declared, that is, from right to left. The procedure is in charge of popping any parameters from the call stack.
+{{fbdoc item="section" value="stdcall
+	Dans la convention **stdcall**, les param&egrave;tres de proc&eacute;dure sont charg&eacute;s sur la pile des appels dans l'ordre oppos&eacute; &agrave; celui de leur d&eacute;claration, c'est &agrave; dire, de la droite vers la gauche. La proc&eacute;dure est charg&eacute;e d'extraire tous les param&egrave;tres de la pile des appels.
 
-	**stdcall** is the default calling convention for all FreeBASIC procedures, and those within ##[[KeyPgExternBlock Extern "Windows"]]## and ##[[KeyPgExternBlock Extern "Windows-MS"]]## blocks. It is also the default convention used in the Windows API.
+	**stdcall** est la convention d'appel par d&eacute;faut pour toutes les proc&eacute;dures FreeBASIC et celles dans les blocs ##[[KeyPgExternBlock Extern "Windows"]]## et ##[[KeyPgExternBlock Extern "Windows-Ms"]]##. C'est &eacute;galement la convention par d&eacute;faut utilis&eacute;e dans l'API Windows.
 
 	{{fbdoc item="target"}}
-	- In DOS and Windows platforms, the procedure name is decorated with an "##@//N//##" suffix, where ##//N//## is the total size, in bytes, of any parameters passed.
+	- Dans les plates-formes DOS et Windows, le nom de proc&eacute;dure est "d&eacute;cor&eacute;" d'un suffixe "##@//N//##", o&ugrave; ##//N//## est la taille totale, en octets, de tous les param&egrave;tres transmis.
 
-{{fbdoc item="section" value="cdecl"}}
-	In the **cdecl** convention, procedure parameters are pushed onto the call stack in the reverse order they are declared, that is, from right to left. The calling code is in charge of popping parameters from the call stack.
+{{fbdoc item="section" value="cdecl
+	Dans la convention **cdecl**, les param&egrave;tres de proc&eacute;dure sont charg&eacute;s sur la pile des appels dans l'ordre oppos&eacute; &agrave; celui de leur d&eacute;claration, c'est &agrave; dire, de la droite vers la gauche. Le code appelant est charg&eacute; d'extraire tous les param&egrave;tres de la pile des appels.
 
-	**cdecl** is the default calling convention for procedures within ##[[KeyPgExternBlock Extern "C"]]## and ##[[KeyPgExternBlock Extern "C++"]]## blocks. It is also the default convention used by most C and C""++"" compilers.
+	**cdecl** est la convention d'appel par d&eacute;faut pour les proc&eacute;dures des blocs ##[[KeyPgExternBlock Extern "C"]]## et ##[[KeyPgExternBlock Extern "C++"]]##. C'est &eacute;galement la convention par d&eacute;faut utilis&eacute;e par la plupart des compilateurs C et C++.
 
-{{fbdoc item="section" value="pascal"}}
-	In the **pascal** convention, procedure parameters are pushed onto the call stack in the order they are declared, that is, from left to right. The procedure is in charge of popping any parameters from the call stack.
+{{fbdoc item="section" value="pascal
+	Dans la convention **pascal**, les param&egrave;tres de proc&eacute;dure sont charg&eacute;s sur la pile des appels dans l'ordre de leur d&eacute;claration, c'est &agrave; dire, de la gauche vers la droite. La proc&eacute;dure est charg&eacute;e d'extraire tous les param&egrave;tres de la pile des appels.
 
-	**pascal** is the default convention used by Pascal and the Microsoft QuickBASIC series of compilers.
+	**pascal** est la convention par d&eacute;faut utilis&eacute;e par Pascal et la s&eacute;rie des compilateurs Microsoft QuickBASIC.
 
-The following table summarizes the differences between the various calling conventions:
+Le tableau suivant r&eacute;sume les diff&eacute;rences entre les diff&eacute;rentes conventions d'appel:
 
-	{{table columns="3" cellpadding="2" cells="Calling convention ; Parameters are pushed onto the call stack from ; Parameters are popped off the call stack by ; stdcall ; right to left ; the procedure ; cdecl ; right to left ; the calling code ; pascal ; left to right ; the procedure"}}
+	{{table columns="" cellpadding="2" cells="<table>Convention d'appel ; Les param&egravetres de proc&eacutedure sont charg&eacutes sur la pile des appels ; Les param&egravetres sont extraits de la pile des appels par ; stdcall ; de la droite vers la gauche ; la proc&eacutedure ; cdecl ; de la droite vers la gauche ; le code appelant ; pascal ; de la gauche vers la droite ; la proc&eacutedure;</table>
 
 {{fbdoc item="target"}}
-	- In DOS and Windows platforms, all calling conventions decorate procedure names with an underscore ("_") prefix.
+	- Sous DOS et Windows, toutes les conventions d'appel d&eacute;corent les noms de proc&eacute;dure avec le pr&eacute;fixe ("_") trait de soulignement.
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgDeclare Declare]]##, ##[[KeyPgSub Sub]]##, ##[[KeyPgFunction Function]]##

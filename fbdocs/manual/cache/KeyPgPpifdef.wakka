@@ -1,31 +1,30 @@
 {{fbdoc item="title" value="#IFDEF"}}----
-Preprocessor conditional directive
+Directive conditionnelle du pr&eacute;processeur
 
-{{fbdoc item="syntax"}}##
-	**#ifdef** //symbol//
-		' Conditionally included statements
+{{fbdoc item="syntax"}}
+	##**#ifdef**## //symbol//
+		' D&eacute;clarations incluses sous condition
 	[[KeyPgPpendif #endif]]
-##
 {{fbdoc item="desc"}}
-	Conditionally includes statements at compile time.
+D&eacute;clarations incluses sous condition au moment de la compilation.
+	Les d&eacute;clarations contenues dans le bloc ##**#ifdef**...[[KeyPgPpendif #endif]]## sont incluses si ##//symbol//## est d&eacute;fini et exclues (ignor&eacute;e) si ##//symbol//## n'est pas d&eacute;fini.
 	
-	Statements within the ##**#ifdef**...[[KeyPgPpendif #endif]]## block are included if ##//symbol//## is defined and excluded (ignored) if ##//symbol//## is not defined.
+	##**#ifdef** //symbol//## est &eacute;quivalent &agrave; ##[[KeyPgPpif #if]] [[KeyPgDefined defined]] (//symbol//)##
 	
-	##**#ifdef** //symbol//## is equivalent to ##[[KeyPgPpif #if]] [[KeyPgDefined defined]] (//symbol//)##
+	{{fbdoc item="ex"}}
 
 {{fbdoc item="ex"}}
-{{fbdoc item="filename" value="examples/manual/prepro/ifdef.bas"}}%%(freebasic)
-#DEFINE _DEBUG
-#IFDEF _DEBUG
-	' Special statements for debugging
-#ENDIF
+#define _DEBUG
+#ifdef _DEBUG
+' Special statements for debugging
+	#endif
 %%
-
 {{fbdoc item="diff"}}
-	- New to Freebasic
 
-{{fbdoc item="see"}}
-	- ##[[KeyPgPpdefine #define]]##
+- Nouveau pour Freebasic
+	{{fbdoc item="see"}}
+
+- ##[[KeyPgPpdefine #define]]##
 	- ##[[KeyPgPpmacro #macro]]##
 	- ##[[KeyPgPpif #if]]##
 	- ##[[KeyPgPpelse #else]]## 
@@ -33,6 +32,7 @@ Preprocessor conditional directive
 	- ##[[KeyPgPpendif #endif]]## 
 	- ##[[KeyPgPpifndef #ifndef]]##
 	- ##[[KeyPgPpundef #undef]]##
+	- ##[[KeyPgDefined defined]]##
 	- ##[[KeyPgDefined defined]]##
 
 {{fbdoc item="back" value="CatPgPreProcess|Preprocessor"}}

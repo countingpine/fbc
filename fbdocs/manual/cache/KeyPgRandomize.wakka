@@ -1,5 +1,5 @@
 {{fbdoc item="title" value="RANDOMIZE"}}----
-Seeds the random number generator
+Alimente le g&eacute;n&eacute;rateur de nombres al&eacute;atoires
 
 {{fbdoc item="syntax"}}##
 	[[KeyPgDeclare declare]] [[KeyPgSub sub]] **Randomize** ( [[KeyPgByval byval]] //seed// [[KeyPgAs as]] [[KeyPgDouble double]] = -1.0,  [[KeyPgByval byval]] //algorithm// [[KeyPgAs as]] [[KeyPgInteger integer]] = 0 )
@@ -9,24 +9,24 @@ Seeds the random number generator
 ##
 {{fbdoc item="param"}}
 	##//seed//##
-		A ##[[KeyPgDouble double]]## seed value for the random number generator.  If omitted, a value based on ##[[KeyPgTimer Timer]]## will be used instead.
+		Une valeur ##[[KeyPgDouble Double]]## pour alimenter le g&eacute;n&eacute;rateur de nombres al&eacute;atoires.  Si omise, une valeur bas&eacute;e sur ##[[KeyPgTimer Timer]]## sera utilis&eacute;e &agrave; la place.
 	##//algorithm//##
-		An ##[[KeyPgInteger integer]]## value to select the algorithm used.  If omitted, the default algorithm for the current [[CompilerDialects language dialect]] is used.
+		Une valeur ##[[KeyPgInteger Integer]]## pour s&eacute;lectionner l'algorithme utilis&eacute;.  Si omise, l'algorithme par d&eacute;faut pour le [[CompilerDialects dialecte du langage]] est utilis&eacute;.
 
 {{fbdoc item="desc"}}
-	Sets the random seed that helps ##[[KeyPgRnd Rnd]]## generate random numbers, and selects the algorithm to use. Valid values for ##//algorithm//## are:
+	D&eacute;finit la valeur de d&eacute;part al&eacute;atoire qui permet &agrave; ##[[KeyPgRnd Rnd]]## de g&eacute;n&eacute;rer des nombres al&eacute;atoires et s&eacute;lectionne l'algorithme &agrave; utiliser. Les valeurs valides pour ##//algorithm//## sont:
 
-		##**0**## - Default for current [[CompilerDialects language dialect]]. This is algorithm ##**3**## in the //[[CompilerOptlang -lang fb]]// dialect, ##**4**## in the //[[CompilerOptlang -lang qb]]// dialect and ##**1**## in the //[[CompilerOptlang -lang fblite]]// dialect.
-		##**1**## - Uses the C runtime library's ##rand()## function. This will give different results depending on the platform.
-		##**2**## - Uses a fast implementation. This should be stable across all platforms, and provides 32-bit granularity, reasonable degree of randomness.
-		##**3**## - Uses the Mersenne Twister. This should be stable across all platforms, provides 32-bit granularity, and gives a high degree of randomness.
-		##**4**## - Uses a function that is designed to give the same random number sequences as QBASIC. This should be stable across all platforms, and provides 24-bit precision, with a low degree of randomness.
+		##**0**## - Valeur par d&eacute;faut pour le [[CompilerDialects dialecte du langage]]. C'est l'algorithme ##**3**## dans le dialecte //[[CompilerOptlang -lang fb]]//, ##**4**## dans le dialecte //[[CompilerOptlang -lang qb]]// et ##**1**## en dialecte //[[CompilerOptlang -lang fblite]]//.
+		##**1**## - Utilise la fonction ##rand()## de la biblioth&egrave;que du langage C. Vous obtiendrez des r&eacute;sultats diff&eacute;rents selon la plate-forme.
+		##**2**## - Utilise une mise en &oelig;uvre rapide. Ce devrait &ecirc;tre stable sur toutes les plates-formes et offre une granularit&eacute; 32-bit, un degr&eacute; raisonnable de hasard.
+		##**3**## - Utilise "Mersenne Twister". Ce devrait &ecirc;tre stable sur toutes les plates-formes, offre une granularit&eacute; 32-bit et donne un degr&eacute; &eacute;lev&eacute; de hasard.
+		##**4**## - Utilise une fonction qui est con&ccedil;ue pour donner les m&ecirc;mes s&eacute;quences de nombres al&eacute;atoires que QBASIC. Ce devrait &ecirc;tre stable sur toutes les plates-formes et offre une pr&eacute;cision 24-bit, avec un faible degr&eacute; de l'al&eacute;atoire.
 		
-		For any given seed, each algorithm will produce a specific, deterministic sequence of numbers for that seed.  If you want each call to ##**Randomize**## to produce a different sequence of numbers, a seed that is not quite predictable should be used - for example, the value returned from ##[[KeyPgTimer Timer]]##.  Omitting the ##//seed//## parameter will use a value based on this.
-		Note: using the ##[[KeyPgTimer Timer]]## value directly as a parameter will produce the same seed if used more than once in the same second.  However, it is generally not worth calling ##**Randomize**## twice with unpredictable seeds anyway, because the second sequence will be no more random than the first.  In most cases, the Mersenne twister should provide a sufficiently random sequence of numbers, without requiring reseeding between ##[[KeyPgRnd Rnd]]## calls.
+		Pour toute semence donn&eacute;e, chaque algorithme produit une s&eacute;quence pr&eacute;cise, d&eacute;terministe de nombres pour cette semence.  Si vous voulez que chaque appel &agrave; ##**Randomize**## produise une s&eacute;quence diff&eacute;rente de nombres, une graine qui n'est pas pr&eacute;visible doit &ecirc;tre utilis&eacute;e - par exemple, la valeur retourn&eacute;e par ##[[KeyPgTimer Timer]]##.  L'omission du param&egrave;tre ##//seed//## utilise une valeur sur cette base.
+		Note: en utilisant la valeur ##[[KeyPgTimer Timer]]## directement en tant que param&egrave;tre va produire la semence m&ecirc;me si elle est utilis&eacute;e plus d'une fois dans la m&ecirc;me seconde.  Toutefois, il n'est g&eacute;n&eacute;ralement pas louable d'appeler ##**Randomize**## deux fois avec des graines impr&eacute;visibles de toute fa&ccedil;on, parce que la deuxi&egrave;me s&eacute;quence ne sera pas plus al&eacute;atoire que la premi&egrave;re.  Dans la plupart des cas, "Mersenne twister" procurera une s&eacute;quence de nombres suffisante, sans n&eacute;cessiter de r&eacute;ensemencement entre les appels &agrave; ##[[KeyPgRnd Rnd]]##.
 
 
-		When you call ##**Randomize**## with the QB compatible algorithm, part of the old seed is retained.  This means that if you call ##**Randomize**## several times with the same seed, you will **not** get the same sequence each time.  To get a specific sequence in QB compatible mode, set the seed by calling ##[[KeyPgRnd Rnd]]## with a negative parameter.
+		Lorsque vous appelez ##**Randomize**## avec l'algorithme QB compatible, une partie de l'ancienne graine est retenue.  Cela signifie que si vous appelez ##**Randomize**## plusieurs fois avec la m&ecirc;me graine, vous **n'**obtiendrez **pas** la m&ecirc;me s&eacute;quence &agrave; chaque fois.  Pour obtenir une s&eacute;quence sp&eacute;cifique au mode compatible QB, fixez la semence en appelant ##[[KeyPgRnd Rnd]]## avec un param&egrave;tre n&eacute;gatif.
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/math/randomize.bas"}}%%(freebasic)
@@ -40,17 +40,17 @@ next
 %%
 
 {{fbdoc item="lang"}}
-	The default algorithm used depends on the current dialect in use:
-		- With the //[[CompilerOptlang -lang fb]]// dialect, a 32 bit Mersenne Twister function with a granularity of 32 bits is used.
-		- With the //[[CompilerOptlang -lang qb]]// dialect, a function giving the same output as ##**Rnd**## in QB is used. The granularity is 24 bits.
-		- With the //[[CompilerOptlang -lang deprecated]]// and //[[CompilerOptlang -lang fblite]]// dialects, the function in the C runtime available in the system is used. The function has a granularity of 15 bits in ""Win32"", and 32 bits in Linux and DOS.
+	L'algorithme utilis&eacute; par d&eacute;faut d&eacute;pend du dialecte en usage:	- Avec le dialecte //[[CompilerOptlang -lang fb]]//, une fonction "Mersenne Twister" 32 bits avec une granularit&eacute; de 32 bits est utilis&eacute;e.
+		- Avec le dialecte //[[CompilerOptlang -lang qb]]//, une fonction donnant le m&ecirc;me r&eacute;sultat que ##**Rnd**## dans QB est utilis&eacute;e. La granularit&eacute; est de 24 bits.
+		- Avec les dialectes //[[CompilerOptlang -lang deprecated]]// et //[[CompilerOptlang -lang fblite]]//, la fonction C disponible dans le syst&egrave;me est utilis&eacute;e. La fonction a une granularit&eacute; de 15 bits dans Win32, et 32 bits sous Linux et DOS.
+		{{fbdoc item="diff"}}
 
-{{fbdoc item="diff"}}
-	- The ##//algorithm//## parameter is new to ""FreeBASIC"".
-	- QBASIC only had one algorithm (replicated in FB in algorithm number ##**4**##, and set as the default in the //[[CompilerOptlang -lang qb]]// dialect).
+- Le param&egrave;tre ##//algorithm//## est nouveau pour FreeBASIC.
+	- QBASIC n'avait qu'un seul algorithme (reproduit dans FB en algorithme num&eacute;ro ##**4**## et d&eacute;fini par d&eacute;faut dans le dialecte //[[CompilerOptlang -lang qb]]//).
+	{{fbdoc item="see"}}
 
-{{fbdoc item="see"}}
-	- ##[[KeyPgRnd Rnd]]##
+- ##[[KeyPgRnd Rnd]]##
+	- [[CompilerDialects Les dialectes du FreeBasic]]
 	- [[CompilerDialects Language dialects]]
 
 {{fbdoc item="back" value="CatPgMath|Mathematical Functions"}}

@@ -1,139 +1,139 @@
 {{fbdoc item="title" value="FreeBASIC Dialects"}}----
 
-	""FreeBASIC"" version 0.17b introduces a //[[CompilerOptlang -lang]]// command-line option, used to change the language compatibility mode for different dialects of the basic language.
+	La version 0.17b de FreeBASIC introduit une nouvelle option ligne de commande //[[CompilerOptlang -lang]]//, utilis&eacute;e pour changer le mode de compatibilit&eacute; de langage pour les diff&eacute;rents dialectes du langage de base.
 
-	Starting with version 0.18.3b the //[[CompilerOptlang -lang qb]]// dialect has been further restricted to only allow what would have been allowed in [[QuickBASIC QuickBASIC]].
+	&Agrave; partir de la version 0.18.3b le dialecte //[[CompilerOptlang -lang qb]]// a &eacute;t&eacute; encore plus restreinte pour ne permettre que ce qui aurait &eacute;t&eacute; admis dans [[QuickBASIC QuickBASIC]].
 
-	In version 0.18.4b the //[[CompilerOptlang -lang fblite]]// dialect was added, intended to replace ##-lang deprecated## in future.
+	Dans la version 0.18.4b le dialecte //[[CompilerOptlang -lang fblite]]// a &eacute;t&eacute; ajout&eacute;, pour remplacer &agrave; l'avenir ##//-lang deprecated//##.
 
-	In version 0.20.0b the ##[[KeyPgPplang #lang]]## directive and ##[[KeyPgMetaLang $lang]]## metacommand were added to specify a dialect from source.
+	Dans la versio 0.20.0b la directive ##[[KeyPgPplang #lang]]## et la m&eacute;tacommande ##[[KeyPgMetaLang $Lang]]## ont &eacute;t&eacute; ajout&eacute;es pour pr&eacute;ciser un dialecte pour la source.
 
-	{{table columns="2" cellpadding="1" cells="-lang option;description;fb;FreeBASIC compatibility (default);qb;qbasic compatibility;fblite;FreeBASIC language compatibility, with a more QBASIC-compatible coding style;deprecated;compatibility with FB 0.16"}}
+	{{table columns="" cellpadding="2" cells="<table>-lang option;description;fb;Compatibilit&eacute FreeBasic (par d&eacutefaut);qb;Compatibilit&eacute qbasic;fblite;Compatibilit&eacute langage FreeBASIC, avec un style de codage le plus possible compatible QBASIC;deprecated;Compatibilit&eacute avec FB 0.16;</table>
 
-	The //[[CompilerOptlang -lang]]// option was needed to allow ""FreeBASIC"" to support object-orientation and other features in the future, without crippling the ""QuickBASIC"" support or breaking compatibility with old ""FreeBASIC"" sources, and without making ""FreeBASIC"" difficult to maintain with many different versions of very similar packages. The ""QuickBASIC"" support can continue to be improved, if needed, without breaking the sources written specifically for ""FreeBASIC"".
+	L'option //[[CompilerOptlang -lang]]// a &eacute;t&eacute; n&eacute;cessaire pour permettre &agrave; FreeBASIC pour supporter l'orientation objet et d'autres fonctionnalit&eacute;s dans le futur, sans paralyser le support QuickBASIC ou la compatibilit&eacute; de rupture avec les sources de l'ancien FreeBASIC, et sans rendre FreeBASIC difficile &agrave; maintenir avec de nombreuses versions diff&eacute;rentes de paquets tr&egrave;s similaires. Le support de QuickBASIC peut continuer &agrave; &ecirc;tre am&eacute;lior&eacute;, si n&eacute;cessaire, sans rompre les sources &eacute;crites sp&eacute;cifiquement pour FreeBASIC.
 
-	To compile old GW-BASIC or ""QuickBASIC/QBasic"" sources without too many changes, use the //[[CompilerOptlang -lang qb]]// option on the command-line when running ##fbc##. This option will evolve into a better compatibility with ""QuickBASIC/QBasic"" code.
+	Pour compiler les sources de l'ancien GW-BASIC ou QuickBASIC/QBasic sans trop de changements, utilisez l'option //[[CompilerOptlang -lang qb]]// sur la ligne de commande lors de l'ex&eacute;cution de ##fbc##. Cette option va &eacute;voluer vers une meilleure compatibilit&eacute; avec le code QuickBASIC/QBasic.
 
-	To compile ""FreeBASIC"" sources from 0.16b, use the //[[CompilerOptlang -lang deprecated]]// option. This option is maintained for compatibility and will not evolve in the future, and it's likely to disappear when ""FreeBASIC"" reaches a non-beta release.
+	Pour compiler les sources FreeBASIC from 0.16b, utilisez l'option //[[CompilerOptlang -lang deprecated]]//. Cette option est maintenue pour assurer la compatibilit&eacute; et ne va pas &eacute;voluer &agrave; l'avenir et elle est susceptible de dispara&icirc;tre lorsque FreeBASIC atteindra une r&eacute;alisation non-beta.
 
-	For programmers who want to access some of ""FreeBASIC""'s newer features, but want to retain a more QBASIC-friendly programming style, use the //[[CompilerOptlang -lang fblite]]// option.  This dialect will not undergo significant changes in the future, but will continue to be maintained and supported.
-	This option is also the most compatible with sources that were made using older versions of ""FreeBASIC"".
+	Pour les programmeurs qui veulent acc&eacute;der &agrave; certaines des nouvelles fonctionnalit&eacute;s de FreeBASIC, mais qui veulent conserver un style de programmation plus proche de QBASIC, utilisez l'option //[[CompilerOptlang -lang fblite]]//.  Ce dialecte ne subira pas de changements importants dans l'avenir, mais continuera &agrave; &ecirc;tre maintenu et support&eacute;.
+	Cette option est &eacute;galement compatible avec la plupart des sources qui ont &eacute;t&eacute; &eacute;crites en utilisant les anciennes versions de FreeBASIC.
 	
-	It is recommended to use //[[CompilerOptlang -lang fb]]// for new projects, as new features (object classes, inheritance..) will be added exclusively to this dialect.
+	Il est recommand&eacute; d'utiliser //[[CompilerOptlang -lang fb]]// pour de nouveaux projets, comme de nouvelles fonctions (classes d'objets, h&eacute;ritage ..) qui seront ajout&eacute;es exclusivement &agrave; ce dialecte.
 	
 	
-{{fbdoc item="section" value="-lang fb (the default mode)"}}
+**<u>-lang fb (le mode par d&eacute;faut)</u>**
 	
-	**Not supported:**
+	**Non pris en charge:**
 
-	""1"") implicit variable declaration
-		- All variables must be explicitly declared, using ##[[KeyPgDim Dim]]##, ##[[KeyPgRedim Redim]]##, ##[[KeyPgVar Var]]##, ##[[KeyPgConst Const]]##, ##[[KeyPgExtern Extern]]## or ##[[KeyPgCommon Common]]##.
+	1) d&eacute;claration de variable implicite
+		- Toutes les variables doivent &ecirc;tre explicitement d&eacute;clar&eacute;es, en utilisant ##[[KeyPgDim Dim]]##, ##[[KeyPgRedim ReDim]]##, ##[[KeyPgVar Var]]##, ##[[KeyPgConst Const]]##, ##[[KeyPgExtern Extern]]## ou ##[[KeyPgCommon Common]]##.
 
-	""2"") type suffixes (##!, #, $, %, &##)
-		- They are only allowed for numeric literals, but it's recommended to use ##[[KeyPgCast Cast]]## or the ##f## (##single##), ##d## (##double##), ##ll## (##longint##), ##ul## (##uinteger##), ##ull## (##ulongint##) numeric literal suffixes to resolve overloading.
+	2) suffixes de type (##!, #, $, %, &##)
+		- Ils ne sont autoris&eacute;s que pour les litt&eacute;raux num&eacute;riques, mais il est recommand&eacute; d'utiliser ##[[KeyPgCast Cast]]## ou les suffixes num&eacute;riques litt&eacute;raux ##f## (##single##), ##d## (##double##), ##ll## (##longint##), ##ul## (##uinteger##), ##ull## (##ulongint##) pour r&eacute;soudre la surcharge.
 
-	""3"") ##[[KeyPgDefbyte Defbyte]]##, ##[[KeyPgDefubyte Defubyte]]##, ##[[KeyPgDefshort Defshort]]##, ##[[KeyPgDefushort Defushort]]##, ##[[KeyPgDefint Defint]]##, ##[[KeyPgDefuint Defuint]]##, ##[[KeyPgDeflng Deflng]]##, ##[[KeyPgDeflongint Deflongint]]##, ##[[KeyPgDefulongint Defulongint]]##, ##[[KeyPgDefsng Defsng]]##, ##[[KeyPgDefdbl Defdbl]]##, ##[[KeyPgDefstr Defstr]]##
-		- An explicit type ("##As //T//##") is needed when declaring variables using ##[[KeyPgDim Dim]]##, ##[[KeyPgRedim Redim]]##, ##[[KeyPgExtern Extern]]## or ##[[KeyPgCommon Common]]##. Variables declared using ##[[KeyPgVar Var]]## or ##[[KeyPgConst Const]]## have their types inferred from an initialization value (an explicit type is optional using ##[[KeyPgConst Const]]##).
+	3) ##[[KeyPgDefbyte DefByte]]##, ##[[KeyPgDefubyte DefUByte]]##, ##[[KeyPgDefshort DefShort]]##, ##[[KeyPgDefushort DefUShort]]##, ##[[KeyPgDefint DefInt]]##, ##[[KeyPgDefuint DefUInt]]##, ##[[KeyPgDeflng DefLng]]##, ##[[KeyPgDeflongint Deflongint]]##, ##[[KeyPgDefulongint Defulongint]]##, ##[[KeyPgDefsng DefSng]]##, ##[[KeyPgDefdbl DefDbl]]##, ##[[KeyPgDefstr DefStr]]##
+		- Un type explicite ("##As //T//##") est n&eacute;cessaire lors de la d&eacute;claration de variables en utilisant ##[[KeyPgDim Dim]]##, ##[[KeyPgRedim ReDim]]##, ##[[KeyPgExtern Extern]]## ou ##[[KeyPgCommon Common]]##. Les variables d&eacute;clar&eacute;es avec ##[[KeyPgVar Var]]## ou ##[[KeyPgConst Const]]## voient leur type d&eacute;duit &agrave; partir d'une valeur d'initialisation (un type explicite est facultatif en utilisant ##[[KeyPgConst Const]]##).
 
-	""4"") all parameters passed by reference by default
-		- By default, all intrinsic scalar types - numeric and pointer types - are passed by value (##[[KeyPgByval Byval]]##). Any other type - ##[[KeyPgString String]]## or user-defined type - is passed by reference (##[[KeyPgByref Byref]]##).
-		- Use the ##-w pedantic## command-line option to have parameters without explicit ##[[KeyPgByval Byval]]## or ##[[KeyPgByref Byref]]## reported.
+	4) tous les param&egrave;tres pass&eacute;s par r&eacute;f&eacute;rence par d&eacute;faut
+		- Par d&eacute;faut, tous les types intrins&egrave;ques scalaires - les types num&eacute;riques et pointeurs - sont pass&eacute;s par valeur (##[[KeyPgByval ByVal]]##). Tout autre type - ##[[KeyPgString String]]## ou un type d&eacute;fini par l'utilisateur - est pass&eacute; par r&eacute;f&eacute;rence (##[[KeyPgByref ByRef]]##).
+		- Utilisez l'option de ligne de commande ##-w pedantic## pour avoir les param&egrave;tres sans signalement explicite de ##[[KeyPgByval ByVal]]## ou ##[[KeyPgByref ByRef]]##.
 
-	""5"") ##OPTION##s of any kind (no context-sensitivity)
-		- Instead of ##[[KeyPgOptionnokeyword Option Nokeyword]]##, use ###undef##.
-		- Instead of ##[[KeyPgOptionescape Option Escape]]##, use: ##!"some esc seq \n\r"## (notice the '##!##' char) and pass ##-w pedantic## to check for possible escape sequences.
-		- ##[[KeyPgOptionexplicit Option Explicit]]## isn't needed, see item 1.
-		- Instead of ##[[KeyPgOptiondynamic Option Dynamic]]##, declare variable-length arrays using ##[[KeyPgRedim Redim]]##. ##[[KeyPgDim Dim]]## can also be used to declare variable-length arrays using variable or no subscripts.
-		- Instead of ##[[KeyPgOptionbase Option Base]]##, use explicit lower-bound subscripts in arrays declarations.
-		- Instead of ##[[KeyPgOptionprivate Option Private]]##, use ##[[KeyPgPrivate Private]]## to declare procedures with internal linkage.
-		- Instead of ##[[KeyPgOptiongosub Option Gosub]]## and ##[[KeyPgOptionnogosub Option Nogosub]]##, use procedures with ##[[KeyPgSub Sub]]## or ##[[KeyPgFunction Function]]##.
+	5) ##OPTION##s de toute nature (pas de sensibilit&eacute; au contexte)
+		- Au lieu de l'option ##[[KeyPgOptionnokeyword Option NoKeyword]]##, utilisez ###undef##.
+		- Au lieu de l'option ##[[KeyPgOptionescape Option Escape]]##, utilisez: ##!"certaines esc seq \n\r"## (notez le caract&egrave;re '##!##') et passez ##-w pedantic## pour rechercher les s&eacute;quences d'&eacute;chappement possibles.
+		- ##[[KeyPgOptionexplicit Option Explicit]]## n'est pas n&eacute;cessaire, voir le point 1.
+		- Au lieu de l'option ##[[KeyPgOptiondynamic Option Dynamic]]##, d&eacute;clarez des tableaux de longueur variable &agrave; l'aide de ##[[KeyPgRedim ReDim]]##. ##[[KeyPgDim Dim]]## peut &eacute;galement &ecirc;tre utilis&eacute; pour d&eacute;clarer les tableaux de longueur variable utilisant une variable ou aucun indice.
+		- Au lieu de l'option ##[[KeyPgOptionbase Option Base]]##, utilisez des indices de la limite inf&eacute;rieure explicites dans les d&eacute;clarations de tableaux.
+		- Au lieu de l'option ##[[KeyPgOptionprivate Option Private]]##, utilisez ##[[KeyPgPrivate Private]]## pour d&eacute;clarer des proc&eacute;dures avec des liens internes.
+		- Au lieu des options ##[[KeyPgOptiongosub Option Gosub]]## et ##[[KeyPgOptionnogosub Option Nogosub]]##, utilisez des proc&eacute;dures avec ##[[KeyPgSub Sub]]## ou ##[[KeyPgFunction Function]]##.
 
-	""6"") periods in symbol names 
-		- Use namespaces instead.
+	6) points dans les noms de symbole 
+		- Utilisez les espaces de noms &agrave; la place.
 	 
-	""7"") ##[[KeyPgGosub Gosub]]## or ##[[KeyPgReturn Return (from Gosub)]]##
-		- Nested procedures may be allowed in future.
+	7) ##[[KeyPgGosub GoSub]]## ou ##[[KeyPgReturn Return (depuis Gosub)]]##
+		- Les proc&eacute;dures imbriqu&eacute;es pourront &ecirc;tre autoris&eacute;es dans le futur.
 
-	""8"") ##[[KeyPgOngosub On Gosub]]## or ##[[KeyPgOngoto On Goto]]##
+	8) ##[[KeyPgOngosub On Gosub]]## or ##[[KeyPgOngoto On Goto]]##
 		- Use ##SELECT expr AS CONST## for the latter.
 
-	""9"") ##[[KeyPgOnerror On Error]]## or ##[[KeyPgResume Resume]]##
-		- Most runtime and graphics library procedures now return an error code, like:  ##IF OPEN( "text" FOR INPUT AS #1 ) <> 0 THEN error##... 
+	9) ##[[KeyPgOnerror On Error]]## ou ##[[KeyPgResume Resume]]##
+		- La plupart des proc&eacute;dures d'ex&eacute;cution et de la biblioth&egrave;que graphique maintenant retournent un code d'erreur:  ##IF OPEN( "text" FOR INPUT AS #1 ) <> 0 THEN error##... 
 
-	""10"") ##'$DYNAMIC##, ##'$STATIC##, ##'$INCLUDE## meta-commands embedded in comments
-		- See item 5 about ##[[KeyPgOptiondynamic Option Dynamic]]##.
-		- Use ###include "filename"## instead of ##'$include##.
+	10) ##'$DYNAMIC##, ##'$STATIC##, ##'$INCLUDE## m&eacute;ta-commandes int&eacute;gr&eacute;es dans les commentaires
+		- Voir le point 5 sur ##[[KeyPgOptiondynamic Option Dynamic]]##.
+		- Utilisez ###include "filename"## au lieu de ##'$include##.
 
-	""11"") ##[[KeyPgCall Call]]## or ##[[KeyPgLet Let]]##
-		- Just remove them.
+	11) ##[[KeyPgCall Call]]## ou ##[[KeyPgLet Let]]##
+		- Retirez-les.
 
-	""12"") numeric labels
-		- No comment.
+	12) les &eacute;tiquettes num&eacute;riques
+		- Pas de commentaire.
 
-	""13"") global symbols with the same name as keywords 
-		- Declare them inside a namespace. 
+	13) symboles globaux avec le m&ecirc;me nom que des mots-cl&eacute;s 
+		- Les d&eacute;clarer &agrave; l'int&eacute;rieur d'un espace de noms. 
 
 
-{{fbdoc item="section" value="-lang deprecated"}}
+**<u>-lang deprecated</u>**
 	 
-	**Supported:** //Anything allowed in version 0.16b, but://
+	**Pris en charge:** //Tout ce qui est permis dans la version 0.16b, mais://
 
-	""1"") ##GOSUB##/##RETURN## and ##ON ... GOSUB## (even at module-level)
-		- so the ##GOSUB## implementation could be thread-unsafe in the ##-lang qb## mode, allowing fast execution (##-lang qb## doesn't support multi-threading, while ##-lang deprecated## does).
+	1) ##GOSUB##/##RETURN## et ##ON ... GOSUB## (m&ecirc;me au niveau du module)
+		- donc la mise en &oelig;uvre de ##GOSUB## pourrait &ecirc;tre thread-dangereuse dans le mode ##-lang qb##, permettant une rapidit&eacute; d'ex&eacute;cution (##-lang qb## ne supporte pas le "multi-threading", alors que ##-lang deprecated## le supporte).
 
-	**Not supported:**
+	**Non pris en charge:**
 
-	""1"") Classes
-		- Periods allowed in symbol names make it too difficult and/or ambiguous.
+	1) Classes
+		- Les points dans les noms de symbole rendent ceci trop difficile et / ou ambigu.
 
-	""2"") Operator overloading
-		- Periods allowed in symbol names make it too difficult and/or ambiguous.
+	2) Surcharge des op&eacute;rateurs
+		- Les points dans les noms de symbole rendent ceci trop difficile et / ou ambigu.
 
-	""3"") Constructors, destructors and methods in ##TYPE##s.
-		- Periods allowed in symbol names make it too difficult and/or ambiguous.
+	3) Les constructeurs, les destructeurs et les m&eacute;thodes dans ##TYPE##s.
+		- Les points dans les noms de symbole rendent ceci trop difficile et / ou ambigu.
 
 
-{{fbdoc item="section" value="-lang fblite"}}
+**<u>-lang fblite</u>**
 	 
-	**Supported:** //Anything allowed in the //[[CompilerOptlang -lang deprecated]]// dialect, plus..//
+	**Pris en charge:** //Tout ce qui est permis dans le dialecte //[[CompilerOptlang -lang deprecated]]//, plus..//
 	
-	""1"") ##GOSUB##/##RETURN##
-	    - Use ##[[KeyPgOptiongosub Option Gosub]]## to enable.  This will disable ##RETURN## from exiting a procedure, due to ambiguity.
+	1) ##GOSUB##/##RETURN##
+	    - Utilisez ##[[KeyPgOptiongosub Option Gosub]]## pour valider.  Cela va d&eacute;sactiver ##RETURN## de la sortie d'une proc&eacute;dure, en raison de l'ambigu&iuml;t&eacute;.
 	
-	**Not supported:**
+	**Non pris en charge:**
 
-	""1"") ##[[KeyPgScope Scope]]## blocks
-		- All variables are given procedure scope.  Explicit ##[[KeyPgScope Scope]]## blocks may be added later.
+	1) Blocs ##[[KeyPgScope Scope]]##
+		- Toutes les variables ont la port&eacute;e niveau proc&eacute;dure.  Les blocs de ##[[KeyPgScope Port&eacute;e]]## explicite seront peut &ecirc;tre ajout&eacute;s plus tard.
 
-{{fbdoc item="section" value="-lang qb"}}
+**<u>-lang qb</u>**
 	
-	**Supported:** //Everything not supported/allowed in the //[[CompilerOptlang -lang fb]]// dialect, plus..//
+	**Pris en charge:** //Tout n'est pas pris en charge/autoris&eacute; dans le dialecte //[[CompilerOptlang -lang fb]]//, plus..//
 
-	""1"") ##[[KeyPgCall Call]]## can be used with forward-referenced functions.
+	1) ##[[KeyPgCall Call]]## peut &ecirc;tre utilis&eacute; avec des fonctions avant r&eacute;f&eacute;rencement..
 
-	""2"") ##[[KeyPgShared Shared]]## can be used inside functions. (W.I.P.)
+	2) ##[[KeyPgShared Shared]]## peut &ecirc;tre utilis&eacute; dans les fonctions. (en cours)
 
-	""3"") All variables, implicitly or explicitly declared, are always allocated in the procedure scope, like in ""QuickBASIC"".
+	3) Toutes les variables, implicitement ou explicitement d&eacute;clar&eacute;es, sont toujours allou&eacute;es dans la port&eacute;e proc&eacute;dure, comme dans QuickBASIC.
 
-	""4"") The ##[[KeyPgData Data]]## statement won't look up symbols, every token is assumed to be a literal string even without quotes, like in ""QuickBASIC"".
+	4) La d&eacute;claration ##[[KeyPgData Data]]## ne regardera pas les symboles, chaque symbole est suppos&eacute; &ecirc;tre une cha&icirc;ne litt&eacute;rale, sans les guillemets, comme dans QuickBASIC.
 
 
-	**Not supported:**
+	**Non pris en charge:**
 
-	""1"") Multi-threading
-		- None of the ##[[CatPgThreading threading]]## procedures may be used.
+	1) Multi-threading
+		- Aucune des proc&eacute;dures de ##[[CatPgThreading threading]]## ne peut &ecirc;tre utilis&eacute;e.
 
-	""2"") Classes and Namespaces
+	2) Les classes et les espaces de noms
 
-	""3"") Procedure and operator overloading
+	3)  La surcharge de proc&eacute;dure et d'op&eacute;rateur
 
-	""4"") Constructors, destructors and other member procedures in ##[[KeyPgType Type]]## definitions.
+	4) Les constructeurs, les destructeurs et autres membres de proc&eacute;dures dans les d&eacute;finitions de ##[[KeyPgType Type]]## definitions.
 
-	""5"") ##[[KeyPgScope Scope]]## blocks
+	5) Blocs ##[[KeyPgScope Scope]]##
 
-	""6"") ##[[KeyPgExternBlock Extern]]## blocks
+	6) Blocs ##[[KeyPgExternBlock Extern]]##
 
-	""7"") Variable initialization
-		- All variables are moved to the procedure scope (like in ""QuickBASIC""), making initializing local variables too difficult to support.
+	7) Initialisation de variable
+		- Toutes les variables sont d&eacute;plac&eacute;es vers la la port&eacute;e de la proc&eacute;dure (comme dans QuickBASIC), ce qui rend l'initialisation de variables locales trop difficile &agrave; supporter.
 
 {{fbdoc item="back" value="DocToc|Table of Contents"}}
