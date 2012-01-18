@@ -30,16 +30,23 @@
  */
 
 /*
- * fb_darwin.h -- darwin specific stuff.
+ * io_mouse.c -- FreeBSD console mouse functions implementation
  *
- * chng: apr/2008 written [DrV]
+ * chng: / written []
  *
  */
 
-#ifndef __FB_DARWIN_H__
-#define __FB_DARWIN_H__
+#include "fb.h"
 
-// On darwin, FBCALL is cdecl with non-aligned stack.
-#define FBCALL __attribute__((force_align_arg_pointer))
+/*:::::*/
+int fb_ConsoleGetMouse(int *x, int *y, int *z, int *buttons, int *clip)
+{
+	return fb_ErrorSetNum(FB_RTERROR_ILLEGALFUNCTIONCALL);
+}
 
-#endif
+
+/*:::::*/
+int fb_ConsoleSetMouse(int x, int y, int cursor, int clip)
+{
+	return fb_ErrorSetNum(FB_RTERROR_ILLEGALFUNCTIONCALL);
+}

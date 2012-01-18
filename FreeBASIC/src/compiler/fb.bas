@@ -870,7 +870,7 @@ end sub
 '':::::
 function fbGetEntryPoint( ) as string static
 
-	function = *env.target.entrypoint
+	function = env.target.entrypoint
 
 end function
 
@@ -1192,8 +1192,6 @@ sub fbGetDefaultLibs _
 	else
 		hAddLib( "fb" )
 	end if
-
-	hAddLib( "gcc" )
 
 	fbc.vtbl.getDefaultLibs( dstlist, dsthash )
 

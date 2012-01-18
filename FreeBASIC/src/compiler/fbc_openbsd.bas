@@ -394,6 +394,7 @@ private sub _getDefaultLibs _
 	symbAddLibEx( dstlist, dsthash, libname, TRUE )
 #endmacro
 
+	hAddLib( "gcc" )
 	hAddLib( "c" )
 	hAddLib( "m" )
 	hAddLib( "pthread" )
@@ -468,7 +469,7 @@ function fbcInit_openbsd( ) as integer
 
 	env.target.targetdir = @"openbsd"
 	env.target.define = @"__FB_OPENBSD__"
-	env.target.entrypoint = @"main"
+	env.target.entrypoint = "main"
 	env.target.underprefix = FALSE
 	env.target.constsection = @"rodata"
 	env.target.allowstdcall = FALSE

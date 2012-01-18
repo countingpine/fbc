@@ -30,16 +30,16 @@
  */
 
 /*
- * fb_darwin.h -- darwin specific stuff.
+ * exit.c -- end helper for FreeBSD
  *
- * chng: apr/2008 written [DrV]
+ * chng: sep/2007 written [DrV]
  *
  */
 
-#ifndef __FB_DARWIN_H__
-#define __FB_DARWIN_H__
+#include "fb.h"
 
-// On darwin, FBCALL is cdecl with non-aligned stack.
-#define FBCALL __attribute__((force_align_arg_pointer))
-
-#endif
+/*:::::*/
+void fb_hEnd ( int unused )
+{
+	fb_unix_hEnd( unused );
+}

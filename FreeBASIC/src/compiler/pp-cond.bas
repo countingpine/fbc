@@ -83,7 +83,6 @@ declare function ppParentExpr _
 
 '' globals
 	dim shared pptb(1 to FB_PP_MAXRECLEVEL) as LEXPP_REC
-
 ''::::
 sub ppCondInit( )
 

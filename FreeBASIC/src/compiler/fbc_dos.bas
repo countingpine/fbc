@@ -259,6 +259,7 @@ private sub _getDefaultLibs _
 	symbAddLibEx( dstlist, dsthash, libname, TRUE )
 #endmacro
 
+	hAddLib( "gcc" )
 	hAddLib( "c" )
 	hAddLib( "m" )
 	hAddLib( "supcx" )
@@ -311,7 +312,7 @@ function fbcInit_dos( ) as integer
 
 	env.target.targetdir = @"dos"
 	env.target.define = @"__FB_DOS__"
-	env.target.entrypoint = @"main"
+	env.target.entrypoint = "main"
 	env.target.underprefix = TRUE
 	env.target.constsection = @"rdata"
 	env.target.allowstdcall = FALSE

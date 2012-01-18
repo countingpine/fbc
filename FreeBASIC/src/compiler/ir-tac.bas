@@ -169,6 +169,11 @@ declare sub _flush _
 	( _
 	)
 
+declare sub _emitStackAlign _
+	( _
+		byval bytes as integer _
+	)
+
 
 '' globals
 	dim shared ctx as IRTAC_CTX
@@ -770,8 +775,14 @@ end sub
 '':::::
 private sub hEmitCallArgs _
 	( _
-		byval arg_list as IR_CALL_ARG_LIST ptr _
+		byval arg_list as IR_CALL_ARG_LIST ptr, _
+		byval bytestopop as integer _
 	)
+
+
+        if( bytestopop >= &h456700 ) then
+            _emitStackAlign( bytestopop )
+        end if
 
 	if( arg_list = NULL ) then
 		return
@@ -801,7 +812,17 @@ private sub _emitCall _
 		byval vr as IRVREG ptr _
 	)
 
-	hEmitCallArgs( arg_list )
+	if( symbGetProcMode( proc ) = FB_FUNCMODE_CDECL ) then
+		'' if this func is VARARG, astCALL() already set the size
+		if( bytestopop = 0 ) then
+			bytestopop = symbGetProcParamsLen( proc )
+		end if
+		if( env.target.align16 ) then
+			bytestopop += &h456700
+		end if
+	end if
+
+	hEmitCallArgs( arg_list, bytestopop )
 
 	_emit( AST_OP_CALLFUNCT, NULL, NULL, vr, proc, bytestopop )
 
@@ -816,7 +837,7 @@ private sub _emitCallPtr _
 		byval bytestopop as integer _
 	)
 
-	hEmitCallArgs( arg_list )
+	hEmitCallArgs( arg_list, bytestopop )
 
 	_emit( AST_OP_CALLPTR, v1, NULL, vr, NULL, bytestopop )
 
@@ -1691,10 +1712,7 @@ private sub hFlushCALL _
 		'' pop up the stack if needed
 		select case symbGetProcMode( proc )
 		case FB_FUNCMODE_CDECL
-			'' if this func is VARARG, astCALL() already set the size
-			if( bytestopop = 0 ) then
-				bytestopop = symbGetProcParamsLen( proc )
-			end if
+			'' nothing to do, bytestopop calculated in _emitCall
 
 		case FB_FUNCMODE_STDCALL, FB_FUNCMODE_STDCALL_MS
 			'' nothing to pop, unless -nostdcall was used

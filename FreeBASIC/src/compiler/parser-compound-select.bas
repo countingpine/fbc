@@ -92,11 +92,13 @@ function cSelectStmtBegin as integer
 
 		'' CONST?
 		if( hMatch( FB_TK_CONST ) ) then
-			return cSelConstStmtBegin( )
-		end if
-
-		if( errReport( FB_ERRMSG_SYNTAXERROR ) = FALSE ) then
-			exit function
+			if( env.target.nojumptables = FALSE ) then
+				return cSelConstStmtBegin( )
+			end if
+		else
+			if( errReport( FB_ERRMSG_SYNTAXERROR ) = FALSE ) then
+			    exit function
+			end if
 		end if
 	end if
 

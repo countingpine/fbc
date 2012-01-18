@@ -30,16 +30,34 @@
  */
 
 /*
- * fb_darwin.h -- darwin specific stuff.
+ * sys_getexepath.c -- get the executable path for Darwin
  *
- * chng: apr/2008 written [DrV]
+ * chng: oct/2010 written [tmc]
  *
  */
 
-#ifndef __FB_DARWIN_H__
-#define __FB_DARWIN_H__
+#include "fb.h"
+#include <string.h>
+#include <mach-o/dyld.h>
 
-// On darwin, FBCALL is cdecl with non-aligned stack.
-#define FBCALL __attribute__((force_align_arg_pointer))
+/*:::::*/
+char *fb_hGetExePath( char *dst, int maxlen )
+{
+	char *p;
 
-#endif
+	uint32_t pathsz = maxlen;
+	if( _NSGetExecutablePath(dst, &pathsz) )
+	{
+		//maxlen too small
+		*dst = '\0';
+		return dst;
+	}
+
+	p = strrchr( dst, '/' );
+	if( p )
+	{
+		*p = '\0';
+	}
+
+	return dst;
+}

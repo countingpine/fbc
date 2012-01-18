@@ -159,7 +159,7 @@ private function hArrayInit _
     dim as integer isarray = any, dtype = any
     dim as FBVARDIM ptr old_dim = any
     dim as FBSYMBOL ptr subtype = any
-	static as FBARRAYDIM dTB(0 to FB_MAXARRAYDIMS - 1)
+	static as FBARRAYDIM dTB(-1 to FB_MAXARRAYDIMS - 1)
 
 	function = FALSE
 

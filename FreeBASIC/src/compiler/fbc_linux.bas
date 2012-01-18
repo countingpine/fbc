@@ -415,6 +415,7 @@ private sub _getDefaultLibs _
 	symbAddLibEx( dstlist, dsthash, libname, TRUE )
 #endmacro
 
+	hAddLib( "gcc" )
 	hAddLib( "c" )
 	hAddLib( "m" )
 	hAddLib( "pthread" )
@@ -493,10 +494,11 @@ function fbcInit_linux( ) as integer
 
 	env.target.targetdir = @"linux"
 	env.target.define = @"__FB_LINUX__"
-	env.target.entrypoint = @"main"
+	env.target.entrypoint = "main"
 	env.target.underprefix = FALSE
 	env.target.constsection = @"rodata"
 	env.target.allowstdcall = FALSE
+'        env.target.align16 = TRUE
 
 	return TRUE
 

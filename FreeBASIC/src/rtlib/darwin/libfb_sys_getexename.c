@@ -30,16 +30,29 @@
  */
 
 /*
- * fb_darwin.h -- darwin specific stuff.
+ * sys_getexename.c -- get the executable's name for FreeBSD
  *
- * chng: apr/2008 written [DrV]
+ * chng: sep/2007 written [DrV]
  *
  */
 
-#ifndef __FB_DARWIN_H__
-#define __FB_DARWIN_H__
+#include "fb.h"
+#include <string.h>
 
-// On darwin, FBCALL is cdecl with non-aligned stack.
-#define FBCALL __attribute__((force_align_arg_pointer))
+/*:::::*/
+char *fb_hGetExeName( char *dst, int maxlen )
+{
+	const char *p;
 
-#endif
+	p = strrchr( __fb_ctx.argv[0], '/' );
+	if( p )
+	{
+		strlcpy( dst, p + 1, maxlen );
+	}
+	else
+	{
+		strlcpy( dst, __fb_ctx.argv[0], maxlen );
+	}
+
+	return dst;
+}

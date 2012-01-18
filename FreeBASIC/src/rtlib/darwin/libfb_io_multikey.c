@@ -30,16 +30,17 @@
  */
 
 /*
- * fb_darwin.h -- darwin specific stuff.
+ * io_multikey.c -- FreeBSD console multikey function implementation
  *
- * chng: apr/2008 written [DrV]
+ * chng: / written []
  *
  */
 
-#ifndef __FB_DARWIN_H__
-#define __FB_DARWIN_H__
+#include "fb.h"
 
-// On darwin, FBCALL is cdecl with non-aligned stack.
-#define FBCALL __attribute__((force_align_arg_pointer))
 
-#endif
+/*:::::*/
+int fb_ConsoleMultikey(int scancode)
+{
+	return fb_ErrorSetNum(FB_RTERROR_ILLEGALFUNCTIONCALL);
+}

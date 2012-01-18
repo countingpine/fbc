@@ -28,13 +28,10 @@
 
 enum GCC_LIB
 	CRT1_O
-	CRTBEGIN_O
-	CRTEND_O
-	CRTI_O
-	CRTN_O
 	GCRT1_O
-	LIBGCC_A
+'	LIBGCC_A
 	LIBSUPC_A
+	OPERATORNEW_O
 	GCC_LIBS
 end enum
 
@@ -117,7 +114,7 @@ private function _linkFiles _
 	''
 	if( fbGetOption( FB_COMPOPT_DEBUG ) = FALSE ) then
 		if( fbGetOption( FB_COMPOPT_PROFILE ) = FALSE ) then
-			ldcline += " -s"
+			ldcline += " -x -S"
 		end if
 	end if
 
@@ -127,14 +124,14 @@ private function _linkFiles _
 	'' crt init stuff
 	if( fbGetOption( FB_COMPOPT_OUTTYPE ) = FB_OUTTYPE_EXECUTABLE) then
 		if( fbGetOption( FB_COMPOPT_PROFILE ) ) then
-			ldcline += " " + QUOTE + fbGetGccLib( GCRT1_O ) + QUOTE
+			ldcline += " " + QUOTE + fbGetGccLib( GCRT1_O ) + QUOTE + " "
 		else
-			ldcline += " " + QUOTE + fbGetGccLib( CRT1_O ) + QUOTE
+			ldcline += " " + QUOTE + fbGetGccLib( CRT1_O ) + QUOTE + " "
 		end if
 	end if
 
-	ldcline += " " + QUOTE + fbGetGccLib( CRTI_O ) + QUOTE
-	ldcline += " " + QUOTE + fbGetGccLib( CRTBEGIN_O ) + QUOTE + " "
+	'' operator new hack
+	ldcline += QUOTE + fbGetGccLib( OPERATORNEW_O ) + QUOTE + " "
 
 	'' add objects from output list
 	dim as FBC_IOFILE ptr iof = listGetHead( @fbc.inoutlist )
@@ -151,26 +148,15 @@ private function _linkFiles _
 	loop
 
 	'' set executable name
-	ldcline += "-o " + QUOTE + fbc.outname + QUOTE
-
-	'' init lib group
-	ldcline += " -( "
+	ldcline += "-o " + QUOTE + fbc.outname + QUOTE + " "
 
 	'' add libraries from cmm-line and found when parsing
 	ldcline += *fbcGetLibList( dllname )
 
 	if( fbGetOption( FB_COMPOPT_NODEFLIBS ) = FALSE ) then
-		'' rtlib initialization and termination (must be included in the group or
-		'' dlopen() will fail because fb_hRtExit() will be undefined)
+		'' rtlib initialization and termination
 		ldcline += QUOTE + fbGetPath( FB_PATH_LIB ) + "fbrt0.o" + QUOTE + " "
 	end if
-
-	'' end lib group
-	ldcline += "-) "
-
-	'' crt end stuff
-	ldcline += QUOTE + fbGetGccLib( CRTEND_O ) + QUOTE
-	ldcline += " " + QUOTE + fbGetGccLib( CRTN_O ) + QUOTE
 
    	'' extra options
    	ldcline += fbc.extopt.ld
@@ -221,7 +207,7 @@ private function _compileResFiles _
 	dim as integer outstr_count, buffer_len, state, label
 	dim as ubyte ptr p
 	dim as string * 4096 chunk
-	dim as string aspath, iconsrc, buffer, outstr()
+	dim as string aspath, objconvpath, iconsrc, icontempobj, buffer, outstr()
 	dim as integer res = any
 
 	function = FALSE
@@ -329,8 +315,14 @@ private function _compileResFiles _
 	if( len( aspath ) = 0 ) then
 		exit function
 	end if
+	objconvpath = fbFindBinFile( "objconv" )
+	if( len( objconvpath ) = 0 ) then
+		exit function
+	end if
 
-	res = exec( aspath, iconsrc + " -o " + hStripExt( iconsrc ) + ".o" )
+	icontempobj = "temp_" + hStripExt( iconsrc ) + ".o"
+
+	res = exec( aspath, iconsrc + " -o " + icontempobj )
 	if( res <> 0 ) then
 		if( fbc.verbose ) then
 			print "compiling XPM icon resource failed: error code " & res
@@ -340,6 +332,18 @@ private function _compileResFiles _
 	end if
 
 	kill( iconsrc )
+
+	res = exec( objconvpath, " -v0 -fmacho " + icontempobj + " " _
+	                         + hStripExt( iconsrc ) + ".o ")
+	if( res <> 0 ) then
+		if( fbc.verbose ) then
+			print "converting XPM icon resource failed: error code " & res
+		end if
+		kill( icontempobj )
+		exit function
+	end if
+
+	kill( icontempobj )
 
 	'' add to obj list
 	dim as string ptr objf = listNewNode( @fbc.objlist )
@@ -404,6 +408,8 @@ private sub _getDefaultLibs _
 #endmacro
 
 	hAddLib( "System" )
+	hAddLib( "ncurses" )
+	hAddLib( "gcc_s.1" )
 
 end sub
 
@@ -452,24 +458,24 @@ function fbcInit_darwin( ) as integer
 	xpmfile = ""
 
 	fbAddGccLib( @"crt1.o", CRT1_O )
-	fbAddGccLib( @"crtbegin.o", CRTBEGIN_O )
-	fbAddGccLib( @"crtend.o", CRTEND_O )
-	fbAddGccLib( @"crti.o", CRTI_O )
-	fbAddGccLib( @"crtn.o", CRTN_O )
 	fbAddGccLib( @"gcrt1.o", GCRT1_O )
-	fbAddGccLib( @"libgcc.a", LIBGCC_A )
+'	fbAddGccLib( @"libgcc.a", LIBGCC_A )
 	fbAddGccLib( @"libsupc++.a", LIBSUPC_A )
+	fbAddGccLib( @"operatornew.o", OPERATORNEW_O )
 
 	env.target.wchar.type = FB_DATATYPE_UINT
 	env.target.wchar.size = FB_INTEGERSIZE
 
 	env.target.targetdir = @"darwin"
 	env.target.define = @"__FB_DARWIN__"
-	env.target.entrypoint = @"main"
-	env.target.underprefix = FALSE
-	env.target.constsection = @"const"
+	env.target.entrypoint = "main"
+	env.target.underprefix = TRUE
+	env.target.constsection = @"rodata"
 	env.target.allowstdcall = FALSE
-	env.target.omitsectiondirective = TRUE
+	env.target.omitsectiondirective = FALSE
+	env.target.align16 = TRUE
+	env.target.objconversion = @"macho"
+	env.target.nojumptables = TRUE
 
 	return TRUE
 

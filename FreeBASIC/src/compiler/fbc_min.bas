@@ -30,8 +30,6 @@
 #include "bfd.bi"
 #endif
 
-dim env as FBENV
-
 declare sub fbcInit _
 	( _
 	)
@@ -160,7 +158,6 @@ declare sub getDefaultLibs _
 		( FBC_OPT_VERSION		, @"version"     ), _
 		( FBC_OPT_OUTPUTNAME	, @"x"           ), _
 		( FBC_OPT_MAINMODULE	, @"m"           ), _
-		( FBC_OPT_ENTRY			, @"entry"	 ), _
 		( FBC_OPT_MAPFILE		, @"map"         ), _
 		( FBC_OPT_MAXERRORS		, @"maxerr"      ), _
 		( FBC_OPT_WARNLEVEL		, @"w"           ), _
@@ -273,7 +270,6 @@ declare sub getDefaultLibs _
 			fbcEnd( 1 )
 		end if
 
-
 		if( fbc.compileonly ) then
 
 		else
@@ -291,11 +287,9 @@ declare sub getDefaultLibs _
 				end if
 
 			else
-
 				'' only add the default libraries to the LD cmd-line, and not to the
 				'' objects and static libraries, for speed/size reasons
 				getDefaultLibs( )
-
 
 				'' resource files..
 				if( compileResFiles( ) = FALSE ) then
@@ -597,20 +591,21 @@ private function convertObjFile _
 	static as integer has_path = FALSE
 	static as integer res
 
-	if( has_path = FALSE ) then
+    if( has_path = FALSE ) then
+    	has_path = TRUE
+
 		path = fbFindBinFile( "objconv" )
 		if( len( path ) = 0 ) then
 			return FALSE
 		end if
-		has_path = TRUE
-	end if
 
-	if( fbc.verbose ) then
-		print "converting to Mach-O: ", path + " " + cmdline
-	end if
+    end if
+
+'    if( fbc.verbose ) then
+'    	print "assembling: ", path + " " + cmdline
+'    end if
 
 	res = exec( path, cmdline )
-
 	if( res <> 0 ) then
 		if( fbc.verbose ) then
 			print "objconv failed: returned error code " & res
@@ -618,6 +613,8 @@ private function convertObjFile _
 	end if
 
 	function = (res = 0)
+
+
 end function
 
 
@@ -681,7 +678,7 @@ private function assembleFiles_GAS _
 		outfile = iof->outf
 
 		if( env.target.objconversion ) then
-			outfile = outfile + "_temp.o"
+			outfile = "_temp_" + outfile
 		end if
 
 		ascline += QUOTE + iof->asmf + _
@@ -691,13 +688,12 @@ private function assembleFiles_GAS _
 
     	'' invoke as
 		if( assembleFile_GAS( ascline ) = FALSE ) then
-			safeKill( outfile )
 			exit function
 		end if
 
 		if( env.target.objconversion ) then
-			ascline = "-v0 -f" + *env.target.objconversion + " " + outfile + " " + iof->outf
-			if( convertObjFile( ascline ) = FALSE ) then
+			ascline = "-nu -f" + *env.target.objconversion + " " + outfile + " " + iof->outf
+			if( convertObjFile( ascline ) ) then
 				safeKill( outfile )
 				exit function
 			end if
@@ -1880,7 +1876,7 @@ private function processOptions _
 					exit function
 				end if
 
-				fbc.extopt.gas += " " + hReplace( *nxt, ",", " " ) + " "
+				fbc.extopt.gas = " " + hReplace( *nxt, ",", " " ) + " "
 
 				del_cnt += 1
 
@@ -1890,7 +1886,7 @@ private function processOptions _
 					exit function
 				end if
 
-				fbc.extopt.ld += " " + hReplace( *nxt, ",", " " ) + " "
+				fbc.extopt.ld = " " + hReplace( *nxt, ",", " " ) + " "
 
 				del_cnt += 1
 
@@ -1900,7 +1896,7 @@ private function processOptions _
 					exit function
 				end if
 
-				fbc.extopt.gcc += " " + hReplace( *nxt, ",", " " ) + " "
+				fbc.extopt.gcc = " " + hReplace( *nxt, ",", " " ) + " "
 
 				del_cnt += 1
 
@@ -1933,17 +1929,6 @@ private function processOptions _
 				fbSetOption( FB_COMPOPT_EXTRAOPT, value )
 
 				del_cnt += 1
-
-			case FBC_OPT_ENTRY
-				if( nxt = NULL ) then
-					printInvalidOpt( arg )
-					exit function
-				end if
-
-				env.target.entrypoint = *nxt
-
-				del_cnt += 1
-
 			end select
 
 			hDelArgNode( arg )
@@ -2257,7 +2242,6 @@ private sub printOptions( )
 			printOption( "-dylib", "Create a shared library" )
 		end if
 	end select
-	printOption( "-entry <name>", "Override the name of the entry function (default: main)" )
 	printOption( "-e", "Add error checking" )
 	printOption( "-ex", "Add error checking with RESUME support" )
 	printOption( "-exx", "Same as above plus array bounds and null-pointer checking" )
@@ -2400,9 +2384,9 @@ function fbcGetLibPathList _
 	dim as FBS_LIB ptr libp = listGetHead( @fbc.ld_libpathlist )
 	do while( libp <> NULL )
 		if( right( *libp->name, 1 ) = FB_HOST_PATHDIV ) then
-    		list += " -L" + QUOTE + left( *libp->name, len(*libp->name) - 1 ) + QUOTE
+    		list += " -L " + QUOTE + left( *libp->name, len(*libp->name) - 1 ) + QUOTE
 		else
-    		list += " -L" + QUOTE + *libp->name + QUOTE
+    		list += " -L " + QUOTE + *libp->name + QUOTE
 		end if
     	libp = listGetNext( libp )
     loop

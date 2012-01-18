@@ -921,9 +921,12 @@ private sub hEmitVarBss _
 
     hEmitBssHeader( )
 
+'print "emitting bss var " &  *symbGetMangledName( s )
+'print "attrib = " & hex(attrib) & " shared=" & (attrib and FB_SYMBATTRIB_SHARED) > 0
+
     '' allocation modifier
     if( (attrib and FB_SYMBATTRIB_COMMON) = 0 ) then
-      	if( (attrib and FB_SYMBATTRIB_PUBLIC) > 0 ) then
+		if( (attrib and FB_SYMBATTRIB_PUBLIC) > 0) then
        		hPUBLIC( *symbGetMangledName( s ), TRUE )
 		end if
        	alloc = ".lcomm"
@@ -1485,13 +1488,60 @@ private sub _emitSTKALIGN _
 
     dim ostr as string
 
-    if( vreg->value.int > 0 ) then
-    	ostr = "sub esp, " + str( vreg->value.int )
-    else
-    	ostr = "add esp, " + str( -vreg->value.int )
-    end if
+    if( vreg->value.int >= &h456700 and vreg->value.int < &h456800 ) then
 
+        '' This Mac OSX-specific code prepares the stack alignment before
+        '' function arguments are pushed
+
+        dim tmpreg as integer
+        dim tmpregname as string
+        dim nofreeregs as integer = FALSE
+
+	tmpreg = hFindFreeReg( FB_DATACLASS_INTEGER )
+	if( tmpreg = INVALID ) then
+		nofreeregs = TRUE
+
+                'assembly emitted in this case:
+                'push eax 
+                'lea eax, [esp+4]
+                '...calc aligned esp
+                'push eax
+                'xchg dword ptr [eax-4], eax
+
+                outp "push eax"
+                outp "lea eax, [esp+4]"
+        else
+        	tmpregname = *hGetRegName( FB_DATATYPE_INTEGER, tmpreg )
+                outp "mov " + tmpregname + ", esp"
+	end if
+
+    	'dim align as integer = vreg->value.int
+        dim off as integer
+        off = vreg->value.int - &h456700
+        '' add 4 bytes for pushing esp
+        off = (1024 - (off + 4)) mod 16
+        if( off ) then
+            outp "add esp, " & off
+        end if
+        outp "and esp, 0xfffffff0"
+        if( off ) then
+            outp "sub esp, " & off
+        end if
+        if( nofreeregs ) then
+            outp "push eax"
+            outp "xchg dword ptr [eax-4], eax"
+        else
+            hPUSH tmpregname
+        end if
+        
+    else
+        if( vreg->value.int > 0 ) then
+        	ostr = "sub esp, " + str( vreg->value.int )
+        else
+        	ostr = "add esp, " + str( -vreg->value.int )
+        end if
 	outp( ostr )
+    end if
 
 end sub
 
@@ -1531,7 +1581,10 @@ private sub _emitCALL _
 	ostr += *symbGetMangledName( label )
 	outp( ostr )
 
-    if( bytestopop <> 0 ) then
+    if( bytestopop >= &h456700 ) then
+    	ostr = "mov esp, [esp+" & (bytestopop - &h456700) & "]"
+    	outp( ostr )
+    elseif( bytestopop > 0 ) then
     	ostr = "add esp, " + str( bytestopop )
     	outp( ostr )
     end if
@@ -1554,7 +1607,10 @@ private sub _emitCALLPTR _
 	ostr = "call " + src
 	outp( ostr )
 
-    if( bytestopop <> 0 ) then
+    if( bytestopop >= &h456700 ) then
+    	ostr = "mov esp, [esp+" & (bytestopop - &h456700) & "]"
+    	outp( ostr )
+    elseif( bytestopop > 0 ) then
     	ostr = "add esp, " + str( bytestopop )
     	outp( ostr )
     end if
@@ -7015,6 +7071,12 @@ private sub _setSection _
 
 	outEx( ostr )
 
+/'
+	if( section = IR_SECTION_BSS and env.target.objconversion <> NULL ) then
+		outEx( ".globl bss_dummy_" + env.inf.name )
+		outp( ".lcomm bss_dummy_" + env.inf.name + ",0" )
+	end if
+'/
 end sub
 
 '':::::

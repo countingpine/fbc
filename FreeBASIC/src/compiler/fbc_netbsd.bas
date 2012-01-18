@@ -409,6 +409,8 @@ private sub _getDefaultLibs _
 #endmacro
 
 	'' TODO
+	hAddLib( "gcc" )
+
 
 end sub
 
@@ -480,7 +482,7 @@ function fbcInit_netbsd( ) as integer
 
 	env.target.targetdir = @"netbsd"
 	env.target.define = @"__FB_NETBSD__"
-	env.target.entrypoint = @"main"
+	env.target.entrypoint = "main"
 	env.target.underprefix = FALSE
 	env.target.constsection = @"rodata"
 	env.target.allowstdcall = FALSE

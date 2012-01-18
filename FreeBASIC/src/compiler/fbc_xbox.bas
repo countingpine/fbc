@@ -353,6 +353,7 @@ private sub _getDefaultLibs _
 	symbAddLibEx( dstlist, dsthash, libname, TRUE )
 #endmacro
 
+	hAddLib( "gcc" )
 	hAddLib( "fbgfx" )
 	hAddLib( "openxdk" )
 	hAddLib( "hal" )
@@ -418,7 +419,7 @@ function fbcInit_xbox( ) as integer
 
 	env.target.targetdir = @"xbox"
 	env.target.define = @"__FB_XBOX__"
-	env.target.entrypoint = @"XBoxStartup"
+	env.target.entrypoint = "XBoxStartup"
 	env.target.underprefix = TRUE
 	env.target.constsection = @"rdata"
 	env.target.allowstdcall = FALSE

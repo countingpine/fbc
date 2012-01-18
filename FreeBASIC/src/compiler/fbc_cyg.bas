@@ -436,6 +436,7 @@ private sub _getDefaultLibs _
 	symbAddLibEx( dstlist, dsthash, libname, TRUE )
 #endmacro
 
+	hAddLib( "gcc" )
 	hAddLib( "cygwin" )
 	hAddLib( "kernel32" )
 	hAddLib( "supc++" )
@@ -500,7 +501,7 @@ function fbcInit_cygwin( ) as integer
 
 	env.target.targetdir = @"cygwin"
 	env.target.define = @"__FB_CYGWIN__"
-	env.target.entrypoint = @"main"
+	env.target.entrypoint = "main"
 	env.target.underprefix = TRUE
 	env.target.constsection = @"rdata"
 	env.target.allowstdcall = TRUE

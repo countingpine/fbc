@@ -271,9 +271,9 @@ sub hClearName _
 		byval src as zstring ptr _
 	) static
 
-    dim as zstring ptr p
+    dim as ubyte ptr p
 
-	p = src
+	p = @src[0]
 
 	do
 		select case as const *p

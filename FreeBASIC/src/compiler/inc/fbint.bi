@@ -598,11 +598,14 @@ type FBTARGET
 	wchar			as FBTARGET_WCHAR
 	targetdir		as zstring ptr				'' directory to look for target bin, lib, etc.
 	define		as zstring ptr				'' __FB_target__ preprocessor define name
-	entrypoint		as zstring ptr				'' entry point of executable (usually "main")
+	entrypoint		as string				'' entry point of executable (usually "main")
 	underprefix		as integer					'' whether symbols are prefixed with an underscore
 	constsection	as zstring ptr				'' linker section to use for constant data
 	allowstdcall	as integer					'' whether stdcall calling convention should be allowed (if false, treat as CDECL)
 	omitsectiondirective	as integer					'' whether to omit .section before section names in the assembly output
+	align16		as integer 				'' align stack to 16 bytes at cdecl function call
+	objconversion	as zstring ptr				'' if objconv is required, name of the binary format to convert to
+	nojumptables	as integer 				'' don't emit jump tables
 end type
 
 type FBOPTION
@@ -686,6 +689,7 @@ end type
 ''
 '' super globals
 ''
-common shared as FBENV env
+'common shared as FBENV env
+extern env as FBENV 
 
 #endif ''__FBINT_BI__

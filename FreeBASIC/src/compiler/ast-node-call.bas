@@ -215,6 +215,10 @@ private function hCallProc _
 
 	'' ptr..
 	else
+		if( mode = FB_FUNCMODE_CDECL andalso env.target.align16 ) then
+			bytestopop += &h456700
+		end if
+
 		vr = astLoad( p )
 		astDelNode( p )
 		if( ast.doemit ) then

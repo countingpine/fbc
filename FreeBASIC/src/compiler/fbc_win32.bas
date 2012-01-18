@@ -550,6 +550,7 @@ private sub _getDefaultLibs _
 	symbAddLibEx( dstlist, dsthash, libname, TRUE )
 #endmacro
 
+	hAddLib( "gcc" )
 	hAddLib( "msvcrt" )
 	hAddLib( "kernel32" )
 	hAddLib( "mingw32" )
@@ -617,7 +618,7 @@ function fbcInit_win32( ) as integer
 
 	env.target.targetdir = @"win32"
 	env.target.define = @"__FB_WIN32__"
-	env.target.entrypoint = @"main"
+	env.target.entrypoint = "main"
 	env.target.underprefix = TRUE
 	env.target.constsection = @"rdata"
 	env.target.allowstdcall = TRUE
