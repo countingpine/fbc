@@ -32,7 +32,10 @@
 declare function emitGasX86_ctor	_
 	( _
 	) as integer
-
+declare function emitGasX86Att_ctor	_
+	( _
+	) as integer
+	
 '' globals
 	dim shared emit as EMITCTX
 
@@ -40,7 +43,12 @@ declare function emitGasX86_ctor	_
 #macro hCallCtor( backend )
 	select case backend
 	case FB_BACKEND_GAS
-		emitGasX86_ctor( )
+		select case env.clopt.asmsyntax
+		case FB_ASMSYNTAX_INTEL
+			emitGasX86_ctor( )
+		case FB_ASMSYNTAX_ATT
+			emitGasX86Att_ctor( )
+		end select
 	end select
 #endmacro
 

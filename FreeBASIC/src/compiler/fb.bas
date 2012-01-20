@@ -505,6 +505,7 @@ sub fbSetDefaultOptions( )
 	env.clopt.target		= FB_DEFAULT_TARGET
 	env.clopt.lang			= FB_DEFAULT_LANG
 	env.clopt.backend		= FB_DEFAULT_BACKEND
+	env.clopt.asmsyntax		= FB_DEFAULT_ASMSYNTAX
 #if defined(TARGET_LINUX) or defined(TARGET_FREEBSD) or defined(TARGET_OPENBSD) or defined(TARGET_DARWIN) or defined(TARGET_NETBSD)
 	env.clopt.findbin		= _
 		FB_FINDBIN_ALLOW_ENVVAR _
@@ -608,6 +609,9 @@ sub fbSetOption _
 
 	case FB_COMPOPT_BACKEND
 		env.clopt.backend = value
+	
+	case FB_COMPOPT_ASMSYNTAX
+		env.clopt.asmsyntax = value
 
 	case FB_COMPOPT_FINDBIN
 		env.clopt.findbin = value
@@ -710,6 +714,9 @@ function fbGetOption _
 
 	case FB_COMPOPT_BACKEND
 		function = env.clopt.backend
+		
+	case FB_COMPOPT_ASMSYNTAX
+		function = env.clopt.asmsyntax
 
 	case FB_COMPOPT_FINDBIN
 		function = env.clopt.findbin

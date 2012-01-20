@@ -149,6 +149,7 @@ enum FB_COMPOPT
 	FB_COMPOPT_EXTRAOPT
 	FB_COMPOPT_OPTIMIZELEVEL
 	FB_COMPOPT_PPONLY
+	FB_COMPOPT_ASMSYNTAX
 
 	FB_COMPOPTIONS
 end enum
@@ -293,6 +294,20 @@ end enum
 const FB_DEFAULT_BACKEND = FB_BACKEND_GAS
 
 ''
+enum FB_ASMSYNTAX
+	FB_ASMSYNTAX_INTEL
+	FB_ASMSYNTAX_ATT
+	
+	FB_ASMSYNTAXES
+end enum
+
+#ifdef TARGET_DARWIN
+const FB_DEFAULT_ASMSYNTAX = FB_ASMSYNTAX_ATT
+#else
+const FB_DEFAULT_ASMSYNTAX = FB_ASMSYNTAX_INTEL
+#endif
+
+''
 enum FB_FINDBIN
 	FB_FINDBIN_USE_DEFAULT = 0
 	FB_FINDBIN_ALLOW_ENVVAR = 1
@@ -345,6 +360,7 @@ type FBCMMLINEOPT
 	extraopt		as FB_EXTRAOPT				'' Extra (misc) options
 	optlevel		as integer					'' optimize level (for gcc)
 	pponly			as integer
+	asmsyntax		as FB_ASMSYNTAX				'' intel or at&t syntax (def= intel, unless target is mac)
 end type
 
 
