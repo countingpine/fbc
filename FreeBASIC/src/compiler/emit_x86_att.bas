@@ -257,39 +257,45 @@ private function hGetIdxName _
 		rname = hGetRegNameAtt( vi->dtype, vi->reg )
 	end if
 	
+	iname = ""
+	
 	if( sym = NULL ) then
 		'' no var or index?
 		if( vi = NULL ) then
 			return NULL
 		end if
-		
-		iname = "("
-		
 	else
-		if( ofs <> 0 ) then
-			iname = str( ofs )
-		else
-			iname = ""
-		end if
-		iname += "("
 		dim as zstring ptr tmpname
 		tmpname = symbGetMangledName( sym )
-		if( tmpname[0] <> asc("%") ) then
-			iname = *tmpname + iname
+		if( tmpname[0] = asc("%") ) then
+			if( ofs <> 0 ) then
+				iname = str( ofs )
+			end if
+			iname += "("
+			iname += *tmpname
+		else
+			if( ofs > 0 ) then
+				iname = *tmpname
+				iname += "+"
+				iname += str( ofs )
+			elseif( ofs < 0 ) then
+				iname = *tmpname
+				iname += str( ofs )
+			else
+				iname = *tmpname
+			end if
+			iname += "("
+			
 			if( addone ) then
 				iname += *rname
 			end if
-		else
-			iname += *tmpname
-		end if
-		if( vi <> NULL ) then
-			iname += ", "
 		end if
 	end if
 
-	iname += *rname
-
     if( vi <> NULL ) then
+		iname += ", "
+		iname += *rname
+		
 		if( mult > 1 ) then
 			iname += ", "
 			iname += str( mult )
@@ -324,9 +330,13 @@ sub hPrepOperandAtt _
     end if
 
 	select case as const vreg->typ
-	case IR_VREGTYPE_VAR, IR_VREGTYPE_PTR
+	case IR_VREGTYPE_VAR
 	
 		operand = ""
+				
+		'' variable or index
+		dim as zstring ptr idx_op
+		idx_op = symbGetMangledName( vreg->sym )
 		
 		'' offset
 		ofs += vreg->ofs
@@ -334,40 +344,27 @@ sub hPrepOperandAtt _
 			ofs += FB_INTEGERSIZE
 		end if
 		
-		'' variable or index
-		dim as zstring ptr idx_op
-		if( vreg->typ = IR_VREGTYPE_VAR ) then
-			idx_op = symbGetMangledName( vreg->sym )
-		else
-        	idx_op = hGetIdxName( vreg, ofs )
-		end if
-		
         if( idx_op <> NULL ) then
-			if( vreg->typ = IR_VREGTYPE_VAR ) then
-				if( idx_op[0] = asc("%") ) then
-					if( ofs <> 0 ) then
-						operand = str( ofs )
-					end if
-					
-					operand += "(" + *idx_op + ")"
-				else
-					operand = *idx_op
-					if( ofs > 0 ) then
-						operand += " + "
-					end if
-					if( ofs <> 0 ) then
-						operand += str( ofs )
-					end if
+			if( idx_op[0] = asc("%") ) then
+				if( ofs <> 0 ) then
+					operand = str( ofs )
 				end if
+				
+				operand += "(" + *idx_op + ")"
 			else
 				operand = *idx_op
+				if( ofs > 0 ) then
+					operand += "+"
+				end if
+				if( ofs <> 0 ) then
+					operand += str( ofs )
+				end if
 			end if
 		else
-			operand = "(, " + str( ofs ) + ")"
-			''TODO: not sure what this line is supposed to do
+			operand = str( ofs )
         end if
 	
-	case IR_VREGTYPE_IDX
+	case IR_VREGTYPE_IDX, IR_VREGTYPE_PTR
 		
 		operand = ""
 		
@@ -1700,7 +1697,7 @@ private sub _emitAttSTORF2I _
 				outp ostr
 			end if
 
-			hMOVAtt dst, aux8
+			hMOVAtt dst, aux8, FB_DATATYPE_BYTE
 
 			if( isfree = FALSE ) then
 				hPOPAtt aux
@@ -1783,7 +1780,7 @@ private sub _emitAttSTORL2F _
 	else
 		'' signed?
 		if( symbIsSigned( svreg->dtype ) ) then
-			ostr = "fild" + dtsuffixTB(svreg->dtype).mname + " " + src
+			ostr = "fildl " + src
 			outp ostr
 
 		'' unsigned, try a bigger type..
@@ -1870,7 +1867,7 @@ private sub _emitAttSTORI2F _
 
 			hPUSHAtt src
 
-			ostr = "fild" + dtsuffixTB(svreg->dtype).mname + " (%esp)"
+			ostr = "fildl (%esp)"
 			outp ostr
 
 			outp "addl $4, %esp"
@@ -1908,7 +1905,7 @@ private sub _emitAttSTORI2F _
 
 		'' signed?
 		if( symbIsSigned( svreg->dtype ) ) then
-			ostr = "fild" + dtsuffixTB(svreg->dtype).mname + " " + src
+			ostr = "fildl " + src
 			outp ostr
 
 		'' unsigned, try a bigger type..
@@ -2121,13 +2118,13 @@ private sub _emitAttLOADF2L _
 		outp "fld %st(0)"
 		'' UWtype hi = (UWtype)(a / Wtype_MAXp1_F)
 		outp "pushl $0x4f800000"
-		outp "fdivl (%esp)"
+		outp "fdivs (%esp)"
 		outp "fistpl (%esp)"
 		'' UWtype lo = (UWtype)(a - ((DFtype)hi) * Wtype_MAXp1_F)
 		outp "fildl (%esp)"
 		outp "pushl $0x4f800000"
-		outp "fmull (%esp)"
-		outp "fsubp"
+		outp "fmuls (%esp)"
+		outp "fsubrp"
 		outp "fistpl (%esp)"
 		'' ((UDWtype) hi << W_TYPE_SIZE) | lo
 	end if
@@ -2284,7 +2281,7 @@ private sub _emitAttLOADF2I _
 				outp ostr
 			end if
 
-			hMOVAtt dst, aux8
+			hMOVAtt dst, aux8, FB_DATATYPE_BYTE
 
 			if( isfree = FALSE ) then
 				hPOPAtt aux
@@ -2503,7 +2500,7 @@ private sub _emitAttLOADI2F _
 
 		'' signed?
 		if( symbIsSigned( svreg->dtype ) ) then
-			ostr = "fild" + dtsuffixTB(svreg->dtype).mname + " " + src
+			ostr = "fildl " + src
 			outp ostr
 
 		'' unsigned, try a bigger type..
@@ -3013,7 +3010,7 @@ private sub _emitAttSMULI _
 		end if
 
 		hMOVAtt rname, dst
-		ostr = "imull " + src + COMMA + rname
+		ostr = "imul" + dtsuffixTB(svreg->dtype).mname + " " + src + COMMA + rname
 		outp ostr
 		hMOVAtt dst, rname
 
@@ -3022,7 +3019,7 @@ private sub _emitAttSMULI _
 		end if
 
 	else
-		ostr = "imull " + src + COMMA + dst
+		ostr = "imul" + dtsuffixTB(svreg->dtype).mname + " " + src + COMMA + dst
 		outp ostr
 	end if
 
@@ -3486,7 +3483,7 @@ private sub hSHIFTL _
 			end if
 
 			if( svreg->value.int > 32 ) then
-				src = str( svreg->value.int - 32 )
+				src = "$" + str( svreg->value.int - 32 )
 				outp mnemonic32 + src + ", " + a
 			end if
 
@@ -5007,7 +5004,7 @@ private sub _emitAttASIN _
 	outp "fld %st(0)"
     outp "fmul %st(0), %st(0)"
     outp "fld1"
-	outp "fsubrp"
+	outp "fsubp"
 	outp "fsqrt"
 	outp "fpatan"
 
@@ -5033,7 +5030,7 @@ private sub _emitAttACOS _
 	outp "fld %st(0)"
     outp "fmul %st(0), %st(0)"
     outp "fld1"
-	outp "fsubrp"
+	outp "fsubp"
 	outp "fsqrt"
 	outp "fxch"
 	outp "fpatan"
@@ -5093,15 +5090,15 @@ private sub _emitAttEXP _
 	) static
 
 	outp "fldl2e"
-	outp "fmulp %st(1), %st(0)" ''TODO: is this right att syntax?
+	outp "fmulp %st, %st(1)"
 	outp "fld %st"
     outp "frndint"
-	outp "fsub %st(1), %st(0)"
+	outp "fsubr %st, %st(1)"
 	outp "fxch"
 	outp "f2xm1"
 	'' can't use fld1 because max 2 fp regs can be used
 	hPUSHAtt( "$0x3f800000" )
-	outp "faddl (%esp)"
+	outp "fadds (%esp)"
 	outp "addl $4, %esp"
 	outp "fscale"
 	outp "fstp %st(1)"
@@ -5223,7 +5220,7 @@ private sub _emitAttFRAC _
 
 	outp "fld %st(0)"
 	outp "frndint"
-	outp "fsubp"
+	outp "fsubrp"
 
 	hFpuRoundRestore( )
 
