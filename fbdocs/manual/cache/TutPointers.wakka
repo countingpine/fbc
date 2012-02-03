@@ -1,25 +1,25 @@
 {{fbdoc item="title" value="Introduction to Pointers"}}----
-//Written by [[WikiRick rdc]]//
+//Ecrit par [[WikiRick rdc]]//
 
-**What is a Pointer?**
+**Qu'est ce qu'un pointeur?**
 
-A pointer is a 4-byte data type that holds an address to a memory location. A pointer doesn't contain data, it points to data once it has been initialized. An uninitialized pointer points to nothing and is undefined.
+Un pointeur est un type de donnée de 4 octets qui contient l"adresse d'un emplacement mémoire. Un pointeur ne contient pas de donnée, il pointe vers une donnée lorsqu'il a été initialisé. Un pointeur non-initialisé ne pointe vers rien du tout et est indéfini.
 
-To understand pointers, think of an egg carton that has numbers 1 through 12 printed on the bottom of each "hole" (where you put the eggs). These holes are like memory locations in a computer; each hole, or memory location, has an address, in this example, 1 through 12. If an egg represents a data item, then an egg in hole 1 has an address of 1.
+Pour comprendre les pointeurs, imaginez un carton à oeufs qui aurait les numéros de 1 à 12 inscrit au fond de chaque "trou" (où vous posez les oeufs). Ces "trous" sont comme les emplacements mémoire de l'ordinateur; chaque case, ou emplacement mémoire, a une adresse, dans cet exemple, de 1 à 12. Si un oeuf représente un élément de donnée, alors un oeuf dans le "trou" 1 a une adresse de 1.
 
-Normally, you would access the data directly through the use of variables. When you DIMension a variable of a particular type, you are setting aside storage space for the data. You do not need to know, or care, where the data resides since you can access the data directly through the variable. This is like reaching out and picking up the egg in hole 1 (reading the data) or putting an egg in hole 1 (setting the data) without looking at the numbers written on the bottom of the hole.
+Normalement, vous accédez aux données directement par l'intermédiaire de variables. Quand vous DIMensionnez une variable d'un type particulier, vous réservez un espace de stockage pour cette donnée. Vous n'avez pas besoin de connaître ou de vous soucier de savoir où la donnée réside en mémoire car vous pouvez accéder directement à celle-ci en utilisant le nom de la variable. C'est comme tendre la main et prendre un oeuf dans la case 1 (lecture de la donnée) ou placer un oeuf dans la case 1 (initialiser la donnée) sans lire le numéro inscrit au fond de la case.
 
-Using pointers is a bit different. Imagine you have a little scrap of paper that will represent our pointer. Right now it is blank and doesn't point to anything. This undefined pointer can't be used until it is initialized. To initialize the pointer, write a 1 on it. Now our pointer is "pointing" to hole 1 in our egg carton. To put data (an egg) in hole 1, we look at our scrap of paper, match it to hole 1 and place the egg in the hole. To retrieve the egg we do just the opposite. We match our slip of paper to hole 1 and then grab the egg. All the putting and getting of the egg has to be done through the slip of paper and is called dereferencing the pointer. That is, we get to the data through the reference contained in the pointer, the number 1. The pointer doesn't contain the data; it contains a reference to the data.
+Utiliser des pointeurs est légèrement différent. Imaginez que vous avez un petit bout de papier qui représente notre pointeur. Pour le moment il est vierge et ne pointe nulle part. Ce pointeur non-défini ne peut être utilisé tant qu'il n'est pas initialisé. Pour l'initialiser, écrivez 1 dessus. Maintenant notre pointeur "pointe" vers la case 1 de notre carton à oeufs. Pour placer une donnée (un oeuf) dans la case 1, nous consultons notre bout de papier, il indique la case 1 et nous plaçons l'oeuf dans cette case. Pour récupérer l'oeuf nous effectuons la manoeuvre oposée.  Nous faisons correspondre notre bout de papier au trou 1 et ensuite récupérons l'oeuf. La mise en place de l'oeuf et sa récupération se réalisent par l'intermédiaire de notre bout de papier et est appelé déréférencer le pointeur. C'est à dire que nous récupérons la donnée par l'intermédiaire de la référence contenue dans le pointeur, le numéro 1. Le pointeur ne contient pas la donnée; il contient une référence vers cette donnée.
 
-In FreeBasic we define a pointer using the [[KeyPgDim Dim]] and [[KeyPgPtr Ptr]] statements:
+Dans FreeBASIC nous définissons un pointeur en utilisant les instructions [[KeyPgDim Dim]] et [[KeyPgPtr Ptr]]:
 
 ##%%(freebasic)
 dim aptr as integer ptr
 %%##
 
-This statement corresponds to our blank piece of paper in the above example. The pointer doesn't point to anything and is undefined. If we tried to use the pointer right now, more than likely the program would crash.
+Cette déclaration correspond à notre bout de papier blanc de l'exemple précédent. Le pointeur ne pointe vers rien et n'est pas défini. Si vous essayez de l'utiliser ainsi, il est plus que probable que le programme se plante!
 
-In order for a pointer to be useful, it must be initialized:
+Pour qu'un pointeur soit utilisable, il doit être initialisé:
 
 ##%%(freebasic)
 dim aptr as integer ptr
@@ -27,18 +27,18 @@ dim aptr as integer ptr
 aptr = allocate(sizeof(integer))
 %%##
 
-Here we are using [[KeyPgAllocate Allocate]] to set aside enough space in memory for an [[KeyPgInteger Integer]] and loading the address of that space into aptr. The [[KeyPgSizeof sizeof]] macro returns the size in bytes of the passed data type. You could use len instead of [[KeyPgSizeof Sizeof]] (since .13b) if you prefer.
+Nous avons utilisé [[KeyPgAllocate Allocate]] de façon à reserver assez d'espace mémoire pour un [[KeyPgInteger Integer]] et avons l'adresse de cet espace dans ##//aptr//##. La macro [[KeyPgSizeof sizeof]] renvoie la taille en octets du type de la donnée qui est passée. Si vous préférez, vous pouvez utilisez ##**Len**## au lieu de [[KeyPgSizeof Sizeof]] (depuis .13b).
 
-Once we have initialized the pointer, we can now use it:
+Une fois le pointeur initialisé, nous pouvons maintenant l'utiliser:
 
 ##%%(freebasic)
 *aptr = 5
 print "aptr: "; *aptr
 %%##
 
-Notice the ***** prefix on aptr. The * is the reference operator. This is like matching the number on the slip of paper to the number on the hole in the egg carton. By using the * operator, we are able to get at the data (egg) contained in the hole pointed at by aptr.
+Notez le préfixe ***** devant ##//aptr//##. Le ***** est l'opérateur de référence. C'est comme faire correspondre le numéro sur le bout de papier au numéro de la case du carton à oeufs. En utilisant l'opérateur *****, nous pouvons accéder à la donnée (l'oeuf) contenu dans la case pointée par ##//aptr//##.
 
-Here is a complete example program:
+Voici un exemple complet de programme:
 
 ##%%(freebasic)
 option explicit
@@ -52,15 +52,15 @@ deallocate aptr
 sleep
 %%##
 
-The [[KeyPgDeallocate deallocate]] function frees the memory pointed at by aptr, and makes aptr undefined once again. This is like erasing the number on our slip of paper. If we were to use aptr after deallocating it, the program would crash.
+La fonction [[KeyPgDeallocate deallocate]] libère la mémoire pointée par ##//aptr//## et ainsi ##//aptr//## est de nouveau non-défini. C'est comme effacer le numéro sur votre bout de papier. Si nous utilisions ##//aptr//## après désallocation, le programme se planerait.
 
-**What Good are Pointers?**
+**A quoi servent les pointeurs?**
 
-A major reason for adding pointers to FreeBasic is that many external libraries require pointers to type structures and pointers to strings. For example, the Win32 API has many structures that must be filled out and then passed to a function through a pointer.
+Une des principales raisons pour ajouter des pointeurs à FreeBASIC est que beaucoup de bibliothèques externes nécessitent des pointeurs vers des structures et des pointeurs vers des chaînes. Par exemple, l'API Win32 a de nombreuses structures qui doivent être remplies et transmises à une fonction via un pointeur.
 
-Another use of a pointer is in a [[KeyPgType Type]] definition. [[KeyPgType Type]] defs in FreeBasic can only contain fixed length strings, but what if you don't know the length of a string until the program is running? A pointer can serve this purpose.
+Une autre utilisation d'un pointeur se trouve dans la définition d'un [[KeyPgType Type]]. Dans FreeBASIC, les définitions de [[KeyPgType Type]] ne peuvent contenir que des chaînes de longueur définie, mais que faire si vous ne connaissez pas la longueur de la chaîne avant le fonctionnement du programme? Un pointeur peut être utile dans ce cas.
 
-(It should be stated that the Type definitions can now support variable length strings.)
+(Il convient de préciser que les définitions de [[KeyPgType Type]] peuvent désormais prendre en charge les chaînes de longueur variable.)
 
 ##%%(freebasic)
 option explicit
@@ -95,45 +95,45 @@ function pSetString(byval s as string) as zstring ptr
 end function
 %%##
 
-Here we define our type with a field sptr as [[KeyPgZstring zstring]] [[KeyPgPtr ptr]]. Zstrings are null terminated strings and are used by many external libraries and are designed for dynamic allocations. Once we define our type we create an instance of it with the [[KeyPgDim dim]] statement:
+Ici nous définisons notre [[KeyPgType Type]] avec un champ ##**sptr**## comme [[KeyPgZstring zstring]] [[KeyPgPtr ptr]]. Les [[KeyPgZstring ZString]]s sont des chaînes terminées par un indicateur nul qui sont utilisées par de nombreuses bibliothèques externes et sont conçues pour l'allocation dynamique. Dès que nous avons créé notre [[KeyPgType Type]] nous en créons une instance avec l'instruction [[KeyPgDim dim]]:
 
 ##%%(freebasic)
 dim mytype as mytptr
 %%##
 
-We then call our function pSetString to get the address of the variable length string we want in our [[KeyPgType type]] def.
+Nous appelons ensuite notre fonction pSetString pour obtenir l'adresse de la chaîne de longueur variable que nous voulons dans notre définition de [[KeyPgType type]].
 
 ##%%(freebasic)
 mytype.sptr = pSetString("Hello World From FreeBasic!")
 %%##
 
-Remember sptr is defined as a pointer, not a string variable, so pSetString is returning a pointer (memory address) to the string not the string itself. In other words, if the string is in hole #1, pSetString returns 1.
+Souvenez-vous que sptr est défini comme un pointeur, non une variable chaîne, donc pSetString retourne un pointeur (adresse mémoire) vers la chaîne, non la chaîne elle-même. En d'autres termes, si la chaîne est en #1, pSetString retourne 1.
 
-The function pSetString uses a temporary [[KeyPgZstring zstring]] sz, to [[KeyPgAllocate allocate]] space for the passed string parameter s. Because a [[KeyPgZstring zstring]] is a null terminated string, we must add 1 to the length of s for the null terminator in the [[KeyPgAllocate allocate]] function.
+La fonction pSetString une [[KeyPgZstring zstring]] temporaire "sz", pour [[KeyPgAllocate allocate]] de l'espace pour le paramètre chaîne "s" qui est passé. Comme une [[KeyPgZstring zstring]] est une chaîne terminée par "null", nous devons ajouter 1 à la longueur de "s" pour le "null terminator" (incateur de fin nul) dans la fonction [[KeyPgAllocate allocate]] .
 
 ##%%(freebasic)
 'allocate some space + 1 for the chr(0)
 sz = allocate(len(s) + 1)
 %%##
 
-Once we have allocated space for the string, we use the reference operator * to load the data into the memory location.
+Une fois que nous avons alloué un espace pour la chaîne, nous utilisons l'opérateur de référence * pour charger les données dans l'emplacement mémoire.
 
 ##%%(freebasic)
 'load the string into the memory location
 *sz = s
 %%##
 
-We then return a pointer (the address of the string) back to our type, which is saved in mytype.sptr.
+Ensuite, nous retournons  un pointeur (l'adresse de la chaîne) vers notre type, qui est enregistré dans mytype.sptr.
 
 ##%%(freebasic)
 'return the pointer
 return sz
 %%##
 
-We can now reference the string in our type using the reference operator.
+Nous pouvons maintenant déréférencer la chaîne dans notre type en utilisant l'opérateur de référence.
 
 ##%%(freebasic)
 print "aptr: "; *mytype.sptr
 %%##
 
-Pointers can be confusing for the uninitiated, however they need not be if it is kept in mind that the pointer doesn't contain data, it simply points to some data. The pointer is a memory address, and you manipulate that data through the reference operator *. It really isn't much different than a normal variable.
+Les pointeurs peuvent être déroutants pour les non-initiés, mais ils ne doivent pas l'être si vous gardez à l'esprit que le pointeur ne contient pas de données, il pointe seulement vers certaines données. Le pointeur est une adresse mémoire et vous manipulez les données par l'opérateur de référence *. Ceci n'est vraiment pas très différent d'une variable normale.

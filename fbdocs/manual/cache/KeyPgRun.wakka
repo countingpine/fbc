@@ -1,5 +1,5 @@
 {{fbdoc item="title" value="RUN"}}----
-Transfers execution to an external program
+Transfère l'exécution vers un programme externe
 
 {{fbdoc item="syntax"}}##
 	[[KeyPgDeclare declare]] [[KeyPgSub function]] **Run** ( [[KeyPgByref byref]] //program// [[KeyPgAs as]] [[KeyPgConstQualifier const]] [[KeyPgString string]], [[KeyPgByref byref]] //arguments// [[KeyPgAs as]] [[KeyPgConstQualifier const]] [[KeyPgString string]] = "####" ) [[KeyPgAs as]] [[KeyPgString integer]]
@@ -9,15 +9,15 @@ Transfers execution to an external program
 ##
 {{fbdoc item="param"}}
 	##//program//##
-		The file name (including file path) of the program (executable) to transfer control to.
+		Le nom du fichier (y compris le chemin du fichier) du programme (exécutable) à qui on transfère le contrôle.
 	##//arguments//##
-		The command-line arguments to be passed to the program.
+		Les arguments de ligne de commande à passer au programme.
 
 {{fbdoc item="ret"}}
-	Returns negative one (##-1##) if the program could not be executed.
+	Retourne (##-1##) si le programme ne peut être exécuté.
 
 {{fbdoc item="desc"}}
-	Transfers control over to an external program. When the program exits, execution will return to the system.
+	Transfère le contrôle à un programme externe. Quand ce programme se termine, l'exécution retourne au système.
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/system/run.bas"}}%%(freebasic)
@@ -29,16 +29,16 @@ Dim result As Integer = Run("program.exe")
 %%
 
 {{fbdoc item="target"}}
-	- Linux requires the //program// case matches the real name of the file. Windows and DOS  are case insensitive. The program being run may be case sensitive for its command line parameters.
-	- Path separators in Linux are forward slashes ("##/##"). Windows uses backward slashes ("##\##") although some versions of Windows allow forward slashes.  DOS uses backward slashes. 
+	- Linux nécessite que la casse de ##//program//## corresponde au nom réel du fichier. Windows et DOS ne sont pas sensibles à la casse. Le programme exécuté peut être sensible à la casse pour ses paramètres de ligne de commande.
+	- Les séparateurs de chemin de Linux sont des barres obliques /. Windows utilise des barres obliques vers l'arrière \ mais il admet des barres obliques .  DOS utilise des barres obliques en arrière \. 
 
 {{fbdoc item="diff"}}
-	- ##**Run**## needs the full executable name, including extension (##.exe##) on platforms that have one (""Win32"", DOS).
-	- Returning an error code is new to ""FreeBASIC"".
+	- ##**Run**## nécessite le nom complet de l'exécutable, y compris l'extension (##.exe##) sur les plateformes qui ont un (""Win32"", DOS).
+	- Returner un code d'erreur est nouveau pour ""FreeBASIC"".
 
 {{fbdoc item="see"}}
-	- ##[[KeyPgExec Exec]]## transfer temporarily, with arguments  
-	- ##[[KeyPgChain Chain]]## transfer temporarily, without arguments
-	- ##[[KeyPgCommand Command]]## pick arguments
+	- ##[[KeyPgExec Exec]]## transfère temporairement, avec arguments  
+	- ##[[KeyPgChain Chain]]## transfère temporairement, sans argument
+	- ##[[KeyPgCommand Command]]## chercher des arguments
 
 {{fbdoc item="back" value="CatPgOpsys|Operating System Functions"}}

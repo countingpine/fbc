@@ -1,20 +1,20 @@
 {{fbdoc item="title" value="WRITE #"}}----
-Outputs a comma-separated list of values to a text file or device
+Inscrit une liste de valeurs séparées par des virgules dans un fichier texte ou un périphérique
 
 {{fbdoc item="syntax"}}##
 	**Write #** //filenum// **,** [ //expressionlist// ]
 ##
 {{fbdoc item="param"}}
 	##//filenum//##
-		File number of an open file or device opened for ##[[KeyPgOutput Output]]## or ##[[KeyPgAppend Append]]##.
+		Numéro de fichier ou périphérique ouvert pour ##[[KeyPgOutput Output]]## ou ##[[KeyPgAppend Append]]##.
 	##//expressionlist//##
-		Comma-separated list of items to print
+		Liste d'items à écrire, séparés par des virgules
 
 {{fbdoc item="desc"}}
-	Outputs the values in ##//expressionlist//## to the text file or device bound to ##//filenum//##. The values are separated with commas, and strings are enclosed in double quotes. Numeric values greater than zero (##0##) and less than one (##1##) are prefixed with a zero (##0##) if none is given (e.g., a value of ##-.123## will be output as ##-0.123##). Extra zeroes are truncated.
+	Sort les valeurs de ##//expressionlist//## vers un fichier texte ou un périphérique associé à ##//filenum//##. Les valeurs sont séparées par des virgules, et les chaînes sont entre guillemets doubles. Les valeurs numériques comprises entre zéro (##0##) et un (##1##) sont péfixées par un zéro (##0##) si aucun zéro n'est donné (par exemple, une valeur de ##-.123## sera sortie ##-0.123##). Les zéros supplémentaires sont éliminés.
 
-	If no expression list is given, ##**Write #**## outputs a carriage return (note that the comma after ##//filenum//## is still necessary, even if no expression list is given).
-	The purpose of ##**Write #**## is to create a file that can be read back by using [[KeyPgInputPp Input #]].
+	Si aucune liste d'items n'est donnée, ##**Write #**## sort un retour chariot (notez que la virgule après ##//filenum//## est obligatoire, même s'il n'y a pas de liste après).
+	Le but de ##**Write #**## est de créer un fichier qui sera, à l'opposé, lisible par [[KeyPgInputPp Input #]].
 
 {{fbdoc item="ex"}}
 
@@ -35,7 +35,7 @@ write #filenum, 123, "text", -.45600
 write #filenum,
 write #filenum, i, d, s
 %%
-	will produce the file:
+	produira le fichier:
 
 %%
 123,"text",-0.456
@@ -44,7 +44,7 @@ write #filenum, i, d, s
 %%
 
 {{fbdoc item="diff"}}
-	- None
+	- Aucune
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgWrite Write]]##

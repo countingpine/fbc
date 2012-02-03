@@ -1,5 +1,5 @@
 {{fbdoc item="title" value="REDIM"}}----
-Defines or resizes a variable-length array
+Définit ou redimensionne un tableau de longueur-variable
 
 {{fbdoc item="syntax"}}##
 	**Redim** [ [[KeyPgShared Shared]] ] [ [[KeyPgPreserve Preserve]] ] //symbolname//([//subscript// [, ...]]) As [[DataType datatype]] [, ...]
@@ -7,30 +7,30 @@ Defines or resizes a variable-length array
 ##
 {{fbdoc item="param"}}
 	##[[KeyPgShared Shared]]##
-		Specifies shared (file-scope) access to the array throughout the module.
+		Spécifie un accès partagé au tableau (pour la portée du fichier) à travers le module.
 	##[[KeyPgPreserve Preserve]]##
-		When used with an existing array, the contents of the array will be preserved during the resize. Note that ##[[KeyPgPreserve Preserve]]## will not work properly in all cases.
+		Lors de l'utilisation avec un tableau existant, le contenu de ce tableau sera préservé pendant le redimensinnement. Notez que ##[[KeyPgPreserve Preserve]]## ne fonctionnera pas correctement dans tous les cas.
 	##//symbolname//##
-		A new or existing array id.
+		Un identificateur (id) de tableau, nouveau ou existant déjà.
 	##//subscript//##: [ ##//lowerbound// To## ] ##//upperbound//##
-		The lower and upper bound range for a dimension of the array. Lower bound defaults to zero (##0##), or the default ##[[KeyPgOptionbase Base]]##, if not specified.
+		Les limites inférieure et supérieure pour une dimension du tableau. La limite inférieure à zéro (##0##) par défaut ou la ##[[KeyPgOptionbase Base]]## par défaut, si non spécifié.
 	##[[DataType datatype]]##
-		The type of elements contained in the array.
+		Le type des éléments contenus dans le tableau.
 
 {{fbdoc item="desc"}}
-	##**Redim**## can be used to define new variable-length arrays, or resize existing variable-length arrays. ##**Redim**## always produces variable-length arrays, so, unlike ##[[KeyPgDim Dim]]##, variable-length arrays can be defined with constant subscripts.
+	##**ReDim**## peut être utilisé pour définir de nouveaux tableaux de longueur variable ou pour redimensionner des tableaux de longueur variable. ##**ReDim**## produit toujours des tableaux de longueur variable, ainsi, contrairement à ##[[KeyPgDim Dim]]##, des tableaux de longueur variable peuvent être définis avec des indices constants.
 
-	When defining a new variable-length array, its elements are default constructed. For simple data types like ##[[KeyPgInteger Integer]]## or ##[[KeyPgDouble Double]]##, the elements are initialized to zero (##0##). For user-defined types with a default constructor, that will be called.
+	Lorsque vous définissez un nouveau tableau de longueur variable, ses éléments sont construits par défaut. Pour des types de données simples comme ##[[KeyPgInteger Integer]]## ou ##[[KeyPgDouble Double]]##, les éléments sont initialisés à zéro (##0##). Pour des types définis par l'utilisateur avec un constructeur par défaut, celui-ci sera appelé.
 
 	**NOTES**: 
-	- ##**Redim** [[KeyPgPreserve Preserve]]## may not work as expected in all cases:
-		##[[KeyPgPreserve Preserve]]##'s current behavior is to keep the original data contiguous in memory, and only expand or truncate the size of the memory.
-		Its behavior (with a single dimension) is well-defined only when the upper bound is changed.  If the lower bound is changed, the current result is that the data is in effect shifted to start at the new lower bound.
-		With multiple dimensions, only the upper bound of only the first dimension may be safely increased.  If the first dimension is reduced, the existing mappable data may be lost. If lower-order dimensions are resized at all, the effects can be hard to predict.
+	- ##**Redim** [[KeyPgPreserve Preserve]]## ne donnera pas le résultat escompté dans les cas suivants:
+		Le comportement normal de ##[[KeyPgPreserve Preserve]]## est de conserver les données originales contiguës dans la mémoire, et seulement augmenter ou diminuer la taille de la mémoire.
+		Son comportement (avec une seule dimension) n'est bien défini que lorsque la borne supérieure est changée. Si la borne inférieure est modifiée, le résultat est que les données sont en effet déplacées pour commencer à la nouvelle limite inférieure.
+		Avec des dimensions multiples, seule la limite supérieure de la première dimension peut être augmentée en toute sécurité. Si la première dimension est réduite, les données existantes cartographiables peuvent être perdues. Si les dimensions d'ordre inférieur sont toutes redimensionnées, les effets sont imprévisibles.
 
-	- ##**Redim**## cannot be used on fixed-size arrays - i.e. arrays with constant bounds made with ##[[KeyPgDim Dim]]##.  This includes arrays contained in UDTs (user-defined ##[[KeyPgType Type]]##s), because currently only fixed-size arrays are supported in UDTs.  This also includes fixed-length arrays passed as parameters in a function.  ""FreeBASIC"" cannot prevent you trying this at compile-time, but the results at run-time will be undefined.
+	- ##**Redim**## ne peut pas être utilisé sur des tableaux de taille fixe - c'est à dire avec des tableaux avec des limites constantes produits par ##[[KeyPgDim Dim]]##.  Ceci inclut les tableaux contenus dans les ##[[KeyPgType Type]]##s définis par l'utilisateur, car seuls des tableaux à taille fixée sont supportés par les types définis par l'utilisateur.  Ceci inclut aussi les tableaux de longueur fixée passés comme paramètres d'une fonction.  ""FreeBASIC"" ne pourra vous empêcher d'essayer cela au moment de la compilation, mais les résultats au moment du fonctionnement seront imprévisibles.
 
-	- Using ##**Redim**## within a member procedure with an array that contains an instance of the object class is undefined, and will [hopefully] result in horrible crashes.
+	- L'utilisation de ##**Redim**## dans un membre d'une procédure avec un tableau qui contient une instance de la classe objet est indéfinie et entraînera d'horribles crashes.
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/array/redim.bas"}}%%(freebasic)
@@ -51,7 +51,7 @@ For index As Integer = LBound(array) To UBound(array)
 	Print index, array(index)
 Next
 %%
-	This program will produce the following output:
+	Ce programme produira la sortie suivante:
 
 %%index         value
  0             0
@@ -117,7 +117,7 @@ For i = LBound(array, 1) To UBound(array, 1)
 Next
 Print
 %%
-	This program will produce the following output:
+	Ce programme produira la sortie suivante:
 
 %%3 * 4:
 
@@ -139,8 +139,8 @@ Print
 
 %%
 {{fbdoc item="diff"}}
-	- ##[[KeyPgPreserve Preserve]]## was in Visual Basic, but not in QBASIC.
-	- Multi-dimensional arrays in ""FreeBASIC"" are in row-major order, rather than column-major order.
+	- ##[[KeyPgPreserve Preserve]]## existe dans Visual Basic, mais pas dans QBASIC.
+	- Les tableaux multi-dimensionnels de ""FreeBASIC"" sont d'ordre ligne-majeur, plutôt que d'ordre colonne-majeur.
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgCommon Common]]##

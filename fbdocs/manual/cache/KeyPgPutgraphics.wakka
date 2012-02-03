@@ -1,126 +1,126 @@
 {{fbdoc item="title" value="PUT (GRAPHICS)"}}----
-Copies an image on to another image or screen
+Copie une image sur une autre image ou sur l'écran
 
 {{fbdoc item="syntax"}}##
 	**Put** [ //target//, ] [ STEP ] ( //x//,//y// ), //source// [ ,( //x1//,//y1// )-[ STEP ]( //x2//,//y2// ) ] [ ,//method// [ ,( //alphaval//|//value//|//blender// [ ,//param//]) ] ]
 ##
 {{fbdoc item="param"}}
 	##//target//##
-		is the address of the buffer where the image is to be drawn. If it's omitted, the image gets blitted to screen. See below.
+		est l'adresse du tampon où l'image doit êtredessinée (destination). Si omis, l'image est "blittée" (affichée) à l'écran. Voir ci-dessous.
 	##STEP##
-		indicates that ##(//x//,  //y//)## offsets are relative to the current graphics cursor position.	
+		indique que les coordonnées ##(//x//,  //y//)## sont relatives à  la position courante du curseur graphique.	
 	##(//x//,  //y//)##
-		specify offsets from the upper-left corner of the destination buffer, or screen, that the image gets drawn to. 
+		indique les coordonnées par rapport au coin en haut à gauche du tampon destination ou de l'écran, sur lequel l'image est dessinée. 
 	##//source//##
-		is the address of the buffer of the image to be drawn. See below.
+		est l'adresse du tampon image sur lequel dessiner. Voir ci-dessous.
 	##(//x1//, //y1//)-[ STEP ](//x2//, //y2//)##
-		specify a rectangular area in the source buffer to draw. If omitted, the entire buffer is drawn. ##STEP## indicates that ##//x2//## and ##//y2//## are relative to ##//x1//## and ##//y1//##, respectively.
+		une zone rectangulaire dans le tampon source, utilisée pour le dessin. Si omise, le tampon entier est utilisé pour le dessin. ##STEP## indique que ##//x2//## et ##//y2//## sont relatifs respectivement à ##//x1//## et ##//y1//##.
 	##//method//##
-		specifies the method used to draw the image to the destination buffer, and can be any one of the following (the default method is ##XOR##):
+		spécifie la méthode utilisée pour dessiner l'image sur le tampon destination et peut être une des méthodes suivantes (##XOR## est la méthode par défaut):
 
-		Background-independent methods
-			##[[KeyPgPsetGfx PSET]]## : Source pixel values are copied without modification.
-			##PRESET## : Source pixel values are 1's-complement negated before being copied.
-			##[[KeyPgTransGfx TRANS]]## : Source pixel values are copied without modification. Does not draw source pixels of mask color. See below.
-		Background-dependent methods
-			##[[KeyPgAndGfx AND]]## : Destination pixels are bitwise ANDed with source pixels. See below.
-			##[[KeyPgOrGfx OR]]## : Destination pixels are bitwise ORed with source pixels. See below.
-			##[[KeyPgXorGfx XOR]]## : Destination pixels are bitwise XORed with source pixels. See below.
-			##[[KeyPgAlphaGfx ALPHA]]## : Source is blended with a transparency factor specified either in the ##//value//## parameter, or in the image's individual pixels.  See below.
-			##[[KeyPgAddGfx ADD]]##: Source is multiplied by a value and added with saturation to the destination. See below.
-			##[[KeyPgCustomgfx CUSTOM]]## : Uses a user-defined function to perform blending the source with the destination. See below.
+		Méthodes indépendantes de l'arrière-plan
+			##[[KeyPgPsetGfx PSET]]## : Les valeurs pixel sont copiées sans modification.
+			##PRESET## : Les valeurs pixel source sont complémentées à  1 négativement (1's-complement negated) avant la copie.
+			##[[KeyPgTransGfx TRANS]]## : Les valeurs pixel source sont copiées sans modification. Ne dessine pas les pixels source du masque de couleur. Voir ci-dessous.
+		Méthodes dépendant de l'arrière-plan
+			##[[KeyPgAndGfx AND]]## : Les pixels destination subissent un AND avec les pixels source (dest AND source). Voir ci-dessous.
+			##[[KeyPgOrGfx OR]]## : Les pixels destination subissent un OR avec les pixels source (dest OR source). Voir ci-dessous.
+			##[[KeyPgXorGfx XOR]]## : Les pixels destination subissent un XOR avec les pixels source (dest XOR source). Voir ci-dessous.
+			##[[KeyPgAlphaGfx ALPHA]]## : Source est mélangée avec un facteur de transparence spécifié soit par le paramètre ##//value//##, soit dans les pixels individuels de l'image.  Voir ci-dessous.
+			##[[KeyPgAddGfx ADD]]##: Source est multiplié par une valeur et ajoutée avec saturation à  la destination. Voir ci-dessous.
+			##[[KeyPgCustomgfx CUSTOM]]## : Utilise une fonction définie par l'utilisateur pour effectuer le mélange de la source avec la destination. Voir ci-dessous.
 
 	##//value//##
-		is a ##0..255## value specifying the transparency value for an ##ADD## or ##ALPHA## method blit.
+		est une valeur de ##0 à 255## spécifiant la valeur de la transparence pour l'une des méthodes de transformation ##ADD## ou ##ALPHA##.
 	##//blender//## 
-		specifies the address of a user-defined function to be called in a ##CUSTOM## method blit. See below.
+		spécifie l'adresse de la fonction utilisateur à appeler pour la méthode de transformation ##CUSTOM##. Voir ci-dessous.
 	##//param//## 
-		specifies a parameter to pass to the custom blender.
+		indique le paramètre à passer à la fonction de transformation utilisateur.
 
 {{fbdoc item="desc"}}
-	The ##**Put**## statement can be used to draw an image onto another image. The ##//x//## and ##//y//## coordinates are affected by the last call to the ##[[KeyPgViewgraphics View]]## and ##[[KeyPgWindow Window]]## statements, and plotted image respects the current clipping region set by last call to the ##[[KeyPgViewgraphics View]]## statement. The source image is clipped if it is drawn outside the destination buffer.
+	##**Put**## peut être utilisé pour dessiner une image sur une autre image. Les coordonnées ##//x//## et ##//y//## sont affectées par le dernier appel à  ##[[KeyPgViewgraphics View]]## et ##[[KeyPgWindow Window]]##, et l'image placée respecte la région de découpage courante validée par le dernier appel à  ##[[KeyPgViewgraphics View]]##. L'image est tronquée si elle est dessinée en-dehors du tampon destination.
 
-	**Valid Image Buffers**
-		The ##//source//## and ##//target//## image buffers must be valid image buffers. Valid image buffers are created using the ##[[KeyPgGetgraphics Get]]## or ##[[KeyPgImagecreate ImageCreate]]## statements. Valid image buffers can be specified in a ##**Put**## statement using an array name with optional index, or a pointer with optional index.
+	**Tampons Image Valides**
+		Les tampons image ##//source//## et ##//target//## doivent être des tampons image valides. Des tampons image valides sont créés par ##[[KeyPgGetgraphics Get]]## ou ##[[KeyPgImagecreate ImageCreate]]##. Des tampons image valides peuvent être spécifiés dans ##**Put**## utilisant un tableau avec un index optionnel ou un pointeur avec un index optionnel.
 
-	**Drawing methods**
-		Depending on the method used, the existing pixel values in the destination buffer are used to calculate the pixel values that are actually drawn. The ##PSET##, ##PRESET## and ##TRANS## methods do not use the destination buffer for calculating final pixel values, while the ##AND##, ##OR##, ##XOR##, ##ALPHA## and ##ADD## methods do. Images that are drawn with these latter methods will look differently depending on the content of the destination buffer.
+	**Méthodes de dessin**
+		Dépendant de la méthode utilisée, les valeurs pixel dans le tampon destination sont utilisées pour calculer les valeurs pixel qui seront dessinées. Les méthodes ##PSET##, ##PRESET## et ##TRANS## n'utilisent pas le tampon destination pour calculer les valeurs finales, au contraire des méthodes ##AND##, ##OR##, ##XOR##, ##ALPHA## et ##ADD##. Les images qui sont dessinées par ces dernières méthodes seront différentes en fonction du contenu du tampon destination.
 
-	**Different pixel formats**
-		The pixel format of an image buffer must be compatible with the current graphics mode color depth; that is, if you acquire an image using ##[[KeyPgGetgraphics Get]]## and you later change screen mode via the ##[[KeyPgScreengraphics Screen]]## statement, the image data may not be valid in the new graphics mode, and you may not be able to draw it on the screen. You should note however that you will always be able to draw image buffers onto other image buffers via ##**Put**## as long as these buffers were created with the same depth.
+	**Différent formats de pixel**
+		Le format de pixel d'un tampon image doit être compatible avec la profondeur de couleur du mode de graphique courant; autrement dit, si vous faites l'acquisition d'une image en utilisant ##[[KeyPgGetgraphics Get]]## et que plus tard vous changez de mode écran avec ##[[KeyPgScreengraphics Screen]]##, les données image ne seront peut être pas valides dans ce nouveau mode graphique, et vous ne pourrez peut être pas l'afficher à  l'écran. Vous noterez cependant que vous pourrez toujours dessiner un tampon image sur un autre tampon image via ##**Put**## tant que ces tampons auront été créés avec la même profondeur.
 
-		The ##AND##, ##OR## and ##XOR## methods produce different results depending on the current color depth, as pixels are stored in different formats; see [[GfxInternalFormats Internal pixel formats]] for details. 
+		Les méthodes ##AND##, ##OR## et ##XOR## donnent des résultats différents en fonction de la pofondeur de couleur courante, car les pixels sont stockés dans différents formats; voir [[GfxInternalFormats Formats internes des pixels]] pour des détails. 
 
-	**Mask Color**
-		The ##TRANS##, ##ALPHA## and ##ADD## methods do not draw pixels in the source image that use the mask color. The mask color depends on target (being it an image buffer or the screen) depth: in depths up to 8 bpp (paletted modes) it is equal to color index ##0##, while in hi/truecolor depths (16 and 32 bpp) it is equal to magenta, which is ##[[KeyPgRgb RGB]](255, 0, 255)##. Note that in 32 bpp modes the alpha value of a color does not affect the identification of the transparent color; only the lower 24 bits are used to identify it. See [[GfxInternalFormats Internal pixel formats]] for details. 
+	**Masque de couleur**
+		Les méthodes ##TRANS##, ##ALPHA## et ##ADD## ne dessinent pas les pixels de l'image source qui utilisent le masque de couleur. Le masque de couleur dépend de la profondeur de la cible (un tampon image ou l'écran): pour des profondeurs jusqu'à  8 bpp (modes avec palette) c'est la couleur d'indice ##0##, alors qu'en profondeur 'hi/truecolor' (16 et 32 bpp) il correspond à  magenta, c'est à  dire ##[[KeyPgRgb RGB]](255, 0, 255)##. Notez que dans les modes 32 bpp la valeur alpha d'une couleur n'affecte pas l'identification de la couleur transparente; seuls les 24 bits de poids faibles sont utilisés pour l'identifier. Voir [[GfxInternalFormats Formats internes des pixels ]] pour plus de détails. 
 
-	**Alpha drawing**
-		The ##ALPHA## method can be used in two modes. If the ##//value//## parameter is specified, this is used to specify the level of transparency for the whole image to be drawn; a value of 0 will draw a completely transparent image, whereas a value of 255 will draw a completely solid one. This mode works only when drawing onto hi/truecolor targets (16 and 32 bpp).
-		If the ##//value//## parameter is omitted, the ##ALPHA## method will take the alpha level value on a per-pixel basis, allowing to draw images with an alpha channel (certain parts of the image can be made more or less transparent than others). This mode works only with 32 bpp image buffers, as this is the only color depth that allows for an embedded alpha value in each pixel.
+	**Dessin de la transparence (Alpha drawing)**
+		La méthode ##ALPHA## est utilisable dans deux modes. Si le paramètre ##//value//## est spécifié, il est utilisé pour spécifier le niveau de transparence pour l'image entière à  dessiner; une valeur de 0 dessinera une image complètement transparente, alors qu'une valeur de 255 en dessinera une sans aucune transparence. Ce mode ne fonctionne qu'avec des cibles 'hi/truecolor' (16 et 32 bpp).
+		Si le paramètre ##//value//## est omis, la méthode ##ALPHA## prendra la valeur du niveau alpha sur une base par-pixel, permettant de dessiner des images avec un canal alpha (certaines parties de l'image pourront étre plus ou moins transparentes que d'autres). Ce mode ne fonctionne qu'avec des tampons image de 32 bpp, car c'est la seule profondeur de couleur permettant d'inclure la valeur alpha dans chaque pixel.
 
-	**Dealing with the alpha channel**
-		Normally ##**Put**## only allows to draw image buffers onto targets with the same depth, but there is an exception. When drawing an 8 bpp image buffer onto a 32 bpp target and the ##ALPHA## method is used, the 8 bpp source image is drawn into the alpha channel of the 32 bpp target. This allows to easily set the whole alpha channel of an image without having to deal with low level access of its pixel data.
+ 	**Jouer avec le canal "alpha"**
+		Normalement ##**Put**## ne permet d'écrire des tampons image que sur des cibles de même profondeur, mais il y a une exception. Quand vous dessinez un tampon image de 8 bpp sur une cible de 32 bpp et que la méthode ##ALPHA## est utilisée, l'image source de 8 bpp est dessinée dans le canal alpha de la cible 32 bpp. Cela permet de valider facilement la totalité du canal alpha d'une image sans étre obligé de manier individuellement ses données pixels.
 
-	**Custom Blend Function**
-		The ##CUSTOM## method uses a user-defined function to calculate the final pixel values to be drawn to the destination buffer. This function will be called once for every pixel of the source image, and will receive the source and destination pixel values, and a data pointer passed by the ##**Put**## function. The pixel value returned will be the value used to draw to the destination buffer. The function has the form:
+	**Méthode CUSTOM de Modification des pixels**
+		La méthode ##CUSTOM## utilise une fonction définie par l'utilisateur pour calculer les valeurs finales des pixels à dessiner dans le tampon destination. Cette fonction sera appelée pour chaque pixel de l'image source, et recevra les valeurs des pixels source et destination et un pointeur de données passé par la fonction ##**Put**##. La valeur du pixel renvoyée sera celle utilisée pour dessiner sur le tampon destination. La fonction est de la forme:
 
 		##[[KeyPgDeclare declare]] [[KeyPgFunction function]] //identifier// ( [[KeyPgByval byval]] //source_pixel// [[KeyPgAs as]] [[KeyPgUinteger uinteger]], [[KeyPgByval byval]] //destination_pixel// [[KeyPgAs as]] [[KeyPgUinteger uinteger]], [[KeyPgByval byval]] //parameter// [[KeyPgAs as]] [[KeyPgAny any]] [[KeyPgPtr ptr]]) [[KeyPgAs as]] [[KeyPgUinteger uinteger]]##
 
-			##//identifier//## is the name of the function. Can be anything.
-			##//source_pixel//## is the current pixel value of the source image.
-			##//destination_pixel//## is the current pixel value of the destination image.
-			##//parameter//## is the parameter that is passed by the ##**Put**## command.  It should be a data ##[[KeyPgPtr Pointer]]##.  If omitted, its value will be zero.
+			##//identifier//## est le nom de la fonction. Selon vos désirs.
+			##//source_pixel//## est la valeur du pixel courant de l'image source.
+			##//destination_pixel//## est la valeur du pixel courant de l'image destination.
+			##//parameter//## c'est le paramètre passé par la commande ##**Put**##. Ce doit être un ##[[KeyPgPtr Pointeur]]## de données.  S'il est omis, sa valeur sera zéro.
 
 {{fbdoc item="ex"}}
-	The following program gives a simple example of how to ##**Put**## an image to the screen, including setting up an image buffer, and freeing its memory after.
+	Le programme ci-dessous donne un exemple simple de la façon d'utiliser ##**Put**## pour placer une image à l'écran, incluant la création d'un tampon image et la libération de la mémoire aprés utilisation.
 	{{fbdoc item="filename" value="examples/manual/gfx/put.bas"}}%%(freebasic)
-'' set up the screen and fill the background with a color
+'' Valide ecran et remplit avec couleur arriere-plan
 screenres 320, 200, 32
 paint (0, 0), rgb(64, 128, 255)
 
-'' set up an image and draw something in it
+'' Valide une image et dessine quelque chose dedans
 dim img as any ptr = imagecreate( 32, 32, rgb(255, 0, 255) )
 circle img, (16, 16), 15, rgb(255, 255, 0),     ,     , 1, f
 circle img, (10, 10), 3,  rgb(  0,   0, 0),     ,     , 2, f
 circle img, (23, 10), 3,  rgb(  0,   0, 0),     ,     , 2, f
 circle img, (16, 18), 10, rgb(  0,   0, 0), 3.14, 6.28
 
-'' PUT the image in the center of the screen
+'' PUT image au centre ecran
 put (160 - 16, 100 - 16), img, trans
 
-'' free the image memory
+'' Libere memoire image
 imagedestroy img
 
-'' wait for a keypress
+'' Attend touche appuyee
 sleep
 %%
 
 {{image class="center" title="Simple Put example output" url="/images/putgfx1.png"}}
 
-	The following example shows how to allocate memory for an image, draw that image using various methods, including a custom blender, and free the memory for the image:
+	L'exemple ci-dessous montre comment allouer de la mémoire pour une image, puis dessiner celle-ci en utilisant différentes méthodes, y compris en utilisant une fonction personnelle, puis comment libérer la mémoire utilisée:
 	{{fbdoc item="filename" value="examples/manual/gfx/put-all.bas"}}%%(freebasic)
 declare function checkered_blend( byval src as uinteger, byval dest as uinteger, byval param as any ptr ) as uinteger
 
-   screen 14, 32                                   '' set 320*240*32 gfx mode
-   
+   screen 14, 32                                   '' valide 320*240*32 mode gfx
+
    dim as any ptr sprite
    dim as integer counter = 0
    
-   sprite = ImageCreate( 32, 32 )                  '' allocate memory for 32x32 sprite
-   
+   sprite = ImageCreate( 32, 32 )                  '' alloue memoire pour sprite 32x32
+
    line sprite, ( 0, 0 )-( 31, 31 ), rgba(255, 0, 0, 64), bf  '' draw a sprite ...
    line sprite, ( 4, 4 )-( 27, 27 ), rgba(255, 0, 0, 192), bf
    line sprite, ( 0, 0 )-( 31, 31 ), rgb(0, 255, 0), b
    line sprite, ( 8, 8 )-( 23, 23 ), rgba(255, 0, 255, 64), bf
    line sprite, ( 1, 1 )-( 30, 30 ), rgba(0, 0, 255, 192)
    line sprite, ( 30, 1 )-( 1, 30 ), rgba(0, 0, 255, 192)
-   
+
    cls
-   dim as integer i : for i = 0 to 63              '' draw the background
+   dim as integer i : for i = 0 to 63              '' draw l' arriere-plan
 	  line( i,0 )-( i,240 ), rgb( i * 4, i * 4, i * 4 )
    next i
-   
-   '' demonstrate all drawing methods ...
+
+   '' Demonstration toutes methodes dessin ...
    put( 8,14 ), sprite, pset
    put step( 16,20 ), sprite, preset
    put step( -16,20 ), sprite, and
@@ -131,8 +131,8 @@ declare function checkered_blend( byval src as uinteger, byval dest as uinteger,
    put step( 16,20 ), sprite, alpha
    put step( -16,20 ), sprite, add, 192
    put step( 16,20 ), sprite, custom, @checkered_blend, @counter
-   
-   '' print a description near each demo
+
+   '' Affiche une description a cote chaque demo
    draw string (100, 26), "<- pset"
    draw string step (0, 20), "<- preset"
    draw string step (0, 20), "<- and"
@@ -143,11 +143,11 @@ declare function checkered_blend( byval src as uinteger, byval dest as uinteger,
    draw string step (0, 20), "<- alpha (per pixel)"
    draw string step (0, 20), "<- add"
    draw string step (0, 20), "<- custom"
-   
-   ImageDestroy( sprite )                          '' free allocated memory for sprite
-   sleep : end 0
 
-'' custom blender function: chequered put
+   ImageDestroy( sprite )                          '' libere memoire sprite
+   sleep : end 0
+   
+'' Fonction blender perso/span
 function checkered_blend( byval src as uinteger, byval dest as uinteger, byval param as any ptr ) as uinteger
    dim as integer ptr counter
    dim as uinteger pixel
@@ -162,17 +162,16 @@ end function
 {{image class="center" title="Put example output" url="/images/putgfx2.png"}}
 
 {{fbdoc item="diff"}}
-	- ##//target//## is new to ""FreeBASIC""
-	- The ##TRANS##, ##ALPHA##, ##ADD## and ##CUSTOM## methods are new to ""FreeBASIC""
-	- FB uses a different image format internally, which is unsupported by QB
-	- QB throws a run-time error instead of clipping out-of-bounds images
-	- In QB, only arrays can be specified as source images
-
+	- ##//target//## est nouveau pour ""FreeBASIC""
+	- Les méthodes ##TRANS##, ##ALPHA##, ##ADD## et ##CUSTOM## sont nouvelles pour ""FreeBASIC"".
+	- Dans QB, la destination est toujours l'écran.
+	- QB produit une erreur de fonctionnement en cas d'écriture en dehors des limites de l'image.
+	- Dans QB, seuls des tableaux (arrays) peuvent être spécifiés comme images source.
 {{fbdoc item="see"}}
-	- ##[[KeyPgPutfileio Put (File I/O)]]##
-	- ##[[KeyPgGetgraphics Get (Graphics)]]##
+	- ##[[KeyPgPutfileio Put (File Entré/Sortie)]]##
+	- ##[[KeyPgGetgraphics Get (Graphique)]]##
 	- ##[[KeyPgImagecreate ImageCreate]]##
 	- ##[[KeyPgAlphaGfx Alpha]]##
-	- [[GfxInternalFormats Internal pixel formats]]
+	- [[GfxInternalFormats Formats graphiques internes]]
 
 {{fbdoc item="back" value="CatPgGfx2D|2D Drawing Functions"}}

@@ -1,42 +1,42 @@
 {{fbdoc item="title" value="Storage Classes"}}----
-Visibility and lifetime of variables, objects and arrays
+Visibilité et durée de vie des variables, des objets et des tableaux
 
-A variable, object or array's storage class determines when and where memory is allocated for it and when that memory is destroyed. There are 2 storage classes in FreeBASIC: //automatic// and //static//.
+Une classe de stockage pour variable, object ou tableau détermine quand et où de la mémoire leur est allouée et quand elle sera détruite. Il existe deux 2 classes de stockage dans FreeBASIC: //automatic// et //static//.
 
-{{fbdoc item="section" value="Automatic"}}
+{{fbdoc item="section" value="Automatic (Automatique)"}}
 
-	//Automatic// variable, object and array lifetimes begin at the point of declaration and end when leaving the scope they are declared in.
+	La durée de vie d'une variable, d'un objet ou d'un tableau //automatic// commence au point de déclaration et se termine quand on quitte la portée de leur déclaration.
 	
-	//Automatic// entities are guaranteed to have unique storage for each instance of the block in which they are declared. For example, the //automatic// variables declared within a procedure will be allocated at different addresses and have unique state (value) for each call to the procedure.
+	Les entités //automatic// ont la garantie d'avoir un stockage unique pour chaque instance du bloc dans lequel elles sont déclarées. Par exemple, les variables //automatic// déclarées dans une procédure seront alloués à des adresses différentes et auront un état unique (valeur) pour chaque appel de la procédure.
 	
-	//Automatic// variables, objects and arrays are defined using the ##[[KeyPgDim Dim]]##, ##[[KeyPgRedim Redim]]## and ##[[KeyPgVar Var]]## keywords without the ##[[KeyPgShared Shared]]## specifier.
+	Les variables, objets et tableaux //automatic// sont définis en utilisant les mots-clefs ##[[KeyPgDim Dim]]##, ##[[KeyPgRedim Redim]]## et ##[[KeyPgVar Var]]## sans le spécificateur ##[[KeyPgShared Shared]]##.
 
-	The memory for //automatic// variables, objects and arrays is allocated on the program stack.
+	La mémoire pour les variables, objets et tableaux //automatic// est allouée sur la pile du programme.
 	
-	//Automatic// variables, objects and arrays have no linkage.
+	Les variables, objets et tableaux //automatic// ne sont pas liés.
 
-{{fbdoc item="section" value="Static"}}
+{{fbdoc item="section" value="Static (Statique)"}}
 
-	//Static// variable, object and array lifetimes begin at program creation and end with program termination.
+	La durée de vie d'une variable, d'un objet ou d'un tableau //static// commence à la création du programme et se termine quand on quitte le programme.
 	
-	//Static// entities are guaranteed to have the same storage for each instance of the block in which they are declared. For example, the //static// variables declared within a procedure will be allocated at the same address, and retain their state (value) across each call to the procedure.
+	Les entités //static// ont la garantie d'avoir le même stockage pour chaque instance du bloc dans lequel elles sont déclarées. Par exemple, les variables //static// déclarées dans une procédure seront alloués à la même adresse et conserveront leur état (valeur) pour chaque appel à la procédure.
 	
-	//Static// variables, objects and arrays are declared using the ##[[KeyPgStatic Static]]## keyword. Entities declared using the ##[[KeyPgShared Shared]]## specifier are implicitly //static//. All entities declared within a procedure that is declared using the ##[[KeyPgStatic Static]]## specifier are also implicitly //static//.
+	Les variables, objets et tableaux //static// sont déclarées en utilisant le mot-clef ##[[KeyPgStatic Static]]##. Entités déclarés en utilisant le spécificateur ##[[KeyPgShared Shared]]## sont implicitement //static//. Toutes les entités déclarées dans une procédure qui est déclarée en utilisant le spécificateur ##[[KeyPgStatic Static]]## sont aussi implicitement //static//.
 	
-	The memory for //static// variables, objects and arrays is allocated in the ##.BSS## section of the executable, or in the ##.DATA## section if they are initialized when defined. //Static// variable-length arrays must be declared empty, with an empty subscript range list; their element data is still allocated in the free store (when they are resized), but the internal array data is allocated in the ##.DATA## section of the executable to allow the element data to persist throughout program execution.
+	La mémoire pour les variables, objets et tableaux //static// est allouée dans la section ##.BSS## de l'exécutable ou dans la section ##.DATA## si les variables, objets et tableaux ont été  initialisés lors de leur définition. Les tableaux de longueur variable //static// doivent être déclarés vides, avec une liste de gamme d'indices vide; leurs éléments de données sont toujours alloués dans le stock libre (quand ils sont redimensionnés), mais le tableau interne des données est alloué dans la section ##.DATA## de l'exécutable pour permettre aux l'éléments de données de persister tout au long de l'exécution du programme.
 	
-	//Static// variables, objects and arrays have internal linkage by default, unless previously declared using the ##[[KeyPgExtern Extern]]## or ##[[KeyPgCommon Common]]## keywords.
+	Les variables, objets et tableaux //static// sont liés en interne par défaut, à moins qu'ils n'aient été préalablement déclarés en utilisant les mots-clefs ##[[KeyPgExtern Extern]]## ou ##[[KeyPgCommon Common]]##.
 
 {{fbdoc item="target"}}
-	-  In DOS and Windows platforms, the size of the program stack can be adjusted at compile-time using the ##//-t//## [[CompilerCmdLine command-line switch]]. In Linux platforms, the size of the program stack can be adjusted at load-time by modifying ##/etc/security/limits.conf##, or on a per-thread basis using the shell builtin ##ulimit##.
+	-  Sous DOS et Windows, la taille de la pile du programme peut être ajustée à la compilation en utilisant l'[[CompilerCmdLine option de ligne de commande]] ##//-t//##. Sous Linux, la taille de la pile du programme peut être ajustée au moment du chargement en modifiant ##/etc/security/limits.conf## ou sur une base par thread à l'aide de la commande interne du shell ##ulimit##.
 
 {{fbdoc item="diff"}}
-	- ""QuickBASIC"" allows //static// entities to be declared within procedures and ##DEF FN## routines only.
+	- ""QuickBASIC"" permet aux entités //static// d'être déclarées seulement dans les procédures et les routines ##DEF FN##.
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgExtern Extern]]##, ##[[KeyPgCommon Common]]##
 	- ##[[KeyPgDim Dim]]##, ##[[KeyPgRedim Redim]]##, ##[[KeyPgVar Var]]##, ##[[KeyPgShared Shared]]##
 	- ##[[KeyPgStatic Static]]##
-	- [[ProPgVarProcLinkage Linkage]]
+	- [[ProPgVarProcLinkage Liens]]
 
 {{fbdoc item="back" value="CatPgProgrammer|Programmer's Guide"}}

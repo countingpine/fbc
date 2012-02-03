@@ -1,5 +1,5 @@
 {{fbdoc item="title" value="IMAGECONVERTROW"}}----
-Converts a row of image data into another color depth
+Convertit une ligne de données image dans une autre profondeur de couleur
 
 {{fbdoc item="syntax"}}##
 	[[KeyPgDeclare declare]] [[KeyPgSub sub]] **""ImageConvertRow""** ( [[KeyPgByval byval]] //src// [[KeyPgAs as]] [[KeyPgAny any]]  [[KeyPgPtr ptr]], [[KeyPgByval byval]] //src_bpp// [[KeyPgAs as]] [[KeyPgInteger integer]], [[KeyPgByval byval]] //dst// [[KeyPgAs as]] [[KeyPgAny any]]  [[KeyPgPtr ptr]], [[KeyPgByval byval]] //dst_bpp// [[KeyPgAs as]] [[KeyPgInteger integer]], [[KeyPgByval byval]] //width// [[KeyPgAs as]] [[KeyPgInteger integer]], [[KeyPgByval byval]] //isrgb// [[KeyPgAs as]] [[KeyPgInteger integer]] = 1 )
@@ -9,20 +9,20 @@ Converts a row of image data into another color depth
 ##
 {{fbdoc item="param"}}
 	##//src//##
-		The address of the start of the source row.  The source can either be a full-color image with a bit depth of 24 or 32 bits per pixel, or a paletted image with a bit depth of 1-8 bits per pixel.  Converting a paletted image will only work properly if you are in a screen mode that is using the correct palette for the image when you do the conversion.
+		L'adresse de départ de la ligne source. Lasource est soit une image pleine couleur (full-color) avec uneprofondeur de couleur de 24 ou 32 bits par pixel, soit une image avecpalette d'une profondeur de 1-8 bits par pixel. Convertir une imageavec palette ne fonctionnera correctement que si vous êtes dans un modeécran utilisant la palette correcte pour l'image lors de la conversion.
 	##//src_bpp//##
-		The number of bits per pixel in the source row.  1-8, 24 and 32.
+		Le nombre de bits par pixel dans la ligne source.  1-8, 24 et 32.
 	##//dst//##
-		The address of the start of the destination row.  The image can be a full-color image of 16 or 32 bits per pixel.  If the source is a paletted image, the destination can also be a paletted image of 1 to 8 bits per pixel.
+		L'adresse du début de la ligne destination.L'image peut être une image pleine couleur de 16 ou 32 bits par pixel.Si la source est une image avec palette, la destination peut aussi êtreune image avec palette de 1 à 8 bits par pixel.
 	##//dst_bpp//##
-		The number of bits per pixel in the destination row.  Valid values for this are 1-8, 16 and 32.
+		Le nombre de bits par pixel dans la ligne destination.  Valeurs valides: 1-8, 16 et 32.
 	##//width//##
-		The length of the row in pixels.
+		La longueur de la ligne en pixels.
 	##//isrgb//##
-		A value of zero indicates that the Red and Blue channels are the other way round in the source image.  Use this switch if you want the Red and Blue channels to be swapped in the conversion.
+		Une valeur de zéro indique que les canaux Rougeet Bleu sont l'autre voie dans l'image source. Utilisez cet indicateursi vous voulez que les canaux Rouge et Bleu doivent être permutéspendant la conversion.
 
 {{fbdoc item="desc"}}
-	Copies the row of an image from one memory location to another, converting the color information in each pixel to match the destination image.
+	Copie une ligne d'une image d'uneposition mémoire vers une autre, convertit l'information couleur dechaque pixel pour correspondre à l'image destination.
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/gfx/imageconvertrow.bas"}}%%(freebasic)
@@ -36,21 +36,21 @@ Dim As IMAGE Ptr img8, img32
 Dim As Integer x, y
 
 
-'' create a 32-bit image, size w*h:
+'' Cree une image 32-bit, taille w*h:
 Screenres 1, 1, 32, , GFX_NULL
 img32 = ImageCreate(w, h)
 
 If img32 = 0 Then Print "Imagecreate failed on img32!": Sleep: End
 
 
-'' create an 8-bit image, size w*h:
+'' Cree une image 8-bit, taille w*h:
 Screenres 1, 1, 8, , GFX_NULL
 img8 = ImageCreate(w, h)
 
 If img8 = 0 Then Print "Imagecreate failed on img8!": Sleep: End
 
 
-'' fill 8-bit image with a pattern
+'' Remplit image 8-bit avec un motif
 for y = 0 to h - 1
 	for x = 0 to w - 1
 	    pset img8, (x, y), 56 + (x + y) mod 24
@@ -58,7 +58,7 @@ for y = 0 to h - 1
 next y
 
 
-'' open a graphics window in 8-bit mode, and PUT the image into it:
+'' Ouvre une fenetre graphique en mode 8-bit, et PUT l' image dans celle-ci:
 Screenres 320, 200, 8
 Windowtitle "8-bit color mode"
 Put (10, 10), img8
@@ -66,7 +66,7 @@ Put (10, 10), img8
 Sleep
 
 
-'' copy the image data into a 32-bit image
+'' Copie les donnees image dans une image 32-bit
 Dim As Byte Ptr p8, p32
 Dim As Integer pitch8, pitch32
 
@@ -87,7 +87,7 @@ For y = 0 To h - 1
 Next y
 
 
-'' open a graphics window in 32-bit mode and PUT the image into it:
+'' Ouvre une fenetre graphique en mode 32-bit et PUT l' image sur celle-ci:
 Screenres 320, 200, 32
 Windowtitle "32-bit color mode"
 Put (10, 10), img32
@@ -95,21 +95,21 @@ Put (10, 10), img32
 Sleep
 
 
-'' free the images from memory:
+'' Libere la memoire des images:
 ImageDestroy img8
 ImageDestroy img32
 %%
 
 {{fbdoc item="lang"}}
-	- Not available in the //[[CompilerOptlang -lang qb]]// dialect unless referenced with the alias ##**""__ImageConvertRow""**##.
+	Non disponible dans le dialecte //[[CompilerOptlang -lang qb]]// sauf si référencé avec l'alias ##**__ImageConvertRow**##.
 
 {{fbdoc item="diff"}}
-	- New to ""FreeBASIC""
+	- Nouveau pour ""FreeBASIC""
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgScreenres ScreenRes]]##
-	- ##[[KeyPgGetgraphics Get (Graphics)]]##
-	- ##[[KeyPgPutgraphics Put (Graphics)]]##
+	- ##[[KeyPgGetgraphics Get (Graphique)]]##
+	- ##[[KeyPgPutgraphics Put (Graphique)]]##
 	- ##[[KeyPgImagecreate ImageCreate]]##
 	- ##[[KeyPgImageDestroy ImageDestroy]]##
 	- ##[[KeyPgImageInfo ImageInfo]]##

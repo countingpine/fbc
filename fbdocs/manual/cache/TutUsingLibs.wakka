@@ -1,65 +1,65 @@
 {{fbdoc item="title" value="Using Libraries"}}----
-This is an excerpt from an article published in QBXL Magazine, with permission by SJ Zero, the author.
+Ceci est un extrait d'un article publié dans QBXL Magazine, avec la permission de SJ Zero, l'auteur.
 
 
-FreeBASIC's greatest strength is it's ability to seamlessly integrate with a number of standard C libraries while maintaining the ease of use that is QB. Even before FB had a built-in graphics library, intrepid coders were using SDL to get graphics and sound routines working. Before the current version included a SDL_net and Winsock, a number of coders, myself included, fought with the headers to get network support into FreeBASIC. Today, I'm just going to cover how to get started with three advanced libraries: SDL, fmod, and tinyPTC. After understanding the fundamentals, you'll see that using C libraries is simple enough that with few exceptions, C libraries are no more difficult to use in FreeBASIC than QB libraries were to use.
+La plus grande force FreeBASIC est sa capacité à intégrer de façon transparente un certain nombre de bibliothèques C standard, tout en conservant la facilité d'utilisation comme QB. Même avant que FB n'ait une bibliothèque graphique intégrée, des codeurs intrépides utilisaient SDL pour avoir des routines graphiques et son fonctionnelles. Avant la version actuelle incluant SDL_net et Winsock, n certain nombre de codeurs, moi y compris, se sont battus avec les en-têtes pour obtenir le support réseau dans FreeBASIC. Aujourd'hui, je vais juste couvrir la façon de commencer avec trois bibliothèques avancées: SDL, fmod et tinyPTC. Après avoir compris les principes fondamentaux, vous verrez que l'utilisation de bibliothèques C est assez simple à quelques exceptions près, les bibliothèques C ne sont pas plus difficiles à utiliser en FreeBASIC que le sont les bibliothèques QB.
 
 
 
-== What are these Libraries, Anyway? ==
+== Quelles sont ces bibliothèques, en tout cas? ==
 
-These libraries are particularly useful because they tend to provide functions for games. 
+Ces bibliothèques sont particulièrement utiles parce qu'ils ont tendance à fournir des fonctions de jeux. 
 
-SDL is a library with graphics and input support built in, and a bunch of sub-libraries for [[http://SDL_net network]], [[http://SDL_ttf TrueType font support]], and [[http://SDL_mixer audio]]. It can be used with [[OpenGL]], but I won't be covering that today.
+SDL est une bibliothèque avec le support intégré des entrées et des graphismes et tout un tas de sous-bibliothèques pour [[http://www.libsdl.org/projects/SDL_net/ le réseau]], [[http://www.libsdl.org/projects/SDL_ttf/ le support des polices TrueType]] et [[http://www.libsdl.org/projects/SDL_mixer/ l'audio]]. Il peut être utilisé avec OpenGL, mais je ne couvrira pas cela aujourd'hui.
 
-TinyPTC is primarily a graphics library, the simplest one available. It does little more than give you a pointer to the graphics reigon to draw to.
+TinyPTC est avant tout une bibliothèque graphique, la plus simple disponible. Il ne fait guère plus que de vous donner un pointeur vers la région où on dessine.
 
-[[FMod]] is a 3d sound and music library. Though its license is strange, it works acceptably for playing sounds, and it nicely encapsulates 3D sound.
+FMod est une bibliothèque musicale et de son 3D. Quoique sa licence soit bizarre, elle fonctionne de façon acceptable pour lire des sons et elle encapsule bien le son 3D.
 
-== Including the Library ==
+== Inclure la bibliothèque ==
 
-The first step in getting any of these libraries to work is including their header files in your project.
-For SDL, it's simply
+La première étape pour obtenir qu'une de ces bibliothèques fonctionne est d'inclure leurs fichiers en-tête dans votre projet.
+Pour SDL, c'est tout simplement:
 %%
  '$INCLUDE: "SDL\SDL.bi"
 %%
-For FMOD, it's 
+Pour FMOD, c'est 
 %%
  '$Include: 'fmod.bi'
 %%
-and for tinyPTC, you'll want
+et pour TinyPTC, vous aurez
 %%
  '$INCLUDE: 'tinyptc.bi'
 %%
-'''2. Initilizing the library, loading a file'''
+'''2. Initialisation de la bibliothèque, chargement d'un fichier'''
 
-Obviously, you can't just include the lib and fire away if it's got to do stuff first. 
-To initilize SDL and load a bitmap into memory, you must:
+De toute évidence, vous ne pouvez pas inclure la lib et démarrer pour faire des trucs de première. 
+Pour initilize SDL et charger un bitmap dans mémoire, vous devez:
 %%
 CONST SCR_WIDTH = 640
 CONST SCR_HEIGHT = 480
-DIM MenuScreen AS SDL_Surface ptr 'our bitmap
-DIM Shared video AS SDL_Surface ptr 'our screen surface
+DIM MenuScreen AS SDL_Surface ptr 'notre bitmap
+DIM Shared video AS SDL_Surface ptr 'notre surface écran
 
 SDL_Init ( SDL_INIT_VIDEO )
-video = SDL_SetVideoMode( SCR_WIDTH, SCR_HEIGHT, 32, 0 ) 'sets the video mode for 640x480x32
+video = SDL_SetVideoMode( SCR_WIDTH, SCR_HEIGHT, 32, 0 ) 'mode video 640x480x32
 MenuScreen = SDL_LoadBMP("bitmap.bmp")
 %%
-To initilize FMOD and load a sound into memory, you must: 
+Pour initialiser FMOD et charger un son dans la mémoire, vous devez taper: 
 %%
-DIM sound AS INTEGER 'it's just a handle, so it's an int!
+DIM sound AS INTEGER 'c'est juste une poignée (handle), c'est donc un int!
 
 IF FSOUND_GetVersion <= FMOD_VERSION THEN
-ErrorQuit "FMOD version " + STR$(FMOD_VERSION) + " or greater required"
+ErrorQuit "FMOD version " + STR$(FMOD_VERSION) + " ou supérieure requise"
 End If
 
 If FSOUND_Init(44100, 32, 0) = FALSE Then
-ErrorQuit "Can't initialize FMOD"
+ErrorQuit "Ne peut pas initialiser FMOD"
 End If
 
 sound = FSOUND_Sample_Load(FSOUND_FREE,"sound.wav", FSOUND_HW3D, 0, 0)
 %%
-Finally, there's no data formats to load with tinyPTC because it's so simple, but you initilize it by going:
+Enfin, il n'y a pas de formats de données à charger avec TinyPTC parce qu'il est tellement simple, mais vous l'initialiser en allant:
 %%
 const SCR_WIDTH = 320
 const SCR_HEIGHT = 200
@@ -71,7 +71,7 @@ end if
 %%
 == Blitting, Playing, or Plotting ==
 
-The most important step, obviously, is to get whatever you want to do to the screen or speakers. This part is relatively easy, and can be encapsulated further into a wrapper function. For SDL, sending an image to the screen means going:
+L'étape la plus importante, évidemment, est d'obtenir ce que vous voulez à l'écran ou les enceintes. Cette partie est relativement facile, et peut être encapsulée dans une autre fonction enveloppe. Pour SDL, l'envoi d'une image à l'écran, c'est aller:
 
 %%
 SUB BlitImage(x as integer,y as integer,image as sdl_surface ptr, dest as sdl_surface ptr) 
@@ -90,10 +90,10 @@ SDL_BlitSurface image, @rectangle, dest, @rectangle2
 
 END SUB%%
 
-For FMOD, the steps to play a sound aren't that difficult either:
+Pour FMOD, la étapes pour jouer un son ne sont pas si difficiles que cela soit:
 %%
 FUNCTION fModPlayWave( samp1 as integer ) AS INTEGER 
-'where samp1 is the number returned by FSOUND_SampleLoad
+'où samp1 est le nombre retourné par FSOUND_SampleLoad
 
 DIM position(0 to 2)' as FSound_Vector
 DIM vel(0 to 2)' FSound_Vector
@@ -103,17 +103,17 @@ fModPlayWave = FSOUND_PlaySoundEx(FSOUND_FREE, samp1, NULL, TRUE)
 
 END FUNCTION
 %%
-And TinyPTC, which is again, not a high level library like the other two, can plot pixels using the following code:
+Et TinyPTC, à nouveau, n'est pas une bibliothèque de haut niveau comme les deux autres, peut tracer des pixels en utilisant la code suivant:
 %%
 SUB putd(BYREF buffer(), BYVAL x AS INTEGER, BYVAL y AS INTEGER, BYVAL colr as INTEGER)
 	    buffer((y * SCR_WIDTH) + x) = colr
-		ptc_update @buffer(0) 'This is a pageFlip
+		ptc_update @buffer(0) 'Ceci est un pageFlip
 END SUB
 %%
 
 
-== Shutting Down ==
-So you don't have to manage memory and do all the boring mundane tasks, you must remember to shut down the library before your program exits. Luckily, all three programs allow this with one line. If you can't shut it down, the library no longer cares. It's beautiful.
+== Arrêter ==
+Donc, vous n'avez pas à gérer la mémoire et faire toutes les tâches ennuyeuses et banales, vous devez vous rappeler de fermer la bibliothèque avant que votre programme se termine. Heureusement, les trois programmes permettent cela avec une seule ligne. Si vous ne pouvez pas l'arrêter, la bibliothèque ne se soucie pas. C'est beau.
 
 %%
 SDL: SDL_Quit ()
@@ -124,5 +124,5 @@ fmod: FSOUND_Close ()
 %%
 tinyPTC: PTC_Close ()
 %%
-That's all there is to quitting!
-As you can see, there is nothing inherently more difficult in using libraries in FreeBASIC compared to QuickBASIC. In fact, because coders don't need to jump through hoops to get to memory, it's actually much easier, even with the more modern OS and hardware.
+Il n'y a plus qu'à se quitter!
+Comme vous pouvez le voir, ce n'est pas fondamentalement plus difficile d'utiliser des bibliothèques en FreeBASIC qu'en QuickBASIC. En fait, parce que les codeurs n'ont pas besoin de faire des pirouettes pour atteindre la mémoire, c'est en fait beaucoup plus facile, même avec le plus moderne OS et matériel.

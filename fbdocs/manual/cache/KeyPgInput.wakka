@@ -1,35 +1,35 @@
 {{fbdoc item="title" value="INPUT"}}----
-Reads a list of values from the keyboard
+Lit une liste de valeurs à partir du clavier
 
 {{fbdoc item="syntax"}}##
 	**Input** [;] ["//prompt//" //separator//] //variable_list//
 ##
 {{fbdoc item="param"}}
 	##//prompt//##
-		an optional string literal that is written to the screen.
+		une chaîne littérale facultative qui est écrite à l'écran.
 	##//separator//##
-		a semicolon (##;##), which appends ##"? "## to the prompt, or comma (##,##), which appends nothing.
+		un point-virgule (##;##), qui ajoute ##"? "##à l'invite, ou une virgule (##,##), qui n'ajoute rien.
 	##//variable_list//##
-		a list of comma-separated variables used to hold the values read from the user.
+		une liste de variables séparées par des virgules utilisées pour stocker les valeurs lues par l'utilisateur.
 
 {{fbdoc item="desc"}}
-	Reads a list values from the keyboard up until the first carriage return. Numerical values are converted from their string representation into the corresponding types in the variable list. Characters are echoed to the screen as they are typed.
-	If there is more than one value in the input list, the user must be instructed to type commas or whitespace to separate each value.  Surrounding whitespace will be trimmed from string values. If an input string has a comma in it, it must be wrapped in quotes (##"..."##) to prevent it being split up.  
-	Alternatively, ##[[KeyPgLineinput Line Input]]## maybe used to input an entire line to a single string without delimiting.
+	Lit une liste de valeurs à partir du clavier jusqu'au premier retour chariot (Touche Entrée). Les valeurs numériques sont converties à partir de leur représentation chaîne dans le type correspondant dans la liste des variables. Les caractères sont affichés à l'écran au fur et à mesure qu'ils sont tapés au clavier.
+	S'il y a plus d'une valeur dans la liste d'entrée, l'utilisateur doit, lors de la frappe, séparer chaque valeur par des virgules ou des espaces.  Les espaces ayant servi à séparer seront éliminés des valeurs chaîne. Si une chaîne entrée contient une virgule, celle-ci doit être entre guillemets (##"..."##) pour éviter qu'elle ne soit éliminée.  
+	Sinon, ##[[KeyPgLineinput Line Input]]## peut être utilisé pour entrer une ligne entière en une seule chaîne sans délimitation.
 	
-	The prompt - if any - is written to the screen at the current cursor location, and characters read are echoed to the screen immediately following the prompt. If no prompt is specified, characters are echoed at the current cursor location.
+	L'invite (prompt) - le cas échéant - est écrit à l'écran à la position courante du curseur et les caractères lus sont écrits à l'écran immédiatement après l'invite. Si aucune invite n'est spécifiée, les caractères sont affichés à la position courante du curseur.
 
-	The optional leading semicolon after ##**Input**## is similar to the optional trailing semicolon in a ##[[KeyPgPrint Print]]## statement: the cursor will remain on the same line after all of the characters have been echoed, otherwise, the cursor will move to the beginning of the next line.
+	Le point-virgule facultatif en premier après ##**Input**## est similaire au point-virgule facultatif à la fin d'une instruction ##[[KeyPgPrint Print]]##: le curseur restera sur la même ligne après que tous les caractères auront été affichés,sinon, le curseur se déplacera vers le début de la ligne suivante.
 
-	If more values are read than are listed in the variable list, extra values will be ignored; if fewer values are read (i.e. the user presses enter before inputting all values), the remaining variables will be initialized - numeric variables to zero (##0##), and string variables to the null string (##"####"##).
+	Si les valeurs lues sont plus nombreuses que celles qui sont énumérées dans la liste des variables, les valeurs supplémentaires sont ignorées; si les valeurs lues ne sont pas assez nombreuses (à savoir, l'utilisateur appuie sur entrée avant d'avoir saisi toutes les valeurs), toutes les valeurs des variables restantes seront initialisées - les variables numériques à zéro (##0##) et les chaînes en une chaîne vide (##"####"##).
 
-	Numeric values are converted similar to the procedures ##[[KeyPgVal Val]]## and ##[[KeyPgVallng ValLng]]##, using the most appropriate function for the number format, converting as many numeric characters as possible.
+	Les valeurs numériques sont converties comme avec les procédures  ##[[KeyPgVal Val]]## et ##[[KeyPgVallng ValLng]]##, en utilisant la fonction la plus appropriée pour le format de nombre, convertissant le plus possible de caractères numériques.
 
-	##**Input**## has a limited edit capacity: it allows to erase characters using the backspace key.  If a better user interface is needed, a custom input routine should be used.
+	##**Input**## a une capacité d'édition limitée: il permet d'effacer les caractères en utilisant la touche "Retour Arrière".  Si une meilleure interface utilisateur est nécessaire, une routine d'entrée personnalisée doit être utilisée.
 	
 {{fbdoc item="ex"}}
 
-	**Example #1**
+	**Exemple #1**
 {{fbdoc item="filename" value="examples/manual/console/input.bas"}}%%(freebasic)
 Dim n As String, a As Integer
 Input "Enter [Name, Age]: ", n, a
@@ -37,7 +37,7 @@ Print n
 Print a
 %%
 
-	**Example #2**
+	**Exemple #2**
 {{fbdoc item="filename" value="examples/manual/console/input2.bas"}}%%(freebasic)
 dim as double a, b
 dim as string yn
@@ -55,14 +55,14 @@ do
 	do
 	    input "Would you like to enter some more numbers"; yn
 	    yn = lcase(yn)
-	loop until yn = "y" or yn = "n"
+	Loop Until yn = "y" Or yn = "n"
 	
 loop while lcase(yn) = "y"
 %%
 
 {{fbdoc item="diff"}}
-	- If the user inputs the wrong number of values, or if it expects a number for a value and gets a string that is not a valid number, then QBASIC issues the message "Redo from start", and does not continue further until it receives a valid input.
-	- QB does not treat space as a delimiter when inputting a number from the console.
+	- Si l'utilisateur entre un nombre incorrect de valeurs ou s'il attend un nombre pour une valeur et obtient une chaîne qui n'est pas un nombre valide, alors QBASIC affiche le message "Redo from start" (Refaire du début) et ne continuera pas plus loin tant qu'il n'aura pas reçu une entrée valable.
+	- QB ne traitera  pas l'espace comme délimiteur lorsque vous entrez un nombre à partir de la console.
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgInputPp Input #]]##

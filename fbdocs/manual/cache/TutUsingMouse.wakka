@@ -1,25 +1,25 @@
 {{fbdoc item="title" value="Using the Mouse in FreeBASIC"}}----
 
-After doing some searches, I quickly noticed that there simply wasn't an official tutorial or technique for manipulating the mouse in a windows console application in FreeBasic. Therefore, I decided to write this technique in order to give such an example to the FreeBasic Community. As you know A Windows Console is already mouse aware by ways of the fact that it is a windows console, which means it's created with the use of the Windows API, which means that the mouse can be accessed from the Console Window. So There's no need to turn the mouse on or off in your code. All you need to do is Get or Set the X and Y coordinates and get the states of the mouse buttons. We will be covering the following subjects in this tutorial.
+Après avoir fait quelques recherches, j'ai rapidement remarqué qu'il n'y avait tout simplement pas tutoriel ou une technique officielle pour la manipulation de la souris dans une application console Windows dans FreeBASIC. Par conséquent, j'ai décidé d'écrire cette technique afin de donner un tel exemple à la Communauté FreeBASIC. Comme vous le savez une console de Windows est toujours informée de la souris par du fait qu'il s'agit d'une fenêtre de console, ce qui signifie qu'elle a été créée avec l'utilisation de l'API Windows, ce qui signifie que la souris peut être accessible à partir de la fenêtre de console. Il n'y a donc pas nécessaire d'activer ou de désactiver la souris dans votre code. Tout ce que vous devez faire est de Get ou Set les coordonnées X et Y et d'obtenir les états des boutons de la souris. Nous allons couvrir les sujets suivants dans ce tutoriel:
 
-	-Getting Mouse Coordinates:
-	  The mouse cursor, when the mouse is moved, continuously updates its position. You can get these values to determine where the pointer currently is on the screen.
+	-Obtenir les coordonnées de la souris:
+	  Le curseur de la souris, quand la souris est déplacée, met à jour sa position continuellement. Vous pouvez obtenir ces valeurs pour déterminer où le pointeur se trouve actuellement à l'écran.
 
-	-Setting Mouse Coordinates:
-	  For some reason there may be a need to position the mouse pointer at a different location than where the pointer currently is.
+	-Paramètrer les coordonnées de la souris:
+	  Pour une raison quelconque, il peut être nécessaire pour positionner le pointeur de la souris à un endroit autre que celui où il se trouve actuellement.
 
-	-Getting The Mouse Button Statuses:
-	  Quite simply, when the user presses a button on the mouse, it returns a value that says that a button is pressed, and which buttons are pressed, too. From these values you can decide what part of your code gets executed.
+	-Obtenir les statuts des boutons de la souris:
+	  Tout simplement, lorsque l'utilisateur appuie sur un bouton de la souris, elle retourne une valeur qui dit qu'un bouton est pressé et aussi lequel est pressé. A partir de ces valeurs, vous pouvez décider quelle partie de votre code sera exécutée.
 
-As with most tutorials, this one too can be better explained with the use of an example program. We will be creating a very simple program that acts upon the user's interaction with the mouse and certain areas of the screen. It should provide the bases of code needed to efficiently operate and control the mouse in your own programming projects.
+Comme avec la plupart des tutoriels, celui-là aussi peut être mieux expliqué à l'aide d'un exemple de programme. Nous allons créer un programme très simple qui agit sur l'interaction de l'utilisateur avec la souris et certaines zones de l'écran. Il devrait fournir les bases de code nécessaires pour opérer efficacement et contrôler la souris dans vos projets personnels de programmation.
 
-IMPORTANT: It is mandatory that you set yourself in a graphic mode in order to use the mouse. the mouse commands will always return -1 for a value if the graphic mode is not set.
+IMPORTANT: Il est impératif que vous fixiez vous-même un mode graphique pour utiliser la souris. Les commandes de la souris retournent toujours une valeur de -1 si le mode graphique n'est pas réglé.
 
-==THE SAMPLE PROGRAM DESCRIPTION==
+==LA DESCRIPTION DU PROGRAMME EXEMPLE==
 
-For the sake of a demonstration program, things will be quite simple and as straightforward as it possibly can. The program will show 3 items at the top of the screen and depending on which one you click a different message will be displayed on the screen. This should give you enough information to know how to work with the mouse in FreeBasic.
+Dans un souci de programme de démonstration, les choses seront, autant que possible, tout à fait simples et directes. Le programme affiche trois items en haut de l'écran et en fonction de celui sur lequel vous cliquez un message différent s'affiche sur l'écran. Cela devrait vous donner suffisamment d'informations pour savoir comment travailler avec la souris en FreeBASIC.
 
-In FreeBasic, there's basically 2 commands that you need to worry about when trying to handle the mouse in your projects. Here they are with their syntax explained as per the documentation.
+En FreeBASIC, il y a essentiellement 2 commandes dont vous devez vous soucier lorsque vous essayez de manipuler la souris dans vos projets. Here they are with their syntax explained as per the documentation.
 
 --------------------------------------------------------------------------------
 {{fbdoc item="title" value="GETMOUSE"}}
@@ -28,15 +28,15 @@ In FreeBasic, there's basically 2 commands that you need to worry about when try
 GETMOUSE x, y[, [wheel][, [buttons]]]
 
 {{fbdoc item="desc"}}
-GETMOUSE retrieves the mouse position and button status. 
+GETMOUSE récupère la position de la souris et l'état des boutons. 
 
-Mouse position is stored in X and Y when the function is called. If the mouse is not in the program window, X and Y will be -1.
+La position de la souris est stockée dans X et Y lorsque la fonction est appelée. Si la souris n'est pas dans la fenêtre du programme, X et Y seront à -1.
 
-'wheel' is the mouse wheel counter. Rotating the wheel away from you makes the count to increase, rotating towards you makes it to decrease. If mouse is not present or out of the program window, wheel will hold -1.
+**"wheel"** est le compteur de la molette de la souris. La rotation de la roue vers l'avant fait augmenter le comptage, vers l'arrière le fait diminuer. Si la souris n'est pas présente ou hors de la fenêtre du programme, "wheel" sera à -1.
 
-'buttons' stores the button status. On function termination, this will return a bitmask holding buttons status. Bit 0 is set if left mouse button is down; bit 1 is set if right mouse button is down; bit 2 is set if middle mouse button is down.
+**"buttons"** stocke l'état des boutons. A la sortie de la fonction, il y aura retour d'un masque binaire indiquant l'état des boutons. Le bit 0 est à 1 si le bouton de gauche est appuyé; le bit 1 à 1 si le bouton de droite est appuyé; le bit 2 à 1 si le bouton du milieu est appuyé.
 
-*GETMOUSE is for use in graphics modes, set using the SCREEEN command ONLY.*
+*GETMOUSE est utilisé dans les modes graphiques, définis SEULEMENT à l'aide de la commande SCREEEN.*
 
 
 ---------------------------------------------------------------------------------
@@ -46,19 +46,19 @@ Mouse position is stored in X and Y when the function is called. If the mouse is
 SETMOUSE x, y, visibility
 
 {{fbdoc item="desc"}}
-SETMOUSE will set the X,Y coordinates of the mouse pointer, as well as setting it's visibility. 
+SETMOUSE fixera les coordonnées X, Y du pointeur de la souris, ainsi que le réglage de sa visibilité. 
 
-Mouse position is set using the X and Y parameters. 
+La position de la souris est réglée en utilisant les paramètres X et Y. 
 
-The mouse will be visible if visibility is set to 1, and invisible if visibility is set to 0.
+La souris sera visible si **"visibility"** est à 1, et invisible lorsque **"visibility"** est à 0.
 
-*SETMOUSE is intended for graphics modes initiated using the SCREEN statement only.*
+*SETMOUSE est destiné aux modes graphiques lancés en utilisant l'instruction SCREEN uniquement*
 
 -------------------------------------------------------------------------------- 
 
-==THE CODING BEGINS==
+==LE CODAGE COMMENCE==
 
-Here are a set of constants that I declare at the beginning of the module. This is simply to gain a bit of clarity of code in the rest of the programming example.
+Voici un ensemble de constantes que je déclare au début du module. C'est tout simplement pour gagner un peu de clarté dans le reste du code de l'exemple de programmation.
 %%(freebasic)
 	CONST LEFTBUTTON = 1 
 	CONST MIDDLEBUTTON = 4 
@@ -66,7 +66,7 @@ Here are a set of constants that I declare at the beginning of the module. This 
 	CONST SHOWMOUSE = 1
 	CONST HIDEMOUSE = 0 
 %%
-As a first step in this example, we will be declaring variables that we will be using throughout the example program. Of course you don't have to declare your variables, but me I like to do so because when you do so you know exactly why you're declaring your variables. To me that's good practice.
+Dans une première étape de cet exemple, nous allons déclarer des variables que nous allons utiliser tout au long de ce programme. Bien sûr, vous n'avez pas à déclarer vos variables, mais moi, je tiens à le faire parce que quand vous le faites vous savez exactement pourquoi vous déclarez ces variables. Pour moi, c'est une bonne pratique.
 %%(freebasic)
 	DIM CurrentX AS INTEGER 
 	DIM CurrentY AS INTEGER
@@ -74,7 +74,7 @@ As a first step in this example, we will be declaring variables that we will be 
 	DIM CanExit AS INTEGER
 	DIM AS STRING A,B,C
 %%
-The idea here is to do everything within a loop so that we can also control how the program exits. So we'll create a loop that will exit when the "Can********Exit" variable is equal to 0. In the loop we'll Interrogate the mouse and print some basic values. (This part is extracted from the example provided in the GETMOUSE syntax explanation in the gfxlib.txt file). Don't forget to set your graphics mode as it is a must to get valid return values from the mouse commands. We'll use Screen 12 for our example.
+L'idée ici est de tout faire dans une boucle de telle sorte que nous pouvons également contrôler la façon dont le programme se termine. Nous allons donc créer une boucle qui se terminera lorsque la variable **"CanExit"** sera égale à 0. Dans du boucle, nous allons Interroger la souris et imprimer certaines valeurs de base. (Cette partie est extraite de l'exemple fourni dans l'explication de la syntaxe de GETMOUSE dans le fichier gfxlib.txt). N'oubliez pas de configurer votre mode graphique car il est indispensable pour obtenir des valeurs de retour valides des commandes de la souris. Nous allons utiliser Screen 12 pour notre exemple.
 %%(freebasic)
 SCREEN 12 
 CanExit = 1
@@ -82,19 +82,19 @@ CanExit = 1
 DO WHILE CanExit <> 0 
 	GETMOUSE CurrentX, CurrentY, , MouseButtons 
 	IF CurrentX < 0 THEN
-	 PRINT "Mouse is out of context." 
+	 Print "La souris est hors contexte." 
 	ELSE
 	IF MouseButtons AND LEFTBUTTON THEN A="L"
 	IF MouseButtons AND MIDDLEBUTTON THEN B="M"
 	IF MouseButtons AND RIGHTBUTTON THEN C="R"
-	 PRINT USING "Mouse position: ###:### Buttons: &&&"; CurrentX; CurrentY;A;B;C 
+	 Print Using "Position de la souris: ###:### Boutons: &&&"; CurrentX; CurrentY;A;B;C 
 	 A="":B="":C=""	 
 	END IF 
 LOOP
 %%
-This sample will basically continuously display information about Where the mouse is, if it's on the program window and which mouse button is pressed if any. The GETMOUSE statement basically puts the current X and Y coordinates in our Current********X and Current********Y variables and the status of the mouse buttons in our Mouse********Buttons variable. The Three If Statements will print L if the left button was pressed, M if the middle button (or the wheel) was pressed and R if the Right button was pressed.
+Cet exemple affichera en permanence essentiellement des informations sur l'endroit où se trouve la souris, si elle est sur la fenêtre du programme et le cas échéant quel bouton la souris est appuyé. L'instruction GETMOUSE basiquement place les coordonnées X et Y courantes dans nos variables **CurrentX** et **CurrentY** et l'état des boutons de la souris dans notre variable **Buttons**. Les trois instructions If afficheront L si le bouton gauche a été appuyé, M si le bouton du milieu (ou la molette) a été appuyé et R si le bouton droit a été appuyé.
 
-For the next step, since we want to control a bit what's happening with the mouse, will display a few extra things at the beginning of the program and control what happens with them afterwards, in the loop. This is regular text being displayed, this could be replaced by a series of line commands or something to draw a button for the different options. But that is outside the scope of this tutorial. So far, by getting rid of the unwanted print statements from the code above, the loop should now look like this:
+Pour l'étape suivante, comme nous voulons contrôler un peu ce qui se passe avec la souris, nous afficherons quelques choses supplémentaires au début du programme et contrôlerons ce qui se passe par la suite, dans la boucle. C'est un texte ordinaire qui est affiché, cela pourrait être remplacé par une série de commandes en ligne ou quelque chose pour dessiner un bouton pour les différentes options. Mais c'est en dehors du champ d'application de ce tutoriel. En se débarrassant des déclarations d'impression non désirées du code ci-dessus, la boucle doit maintenant ressembler à ceci:
 %%(freebasic)
 	SCREEN 12 
 	SETMOUSE 1, 1, 1
@@ -106,7 +106,7 @@ For the next step, since we want to control a bit what's happening with the mous
 	 GETMOUSE CurrentX, CurrentY, , MouseButtons
 	LOOP 
 %%
-Basically we print the line that has " | FIRST | SECOND | THIRD | EXIT | " at the top of the screen. And we go into the loop that interrogates the mouse. Of course, right now nothing will happen if you press a button because there is no code for it. In our example, we'll add code that simple prints which option was selected. If the user selects the EXIT option, we'll print the Option and we'll exit the loop. We'll also add a print statement outside the loop with a sleep to tell the use that we are truely outside the loop and therefore the program is ended. With all this, the code should now look like this. I am putting the whole source file here so you can cut and paste it easily.
+Essentiellement nous affichons la ligne qui contient " | FIRST | SECOND | THIRD | EXIT | " en haut de l'écran. Et nous entrons dans la boucle qui interroge la souris. Bien sûr, en ce moment rien ne se passera si vous appuyez sur un bouton, car il n'y a pas de code pour lui. Dans notre exemple, nous allons ajouter du code qui affiche simplement l'option qui a été sélectionnée. Si l'utilisateur sélectionne l'option EXIT, nous imprimerons l'option et nous sortirons de la boucle. Nous allons également ajouter une instruction d'affichage en dehors de la boucle avec un SLEEP pour dire à l'utilisateur que nous sommes vraiment en dehors de la boucle et donc que le programme est terminé. Avec tout cela, la code devrait maintenant ressembler à ceci. Je mets le fichier source complet ici, donc vous pouvez le copier et le coller facilement.
 %%(freebasic)
 CONST LEFTBUTTON   = 1
 CONST MIDDLEBUTTON = 4   ' UNUSED IN THIS DEMO
@@ -131,16 +131,16 @@ DO
 	  IF CurrentY <= 12 THEN
 	     IF CurrentX >= 0 AND CurrentX <=75 THEN
 	        LOCATE 12, 1
-	        PRINT "First Option Selected ";
+	        Print "FIRST Option selectionnee ";
 	     ELSEIF CurrentX >= 76 AND CurrentX <= 147 THEN
 	        LOCATE 12, 1
-	        PRINT "Second Option Selected";
+	        Print "SECOND Option selectionnee";
 	     ELSEIF CurrentX >= 148 AND CurrentX <=212 THEN
 	        LOCATE 12, 1
-	        PRINT "Third Option Selected ";
+	        Print "THIRD Option selectionnee ";
 	     ELSEIF CurrentX >= 213 AND CurrentX <=268 THEN
 	        LOCATE 12, 1
-	        PRINT "Last Option Selected  ";
+	        Print "Derniere Option selectionnee  ";
 	        EXIT DO
 	     ENd IF
 	  END IF
@@ -149,17 +149,17 @@ LOOP WHILE INKEY$ = ""
 
 SETMOUSE 1, 1, HIDEMOUSE
 PRINT
-PRINT "AND NOW WE'RE OUT OF THE LOOP"
+Print "ET MAINTENANT ON EST EN DEHORS DE LA BOUCLE"
 SLEEP
 %%
 
-You can see the many IF statements in this last piece of code. The numbers that are there have been measured as per SCREEN 12 returned coordinates. They should work in all graphics mode however because a pixel is a pixel in a Console Graphics Window. Each if represents where the different options are written on the screen. If you would have used a graphics button routine you could simply use the same width and height as you did to draw the button in these if statements to know which button was clicked.
+Vous pouvez voir les nombreuses instructions IF dans ce dernier morceau de code. Les nombres qui sont là ont été déterminés par rapport aux coordonnées renvoyées par SCREEN 12. Toutefois, elles devraient fonctionner dans tous les modes graphiques, car un pixel est un pixel dans une fenêtre graphique de la console. Chaque IF représente le lieu où les différentes options sont écrites à l'écran. Si vous voulez utiliser une routine de bouton graphique,vous pouvez simplement utiliser les mêmes largeur et hauteur pour dessiner le bouton dans ces instructions IF pour savoir quel bouton a été cliqué.
 
-==IN CONCLUSION==
+==EN CONCLUSION==
 
-As you can see, using the mouse has been made very simple in FreeBasic. You can use simple statement like the print command to draw your screens or you can use graphics command like LINE to draw your screens graphically. No matter which way you choose to draw your screens with, the SETMOUSE and GETMOUSE statement will work the same way and return the very same values. All you have to do is get that information and make your programs do what you want them to do if they press a button, select an option, or even in the case of a game, you could easily make the main character move towards the location where you clicked on the screen as well. The choice is up to you.
+Comme vous pouvez le voir, utiliser la souris est très simple dans FreeBASIC. Vous pouvez utiliser une simple instruction comme la commande d'affichage PRINT pour dessiner vos écrans ou vous pouvez utiliser une commande graphique comme LINE pour dessiner vos écrans graphiquement. Peu importe la façon dont vous choisissez d' élaborer vos écrans, les instructions SETMOUSE et GETMOUSE fonctionneront de la même manière et retourneront les mêmes valeurs. Tout ce que vous avez à faire, c'est d'obtenir les informations, et d'obliger vos programmes à faire ce que vous voulez qu'ils fassent si on appuye sur un bouton, sélectionne une option, ou même dans le cas d'un jeu, vous pouvez facilement faire bouger le personnage principal vers l'endroit où vous avez cliqué sur l'écran. A vous de choisir.
 
-As always, if you have any questions regarding this tutorial or any other I've written, feel free to email me and we'll see what we can do about solving your particular problem.
+Comme toujours, si vous avez des questions concernant ce tutoriel ou sur tout autre que j'ai écrit, n'hésitez pas à m'envoyer un email et nous verrons ce que nous pouvons faire pour résoudre votre problème particulier.
 
 
 MystikShadows

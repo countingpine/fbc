@@ -1,27 +1,27 @@
 {{fbdoc item="title" value="Member Procedures"}}----
-Procedures with full access to members of a ##[[KeyPgType Type]]## or ##[[KeyPgClass Class]]##.
+Procédures avec un accès complet aux membres d'un ##[[KeyPgType Type]]## ou d'une ##[[KeyPgClass Class]]##.
 
-**{{anchor name="DECL|Declaration and definition"}}**
-	Declaring and defining member procedures.
+**{{anchor name="DECL|Déclaration et définition"}}**
+	Déclarer et définir des membres de procédures.
 **{{anchor name="USAGE|Usage"}}**
-	Calling member procedures.
-**{{anchor name="THIS|The hidden parameter, This"}}**
-	Implicit access to the instance with which non-static member procedures are called.
-**{{anchor name="ACCESS|Access rights"}}**
-	Referring to other members in member procedures.
-**{{anchor name="OVERLOAD|Overloading"}}**
-	Declaring two or more member procedures with the same name.
-**{{anchor name="STATIC|Static member procedures"}}**
-	Differences from non-static member procedures.
+	Appel de membre de procédure.
+**{{anchor name="THIS|Le paramètre caché, This"}}**
+	Accès implicite à l'instance avec laquelle un membre de procédure non statique est appelé.
+**{{anchor name="ACCESS|Les droits d'accès"}}**
+	Faire référence à d'autres membres dans les membres de procédures.
+**{{anchor name="OVERLOAD|Surcharge"}}**
+	Déclarer deux ou plusieurs membres de procédures portant le même nom.
+**{{anchor name="STATIC|Membres statiques de procédures"}}**
+	Les différences avec les membres non-statiques de procédures.
 
-~&//The term 'member procedure' refers to both static and non-static member procedures, unless otherwise noted.//
+~&//Le terme 'membre de procédure' fait référence aussi bien aux membres statiques que non-statiques des procédures, sauf indication contraire.//
 
-{{anchor name="DECL"}}{{fbdoc item="section" value="Declaration and definition"}}
-	Member procedures are declared much like normal module-level procedures except that they are declared within, and defined outside, a ##[[KeyPgType Type]]## or ##[[KeyPgClass Class]]## definition *.
+{{anchor name="DECL"}}{{fbdoc item="section" value="Déclaration et définition"}}
+	Les membres de procédures sont déclarés tout comme les procédures au niveau normal du module sauf qu'ils sont déclarés à l'intérieur, et définis à l'extérieur, d'une définition de ##[[KeyPgType Type]]## ou de ##[[KeyPgClass Class]]## //(voir note *)//.
 
-	When defining member procedures, the procedure name is prefixed with the name of the ##[[KeyPgType Type]]## or ##[[KeyPgClass Class]]## and the member access operator (##[[KeyPgOpMemberAccess Operator . (Member access)]]##). It is an error to define a member procedure without a matching declaration in the ##[[KeyPgType Type]]## or ##[[KeyPgClass Class]]## definition.
+	Lors de la définition d'un membre de procédure, the procedure name is prefixed with the name of the ##[[KeyPgType Type]]## or ##[[KeyPgClass Class]]## and the member access operator (##[[KeyPgOpMemberAccess Operator . (Accès Membre)]]##). It is an error to define a member procedure without a matching declaration in the ##[[KeyPgType Type]]## or ##[[KeyPgClass Class]]## definition.
 
-	The following example declares and defines a ##[[KeyPgSub Sub]]## and ##[[KeyPgFunction Function]]## member procedure:
+	L'exemple suivant déclare et définit une procédure avec des membres ##[[KeyPgSub Sub]]## et ##[[KeyPgFunction Function]]##:
 
 	{{fbdoc item="filename" value="examples/manual/proguide/members/foo1.bi"}}%%(freebasic)
 '' foo1.bi
@@ -42,12 +42,12 @@ Function foo.g As Integer
 End Function
 %%
 
-	* //In the future, member procedures may be able to be defined within the ##[[KeyPgType Type]]## or ##[[KeyPgClass Class]]## definition.//
+	* //À l'avenir, les membres de procédures pourraient être en mesure d'être définis dans la définition de ##[[KeyPgType Type]]## ou ##[[KeyPgClass Class]]##.//
 
-{{anchor name="USAGE"}}{{fbdoc item="section" value="Usage"}}
-	Member procedures are referred to just like member data, that is, their name is prefixed with the name of an object instance and the member access operator (##[[KeyPgOpMemberAccess Operator . (Member access)]]##) *.
+{{anchor name="USAGE"}}{{fbdoc item="usage"}}
+	Les membres de procédures sont mentionnées à l'instar des données membres, c'est-à-dire que leur nom est préfixé par le nom d'une instance de l'objet et l'opérateur d'accès membre (##[[KeyPgOpMemberAccess Operator . (Accès Membre)]]##) //(voir note *)//.
 
-	The following example, using the code from the last example, calls ##[[KeyPgSub Sub]]## and ##[[KeyPgFunction Function]]## member procedures:
+	L'exemple suivant, utilisant le code de l'exemple précédent, appelle des membres de procédure ##[[KeyPgSub Sub]]## et ##[[KeyPgFunction Function]]##:
 
 	{{fbdoc item="filename" value="examples/manual/proguide/members/usage1.bas"}}%%(freebasic)
 '' ... foo with non-static members as before ...
@@ -57,16 +57,16 @@ Dim bar As foo
 bar.f(bar.g())
 %%
 
-	* //Static member procedures do not require an object instance in order to be called.//
+	* //Les membres statiques de procédures ne nécessitent pas une instance d'objet afin d'être appelés.//
 
-{{anchor name="THIS"}}{{fbdoc item="section" value="The hidden parameter, This"}}
-	Member procedures actually have an additional parameter than what they are declared with *. When they are called, using the name of an instance and ##[[KeyPgOpMemberAccess Operator . (Member access)]]##, a reference to that instance is passed along with any other arguments in the call, allowing the member procedure direct access to the instance.
+{{anchor name="THIS"}}	{{fbdoc item="section" value="Le paramètre caché, This"}}
+	Les membres de procédures ont effectivement un paramètre supplémentaire ceux qui sont déclarés avec *. Quand ils sont appelés, en utilisant le nom d'une instance et ##[[KeyPgOpMemberAccess Operator . (Accès Membre)]]##, une référence de cette instance est passée avec d'autres arguments dans l'appel, permettant aux membres de la procédure un accès direct à l'instance.
 
-	The additional parameter added by the compiler is called ##[[KeyPgThis This]]##, and since it's a reference, any modifications to ##[[KeyPgThis This]]## are actually modifications to the instance that was passed to the member procedure when it was called. You can use ##[[KeyPgThis This]]## just like any other variable, ie., pass it to procedures taking a object of the same type, call other member procedures and access member data using ##[[KeyPgOpMemberAccess Operator . (Member access)]]##, etc.
+	Le paramètre supplémentaire ajouté par le compilateur est appelé ##[[KeyPgThis This]]##, et puisque c'est une référence, toutes modifications apportées à ##[[KeyPgThis This]]## sont effectivement des modifications de l'instance qui a été passée au membre de la procédure quand il a été appelé. Vous pouvez utiliser ##[[KeyPgThis This]]## exactement comme une autre variable, à savoir, le passer à des procédures d'un objet du même type, appeler d'autres membres de procédures et accéder à un membre données en utilisant ##[[KeyPgOpMemberAccess Operator . (Accès Membre)]]##, etc.
 
-	Most of the time, however, using ##[[KeyPgThis This]]## explicitly is unnecessary; member procedures can refer to other members of the instance which they are passed directly by name, without having to qualify it with ##[[KeyPgThis This]]## and ##[[KeyPgOpMemberAccess Operator . (Member access)]]##. The only times when you need to qualify member names with ##[[KeyPgThis This]]## is when the member name is hidden, for example, by a parameter or local variable. In these situations, qualifying the member name is the only way to refer to these hidden member names.
+	La plupart du temps, toutefois, utiliser ##[[KeyPgThis This]]## explicitement, est inutile; un membre de procédure peut se référer à d'autres membres de l'instance à laquelle il est passé directement par nom, sans avoir à le qualifier avec ##[[KeyPgThis This]]## et ##[[KeyPgOpMemberAccess Operator . (Accès Membre)]]##. Les seuls moments où vous devez qualifier le nom des membres avec ##[[KeyPgThis This]]## est lorsque le nom du membre est caché, par exemple, par un paramètre ou une variable locale. Dans ces situations, qualifier le nom du membre est le seul moyen de se référer à ces noms de membres cachés.
 
-	The following example uses the ##[[KeyPgThis This]]## keyword to refer to member data whose name is hidden by a parameter and local variable:
+	L'exemple suivant utilise le mot-clé ##[[KeyPgThis This]]## pour se référer à un membre de données dont le nom est caché par par un paramètre et une variable locale:
 
 	{{fbdoc item="filename" value="examples/manual/proguide/members/this.bas"}}%%(freebasic)
 Type foo
@@ -88,17 +88,17 @@ Sub foo.g ()
 End Sub
 %%
 	
-	* //Static member procedures do not have this extra parameter added by the compiler, and so cannot access the object instance from which it was called with.//
+	* //Les membres statiques de procédures n'ont pas ce paramètre supplémentaire ajouté par le compilateur et ne peuvent donc pas accéder à l'instance objet à partir de laquelle ils ont été appelés.//
 
-{{anchor name="ACCESS"}}{{fbdoc item="section" value="Access rights"}}
-	Unlike normal module-level procedures, member procedures have full access rights to the members of the ##[[KeyPgType Type]]## or ##[[KeyPgClass Class]]## they are declared in; they can refer to the public, protected and private members of a ##[[KeyPgType Type]]## or ##[[KeyPgClass Class]]##.
+{{anchor name="ACCESS"}}{{fbdoc item="section" value="Les droits d'accès"}}
+	Contrairement aux procédures normales de niveau module, les membres de procédures ont des droits d'accès complets aux membres du ##[[KeyPgType Type]]## ou de la ##[[KeyPgClass Class]]## où ils ont été déclarés; ils peuvent se référer aux membres publics, protégés et privés d'un ##[[KeyPgType Type]]## ou d'une ##[[KeyPgClass Class]]##.
 
-{{anchor name="OVERLOAD"}}{{fbdoc item="section" value="Overloading"}}
-	A member procedure can be declared to have the same name as another member procedure, provided the parameters are different, either in number or in type. This is referred to as overloading.
+{{anchor name="OVERLOAD"}}{{fbdoc item="section" value="Surcharge"}}
+	Un membre de procédure peut être déclaré en ayant le même nom qu'un autre membre d'une procédure, à condition que les paramètres soient différents, que ce soit en nombre ou en type. C'est ce qu'on appelle la surcharge.
 
-	Only the parameters are used to determine if a procedure declaration is a valid overload. For example, a ##[[KeyPgType Type]]## or ##[[KeyPgClass Class]]## could have static and non-static member procedures with the same name, or ##[[KeyPgSub Sub]]## and ##[[KeyPgFunction Function]]## member procedures with the same name
+	Seuls les paramètres sont utilisés pour déterminer si une déclaration de procédure est une surcharge valide. Par exemple, un ##[[KeyPgType Type]]## ou une ##[[KeyPgClass Class]]## pourraient comporter des membres statiques et non-statiques de procédures ayant le même nom, ou des membres ##[[KeyPgSub Sub]]## et ##[[KeyPgFunction Function]]## de procédures avec le même nom.
 
-	Unlike a module-level procedure, which needs to specify the ##[[KeyPgOverload Overload]]## clause in the declaration to allow overloading it, a member procedure is overloadable by default, and does not need the ##[[KeyPgOverload Overload]]## clause.
+	Contrairement à une procédure de niveau module, qui a besoin de spécifier la clause ##[[KeyPgOverload Overload]]## dans sa déclaration pour lui permettre d'être surchargée, un membre de procédure est surchargeable par défaut et n'a pas besoin de la clause ##[[KeyPgOverload Overload]]##.
 
 	{{fbdoc item="filename" value="examples/manual/proguide/members/overload.bas"}}%%(freebasic)
 Type T
@@ -125,14 +125,14 @@ Type T
 End Type
 %%
 
-{{anchor name="STATIC"}}{{fbdoc item="section" value="Static member procedures"}}
-	Static member procedures are declared and defined much in the same way as non-static member procedures, with the ##[[KeyPgStatic Static]]## keyword preceding the declaration and definition.
+{{anchor name="STATIC"}}{{fbdoc item="section" value="Membres statiques de procédures"}}
+	Les membres statiques de procédures sont déclarés et définis de la même manière que les membres de procédures non-statiques, avec avec le mot-clé ##[[KeyPgStatic Static]]## précédant la déclaration et la définition.
 
-	Member procedures defined using the ##[[KeyPgStatic Static]]## keyword must be declared with the ##[[KeyPgStatic Static]]## keyword in the [[KeyPgType Type]] or [[KeyPgClass Class]] definition, or a compiler error will occur. Like non-static member procedures, it is an error to define a static member procedure without a matching declaration in the [[KeyPgType Type]] or [[KeyPgClass Class]] definition.
+	Les membres de procédures définis en utilisant le mot-clef ##[[KeyPgStatic Static]]## doivent être déclarés avec le mot-clef ##[[KeyPgStatic Static]]## dans la définition d'un [[KeyPgType Type]] ou d'une [[KeyPgClass Class]] ou le compilateur émettra un message d'erreur. Comme les membres non-statiques de procédures, c'est une erreur de définir un membre statique de procédure sans une déclaration correspondant à la définition de [[KeyPgType Type]] ou [[KeyPgClass Class]].
 	
-	Do not confuse this with procedure definitions that specify static storage for their variables and objects by appending the ##[[KeyPgStatic Static]]## keyword to the procedure header. The ##[[KeyPgStatic Static]]## keyword can be used in both contexts, however; static member procedures can be defined with static variable and object storage.
+	Ne pas confondre ceci avec les définitions de procédure qui précisent le stockage statique pour leurs variables et des objets en ajoutant le mot-clé ##[[KeyPgStatic Static]]## à l'en-tete de la procédure. Le mot-clé ##[[KeyPgStatic Static]]## peut, néanmoins, être utilisé dans les deux contextes; les membres de procedures statiques peuvent être définis avec un stockage statique de variable et d'objet.
 
-	The following example declares two static member procedures, the first of which also has static variable and object storage. Note that the ##[[KeyPgStatic Static]]## keyword is optional in the member procedure definition:
+	L'exemple suivant déclare deux membres de procédure statiques, dont le premier a également un stockage statique de variable et d'objet. Notez que le mot-clé ##[[KeyPgStatic Static]]## est facultatif dans la définition du membre de la procédure:
 
 	{{fbdoc item="filename" value="examples/manual/proguide/members/foo2.bi"}}%%(freebasic)
 '' foo2.bi
@@ -153,11 +153,11 @@ Function foo.g As Integer
 End Function
 %%
 
-	Static member procedures can be called like non-static member procedures, qualifying the name of the procedure with the name of an instance and the member access operator (##[[KeyPgOpMemberAccess Operator . (Member access)]]##).
+	Les membres de procédure statiques peuvent être appelés comme des membres de procédure non-statiques, en qualifiant le nom de la procédure avec le nom d'une instance et l'opérateur d'accès aux membres de procédures (##[[KeyPgOpMemberAccess Operator . (Accès Membre)]]##).
 
-	They can also be called by qualifying the procedure name with the name of the ##[[KeyPgType Type]]## or ##[[KeyPgClass Class]]## they were declared in and the member access operator (##[[KeyPgOpMemberAccess Operator . (Member access)]]##). In other words, an instance is not required in order to call static-member procedures.
+	Ils peuvent aussi être appelés en qualifiant le nom de la procédure avec le nom du ##[[KeyPgType Type]]## ou de la ##[[KeyPgClass Class]]## où ils ont été déclarés et l'opérateur d'accès aux membres de procédures (##[[KeyPgOpMemberAccess Operator . (Accès Membre)]]##). En d'autres mots, une instance n'est pas nécessaire pour appeler des membres de procédures statiques.
 
-	The following example, using the code from the last example, uses both ways to call static member procedures:
+	L'exemple suivant, utilise le code de l'exemple précédent et aussi les deux moyens d'appeler un membre de procédure statique:
 	
 	{{fbdoc item="filename" value="examples/manual/proguide/members/usage2.bas"}}%%(freebasic)
 '' ... foo with static members as before ...
@@ -167,9 +167,9 @@ Dim bar As foo
 bar.f(foo.g())
 %%
 
-	Unlike non-static member procedures, which are declared with an extra ##[[KeyPgThis This]]## parameter, static member procedures do not get passed an instance when called. Because of this, static member procedures can only refer to constants, enumerations, other static members (data or procedures), etc., without qualifying their names. Static member procedures can still refer to non-static members when qualified with an instance, for example: a parameter or local variable.
+	Contrairement aux membres de procédures non-statiques qui sont déclarés avec un paramètre supplémentaire ##[[KeyPgThis This]]##, les membres de procédure statiques n'ont pas besoin du passage d'une instance pour être appelés. Pour cette raison, les membres de procédures statiques peuvent seulement faire référence à des constantes, des énumérations d'autres membres statiques (données ou procédures), etc., sans qualifier leurs noms. Les membres de procédures statiques peuvent toujours se référer à des membres de procédures non-statiques quand ils sont qualifiés avec une instance, par exemple: un paramètre ou une variable locale.
 
-	The following example refers to a non-static member from a static procedure:
+	L'exemple suivant fait référence à un membre de procédure non-statique à partir d'une procédure statique:
 
 	{{fbdoc item="filename" value="examples/manual/proguide/members/static.bas"}}%%(freebasic)
 Type foo

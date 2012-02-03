@@ -1,5 +1,5 @@
 {{fbdoc item="title" value="DateDiff"}}----
-Gets the difference of two dates measured by a specified interval
+Récupère la différence entre deux dates, mesurée à l'aide d'un intervalle donné
 
 {{fbdoc item="syntax"}}##
 	[[KeyPgDeclare declare]] [[KeyPgFunction function]] **""DateDiff""** ( [[KeyPgByref byref]] //interval// [[KeyPgAs as]] [[KeyPgConstQualifier const]] [[KeyPgString string]], [[KeyPgByval byval]] //serial1// [[KeyPgAs as]] [[KeyPgDouble double]], [[KeyPgByval byval]] //serial2// [[KeyPgAs as]] [[KeyPgDouble double]], [[KeyPgByval byval]] //firstdayofweek// [[KeyPgAs as]] [[KeyPgInteger integer]] = fbUseSystem, [[KeyPgByval byval]] //firstdayofyear// [[KeyPgAs as]] [[KeyPgInteger integer]] = fbUseSystem ) [[KeyPgAs as]] [[KeyPgInteger integer]]
@@ -10,38 +10,38 @@ Gets the difference of two dates measured by a specified interval
 ##
 {{fbdoc item="param"}}
 	##//interval//##
-		the unit of time (interval) with which to measure the difference
+		l'unité de temps (intervalle) utilisée pour calculer la différence
 	##//date_serial1//##
-		starting date serial
+		"date serial" de départ
 	##//date_serial2//##
-		end date serial
+		"date serial" de fin
 	##//firstdayofweek//##
-		first day of the week
+		1er jour de la semaine
 	##//firstdayofyear//##
-		first day of the year
+		1er jour de l'année
 
 {{fbdoc item="ret"}}
-	Returns an integer corresponding to the number of ##//interval//##s found between two [[ProPgDates Date Serials]].
+	Retourne un nombre entier correspondant au nombre d'##//interval//##s trouvés entre deux [[ProPgDates Date Serials]].
 
-	If ##//date_serial1//## > ##//date_serial2//##, the result is negative.
+	Si ##//date_serial1//## > ##//date_serial2//##, le résultat est négatif.
 
 {{fbdoc item="desc"}}
 
-	##//interval//## is specified as follows:
+	##//interval//## est spécifié comme ci-dessous:
 
-		{{table columns="2" cellpadding="1" cells="value;interval;yyyy;years;q;quarter(three months);m;months;w; seven day periods; ww;calendar weeks;d,y;days;h;hours;n;minutes;s;seconds"}}  
+		{{table columns="2" cellpadding="1" cells="valeur;intervalle;yyyy;années;q;trimestres;m;mois;w; périodes de 7 jours; ww;semaines du calendrier;d,y;jours;h;heures;n;minutes;s;secondes"}}  
 
-	##//first_dayofweek//## Affects the counting when ##'ww'## interval is used.
+	##//first_dayofweek//## affecte le comptage quand l'intervalle ##'ww'## est utilisé.
 
-		{{table columns="3" cellpadding="1" cells="value;first day of week;constant;omitted;sunday;###;0;local settings;fbUseSystem;1;sunday;fbSunday;2;monday;fbMonday;3;tuesday;fbTuesday;4;wednesday;fbWednesday;5;thursday;fbThursday;6;friday;fbFriday;7;saturday;fbSaturday"}}
+		{{table columns="3" cellpadding="1" cells="valeur;1er jour de la semaine;constante;omis;sunday = dimanche; 0;paramètres locaux;fbUseSystem;1;sunday = dimanche;fbSunday;2;monday = lundi;fbMonday;3;tuesday = mardi;fbTuesday;4;wednesday = mercredi;fbWednesday;5;thursday = jeudi;fbThursday;6;friday = vendredi;fbFriday;7;saturday = samedi;fbSaturday"}}
 
-	##//first_weekofyear//## specifies which year (previous or next) that the week which spans the end of one year and the beginning of the next should included with.
+	##//first_weekofyear//## spécifie quelle année (précédente ou suivante) dont la semaine qui est "à cheval" sur la fin d'une année et le début de la suivante devrait être incluse.
 
-		{{table columns="3" cellpadding="1" cells="value;first week of year;constant;0;local settings;fbUseSystem;1;January 1's week;fbFirstJan1;2;first weeks having 4 days in the year;fbFirstFourDays;3;first full week of year;fbFirstFullWeek"}}
+		{{table columns="3" cellpadding="1" cells="valeur;1ère semaine de l'année;constante;0;paramètres locaux;fbUseSystem;1;semaine du 1er janvier;fbFirstJan1;2;1ère semaine ayant 4 jours dans l'année;fbFirstFourDays;3;1ère semaine complète de l'année;fbFirstFullWeek"}}
 
-	Notice if you do an arithmetical subtraction of two date serials you get the difference in days.
+	Notez que si vous effectuez une soustraction arithmétique de deux "date serial"s vous obtenez la différence en jours.
 
-	The compiler will not recognize this function unless ##vbcompat.bi## or ##datetime.bi## is included.
+	Le compilateur ne reconnaît cette fonction que si ##vbcompat.bi## ou ##datetime.bi## est inclus.
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/dates/datediff.bas"}}%%(freebasic)
@@ -66,7 +66,7 @@ end if
 %%
 
 {{fbdoc item="diff"}}
-	- Did not exist in QB. This function appeared in Visual Basic.
+	- N'existe pas dans QB. Cette fonction est apparue dans Visual Basic.
 
 {{fbdoc item="see"}}
 	- [[ProPgDates Date Serials]]

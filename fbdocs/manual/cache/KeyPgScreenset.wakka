@@ -1,5 +1,5 @@
 {{fbdoc item="title" value="SCREENSET"}}----
-Sets current work and visible pages
+Valide la page de travail et la page visible
 
 {{fbdoc item="syntax"}}##
 	[[KeyPgDeclare declare]] [[KeyPgSub sub]] **Screenset** ( [[KeyPgByval byval]] //work_page// [[KeyPgAs as]] [[KeyPgInteger integer]] = -1, [[KeyPgByval byval]] //visible_page// [[KeyPgAs as]] [[KeyPgInteger integer]] = -1 )
@@ -9,30 +9,30 @@ Sets current work and visible pages
 ##
 {{fbdoc item="param"}}
 	##//work_page//##
-		index to working page
+		indice de la page de travail
 	##//visible_page//##
-		index to visible page
+		indice de la page visible
 
 {{fbdoc item="desc"}}
-	##**Screenset**## allows to set the current working page and the current visible page. Page numbers range from  0 to the num_pages specified when setting the graphics mode minus 1 . You can use this function to achieve page-flipping or double-buffering.  If you omit ##//work_page//## but not ##//visible_page//##, only visible page is changed. If you omit ##//visible_page//## but not ##//work_page//##, only work page is changed. If you omit both arguments, both work page and visible page are reset to page 0.
+	##**ScreenSet**## permet de déterminer la page courante de travail ainsi que la page visible. Les numéros de page vont de 0 à num_pages spécifié lors de la validation du mode graphique moins 1. Vous pouvez utiliser cette fonction pour utiliser les techniques de la "permutation de page" (page-flipping) ou du "double tampon" (double-buffering).  Si vous omettez ##//work_page//## mais pas ##//visible_page//##, seule la page visible changera. Si vous omettez les deux arguments, les deux pages, de travail et visible, correspondront à la page 0.
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/gfx/screenset.bas"}}%%(freebasic)
-' Set good old 320x200 in 8bpp mode, but with 2 pages
+' Valide bon vieux mode, 320x200 en 8bpp mais avec 2 pages
 SCREEN 13, ,2
 COLOR ,15
 DIM x AS INTEGER
 x = -40
-' Let's work on page 1 while we display page 0
+' Travail sur page 1 pendant nous affichons page 0
 SCREENSET 1, 0
 DO
 	CLS
 	LINE (x, 80)-(x + 39, 119), 4, BF
 	x = x + 1
 	IF (x > 319) THEN x = -40
-	' Wait for vertical sync
+	' Attente syncro verticale
 	WAIT &h3DA, 8
-	' Copy work page to visible page
+	' Copy page travail vers page visible
 	SCREENCOPY
 LOOP WHILE INKEY = ""
 
@@ -40,10 +40,10 @@ LOOP WHILE INKEY = ""
 
 
 {{fbdoc item="lang"}}
-	- Not available in the //[[CompilerOptlang -lang qb]]// dialect unless referenced with the alias ##**""__Screenset""**##.
+	- Non disponible en dialecte //[[CompilerOptlang -lang qb]]// sauf si référencé avec l'alias ##**""__Screenset""**##.
 
 {{fbdoc item="diff"}}
-	- New to ""FreeBASIC""
+	- Nouveau pour ""FreeBASIC""
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgScreengraphics Screen (Graphics)]]##

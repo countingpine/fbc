@@ -1,73 +1,73 @@
 {{fbdoc item="title" value="Running"}}----
-Invoking the compiler after installation.
+Utilisation du compilateur après l'installation.
 
 {{fbdoc item="section" value="Windows"}}
-	The compiler can be manually invoked from the command-line, or automatically by your IDE/Code Editor. If you're using an IDE, you will usually have to tell it where the compiler was installed, so it can find it. How exactly to do that depends on the IDE. 
+	Le compilateur peut être appelé manuellement à partir de la ligne de commande ou automatiquement par votre éditeur de Code/IDE. Si vous utilisez un IDE, vous aurez généralement à lui dire où le compilateur a été installé, ainsi il peut le trouver. Comment faire exactement cela, dépend de l'IDE. 
 	
-	To compile manually, you should append the FreeBASIC installation directory to your PATH environment variable, separating it from previous entries using a semi-colon. Now you can simply use "fbc" from the command prompt, instead of always having to type in the full path (e.g. "C:\FreeBASIC\fbc.exe").
+	Pour compiler manuellement, vous devez ajouter le répertoire d'installation de FreeBASIC à votre variable d'environnement PATH, la séparant des autres en utilisant un point-virgule. Maintenant vous pouvez simplement utiliser "fbc" de l'invite de commande, au lieu de toujours avoir à taper le chemin d'accès complet (exemple "C:\FreeBASIC\fbc.exe").
 
-	Then, open a console/command prompt/MS DOS prompt, in the same directory as your program. To compile your program, you can use:
+	Ensuite, ouvrez une console/invite de commande/invite MS DOS, dans le même répertoire que votre programme. Pour compiler votre programme, vous pouvez utiliser:
 
 		##C:\mystuff\myprogram\> fbc myprogram.bas##
 
-	and ##myprogram.exe## will be created in the same directory.
+	et ##myprogram.exe## sera créé dans le même répertoire.
 
-	A console can be launched in a specific directory from Explorer by using Microsoft's "Open Command Window Here" ""PowerToy"" on Windows XP. On Windows Vista & above you can SHIFT+""RightClick"" on a folder in Explorer to see the 'Open Command Window Here' option. As a last resort, you can also select Start -> Run, type "cmd" and hit Enter, and use the "cd" command to change the current directory.
+	Une console peut être ouverte dans un répertoire spécifique à partir d'Explorer à l'aide de Microsoft "Open Command Window Here" PowerToy sur Windows XP. Sous Windows Vista & après vous pouvez SHIFT+ClicDroit sur un dossier dans l'explorateur pour voir l'option 'Open Command Window Here'. En dernier recours, vous pouvez également sélectionner Start -> Exécutez, tapez "cmd" et appuyez sur Entrée, et utilisez la commande "cd" pour changer le répertoire courant.
 	
 	
-	Note: You can in fact invoke the compiler from any directory you like, but you have to specifiy the correct path to your program, so the compiler can find it, for example:
+	Note: Vous pouvez en effet lancer le compilateur à partir de n'importe quel répertoire, mais vous devez spécifier le chemin d'accès correct à votre programme, de sorte que le compilateur puisse le trouver, par exemple:
 	
 		##C:\> fbc mystuff\myprogram\myprogram.bas##
 		
-	The resulting executable will still be put in the same directory as the program.
+	L'exécutable résultant sera encore mis dans le même répertoire que le programme.
 
 {{fbdoc item="section" value="Linux"}}
-	If the install.sh script was successfully executed with enough priviledges, the compiler binary should have been copied ##/usr/local/bin/fbc##, allowing any user access to the compiler from any directory.
+	Si le script install.sh a été exécuté avec succès avec suffisamment de privilèges, le binaire du compilateur doit être copié dans ##/usr/local/bin/fbc##, permettant à tout utilisateur l'accès au compilateur de n'importe quel répertoire.
 	
-	From the prompt, type,
+	Depuis l'invite, tapez:
 
 		 ##fbc##
 
-	to see a list of options.  To compile the "Hello, world!" example program, navigate to the directory where the ""FreeBASIC"" examples were installed (/usr/local/share/freebasic), and type,
+	pour voir une liste d'options.  Pour compiler l'exemple de programme "Hello, world!" ("Bonjour, monde!), accédez au répertoire où les exemples ""FreeBASIC"" ont été installés (/usr/local/share/freebasic) et tapez:
 
 		##fbc examples/misc/hello.bas##
 
-	and a ##./hello## executable file will be created in the ##examples/misc## directory.
+	et un fichier exécutable ##./hello## sera créé dans le répertoire ##examples/misc##.
 
-{{fbdoc item="section" value="Linux (standalone)"}}
-	If the install script ##install-standalone.sh## was successfully executed with enough privileges, a link to the compiler binary should have been created at ##/usr/bin/fbc##, allowing any user access to the compiler from any directory. If it was not possible to create the link, you may want to alter your ##PATH## environmental variable to be able to invoke the compiler from any directory. Navigate to the directory where ""FreeBASIC"" was installed.
+{{fbdoc item="section" value="Linux (autonome)"}}
+	Si le script ##install-standalone.sh## a été exécuté avec succès avec suffisamment de privilèges, un lien vers le fichier binaire du compilateur doit avoir été créé à ##/usr/bin/fbc##, permettant à tout utilisateur l'accès au compilateur depuis n'importe quel répertoire. S'il n'était pas possible de créer le lien, vous pouvez modifier votre variable d'environnement ##PATH## pour être en mesure d'appeler le compilateur à partir de n'importe quel répertoire. Accédez au répertoire où a été installé ""FreeBASIC"".
 
-	From the prompt, type,
+	Depuis l'invite, tapez:
 
 		 ##fbc##
 
-	to see a list of options. To compile the "Hello, world!" example program type,
+	pour voir une liste d'options. Pour compiler l'exemple de programme "Hello, world!" ("Bonjour, monde!), tapez:
 
 		##fbc examples/misc/hello.bas##
 
-	and a ##./hello## executable file will be created in the ##examples/misc## directory.
+	et un fichier exécutable ##./hello## sera créé dans le répertoire ##examples/misc##.
 
 {{fbdoc item="section" value="DOS"}}
-	Navigate to the directory where ""FreeBASIC"" was installed. For example, if ""FreeBASIC"" is installed in the directory ##C:\FB##, type,
+	Accédez au répertoire où ""FreeBASIC"" a été installé. Par exemple, si ""FreeBASIC"" est installé dans le répertoire ##C:\FB##, tapez:
 
 		##C:##
 		##CD FB##
 
-	Some DOSes accept "##CDD C:\FB##" as well. You can also add the ""FreeBASIC"" directory to your PATH environment variable (usually something like "##SET PATH=C:\FB\;%PATH%##") so you can invoke the compiler from any directory.
+	Certains DOS acceptent aussi "##CDD C:\FB##". Vous pouvez également ajouter le répertoire de ""FreeBASIC"" à votre variable d'environnement PATH (généralement quelque chose comme "##SET PATH=C:\FB\;%PATH%##") de sorte que vous pourrez appeler le compilateur à partir de n'importe quel répertoire.
 
-	At the prompt, type,
+	Depuis l'invite, tapez:
 
 		##fbc##
 
-	to see a list of options. To compile the "Hello, world!" example program type,
+	pour voir une liste d'options. Pour compiler l'exemple de programme "Hello, world!" ("Bonjour, monde!), tapez:
 
 		##fbc examples\misc\hello.bas##
 
-	and a ##hello.exe## executable file will be created in the ##examples\misc## directory.
+	et un fichier exécutable ##hello.exe## sera créé dans le répertoire ##examples\misc##.
 
 {{fbdoc item="see"}}
-	- [[CompilerInstalling Installing FreeBASIC]]
-	- [[CompilerCmdLine Compiler Command Line Options]]
-	- [[CompilerFAQ Compiler FAQ]]
+	- [[CompilerInstalling Installation de FreeBASIC]]
+	- [[CompilerCmdLine Options de ligne de commande du compilateur]]
+	- [[CompilerFAQ FAQ du compilateur]]
 
 {{fbdoc item="back" value="DocToc|Table of Contents"}}

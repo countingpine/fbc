@@ -1,25 +1,25 @@
 {{fbdoc item="title" value="LPRINT"}}----
-Writes text to the default printer.
+Écrit du texte vers l'imprimante par défaut.
 
 {{fbdoc item="syntax"}}##
 	**Lprint**  [ [[KeyPgPrintusing Using]] //formatstring//,] [//expressionlist//] [(, | ;)] ...
 ##
 {{fbdoc item="param"}}
 	##//formatstring//##
-		String specifying the output format.
+		Chaîne spécifiant le format de sortie.
 	##//expressionlist//##
-		List of variables to output according to the specified format.
+		Liste des variables pour une sortie selon le format spécifié.
 
 {{fbdoc item="desc"}}
-	Prints ##//expressionlist//## to the printer attached to the parallel port LPT1, or if it does not exist, to the default printer.  To print to a printer different from the default one, use ##[[KeyPgOpenLpt OPEN LPT]]##.
+	Imprime ##//expressionlist//## sur l'imprimante connectée au port parallèle LPT1, ou si elle n'existe pas, à l'imprimante par défaut.  Pour imprimer sur une imprimante différente de celle par défaut, utilisez ##[[KeyPgOpenLpt OPEN LPT]]##.
 
-	The ##[[KeyPgPrintusing Using]]## clause formats ##//expressionlist//## according to ##//formatstring//##.  Any data type but a UDT can be passed to **##Lprint##** ##//expressionlist##//, expressions do **not** have to be converted to strings first.
+	La clause ##[[KeyPgPrintusing Using]]## formate ##//expressionlist//## en accord avec ##//formatstring//##.  Tout type de données sauf un type défini par l'utilisateur peut être passé à **##LPrint##** ##//expressionlist##//, les expressions n'ont pas à être converties en chaînes avant.
 
-	Using a comma (##,##) as separator or in the end of the ##//expressionlist//## will place the cursor in the next column (every 14 characters), using a semi-colon (##;##) won't move the cursor. If neither of them are used in the end of the ##//expressionlist//##, then a new-line will be printed.
+	L'utilisation d'une virgule (##,##) comme séparateur ou à la fin de ##//expressionlist//## placera le curseur au début de la colonne suivante (tous les 14 caractères), l'utilisation d'un point-virgule (##;##) ne déplacera pas le curseur. Si ni l'un ni l'autre n'est placé à la fin de ##//expressionlist//##, alors une spécification de nouvelle ligne sera envoyée.
 
-	Some printers will not print at all until a ##[[KeyPgChr Chr]](12)## (End of Page) character is printed.
+	Certaines imprimantes n'impriment rien tant qu'un caractère ##[[KeyPgChr Chr]](12)## (Fin de Page) n'est pas envoyé.
 
-	Internally, FreeBASIC uses the special file number ##-1## for printing using **##Lprint##**.  This file number may be safely closed using ##[[KeyPgClose Close]] -1##.  The next use of **##Lprint##** will automatically reopen it as needed.
+	En interne, FreeBASIC utilise le numéro de fichier spécial ##-1## pour l'impression en utilisant **##LPrint##**.  Ce numéro de fichier peut être fermé en toute sécurité avec ##[[KeyPgClose Close]] -1##.  L'utilisation suivante de **##LPrint##** le réouvrira automatiquement si nécessaire.
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/hardware/lprint.bas"}}%%(freebasic)
@@ -43,10 +43,10 @@ LPrint Chr$(12)
 %%
 
 {{fbdoc item="diff"}}
-	- None
+	- Aucune
 
 {{fbdoc item="lang"}}
-	- ##**Lprint**## is not supported in the //[[CompilerOptlang -lang fb]]// dialect. In this dialect the printer must be properly opened with ##[[KeyPgOpenLpt Open LPT]]## and ##[[KeyPgPrintPp Print #]]## must be used to print.
+	- ##**LPrint**## n'est pas supporté par le dialecte //[[CompilerOptlang -lang fb]]//. Dans ce dialecte, l'imprimante doit être ouverte correctement avec ##[[KeyPgOpenLpt Open LPT]]## et ##[[KeyPgPrintPp Print #]]## doit être utilisé pour imprimer.
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgOpenLpt Open LPT]]##

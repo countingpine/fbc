@@ -1,16 +1,16 @@
 {{fbdoc item="title" value="PRESERVE"}}----
-Used with ##[[KeyPgRedim Redim]]## to preserve contents will resizing an array
+Utilisé avec ##[[KeyPgRedim Redim]]## pour préserver le contenu d'un tableau lors de son redimensionnement
 
 {{fbdoc item="syntax"}}##
 	[[KeyPgRedim redim]] **Preserve** //array//(...) [[KeyPgAs as]] [[DataType datatype]]
 ##
 {{fbdoc item="desc"}}
-	Used with ##[[KeyPgRedim Redim]]## so that when an array is resized, data is not reset but is preserved. This means when the array is enlarged that only new data is reset, while the old data remains the same.
+	Utilisé avec ##[[KeyPgRedim Redim]]## de sorte que quand un tableau est redimensionné, les données sont pas remises à zéro, mais conservées. Cela signifie que lorsque le tableau est agrandi, seules les données nouvelles sont remises à zéro, tandis que les anciennes données restent les mêmes.
 
-	**NOTE**: ##**Redim** [[KeyPgPreserve Preserve]]## may not work as expected in all cases:
-		##[[KeyPgPreserve Preserve]]##'s current behavior is to keep the original data contiguous in memory, and only expand or truncate the size of the memory.
-		Its behavior is only well-defined when the upper bound is changed.  If the lower bound is changed, the current result is that the data is in effect shifted to start at the new lower bound.
-		If there are multiple dimensions, only the upper bound of the first dimension may be changed safely.  If lower-order dimensions are resized at all, the effects can be hard to predict.
+	**NOTE**: ##**ReDim** [[KeyPgPreserve Preserve]]## peut ne pas fonctionner comme espéré dans certains cas:
+		Le comportement normal de ##[[KeyPgPreserve Preserve]]## est de conserver les données originales contiguës dans la mémoire et seulement augmenter ou diminuer la taille de la mémoire.
+		Son comportement n'est bien défini que lorsque la borne supérieure est changée.  Si la borne inférieure est modifiée, le résultat est que les données sont en effet déplacées pour commencer à la nouvelle limite inférieure.
+		S'il y a des dimensions multiples, seule la limite supérieure de la première dimension peut être modifiée en toute sécurité.  Si les dimensions d'ordre inférieur sont toutes redimensionnées, les effets sont imprévisibles.
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/array/preserve.bas"}}%%(freebasic)
@@ -29,7 +29,7 @@ next
 %%
 
 {{fbdoc item="diff"}}
-	- ##**Preserve**## wasn't supported until PDS 7.1
+	- ##**Preserve**## n'était pas supporté jusqu'à PDS 7.1
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgDim Dim]]##

@@ -1,5 +1,5 @@
 {{fbdoc item="title" value="ERR"}}----
-Error handling function to return the error number of the last error
+Fonction de gestion des erreurs qui renvoie le numéro de la dernière erreur
 
 {{fbdoc item="syntax"}}##
 	[[KeyPgDeclare declare]] [[KeyPgFunction function]] **Err** ( ) [[KeyPgAs as]] [[KeyPgInteger integer]]
@@ -8,19 +8,19 @@ Error handling function to return the error number of the last error
 	//result// = **Err**
 ##
 {{fbdoc item="ret"}}
-	After an error, returns the error code that occurred. 
+	Après une erreur, retourne le code de l'erreur qui s'est produite. 
 
 {{fbdoc item="desc"}}
-	##**Err**## can always be used, even if QB-like error handling is not enabled.
+	##**Err**## peut toujours être utilisé, même si la gestion des erreurs QB-like n'est pas activée.
 
-	##**Err**## is reset by ##[[KeyPgResume Resume]]## and ##[[KeyPgResumenext Resume Next]]##.
+	##**Err**## est réinitialisé par ##[[KeyPgResume Resume]]## et ##[[KeyPgResumenext Resume Next]]##.
 
-	    NOTE: Care should be taken when calling an internal function (such as ##[[KeyPgPrint Print]]##) after an error occurs because it will reset the error value with its own error status.  To preserve the ##**Err**## value, it is a good idea to store it in a variable as soon as the error handler is entered.
+	    NOTE: Des précautions doivent être prises lors de l'appel d'une fonction interne (comme ##[[KeyPgPrint Print]]##) après qu'une erreur se soit produite car la valeur d'erreur sera réinitialisée avec son propre statut d'erreur. Pour préserver la valeur ##**Err**##, il faut la copier dans une variable auxiliaire dès que le gestionnaire d'erreurs est lancé.
 
-	See [[TblRuntimeErrors Runtime Error Codes]] for a listing of runtime error numbers and their associated meaning.
+	Voir [[TblRuntimeErrors Codes d'erreur de fonctionnement]] pour une liste des numéros d'erreur d'exécution et leur signification.
 
 {{fbdoc item="ex"}}
-An example using QBasic style error handling (compile with -ex option)
+Un exemple en utilisant le style QBasic de gestion d'erreur (compilation avec l'option -ex)
 {{fbdoc item="filename" value="examples/manual/error/err1.bas"}}%%(freebasic)
 '' Compile with -lang fblite or qb
 
@@ -35,7 +35,7 @@ Error_Handler:
   Print "Error #"; n
   Resume Next
 %%
-An example using inline error handling (note: ##[[KeyPgOpen Open]]## can also return its own error status when called as a function)
+Un exemple en utilisant la gestion des erreurs en ligne (note: ##[[KeyPgOpen Open]]## peut aussi retourner son propre status d'erreur s'il est appelé comme une fonction)
 {{fbdoc item="filename" value="examples/manual/error/err2.bas"}}%%(freebasic)
 '' compile without -e switch
 
@@ -52,11 +52,11 @@ close #1
 %%
 
 {{fbdoc item="diff"}}
-	- Error numbers are not the same as in QB.
+	- Les numéros d'erreur sont différents dans QB.
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgOnerror On Error]]##
-	- {{fbdoc item="keyword" value="ProPgErrorHandling|Error Handling"}} 
-	- [[TblRuntimeErrors Runtime Error Codes]]
+	- {{fbdoc item="keyword" value="ProPgErrorHandling|Gestion des erreurs"}} 
+	- [[TblRuntimeErrors Codes des erreurs de fonctionnement]]
 
 {{fbdoc item="back" value="CatPgError|Error Handling Functions"}}

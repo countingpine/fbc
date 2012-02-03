@@ -1,41 +1,41 @@
 {{fbdoc item="title" value="DRAW"}}----
-Statement for sequenced pixel plotting
+Déclaration pour l'écriture séquentielle de pixel
 
 {{fbdoc item="syntax"}}##
 	**Draw** [//target//,] //cmd//
 ##
 {{fbdoc item="param"}}
 	##//target//##
-		the buffer to draw on
+		le tampon où dessiner
 	##//cmd//##
-		a string containing the sequence of commands
+		une chaîne contenant une séquence de commandes
 
 {{fbdoc item="desc"}}
-	Drawing will take place onto the current work page set via ##[[KeyPgScreenset ScreenSet]]## or onto the ##//target//## ##[[KeyPgGetgraphics Get]]##/##[[KeyPgPutgraphics Put]]## buffer if specified.
-	The ##**Draw**## statement can be used to issue several drawing commands all at once; it is useful to quickly draw figures. The command string accepts the following commands:
+	Le dessin sera sur la page courante de travail validée par ##[[KeyPgScreenset ScreenSet]]## ou sur le tampon ##//cible (target)//## ##[[KeyPgGetgraphics Get]]##/##[[KeyPgPutgraphics Put]]## s'il est spéecifié.
+	La déclaration ##**Draw**##peut être utilisée pour exécuter plusieurs commandes de dessin d'unseul coup; c'est très utile pour dessiner rapidement des figures. Lachaîne contenant les commandes accepte les commandes suivantes:
 
-	Commands to plot pixels:
-	{{table columns="2" cellpadding="1" cells="Command;Description;###;Commands to plot pixels:;B;Optional prefix: move but do not draw.;N;Optional prefix: draw but do not move.;M x,y;Move to specified screen location. if a '+' or '-' sign precedes x, movement is relative to current cursor position.  x's sign has no effect on the sign of y.;U [n];Move n units up. If n is omitted, 1 is assumed.;D [n];Move n units down. If n is omitted, 1 is assumed.;L [n];Move n units left. If n is omitted, 1 is assumed.;R [n];Move n units right. If n is omitted, 1 is assumed.;E [n];Move n units up and right. If n is omitted, 1 is assumed.;F [n];Move n units down and right. If n is omitted, 1 is assumed.;G [n];Move n units down and left. If n is omitted, 1 is assumed.;H [n];Move n units up and left. If n is omitted, 1 is assumed.;###;Commands to color:;C n;Changes current foreground color to n.;P p,b;PAINTs (flood fills) region of border color b with color p.;###;Commands to scale and rotate:;S n;Sets the current unit length, default is 4.  A unit length of 4 is equal to 1 pixel.;A n;Rotate n*90 degrees (n ranges 0-3).;TA n;Rotate n degrees (n ranges 0-359).;###;Extra commands:;X p;Executes commands at p, where p is a STRING PTR."}}
+	Commandes pour écrire des pixels:
+	{{table columns="2" cellpadding="1" cells="Commande;Description; Commandes pour écrire des pixels:;B;Préfixe facultatif: déplace mais n'écrit pas.;N;Préfixe facultatif: écrit mais ne déplace pas.;Mx,y;Déplace à la position écran spécifiée. Si + ou - précède x, le mouvement est relatif à la position courante du curseur.;U[n];Déplace de n unités vers le haut. Si n est omis, n = 1 par défaut.;D[n];Déplace de n unités vers le bas. Si n est omis, n = 1 par défaut.;L[n];Déplace de n unités vers la gauche. Si n est omis, n = 1 par défaut.;R[n];Déplace de n unités vers la droite. Si n est omis, n = 1 par défaut.;E[n];Déplace de n unités vers le haut et la droite. Si n est omis, n = 1 par défaut.;F[n];Déplace de n unités vers le bas et la droite. Si n est omis, n = 1 par défaut..;G[n];Déplace de n unités vers le bas et la gauche. Si n est omis, n = 1 par défaut.;H[n];Déplace de n unités vers le haut et la gauche. Si n est omis, n = 1 par défaut.; Commandes de couleur:;Cn;La couleur de premier-plan courante devient n.;Pp,b;Remplit la région avec une bordure de couleur b en utilisant la couleur p.; Commandes pour modifier la taille et effectuer une rotation:;Sn;Valide l'unité courante de longueur, 4 par défaut.  Une unité de longueur 4 est égale à 1 pixel.;An;Rotation de n*90 degrés (n de 0 à 3).;TAn;Rotation de n degrés (n de 0 à 359); Commande supplémentaire:;Xp;Exécute la commande à l'addresse p, où p est un STRING PTR."}}
 	
-Commands to set the color, size and angle will take affect all subsequent ##**Draw**## operations.
+Les commandes pour régler la couleur, la taille et l'angle auront une incidence sur toutes les opérations ##**Draw**## ultérieures.
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/gfx/draw.bas"}}%%(freebasic)
 screen 13
 
-'Move to (50,50) without drawing
+'Deplace vers (50,50) sans dessin
 draw "BM 50,50"
 
-'Set drawing color to 2 (green)
+'Valide couleur dessin a 2 (vert)
 draw "C2"
 
-'Draw a box
+'Dessine une boite
 draw "R50 D30 L50 U30"
 
-'Move inside the box
+'Deplace dans la boite
 draw "BM +1,1"
 
-'Flood fill with color 1 (blue) up to border color 2 
+'Remplit couleur 1 (bleu) jusqu'aux bords couleur 2 
 draw "P 1,2"
 
 sleep
@@ -43,12 +43,12 @@ sleep
 {{image class="center" title="Draw example output" url="/images/draw1.png"}}
 
 {{fbdoc item="filename" value="examples/manual/gfx/draw2.bas"}}%%(freebasic)
-'' Draws a flower on-screen
+'' Dessine une fleur sur ecran
 
 dim as integer i, a, c
 dim as string fill, setangle
 
-'' pattern for each petal
+'' motif pour chaque petale
 dim as const string petal = _
 	_
 	("X" & varptr(setangle)) _ '' link to angle-setting string
@@ -96,13 +96,13 @@ sleep
 {{image class="center" title="Draw example output" url="/images/draw2.png"}}
 
 {{fbdoc item="diff"}}
-	- ##//target//## is new to ""FreeBASIC""
-	- QB used the special pointer keyword VARPTR$ with the ##X p## command.
-	- FB does not currently allow sub-pixel movements: all movements are rounded to the nearest integer coordinate.
+	- ##//target//## est nouveau pour ""FreeBASIC""
+	- QB utilise le pointeur spécial VARPTR$ avec la commande ##X p##.
+	- FB ne permet pas actuellement de mouvements de sous-pixels: tous les mouvements sont arrondis à l'entier de coordonnée le plus proche .
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgDrawString Draw String]]##
-	- ##[[KeyPgScreengraphics Screen (Graphics)]]##
+	- ##[[KeyPgScreengraphics Screen (Graphique)]]##
 	- ##[[KeyPgOpVarptr VarPtr]]##
 	- ##[[KeyPgPaint Paint]]##
 

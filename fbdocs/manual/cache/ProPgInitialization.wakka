@@ -1,5 +1,5 @@
 {{fbdoc item="title" value="Variable Initializers"}}----
-Variable initializers are supported for initializing Arrays, variables and UDTs.
+Les initialiseurs de variables sont servent à initialiser des tableaux, des variables et des types définis par l'utilisateur.
 
 {{fbdoc item="syntax"}}##
 		[[KeyPgDim Dim]] //scalar_symbol// [AS [[DataType DataType]]] = //expression//
@@ -7,16 +7,16 @@ Variable initializers are supported for initializing Arrays, variables and UDTs.
 		[[KeyPgDim Dim]] //udt_symbol// AS [[DataType DataType]] = ( //expression// [, ...] )
 ##
 {{fbdoc item="desc"}}
-	Arrays, variables and UDTs may be given a value at the time of their declaration using ##[[KeyPgDim Dim]]##, with the syntax shown above.  Please note the important differences between initializing different types.  Scalar variables are initialized as they would in a normal assignment, using an equals sign.  UDTs and arrays are assigned with an equal sign followed by a greater than symbol (=>).  Array values are given in comma delimited values enclosed by curly brackets, and UDT values are given in comma delimited values enclosed by parenthesis.
+	Les tableaux, les variables et les types définis par l'utilisateur peuvent recevoir une valeur lors de leur déclaration en utilisant ##[[KeyPgDim Dim]]##, avec la syntaxe ci-dessus.  S'il vous plaît, notez les différences importantes entre les différents types d'initialisation.  Les variables scalaires sont initialisées comme dans une affectation normale, en utilisant un signe égal.  Les types définis par l'utilisateur et les tableaux sont assignés à l'aide d'un signe égal suivi d'un signe plus grand que (=>).  Les valeurs d'un tableau sont données par des valeurs séparées par des virgules délimitées par des accolades, et les valeurs des types définis par l'utilisateur sont indiquées par des valeurs séparées par des virgules délimitées par des parenthèses.
 
-	These methods of initializing variables can be nested within one another for complex assignments.  For instance, to initialize a multidimensional array:
+	Ces méthodes d'initialisation des variables peuvent être imbriquées les unes dans les autres pour les tâches complexes.  Par exemple, pour initialiser un tableau multi-dimensionnel:
 
 {{fbdoc item="filename" value="examples/manual/proguide/init/array.bas"}}%%(freebasic)
 DIM array(1 to 2, 1 to 5) as Integer => {{1, 2, 3, 4, 5}, {1, 2, 3, 4, 5}}
 %%
-	In this declaration, the values for the left-most dimension are given as 5-index arrays.  Nesting allows for arrays of any dimension to be initialized.
+	Dans cette déclaration, les valeurs pour la dimension la plus à gauche sont données sous forme de tableaux d'index 5.  L'imbrication permet d'initialiser les tableaux de n'importe quelles dimensions.
 
-	UDTs and arrays can be nested within each other as well.  For instance, the following code declares and initializes an array of UDTs.
+	Les types définis par l'utilisateur et les tableaux peuvent aussi être imbriqués les uns dans les autres.  Par exemple, le code suivant déclare et initialise un tableau de types définis par l'utilisateur.
 
 {{fbdoc item="filename" value="examples/manual/proguide/init/udtarray.bas"}}%%(freebasic)
 Type mytype
@@ -31,10 +31,10 @@ Dim MyVar(2) As mytype => _
 		(2.0, 2, @"GoodBye") _
 	}
 %%
-	For module-level, static, or global variables, initialized values must be constant expressions.  FreeBASIC will report a compile-time error if otherwise.
+	Pour les variables statiques ou globales, au niveau module , les valeurs d'initialisation doivent être des expressions constantes.  Autrement, FreeBASIC signale une erreur de compilation.
 
 {{fbdoc item="diff"}}
-	- Variable Initializers are new to ""FreeBASIC""
+	- Les initialiseurs de variables sont nouveau pour ""FreeBASIC""
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgDim Dim]]##

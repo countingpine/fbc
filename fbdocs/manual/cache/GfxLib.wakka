@@ -1,18 +1,18 @@
 {{fbdoc item="title" value="GfxLib - FreeBASIC graphics library overview"}}----
 
-""GfxLib"" is the built-in graphics library included in FreeBASIC. As well as re-creating every QuickBASIC graphics command, ""GfxLib"" has built-in commands to handle input from the keyboard and mouse. Major contributors of the library are Lillo, ""CoderJeff"" and DrV.
+""GfxLib"" est la bibliothèque graphique intégrée dans FreeBASIC. En plus de re-créer toutes les commandes graphiques de QuickBASIC, ""GfxLib"" a intégré des commandes pour gérer les entrées du clavier et de la souris. Les principaux contributeurs de la bibliothèque sont Lillo, ""CoderJeff"" et DrV.
 
-The library supports various drivers depending on the platform: 
+La bibliothèque prend en charge des pilotes différents en fonction de la plate-forme: 
 
-	- All:
-		- **##Null##** Does nothing. Purpose = ??? [[http://fbc.svn.sourceforge.net/viewvc/fbc/trunk/FreeBASIC/src/gfxlib2/libfb_gfx_driver_null.c?view=markup (SVN libfb_gfx_driver_null.c)]] 
+	- Toutes:
+		- **##Null##** Ne fait rien. But = ??? [[http://fbc.svn.sourceforge.net/viewvc/fbc/trunk/FreeBASIC/src/gfxlib2/libfb_gfx_driver_null.c?view=markup (SVN libfb_gfx_driver_null.c)]] 
 
-	- ""Win32"" and ""Linux"":
+	- ""Win32"" et ""Linux"":
 		- **##OpenGL##** 
 
 	- ""Win32"":
-		- **##DirectX##** The default selection of FB ""GfxLib"". May not be available on old Windows installations. [[http://fbc.svn.sourceforge.net/viewvc/fbc/trunk/FreeBASIC/src/gfxlib2/win32/libfb_gfx_driver_ddraw.c?view=markup (SVN libfb_gfx_driver_ddraw.c)]] Bug note: broken in FB versions 0.20 and (some ?) 0.18.x (crash if not available), fixed in 0.21 SVN. [[http://www.freebasic.net/forum/viewtopic.php?p=106600#106600 (forum discussion: p=106600)]]
-		- **##GDI##** The "safest" one, available in all ""Win32"" versions. [[http://fbc.svn.sourceforge.net/viewvc/fbc/trunk/FreeBASIC/src/gfxlib2/win32/libfb_gfx_driver_gdi.c?view=markup (SVN libfb_gfx_driver_gdi.c)]] Bug note: broken in FB versions 0.20 and  (some ?) 0.18.x ("banding effects"), not fixed in 0.21 SVN. [[http://www.freebasic.net/forum/viewtopic.php?p=106600#106600 (forum discussion: p=106600)]]
+		- **##DirectX##** La sélection par défaut de la FB ""GfxLib"". Peut ne pas être disponible sur les anciennes installations Windows. [[http://fbc.svn.sourceforge.net/viewvc/fbc/trunk/FreeBASIC/src/gfxlib2/win32/libfb_gfx_driver_ddraw.c?view=markup (SVN libfb_gfx_driver_ddraw.c)]] Bug note: broken in FB versions 0.20 and (some ?) 0.18.x (crash if not available), fixed in 0.21 SVN. [[http://www.freebasic.net/forum/viewtopic.php?p=106600#106600 (forum discussion: p=106600)]]
+		- **##GDI##** Le "plus sûr" , disponible dans toutes les versions ""Win32"". [[http://fbc.svn.sourceforge.net/viewvc/fbc/trunk/FreeBASIC/src/gfxlib2/win32/libfb_gfx_driver_gdi.c?view=markup (SVN libfb_gfx_driver_gdi.c)]] Bug note: broken in FB versions 0.20 and  (some ?) 0.18.x ("banding effects"), not fixed in 0.21 SVN. [[http://www.freebasic.net/forum/viewtopic.php?p=106600#106600 (forum discussion: p=106600)]]
 
 	- ""Linux"":
 		- **##???##**
@@ -20,38 +20,38 @@ The library supports various drivers depending on the platform:
 	- DOS:
 		- **##BIOS##** [[http://fbc.svn.sourceforge.net/viewvc/fbc/trunk/FreeBASIC/src/gfxlib2/dos/libfb_gfx_driver_bios.c?view=markup (SVN libfb_gfx_driver_bios.c)]]
 		- **##""ModeX""##** "tuned" 320x240x8bpp VGA mode [[http://fbc.svn.sourceforge.net/viewvc/fbc/trunk/FreeBASIC/src/gfxlib2/dos/libfb_gfx_driver_modex.c?view=markup (SVN libfb_gfx_driver_modex.c)]]
-		- **##VESA banked##** compatible with very old VESA 1.x implementations [[http://fbc.svn.sourceforge.net/viewvc/fbc/trunk/FreeBASIC/src/gfxlib2/dos/libfb_gfx_driver_vesa_bnk.c?view=markup (SVN libfb_gfx_driver_vesa_bnk.c)]]
-		- **##VESA linear##** needs VESA version at least 2.0, usually faster than banked VESA [[http://fbc.svn.sourceforge.net/viewvc/fbc/trunk/FreeBASIC/src/gfxlib2/dos/libfb_gfx_driver_vesa_lin.c?view=markup (SVN libfb_gfx_driver_vesa_lin.c)]]
+		- **##VESA banked##** compatible avec de très vieilles implémentations VESA 1.x [[http://fbc.svn.sourceforge.net/viewvc/fbc/trunk/FreeBASIC/src/gfxlib2/dos/libfb_gfx_driver_vesa_bnk.c?view=markup (SVN libfb_gfx_driver_vesa_bnk.c)]]
+		- **##VESA linear##** a besoin de la version VESA au moins 2.0, généralement plus rapide que "banked VESA" [[http://fbc.svn.sourceforge.net/viewvc/fbc/trunk/FreeBASIC/src/gfxlib2/dos/libfb_gfx_driver_vesa_lin.c?view=markup (SVN libfb_gfx_driver_vesa_lin.c)]]
 		- **##VGA##** [[http://fbc.svn.sourceforge.net/viewvc/fbc/trunk/FreeBASIC/src/gfxlib2/dos/libfb_gfx_driver_vga.c?view=markup (SVN libfb_gfx_driver_vga.c)]]
-		- Bug note: [[KeyPgPalette Palette]] doesn't work well [[http://freebasic.net/forum/viewtopic.php?t=12691 (forum discussion: t=12691)]] 
+		- Bug note: [[KeyPgPalette Palette]] ne fonctionne pas bien [[http://freebasic.net/forum/viewtopic.php?t=12691 (forum discussion: t=12691)]] 
 
-##[[KeyPgScreencontrol Screencontrol]]## can be used (SET_DRIVER_NAME 103) to override the default driver preferences. 
+##[[KeyPgScreencontrol Screencontrol]]## peut être utilisé (SET_DRIVER_NAME 103) pour remplacer les préférences par défaut du pilote. 
 
-{{fbdoc item="target"}}
-	- In DOS, ""GfxLib"" will create and "manage" a mouse arrow if a mouse driver is detected. There is no "official" way to disable this. Also the arrow doesn't react to mouse movements while the screen is locked.
-	- In DOS, Windowing and OpenGL related commands and switches are not available (they exist but do nothing, or return some values with no meaning)
-	- In DOS, the resolution must match one supported by the graphics card. ""GfxLib"" will try to find an appropriate mode from VGA modes, ""ModeX"" or VESA, preferring VESA LFB interface if available, or banked VESA otherwise. Unsupported resolutions may currently crash the program, though in future ""GfxLib"" may try to find a close match instead. For optimal compatibility, you should support "safe" resolutions like 640x480 and 800x600, and maybe 1024x768. There are various additional modes like 768x576 around, but they are vendor specific and lacking on many other cards. Also modes 1024x768 and above are not available on older cards and laptops. 
+{{fbdoc item="section" value="Différences plate-forme"}}
+	- Sous DOS, ""GfxLib"" permettra de créer et de "gérer" une flèche de la souris si un pilote de la souris est détectée. Il n'y a pas de moyen "officiel" pour désactiver ceci. Également la flèche ne réagit pas pour des mouvements de la souris pendant que l'écran est verrouillé.
+	- Sous DOS, les commandes Windowing et OpenGL connexes et les commutateurs ne sont pas disponibles (ils existent, mais ne font rien ou retournent des valeurs sans signification)
+	- Sous DOS, la résolution doit correspondre à une, prise en charge par la carte graphique. ""GfxLib"" va essayer de trouver un mode VGA approprié de modes, ""ModeX"" ou VESA, preferring VESA LFB interface si disponible, ou "banked" VESA autrement. Les résolutions non prises en charge peuvent actuellement planter le programme, même si à l'avenir ""GfxLib"" peut essayer de trouver une correspondance proche. Pour une compatibilité optimale, vous devriez utiliser des résolutions "sécurité" comme 640x480 et 800x600, et peut-être 1024x768. Il existe différents modes supplémentaires comme 768x576, mais ils sont spécifiques à un fournisseur et n'existent pas sur de nombreuses autres cartes. Également, les modes de 1024x768 et plus, ne sont pas disponibles sur les cartes plus anciennes et les ordinateurs portables. 
 
 {{fbdoc item="diff"}}
-	- Graphics support was internally redesigned. QB used VGA graphics modes, and wrote directly into the VGA RAM. Multiple pages were available as long as the card supported them. FB uses backbuffers, one per defined page, and copies them to the video RAM (VGA (DOS), VESA (DOS), DirectX (""Win32""), ...) in the background. Graphics commands do work as they used to in QB, but a few notable differences are present:
-		- The background screen updating eats a considerable amount of CPU performance.
-		- There is a thread (""Win32"" and ""Linux"") or ISR (DOS, uses the PIT) active for this.
-		- Mixing FB's graphics support with low-level screen accesses (VGA) is not supported, even in DOS. However direct screen memory access is possible using Screenptr and Screenlock and is fully portable. In DOS VGA and VESA are still available, but can't be mixed with FB's graphics support.
+	- Le support graphique a été remanié en interne. QB utilisait les modes graphiques VGA et écrivait directement dans la RAM VGA. Plusieurs pages étaient disponibles pour autant que la carte les admettait. FB utilisait des "backbuffers", un par page définie, et les copiait dans la RAM vidéo (VGA (DOS), VESA (DOS), DirectX (""Win32""), ...) en arrière-plan. Les commandes graphiques doivent travailler comme elles le faisaient dans QB, mais quelques différences notables sont présentes:
+		- La mise à jour de l'écran en arrière-plan "mange" une quantité considérable des ressources du processeur.
+		- Il y a un "thread" (""Win32"" et ""Linux"") ou ISR (DOS, utilise le PIT) actif pour ceci.
+		- Mélanger le support graphique de FB avec avec des accès écran de bas niveau (VGA) n'est pas supporté, même sous DOS. Cependant, des accès directs à la mémoire sont possibles en utilisant Screenptr et Screenlock et sont pleinement portables. Sous DOS, VGA et VESA sont encore disponibles, mais ne peuvent pas être mélangés avec le support graphique de FB.
 
 {{fbdoc item="see"}}
-	- [[CatPgGfx GFX Functions Index]]
-	- ##[[KeyPgScreengraphics Screen]]## The QB-like way to set graphics mode
-	- ##[[KeyPgScreenres Screenres]]## More flexible alternative to ##**Screen**##
-	- ##[[KeyPgScreenlist Screenlist]]## Check display modes available for FB ""GfxLib"" to use
-	- ##[[KeyPgScreencontrol Screencontrol]]## Select driver and more 
+	- [[CatPgGfx Index des fonctions GFX]]
+	- ##[[KeyPgScreengraphics Screen]]## La façon QB-like pour définir le mode graphique
+	- ##[[KeyPgScreenres Screenres]]##L'alternative la plus flexible à ##**Screen**##
+	- ##[[KeyPgScreenlist Screenlist]]## Vérification des modes d'affichage disponibles et utilisables pour FB ""GfxLib""
+	- ##[[KeyPgScreencontrol Screencontrol]]## Sélectionner le pilote et plus 
 	- ##[[KeyPgScreenlock Screenlock]]##
 	- ##[[KeyPgScreenunlock Screenunlock]]##
-	- ##[[KeyPgScreenptr Screenptr]]## Semi-low level access
+	- ##[[KeyPgScreenptr Screenptr]]## Accès au niveau semi-bas
 	- ##[[KeyPgScreenset Screenset]]##
 	- ##[[KeyPgScreencopy Screencopy]]##
 	- ##[[KeyPgScreeninfo Screeninfo]]##
 	- ##[[KeyPgScreenglproc Screenglproc]]##
-	- ##[[GfxInternalFormats Internal pixel formats]]##
+	- ##[[GfxInternalFormats Formats internes des pixels]]##
 
 {{fbdoc item="back" value="DocToc|Table of Contents"}}
 {{fbdoc item="back" value="CatPgProgrammer|Programmer's Guide"}}

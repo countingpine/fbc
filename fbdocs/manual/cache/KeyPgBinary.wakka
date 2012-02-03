@@ -1,43 +1,43 @@
 {{fbdoc item="title" value="BINARY"}}----
-Specifies file or device to be opened for binary mode
+Spécifie que le fichier ou le périphérique doit être ouvert en mode binaire
 
 {{fbdoc item="syntax"}}##
 	[[KeyPgOpen Open]] //filename// for **Binary** [[[KeyPgAccess Access]] //access_type//] [[[KeyPgLock Lock]] //lock_type//] as [#]//filenum// 
 ##
 {{fbdoc item="param"}}
 	##//filename//##
-		file name to open
+		nom de fichier à ouvrir
 	##//access_type//##
-		indicates whether the file may be read from, written to or both
+		indique si on lit le fichier, si on écrit sur le fichier ou les deux
 	##//lock_type//##
-		locking to be used while the file is open
+		verrouillage utilisé pendant que le fichier est ouvert
 	##//filenum//##
-		unused file number to associate with the open file
+		numéro de fichier à associer au fichier ouvert
 
 {{fbdoc item="desc"}}
-	Opens a file or device for reading and/or writing binary data in the file ##//filenum//##, with free format.
-	If the file does not exist, a new file will be created. The file pointer is initialized by ##[[KeyPgOpen Open]]## at byte no. 1. 
-	##[[KeyPgGetfileio Get #]]## and ##[[KeyPgPutfileio Put #]]## file operations move the file pointer according to the size of the data, the pointer can be set to any byte in the file.
-	The data existing in the file is preserved by ##[[KeyPgOpen Open]]##. 
-	This file mode can use any buffer variable to read/write data in the file.   
-	The data is saved in binary mode, in the same internal format ""FreeBASIC"" uses, by means of ##[[KeyPgGetfileio Get #]]## and ##[[KeyPgPutfileio Put #]]##.
+	Ouvre un fichier ou un pérphérique en lecture et/ou écriture de données binaires dans ##//filenum//##, avec un format libre.
+	Si le fichier n'existe pas, un nouveau fichier sera créé. Le pointeur de fichier est initialisé par ##[[KeyPgOpen Open]]## à l'octet numéro 1. 
+	Les opérations sur les fichiers ##[[KeyPgGetfileio Get #]]## et ##[[KeyPgPutfileio Put #]]## déplacent le pointeur de fichier en fonction de la taille des données, le pointeur peut être déplacé sur n'importe quel octet du fichier.
+	Les données existantes dans le fichier sont conservées par ##[[KeyPgOpen Open]]##. 
+	Ce mode fichier peut utiliser n'importe quel tampon variable pour lire/écrire des données dans le fichier.   
+	Les données sont sauvegardées en mode binaire, dans le même format interne utilisé par ""FreeBASIC"", par le biais de ##[[KeyPgGetfileio Get #]]## et ##[[KeyPgPutfileio Put #]]##.
 	
-	##//filename//## must be a string expression resulting in a legal file name in the target OS, without wildcards. The file will be sought for in the present directory, unless a path is given.
+	##//filename//## doit être une expression chaîne correspondant à un nom de fichier légal dans le système d'exploitation cible, sans jokers de remplacement. Le fichier sera recherché dans le répertoire courant, sauf si ##//filename//## contient un chemin.
 			
-	##//Access_type//## By default ##**Binary**## mode allows to both read and write the file, unless an ##[[KeyPgAccess Access]]## type is specified, it mus be one of: 
-		- ##**Read**## - the file is opened for input only
-		- ##**Write**## - the file is opened for output only
-		- ##**Read Write**## - the file is opened for input and output (the default)
+	##//Access_type//## par défaut le mode ##**Binary**## permet à la fois de lire et écrire dans le fichier, sauf si un type d'##[[KeyPgAccess Access]]## est spécifié, il doit être l'un de ceux-ci: 
+		- ##**Read**## - le fichier est ouvert en entrée seulement
+		- ##**Write**## - le fichier est ouvert en sortie seulement
+		- ##**Read Write**## - le fichier est ouvert en entrée et sortie (par défaut)
 
-	##//Lock_type//## indicates the way the file is locked  for other processes (users or threads), it is one of:
-		- ##**Shared**## - The file can be freely accessed by other processes     
-		- ##**Lock Read**## - The file can't be opened simultaneously for reading
-		- ##**Lock Write**## - The file can't be opened simultaneously for writing
-		- ##**Lock Read Write**## - The file cannot be opened simultaneously by other processes.
-		If no lock type is stated, the file will be ##**Shared**## for other threads of the program and ##**Lock Read Write**## for other programs.
-		##[[KeyPgLock Lock]]## and ##[[KeyPgUnlock Unlock]]## can be used to restrict temporally access to parts of a file.
+	##//Lock_type//## indique la façon dont le fichier est verrouillé pour les autres processus (utilisateurs ou fils), il est l'un de ceux-ci:
+		- ##**Shared**## - Le fichier peut être librement consulté par d'autres processus     
+		- ##**Lock Read**## - Le fichier ne peut pas être ouvert en même temps pour la lecture
+		- ##**Lock Write**## - Le fichier ne peut pas être ouvert en même temps pour l'écriture
+		- ##**Lock Read Write**## - Le fichier ne peut pas être ouvert simultanément par d'autres processus.
+		Si aucun type de verrouillage n'est indiqué, le fichier sera ##**Shared**## pour les autres "threads" du programme et ##**Lock Read Write**## pour les autres programmes.
+		##[[KeyPgLock Lock]]## et ##[[KeyPgUnlock Unlock]]## peut être utilisé pour restreindre temporairement l'accès à des parties d'un fichier.
 
-	##//filenum//## is a valid file number (in the range ##1..255##) not being used for any other file presently open. The file number identifies the file for the rest of file operations. A free file number can be found using the ##[[KeyPgFreefile FreeFile]]## function.
+	##//filenum//## est un numéro de fichier valide (dans la plage ##1..255##) non utilisé par un autre fichier actuellement ouvert. Le numéro de fichier identifie celui-ci pour le reste des opérations. Un numéro de fichier libre peut être trouvé avec la fonction ##[[KeyPgFreefile FreeFile]]##.
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/fileio/binary-write.bas"}}%%(freebasic)
@@ -79,7 +79,7 @@ Print txt
 %%
 
 {{fbdoc item="diff"}}
-	- None
+	- Aucune
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgOpen Open]]##

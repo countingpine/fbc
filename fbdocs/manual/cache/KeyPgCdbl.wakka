@@ -1,5 +1,5 @@
 {{fbdoc item="title" value="CDBL"}}----
-Converts numeric or string expression to ##[[KeyPgDouble Double]]## precision floating point
+Convertit une expression numérique ou une chaîne en nombre ##[[KeyPgDouble Double]]## précision à virgule flottante.
 
 {{fbdoc item="syntax"}}##
 	[[KeyPgDeclare declare]] [[KeyPgFunction function]] **Cdbl** ( [[KeyPgByval byval]] //expression// [[KeyPgAs as]] [[DataType datatype]] ) [[KeyPgAs as]] [[KeyPgDouble double]]
@@ -15,21 +15,20 @@ Converts numeric or string expression to ##[[KeyPgDouble Double]]## precision fl
 ##
 {{fbdoc item="param"}}
 	##//expression//##
-		a numeric, string, or pointer expression to cast to a ##[[KeyPgDouble Double]]## value
+		Une expression numérique, chaîne ou pointeur à transformer (cast) en valeur ##[[KeyPgDouble Double]]##
 	##//datatype//##
-		any numeric, string, or pointer data type
+		Tout type de données numérique, chaîne ou pointeur.
 	##//typename//##
-		a user defined type
+		Un type défini par l'utilisateur.
 
 {{fbdoc item="ret"}}
-	A ##[[KeyPgDouble Double]]## precision value.
+	Une valeur ##[[KeyPgDouble Double]]## précision.
+	{{fbdoc item="desc"}}
+	La fonction ##**CDbl**## retourne une valeur ##[[KeyPgDouble Double]]## 64 bits. La fonction ne vérifie pas s'il y a un dépassement, alors assurez-vous de ne pas avoir une valeur en dehors de l'intervalle correspondant au type de données ##[[KeyPgDouble Double]]##. Le nom peut être expliqué par 'Convert to DouBLe'.
 
-{{fbdoc item="desc"}}
-	The ##**CDbl**## function returns a 64-bit ##[[KeyPgDouble Double]]## value. The function does not check for an overflow, so be sure not to pass a value outside the representable range of the ##[[KeyPgDouble Double]]## data type. The name can be explained as 'Convert to ""DouBLe""'.
+	Si l'argument de ##**CDbl**## est une expression chaîne, il est converti en valeur numérique à l'aide de ##[[KeyPgVal Val]]##.
 
-	If the argument to ##**CDbl**## is a string expression, it is first converted to numeric by using ##[[KeyPgVal Val]]##.
-
-{{fbdoc item="ex"}}
+	{{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/casting/cdbl.bas"}}%%(freebasic)
 ' Using the CDBL function to convert a numeric value
 
@@ -45,7 +44,7 @@ SLEEP
 %%
 
 {{fbdoc item="diff"}}
-	- None
+	- Aucune
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgCbyte Cbyte]]##

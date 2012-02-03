@@ -1,38 +1,38 @@
 {{fbdoc item="title" value="Operator Placement New"}}----
-Operator to construct an object at a specified memory address.
+Opérateur pour construire un object à l'adresse mémoire spécifiée.
 
 {{fbdoc item="syntax"}}##
 	//result// = **New(//address//)** //[[DataType datatype]]//
-		//or//
+		//ou//
 	//result// = **New(//address//)** //[[DataType datatype]]// ( //initializers//, ... )
-		//or//
+		//ou//
 	//result// = **New(//address//)** //[[DataType datatype]]//**[** //count// **]**
 ##
 {{fbdoc item="param"}}
 	##//address//## 
-		the location in memory to construct. the parenthesis are **not** optional.
+		La position mémoire où construire. Les parenthèses **ne sont pas** facultatives.
 	##//size//## 
-		number of bytes to allocate.
+		Le nombre d'octets à allouer.
 	##//initializers//##
-		Initial value(s) for the variable.
+		La valeur initiale de la variable.
 	##//datatype//##
-		name of the data type to create.
+		Le nom du type de donnée à créer.
 	##//count//##
-		Number of elements to allocate.
+		Le nombre d'éléments à allouer.
 
 {{fbdoc item="ret"}}
-	A pointer of type [[DataType datatype]] to the newly allocated data.
+	Un pointeur du type [[DataType datatype]] vers la nouvelle donnée allouée.
 
 {{fbdoc item="desc"}}
-	The ##**Placement New**## operator constructs a specified data type at the specified memory location. 
+	L'opérateur ##**New (Emplacement mémoire)**## construit un type de donnée spécifique à l'emplacement mémoire spécifié. 
 
-	For simple types, like integers, an initial value can be given. For types without constructors, initial values can be specified for each field. Types that have constructors can have their constructors called by ##**Placement New**## as well. If no initializers are given, the default values for those types will be set.
+	Pour des types simples, comme les entiers, une valeur initiale peut être donnée. Pour des types sans constructeur, des valeurs initiales peuvent être spécifiées pour chacun des champs. Pour les types ayant des constructeurs ceux-ci peuvent être appelés par ##**New (Emplacement mémoire)**##. Si aucun initialiseur n'est fourni, les valeurs par défaut seront utilisées.
 
-	Memory is **not** allocated when using the ##**Placement New**## operator. Instead, the memory at the specified ##//address//## is used.  It is incorrect to call ##[[KeyPgOpDelete Delete]]## on the address. See examples below for proper //placement new// usage.
+	La mémoire **n'est pas** allouée quand on utilise l'opérateur ##**Placement New**##. Au lieu de cela, la mémoire à l'##//address//##e spécifiée est utilisée.  Il est incorrect d'appeler ##[[KeyPgOpDelete Delete]]## pour cette adresse. Voir les exemples ci-dssous pour utiliser correctement //new (emplacement mémoire)//.
 
-	Specifying an initial value of ##[[KeyPgAny Any]]##, as in ##new(address) datatype(any)## will not initialize the data.  This is only valid on data types that do not have constructors.
+	Spécifier une valeur initiale ##[[KeyPgAny Any]]##, comme dans ##new(address) datatype(any)## n'initialisera pas les données.  Ceci n'est valide que pour des types de donnée n'ayant pas de constructeur.
 
-	Specifying an initial value of ##[[KeyPgAny Any]]##, as in ##new(address) datatype[count]{any}## will not initialize the data.  This is only valid on data types that do not have constructors.
+	Spécifier une valeur initiale ##[[KeyPgAny Any]]##, comme dans ##new(address) datatype[count]{any}## n'initialisera pas les données.  Ceci n'est valide que pour des types de donnée n'ayant pas de constructeur.
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/operator/placement_new.bas"}}%%(freebasic)
@@ -66,10 +66,10 @@ scope
 end scope
 %%
 {{fbdoc item="lang"}}
-	- Only available in the //[[CompilerOptlang -lang fb]]// dialect.
+	- Utilisable seulement dans le dialecte //[[CompilerOptlang -lang fb]]//.
 
 {{fbdoc item="diff"}}
-	- New to ""FreeBASIC""
+	- Nouveau pour ""FreeBASIC""
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgOpDelete Delete]]##

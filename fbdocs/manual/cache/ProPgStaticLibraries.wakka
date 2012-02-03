@@ -1,68 +1,68 @@
 {{fbdoc item="title" value="Static Libraries"}}----
-A static library is compiled code that can be later used when building an executable.
+Une bibliothèque statique est du code compilé qui peut être utilisé plus tard lors de la construction d'un exécutable.
 
-When the compiler makes an executable, the basic source files are first turned in to object files.  The object files are then linked together to make an executable.  When we compile source code, we don't necessarily have to make an executable.  We could instead group all of the object files (made from sources) in to a single file called a static library.
+Lorsque le compilateur génère un exécutable, les fichiers sources de base sont d'abord transformés en fichiers objets.  Les fichiers objets sont ensuite liés ensemble pour créer un exécutable.  Lorsque nous compilons le code source, nous ne le faisons pas nécessairement pour créer un exécutable.  Nous pouvons plutôt grouper tous les fichiers objets (fabriqués à partir des sources) en un fichier unique appelé une bibliothèque statique.
 
-The library is referred to as static, because when the object files which it contains are later linked in to an executable, a copy of all the needed code in the library is added to the executable.
+La bibliothèque est appelée statique, parce que lorsque les fichiers objets qu'elle contient sont ensuite liés dans un fichier exécutable, une copie de tout le code nécessaire de la bibliothèque est ajouté à l'exécutable.
 
-Once the library is made, we can then use the code that it contains just as if we were compiling the source directly with our program.
+Une fois que la bibliothèque est générée, Une fois que la bibliothèque est générée, nous pouvons alors utiliser le code qu'elle contient comme si nous avions compilé les sources directement avec notre programme.
 
-Following is a simple example of creating a static library using these three files:
-	- ##mylib.bas## - the source for the library
-	- ##mylib.bi## - the header for the library
-	- ##mytest.bas## - a test program
+Voici un exemple simple créant une bibliothèque statique en utilisant ces trois fichiers:
+	- ##mylib.bas## - le source de la bibliothèque
+	- ##mylib.bi## - l'en-tête pour la bibliothèque
+	- ##mytest.bas## - un programme de test
 
-Our library will be a single module providing a single function:
+Notre bibliothèque sera un module unique assurant une fonction unique:
 
 {{fbdoc item="filename" value="examples/manual/proguide/static-lib/mylib.bas"}}%%(freebasic)
 '' mylib.bas
-'' compile with: fbc -lib mylib.bas
+'' compiler avec: fbc -lib mylib.bas
 
-'' Add two numbers together and return the result
+'' Additionne deux nombres ensemble et retourne le résultat
 Public Function Add2( ByVal x As Integer, ByVal y As Integer ) As Integer
   Return( x + y )
 End Function
 %%
-Compile the library with:
+Compiler la bibliothèque avec:
 	##fbc -lib mylib.bas##
 
-The //[[CompilerOptlib -lib]]// option tells the compiler to take the source code, ##mylib.bas##, and turn it in to an object file ##mylib.o##, then store the object file in to a library file, also called an archive, ##libmylib.a##.  A library might contain many modules (source files) each with many functions, but for this simple example, it is just one each.
+L'option //[[CompilerOptlib -lib]]// indique au compilateur de prendre le code source, ##mylib.bas##, et de le transformer en un fichier objet ##mylib.o##, puis de stocker le fichier objet dans un fichier bibliothèque, aussi appelé une archive, ##libmylib.a##.  Une bibliothèque peut contenir de nombreux modules (fichiers source), chacun avec de nombreuses fonctions, mais pour cet exemple simple, il n'y en a simplement qu'un seul.
 
-To make use of the library in some other source code, we need some way of telling the compiler what exactly is in the library.  A good way to do this is to put the declarations ( also called an interface, or API ) for the library in to a header file.
+Pour faire usage de la bibliothèque dans un autre code source , nous avons besoin d'une certaine façon de dire au compilateur ce qui est exactement dans la bibliothèque.  Une bonne façon pour y parvenir est de mettre les déclarations (également appelée une interface ou API) de la bibliothèque dans un fichier d'en-tête.
 
 {{fbdoc item="filename" value="examples/manual/proguide/static-lib/mylib.bi"}}%%(freebasic)
 '' mylib.bi
 #inclib "mylib"
 Declare Function Add2( ByVal x As Integer, ByVal y As Integer ) As Integer
 %%
-There is no need to compile the header.  We want this in its source form so it can be included with other source files.  The ##[[KeyPgInclib #inclib]]## statement will tell the compiler the name of a static library that we need to link with when eventually making an executable.
+Il n'est pas nécessaire de compiler l'en-tête.  Nous le voulons dans sa forme source, comme cela il peut être inclus avec les autres fichiers source.  L'instruction  ##[[KeyPgInclib #inclib]]## dira au compilateur le nom de la bibliothèque statique que nous voulons lier lorsque, éventuellement, nous désirerons générer un exécutable.
 
-With our library (.a file) and a header (.bi file) we can try them out in a test program:
+Grâce à notre bibliothèque (un fichier .a) et un fichier d'en-tête (.bi file) nous pouvons les essayer dans un programme de test:
 
 {{fbdoc item="filename" value="examples/manual/proguide/static-lib/mytest.bas"}}%%(freebasic)
 '' mytest.bas
-'' compile with: fbc mytest.bas
+'' compiler avec: fbc mytest.bas
 #include once "mylib.bi"
 Print Add2(1,2)
 %%
-The ##[[KeyPgInclude #include]]## statement tells the compiler to include the source code from ##mylib.bi## just as if we had typed it in to the original source.  With the way we have written our include file, it tells the compiler everything it needs to know about the library.
+L'instruction ##[[KeyPgInclude #include]]## indique au compilateur d'inclure le code source de ##mylib.bi## comme si nous l'avions tapé dans le source original.  Avec la manière dont nous avons écrit notre fichier d'inclusion, il indique au compilateur tout ce qu'il doit savoir sur la bibliothèque.
 
-We compile this with:
+Nous compilons ceci avec:
 	##fbc mytest.bas##
 
-Then when we run the ##mytest## executable, we should get the result of:
+Puis, quand nous lancerons l'exécutable ##mytest##, nous devrions obtenir ce résultat:
 	##3##
 
-More than one source module can be used when making a library.  And basic programs can use more than one library by including each needed header.  Some libraries are so large that they might use several headers.  On very large projects, making libraries out of some code modules that seldom change can improve compile times dramatically.
+Plus d'un module source peut être utilisé lors de la fabrication de la bibliothèque.  Et les programmes de base peuvent utiliser plus d'une bibliothèque en incluant les fichiers d'en-tête nécessaires.  Certaines bibliothèques sont si importantes qu'elles peuvent utiliser plusieurs en-têtes.  Pour de très grands projets, la création de bibliothèques avec certains modules de code qui ne changent que rarement peut améliorer considérablement les temps de compilation.
 
-Libraries can optionally contain debugging information specified with the //[[CompilerOptg -g]]// command line option.
+Les bibliothèques peuvent éventuellement contenir des informations de débogage spécifiées avec l'option de ligne de commande //[[CompilerOptg -g]]//.
 
-Object files, and therefore libraries, are platform specific and in some cases specific to a particular version of the compiler and FreeBASIC runtime library.
+Les fichiers objets, et donc les bibliothèques, sont dépendants de la plate-forme et dans certains cas dépendants d'une version particulière du compilateur et de la bibliothèque d'exécution FreeBASIC.
 
 {{fbdoc item="see"}}
-	- [[ProPgSharedLibraries Shared Libraries]]
+	- [[ProPgSharedLibraries Bibliothèques partagées]]
 	- ##[[KeyPgInclib #inclib]]##
 	- ##[[KeyPgInclude #include]]##
-	- [[CompilerOptlib Compiler Option: -lib]]
+	- [[CompilerOptlib Option du compilateur: -lib]]
 
 {{fbdoc item="back" value="CatPgProgrammer|Programmer's Guide"}}

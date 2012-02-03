@@ -1,68 +1,68 @@
 {{fbdoc item="title" value="PSET"}}----
-Plots a single pixel
+Place un seul pixel
 
 {{fbdoc item="syntax"}}##
 	**PSet** [//target// ,] [STEP] (//x//, //y//) [,//color//]
 ##
 {{fbdoc item="param"}}
 	##//target//##
-		specifies buffer to draw on.  
+		spécifie le tampon sur lequel on dessine.  
 	##STEP##
-		indicates that coordinates are relative
+		indique que ces coordonnées sont relatives
 	##(//x, y//)##
-		coordinates of the pixel.
+		coordonnées du pixel.
 	##//color//##
-		the color attribute.
+		l'attribut de couleur.
 
 {{fbdoc item="desc"}}
 
-	##//target//## specifies buffer to draw on.  ##//target//## may be an image created with ##[[KeyPgImagecreate ImageCreate]]## or ##[[KeyPgGetgraphics Get (Graphics)]]##.  If omitted, ##//target//## defaults to the screen's current work page.
+	##//target//## spécifie le tampon sur lequel on dessine.  ##//target//## peut être une image créée avec ##[[KeyPgImagecreate ImageCreate]]## ou ##[[KeyPgGetgraphics Get (Graphique)]]##.  Si omis, ##//target//## prend par défaut la page courante de travail de l'écran.
 
-	##(//x, y//)## are the coordinates of the pixel.  ##STEP## if present, indicates that ##(//x, y//)## coordinates are relative to the graphics cursor position.  If omitted, ##(//x, y//)## are relative to the upper left-hand corner of ##//target//##.  The x and y coordinates are affected by the last call to the ##[[KeyPgViewgraphics View (Graphics)]]## and ##[[KeyPgWindow Window]]## statements, and respect the current clipping region as set by the ##[[KeyPgViewgraphics View (Graphics)]]## statement.
+	##(//x, y//)## sont les coordonnées du pixel.  ##STEP## si présent, indique que les coordonnées##(//x, y//)## sont relatives à la position du curseur graphique.  Si omis, ##(//x, y//)## sont relatives au coin en haut à gauche de ##//target//##.  Les coordonnées x et y sont affectées par le dernier appel à ##[[KeyPgViewgraphics View (Graphique)]]## et ##[[KeyPgWindow Window]]##, et respectent la région de découpage (clipping region) validée par ##[[KeyPgViewgraphics View (Graphique)]]##.
 
-	##//color//## specifies the color attribute.  If omitted, ##//color//## defaults to the current foreground color.  See ##[[KeyPgColor Color]]##.  ##//color//## is graphics mode specific, see ##[[KeyPgColor Color]]## and ##[[KeyPgScreengraphics Screen (Graphics)]]## for details.
+	##//color//## spécifie l'attribut de couleur.  Si omis, ##//color//## prend par défaut la couleur courante d'avant-plan.  Voir ##[[KeyPgColor Color]]##.  ##//color//## dépend du mode graphique, voir ##[[KeyPgColor Color]]## et ##[[KeyPgScreengraphics Screen (Graphique)]]## pour plus de détails.
 
-	Optimization note: while **Pset** and the opposite ##[[KeyPgPoint Point]]## provide valid results, they are very slow. Much better performance can be achieved by using ##[[KeyPgPoke Poke]]## after calculating the address yourself from values obtained from ##[[KeyPgImageinfo Imageinfo]]## and ##[[KeyPgScreeninfo Screeninfo]]##, or even more usig inline ASM.
+	Note d'optimisation: bien que **Pset** et son opposé ##[[KeyPgPoint Point]]## donnent des résultats valides, ils sont très lents. De meilleures performances sont obtenues en utilisant ##[[KeyPgPoke Poke]]## après avoir calculé vous-même l'adresse à partir des valeurs obtenues par ##[[KeyPgImageinfo Imageinfo]]## et ##[[KeyPgScreeninfo Screeninfo]]##, ou même en utilisant le langage machine avec "inline ASM".
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/gfx/pset.bas"}}%%(freebasic)
-' Set an appropriate Screen mode.
+' Valide un mode ecran approprie.
 Screen 14
 
-' Plot a pixel at the coordinates 100, 100, Color 15. (white)
+' Place un pixel aux coordonnees 100, 100, Couleur 15. (blanc)
 Pset (100, 100), 15
-' Confirm the operation.
+' Confirme l' operation.
 Locate 1: Print "Pixel plotted at 100, 100"
-' Wait for a keypress.
+' Attente touche appuyee.
 Sleep
  
-' Plot another pixel at the coordinates 150, 150, Color 4. (red) 
+' Place un autre pixel aux coordonnees 150, 150, Couleur 4. (rouge) 
 Pset (150, 150), 4
-' Confirm the operation.
+' Confirme l' operation.
 Locate 1: Print "Pixel plotted at 150, 150"
-' Wait for a keypress.
+' Attente touche appuyee.
 Sleep
  
-' Plot a third pixel relative to the second, Color 15. (white)
-' This pixel is given the coordinates 60, 60. It will be placed
-' at 60, 60 plus the previous coordinates (150, 150), thus plotting at 210, 210.
+' Place un 3eme pixel relatif au second, Couleur 15. (blanc)
+' Ce pixel a les coordonnees 60, 60. Il sera place
+' a 60, 60 plus les coordonnees precedentes (150, 150), donc place a 210, 210.
 Pset Step (60, 60), 15
-' Confirm the operation.
+' Confirme l' operation.
 Locate 1: Print "Pixel plotted at 150 + 60, 150 + 60"
-' Wait for a keypress
+' Attente touche appuyee
 Sleep
 
-' Close the program
+' Ferme le programme
 End
 %%
 
 {{fbdoc item="diff"}}
-	- ##//target//## is new to ""FreeBASIC""
+	- ##//target//## nouveau pour ""FreeBASIC""
 
 {{fbdoc item="see"}}
-	- ##[[KeyPgPoint Point]]## - read out pixels 
+	- ##[[KeyPgPoint Point]]## - lecture de pixels 
 	- ##[[KeyPgPreset PReset]]## 
-	- ##[[KeyPgViewgraphics View (Graphics)]]##
+	- ##[[KeyPgViewgraphics View (Graphique)]]##
 	- ##[[KeyPgWindow Window]]##
 
 {{fbdoc item="back" value="CatPgGfx2D|2D Drawing Functions"}}

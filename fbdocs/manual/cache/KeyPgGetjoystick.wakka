@@ -1,5 +1,5 @@
 {{fbdoc item="title" value="GETJOYSTICK"}}----
-Reads buttons and axis information from attached gaming devices
+Lecture des informations des boutons et des axes des dispositifs relatifs au jeu
 
 {{fbdoc item="syntax"}}##
 	[[KeyPgDeclare declare]] [[KeyPgFunction function]] **Getjoystick** ( [[KeyPgByval byval]] //id// [[KeyPgAs as]] [[KeyPgInteger integer]], [[KeyPgByref byref]] //buttons// [[KeyPgAs as]] [[KeyPgInteger integer]] = 0, [[KeyPgByref byref]] //a1// [[KeyPgAs as]] [[KeyPgSingle single]] = 0, [[KeyPgByref byref]] //a2// [[KeyPgAs as]] [[KeyPgSingle single]] = 0, [[KeyPgByref byref]] //a3// [[KeyPgAs as]] [[KeyPgSingle single]] = 0, [[KeyPgByref byref]] //a4// [[KeyPgAs as]] [[KeyPgSingle single]] = 0, [[KeyPgByref byref]] //a5// [[KeyPgAs as]] [[KeyPgSingle single]] = 0, [[KeyPgByref byref]] //a6// [[KeyPgAs as]] [[KeyPgSingle single]] = 0, [[KeyPgByref byref]] //a7// [[KeyPgAs as]] [[KeyPgSingle single]] = 0, [[KeyPgByref byref]] //a8// [[KeyPgAs as]] [[KeyPgSingle single]] = 0 ) [[KeyPgAs as]] [[KeyPgInteger integer]]
@@ -9,35 +9,35 @@ Reads buttons and axis information from attached gaming devices
 ##
 {{fbdoc item="param"}}
 	##//id//##
-		the device id number (0 - 15)
+		nombre identificateur du dispositif (0 - 15)
 	##//buttons//##
-		the button status
+		l'état bouton
 	##//a1//##
-		first axis value
+		valeur premier axe
 	##//a2//##
-		second axis value
+		valeur second axe
 	##//a3//##
-		third axis value
+		valeur troisième axe
 	##//a4//##
-		fourth axis value
+		valeur quatrième axe
 	##//a5//##
-		fifth axis value
+		valeur cinquième axe
 	##//a6//##
-		sixth axis value
+		valeur sixième axe
 	##//a7//##
-		seventh axis value
+		valeur septième axe
 	##//a8//##
-		eighth axis value
+		valeur huitième axe
 
-{{fbdoc item="ret"}}
-	0 on success or 1 on failure.  All of the axis positions are returned in floating point format.
+{{fbdoc item="section" value="Valeur renvoyée"}}
+	##0 si succès ou ##1## si échec.  Toutes les valeurs des positions des axes sont retournées sous forme de nombres à virgule flottante.
 
 {{fbdoc item="desc"}}
-	##**Getjoystick**## will retrieves the button state, and the axis positions for up to 8 axes, for the joystick determined by ##//id//##, a number between 0 and 15. Buttons are stored in a similar manner to ##[[KeyPgGetmouse Getmouse]]##, with each bit in ##//buttons//## representing a button.
+	##**GetJoystick**## retourne l'état bouton et les positions des axes, jusqu'à 8 axes, pour chaque joystick determiné par ##//id//##, un nombre de ##0## à ##15##. Les valeurs des boutons sont stockées de la même façon que pour ##[[KeyPgGetmouse Getmouse]]##, avec chaque bit //## représentant un bouton.
 
-	A single precision value between ##-1.0## and ##1.0## is returned for each valid axis.  If the axis does not exist for the controller, a value of ##-1000.00## is returned.
+	Une valeur simple précision de ##-1.0## à ##1.0## est retournée pour chaque axe valide.  Si l'axe n'existe pas pour le contrôleur, une valeur de ##-1000.00## est retournée.
 
-	##**Getjoystick**## will return 0 upon successful completion; It will return 1 upon failure. Failure can be caused by specifying an illegal joystick number, specifying a joystick which doesn't exist, or a failure in the joystick API.
+	##**GetJoystick**## renvoie ##0## après réussite; renvoie 1 en cas d'échec. L'échec peut être provoqué par un nombre illégal de joystick, en spécifiant un joystick qui n'existe pas, ou un échec de l'API joystick.
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/input/getjoystick.bas"}}%%(freebasic)
@@ -51,7 +51,7 @@ dim a as integer
 
 const JoystickID = 0
 
-'This line checks to see if the joystick is ok.
+'Cette ligne verifie si joystick est ok.
 
 if GETJOYSTICK(JoystickID,buttons,x,y) then 
 	print "Joystick doesn't exist or joystick error."
@@ -66,9 +66,9 @@ do
 	result = GETJOYSTICK(JoystickID,buttons,x,y)
 
 	locate 1,1
-	print ;"result:";result;" x:" ;x;" y:";y;" Buttons:";buttons,"","",""
+	print ;"result:";result;" x:" ;x;" y:";y;" Buttons:";buttons"","""","",""
 	
-	'This tests to see which buttons from 1 to 27 are pressed. 
+	'Ces tests pour voir quels boutons de 1 a 27 sont appuyes. 
 	for a = 0 to 26 
 	    if (buttons AND (1 shl a)) then 
 	        print "Button ";a;" pressed.    "
@@ -80,13 +80,13 @@ loop
 %%
 
 {{fbdoc item="lang"}}
-	- Not available in the //[[CompilerOptlang -lang qb]]// dialect unless referenced with the alias ##**""__Getjoystick""**##.
+	- Non disponible dans le dialecte //[[CompilerOptlang -lang qb]]// sauf si référencé avec l'alias ##**""__Getjoystick""**##.
 
 {{fbdoc item="diff"}}
-	- New to ""FreeBASIC""
+	- Nouveau pour ""FreeBASIC""
 
 {{fbdoc item="see"}}
-	- ##[[KeyPgScreengraphics Screen (Graphics)]]##
+	- ##[[KeyPgScreengraphics Screen (Graphique)]]##
 	- ##[[KeyPgSetmouse Setmouse]]##
 	- ##[[KeyPgGetmouse Getmouse]]##
 	- ##[[KeyPgMultikey Multikey]]##

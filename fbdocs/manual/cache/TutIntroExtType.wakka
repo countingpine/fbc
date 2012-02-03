@@ -3,45 +3,45 @@
 
 === Introduction===
 
-FreeBasic is moving towards implementing Object Oriented programming. While classes have not yet been added to the language, the Type definition has been extended to include some Object Oriented constructs as a first step towards full class support. This article introduces some of the concepts of Object Oriented design and explains some of the extended type constructs.
+FreeBASIC s'oriente vers la mise en oeuvre de la Programmation Orientée Objet (POO). Alors que les classes n'ont pas encore été ajoutées au langage, la définition de type a été élargie pour inclure certaines constructions orientées objet comme une première étape vers le soutien complet de la classe. Cet article présente quelques-uns des concepts de conception orientée objet et explique certaines des constructions de type étendu.
 
-=== Object Oriented Programming===
+=== Programmation Orientée Objet (POO)===
 
-Object Oriented Programming, usually shortened to OOP, is a methodology that enables the programmer to build code units called objects. An object is a thing; it is a unit of code that represents something that needs to be manipulated in a program. You can think of an object as a noun: a person, place or thing. An object could be a sprite, a drawing primitive or something more elaborate like a tank in a game. Any concrete entity that has a set of characteristics and actions can be represented as an object.
+La Programmation Orientée Objet, habituellement abrégée POO, est une méthodologie qui permet au programmeur de construire des unités de code appelés objets. Un objet est une chose; il s'agit d'une unité de code qui représente quelque chose qui doit être manipulé dans un programme. Vous pouvez penser à un objet comme un substantif: une personne, un lieu ou une chose. Un objet peut être un "sprite", une primitive de dessin ou quelque chose de plus élaboré comme un tank dans un jeu. Toute entité concrète qui a un ensemble de caractéristiques et d'actions peuvt être représentée comme un objet.
 
-An object contains both the data needed by the object, and the methods (subroutines and functions) that act on the data. This grouping of data and methods into a single entity is called encapsulation. Encapsulation allows you to create modular units that can be reused in multiple programs. This idea of code reuse was the main motivation in the creation of the OOP paradigm.
+Un objet contient à la fois les données nécessaires pour l'objet et les méthodes (des sous-programmes et fonctions) qui agissent sur les données. Ce regroupement de données et méthodes en une seule entité est appelée encapsulation. L'encapsulation permet de créer des unités modulaires qui peuvent être réutilisées dans plusieurs programmes. Cette idée de la réutilisation du code a été la principale motivation de la création du paradigme de la POO.
 
-Another beneficial consequence of encapsulation is information hiding. The data inside the object is shielded from the outside world so that unwanted changes to the data cannot occur. Instead of accessing a variable directly, the object has a public interface that the external program should use to access and change data members. By using an interface, you can control how the object behaves and ensure that its operation is consistent across many programs. 
+Une autre conséquence bénéfique de l'encapsulation est de cacher l'information. Les données à l'intérieur de l'objet sont à l'abri du monde extérieur afin que des modifications indésirables des données ne puissent pas se produire. Au lieu d'accéder directement à une variable, l'objet a une interface publique que le programme externe doit utiliser pour accéder et modifier les données membres. En utilisant une interface, vous pouvez contrôler la façon dont l'objet se comporte et vous assurer que son fonctionnement est cohérent à travers de nombreux programmes. 
 
-The interface also allows you to make internal changes to the code, without changing the way the object is accessed. As long as you don’t change the published interface, that is change any existing public methods, you can improve the object without breaking any existing code that relies on the object. In the cases where a program my need an improved method, you can leave the old method in place to maintain compatibility, and just add a new method with the improved functionality. New programs can use the new method, while old programs can still use the old method.
+L'interface vous permet également de faire des changements internes du code, sans changer la façon dont l'objet est accessible. Tant que vous ne changez pas l'interface publiée, c'est à dire de modifier les méthodes publiques existantes, vous pouvez améliorer l'objet sans casser tout le code existant qui repose sur l'objet. Dans le cas où un de vos programmes a besoin d'une méthode améliorée, vous pouvez laisser l'ancienne méthode en place pour maintenir la compatibilité, et il suffit d'ajouter une nouvelle méthode avec la fonctionnalité améliorée. Les nouveaux programmes peuvent utiliser la nouvelle méthode, tandis que les anciens programmes peuvent toujours utiliser l'ancienne méthode.
 
-Another advantage of using a public interface is so that other programmers can use your object without worrying about the internal details of the object. As long as the published interface is stable and well documented, anyone should be able to use your object, even beginners.
+Un autre avantage d'utiliser une interface publique est que d'autres programmeurs peuvent utiliser votre objet sans se soucier des détails internes de l'objet. Tant que l'interface publiée est stable et bien documentée, n'importe qui devrait être en mesure d'utiliser votre objet, même des débutants.
 
-=== The Published Contract===
+=== Le contrat de publication===
 
-As already stated, OOP was designed to enable code reuse among programmers. In order for code reuse to be helpful, the published interface must remain stable. That is, once an object has been released and is being used in programs, the published interface should not change so that programs that use the object continue to work correctly. There is an implicit contract between you as the author of the object and the end-user of your object that you will maintain the published interface across changes that may need to be made to the object. This implicit contract between author and user is the main strength of the OOP paradigm, and is the main reason that OOP has become such a powerful programming methodology.
+Comme déjà indiqué, la POO a été conçue pour permettre la réutilisation du code entre les programmeurs. De façon à ce que la réutilisation du code soit utile, l'interface publiée doit rester stable. Ceci dit, une fois qu'un objet a été libéré et est utilisé dans les programmes, l'interface publiée ne devrait pas changer afin que les programmes qui utilisent l'objet continuent à travailler correctement. Il y a un contrat implicite entre vous en tant qu'auteur de l'objet et l'utilisateur final de votre objet que vous maintiendrez l'interface publiée à travers les changements qui peuvent être nécessaires à l'objet. Ce contrat implicite entre l'auteur et l'utilisateur est la principale force du paradigme POO, et c'est la raison principale pour laquelle la POO est devenue une telle méthodologie de programmation puissante.
 
-=== The Characteristics of an Object===
+=== Les caractéristiques d'un objet===
 
-As already mentioned, an object contains both data and methods. The data describes the properties of an object, while the methods describe what the object can do. A simple, and not-really-useful example will illustrate this concept. 
+Comme déjà mentionné, un objet contient à la fois des données et des méthodes. Les données décrivent les propriétés d'un objet, tandis que les méthodes de décrivent ce que l'objet peut faire. Un exemple simple et pas vraiment utile pour illustrer ce concept. 
 
-Suppose you want to create an object that draws a rectangle on the screen. A rectangle can have several properties that would be contained within the data members of the object. A rectangle has an origin on the screen, normally the top left corner, which can be represented by x and y data members. A rectangle has a width and a height, so the object would have width and height data members. A rectangle can either be outlined or filled, so a filled flag data member can be added to the object. Of course, if you are going to draw a rectangle, you will want to draw it in a particular color, so the object will need to have a color data member, and to have the object be a bit more flexible, you can add a color member for the outline and a different color member for the fill. Of course you will need a method to actually draw the rectangle on the screen, so you can add a draw routine to the object definition.
+Supposons que vous voulez créer un objet qui dessine un rectangle sur l'écran. Un rectangle peut avoir plusieurs propriétés qui seront contenues dans les données membres de l'objet. Un rectangle a une origine sur l'écran, normalement dans le coin supérieur gauche, qui peut être représenté par les données membres x et y. Un rectangle a une largeur et une hauteur, donc l'objet aura des données membres largeur et la hauteur. Un rectangle peut être vide ou rempli, donc un membre de donnée "drapeau de remplissage" peut être ajouté à l'objet. Bien sûr, si vous dessinez un rectangle, vous voudrez le dessiner dans une couleur particulière, donc l'objet aura besoin d'avoir un membre de données de couleur, et pour avoir un objet qui soit un peu plus flexible, vous pouvez ajouter un membre pour la couleur du contour et un membre de couleur différente pour le remplissage. Bien sûr, vous aurez besoin d'une méthode pour dessiner le rectangle réellement sur l'écran, ainsi vous pouvez ajouter une routine qui le dessinera dans la définition d'objet.
 
-So our rectangle object has the following preliminary properties and methods:
+Donc, pour commencer, notre objet rectangle a les propriétés et méthodes suivantes:
 
-~- Property: x and y origin
-~- Property: width
-~- Property: height
-~- Property: filled
-~- Property: outline color
-~- Property: fill color
-~- Method: DrawRectangle
+~- Propriété: origine x et y
+~- Propriété: largeur
+~- Propriété: hauteur
+~- Propriété: rempli
+~- Propriété: la couleur du contour
+~- Propriété: la couleur de remplissage
+~- Méthode: tracé du rectangle
 
 This list is called the object definition. In FreeBasic you define an object using the extended Type definition. The extended Type is similar to the standard Type, with some added language constructs that implements a subset of OOP features.
 
 === A Rectangle Type Definition===
 
-The following code snippet is a partial rectangle definition:
+Le code suivant est une définition partielle du rectangle:
 %%(freebasic)
 Type myRect
   Private:
@@ -56,9 +56,9 @@ Type myRect
 	Declare Sub DrawRect()
 End Type
 %%
-As you can see, the extended Type looks much like a standard Type except for the Private: and Public: keywords and the sub declaration. The Private: keyword tells the compiler that the data members that follow are private to the type, that is cannot be accessed outside of the type. The private state extends to all object members until a new qualifier is encountered, which in this case is the Public: qualifier just above the Sub declaration. All of the data members are hidden from the outside world and cannot be changed from outside the scope of the Type, a process called information hiding. The underscore appended to the private variables is the common way to define private variables.
+Comme vous pouvez le voir, le type étendu ressemble beaucoup à un Type standard, sauf pour Private: et Public: les mots clés et la déclaration de la Sub. Le mot-clé Private: indique au compilateur que les membres de données qui suivent sont du type "privé", et qu'elles ne peuvent pas être accédées en dehors de ce type. L'état "privé" s'étend à tous les membres de l'objet jusqu'à ce qu'un qualificatif nouveau soit rencontré, qui dans ce cas est Public: qualificatif juste au-dessus de la déclaration de la Sub. Tous les membres de données sont cachées du monde extérieur et ne peuvent être changés de l'extérieur de la portée de ce type, un processus appelé "le masquage des information". Le trait de soulignement ajouté aux variables privées est la voie commune pour définir des variables privées.
 
-Information hiding is a way to maintain the integrity of the object. You should never allow an outside process to directly access a data member. All data access should be through the use of Property members so that you can control what is being passed to your object. Strict control over your object’s data will help prevent many errors that may occur when a programmer uses your object.
+Le masquage d'information est un moyen de maintenir l'intégrité de l'objet. Vous ne devriez jamais permettre à un processus externe d'accéder directement à un membre de données. Tous les accès aux données doivent se faire par l'utilisation de la propriété des membres de sorte que vous pouvez contrôler ce qui est transmis à votre objet. Un contrôle strict sur les données de votre Object va aider à prévenir de nombreuses erreurs qui peuvent survenir quand un programmeur utilise votre objet.
 %%(freebasic)
 Type myRect
   Private:
@@ -87,15 +87,15 @@ Type myRect
 	Declare Property FillColor() As Integer
 End Type
 %%
-The Declare statements following the Public: qualifier comprises the public interface to your object. Since the variables of the type are defined with the Private: keyword, the only way to access the variables is through the Property members maintaining the integrity of the object. Since you define the code in each Property member, you have full control over what is being put into your object. A common example of this is to put range checking code in your property members so that the object does not contain invalid data.
+Les instructions Declare suivant le qualificatif Public: forment l'interface publique de votre objet. Comme les variables de ce type sont définies avec mot-clé Private:, la seule façon d'accéder à des variables se fait par les membres Property pour maintenir l'intégrité de l'objet. Puisque vous de définissez le code de chaque "Property membre", vous avez le plein contrôle sur ce qui est mis dans votre objet. Un exemple courant de ceci est de mettre une gamme de code de vérification dans votre les "Property membres" de sorte que l'objet ne contienne pas de données invalides.
 
-In this example, the variables can be both written and read. The compiler distinguishes between a read Property and a write Property by the type of the method. A subroutine-formatted Property is a write property since you are passing a value that will be saved in a private variable. A function-formatted Property is a read property since a private variable will be returned to the caller. You can create read-only Properties by adding just a function-formatted Property or write-only Properties by just adding a subroutine-formatted Property.
+Dans cet exemple, les variables peuvent être à la fois lues et écrites. Le compilateur fait la distinction entre une "Property en lecture" et une "Property en écriture" d'après le type de la méthode. Une "Property formatée Sub" est une "Property en écriture" puisque vous passez une valeur qui sera enregistrée dans une variable privée. Une "Property formatée Function" est une "Property en lecture" puisqu'une variable privée sera retournée à l'appelant. Vous pouvez créer des "Property en lecture seule" en ajoutant seulement une "Property formatée Function" ou une "Property en écriture seule" en ajoutant seulement une "Property formatée Sub"
 
-=== Creating Well-Behaved Objects===
+=== Création d'objets au comportement correct===
 
-The definition looks complete at this point, but there is a problem. What would happen if some or all of the variables were not initialized? The object would not perform correctly and potentially generate a runtime error. It would be better to have a set of default values for the object variables just in case one or more variables did not get initialized. You can initialize the object at the moment of creation by using a Constructor.
+La définition semble complète à ce stade, mais il y a un problème. Que se passera-t-il si une partie ou l'ensemble des variables n'ont pas été initialisées? L'objet ne fonctionnera pas correctement et générera potentiellement une erreur d'exécution. Il serait préférable d'avoir un ensemble de valeurs par défaut pour les variables de l'objet, juste au cas où une ou plusieurs variables ne soient pas initialisées. Vous pouvez initialiser l'objet au moment de la création en utilisant un constructeur (Constructor)
 
-A Constructor is a subroutine that is called when the object is created using the Dim (or New) statement. Constructors are useful for initializing an object, either with default values, or values you pass to the Constructor. The updated type definition now looks like the following:
+Un constructeur est une fonction qui est appelée lorsque l'objet est créé en utilisant l'instruction Dim (ou New). Les constructeurs sont utiles pour initialiser un objet, soit avec des valeurs par défaut, soit par les valeurs que vous passez au constructeur. La définition du type mise à jour ressemble maintenant à ceci:
 %%(freebasic)
 Type myRect
   Private:
@@ -121,23 +121,23 @@ Type myRect
 	Declare Property Otlncolor(Byval oc_ As Integer)
 	Declare Property Otlncolor() As Integer
 	Declare Property FillColor(Byval fc_ As Integer)
-	Declare Property FillColor() As Integer    Declare Constructor()
+	Declare Property FillColor() As Integer:    Declare Constructor()
 	Declare Constructor(xx_ As Integer, yy_ As Integer, w_ As Integer, _
 	                    h_ As Integer, f_ As Integer, oc_ As Integer, _
 	                    fc_ As Integer)
 	                    
 End Type
 %%
-You will notice in the definition that we have two Constructors, one that takes a set of parameters and one that doesn’t. This is called overloading and can be used not only with Constructors but also with other subroutines and functions. Overloading is useful for situations where you need to handle different parameter types with a single method call. The compiler will determine which method to call based on the parameters passed to the method. You can overload as many methods as you want, as long as the number and type of parameters for each method is unique.
+Vous remarquerez dans la définition que nous avons deux constructeurs, un qui prend un ensemble de paramètres et l'autre non. C'est ce qu'on appelle la surcharge et peut être utilisé non seulement avec les constructeurs, mais aussi avec d'autres sous-programmes et fonctions. La surcharge est utile dans les situations où vous avez besoin de gérer différents types de paramètres avec un seul appel de méthode. Le compilateur détermine la méthode à appeler en fonction des paramètres transmis à la méthode. Vous pouvez surcharger autant de méthodes que vous le souhaitez, tant que le nombre et le type des paramètres de chaque méthode est unique.
 
-In this instance, if the Constructor is not passed any parameter values, it will initialize the variables to a set of default values. If the Constructor is called with parameters, then it will use the passed values to initialize the object’s variables.
+Dans ce cas, si le constructeur n'est pas passé des valeurs aux paramètres, il va initialiser les variables à un ensemble de valeurs par défaut. Si le constructeur est appelé avec les paramètres, alors il utilisera les valeurs passées pour initialiser les variables de l' objet.
 
-There is also a Destructor method that is called when the object is destroyed. You can use the Destructor to perform any cleanup tasks that must be carried out before the object is released from memory. If the object created any pointer references, or opened any files, then you would clean up those references in the Destructor. Since the Rectangle object doesn’t create any outside references, a Destructor is not needed.
+Il y a aussi une méthode Destructor (destructeur) qui est appelée lorsque l'objet est détruit. Vous pouvez utiliser le destructeur pour effectuer les tâches de nettoyage qui doivent être effectuées avant que l'objet ne éliminé de la mémoire. Si l'objet créé des références pointeur ou ouvre des fichiers, vous pourrez alors nettoyer ces références dans le destructeur. Puisque l'objet Rectangle ne crée pas de références à l'extérieur, un destructeur n'est pas nécessaire.
 
 
-=== Filling in the Object Methods===
+=== Remplir les méthodes objet===
 
-The type definition is a template for the object type and tells the compiler how to set up the object in memory. However, in order to actually use the object, you need to create the actual method calls, which is shown in the next listing.
+La définition du type est un modèle pour le type d'objet et indique au compilateur comment mettre en place l'objet en mémoire. Toutefois, afin d'utiliser effectivement l'objet, vous devez créer les appels de méthode réelle, ce qui est indiqué dans la liste suivante.
 %%(freebasic)
 Type myRect
   Private:
@@ -256,11 +256,11 @@ Constructor MyRect (xx_ As Integer, yy_ As Integer, w_ As Integer, _
 	this.Fillcolor_ = fc_
 End Constructor
 %%
-The Methods and Properties are defined using the Sub/Function/Property methodname.TypeName syntax. This tells the compiler how to match up methods with the proper type definition. The Constructors are defined with the type name for the same reason. The //this// identifier is a hidden parameter that is passed to the methods that refers to the defined type. You use the //this// identifier to specify that you want to access the type constructs.
+Les méthodes et propriétés sont définies en utilisant la syntaxe "Sub/Function/Propriété nom de méthode.TypeName". Cela indique au compilateur comment faire correspondre aux méthodes à la définition du type approprié. Pour la même raison, les constructeurs sont définis avec le nom du type. L'identifiant //this// est un paramètre caché qui est passé aux méthodes qui se réfèrent au type défini. Vous utilisez l'identifiant //this// pour spécifier que vous voulez accéder à des constructions du type.
 
-=== Using Your Object===
+=== Utilisation de votre objet===
 
-The object is now complete can be used in a program which is listed below.
+L'objet maintenant complet peut être utilisé dans le programme ci-dessous.
 %%(freebasic)
 Type myRect
   Private:
@@ -403,6 +403,6 @@ Sleep
 End
 %%
 
-To initialize the object using the default Constructor, you simply Dim the extended Type just as you would the standard type. If the Constructor only takes a single value then you can use the Dim var as Typename = value syntax. To initialize the object with a set of values, you Dim the type and then use the = typename(par1m parm1…) syntax. You can see that accessing the members of the object is just like accessing the member of a standard type.
+Pour initialiser l'objet avec le constructeur par défaut, il vous suffit de //Dim//ensionner le type étendu comme vous le feriez avec un type standard. Si le constructeur ne prend qu'une seule valeur, alors vous pouvez utiliser la syntaxe //Dim var As TypeName = valeur//. Pour initialiser l'objet avec un ensemble de valeurs, vous //Dim//ensionner le type et ensuite vous utilisez la  syntaxe  //= typename (par1m parm1 ...)//. Vous pouvez voir que l'accès aux membres de l'objet est identique à l'accès au membre d'un type standard.
 
-Thanks to cha0s at the FreeBasic forums for the information regarding Properties.
+Merci à cha0s des forums FreeBASIC pour l'information relative aux "Property".

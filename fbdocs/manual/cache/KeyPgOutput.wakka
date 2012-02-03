@@ -1,40 +1,40 @@
 {{fbdoc item="title" value="OUTPUT"}}----
-Specifies text file to be opened for output mode
+Spécifie un fichier texte à ouvrir en sortie
 
 {{fbdoc item="syntax"}}##
 	[[KeyPgOpen open]] //filename// for **Output** [[[KeyPgEncoding encoding]] //encoding_type//] [[[KeyPgLock lock]] //lock_type//] as [#]//filenum// 
 ##
 {{fbdoc item="param"}}
 	##//filename//##
-		file name to open for output
+		nom du fichier à ouvrir en sortie
 	##//encoding_type//##
-		indicates encoding type for the file
+		indique le codage du fichier
 	##//lock_type//##
-		locking to be used while the file is open
+		verrouillage à utiliser lorsque le fichier est ouvert
 	##//filenum//##
-		unused file number to associate with the open file
+		numéro de fichier inutilisé pour l'associer au fichier ouvert
 
 {{fbdoc item="desc"}}
-	A file mode used with ##[[KeyPgOpen Open]]## to open a text file for writing.
+	Un mode fichier utilisé avec ##[[KeyPgOpen Open]]## pour ouvrir un fichier texte en écriture.
 
-	This mode is used to write text with ##[[KeyPgPrintPp Print #]]##, or comma separated values with ##[[KeyPgWrite Write #]]##. 
+	Ce mode est utilisé pour écrire un texte avec ##[[KeyPgPrintPp Print #]]##, ou des valeurs séparées par des virgules avec ##[[KeyPgWrite Write #]]##. 
 
-	Text files can't be simultaneously read and written in ""FreeBASIC"", so if both functions are required on the same file, it must be opened twice.
+	Les fichiers texte ne peuvent pas être simultanément en lecture et en écriture dans ""FreeBASIC"", donc si les deux fonctions sont nécessaires sur le même fichier, il doit être ouvert deux fois.
 	
-	##//filename//## must be a string expression resulting in a legal file name in the target OS, without wildcards. The file will be sought for in the present directory, unless the ##//filename//## contains a path . If the file does not exist, it is created. The pointer is set at the first character of the file.
+	##//filename//## doit être une expression chaîne correspondant à un nom de fichier compatible avec le système cible, sans jokers de remplacement. Le fichier sera recherché dans le répertoire courant, sauf si ##//filename//## contient un chemin. Si le fichier n'existe pas, il est créé. Le pointeur est placé sur le premier caractère du fichier.
 	
-	##//Encoding_type//## indicates the Unicode ##[[KeyPgEncoding Encoding]]## of the file, so characters are correctly read. If omitted, "ascii" encoding is defaulted. Only little endian character encodings are supported at the moment. 
+	##//Encoding_type//## indique le ##[[KeyPgEncoding Encoding (=codage)]]## Unicode du fichier, ainsi les caractères sont lus correctement. Si omis, le codage "ascii" est utilisé par défaut. Seuls les caractères codés "little endian" sont supportés pour le moment. 
 		-##"utf8"##
 		-##"utf16"##
 		-##"utf32"## 
-		-##"ascii"## (the default)
+		-##"ascii"## (par défaut)
 	
-	##//Lock_type//## indicates the way the file is locked  for other processes, it is one of:
-		- ##**Read**## - the file can be opened simultaneously by other processes, but not for reading
-		- ##**Write**## - the file can be opened simultaneously by other processes, but not for writing
-		- ##**Read Write**## - the file cannot be opened simultaneously by other processes (the default)
+	##//Lock_type//## indique la façon dont le fichier est verrouillé pour d'autres processus:
+		- ##**Read**## - le fichier peut être ouvert simultanément par d'autres processus, mais pas pour la lecture
+		- ##**Write**## - le fichier peut être ouvert simultanément par d'autres processus, mais pas en écriture
+		- ##**Read Write**## -le fichier ne peut pas être ouvert simultanément par d'autres processus (par défaut)
 
-	##//filenum//## Is a valid FreeBASIC file number (in the range ##1..255##) not being used for any other file presently open. The file number identifies the file for the rest of file operations. A free file number can be found using the ##[[KeyPgFreefile Freefile]]## function.
+	##//filenum//## est un numéro ""FreeBASIC"" valide de fichier (dans la plage ##1..255##) qui n'est pas utilisé par un autre fichier actuellement ouvert. Le numéro de fichier identifie le fichier pour le reste des opérations de fichiers. Un numéro de fichier libre peut être trouvé en utilisant la fonction ##[[KeyPgFreefile Freefile]]##.
 
 
 {{fbdoc item="ex"}}
@@ -72,7 +72,7 @@ Print "Your age is: " + Str(age_ubyte)
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgAppend Append]]##
-	- ##[[KeyPgInputfilemode Input (File Mode)]]##
+	- ##[[KeyPgInputfilemode Input (Mode fichier)]]##
 	- ##[[KeyPgOpen Open]]##
 
 {{fbdoc item="back" value="CatPgFile|File I/O Functions"}}

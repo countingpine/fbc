@@ -1,67 +1,67 @@
 {{fbdoc item="title" value="Profiling"}}----
-Profiling can be used to analyze the performance of an application.
+Le profilage peut être utilisé pour analyser les performances d'une application.
 
-The performance of an application might be measured by how many times functions are called, how much time is spent executing those functions, and which functions are calling other functions.  This can help to identify functions that might be taking too long to execute or executed too many times and that might be worth reviewing for optimization.
+Les performances d'une application peuvent être mesurées par le nombre de fois que les fonctions sont appelées, combien de temps est consacré à l'exécution de ces fonctions et quelles sont les fonctions qui appellent d'autres fonctions. Cela peut aider à identifier les fonctions susceptibles de prendre trop de temps à l'exécution ou exécutées trop de fois et qui pourraient mériter d'être examinées pour une optimisation.
 
-FreeBASIC uses GPROF for analyzing the execution of an application.  The profiler information is collected while the program is running, and GPROF is used to report on the collected data afterward.
+FreeBASIC utilise GPROF pour analyser l'exécution d'une application.  Les informations de profilage sont collectées pendant que le programme est en cours d'exécution et GPROF est utilisé par la suite pour le rapport sur les données recueillies.
 
-The three basic steps to profiling a program are:
-	- 1) Prepare the program for profiling by compiling source with the //[[CompilerOptprofile -profile]]// option.
-	- 2) Run the program to collection information ( stored in ##gmon.out## ).
-	- 3) Analyze the information collected using GPROF.
+Les trois étapes de base pour le profilage d'un programme sont:
+	- 1) Préparer le programme pour le profilage en compilant le source avec l'option //[[CompilerOptprofile -profile]]//.
+	- 2) Exécuter le programme de collecte d'informations (stockées dans ##gmon.out##).
+	- 3) Analyser les informations recueillies à l'aide de GPROF.
 
-Full documentation on GPROF is available here: [[http://www.gnu.org/software/binutils/manual/gprof-2.9.1/gprof.html http://www.gnu.org/software/binutils/manual/gprof-2.9.1/gprof.html]].  If the documentation has moved from that location, simply search the web for "GNU GPROF" and a relevant link should be returned.
+Une documentation complète sur GPROF est disponible ici: [[http://www.gnu.org/software/binutils/manual/gprof-2.9.1/gprof.html http://www.gnu.org/software/binutils/manual/gprof-2.9.1/gprof.html]].  Si la documentation s'est déplacée de cet endroit, il suffit de rechercher sur le web pour "GNU GPROF" et un lien pertinent devrait être retourné.
 
-FreeBASIC supports function profiling; not basic-block or line-by-line profiling.
+FreeBASIC prend en charge le profilage des fonctions; pas de profilage bloc-de-base et ligne-par-ligne.
 
-{{fbdoc item="section" value="Preparing a Program for Profiling"}}
-	Only code that is compiled with the //[[CompilerOptprofile -profile]]// command line option can be profiled.  Pass the //[[CompilerOptprofile -profile]]// option to the FreeBASIC compiler to prepare the program to be profiled.  This will tell the compiler to insert special startup code at the beginning of the application as well as at the beginning of each function.
+{{fbdoc item="section" value="Préparer un programme pour le profilage"}}
+	Seul le code qui est compilé avec l'option de ligne de commande //[[CompilerOptprofile -profile]]// peut être profilé.  Passer l'option //[[CompilerOptprofile -profile]]// pour le compilateur FreeBASIC pour préparer le programme au profilage.  Ceci indique au compilateur d'insérer du code de démarrage spécial au début de l'application ainsi qu'au début de chaque fonction.
 	%%
 fbc program.bas -profile
 %%
 
-{{fbdoc item="section" value="Profiling the Program"}}
-	The information needed to analyze execution of the program is gathered while the program is running.  Run the program to begin collecting the function call information.  This information is automatically stored in a file named ##gmon.out## in the same directory as the program.
+{{fbdoc item="section" value="Le profilage du programme"}}
+	Les informations nécessaires pour analyser l'exécution du programme sont recueillies lorsque le programme est en cours d'exécution.  Exécutez le programme pour commencer à collecter les informations d'appel de fonctions.  Ces informations sont automatiquement stockées dans un fichier nommé ##gmon.out## dans le même répertoire que le programme.
 
-{{fbdoc item="section" value="Analyzing the Program's Output"}}
-	Use GPROF to analyze the output.  The default report for GPROF includes descriptions on what each of the columns of values mean.  If you are new to using GPROF, you may want to first run the default report and read through the descriptions.  The output from GPROF can be saved to a file by redirection.
+{{fbdoc item="section" value="Analyse des résultats du programme"}}
+	Utiliser GPROF pour analyser les résultats.  Le rapport par défaut de GPROF inclut des descriptions de ce que signifie chacune des colonnes de valeurs.  Si vous êtes nouvel utilisateur de GPROF, vous pouvez d'abord exécuter le rapport par défaut et lire les descriptions.  La sortie de GPROF peut être sauvegardée dans un fichier de redirection.
 
-	Save output from GPROF to ##profile.txt##:
+	Enregistrer la sortie de GPROF dans ##profile.txt##:
 	%%
 gprof program[.exe] > profile.txt
 %%
 
-	Show just the flat report with no descriptions:
+	Afficher uniquement le rapport simple sans les descriptions:
 	%%
 gprof program[.exe] --brief --flat-profile > profile.txt
 %%
 
-{{fbdoc item="section" value="Combining the Results of More than One Session"}}
-	GPROF also has a '--sum' option for conveniently combining results from multiple execution sessions.  Here is an example of usable:
-	- Run your program once. This will create ##gmon.out##.
-	- Use the command :
+{{fbdoc item="section" value="Combiner les résultats de plusieurs sessions"}}
+	GPROF a aussi une option '--sum' pour combiner commodément les résultats de plusieurs sessions d'exécutions.  Voici un exemple utilisable:
+	- Exécutez votre programme une fois. Cela créera ##gmon.out##.
+	- Utilisez la commande:
 		##mv gmon.out gmon.sum## 
-		or 
+		ou 
 		##rename gmon.out gmon.sum##.
-	- Run your program again.  This will create new data in ##gmon.out##.
-	- Merge the new data in ##gmon.out## into ##gmon.sum## using the command: 
+	- Exécutez à nouveau votre programme.  Cela créera de nouvelles données dans ##gmon.out##.
+	- Fusionnez les nouvelles données dans ##gmon.out## dans ##gmon.sum## en utilisant la commande: 
 		##gprof --sum program[.exe] gmon.out gmon.sum##
-	- Repeat the last two steps as often as needed. 
-	- Analyze the summary data using the command: 
+	- Répétez les deux dernières étapes autant de fois que nécessaire. 
+	- Analysez les données de synthèse à l'aide de la commande: 
 		##gprof program[.exe] gmon.sum > profile.txt##
 
-{{fbdoc item="section" value="FreeBASIC Profiling Internals"}}
-	When the '-profile' option is enabled, one or more bits of code are added to the program.
-	- Call to ##"_monstartup()"## at the beginning of the implicit main to initialize the profiling library.
-	- Call to ##"mcount()"## at the beginning of each procedure.  This is how the profiling library keeps track of what function is being and by which other function.
-	- Linking of additional program startup object code.  (e.g. ##gcrt?.o## )
+{{fbdoc item="section" value="Fonctionnement interne du profilage FreeBASIC"}}
+	Quand l'option '-profile' est validée, un ou plusieurs morceaux de code sont ajoutés au programme.
+	- L'appel à ##"_monstartup()"## au début du code principal implicite initialise la bibliothèque de profilage.
+	- Un appel à ##"mcount()"## au début de chaque procédure.  C'est ainsi que la bibliothèque de profilage garde la trace de ce que fait la fonction en cours et aussi les autres fonctions.
+	- Lier du code de programmation supplémentaire de démarrage.  (par exemple, ##gcrt?.o## )
 
-	The profiling library itself may be in a separate library or part of the C runtime library.
-	- mingw will require ##gcrt2.o## and ##libgmon.a ##
-	- cygwin will require gcrt0.o and ##libgmon.a##
-	- dos will require ##gcrt0.o## (profiler code is in ##libc.a##) 
-	- linux will require ##gcrt1.o## (profiler code is in ##libc.a##) 
+	La bibliothèque de profilage peut être elle-même dans une bibliothèque séparée ou être une partie de la bibliothèque d'exécution C.
+	- mingw nécessitera ##gcrt2.o## et ##libgmon.a ##
+	- cygwin nécessitera gcrt0.o et ##libgmon.a##
+	- dos nécessitera ##gcrt0.o## (le code de profilage est dans ##libc.a##) 
+	- linux nécessitera ##gcrt1.o## (le code de profilage est dans ##libc.a##) 
 
-	The details may vary from one port of FreeBASIC to the next, but source code built for profiling with FreeBASIC should be compatible with other languages also supporting GPROF.
+	Les détails peuvent varier d'un portage de FreeBASIC à l'autre, mais le code source construit pour le profilage avec FreeBASIC devrait être compatible avec d'autres langages qui supportent GPROF.
 
 {{fbdoc item="back" value="CatPgProgrammer|Programmer's Guide"}}

@@ -1,30 +1,30 @@
 {{fbdoc item="title" value="ASM"}}----
-Code block that allows the use of architecture-specific instructions.
+Bloc de code qui permet l'utilisation d'instructions spécifiques à l'architecture.
 
 {{fbdoc item="syntax"}}##
 	**Asm**
 		//architecture-dependent instructions//
 	End **Asm**
 
-		##//Or//##
+		##//Ou//##
 
 	**Asm** //architecture-dependent instructions//
 ##
 {{fbdoc item="desc"}}
-	The ##Asm## block is used to insert specific machine-code instructions in a program in order to perform operations that cannot be carried out using the features of the language or to hand-optimize performance-sensitive sections of code.
+	Le bloc ##Asm## est utilisé pour insérer dans le programme des instructions en code machine afin d'effectuer des opérations qui ne peuvent l'être en utilisant les caractéristiques du langage ou d'optimiser à la main les performances de sections de code sensibles.
 
-	The current ""FreeBASIC"" compiler currently only produces code for Intel [[x86 80x86]]-based machines; however, in the future, the compiler might be ported to a platform which does not support the same instruction set.  Therefore, ##Asm## blocks should only be used when necessary, and a ""FreeBASIC""-only alternative should be provided if possible.
+	Le compilateur ""FreeBASIC"" actuellement ne produit du code que pour les machines Intel basées sur [[x86 80x86]]; toutefois, à l'avenir, le compilateur sera peut être porté sur une plate-forme qui ne supporte pas le même jeu d'instructions.  Par conséquent, les blocs ##Asm## ne devraient être utilisés que lorsque cela est nécessaire et seule une alternative ""FreeBASIC"" devrait être fournie, si possible.
 
-	The return value of a function may be set by using the ##[[KeyPgFunction Function]]## keyword within brackets as shown in the example below.
+	La valeur retournée par une fonction peut être définie en utilisant le mot-clef ##[[KeyPgFunction Function]]## entre parenthèses tel qu'illustré dans l'exemple ci-dessous.
 
-	##Asm## block comments have the same syntax as usual ""FreeBASIC"" [[KeyPgRem comments]]  - use ""FreeBASIC""-like " ##'## " comments, not " ##;## " as usual in ASM. 
+	Les blocs de commentaires ##Asm## ont la syntaxe habituelle des [[KeyPgRem Commentaires]] du ""FreeBASIC"" ""FreeBASIC"" [[KeyPgRem Comments]]  - utilisez les commentaires FreeBASIC " ##'## ", et non les commentaires " ##;## " comme d'habitude en ASM. 
 
-	==x86 Specific:==
+	== Specificités x86:==
 
-		==Syntax==
-			The syntax of the inline assembler is a simplified form of Intel syntax.  Intel syntax is used by the majority of x86 assemblers, such as MASM, TASM, NASM, YASM and FASM. In general, the destination of an instruction is placed first, followed by the source. Variables and functions defined by a program may be referenced in an Asm block.  The assembler used by ""FreeBASIC"" is GAS, using the ##.intel_syntax noprefix## directive, and ASM blocks are passed through unmodified, except for the substitution of local variable names for stack frame references, and commenting removal.
+		==Syntaxe==
+			La syntaxe de l'assembleur en ligne est une forme simplifiée de la syntaxe Intel.  La syntaxe Intel est utilisée par la majorité des assembleurs x86, tels que MASM, TASM, NASM, YASM et FASM. En général, la destination d'une instruction est placée en premier, suivie par la source. Les variables et fonctions définies par un programme doivent être référencées dans un bloc Asm.  L'assembleur est utilisé par ""FreeBASIC"" est GAS, utilisant la directive ##.intel_syntax noprefix##, et les blocs ASM sont passés non modifiés, sauf pour la substitution des noms de variables locales pour le cadre de la pile références et en commentant l'enlèvement.
 
-			Instruction syntax is mostly the same as FASM uses, one important difference is that GAS requires size settings to be followed by the word "ptr".
+			La syntaxe d'instructions est essentiellement le même que celle qu'utilise FASM, une différence importante est que GAS nécessite des paramètres de taille à suivre par le mot "ptr".
 			
 			%%(freebasic)
 ' Assuming "blah" is a FB global or local UINTEGER variable
@@ -33,27 +33,27 @@ inc  [blah]             ' Not OK: size is not given
 inc  dword [blah]       ' Not OK: size given, but still not accepted by GAS
 inc  dword ptr [blah]   ' OK: "ptr" is needed by GAS here%%
 
-		==Register Preservation==
-			When an ASM block is opened, the registers ##ebx##, ##esi##, and ##edi## are pushed to the stack, when the block is closed, these registers are popped back from the stack.  This is because these registers are required to be preserved by most or all OS's using the x86 CPU.  You can therefore use these registers without explicitly preserving them yourself. You should not change ##esp## and ##ebp##, since they are usually used to address local variables. 
+		{{fbdoc item="subsect" value="Préservation des registres"}}
+			Quand un bloc ##**Asm**## est ouvert, les registres ##ebx##, ##esi## et ##edi## sont poussés sur la pile, quand le bloc est fermé, ces registres sont récupérés sur la pile.  C'est parce que ces registres doivent être préservés par la plupart ou la totalité des systèmes d'exploitation utilisant le processeur x86.  Vous pouvez donc utiliser ces registres sans les préserver explicitement, vous-même. Vous ne devez pas modifier  ##esp## et ##ebp##, car ils sont généralement utilisés pour traiter les variables locales. 
 
-		==Register Names==
-		~The names of the registers for the x86 architecture are written as follows in an ##Asm## block:
-		~- 4-byte integer registers: ##eax##, ##ebx##, ##ecx##, ##edx,## ##ebp##, ##esp##, ##edi##, ##esi##
-		~- 2-byte integer registers: ##ax##, ##bx##, ##cx##, ##dx##, ##bp##, ##sp##, ##di##, ##si## (low words of 4-byte ##e##- registers)
-		~- 1-byte integer registers: ##al##, ##ah##, ##bl##, ##bh##, ##cl##, ##ch##, ##dl##, ##dh## (low and high bytes of 2-byte -##x## registers)
-		~- Floating-point registers: ##st(0)##, ##st(1)##, ##st(2)##, ##st(3)##, ##st(4)##, ##st(5)##, ##st(6)##, ##st(7)##
-		~- MMX registers (aliased onto floating-point registers): ##mm0##, ##mm1##, ##mm2##, ##mm3##, ##mm4##, ##mm5##, ##mm6##, ##mm7##
-		~- SSE registers: ##xmm0##, ##xmm1##, ##xmm2##, ##xmm3##, ##xmm4##, ##xmm5##, ##xmm6##, ##xmm7##
+		{{fbdoc item="subsect" value="Noms des registres"}}
+		~Les noms des registres pour l'architecture x86 sont rédigés comme suit dans un bloc ##Asm##:
+		~- registres entiers de 4 octets: ##eax##, ##ebx##, ##ecx##, ##edx,## ##ebp##, ##esp##, ##edi##, ##esi##
+		~- registres entiers de 2 octets: ##ax##, ##bx##, ##cx##, ##dx##, ##bp##, ##sp##, ##di##, ##si## (low words of 4-byte ##e##- registers)
+		~- registres entiers de 1 octets: ##al##, ##ah##, ##bl##, ##bh##, ##cl##, ##ch##, ##dl##, ##dh## (low and high bytes of 2-byte -##x## registers)
+		~- registres à virgule flottante: ##st(0)##, ##st(1)##, ##st(2)##, ##st(3)##, ##st(4)##, ##st(5)##, ##st(6)##, ##st(7)##
+		~- registres MMX (alias sur les registres à virgule flottante): ##mm0##, ##mm1##, ##mm2##, ##mm3##, ##mm4##, ##mm5##, ##mm6##, ##mm7##
+		~- registres SSE: ##xmm0##, ##xmm1##, ##xmm2##, ##xmm3##, ##xmm4##, ##xmm5##, ##xmm6##, ##xmm7##
 		
-		==Instruction Set==
+		==Ensemble des instructions==
 		
-		See these external references:
+		Voir ces références externes:
 		~- [[http://board.flatassembler.net/download.php?id=3093 Original Intel 80386 manual from 1986]]
 		~- [[http://developer.intel.com/design/Pentium4/documentation.htm Latest Intel Pentium 4 manuals]]
-		~- [[http://home.comcast.net/~fbkotler/nasmdocb.html NASM x86 Instruction Reference]] (Please note that NASM is not the assembler used by ""FreeBASIC"", but this page provides a good overview of x86 instructions)
+		~- [[http://home.comcast.net/~fbkotler/nasmdocb.html NASM x86 Instruction Reference]] (S'il vous plaît notez que NASM n'est pas l'assembleur utilisé par ""FreeBASIC"", mais cette page donne un bon aperçu des instructions x86)
 		
-		==Unsafe instructions==
-		~Note that the ""FreeBASIC"" compiler produces 32-bit protected-mode code for the x86 which usually runs in an unprivileged user level; therefore, privileged and sensitive instructions will assemble fine, but possibly won't work correctly or cause a runtime "General Protection Fault", "Illegal instruction", or SIGILL error. The following are the privileged and sensitive instructions as of the Intel Pentium 4 and Xeon:
+		==Instructions à risque==
+		~Notez que le compilateur ""FreeBASIC"" produit du code 32-bit en mode protégé pour les architectures x86 qui fonctionne habituellement dans un niveau utilisateur non privilégié; cependant, les instructions privilégiés et sensibles seront assemblées correctement, mais ne fonctionneront peut-être pas correctement ou provoqueront une ereur du type "General Protection Fault", "Illegal instruction" ou SIGILL. Voici les instructions privilégiées et sensibles des processeurs Intel Pentium 4 et Xeon:
 		
 		~- ##cli## *1
 		~- ##clts##
@@ -69,7 +69,7 @@ inc  dword ptr [blah]   ' OK: "ptr" is needed by GAS here%%
 		~- ##lldt##
 		~- ##lmsw##
 		~- ##ltr##
-		~- ##mov## to/from ##CR##n, ##DR##n, ##TR##n
+		~- ##mov## vers/depuis ##CR##n, ##DR##n, ##TR##n
 		~- ##out## *1
 		~- ##outs## *1
 		~- ##rdmsr##
@@ -81,13 +81,13 @@ inc  dword ptr [blah]   ' OK: "ptr" is needed by GAS here%%
 		~- ##wrmsr##
 		~- all SSE2 and higher instructions *2
 
-		~ *1: sensitive to IOPL, fine in DOS 
-		~ *2: sensitive to permission bits in CR4, see below
+		~ *1: sensible à IOPL, très bien sous DOS 
+		~ *2: sensible aux bits d'autorisation dans CR4, voir ci-dessous
 		
-	The privileged instructions will work "correctly" in DOS when running on a Ring 0 DPMI kernel, like the (non-default) Ring 0 version of CWSDPMI, WDOSX or D3X, nevertheless most of them are not really useful and dangerous when executed from DPMI code. RDTSC (Read Time Stamp Counter) has been shown to be allowed by most, or all OS'es.
-	However the usefulness of RDTSC has been diminished with the advent of multi-core and hibernating CPUs. SSE2 and higher instructions are disabled "by default" after CPU initialization, Windows and Linux usually do enable them, in DOS it is business of the DPMI host: HDPMI32 will enable them, CWSDPMI won't. The INT instruction is usable in the DOS version/target only, note that it works slightly differently from real mode DOS, see also [[FaqDOS]].
-	The segment registers (##cs##, ##ds##, ##es##, ##fs##, ##gs##) should not be changed from an ##Asm## block, except in certain cases with the DOS port (note that they do NOT work the same way as in real-mode DOS, see also [[FaqDOS]]). The operating system or DPMI host is responsible for memory management; the meaning of segments (selectors) in protected mode is very different from real-mode memory addressing.
-	Note that those "unsafe" instructions are not guaranteed to raise a "visible" crash even when ran with insufficient privilege - the OS or DPMI host can decide to "emulate" them, either functionally (reading from some CRx works under HDPMI32), or "dummy" (nothing happens, instruction will pass silently, like a NOP).
+	Les instructions privilégiées fonctionnent "correctement" sous DOS lors de l'exécution sur un "noyau Ring 0 DPMI", comme la (non-défaut) version Ring 0 de CWSDPMI, WDOSX ou D3X, cependant la plupart d'entre eux ne sont pas vraiment utiles et dangereux lorsqu'ils sont exécutés à partir de code DPMI. RDTSC (Read Time Stamp Counter) a été exposé à être autorisé par la plupart ou la totalité OS.
+	Cependant l'utilité de RDTSC a été diminué avec l'avènement du multi-core et des processeurs à hibernation. SSE2 et instructions supérieures sont désactivées "par défaut" après l'initialisation du CPU, Windows et Linux en général les permettent, sous DOS, c'est l'affaire de l'hôte DPMI: HDPMI32 les permettra, CWSDPMI ne le permettra pas. L'instruction INT est utilisable sous DOS version/cible uniquement, noter qu'il fonctionne un peu différemment du mode réel DOS, voir aussi [[FaqDOS]].
+	Les registres de segment (##cs##, ##ds##, ##es##, ##fs##, ##gs##) ne devrait pas être modifiés à partir d'un bloc ##Asm##, sauf dans certains cas de portage DOS, (notez qu'ils NE fonctionnent PAS de la même façon qu'en mode réel DOS, voir aussi [[FaqDOS]]). Le système opératoire ou l'hôte DPMI est responsable de la gestion de la mémoire; la signification des sègments (sélecteurs) en mode protégé est très différente du mode d'adressage réel de la mémoire.
+	Notez que ces instructions "dangereuses" ne sont pas garanties pour faire appara&igravetre un crash "visible" même quand a fonctionné avec les privilèges suffisants - l'OS ou l'hôte DPMI peut décider de les "émuler", soit fonctionnellement (en lisant à partir de certains CRx sous HDPMI32), ou "factices" (rien ne se passe, l'instruction passera en silence, comme un NOP).
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/misc/asm.bas"}}%%(freebasic)
@@ -107,15 +107,15 @@ Print "4 + 5 ="; AddFive(i)
 
 ##%%4 + 5 = 9%%##
 
-	""FreeBASIC""'s Assembler is AS / GAS, the assembler of GCC, so an external program. Some quirks apply:
-		- The error lines  returned by FBC for ASM blocks are not related the FB source file. As FBC simply displays the errors returned by AS , the lines are related to the assembly file. To make ""FreeBASIC"" preserve them, the compiler must be invoked with the //[[CompilerOptrupp -R]]// option ("don't delete ASM files").
-		- The label names are case sensitive inside ASM blocks.
+	L'assembleur de ""FreeBASIC""'s est AS / GAS, l'assembleur de GCC, donc un programme externe. Certaines bizarreries s'appliquent:
+		- Les lignes d'erreur renvoyées par FBC pour les blocs ##**Asm**## ne sont pas liés au fichier source FB. Comme FBC affiche simplement les erreurs renvoyées par AS, les lignes sont liées au fichier assembleur. Pour que ""FreeBASIC"" les préserve, le compilateur doit être appelé avec l'option //[[CompilerOptrupp -R]]// ("ne pas supprimer les fichiers ASM").
+		- Les noms d'étiquettes sont sensibles à la casse à l'intérieur des blocs ##**Asm**##.
 
 {{fbdoc item="lang"}}
 	- Not available in the //[[CompilerOptlang -lang qb]]// dialect unless referenced with the alias ##**""__Asm""**##.
 
-{{fbdoc item="diff"}}
-	- New to ""FreeBASIC""
+{{fbdoc item="lang"}}
+	- Nouveau pour ""FreeBASIC""
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgFunction Function]]##

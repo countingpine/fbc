@@ -1,5 +1,5 @@
 {{fbdoc item="title" value="DIR"}}----
-Searches for and returns information about an item in the filesystem, performs a directory search.
+Recherche et renvoie des informations sur un élément dans le système de fichiers, effectue une recherche dans les répertoire.
 
 {{fbdoc item="syntax"}}##
 	# [[KeyPgInclude include]] "dir.bi"
@@ -17,60 +17,58 @@ Searches for and returns information about an item in the filesystem, performs a
 ##
 {{fbdoc item="param"}}
 	##//item_spec//##
-		The pattern to match an item's name against.
+		Le modèle correspondant au nom d'un élément.
 	##//attrib_mask//##
-		The bit mask to match an item's attributes against.
+		Le masque de bits correspondant aux attributs d'un élément.
 	##//out_attrib//##
-		Reference to a bit mask that's assigned each of the found item's attributes, if any.
+		Référence à un masque de bits qui est assigné à chacun des attributs de l'objet trouvé, le cas échéant.
 	##//p_out_attrib//##
-		Pointer to a bit mask that's assigned each of the found item's attributes, if any.
+		Pointeur vers un masque de bits qui est assigné à chacun des attributs de l'objet trouvé, le cas échéant.
 
 {{fbdoc item="ret"}}
-	If no item matching the name ##//item_spec//## or the attribute mask ##//attrib_mask//## was found, then ##//out_attrib//## (or ##*//p_out_attrib//##) is assigned to zero and an empty string is returned. Otherwise, ##//out_attrib//## (or ##*//p_out_attrib//##) is assigned the attribute mask of the item, and the item name, without a path, is returned.
+	Si aucun item correspondant au nom ##//item_spec//## ou au masque d'attribut ##//attrib_mask//## nest trouvé, alors ##//out_attrib//## (ou ##*//p_out_attrib//##) reçoit la valeur zéro et ue chaîne vide est retournée. Autrement, ##//out_attrib//## (ou ##*//p_out_attrib//##) reçoit le masque d'attribut de l'item, et le nom de l'item, sans chemin, est retourné.
 
 {{fbdoc item="desc"}}
-	If ##//item_spec//## contains an absolute path, then the first procedure searches the filesystem for an item that matches the name ##//item_spec//## and whose attributes are all contained in ##//attrib_mask//##. Otherwise, it searches relative to the current directory (see ##[[KeyPgCurdir CurDir]]##). In any case, if a matching item is not found, ##//out_attrib//## is assigned to zero and an empty string is returned. Otherwise, ##//out_attrib//## is assigned with the attribute flags of the item, and the name of the item, without a path, is returned.
+	Si ##//item_spec//## contient un chemin absolu, alors la première procédure recherche dans le système de fichiers un item qui correspond au nom ##//item_spec//## et dont tous les attributs sont tous contenus dans ##//attrib_mask//##. Autrement, il recherche par rapport au répertoire courant (voir ##[[KeyPgCurdir CurDir]]##). En tout cas, si aucun élément correspondant n'est trouvé, zéro est attribué à ##//out_attrib//## et une chaîne vide est retournée. Sinon, ##//out_attrib//## est affecté avec les indicateurs d'attribut de l'élément, et le nom de l'élément, sans chemin d'accès, est retourné.
 
-	##//item_spec//## may include an asterisk (##*##, for matching any adjacent characters) or one or more question marks (##?##, for matching any individual character). If it does, the procedure searches for the first such item. If found, subsequent calls with ##//item_spec//## equal to an empty string will return the next item matching the name ##//item_spec//## until no more such items are found. If ##//attrib_mask//## is omitted from these subsequent calls, the procedure searches for items with the same attributes as in the previous call.
+	##//item_spec//## peut inclure un astérisque (##*##, pour correspondre à des caractères adjacents) ou un ou plusieurs points d'interrogation  (##?##, pour correspondre à tout caractère individuel). Si c'est le cas, la procédure recherche le premier item du genre. S'il est trouvé, les appels suivants avec ##//item_spec//## égal à une chaîne vide retournera l'élément suivant correspondant au nom ##//item_spec//## jusqu'à ce qu'aucun autre item correspondant ne soit trouvé. Si ##//attrib_mask//## est omis de ces appels ultérieurs, la procédure recherche des items avec les mêmes attributs que lors de l'appel précédent.
 
-	The second procedure behaves the same as ##**Dir**( //item_spec//, //attrib_mask//, *//p_out_attrib// )##.
+	La seconde procédure a le même comportement que ##**Dir**( //item_spec//, //attrib_mask//, *//p_out_attrib// )##.
 	
-	The third procedure behaves the same as ##**Dir**( "####", , //out_attrib// )##.
+	La troisième procédure a le même comportement que ##**Dir**( "####", , //out_attrib// )##.
 
-	The fourth procedure behaves the same as ##**Dir**( "####", , *//p_out_attrib// )##.
+	La quatrième procédure a le même comportement que ##**Dir**( "####", , *//p_out_attrib// )##.
 
-**File Attributes:**
-	Files and directories and other items can be said to possess so-called file attributes; metadata that describes the item. The meaning of this metadata varies with operating system and the file system it uses. The following macros are used as bit-flags with ##//attrib_mask//##, ##//out_attrib//## and ##*//p_out_attrib//##. Their values can be combined to form a mask using ##[[KeyPgOpOr Operator Or]]##, or individual values can be checked using ##[[KeyPgOpAnd Operator And]]##. To access them, ##[[KeyPgInclude Include]] "dir.bi"##.
+**Attributs des fichiers:**
+	Les fichiers, répertoires et autres items, si on peut dire, possèdent des sortes d'attributs de fichier; les métadonnées qui décrivent l'item. Le sens de ces métadonnées varie en fonction du système d'exploitation et du système utilisé. Les macros suivantes sont utilisées comme "bit-flags" avec ##//attrib_mask//##, ##//out_attrib//## et ##*//p_out_attrib//##. Leurs valeurs peuvent être combinées pour former un masque en utilisant l'##[[KeyPgOpOr Opérateur Or]]##. Pour y accéder, ##[[KeyPgInclude Include]] "dir.bi"##.
 
 	## # define fbReadOnly &h01 ##
-		//The item cannot be written to or deleted.//
-		**DOS & Windows**: The item has the "read-only" attribute set.
-		**Linux**:The item has no write permissions associated with the current user or group, nor is it globally writable.  (Whether or not the user has root permissions is ignored.)
+		//L'item ne peut être écrit ou supprimé.//
+		**DOS & Windows**: L'item a l'attribut "read-only" (lecture seule) validé.
+		**Linux**:L'item n'a pas de permission d'écriture associée avec l'utilisateur ou le groupe courant, il n'est pas accessible en écriture au niveau global.  (Que l'utilisateur ait ou non les permissions "root" n'a aucune importance.)
 
 	## # define fbHidden &h02 ##
-		//The item is hidden in ordinary directory listings.//
-		**DOS & Windows**: The item has the "hidden" attribute set.
-		**Linux**: The item's name has a period (##.##) as the first character.
+		//L'item est caché dans dans une liste normale de répertoire.//
+		**DOS & Windows**: L'item a l'attribut "hidden" (caché) validé.
+		**Linux**: Le nom de l'item a un point (##.##) comme premier caractère.
 
 	## # define fbSystem &h04 ##
-		//The item is used almost exclusively by the system.//
-		**DOS & Windows**: The item has the "system" attribute set.
-		**Linux**: The item is either a character device, block device, named pipe (FIFO) or Unix socket.
-
-	## # define fbDirectory &h10 ## 
-		//The item is a directory. Includes the current (##.##) and parent (##..##) directories as well.//
-		**DOS & Windows & Linux**: The item is a directory.
+		//L'item est utilisé presque exclusivement par le système.//
+		**DOS & Windows**: L'item a l'attribut "system" (système) validé.
+		**Linux**: L'item est soit un périphérique en mode caractère, un périphérique en mode bloc, un tube nommé (FIFO) ou un socket Unix. 
+	## # define fbDirectory &h10 ##
+		//L'item est un répertoire. Inclus les répertoire courant (##.##) et parent (##..##).//
+		**DOS & Windows**: L'item a l'attribut "directory" (répertoire) validé.		**Linux**: L'item est un répertoire.
 
 	## # define fbArchive &h20 ##
-		//The item may be backed up after some automated operations.//
-		**DOS & Windows**: The item has the "archive" attribute set (automatically set after every write access to a file).
-		**Linux**: The item is not a directory; typical filesystems do not support this metadata.
+		//L'item peut être sauvegardé après quelque opération automatisée.//
+		**DOS & Windows**: L'item a l'attribut "archive" validé.		**Linux**: L'item n'est pas un répertoire; les systèmes de fichiers typiques ne supportent pas ces métadonnées.
 
 	## # define fbNormal (fbReadOnly or fbArchive) ##
-		//The item is a file or directory.//
+		//L'item est un fichier ou un répertoire.//
 
-	Items found having no attributes are always matched, regardless of the value of ##//attrib_mask//##. An item will not be matched if it has one or more attributes that aren't specified in ##//attrib_mask//##.
-	If ##//attrib_mask//## does not include ##**fbArchive**##, then ##**Dir**## may widen the check to include ##**fbDirectory**##, but it is recommended to add ##**fbDirectory**## explicitly, if that is the behaviour sought.  Finer control can be gained by checking the ##//out_attrib//## value for the desired set of attributes.
+	Les items trouvés sans attributs correspondent toujours, indépendamment de la valeur de ##//attrib_mask//##. Un item ne correspondra pas s'il a un ou plusieurs attributs qui ne sont pas spécifiés dans ##//attrib_mask//##.
+	De plus, si ##//attrib_mask// [[KeyPgOpAnd And]] **fbArchive**## égale zéro, alors ##//attrib_mask//## est attribué à ##//attrib_mask// [[KeyPgOpOr Or]] **fbDirectory**## avant de vérifier si les attributs du fichier correspondent.
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/system/dir.bas"}}%%(freebasic)
@@ -142,15 +140,15 @@ Print "Found " & filecount & " files and " & dircount & " subdirs"
 %%
 
 {{fbdoc item="target"}}
-	- Linux requires the ##//filename//## case to match the real name of the file. Windows and DOS are case insensitive.
-	- Path separators in Linux are forward slashes ##/##. Windows uses backslashes ##\## but it allows for forward slashes.  DOS uses backslashes.
-	- In DOS, the attrib mask value of ##&h37## (##&h3F## usually works also, but ##&h37## is safer) returns all files and directories, including "." and "..", but no Volume: the value ##8## returns the Volume, even if current directory is not the main directory.
+	- Linux requiert que la casse de ##//filename//## corresponde au nom réel du fichier. Windows et DOS ne sont pas sensibles à la casse.
+	- Les séparateurs de chemin, sous Linux, sont des barres obliques ##/##. Windows utilise des anti-slashs ##\## mais il permet de barres obliques.  DOS utilise des anti-slashs.
+	- Sous DOS, une valeur du masque "attrib" de ##&h37## (##&h3F## fonctionne habituellement aussi, mais ##&h37## est plus sûr) retourne tous les fichiers et répertoires, incluant "." and "..", mais pas de "Volume": la valeur ##8## retourne le "Volume", même si le répertoire courant n'est pas dans le répertoire principal.
 
 {{fbdoc item="lang"}}
-	- Not available in the //[[CompilerOptlang -lang qb]]// dialect unless referenced with the alias ##**""__Dir""**##.
+	- Non disponible dans le dialecte //[[CompilerOptlang -lang qb]]// sauf si référencé avec l'alias ##**""__Dir""**##.
 
 {{fbdoc item="diff"}}
-	- Not found in ""QBasic"" but present in Visual Basic.  The ##//out_attrib//## parameter is new to ""FreeBASIC"".
+	- N'existe pas en ""QBasic"" mais en Visual Basic.  Le paramètre ##//out_attrib//## est nouveau pour ""FreeBASIC"".
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgOpen Open]]##

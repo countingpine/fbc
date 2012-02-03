@@ -1,40 +1,40 @@
 {{fbdoc item="title" value="APPEND"}}----
-Specifies text file to be opened for append mode
+Spécifie un fichier texte qui doit être ouvert pour le mode ajout
 
 {{fbdoc item="syntax"}}##
 	[[KeyPgOpen open]] //filename// for **Append** [[[KeyPgEncoding encoding]] //encoding_type//] [[[KeyPgLock lock]] //lock_type//] as [#]//filenum// 
 ##
 {{fbdoc item="param"}}
 	##//filename//##
-		file name to open for append
+		nom de fichier à ouvrir pour l'ajout
 	##//encoding_type//##
-		indicates encoding type for the file
+		indique le type d'encodage du fichier
 	##//lock_type//##
-		locking to be used while the file is open
+		verrouillage à utiliser pendant que le fichier est ouvert
 	##//filenum//##
-		unused file number to associate with the open file
+		numéro de fichier inutilisé à associer avec le fichier ouvert
 
 {{fbdoc item="desc"}}
-	A file mode used with ##[[KeyPgOpen Open]]## to open a text file for writing.
+	Un mode de fichier utilisé avec ##[[KeyPgOpen Open]]## pour ouvrir un fichier texte en écriture.
 
-	This mode is used to add text to an existing file  with ##[[KeyPgPrintPp Print #]]##, or comma separated values with ##[[KeyPgWrite Write#]]##.
+	Ce mode est utilisé pour ajouter du texte à un fichier existant avec ##[[KeyPgPrintPp Print #]]##, ou des valeurs séparées par des virgules avec ##[[KeyPgWrite Write#]]##.
 
-	Text files can't be simultaneously read and written in ""FreeBASIC"", so if both functions are required on the same file, it must be opened twice.
+	Les fichiers texte ne peuvent pas être lus et écrits simultanément en ""FreeBASIC"", si les deux fonctions sont nécessaires sur le même fichier, il doit être ouvert deux fois.
 	
-	##//filename//## must be a string expression resulting in a legal file name in the target OS, without wildcards. The file will be sought for in the present directory, unless the ##//filename//## contains a path . If the file does not exist, it is created. The pointer is set after the last character of the file.
+	##//filename//## doit être une expression chaîne correspondant à un nom de fichier légal dans le système d'exploitation cible, sans jokers de remplacement. Le fichier sera recherché dans le répertoire courant, sauf si ##//filename//## contient un chemin. Si le fichier n'existe pas, il est créé. Le pointeur est positionné après le dernier caractère du fichier.
 	
-	##//Encoding_type//## indicates the Unicode ##[[KeyPgEncoding Encoding]]## of the file, so characters are correctly read. If omitted, "ascii" encoding is defaulted. Only little endian character encodings are supported at the moment. 
+	##//Encoding_type//## indique le ##[[KeyPgEncoding Encoding (codage)]]## Unicode du fichier, ainsi les caractères seront lus correctement. S'il est omis, ce sera l'encodage "ascii" par défaut. Seul, les codages de caractères ##//little endian//## sont pris en charge pour le moment. 
 		-##"utf8"##
 		-##"utf16"##
 		-##"utf32"##
-		-##"ascii"## (the default)
+		-##"ascii"## (par défaut)
 	
-	##//Lock_type//## indicates the way the file is locked  for other processes, it is one of:
-		- ##**Read**## - the file can be opened simultaneously by other processes, but not for reading
-		- ##**Write**## - the file can be opened simultaneously by other processes, but not for writing
-		- ##**Read Write**## - the file cannot be opened simultaneously by other processes (the default)
+	##//Lock_type//## indique la façon dont le fichier est verrouillé pour d'autres processus:
+		- ##**Read**## - le fichier peut être ouvert simultanément par d'autres processus, mais pas pour la lecture
+		- ##**Write**## - le fichier peut être ouvert simultanément par d'autres processus, mais pas pour l'écriture
+		- ##**Read Write**## - le fichier ne peut être ouvert simultanément par d'autres processus (par défaut)
 
-	##//filenum//## Is a valid FreeBASIC file number (in the range ##1..255##) not being used for any other file presently open. The file number identifies the file for the rest of file operations. A free file number can be found using the ##[[KeyPgFreefile Freefile]]## function.
+	##//filenum//## est un numéro FreeBASIC valide de fichier (dans la gamme ##1..255##) non utilisé à ce moment-là par un autre fichier actuellement ouvert. Le numéro de fichier identifie le fichier pour le reste des opérations. Un numéro de fichier libre peut être trouvé en utilisant la fonction ##[[KeyPgFreefile Freefile]]##.
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/fileio/for-append.bas"}}%%(freebasic)
@@ -46,7 +46,7 @@ FOR i = 1 to 10
 NEXT
 %%
 {{fbdoc item="diff"}}
-	- None
+	- Aucune.
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgInputfilemode Input (File Mode)]]##

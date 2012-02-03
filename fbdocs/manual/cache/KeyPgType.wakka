@@ -1,5 +1,5 @@
 {{fbdoc item="title" value="TYPE"}}----
-Declares a user-defined type.
+Déclare un type défini par l'utilisateur.
 
 {{fbdoc item="syntax"}}##
 
@@ -26,52 +26,54 @@ Declares a user-defined type.
 ##
 {{fbdoc item="param"}}
 	##//alignment//##
-		Specifies the byte alignment for data fields.
+		Spécifie l'alignement d'octets pour les champs de données.
 	##//fieldname//##
-		Name of the data field or member procedure.
+		Nom du champ de données ou d'un membre de procédure.
 	##//external_name//##
-		Name of field as seen when externally linked.
+		Nom de domaine si liens externes.
 	##//parameters//##
-		The parameters to be passed to a member procedure.
+		Les paramètres à passer à un membre de procédure.
 	##//array subscripts//##
-		Subscripts to declare a fixed-length array.
+		Les indices pour déclarer un tableau de longueur fixe.
 	##//bits//##
-		Number of bits a data field occupies.
+		Nombre de bits occupés par un champ de données.
 	##//initializer//##
-		Default initializer for the data field.
+		Initialisation par défaut pour le champ de données.
 	##//operatorname//##
-		The name of the operator to be overloaded.
+		Le nom de l'opérateur à surcharger.
 	##//calling convention specifier//##
-		Can be ##[[KeyPgCdecl Cdecl]]##, ##[[KeyPgStdcall Stdcall]]## or ##[[KeyPgPascal Pascal]]##.
+		Peut être ##[[KeyPgCdecl Cdecl]]##, ##[[KeyPgStdcall Stdcall]]## or ##[[KeyPgPascal Pascal]]##.
 
 {{fbdoc item="desc"}}
-	##**Type**## is used to declare custom data types containing one or more bit, scalar, array or other ##**Type**## fields.
+	##**Type**## est utilisé pour déclarer des types de données contenant un ou plusieurs bits, scalaire, tableau ou d'autres champs de ##**Type**##.
 
-	Types support member functions including ##[[KeyPgConstructor Constructor]]##, ##[[KeyPgDestructor Destructor]]##, ##[[KeyPgMemberFunction Function]]##, ##[[KeyPgOperator Operator]]##, ##[[KeyPgProperty Property]]## and ##[[KeyPgMemberSub Sub]]##.
+	Supporte membre de fonctions incluant ##[[KeyPgConstructor Constructor]]##, ##[[KeyPgDestructor Destructor]]##, ##[[KeyPgMemberFunction Function]]##, ##[[KeyPgOperator Operator]]##, ##[[KeyPgProperty Property]]## et ##[[KeyPgMemberSub Sub]]##.
 
-	Fields default to ##[[KeyPgVisPublic Public:]]## member access unless, ##[[KeyPgVisPrivate Private:]]## or ##[[KeyPgVisProtected Protected:]]## is specified.
+	Les champs seront, par défaut, des membres à accès ##[[KeyPgVisPublic Public:]]## sauf si, ##[[KeyPgVisPrivate Private:]]## ou ##[[KeyPgVisProtected Protected:]]## est spécifié.
 
-	An anonymous ##[[KeyPgUnion Union]]## can be nested in a ##**Type**## declaration.
+	Une ##[[KeyPgUnion Union]]## anonyme peut être imbriquée dans une déclaration de ##**Type**##.
 
-	The optional ##[[KeyPgField Field]]=//number//## when given will change the default field alignment. ##[[KeyPgField Field]]=1## will disable any alignment, making the ##**Type**## contiguous in memory. 
+	##[[KeyPgField Field]]=//number//## est facultatif, s'il existe, il change l'alignement par défaut des champs. ##[[KeyPgField Field]]=1## annule tout alignement, rendant le ##**Type**## contigu en mémoire. 
 
-	##**Type**## can be used to return a temporary type variable.  See ##[[KeyPgTypeTemp Type()]]##.
+	##**Type**## peut être utilisé pour retourner une variable de type temporaire. Voir ##[[KeyPgTypeTemp Type()]]##.
 
-	##**Type**## can be used to declare a type definition ( i.e. an alias or alternative name ) for an already declared or yet to be declared type.  See ##[[KeyPgTypeAlias Type (Alias)]]##
+	##**Type**## peut être utilisé pour déclarer une définition de type ( c'est à dire un alias ou un autre nom ) pour un type déjà déclaré ou qui va être déclaré.  Voir ##[[KeyPgTypeAlias Type (Alias)]]##
 
-	Data fields may have an optional default ##//initializer//## value.  This default value initializes the data field immediately before any constructor is called.
+	Les champs de données peuvent avoir une valeur facultative ##//initializer//## par défaut.  Cette valeur par défaut initialise le champ de données immédiatement avant tout appel du constructeur.
 
-	##[[KeyPgStaticMember Static]]## immediately preceding ##[[KeyPgMemberSub Sub]]## or ##[[KeyPgMemberFunction Function]]## indicates that no hidden ##[[KeyPgThis This]]## parameter is to be passed to the member procedure.
+	##[[KeyPgStaticMember Static]]## qui précède immédiatement ##[[KeyPgMemberSub Sub]]## ou ##[[KeyPgMemberFunction Function]]## indique qu'aucun paramètre caché ##[[KeyPgThis This]]## doit être transmis au membre de la procédure.
 
-	##[[KeyPgConstMember Const]]## immediately preceding ##[[KeyPgMemberSub Sub]]## or ##[[KeyPgMemberFunction Function]]## indicates that the hidden ##[[KeyPgThis This]]## parameter is to be considered read-only.
+	##[[KeyPgConstMember Const]]## qui précède immédiatement ##[[KeyPgMemberSub Sub]]## ou ##[[KeyPgMemberFunction Function]]## indique que le paramètre caché ##[[KeyPgThis This]]## est à considérer comme en lecture-seulement (read-only).
 
-	 **Warning** Special care must be taken when using a user defined type for file I/O.  It is recommended to use ##Field = 1## for such cases, and it may be required to read files created by other applications.
-	UDTs that contain pointers to data should not be written to file as-is: when the data is read later, the pointers will almost certainly be invalid, and the data they pointed to will no longer be available.  Instead, custom input/output routines should be used, to save the allocated data in a different format in the file.  This includes UDTs containing variable-length strings.
-	Additionally, reading fixed length strings in UDT's from files is problematic: at present, fixed-length strings contain an extra NULL character on the end.  To preserve alignment the field would need to be declared with one char less than the actual size and accessing the field by its name makes the last character unavailable.  It also means there may be potential problems passing the string to functions that expect the NULL character to be there.
-	A better solution is to use ubyte arrays, this requires a couple of auxiliary functions converting to/from string. See the example.
+	 **Avertissement:**
+	Des précautions particulières doivent être prises lors de l'utilisation d'un type défini par l'utilisateur pour les entrées/sorties (I / O) fichier.  Il est recommandé d'utiliser ##Field = 1## pour de tels cas, et cela peut être nécessaire pour lire les fichiers créés par d'autres applications.
+	Les types de données utilisateur qui contiennent des pointeurs vers des données ne doivent pas être écrits dans le fichier tel quel: lorsque les données sont lues plus tard, les pointeurs seront presque toujours invalides, et les données qu'ils pointaient ne seront plus disponibles.  Au lieu de cela, des routines d'entrée / sortie personnalisés doivent être utilisées, pour sauver les données allouées dans un format différent dans le fichier.  Cela inclut les types de données utilisateur contenant des chaînes de longueur variable.
+	En outre, la lecture de chaînes de longueur fixe dans un type utilisateur à partir de fichiers est problématique: à l'heure actuelle, les chaînes de longueur fixe contiennent un caractère NULL supplémentaires à la fin.  Afin de préserver l'alignement le champ devra être déclaré avec un nombre de caractères inférieur à la taille réelle et l'accès au champ par son nom rendra le dernier caractère indisponible.  Cela signifie également qu'il peut y avoir des problèmes potentiels en passant la chaîne aux fonctions qui attendent d'avoir là un caractère NULL.
+
+	Une meilleure solution consiste à utiliser des tableaux de type ##**UByte**##, cela nécessite un couple de fonctions auxiliaires de conversion ##//'vers / à partir de'//## la chaîne. Voir l'exemple.
 
 {{fbdoc item="ex"}}
-This is an example of a QB-style type, not including procedure definitions
+Ceci est un exemple de style QB-style, ne comprenant pas des définitions de procédure
 {{fbdoc item="filename" value="examples/manual/udt/type1.bas"}}%%(freebasic)
 TYPE clr
 	red AS UBYTE
@@ -85,7 +87,7 @@ c.green = 128
 c.blue = 64
 %%
 
-And this is an example of a type working as an object:
+Et ceci un exemple d'un type fontionnant comme un objet:
 {{fbdoc item="filename" value="examples/manual/udt/type2.bas"}}%%(freebasic)
 '' Example showing the problems with fixed length string fields in UDTs
 '' Suppose we have read a GIF header from a file
@@ -134,17 +136,17 @@ if ub2str(h2->sig()) = "GIF89a" then print "ok" else print "error" '' Prints ok
 %%
 
 {{fbdoc item="target"}}
-	- The default field alignment is 4 bytes for DOS and Linux targets.
-	- The default field alignment is 8 bytes for Windows targets.
-	
+	- L'alignement des champs par défaut est de 4 octets pour les cibles DOS et Linux.
+	- L'alignement des champs par défaut est de 8 octets pour les cibles Windows.
+
 {{fbdoc item="lang"}}
-	- Object-related features such as functions declared inside ##**Type**## blocks are supported only with the //[[CompilerOptlang -lang fb]]// dialect since version 0.17b
-	- In the //[[CompilerOptlang -lang fb]]// and //[[CompilerOptlang -lang fblite]]// dialects, the default field alignment depends on the target platform.
-	- With the //[[CompilerOptlang -lang qb]]// dialect the fields are aligned to byte boundaries by default, unless otherwise specified.
-	- To force byte alignment use ##FIELD=1##.
+	- Les fonctionnalités relatives aux objets telles que les fonctions déclarées à l'intérieur de blocs ##**Type**## sont prises en charge uniquement avec le dialecte //[[CompilerOptlang -lang fb]]// depuis la version 0.17b
+	- Dans les dialectes //[[CompilerOptlang -lang fb]]// et //[[CompilerOptlang -lang fblite]]//, l'alignement des champs par défaut dépend de la plate-forme cible.
+	- Avec le dialecte //[[CompilerOptlang -lang qb]]// les champs sont alignés à l'octet limites par défaut, sauf indication contraire.
+	- Pour forcer l'alignement octet utilisez ##FIELD=1##.
 
 {{fbdoc item="diff"}}
-	- At present, fixed-length strings have an extra, redundant character on the end, which means they take up one more byte than they do in QB.  For this reason, UDTs that use them are not compatible with QB when used for file I/O.
+	- A l'heure actuelle, les chaînes de longueur fixe ont un supplément, le caractère redondant de fin, ce qui signifie qu'elles prennent un octet supplémentaire par rapport à QB.  Pour cette raison, les types définis par l'utilisateur qui les utilisent ne sont pas compatibles avec QB lorsqu'ils les utilisent pour les Entrées / Sories de fichier.
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgTypeAlias Type (Alias)]]##

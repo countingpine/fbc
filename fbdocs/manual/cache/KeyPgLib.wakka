@@ -1,8 +1,8 @@
 {{fbdoc item="title" value="LIB"}}----
-Specifies the library where a sub or function can be found as part of a declaration
+Spécifie où un sous-programme / une fonction peut trouver une DLL dans le cadre d'une déclaration
 
 {{fbdoc item="syntax"}}##
-	[[KeyPgDeclare declare]] { [[KeyPgSub sub]] | [[KeyPgFunction function]] } //proc_name// **lib** "//libname//" [ [[KeyPgAlias alias]] "//symbol_name//" ] ( //arguments list// ) [[KeyPgAs as]] //return_type//
+	[[KeyPgDeclare declare]] { [[KeyPgSub sub]] | [[KeyPgFunction function]] } //proc_name// **Lib** "//dllname//" [[KeyPgAlias alias]] "//symbol_name//" ( //arguments list// ) [[KeyPgAs as]] //return_type//
 	
 	[[KeyPgExternBlock extern]] "//mangling//" lib "//libname//"
 		//declarative statements//
@@ -15,9 +15,9 @@ Specifies the library where a sub or function can be found as part of a declarat
 
 ##
 {{fbdoc item="desc"}}
-	In ##[[KeyPgSub Sub]]## or ##[[KeyPgFunction Function]]## declarations, and also in class method declarations (including constructors and destructors), ##**lib**## indicates the library containing the function. Libraries specified in this way are linked in as if ##[[KeyPgInclib #inclib "libname"]]## or ##[[CompilerOptl -l libname]]## had been used.
+	Dans les déclarations ##[[KeyPgSub Sub]]## et ##[[KeyPgFunction Function]]##, ##**Lib**## indique la "dll" contenant la fonction. Les bibliothèques spécifiées de cette manière sont liées, comme si elles avaient été spécifiées avec [[KeyPgInclib #inclib]].
 	
-	##**lib**## can also be used with [[KeyPgExternBlock Extern ... End Extern blocks]] to specifiy a ##**lib**## for all declarations inside.
+	##**Lib**## peut aussi être utilisé avec des [[KeyPgExternBlock blocs Extern ... End Extern]] pour spécifier ##**Lib**## pour toutes les déclarations internes.
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/procs/mydll.bas"}}%%(freebasic)
@@ -40,7 +40,7 @@ Print "GetValue = &h"; Hex(GetValue())
 %%
 
 {{fbdoc item="diff"}}
-	- New to ""FreeBASIC""
+	- Nouveau pour ""FreeBASIC""
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgDeclare Declare]]##

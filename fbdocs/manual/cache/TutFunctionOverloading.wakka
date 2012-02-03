@@ -1,14 +1,14 @@
 {{fbdoc item="title" value="Function Overloading"}}----
-//written by [[LaananFisher :stylin:]]//
+//Ecrit par [[LaananFisher :stylin:]]//
 
 ----
 
-====What is It?====
+===Qu'est-ce que c'est?===
 
 
-Function overloading is as close as you can come to generic programming without having templates. In functional (or modular) programming, the emphasis is on value, while in generic programming, the emphasis is on //type//. Similar functions are called based on the type of the argument passed. Function overloading is a side-step into generic programming, allowing a function identifier to be associated with a variety of functions that work with a variety of different types - and making it all transparent to the client (you).
+La surcharge de fonction est aussi près que vous pouvez venir à la programmation générique sans avoir de modèles. En programmation fonctionnelle (ou modulaire), l'accent est mis sur la valeur, tandis que dans la programmation générique, l'accent est mis sur le //type//. Des fonctions similaires sont appelées en fonction du type de l'argument passé. La surcharge de fonction est un pas de côté dans la programmation générique, permettant à un identifiant de fonction d'être associé à une variété de fonctions qui fonctionnent avec une variété de types différents - et de le rendre totalement transparent pour le client (vous).
 
-Simply put, function overloading involves defining functions that have the same name, but different //signatures//. A function's signature is a combination of all the information needed to correctly reference the function, and includes the function's parameter list and return type. These are what we redefine, or overload. Let's start off with a small example. Say we need functions that output the string respresentation of a number. We simply write:
+Autrement dit, la surcharge de fonction consiste à définir des fonctions qui ont le même nom, mais des //signatures// différentes. La signature d'une fonction est une combinaison de toutes les informations nécessaires pour référencer correctement la fonction et inclut la liste des paramètres de la fonction et le type de retour. Ceci est ce que nous redéfinissons, ou de surchargeons. Commençons avec un petit exemple. Supposons que nous avons besoin de fonctions affichant la chaîne représentatant un certain nombre. Nous écrivons tout simplement:
 
 
 ##%%(freebasic)
@@ -35,12 +35,12 @@ function print_short( n as short ) : print str( n ) : return : end function
 
 ----
 
-====What Does It Do For Me?====
+===Que fait-elle pour moi?===
 
 
-The problem here is that not only do we have two different function signatures, but we have two different function //identifiers// as well; we - not the compiler - have to remember both in order to call the right function. As you may be able to imagine, this can be pretty confusing if you decide you want to support INTEGERs, SINGLEs and DOUBLEs as well. Plus, for completeness, you may want to have functions that accept both the signed and unsigned versions of each of these. Clearly, you're going to have some kind of naming-scheme setup to make this easier on yourself. And, of course you'll want to support your own TYPEs as well, and - oh wait, we forgot about pointers. OK, now you'll need to double the list of function names you not only need to come up with, but also try and remember when you're actually writing code that uses these functions. Since, after all, you do have implicit conversions available to/forced upon you, and the compiler will happily let you slip a DOUBLE in to your print_integer function - woops! Bug-city, here we come! Surely there must be a better way?
+Le problème ici est que non seulement nous avons deux signatures de fonction différentes, mais nous avons deux //identifiants// de fonction différents, ainsi, nous - et non le compilateur - devons nous souvenir d'appeler la fonction convenable. Comme vous l'imaginez peut-être, cela peut être assez déroutant si vous décidez que vous voulez manipuler des INTEGER, SINGLE et DOUBLE. De plus, pour être complet, vous pouvez avoir des fonctions qui acceptent à la fois les versions signées et non signées de chacun de ces cas. De toute évidence, vous allez avoir une sorte de nommage de configuration système à faire pour rendre ceci plus facile pour vous-même. Et, bien sûr, vous aurez envie de manipuler aussi vos propres types, et - oh, attendez, nous avons oublié les pointeurs. OK, maintenant vous aurez besoin de doubler la liste des noms de fonction, vous devez non seulement trouver ces noms, mais aussi essayer de vous en souvenir quand vous écrirez le code qui utilisera ces fonctions. Et puis, après tout, vous avez les conversions implicites disponibles / imposées à vous, et le compilateur se fera un plaisir de vous laisser glisser un DOUBLE dans votre fonction "print_integer" - woops! Bug-ville, nous voilà! Il doit sûrement y avoir une meilleure méthode?
 
-There is, and don't call me Shirley. I mentioned before that the compiler uses two primary components to establish a function signature: the parameter list and the return type. I also mentioned that through overloading, we can define multiple functions with different signatures, and still keep the same function name for all of them. You may be thinking this is our way out of our dilema, convoluted name space and all. Well, you're right - check this out:
+Ceci étant, ne m'appelez pas Shirley. J'ai déjà mentionné que le compilateur utilise deux composants principaux pour établir une signature de fonction: la liste des paramètres et le type de retour. J'ai aussi mentionné que grâce à la surcharge, on peut définir des fonctions multiples avec des signatures différentes, en gardant toujours le même nom de fonction pour chacun d'elles. Vous pouvez penser que c'est notre moyen de sortir de notre dilemme, espace de nom alambiqué et autres. Eh bien, vous avez raison - jetez un oeil sur ceci:
 
 
 ##%%(freebasic)
@@ -77,20 +77,20 @@ function print_numeric( n as longint ) : print str( n ) : return : end function
 
 ----
 
-====What does It Mean?====
+===Qu'est-ce que cela signifie?===
 
 
-One thing that should stand out right away is how incredibly easy it is to do this. That might seem strange considering the freedom, flexibility and //type-safety// if offers you, but then again most higher-level constructs are like that. In a nutshell, using methods like this will not only make your life a whole lot easier, but you'll be spending less time debugging, and that's a good thing no matter what kind of code you write.
+Une chose qui devrait se remarquer d'emblée est de voir comment il est incroyablement facile de faire cela. Cela peut sembler étrange compte tenu de la liberté, la flexibilité et la sécurité de type, qui s'offre à vous, mais là encore les constructions de niveau le plus élevé sont comme ça. En un mot, en utiliser des méthodes comme celle-ci ne rendra pas seulement de votre vie beaucoup plus facile, mais vous passerez moins de temps dans le débogage et c'est une bonne chose, peu importe le type de code que vous écriviez.
 
-It means //flexibility//. Function overloading offers the ability to add more features ( print_numeric( f as fraction) ) while still keeping your current code intact. Your code doesn't break because you want to support printing the numeric representation of a handkerchief, or armor, or whatever else. You may now be thinking that the above code is not so trivial anymore, and that what seems really simple - because it is - is really the foundation of writing better code. You'd be right.
+Cela signifie //flexibilité//. La surcharge de fonction offre la possibilité d'ajouter plus de fonctionnalités (print_numeric( f as fraction)) tout en gardant intact votre code actuel. Votre code ne casse pas parce que vous voulez soutenir l'impression de la représentation numérique d'un mouchoir, d'une armure ou de tout autre chose. Vous pourriez maintenant penser que le code ci-dessus n'est pas si trivial que ça et que ce qui semble très simple - parce que ça l'est - est vraiment le fondement de l'écriture d'un meilleur code. Et vous auriez raison.
 
-It means //maintainability//: So you've got your 80 functions of print_some_long_name_you_need_to_look_up_everytime_you_want_to_use_it written and debugged. Everything's great in your little torturous, self-loathing world. What happens when something needs to change? Even if only 1 of those functions needs to change, BAM! A maintenence nightmare. You're going to have to search the entire code-base to be //completely// sure you haven't missed a function here or there; sad way to spend a Saturday night, my friend.
+Cela signifie //maintenabilité//: Donc, vous avez vos 80 fonctions d'écriture_d'un_certain_nom_que_vous_devez_vérifier_chaque_fois_que_vous_en_avez_besoin_pour_l'écriture_ou_le_débogage. Tout est grand dans votre petit monde tortueux et d'auto-dégoût. Qu'est-ce qui se passe quand quelque chose doit changer? Si seulement une de ces fonctions doit changer, BAM! Un cauchemar de maintenance. Vous allez avoir à rechercher dans l'ensemble code de base pour être //complètement// sûr que vous n'avez pas raté une fonction ici ou là; triste façon de passer un samedi soir, mon ami.
 
-It means //safety//: You may notice that I utilize two OPTIONs in these examples: [[KeyPgOptionexplicit OPTION EXPLICIT]] and [[KeyPgOptionbyval OPTION BYVAL]]. I'm big on safety, and I'm even bigger on having the compiler watch my back for me. I use these because it is safer to, and I'll take all the safety I can get. Function overloading also affords you safety - safety against evil (read: accidental) implicit conversions. Consider if we were actually returning a value from these functions that was dependent on the argument we passed to it. As above, if a double were allowed to get truncated without our knowledge, that spells many pills of excedrin trying to make that debugging headache go away. It's all about the type-safety, something which cause many to scoff at C//pp//.
+Cela signifie //sécurité//: Vous pouvez remarquer que j'utilise deux options dans ces exemples: [[KeyPgOptionexplicit OPTION EXPLICIT]] et [[KeyPgOptionbyval OPTION BYVAL]]. Je suis fort sur la sécurité, et je le suis encore plus en demandant au compilateur de surveiller mes arrières. J'utilise ceci parce que c'est plus sûr et je vais demander toute la sécurité que je peux obtenir. La surcharge de fonction met également en sécurité - sécurité contre le mal (lire: accidentelle) les conversions implicites. Considérez que nous sommes réellement en mesure de retourner, à partir de ces fonctions, une valeur qui repose sur l'argument que nous lui passons. Comme précédemment, si un double a été autorisé à être tronquer à notre insu, cela signifie que de nombreux comprimés d'Excedrin essaieront de faire disparaître les maux de tête débogage. C'est tout au sujet de la chose de sécurité de type, quelque chose qui force certains à se moquer de C//pp//.
 
 ----
 
-====Wrapping Up====
+===Conclusion===
 
 
-I hope you have learned at least the basics of function overloading (since that's all I covered). And I hope you start thinking about the themes I've brought up, if you haven't before. Next time I'll discuss overloading functions with different numbers of parameters, different return types, as well as the joys and pitfalls of both. Stay tuned.
+J'espère que vous avez appris au moins les rudiments de la surcharge de fonction (puisque c'est tout ce que je couvert). Et j'espère que vous commencez à penser à des thèmes que j'ai soulevé, si ce n'était pas le cas auparavant. La prochaine fois je discuterai des fonctions surchargées avec différents nombres de paramètres, différents types de retour, ainsi que des joies et des pièges des deux. Restez à l'écoute.

@@ -1,44 +1,44 @@
 {{fbdoc item="title" value="GET (GRAPHICS)"}}----
-Gets a copy of a portion of the current work page or an image buffer
+Obtient une copie d'une portion de la page courante de travail ou d'un tampon image
 
 {{fbdoc item="syntax"}}##
 	**Get** [//source//,] [Step] (//x1//, //y1//) - [STEP] (//x2//, //y2//), //dest//]
 ##
 {{fbdoc item="param"}}
 	##//source//##
-		the address of an image buffer.
+		adresse d'un tampon image.
 	##Step##
-		indicates that the following co-ordinates are not absolute co-ordinates.
+		indique que les coordonnées qui suivent ne sont pas absolues.
 	##//x1//##,  ##//y1//##
-		co-ordinates of the upper-left corner of the sub-image to copy.
+		coordonnées du coin en haut à gauche de la sous-image à copier.
 	##//x2//##,  ##//y2//##
-		co-ordinates of the lower-right corner of the sub-image to copy.
+		coordonnées du coin en bas à droite de la sous-image à copier.
 	##//dest//##
-		the address of a previously allocated buffer to store the image data.
+		adresse du tampon précédemment alloué pour stocker les données image.
 
 {{fbdoc item="desc"}}
-	##**Get**## copies a rectangular portion of the current work page specified by the co-ordinates (##//x1//##,  ##//y1//##) and (##//x2//##,  ##//y2//##), which represent the upper-left and lower-right corners of the rectangle, respectively. ##**Step**## specifies that the upper-left co-ordinates are relative to the current graphics pen location, and/or that the lower-right co-ordinates are relative to the upper-left co-ordinates. The new image buffer is formatted to match the current screen mode [[GfxInternalFormats pixel format]].
+	##**Get**## copie une portion rectangulaire de la page de travail courante, spécifiée par les coordonnées (##//x1//##,  ##//y1//##) et (##//x2//##,  ##//y2//##), qui représentent respectivement les coins haut-gauche et bas-droite du rectangle. ##**Step**## précise que les coordonnées sont relatives à la position du crayon graphique, et/ou les coordonnées sont relatives aux coordonnées du coin haut-gauche. Le nouveau tampon image est formaté pour correspondre au [[GfxInternalFormats format pixel ]]du mode écran courant.
 
-	##//dest//## can be an address, an [[ProPgArrays array]], or a reference to the first element in an [[ProPgArrays array]] that will receive the new image buffer. This memory must be sufficiently allocated to hold the image buffer; the number of bytes required varies with the [[CompilerOptlang -lang dialect]] used to compile the program.
+	##//dest//## peut être une addresse, un [[ProPgArrays tableau]] ou une référence au premier élément d'un [[ProPgArrays tableau]] qui recevra le nouveau tampon image. L'allocation mémoire doit être suffisante pour recevoir le tampon image; le nombre d'octets varie avec le [[CompilerOptlang -lang dialect]] utilisé pour compiler le programme.
 
-	##//source//## can be an address, an [[ProPgArrays array]], or a reference to the first element in an [[ProPgArrays array]] that holds an image buffer to retrieve a portion of. ##//x1//##,  ##//y1//##, ##//x2//##,  ##//y2//##, ##**Step**## and ##//dest//## have the same meaning in this case.
+	##//source//## peut être une addresse, un [[ProPgArrays tableau]] ou une référence au premier élément d'un [[ProPgArrays tableau]] qui contient un tampon image pour recevoir la portion de l'image. ##//x1//##,  ##//y1//##, ##//x2//##,  ##//y2//##, ##**Step**## et ##//dest//## ont la même signification dans ce cas.
 
-	The co-ordinates of the rectangle are affected by the most recent ##[[KeyPgWindow Window]]## and ##[[KeyPgViewgraphics View (Graphics)]]## statements, and must both be within the current clipping region set by ##[[KeyPgViewgraphics View (Graphics)]]##, otherwise an illegal function call runtime error will be triggered, and the function will have no effect.
+	Les coordonnées du rectangle sont modifiées par les plus récentes déclarations de ##[[KeyPgWindow Window]]## et ##[[KeyPgViewgraphics View (Graphics)]]##, et doivent être toutes les deux dans la région de découpage courante (clipping region) validée par ##[[KeyPgViewgraphics View (Graphics)]]##, autrement sera émise une erreur d'appel illégal à une fonction, et la fonction n'aura aucun effet.
 
-**Runtime errors:**
-	##**Get**## throws one of the following [[ProPgErrorHandling runtime errors]]:
+**Erreurs de fonctionnement:**
+	##**Get**## produit une des [[ProPgErrorHandling erreurs de fonctionnement]] suivantes:
 
 	//(##1##) Illegal function call//
-		- ##//dest//## is an array, but is not big enough to hold the image buffer.
-		- The upper-left or lower-right co-ordinates of the rectangle are outside the current clipping region. See ##[[KeyPgViewgraphics View (Graphics)]]##.
+		- ##//dest//## est un tableau, mais il n'est pas assez grand pour contenir le tampon image.
+		- Les coordonnées du coin en haut à gauche ou en bas à droite sont en dehors de la région de découpage courante (clipping region). Voir ##[[KeyPgViewgraphics View (Graphics)]]##.
 
 {{fbdoc item="lang"}}
-	There are 2 types of buffers (details see [[GfxInternalFormats]]) depending from FB dialect used:
+	Il y a 2 types de tampons (voir [[GfxInternalFormats Formats graphiques internes]]) dépendant du dialecte FB qui est utilisé:
 
-	- In the //[[CompilerOptlang -lang fb]]// dialect, ##//dest//## receives a new-style image buffer, which consists of a 32-byte image header followed by pixel data which is row-padded to the next paragraph boundary (16 bytes). Use the following formula to calculate the total size, in bytes, required to store the image buffer, where ##w## and ##h## are the respective width and height of the rectangular portion of the current work page or source image buffer, and ##bpp## is the number of bytes per pixel of the current screen mode:
+	- Dans les dialectes //[[CompilerOptlang -lang fb]]//, ##//dest//## reçoit un tampon image nouveau-style, consistant en une en-tête image de 32 octets suivi par les données pixels data qui est "row-padded" jusqu'à la limite du paragraphe suivant (16 octets). Utilisez la formule suivante pour calculer la taille totale, en octets, nécessaire pour stocker le tampon image, où ##w## et ##h## sont respectivement la largeur et la hauteur de la portion rectangulaire de la page courante de travail ou du tampon image source, et ##bpp## est le nombre d'octets par pixel de l'écran courant:
 		##size = 32 + (((w * bpp + &hF) and not &hF) * h)##
 
-	- In the //[[CompilerOptlang -lang qb]]// and //[[CompilerOptlang -lang fblite]]// dialects, ##//dest//## receives a QB-style image buffer, which consists of a 4-byte image header followed by pixel data which is not row-padded. Use the following formula to calculate the total size, in bytes, required to store the image buffer, where ##w## and ##h## are the respective width and height of the rectangular portion of the current work page or source image buffer, and ##bpp## is the number of bytes per pixel of the current screen mode:
+	- Dans le dialecte //[[CompilerOptlang -lang qb]]// et //[[CompilerOptlang -lang fblite]]//, ##//dest//## reçoit un tampon image style-QB, qui consiste en une en-tête image de 4 octets suivi par les données pixel qui ne sont pas "row-padded". Utilisez la formule suivante pour calculer la taille totale, en octets, nécessaire pour stocker le tampon image, où ##w## et ##h## sont respectivement la largeur et la hauteur de la portion rectangulaire de la page courante de travail ou du tampon image source, et ##bpp## est le nombre d'octets par pixel du [[GfxInternalFormats format pixel]] du mode écran courant:
 		##size = 4 + (w * h * bpp)##
 
 {{fbdoc item="ex"}}
@@ -97,6 +97,6 @@ wend
 	- ##[[KeyPgScreengraphics Screen (Graphics)]]##
 	- ##[[KeyPgWindow Window]]##
 	- ##[[KeyPgViewgraphics View (Graphics)]]##
-	- [[GfxInternalFormats Internal graphics formats]]
+	- [[GfxInternalFormats Formats graphiques internes]]
 
 {{fbdoc item="back" value="CatPgGfx2D|2D Drawing Functions"}}

@@ -1,5 +1,5 @@
 {{fbdoc item="title" value="CONSTRUCTOR"}}----
-Called automatically when a class or user defined type is created
+Appelé automatiquement lorsqu'une classe ou un type défini par l'utilisateur est créé
 
 {{fbdoc item="syntax"}}##
 	[[KeyPgType Type]] //typename//
@@ -13,23 +13,23 @@ Called automatically when a class or user defined type is created
 ##
 {{fbdoc item="param"}}
 	##//typename//## 
-		name of the ##[[KeyPgType Type]]## of ##[[KeyPgClass Class]]##
+		nom du ##[[KeyPgType Type]]## ou ##[[KeyPgClass Class]]##
 
 {{fbdoc item="desc"}}
-	##**Constructor**## methods are called when a user defined ##[[KeyPgType Type]]## or ##[[KeyPgClass Class]]## variable is created.
+	Les méthodes ##**Constructor**## sont appelées lorsqu'un ##[[KeyPgType Type]]## défini par l'utilisateur ou une variable de ##[[KeyPgClass Class]]## est créé.
 
-	##//typename//## is the name of the type for which the ##**Constructor**## method is declared and defined.  Name resolution for ##//typename//## follows the same rules as procedures when used in a ##[[KeyPgNamespace Namespace]]##.
+	##//typename//## est le nom du type pour lequel la méthode ##**Constructor**## est déclarée et définie.  La résolution de noms pour ##//typename//## suit les mêmes règles que les procédures en cas d'utilisation dans un ##[[KeyPgNamespace espace de noms]]##.
 
-	More than one constructor may exist for a type or class.  The exact constructor method called depends on the ##//parameter//## signature matched when the variable is initialized.  More than one ##//parameter//## may exist in a constructor method declaration.
+	Plus d'un constructeur peut exister pour un type ou une classe.  La méthode constructeur exacte appelée dépend de la signature ##//parameter//## correspondant quand la variable est initialisée.  Plus d'un ##//parameter//## peut exister dans la déclaration de la méthode ##**Constructor**##.
 
-	A constructor method is passed a hidden ##[[KeyPgThis this]]## parameter having the same type as ##//typename//##.  ##[[KeyPgThis this]]## is optionally used to access the fields of the ##[[KeyPgType Type]]## or ##[[KeyPgClass Class]]## which is to be initialized in the ##**Constructor**## method.
+	Une méthode constructeur est passée à un paramètre ##[[KeyPgThis this]]## caché qui est du même type que ##//typename//##.  ##[[KeyPgThis this]]## est éventuellement utilisé pour accéder aux champs du ##[[KeyPgType Type]]## ou de la ##[[KeyPgClass Class]]## qui a été initialisé dans la méthode ##**Constructor**##.
 
-	Chaining of constructors in nested types is supported.  Any fields that have their own default constructor are called first.
+	Le chaînage des constructeurs dans les types imbriqués est pris en charge.  Tous les champs qui ont leur propre constructeur par défaut sont appelés en premier.
 
-	Constructors are called when declaring global or local static instances of ##//typename//## and when allocating ##//typename//## dynamically using the ##[[KeyPgOpNew New]]## operator.
+	Les constructeurs sont appelés lors de la déclaration d'instances statiques globales ou locales de ##//typename//## et lors de l'allocation dynamique de ##//typename//## en utilisant l'opérateur ##[[KeyPgOpNew New]]##.
 
 {{fbdoc item="ex"}}
-Simple constructor example for beginners.
+Exemple de constructeur simple pour débutants.
 {{fbdoc item="filename" value="examples/manual/udt/constructor-ptr.bas"}}%%(freebasic)
 Type MyObj
   Foo As Integer Ptr
@@ -76,7 +76,7 @@ End Scope
   '' Because our objects are being deleted.
 Sleep
 %%
-More advanced construction example, showing constructor overloading among other things.
+Exemple de construction plus avancée, montrant une surcharge constructeur entre autres choses.
 {{fbdoc item="filename" value="examples/manual/udt/constructor.bas"}}%%(freebasic)
 type sample
 
@@ -142,10 +142,10 @@ print "  x3 = "; x3
 print "  x4 = "; x4
 %%
 {{fbdoc item="lang"}}
-	- Object-related features are supported only in the //[[CompilerOptlang -lang fb]]// option
+	- Les caractéristiques liées à l'objet sont prises en charge uniquement dans le dialecte //[[CompilerOptlang -lang fb]]//
 
 {{fbdoc item="diff"}}
-	- New to ""FreeBASIC""
+	- Nouveau pour ""FreeBASIC""
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgType Class]]##

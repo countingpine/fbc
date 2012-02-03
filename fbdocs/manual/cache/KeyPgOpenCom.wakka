@@ -1,5 +1,5 @@
 {{fbdoc item="title" value="OPEN COM"}}----
-Opens a serial port for input and output
+Ouvre un port série en entrée et sortie
 
 {{fbdoc item="syntax"}}##
 	[[KeyPgDeclare declare]] [[KeyPgFunction function]] **Open Com** ( byref //options// [[KeyPgAs as]] [[KeyPgString string]], **AS** //filenum// [[KeyPgAs as]] [[KeyPgInteger integer]] ) [[KeyPgAs as]] [[KeyPgInteger integer]]
@@ -9,73 +9,73 @@ Opens a serial port for input and output
 ##
 {{fbdoc item="param"}}
 	##//options//##
-		A [[KeyPgString string]] containing options used in controlling the port.
+		A [[KeyPgString string]] contenant les options de contrôle du port.
 	##//filenum//##
-		The file number to bind to the port.
+		Le numéro de fichier à associer au port.
 
 {{fbdoc item="ret"}}
-	Returns zero (0) on success and a non-zero error code otherwise.
+	Retourne zéro (0) si succès et autrement un code d'erreur différent de zéro.
 
 {{fbdoc item="desc"}}
-	This command opens a serial port of the PC, allowing to send and receive data by using the normal file commands as PRINT #, INPUT#, GET #,...
+	Cette commande ouvre un port série du PC, ce qui permet d'envoyer et de recevoir des données en utilisant les commandes de fichiers normales comme PRINT #, INPUT #, GET #,...
 
-	The main parameter is a [[KeyPgString string]] that describes, at the very least, which communications port to open. It has the format:
+	Le paramètre principal est une [[KeyPgString string]] qui décrit, à tout le moins, le port de communication à ouvrir. Elle a le format:
 
 		##"**COM**//n//**:** [ //baudrate// ][ , [ //parity// ][ , [ //data_bits// ][ , [ //stop_bits// ][ , [ //extended_options// ]]]]]"##
 
-	where,
+	où,
 	##//n//##
-		Com port to open. "1", "2", "3", "4", etc.  Some platforms will support more serial ports depending on how the operating system is configured.  Where ##//n//## is not given, "COM:" will map to "COM1:", except on Linux where "COM:" maps to "/dev/modem"
+		Port Com à ouvrir. "1", "2", "3", "4", etc.  Certaines plates-formes ont plus de ports série selon la façon dont le système d'exploitation est configuré.  Si ##//n//## est absent, "COM:" sera "COM1:", sauf sous Linux où "COM:" sera "/dev/modem"
 	##//baudrate//##
-		"300" (default), "1200", ..., etc.
+		"300" (par défaut), "1200", ..., etc.
 	##//parity//##
-		"N" (none), "E" (even, default), "O" (odd), "S" (space), "M" (mark), "PE" (QB-quirk: checked, even parity)
+		"N" (none=aucune), "E" (even=paire, par défaut), "O" (odd=impaire), "S" (space=espace), "M" (mark=marque), "PE" (QB-quirk: checked, even parity)
 	##//data_bits//##
-		"5", "6", "7" (default) or "8".
+		"5", "6", "7" (par défaut) or "8".
 	##//stop_bits//##
-		"1", "1.5" or "2". //(default value depends on baud rate and data bits, see table below)//
+		"1", "1.5" or "2". //(la valeur par défaut dépend de "baud rate" et "data bits", voir table ci-dessous)//
 
-			{{table columns="2" cellpadding="2" cells="Condition;Default number of stop bits;baud rate <= 110 and data bits = 5;1.5;baud rate <= 110 and data bits >= 6;2;baud rate > 110;1"}}
+			{{table columns="2" cellpadding="2" cells="Condition;Nombre de bits d'arrêt par défaut;baud rate <= 110 et data bits = 5;1.5;baud rate >= 110 et data bits >= 6;2;baud rate > 110;1"}}
 	##//extended_options//##
-		Miscellaneous options. //(See table below)//
+		Options diverses. //(Voir table ci-dessous)//
 
-			{{table columns="2" cellpadding="2" cells="Option;Action;'CSn';Set the CTS duration (in ms) (n>=0), 0 = turn off, default = 1000;'DSn';Set the DSR duration (in ms) (n>=0), 0 = turn off, default = 1000;'CDn';Set the Carrier Detect duration (in ms) (n>=0), 0 = turn off;'OPn';Set the 'Open Timeout' (in ms) (n>=0), 0 = turn off;'TBn';Set the 'Transmit Buffer' size (n>=0), 0 = default, depends on platform;'RBn';Set the 'Receive Buffer' size (n>=0), 0 = default, depends on platform;'RS';Suppress RTS detection;'LF';Communicate in ASCII mode (add LF to every CR) - Win32 doesn't support this one;'ASC';same as 'LF';'BIN';The opposite of LF and it'll always work;'PE';Enable 'Parity' check;'DT';Keep DTR enabled after CLOSE;'FE';Discard invalid character on error;'ME';Ignore all errors;'IRn';IRQ number for COM (only supported (?) on DOS)"}}
+			{{table columns="2" cellpadding="2" cells="Option;Action;'CSn';Établit la durée de CTS (en ms) (n&gt=0), 0 = arrêter, par défaut = 1000;'DSn';Établit la durée de DSR (en ms) (n&gt=0), 0 = arrêter, par défaut = 1000;'CDn';Établit la durée de Carrier Detect (en ms) (n&gt=0), 0 = arrêter;'OPn';Établit 'Open Timeout' (en ms) (n&gt=0), 0 = arrêter;'TBn';Établit la taille de 'Transmit Buffer' (n&gt=0), 0 = par défaut, dépend de la plate-forme ;'RBn';Établit la taille de 'Receive Buffer' (n&gt=0), 0 = par défaut, dépend de la plate-forme;'RS';Supprime la détection de RTS;'LF';Communique en mode ASCII (ajoute LF à chaque CR) - Win32 ne permet pas;'ASC';comme 'LF';'BIN';L'opposé de LF et fonctionnera toujours;'PE';Valide recherche de 'Parity';'DT';Conserve DTR valide après CLOSE;'FE';Rejeter caractère non valide en cas d'erreur;'ME';Ignorer toutes les erreurs;'IRn';numéro d'IRQ pour COM (supporté seulement (?) sous DOS)"}}
 
-	All items except for the COM port are optional. The order of ##//baudrate//##, ##//parity//##, ##//data_bits//##, ##//stop_bits//## is fixed. Any skipped fixed item ( ##//baudrate//##, etc...) must be empty.
+	Tous les items sont facultatifs, sauf pour le port COM. L'ordre de ##//baudrate//##, ##//parity//##, ##//data_bits//##, ##//stop_bits//## est fixé. Tout élément fixe sauté ( ##//baudrate//##, etc...) doit être vide.
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/fileio/opencom1.bas"}}%%(freebasic)
 OPEN COM "COM1:9600,N,,2" as 1
 %%
-	Opens COM1 with 9600 baud, no parity, 7 data bits and 2 stop bits.
+	Ouvre COM1 avec 9600 baud, no parity, 7 data bits et 2 stop bits.
 
 {{fbdoc item="filename" value="examples/manual/fileio/opencom2.bas"}}%%(freebasic)
 OPEN COM "COM1:115200" as 1
 %%
-	Opens COM1 with 115200 baud, "even" parity, 7 data bits and 1 stop bits. 
+	Ouvre COM1 avec 115200 baud, "even" parity, 7 data bits et 1 stop bits. 
 
 {{fbdoc item="target"}}
-	- On the Windows platform ##"COM:"## maps to ##"COM1:"##
-	- On the Linux platform
-		##"COM:"## maps to ##"/dev/modem"##
-		##"COM1:"## maps to ##"/dev/ttyS0"##
-		##"COM2:"## maps to ##"/dev/ttyS1"##, etc 
-		##"/dev/xyz:"## maps to ##"/dev/xyz"##, etc
-	- The DOS serial driver is experimental and can access COM ports 1 to 4 
-		It uses the following base io and IRQ's as default: 
+	- Sur les plates-formes Windows ##"COM:"## est ##"COM1:"##
+	- Sur les plates-formes Linux
+		##"COM:"## est ##"/dev/modem"##
+		##"COM1:"## est ##"/dev/ttyS0"##
+		##"COM2:"## est ##"/dev/ttyS1"##, etc 
+		##"/dev/xyz:"## est ##"/dev/xyz"##, etc
+	- Le pilote série DOS est expérimental et peut accéder aux ports COM 1 à 4 
+		Il utilise la base suivante I/O et IRQ par défaut: 
 		COM1 - &h3f8 - IRQ4 
 		COM2 - &h2f8 - IRQ3 
 		COM3 - &h3e8 - IRQ4 
 		COM4 - &h2e8 - IRQ3 
-		Since fbc-0.18.4, an alternate IRQ can be specified using the the "IRn" protocol option where "n" is 3 through 7.
-		Currently not supported: IRQ's on the slave PIC, alternate base I/O addresses, Timeouts and most errors as detected in QB, hardware flow control, FIFO's.
-		##"COM:"## maps to ##"COM1:"##
+		Depuis fbc-0.18.4, une alternative IRQ peut être spécifiée en utilisant l'option du "IRn" protocole où "n" va de 3 à 7.
+		Á l'heure actuelle pas pris en charge: IRQ sur le PIC esclave, base alternative adresses I / O, Délais d'attente et la plupart des erreurs détectées dans QB, contrôle de flux matériel, FIFO.
+		##"COM:"## est ##"COM1:"##
 {{fbdoc item="lang"}}
-	- In the //[[CompilerOptlang -lang qb]]// dialect the old syntax ##OPEN "COMx:...## is supported. 
+	- dans le dialecte //[[CompilerOptlang -lang qb]]// l'ancienne syntaxe ##OPEN "COMx:...## est admise. 
 
 {{fbdoc item="diff"}}
-	- In QB the syntax was ##OPEN  "COMx:[baudrate] [,parity, [data_bits, [stop_bits, [extended_options]]]]"  FOR INPUT|OUTPUT|RANDOM AS [#] n##
-	- In QB, only ##"COM1:"## and ##"COM2:"## are supported.  In FreeBASIC, any correctly configured serial port may be used.
+	- Dans la syntaxe QB il y avait ##OPEN  "COMx:[baudrate] [,parity, [data_bits, [stop_bits, [extended_options]]]]"  FOR INPUT|OUTPUT|RANDOM AS [#] n##
+	- Dans QB, seulement ##"COM1:"## et ##"COM2:"## sont supportés.  Dans FreeBASIC, tout port série correctement configuré peut être utilisé.
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgOpen Open]]##

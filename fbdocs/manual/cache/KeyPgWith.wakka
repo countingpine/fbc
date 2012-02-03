@@ -1,5 +1,5 @@
 {{fbdoc item="title" value="WITH"}}----
-Statement block to allow implicit access to fields in a user defined type variable
+Bloc d'instructions pour permettre un accès implicite à des champs dans une variable de type défini par l'utilisateur
 
 {{fbdoc item="syntax"}}##
 	**With** //user_defined_var//
@@ -7,13 +7,13 @@ Statement block to allow implicit access to fields in a user defined type variab
 	**End With**
 ##
 {{fbdoc item="desc"}}
-	The ##**With...End With**## block allows the omission of the name of a variable of a user-defined ##[[KeyPgType Type]]## when referring to its fields. The fields may then be accessed with just a single period (##.##) before them, e.g. if the ##[[KeyPgType Type]]## contains an field element called "//##element##//", then it could be accessed within the ##**With**## block as "##//.element//##".
+	Le bloc ##**With...End With**## permet l'omission du nom d'une variable d'un ##[[KeyPgType Type]]## défini par l'utilisateur quand on se référe à ses champs. Les champs peuvent être accessibles avec seulement un point (##.##)placé devant, par exemple si le ##[[KeyPgType Type]]## contient un élément champ appelé "//##element##//", on peut y accéder dans le bloc ##**With**## par "##//.element//##".
 
-	It can be used as a shorthand to save typing and avoid cluttering the source. ##**With**## can also be used with dereferenced pointers, as the second example shows.
+	Il peut être utilisé comme un raccourci pour éviter de taper beaucoup de texte et ainsi ne pas encombrer le fichier source. ##**With**## peut également être utilisé avec des pointeurs déréférencés, comme le montre le second exemple.
 
-	##**With**## blocks may be nested.  In this case, only the innermost ##**With**## block is active, and any outer ones are ignored until the inner one is closed again.  See the third example for an illustration of this.
+	Les blocs ##**With**##peuvent être imbriqués.  Dans ce cas, seul le bloc ##**With**## le plus interne avec est actif, et tous les blocs externes sont ignorées jusqu'à ce que celui de l'intérieur soit de nouveau fermé.  Voir le troisième exemple pour une illustration de cela.
 
-	Internally, a reference to the variable is taken at the start of the ##**With**## block, and then is used to calculate any element accesses within the block.  Note that this means that ##[[KeyPgGoto Goto]]## should not be used to jump into a ##**With**## block, otherwise the reference will not have been set, and the results of trying to access it will be undefined.
+	En interne, une référence à la variable est prise au début du bloc ##**With**##, et est ensuite utilisée pour calculer tous les accès aux éléments dans le bloc.  Notez que cela signifie que ##[[KeyPgGoto Goto]]## ne doit pas être utilisé pour entrer dans un bloc ##**With**##, sinon la référence n'aura pas été réglée, et les résultats pour essayer d'y accéder seront indéfinis.
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/udt/with-1.bas"}}%%(freebasic)
@@ -86,10 +86,10 @@ print rect2.x, rect2.y '' 3,  4
 %%
 
 {{fbdoc item="lang"}}
-	- Not available in the //[[CompilerOptlang -lang qb]]// dialect unless referenced with the alias ##**""__With""**##.
+	- Non disponible dans le dialecte //[[CompilerOptlang -lang qb]]// sauf si référencé avec l'alias ##**""__With""**##.
 
 {{fbdoc item="diff"}}
-	- New to ""FreeBASIC""
+	- Nouveau pour ""FreeBASIC""
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgType Type]]##

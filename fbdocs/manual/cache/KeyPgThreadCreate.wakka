@@ -1,5 +1,5 @@
 {{fbdoc item="title" value="THREADCREATE"}}----
-Starts a user-defined procedure in a separate execution thread
+Démarre une procédure définie par l'utilisateur dans un "thread" d'exécution distinct
 
 {{fbdoc item="syntax"}}##
 	[[KeyPgDeclare declare]] [[KeyPgFunction function]] **Threadcreate** ( [[KeyPgByval byval]] //proc// [[KeyPgAs as]] [[KeyPgSub sub]] ( [[KeyPgByval byval]] [[KeyPgAs as]] [[KeyPgAny any]] [[KeyPgPtr ptr]] ), [[KeyPgByval byval]] //param// [[KeyPgAs as]] [[KeyPgAny any]] [[KeyPgPtr ptr]] = 0, [[KeyPgByval byval]] //stack_size// [[KeyPgAs as]] [[KeyPgInteger integer]] = 0 ) [[KeyPgAs as]] [[KeyPgAny any]] [[KeyPgPtr ptr]]
@@ -9,23 +9,23 @@ Starts a user-defined procedure in a separate execution thread
 ##
 {{fbdoc item="param"}}
 	##//proc//##
-		A pointer to the ##[[KeyPgSub Sub]]## intended to work as a thread.
+		Un pointeur vers le ##[[KeyPgSub Sub]]## prévue pour travailler comme un "thread".
 	##//param//##
-		Optional [[KeyPgAny any]] [[KeyPgPtr ptr]] argument for the ##[[KeyPgSub Sub]]## pointed to by ##//proc//## (it can be a pointer to a structure or an array if more arguments are needed).
+		Argument facultatif [[KeyPgAny any]] [[KeyPgPtr ptr]] pour la ##[[KeyPgSub Sub]]## pointée par ##//proc//## (peut être un pointeur vers une structure ou un tableau si plusieurs arguments sont nécessaires).
 	##//stack_size//##
-		Optional number of bytes to reserve for this thread's stack.
+		Nombre (facultatif) d'octets à réserver pour la pile de ce "thread".
 
 {{fbdoc item="ret"}}
-	**Threadcreate** returns an ##[[KeyPgAny any]] [[KeyPgPtr ptr]]## handle to the thread created, or the null pointer (0) on failure.
+	**Threadcreate** retourne un "handle" ##[[KeyPgAny any]] [[KeyPgPtr ptr]]## vers le "thread" créé, ou le pointeur nul (0) en cas d'échec.
 
 {{fbdoc item="desc"}}
-	The user function is started as a thread executes in parallel with the main part of the program. The OS achieves this by assigning it to a different processor if it exists, or using the waiting times in the main program.
+	La fonction utilisateur est lancée comme un "thread" exécuté en parallèle avec la partie principale du programme. Le système d'exploitation atteint cet objectif en l'assignant à un processeur différent si il existe, ou en utilisant les temps d'attente dans le programme principal.
 
-	Before closing, a program must wait for the termination of all the threads it has launched; see ##[[KeyPgThreadWait Threadwait]]##.
+	Avant fermeture, un programme doit attendre l'achèvement de tous les "threads" qu'il a lancés; voir ##[[KeyPgThreadWait Threadwait]]##.
 
-	To avoid simultaneous access to shared resources from different threads, FreeBASIC implements mutexes, mutual exclusion locks that can be "owned" by a single thread when doing critical work. See ##[[KeyPgMutexCreate Mutexcreate]]##, ##[[KeyPgMutexLock Mutexlock]]##, ##[[KeyPgMutexUnlock Mutexunlock]]##, ##[[KeyPgMutexDestroy Mutexdestroy]]##.
+	Pour éviter l'accès simultané aux ressources partagées à partir de "threads" différents, FreeBASIC met en œuvre les "mutex", les verrous d'exclusion mutuelle qui peuvent être "possédés" par un seul "thread" lors d'un travail critique. Voir ##[[KeyPgMutexCreate Mutexcreate]]##, ##[[KeyPgMutexLock Mutexlock]]##, ##[[KeyPgMutexUnlock Mutexunlock]]##, ##[[KeyPgMutexDestroy Mutexdestroy]]##.
 
-	On some systems, the stack automatically grows beyond ##//stack_size//## if more space is needed; on others, this is the fixed maximum allowed. Behavior is undefined when more stack is used than the reserved size on systems where stacks are not able to grow.
+	Sur certains systèmes, la pile augmente automatiquement au-delà de ##//stack_size//## si plus d'espace est nécessaire; sur les autres, c'est le maximum permis. Le comportement est imprévisible en cas de dépassement de pile, par rapport à ce qui était réservé, dans les cas où la pile n'est pas capable de s'agrandir.
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/threads/threadcreate.bas"}}%%(freebasic)
@@ -80,14 +80,14 @@ Sleep
 %%
 
 {{fbdoc item="lang"}}
-	- Threading is not allowed in ##-lang qb##
+	- Les "Thread" n'existent pas dans le dialecte //[[CompilerOptlang -lang qb]]//.
 
 {{fbdoc item="target"}}
-	- **Threadcreate** is not available with the DOS version / target of FreeBASIC, because multithreading is not supported by DOS kernel nor the used extender.
-	- In Linux the threads are always started in the order they are created, this can't be assumed in Win32. It's an OS, not a FreeBASIC issue. 
+	- La version DOS de FreeBASIC ne permet pas les "threads", car l'OS ne les supporte pas.
+	- Dans Linux les "threads" sont toujours démarrés dans l'ordre de leur création, ceci n'est pas possible sous Win32. Il s'agit de l'OS, pas une question FreeBASIC. 
 
 {{fbdoc item="diff"}}
-	- New to ""FreeBASIC""
+	- Nouveau pour ""FreeBASIC""
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgThreadWait Threadwait]]##

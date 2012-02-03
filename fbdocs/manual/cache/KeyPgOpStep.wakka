@@ -1,5 +1,5 @@
 {{fbdoc item="title" value="Operator Step (Iteration)"}}----
-Increments the iterator of a ##[[KeyPgFornext For...Next]]## loop
+Incrémente l'itérateur d'une boucle ##[[KeyPgFornext For...Next]]##
 
 {{fbdoc item="syntax"}}##
 	{ [[KeyPgType Type]] | [[KeyPgClass Class]] | [[KeyPgUnion Union]] } //typename//
@@ -15,22 +15,22 @@ Increments the iterator of a ##[[KeyPgFornext For...Next]]## loop
 ##
 {{fbdoc item="param"}}
 	##//typename//##
-		name of the ##[[KeyPgType Type]]##, ##[[KeyPgClass Class]]##, or ##[[KeyPgUnion Union]]##
+		nom du ##[[KeyPgType Type]]##, de la ##[[KeyPgClass Class]]## ou de l'##[[KeyPgUnion Union]]##
 	##//stp//##, ##//step_value//##
-		a ##//typename//## object used as an incremental value
+		un objet ##//typename//## utilisé comme valeur d'incrémentation
 	##//iterator//##
-		a ##//typename//## object used as an iterator
+		un objet ##//typename//## utilisé comme itérateur
 	##//end_value//##
-		a ##//typename//## object used as a loop-terminating value
+		un objet ##//typename//## utilisé comme valeur de fin de boucle
 	##//start_value//##
-		a ##//typename//## object used to copy construct or assign to the iterator initially
+		un objet ##//typename//## utilisé pour la construction de copie ou pour initialiser l'itérateur
 
 {{fbdoc item="desc"}}
-	##[[KeyPgOpFor Operator For]]##, ##[[KeyPgOpNext Operator Next]]## and ##**Operator Step**## can be overloaded in user-defined type definitions to allow objects of that type to be used as iterators and step values in ##[[KeyPgFornext For...Next]]## loops.
+	##[[KeyPgOpFor Operator For]]##, ##[[KeyPgOpNext Operator Next]]## et ##**Operator Step**## peut être surchargé dans des définitions de type utilisateur pour permettre à des objets de ce type d'être utilisés comme itérateurs et valeurs d'incrémentation dans des boucles ##[[KeyPgFornext For...Next]]##.
 
-	##**Operator Step**## is called to increment the iterator immediately after all statements in the ##[[KeyPgFornext For...Next]]## body are executed, if any.
+	L'##**Operator Step**## est appelé pour incrémenter l'itérateur immédiatement après l'exécution de toutes les déclarations, s'il y en a, de la boucle ##[[KeyPgFornext For...Next]]##.
 
-	The first version of ##**Operator Step**## is used if no step value is given in the ##[[KeyPgFornext For...Next]]## statement. If a step value is given, the second version is used and is passed the step value.
+	La première version d'##**Operator Step**## est utilisée si aucune valeur d'incrémentation n'est donnée dans la déclaration ##[[KeyPgFornext For...Next]]##. Si la valeur d'incrémentation est donnée, la seconde version est utilisée et passée.
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/udt/step.bas"}}%%(freebasic)
@@ -74,7 +74,7 @@ For i As T = 10 To 1 Step -1
   Print i.value;
 Next i
 %%
-A more practical example demonstrating file iteration based on [[http://www.freebasic.net/forum/viewtopic.php?p=83564 cha0s' file iteration class]].
+Un exemple plus pratique démontrant l'itération de fichier basé sur [[http://www.freebasic.net/forum/viewtopic.php?p=83564 cha0s' file iteration class]].
 {{fbdoc item="filename" value="examples/manual/udt/stepFileIteration.bas"}}%%(freebasic)
 '' a class which iterates through files
 type FileIter
@@ -110,7 +110,7 @@ For i As FileIter = "./" To ""
 Next
 %%
 {{fbdoc item="lang"}}
-	- Only available in the //[[CompilerOptlang -lang fb]]// dialect.
+	- Disponible seulement dans le dialecte //[[CompilerOptlang -lang fb]]//.
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgOpFor Operator For]]##

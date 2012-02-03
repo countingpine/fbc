@@ -1,133 +1,133 @@
 {{fbdoc item="title" value="String Functions"}}----
-Statements and Procedures that work with strings.
+Déclarations et procédures qui travaillent sur les chaînes.
 
 {{fbdoc item="desc"}}
-	These statements and procedures provide many ways to create and manipulate strings and substrings. Numbers can be converted to strings and vice-versa. Procedures are also provided to aid in serialization of numeric data, perhaps for persistent storage.
+	Ces déclarations et procédures fournissent de nombreux moyens pour créer et manipuler chaîne et sous-chaînes. Les nombres peuvent  être convertis en chaînes et vice-versa. Des procédures sont également fournies pour faciliter la sérialisation des données numériques, même pour le stockage persistant.
 
-**{{anchor name="CREATESTR|Creating Strings"}}**
-	String data types and procedures that create new strings.
-**{{anchor name="CHRCONVERT|Character Conversions"}}**
-	Procedures that convert from character codes to strings and back.
-**{{anchor name="NUMSTRCONV|Numeric to String Conversions"}}**
-	Procedures that convert numeric values to strings.
-**{{anchor name="STRNUMCONV|String to Numeric Conversions"}}**
-	Procedures that convert strings to numeric values.
-**{{anchor name="NUMSERIAL|Numeric Serializations"}}**
-	Procedures that convert raw numeric data to and from strings suitable for storage.
-**{{anchor name="SUBSTRING|Working with Substrings"}}**
-	Procedures that return subsets of strings, or that modify subsets of strings.
+**{{anchor name="CREATESTR|Création de chaînes"}}**
+	Types de données chaîne et procédures  qui céent de nouvelles chaînes.
+**{{anchor name="CHRCONVERT|Conversions de caractères"}}**
+	Procédures qui convertissent des codes carctères en chaînes et vice-versa.
+**{{anchor name="NUMSTRCONV|Conversions numérique vers chaîne"}}**
+	Procédures qui convertissent des valeurs numériques en chaînes.
+**{{anchor name="STRNUMCONV|Conversions chaîne vers numérique"}}**
+	Procédures qui convertissent des chaînes en valeurs numériques.
+**{{anchor name="NUMSERIAL|Sérilisations numériques"}}**
+	Procédures qui convertissent des données numériques brutes vers/depuis des chaînes appropriées pour le stockage.
+**{{anchor name="SUBSTRING|Travail avec les sous-chaînes"}}**
+	Procédures qui retournent des sous-ensembles de chaînes, ou qui modifient des sous-ensembles de chaînes.
 
-<<{{anchor name="CREATESTR"}}{{fbdoc item="section" value="Creating Strings"}}
+<<{{anchor name="CREATESTR"}}{{fbdoc item="section" value="Création de chaînes"}}
 	=={{fbdoc item="keyword" value="KeyPgString|STRING"}}==
-		Standard data type: 8 bit character string.
-	=={{fbdoc item="keyword" value="KeyPgStringFunction|STRING (Function)"}}==
-		Returns a [[KeyPgString String]] of multiple characters.
+		Type de données standard : chaîne de caractères 8 bit.
+	=={{fbdoc item="keyword" value="KeyPgStringFunction|STRING (Fonction)"}}==
+		Retourne une [[KeyPgString String]] de plusieurs caractères.
 	=={{fbdoc item="keyword" value="KeyPgZstring|ZSTRING"}}==
-		Standard data type: null terminated 8 bit character string.
+		Type de données standard : chaîne de caractères 8 bit terminée par "null".
 	=={{fbdoc item="keyword" value="KeyPgWstring|WSTRING"}}==
-		Standard data type: wide character string.
-	=={{fbdoc item="keyword" value="KeyPgWstringFunction|WSTRING (Function)"}}==
-		Returns a [[KeyPgWstring WString]] of multiple characters.
+		Type de données standard : chaînes de caractères larges (2 octets).
+	=={{fbdoc item="keyword" value="KeyPgWstringFunction|WSTRING (Fonction)"}}==
+		Retourne une [[KeyPgWstring WString]] de multiples caractères.
 	=={{fbdoc item="keyword" value="KeyPgSpace|SPACE"}}==
-		Returns a [[KeyPgString String]] consisting of spaces.
+		Retourne une [[KeyPgString String]] remplie d'espaces.
 	=={{fbdoc item="keyword" value="KeyPgWspace|WSPACE"}}==
-		Returns a [[KeyPgWstring WString]] consisting of spaces.
+		Retourne une [[KeyPgWstring WString]] remplie d'espaces.
 	=={{fbdoc item="keyword" value="KeyPgLen|LEN"}}==
-		Returns the length of a string in characters.
+		Retourne la longueur en caractères de la chaîne.
 
-{{anchor name="CHRCONVT"}}{{fbdoc item="section" value="Character Conversion"}}
+{{anchor name="CHRCONVT"}}{{fbdoc item="section" value="Conversions de caractères"}}
 	=={{fbdoc item="keyword" value="KeyPgAsc|ASC"}}==
-		Returns an [[KeyPgInteger Integer]] representation of an character.
+		Retourne un [[KeyPgInteger Integer (=entier)]] représentation d'un caractère.
 	=={{fbdoc item="keyword" value="KeyPgChr|CHR"}}==
-		Returns a string of one or more characters from their ASCII [[KeyPgInteger Integer]] representation.
+		Retourne une chaîne d'un ou plusieurs caractères à partir de leur représentation [[KeyPgInteger Integer]]  ASCII.
 	=={{fbdoc item="keyword" value="KeyPgWchr|WCHR"}}==
-		Returns a [[KeyPgWstring WString]] of one or more characters from their Unicode [[KeyPgInteger Integer]] representation.
+		Retourne une [[KeyPgWstring WString]] d'un ou plusieurs caractères à partir de leur représentation [[KeyPgInteger Integer]] Unicode.
 
-{{anchor name="NUMSTRCONV"}}{{fbdoc item="section" value="Numeric to String Conversions"}}
+{{anchor name="NUMSTRCONV"}}{{fbdoc item="section" value="Conversions numérique vers chaîne"}}
 	=={{fbdoc item="keyword" value="KeyPgBin|BIN"}}==
-		Returns a binary [[KeyPgString String]] representation of an integral value.
+		Retourne une [[KeyPgString String]] binaire représentation d'une valeur entière.
 	=={{fbdoc item="keyword" value="KeyPgWbin|WBIN"}}==
-		Returns a binary [[KeyPgWstring WString]] representation of an integral value.
+		Retourne une [[KeyPgWstring WString]] binaire représentation d'une valeur entière.
 	=={{fbdoc item="keyword" value="KeyPgHex|HEX"}}==
-		Returns a hexadecimal [[KeyPgString String]] representation of an integral value.
+		Retourne une [[KeyPgString String]] hexadécimale représentation d'une valeur entière.
 	=={{fbdoc item="keyword" value="KeyPgWhex|WHEX"}}==
-		Returns a hexadecimal [[KeyPgWstring WString]] representation of an integral value.
+		Retourne une [[KeyPgWstring WString]] hexadécimale représentation d'une valeur entière.
 	=={{fbdoc item="keyword" value="KeyPgOct|OCT"}}==
-		Returns an octal [[KeyPgString String]] representation of an integral value.
+		Retourne une [[KeyPgString String]] octale représentation d'une valeur entière.
 	=={{fbdoc item="keyword" value="KeyPgWoct|WOCT"}}==
-		Returns an octal [[KeyPgWstring WString]] representation of an integral value.
+		Retourne une [[KeyPgWstring WString]] octale représentation d'une valeur entière.
 	=={{fbdoc item="keyword" value="KeyPgStr|STR"}}==
-		Returns the [[KeyPgString String]] representation of numeric value.
+		Retourne la [[KeyPgString String]] représentation d'une valeur numérique.
 	=={{fbdoc item="keyword" value="KeyPgWstr|WSTR"}}==
-		Returns the [[KeyPgWstring WString]] representation of numeric value.
+		Retourne la [[KeyPgWstring WString]] représentation d'une valeur numérique.
 	=={{fbdoc item="keyword" value="KeyPgFormat|FORMAT"}}==
-		Returns a formatted [[KeyPgString String]] representation of a [[KeyPgDouble Double]].
+		Retourne une [[KeyPgString String]] formatée représentation d'un [[KeyPgDouble Double]].
 
-{{anchor name="STRNUMCONV"}}{{fbdoc item="section" value="String to Numeric Conversions"}}
+{{anchor name="STRNUMCONV"}}{{fbdoc item="section" value="Conversions chaîne vers numérique"}}
 	=={{fbdoc item="keyword" value="KeyPgVal|VAL"}}==
-		Returns the [[KeyPgDouble Double]] conversion of a numeric string.
+		Retourne le [[KeyPgDouble Double]] conversion d'une chaîne numérique.
 	=={{fbdoc item="keyword" value="KeyPgValint|VALINT"}}==
-		Returns the [[KeyPgInteger Integer]] conversion of a numeric string.
+		Retourne l'[[KeyPgInteger Integer]] conversion d'une chaîne numérique.
 	=={{fbdoc item="keyword" value="KeyPgVallng|VALLNG"}}==
-		Returns the [[KeyPgLong Long]] conversion of a numeric string.
+		Retourne le [[KeyPgLong Long]] conversion d'une chaîne numérique.
 	=={{fbdoc item="keyword" value="KeyPgValuint|VALUINT"}}==
-		Returns the [[KeyPgUinteger uInteger]] conversion of a numeric string.
+		Retourne le [[KeyPgUinteger uInteger]] conversion d'une chaîne numérique.
 	=={{fbdoc item="keyword" value="KeyPgValulng|VALULNG"}}==
-		Returns the [[KeyPgUlong ULong]] conversion of a numeric string.
+		Retourne le [[KeyPgUlong ULong]] conversion d'une chaîne numérique.
 
-<<>>{{anchor name="NUMSERIAL"}}{{fbdoc item="section" value="Numeric Serialization"}}
+<<>>{{anchor name="NUMSERIAL"}}{{fbdoc item="section" value="Sérialisations numériques"}}
 	=={{fbdoc item="keyword" value="KeyPgMkd|MKD"}}==
-		Returns an eight character [[KeyPgString String]] representation of a [[KeyPgDouble Double]].
+		Retourne une [[KeyPgString String]] de huit octets représentation d'un [[KeyPgDouble Double]].
 	=={{fbdoc item="keyword" value="KeyPgMki|MKI"}}==
-		Returns a four character [[KeyPgString String]] representation of a [[KeyPgInteger Integer]].
+		Retourne une [[KeyPgString String]] de quatre octets représentation d'un [[KeyPgInteger Integer]].
 	=={{fbdoc item="keyword" value="KeyPgMkl|MKL"}}==
-		Returns a four character [[KeyPgString String]] representation of a [[KeyPgLong Long]].
+		Retourne une [[KeyPgString String]] de quatre octets représentation d'un [[KeyPgLong Long]].
 	=={{fbdoc item="keyword" value="KeyPgMklongint|MKLONGINT"}}==
-		Returns an eight character [[KeyPgString String]] representation of a [[KeyPgLongint Longint]].
+		Retourne une [[KeyPgString String]] de huit octets représentation d'un [[KeyPgLongint Longint]].
 	=={{fbdoc item="keyword" value="KeyPgMks|MKS"}}==
-		Returns a four character [[KeyPgString String]] representation of a [[KeyPgSingle Single]].
+		Retourne une [[KeyPgString String]] de quatre octets représentation d'un [[KeyPgSingle Single]].
 	=={{fbdoc item="keyword" value="KeyPgMkshort|MKSHORT"}}==
-		Returns a two character [[KeyPgString String]] representation of a [[KeyPgShort Short]].
+		Retourne une [[KeyPgString String]] de deux octets représentation d'un [[KeyPgShort Short]].
 	=={{fbdoc item="keyword" value="KeyPgCvd|CVD"}}==
-		Returns a [[KeyPgDouble Double]] representation of an eight character [[KeyPgString String]].
+		Retourne un [[KeyPgDouble Double]] représentation d'une [[KeyPgString String]] de huit octets.
 	=={{fbdoc item="keyword" value="KeyPgCvi|CVI"}}==
-		Returns an [[KeyPgInteger Integer]] representation of a four character [[KeyPgString String]].
+		Retourne an [[KeyPgInteger Integer]] représentation d'une [[KeyPgString String]] de quatre octets.
 	=={{fbdoc item="keyword" value="KeyPgCvl|CVL"}}==
-		Returns a [[KeyPgLong Long]] representation of a four character [[KeyPgString String]].
+		Retourne a [[KeyPgLong Long]] représentation d'une [[KeyPgString String]] de quatre octets.
 	=={{fbdoc item="keyword" value="KeyPgCvlongint|CVLONGINT"}}==
-		Returns a [[KeyPgLongint Longint]] representation of an eight character [[KeyPgString String]].
+		Retourne a [[KeyPgLongint Longint]] représentation d'une [[KeyPgString String]] de huit octets.
 	=={{fbdoc item="keyword" value="KeyPgCvs|CVS"}}==
-		Returns a [[KeyPgSingle Single]] representation of a four character [[KeyPgString String]].
+		Retourne a [[KeyPgSingle Single]] représentation d'une [[KeyPgString String]] de quatre octets.
 	=={{fbdoc item="keyword" value="KeyPgCvshort|CVSHORT"}}==
-		Returns a [[KeyPgShort Short]] representation of a two character [[KeyPgString String]].
+		Retourne a [[KeyPgShort Short]] représentation d'une [[KeyPgString String]] de deux octets.
 
-{{anchor name="SUBSTRING"}}{{fbdoc item="section" value="Working with Substrings"}}
+{{anchor name="SUBSTRING"}}{{fbdoc item="section" value="Travail avec les sous-chaînes"}}
 	=={{fbdoc item="keyword" value="KeyPgLeft|LEFT"}}==
-		Returns a substring of the leftmost characters in a string.
-	=={{fbdoc item="keyword" value="KeyPgMidfunction|MID (Function)"}}==
-		Returns a substring of a string.
+		Retourne une sous-chaîne des caractères les plus à gauche d'une chaîne.
+	=={{fbdoc item="keyword" value="KeyPgMidfunction|MID (Fonction)"}}==
+		Retourne une sous-chaîne d'une chaîne.
 	=={{fbdoc item="keyword" value="KeyPgRight|RIGHT"}}==
-		Returns a substring of the rightmost characters in a string.
+		Retourne une sous-chaîne des caractères les plus à droite d'une chaîne.
 	=={{fbdoc item="keyword" value="KeyPgLcase|LCASE"}}==
-		Returns a copy of a string converted to lowercase alpha characters.
+		Retourne une copie d'une chaîne convertie en caractères alphabétiques minuscules.
 	=={{fbdoc item="keyword" value="KeyPgUcase|UCASE"}}==
-		Returns a copy of a string converted to uppercase alpha characters.
+		Retourne une copie d'une chaîne convertie en caractères alphabétiques majuscules.
 	=={{fbdoc item="keyword" value="KeyPgLtrim|LTRIM"}}==
-		Removes surrounding substrings or characters on the left side of a string.
+		Enlève les sous-chaines qui entourent ou les caractères sur le côté gauche d'une chaîne.
 	=={{fbdoc item="keyword" value="KeyPgRtrim|RTRIM"}}==
-		Removes surrounding substrings or characters on the right side of a string.
+		Enlève les sous-chaines qui entourent ou les caractères sur le côté droit d'une chaîne.
 	=={{fbdoc item="keyword" value="KeyPgTrim|TRIM"}}==
-		Removes surrounding substrings or characters on the left and right side of a string.
+		Enlève les sous-chaines qui entourent ou les caractères sur les côtés gauche et droit d'une chaîne.
 	=={{fbdoc item="keyword" value="KeyPgInstr|INSTR"}}==
-		Returns the first occurrence of a substring or character within a string.
+		Repère la première occurrence d'une sous-chaine ou d'un caractère dans une chaîne.
 	=={{fbdoc item="keyword" value="KeyPgInstrrev|INSTRREV"}}==
-		Returns the last occurrence of a substring or character within a string.
+		Repère la dernière occurrence d'une sous-chaine ou d'un caractère dans une chaîne.
 	=={{fbdoc item="keyword" value="KeyPgMidstatement|MID (Statement)"}}==
-		Copies a substring to a substring of a string.
+		Copie une sous-chaine vers une sous-chaine d'une chaîne.
 	=={{fbdoc item="keyword" value="KeyPgLset|LSET"}}==
-		Left-justifies a string.
+		Justification à gauche d'une chaîne.
 	=={{fbdoc item="keyword" value="KeyPgRset|RSET"}}==
-		Right-justifies a string.
+		Justification à droite d'une chaîne.
 
 >>::c::
 {{fbdoc item="back" value="DocToc|Table of Contents"}}

@@ -1,5 +1,5 @@
 {{fbdoc item="title" value="LOCK"}}----
-Restricts read/write access to a file or portion of a file
+Limite l'accès en lecture/écriture sur un fichier ou une partie d'un fichier
 
 {{fbdoc item="syntax"}}##
 	**Lock** #//filenum//, //record//
@@ -7,20 +7,20 @@ Restricts read/write access to a file or portion of a file
 ##
 {{fbdoc item="param"}}
 	##//filenum//##
-		The file number used to ##[[KeyPgOpen Open]]## the file.
+		Le numéro du fichier pour ##[[KeyPgOpen Open (=ouvrir)]]## le fichier.
 	##//record//##
-		The record (##[[KeyPgRandom Random]]## files) to lock.
+		L'enregistrement (fichiers ##[[KeyPgRandom Random]]##) à verrouiller.
 	##//start//##
-		The first byte position (##[[KeyPgBinary Binary]]## files) to lock from.
+		La position du premier octet (##[[KeyPgBinary Binary]]## files) à partir duquel verrouiller.
 	##//end//##
-		The last byte position (##[[KeyPgBinary Binary]]## files) to lock to.
+		La position du dernier octet (##[[KeyPgBinary Binary]]## files) jusqu'où verrouiller.
 
 {{fbdoc item="desc"}}
-	##**Lock**## temporarily restricts access by other threads or programs to a file, or portion of a file, usually to allow safe writing to it.
+	##**Lock**## restreint temporairement l'accès par d'autres ##//threads//## ou programmes dans un fichier, ou une partie d'un fichier, généralement pour permettre une écriture sécurisée dans ce fichier (ou partie de...).
 
-	After modifying the data, an ##[[KeyPgUnlock Unlock]]## with the same parameters as the ##**Lock**## should be issued.
+	Après avoir modifié les données, un ##[[KeyPgUnlock Unlock]]## avec les mêmes paramètres que ##**Lock**## doit être effectué.
 
-	**Note: This command does not always work, neither as documented nor as expected. It appears to be broken at the moment.**
+	**Note: Cette commande ne fonctionne toujours pas, ni comme documentée, ni comme prévu. Elle semble être "cassée" pour le moment.**
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/fileio/lock.bas"}}%%(freebasic)
@@ -41,8 +41,8 @@ close #f
 %%
 
 {{fbdoc item="diff"}}
-	- Currently, FB cannot implicitly lock the entire file
-	- In ##[[KeyPgRandom Random]]## mode, FB cannot lock a range of records
+	- Actuellement, FB ne peut pas verrouiller implicitement tout le fichier.
+	- En mode ##[[KeyPgRandom Random]]##, FB ne peut pas verrouiller une plage d'enregistrements.
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgOpen Open]]##

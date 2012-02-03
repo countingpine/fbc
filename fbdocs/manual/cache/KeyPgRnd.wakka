@@ -1,5 +1,5 @@
 {{fbdoc item="title" value="RND"}}----
-Returns a random [[KeyPgDouble double]] precision number in the range ##[0, 1)##
+Renvoie un nombre aléatoire en [[KeyPgDouble double]] précision dans l'intervalle ##[0, 1)##
 
 {{fbdoc item="syntax"}}##
 	[[KeyPgDeclare declare]] [[KeyPgFunction function]] **Rnd** ( [[KeyPgByval byval]] //seed// [[KeyPgAs as]] [[KeyPgSingle single]] = 1.0 ) [[KeyPgAs as]] [[KeyPgDouble double]]
@@ -8,18 +8,18 @@ Returns a random [[KeyPgDouble double]] precision number in the range ##[0, 1)##
 	//result// = **Rnd**( //seed// )
 ##
 {{fbdoc item="param"}}
-	##//number//##
-		Optional ##[[KeyPgSingle single]]## argument. If ##//seed//## has a value of zero, the last random number generated is repeated, for any other number a new random number is returned. With the QB-compatible algorithm, a negative number fully reseeds the generator.  The default for no argument is to return a new random number.
+	##//seed//##
+		Argument ##[[KeyPgSingle single]]## facultatif. Si ##//seed//## a une valeur de zéro, le dernier nombre aléatoire généré est répété, pour tout autre nombre, un nouveau nombre aléatoire est renvoyé. Avec l'algorithme QB-compatible, un nombre négatif regénère entièrement le générateur.  S'il n'y a aucun argument, par défaut un nouveau nombre aléatoire est retourné.
 
 {{fbdoc item="ret"}}
-	Returns the random number generated.
+	Retourne le nombre aléatoire généré.
 
 {{fbdoc item="desc"}}
-	Returns a number of type ##[[KeyPgDouble double]]## in the range ##[0, 1)## (i.e. ##0 <= **Rnd** < 1##), based on a random seed (see ##[[KeyPgRandomize Randomize]]##).
+	Renvoie un nombre de type ##[[KeyPgDouble double]]## dans l'intervalle ##[0, 1)## (c'est à dire ##0 <= **Rnd** < 1##), basé sur une graine aléatoire (voir ##[[KeyPgRandomize Randomize]]##).
 
-	##**Rnd**## can use a variety of different algorithms - see ##[[KeyPgRandomize Randomize]]## for details of the default and selectable algorithms.
+	##**Rnd**## peut utiliser une variété d'algorithmes différents - voir ##[[KeyPgRandomize Randomize]]## pour les détails de l'algorithme par défaut et des algorithmes sélectionnables.
 
-	##**Rnd**## will return the same sequence of numbers every time a program is run.  This sequence can be changed by reseeding the generator.
+	##**Rnd**## retournera la même séquence de nombres chaque fois que le programme est exécuté.  Cette séquence peut être modifiée en régnérant le générateur.
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/math/rnd.bas"}}%%(freebasic)
@@ -47,15 +47,13 @@ print int(rnd_range(69, 421))
 %%
 
 {{fbdoc item="lang"}}
-	The default algorithm used depends on the current dialect in use:
-		- With the //[[CompilerOptlang -lang fb]]// dialect, a 32 bit Mersenne Twister function with a granularity of 32 bits is used.
-		- With the //[[CompilerOptlang -lang qb]]// dialect, a function giving the same output as ##**Rnd**## in QB is used. The granularity is 24 bits.
-		- With the //[[CompilerOptlang -lang deprecated]]// and //[[CompilerOptlang -lang fblite]]// dialects, the function in the C runtime available in the system is used. The function available in Win32 has a granularity of 15 bits, and 32 bits in Linux and DOS.
-
+	L'algorithme utilisé par défaut dépend du dialecte en usage:
+		- Avec le dialecte //[[CompilerOptlang -lang fb]]//, une fonction "Mersenne Twister" 32 bits avec une granularité de 32 bits est utilisée.
+		- Avec le dialecte //[[CompilerOptlang -lang qb]]//, une fonction donnant le même résultat que ##**Rnd**## dans QB est utilisée. La granularité est de 24 bits.
+		- Avec les dialectes //[[CompilerOptlang -lang deprecated]]// et //[[CompilerOptlang -lang fblite]]//, la fonction C disponible dans le système est utilisée. La fonction a une granularité de 15 bits dans Win32 et 32 bits sous Linux et DOS.
 {{fbdoc item="diff"}}
-	- None, if compiled in the //[[CompilerOptlang -lang qb]]// dialect.  Other dialects can also use the same seeding and generating algorithms by calling ##[[KeyPgRandomize Randomize]]## with the appropriate parameter.
-	- For the non-QB-compatible algorithms, if the optional argument is less than 0, it has the same meaning as passing an argument of 1.
-
+	Aucune, si compilé avec le dialecte //[[CompilerOptlang -lang qb]]//.  Les autres dialectes peuvent également utiliser la même génération et algorithmes de génération en appelant ##[[KeyPgRandomize Randomize]]## avec le paramètre approprié.
+	- Pour les algorithmes non-QB-compatibles, si l'argument optionnel est inférieur à 0, il est équivalent à passer 1 en argument.
 {{fbdoc item="see"}}
 	- ##[[KeyPgRandomize Randomize]]##
 	- ##[[KeyPgTimer Timer]]##

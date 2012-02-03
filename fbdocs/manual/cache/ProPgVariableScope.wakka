@@ -1,115 +1,115 @@
 {{fbdoc item="title" value="Variable Scope"}}----
-Visibility and access rules for variables and objects
+Règles de visibilité et d'accès pour les variables et objets
 
-A variable's scope refers to its visibility in a program. A variable is not visible (cannot be accessed) outside the scope in which it was declared. Where and how a variable is declared determines its scope.
+La portée d'une variable se réfère à sa visibilité dans le programme. Une variable n'est pas visible (n'est pas accessible) en dehors de la portée pour laquelle elle a été déclarée. Où et comment une variable est déclarée détermine son champ d'application.
 
-	In FreeBASIC, there are 4 categories of scope: **//local//**, **//shared//**, **//common//** and **//common shared//**. Each of these scopes has different visibility rules, which are detailed below.
+	En FreeBASIC, il ya 4 catégories de portée: **//local//**, **//shared//**, **//common//** et **//common shared//**. Chacune de ces portées a des règles de visibilité différentes qui sont détaillées ci-dessous.
 
-{{fbdoc item="section" value="Local Scope"}}
+{{fbdoc item="section" value="Portée locale (local)"}}
 
-	Variables declared in the local scope are visible only in the most local instance of the IF, FOR, SCOPE, function, or module block in which they are declared.
+	Les variables déclarées dans la portée locale sont visibles uniquement dans l'instance la plus locale d'une fonction IF, FOR, SCOPE ou du bloc module où elles ont été déclarées.
 
-	- ##[[KeyPgSub Sub]]##, ##[[KeyPgFunction Function]]##, the main body, and each compound statement implicitly define a new local scope block. 
-	- Explicitly declared variables using ##[[KeyPgDim Dim]]## or ##[[KeyPgRedim Redim]]## take the scope of the local most block in which they are declared. 
-	- Implicit variables take the scope of the the local most ##[[KeyPgScope Scope...End Scope]]## block in which they are first used, otherwise take the scope of the ##[[KeyPgSub Sub]]##, ##[[KeyPgFunction Function]]##, or main body in which they are used. 
+	- ##[[KeyPgSub Sub]]##, ##[[KeyPgFunction Function]]##, le corps principal du programme et chaque instruction composée définissent implicitement des blocs de nouvelles portées locales. 
+	- Les variables déclarées explicitement en utilisant ##[[KeyPgDim Dim]]## ou ##[[KeyPgRedim Redim]]## prennent la portée du bloc le plus local dans lequel sont déclarées. 
+	- Les variables implicites prennent la portée du bloc le plus local ##[[KeyPgScope Scope...End Scope]]## dans lequel elles ont été utilisées en premier, autrement elles ont la portée de ##[[KeyPgSub Sub]]##, ##[[KeyPgFunction Function]]## ou du corps principal où elles sont utilisées. 
 
-	In the local scope, there is no visibility between module-level code and function level code. Furthermore, variables dimensioned within a block decision or loop statement will only be visible within the block in which they are dimensioned. Variables declared in the local scope of a module are not visible in any of the functions within that module. Similarly, local variables declared inside functions are not visible in the module-level code, nor any other function within the module.
+	Dans la portée locale il n'y a pas de visibilité entre le code au niveau du module et le code au niveau de la fonction. En outre, les variables dimensionnées dans un bloc de décision ou une instruction de boucle ne seront visibles que dans le bloc dans lequel ont été dimensionnées. Les variables déclarées dans portée locale d'un module ne sont pas visibles dans l'une quelconque des fonctions au sein de ce module. De même, les variables locales déclarées à l'intérieur des fonctions ne sont pas visibles dans la code au niveau du module, ni aucune autre fonction au sein du module.
 
-	Variables declared inside ##[[KeyPgScope Scope]]## blocks may only be declared of local scope, and are not visible outside the block. ##[[KeyPgScope Scope]]## blocks, however, inherit the surrounding scope, so local variables declared outside the ##[[KeyPgScope Scope]]## block will be visible inside (//see example program//).
+	Les variables déclarées à l'intérieur de blocs ##[[KeyPgScope Scope]]## ne peuvent être déclarées que de portée locale et ne sont pas visibles à l'extérieur du bloc. Les blocs ##[[KeyPgScope Scope]]##, cependant, héritent de la portée environnante, ainsi les variables locales déclarées en dehors du bloc ##[[KeyPgScope Scope]]## seront visibles à l'intérieur de celui-ci (//voir exemple de programme//).
 
-	You can declare a variable to be of local scope explicitly by using the ##[[KeyPgDim Dim]]## statement, or implicitly by simply introducing the variable (//see [[ProPgImplicitdeclarations Implicit Declarations]]//). The example program ##**local.bas**## demonstrates visibility rules for the local scope.
+	Vous pouvez déclarer une variable comme étant de portée locale explicitement en utilisant l'instruction ##[[KeyPgDim Dim]]## ou implicitement par simple introduction de la variable (//voir [[ProPgImplicitdeclarations Les déclarations implicites]]//). L'exemple de programme ##**local.bas**## démontre les règles de visibilité pour la portée locale.
 
 **local.bas**
 {{fbdoc item="filename" value="examples/manual/proguide/varscope/local.bas"}}%%(freebasic)
-'' visible only in this module
+'' visible seulement dans ce module
 Dim As Integer local_moduleLevel1
 
 '' OK.
 Print local_moduleLevel1
 
 Scope
-  '' OK; SCOPE Blocks inherit outer scope
+  '' OK; Blocs SCOPE heritent portée environnante
   Print local_moduleLevel1
   
-  '' visible only in this SCOPE Block
+  '' visible seulement dans ce Bloc SCOPE
   Dim As Integer local_moduleLevel2
 
   '' OK.
   Print local_moduleLevel2
 End Scope
 
-'' Error; can't see inner-SCOPE vars
+'' Error; impossible voir variables SCOPE-interieure
 '' print local_moduleLevel2
 
 Function some_function( ) As Integer
-  '' visible only in this function
+  '' visible seulement dans cette fonction
   Dim As Integer local_functionLevel
 
   '' OK.
   Print local_functionLevel
 
-  '' Error; can't see local module-level vars  
+  '' Error; impossible voir variables niveau-module local  
   '' print local_moduleLevel1
 
-  '' Error; can't see local module-level vars
+  '' Error; impossible voir variables niveau-module local
   '' print local_moduleLevel2
 
   function = 0
 
 End Function
 
-'' print local_functionLevel                    '' Error; can't see function_level vars
+'' print local_functionLevel                    '' Error; impossible voir variables niveau_fonction
 End 0
 %%
 
-{{fbdoc item="section" value="Shared Scope"}}
+{{fbdoc item="section" value="Portée partagée (Shared Scope)"}}
 
-	Variables declared in the shared scope of a module are visible to both the module and all functions of that module.
+	Les variables déclarées de portée partagée (shared scope) dans un module sont visibles dans tout le module ainsi que toutes les fonctions de celui-ci.
 
-	Unlike the local scope, the shared scope makes module-level variables visible to functions of that module. In other words, the module //shares// its declarations with its functions.
+	Contrairement à la portée locale, la portée partagée (shared scope) rend les variables de niveau module visibles à toutes les fonctions de ce module. En d'autres termes le module //partage// ses déclarations avec ses fonctions.
 
-	Variables can only be declared to be of shared scope at the module-level. Ie., only modules can share variables. Neither functions nor ##[[KeyPgScope Scope]]## blocks can declare variables in the shared scope, thus variables declared there can only be local to that function or block.
+	Les variables peuvent seulement être déclarées de portée partagée au niveau du module. C'est à dire, seuls les modules peuvent partager des variables. Ni les fonctions, ni les blocs ##[[KeyPgScope Scope]]## ne peuvent déclarer des variables de portée partagée, donc les variables déclarées peuvent seulement être locales à cette fonction ou bloc.
 
-	You can declare a variable to be of shared scope by using the DIM statement with the ##[[KeyPgShared Shared]]## keyword. The example program ##**shared_scope.bas**## demonstrates visibility rules for the shared scope.
+	Vous pouvez déclarer une variable comme étant de portée partagée en utilisant l'instruction DIM avec mot-clé ##[[KeyPgShared Shared]]##. L'exemple de programme ##**shared_scope.bas**## démontre les règles de visibilité pour la portée partagée.
 
 ##**shared.bas**##
 {{fbdoc item="filename" value="examples/manual/proguide/varscope/shared.bas"}}%%(freebasic)
-'' visible throughout this module
+'' visible dans tout le module
 Dim Shared As Integer shared_moduleLevel1
 
 '' OK.
 Print shared_moduleLevel1
 
 Scope
-  '' OK; can see outer-scope vars
+  '' OK; peut voir variables portee-environnante
   Print shared_moduleLevel1
   
-  '' Error; SCOPE-level vars cannot be shared
+  '' Error; variables niveau-SCOPE impossible etre partagees
   '' dim shared as integer shared_ModuleLevel2
 End Scope
 
 End 0
 
 Function some_function( ) As Integer
-  '' OK; can see shared module-level vars
+  '' OK; peut voir variables niveau-module partagees
   Print shared_moduleLevel1
 
-  '' Error; function-level vars cannot be shared  
+  '' Error; variables niveau-fonction impossible etre partagees  
   '' dim shared as integer sharedFunctionLevel
 
   function = 0
 End Function
 %%
 
-{{fbdoc item="section" value="Common Scope"}}
+{{fbdoc item="section" value="Portée commune (Common Scope)"}}
 
-	Variables declared in the common scope are visible to all modules.
+	Les variables déclarées de portée commune (Common Scope) sont visibles pour tous les modules.
 
-	Variables declared with ##[[KeyPgCommon Common]]## are visible to other modules with a matching ##[[KeyPgCommon Common]]## variable declaration.  The variable name declared must match from between modules.
+	Les variables déclarées avec ##[[KeyPgCommon Common]]## sont visibles à d'autres modules avec une déclaration de variable ##[[KeyPgCommon Common]]## correspondant.  Le nom de la variable déclarée doit correspondre aux modules entre eux.
 
 ##**module1.bas**##
 {{fbdoc item="filename" value="examples/manual/proguide/varscope/module1.bas"}}%%(freebasic)
-'' compile with:
+'' compiler avec:
 ''    fbc -lang qb module1.bas module2.bas
 
 '$lang: "qb"
@@ -117,12 +117,12 @@ End Function
 Declare Sub Print_Values()
 Common m1 As Integer
 Common m2 As Integer
-	                  ' This is executed after all other modules
+	                  ' Ceci est execute apres tous autres modules
 m1 = 1
 
 Print "Module1"       
-Print "m1 = "; m1     ' m1 = 1 as set in this module
-Print "m2 = "; m2     ' m2 = 2 as set in module2
+Print "m1 = "; m1     ' m1 = 1 comme defini dans ce module
+Print "m2 = "; m2     ' m2 = 2 comme defini dans module2
 
 Print_Values
 %%
@@ -134,18 +134,18 @@ Common m2 As Integer
 
 m2 = 2
 
-print "Module2"       ' This is executed first
-print "m1 = "; m1     ' m1 = 0 (by default)
+Print "Module2"       ' Ceci est execute en premier
+Print "m1 = "; m1     ' m1 = 0 (par defaut)
 print "m2 = "; m2     ' m2 = 2
 
 Sub Print_Values()
   print "Module2.Print_Values"
-  print "m1 = "; m1   ' Implicit variable = 0    
-  print "m2 = "; m2   ' Implicit variable = 0  
+  Print "m1 = "; m1   ' Variable implicite = 0    
+  Print "m2 = "; m2   ' Variable implicite = 0  
 End Sub
 %%
 
-**Output:**
+**Affichage:**
 %%
   Module2
   m1 = 0
@@ -158,11 +158,11 @@ End Sub
   m2 = 0
 %%
 
-{{fbdoc item="section" value="Common Shared Scope"}}
+{{fbdoc item="section" value="Portée commune partagée (Common Shared Scope)"}}
 
-	Variables declared in the common shared scope are visible to all modules and all functions of those modules.
+	Les variables déclarées de portée commune partagée (Common Shared Scope) sont visibles à tous les modules et toutes leurs fonctions.
 
-	Variables declared with ##[[KeyPgCommon Common]]## are visible to other modules with a matching ##[[KeyPgCommon Common]]## variable declaration.  The variable name declared must match from between modules.  Within a module the ##[[KeyPgShared Shared]]## declaration modifier gives the variable module scope and makes the variable visible to all subs and functions.
+	Les variables déclarées avec ##[[KeyPgCommon Common]]## sont visibles aux autres modules avec une déclaration de variable ##[[KeyPgCommon Common]]## correspondant.  Le nom de la variable déclarée doit correspondre aux modules entre eux.  Dans un module le modificateur de déclaration ##[[KeyPgShared Shared]]## donne à la variable la portée niveau-module et la rend visible à tous les "sub" et fonctions.
 
 //**##module3.bas##**//
 {{fbdoc item="filename" value="examples/manual/proguide/varscope/module3.bas"}}%%(freebasic)
@@ -215,7 +215,7 @@ End Sub
 %%
 
 {{fbdoc item="ex"}}
-	See examples above.
+	Voir les exemples ci-dessus.
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgScope Scope]]##
@@ -223,7 +223,7 @@ End Sub
 	- ##[[KeyPgCommon Common]]##
 	- ##[[KeyPgShared Shared]]##
 	- [[ProPgVariables Variables]]
-	- [[ProPgImplicitdeclarations Implicit Declarations]]
+	- [[ProPgImplicitdeclarations Les déclarations implicites]]
 
 {{fbdoc item="back" value="CatPgProgrammer|Programmer's Guide"}}
    

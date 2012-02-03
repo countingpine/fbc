@@ -1,37 +1,37 @@
 {{fbdoc item="title" value="PRINT # USING"}}----
-Outputs formatted text to a file or device
+Sort un texte formaté vers un fichier ou un périphérique
 
 {{fbdoc item="syntax"}}##
 	**Print #** //filenum// **,** **Using** //formatstring// **;** [ //expressionlist// ]
 ##
 {{fbdoc item="param"}}
 	##//filenum//##
-		The file number of a file or device opened for ##[[KeyPgOutput Output]]## or ##[[KeyPgAppend Append]]##.
+		Le numéro de fichier d'un fichier ou d'un périphérique ouvert avec ##[[KeyPgOutput Output]]## ou ##[[KeyPgAppend Append]]##.
 	##//formatstring//##
-		Format string to use.
+		La chaîne formatée à utiliser.
 	##//expressionlist//##
-		List of items to print, separated by semi-colons.
+		Liste des éléments à imprimer, séparés par des points-virgules.
 
 {{fbdoc item="desc"}}
-	Output various expressions to a text file or device using a format determined by the ##//formatstring//## parameter. Internally, ##**Print Using**## uses a buffer size of 2048 bytes: while it is highly unlikely that this buffer would be filled, it should be noted that output would be truncated should this limit be reached.
+	Sort des expressions diverses dans un fichier texte ou un périphérique en utilisant un format déterminé par le paramètre ##//formatstring//##. En interne, ##**Print Using**## utilise un buffer de 2048 octets: alors qu'il est très peu probable que ce tampon soit rempli, il convient de noter que la sortie serait tronquée si cette limite était atteinte.
 
-	If no expression list is given, the format string will be printed up to the first special marker.  Note that the semi-colon after the format string is still necessary, even if no expression list is given.
+	Si aucune ##//expressionlist//## n'est donnée, la ##//formatstring//## sera écrite jusqu'à la première borne spéciale.  Notez que le point-virgule après la chaîne formatée est toujours nécessaire, même si aucune liste d'expressions est donnée.
 
-	The format string dictates how the expressions are to be formatted when output to the screen, indicated by the use of special marker characters. There are markers for formatting both string and numeric output:
+	La chaîne de format détermine la façon dont les expressions sont à mettre en forme pour une sortie à l'écran, ceci est indiqué par l'utilisation de caractères marqueurs spéciaux. Il y a deux sortes de marqueurs, pour le formatage de chaîne ou de sortie numérique:
 
-	{{fbdoc item="section" value="String formatting"}}
+	{{fbdoc item="section" value="Le formatage de chaîne"}}
 
-		{{table columns="2" cellpadding="2" cells="Marker;Formatting;!;prints the first character of a string;\   \;prints as many characters of a string as occuppied between the pair \ \;&;prints the entire string"}}
+		{{table columns="2" cellpadding="2" cells="Marqueur;Formatage;!;écrit le premier caractère d'une chaîne;\   \;écrit autant de caractères d'une chaîne qu'il y en a entre la paire de \ \;&écrit la chaîne entière"}}
 
-	{{fbdoc item="section" value="Numeric formatting"}}
+	{{fbdoc item="section" value="Le formatage numérique"}}
 
-		{{table columns="2" cellpadding="2" cells="Marker;Formatting;#;placeholder for a digit;,; placed after integer digit indicates groups of 3 digits should be separated by commas;.; placed near # indicates place for the decimal point;+;prints the sign of the number when placed to the left of numeric formatting;^^^^;prints exponential notation when placed to the right of numeric formatting;&;prints a number intelligently, using the exact number of digits required (new to version 0.21.0b)"}}
+		{{table columns="2" cellpadding="2" cells="Marqueur;Formatage;#;espace réservé pour un chiffre;,; placé après un chiffre d'un nombre entier indique que les groupes de 3 chiffres doivent être séparés par des virgules;.; placé à proximité de # indique la place pour le point décimal;+;écrit le signe du nombre lorsqu'il est placé à la gauche d'une mise en forme numérique;^^^^;placé à droite de mise en forme numérique implique la notation scientifique;&imprime un nombre intelligemment, en utilisant le nombre exact de chiffres requis (nouveau pour la version 0.21.0b)"}}
 
-	All of the special marker characters can be escaped, or preceded, with the underscore character ##"_"##, allowing them to be printed directly.  For example, ##"_!"## is printed as ##"!"##.
+	Tous les caractères spéciaux de marqueurs peuvent être précédés d'un caractère d'échappement, ou précédés, avec le caractère de soulignement ##"_"##, leur permettant d'être affichés directement.  Par exemple, ##"_!"## est affiché ##"!"##.
 
-	If a numerical value doesn't fit in the form indicated by the format string, the formatting is ignored and the number is printed preceded by the percent ##"%"## character. E.g., the number ##1234## with a ##//formatstring//## of ##"""##.##"""## would be printed as ##"%1234.00"##.
+	Si une valeur numérique ne correspond pas à la forme indiquée par la chaîne de format, la mise en forme est ignorée et le nombre est imprimé précédé par le caractère pour cent ##"%"##. Par exemple, le nombre ##1234## avec une ##//formatstring//## de ##"""##.##"""## sera affiché ##"%1234.00"##.
 
-	All other characters within the format string are printed as they appear.
+	Tous les autres caractères de la chaîne de format sont écrits tels qu'ils apparaissent.
 
 {{fbdoc item="ex"}}
 
@@ -51,7 +51,7 @@ print #filenum, using "'###', '+###.###'"; 123.456, -123.456
 
 close(filenum)
 %%
-	will produce the file:
+	produira le fichier:
 %%
 This file is called 'file.txt'
 Some numerical values are:
@@ -59,7 +59,7 @@ Some numerical values are:
 %%
 
 {{fbdoc item="diff"}}
-	- QB didn't allow ##"&"## to be used for printing numbers.
+	- QB ne permettait pas d'utiliser ##"&"## pour l'impression de nombres.
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgPrintPp Print #]]##

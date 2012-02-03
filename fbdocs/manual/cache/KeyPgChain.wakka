@@ -1,5 +1,5 @@
 {{fbdoc item="title" value="CHAIN"}}----
-Temporarily transfers control to an external program
+Transfère temporairement le contrôle à un programme externe
 
 {{fbdoc item="syntax"}}##
 	[[KeyPgDeclare declare]] [[KeyPgFunction function]] **Chain** ( [[KeyPgByref byref]] //program// [[KeyPgAs as]] [[KeyPgConstQualifier const]] [[KeyPgString string]] ) [[KeyPgAs as]] [[KeyPgInteger integer]]
@@ -9,20 +9,20 @@ Temporarily transfers control to an external program
 ##
 {{fbdoc item="param"}}
 	##//program//##
-		The file name (including file path) of the program (executable) to transfer control to.
+		Le nom de fichier (y compris le chemin du fichier) du programme (exécutable) à qui on donne le contrôle.
 
 {{fbdoc item="ret"}}
-	    Returns the external program's exit code if executed successfully, or negative one (-1) otherwise.
+	    Retourne le code de sortie du programme externe si exécuté avec succès, autrement un nombre négatif (-1) .
 
 {{fbdoc item="desc"}}
-	Transfers control over to an external program. When the program exits, execution resumes immediately after the call to ##**Chain**##.
+	Transfère le contrôle à un programme externe. Lorsque le programme se termine, l'exécution reprend immédiatement après l'appel à ##**Chain**##.
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/system/chain.bas"}}%%(freebasic)
 #ifdef FB__LINUX
-#define CHAIN2	"chain2"
+#define CHAIN2    "chain2"
 #else
-#define CHAIN2	"chain2.exe"
+#define CHAIN2    "chain2.exe"
 #endif
 
 	print "chain1 begins"
@@ -34,16 +34,16 @@ Temporarily transfers control to an external program
 	sleep
 %%
 {{fbdoc item="target"}}
-	- Linux requires the ##//program//## name case matches the real name of the file. Windows and DOS  are case insensitive. The program  chained may be case sensitive for its command line parameters.
-	- Path separators in Linux are forward slashes / . Windows uses backward slashes \ but it allows for forward slashes .  DOS uses backward  \ slashes.
-	- Exit code is limited to 8 bits in DOS.
+	- Linux nécessite que la casse du nom du ##//program//## corresponde au nom réel du fichier. Windows et DOS ne sont pas sensible à la casse. Le programme chaîné doit être sensible à la casse pour les paramètres de sa ligne de commande.
+	- Les séparateurs de chemin sous Linux sont des barres obliques / . Windows utilise des barres obliques arrière  \ mais il permet les barres obliques .  DOS utilise des barres obliques arrière  \ .
+	- Le code de sortie est limité à 8 bits sous DOS.
 
 {{fbdoc item="diff"}}
-	- None
+	- Aucune
 
 {{fbdoc item="see"}}
-	- ##[[KeyPgExec Exec]]## transfer temporarily, with arguments  
-	- ##[[KeyPgRun Run]]## one-way transfer
-	- ##[[KeyPgCommand Command]]## pick arguments
+	- ##[[KeyPgExec Exec]]##
+	- ##[[KeyPgRun Run]]##
+	- ##[[KeyPgCommand Command]]##
 
 {{fbdoc item="back" value="CatPgOpsys|Operating System Functions"}}

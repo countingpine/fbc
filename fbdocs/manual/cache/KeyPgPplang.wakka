@@ -1,21 +1,21 @@
 {{fbdoc item="title" value="#LANG"}}----
-Preprocessor statement to set the compiler dialect.
+Déclaration du préprocesseur pour définir le dialecte du compilateur.
 
 {{fbdoc item="syntax"}}##
 	**#lang** "//lang//"
 ##
 {{fbdoc item="param"}}
 	##"//lang//"##
-		The dialect to set, enclosed in double quotes, and must be one of ##"fb"##, ##"fblite"##, ##"qb"##, or ##"deprecated"##.
+		Le dialecte à fixer, entre guillemets doubles, qui doit être l'un de ceux-ci: ##"fb"##, ##"fblite"##, ##"qb"##, ou ##"deprecated"##.
 
 {{fbdoc item="desc"}}
-	If the //[[CompilerOptforcelang -forcelang]]// option was not given on the command line, ##**#lang**## can be used to set the dialect for the source module in which it appears.  At most two passes will be made on the source module.  On the first pass, if the specified dialect is anything other than the default dialect (chosen with //[[CompilerOptlang -lang]]//, or ##"fb"## by default), the compiler will reset the parser for another pass and restart compilation at the beginning of the source module.  If this directive is encountered again on the second pass, and the specified dialect does not match the new current dialect, a warning is issued and compilation continues.  If any errors were encountered on the first pass, the compiler will not attempt a second pass."
+	Si l'option //[[CompilerOptforcelang -forcelang]]// n'a pas été donnée par la ligne de commande, ##**#lang**## peut être utilisé pour indiquer le dialecte dans lequel le module source apparaît.  Tout au plus deux passes seront effectuées sur le module source.  Lors de la première passe, si le dialecte spécifié est différent du dialecte par défaut (choisi avec //[[CompilerOptlang -lang]]//, ou ##"fb"## par défaut), le compilateur réinitialisera l'analyseur pour un nouveau passage et redémarrera la compilation au début du module source.  Si cette directive est rencontrée à nouveau lors de la seconde passe et que le dialecte spécifié ne correspond pas au nouveau dialecte courant, un avertissement est émis et la compilation continue.  Si des erreurs ont été rencontrées lors du premier passe, le compilateur ne tentera pas une seconde passe.
 
-	##**#lang**## may not be used in any compound statement, scope, or subroutine.  However, it may be nested in module level preprocessor statements or used in an include file.
+	##**#lang**## ne peut pas être utilisé dans toute instruction composée, portée ou sous-programme.  Cependant, il peut être imbriqué dans des déclarations au niveau module du préprocesseur ou utilisé dans un "fichier include".
 
-	There is currently no restriction on where this directive may be placed in a source module.  In future this may change, therefore best practice would be to use this directive before the first declaration, definition, or executable statement in the source.
+	Il n'existe actuellement aucune restriction sur l'endroit où cette directive peut être placée dans un module source.  A l'avenir, cela pourrait changer; cependant, la meilleure pratique est d'utiliser cette directive avant la première déclaration, définition ou déclaration exécutable dans le source.
 
-	This directive overrides the //[[CompilerOptlang -lang]]// option if it was given on the command line.  However, if the //[[CompilerOptforcelang -forcelang]]// option was given on the command line, this directive will have no effect.  A warning is issued, the directive is ignored, and compilation will continue.  This allows the user to explicitly override ##**#lang**## directives.
+	Cette directive annule l'option //[[CompilerOptlang -lang]]// si elle a été donnée sur la ligne de commande.  Cependant, si l'option //[[CompilerOptforcelang -forcelang]]// a été donnée sur la ligne de commande, cette directive sera sans effet.  Un avertissement est affiché, la directive est ignorée et la compilation continue.  Cela permet à l'utilisateur de remplacer explicitement les directives ##**#lang**##.
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/prepro/lang.bas"}}%%(freebasic)
@@ -23,13 +23,13 @@ Preprocessor statement to set the compiler dialect.
 %%
 
 {{fbdoc item="diff"}}
-	- New to ""FreeBASIC""
+	- Nouveau pour ""FreeBASIC""
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgMetaLang $lang]]##
 	- ##[[KeyPgDdfblang __FB_LANG__]]##
-	- [[CompilerOptlang Compiler Option: -lang]]
-	- [[CompilerOptforcelang Compiler Option: -forcelang]]
-	- [[CompilerDialects FreeBASIC Dialects]]
+	- [[CompilerOptlang Option du compilateur: -lang]]
+	- [[CompilerOptforcelang Option du compilateur: -forcelang]]
+	- [[CompilerDialects Les dialectes du FreeBASIC]]
 
 {{fbdoc item="back" value="CatPgPreProcess|Preprocessor"}}

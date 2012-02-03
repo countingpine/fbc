@@ -1,13 +1,13 @@
 {{fbdoc item="title" value="Fixed-length Arrays"}}----
-Fixed-size homogeneous data structures.
+Structures de taille fixe de données homogènes.
 
-{{fbdoc item="section" value="Overview"}}
-	Fixed-length arrays are [[ProPgArrays arrays]] that have a fixed constant size throughout the execution of a program. The memory used by a fixed-length array to store its elements is allocated at compile-time, either on the stack or in the ##.BSS## or ##.DATA## sections of the executable, depending on whether ##[[KeyPgStatic Static]]## was used to define it. This may allow for quicker program execution since the memory for the array is already allocated, unlike [[ProPgVarLenArrays variable-length arrays]], whose element memory isn't allocated until runtime.
+{{fbdoc item="section" value="Vue d'ensemble"}}
+	Les tableaux de longueur fixe sont des [[ProPgArrays tableaux]] qui ont une taille fixée constante tout au long de l'exécution d'un programme. La mémoire utilisée par un tableau de longueur fixe pour stocker ses éléments est allouée au moment de la compilation, soit sur la pile ou dans les sections ##.BSS## ou ##.DATA## de l'exécutable, selon que ##[[KeyPgStatic Static]]## a été utilisé pour le définir. Cela peut permettre l'exécution rapide du programme depuis la mémoire pour le tableau s'il est déjà alloué, contrairement aux [[ProPgVarLenArrays tableaux de longueur variable]], dont les éléments ne sont pas alloués en mémoire avant l'exécution.
 
-	Fixed-length arrays with //[[ProPgStorageClasses automatic storage]]//, have their elements allocated on the program stack, and pointers to these elements remain valid only while the array is in scope. The elements of fixed-length arrays with //[[ProPgStorageClasses static storage]]// are allocated in the ##.DATA## or ##.BSS## sections of the executable, depending on whether or not they are initialized when defined, so pointers to these elements remain valid for the entire execution of the program. Fixed-length arrays of any storage class cannot be resized during program execution, only [[ProPgVarLenArrays variable-length arrays]] can.
+	Les tableaux de longueur fixe avec //[[ProPgStorageClasses stockage automatique]]//, ont leurs éléments alloués sur la pile du programme et les pointeurs vers ces éléments restent valide seulement quand le tableau est dans la portée. Les éléments des tableaux de longueur fixe avec //[[ProPgStorageClasses stockage statique]]// ont allouées dans les sections ##.DATA## ou ##.BSS## de l'exécutable, en fonction de leur initialisation ou non lors de leur définition, de sorte que les pointeurs vers ces éléments restent valables pour toute l'exécution du programme. Les tableaux de longueur fixe de toute classe de stockage ne peuvent pas être redimensionnés lors de l'exécution du programme, seuls [[ProPgVarLenArrays les tableaux de longueur variable]] le peuvent.
 
-{{fbdoc item="section" value="Declaration and definition"}}
-	A fixed-length array is declared with the ##[[KeyPgExtern Extern]]## keyword, followed by a variable identifier, a parenthesized list of one (1) or more subscript ranges and an element [[CatPgStdDataTypes datatype]]. For an array to be declared fixed-length, either numerical literals, ##[[KeyPgConst Const]]## variables or ##[[KeyPgEnum Enum]]## enumerators can be used as subscript range values.
+{{fbdoc item="section" value="Déclaration et définition"}}
+	Un tableau de longueur fixe est déclarée avec le mot-clé ##[[KeyPgExtern Extern]]##, suivi par un identifiant de variable, une liste entre parenthèses d'un (1) (ou plus) intervalle(s) d'indices et un élément d'un certain [[CatPgStdDataTypes type de données]]. Pour un tableau qui doit être déclaré de longueur fixe, soit des variables littérales numériques ##[[KeyPgConst Const]]## ou des énumérateurs ##[[KeyPgEnum Enum]]## peuvent être utilisés comme valeurs de la plage d'indices.
 
 {{fbdoc item="filename" value="examples/manual/proguide/arrays/fixedlen_1.bas"}}%%(freebasic)
 const maxLowerBound as integer = -5
@@ -20,7 +20,7 @@ extern arrayOfStrings(maxLowerBound to maxUpperBound, 20) as string
 '' big enough to hold an INTEGER..
 extern arrayOfBytes(sizeof(integer)) as byte
 %%
-	A fixed-length array is defined with either the ##[[KeyPgStatic Static]]## or ##[[KeyPgDim Dim]]## keywords, following the same form as declaration.
+	Un tableau de longueur fixe est défini avec l'un ou l'autre des mots-clefs ##[[KeyPgStatic Static]]## ou ##[[KeyPgDim Dim]]##, en suivant la même forme que la définition.
 
 {{fbdoc item="filename" value="examples/manual/proguide/arrays/fixedlen_2.bas"}}%%(freebasic)
 '' Defines a one-dimensional fixed-length array of type SHORT having static storage.

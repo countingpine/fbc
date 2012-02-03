@@ -1,54 +1,54 @@
 {{fbdoc item="title" value="Basic Input"}}----
-Get Information into your Program.
+Obtenez de l'information dans votre programme.
 
-Input is the life of any program.  If you can't get something into your program, how are you going to get anything out of it?  What you will find here is the basics of how to get information into your FreeBASIC program.
+L'entrée est la vie de tout programme.  Si vous ne pouvez pas obtenir quelque chose dans votre programme, comment allez-vous tirer quelque chose de lui?  Ce que que vous trouverez ici, ce sont les bases sur la façon d'obtenir des informations dans votre programme FreeBASIC.
 
-Here's a very basic program that will ask for your name:
+Voici un programme très basique qui vous demandera votre nom:
 
 %%(freebasic)
-'Create a place to put the user's name
+'Créer une place pour mettre le nom utilisateur
 dim as string strMyName
 
-' Ask for the user's name and store it in the string 'strMyName'
-input "What is your name? ", strMyName
+' Interroger pour le nom utilisateur et le stocker dans la chaine 'strMyName'
+Input "Quel est votre nom? ", strMyName
 
-' Wait half a second
+' Attente une demi seconde
 sleep 500
 
-' Show them their name
+' Afficher le nom
 print
-print "I now know your name is "; strMyName
+Print "Je sais que votre nom est "; strMyName
 print
 
-' Wait until someone presses a button before you exit
-print "Press any button to exit"
+' Attendre quelqu'un appuie sur une touche avant de terminer
+Print "Appuyez sur une touche pour terminer"
 sleep
 %%
 
-INPUT is the easiest way to get information from someone.  They just type in some text and press Enter when they are done.  
+INPUT est le moyen le plus simple pour obtenir des informations de quelqu'un.  Ils ont juste à taper du texte et à appuyer sur Entrée lorsque c'est fait.  
 
-What if you you only want one keystroke?  The easiest way is to use the {{fbdoc item="keyword" value="KeyPgGetkey|GETKEY"}} method.  {{fbdoc item="keyword" value="KeyPgGetkey|GETKEY"}} gives you the {{fbdoc item="keyword" value="CptAscii|ASCII"}} value of a key that was pressed.
+Que faire si vous ne voulez qu'une seule frappe?  Le plus simple est d'utiliser la méthode {{fbdoc item="keyword" value="KeyPgGetkey|GETKEY"}}.  {{fbdoc item="keyword" value="KeyPgGetkey|GETKEY"}} vous renvoie la valeur {{fbdoc item="keyword" value="CptAscii|ASCII"}} de la touche qui a été appuyée.
 
 %%(freebasic)
-' Ask the user for input
-Print "Press your favorite key:"
+' Demande une entrée à l'utilisateur
+Print "Appuyez sur votre touche favorite:"
 
-' Set a place to keep the ASCII value of the key
+' Définit un endroit pour garder la valeur ASCII de la touche
 Dim As Integer strKeyPress
 
-' Keep going until a key is pressed
+' Continue jusqu'à ce qu'une touche soit appuyée
 Do
 	strKeyPress = GetKey    
 Loop Until strKeyPress <> 0    
 
-' Show the key the user pressed
+' Affiche la touche appuyée par l'utilisateur
 Print
-Print "Your favorite key is: "; Chr(strKeyPress)                        
+Print "Votre touche favorite est: "; Chr(strKeyPress)                        
 	                    
-' Wait until someone presses a button before you exit
+' Attend qu'une touche soit appuyée pour terminer
 Print
-Print "Press any button to exit"
+Print "Appuyez sur une touche pour terminer"
 Sleep
 %%
 
-For more information check out the {{fbdoc item="keyword" value="CatPgInput|User Input"}} Section.
+Pour plus d'informations consultez le section {{fbdoc item="keyword" value="CatPgInput|Saisie utilisateur"}}.

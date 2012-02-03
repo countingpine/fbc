@@ -1,5 +1,5 @@
 {{fbdoc item="title" value="CVI"}}----
-Converts an four byte string to an integer variable
+Conversion d'une chaîne de 4 octets en une variable entière
 
 {{fbdoc item="syntax"}}##
 	[[KeyPgDeclare declare]] [[KeyPgFunction function]] **Cvi** ( [[KeyPgByref byref]] //str// [[KeyPgAs as]] [[KeyPgConstQualifier const]] [[KeyPgString string]] ) [[KeyPgAs as]] [[KeyPgInteger integer]]
@@ -9,17 +9,17 @@ Converts an four byte string to an integer variable
 ##
 {{fbdoc item="param"}}
 	##//str//##
-		A [[KeyPgString string]] exactly four bytes in length with a binary copy of an integer variable stored in it.
+		Une chaîne (##[[KeyPgString string]##]) ayant exactement 4 octets de longueur, copie d'une variable entière.
 
 {{fbdoc item="ret"}}
-	An [[KeyPgInteger integer]] variable to copy the binary copy of a integer to.
+	Une variable entière (##[[KeyPgInteger integer]]##) pour contenir la copie binaire d'un ENTIER.
 
 {{fbdoc item="desc"}}
-	Returns a 32 bit ##[[KeyPgInteger Integer]]## value using the binary data contained in a string that is **exactly** four bytes in length.  An integer value of zero (0) is returned if the string is not exactly four bytes in length.
+	Retourne une valeur entière (##[[KeyPgInteger Integer]]##) 32 bits en utilisant les données contenues dans une chaîne qui a **exactement** 4 octets de longueur. Une valeur entière zéro (##0##) est retournée si la chaîne n'a pas exactement 4 octets de longueur.
 
-	##**Cvi**## is used to convert 4-byte-strings created with ##[[KeyPgMki Mki]]##.
+	##**CVI**## est utilisé pour convertir des chaînes-4-octets crées avec ##[[KeyPgMki Mki]]##.
 
-	This function can also be used to convert 32 bit integer values from a memory or file buffer without the need for a ##[[KeyPgType ]]## structure.  However, just as with the type structure, special care should be taken when using ##**Cvi**## to convert strings that have been read from a buffer.  The ##[[KeyPgCvi Cvi]]## and ##[[KeyPgMki Mki]]## functions are processor dependent.  That is, they will return different results depending on the endianness of the processor.
+	Cette fonction peut aussi convertir des valeurs entières 32 bits à partir de la mémoire ou d'un tampon fichier sans l'utilisation d'une structure ##[[KeyPgType Type]]##. Cependant, tout comme avec la structure type, une attention particulière doit être prise lors de l'utilisation ##**CVI**## pour convertir des chaînes qui ont été lues à partir d'un tampon. Les fonctions ##[[KeyPgCvi Cvi]]## et ##[[KeyPgMki Mki]]## sont dépendantes du processeur. Elles retourneront des résultats différents dépendant de l'//endian// du processeur.
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/strings/cvi.bas"}}%%(freebasic)
@@ -31,10 +31,10 @@ sleep
 %%
 
 {{fbdoc item="lang"}}
-	- In the //[[CompilerOptlang -lang qb]]// dialect, ##**Cvi**## expects a 2-byte-string, since a QB integer is only 16 bits.  Only the first two bytes of the string are used, even if the string happens to be longer than two bytes.
+	- Dans le dialecte //[[CompilerOptlang -lang qb]]//, ##**CVI**## attend des chaînes-2-octets, car un entier QB integer n'a que 16 bits.  Seuls les deux premiers octets de la chaîne sont utilisés, même si la chaîne à une longueur supérieure à 2 octets.
 
 {{fbdoc item="diff"}}
-	- In QB an error occurs if the string passed is less than two bytes in length.
+	- Dans QB une erreur apparaît si la chaîne passée a une longueur supérieure à 2 octets.
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgMki Mki]]##

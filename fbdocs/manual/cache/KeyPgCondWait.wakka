@@ -1,5 +1,5 @@
 {{fbdoc item="title" value="CONDWAIT"}}----
-Stops execution of current thread until some condition becomes true
+Arrête l'exécution du "thread" courant jusqu'à ce qu'une condition devienne vraie
 
 {{fbdoc item="syntax"}}##
 	[[KeyPgDeclare declare]] [[KeyPgSub sub]] **Condwait** ( [[KeyPgByval byval]] //handle// [[KeyPgAs as]] [[KeyPgAny any]] [[KeyPgPtr ptr]], [[KeyPgByval byval]] //mutex// [[KeyPgAs as]] [[KeyPgAny any]] [[KeyPgPtr ptr]] )
@@ -9,29 +9,29 @@ Stops execution of current thread until some condition becomes true
 ##
 {{fbdoc item="param"}}
 	##//handle//##
-		The handle of a conditional variable, or the null pointer (0) on failure.
+		Le "handle" d'une variable conditionnelle, ou le pointeur nul (0) en cas d'échec.
 	##//mutex//##
-		The mutex associated with this conditional variable, which must be locked when testing the condition and calling ##**Condwait**##
+		Le "mutex" associé à cette variable conditionnelle, qui doit être verrouillé lors de la vérification de la condition et l'appel à ##**CondWait**##
 
 {{fbdoc item="desc"}}
-	Function that stops the thread where it is called until some other thread  ##[[KeyPgCondSignal Condsignal]]##s or ##[[KeyPgCondBroadcast Condbroadcast]]##s  the handle.
+	Fonction qui arrête le "thread" où elle est appelée jusqu'à ce qu'un autre thread ou ##[[KeyPgCondSignal Condsignal]]##s ou ##[[KeyPgCondBroadcast Condbroadcast]]## le "handle".
 
-	Once the conditional variable is created with ##[[KeyPgCondCreate Condcreate]]## and the threads are started, one of more of them can be set to ##**Condwait**## for the conditional; they will be stopped until some other thread ##[[KeyPgCondSignal Condsignal]]##s that the waiting thread can restart. ##[[KeyPgCondBroadcast Condbroadcast]]## can be used to restart all threads waiting for the conditional. At the end of the program ##[[KeyPgCondDestroy Conddestroy]]## must be used to avoid leaking resources in the OS.
+	Une fois que le conditionnel est ##[[KeyPgCondCreate Condcreate]]## et les "threads" démarrés, l'un (ou plusieurs) d'entre eux peut être fixé à ##**CondWait**## pour le conditionnel, ils seront arrêtés jusqu'à un autre "thread" ##[[KeyPgCondSignal Condsignal]]## que le "thread" en attente puisse redémarrer. ##[[KeyPgCondBroadcast Condbroadcast]]## peut être utilisé pour redémarrer tous les "threads" qui attendent le conditionnel. A la fin du programme ##[[KeyPgCondDestroy Conddestroy]]## doit être utilisé pour éviter les fuites de ressources dans le système d'exploitation.
 
-	When calling ##**Condwait**##, ##//mutex//## should already be locked.  An atomic unlock of the mutex and wait on the conditional variable will occur.  When the condition variable becomes signaled, ##//mutex//## will be locked again and then execution will return to the thread after the ##**Condwait**## call.
+	A l'appel de ##**CondWait**##, ##//mutex//## doit toujours être verrouillé.  Un déblocage "atomique" des mutex et une veille sur la variable conditionnelle auront lieu. Lorsque la variable de condition est signalée, ##//mutex//## est verrouillé à nouveau, puis l'exécution retournera au "thread" après l'appel de ##**CondWait**##.
 
 {{fbdoc item="ex"}}
-	See ##[[KeyPgCondCreate Condcreate]]##
+	Voir ##[[KeyPgCondCreate Condcreate]]##
 
 {{fbdoc item="target"}}
-	- **Condwait** is not available with the DOS version / target of FreeBASIC, because multithreading is not supported by DOS kernel nor the used extender.
-	- In Linux the threads are always started in the order they are created, this can't be assumed in Win32. It's an OS, not a FreeBASIC issue. 
+	- **Condwait** n'est pas utilisable avec la version/cible DOS de FreeBASIC, parce que le "multithreading" n'est pas supporté par le noyau DOS, ni l'extension utilisée.
+	- Sous Linux les "threads" sont toujours démarrés dans l'ordre de leur création, ceci n'est pas vrai sous Win32. C'est une question d'OS, pas de FreeBASIC. 
 
 {{fbdoc item="lang"}}
-	- Threading is not allowed in //[[CompilerOptlang -lang qb]]//
+	- "Threading" n'est pas utilisable dans le dialecte //[[CompilerOptlang -lang qb]]//
 
 {{fbdoc item="diff"}}
-	- New to ""FreeBASIC""
+	- Nouveau pour ""FreeBASIC""
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgCondCreate Condcreate]]##

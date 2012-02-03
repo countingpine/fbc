@@ -1,5 +1,5 @@
 {{fbdoc item="title" value="Operator OR (Inclusive Disjunction)"}}----
-Returns the bitwise-or (inclusive disjunction) of two numeric values
+Retourne la manipulation de bits (disjonction inclusive) de deux valeurs numériques
 
 {{fbdoc item="syntax"}}##
 	[[KeyPgDeclare declare]] [[KeyPgOperator operator]] **Or** ( [[KeyPgByref byref]] //lhs// [[KeyPgAs as]] //T1//, [[KeyPgByref byref]] //rhs// [[KeyPgAs as]] //T2// ) [[KeyPgAs as]] //Ret//
@@ -9,31 +9,31 @@ Returns the bitwise-or (inclusive disjunction) of two numeric values
 ##
 {{fbdoc item="param"}}
 	##//lhs//##
-		The left-hand side expression.
+		Le côté gauche de l'expression.
 	##//T1//##
-		Any numeric type.
+		Tout type numérique.
 	##//rhs//##
-		The right-hand side expression.
+		Le côté droit de l'expression.
 	##//T2//##
-		Any numeric type.
+		Tout type numérique.
 	##//Ret//##
-		A numeric type (varies with ##//T1//## and ##//T2//##).
+		Un type numérique (varie avec ##//T1//## et ##//T2//##).
 
 {{fbdoc item="ret"}}
-	Returns the bitwise-disjunction of the two operands.
+	Retourne la manipulation de bits (disjonction inclusive) des deux opérandes.
 
 {{fbdoc item="desc"}}
-	This operator returns the bitwise-disjunction of its operands, a logical operation that results in a value with bits set depending on the bits of the operands.
+	Cet opérateur retourne la manipulation de bits disjonction-inclusive de ses opérandes, une opération logique dont le résultat est une valeur avec ses bits positionnés en fonction des bits de ses opérandes.
 
-	The truth table below demonstrates all combinations of a boolean-disjunction operation:
+	La table de vérité ci-dessous montre toutes les combinaisons de l'opération booléenne de disjonction inclusive:
 
-	{{table columns="3" cellpadding="2" cells="Lhs Bit;Rhs Bit;Result;0;0;0;1;0;1;0;1;1;1;1;1"}}
+	{{table columns="3" cellpadding="2" cells="Bit côté gauche;Bit côté droit;Résultat;0;0;0;1;0;1;0;1;1;1;1;1"}}
 
-	No short-circuiting is performed - both expressions are always evaluated.
+	Aucun court-circuit n'est possible - les deux expressions sont toujours évaluées.
 	
-	The return type depends on the types of values passed. ##[[KeyPgByte Byte]]##, ##[[KeyPgUbyte Ubyte]]## and floating-point type values are first converted to ##[[KeyPgInteger Integer]]##. If the left and right-hand side types differ only in signedness, then the return type is the same as the left-hand side type (##//T1//##), otherwise, the larger of the two types is returned.
+	Le type de retour dépend des types des valeurs passées. Les valeurs de type ##[[KeyPgByte Byte]]##, ##[[KeyPgUbyte Ubyte]]## et à virgule flottante sont en premier converties en ##[[KeyPgInteger Integer]]##. Si les types des deux côtés diffèrent seulement par leur signe, alors le type de retour est le même que celui du côté gauche (##//T1//##), autrement, le plus large des deux types est retourné.
 
-	This operator can be overloaded for user-defined types.
+	Cet opérateur peut être surchargé pour les types définis par l'utilisateur.
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/operator/or-bitwise.bas"}}%%(freebasic)
@@ -60,12 +60,12 @@ SLEEP
 %%
 
 {{fbdoc item="lang"}}
-	- In the //[[CompilerOptlang -lang qb]]// dialect, this operator cannot be overloaded.
+	- Dans le dialecte //[[CompilerOptlang -lang qb]]//, cet opérateur ne peut pas être surchargé.
 
 {{fbdoc item="diff"}}
-	- None
+	- Aucune
 
 {{fbdoc item="see"}}
-	- [[TblTruth Operator Truth Tables]]
+	- [[TblTruth Tables de vérité des opérateurs]]
 
 {{fbdoc item="back" value="CatPgOpLogical|Logical Operators"}}{{fbdoc item="back" value="CatPgOperators|Operators"}}

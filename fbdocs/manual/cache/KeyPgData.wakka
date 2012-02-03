@@ -1,22 +1,22 @@
 {{fbdoc item="title" value="DATA"}}----
-Statement to store data at compile time.
+Déclaration pour stocker des données lors de la compilation.
 
 {{fbdoc item="syntax"}}##
 	**Data** //constant_expression1// [,//constant_expression2//]...
 ##
 {{fbdoc item="desc"}}
-	##Data## stores a list of constant numeric or alphabetical expressions that are evaluated at compile time (except with //[[CompilerOptlang -lang qb]]//) and stored as constants that can be read into variables by using ##[[KeyPgRead Read]]##.
+	##Data## stocke une liste d'expressions constantes numériques ou alphabétiques qui sont évaluées au moment de la compilation (excepté avec //[[CompilerOptlang -lang qb]]//) et stockées sous forme de constantes qui peuvent être lues dans des variables en utilisant ##[[KeyPgRead Read]]##.
 	
-	All the ##**Data**## statements in the program behave as a single chained list; after the last element of one ##**Data**## statement is read, the first element of the following ##**Data**## statement will be read.
-	The program should not attempt to ##[[KeyPgRead Read]]## after the last ##**Data**## element.  The results are (in all dialects) undefined,  and the program may crash (Page Fault).
+	Toutes les déclarations de ##**Data**##s dans le programme se comportent comme une liste unique enchaînée; après la lecture du dernier élément d'une déclaration de ##**Data**##, le premier élément de la déclaration suivante ##**Data**## sera lu.
+	Le programme ne doit pas tenter un ##[[KeyPgRead Read]]## après le dernier élément ##**Data**##.  Les résultats sont (dans tous les dialectes) indéfinis et le programme peut se bloquer (Page Fault = Erreur de page).
 	
-	##**Data**## statements are only visible from within the module in which they are defined.
+	Les déclarations ##**Data**## ne sont visibles que depuis le module dans lequel ells sont définies.
 	
-	##**Data**## constants can only be of simple types (numeric or string).  A numeric value can be read as a numeric literal into a string. A string read into a numeric variable will be evaluated by the ##[[KeyPgVal Val]]## function.  ##[[KeyPgConst Const]]##s can be used as items of data except in the //[[CompilerOptlang -lang qb]]// dialect, where their names are considered as normal text.
+	Les constantes ##**Data**## ne peuvent être que des types simples (numériques ou chaînes).  Une valeur numérique peut être lue comme un littéral numérique dans une chaîne. Une chaîne lue dans une variable numérique sera évaluée par la fonction ##[[KeyPgVal Val]]##.  Les ##[[KeyPgConst Const]]##s peuvent être utilisées comme éléments de données, sauf dans le dialecte //[[CompilerOptlang -lang qb]]//, où leurs noms sont considérés comme du texte normal.
 	
-	The "##**[[KeyPgRestore Restore]]** //label//##" statement makes the first ##**Data**## item after the ##//label//## the next item to be read, allowing the user to choose specific sections of data to read.
+	//label//## de la déclaration ##**[[KeyPgRestore Restore]]**## fait que le premier item de ##**Data**## après ##//label//## sera le suivant à lire, permettant à l'utilisateur de choisir des sections spécifiques de données à lire.
 
-	##**Data**## is normally used to initialize variables. ""FreeBASIC"" also allows the initialization of static variables when they are ##[[KeyPgDim Dim]]##ensioned - see [[ProPgInitialization Variable Initializers]] for more information.
+	##**Data**## est normalement utilisé pour initialiser les variables. ""FreeBASIC"" permet aussi l'initialisation de variables statiques quand elles sont ##[[KeyPgDim Dim]]##ensionnées -  Voir [[ProPgInitialization Initialiseurs de variables]] pour plus d'informations.
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/data/data.bas"}}%%(freebasic)
@@ -56,12 +56,12 @@ DATA 3, 234, 435/4, 23+433, 87643, "Good" + "Bye!"
 %%
 
 {{fbdoc item="lang"}}
-	- //[[CompilerOptlang -lang fb]]// and //[[CompilerOptlang -lang fblite]]// considers data items as constant expressions that are evaluated during compilation and its result stored in the program.
-	- //[[CompilerOptlang -lang qb]]// considers unquoted words, including names of variables and constants, as literal strings, and stores them without change, as in QBASIC.  Unquoted strings are delimited by commas, and a colon or a line-break signifies the end of the ##**Data**## statement.  Unquoted strings are trimmed of whitespace at the beginning and end.
+	- //[[CompilerOptlang -lang fb]]// et //[[CompilerOptlang -lang fblite]]// considèrent les items de ##**Data**## comme des expressions constantes qui sont évaluées pendant la compilation et leur résultat stocké dans le programme.
+	- //[[CompilerOptlang -lang qb]]// considère les mots non-commentés, inclus les noms de variables et constantes, comme des chaînes littérales, et les stocke sans changement, comme dans QBASIC.  Les chaînes non-commentées sont délimitées par des virgules, et deux-points (:) ou un fin de ligne signifie la fin de la déclaration ##**Data**##.  Dans les chaînes non-commentées les espaces sont éliminés au début et à la fin.
 
 {{fbdoc item="diff"}}
-	- Outside of the //[[CompilerOptlang -lang qb]]// dialect, alphabetic string literals must be enclosed within quotation marks, in QBASIC this was optional.
-	- In QBASIC empty items evaluated to number ##0## or to empty strings, in ""FreeBASIC"" they give a compile error. In QBASIC a comma at the end of the statement made an additional, empty item, evaluated to ##0## or an empty string. In ""FreeBASIC"" they give a compile error.
+	- En dehors du dialecte //[[CompilerOptlang -lang qb]]// les chaînes de littéraux alphabétiques doivent être entre guillemets, dans QBASIC cette utilisation est facultative.
+	- Dans QBASIC les items vides sont évalués au nombre ##0## ou à des chaînes vides, dans ""FreeBASIC"" ils donnent une erreur de compilation. Dans QBASIC une virgule à la fin de la déclaration amène un item supplémentaire, vide, évalué à ##0## ou une chaîne vide. Dans ""FreeBASIC"" ils donnent une erreur de compilation.
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgRead Read]]##

@@ -1,5 +1,5 @@
 {{fbdoc item="title" value="BIT"}}----
-Gets the state of an individual bit in an integer value.
+Obtient l'état individuel d'un bit dans une valeur entière.
 
 {{fbdoc item="syntax"}}##
 	[[KeyPgPpdefine #define]] **Bit**( //value//, //bit_number// ) (((//value//) [[KeyPgOpAnd and]] ([[KeyPgCast Cast]]([[KeyPgTypeof TypeOf]](//value//), 1) [[KeyPgOpShiftLeft shl]] (//bit_number//))) <> 0)
@@ -9,15 +9,15 @@ Gets the state of an individual bit in an integer value.
 ##
 {{fbdoc item="param"}}
 	##//value//##
-		The integer value.
+		La valeur entière.
 	##//bit_number//##
-		The index of the bit.
+		L'indice du bit.
 
 {{fbdoc item="ret"}}
-	Returns an ##[[KeyPgInteger Integer]]## value of ##-1## if the bit is set, or ##0## if the bit is cleared.
+	Retourne une valeur ##[[KeyPgInteger Integer]]## de ##-1## si le bit est valide (1), ou ##0## si le bit est à 0.
 
 {{fbdoc item="desc"}}
-	This macro expands to an integer value indicating whether or not the bit specified by ##//bit_number//## is set in the integer ##//value//##. Behaves as `##(//value// [[KeyPgOpAnd And]] 1 [[KeyPgOpShiftLeft Shl]] //bit_number//) <> 0##`.
+	Cette macro se développe en une valeur entière indiquant si oui ou non le bit spécifié par ##//bit_number//## est validé (à 1) dans ##//value//## entière. Se comporte comme `##(//value// [[KeyPgOpAnd And]] 1 [[KeyPgOpShiftLeft Shl]] //bit_number//) <> 0##`.
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/bits/bit.bas"}}%%(freebasic)
@@ -25,7 +25,7 @@ PRINT BIT(4,2)
 PRINT BIT(5,1)
 PRINT BIT(&H8000000000000000ULL,63)
 %%
-	will produce the output:
+	produira la sortie:
 
 %%
 -1
@@ -34,10 +34,10 @@ PRINT BIT(&H8000000000000000ULL,63)
 %%
 
 {{fbdoc item="lang"}}
-	- Not available in the //[[CompilerOptlang -lang qb]]// dialect.
+	- Non disponible dans le dialecte //[[CompilerOptlang -lang qb]]//.
 
 {{fbdoc item="diff"}}
-	- New to ""FreeBASIC""
+	- Nouveau pour ""FreeBASIC""
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgBitset Bitset]]##

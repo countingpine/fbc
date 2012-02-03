@@ -1,15 +1,15 @@
 {{fbdoc item="title" value="Simulating Polymorphism"}}----
-//Written by [[WikiRick rdc]]//
+//Ecrit par [[WikiRick rdc]]//
 
 === Introduction===
 
-Polymorphism is a powerful tool in object-oriented program. A polymorphic method (Sub or Function) behaves differently depending on the definition of the object. For example, an animal object may have a speak method that will issue a bark for a dog and a meow for a cat. FreeBasic doesn’t yet support true polymorphism; this will be added when classes are implemented. However, you can simulate polymorphic methods using method pointers. 
+Le polymorphisme est un outil puissant dans les programmes orientés-objet. Une méthode polymorphe (Sub ou Function) se comporte différemment selon la définition de l'objet. Par exemple, un objet "animal" peut avoir une méthode "parler" qui émettra un aboiement pour un chien et un miaulement d'un chat. FreeBASIC ne supporte pas encore le vrai polymorphisme, il sera ajouté lorsque les classes seront implémentées. Cependant, vous pouvez simuler les méthodes polymorphes en utilisant les méthodes pointeurs. 
 
-=== Polymorphism===
+=== Polymorphisme===
 
-Polymorphic methods are subroutines or functions that have the same type and parameter list, but behave differently when bound to different objects. An animal object may have a Speak method that will issue a bark for a dog and a meow for a cat. Since FreeBasic doesn’t yet have classes, you cannot implement true polymorphic methods, but you can simulate the behavior by using method pointers.
+Les méthodes polymorphes sont des "Sub" ou des "Function" qui ont le type et la même liste des paramètres, mais qui se comportent différemment lorsqu'elles sont liées à des objets différents. Un objet "animal" peut avoir une méthode "parler" qui émettra un aboiement pour un chien et un miaulement d'un chat.Comme FreeBASIC ne connaît pas encore les classes, vous ne pouvez implémenter de vraies méthodes polymorphes,  you cannot implement true polymorphic methods, mais vous pouvez simuler leur comportement en utilisant des méthodes pointeurs.
 
-The following listing shows a couple of defines and an extended type declaration:
+Le listing suivant montre un couple de "#define" et une déclaration de type étendu:
 %%(freebasic)
 #define isdog 1
 #define iscat 2
@@ -20,7 +20,7 @@ Type animal
 	Declare Constructor (anid As Integer)    
 End Type
 %%
-The #defines are passed to the Constructor to signal what type of object is being created. The speak As Sub()definition defines the method pointer. As you will see, the address of two different subroutines will be passed to the speak method pointer. The following listing shows the different speak subroutines and the Constructor method:
+Les "#define" sont passés au constructeur (Constructor) pour lui signaler quel type d'objet sera créé. La définition "speak As Sub()" définit la méthode pointeur. Comme vousle voyez, l'adresse de deux sous-programmes différents sera passée à la méthode pointeur "speak". Le listing suivant montre les sous-programmes speak différents et la méthode Constructor:
 %%(freebasic)
 'Speak method for dog object
 Sub Bark()
@@ -41,19 +41,19 @@ Constructor animal(anid As Integer)
 	End If
 End Constructor
 %%
-The Bark subroutine will be called if the object is a dog and the Meow subroutine will be called if the object is a cat. You may be wondering why you can’t just overload the method? For overloaded methods, the type and parameter list must be unique, where in a polymorphic method, the type and parameter list must be the same. Since Bark and Meow have the same parameter list, that is no parameters, you cannot overload the method.
+Le sous-programmes "Bark" sera appelé si l'objet est un chien et "Meow" si c'est un chat. Vous vous demandez pourquoi on n'a pas surchargé la méthode? Pour surcharger une méthode, le type et la liste de paramètres doivent être uniques, où dans une méthode polymorphe, le type et le paramètre doivent être le même. Comme "Bark" et "Meow" ont la même liste de paramètres, c'est à dire aucun paramètre, vous ne pouvez pas surcharger cette méthode.
 
-The Constructor code is where the program decides what method call to use. If anid is equal to isdog, then the Speak method pointer will be set to the address of the Bark subroutine. If anid is equal to iscat then Speak will be set to the address of the Meow subroutine. The addressof operator @ is used to pass the address of Bark and Meow to the Speak pointer. 
+C'est dans le code du Constructor que se décide quelle méthode à appeler pour l'utiliser. Si "anid" est égal à "isdog", alors la méthode pointeur "Speak" sera fixée sur l'adresse du sous-programme "Bark". Si "anid" est égal à "iscat",  alors la méthode pointeur "Speak" sera fixée sur l'adresse du sous-programme "Meow". L'opérateur @ (adresse de) est utilisé pour passer l'adresse de "Bark" et "Meow" au pointeur "Speak". 
 
-The //this// object reference is a hidden parameter that is passed to the Constructor that references the type, which in this case is animal. You can use this to reference the internal variables within the type.
+La référence objet //this// est un paramètre caché qui est passé au constructeur et qui fait référence au type, qui dans ce cas est "animal". Vous pouvez l'utiliser pour référencer les variables internes au sein du type.
 
-The only thing left to do is to create and initialize the object:
+La seule chose qui reste à faire est de créer et d'initialiser l'objet:
 %%(freebasic)
 'Create a dog and cat object
 Dim myDog As animal = isdog
 Dim mycat As animal = iscat
 %%
-Here myDog and myCat are created with the appropriate flags passed to the Constructor so that the proper references can be set up. Once the object are created you can call the speak method of each object.
+Ici "myDog" et "myCat" sont créés avec les indicateurs appropriés passés au constructeur ainsi les références appropriées peuvent être mises en place. Dès que les objets sont créés vous pouvez appeler la méthode "speak" de chaque objet.
 %%(freebasic)
 'Have the animals speak
 Print "My dog says ";
@@ -61,14 +61,14 @@ myDog.speak()
 Print "My cat says ";
 myCat.speak()
 %%
-Notice that you are calling the same speak method, yet the output is different:
+Notez que vous appelez la même méthode "speak", cependant les réponses sont différentes:
 %%(freebasic)
 My dog says Woof!
 My cat says Meow!
 %%
-This is the essence of polymorphic methods. 
+C'est l'essence même des méthodes polymorphes. 
 
-Here is the complete program listing:
+Voici le listing du programme complet:
 %%(freebasic)
 'Simulated Polymorphism Using Method Pointers
 'Richard D. Clark

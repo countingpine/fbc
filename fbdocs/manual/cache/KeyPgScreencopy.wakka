@@ -1,5 +1,5 @@
 {{fbdoc item="title" value="SCREENCOPY"}}----
-Copies the contents of a graphical page into another graphical page
+Copie le contenu d'une page graphique dans une autre page graphique
 
 {{fbdoc item="syntax"}}##
 	[[KeyPgDeclare declare]] [[KeyPgSub sub]] **Screencopy** ( [[KeyPgByval byval]] //frompage// [[KeyPgAs as]] [[KeyPgInteger integer]] = -1, [[KeyPgByval byval]] //topage// [[KeyPgAs as]] [[KeyPgInteger integer]] = -1 )
@@ -9,31 +9,31 @@ Copies the contents of a graphical page into another graphical page
 ##
 {{fbdoc item="param"}}
 	##//frompage//##
-		page to copy from
+		page à copier
 	##//topage//##
-		page to copy to
+		page vers laquelle copier
 
 {{fbdoc item="desc"}}
-	##//from_page//## is the page to copy from. If this argument is omitted, the current work page is assumed.
+	##//from_page//## est la page que l'on copie. Si cet argument est omis, la page de travail courante est utilisée.
 
-	##//to_page//## is the page to copy to. If this argument is omitted, the currently visible page is assumed.
+	##//to_page//## est la page vers laquelle on copie. Si cet argument est omis, la page visible courante est utilisée.
 
-	Page numbers range from 0 to the num_pages specified when setting the graphics mode minus 1 
+	Les numéros de page varient de 0 à num_pages spécifié lors du réglage du mode graphique moins 1 
 
-	You can use this function to add a double buffer to your graphics. Any graphics screen mode supports this function; you must supply valid page numbers otherwise ##**Screencopy**## will have no effect.
+	Vous pouvez utiliser cette fonction pour ajouter un double tampon à vos graphiques. Tous les modes graphiques supportent cette fonction; vous devez fournir des numéros de page valides sinon ##**ScreenCopy**## n'aura aucun effet.
 
-	There are two other functons similar to this: ##[[KeyPgFlip Flip]]## and ##[[KeyPgPcopy PCopy]]##.  ##[[KeyPgFlip Flip]]## is designed to work in ""OpenGL"" modes, while ##[[KeyPgPcopy PCopy]]## supports console pages on some platforms.  Both do the same thing as ##**Screencopy**## in normal graphics modes.
+	Il existe deux autres fonctions similaires: ##[[KeyPgFlip Flip]]## et ##[[KeyPgPcopy PCopy]]##.  ##[[KeyPgFlip Flip]]## est conçu pour fonctionner en mode ""OpenGL"", alors que ##[[KeyPgPcopy PCopy]]## supporte les pages console sur certaines plates-formes.  Les deux font la même chose que ##**ScreenCopy**## dans les modes graphiques normaux.
 
-Example:
-	See ##[[KeyPgScreenset Screenset]]## example.
+Exemple:
+	Voir l'exemple de ##[[KeyPgScreenset Screenset]]##.
 
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/gfx/screencopy.bas"}}%%(freebasic)
-'' 320x200x8, with 3 pages
+'' 320x200x8, avec 3 pages
 screen 13,,3
 
-'' image for page #1
+'' image pour page #1
 screenset 1, 0
 cls
 circle( 160, 100 ), 90, 1 ,,,, f
@@ -41,7 +41,7 @@ circle( 160, 100 ), 90, 15
 print "Press 2 to copy page #2 to visible page"
 print "Press escape to exit"
 
-'' image for page #2
+'' image pour page #2
 screenset 2, 0
 cls
 line( 50, 50 )-( 270, 150 ), 2, bf
@@ -49,7 +49,7 @@ line( 50, 50 )-( 270, 150 ), 15, b
 print "Press 1 to copy page #1 to visible page"
 print "Press escape to exit"
 
-'' page #0 is the visible page
+'' page #0 est la page visible
 screenset 0, 0
 cls
 print "Press 1 to copy page #1 to visible page"
@@ -75,10 +75,10 @@ loop
 
 
 {{fbdoc item="lang"}}
-	- Not available in the //[[CompilerOptlang -lang qb]]// dialect unless referenced with the alias ##**""__Screencopy""**##.
+	- Non disponible dans le dialecte //[[CompilerOptlang -lang qb]]// sauf si référencé avec l'alias ##**""__Screencopy""**##.
 
 {{fbdoc item="diff"}}
-	- New to ""FreeBASIC"". QB had ##[[KeyPgPcopy Pcopy]]## to do the same function.
+	- Nouveau pour ""FreeBASIC"". QB a ##[[KeyPgPcopy Pcopy]]## comme fonction équivalente.
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgScreengraphics Screen (Graphics)]]##

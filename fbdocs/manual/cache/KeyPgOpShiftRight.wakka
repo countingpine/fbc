@@ -1,5 +1,5 @@
 {{fbdoc item="title" value="Operator Shr (Shift right)"}}----
-Shifts the bits of a numeric expression to the right
+Décale vers la droite les bits d'une expression numérique
 
 {{fbdoc item="syntax"}}##
 	[[KeyPgDeclare declare]] [[KeyPgOperator operator]] **Shr** ( [[KeyPgByref byref]] //lhs// [[KeyPgAs as]] [[KeyPgInteger integer]], [[KeyPgByref byref]] //rhs// [[KeyPgAs as]] [[KeyPgInteger integer]] ) [[KeyPgAs as]] [[KeyPgInteger integer]]
@@ -12,21 +12,21 @@ Shifts the bits of a numeric expression to the right
 ##
 {{fbdoc item="param"}}
 	##//lhs//##
-		The left-hand side expression.
+		La valeur de l'opération de décalage.
 	##//rhs//##
-		The right-hand side shift expression.
+		Le nombre de bits de décalage.
 
 {{fbdoc item="ret"}}
-	Returns the result of ##//lhs//## being shifted right ##//rhs//## number of times.
+	Retourne le résultat du décalage de ##//rhs//## bits vers la droite de la valeur ##//lhs//##.
 
 {{fbdoc item="desc"}}
-	**##Operator Shr## (Shift right)** shifts all of the bits in the left-hand side expression (##//lhs//##) right a number of times specified by the right-hand side expression (##//rhs//##). This has the effect of dividing ##//lhs//## by two for each shift. For example, "##&b0101 **Shr** 1##" returns the binary number ##&b010##, and "##5 **Shr** 1##" returns ##2##.
+	L'**##Operator Shr## (Décalage vers la droite)** décale vers la droite tous les bits de l'expression de gauche (##//lhs//##) un nombre de fois spécifié dans l'expression de droite (##//rhs//##). Cela a pour effet de diviser ##//lhs//## par deux pour chaque décalage. Par exemple, "##&b0101 **Shr** 1##" retourne le nombre binaire ##&b010##, et "##5 **Shr** 1##" retourne ##2##.
 
-	If the left-hand side expression is signed, the sign bit is copied in the newly created bits on the left after the shift.
+	Si l'expression de gauche est signée, le bit de signe est copié sur la gauche des bits nouvellement créés après le décalage.
 
-	Neither of the operands are modified in any way.
+	Dans tous les cas, aucun opérande n'est modifié.
 
-	This operator can be overloaded for user-defined types.
+	Cet opérateur peut être surchargé pour accepter les types définis par l'utilisateur.
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/operator/shift-right.bas"}}%%(freebasic)
@@ -37,7 +37,7 @@ For i As Integer = 0 To 10
 	
 Next i
 %%
-Output:
+Affiche:
 %%
  1000         0000001111101000
  500          0000000111110100
@@ -53,15 +53,15 @@ Output:
 %%
 
 {{fbdoc item="lang"}}
-	- Not available in the //[[CompilerOptlang -lang qb]]// dialect unless referenced with the alias ##**""__Shr""**##.
+	- Non disponible dans le dialecte //[[CompilerOptlang -lang qb]]// sauf si référencé avec l'alias ##**""__Shr""**##.
 
 {{fbdoc item="diff"}}
-	- New to ""FreeBASIC""
+	- Nouveau pour ""FreeBASIC""
 
 {{fbdoc item="see"}}
-	- ##[[KeyPgOpCombineShiftRight Operator Shr= (Shift Right and Assign)]]##
-	- ##[[KeyPgOpShiftLeft Operator Shl (Shift left)]]##
+	- ##[[KeyPgOpCombineShiftRight Operator Shr= (Décalage à droite et Affectation)]]##
+	- ##[[KeyPgOpShiftLeft Operator Shl (Décalage à gauche)]]##
 	- ##[[KeyPgBin Bin]]##
-	- [[CatPgMath Mathematical Functions]]
+	- [[CatPgMath Fonctions mathématiques]]
 
 {{fbdoc item="back" value="CatPgOpArithmetic|Arithmetic Operators"}}{{fbdoc item="back" value="CatPgOperators|Operators"}}

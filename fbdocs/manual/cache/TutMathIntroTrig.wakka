@@ -1,22 +1,22 @@
 {{fbdoc item="title" value="A Brief Introduction To Trigonometry"}}----
-//Written by RandyKeeling//
+//Ecrit par RandyKeeling//
 
-This tutorial includes:
+Ce tutoriel comprend:
 
-	- Right Triangles
-	- Pythagoras' Theorem
-	- Trigonometric Functions
-	- Applying Trigonometric functions
-	- Inverse Trigonometric functions
-	- Other Trigonometric functions
-	- Law of Sines, Law of Cosines, and other relationships
+	- Les triangles rectangles
+	- Le théorème de Pythagore
+	- Les fonctions trigonomètriques
+	- L'application des fonctions trigonomètriques
+	- Les fonctions trigonomètriques inverses
+	- Les autres fonctions trigonomètriques
+	- Les lois des sinus, des cosinus et autres relations
 
-Trigonometry can be thought of as the study of triangles. There is more to it than that, but this will suffice for this tutorial. While this may seem to be of limited use, many problems in both the real and virtual worlds can be solved by creative application of triangles.
+La trigonométrie peut être considérée comme l'étude des triangles. C'est plus compliqué que cela, mais cela suffira pour ce tutoriel. Bien que cela semble être d'une utilité limitée, de nombreux problèmes dans les mondes réel et virtuel peuvent être résolus par l'application créative de triangles.
 
-A triangle has three sides and in 'normal' (i.e. Euclidean) space has three angles whose measurements add to be exactly 180 degrees (or Pi radians). For this tutorial we will deal only with 'normal' triangles (for those interested in other spaces, search for non-Euclidean triangles or non-Euclidean geometry).
+Un triangle a trois côtés et dans l'espace "normal" (c.a.d-euclidien) a trois angles dont la somme des mesures est exactement 180 degrés (ou Pi radians). Pour ce tutoriel, nous allons traiter uniquement avec des triangles "normaux" (pour ceux qui s'intéressent à d'autres espaces, faites une recherche sur les triangles non-euclidiens ou la géométrie non-euclidienne).
 
-**Right Triangles**
-To begin with, we will deal with a special class of triangles known as right triangles. A right triangle has one angle that measures 90 degrees. Because the angles of a triangles must be exactly 180 degrees, there can be only one 90 degree angle in a triangle (and it is the largest angle in a right triangle). Below is FreeBASIC code to draw an image of a right triangle. (This image will be referred to throughout the tutorial.) In this image, uppercase letters denote sides, and their corresponding lowercase letters denote the angle opposite of the side. For example, angle y is the angle opposite side Y.
+**Les triangles rectangles**
+Pour commencer, nous allons faire face à une classe spéciale de triangles: les triangles rectangles. Un triangle rectangle a un angle qui mesure 90 degrés (angle droit). Comme la somme des angles d'un triangle doit être exactement de 180 degrés, il ne peut y avoir qu'un seul angle de 90 degrés dans un triangle (et c'est le plus grand angle dans un triangle rectangle). Ci-dessous vous avez le code FreeBASIC pour dessiner une image d'un triangle rectangle. (Cette image sera reprise dans tout le tutoriel.) Dans cette image, les lettres majuscules nomment les côtés et leurs correspondances en lettres minuscules nomment l'angle opposé de ce côté. Par exemple, l'angle y est opposé au côté Y.
 
 ##%%(freebasic)
 SCREENRES 640,480,8
@@ -51,107 +51,109 @@ PRINT "X"
 SLEEP
 %%##
 
-The box in the lower right hand corner means that it is a right angle (measures 90 degrees). The side opposite of that angle (side Z) is called the hypotenuse and is the longest side in a right triangle. 
 
-**Pythagoras' Theorem**
+{{image class="center" title="#" url="/images/trigo.png"}} 
 
-Perhaps the first bit of trigonometry that most people learn is the relationship commonly known as Pythagoras' Theorem. It simply states that the square of the hypotenuse of a right triangle is equal to the sum of the square of the other two sides. It is easier to understand in equation form.
+La boîte dans le coin inférieur gauche signifie que c'est un angle droit (il mesure 90 degrés). Le côté opposé de cet angle (côté Z) est appelé l'hypoténuse et c'est le côté le plus long dans un triangle rectangle.
+
+**Le théorème de Pythagore**
+
+Peut-être que le premier élément de la trigonométrie que la plupart des gens apprennent est la relation communément appelée Théorème de Pythagore. Il indique simplement que le carré de l'hypoténuse d'un triangle rectangle est égal à la somme des carrés des deux autres côtés. Il est plus facile à comprendre sous forme d'équation.
 
 Z^2 = X^2 + Y^2
 
-A trivial example application of this law might be the following.
+a des fonctions pour ces fonctions trigonométriques et d'autres.
 
-If player one is 100 meters due east of a marked location (the origin) and player two is 150 meters due north of the same location, how far apart are they?
+Un exemple trivial d'application de cette loi pourrait être le suivant.
 
-D = SQR(100^2 + 150^2)
+Si le joueur est de 100 mètres à l'est d'un emplacement marqué (l'origine) et deux joueurs sont à 150 mètres au nord du même endroit, à quelle distance sont-ils?
 
-**Trigonometric Functions**
+D = SQR(100^2 + 150^2) 
 
-Long ago people discovered that regardless of the size of the triangle, certain ratios were always the same. For example, in the image of the triangle above, if the measure of angle y is 45 degrees, then regardless of the size of the triangle, the ratio Y/X will always be the same. Collections of these ratios are trigonometric functions. 
+**Les fonctions trigonomètriques**
 
-The three primary functions are Sine ({{fbdoc item="keyword" value="KeyPgSin|SIN"}}), Cosine ({{fbdoc item="keyword" value="KeyPgCos|COS"}}), and Tangent (TAN). There are many different ways to define these three functions. One way is with relationships between sides of a right triangle.
+	-Depuis longtemps, des personnes ont découvert que, indépendamment de la taille du triangle, certains ratios étaient toujours les mêmes. Par exemple, dans l'image du triangle ci-dessus, si la mesure de l'angle y est de 45 degrés, alors indépendamment de la taille du triangle, le ratio Y/X sera toujours le même. Les collections de ces ratios constituent les fonctions trigonométriques.
+	-Les trois principales fonctions sont Sinus ([[KeyPgSin  Sin ]]), Cosinus ({{fbdoc item="keyword" value="KeyPgCos| Cos "}}), et tangente (TAN). Il y a plusieurs manières de définir ces trois fonctions. L'une correspond aux relations entre les côtés d'un triangle rectangle.
+	-Sinus ([[KeyPgSin Sin]]) est le rapport entre le côté opposé à l'angle en question et l'hypoténuse. Dans le triangle ci-dessus, le sinus de l'angle y (écrit SIN(y)) est la longueur du côté Y divisé par la longueur du côté Z.
 
-	-Sine ({{fbdoc item="keyword" value="KeyPgSin|SIN"}}) is the ratio of the side opposite the angle in question to the hypotenuse. In the above triangle, the sine of the angle y (written as SIN(y)) is the length of side Y divided by the length of side Z.
-	-Cosine ({{fbdoc item="keyword" value="KeyPgCos|COS"}}) is the ratio of the side adjacent to the angle in question to the hypotenuse. In the above triangle, the cosine of angle y (written COS(y)) is the length of Side X divided by the length of side Z.
-	-Tangent ({{fbdoc item="keyword" value="KeyPgTan|TAN"}}) is the ratio of the side opposite to the angle in question to the side adjacent to the angle in question. In the above triangle, the tangent of angle y (written as {{fbdoc item="keyword" value="KeyPgTan|TAN"}}(y)) is the length of side Y divided by the length of side X.
+Cosinus ({{fbdoc item="keyword" value="KeyPgCos|COS"}}) est le rapport entre le côté adjacent à l'angle en question et l'hypoténuse. Dans le triangle ci-dessus, le cosinus de l'angle y (écrit COS(y)) est la longueur du côté X divisé par la longueur du côté Z. 
 
-Many people remember these relationships with the mnemonic device SOHCAHTOA (pronounced Sow Cah Toe-a) which is of course {{fbdoc item="keyword" value="KeyPgSin|SIN"}} = opposite/hypotenuse, {{fbdoc item="keyword" value="KeyPgCos|COS"}} = adjacent/hypotenuse, and {{fbdoc item="keyword" value="KeyPgTan|TAN"}} = opposite/adjacent. 
+Tangente ([[KeyPgTan Tan]]) est le rapport entre le côté opposé à l'angle en question et le côté adjacent à l'angle en question. Dans le triangle ci-dessus, la tangente de l'angle y (écrit [[KeyPgTan Tan]](y)) est la longueur du côté Y divisé par la longueur du côté X. 
 
-FreeBASIC has functions for these trigonometric functions and others. 
+De nombreuses personnes se souviennent de ces relations avec le moyen mnémotechnique SOHCAHTOA (prononcer Sow Cah Toe-a) qui correspond à [[KeyPgSin Sin]] = opposé/hypoténuse, [[KeyPgCos Cos]] = adjacent/hypoténuse, and [[KeyPgTan Tan]] = opposé/adjacent.
 
-**Applying Trigonometric functions**
+Le FreeBASIC a des fonctions pour ces fonctions trigonométriques et d'autres.
 
-Referring again to the triangle image above, let's say that player one is on the ground at the point near angle y and player two is at the point near angle x (off of the ground). If player one knows how far he or she is from the side Y (let's say 25.2 meters) and can measure the value of angle y (let's say 31.5 degrees) how far off the ground is player two? How far away is player one from player two?
+**L'application des fonctions trigonomètriques**
 
-To solve this we look at what pieces of information we know. We know the adjacent side to angle y (25.2 meters) and the measure of angle y (31.5 degrees). This is enough information to use the tangent function. {{fbdoc item="keyword" value="KeyPgTan|TAN"}} ( y ) = Opposite/adjacent, or TAN(31.5 degrees) = Opposite/25.2 meters. Using a little algebra to rearrange this we get opposite = {{fbdoc item="keyword" value="KeyPgTan|TAN"}}(31.5 degrees) * 25.2 meters. To find the distance between the players we could use Pythagoras's Theorem now that we know the two non-hypotenuse sides of the triangle or we could use the cosine. Using cosine would give {{fbdoc item="keyword" value="KeyPgCos|COS"}} ( y ) = adjacent/hypotenuse. With some algebra we get, hypotenuse = 25.2/{{fbdoc item="keyword" value="KeyPgCos|COS"}}(31.5 degrees).
+En se référant à nouveau à l'image ci-dessus du triangle, disons que le joueur 1 est, sur le sol, en un point près de l'angle y et le joueur 2 est en un point près de l'angle x (au-dessus du sol). Si le joueur 1 sait à quelle distance il (ou elle) est du côté Y (disons 25,2 mètres) et peut mesurer la valeur de l'angle Y (disons 31,5 degrés) à quelle distance de la terre se trouve le joueurs 2? À quelle distance est le joueur 1 du joueur 2?Referring again to the triangle image above, let's say that player one is on the ground at the point near angle y and player two is at the point near angle x (off of the ground). If player one knows how far he or she is from the side Y (let's say 25.2 meters) and can measure the value of angle y (let's say 31.5 degrees) how far off the ground is player two? How far away is player one from player two?
 
-Before we can write a program to solve this, we must remember that FreeBASIC, like most programming languages, works with radians, not degrees (see [[TutMathAngles Angles]] ).
+Pour résoudre ce problème, examinons les éléments d'information que nous connaissons. Nous connaissons le côté adjacent à l'angle Y (25,2 mètres) et la mesure de l'angle Y (31,5 degrés). Cette information est suffisante pour utiliser la fonction tangente. [[KeyPgTan  Tan ]] (y) = opposé/adjacent, ou TAN (31,5 degrés) = Opposé/25.2 mètres. En utilisant un peu d'algèbre pour réorganiser tout cela, nous obtenons Opposé = [[KeyPgTan  Tan ]] (31,5 degrés) * 25,2 mètres. Pour trouver la distance entre les joueurs nous pouvons utiliser le théorème de Pythagore, maintenant que nous connaissons la mesure des deux côtés différents de l'hypoténuse du triangle ou nous pouvons utiliser le cosinus. L'utilisation du cosinus donne [[KeyPgCos  Cos ]] (y) = adjacent/hypoténuse. Avec un peu d'algèbre nous obtenons, l'hypoténuse = 25,2 / [[KeyPgCos  Cos ]] (31,5 degrés).
 
-In FreeBASIC we could get the answer with this code.
-
+Avant que nous puissions écrire un programme pour résoudre ce problème, il faut rappeler que FreeBASIC, comme la plupart des langages de programmation, travaille en radians, pas en degrés (voir Mesure des angles [[TutMathAngles Angles]]).
+Avec FreeBASIC nous pouvons obtenir la réponse avec le code suivant.
 ##%%(freebasic)
-CONST PI AS DOUBLE = 3.1415926535897932
-DIM Opposite AS DOUBLE
-DIM Hypotenuse AS DOUBLE
-DIM Angle As DOUBLE
+Const PI As Double = 3.1415926535897932
+Dim Opposite As Double
 
+Dim Hypotenuse As Double
+
+Dim Angle As Double
 Angle = 31.5 * Pi / 180
 
-Opposite = TAN ( Angle ) * 25.2
-Hypotenuse = 25.2 / COS ( Angle )
+Opposite = Tan ( Angle ) * 25.2
+Hypotenuse = 25.2 / Cos ( Angle )
 
-PRINT Opposite
-PRINT Hypotenuse
+Print Opposite
+%%Print Hypotenuse
 
-SLEEP
-%%##
+Sleep
 
-The above code tells us that player two is about 15.4 meters off the ground and around 29.5 meters away (along the hypotenuse).
+##
 
-**Inverse Trigonometric functions**
+Le code ci-dessus nous indique que le joueur 2 est à environ 15,4 mètres du sol et autour de 29,5 mètres (le long de l'hypoténuse). 
 
-But what if you know the sides of a triangle and need to find the angle? You would then use the inverse trigonometric functions. 
+	- **Les fonctions trigonomètriques inverses**
+	- Mais que faire si vous connaissez les côtés d'un triangle et avez besoin de trouver la valeur de l'angle? Vous pouvez alors utiliser les fonctions trigonométriques inverses.
+	- **Arc****Sine** (or Sinus Inverse)
 
-	- Arc********Sine (or Inverse Sine)
-	- Arc********Cosine (or Inverse Cosine)
-	- Arc********Tangent (or Inverse Tangent)
+**Arc****Cosine** (or Cosinus Inverse)
 
-For example, using the above set-up, if player two was 30 meters off the ground and 50 meters away from player one (along the hypotenuse) what is the measure of angle y? Looking at our trigonometric functions it looks like we have need of the sine function (an opposite and a hypotenuse). {{fbdoc item="keyword" value="KeyPgSin|SIN"}} ( y ) = opposite/hypotenuse, Arc********Sine (opposite/hypotenuse) = y.
+**Arc****Tangent** (or Tangente Inverse)
+Par exemple, en utilisant la configuration ci-dessus, si le joueur 2 était à 30 mètres du sol et 50 mètres du joueur 1 (le long de l'hypoténuse) quelle est la mesure de l'angle y? En regardant nos fonctions trigonométriques il semble que nous avons besoin de la fonction sinus (opposé et hypoténuse). [[KeyPgSin  Sin ]] (y) = opposé/hypoténuse, **Arc****Sine** (opposé/hypoténuse) = y.
+%%##%%(freebasic)
+Print Asin (30/50)
 
-##%%(freebasic)
-PRINT ASIN (30/50)
-%%##
-This gives an angle of about 0.6435 radians, or around 36.9 degrees. The FreeBASIC command for each of these inverse functions are:
+	- ##
+	- Cela donne un angle d'environ 0,6435 radians, soit environ 36,9 degrés. Les commandes FreeBASIC pour chacune de ces fonctions inverses sont:
+	- [[KeyPgAsin Asin]] (arcsine)
 
-	- {{fbdoc item="keyword" value="KeyPgAsin|ASIN"}} (arcsine)
-	- {{fbdoc item="keyword" value="KeyPgCos|ACOS"}} (arccosine)
-	- {{fbdoc item="keyword" value="KeyPgAtn|ATN"}} (arctan, there is also {{fbdoc item="keyword" value="KeyPgAtan2|ATAN2"}} which takes the opposite and adjacent sides of the triangle, not their ratio)
+[[KeyPgCos Acos]] (arccosine)
 
-**Other Trigonometric functions**
+[[KeyPgAtn Atn]] (arctan, il y a aussi [[KeyPgAtan2 Atan2]] qui prend les côtés opposé et adjacent du triangle, et non pas leur rapport)
 
-There are other trigonometric functions that are defined in terms of the above functions. Although none of the below are defined in FreeBASIC.
+	-**Les autres fonctions trigonomètriques**
+	-Il existe d'autres fonctions trigonométriques qui sont définis en termes dans les fonctions ci-dessus. Bien qu'aucune des fonctions ci-dessous ne soient définies dans FreeBASIC.
+	-Secant (sec(y)) is 1/[[KeyPgCos Cos]](y)
 
-	-Secant (sec(y)) is 1/{{fbdoc item="keyword" value="KeyPgCos|COS"}}(y)
-	-Cosecant (csc(y)) is 1/{{fbdoc item="keyword" value="KeyPgSin|SIN"}}(y)
-	-Cotangent (cot(y)) is 1/{{fbdoc item="keyword" value="KeyPgTan|TAN"}}(y)
-
-Each of these has an inverse (or arc) functions as well. 
+Cosecant (csc(y)) is 1/[[KeyPgSin Sin]](y) 
 
 
-**Law of Sines, Law of Cosines, and other relationships**
-All of the above has assumed a right triangle, but this was an aid in explaining the basic trigonometric functions. The following does not rely on right triangles; these identities are valid for any triangle.
+Cotangent (cot(y)) is 1/[[KeyPgTan Tan]](y)
+Chacune d'elles a aussi une fonction inverse (ou arc).
 
-Law of Sines
-{{fbdoc item="keyword" value="KeyPgSin|SIN"}} (y)/Y = {{fbdoc item="keyword" value="KeyPgSin|SIN"}} (x)/X = {{fbdoc item="keyword" value="KeyPgSin|SIN"}} (z)/Z
+**Les lois des sinus, des cosinus et autres relations**
+Tout ce qui précède a démontré dans un triangle rectangle, mais ce n'est qu'une aide pour expliquer les fonctions trigonométriques de base. Ce qui suit ne repose pas sur des triangles rectangles; ces identités sont valables pour n'importe quel triangle.
 
-Law of Cosines
+Loi des sinus
+[[KeyPgSin Sin]] (y)/Y = [[KeyPgSin Sin]] (x)/X = [[KeyPgSin Sin]] (z)/Z
+
+Loi des cosinus
+
 Z^2 = X^2 + Y^2 - 2*X*Y*{{fbdoc item="keyword" value="KeyPgCos|COS"}}(z)
-
-Other Identities
+Autres identités
 
 {{fbdoc item="keyword" value="KeyPgSin|SIN"}}^2(y) + {{fbdoc item="keyword" value="KeyPgCos|COS"}}^2(y) = 1
-This means the same as {{fbdoc item="keyword" value="KeyPgSin|SIN"}}(y)*{{fbdoc item="keyword" value="KeyPgSin|SIN"}}(y) + {{fbdoc item="keyword" value="KeyPgCos|COS"}}(y)*{{fbdoc item="keyword" value="KeyPgCos|COS"}}(y) = 1
 
-{{fbdoc item="keyword" value="KeyPgTan|TAN"}}(y) = {{fbdoc item="keyword" value="KeyPgSin|SIN"}}((y)/{{fbdoc item="keyword" value="KeyPgCos|COS"}}(y)
-
-There are several more useful identities out there. Search for trigonometric identities or consult any higher mathematical reference.
+Ce qui est identique à [[KeyPgSin Sin]](y)*[[KeyPgSin Sin]](y) + [[KeyPgCos Cos]](y)*[[KeyPgCos Cos]](y) = 1[[KeyPgTan Tan]](y) = [[KeyPgSin Sin]]((y)/[[KeyPgCos Cos]](y)
+Il existe d'autres identités utiles en-dehors de celles-là. Faites une recherche sur les identités trigonométriques ou consultez une référence mathématique plus élevée.

@@ -1,5 +1,5 @@
 {{fbdoc item="title" value="SCREENUNLOCK"}}----
-Unlocks work page's framebuffer
+Déverrouille le tampon de la page de travail
 
 {{fbdoc item="syntax"}}##
 	[[KeyPgDeclare declare]] [[KeyPgSub sub]] **Screenunlock** ( [[KeyPgByval byval]] //startline// [[KeyPgAs as]] [[KeyPgInteger integer]] = -1, [[KeyPgByval byval]] //endline// [[KeyPgAs as]] [[KeyPgInteger integer]] = -1 )
@@ -9,29 +9,31 @@ Unlocks work page's framebuffer
 ##
 {{fbdoc item="param"}}
 	##//startline//##
-		optional argument specifying first screen line to be updated. If omitted, top screen line is assumed.
+		paramètre optionnel spécifiant la première ligne écran à mettre à jour. Si omis, considère la première ligne en haut de l'écran.
 	##//endline//##
-		optional argument specifying last screen line to be updated. If omitted, bottom screen line is assumed.
+		paramètre optionnel spécifiant la dernière ligne écran à mettre à jour. Si omis, considère la dernière ligne en bas de l'écran.
 
 {{fbdoc item="desc"}}
-	##**Screenunlock**## unlocks the current work page assuming it was previously locked by calling ##[[KeyPgScreenlock Screenlock]]## and lets the system restart updating the screen regularly. When called with ##start_line## and ##end_line## , only the screen area between those lines is assumed to have changed, and will be updated. 
+	##**Screenunlock**## déverrouille la page de travail courante à condition qu'elle ait été verrouillée précédemment en appelant ##[[KeyPgScreenlock Screenlock]]## et permet le redémarrage du système avec mise à jour de l'écran régulièrement. Lors d'un appel avec ##start_line## et ##end_line## , seule la zone comprise entre ces deux lignes est prise en compte pour être modifiée, et sera mise à jour. 
 
-	An internal counter exists that remembers the screen lock state, thus ##**Screenunlock**## has an effect only on a screen that is locked.  A screen that has not been locked with ##**Screenlock**## cannot get unlocked, however ##**Screenunlock**## still will force an update of given area or full screen.   
+	Il existe un compteur interne qui mémorise l'état du verrouillage de l'écran, donc ##**ScreenUnlock**## n'a d'effet que sur un écran verrouillé précédemment.  Un écran qui n'a pas été verrouillé avec ##**ScreenLock**## ne peut être déverrouillé, cependant un nouveau ##**ScreenUnlock**## forcera la mise à jour d'une zone donnée ou de l'écran.   
 
-	Calls to ##**Screenunlock**## must be paired with matching calls to ##**[[KeyPgScreenlock Screenlock]]**##.  Only the first call to ##**[[KeyPgScreenlock Screenlock]]**## actually performs a locking operation.  Subsequent calls to ##**Screenlock**## only increment the lock counter.  Conversely, ##**Screenunlock**## only decrements the lock counter until it reaches zero at which time the actual unlock operation will be performed.  Using ##[[KeyPgScreengraphics Screen]]## or ##[[KeyPgScreenres Screenres]]## will release all locks and set the lock counter back to zero before changing screen modes.
+	A un certain nombre d'appels à ##**Screenunlock**## doit correspondre le même nombre d'appels à ##**[[KeyPgScreenlock Screenlock]]**##.  Seul le premier appel à ##**[[KeyPgScreenlock Screenlock]]**## procède effectivement à une opération de verrouillage.  Les appels suivants à ##**ScreenLock**## incrémentent seulement le compteur de verrouillage.  À l'inverse, ##**ScreenUnlock**## décrémente seulement le compteur de verrouillage jusqu'à ce qu'il atteigne zéro, à ce moment-là seulement, l'actuelle opération de déverrouillage sera effectuée.  L'utilisation de ##[[KeyPgScreengraphics Screen]]## ou ##[[KeyPgScreenres Screenres]]## annulera tous les verrouillages et mettra le compteur à zéro avant de changer de mode écran.
+ 
+	Toutes les déclarations graphiques verrouillent automatiquement l'écran avant l'appel de fonction et déverrouillent l'écran par la suite, vous n'avez donc pas besoin de faire cela explicitement en utilisant ##**[[KeyPgScreenlock Screenlock]]**## et ##**ScreenUnlock**##. Vous devez seulement verrouiller l'écran lorsque vous désirez accéder directement à l'écran (framebuffer) à l'aide de ## [[KeyPgScreenptr  ScreenPtr ]] ## ou lorsque vous souhaitez regrouper plusieurs déclarations graphiques ensemble afin que leurs effets apparaissent simultanément à l'écran, évitant ainsi les scintillements pendant les mises à jour de l'écran.
 
-	All graphic statements automatically lock the screen before the function call, and unlock the screen afterwards, so you do not need to do this explicitly using ##**[[KeyPgScreenlock Screenlock]]**## and ##**Screenunlock**##. You only need to lock the screen when you wish to access the screen (framebuffer) directly using ##[[KeyPgScreenptr Screenptr]]##  or when you wish to group several graphic statements together so their effects appear simultaneously on screen, thus avoiding potential screen flicker during screen updates.
+	Après l'appel de ##**Screenunlock**##, tous les états graphiques peuvent être utilisés en toute sécurité, d'autre part accèder directement au tampon image de la page de travail via ##[[KeyPgScreenptr ScreenPtr]]## peut être utilisé seulement après un nouveau verrouillage de l'écran avec ##[[KeyPgScreenlock ScreenLock]]##.
 
-	Warning (Win32, Linux) : The screen is locked by stopping the thread that processes also the OS' events. This means the screen should be locked only for the short time required to redraw it, and no user input will be received while the screen is locked.
+	Attention (""Win32"", Linux) : l'écran est verrouillé par arrêt du "thread" qui gère aussi les événements de l'OS. Cela signifie que l'écran ne doit être verrouillé que pour un laps de temps le plus court possible pendant lequel il est redessiné, et aucune entrée utilisateur n'est valide pendant que l'écran est verrouillé.
 
 {{fbdoc item="ex"}}
-	See ##[[KeyPgScreenptr Screenptr]]## example.
+	- Voir l'exemple de ##[[KeyPgScreenptr ScreenPtr]]##.
 
 {{fbdoc item="lang"}}
-	- Not available in the //[[CompilerOptlang -lang qb]]// dialect unless referenced with the alias ##**""__Screenunlock""**##.
+	- Non disponible en dialecte //[[CompilerOptlang -lang qb]]// sauf si référencé avec l'alias ##**__Screenunlock**##.
 
 {{fbdoc item="diff"}}
-	- New to ""FreeBASIC""
+	- Nouveau pour ""FreeBASIC""
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgScreengraphics Screen (Graphics)]]##

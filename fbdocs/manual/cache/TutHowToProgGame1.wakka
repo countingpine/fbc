@@ -1,50 +1,50 @@
 {{fbdoc item="title" value="How to Program a Game: Lesson 1"}}
 
-{{fbdoc item="section" value="Introduction by Lachie Dazdarian"}}
-The objective of this series of lessons is to help newbies who know very little of BASIC to learn the basics of programming in FreeBASIC necessary to create any computer game. Some elementary BASIC knowledge would help a lot, though I believe that people who don't know BASIC at all should comprehend these lessons too. I'm using here the word (well, it's an acronym) "BASIC" and not FreeBASIC, because if you know the basics of QuickBASIC, Visual BASIC or any other variant of BASIC, these lessons should be easy to comprehend.
+{{fbdoc item="section" value="Introduction par Lachie Dazdarian"}}
+L'objectif de cette série de leçons est d'aider les débutants qui connaissent un peu le BASIC, à apprendre les bases de la programmation en FreeBASIC nécessaires pour créer un jeu sur ordinateur. Quelues connaissances de base du BASIC seront très utiles pour faciliter les choses, cependant je crois que ceux qui ne connaissent pas le BASIC à fond peuvent quand même comprendre ces leçons. J'utilise ici le mot (enfin, c'est un acronyme) "BASIC" et non pas FreeBASIC, parce que si vous connaissez les bases de QuickBASIC, Visual Basic ou toute autre variante de Basic, ces leçons doivent être faciles à comprendre.
 
-I'm starting this series because I feel that tutorials of this kind were always something what our community was lacking, even before FreeBASIC. I've corresponded during my programming lifetime with quite few programming newbies, and they all had almost identical problems when trying to program a game. So I think I'm able to detect what beginners need quite well and on what way the stuff needs to be explained to them. I also remember my beginnings and the problems I had with using separated routines that were never meant to be combined and used to create a game. The breaking point for me was the moment when I discovered RelLib (a QuickBASIC graphics library by R.E.Lope) and the scrolling engine that was created with it. That scrolling engine motivated me to explore its mechanics and expand on it (with some help from R.E.Lope). In one single moment I acquired the ability to program most of the stuff (necessary to complete a game) by myself. It's like driving a bike. The moment when you acquire the actual skill lasts for one second.
+Je commence cette série parce que je pense que des tutoriels de ce genre ont toujours été quelque chose qui a manqué à notre communauté, même avant FreeBASIC. J'ai correspondu durant ma vie de programmeur avec quelques novices en programmation et ils ont toujours eu à peu près les mêmes problèmes quand ils ont essayé de programmer un jeu. Donc, je pense que je suis capable de détecter ce dont les débutants ont besoin et de quelle façon les choses doivent leur être expliquées. Je me souviens aussi de mes débuts et des problèmes que j'ai eus avec l'aide des routines séparées qui n'ont jamais été destinées à être combinées et utilisées pour créer un jeu. Le point de rupture a été pour moi le moment où j'ai découvert RelLib (une bibliothèque graphique en QuickBASIC par R.E.Lope) et le moteur de défilement qui a été créé avec elle. Ce moteur de défilement m'a incité à explorer ses mécaniciens et à le développer (avec une certaine aide de R.E.Lope). En un seul instant j'ai acquis la capacité de programmer la plupart des choses (nécessaires pour compléter un jeu) tout seul. C'est comme conduire un vélo. Le moment où vous avez acquis la compétence réelle a duré une seconde.
 
-So that's my goal with this series. To learn you enough so you would be self-sufficient in 90% of cases. And the best way to learn new things is to see them applied. Many tutorials fail in this by being too generic. You will always need help from more expert programmers, but the point is that you don't need it on every step. Have in mind that this depends on the type of game you are developing and the graphics library / tools you are using.
+Donc, c'est mon objectif avec cette série. Pour vous en apprendre suffisamment pour que vous soyez auto-suffisant dans 90% des cas. Et la meilleure façon d'apprendre de nouvelles choses est de les voir appliquées. De nombreux tutoriels échouent dans cette tâche car trop génériques. Vous aurez toujours besoin d'aide de programmeurs plus expérimentés, mais l'idée est que vous n'en avez pas besoin à chaque étape. Ayez à l'esprit que cela dépend du type de jeu que vous développez et la bibliothèque graphique / outils que vous utilisez.
 
-The example programs and mini-games we'll create will be coded in GFXlib (the FreeBASIC's built-in graphics library). Lynn's Legacy, ArKade, Mighty Line and Poxie were coded in it (among many others), and I think those games are good references. But don't worry. Switching from one graphics library to another is relatively easy when you know how to code in at least one.
+Les programmes d'exemple et de mini-jeux que nous allons créer seront codés en GFXlib (la bibliothèque graphique intégrée de FreeBASIC). Lynn Legacy, Arkade, Line Puissant et Poxie ont été codées avec elle (entre autres) et je pense que ces jeux sont de bonnes références. Mais ne vous inquiétez pas. Passer d'une librairie graphique à l'autre est relativement facile quand on sait comment en utiliserer au moins une.
 
-This tutorial will not deal with raycasting engines (3D programming) or something "advance" like that. If you want that but are a beginner, you NEED the following lessons FIRST.
+Ce tutoriel ne traitera pas des moteurs "raycasting" (programmation 3D) ou quelque chose d'"avancé" de ce genre. Si vous voulez utiliser cela, mais n'êtes qu'un débutant, vous avez BESOIN des leçons suivantes EN PREMIER.
 
-Since we are going to code in FreeBASIC you need to get FreeBASIC first (if you don't have it yet) from http://www.freebasic.net (the examples were compiled with version 0.18b), and one of the FreeBASIC IDEs available. I recommend FBIDE or FBEdit.
+Puisque nous allons coder en FreeBASIC vous avez besoin en premier FreeBASIC (si vous ne l'avez pas encore) à partir de http://www.freebasic.net (les exemples ont été compilés avec la version 0.18b) et l'un des IDE FreeBASIC disponibles. Je recommande FBIDE ou FBEdit.
 
-{{fbdoc item="section" value="Example #1: A simple program - The circle moves!"}}
+{{fbdoc item="section" value="Exemple #1: Un programme simple - Le cercle se déplace!"}}
 
-We'll start with some elementary stuff. The first program we'll code will not feature external graphics, because loading graphics from external files (usually BMP images) is always a dirty business and will confuse you at this point. Trust me on this. Be patient.
+Nous allons commencer avec des trucs élémentaires. Le premier programme que nous allons le coder n'aura pas d'éléments graphiques externes, car le chargement des graphiques à partir des fichiers externes (généralement des images BMP) est toujours une affaire compliquée et vous embrouillera pour un début. Croyez-moi. Soyez patient.
 
-The program we'll create will allow you to move a circle around the screen. A very simple program, but through making it we'll learn important facts and a lot of elementary statements and methods necessary to create any game with GFXlib.
+Le programme que nous allons créer va vous permettre de déplacer un cercle autour de l'écran. Un programme très simple, mais à travers lui, nous allons apprendre des notions importantes, beaucoup de déclarations élémentaires et méthodes nécessaires pour créer n'importe quel jeu avec GFXlib.
 
-As we are using GFXlib you need to be aware of the gfxlib.txt file(GFXlib's documentation) placed in the /FreeBASIC/docs directory. That's our Bible and very useful with these lessons since I will not explain every parameter of every statement used in the example programs (most likely). This document is somewhat outdated as FreeBASIC moved on with new versions, so be sure to refer to this online FreeBASIC manual too (part of the FreeBASIC Wiki).
+Comme nous utilisons GFXlib vous devez être au courant du fichier gfxlib.txt (documentation GFXlib) situé dans le répertoire /FreeBASIC/docs. C'est notre bible et il très utile pour ces leçons puisque je ne vais pas expliquer tous les paramètres de chaque déclaration utilisée dans les programmes d'exemple (le plus probable). Ce document est quelque peu dépassé depuis que FreeBASIC a évolué avec les nouvelles versions, donc n'oubliez pas de consulter aussi le manuel en ligne du FreeBASIC (partie du Wiki FreeBASIC).
 
-Open a new program in FBIDE. First thing we'll do is set the graphic mode. What's setting a graphic mode? Choosing the program's graphic resolution and color depth in bits (8-bit, 16-bit, ...). For example, 8-bit color depth is the standard 256 colors mode (8 bits per pixel). The graphic mode is set with the SCREEN statement like this:
+Ouvrez un nouveau programme dans FBIDE. La première chose que nous allons faire est de définir le mode graphique. Quoi? Fixer un mode graphique? Choix de la résolution graphique du programme et de la profondeur des couleurs en bits (8 bits, 16 bits, ...). Par exemple, la profondeur de couleur 8 bits est le standard en mode 256 couleurs (8 bits par pixel). Le mode graphique est réglé avec la déclaration écran suivante:
 
 %%(freebasic)
 	SCREEN 13,8,2,0
 %%
 
-13 means 320*200 graphic resolution, 8 means 8-bit graphics, 2 means two work pages, and 0 means window mode (input 1 for full screen mode). Minimum of 2 work pages is recommended for any graphics dependant program. These things will become clearer a little bit later. For more details about the SCREEN statement refer to GFXlib's documentation or FreeBASIC Wiki (a more "advanced" version of the SCREEN statement is SCREENRES).
+13 signifie une résolution graphique de 320*200, 8  signifie graphiques 8-bit, 2 signifie deux pages de travail et 0 signifie mode fenêtré (1 pour plein écran). Un minimum de 2 pages de travail est recommandée pour tout programme dépendant de graphiques. Ces notions deviendront plus claires un peu plus tard. Pour plus de détails sur la déclaration SCREEN référez-vous à la documentation de GFXlib ou au Wiki FreeBASIC (une version plus "avancée" de SCREEN est SCREENRES).
 
-The next thing we'll do is set a loop that plays until the user pushes the letter Q on the keyboard. Loops are foundation of any program, not just a computer game. Coding a program on a way it would stop/halt every now and then and wait for the user to type something in is a BAD and WRONG way to program anything you want for other people to play. We'll use loops as places where the program waits for the user to do something (clicks with mouse or pushes a key) and where the program executes some routine according to user's action. It will also be used as a place where objects not controlled by the player (enemies) are managed/moved. Loops are a must have.
+La prochaine étape est de définir une boucle qui joue jusqu'à ce que l'utilisateur appuie sur la lettre Q du clavier. Les boucles sont la base de tout programme et pas seulement pour un jeu d'ordinateur. Coder un programme en utilisant une méthode qui le ferait s'arrêter et le mettrait en attente d'une action quelconque de l'utilisateur est une méthode MAUVAISE et ERRONEE quel que soit ce que vous voulez programmer pour que d'autres personnes puissent y jouer. Nous utiliserons les boucles comme des lieux où le programme attend que l'utilisateur fasse quelque chose (clics avec la souris ou appuie sur une touche) et où le programme exécute une routine selon l'action de l'utilisateur. Elles seront également utilisées comme un lieu où les objets non contrôlés par le joueur (ennemis) seront gérés / déplacés. Les boucles sont un "must".
 
-If you are aware of all these things, you can skip to the end of this section and download the completed example (with comments). If there is something in it you don't understand, then get back here.
+Si vous êtes au courant de toutes ces choses, vous pouvez passer à la fin de cette section et télécharger l'exemple terminé (avec commentaires). S'il y a dedans quelque chose que vous ne comprenez pas, revenez ici.
 
-We can set a loop on more ways (with WHILE:WEND statements, using the GOTO statement - Noooo!), but the best way is to use DO...LOOP. This type of loop simply repeats a block of statements in it until the condition is met. You set the condition(s) after LOOP with UNTIL. Check the following code:
+Nous pouvons définir une boucle de plusieurs façons (avec les déclarations WHILE: WEND, en utilisant l'instruction GOTO - Noooon), mais la meilleure est d'utiliser DO...LOOP. Ce type de boucle répète simplement un bloc d'instructions jusqu'à ce que la condition soit remplie. Vous établissez la(les) condition(s) après LOOP avec UNTIL. Testez le code suivant:
 
 %%(freebasic)
 	SCREEN 13,8,2,0 ' Sets the graphic mode
 	DO
 	' We'll put our statements here later
-	LOOP UNTIL INKEY$ = "Q" or INKEY$ = "q"
+	Loop Until Inkey$ = "Q" Or Inkey$ = "q"
 %%
 
-If you compile this code and run it, you'll get a small black empty 320*200 window which you can turn off by pushing the letter Q (you might need to hold it). The program simply loops until you press "Q or "q". I used both upper and lower case "Q" symbol in case Caps Lock is turned on on your keyboard. INKEY$ is a statement that returns the last key pushed on the keyboard. I will explain later why it shouldn't be used with games and what's a better substitute.
+Si vous compilez ce code et l'exécutez, vous aurez une petit fenêtre 320 * 200 noire et vide et vous pourrez la désactiver en appuyant sur la touche Q (vous pourriez avoir besoin de la maintenir). Le programme boucle tout simplement jusqu'à ce que vous appuyez sur "Q" ou "q". J'ai utilisé les deux: majuscules et minuscules pour la lettre "Q" au cas où les majuscules seraient verrouillées sur votre clavier. INKEY $ est une instruction qui retourne la dernière touche appuyée du clavier . J'expliquerai plus tard pourquoi elle ne doit pas être utilisée dans les jeux et quel est le meilleur substitut.
 
-To draw a circle we'll use the CIRCLE statement (refer to GFXlib's documentation). Check the following code:
+Pour tracer un cercle j'utiliserai la déclaration CIRCLE (se référer à la documentation GFXlib). Essayez le code suivant:
 
 %%(freebasic)
 	SCREEN 13,8,2,0 ' Sets the graphic mode
@@ -53,10 +53,10 @@ To draw a circle we'll use the CIRCLE statement (refer to GFXlib's documentation
 
 	CIRCLE (150, 90), 10, 15 
 
-	LOOP UNTIL INKEY$ = "Q" or INKEY$ = "q"
+	Loop Until Inkey$ = "Q" Or Inkey$ = "q"
 %%
 
-The last code draws a small circle on coordinates 150, 90 with a radius of 10 and color 15 (plain white) in a loop, which you can check if you compile the code. So how to move that circle? We need to connect its coordinates with VARIABLES. For this we'll use two variables named circlex and circley. Check the following code:
+Le dernier code dessine un petit cercle aux coordonnées 150, 90 avec un rayon de 10 et la couleur 15 (Blanc pur) dans une boucle, que vous pouvez essayer si vous compilez le code. Alors, comment déplacer de ce cercle? Nous devons relier ses coordonnées avec des VARIABLES. Pour cela nous allons utiliser deux variables nommées circlex et circley. Vérifiez le code suivant:
 
 %%(freebasic)
 	DIM SHARED AS SINGLE circlex, circley
@@ -70,39 +70,39 @@ The last code draws a small circle on coordinates 150, 90 with a radius of 10 an
 
 	CIRCLE (circlex, circlex), 10, 15 
 
-	LOOP UNTIL INKEY$ = "Q" or INKEY$ = "q"
+	Loop Until Inkey$ = "Q" Or Inkey$ = "q"
 %%
 
-This makes no change in the result of our program, but it's a step to what we want to accomplish. You can change the amounts to which circlex and circley equal to change the circle's initial position, but that's not what we really want. In order to move the circle we need to connect circlex and circley variables with keyboard statements.
+Cela n'apporte aucune modification dans le résultat de notre programme, mais c'est une étape vers ce que nous voulons accomplir. Vous pouvez modifier les valeuurs de circlex et circley, mais ce n'est pas ce que nous voulons vraiment. Afin de déplacer le cercle nous devons connecter les variables circlex et circley avec les déclarations du clavier.
 
-We declared first two variables in our program. Since FreeBASIC ver.0.17 all variables in FreeBASIC programs MUST be declared, although if you use –lang qb command line during compiling you can compile using old QBasic compatibility dialect (I don’t recommend it as it will keep you deprived of possible advances and extensions which default FB compatibility already provides and will provide). For more info on this check the appropriate page of the FreeBASIC wiki - Using the command line. Variables are declared (dimensioned) on this way:
+Nous avons déclaré les deux premières variables dans notre programme. Depuis FreeBASIC ver.0.17 toutes les variables dans les programmes de FreeBASIC doivent être déclarées, mais si vous utilisez la  commande en ligne "-lang qb" pendant la compilation, vous pouvez compiler en utilisant la compatibilité avec le vieux dialecte QBasic (je ne le recommande pas car cela vous privera des avancées et extensions possibles que la compatibilité FB par défaut fournit déjà et fournira). Pour plus d'infos sur cela consultez la page appropriée du wiki FreeBASIC - Utilisation de la ligne de commande. Les variables sont déclarées (dimensionnées) de cette façon:
 
 %%(freebasic)
 	DIM variable_name [AS type_of_variable] 
 %%
 
-Or...
+Ou...
 
 %%(freebasic)
 	DIM [AS type_of_variable] variable1, variable2, variable3, ... 
 %%
 
-The data inside [ ] is optional and the brackets are not used. Types of variables available in FreeBASIC are BYTE, SHORT, INTEGER, STRING, SINGLE, DOUBLE and few others, but I don't find details about them important on this level. What you need to know now is that you should declare variables or arrays AS INTEGER when they hold graphics data (memory buffers holding graphics) or when they represent data which doesn't need decimal precision (number of lives, points, etc.). Variables that need decimal precision are declared AS SINGLE or DOUBLE. Those are usually variables used in games which rely on physics formulae like arcade car driving games or jump 'n run games (gravity effect). Simply, the difference between the speed of two pixels per cycle and the speed of one pixel per cycle is most often too large, and in those limits you can't emulate effects like fluid movement on the most satisfactory way. Also, behind DIM you should put SHARED which makes that the specific variable readable in the entire program (all subroutines). Don't use SHARED only with variables declared inside subroutines (I do it very rarely). If you are going to declare ARRAYS inside a subroutine, I advise you to replace DIM with REDIM. Strings are used to hold text data. Like YourName = "Dodo", but you need to declare YourName AS STRING first.
+Les données entre [ ] sont facultatives et les crochets ne sont pas utilisés. Les types de variables disponibles en FreeBASIC sont BYTE, SHORT, INTEGER, STRING, SINGLE, DOUBLE et quelques autres, mais il n'est pas important, à ce niveau, de donner des détails sur elles. Ce que vous devez savoir maintenant c'est que vous pouvez déclarer des variables ou des tableaux d' INTEGER quand ils contiennent des données graphiques (tampons mémoire contenant des éléments graphiques) ou quand elles représentent des données qui ne nécessitent de précision décimale (nombre de vies, points, etc;); les variables qui ont besoin de précision décimale sont déclarées AS SINGLE ou DOUBLE. Celles-ci sont généralement des variables utilisées dans les jeux qui reposent sur des formules de physique comme les jeux d'arcade de conduite de voiture ou des jeux "Jump 'n run" (effet de la pesanteur). Simplement, la différence entre la vitesse de deux pixels par cycle et la vitesse d'un pixel par cycle est le plus souvent trop gros, et dans ces limites, vous ne pouvez pas reproduire des effets comme le mouvement des fluides de la manière la plus satisfaisante. Derrière DIM vous pouvez ausi ajouter SHARED qui rend la variable spécifique lisible dans l'ensemble du programme (tous les sous-programmes). N' utiliser pas SHARED uniquement avec les variables déclarées à l'intérieur des sous-routines (je le fais très rarement). Si vous avez à déclarer des TABLEAUX  dans une routine, je vous conseille de remplacer DIM par REDIM. Les chaînes sont utilisés pour contenir des données texte. Comme VotreNom = "Dodo", mais vous devez au préalable déclarer VotreNom AS STRING.
 
-Now I will introduce a new statement instead of INKEY$ which can detect multiple keypresses and is much more responsive (perfect response) than INKEY$. The flaw of INKEY$, as well as being very non-responsive (which you probably were able to detect when trying to shut down the previously compiled examples), is that it can detect only one keypress at any given moment which renders it completely unusable in games.
+Maintenant je vais vous présenter une nouvelle fonction remplaçant INKEY$ qui permet de détecter de multiples pressions sur les touches et qui est beaucoup plus réactive (réponse parfaite) que INKEY$. La faille du INKEY$, en plus d'être très non-réactive (ce que vous avez probablement remarqué lorsque vous avez essayé de fermer les exemples précédemment compilés), est qu'elle ne peut détecter qu'une seule pression de touche à tout instant ce qui le rend complètement inutilisable dans les jeux.
 
-The substitute we'll use is MULTIKEY (a GFXlib statement) which features only one parameter, and that's the DOS scancode of the key you want to query. You might be lost now. DOS scancode is nothing but a code referred by the computer to a certain keyboard key. If you check Appendix A of the GFXlib's documentation, you will see what each code stands for. For example, MULTIKEY(&h1C) queries if you pushed ENTER. GFXlib allows you to replace these scancodes with "easy to read" constants like it's explained in Appendix A. To use GFXlib you need to include its .bi file (fbgfx.bi) into your source. What's a .bi file? Well, it can be any kind of module you would attach to your source code and which can feature various subroutines (if you don't know what a subroutine is, we'll get on that later) and declarations used in your main module. The code you need to add are these two lines as it follows:
+Le substitut, nous allons utiliser est MULTIKEY (une déclaration GFXlib) qui dispose d'un seul paramètre, et c'est le "scancode DOS" de la touche que vous voulez interroger. Vous pourriez être perdu maintenant. Le "scancode DOS" n'est rien d'autre que le code attribué par l'ordinateur aux touches du clavier. Si vous consultez l'annexe A de la documentation de la GFXlib, vous verrez ce que chaque code représente. Par exemple, MULTIKEY(&h1C) correspond à un appui sur la touche ENTRER. La GFXlib vous permet de remplacer ces scancodes par des constantes "facile à lire" comme expliqué dans l'annexe A. Pour utiliser GFXlib vous devez inclure son fichier.bi (fbgfx.bi) dans votre source. Qu'est-ce qu'un fichier.bi? Eh bien, ce peut être n'importe quel type de module que vous joignez à votre code source et qui peut fournir différents sous-programmes (si vous ne savez pas ce qu'est un sous-programme est, nous verrons plus tard) et déclarations utilisées dans votre module principal. Le code que vous devez ajouter corresond aux deux lignes suivantes:
 
 %%(freebasic)
 	#include "fbgfx.bi" 
 	Using FB
 %%
 
-It's best to put these two lines somewhere on the beginning of your program (before or after the sub declarations). You don't need to set a path to fbgfx.bi since it's placed in the /FreeBASIC/inc directory. You only need to set a path to a .bi file if it's not in that directory or not in the directory where the source code is. Using FB tells the program that we will be accessing GFXlib symbols without namespace, meaning, without having to put 'FB.' in front of every GFXlib symbol. Refer to FreeBASIC Wiki on USING.
+Il est préférable de mettre ces deux lignes quelque part au début de votre programme (avant ou après les déclarations des "sub"). Vous n'avez pas besoin de définir un chemin vers fbgfx.bi car il a placé dans le répertoire /FreeBASIC /inc. Vous avez seulement besoin de définir un chemin vers un fichier.bi s'il n'est pas dans ce répertoire ou dans le répertoire du code source. Utiliser FB indique au programme que nous accèderons aux symboles GFXlib sans espace de noms, ce qui signifie, sans avoir à mettre "FB." en face de chaque symbole GFXlib. Reportez-vous au Wiki sur l'UTILISATION de FreeBASIC.
 
-Now the fun starts.
+Maintenant, le plaisir commence.
 
-We will add a new variable named circlespeed which flags (sets) how many pixels the circle will move in one cycle (loop). The movement will be done with the arrows key. Every time the user pushes a certain arrow key we will tell the program to change either circlex or circley (depends on the pushed key) by the amount of circlespeed. Check the following code:
+Nous allons ajouter une nouvelle variable nommée "circlespeed" dont les drapeaux (bits à 1) indiquent le nombre de pixels du cercle qui se déplacent dans un cycle (une boucle). Le mouvement sera provoqué par les touches flèches. Chaque fois que l'utilisateur appuie sur une touche fléchée nous allons dire au programme de modifier "circlex" ou "circley" (cela dépend de la touche appuyée) par la quantité "circlespeed". Testez le code suivant:
 
 %%(freebasic)
 	#include "fbgfx.bi"
@@ -129,13 +129,13 @@ We will add a new variable named circlespeed which flags (sets) how many pixels 
 	LOOP UNTIL MULTIKEY(SC_Q) OR MULTIKEY(SC_ESCAPE)
 %%
 
-As you see we also changed the condition after UNTIL since we are using MULTIKEY now. Now you can exit the program by pressing ESCAPE too (I added one more condition).
+Comme vous le voyez nous avons aussi changé la condition après UNTIL puisque nous utilisons MULTIKEY maintenant. Maintenant vous pouvez aussi quitter le programme en appuyant sur ESCAPE (j'ai ajouté une autre condition).
 
-If you compile the last version of the code, two things we don't want to happen will happen. The program will run so fast you won't even notice the movement of the circle, and the circle will "smear" the screen (the circles drawn on different coordinates in previous cycles will remain on the screen). To avoid smearing you need to have the CLS statement (clears the screen) in the loop so that in every new cycle the old circle from the previous cycle is erased before the new is drawn.
+Si vous compilez la dernière version du code, deux choses indésirables se produisent. Le programme s'exécutera si rapidement que vous ne remarquerez même pas le mouvement du cercle et le cercle "s'étale" sur l'écran (les cercles tracés aux différentes coordonnées dans les cycles précédents ne sont pas effacés et s'accumulent à l'écran). Pour éviter cela vous devez placer l'instruction CLS (nettoie l'écran) dans la boucle de façon que pour chaque nouveau cycle l'ancien cercle du cycle précédent soit effacé avant le tracé du nouveau.
 
-To reduce the speed of the program the quickest fix is the SLEEP command. What it does? It waits until the specified amount of time has elapsed (in milliseconds) or a key is pressed. To escape the key press option use SLEEP milliseconds, 1. This statement is also an efficient solution for the 100 % CPU usage problem. You see, if you don't use that statement any kind of FreeBASIC program with a loop (even the simplest one) will hold up all the computer cycles and make all the other Windows tasks you might be running to crawl. It also makes difficult for you to operate with other tasks while that kind of FreeBASIC program is running. Err...this is not a huge problem and a fair amount of programmers that have released FreeBASIC games so far did not bother to fix it.
+Pour réduire la vitesse du programme le correctif le plus rapide est la commande SLEEP. Que fait-elle? Elle attend (ne fait rien) jusqu'à ce que la quantité de temps spécifiée (en millisecondes) soit écoulée ou bien qu'une touche soit appuyée. Pour annuler l'option "touche appuyée" utilisez "SLEEP millisecondes, 1". Cette instruction est également une solution efficace pour le problème d'utilisation du processeur à 100%. Vous voyez, si vous n'utilisez pas cette instruction tout type de programme FreeBASIC avec une boucle (même la plus simple) mobilisera tous les cycles de l'ordinateur et toutes les autres tâches de Windows ne pourront être exécutées correctement. Cela rend également difficile pour vous d'exécuter d'autres tâches pendant l'exécution ce genre de programme FreeBASIC. Euh ... ce n'est pas un problème énorme et une bonne quantité de programmeurs qui ont réalisé des jeux FreeBASIC jusqu'à présent n'ont pas pris la peine de s'en préoccuper.
 
-Copy and paste the following code and compile it:
+Copiez et collez le code suivant et compilez le:
 
 %%(freebasic)
 	#include "fbgfx.bi"
@@ -165,13 +165,13 @@ Copy and paste the following code and compile it:
 	LOOP UNTIL MULTIKEY(SC_Q) OR MULTIKEY(SC_ESCAPE)
 %%
 
-Viola! Our circle is moving and "slow enough".
+Voila! Notre cercle se déplacement "assez lentement".
 
-The last version of the code does not represent the desirable way of coding, but I had to simplify the code in order to make this lesson easy to understand. What we need to do next is declare our variables on the way they should be declared in any "serious" program, and show why we are having two work pages and what we can do with them.
+La dernière version du code ne présente pas la meilleure manière de coder, mais j'ai été obligé de le simplifier afin de rendre cette leçon facile à comprendre. Nous allons maintenant déclarer nos variables de la manière dont elles doivent l'être dans tout programme "sérieux" et de montrer l'utilité et l'utilisation de deux pages de travail.
 
-The way variables are declared in the above code is not the most convenient in larger projects where we have huge amount of variables usually associated to several objects (an object can be the player, enemy or anything that is defined with MORE THAN ONE variable).
+La façon dont les variables sont déclarées dans le code ci-dessus n'est pas plus pratique que dans les grands projets où nous avons énormément de variables habituellement associées à plusieurs objets (un objet peut être le joueur, un ennemi ou tout ce qui est défini avec PLUS D'UNE VARIABLE).
 
-So first we'll define a user defined data type with the statement TYPE that can contain more variables/arrays (stay with me). We'll name this user data type ObjectType. The code:
+Alors d'abord nous allons définir un type de données défini par l'utilisateur avec l'instruction TYPE qui peut contenir plusieurs variables/tableaux (restez avec moi!). Nous allons nommer ce type de données utilisateur "ObjectType". Le code:
 
 %%(freebasic)
 	TYPE ObjectType
@@ -181,7 +181,7 @@ So first we'll define a user defined data type with the statement TYPE that can 
 	END TYPE
 %%
 
-After this we declare our circle as an object:
+Après cela, nous déclarons notre cercle comme un objet:
 
 %%(freebasic)
 	DIM SHARED CircleM AS ObjectType
@@ -190,9 +190,9 @@ After this we declare our circle as an object:
 	' the statement CIRCLE, thus "CircleM".
 %%
 
-How is this method beneficial? It allows us to manage the program variables on a more efficient and cleaner way. Instead of (in this example) having to declare each circle's characteristic (it's position, speed, etc.) separately, we'll simply use a type:def that includes all these variables and associate a variable or an array to it (in this case that's CircleM). So now the circle's x position is flagged with CircleM.X, circle's y position with CircleM.Y and circle's speed with CircleM.speed. I hope you see now why this is better. One user defined type can be connected with more variables or arrays. In this example you can add another object with something like DIM SHARED EnemyCircle(8) AS ObjectType which would allow us to manage 8 "evil" circles with a specific set of routines (an AI of some sort) using the variables from the ObjectType type:def (x, y, speed), and these circles could "attack" the user's circle on some way. In the next lesson all this will become more clear. Have in mind that not ALL variables need to be declared using a type:def. This is only for "objects" in your game that are defined (characterized) with more variables (like a hero determined by health, money, score, strength, etc.).
+Comment cette méthode est-elle bénéfique? Elle nous permet de gérer les variables du programme par un moyen plus efficace et plus propre. Au lieu d'avoir (dans cet exemple) à déclarer les caractéristiques de chaque cercle (la position, vitesse, etc) séparément, nous allons simplement utiliser un "type:def" qui comprend toutes ces variables et lui associer une variable ou un tableau (dans notre cas, c'est CircleM). Alors maintenant, la position x du cercle est marqué avec "CircleM.x", la position y cercle avec "CircleM.y" et la vitesse du cercle avec "CircleM.speed". J'espère que vous comprenez maintenant pourquoi c'est mieux. Un Type défini par l'utilisateur peut être connecté à plusieurs variables ou des tableaux. Dans cet exemple, vous pouvez ajouter un autre objet avec quelque chose comme "DIM SHARED EnemyCircle(8) AS ObjectType" qui nous permettrait de gérer 8 "cercles ennemis" avec un ensemble spécifique de routines (une IA d'une certaine sorte) en utilisant les variables "ObjectType type:def (x, y, speed)", et ces cercles pourraient "attaquer" le cercle de l'utilisateur d'une certaine façon. Dans la prochaine leçon tout cela deviendra plus clair. Avoir à l'esprit que TOUTES les variables ne doivent pas être déclarées en utilisant un "type:def". Ce sont seulement pour les "objets" de votre jeu qui seront définis (caractérisés) avec plusieurs variables (comme un héros déterminé par la santé, de l'argent, le score, la force, etc.).
 
-After the change the final version of the code looks like this:
+Après le changement de la version finale du code ressemble à ceci:
 
 %%(freebasic)
 	#include "fbgfx.bi"
@@ -233,31 +233,31 @@ After the change the final version of the code looks like this:
 	LOOP UNTIL MULTIKEY(SC_Q) OR MULTIKEY(SC_ESCAPE)
 %%
 
-You will notice I added one more statement in the code. The SETMOUSE statement positions the system mouse cursor (first two parameters) and shows or hides it (third parameter; 0 hides it). You should input this statement with these parameters in every program AFTER the SCREEN statement (IMPORTANT!) by default, because even if your program is going to feature a mouse controllable interface, you will most likely draw your own cursor. Trust me on this. Uh, I using that line way too often.
+Vous remarquerez, j'ai ajouté une autre instruction dans le code. L'instructione SETMOUSE positionne le curseur de la souris (les deux premiers paramètres) et l'affiche ou le cache (le troisième paramètre; 0 le cache). Vous pouvez utiliser cette instruction avec ces paramètres par défaut dans chacun de vos programmes APRES l'instruction SCREEN (IMPORTANT!), car même si votre programme contôlera la souris, vous préférerez peut être dessiner votre propre curseur.  because even if your program is going to feature a mouse controllable interface, you will most likely draw your own cursor. Croyez-moi sur ce point. Euh, j'utilise beaucoup trop cette façon de voir les choses.
 
-Download the completed example with extra comments inside the source: move_circle.zip
+Téléchargez l'exemple achevé avec des commentaires supplémentaires à l'intérieur du source: move_circle.zip
 
-Phew, we are done with the first example. Some of you might think I went into too many details, but I feel all this dance was needed to make the next examples and lessons a more enjoyable adventure.
+Ouf, nous en avons fini avec le premier exemple. Certains d'entre vous pourraient penser que je suis allé trop dans les détails, mais je me sens que tout cela était nécessaire pour rendre les exemples suivants et les leçons de cette aventure des plus agréables.
 
-Nevertheless, this example is far from what we want, right? So the next chapter will learn you how to load graphics from external files among other things. 
+Néanmoins, cet exemple est loin d'être ce que nous voulons, non? Alors au chapitre suivant vous apprendrez comment charger des graphismes à partir de fichiers externes, entre autres. 
 
-{{fbdoc item="section" value="Example 2: A warrior running around a green field"}}
+{{fbdoc item="section" value="Exemple 2: Un guerrier courant autour d'un champ vert"}}
 
-In the next example we will be applying all the knowledge from the first example, so don't expect for this example to go into every statement again. I will explain every new statement and just brush off the old ones.
+Dans l'exemple suivant nous allons appliquer toutes les connaissances du premier exemple, alors ne vous attendez pas pour cet exemple à un retour sur chaque instruction. Je vais vous expliquer chaque nouvelle instruction et juste rafraichir les anciennes.
 
-In this section we'll start to code our mini-game which won't be completed in this lesson. In this lesson we'll just create a program where a warrior runs around a green field (single screen).
+Dans cette section, nous allons commencer à coder notre mini-jeu qui ne sera pas terminé dans cette leçon. Dans cette leçon, nous allons simplement créer un programme où un guerrier tourne autour d'un champ vert (un seul écran).
 
-First I'll show you what graphics we'll be using. We are going to work in 8-bit color depth mode, so the images that we are going to use need to be saved in that mode (256 colors mode). For warrior sprites I'll use the sprites of the main character from my first game Dark Quest.
+D'abord je vais vous montrer le graphique que nous allons utiliser. Nous allons travailler en mode couleur 8-bit de profondeur, donc les images que nous allons utiliser doivent être enregistrées dans ce mode (mode 256 couleurs). Pour les "sprites" guerrier je vais utiliser les "sprites" du personnage principal de mon premier jeu "Dark Quest".
 
 http://hmcsoft.org/fb/htpagl1-sprites.png
 
-As you see this image features 12 sprites of our warrior, each 20*20 pixels large. Two for each direction (walk animation) and one sprite for each direction when the warrior is swinging with his sword. Sword swinging won’t be implemented in the first lesson but will become necessary later.
+Comme vous le voyez cette image dispose de 12 sprites de nos guerriers, chacun ayant 20 * 20 pixels de large. Deux pour chaque direction (animation de marche) et un sprite pour chaque direction lorsque le guerrier se balance avec son épée. L'épée balancée n'est mis en oeuvre dans la première leçon, mais deviendra nécessaire plus tard.
 
-Second image is the background image which you can check/download if you click here (320*200 pixels large, 8-bit BMP image).
+La seconde image est l'image d'arrière-plan que vous pouvez télécharger en cliquant ici (320*200 pixels de large, image BMP 8-bit).
 
-Download both images and place them where you will place the source, or just download the completed example at the end of this section.
+Téléchargez les images et placez-les où vous allez placer la source, ou tout simplement Téléchargez l'exemple achevé à la fin de cette section.
 
-On the beginning of our program we should include fbgfx.bi, same as in the first example, and then set the same graphic mode. The code:
+Au début de notre programme, Il faut inclure fbgfx.bi, comme dans le premier exemple, puis définir le même mode graphique. Le code:
 
 %%(freebasic)
 	#include "fbgfx.bi" 
@@ -267,23 +267,23 @@ On the beginning of our program we should include fbgfx.bi, same as in the first
 	SETMOUSE 0,0,0  ' Hides the mouse cursor
 %%
 
-Now we will declare two memory pointers that will point to memory buffers where our graphics will be stored (one for the sprites and one for the background).
+Maintenant, nous allons déclarer deux pointeurs de mémoire qui pointeront vers les tampons mémoire où nos graphiques sont stockés (un pour les sprites et un pour le fond).
 
-The first pointer we'll name background1 and declare it with the following line:
+Le premier pointeur est nommé "background1" et il est déclaré avec la ligne suivante:
 
 %%(freebasic)
 	DIM SHARED background1 AS ANY PTR
 %%
 
-ANY PTR tells us that background1 will actually be a memory pointer. A pointer defined as an ANY PTR disables the compiler checking for the type of data it points to. It is useful as it can point to different types of data. We'll use pointers because we will allocate memory for our graphics using the IMAGECREATE statement. IMAGECREATE allocates the right amount of memory for a piece of graphics (sprite/image) if we input its height and width. Otherwise we would have to do it manually, meaning, calculate the needed amount of memory as the result of the sprite size, bit-depth and variable size. IMAGECREATE does this for use. As IMAGECREATE results with a pointer, we need to refer a pointer to it and not a variable. Don't worry if you don't know anything about pointers. You don't need to (to comprehend this tutorial).
+ANY PTR nous dit que "background1" sera effectivement un pointeur mémoire. Un pointeur défini comme ANY PTR désactive le compilateur pour la vérification le type de données sur lequel il pointe. C'est utile car il peut pointer vers différents types de données. Nous allons utiliser des pointeurs car nous allons allouer de la mémoire pour nos graphiques en utilisant l'instruction IMAGECREATE. IMAGECREATE alloue la bonne quantité de mémoire pour un élement graphique (sprites / image), si nous donnons sa hauteur et sa largeur. Sinon, nous aurions à le faire manuellement, ce qui signifie, calculer la quantité de mémoire nécessaire d'après la taille du sprite, la profondeur de bit et la taille de  la variable. IMAGECREATE fait cela pour nous. Comme le résultat d'IMAGECREATE est un pointeur, nous devons nous référer à un pointeur et non une variable. Ne vous inquiétez pas si vous ne savez rien à propos des pointeurs. Vous n'en avez pas besoin pour comprendre ce tutoriel.
 
-The next pointer we'll declare will point to the memory buffer that holds the 12 warrior sprites. We will dimension this pointer as a single dimension array, each element in the array representing one sprite.
+Le pointeur suivant pointe vers la mémoire tampon qui contient les 12 sprites du guerrier. Nous allons le dimensionner comme un tableau unidimensionnel, chaque élément du tableau représentant un sprite.
 
 %%(freebasic)
 	DIM SHARED WarriorSprite(12) AS ANY PTR
 %%
 
-Both these lines should be put in the code before the SCREEN statement. That's the way you'll write every program. Subroutine declarations, then variable declarations, then extra subroutine declarations if needed, and then the real code. The beginning of our program should now look like this:
+Ces deux lignes devraient être mis dans le code avant l'instruction SCREEN. C'est la façon d'écrire chaque programme. Déclarations des sous-programmes, déclarations des variables, puis les déclarations des sous-programmes supplémentaire si nécessaire, puis le code réel. Le début de notre programme devrait maintenant ressembler à ceci:
 
 %%(freebasic)
 	#include "fbgfx.bi" 
@@ -298,5 +298,5 @@ Both these lines should be put in the code before the SCREEN statement. That's t
 	SETMOUSE 0,0,0  ' Hides the mouse cursor
 %%
 
-After the screen resolution, color depth and number of work pages are set, we will hide our work page before loading graphics onto it since we don't want for the user to see all of the program's graphics every time he or she starts our program. To accomplish that we'll use the SCREENSET statement. What it does? It sets the work page (first parameter) and the visible page (second parameter). In our case we will set page 1 as the work page and page 0 as the visible page. After using 'SCREENSET 1, 0' every time we draw or load something on the screen it will be loaded/drawn on the work page and won't be visible to the user until we use the statement SCREENCOPY or SCREENSET with different parameters (SCREENSET 1, 1). This allows us to load graphics onto the screen we don't want for the user to see and delete it before coping the content on the work page to the visible page. This page flipping is also useful in loops with "graphics demanding" programs to avoid flicker or some other unwanted occurrence.
+Dès que la résolution de l'écran, la profondeur de couleur et nombre de pages du travail sont fixés, nous allons cacher notre page de travail avant le chargement des graphiques sur elle car nous ne voulons pas que l'utilisateur voit tous les graphique du programme à chaque fois qu'il ou elle lance notre programme . Pour accomplir cela, nous allons utiliser l'instruction SCREENSET. Que fait-elle? Elle définit la page de travail (premier paramètre) et la page visible (deuxième paramètre). Dans notre cas nous allons mettre en page 1 la page de travail et en page 0 la page visible. Après l'utilisation de "SCREENSET 1, 0" chaque fois que nous dessinerons ou chargerons quelque chose sur l'écran, cel sera chargé / dessiné sur la page de travail et ne sera pas visible pour l'utilisateur jusqu'à ce que nous utilisons l'instruction SCREENCOPY ou SCREENSET avec des paramètres différents (SCREENSET 1, 1). Cela nous permet de charger des graphiques sur l'écran, invisibles pour l'utilisateur et de les supprimer avant que la page de travail ne soit la page visible. Cette permutation (flipping) de pages  est également utile dans les boucles avec des" programmes "exigeant des graphiques" pour éviter le scintillement ou un autre événement indésirable.
 

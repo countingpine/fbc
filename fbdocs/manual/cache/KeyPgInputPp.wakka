@@ -1,24 +1,24 @@
 {{fbdoc item="title" value="INPUT #"}}----
-Reads a list of values from a text file
+Lit une liste de valeurs à partir d'un fichier texte
 
 {{fbdoc item="syntax"}}##
 	**Input** # //filenum//, //variable_list//
 ##
 {{fbdoc item="param"}}
 	##//filenum//##
-		a file number of a file or device opened for ##[[KeyPgInputfilemode Input]]##
+		un numéro de fichier d'un fichier ou d'un dispositif ouvert avec ##[[KeyPgInputfilemode Input]]##
 	##//variable_list//##
-		a list of variables used to hold the values read
+		une liste des variables utilisées pour stocker les valeurs lues
 
 {{fbdoc item="desc"}}
-	Reads from a text file through a bound file number a delimiter-separated set of values and writes them in reading order into the variables in ##//variable_list//##. If a variable is numeric the read value is converted from its string representation into the corresponding type.
+	Lit à partir d'un fichier texte par l'intermédiaire d'un numéro de fichier un ensemble de valeurs séparées par un délimiteur et les écrit dans l'ordre de la lecture dans les variables de ##//variable_list//##. Si une variable est numérique la valeur lue est convertie à partir de sa représentation sous forme de chaîne dans son type correspondant.
 
-	Numeric values are converted in a similar way to the procedures ##[[KeyPgVal Val]]## and ##[[KeyPgVallng ValLng]]##, using the most appropriate function for the number format.
+	Les valeurs numériques sont converties de la même façon que les procédures ##[[KeyPgVal Val]]## et ##[[KeyPgVallng ValLng]]##, en utilisant la fonction la plus appropriée pour le format du nombre.
 
-	Delimiters may be commas or line breaks. Whitespace is also treated as a separator after numbers. A string including a comma or a whitespace must be surrounded by double quotes. 
+	Les délimiteurs peuvent être des virgules ou des sauts de ligne. Un espace blanc est considéré comme séparateur après les nombres. Une chaîne contenant des virgules ou espaces blancs doit être encadrée par des guillemts doubles. 
 
-	To read an entire line into a string, use ##[[KeyPgLineinputPp Line Input]]## instead.
-	[[KeyPgWritePp Write #]] can be used to create a file readable with ##**""Input #""**##.
+	Pour lire une ligne entière dans une chaîne, utilisez plutôt ##[[KeyPgLineinputPp Line Input]]##.
+	[[KeyPgWritePp Write #]] peut être utilisé pour créer un fichier lisible avec ##**""Input #""**##.
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/fileio/input.bas"}}%%(freebasic)
@@ -37,13 +37,13 @@ print a, b, c
 %%
 
 {{fbdoc item="diff"}}
-	- QB has a bug in INPUT # that causes it to read past the end of the line if it does not find a matching end-quote when reading a string. If you are porting QB code that relies upon this bug, you may need to edit your data files to remove newlines from inside quoted strings, or to use a custom function to piece back together the multiline string.
+	- QB a un "bug" dans INPUT # qui l'amène à lire au-delà de la fin de la ligne s'il ne trouve pas des guillemets de fin quand il lit une chaîne. Si vous avez du code QB qui repose sur ce bug, vous devez éditer vos fichiers de données pour supprimer les chaînes multi-lignes à l'intérieur des guillemets ou utiliser une fonction personnalisée qui rassemble sur une seule ligne les éléments d'une chaîne multi-lignes.
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgInput Input]]##
 	- ##[[KeyPgLineinputPp Line Input #]]##
 	- ##[[KeyPgWritePp Write #]]##
 	- ##[[KeyPgOpen Open]]##
-	- ##[[KeyPgInputfilemode Input (file mode)]]##
+	- ##[[KeyPgInputfilemode Input (Mode fichier)]]##
 
 {{fbdoc item="back" value="CatPgFile|File I/O Functions"}}

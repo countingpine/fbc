@@ -1,24 +1,24 @@
 {{fbdoc item="title" value="Operator [] (Pointer index)"}}----
-Returns a reference to memory offset from an address
+Renvoie une référence au décalage mémoire par rapport à une adresse
 
 {{fbdoc item="syntax"}}##
 	[[KeyPgDeclare declare]] [[KeyPgOperator operator]] **[]** ( [[KeyPgByref byref]] //lhs// [[KeyPgAs as]] //T// [[KeyPgPointer pointer]], [[KeyPgByref byref]] //rhs// [[KeyPgAs as]] [[KeyPgInteger integer]] ) [[KeyPgAs as]] //T//
 ##
-~&//Note that **##Operator []## (Pointer index)** returns a reference. See [[CompilerFAQ CompilerFAQ]].//
+~&//Notez que **##Operator [ ]## (Pointeur d'indice)** retourne une référence. Voir [[CompilerFAQ FAQ du Compilateur]].//
 
 {{fbdoc item="usage"}}##
 	//result// = //lhs// **[** //rhs// **]**
 ##
 {{fbdoc item="param"}}
 	##//lhs//##
-		The base address.
+		L'adresse de base.
 	##//rhs//##
-		A signed offset from ##//lhs//##.
+		Un décalage (offset) à partir de ##//lhs//##.
 	##//T//##
-		Any data type.
+		Tout type de donnée.
 
 {{fbdoc item="desc"}}
-	This operator returns a reference to a value some distance in memory from a base address. It is essentially shorthand for "##[[KeyPgOpValueOf *]](//lhs// [[KeyPgOpAdd +]] //rhs//)##"; both do exactly the same thing. Like pointer arithmetic, any type of ##[[KeyPgPointer POINTER]]## can be indexed except for an ##[[KeyPgAny ANY]]## ##[[KeyPgPointer POINTER]]##. Also, like pointer arithmetic, it is up to the user to make sure meaningful data is being accessed.
+	Cet opérateur renvoie une référence à une valeur à une certaine distance dans la mémoire par rapport à une adresse de base. Il s'agit essentiellement d'un raccourci pour "##[[KeyPgOpValueOf *]](//lhs// [[KeyPgOpAdd +]] //rhs//)##"; les deux font exactement la même chose. Comme un pointeur arithmétique, tout type de ##[[KeyPgPointer Pointeur]]## peut être indexé sauf pour un  ##[[KeyPgPointer Pointeur]]## ##[[KeyPgAny ANY]]##. Aussi, comme un pointeur arithmétique, c'est à l'utilisateur de s'assurer les données significatives sont accessibles.
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/operator/pointer-index.bas"}}%%(freebasic)
@@ -34,17 +34,17 @@ for index as integer = 0 to 4
 next
 %%
 
-	Will give the output,
+	Affichera,
 
 %%0 1 2 3 4
 %%
 
 {{fbdoc item="diff"}}
-	- New to ""FreeBASIC""
+	- Nouveau pour ""FreeBASIC""
 
 {{fbdoc item="see"}}
-	- ##[[KeyPgOpAdd Operator + (Add)]]##
-	- ##[[KeyPgOpSubtract Operator - (Subtract)]]##
-	- [[CatPgOpPoint Pointer Operators]]
+	- ##[[KeyPgOpAdd Operator + (Addition)]]##
+	- ##[[KeyPgOpSubtract Operator - (Soustraction)]]##
+	- [[CatPgOpPoint Pointeur Opérateurs]]
 
 {{fbdoc item="back" value="CatPgOpIndexing|Indexing Operators"}}{{fbdoc item="back" value="CatPgOperators|Operators"}}

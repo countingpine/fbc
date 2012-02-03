@@ -1,48 +1,48 @@
 {{fbdoc item="title" value="STRING"}}----
-Standard data type: 8 bit character string
+Type de données standard : chaîne de caractères 8 bits.
 
 {{fbdoc item="syntax"}}##
 	[[KeyPgDim dim]] //variable// [[KeyPgAs as]] **String** [ * //size//]
 ##
 {{fbdoc item="desc"}}
-	A ##**String**## is an array of characters.
+	Une ##**String**## est un tableau de caractères.
 
-	A ##**String**## declared without the ##//size//## parameter is dynamically resized depending on the length of the string. The length can range from 0 bytes to 2 gigabytes. A descriptor contains a pointer to the actual string and the length of the string. ##[[KeyPgOpVarptr Varptr]]## will return a pointer to the descriptor, while ##[[KeyPgOpStrptr Strptr]]## will point to the actual string.
-	Despite the use of the descriptor, an implicit ##NULL## character (##[[KeyPgChr chr]](0)##) is added to the end of the string, to allow passing them to functions in external libraries without making slow copies.  ""FreeBASIC""'s internal functions will ignore this character, and not treat it as part of the string.
+	Une ##**String**## déclarée sans le paramètre ##//size//## est redimensionnée dynamiquement en fonction de la longueur de la chaîne. La longueur peut aller de 0 octets à 2 gigaoctets. Un descripteur contient un pointeur vers la chaîne et sa longueur. ##[[KeyPgOpVarptr Varptr]]## retourne un pointeur vers le descripteur, alors que ##[[KeyPgOpStrptr Strptr]]## pointe vers la chaîne elle-même.
+	Malgré l'utilisation du descripteur, un caractère implicite ##NULL## (##[[KeyPgChr chr]](0)##) est ajouté à la fin de la chaîne, pour permettre de les passer à des fonctions de bibliothèques externes sans en faire des copies qui sont très lentes.  Les fonctions internes de ""FreeBASIC""'s ignoreront ce caractère, et ne le traiteront pas comme faisant partie de la chaîne.
 
-	A ##**String**## declared with a ##//fixed size//## is a QB-style fixed length string, with the exception that unused characters are set to 0, regardless of what "-lang" compiler option is used. It has no descriptor and it is not resized to fit its contents. As in QB, if data overflows the size of the string, it is truncated on the right side.
-	Fixed length strings are also terminated with a ##NULL## character, and so they use ##//size// + 1## bytes of space.  This ##NULL## terminator may be removed in future, to prevent the redundant character complicating data layout in user-defined ##[[KeyPgType Type]]##s.
+	Une ##**String**## déclarée avec ##//fixed size//## est une chaîne de style QB de longueur fixe, exception faite que les caractères non utilisés sont mis à 0, quel que soit l'option compilateur "-lang" utilisée. Elle n'a pas de descripteur et n'est pas redimensionnées pour s'adapter à son contenu. Comme dans QB, s'il y a débordement de données par rapport à la taille de la chaîne, elle est tronquée sur le côté droit.
+	Les chaînes à longueur fixe sont aussi terminées par un caractère ##NULL##, et utilisent donc ##//size// + 1## octets d'espace.  Ce terminateur ##NULL## pourrait être retiré à l'avenir, pour empêcher le caractère redondant de compliquer la disposition des données dans les ##[[KeyPgType Type]]##s définis par l'utilisateur.
 
-	String variable names need not end in a dollar sign ##$## as in other dialects of BASIC.  In //[[CompilerDialects lang fb]]// variable suffixes, including the dollar sign, are disallowed entirely.
+	Les noms de variables String n'ont pas à être terminés par le signe dollar ##$## comme dans les autres dialectes du BASIC.  Dans les suffixes de variables du langage //[[CompilerDialects lang fb]]//, inclure le signe dollar, est totalement interdit.
 
-	Note: When passing ##**String**##s as parameters to ##[[KeyPgSub Sub]]##s, they should always be passed by reference (##[[KeyPgByref ByRef]]##).  Currently, ##[[KeyPgByval ByVal]]## does not pass a copy of the string, but a ##[[KeyPgPtr Pointer]]## to the string data.  This can cause unexpected behavior.
+	Note: Quand on passe des ##**String**##s comme paramètres de ##[[KeyPgSub Sub]]##s, elles doivent toujours être passées par référence (##[[KeyPgByref ByRef]]##).  Actuellement, ##[[KeyPgByval ByVal]]## ne passe pas une copie de la chaîne, mais un ##[[KeyPgPtr Pointeur]]## vers les données de la chaîne.  Cela peut entraîner un comportement inattendu.
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/datatype/string.bas"}}%%(freebasic)
-'' Compile with -lang fblite or qb
+'' Compile avec -lang fblite ou qb
 
 #lang "fblite"
 
-'' Variable-length
+'' Longueur-variable
 Dim a As String
 a = "Hello"
 
-'' Or
+'' Ou
 Dim b$
 b$ = "World"
 
-'' Fixed-length
+'' Longueur-fixe
 Dim c As String * 32
 c = "Hello World"
 %%
 
 {{fbdoc item="diff"}}
-	- In QB the strings were limited to 32767 characters.
-	- In QB, the unused characters of a fixed-length string were initialized with 32 (space, or " ", in ASCII).
-	- In QB static or fixed-size strings were often used in records to represent a number of bytes of data;  for example, a string of 1 length to represent 1 byte in a UDT read from a file.  This is not possible in ""FreeBASIC"" since strings always have an ##NULL## character following.  When converting QBasic code that reads UDTs from files, make sure all instances of "##As String * //n//##" are replaced with "##As uByte (0 to //n// - 1)##" or your files will be incompatible.
+	- Dans QB les chaînes sont limitées à 32767 caractères.
+	- Dans QB, les caractères non utilisés d'une chaîne de longueur fixe sont initialisés avec 32 (espace, ou "", en ASCII).
+	- Dans QB les chaînes statiques ou à taille fixe sont souvent utilisées dans des enregistrements pour représenter un nombre d'octets de données;  par exemple, une chaîne de longueur 1 pour représenter 1 octet dans une UDT lue à partir d'un fichier.  Ceci n'est pas possible en ""FreeBASIC"" cat les chaînes ont toujours un caractère ##NULL## à la fin.  Quand vous convertissez du code QBasic qui lit des UDTs à partir de fichiers, assurez-vous que toutes les instances de "##As String * //n//##" sont remplacées par "##As uByte (0 to //n// - 1)##" ou vos fichiers seront incompatibles.
 
 {{fbdoc item="see"}}
-	- ##[[KeyPgStringFunction String (Function)]]##
+	- ##[[KeyPgStringFunction String (Fonction)]]##
 	- ##[[KeyPgZstring Zstring]]##
 	- ##[[KeyPgWstring Wstring]]##
 	- ##[[KeyPgStr Str]]##

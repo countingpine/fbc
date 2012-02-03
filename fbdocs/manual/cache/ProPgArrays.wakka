@@ -1,11 +1,11 @@
 {{fbdoc item="title" value="Arrays"}}----
-Multi-dimensional container types.
+Types de conteneurs multi-dimensionnels.
 
-{{fbdoc item="section" value="Overview"}}
-	//Arrays// are special kinds of [[ProPgVariables variables]] which act as containers for a number of values, or //elements//. An array can store elements of any type, and all of its elements share the same type. For example, an array can store ##[[KeyPgInteger Integer]]## elements or ##[[KeyPgSingle Single]]## elements, but not both. These elements are accessed--read from or written to--through an ##[[KeyPgInteger Integer]]## value representing their //position// in the array. Arrays have lengths, or //sizes//, which are equal to the number of elements they are storing at any given time. //Fixed-length// arrays have constant sizes throughout their lifetimes, while the sizes of //variable-length// arrays can change dynamically.
+{{fbdoc item="section" value="Vue d'ensemble"}}
+	Les //tableaux (arrays)// sont des types particuliers de [[ProPgVariables variables]] qui agissent comme des conteneurs pour un certain nombre valeurs ou d'//éléments//. Un tableau peut stocker des éléments de tout type et tous ses éléments sont du même type. Par exemple, un tableau peut stocker des éléments ##[[KeyPgInteger Integer]]## ou ##[[KeyPgSingle Single]]##, mais pas les deux en même temps. Ces éléments sont accessibles -- en lecture ou en écriture -- par l'intermédiaire d'une valeur ##[[KeyPgInteger Integer]]## représentant leur //position// dans le tableau. Les tableaux ont des longueurs ou des //tailles// qui sont égales au nombre éléments qu'ils contiennent à un moment donné. Les tableaux de //longueur fixe (Fixed-length)// ont une taille constante tout au long de leur existence, alors que la taille des tableaux de //longueur variable (variable-length)// peut changer de façon dynamique.
 
-{{fbdoc item="section" value="Elements and positions"}}
-	The values that an array stores are its elements. Each element of an array has a corresponding position, which is an ##[[KeyPgInteger Integer]]## value ranging from the array's //lower bound// to its //upper bound//, inclusive. These positions are used to access individual elements in the array using ##[[KeyPgOpArrayIndex operator ()]]##, which takes a position and returns a reference to the element at that position. A valid position in an array is greater than or equal to its lower bound, and less than or equal to its upper bound.
+{{fbdoc item="section" value="Eléments et positions"}}
+	Les valeurs qu'un tableau stocke sont ses éléments. Chaque élément d'un tableau a une position correspondante, qui est une valeur ##[[KeyPgInteger Integer]]## allant de sa //limite inférieure (lower bound)// à sa //limite supérieure (upper bound)//, incluses. Ces positions sont utilisées pour accéder aux éléments individuels du tableau à l'aide de l'##[[KeyPgOpArrayIndex operator ()]]## qui acquiert une position et renvoie une référence sur l'élément à cette position. Une position valide dans un tableau est supérieure ou égale à sa borne inférieure et inférieure ou égale à sa limite supérieure.
 
 {{fbdoc item="filename" value="examples/manual/proguide/arrays/array1.bas"}}%%(freebasic)
 ' Create an array of 3 elements all having the value zero (0.0f).
@@ -20,12 +20,12 @@ for position as integer = 1 to 3
 next
 %%
 
-{{fbdoc item="section" value="Sizes and bounds"}}
-	The size of an array is equal to the number of elements it stores at any given time. An array can have a size of zero (0), meaning it's not storing any values at the moment--it's //empty//. If an array's size is greater than zero, that many elements are being stored. An array's size is equal to one more than the difference between its upper and lower bounds, or ##[[KeyPgUbound ubound]](//array//) - [[KeyPgLbound lbound]](//array//) + 1##.
+{{fbdoc item="section" value="Dimensions et limites"}}
+	La taille d'un tableau est égale au nombre d'éléments qu'il stocke à un moment donné. Un tableau peut avoir une taille de zéro (0), ce qui signifie qu'il ne stocke pas de valeurs pour le moment -- il est //vide//. Si la taille d'un tableau est supérieure à zéro, c'est qu'il stocke des éléments. La taille d'un tableau est égale à la différence entre eux ses bornes supérieure et inférieure augmentée de 1, ou ##[[KeyPgUbound ubound]](//array//) - [[KeyPgLbound lbound]](//array//) + 1##.
 
-	The lower and upper bounds not only determine the size of an array, but also the valid positions of individual elements. For example, an array with lower and upper bounds of zero (0) and four (4) stores five (5) elements, the first element being at position 0, the last at position 5. These bounds may be specified when the array is declared, or, for some arrays, changed by resizing the array. An array's lower and upper bounds can be retrieved using ##[[KeyPgLbound Lbound]]## and ##[[KeyPgUbound Ubound]]##, respectively.
+	Les bornes inférieure et supérieure déterminent pas seulement la taille d'un tableau, mais aussi les positions de chacun de ses éléments valides. Par exemple, un tableau avec sa borne inférieure égale à zéro (0) et sa borne supérieure égale à quatre (4) stocke cinq (5) éléments, le premier élément à la position 0 et dernier à la position 5. Ces bornes ne peuvent être précisées lorsque le tableau est déclaré, ou, pour certains tableaux, modifié par le redimensionnement du tableau. Les limites inférieure et supérieure d'un tableau peuvent être récupérées à l'aide de ##[[KeyPgLbound Lbound]]## et ##[[KeyPgUbound Ubound]]##, respectivement.
 
-	When creating or resizing an array, if a lower bound is not specified it defaults to zero (0).
+	Lors de la création ou du redimensionnement d'un tableau, si sa limite inférieure n'est pas spécifiée sa valeur par défaut sera zéro (0).
 
 {{fbdoc item="filename" value="examples/manual/proguide/arrays/array2.bas"}}%%(freebasic)
 ' Declares and initializes an array of four integer elements.
@@ -37,12 +37,12 @@ for position as integer = lbound(array) to ubound(array)
 next
 %%
 
-{{fbdoc item="section" value="Fixed-length and variable-length"}}
-	There are two fundamental kinds of arrays: //[[ProPgFixLenArrays fixed-length]]// and //[[ProPgVarLenArrays variable-length]]//. The primary difference between the two is that the bounds of fixed-length arrays can never change, that is, they always store the same number of elements in the same positions. Variable-length array bounds can be changed, affecting the number of elements stored and/or the positions of the elements.
+{{fbdoc item="section" value="Longueur fixe (Fixed-length) et longueur variable (variable-length)"}}
+	Il existe deux types fondamentaux de tableaux: //[[ProPgFixLenArrays longueur fixe]]// et //[[ProPgVarLenArrays longueur variable]]//. Principale différence entre les deux: les limites des tableaux de longueur fixe ne peuvent jamais changer, c'est à dire qu'ils stockent toujours le même nombre d'éléments aux mêmes positions. Les limites des tableaux à longueur variable peuvent changer, affectant le nombre d'éléments stockés et/ou les positions des éléments.
 
-	Since fixed-length arrays never change size, the compiler chooses to make room for--or, //allocate//--the memory for the array elements either in static storage or on the program stack, depending on the array's [[ProPgStorageClasses storage class]]. This can be an advantage, since the cost of creating these kinds of arrays doesn't include any adverse run-time penalty. Fixed-length arrays are declared using ##[[KeyPgExtern Extern]]##, ##[[KeyPgStatic Static]]## and ##[[KeyPgDim Dim]]##. At least an upper bound must be specified, and all bounds must be compile-time constant values, such as numeric literals, ##[[KeyPgConst Const]]## variables or ##[[KeyPgEnum Enum]]## enumerators.
+	Puisque les tableaux de longueur fixe ne changent jamais la taille, le compilateur choisit pour faire de la place en--ou, //affecter//--la mémoire pour les éléments du tableau, soit en stockage statique ou sur la pile du programme, selon la [[ProPgStorageClasses classe de stockage]] des tableaux. Cela peut être un avantage, Cela peut être un avantage, puisque le coût de la création de ces sortes des tableaux ne comprend pas les pénalités néfastes d'exécution. Les tableaux de longueur fixe sont déclarés à l'aide de ##[[KeyPgExtern Extern]]##, ##[[KeyPgStatic Static]]## et ##[[KeyPgDim Dim]]##. Au minimum une limite supérieure doit être spécifiée et toutes les limites doivent être à la compilation des valeurs constantes, telles que les littéraux numériques, variables ##[[KeyPgConst Const]]## ou énumérateurs ##[[KeyPgEnum Enum]]##.
 
-	Variable-length arrays can change in size, so the compiler chooses to allocate the memory for the array elements at run-time, in the free store. The advantage here of course is being able to dynamically resize the arrays, however, run-time performance could vary when they are created, resized or destroyed. Variable-length arrays are declared using ##[[KeyPgExtern Extern]]##, ##[[KeyPgStatic Static]]##, ##[[KeyPgDim Dim]]## and ##[[KeyPgRedim Redim]]##. When using ##[[KeyPgExtern Extern]]##, ##[[KeyPgStatic Static]]## or ##[[KeyPgDim Dim]]##, the lower and upper bounds can be left unspecified--resulting in an empty array--or either one must have a variable value, such as an ##[[KeyPgInteger Integer]]## variable or ##[[KeyPgFunction Function]]## result. ##[[KeyPgRedim Redim]]## can be used to resize an existing variable-length array, by giving it different lower and/or upper bounds.
+	Les ableaux de longueur variable peuvent changer de taille, de sorte que le compilateur choisit d'allouer la mémoire pour les éléments du tableau lors de l'exécution, dans le stock libre. L'avantage ici, bien sûr, c'est d'être en mesure de redimensionner dynamiquement les tableaux, cependant, les performances d'exécution peuvent varier quand ils sont créés, redimensionnées ou détruits. Les tableaux de longueur variable sont sont déclarés à l'aide de ##[[KeyPgExtern Extern]]##, ##[[KeyPgStatic Static]]##, ##[[KeyPgDim Dim]]## et ##[[KeyPgRedim Redim]]##. Lors de l'utilisation de ##[[KeyPgExtern Extern]]##, ##[[KeyPgStatic Static]]## ou ##[[KeyPgDim Dim]]##, les bornes inférieure et supérieure peuvent être laissées non spécifiées--en découlant un tableau vide--ou l'une doit avoir une valeur sous forme de variable, comme une variable ##[[KeyPgInteger Integer]]## ou un résultat de ##[[KeyPgFunction Function]]##. ##[[KeyPgRedim Redim]]## peut être utilisé pour redimensionner un tableau de longueur variable existant, en lui donnant des limites inférieure et/ou supérieure différentes.
 
 {{fbdoc item="filename" value="examples/manual/proguide/arrays/array3.bas"}}%%(freebasic)
 ' Creates a fixed-length array that holds 5 single elements.
@@ -56,8 +56,8 @@ dim vlarray() as integer
 redim vlarray(1 to 10) as integer
 %%
 
-{{fbdoc item="section" value="Multi-dimensional arrays"}}
-	The arrays discussed so far have been one-dimensional, that is, the elements are accessed through a single position. One-dimensional arrays can be thought of as a simple row of elements. Arrays can also have more than one dimension; an individual element of the array is accessed using two or more positions. Two-dimensional arrays use two positions--a row and a column position--to refer to individual elements, like a grid or table. Three-dimensional arrays use three positions--a row, column and perhaps depth position--to refer to individual elements, like a cube. Four-dimensional arrays can be thought of as one or more three-dimensional arrays, and so on. Multi-dimensional arrays are declared just like one-dimensional arrays, except that more than one lower and upper bound range is specified.
+{{fbdoc item="section" value="Les tableaux multi-dimensionnels"}}
+	Les tableaux examinés jusqu'ici étaient uni-dimensionnels, c'est-à-dire que leurs éléments sont accessibles via une seule position. Les tableaux à une dimension peuvent être considérés comme une simple rangée d'éléments. Les tableaux peuvent aussi avoir plus d'une dimension; un élément individuel du tableau est accessible à l'aide de deux ou plusieurs positions. Les tableaux à deux dimensionnels utilisent deux positions--une position de ligne et une de colonne--pour se référer à des éléments individuels, comme une grille ou une table. Les tableaux tri-dimensionnels utilisent trois positions--une position de rangée, de colonne et peut-être de profondeur--pour se référer à des éléments individuels, comme dans un cube. Les tableaux à quatre dimensions peuvent être considérés comme un ou plusieurs tableaux tri-dimensionnels, et ainsi de suite. Les tableaux multi-dimensionnels sont déclarés comme les tableaux à une dimension, si ce n'est que plus d'une limite inférieure et une limite supérieure sont spécifiées.
 
 {{fbdoc item="filename" value="examples/manual/proguide/arrays/array4.bas"}}%%(freebasic)
 ' Take Care while initializing multi-dimensional array
@@ -65,8 +65,8 @@ Dim as integer multidim(1 to 2,1 to 5) = {{0,0,0,0,0},{0,0,0,0,0}}
 %%
 
 {{fbdoc item="see"}}
-	- [[ProPgFixLenArrays Fixed-length Arrays]]
-	- [[ProPgVarLenArrays Variable-length Arrays]]
-	- [[ProPgVariableScope Variable Scope]]
+	- [[ProPgFixLenArrays Tableaux de longueur fixe]]
+	- [[ProPgVarLenArrays Tableaux de longueur variable]]
+	- [[ProPgVariableScope Portée des variables]]
 
 {{fbdoc item="back" value="CatPgProgrammer|Programmer's Guide"}}

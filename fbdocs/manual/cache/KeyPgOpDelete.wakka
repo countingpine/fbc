@@ -1,5 +1,5 @@
 {{fbdoc item="title" value="Operator Delete"}}----
-Operator to delete data allocated with the ##[[KeyPgOpNew New]]## operator
+Opérateur pour détruire des données allouées avec l'opérateur ##[[KeyPgOpNew New]]##
 
 {{fbdoc item="syntax"}}##
 	[[KeyPgDeclare declare]] [[KeyPgOperator operator]] **delete** ( //buf//  [[KeyPgAs as]] [[KeyPgAny any]] [[KeyPgPtr ptr]] )
@@ -7,21 +7,21 @@ Operator to delete data allocated with the ##[[KeyPgOpNew New]]## operator
 ##
 {{fbdoc item="usage"}}##
 	**Delete** //expression//
-		//or//
+		//ou//
 	**Delete[]** //expression//
 ##
 {{fbdoc item="param"}}
 	##//buf//## 
-		An address of memory to free.
+		Une adresse mémoire à libérer.
 	##//expression//##
-		An address of memory to free.
+		Une adresse mémoire à libérer.
 
 {{fbdoc item="desc"}}
-	##**Delete**## is used to destroy and free the memory of an object created with [[KeyPgOpNew New]]. When deleting a TYPE, its destructor will be called. ##**Delete**## should only be used with addresses returned from ##[[KeyPgOpNew New]]##.
+	##**Delete**## est utilisé pour détruire et libérer la mémoire d'un objet créé avec [[KeyPgOpNew New]]. Quand on ##**Delete**## un TYPE, son destructeur est appelé. ##**Delete**## doit être utilisé uniquement avec des adresses retournées par ##[[KeyPgOpNew New]]##.
 
-	The array version of ##**Delete**##, ##**Delete[]**##, is used to destroy an array of objects previously created with [[KeyPgOpNew New]][]. Destructors will be called here as well.
+	La version ##**Delete**## pour les tableaux, ##**Delete[]**##, est utilisé pour détruire un tableau d'objets créés précédemment avec [[KeyPgOpNew New]][]. Les destructeurs seront là aussi appelés.
 
-	##**Delete**## must be used with addresses returned from [[KeyPgOpNew New]], and ##**Delete[]**## with [[KeyPgOpNew New]][]. You cannot mix and match the different versions of the operators.
+	##**Delete**## doit être utilisé avec des adresses retournées par [[KeyPgOpNew New]], et ##**Delete[]**## par [[KeyPgOpNew New]][]. Vous ne pouvez mélanger les différentes versions de ces opérateurs.
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/operator/delete.bas"}}%%(freebasic)
@@ -57,10 +57,10 @@ scope
 end scope
 %%
 {{fbdoc item="lang"}}
-	- Only available in the //[[CompilerOptlang -lang fb]]// dialect.
+	- Valable seulement dans le dialecte //[[CompilerOptlang -lang fb]]//.
 
 {{fbdoc item="diff"}}
-	- New to ""FreeBASIC""
+	- Nouveau pour ""FreeBASIC""
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgOpNew New]]##

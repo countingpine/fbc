@@ -1,5 +1,5 @@
 {{fbdoc item="title" value="ALLOCATE"}}----
-Allocates a block of memory from the free store
+Alloue un bloc de mémoire à partir de la mémoire libre
 
 {{fbdoc item="syntax"}}##
 	[[KeyPgDeclare declare]] [[KeyPgFunction function]] **Allocate** [[KeyPgCdecl cdecl]] ( [[KeyPgByval byval]] //count// [[KeyPgAs as]] [[KeyPgInteger integer]] ) [[KeyPgAs as]] [[KeyPgAny any]] [[KeyPgPtr ptr]]
@@ -9,15 +9,15 @@ Allocates a block of memory from the free store
 ##
 {{fbdoc item="param"}}
 	##//count//##
-		The size, in bytes, of the block of memory to allocate.
+		La taille, en octets du bloc de mémoire à allouer.
 
 {{fbdoc item="ret"}}
-	If successful, the address of the start of the allocated memory is returned. Otherwise, if the requested block size could not be allocated, or if ##//count// < 0##, then the null pointer (##0##) is returned.
+	En cas de succès, l'adresse du début de la mémoire allouée est retournée. Sinon, si la taille demandée du bloc ne peut être attribuée ou si ##//count// < 0##, alors le pointeur (##0##) est retourné.
 
 {{fbdoc item="desc"}}
-	Attempts to allocate, or reserve, ##//count//## number of bytes from the free store (heap). The initial value of newly allocated memory is unspecified. The pointer that is returned is an [[KeyPgAny any]] [[KeyPgPtr ptr]] and points to the start of the allocated memory. This pointer is guaranteed to be unique, even if ##//count//## is zero.
+	Tente d'attribuer, ou de réserver, ##//count//## octets à partir de la mémoire libre (heap = tas). La valeur initiale de la mémoire nouvellement allouée n'est pas spécifiée. Le pointeur retourné est un [[KeyPgAny any]] [[KeyPgPtr ptr]] et pointe sur le début de la mémoire allouée. Ce pointeur est garanti comme étant unique, même si ##//count//## est zéro.
 
-	Allocated memory must be deallocated, or returned back to the free store, with ##[[KeyPgDeallocate Deallocate]]## when no longer needed. 
+	La mémoire occupée doit être libérée, ou retourner au "tas"" libre, avec ##[[KeyPgDeallocate Deallocate]]## quand elle n'est plus utlisée. 
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/memory/allocate.bas"}}%%(freebasic)
@@ -54,11 +54,11 @@ Allocates a block of memory from the free store
 	deallocate(buffer)
 	end 0
 %%
-	Output is:
+	Affichage:
 	<<## 0 1 1 2 3 5 8 13 21 34 55 89 144 233 377##>>
 	::c::
 
-	It is important to free allocated memory if it's not going to be used anymore. Unused memory that isn't freed is simply wasting memory, and if the address of that memory is somehow overwritten or forgotten, that memory can never be freed. This condition is known as a memory leak, and should be avoided at all costs. Note that leaked memory is always completely freed when the application terminates, either by an "ordinary" exit or crash, so the leak "persists" only as long as the application runs, nevertheless it's a good habit to free any allocated memory inside your application. The following example demonstrates a function with a memory leak, where the address of allocated memory is lost and isn't and can't be freed anymore. If such a function is called frequently, the total amount of memory wasted can add up quickly.
+	Il est important de libérer la mémoire allouée si elle ne sera plus utilisée. La mémoire non utilisée non-libérée est simplement une perte de mémoire, et si son adresse est d'une certaine façon écrasée ou oubliée, cette mémoire ne pourra jamais être libérée. Ceci est une perte de mémoire et doit être évité à tout prix. Notez que la mémoire perdue est toujours entièrement libérée lorsque l'application se termine, soit par une sortie "ordinaire" ou un "crash", donc la fuite "persiste" tant que l'application s'exécute; malgré tout c'est une bonne habitude de libérer toute la mémoire allouée à l'intérieur de votre application . L'exemple suivant montre une fonction avec une fuite de mémoire, où l'adresse de mémoire allouée est perdue et n'est pas et ne peut pas être libérée. Si une telle fonction est appelée souvent, le montant total de la mémoire perdue peut augmenter rapidement.
 
 {{fbdoc item="filename" value="examples/manual/memory/allocate2.bas"}}%%(freebasic)
 '' Bad example of Allocate usage, causing memory leaks
@@ -77,7 +77,7 @@ sub BadAllocateExample()
 end sub
 
 	'' Main
-	BadAllocateExample() '' Creates a memory leak 
+	BadAllocateExample() '' Creates a memory leak
 	print "Memory leak!"
 	BadAllocateExample() '' ... and another
 	print "Memory leak!"
@@ -85,13 +85,13 @@ end sub
 %%
 
 {{fbdoc item="target"}}
-	- This procedure is not guaranteed to be thread-safe.
+	- Cette procédure n'est pas garantie d'être "thread-safe".
 
 {{fbdoc item="lang"}}
-	- Not available in the //[[CompilerOptlang -lang qb]]// dialect unless referenced with the alias ##**""__Allocate""**## 
+	Non disponible dans le dialecte //[[CompilerOptlang -lang qb]]// sauf si référencé avec l'alias ##**__Allocate**##
 
-{{fbdoc item="diff"}}
-	- New to ""FreeBASIC""
+{{fbdoc item="diff"}} 
+	- Nouveau pour ""FreeBASIC""
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgCallocate Callocate]]##

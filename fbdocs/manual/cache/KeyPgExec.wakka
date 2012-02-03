@@ -1,5 +1,5 @@
 {{fbdoc item="title" value="EXEC"}}----
-Temporarily transfers execution to an external program
+Transfère temporairement l'exécution à un programme externe
 
 {{fbdoc item="syntax"}}##
 	[[KeyPgDeclare declare]] [[KeyPgSub function]] **Exec** ( [[KeyPgByref byref]] //program// [[KeyPgAs as]] [[KeyPgConstQualifier const]] [[KeyPgString string]], [[KeyPgByref byref]] //arguments// [[KeyPgAs as]] [[KeyPgConstQualifier const]] [[KeyPgString string]] ) [[KeyPgAs as]] [[KeyPgInteger integer]]
@@ -9,15 +9,15 @@ Temporarily transfers execution to an external program
 ##
 {{fbdoc item="param"}}
 	##//program//##
-		The file name (including file path) of the program (executable) to transfer control to.
+		Le nom de fichier (avec le chemin du fichier) du programme (exécutable) auquel on transfère le contrôle.
 	##//arguments//##
-		The command-line arguments to be passed to the program.
+		Les arguments de la ligne de commande à passer au programme.
 
 {{fbdoc item="ret"}}
-	The exit status of the program, or negative one (-1) if the program could not be executed.
+	L'état de sortie du programme, ou une valeur negative (-1) si le programme ne peut pas être exécuté.
 
 {{fbdoc item="desc"}}
-	Transfers control over to an external program. When the program exits, execution resumes immediately after the call to ##**Exec**##.
+	Transfère le contrôle à un programme externe. Lorsque le programme se termine, l'exécution reprend immédiatement après l'appel à ##**Exec**##.
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/system/exec.bas"}}%%(freebasic)
@@ -33,19 +33,19 @@ ELSE
 END IF
 %%
 {{fbdoc item="target"}}
-	- Linux requires the //program// case matches the real name of the file. Windows and DOS  are case insensitive. The program being executed may be case sensitive for its command line parameters.
-	- Path separators in Linux are forward slashes / . Windows uses backward slashes \ but it allows for forward slashes .  DOS uses backward  \ slashes. 
-	- Exit code is limited to 8 bits in DOS.
+	- Linux nécessite que la casse de //program// corresponde au nom réel du fichier. Windows et DOS ne sont pas sensibles à la casse. Le programme en cours d'exécution peut être sensible à la casse pour ses paramètres de ligne de commande.
+	- Les séparateurs de chemin de Linux sont des barres obliques /. Windows utilise des barres obliques vers l'arrière \ mais il admet des barres obliques .  DOS utilise des barres obliques en arrière \. 
+	- Le code de sortie est limité à 8 bits sous DOS.
 
 {{fbdoc item="lang"}}
-	- Not available in the //[[CompilerOptlang -lang qb]]// dialect unless referenced with the alias ##**""__Exec""**##.
+	- Non disponible dans le dialecte //[[CompilerOptlang -lang qb]]// sauf si référencé avec l'alias ##**""__Exec""**##.
 
 {{fbdoc item="diff"}}
-	- New to ""FreeBASIC""
+	- Nouveau pour ""FreeBASIC""
 
 {{fbdoc item="see"}}
-	- ##[[KeyPgChain Chain]]## transfer temporarily, without arguments
-	- ##[[KeyPgRun Run]]## one-way transfer
-	- ##[[KeyPgCommand Command]]## pick arguments
+	- ##[[KeyPgChain Chain]]## transfère temporairement, sans argument
+	- ##[[KeyPgRun Run]]## transfert une-voie
+	- ##[[KeyPgCommand Command]]## chercher des arguments
 
 {{fbdoc item="back" value="CatPgOpsys|Operating System Functions"}}

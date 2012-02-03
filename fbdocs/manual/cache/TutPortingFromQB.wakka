@@ -1,111 +1,111 @@
 {{fbdoc item="title" value="Compiling a Big QB program in FB"}}----
 
-Let's try to compile a big (4000+ lines) graphical QB program in FreeBasic, to see how compatible FB is with QB.
-As an example I will use Jark's TCRay a great raytracer with quadric, cubic and quadratic shapes, perlin noise programmed in 2004. You can get TCRay.zip from
+Essayons de compiler un grand (4000 + lignes) programme QB graphique dans FreeBASIC, pour voir comment FB est compatible avec QB.
+AComme exemple je vais utiliser TCRay de Jark un raytraceur puissant, programmé en 2004, avec quadrique, formes cubiques et quadratiques, bruit "perlin". Vous pouvez télécharger TCRay.zip depuis
 http://www.mandelbrot-dazibao.com/Programs/Programs.htm
 
-Notice TCRay is a QB4.5 interpreted program, Jark never had the patience to compile his work,
-he just tested it interpreted and went on adding features.
+Notez que TCRay est un programme interprété QB4.5, Jark n'a jamais eu la patience de compiler son travail,
+il a juste testé une version interprétée et a ajouté des fonctionnalités.
 
 
-The program is made of has 3 files:
+Le programme est composé de 3 fichiers:
 
-	""TcRay21C.bas"" - The Main file.
-	""TcLib17L.bas"" - The SVGA graphics library.
-	""Tclib17.bi"" - The include file for the library.
+	""TcRay21C.bas"" - Le fichier Main.
+	""TcLib17L.bas"" - La bibliothèque graphique SVGA.
+	""Tclib17.bi"" - Le fichier à inclure pour la bibliothèque.
 
-==Porting ""TCLib17.bas""==
+{{fbdoc item="subsect" value="Portage de ""TCLib17.bas"""}}
 
-**In ""TCLib17.bas""**
-It is a "pure QB" SVGA library. Most of its functions are obsoleted by FB as they are implemented as QB-style keywords.  I had my share in developing that lib so you can trust me for this part ;)
+**Dans ""TCLib17.bas""**
+Il s'agit d'une bibliothèque SVGA "pure QB". La plupart de ses fonctions sont rendues obsolètes par FB car elles sont mises en oeuvre comme mots-clés de style QB. J'ai eu ma part dans le développement de ces bibliothèques de sorte que vous pouvez me faire confiance pour cette partie ;)
 
-Comment out the contents of the ClearScreen sub and add this
+Commentez le contenu du sous-programme ClearScreen et ajoutez ceci:
 ##CLS##
 
-Comment out the contents of the Point24 sub and add this:
+Commentez le contenu du sous-programme Point24 et ajoutez ceci:
 ##a& = Point(x%,y%)
 red% = a& Shr 16
 green% = (a& Shr 8) And 255
 blue% = a& And 255## 	
 
-Comment out the contents of the Pset24 sub and add this:
+Commentez le contenu du sous-programme Pset24 et ajoutez ceci:
 ##PSet (x%,y%), red% Shl 16 Or green Shl 8 Or blue##
 
-Comment out the contents of the Screenshot sub and add this:
+Commentez le contenu du sous-programme Screenshot et ajoutez ceci:
 ##BSave Name$+".bmp"##
 
-Comment out the contents of the ""SelectVga"" sub, we will work with a fixed size most pc's will support.  Comment out the contents of the ""SetText sub"", we are able to output text in HiRes graphics so mode switching is not required.
+Commentez le contenu du sous-programme SelectVga, nous allons fonctionner avec une taille fixe supportée par la plupart des PC.  Commentez le contenu du sous-programme SetText, nous sommes capables d'afficher du texte en mode de haute résolution (HiRes) donc la commutation de mode n'est pas nécessaire.
 
-Comment out the contents of the ""SetVGA"" Sub excluding the Powers of two calculation at the end and add these four lines:
+Commentez le contenu du sous-programme ""SetVGA"" en excluant le calcul des puissances de deux à la fin et ajouter ces quatre lignes:
 ##Screen 20,32 '1024x768, 32 bits
 scrheight=768
 scrwidth=1024
 Fullscreen##
 
 
-**In TCRay17.bas**
-Add a ""SetSVGA"" as the first line in the Menu sub (we are not switching modes so mode must be set before outputting text),
+**Dans TCRay17.bas**
+Ajouter ""SetSVGA"" comme première ligne du sous-programme Menu (nous ne commutatons pas les modes de sorte que cela doit être réglé avant la sortie de texte,
 
-==Compiling==
-Ok, stop trusting me, now you can start trying to compile.  You'll receive some errors.
+==Compilation==
+Ok, arrêtez de me faire confiance, vous pouvez maintenant commencer à essayer de compiler. Vous aurez quelques erreurs.
 
-Compile with:  //fbc -s gui -w 1 -lang qb ""TcRay21C.bas"" ""TcLib17L.bas""//
+Compilez avec:  //fbc -s gui -w 1 -lang qb ""TcRay21C.bas"" ""TcLib17L.bas""//
 
-I warn you all changes required except two come from a couple of (wise) limitations in the FB syntax:
-	- A variable name can't be a keyword plus a type suffix
-	- A simple variable can't have the same name as an array
+Je vous préviens que tous les changements nécessaires, sauf deux viennent d'un couple de (sages) limitations dans la syntaxe FB:
+	- Un nom de variable ne peut pas être un mot-clé plus un suffixe de type
+	- Une simple variable ne peut pas avoir le même nom qu'un tableau
 
 **""In TCLib17.bi""**
-ERROR: Duplicated definition, found 'RGB' ([[KeyPgRgb RGB]] is a keyword in FB)
-Add:
+ERROR: Duplicated definition, found 'RGB' ([[KeyPgRgb RGB]] est un mot-clé de FB)
+Ajoutez:
 ## #undefine RGB##
-Before the line giving the error.
+Avant la ligne qui a donné l'erreur.
 
-ERROR: Duplicated definition, found 'ScreenRes' ([[KeyPgScreenres ScreenRes]] is a keyword in FB)
-Add:
+ERROR: Duplicated definition, found 'ScreenRes' ([[KeyPgScreenres ScreenRes]] est un mot-clé de FB)
+Ajoutez:
 ## #undefine ""ScreenRes""##
-Before the line giving the error.
+Avant la ligne qui a donné l'erreur.
 
-ERROR: Duplicated definition, found 'Name' ([[KeyPgName Name]] is a keyword in QB)
-Add
+ERROR: Duplicated definition, found 'Name' ([[KeyPgName Name]] est un mot-clé de QB)
+Ajoutez
 ## #undefine Name##
-Before the line giving the error.
+Avant la ligne qui a donné l'erreur.
 
 **""In TCRay17.bas""**
-ERROR: Duplicated definition, found 'Acos' ([[KeyPgAcos Acos]] is a keyword in QB)
-Add
+ERROR: Duplicated definition, found 'Acos' ([[KeyPgAcos Acos]] est un mot-clé de QB)
+Ajoutez
 ## #undefine Acos##
-Before the line giving the error.
+Avant la ligne qui a donné l'erreur.
 
-ERROR: Argument count mismatch Clear ([[KeyPgClear CLEAR]] is not required in FB, the keyword has been reused (not a clever decision?))
-'comment out CLEAR
+ERROR: Argument count mismatch Clear ([[KeyPgClear CLEAR]] n'est pas nécessaire dans FB, le mot-clé a été réutilisé (non une décision intelligente?))
+'commenter CLEAR
 
-ERROR: Illegal specification, at parameter 2 (Type) of Init.Cubic() ([[KeyPgType Type]] is a keyword in QB)
-We can undefine it so search and replace ##type$## to ##_type$##
+ERROR: Illegal specification, at parameter 2 (Type) of Init.Cubic() ([[KeyPgType Type]] est un mot-clé de QB)
+Nous pouvons annuler sa définition pour cela rechercher et remplacer ##type$## par ##_type$##
 
 ERROR: Expected 'END IF', found 'END' END FUNCTION
-This is an error caused by a quirk introduced in FB. Single line [[KeyPgIfthen IF]]'s having a colon after THEN require an ENDIF, it has to do with macros...  What reason had Jark to put colons past his THEN's escapes me. QB does not require them at all and FB behaves as expected without them.  Remove all colons after THEN keywords. Search and Replace //THEN :// to //THEN//
+Ceci est une erreur provoquée par une bizarrerie introduite dans FB. Une unique ligne [[KeyPgIfthen IF]] terminée par deux-points (:) après le THEN nécessite un ENDIF, il a à faire avec des macros...  Quelle raison avait Jark de mettre deux points après son THEN m'échappe. QB n'en a pas besoin du tout et FB se comporte comme prévu sans eux. Retirez tous les deux-points après les mots-clés THEN. Recherchez et remplacez //THEN :// par //THEN//
 
 ERROR: Array access, index expected, before '=' xn = x * x - y * y + zx0
-We have an array names xn, and a variable named xn.  Substitute xn with _xn in the lines which error when you try to compile.
+Nous avons un tableau et une variable nommés xn. Remplacez xn par _xn dans les lignes qui provoquent une erreur lorsque vous essayez de compiler.
 
-The same error with x0, we have an array called x0.
-Substitute xo with _xo in the lines which error when you try to compile.
+Même erreur avec x0, nous avons un tableau nommé x0.
+Remplacez xo par _xo dans les lignes qui provoquent une erreur lorsque vous essayez de compiler.
 
 ERROR: Array access, index expected, before '*' dadY = Amplitude * dAdR * drdY. Same problem with Amplitude.
-Substitute Amplitude with _Amplitude in the lines which error when you try to compile.
+Remplacez Amplitude par _Amplitude dans les lignes qui provoquent une erreur lorsque vous essayez de compiler.
 
-Ok. At this point all modules compile. We're now going to fix a few linker errors.
+Ok. A ce stade, tous les modules se compilent. Nous allons maintenant corriger quelques erreurs de l'éditeur de liens.
 
-**Linker Errors**
-After compiling the linker ties together all the modules with a runtime library, finds the final addresses of every sub/function and substitutes the labels in the calls with these addresses.  If a sub/function is called in the code and its nowhere to be found, the linker complains and gives us the name of the offending function. It can't give us the line numbers (the linker doesn't work with the source) so we will have to do a text search to find where the problem occurs.  Notice the linker gives us "mangled" function names (an ampersand and the size of the parameters passed is added to the end), just ignore the ampersand and what's after.
+**Erreurs de l'éditeur de liens**
+Après compilation l'éditeur de liens lie ensemble tous les modules avec une bibliothèque d'exécution, détermine l'adresse finale de tous les sous-programmes et fonctions (sub/function) et remplace les étiquettes des appels par ces adresses. Si un/une sous-programme/fonction est appelé(e) dans le code et est introuvable, l'éditeur de liens se plaint et nous donne le nom de la fonction incriminée. Il ne peut pas nous donner les numéros de ligne ( l'éditeur de liens ne trvaille pas avec le source) nous aurons donc à faire une recherche de texte pour trouver où le problème est apparu.  Notez que l'éditeur de liens nous donne des noms de fonction modifiés (un esperluette (&) et la taille des paramètres passés sont ajoutés à la fin),  ignorez simplement l'esperluette et ce qui est après.
 
 ""TcRay21C.o:fake:(.text+0x174d):"" undefined reference to `LINE24@20'
-A call to an undefined Line24 sub is made in the program, you can find this call inside Draw.Axis, in ""TCRay21.bas"", a sub that's it's never called (you can do a search to confirrm it)
-Probably the QB4.5 compiler would complain too about this. (Remember: this program never compiled in QB4.5) Just comment out the contents of the sub Draw.Axis 
+Un appel à un sous-programme indéfini Line24 a lieu dans le programme, vous pouvez trouver cet appel à l'intérieur de Draw.Axis, dans ""TCRay21.bas"", un sous-programme qui n'est jamais appelé (vous pouvez faire une recherche pour le confirmer)
+Probablement que le compilateur QB4.5 se plaindrait aussi à ce sujet. (Rappelez-vous: ce programme n'a jamais été compilé en QB4.5) Commentez simplement le contenu de Draw.Axis 
 
 ""TcRay21C.o:fake:(.text+0x181b3):"" undefined reference to `FFIX@0'
-Ffix was that useful v1ctor's floating point patch for QB 4.5.  It's not needed in FreeBASIC.  Just comment out the line calling it just after the declarations in tcray21c.bas
+Ffix était ce patch v1ctor virgule flottante pour QB 4.5.  Il n'est pas nécessaire avec FreeBASIC. Commentez simplement les lignes qui l'appellent juste après les déclarations dans tcray21c.bas
 
-And that's all, the program compiles and works. Not a lot of changes for 4000+ lines...
-Enjoy!
+Et c'est tout, le programme se compile et fonctionne. Pas beaucoup de changements pour + de 4000 lignes...
+Amusez-vous!

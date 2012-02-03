@@ -1,5 +1,5 @@
 {{fbdoc item="title" value="SCREENCONTROL"}}----
-Sets or gets internal graphics library settings
+Définit ou obtient les paramètres internes de la bibliothèque graphique
 
 {{fbdoc item="syntax"}}##
 	[[KeyPgDeclare declare]] [[KeyPgSub sub]] **""ScreenControl""** ( [[KeyPgByval byval]] what [[KeyPgAs as]] [[KeyPgInteger integer]], [[KeyPgByref byref]] param1 [[KeyPgAs as]] [[KeyPgInteger integer]] = 0, [[KeyPgByref byref]] param2 [[KeyPgAs as]] [[KeyPgInteger integer]] = 0, [[KeyPgByref byref]] param3 [[KeyPgAs as]] [[KeyPgInteger integer]] = 0, [[KeyPgByref byref]] param4 [[KeyPgAs as]] [[KeyPgInteger integer]] = 0 )
@@ -7,123 +7,123 @@ Sets or gets internal graphics library settings
 ##
 {{fbdoc item="usage"}}##
 	**""ScreenControl""**( //what// [, [ //param1// ][, [ //param2// ][, [ //param3// ][, [ //param4// ]]]]] )
-		##or,##
-	**""ScreenControl""**( //what// [, //param// ] )
+		##ou,##
+	**"ScreenControl""**( //what// [, //param// ] )
 ##
 {{fbdoc item="param"}}
 	##//what//##
-		specifies the function to perform
+		spécifie la fonction à exécuter
 	##//param1//##
-		optional first integer parameter, contains value to be set on entry or value got on exit
+		premier paramètre entier optionnel, contient la valeur à valider en entrée ou la valeur à obtenir en sortie
 	##//param2//##
-		optional second integer parameter, contains value to be set on entry or value got on exit
+		second paramètre entier optionnel, contient la valeur à valider en entrée ou la valeur à obtenir en sortie
 	##//param3//##
-		optional third integer parameter, contains value to be set on entry or value got on exit
+		troisième paramètre entier optionnel, contient la valeur à valider en entrée ou la valeur à obtenir en sortie
 	##//param4//##
-		optional fourth integer parameter, contains value to be set on entry or value got on exit
+		quatrième paramètre entier optionnel, contient la valeur à valider en entrée ou la valeur à obtenir en sortie
 	##//param//##
-		optional string parameter, contains text to be set on entry or text got on exit
+		paramètre chaîne optionnel, contient le texte à valider en entrée ou à obtenir en sortie
 
 {{fbdoc item="desc"}}
 
-	This function can be used to set or get internal ""GfxLib"" states. The ##//what//## parameter specifies which operation to perform. On operations that set states, the ##//param*//## parameters must contain the values to be set. On operations that get states, ##//param*//## will hold the values returned by ""GfxLib"" when the function returns.
+	Cette fonction peut être utilisée pour définir ou obtenir des états internes de ""GfxLib"". Le paramètre ##//what//## spécifie quelle opération exécuter. Pour les opérations initialisant des états, les paramètres ##//param*//## doivent contenir les valeurs à initialiser. Pour les opérations qui obtiennent des états, ##//param*//## contiendra les valeurs retournées par ""GfxLib"" quand la fonction retournera.
 	The meaning of the ##//param*//## parameters depend on the ##//what//## parameter, whose possible values are defined as constants in ##fbgfx.bi##.  In //[[CompilerDialects lang fb]]//, they are set to be stored in the ##FB## ##[[KeyPgNamespace Namespace]]##.
-	Below is a list of the supported ##//what//## constants - and their values as defined at time of writing - along with the parameters associated with them.
+	Voici une liste des constantes ##//what//## supportées - et leurs valeurs et leurs valeurs telles que définies au moment de la rédaction - ainsi que les paramètres qui leur sont associés.
 
-	__Supported operations__
+	__Opérations supportées__
 		
-		Note: * denotes operations that are allowed while a graphics mode has not yet been set via [[KeyPgScreengraphics Screen (Graphics)]] or [[KeyPgScreenres ScreenRes]]. For all other operations, return values are zero(##0##) or the empty string(##"####"##) and the operation has no effect if a graphics mode is not available at call time.
+		Note: * désigne les opérations qui sont autorisées tant qu'un mode graphique n'a pas encore été fixé par [[KeyPgScreengraphics Screen (Graphics)]] or [[KeyPgScreenres ScreenRes]]. Toutes les autres opérations, retournent la valeur zéro(##0##) ou la chaîne vide (##"####"##) et l'opération n'a aucun effet et l'opération n'a aucun effet si un mode graphique n'est pas disponible lors de l'appel.
 		
-		**Get operations**
-	- ##GET_WINDOW_POS## (##0##) Returns the current window position, in desktop coordinates.
+		**Opérations pour "obtenir" une valeur**
+	- ##GET_WINDOW_POS## (##0##) Retourne la position courante de la fenêtre, en coordonnées du bureau.
 		[OUT] ##//param1//## x
 		[OUT] ##//param2//## y
-	- * ##GET_WINDOW_TITLE## (##1##) Returns the title of the program window.
-		[OUT] ##//param//## title
-	- ##GET_WINDOW_HANDLE## (##2##) Returns a handle to the program window.
-		[OUT] ##//param1//## handle; this is a ##HWND## in Windows, a "Window" XID in X11
-	- * ##GET_DESKTOP_SIZE## (##3##) Returns the desktop size, in pixels.
-		[OUT] ##//param1//## width
-		[OUT] ##//param2//## height
-	- ##GET_SCREEN_SIZE## (##4##) Returns the current screen size in pixels.
-		[OUT] ##//param1//## width
-		[OUT] ##//param2//## height
-	- ##GET_SCREEN_DEPTH## (##5##) Returns current graphics mode screen depth.
-		[OUT] ##//param1//## bits per pixel
-	- ##GET_SCREEN_BPP## (##6##) Returns current graphics mode BPP.
-		[OUT] ##//param1//## bytes per pixel
-	- ##GET_SCREEN_PITCH## (##7##) Returns the current graphics mode framebuffer pitch, in bytes.
+	- * ##GET_WINDOW_TITLE## (##1##) Retourne le titre de la fenêtre du programme.
+		[OUT] ##//param//## titre
+	- ##GET_WINDOW_HANDLE## (##2##) Retourne une accroche (handle) vers la fenêtre du programme.
+		[OUT] ##//param1//## handle; c'est un ##HWND## pour Windows, un "Window" XID pour X11
+	- * ##GET_DESKTOP_SIZE## (##3##) Retourne la taille du bureau, en pixels.
+		[OUT] ##//param1//## largeur
+		[OUT] ##//param2//## hauteur
+	- ##GET_SCREEN_SIZE## (##4##) Retourne la taille de l'écran en pixels.
+		[OUT] ##//param1//## largeur
+		[OUT] ##//param2//## hauteur
+	- ##GET_SCREEN_DEPTH## (##5##) Retourne la profondeur du mode graphique courant.
+		[OUT] ##//param1//## bits par pixel
+	- ##GET_SCREEN_BPP## (##6##) Retourne le mode graphique BPP courant.
+		[OUT] ##//param1//## octets par pixel
+	- ##GET_SCREEN_PITCH## (##7##) Retourne la longueur d'une ligne (pitch) du tampon image du mode graphique courant, en octets.
 		[OUT] ##//param1//## pitch
-	- ##GET_SCREEN_REFRESH## (##8##) Returns the current graphics mode refresh rate, in hertz.
-		[OUT] ##//param1//## rate
-	- ##GET_DRIVER_NAME## (##9##) Returns the current graphics mode driver name.
-		[OUT] ##//param//## name
-	- ##GET_TRANSPARENT_COLOR## (##10##) Returns the transparent color value for the current graphics mode depth.
-		[OUT] ##//param1//## value
-	- ##GET_VIEWPORT## (##11##) Returns the current viewport as set by the [[KeyPgViewgraphics View (Graphics)]] statement, in screen coordinates.
+	- ##GET_SCREEN_REFRESH## (##8##) Retourne la fréquence de rafraîchissement du mode graphique, en hertz.
+		[OUT] ##//param1//## fréquence
+	- ##GET_DRIVER_NAME## (##9##) Retourne le nom du driver du mode graphique courant.
+		[OUT] ##//param//## nom
+	- ##GET_TRANSPARENT_COLOR## (##10##) Retourne la valeur de la couleur de la transparence pour la profondeur du mode graphique courant.
+		[OUT] ##//param1//## valeur
+	- ##GET_VIEWPORT## (##11##) Retourne la vue courante (viewport) courante initialisée par [[KeyPgViewgraphics View (Graphics)]], en coordonnées écran.
 		[OUT] ##//param1//## x1
 		[OUT] ##//param2//## y1
 		[OUT] ##//param3//## x2
 		[OUT] ##//param4//## y2
-	- ##GET_PEN_POS## (##12##) Returns the last graphical pen position, in screen coordinates. This position is used in graphics functions supporting relative coordinates using the ##[[KeyPgStep Step]]## keyword.
+	- ##GET_PEN_POS## (##12##) Retourne la dernière position du crayon graphique, en coordonnées écran. Cette position est utilisée dans les fonctions graphiques supportant les coordonnées relatives utilisant le mot-clef ##[[KeyPgStep Step]]##.
 		[OUT] ##//param1//## x
 		[OUT] ##//param2//## y
-	- ##GET_COLOR## (##13##) Returns the current graphics mode color.
-		[OUT] ##//param1//## foreground
-		[OUT] ##//param2//## background
-	- ##GET_ALPHA_PRIMITIVES## (##14##) Returns if primitives drawing support for alpha channel is enabled.
-		[OUT] ##//param1//## ##TRUE## (##-1##) if alpha primitives is enabled, ##FALSE## (##0##) otherwise
-	- ##GET_GL_EXTENSIONS## (##15##) Returns a string holding all supported GL extensions, or the empty string if not in ""OpenGL"" mode.
-		[OUT] ##//param//## supported GL extensions
-	- ##GET_HIGH_PRIORITY## (##16##) Returns if ##GFX_HIGH_PRIORITY## was specified in the flags passed to ##[[KeyPgScreengraphics Screen]]## or ##[[KeyPgScreenres Screenres]]##.
-		[OUT] ##//param1//## higher priority graphics processing enabled
+	- ##GET_COLOR## (##13##) Retourne la couleur courante du mode graphique.
+		[OUT] ##//param1//## avant-plan
+		[OUT] ##//param2//## arrière-plan
+	- ##GET_ALPHA_PRIMITIVES## (##14##) Retourne si les primitives du support graphique de dessin pour le canal alpha sont validées.
+		[OUT] ##//param1//## ##TRUE## (##-1##) si les primitives alpha sont valides, ##FALSE## (##0##) autrement
+	- ##GET_GL_EXTENSIONS## (##15##) Retourne une chaîne contenant toutes les extensions GL supportées, ou une chaîne vide si pas de mode ""OpenGL"" valide.
+		[OUT] ##//param//## extensions GL supportées
+	- ##GET_HIGH_PRIORITY## (##16##) Retourne  si ##GFX_HIGH_PRIORITY## a été spécifié dans les drapeaux passés à ##[[KeyPgScreengraphics Screen]]## ou ##[[KeyPgScreenres Screenres]]##.
+		[OUT] ##//param1//## priorité de traitement graphique la plus haute validée
 
-		**Set operations**
-	- ##SET_WINDOW_POS## (##100##) Sets the current program window position, in desktop coordinates.
+		**Opérations pour initialiser une valeur**
+	- ##SET_WINDOW_POS## (##100##) Définit la position de la fenêtre programme, en coordonnées bureau.
 		[IN] ##//param1//## x
 		[IN] ##//param2//## y
-	- * ##SET_WINDOW_TITLE## (##101##) Sets the current program window title. This is equivalent to calling ##[[KeyPgWindowtitle WindowTitle]]( //param// )##.
-		[IN] ##//param//## title
-	- ##SET_PEN_POS## (##102##) Sets the current graphical pen position, in screen coordinates. This position is used in graphics functions supporting relative coordinates using the ##[[KeyPgStep Step]]## keyword.
+	- * ##SET_WINDOW_TITLE## (##101##) Définit le titre de la fenêtre programme. Ceci est équivalent à appeler ##[[KeyPgWindowtitle WindowTitle]]( //param// )##.
+		[IN] ##//param//## titre
+	- ##SET_PEN_POS## (##102##) Définit la position courante du crayon graphique, en coordonnées écran. Cette position est utilisée dans les fonctions graphiques supportant les coordonnées relatives utilisant le mot-clef ##[[KeyPgStep Step]]##.
 		[IN] ##//param1//## x
 		[IN] ##//param2//## y
-	- * ##SET_DRIVER_NAME## (##103##) Sets the name of the internal graphics driver to be used in subsequent calls to ##[[KeyPgScreengraphics Screen]]## or ##[[KeyPgScreenres ScreenRes]]##.
-		[IN] ##//param//## driver name
-	- ##SET_ALPHA_PRIMITIVES## (##104##) Sets if primitives drawing should honor alpha channel.
-		[IN] ##//param1//## enabled
-	- * ##SET_GL_COLOR_BITS## (##105##) Sets the number of bits dedicated to the ""OpenGL"" color buffer
+	- * ##SET_DRIVER_NAME## (##103##) Définit le nom du driver graphique interne à utiliser dans les appels ultérieurs à ##[[KeyPgScreengraphics Screen]]## ou ##[[KeyPgScreenres ScreenRes]]##.
+		[IN] ##//param//## nom du driver
+	- ##SET_ALPHA_PRIMITIVES## (##104##) Définit si les primitives de dessin respecte le canal alpha.
+		[IN] ##//param1//## valide
+	- * ##SET_GL_COLOR_BITS## (##105##) Définit le nombre de bits dédiés au tampon couleur ""OpenGL""
 		[IN] ##//param1//## bits
-	- * ##SET_GL_COLOR_RED_BITS## (##106##) Sets the number of bits dedicated to the red component of the ""OpenGL"" color buffer
+	- * ##SET_GL_COLOR_RED_BITS## (##106##) Définit le nombre de bits dédiés à la composante rouge du tampon couleur ""OpenGL""
 		[IN] ##//param1//## bits
-	- * ##SET_GL_COLOR_GREEN_BITS## (##107##) Sets the number of bits dedicated to the green component of the ""OpenGL"" color buffer
+	- * ##SET_GL_COLOR_GREEN_BITS## (##107##) Définit le nombre de bits dédiés à la composante vert du tampon couleur ""OpenGL""
 		[IN] ##//param1//## bits
-	- * ##SET_GL_COLOR_BLUE_BITS## (##108##) Sets the number of bits dedicated to the blue component of the ""OpenGL"" color buffer
+	- * ##SET_GL_COLOR_BLUE_BITS## (##108##) Définit le nombre de bits dédiés à la composante bleu du tampon couleur ""OpenGL""
 		[IN] ##//param1//## bits
-	- * ##SET_GL_COLOR_ALPHA_BITS## (##109##) Sets the number of bits dedicated to the alpha component of the ""OpenGL"" color buffer
+	- * ##SET_GL_COLOR_ALPHA_BITS## (##109##) Définit le nombre de bits dédiés à la composante alpha du tampon couleur ""OpenGL""
 		[IN] ##//param1//## bits
-	- * ##SET_GL_DEPTH_BITS## (##110##) Sets the number of bits dedicated to the ""OpenGL"" depth buffer
+	- * ##SET_GL_DEPTH_BITS## (##110##) Définit le nombre de bits dédiés au tampon profondeur ""OpenGL""
 		[IN] ##//param1//## bits
-	- * ##SET_GL_STENCIL_BITS## (##111##) Sets the number of bits dedicated to the ""OpenGL"" stencil buffer
+	- * ##SET_GL_STENCIL_BITS## (##111##) Définit le nombre de bits dédiés au tampon stencil ""OpenGL""
 		[IN] ##//param1//## bits
-	- * ##SET_GL_ACCUM_BITS## (##112##) Sets the number of bits dedicated to the ""OpenGL"" accumulation buffer
+	- * ##SET_GL_ACCUM_BITS## (##112##) Définit le nombre de bits dédiés au tampon accumulation ""OpenGL""
 		[IN] ##//param1//## bits
-	- * ##SET_GL_ACCUM_RED_BITS## (##113##) Sets the number of bits dedicated to the red component of the ""OpenGL"" accumulation buffer
+	- * ##SET_GL_ACCUM_RED_BITS## (##113##) Définit le nombre de bits dédiés à la composante rouge du tampon accumulation ""OpenGL""
 		[IN] ##//param1//## bits
-	- * ##SET_GL_ACCUM_GREEN_BITS## (##114##) Sets the number of bits dedicated to the green component of the ""OpenGL"" accumulation buffer
+	- * ##SET_GL_ACCUM_GREEN_BITS## (##114##) Définit le nombre de bits dédiés à la composante vert du tampon accumulation ""OpenGL""
 		[IN] ##//param1//## bits
-	- * ##SET_GL_ACCUM_BLUE_BITS## (##115##) Sets the number of bits dedicated to the blue component of the ""OpenGL"" accumulation buffer
+	- * ##SET_GL_ACCUM_BLUE_BITS## (##115##) Définit le nombre de bits dédiés à la composante bleu du tampon accumulation ""OpenGL""
 		[IN] ##//param1//## bits
-	- * ##SET_GL_ACCUM_ALPHA_BITS## (##116##) Sets the number of bits dedicated to the alpha component of the ""OpenGL"" accumulation buffer
+	- * ##SET_GL_ACCUM_ALPHA_BITS## (##116##) Définit le nombre de bits dédiés à la composante alpha du tampon accumulation ""OpenGL""
 		[IN] ##//param1//## bits
-	- * ##SET_GL_NUM_SAMPLES## (##117##) Sets the number of samples to be used for ""OpenGL"" multisampling
+	- * ##SET_GL_NUM_SAMPLES## (##117##) Définit le nombre de "samples" à utiliser pour ""OpenGL"" multisampling
 		[IN] ##//param1//## samples
 
-		**Other operations**
-	- ##POLL_EVENTS## (##200##) Cause the library to poll all events, ie to check the system event queue, specifically used for retrieving keyboard and mouse events.  This is most useful for ""OpenGL"" code where ##[[KeyPgFlip Flip]]## is not used, as normally ##[[KeyPgFlip Flip]]## will cause these events to be polled.
+		**Autres opérations**
+	- ##POLL_EVENTS## (##200##)Oblige la bibliothèque à interroger tous les événements, c'est à dire de vérifier la file d'attente des événements système, utilisé spécifiquement pour déterminer les événements clavier ou souris.  Ceci est très utile pour du code ""OpenGL"" ou ##[[KeyPgFlip Flip]]## n'est pas utilisé, car normalement ##[[KeyPgFlip Flip]]## provoque l'interrogation de ces événements.
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/gfx/screencontrol.bas"}}%%(freebasic)
-'' include fbgfx.bi for some useful definitions
+'' include fbgfx.bi pour certaines definitions
 #include "fbgfx.bi"
 
 using fb
@@ -134,7 +134,7 @@ dim as any ptr img
 
 screenres 384, 64, 32,, GFX_SHAPED_WINDOW
 
-'' create a fancy window shape
+'' cree une forme fenetre fantaisie
 img = imagecreate(48,8)
 draw string img, (0, 0), "GfxLib"
 for y = 0 to 63
@@ -168,10 +168,10 @@ loop while not multikey(1)
 
 
 {{fbdoc item="lang"}}
-	- Not available in the //[[CompilerOptlang -lang qb]]// dialect unless referenced with the alias ##**""__Screencontrol""**##.
+	- Non disponible dans le dialecte //[[CompilerOptlang -lang qb]]// sauf si référencé avec l'alias ##**""__Screencontrol""**##.
 
 {{fbdoc item="diff"}}
-	- New to ""FreeBASIC""
+	- Nouveau pour ""FreeBASIC""
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgScreengraphics Screen (Graphics)]]##

@@ -1,23 +1,23 @@
 {{fbdoc item="title" value="Literals"}}----
-Non-variable compile-time string and numeric values.
+Chaîne non-variable non-compilable et valeurs numériques.
 
-Literals are numbers or strings of characters specified directly in the source code.  Literal values may be used by assigning them to a variable or constant, passing them to a procedure, or using them in an expression.
+Les littéraux sont des nombres ou des chaînes de caractères spécifiés directement dans le code source.  Les valeurs littérales peuvent être utilisées en les assignant à une variable ou une constante, en les passant à une procédure ou en les utilisant dans une expression.
 
-Numeric literals come in two forms - integer and floating-point.  
+Les littéraux numériques existent sous deux formes - nombres entiers et à virgule flottante.  
 
-{{fbdoc item="section" value="Integer Literals"}}
+{{fbdoc item="section" value="Littéraux entiers"}}
 
-	__Decimal__
-	Decimal digits ( ##0 1 2 3 4 5 6 7 8 9## ).
-	//Note: to get negative values, a "##-##" sign (##[[KeyPgOpNegate Operator - (Negate)]]##) can be placed before a numeric literal//
+	__Décimal__
+	Les chiffres de décimaux ( ##0 1 2 3 4 5 6 7 8 9## ).
+	//Note: pour obtenir des valeurs négatives, un signe "##-##" (##[[KeyPgOpNegate Opérateur - (Négation)]]##) peut être placé devant un littéral numérique//
 
 {{fbdoc item="filename" value="examples/manual/proguide/literals/dec.bas"}}%%(freebasic)
 Dim x as integer = 123456
 Dim b as byte = -128
 %%
 
-	__Hexadecimal__
-	"##&H##", followed by hexadecimal digits ( ##0 1 2 3 4 5 6 7 8 9 A B C D E F## ).
+	__Hexadécimal__
+	"##&H##", suivi de chiffres hexadécimaux ( ##0 1 2 3 4 5 6 7 8 9 A B C D E F## ).
 
 {{fbdoc item="filename" value="examples/manual/proguide/literals/hex.bas"}}%%(freebasic)
 Dim x As Integer = &h1E240
@@ -25,31 +25,31 @@ Dim b As Byte = &H80
 %%
 		
 	__Octal__
-	"##&O##" ( O as in "Octal" ), followed by octal digits ( ##0 1 2 3 4 5 6 7## )
+	"##&O##" ( O comme dans "Octal" ), suivi de chiffres octals ( ##0 1 2 3 4 5 6 7## )
 
 {{fbdoc item="filename" value="examples/manual/proguide/literals/oct.bas"}}%%(freebasic)
 Dim x as integer = &O361100
 Dim b as byte = &O400
 %%
-	__Binary__
-	"##&B##", followed by binary digits ( ##0 1## )
+	__Binaire__
+	"##&B##", suivi de chiffres binaires ( ##0 1## )
 
 {{fbdoc item="filename" value="examples/manual/proguide/literals/bin.bas"}}%%(freebasic)
 Dim x as integer = &B11110001001000000
 Dim b as byte = &B10000000
 %%
 
-{{fbdoc item="section" value="Integer size suffixes"}}
-	If an integer literal suffix is not given, the number field size required to hold the literal is automatically calculated.  Specifying a size suffix guarantees that the compiler will consider a number as a specific integer size.
+{{fbdoc item="section" value="Suffixes de taille d'un entier"}}
+	Si aucun suffixe littéral d'entier n'est donné, la dimension du champ du nombre requis pour contenir le littéral est automatiquement calculée.  La spécification d'un suffixe de taille garantit que le compilateur examinera le nombre comme un entier de taille spécifique.
 
-	Integer literals ending with:
-	- "##L##", "##%##", are considered as signed 32 bit integers. (##[[KeyPgInteger Integer]]##)
-	- "##&##", are considered as signed 32 bit long integers. (##[[KeyPgLong Long]]##)
-	- "##U##", "##UL##", are considered as unsigned 32 bit integers. (##[[KeyPgUinteger Uinteger]]##)
-	- "##LL##", are considered as signed 64 bit integers. (##[[KeyPgLongint Longint]]##)
-	- "##ULL##", are considered as unsigned 64 bit integers. (##[[KeyPgUlongint Ulongint]]##)
+	Les entiers littéraux se terminant par:
+	- "##L##", "##%##", sont considérés comme des entiers 32 bits signés. (##[[KeyPgInteger Integer]]##)
+	- "##&##", sont considérés comme des entiers longs 32 bits signés. (##[[KeyPgLong Long]]##)
+	- "##U##", "##UL##", sont considérés comme des entiers 32 bits non signés. (##[[KeyPgUinteger Uinteger]]##)
+	- "##LL##", sont considérés comme des entiers 64 bits signés. (##[[KeyPgLongint Longint]]##)
+	- "##ULL##", sont considérés comme des entiers 64 bits non signés. (##[[KeyPgUlongint Ulongint]]##)
 
-	The prefixes, suffixes, and hexadecimal letter digits are all case-insensitive.
+	Les préfixes, les suffixes et les lettres des chiffres hexadécimaux sont tous insensibles à la casse.
 	
 {{fbdoc item="filename" value="examples/manual/proguide/literals/intsuff.bas"}}%%(freebasic)
 Dim a as integer = 123L
@@ -58,21 +58,21 @@ Dim c as longint = 76543LL
 Dim d as ulongint = &b1010101ULL
 %%
 
-{{fbdoc item="section" value="Floating Point Literals"}}
-	Floating point numbers are specified in decimal digits, may be positive or negative, have a fractional portion, and optionally an exponent.  The format of a floating point literal is as follows:
+{{fbdoc item="section" value="Littéraux à virgule flottante"}}
+	Les nombres à virgule flottante sont exprimés avec des chiffres décimaux, ils peuvent être positifs ou négatifs, ont une partie décimale et éventuellement un exposant.  Le format d'un littéral à virgule flottante est:
 
-	##""number[.[fraction]][[D|E][[+|-]exponent]][suffix]""##
-	//or//
-	##"".fraction[[D|E][[+|-]exponent]][suffix]""##
+	##nombre[.[partie décimale]][[D|E][[+|-]exposant]][suffixe]##
+	//ou//
+	##.partie décimale[[D|E][[+|-]exposant]][suffixe]##
 	
-	By default, floating point numbers that do not have either an exponent or a suffix are considered as a double precision floating point value, except in the //[[CompilerOptlang -lang qb]]// dialect, where numbers of 7 digits or fewer are considered to be single precision.
+	Par défaut, les nombres à virgule flottante qui n'ont pas soit un exposant ou un suffixe sont considérés comme ayant une valeur double précision en virgule flottante, sauf dans le dialecte //[[CompilerOptlang -lang qb]]//, où les nombres de 7 chiffres (ou moins) sont considérés comme en simple précision.
 {{fbdoc item="filename" value="examples/manual/proguide/literals/floats.bas"}}%%(freebasic)
 Dim a as double = 123.456
 Dim b as double = -123.0
 %%
 
-	The letter "##D##" or "##E##", placed after the number/fraction part, allows the number to be given an exponent.  The exponent may be specified as either positive or negative with a plus ("##+##") or minus ("##-##") sign.  Exponents that do not have a sign are positive.
-	An exponent is not required after the letter, so the letter can be used on its own just to specify the type.  "##D##" specifies a double-precision floating-point number.  "##E##" specifies a floating-point number using the default precision.
+	La lettre "##D##" ou "##E##", placée après le partie entière/décimale du nombre, permet l'expression du nombre avec un exposant.  L'exposant peut être spécifié comme positif ou négatif à l'aide du signe plus ("##+##") ou moins ("##-##").  Les exposants qui n'ont pas un signe sont positifs.
+	Un exposant n'est pas nécessaire après la lettre si elle est utilisée seule juste pour préciser le type.  "##D##" indique un nombre à virgule flottante en double précision.  "##E##" spécifie un nombre à virgule flottante utilisant la précision par défaut.
 
 {{fbdoc item="filename" value="examples/manual/proguide/literals/dblsuff.bas"}}%%(freebasic)
 Dim a as double = -123.0d
@@ -82,8 +82,8 @@ Dim d as double = 743.1D-13
 Dim e as double = 743.1E13
 %%
 
-	A suffix of "##!##" or "##F##" on a number specifies a single precision (32 bit total) floating point value.  A suffix of "##""#""##" specifies a double precision float.
-	Note that the letter suffixes and exponent specifiers are all case-insensitive.
+	Un suffixe """#""#!##" ou "##F##" sur un nombre spécifie une valeur en simple précision (32 bits au total) en virgule flottante.  Un suffixe "#####" spécifie une valeur en double précision en virgule flottante.
+	Notez que les lettres suffixes et les prescripteurs d'exposant sont insensibles à la casse.
 
 {{fbdoc item="filename" value="examples/manual/proguide/literals/singsuff.bas"}}%%(freebasic)
 Dim a as single = 3.1!
@@ -92,34 +92,34 @@ Dim c as double = 0#
 Dim d as double = 3.141592653589e3#
 %%
 
-{{fbdoc item="section" value="String Literals"}}
-	String literals are a sequence of characters contained between two double quotes.  The sequence of characters escaped or non-escaped.
+{{fbdoc item="section" value="Les chaînes littérales"}}
+	Une chaîne littérale est une séquence de caractères comprise entre deux guillemets doubles.  Une séquence de caractères d'échappement ou non.
 
-	Double quotes can be specified in the string literal by using two double quotes together.
+	Les guillemets doubles peuvent être spécifiés dans la chaîne littérale en utilisant deux guillemets doubles ensemble.
 {{fbdoc item="filename" value="examples/manual/proguide/literals/string.bas"}}%%(freebasic)
 print "Hello World!"
 print "That's right!"
 print "See the ""word"" contained in double quotes."
 %%
 
-	String literals can contain escape sequences if the string literal is prefixed by the ##[[KeyPgOpPpEscape ! operator]]## (Escaped String Literal).  See [[TblEscapeSequences Escape Sequences]] for a list of accepted escape sequences.
+	Une chaîne littérale peut contenir des séquences d'échappement si elle est préfixée par ##[[KeyPgOpPpEscape ! operator]]## (Echappement chaîne littérale).  Voir [[TblEscapeSequences Séquences d'échappement]] pour une liste des séquences d'échappement acceptées.
 {{fbdoc item="filename" value="examples/manual/proguide/literals/escape.bas"}}%%(freebasic)
 print !"Hello\nWorld!"
 %%
 
-	By default, string literals are non-escaped unless ##[[KeyPgOptionescape Option Escape]]## was used in the source in which case all string literals following are by default escaped.
+	Par défaut, les chaînes littérales ne supportent pas les séquences d'échappement sauf si ##[[KeyPgOptionescape Option Escape]]## a été utilisée dans le source; dans ce cas, toutes les chaînes littérales suivantes supporteront les séquences d'échappement.
 
-	A string may be explicitly specified as non-escaped when prefixed by the ##[[KeyPgOpPpEscape $ operator]]## (Non-Escaped String Literal).
+	Une chaîne peut être spécifiée explicitement comme ne supportant pas les séquences d'échappement lorsqu'elle est préfixée par ##[[KeyPgOpPpNoescape $ Operator]]## (Non Echappement chaîne littérale).
 {{fbdoc item="filename" value="examples/manual/proguide/literals/noescape.bas"}}%%(freebasic)
 print $"C:\temp"
 %%
 
-	Besides ASCII files with Unicode escape sequences (##\u##), ""FreeBASIC"" can parse UTF-8, UTF-16LE, UTF-16BE, UTF-32LE and UTF-32BE source files allowing unicode characters directly in the string literal.
+	En plus des fichiers ASCII avec des séquences d'échappement Unicode (##\u##), ""FreeBASIC"" peut analyser les fichiers source UTF-8, UTF-16LE, UTF-16BE, UTF-32LE et UTF-32BE FreeBASIC peut analyser source eee fichiers permettant des caractères unicode directement dans la chaîne littérale.
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgPpdefine #define]]##
 	- ##[[KeyPgConst Const]]## 
-	- [[CatPgStdDataTypes Standard Data Types]]
-	- [[TblVarTypes]] Table with variable types overview, limits and suffixes
+	- [[CatPgStdDataTypes Types de données standard]]
+	- [[TblVarTypes Tableau des types de variables, leurs limites et leurs suffixes]]
 
 {{fbdoc item="back" value="CatPgProgrammer|Programmer's Guide"}}

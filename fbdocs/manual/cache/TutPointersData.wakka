@@ -1,9 +1,9 @@
 {{fbdoc item="title" value="Pointers, Data Types and Memory"}}----
-//Written by [[WikiRick rdc]]//
+//Ecrit par [[WikiRick rdc]]//
 
-If you read the article [[TutPointers Introduction to Pointers]] you know that pointers contain memory location addresses. You can manipulate the data in these memory locations using the reference operator *. Using pointers with single data item isn?t a problem, but what if you need to store multiple data items together and manipulate them using a pointer? It can get a bit tricky unless you understand how data is stored in memory.
+Si vous lisez l'article [[TutPointers Introduction aux pointeurs]] vous savez que les pointeurs contiennent des adresses d'emplacements mémoire. Vous pouvez manipuler les données de ces emplacements mémoire en utilisant l'opérateur de référence *. L'utilisation de pointeurs avec un seul item de données unique n'est pas un problème, mais que faire si vous avez besoin de stocker de multiples éléments de données et de les manipuler à l'aide d'un pointeur? C'est peut être un peu plus difficile à moins de comprendre comment les données sont stockées en mémoire.
 
-A single memory location in a computer is 1 byte long. Big enough to hold a single ANSI character (as opposed to Unicode characters, which are wide characters and are two bytes. We won?t be discussing Unicode characters in this article.) However, all data types are not a single byte in width. Here is a simple program that displays the length in bytes of each data type.
+Un emplacement mémoire dans un ordinateur a une longueur de 1 octet. Assez grand pour contenir un caractère ANSI (par opposition aux caractères Unicode, qui sont des caractères larges et occupent deux octets. Nous ne discuterons pas de caractères Unicode dans cet article.) Cependant, tous les types de données n'ont pas un seul octet de longueur. Voici un programme simple qui affiche la longueur en octets de chaque type de données.
 
 ##%%(freebasic)
 dim a as byte
@@ -49,7 +49,7 @@ deallocate s3
 sleep
 %%##
 
-The output is:
+Affiche à l'écran:
 
 ##%%(freebasic)
 Byte:  1
@@ -69,9 +69,9 @@ Variable String:  27
 ZString:  27
 %%##
 
-Notice that the length of a pointer is always 4 bytes long (the same as an integer), regardless of the data being pointed to, since a pointer contains a memory address and not data.
+Notez que la longueur d'un pointeur est toujours de 4 octets (la même que celle d'un entier), indépendamment des données pointées, puisque un pointeur contient une adresse mémoire et non les données.
 
-Looking at the length of the different data types, you can see that if you were to [[KeyPgAllocate allocate]] enough space for 10 integers, it would take 40 bytes of memory. Each integer takes up 4 bytes. So the question is, how do you access each integer value from the memory buffer? The answer, pointer math. Take a look at the following program.
+En regardant la longueur des différents types de données, vous voyez que pour [[KeyPgAllocate allocate]] suffisamment d'espace pour 10 entiers, il faut 40 octets de mémoire. Chaque entier prend 4 octets. Donc la question est, comment accéder à chaque valeur entière de la mémoire tampon? La réponse, l'arithmétique des pointeurs. Jetez un oeil au programme suivant.
 
 ##%%(freebasic)
 option explicit
@@ -94,20 +94,20 @@ sleep
 end
 %%##
 
-In this program we dimension two variables, an [[KeyPgInteger integer]] and an [[KeyPgInteger integer]] [[KeyPgPointer pointer]], aptr. Aptr will point to our memory buffer that will contain two integers. The [[KeyPgAllocate allocate]] function requires the size of the buffer we need, so we multiply the size of an [[KeyPgInteger integer]] by 2 to reserve 8 bytes of memory (each integer will take 4 bytes of space). 
+Dans ce programme nous dimensionnons deux variables, un [[KeyPgInteger integer]] et un [[KeyPgInteger integer]] [[KeyPgPointer pointer]], aptr. Aptr pointera sur notre tampon mémoire qui contiendra deux entiers. La fonction [[KeyPgAllocate allocate]] requiert la taille du tampon mémoire dont nous avons besoin, donc nous multiplions la taille d'un [[KeyPgInteger integer]] par 2 pour réserver 8 octets de mémoire (chaque entier prendra 4 octets d'espace). 
 
-After the allocation process, aptr contains the address of the first byte of our memory buffer. Storing the first integer is simply a matter of using the reference operator and setting the value to 1. To print out the value, we again just use *aptr.
+Après le processus d'allocation, aptr contient l'adresse du premier octet de notre tampon mémoire. Stocker le premier entier consiste tout simplement à utiliser la référence de l'opérateur et de lui donner la valeur à 1. Pour afficher sa valeur, nous utilisons simplement *aptr.
 
-Now, le me ask you a question: How does the compiler know that the value 1 requires 4 bytes and not 1 or 2 bytes? Because we dimensioned aptr as an //integer ptr//. The compiler knows that an integer takes 4 bytes and so loads the data into four bytes of memory. This is why when we print out the value we get 1 and not some strange number.
+Maintenant, laissez-moi vous poser une question: Comment le compilateur sait que la valeur 1 requiert 4 octets, et non pas 1 ou 2 octets? Parce que nous avons dimensionné aptr comme un //integer ptr//. Le compilateur sait qu'un entier occupe 4 octets et donc il charge les données dans quatre octets de mémoire. C'est pourquoi, lorsque nous affichons la valeur nous obtenons 1 et non pas un nombre étrange.
 
-To load the second value into our buffer, we use:
+Pour charger la deuxième valeur dans notre tampon, nous utilisons:
 
 ##%%(freebasic)
 *(aptr + 4) = 2
 %%##
 
-This may look a little strange at first glance. Aptr points to the first byte in our memory buffer. An integer is 4 bytes long, so to get to the next integer byte position, we must add 4 to aptr. We need the parenthesis around the add operation because the reference operator * has a higher precedence than +. The parenthesis ensure that we perform the add operation first, and then apply the indirection operator.
+Cela peut paraître un peu étrange au premier abord. Aptr pointe sur le premier octet dans notre tampon mémoire. Un entier occupe 4 octets, donc pour arriver à la position de l'octet entier suivant, il faut ajouter 4 à aptr. Nous avons besoin de parenthèses autour de l'opération d'addition, car l'opérateur de référence * a une priorité supérieure à +. Les parenthèses nous assurent que nous effectuons l'opération d'addition en premier et qu'ensuite nous appliquons l'opérateur d'indirection.
 
-Notice that we didn?t increment aptr directly. If we did, aptr would no longer point to the start of the memory buffer and the program would crash when we deallocated the buffer since it would [[KeyPgDeallocate deallocate]] memory outside the memory buffer. If the need arises to directly increment a pointer, then create a temporary pointer variable and increment that, rather than the pointer used in the original allocation. 
+Notez que nous n'avons pas incrémenter aptr directement. Si nous l'avions fait, aptr pointerait plus vers le début du tampon mémoire et le programme planterait quand on désallouerait le tampon, car [[KeyPgDeallocate deallocate]] s'effectuerait en-dehors du tampon mémoire. Si le besoin se faisait sentir d' incrémenter directement un pointeur, alors il faudrait créer une variable pointeur temporaire et l'incrémenter, plutôt que le pointeur utilisé dans l'allocation initiale. 
 
-Memory buffers and pointers are a powerful way to store and manipulate data in memory. Care must be taken though to ensure that you are accessing the data correctly according to the type of data being stored in the buffer.
+Les tampons mémoire et les pointeurs sont un moyen puissant pour stocker et manipuler des données en mémoire. Des précautions doivent être prises pour s'assurer que vous accédez correctement aux données en fonction du type de données stockées dans le tampon mémoire.

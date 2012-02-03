@@ -1,98 +1,98 @@
 {{fbdoc item="title" value="Introduction to Variable Scope"}}----
-//Written by [[WikiRick rdc]]//
+//Ecrit par [[WikiRick rdc]]//
 
 === Variable Scope ===
 
-Scope refers to the visibility of a variable, where you can access a variable within a program. Before you can understand the different levels of scope, you need to understand the structure of a program in FreeBasic.
+##**Scope = portée**## fait référence à la visibilité d'une variable, où vous pouvez accéder à une variable dans un programme. Avant de pouvoir comprendre les différents niveaux de portée, vous devez comprendre la structure d'un programme en FreeBASIC.
 
-== Program Structure ==
+== Structure d'un programme ==
 
-A complete program is composed of one or more .bas files, called modules. Each module can contain both module level code, and code contained within subroutines and functions. Module level code is code that is //not// contained within a subroutine or function. The following snippet illustrates the various parts of a module.
+Un programme complet est composé d'un ou plusieurs fichiers **.bas**, appelés modules. Chaque module peut contenir, à la fois, du code de niveau module et du code contenu dans les sous-routines et fonctions. Du code de niveau module est du code qui //**n'est pas**// contenu dans une sous-routine ou une fonction. L'extrait suivant illustre les différentes parties d'un module.
 
 %%(freebasic)
-Dim aInt as Integer 'Variable declared at module level
+Dim aInt As Integer 'Variable déclarée au niveau module
 
 Sub DoSomething
-	Dim aInt as Integer 'Variable declared at sub level
+	Dim aInt As Integer 'Variable déclarée au niveau sous-routine
 	
-	... 'This code is local to sub
+	... 'Ce code est local à Sub
 End Sub
 
 Function DoSomethingElse() as Integer
-	Dim aInt as Integer 'Variable declared at func level
+	Dim aInt As Integer 'Variable déclarée au niveau fonction
 	
-	... 'This code is local to func
+	... 'Ce code est local à Function
 End Function
 
-'Module level code
+'Code niveau module
 aInt = 5
 DoSomething
 aInt = DoSomethingElse()
 %%
 
-== Local Variables ==
+== Variables locales ==
 
-If you define a variable at the module level (and not using ##Shared##), the variable is said to have local module level scope. It is visible to the module level code, but not to any subroutine or function within the module. In the example above the module variable ##aInt## is only visible to the module level code. 
+Si vous définissez une variable au niveau du module (et n'utilisez pas ##**Shared**##), la variable est dite avoir une portée au niveau du module local. Elle est visible par le code au niveau du module, mais pas des sous-routines ou fonctions au sein du module. Dans l'exemple ci-dessus la variable du module ##**aInt**## est visible uniquement pour le code de niveau module. 
 
-Variables defined within a subroutine or function are local to the subroutine or function and are not visible to module level code or any other subroutine or function.
+Les variables définies dans une sous-routine ou une fonction sont locales à la sous-routine ou fonction et ne sont pas visibles du code de niveau module ou de toute autre sous-programme ou fonction.
 
-== Variables Defined Within Control Structures ==
+== Variables définies au sein de structures de contrôle ==
 
-Variables that are defined within If, For-Next, While-Wend and Do-Loop constructs are local to the control structure block code. That is, they are not visible outside the bounds of the begin and end of the control block, just like a variable declared within a subroutine or function. 
+Les variables qui sont définies dans des constructions ##**If**##, ##**For-Next**##, ##**While-Wend**## et ##**Do-Loop**## sont locales au code de la structure du bloc de contrôle. Autrement dit, ils ne sont pas visibles à l'extérieur des limites du début et de fin du bloc de contrôle, tout comme une variable déclarée dans une sous-routine ou une fonction. 
 
-== Shared Variables ==
+== Les variables partagées (Shared) ==
 
-In the example, if you wanted ##aInt## to be visible within the subroutine or function, you would need to declare the variable as ##Shared## and then not declare a variable with the same name within any subroutine, function or control block. ##Shared## variables are visible to module level code, subroutine or function level code and within control structure blocks.
+Dans l'exemple, si vous voulez que ##**aInt**## soit visible au sein de la sous-routine ou de la fonction, vous devez déclarer la variable comme étant ##**Shared**## et ensuite ne pas déclarer une variable avec le même nom dans des sous-routine, fonction ou bloc de contrôle. Les variables ##**Shared**## sont visibles par le code de niveau module, celui de niveau sous-routines ou fonctions et au sein des structures de contrôle.
 
-== Scope Conflicts ==
+== Les conflits de portée==
 
-In the code snippet above, if ##aInt## were declared as ##Shared##, and each subroutine and function declared ##aInt##, there would be a scope conflict, since there is one variable name used for different levels of scope.
+Dans l'extrait de code ci-dessus, si ##**aInt**## est déclarée ##**Shared**## et que chaque sous-routine et fonction déclare ##**aInt**##, il y aurait un conflit une portée, car il y aurait même un nom de variable utilisé pour différents niveaux de portée.
 
-The compiler resolves this by taking the current scope into account and mapping the variable within that scope. Since subroutines and functions have a lower level of scope than the module, ##aInt## would refer to the variable declared within the sub or func, and not the one declared at the module level, even though it is declared as a shared variable.
+Le compilateur résout cela en prenant la portée courante en compte et planifie la variable avec cette portée. Comme les sous-routines et fonctions ont un niveau de portée inférieur à celui d'un module, ##**aInt**## fait référence soit à la variable déclarée dans la sous-routine ou la fonction, et non pas à celle qui a été déclarée au niveau d'un module, même si elle a été déclarée comme une variable partagée.
 
-== Multiple Modules ==
+== Plusieurs modules ==
 
-Scope is limited to a single module, that is a single .bas file. However, it is sometimes necessary to extend the scope from one module to another. You would use the ##Common## statement when you declare a variable that needs to be shared among modules.
+La portée est limitée à un seul module, c'est à dire un unique fichier ##**.bas**##. Cependant, il est parfois nécessaire d'étendre la portée d'un module à un autre. Vous devez utiliser la déclaration ##**Common**## lorsque vous déclarez une variable qui doit être partagée entre plusieurs modules.
 
-Each module must have the same ##Common## declaration in order for the compiler to match up the common variables. If you declare a variable in module1 as ##Common aInt as Integer## then module2 must also have ##Common aInt as Integer##. Without the common declaration ##aInt## would not be visible within module2.
+Chaque d'un module doit avoir la même déclaration ##**Common**## pour que le compilateur de fasse correspondre les variables communes. Si vous déclarez une variable ##**Common aInt as Integer**## dans module1 alors le module2 doit aussi avoir ##**Common aInt as Integer**##. Sans cette déclaration commune ##**aInt**## ne serait pas visible dans le module2.
 
-You can add the ##Shared## attribute to ##Common##, that is ##Common Shared## to not only extend scope to multiple modules, but to extend scope within a module. ##Common Shared## operates the same as ##Shared## within a single module. As with ##Common##, you need to have matching declarations in each module that needs access to the variable.
+Vous pouvez ajouter l'attribut ##**Shared**## à ##**Common**##, c'est à dire ##**Common Shared**## non seulement pour étendre la portée à plusieurs modules, mais pour étendre la portée au sein d'un module. ##**Common Shared**## fonctionne comme ##**Shared**## dans un seul module. Comme avec ##**Common**##, vous avez besoin d'apparier les déclarations dans chaque module qui doit avoir accès à la variable.
 
 === Scope...End Scope ===
 
-You can create a temporary scope block by using the ##Scope##, ##End Scope## keywords. The scope block is very useful when creating multi-line macros where you may need to create some temporary working variables but do not want to introduce name conflicts in the program. The following snippet illustrates how to create a scope block.
+Vous pouvez créer un bloc de portée temporaire en utilisant les mots-clés ##**Scope**## et ##**End Scope**##. Le bloc de portée est très utile lors de la création de macros multi-ligne où vous pouvez avoir besoin de créer des variables de travail temporaires mais en évitant de créer des conflits de nom dans le programme. L'extrait suivant montre comment créer un bloc de portée.
 
 %%(freebasic)
 Scope
 	Dim tmp as Integer
-	... 'Some code
+	... 'Du code
 End Scope
 %%
 
-The scope of any variable created within a scope block is limited to the block itself. However, the scope block inherits the visibility of the surrounding scope so that variables created at the same scope as the scope block are visible within the block.
+La portée d'une variable créée dans un bloc de portée est limitée au bloc lui-même. Cependant, le bloc de portée hérite de la visibilité de la portée environnante, afin que les variables créées avec la même portée que le bloc de portée soient visibles dans le bloc.
 
-For example, if you have aInt which is at module level scope, and the scope block is at module level scope, then ##aInt## would be visible inside the scope block. Unless of course there is a scope conflict, in which case the variable inside the scope block would override the variable with the same name outside the scope block.
+Par exemple, si vous avez ##**aInt**## qui est de portée niveau module et le bloc de portée qui est de portée niveau module, alors ##**aInt**##serait visible à l'intérieur du bloc de portée. À moins bien sûr qu'il n'y ait un conflit de portée, auquel cas la variable à l'intérieur du bloc de portée aurait préséance sur la variable avec le même nom mais en dehors du bloc portée.
 
-=== Variable Lifetime ===
+=== Durée de vie d'une variable ===
 
-Not only does scope set the visibility of a variable, it also determines the lifetime of a variable. A variable goes through several stages in its lifetime; creation, initialization, access and destruction. When this occurs depends on the scope of a variable, that is, where the variable has been defined within the program.
+La portée ne définit pas seulement la visibilité d'une variable, elle détermine également sa durée de vie. Une variable passe par plusieurs étapes dans sa vie; création, initialisation, accès et destruction. La portée d'une variable dépend du moment où cela se produit, c'est à dire, où la variable a été définie dans le programme.
 
-== Module Level Variables ==
+== Variables de niveau module ==
 
-Module level variables exist for the life of a program, since they are declared within the main body of the program. Module level code is the main executing code of the program, and terminates when the program ends.
+Les variables au niveau du module existent pour la durée de vie d'un programme, puisqu'elles sont déclarées dans le corps principal du programme. Le code de niveau module est le code d'exécution principal du programme et se termine lorsque le programme se termine..
 
-== Subroutine and Function Level Variables ==
+== Les variables de niveau sous-routine et fonction ==
 
-Variables declared within a subroutine and function exist as long as the program is within the body of the subroutine and function. On entering the sub/func, the variable is created, initialized and can be accessed within the sub/func. Once the subroutine or function exits, the variable is destroyed.
+Les variables déclarées dans un sous-programme ou une fonction existent aussi longtemps que le programme est dans le corps du sous-programme ou de la fonction. A l'entrée dans la ##**Sub/Function**##, la variable est créée, initialisée et est accessible dans ##**Sub/Function**##. Dès la sortie de ##**Sub/Function**##, la variable est détruite.
 
-== Static Variables  ==
+== Les variables statiques  ==
 
-One exception to the declared sub/func variable is the ##Static## variable. ##Static## variables maintain their value between calls to the subroutine or function and so have a module level lifespan. 
+Une exception aux variables déclarées dans ##**Sub/Function**## c'est la variable ##**Static**##. Les variables ##Static## conservent leur valeur entre les appels à ##**Sub/Function**## et ont donc une durée de vie niveau module. 
 
-== Control Block Variables ==
+== Les variables de blocs de contrôle ==
 
-Variables declared within a control block, such as a For-Next, exist as long as the control block is executing. Upon leaving the control block, the variables are destroyed.
+Les variables déclarées dans un bloc de contrôle, comme un ##**For-Next**## existent tant que le bloc de contrôle est exécuté. Au moment de quitter le bloc de contrôle, les variables soient détruites.
 
-== Scope...End Scope Variables ==
+== Variables Scope...End Scope ==
 
-Variables declared within a scope block exist as long as the the scope block exists. Once the program leaves the scope block, any variables created within the scope block are destroyed.
+Les variables déclarées dans un bloc ##**Scope...End Scope**## existent aussi longtemps que le bloc existe. Dès que le programme quitte le bloc toutes les variables créées dans le bloc sont détruites.

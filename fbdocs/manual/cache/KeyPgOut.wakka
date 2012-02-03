@@ -1,5 +1,5 @@
 {{fbdoc item="title" value="OUT"}}----
-Outputs a value to a hardware port.
+Envoie une valeur sur un port "hardware".
 
 {{fbdoc item="syntax"}}##
 	[[KeyPgDeclare declare]] [[KeyPgFunction function]] **Out** ( [[KeyPgByval byval]] //port// [[KeyPgAs as]] [[KeyPgUshort ushort]] , [[KeyPgByval byval]] //data// [[KeyPgAs as]] [[KeyPgUbyte ubyte]] ) [[KeyPgAs as]] [[KeyPgInteger integer]]
@@ -9,12 +9,12 @@ Outputs a value to a hardware port.
 ##
 {{fbdoc item="param"}}
 	##//port//##
-		Hardware port to write to.
+		Port hardware sur lequel écrire.
 	##//data//##
-		Data value to write.
+		Donnée à écrire.
 
 {{fbdoc item="desc"}}
-	This function sends ##//value//## to ##//port//## and returns immediately.
+	Cette fonction envoie ##//value//## sur ##//port//## et retourne immédiatement.
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/hardware/out.bas"}}%%(freebasic)
@@ -44,9 +44,9 @@ Sound(1046, 60) 'C6
 %%	
 	
 {{fbdoc item="target"}}
-	- In the Windows and Linux versions three port numbers (&H3C7, &H3C8, &H3C9) are hooked by the graphics library when a graphics mode is in use to emulate QB's VGA palette handling. This use  is deprecated; use ##[[KeyPgPalette Palette]]## to retrieve and set palette colors.
+	- Dans les versions Windows et Linux trois numéros de port (&H3C7, &H3C8, &H3C9) sont réservés par la librairie graphique quand un mode graphique est utilisé pour émuler une palette VGA QB. Cette utilisation est obsolète; utilisez ##[[KeyPgPalette Palette]]## pour récupérer ou valider une palette de couleurs.
 	
-	- Using true port access in the Windows version requires the program to install a device driver for the present session. For that reason, Windows executables using hardware port access should be run with administrator permits each time the computer is restarted. Further runs don't require admin rights as they just use the already installed driver. The driver is only 3K in size and is embedded in the executable.
+	- L'utilisation d'un accès "true port" dans la version Windows implique que le programme installe un "driver" de "device" pour la session en cours. Pour cette raison, les exécutables Windows utilisant un accès port "hardware" doivent être lancés avec des permissions administrateur pour chaque redémarrage de l'ordinateur. Les lancements ultérieurs n'auront pas besoin de ces droits car il ne font qu'utiliser le driver déjà installé. Le driver n'a qu'une taille de 3K et est intégré dans l'exécutable.
 
 
 {{fbdoc item="see"}}

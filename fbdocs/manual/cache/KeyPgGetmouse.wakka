@@ -1,5 +1,5 @@
 {{fbdoc item="title" value="GETMOUSE"}}----
-Retrieves the status of the mouse pointing device
+Récupère l'état du dispositif de pointage de la souris
 
 {{fbdoc item="syntax"}}##
 	[[KeyPgDeclare declare]] [[KeyPgFunction function]] **Getmouse** ( [[KeyPgByref byref]] //x// [[KeyPgAs as]] [[KeyPgInteger integer]], [[KeyPgByref byref]] //y// [[KeyPgAs as]] [[KeyPgInteger integer]], [[KeyPgByref byref]] //wheel// [[KeyPgAs as]] [[KeyPgInteger integer]] = 0, [[KeyPgByref byref]] //buttons// [[KeyPgAs as]] [[KeyPgInteger integer]] = 0, [[KeyPgByref byref]] //clip// [[KeyPgAs as]] [[KeyPgInteger integer]] = 0 ) [[KeyPgAs as]] [[KeyPgInteger integer]]
@@ -9,31 +9,31 @@ Retrieves the status of the mouse pointing device
 ##
 {{fbdoc item="param"}}
 	##//x//##
-		x coordinate value
+		valeur de la coordonnée x
 	##//y//##
-		y coordinate value
+		valeur de la coordonnée y
 	##//wheel//##
-		scroll wheel value
+		valeur de la molette
 	##//buttons//##
-		button status
+		état des boutons
 	##//clip//##
-		clip status
+		état "clip"
 
 {{fbdoc item="ret"}}
-	##0## on success or ##1## on failure.
+	##0## si succès ou ##1## si échec.
 
 {{fbdoc item="desc"}}
-	##**Getmouse**## retrieves the mouse position and buttons status; information is returned in the variables passed to this function by reference. If a mouse is not available, all variables will contain the ##-1## value. 
+	##**GetMouse**## détermine la position de la souris et l'état des boutons; l'information est retournée dans les variables passées par référence à la fonction. Si aucune souris n'est disponible, toutes les variables contiendront la valeur ##-1##. 
 	
-	If in console mode, the ##//x//## and ##//y//## coordinates are the character cell coordinates the mouse is currently on; the upper left corner of the screen is at coordinates ##0, 0##. If the mouse moves out of the console window, ##**Getmouse**## returns the last coordinate on the window that the mouse was on. 
+	En mode console, les coordonnées ##//x//## et ##//y//## sont les coordonnées de la cellule caractère où se trouve la souris; le coin en haut à gauche de l'écran  a les coordonnées ##0,0##.. Si la souris sort de la fenêtre console, ##**GetMouse**## renvoie les dernières coordonnées lorsque la souris était encore sur la fenêtre. 
 	
-	If in graphics mode, ##//x//## and ##//y//## will always be returned in pixel coordinates still relative to the upper left corner of the screen, which is at 0,0 in this case; custom coordinates system set via ##[[KeyPgViewgraphics View]]## or ##[[KeyPgWindow Window]]## do not affect the coordinates returned by ##**Getmouse**##. If the mouse runs off the window, all values are set to ##-1##.
+	En mode graphique, ##//x//## et ##//y//## retournent toujours les coordonnées en pixels relatives au coin en haut à gauche de l'écran, qui lui a les coordonnées 0,0; un système de coordonnées personnel établi via ##[[KeyPgViewgraphics View]]## ou ##[[KeyPgWindow Window]]## n'affectera pas les coordonnées retournées par ##**GetMouse**##. Si la souris sort de la fenêtre, toutes les valeurs seront mises à ##-1##.
 	
-	##//Wheel//## is the mouse wheel counter; rotating the wheel away from you makes the count to increase, rotating the wheel toward you makes it to decrease. At program startup or when a new graphics mode is set via ##[[KeyPgScreengraphics Screen]]##, wheel position is reset to 0. ""FreeBASIC"" may not always support mouse wheels for a given platform, in which case 0 is always returned.
+	##//Wheel//## est le compteur de la molette souris; actionner la molette vers l'avant augmentera la valeur du compteur, une rotation vers l'arrière diminuera la valeur du compteur. Au départ du programme ou quand un nouveau mode graphique est validé via ##[[KeyPgScreengraphics Screen]]##, la position de la molette est remise à 0. ""FreeBASIC"" ne gère pas toujours la molette pour certaines plates-formes, dans ce cas une valeur 0 est toujours renvoyée.
 	
-	##//Buttons//## stores the buttons status as a bitmask: bit 0 is set if left mouse button is down; bit 1 is set if right mouse button is down; bit 2 is set if middle mouse button / wheel is down.
+	##//Buttons//## stocke l'état des boutons sous la forme d'un masque de bits: le bit 0 est valide (à 1) si le bouton gauche est appuyé; le bit 1 est valide si le bouton droit est appuyé; le bit 2 est valide si le bouton central / molette est appuyé.
 
-	##//Clip//## stores the mouse clipping status; if ##1##, the mouse is currently clipped to the graphics window; if ##0##, the mouse is not clipped.
+	##//Clip//## stocke l'état de "clipping"; si à ##1##, la souris est "clippée" à la fenêtre graphique; si à ##0##, la souris n'est pas "clippée".
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/input/getmouse.bas"}}%%(freebasic)
@@ -42,7 +42,7 @@ DIM AS INTEGER x, y, buttons, res
 ' Set video mode and enter loop
 SCREENRES 640, 480, 8
 DO
-	' Get mouse x, y and buttons. Discard wheel position.
+	' Recupere x, y souris et boutons. Discard wheel position.
 	res = GETMOUSE (x, y, , buttons)
 	LOCATE 1, 1
 	IF res <> 0 THEN '' Failure
@@ -92,18 +92,18 @@ loop while inkey = ""
 %%
 
 {{fbdoc item="lang"}}
-	- Not available in the //[[CompilerOptlang -lang qb]]// dialect unless referenced with the alias ##**""__Getmouse""**##.  The variables passed must also be of type ##[[KeyPgLong Long]]## instead of ##[[KeyPgInteger Integer]]##.
+	- Non disponible dans le dialecte //[[CompilerOptlang -lang qb]]// sauf si référencé avec l'alias ##**""__Getmouse""**##.  Les variables passées doivent aussi être du type ##[[KeyPgLong Long]]## au lieu de ##[[KeyPgInteger Integer (Entier)]]##.
 
 {{fbdoc item="target"}}
 	- On ""Win32"", scroll wheel changes are not guaranteed to be detected in full-screen console mode. 
 	- In DOS, the "clip" value has no relevance.  Additionally the wheel and middle button will not work unless supported and enabled by the mouse driver. See also [[FaqDOS]].
 
 {{fbdoc item="diff"}}
-	- New to ""FreeBASIC""
+	- Nouveau pour FreeBASIC 
 
 {{fbdoc item="see"}}
-	- ##[[KeyPgScreenres Screenres]]## setting graph mode by resolution
-	- ##[[KeyPgScreengraphics Screen (Graphics)]]## setting mode the QB-like way
+	- ##[[KeyPgScreenres ScreenRes]]## valide le mode graphique par résolution
+	- ##[[KeyPgScreengraphics Screen (Graphiques)]]## valide le mode graphique méthode QB
 	- ##[[KeyPgSetmouse Setmouse]]##
 	- ##[[KeyPgMultikey Multikey]]##
 	- ##[[KeyPgGetjoystick Getjoystick]]##

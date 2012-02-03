@@ -1,45 +1,45 @@
 {{fbdoc item="title" value="RANDOM"}}----
-Specifies file or device to be opened for binary mode
+Spécifie le fichier ou le périphérique à ouvrir en mode binaire
 
 {{fbdoc item="syntax"}}##
 	[[KeyPgOpen Open]] //filename// for **Random** [[[KeyPgAccess Access]] //access_type//] [[[KeyPgLock Lock]] //lock_type//] as [#]//filenum// [Len = //record_length//]
 ##
 {{fbdoc item="param"}}
 	##//filename//##
-		file name to open
+		nom du fichier à ouvrir
 	##//access_type//##
-		indicates whether the file may be read from, written to or both
+		indique si le fichier doit être lu, écrit ou les deux
 	##//lock_type//##
-		locking to be used while the file is open
+		verrouillage à utiliser quand le fichier est ouvert
 	##//filenum//##
-		unused file number to associate with the open file
+		un numéro inutilisé de fichier pour l'associer au fichier ouvert
 	##//record_length//##
-		the size of the record used for the file
+		la taille des enregistrements utilisée pour le fichier
 
 {{fbdoc item="desc"}}
-	Opens a file or device for reading and/or writing binary data in the given file ##//filenum//##, with records of size ##//record_length//##.
-	If the file does not exist, a new file will be created, otherwise any data existing in the file is preserved by ##[[KeyPgOpen Open]]##.  The file pointer is initialized by ##[[KeyPgOpen Open]]## at the start of the file, at record number ##1##. File operations move the file position in steps of ##//record_length//## bytes.
-	This file mode uses an user-defined ##[[KeyPgType Type]]## buffer variable to read/write full records in a file. The buffer variable uses to include several fields.
-	The data is saved in binary mode, in the same internal format ""FreeBASIC"" uses, by means of ##[[KeyPgGetfileio Get #]]## and ##[[KeyPgPutfileio Put #]]##.
+	Ouvre un fichier ou un périphérique en lecture et/ou écriture de données binaires dans le fichier donné ##//filenum//##, avec des enregistrements de taille ##//record_length//##.
+	Si le fichier n'existe pas, un nouveau fichier sera créé, sinon toutes les données existantes dans le fichier sont préservées par ##[[KeyPgOpen Open]]##.  Le pointeur du fichier est initialisé par ##[[KeyPgOpen Open]]## au début du fichier, à l'enregistrement numéro ##1##. Les opérations sur le fichier déplace la position par pas de ##//record_length//## octets.
+	Ce mode de fichier utilise une variable tampon de ##[[KeyPgType Type]]## défini par l'utilisateur pour lire/écrire des enregistrements complets dans le fichier. La variable tampon utilisée peut inclure plusieurs champs.
+	Les données sont sauvegardées en mode binaire, dans le même format interne utilisé par ""FreeBASIC"", par le biais de ##[[KeyPgGetfileio Get #]]## et ##[[KeyPgPutfileio Put #]]##.
 	
-	##//filename//## must be string expression resulting in a legal file name in the target OS, without wildcards. The file will be sought for in the present directory, unless a path is given.
+	##//filename//## doit être une expression chaîne correspondant à un nom de fichier légal dans le système d'exploitation cible, sans jokers de remplacement. Le fichier sera recherché dans le répertoire courant, sauf si ##//filename//## contient un chemin.
 			
-	##//Access_type//## - By default ##**Random**## mode allows to both read and write the file, unless an ##[[KeyPgAccess Access]]## type is specified, it must be one of:
-		- ##**Read**## - the file is opened for input only
-		- ##**Write**## - the file is opened for output only
-		- ##**Read Write**## - the file is opened for input and output (the default)
+	##//Access_type//## - par défaut le mode ##**Random**## permet à la fois lire et écrire dans le fichier, sauf si un type d'##[[KeyPgAccess Access]]## est spécifié, il doit être l'un de ceux-ci:
+		- ##**Read**## - le fichier est ouvert en lecture seulement
+		- ##**Write**## - le fichier est ouvert en écriture seulement
+		- ##**Read Write**## - le fichier est ouvert en lecture et écriture (par défaut)
 
-	##//Lock_type//## indicates the way the file is locked for other processes (users or threads), it is one of:
-		- ##**Shared**## - The file can be freely accessed by other processes     
-		- ##**Lock Read**## - The file can't be opened simultaneously for reading
-		- ##**Lock Write**## - The file can't be opened simultaneously for writing
-		- ##**Lock Read Write**## - The file cannot be opened simultaneously by other processes.
-		If no lock type is stated, the file will be ##**Shared**## for other threads of the program and ##**Lock Read Write**## for other programs.
-		##[[KeyPgLock Lock]]## and ##[[KeyPgUnlock Unlock]]## can be used to restrict temporally access to parts of a file.
+	##//Lock_type//## indique la façon dont le fichier est verrouillé pour les autres processus (utilisateurs ou fils), il est l'un de ceux-ci:
+		- ##**Shared**## - Le fichier peut être librement consulté par d'autres processus     
+		- ##**Lock Read**## - Le fichier ne peut pas être ouvert en même temps pour la lecture
+		- ##**Lock Write**## - Le fichier ne peut pas être ouvert en même temps pour l'écriture
+		- ##**Lock Read Write**## - Le fichier ne peut pas être ouvert simultanément par d'autres processus.
+		Si aucun type de verrouillage n'est indiqué, le fichier sera ##**Shared**## pour les autres "threads" du programme et ##**Lock Read Write**## pour les autres programmes.
+		##[[KeyPgLock Lock]]## et ##[[KeyPgUnlock Unlock]]## peuvent être utilisés pour restreindre temporairement l'accès à des parties d'un fichier.
 
-	##//filenum//## is a valid ""FreeBASIC"" file number (in the range ##1..255##) not being used for any other file presently open. This number identifies the file for the rest of file operations. A free file number can be found using the ##[[KeyPgFreefile FreeFile]]## function.
+	##//filenum//## est un numéro de fichier valide (dans la plage ##1..255##) non utilisé par un autre fichier actuellement ouvert. Le numéro de fichier identifie celui-ci pour le reste des opérations. Un numéro de fichier libre peut être trouvé avec la fonction ##[[KeyPgFreefile FreeFile]]##.
 	
-	##//record_length//## is the amount of bytes the file pointer will move for each individual ##[[KeyPgGetfileio Get]]## and ##[[KeyPgPutfileio Put]]##, it must match the size of the buffer variable used when ##[[KeyPgGetfileio Get]]##ting and ##[[KeyPgPutfileio Put]]##ting data. If omitted, it defaults to ##128##.
+	##//record_length//## est le nombre d'octets que le pointeur du fichier va parcourir pour chaque  ##[[KeyPgGetfileio Get]]## et ##[[KeyPgPutfileio Put]]##, il doit correspondre à la taille de la variable tampon utilisée lors d'un ##[[KeyPgGetfileio Get]]## et ##[[KeyPgPutfileio Put]]## de données. Si omis, sa valeur par défaut est de ##128##.
 
 	{{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/math/random.bas"}}%%(freebasic)
@@ -82,8 +82,8 @@ data "pqrs",     "tuv",      "wxyz"
 %%
 
 {{fbdoc item="diff"}}
-	- In QB, String-contained runtime user defined types (UDT) are not implemented in ""FreeBASIC"".
-	- The keyword ##[[KeyPgField Field]]## can only be used with ##[[KeyPgType Type]]## to specify the packing of the UDT. 
+	- Dans QB, les chaînes de contenu d'exécution de type défini par l'utilisateur ne sont pas implémentées dans ""FreeBASIC"".
+	- Le mot-clef ##[[KeyPgField Field]]## ne peut être utilisé qu'avec ##[[KeyPgType Type]]## pour spécifier l'empaquetage du type défini par l'utilisateur 
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgOpen Open]]##

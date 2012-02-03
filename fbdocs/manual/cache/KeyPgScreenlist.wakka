@@ -1,5 +1,5 @@
 {{fbdoc item="title" value="SCREENLIST"}}----
-Finds available fullscreen video modes
+Détermine les modes plein écran valides
 
 {{fbdoc item="syntax"}}##
 	[[KeyPgDeclare declare]] [[KeyPgFunction function]] **Screenlist** ( [[KeyPgByval byval]] //depth// [[KeyPgAs as]] [[KeyPgInteger integer]] = 0 ) [[KeyPgAs as]] [[KeyPgInteger integer]]
@@ -9,26 +9,26 @@ Finds available fullscreen video modes
 ##
 {{fbdoc item="param"}}
 	##//depth//##
-		the color depth for which the list of modes is requested  (supported depths are 8, 15, 16, 24 and 32)
+		la profondeur de couleur pour laquelle on détermine la liste de modes (les profondeurs supportées sont 8, 15, 16, 24 and 32)
 
 {{fbdoc item="ret"}}
-	returns 0, when there are no more resolutions to read.
+	retourne ##0##, s'il n'y a aucune résolution à lire.
 
 {{fbdoc item="desc"}}
-	It works like the ##[[KeyPgDir Dir]]## function: the first call to the function requires the ##//depth//## parameter to be specified, it  returns the lowest supported resolution for the requested depth. Further calls to ##**Screenlist**## without arguments returns the next resolutions. When no more resolutions are available, ##[[KeyPgScreenlist Screenlist]]## returns 0.
+	Fonctionnement identique à celui de la fonction ##[[KeyPgDir Dir]]## : au premier appel de la fonction le paramètre ##//depth//## est obligatoire, la fonction renvoie la résolution la plus basse supportée par cette profondeur de couleur. Les appels suivants à  ##**ScreenList**## sans argument renvoie les résolutions suivantes. Quand il n'y a plus de résolution valable, ##[[KeyPgScreenlist Screenlist]]## retourne #0##.
 
-	The result of ##[[KeyPgScreenlist Screenlist]]## is encoded in an integer with the  screen width as the high word and height and the height as the low word respectively.
+	Le résultat de ##[[KeyPgScreenlist Screenlist]]## est encodé dans un entier, la largeur d'écran dans le mot de poids fort et la hauteur d'écran dans le mot de poids faible.
 
-	Resolutions are returned from lowest to highest supported ones. 
+	Les résolutions supportées sont renvoyées de la plus faible à la plus forte.
 
-	It is safe to call this function before any graphics mode has been set.
+	Il est préférable d'appeler cette fonction avant qu'un mode graphique soit validé. 
 
 {{fbdoc item="filename" value="examples/manual/gfx/screenlist.bas"}}%%(freebasic)
 Dim As Integer mode, w, h
-'' Find which 8bit resolutions are supported
+'' Cherche quelles resolutions 8bit sont supportees
 mode = ScreenList(8)
 While (mode)
-	w = HiWord(mode)
+w = HiWord(mode)
 	h = LoWord(mode)
 	Print Str(w) + "x" + Str(h)
 	mode = ScreenList
@@ -37,10 +37,10 @@ Wend
 
 
 {{fbdoc item="lang"}}
-	- Not available in the //[[CompilerOptlang -lang qb]]// dialect unless referenced with the alias ##**""__Screenlist""**##.
+	- Not available in the //[[CompilerOptlang -lang qb]]// dialect unless referenced with the alias ##**__Screenlist**##.
 
 {{fbdoc item="diff"}}
-	- New to ""FreeBASIC""
+	- Nouveau pour ""FreeBASIC""
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgScreengraphics Screen]]##

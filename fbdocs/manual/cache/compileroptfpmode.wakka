@@ -1,27 +1,27 @@
 {{fbdoc item="title" value="Compiler Option: -fpmode"}}----
-Selects faster, less accurate or slower, more precise floating-point math.
+Sélectionne des mathématiques à virgule flottante plus rapides, moins précises ou plus lentes, plus précises.
 
 {{fbdoc item="syntax"}}##
 	**-fpmode** < //mode// >
 ##
 {{fbdoc item="param"}}
 	##//mode//##
-		The floating point mode: ##FAST## | ##PRECISE##.
+		Le mode en virgule flottante: ##FAST## | ##PRECISE##.
 
 {{fbdoc item="desc"}}
-	The ##-fpmode## compiler option specifies whether speed or precision is more important for floating point math. If this option is not specified, the default is ##-fpmode PRECISE##.
+	L'option de compilateur ##-fpmode## spécifie si la vitesse ou la précision est plus importante pour les mathématiques à virgule flottante. Si cette option n'est pas spécifiée, la valeur par défaut est ##-fpmode PRECISE##.
 
-	##-fpmode FAST## will generate faster, less accurate instructions for certain floating point operations.
+	##-fpmode FAST## va produire certaines opérations en virgule flottante plus rapides, moins précises.
 
-	##-fpmode PRECISE## will generate standard floating point instructions that operate at the default speed and accuracy of the selected floating point unit.
+	##-fpmode PRECISE## va générer des instructions en virgule flottante standard qui fonctionnent à la vitesse et la précision par défaut de l'unité de virgule flottante sélectionnée.
 
-	Currently, the only floating point operations that behave differently when using ##-fpmode FAST## are: ##[[KeyPgSin sin]]()##, ##[[KeyPgCos cos]]()##, reciprocal, and reciprocal [[KeyPgSqr square root]], all of which must operate on ##[[KeyPgSingle Single]]## precision values.
+	Actuellement, les seules opérations en virgule flottante qui se comportent différemment lorsqu'on utilise ##-fpmode FAST## sont: ##[[KeyPgSin sin]]()##, ##[[KeyPgCos cos]]()##, réciproques, et réciproque de [[KeyPgSqr racine carrée]], qui toutes doivent opérer sur des valeur ##[[KeyPgSingle Single]]## précision.
 
-	Using ##-fpmode PRECISE## is dependent on the ##[[CompilerOptfpu -fpu SSE]]## command line option. Using ##-fpmode PRECISE## without using ##[[CompilerOptfpu -fpu SSE]]## will generate an error.
+	L'utilisation de ##-fpmode PRECISE## dépend de l'option en ligne de commande ##[[CompilerOptfpu -fpu SSE]]##. Utiliser ##-fpmode PRECISE## sans utiliser ##[[CompilerOptfpu -fpu SSE]]## génèrera une erreur.
 
 {{fbdoc item="see"}}
-	- [[CompilerCmdLine Using the Command Line]]
-	- [[CompilerOptfpu Compiler Option: -fpu]]
+	- [[CompilerCmdLine Utilisation de la ligne de commande]]
+	- [[CompilerOptfpu Option du compilateur: -fpu]]
 	- ##[[KeyPgDdfbfpmode __FB_FPMODE__]]##
 
 {{fbdoc item="back" value="CatPgCompOpt|Compiler Options"}}

@@ -1,5 +1,5 @@
 {{fbdoc item="title" value="PALETTE"}}----
-Customizes colors in modes with paletted colors
+Personnalise les couleurs dans les modes de couleurs palettisées
 
 {{fbdoc item="syntax"}}##
 	**Palette** [Get] [//index//, //color//]
@@ -8,57 +8,57 @@ Customizes colors in modes with paletted colors
 ##
 {{fbdoc item="param"}}
 	##Get##
-		indicates getting palette information rather than setting palette information
+		indique une demande d'information et non une validation d'information palette
 	##Using##
-		indicates using array of color values
+		indique l'utilisation d'un tableau de valeurs de couleur
 	##//index//##
-		palette index
+		indice de la palette
 	##//color//##
-		color attribute
+		attribut couleur
 	##//r//##
-		red color component
+		composante rouge de couleur
 	##//g//##
-		green color component
+		composante vert de couleur
 	##//b//##
-		blue color component
+		composante bleu de couleur
 	##//arrayname(idx)//##
-		array and index to get/set color attributes
+		tableau et indice pour obtenir/valider les attributs de couleur
 
 {{fbdoc item="desc"}}
-	The ##**Palette**## statement is used to retrieve or customize the current palette for graphics modes with a color depth of up to 8bpp; using ##**Palette**## while in a mode with a higher color depth will have no effect. Calling ##**Palette**## with no argument restores the default palette for current graphics mode, as set by the ##[[KeyPgScreengraphics Screen (Graphics)]]## statement.
-	The GfxLib sets a [[GfxDefPalettes default palette]] when a [[KeyPgScreengraphics Screen]] mode is initialized.
+	##**Palette**## est utilisé pour récupérer ou établir la palette courante pour les modes graphiques avec une profondeur de couleur jusqu'à 8bpp (8 bits par pixel); l'utilisation de ##**Palette**## quand on est dans un mode de profondeur de couleur supérieur n'a aucun effet. Appeler ##**Palette**## sans argument restaure la palette par défaut pour le mode graphique courant, comme le fait ##[[KeyPgScreengraphics Screen (Graphique)]]##.
+	La GfxLib valide une [[GfxDefPalettes palette par défaut]] quand un mode ##[[KeyPgScreengraphics Screen]]## est initialisé.
 	
-	==First form==
-		If you specify index and color, these are dependent on the current mode:
-		{{table columns="3" cellpadding="1" cells="Screen mode;index range;color range;1;0-3;0-15;2;0-1;0-15;7,8;0-15;0-15;9;0-15;0-63;11;0-1;see below;12;0-15;see below;13 to 21;0-255; see below"}}
-		In screen modes 1, 2, 7, 8 and 9 you can assign to each color index one of the colors in the available range. In other screen modes, the color must be specified in the form &hBBGGRR, where BB, GG and RR are the blue, green and red components ranging ##&h0##-##&h3F## in hexadecimal (0-63 in decimal). If you don't like hexadecimal form, you can use the following formula to compute the integer value to pass to this parameter:
+	==Première forme==
+		Si vous spécifiez ##//index//## et ##//color//##, ceux-ci dépendent du mode courant:
+		{{table columns="3" cellpadding="1" cells="Mode écran;index;color;1;0-3;0-15;2;0-1;0-15;7,8;0-15;0-15;9;0-15;0-63;11;0-1;voir ci-dessous;12;0-15;voir ci-dessous;13 à 21;0-255;voir ci-dessous"}}
+		Dans les modes écran 1, 2, 7, 8 et 9 vous assignez à chaque indice de couleur une des couleurs disponible dans la plage. Dans les autres modes écran, la couleur doit être spécifiée dans la forme &hBBVVRR, où BB, VV et RR sont les composantes bleu, vert et rouge dans la plage &h0-&h3F en hexadécimal (0-63 en décimal). Si vous n'aimez pas la forme hexadécimale, vous pouvez utiliser la formule ci-dessous pour calculer la valeur entière à passer à ce paramètre:
 		##color = red [[KeyPgOpOr or]] (green [[KeyPgOpShiftLeft shl]] 8) [[KeyPgOpOr or]] (blue [[KeyPgOpShiftLeft shl]] 16)##
-		Where red, green and blue must range ##0##-##63##. Please note that color values accepted by ##**Palette**## are **not** the in the same form as returned by the ##[[KeyPgRgb RGB]]## macro (the red and blue fields are inverted, and the range is different); this is for backward compatibility with QB.
+		Où 'red' (rouge), 'green' (vert) et 'blue' (bleu) sont dans la plage 0-63. Notez SVP que les valeurs de couleur acceptées par ##**Palette**## **ne** sont **pas** de la même forme que celles retournées par la macro ##[[KeyPgRgb RGB]]## (les champs rouge et bleu sont intervertis, et la plage est différente); c'est une question de compatibilité avec QB.
 
-	==Second form==
-		In the second form, you specify the red, green and blue components for a palette entry directly, by calling ##**Palette**## with 4 parameters. In this case ##//r//##, ##//g//## and ##//b//## must be in the range ##0##-##255##.
+	==Seconde forme==
+		Dans la seconde forme, vous précisez les composantes rouge, vert et bleu directement pour une palette, en appelant ##**Palette**## avec 4 paramètres. Dans ce cas ##//r//##, ##//g//## et ##//b//## doivent être dans la plage ##0##-##255##.
 	
-	==Third form==
-		Calling ##**Palette Using**## allows to set a list of color values all at once; you should pass an array holding enough elements as the color indices available for your current graphics mode color depth (2 for 1bpp, 4 for 2bpp, 16 for 4bpp or 256 for 8bpp). The array elements must be integer color values in the form described above. The colors stored into ##//arrayname//## starting with given ##//idx//## index are then assigned to each palette index, starting with index 0.
+	==Troisième forme==
+		Appeler ##**Palette Using**## permet d'établir en une seule fois une liste de valeurs de couleur; vous devrez passer un tableau ayant autant d'éléments que les indices de couleur disponibles pour la profondeur de couleur de votre mode graphique courant (2 pour 1bpp, 4 pour 2bpp, 16 pour 4bpp ou 256 pour 8bpp). Les éléments du tableau doivent être des valeurs entières de couleur comme décrit précédemment. Les couleurs stockées dans ##//arrayname//## débutent avec l'indice donné par ##//idx//## puis sont assignées à chaque indice de la palette, en commençant par 0.
 	
-	Form 1 and 3 are for backward compatibility with QB; form 2 is meant to ease palette handling. Any change to the palette is immediately visible on screen.
+	Les formes 1 et 3 sont pour la compatibilité descendante avec QB; la forme 2 facilite la prise en charge de la palette. Chaque modification de la palette est immédiatement suivi d'effet à l'écran.
 
-	If the ##**Get**## option is specified, ##**Palette**## retrieves instead of setting color values for the current palette. The parameters have the same meaning as specified for the form being used, but in this case color, ##//r//##, ##//g//## and ##//b//## must be variables passed by reference that will hold the color RGB values on function exit.
+	Si l'option ##**Get**## est spécifiée, ##**Palette**## récupère au lieu de valider les valeurs de la palette courante. Les paramètres ont la même signification pour chaque forme utilisée, mais dans ce cas ##//color//##, ##//r//##, ##//g//## et ##//b//## sont des variables passées par référence qui contiendront les valeurs de couleur RVB à la sortie de la fonction.
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/gfx/palette.bas"}}%%(freebasic)
-' Setting a single color, form 1.
+' Valide une seule couleur, forme 1.
 screen 15
 locate 1,1: color 15
 print "Press any key to change my color!"
 sleep
-' Now change color 15 hues to bright red
+' Maintenant change couleur 15 teintes vers lumineux red
 palette 15, &h00003F
 sleep
 %%
 
 {{fbdoc item="filename" value="examples/manual/gfx/palette2.bas"}}%%(freebasic)
-' Getting a single color, form 2.
+' Obtient une seule couleur, forme 2.
 dim as integer r, g, b
 screen 13
 palette get 32, r, g, b
@@ -68,7 +68,7 @@ sleep
 %%
 
 {{fbdoc item="filename" value="examples/manual/gfx/palette3.bas"}}%%(freebasic)
-' Getting whole palette, form 3.
+' Obtient palette entiere, forme 3.
 dim pal(1 to 256) as integer
 dim i as integer
 screen 13
@@ -80,12 +80,12 @@ sleep
 %%
 
 {{fbdoc item="diff"}}
-	- QB version did not support palette retrieval.
+	- La version QB ne prend pas en charge la récupération de la palette.
 
 {{fbdoc item="see"}}
-	- ##[[KeyPgScreengraphics Screen (Graphics)]]##
+	- ##[[KeyPgScreengraphics Screen (Graphique)]]##
 	- ##[[KeyPgColor Color]]##
 	- ##[[KeyPgUsing Using]]##
-	- ##[[GfxInternalFormats Internal Pixel Formats]]##
+	- ##[[GfxInternalFormats Formats graphiques internes]]##
 
 {{fbdoc item="back" value="CatPgGfx2D|2D Drawing Functions"}}

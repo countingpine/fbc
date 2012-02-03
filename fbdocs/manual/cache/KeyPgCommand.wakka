@@ -1,5 +1,5 @@
 {{fbdoc item="title" value="COMMAND"}}----
-Returns command line parameters used to call the program
+Renvoie les paramètres de la ligne de commande utilisés pour appeler le programme
 
 {{fbdoc item="syntax"}}##
 	[[KeyPgDeclare declare]] [[KeyPgFunction function]] **Command** ( [[KeyPgByval byval]] //index// [[KeyPgAs as]] [[KeyPgInteger integer]] = -1 ) [[KeyPgAs as]] [[KeyPgString string]]
@@ -9,41 +9,41 @@ Returns command line parameters used to call the program
 ##
 {{fbdoc item="param"}}
 	##//index//##
-		Zero-based index for a particular command-line argument.
+		Indice (de base zéro) pour un argument particulier de la ligne de commande.
 
 {{fbdoc item="ret"}}
-	  Returns the command-line arguments(s).
+	  Retourne le(s) arguments(s)de ligne de commande.
 
 {{fbdoc item="desc"}}
-	##**Command**## returns command-line arguments passed to the program upon execution.
+	##**Command**## retourne le(s) arguments(s)de ligne de commande passés au programme lors de l'exécution.
 
-	If ##//index//## is less than zero (##< 0##), a space-separated list of all command-line arguments is returned, otherwise, a single argument is returned. A value of zero (##0##) returns the name of the executable; and values of one (##1##) and greater return each command-line argument.
+	Si ##//index//## est inférieur à zéro (##< 0##), une liste de tous les arguments (séparés par des epaces) de la ligne de commande est retournée, autrement, un argument unique est retourné. Une valeur de zéro (##0##) retourne le nom de l'exécutable; et une valeur de un (##1##) et supérieure retourne chaque argument de la ligne de commande.
 	
-	If ##//index//## is greater than the number of arguments passed to the program, the null string (##"####"##) is returned.
+	Si ##//index//## est supérieur au nombre d'arguments passés au programme, la chaîne nulle ##"####"##) est retournée.
 
-	When the command line is parsed for arguments, everything between double quotes in the parameter list will be considered as a single parameter, and is returned with the double quotes.
+	Lorsque la ligne de commande est analysée pour les arguments, ce qui est entre guillemets dans la liste des paramètres sera considéré comme un seul paramètre, et est retourné avec les guillemets.
 
-	By default, filename globbing for arguments (expansion of wildcards to filenames) is used on all ports of ""FreeBASIC"" for compatibility.  Arguments on the command line containing wildcards are typically not expanded if when no file is matched or if properly quoted.  Other special characters for redirection are typically not returned unless properly quoted.  Consult the documentation on the shell being used for more information on the proper quoting of command line arguments.
+	Par défaut, le nom de fichier avec "globbing" (expansion des jokers pour les noms de fichiers) pour les arguments est utilisé sur tous les portages de ""FreeBASIC"" pour la compatibilité.  Les arguments sur la ligne de commande contenant des jokers ne sont généralement pas expansés si aucun fichier ne correspond ou n'est correctement déclaré.  Les autres caractères spéciaux pour la redirection ne sont généralement pas retournés sauf si correctement déclarés.  Consultez la documentation sur l'interpréteur de commandes (shell) utilisé pour plus d'informations sur la déclaration convenable des arguments de la ligne de commande.
 
-~&//**WARNING**: By nature of constructor precedence in ""FreeBASIC"" and main() initialization, calling ##**Command**## within a global constructor is not safe. At the moment your app will not crash, but you will only receive the null string (##"####"##). This *may* be able to be fixed in the future, but it would be wise not to rely on that.//
+~&//**AVERTISSEMENT**: Par la nature de la priorité de constructeur sous ""FreeBASIC"" et initialisation de main(), appeler ##**Command**## dans un constructeur global n'est pas sûr. Sur le moment, votre application ne plantera pas, mais vous ne recevrez que la chaîne nulle (##"####"##). Ceci sera *peut être* corrigé à l'avenir, mais il serait sage de ne pas trop y croire.//
 
-	__Disabling filename globbing under Win32__
-		For mingw32 and cygwin builds, link the ""FreeBASIC"" program with CRT_noglob.o or define the following somewhere in the source:
+	__Désactivation de "globbing" de nom de fichier sous Win32__
+		Pour les constructions mingw32 et cygwin builds, lier le programme ""FreeBASIC"" avec CRT_noglob.o ou définir ce qui suit quelque part dans la source:
 		{{fbdoc item="filename" value="examples/manual/check/KeyPgCommand_1.bas"}}%%(freebasic)
 Extern _CRT_glob Alias "_CRT_glob" As Integer
 Dim Shared _CRT_glob As Integer = 0
 %%
 
-	__Disabling filename globbing under Dos__
-		Define the following function somewhere in the source:
+	__Désactivation du "globbing" de nom de fichier sous Dos__
+		Définir la fonction suivante quelque part dans la source:
 		{{fbdoc item="filename" value="examples/manual/check/KeyPgCommand_2.bas"}}%%(freebasic)
 Public Function __crt0_glob_function Alias "__crt0_glob_function" ( ByVal arg As UByte Ptr ) As UByte Ptr Ptr
   Return 0
 End Function
 %%
 
-	__Disabling filename globbing under Linux__
-		Filename globbing is handled by the command shell.  Quote the argument containing wildcards or disable filename globbing in the shell prior to executing the command.  For example in bash use 'set -f' to disable wildcard expansion
+	__Désactivation du "globbing" de nom de fichier sous Linux__
+		Le "globbing" de nom de fichier  est géré par l'interpréteur de commandes (shell).  Mettre entre guillemets l'argument contenant des jokers ou désactiver le "globbing" de nom de fichier dans le shell avant l'exécution de la commande.  Par exemple dans l'interpréteur de commandes bash utilisez 'set -f' pour désactiver l'expansion des jokers.
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/system/command.bas"}}%%(freebasic)
@@ -75,13 +75,13 @@ End Function
 %%
 
 {{fbdoc item="lang"}}
-	- The string type suffix ##$## is obligatory in the //[[CompilerOptlang -lang qb]]// dialect.
-	- The string type suffix ##$## is optional in the //[[CompilerOptlang -lang fblite]]// and //[[CompilerOptlang -lang fb]]// dialects.
+	- Le suffixe de type chaîne ##$## est obligatoire dans le dialecte //[[CompilerOptlang -lang qb]]//.
+	- Le suffixe de type chaîne ##$## est facultatif dans les dialectes //[[CompilerOptlang -lang fblite]]// et //[[CompilerOptlang -lang fb]]//.
 
 {{fbdoc item="diff"}}
-	- The numeric argument was not supported in QB.
-	- QB converted the parameter list to uppercase before returning it, ""FreeBASIC"" doesn't.
-	- By default arguments containing wildcard characters are expanded (filename globbing)
+	- L'argument numérique n'était pas pris en charge dans QB.
+	- QB convertit la liste de paramètres en majuscules avant de la retourner, ""FreeBASIC"" non.
+	- Par défaut les arguments contenant des caractères génériques sont développés ("globbing" des noms de fichiers)
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgDdfbargc __FB_ARGC__]]##

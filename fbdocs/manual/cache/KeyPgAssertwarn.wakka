@@ -1,5 +1,5 @@
 {{fbdoc item="title" value="ASSERTWARN"}}----
-Debugging macro that prints a warning if an expression evaluates to 0.
+Macro de débogage qui affiche un avertissement si une expression est évaluée à ##0## (false = faux).
 
 {{fbdoc item="syntax"}}##
 	[[KeyPgPpdefine #define]] **ASSERTWARN**(//expression//) [[KeyPgIfthen if]] (expression) = 0 [[KeyPgThen then]] : fb_AssertWarn( [[KeyPgDdfile __FILE__]], [[KeyPgDdline __LINE__]], [[KeyPgDdfunction __FUNCTION__]], [[KeyPgOpPpStringize #]]expression ) : [[KeyPgEndif end if]]
@@ -9,14 +9,14 @@ Debugging macro that prints a warning if an expression evaluates to 0.
 ##
 {{fbdoc item="param"}}
 	##//expression//##
-		Any valid expression.  If ##//expression//## evaluates to 0, a warning message is printed to stdout (console).
+		Toute expression valide.  Si ##//expression//## est évaluée à ##0##, un message d'avertissement est affiché sur la sortie standard (console).
 
 {{fbdoc item="desc"}}
-	The ##**ASSERTWARN**## macro is intended for use in debugging and works only if the ##-g## option is selected in the FBC command line. In this case it prints a warning message if ##//expression//## evaluates to 0. It doesn't stop the program execution like [[KeyPgAssert ASSERT]] does.
+	La macro ##**ASSERTWARN**## est prévue pour être utilisée lors du débogage et ne fonctionne que si l'option ##-g## est sélectionnée dans la ligne de commande FBC. Dans ce cas elle affiche un message d'avertissement si ##//expression//## est évaluée à ##0##. Elle n'arrêtera pas l'exécution du programme comme le fait ##[[KeyPgAssert ASSERT]]##.
 	
-	Its normal use is to check the correct value of the variables during debugging.
+	Son utilisation normale est de vérifier la valeur correcte des variables pendant le débogage.
 	
-	If ##-g## is not passed to fbc, the macro does not generate any code.
+	Si ##//-g//## n'est pas passé à fbc, la macro ne génère pas de code et n'a aucun effet.
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/debug/assertwarn.bas"}}%%(freebasic)
@@ -32,10 +32,10 @@ foo
 %%
 
 {{fbdoc item="lang"}}
-	- Not available in the //[[CompilerOptlang -lang qb]]// dialect unless referenced with the alias ##**""__ASSERTWARN""**##.
+	- Non disponible dans le dialecte //[[CompilerOptlang -lang qb]]// sauf si référencé avec l'alias ##**""__ASSERTWARN""**##.
 
 {{fbdoc item="diff"}}
-	- New to ""FreeBASIC""
+	- Nouveau pour ""FreeBASIC""
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgAssert ASSERT]]##

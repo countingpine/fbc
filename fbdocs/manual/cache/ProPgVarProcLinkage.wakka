@@ -1,40 +1,40 @@
 {{fbdoc item="title" value="Variable and Procedure Linkage"}}----
-Name visibility within and between modules
+Visibilité des noms à l'intérieur et entre les modules
 
-	//Linkage// refers to the visibility of the name of a variable, object or procedure between one or more modules of a program. In other words, a linkage dictates how a name is shared between modules. There are two main types of linkage a name can have: //internal// and //external//.
+	//Linkage (Liens)// fait référence à la visibilité du nom d'une variable, d'un objet ou d'une procédure entre un ou plusieurs modules d'un programme. In other words, a linkage dictates how a name is shared between modules. Il existe deux principaux types de liaison d'un nom: //internal (interne)// et //external (externe)//.
 
-{{fbdoc item="section" value="Internal linkage"}}
+{{fbdoc item="section" value="Internal linkage (Liaison interne)"}}
 
-	Names with //internal linkage// only refer to variables, objects or procedures defined within their own module; they are not outwardly visible to other modules. This means that two or more modules can refer to different things using the same name. Note that linkage only refers to visibility of a name, and depending on storage class and lifetime, a variable, object or procedure with internal linkage may be shared between modules using its address.
+	Les noms avec "//internal linkage//" (liaison interne) font seulement référence à des variables, des objets ou des procédures définis au sein de leur propre module; ils ne sont pas visibles de l'extérieur par d'autres modules. Cela signifie que deux ou plusieurs modules peuvent se référer à des choses différentes en utilisant le même nom. Notez que "linkage (Liens)" se réfère uniquement à la visibilité d'un nom, et selon sa classe de stockage et sa durée de vie, une variable, un objet ou une procédure avec "//internal linkage//" (liaison interne) peut être partagé entre les modules en utilisant son adresse.
 
-	{{fbdoc item="subsect" value="Module-scope declarations"}}
+	{{fbdoc item="section" value="Déclarations de portée module"}}
 
-		Variable and object names declared at module-scope have internal linkage unless otherwise declared with ##[[KeyPgExtern Extern]]## or ##[[KeyPgCommon Common]]##. For example, variable names first introduced with ##[[KeyPgDim Dim]]## or ##[[KeyPgStatic Static]]## have internal linkage, and those variables can only be referred to by name within the module in which they are defined. Note that using ##[[KeyPgShared Shared]]## only allows name visibility within the module's procedures, and does not contribute to the name's linkage.
+		Les noms de variables et d'objets déclarés au niveau de portée-module ont un "//internal linkage//" (liaison interne) sauf s'ils sont déclarés avec ##[[KeyPgExtern Extern]]## ou ##[[KeyPgCommon Common]]##. Par exemple, les noms de variables déclarés la première fois avec ##[[KeyPgDim Dim]]## ou ##[[KeyPgStatic Static]]## ont un "//internal linkage//" (liaison interne) et ces variables peuvent seulement être désignées par leur nom dans le module dans lequel elles sont définies. Notez que l'utilisation de ##[[KeyPgShared Shared]]## ne permet que la visibilité de nom dans les procédures du module et ne contribue pas à la liaison de nom.
 
-		Procedure names declared with ##[[KeyPgPrivate Private]]## have internal linkage.
+		Les noms de procédure déclarées avec ##[[KeyPgPrivate Private]]## ont un "//internal linkage//" (liaison interne).
 
-	{{fbdoc item="subsect" value="Local-scope declarations"}}
+	{{fbdoc item="section" value="Déclarations de portée locale"}}
 
-		All variable and object names declared at local-scope (in a ##[[KeyPgDo Do]]## loop, or procedure body, for instance) have internal linkage.
+		Tous les noms de variables et d'objets déclarés de portée locale (dans une boucle ##[[KeyPgDo Do]]## ou dans le corps d'une procédure, par exemple) ont un "//internal linkage//" (liaison interne).
 
-{{fbdoc item="section" value="External linkage"}}
+{{fbdoc item="section" value="External linkage (Liaison externe)"}}
 
-	Names with //external linkage// may refer to variables, objects or procedures defined within their module or in another module. Having external linkage means that a name is outwardly visible to other modules, and all modules that use that same external name all refer to the same variable, object or procedure. Thus, only one module may define an external name (the compiler will complain about a duplicated definition if it finds an additional definition of a name with external linkage).
+	Les noms avec un "//external linkage//" (liaison externe) peuvent faire référence à des variables, des objets ou des procédures définis au sein de leur propre module ou dans un autre module. Avoir un "//external linkage//" (liaison externe) signifie que le nom est visible vers l'extérieur à d'autres moduleset tous les modules qui utilisent ce même nom externe se réfèrent tous à la même variable, au même objet ou à la même procédure. Ainsi, un seul module peut définir un nom externe (le compilateur se plaindra d'une définition en double s'il constate une définition supplémentaire d'un nom avec "//external linkage//" (liaison externe)).
 
-	{{fbdoc item="subsect" value="Module-scope declarations"}}
+	{{fbdoc item="section" value="Déclarations de portée module"}}
 
-		Variable and object names declared at module-scope are declared to have external linkage with ##[[KeyPgExtern Extern]]## or ##[[KeyPgCommon Common]]##. 
+		Les noms de variables et d'objets déclarés au niveau de portée-module pour avoir un "//external linkage//" (liaison externe) sont déclarées avec ##[[KeyPgExtern Extern]]## ou ##[[KeyPgCommon Common]]##. 
 
-		##[[KeyPgExtern Extern]]## declares the variable having external linkage, but does not define it.  This external declaration must come before any definition of the same name (a declaration without ##[[KeyPgExtern Extern]]## specifies internal linkage, and currently, any further external declarations of that name signify a duplicated definition).  Variable and object names with external linkage declared using ##[[KeyPgExtern Extern]]## are always in the shared scope, and so can be referred to within procedure bodies.
+		##[[KeyPgExtern Extern]]## déclare que la variable a un "//external linkage//" (liaison externe), mais ne la définit pas.  Cette déclaration externe doit passer avant toute définition du même nom (une déclaration sans ##[[KeyPgExtern Extern]]## spécifie un "//internal linkage//" (liaison interne), et actuellement, les déclarations ultérieures externes de ce nom signifient une définition double).  Les noms de variables et d'objets avec "//external linkage//" (liaison externe) déclarés à l'aide de ##[[KeyPgExtern Extern]]## sont toujours dans la portée partagée (shared scope), et on peut donc se référer à eux dans les corps de procédure.
 
-		##[[KeyPgCommon Common]]## declares the variable having external linkage as well as defining the variable.  But, it is different from ##[[KeyPgExtern Extern]]## in that the ##[[KeyPgCommon Common]]## definition of the variable may appear in more than one module.  When used with arrays, only variable-length arrays without subscripts may be declared, and the array must be sized at run-time using ##[[KeyPgDim Dim]]## or ##[[KeyPgRedim ReDim]]## before it can be used.  Variable and object names with external linkage declared using ##[[KeyPgCommon Common]]## are only in the shared scope if the ##[[KeyPgShared Shared]]## scope specifier is also given.  Shared variables can be referred to within procedure bodies.
+		##[[KeyPgCommon Common]]## déclare que la variable a un "//external linkage//" (liaison externe) ainsi qu'il définit la variable.  Mais, il est différent de ##[[KeyPgExtern Extern]]## par le fait que la définition ##[[KeyPgCommon Common]]##  de la variable peut apparaître dans plus d'un module.  Lorsqu'il est utilisé avec des tableaux, seuls des tableaux de longueur variable, sans indices peuvent être déclarés, et le tableau doit être dimensionné de moment de l'exécution à l'aide de ##[[KeyPgDim Dim]]## ou ##[[KeyPgRedim ReDim]]## avant qu'il puisse être utilisé.  Les noms de variables et d'objets avec un "//external linkage//" (liaison externe) déclarés à l'aide de ##[[KeyPgCommon Common]]## ne sont que dans la portée partagée si le spécificateur de portée ##[[KeyPgShared Shared]]## est aussi utilisé.  On peut se référer aux variables partagées dans les corps de procédures.
 
-		When both ##[[KeyPgExtern Extern]]## and ##[[KeyPgCommon Common]]## are both used to declare and define a variable, the effect is that the meaning of ##[[KeyPgCommon Common]]## statement is altered to behave as though it were a ##[[KeyPgDim Dim]]## declaration.  So it is generally, not recommended to mix ##[[KeyPgExtern Extern]]## and ##[[KeyPgCommon Common]]## on the same variable in the same module.  However, variables may be declared and defined with ##[[KeyPgCommon Common]]## in one module and then referenced with ##[[KeyPgExtern Extern]]## in another module without confusion.
+		Quand ##[[KeyPgExtern Extern]]## et ##[[KeyPgCommon Common]]## sont utilisés les deux ensemble pour déclarer et définir une variable, l'effet est que le sens de la déclaration ##[[KeyPgCommon Common]]## est modifié de façon à se comporter comme s'il s'agissait d'une déclaration ##[[KeyPgDim Dim]]##.  Il est donc généralement pas recommandé de mélanger ##[[KeyPgExtern Extern]]## et ##[[KeyPgCommon Common]]## sur la même variable dans le même module.  Toutefois, les variables peuvent être déclarées et définies avec ##[[KeyPgCommon Common]]## dans un module et puis référencées avec ##[[KeyPgExtern Extern]]## dans un autre module, sans confusion.
 		
-		Procedure names are declared to have external linkage by default. Declarations using ##[[KeyPgPublic Public]]## explicitly specify external linkage.
+		Les noms de procédure sont déclarés comme ayant un "//external linkage//" (liaison externe) par défaut. Les déclarations utilisant explicitement ##[[KeyPgPublic Public]]## signifient "//external linkage//" (liaison externe).
 
-	{{fbdoc item="subsect" value="Local-scope declarations"}}
+	{{fbdoc item="section" value="Les déclarations de portée locale"}}
 
-		Currently, names declared at local-scope cannot have external linkage.
+		Actuellement, les noms déclarés de portée locale ne peuvent pas avoir un "//external linkage//" (liaison externe).
 
 {{fbdoc item="back" value="CatPgProgrammer|Programmer's Guide"}}

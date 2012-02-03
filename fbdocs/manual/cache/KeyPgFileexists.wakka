@@ -1,5 +1,5 @@
 {{fbdoc item="title" value="FILEEXISTS"}}----
-Tests the existence of a file
+Teste l'existence d'un fichier
 
 {{fbdoc item="syntax"}}##
 	[[KeyPgDeclare declare]] [[KeyPgFunction function]] **""FileExists""** ( [[KeyPgByval byval]] //filename// [[KeyPgAs as]] [[KeyPgZstring zstring]] [[KeyPgPtr ptr]] ) [[KeyPgAs as]] [[KeyPgInteger integer]]
@@ -8,22 +8,22 @@ Tests the existence of a file
 	#include "file.bi"
 	//result// = **""FileExists""**( //filename// )
 ##
-//or//
+//ou//
 ##
 	#include "vbcompat.bi"
 	//result// = **""FileExists""**( //filename// )
 ##
 {{fbdoc item="param"}}
 	##//filename//##
-		Filename to test for existence.
+		Nom du fichier dont on teste l'existence.
 
 {{fbdoc item="ret"}}
-	Returns non-zero (##-1##) if the file exists, otherwise returns zero (##0##).
+	Retourne non-zéro (##-1##) si le fichier existe, autrement retourne zéro (##0##).
 
 {{fbdoc item="desc"}}
-	##**""FileExists""**## tests for the existence of a file.
-	Internally, it may issue an Open() and a Close() function, which may have consequences - eg, any existing ##[[KeyPgLock Lock]]##(s) on the file may be released.
-	Depending on the exact requirements, alternative methods of checking for file existence may be to use the ##[[KeyPgDir Dir]]()## function (being careful of attributes and ensuring the path doesn't contain wildcards), or to try ##[[KeyPgOpen Open]]##ing the file and checking the return value for success.
+	##**""FileExists""**## teste l'existence d'un fichier.
+	En interne, il peut y avoir émission d'un Open() et d'une fonction close(), qui peut avoir des conséquences - par exemple, tout ##[[KeyPgLock Lock]]## existant sur le fichier peut être libéré.
+	Selon les besoins exacts, une méthode alternative de vérifier l'existence des fichiers est d'utiliser la fonction ##[[KeyPgDir Dir]]()## (en faisant attention aux attributs et en s'assurant que le chemin ne contient pas jokers), ou d'essayer un ##[[KeyPgOpen Open]]## sur le fichier puis vérifier la valeur de retour et tester la réussite.
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/system/fileexists.bas"}}%%(freebasic)
@@ -42,12 +42,12 @@ end if
 %%
 
 {{fbdoc item="target"}}
-	- Linux requires the ##//filename//## case matches the real name of the file. Windows and DOS are case insensitive. 
-	- Path separators in Linux are forward slashes ##/##. Windows uses backward slashes ##\## but it allows for forward slashes.  DOS uses backward ##\## slashes. 
+	- Linux nécessite que la casse de ##//filename//## corresponde au nom réel du fichier. Windows et DOS ne sont pas sensibles à la casse. 
+	- Les séparateurs de chemin de Linux sont des barres obliques ##/##. Windows utilise des barres obliques vers l'arrière ##\## mais il admet des barres obliques.  DOS utilise des barres obliques en arrière ##\##. 
 
 
 {{fbdoc item="diff"}}
-	- New to ""FreeBASIC""
+	- Nouveau pour ""FreeBASIC""
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgDir Dir]]##

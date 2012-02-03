@@ -1,5 +1,5 @@
 {{fbdoc item="title" value="CINT"}}----
-Converts numeric or string expression to an ##[[KeyPgInteger Integer]]##
+Convertit une expression numérique ou une chaîne en ##[[KeyPgInteger Integer]]## (nombre entier)
 
 {{fbdoc item="syntax"}}##
 	[[KeyPgDeclare declare]] [[KeyPgFunction function]] **Cint** ( [[KeyPgByval byval]] //expression// [[KeyPgAs as]] [[DataType datatype]] ) [[KeyPgAs as]] [[KeyPgInteger integer]]
@@ -15,21 +15,21 @@ Converts numeric or string expression to an ##[[KeyPgInteger Integer]]##
 ##
 {{fbdoc item="param"}}
 	##//expression//##
-		a numeric, string, or pointer expression to cast to a ##[[KeyPgInteger Integer]]## value
+		Une expression numérique, chaîne ou pointeur à transformer (cast) en valeur ##[[KeyPgInteger Integer]]##
 	##//datatype//##
-		any numeric, string, or pointer data type
+		Tout type de donnée numérique, chaîne ou pointeur.
 	##//typename//##
-		a user defined type
+		Un type défini par l'utilisateur.
 
 {{fbdoc item="ret"}}
-	An ##[[KeyPgInteger Integer]]## value.
+	Une valeur ##[[KeyPgInteger Integer]]##.
 
 {{fbdoc item="desc"}}
-	If ##**Cint**## is passed a ##//numeric expression//##, it rounds it using using the [[http://en.wikipedia.org/wiki/Rounding#Round-to-even_method round-to-even method]] - i.e. it rounds to the closest integer value, choosing the closest even integer if the number is equidistant from two integers - and returns a 32-bit ##[[KeyPgInteger Integer]]##. The function does not check for an overflow, and results are undefined for values which are less than ##-2##&nbsp;##147##&nbsp;##483##&nbsp;##648## or larger than ##2##&nbsp;##147##&nbsp;##483##&nbsp;##647##. 
+	Si une ##//numeric expression//## est passée à ##**CInt**##, elle est arrondie en utilisant la méthode [[http://en.wikipedia.org/wiki/Rounding#Round-to-even_method Arrondir au pair le plus proche (round-to-even method)]] - c'est à dire, que le nombre est arrondi à la valeur entière la plus proche, en choisissant le plus proche entier pair si le nombre est équidistant de deux nombres entiers - et retourne un ##[[KeyPgInteger Integer]]## 32 bits. La fonction ne vérifie pas s'il y a un dépassement et les résultats sont imprévisibles pour des valeurs inférieures à ##-2## ##147## ##483## ##648## ou supérieures à ##2## ##147## ##483## ##647##. 
 
-	If the argument is a string expression, it is converted to numeric by using ##[[KeyPgValint Valint]]##.
+	Si l'argument est une expression de chaîne, il est converti en numérique à l'aide de ##[[KeyPgValint Valint]]##.
 
-	The name "CINT" is derived from 'Convert to INTeger'.
+	Le nom "CINT" est dérivé de 'Convert to INTeger'.
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/casting/cint.bas"}}%%(freebasic)
@@ -51,10 +51,10 @@ SLEEP
 %%
 
 {{fbdoc item="lang"}}
-	- In the //[[CompilerOptlang -lang qb]]// dialect, ##**Cint**## will return a 16-bit integer, like in QB.
+	- Dans le dialecte //[[CompilerOptlang -lang qb]]//, ##**CInt**## retourne un entier 16 bits, comme QB.
 
 {{fbdoc item="diff"}}
-	- The string argument was not allowed in QB
+	- L'argument de chaîne n'est pas autorisé sous QB
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgCast Cast]]##

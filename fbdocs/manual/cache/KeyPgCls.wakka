@@ -1,5 +1,5 @@
 {{fbdoc item="title" value="CLS"}}----
-Clears the screen in both text modes and graphics modes
+Efface l'écran, aussi bien dans le mode texte que le mode graphique
 
 {{fbdoc item="syntax"}}##
 	[[KeyPgDeclare declare]] [[KeyPgSub sub]] **Cls** ( [[KeyPgByval byval]] //mode// [[KeyPgAs as]] [[KeyPgInteger integer]] = 1 )
@@ -9,34 +9,34 @@ Clears the screen in both text modes and graphics modes
 ##
 {{fbdoc item="param"}}
 	##//mode//##
-		A optional numeric variable with a value from ##0## to ##2##.  If omitted, it defaults to ##1##.
+		Une variable numérique facultative d'une valeur de 0 à 2. Si omise, 1 par défaut.
 
 {{fbdoc item="desc"}}
-	An optional ##//mode//## parameter may be given,
+	Un paramètre facultatif ##//mode//## peut être fourni,
 
-		If omitted, ##**CLS**## clears either the text or graphics viewport.  If a graphics viewport has been defined using the ##[[KeyPgViewgraphics View (Graphics)]]## statement, the graphics viewport is cleared.  Otherwise, the text viewport, defined by ##[[KeyPgViewtext View Print]]##, is cleared.  (If there is no explicit text viewport defined, the entire screen is cleared.)
+		S'il est omis, ##**Cls**## efface le texte ainsi que les graphiques de la fenêtre.  Si une fenêtre graphique a été définie en utilisant ##[[KeyPgViewgraphics View (Graphics)]]##, cette fenêtre est effacée. Autrement, la fenêtre texte définie par ##[[KeyPgViewtext View Print]]##, est nettoyée.  (S'il n'y a pas de fenêtre texte explicitement définie, l'écran entier est nettoyé.).
 
-		If ##0##, clears the entire screen
+		Si à ##0##, efface l'écran entier.
 
-		If ##1##, clears the graphics viewport if defined.  Otherwise, clears the text viewport
+		Si à ##1##, efface la fenêtre graphique si elle a été définie. Autrement, efface la fenêtre texte.
 
-		If ##2##, clears the text viewport
+		Si à ##2##, efface le fenêtre texte.
 
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/console/cls.bas"}}%%(freebasic)
-'' set the color to light grey text on a blue background
+'' Valide  couleur texte : gris clair et arrire-plan bleu
 Color 7, 1
 
-'' clear the screen to the background color
+'' efface ecran avec couleur arriere-plan
 Cls
 
-'' print text in the center of the screen
+'' ecris texte au centre ecran
 Locate 12, 33
 Print "Hello Universe!"
 %%
 
-In graphics modes, if you want to clear the entire screen to color ##0##, it can be faster using  ##[[KeyPgClear Clear]]## to write zeroes to the screen memory than calling ##**CLS**##.
+Dans les modes graphiques, si vous voulez effacer entièrement l'écran avec la couleur ##0##, il est plus rapide d'utiliser ##[[KeyPgClear Clear]]## pour écrire des zéros dans la mémoire écran que d'appeler ##**Cls**##.
 
 {{fbdoc item="filename" value="examples/manual/gfx/cls-memset.bas"}}%%(freebasic)
 Dim scrbuf As Byte Ptr, scrsize As Integer
@@ -51,29 +51,29 @@ scrsize = scrpitch * scrhei
 
 Do
 	
-	'' lock the screen (must do this while working directly on screenbuffer)
+	'' verouille ecran (obligatoire pendant travail directement dans tampon ecran)
 	Screenlock
 		
-		'' clear the screen (could use Cls here):
+		'' efface ecran (possible utiliser Cls ici):
 		Clear *scrbuf, 0, scrsize
 		
-		'' draw circle
+		'' dessine cercle
 		Circle (320, 240), r
 		
 	Screenunlock
 	
-	'' grow/shrink circle radius
+	'' augment/diminue rayon cercle
 	r += dr
 	If r <= 0 Then dr = 1 Else If r >= 100 Then dr = -1
 	
-	'' short pause in each frame (prevents hogging the CPU)
+	'' courte pause pour chaque image (previent saturation CPU)
 	Sleep 1, 1
 	
-	'' run loop until user presses a key
+	touche appuyee
 Loop Until len(Inkey) > 0%%
 
-{{fbdoc item="diff"}}
-	- None
+{{fbdoc item="section" value="Différences par rapport à QB"}}
+	- Aucune
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgColor Color]]##

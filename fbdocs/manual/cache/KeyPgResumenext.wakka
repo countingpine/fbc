@@ -1,13 +1,13 @@
 {{fbdoc item="title" value="RESUME NEXT"}}----
-Error handling statement to resume execution after a jump to an error handler
+Déclaration de gestion des erreurs pour reprendre l'exécution après un saut à un gestionnaire d'erreur
 
 {{fbdoc item="syntax"}}##
 	**Resume Next**
 ##
 {{fbdoc item="desc"}}
-	##**Resume Next**## is used in the traditional QB error handling mechanism within an error handler (called by ##[[KeyPgOnerror On Error]]##) to return execution to the line after the one that caused the error.  Usually this is used to avoid executing the same line and causing the error again.
+	##**Resume Next**## est utilisé dans le mécanisme traditionnel de prise en charge des erreurs de QB du gestionnaire d'erreurs (appelé par ##[[KeyPgOnerror On Error]]##) pour reprendre l'exécution à la ligne après celle qui a provoqué l'erreur.  Habituellement, cela est utilisé pour éviter l'exécution de la même ligne et de provoquer à nouveau la même erreur.
 
-	##**Resume Next**## resets the ##[[KeyPgErr Err]]## value to 0
+	##**Resume Next**## réinitialise à ##0## la valeur de ##[[KeyPgErr Err]]##
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/error/resume-next.bas"}}%%(freebasic)
@@ -33,7 +33,7 @@ Resume Next ' execution jumps to 'Print "ending..."' line, but j is now in an un
 %%
 
 {{fbdoc item="lang"}}
-	-  ON ERROR is not supported in the //[[CompilerOptlang -lang fb]]// dialect. Statements can be used in its function form to return an error code
+	-  ON ERROR n'est pas supporté dans le dialecte //[[CompilerOptlang -lang fb]]//. Des déclarations peuvent être utilisées dans cette forme de fonction pour retourner un code d'erreur
 {{fbdoc item="filename" value="examples/manual/check/KeyPgResumenext_1.bas"}}%%(freebasic)
 If Open( "text" For Input As #1 ) <> 0 Then
   Print "Unable to open file"
@@ -41,11 +41,11 @@ End If
 %% 
 
 {{fbdoc item="diff"}}
-	- Must compile with //[[CompilerOptex -ex]]// option
+	- Doit être compilé avec l'option //[[CompilerOptex -ex]]//
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgErr Err]]##
-	- ##[[KeyPgResume Resume]]##
-	- [[ProPgErrorHandling Error Handling]]
+	- ##[[KeyPgResumenext Resume]]##
+	- [[ProPgErrorHandling Gestion des erreurs]]
 
 {{fbdoc item="back" value="CatPgError|Error Handling Functions"}}

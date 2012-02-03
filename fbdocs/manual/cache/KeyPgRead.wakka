@@ -1,65 +1,64 @@
 {{fbdoc item="title" value="READ"}}----
-Reads values stored with the ##[[KeyPgData Data]]## statement.
+Lecture des valeurs stockées avec ##[[KeyPgData Data]]##.
 
 {{fbdoc item="syntax"}}##
 	**Read** //variable_list//
 ##
 {{fbdoc item="desc"}}
-	Reads data stored in the application with the ##[[KeyPgData Data]]## command. 
+	Lit les données stockées dans l'application avec la commande ##[[KeyPgData Data]]##. 
 	
-	The elements of the ##//variable_list//## must be of basic types, numeric, strings or elements of arrays and user defined types.
+	Les éléments de ##//variable_list//## doivent être des types basiques, numériques, chaînes ou éléments de tableaux et de types définis par l'utilisateur.
 
-	All the ##[[KeyPgData Data]]## statements in the program behave as a single list, after the last element of one ##[[KeyPgData Data]]## statement is read, the first element of the following ##[[KeyPgData Data]]## statement will be read.
-	The program should not attempt to ##[[KeyPgRead Read]]## after the last ##**Data**## element.  The results are (in all dialects) undefined,  and the program may crash (Page Fault).
+	Toutes les déclarations données ( ##[[KeyPgData Data]]## ) dans le programme constituent une liste unique, après la lecture du dernier élément d'une déclaration de données, le premier élément de la déclaration de données suivante sera lu.
+	Le programme ne doit pas tenter de lire ( ##[[KeyPgRead Read]]## ) après le dernier élément de données. Si c'est le cas, les résultats sont (dans tous les dialectes) indéfinis, et le programme peut se "planter" (erreur de page).
 
-	Data constants can only be of simple types (numeric or string).  A string read into a numeric variable will be evaluated by the ##[[KeyPgVal Val]]## function.
+	Des données constantes ne peuvent être que des types simples (numériques ou chaînes). Une chaîne lue dans une variable numérique sera évaluée par la fonction ##[[KeyPgVal Val]]##.
 
-	The "##[[KeyPgRestore Restore]] //label//##" statement makes the first ##[[KeyPgData Data]]## item after ##//label//## the next item to be read, allowing the user to choose specific sections of data to be read.
+	L'instruction "##[[KeyPgRestore Restore]]## ##//label//##" oblige la lecture du premier item de données après ##//label//##, permettant à l'utilisateur de choisir des sections spécifiques de données à lire.
 
-{{fbdoc item="ex"}}
+	{{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/data/read.bas"}}%%(freebasic)
-' Create an array of 5 integers and a string to hold the data.
+' Cree un tableau de 5 entiers et une chaine pour stocker les donnees.
 DIM AS INTEGER h(4)
 DIM AS STRING hs
 DIM AS INTEGER readindex
 
-' Set up to loop 5 times (for 5 numbers... check the data)
+' Boucle 5 fois (pour 5 nombres... charge les donnees)
 FOR readindex = 0 TO 4
 
-  ' Read in an integer.
+  ' Lecture d'un entier.
   READ h(readindex)
 
-  ' Display it.
+  ' Affichage de celui-ci.
   PRINT "Number" ; readindex ; " = " ; h(readindex)
 
 NEXT readindex
 
-' Spacer.
+' Separation.
 PRINT
 
-' Read in a string.
+' Lecture d'une chaine.
 READ hs
 
-' Print it.
+' Affiche celle-ci.
 PRINT  "String = " + hs
 
-' Await a keypress.
+' Attend appui sur touche.
 SLEEP
 
-' Exit program.
+' Sortie programme.
 END
 
-' Block of data.
+' Block de donnees.
 DATA 3, 234, 4354, 23433, 87643, "Bye!"
 %%
-
 {{fbdoc item="lang"}}
-	- None in syntax and usage of ##**Read**##
-	- See the ##[[KeyPgData Data]]## page for more information on differences in storing the data
+	- Aucune dans la syntaxe et l'usage de ##**Read**##
+	- Voir la page ##[[KeyPgData Data]]## pour plus d'informations sur les différences dans le stockage des données
 
-{{fbdoc item="diff"}}
-	- None in syntax and usage of ##**Read**##
-	- See the ##[[KeyPgData Data]]## page for more information on differences in storing the data
+ {{fbdoc item="diff"}}
+	- Aucune dans la syntaxe et l'usage de ##**Read**##
+	- Voir la page ##[[KeyPgData Data]]## pour plus d'informations sur les différences dans le stockage des données
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgData Data]]##

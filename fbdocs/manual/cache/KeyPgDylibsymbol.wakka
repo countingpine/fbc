@@ -1,5 +1,5 @@
 {{fbdoc item="title" value="DYLIBSYMBOL"}}----
-Returns the address of a function or variable in a dll
+Renvoie l'adresse d'une fonction ou d'une variable dans une dll
 
 {{fbdoc item="syntax"}}##
 	[[KeyPgDeclare declare]] [[KeyPgFunction function]] **Dylibsymbol** ( [[KeyPgByval byval]] //library// [[KeyPgAs as]] [[KeyPgAny any]] [[KeyPgPtr ptr]], [[KeyPgByref byref]] //symbol// [[KeyPgAs as]] [[KeyPgString string]] ) [[KeyPgAs as]] [[KeyPgAny any]] [[KeyPgPtr ptr]]
@@ -10,24 +10,24 @@ Returns the address of a function or variable in a dll
 ##
 {{fbdoc item="param"}}
 	##//library//##
-		The [[KeyPgAny any]] [[KeyPgPtr ptr]] handle of a DLL returned by ##[[KeyPgDylibload Dylibload]]##
+		Le [[KeyPgAny any]] [[KeyPgPtr ptr]] de prise en charge de la DLL retourné par ##[[KeyPgDylibload Dylibload]]##
 	##//symbol//##
-		A [[KeyPgString string]] containing name of the function, or variable in the library to return the address of.  In Windows only, can also be a ##[[KeyPgShort short]]## containing the ordinal of the function/variable.
+		Une [[KeyPgString String = Chaîne]] contenant le nom de la fonction, ou de la variable dans la librairie pour laquelle on retourne l'adresse.  Sous Windows seulement, peut aussi être un ##[[KeyPgShort short]]## contenant l'ordinal de la fonction/variable.
 
 {{fbdoc item="ret"}}
-	A ##[[KeyPgPtr pointer]]## to the function or variable in the library.
+	Un ##[[KeyPgPtr pointer]]## vers la fonction ou la variable dans la librairie.
 
-	If the function fails, the return value is 0.
+	Si la fonction échoue, la valeur retournée est 0.
 
 {{fbdoc item="desc"}}
-	##**Dylibsymbol**## returns a pointer to the variable or function named ##//symbol//## , in the dll pointed by ##//libhandle//##. ##//libhandle//## is obtained by loading the dll with ##[[KeyPgDylibload Dylibload]]##. The symbol must have been ##[[KeyPgExport Export]]##ed in the dll.
-	If ##//libhandle//## is 0, the symbol is searched in the current executable or dll.
+	##**DyLibSymbol**## renvoie un pointeur sur la variable ou une fonction appelée ##//symbol//## , dans la dll pointée par ##//libhandle//##. ##//libhandle//## est obtenu en chargeant la dll avec ##[[KeyPgDylibload Dylibload]]##. Le symbole doit avoir été ##[[KeyPgExport Export]]##é dans la DLL.
+	Si ##//libhandle//## est 0, le symbole est recherché dans l'exécutable ou la dll courant.
 
-	If using ##[[KeyPgCdecl Cdecl]]## functions, only the name of the procedure needs to be specified. If dynamically linking to a function created using STDCALL (default in windows), then the function must be decorated. To decorate a function, use its name, '@', then the number of bytes passed as arguments. For instance if the function ##FOO## takes 3 integer arguments, the decorated function would be 'FOO@12'. Remember, without an explicit ##[[KeyPgAlias alias]]##, the procedure name will be uppercase.
+	Si on utilise les fonctions ##[[KeyPgCdecl Cdecl]]##, seule le nom de la procédure nécessite d'être spécifié. Si lien dynamique à une fonction en utilisant STDCALL (par défaut dans Windows), alors la fonction doit être "decorated". Pour "decorate" une fonction, utilisez son nom, '@', puis le nombre d'octets passé comme arguments. Par exemple, si la fonction ##FOO## prend 3 arguments entiers, la fonction "decorated" serait 'FOO@12'. Rappelez-vous, sans un ##[[KeyPgAlias alias]]## explicite, le nom de la procédure sera en majuscules.
 
-	If linking to a dll created in Visual C""++""(tm), decoration need not be used. For GCC, decoration is needed.
+	Si lien vers une dll créée dans Visual C""++""(tm), "decoration" ne doit pas être utilisé. Pour GCC, "decoration" est nécessaire.
 
-	**Note:** The dylibsymbol, if failing, will attempt to automatically decorate the procedure, from @0 to @256, in 4 byte increments.
+	**Note:** Le dylibsymbol, si échec, essaiera automatiquement de "decorate" la procédure, de @0 à @256, en incréments de 4 octets.
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/module/mydll2.bas"}}%%(freebasic)
@@ -67,14 +67,14 @@ Sleep
 %%
 
 {{fbdoc item="target"}}
-	- Dynamic link libraries are not available in DOS ,as the OS doesn't support them.
-	- Ordinals are not supported on Linux, 0 is always returned.
+	- Les bibliothèques de liens dynamiques ne sont pas disponibles sous DOS, car l'OS ne les supporte pas.
+	- Ordinaux ne sont pas pris en charge sur Linux, 0 est toujours retourné.
 
 {{fbdoc item="lang"}}
-	- Not available in the //[[CompilerOptlang -lang qb]]// dialect unless referenced with the alias ##**""__Dylibsymbol""**##.
+	- Non disponible dans le dialecte //[[CompilerOptlang -lang qb]]// sauf si référencé avec l'alias ##**""__Dylibsymbol""**##.
 
 {{fbdoc item="diff"}}
-	- New to ""FreeBASIC""
+	- Nouveau pour ""FreeBASIC""
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgDylibload Dylibload]]##

@@ -1,5 +1,5 @@
 {{fbdoc item="title" value="HEX"}}----
-Returns the hexadecimal of the given number
+Retourne la valeur hexadécimale du nombre donné
 
 {{fbdoc item="syntax"}}##
 	[[KeyPgDeclare declare]] [[KeyPgFunction function]] **Hex** [[KeyPgOverload overload]] ( [[KeyPgByval byval]] //number// [[KeyPgAs as]] [[KeyPgByte byte]] ) [[KeyPgAs as]] [[KeyPgString string]]
@@ -18,21 +18,21 @@ Returns the hexadecimal of the given number
 ##
 {{fbdoc item="param"}}
 	##//number//##
-		A number or expression evaluating to a number.  A floating-point number will be converted to a ##[[KeyPgLongint longint]]##.
+		Un nombre ou expression évalué comme nombre.  Un nombre à virgule flottante sera converti en ##[[KeyPgLongint longint]]##.
 	##//digits//##
-		Optional number of digits to return.
+		Facultatif: nombre de chiffres à retourner.
 
 {{fbdoc item="ret"}}
-	A [[KeyPgString string]] containing the unsigned hexadecimal representation of ##//number//##.
+	Une [[KeyPgString String (chaîne)]] contenant la représentation hexadécimale non-signée de ##//number//##.
 
 {{fbdoc item="desc"}}
-	Returns the unsigned hexadecimal string representation of the integer ##//number//##. Hexadecimal digits range from 0-9, or A-F.
+	Retourne la représentation hexadécimale non-signée de l'entier ##//number//##. Chiffres héxadécimaux de 0 à 9, ou A à F.
 
-	If you specify ##//digits//## > 0, the result string will be exactly that length.  It will be truncated or padded with zeros on the left, if necessary.
+	Si vous spécifiez ##//digits//## > 0, la chaîne résultat aura exactement cette longueur.  Elle sera tronquée ou complètée avec des zéros sur la gauche, si nécessaire.
 
-	The length of the string will not go longer than the maximum number of digits required for the type of ##//number//## (8 for an ##[[KeyPgInteger integer]]##, 16 for a ##[[KeyPgLongint longint]])##.
+	La longueur de la chaîne ne dépassera pas le nombre de bits maximum requis pour le type de ##//number//## (8 pour un ##[[KeyPgInteger Integer (entier)]]##, 16 pour un ##[[KeyPgLongint LongInt (entier long)]])##.
 
-	If you want to do the opposite, i.e. convert a hexadecimal string back into a number, the easiest way to do it is to prepend the string with ##"&H"##, and convert it using ##[[KeyPgValint Valint]]## or ##[[KeyPgVallng Vallng]]##, similarly to a normal numeric string.  E.g. ##[[KeyPgValint Valint]]("&HFF")##
+	Si vous désirez l'opposé, par exemple convertir une chaîne binaire vers un nombre, la meilleure façon de le faire est d'ajouter ##"&H"##, au début de la chaîne, et la convertir en utilisant ##[[KeyPgValint Valint]]## ou ##[[KeyPgVallng Vallng]]##, de façon similaire à une chaîne numérique normale.  Par exemple ##[[KeyPgValint Valint]]("&HFF")##
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/strings/hex.bas"}}%%(freebasic)
@@ -41,7 +41,7 @@ Print Hex(54321)
 Print Hex(54321, 2)
 Print Hex(54321, 5)
 %%
-	will produce the output:
+	produira la sortie:
 
 %%D431
 31
@@ -49,12 +49,12 @@ Print Hex(54321, 5)
 %%
 
 {{fbdoc item="lang"}}
-	- The string type suffix ##"$"## is obligatory in the //[[CompilerOptlang -lang qb]]// dialect.
-	- The string type suffix ##"$"## is optional in the //[[CompilerOptlang -lang fblite]]// and //[[CompilerOptlang -lang fb]]// dialects.
+	- Le suffixe de type chaîne ##"$"## est obligatoire dans le dialecte //[[CompilerOptlang -lang qb]]//.
+	- Le suffixe de type chaîne ##"$"## est facultatif dans les dialectes //[[CompilerOptlang -lang fblite]]// et //[[CompilerOptlang -lang fb]]//.
 
 {{fbdoc item="diff"}}
-	- In QBASIC, there was no way to specify the number of digits returned.
-	- The size of the string returned was limited to 32 bits, or 8 hexadecimal digits.
+	- Dans QBASIC, il n'y avait aucun moyen de spécifier le nombre de chiffres retournés.
+	- La taille de la chaîne retournée était limitée à 32 bits, ou 8 chiffres hexadécimaux.
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgBin Bin]]##

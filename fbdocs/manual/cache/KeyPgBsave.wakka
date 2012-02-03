@@ -1,5 +1,5 @@
 {{fbdoc item="title" value="BSAVE"}}----
-Saves an array of arbitrary data and palette information to a file on disk
+Sauve un espace de données arbitraires et d'information palette dans un fichier sur le disque
 
 {{fbdoc item="syntax"}}##
 	[[KeyPgDeclare declare]] [[KeyPgFunction function]] **Bsave** ( [[KeyPgByref byref]] //filename// [[KeyPgAs as]] [[KeyPgConstQualifier const]] [[KeyPgString string]], [[KeyPgByval byval]] //source// [[KeyPgAs as]] [[KeyPgAny any]] [[KeyPgPtr ptr]], [[KeyPgByval byval]] //size// [[KeyPgAs as]] [[KeyPgInteger integer]] = 0, [[KeyPgByval byval]] //pal// [[KeyPgAs as]] [[KeyPgAny any]] [[KeyPgPtr ptr]] = 0 ) [[KeyPgAs as]] [[KeyPgInteger integer]]
@@ -9,52 +9,52 @@ Saves an array of arbitrary data and palette information to a file on disk
 ##
 {{fbdoc item="param"}}
 	##//filename//##
-		the name of the file to create for storing the pixel and palette data.
+		le nom du fichier à créer pour stocker les données pixels et palette.
 	##//source//##
-		the address of the data to store, or null (##0##) to store pixel data from the current screen work page.
+		L'adresse des données à stocker, ou nul (##0##) pour stocker les données à partir de la page écran active.
 	##//size//##
-		the total number of bytes of data to store.
+		le nombre total d'octets à stocker.
 	##//pal//##
-		the address of a buffer holding palette information, or null (##0##) to use the current screen palette.
+		l'adresse du buffer contenant l'information palette, ou nul (##0##) pour utiliser la palette de l'écran.
 
 {{fbdoc item="ret"}}
-	Returns zero (##0##) if successful, or a non-zero error code to indicate a failure. //[[ProPgErrorHandling (throws a runtime error)]]//
+	Retourne zéro (##0##) si réussite, ou un code d'erreur non-zéro pour indiquer un échec. //[[ProPgErrorHandling (émission d'une erreur de fonctionnement)]]//
 
 {{fbdoc item="desc"}}
-	##**Bsave**## is used for saving arbitrary data from memory into a file, using a file format specific to FB, or saving images into a standard BMP image file, replacing an existing file if necessary.
+	##**BSave**## est utilisé pour sauver, dans un fichier, des données en mémoire, en utilisant un format spécifique à FB, ou sauver des images dans un format standard de fichier image BMP, en remplaçant un fichier existant si nécessaire.
 
-	##**Bsave**## outputs a __total__ of ##//size//## bytes of arbitrary data located at ##//source//## to a specified file. If ##//source//## is null (##0##), then ##**Bsave**## outputs a __maximum__ of ##//size//## bytes from the current work page's pixel buffer, which is structured in the current screen mode's internal pixel format. Palette information is obtained from ##//pal//## if non-null, or if null (##0##), from the current screen palette.
+	##**BSave**## extrait un nombre __total__ de ##//size//## octets de données situées dans ##//source//## vers le fichier spécifié. Si ##//source//## est nul (##0##), alors ##**BSave**## extrait un nombre __maximum__ de ##//size//## octets à partir du tampon pixels de la page active, structurée dans le format de pixel du mode écran. L'information palette est obtenue à partir de ##//pal//## si non nul, ou si nul (##0##), à partir de la palette écran courante.
 
-	A BMP image file can be created if ##//filename//## has a file extension of """BMP""". ##//source//## is assumed to point to a valid image buffer whose entire pixel data will be stored in the BMP file. If ##//source//## is null (##0##), the entire current work page will be stored instead. Palette information is obtained from ##//pal//## if non-null, or if null (##0##), from the current screen palette. The ##//size//## parameter is ignored when saving BMP files.
+	Un fichier image BMP est créé si ##//filename//## a l'extension """BMP""". ##//source//## est supposé pointer vers un buffer image valide dont toutes les données pixel seront chargées dans le fichier BMP. Si ##//source//## est nul (##0##), la page courante valide sera entièrement chargée dans le fichier. L'information palette est obtenue à partir de ##//pal//## si non-nul, ou si nul (##0##), à partir de la palette courante de l'écran. Le paramètre ##//size//## est ignoré quand on sauvegarde des fichiers BMP.
 
-**Runtime errors:**
-	##**Bsave**## throws one of the following [[ProPgErrorHandling runtime errors]]:
+**Erreurs de foncionnement:**
+	##**BSave**## produit une des [[ProPgErrorHandling erreurs de foncionnement]] suivantes :
 
 	//(##2##) File not found//
-		- The file could not be created.
-		- ##//size//## is less than zero (##0##), or ##//size//## is zero and ##//source//## is non-null.
+		- Le fichier ne peut être créé.
+		- ##//size//## est inférieur à zéro (##0##), ou ##//size//## est zéro et ##//source//## est non-nul.
 	//(##3##) File I/O error//
-		- The file could not be written to.
+		- Ne peut écrire dans le fichier.
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/gfx/bsave.bas"}}%%(freebasic)
-' Set gfx mode
+' Valide mode gfx
 SCREENRES 320, 200, 32
 
-' Clear with black on white
+' Efface avec noir sur blanc
 COLOR RGB(0, 0, 0), RGB(255, 255, 255)
 CLS
 
 LOCATE 13, 15: PRINT "Hello world!"
 
-' Save as BMP
+' Sauve comme BMP
 BSAVE "hello.bmp", 0
 %%
 
 {{fbdoc item="diff"}}
-	- Support for saving more than 64KiB of arbitrary data is new to ""FreeBASIC"".
-	- Support for saving BMP files is new to ""FreeBASIC"".
-	- ""QB"" cannot use ##[[KeyPgBload Bload]]## to load files created with ##**Bsave**## in ""FreeBASIC"", but ""FreeBASIC"" can use ##[[KeyPgBload Bload]]## to load files created with ##**Bsave**## in ""QB""
+	- La possibilité de sauvegarder plus de 64KiB de données est nouvelle pour ""FreeBASIC"".
+	- La possibilité de sauvegarder des fichiers BMP est nouvelle pour ""FreeBASIC"".
+	- ""QB"" ne peut utiliser ##[[KeyPgBload Bload]]## pour charger des fichiers créés avec ##**BSave**## dans ""FreeBASIC"", mais ""FreeBASIC"" peut utiliser ##[[KeyPgBload Bload]]## pour charger des fichiers créés avec ##**BSave**## dans ""QB""
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgBload Bload]]##

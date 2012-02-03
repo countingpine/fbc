@@ -1,5 +1,5 @@
 {{fbdoc item="title" value="FUNCTION"}}----
-Defines a procedure returning a value
+Définit une procédure retournant une valeur
 
 {{fbdoc item="syntax"}}##
 	[[[KeyPgPublic Public]]|[[KeyPgPrivate Private]]] **Function** //identifier// [[[KeyPgCdecl CDecl]]|[[KeyPgPascal Pascal]]|[[KeyPgStdcall StdCall]]] [[[KeyPgOverload Overload]]] [[[KeyPgAlias Alias]] //external_identifier//] [([//parameter_list//])] [[[KeyPgAs As]] //return_type//] [[[KeyPgStatic Static]]] [[[KeyPgExport Export]]]
@@ -10,46 +10,45 @@ Defines a procedure returning a value
 	[[KeyPgEndblock End]] Function
 ##
 {{fbdoc item="param"}}
-	##//identifier//##: the name of the function
-	##//external_identifier//##: externally visible (to the linker) name enclosed in quotes
+	##//identifier//##: le nom de la fonction
+	##//external_identifier//##: nom visible de l'extérieur (à l'éditeur de liens) entre guillemets
 	##//parameter_list//##: ##//parameter//[, //parameter//[, ...]]##
 	##//parameter//##: ##[[[KeyPgByref ByRef]]|[[KeyPgByval ByVal]]] //identifier// [[[KeyPgAs As]] //type//] [= //default_value//]##
-		##//identifier//##: the name of the variable referenced in the function.  If the argument is an array then the identifier must be followed by an empty parenthesis. 
-		##//type//##: the type of variable
-		##//default_value//##: the value of the argument if none is specified in the call
-	##//return_type//##: the type of variable returned by the function
-	##//statements//##: one or more statements that make up the function body
-	##//return_value//##: the value returned from the function
-
+		##//identifier//##: le nom de la variable référencée dans la fonction.  Si l'argument est un tableau, alors l'identificateur doit être suivi de parenthèses vides.
+		##//type//##: le type de variable
+		##//default_value//##: la valeur de l'argument si rien n'est spécifié dans l'appel
+	##//return_type//##: le type de la variable retournée par la fonction
+	##//statements//##: une ou plusieurs déclaration(s) qui compose(nt) le corps de la fonction
+	##//return_value//##: la valeur retournée par la fonction
 {{fbdoc item="desc"}}
-	A function defines a block of code which can be executed with a single statement (a function call), and provide a value back to the caller when finished (a return value). 	There are several reasons to use functions:
-	- Reduces redundancy in your program
-	- Enables reuse of code in many programs
-	- Improves readability of the program
-	- Improves maintainability of the program
-	- Makes it easy to extend your program
+	Une fonction définit un bloc de code qui peut être exécuté par une seule instruction (un appel de fonction) et retourne une valeur à l'appelant lorsqu'elle a terminé (la valeur retournée). Il y a plusieurs raisons d'utiliser les fonctions:
+		- Réduit les redondances dans votre programme
+		- Permet la réutilisation de code dans de nombreux programmes
+		- Améliore la lisibilité du programme
+		- Améliore la maintenance du programme 
+		- Facilite l'amélioration de votre programme
 
-	//Access Rights// : The ##[[KeyPgPublic Public]]## and ##[[KeyPgPrivate Private]]## keywords specify public or private intra module-level access rights, respectively. If neither is given, the function defaults to public access (##[[KeyPgPublic Public]]##).
-	
-	//Calling Convention// : Calling convention, or the order in which arguments are pushed and popped from the stack during function calls, is specified with the ##[[KeyPgCdecl CDecl]]##, ##[[KeyPgPascal Pascal]]## and ##[[KeyPgStdcall StdCall]]## keywords. If none is given, the function uses the standard convention by default (##[[KeyPgStdcall StdCall]]##).
-	
-	//Passing Arguments// : Functions may receive one or more variables, or arguments, when called. These arguments are listed as ##//parameters//## in the ##//parameter_list//##. The ##[[KeyPgByref ByRef]]## and ##[[KeyPgByval ByVal]]## keywords specify whether the argument will be passed by reference or by value, respectively. The argument's type is given by "##[[KeyPgAs As]] //type//##" following the ##//parameter//##. If a parameter in the declaration is given a default value, the parameter is optional.  Array parameters are specified by following an identifier with an empty parenthesis.  Note that array parameters are always ##[[KeyPgByref ByRef]]## and the ##[[KeyPgByref ByRef]]## keyword is neither required nor allowed for array parameters.  When calling a function with an array argument the parenthesis must be supplied there too; see the examples.
+	//Droits d'accès// : Les mots-clés ##[[KeyPgPublic Public]]## et ##[[KeyPgPrivate Private]]## spécifient des droits d'accès, respectivement, publics ou privés entre niveaux-modules. Si aucun n'est donné, par défaut la fonction aura un accès (##[[KeyPgPublic Public]]##).
 
-	//Overloaded Functions// : An overloaded function may share the same name (##//identifier//##) as another with a different signature. The ##[[KeyPgOverload Overload]]## keyword specifies that a function may be overloaded. A function must be defined - or declared - using the ##[[KeyPgOverload Overload]]## keyword prior to any functions that overload them.
-	
-	//Returning values// : ##//return_type//## specifies the ##[[DataType data type]]## returned by a function upon exit. If no data type is specified, then the function will return the default data type, which will be Integer unless set to another data type using ##[[KeyPgDefsng DefSng]]##, ##[[KeyPgDefdbl DefDbl]]##, ##[[KeyPgDefstr DefStr]]##, etc. Functions can return values //(and soon, references)// using three methods: the ##[[KeyPgReturn Return]]## keyword followed by a value exits the function immediately, and returns that value to the caller. Functions can also return values by assigning the Function keyword or the function's ##//identifier//## to the desired return value. The latter two methods do not cause the function to exit, however. Since functions return values, function calls evaluate to expressions. Thus, function calls can be made wherever an expression is expected, like in [[KeyPgOpAssignment assignments]] or ##[[KeyPgIfthen If]]## statements.
+	//Convention d'appel// : La convention d'appel, ou l'ordre dans lequel les arguments sont entrés et sortis de la pile lors des appels de fonction, est spécifiée avec les mots-clés ##[[KeyPgCdecl cdecl]]##, ##[[KeyPgPascal pascal]]## et ##[[KeyPgStdcall stdcall]]##. Si aucune n'est fournie, la fonction utilise la convention standard par défaut (##[[KeyPgStdcall stdcall]]##).
 
-	//Local Variable Preservation// : The ##[[KeyPgStatic Static]]## keyword specifies that a function's locally declared variables are preserved between function calls. Upon entering a function defined with ##[[KeyPgStatic Static]]##, local variables have the same value as when the function was last called.
+	//Passage des arguments// : Les fonctions peuvent recevoir une ou plusieurs variables, ou arguments, en cas d'appel. Ces arguments sont répertoriés en tant que ##//parameters//## dans ##//parameter_list//##. Les mots-clés ##[[KeyPgByref ByRef]]## et ##[[KeyPgByval ByVal]]## précisent si l'argument sera passé par référence ou par valeur, respectivement. Le type de l'argument est donnée par "##[[KeyPgAs As]] //type//##" derrière le ##//parameter//##. Si un paramètre est donné dans la déclaration avec une valeur par défaut, le paramètre est facultatif.  Les paramètres de tableaux sont spécifiés en plaçant des parenthèses vides après l'identifiant.  Notez que les paramètres tableau sont toujours ##[[KeyPgByref ByRef]]## et le mot-clef ##[[KeyPgByref ByRef]]## n'est ni nécessaire ni permis comme paramètre tableau.  Lorsque vous appelez une fonction avec un argument de tableau les parenthèses sont de rigueur là aussi, voir les exemples.
+
+	//Fonctions surchargées// : Une fonction surchargée peut partager le même nom (##//identifier//##) qu'une autre avec une signature différente. Le mot-clé ##[[KeyPgOverload Overload]]## précise qu'une fonction peut être surchargée. Une fonction peut être définie - ou déclarée - en utilisant le mot-clé  ##[[KeyPgOverload Overload]]## avant toutes les fonctions qui les surchargent.
+
+	//Les valeurs de retour// : ##//return_type//## spécifie le ##[[DataType data type]]## retourné par une fonction à la sortie. Si aucun type de données n'est spécifié, alors la fonction retournera le type de données par défaut, qui sera ##//Integer//## sauf si a été précisé un autre type de données en utilisant ##[[KeyPgDefsng DefSng]]##, ##[[KeyPgDefdbl DefDbl]]##, ##[[KeyPgDefstr DefStr]]##, etc. Les fonctions peuvent retourner des valeurs //(et bientôt, des références)// en utilisant trois méthodes: le mot-clé ##[[KeyPgReturn Return]]## suivi d'une valeur fait sortir de la fonction immédiatement et renvoie cette valeur à l'appelant. Les fonctions peuvent également renvoyer des valeurs en attribuant le mot clé ##//Function//## ou l'##//identifier//## de la fonction à la valeur de retour souhaitée. Cependant, les deux dernières méthodes ne provoquent pas la sortie de la fonction. Comme les fonctions retournent des valeurs, les appels de fonction évaluent les expressions. Ainsi, les appels de fonction peuvent être faits partout où une expression est attendue, comme dans les déclarations [[KeyPgOpAssignment Affectations]] ou ##[[KeyPgIfthen If]]##.
+
+	//Préservation des variables locales// : Le mot-clef ##[[KeyPgStatic Static]]## indique que les variables locales déclarées dans une fonction sont conservées entre les appels de cette fonction. En entrant dans une fonction définie avec ##[[KeyPgStatic Static]]##, les variables locales ont la même valeur que la dernière fois que la fonction a été appelée.
 
 {{fbdoc item="ex"}}
 
 {{fbdoc item="filename" value="examples/manual/procs/func-1.bas"}}%%(freebasic)
-'' This program demonstrates the declaration of a function 
+'' This program demonstrates the declaration of a function
 '' and returning a value using Return command
 
 Declare Function ReturnTen () as integer
 
-Print ReturnTen () '' ReturnTen returns an integer by default.
+	Print ReturnTen () '' ReturnTen returns an integer by default.
 
 Function ReturnTen() as integer
 	Return 10
@@ -57,7 +56,7 @@ End Function
 %%
 
 {{fbdoc item="filename" value="examples/manual/procs/func-2.bas"}}%%(freebasic)
-'' This program demonstrates the declaration of a function 
+'' This program demonstrates the declaration of a function
 '' and returning a value using assignment to function name
 
 Declare Function ReturnTen () as integer
@@ -90,47 +89,47 @@ Function ReturnTen Overload (a As String) as integer
 End Function
 
 Function ReturnTen (a As Integer) as integer
-	Return a
+Return a 
 End Function
 %%
 
 {{fbdoc item="filename" value="examples/manual/procs/func-4.bas"}}%%(freebasic)
-'' The following example demonstrates optional parameters.
+  '' The following example demonstrates optional parameters.
 
 Function TestFunc(P As String = "Default") As String
-	Return P
+Return P
 End Function
 
-Print TestFunc("Testing:")
+Print TestFunc("Testing:") 
 Print TestFunc
 %%
 
 {{fbdoc item="filename" value="examples/manual/procs/func-5.bas"}}%%(freebasic)
-'' This example shows how to declare and call 
+'' This example shows how to declare and call
 '' functions taking array arguments.
 
 Function x(b() As Double) As Integer
-  x = UBound(b)-LBound(b)+1
+	x = UBound(b)-LBound(b)+1
 End Function
 
 Dim a(1 To 10) As Double
 Print x(a())
-Dim c(10 To 20) As Double 
+Dim c(10 To 20) As Double
 Print x(c())
 %%
 
 {{fbdoc item="lang"}}
-	- In the //[[CompilerOptlang -lang fb]]// dialect, ##**Byval**## is the default parameter passing convention for all built-in types except ##[[KeyPgString String]]##; String and user-defined ##[[KeyPgType Type]]##s are passed ##[[KeyPgByref Byref]]## by default.
-	- In the //[[CompilerOptlang -lang qb]]// and //[[CompilerOptlang -lang fblite]]// dialects, ##**Byref**## is the default parameter passing convention.
-	- In the //[[CompilerOptlang -lang qb]]// dialect, the name of the function must be used in an assignment to specify the return value.  Using ##**function** = ...##" to specify the return value may not be used.
-	- In the //[[CompilerOptlang -lang qb]]// and //[[CompilerOptlang -lang fblite]]// dialects, ##[[KeyPgReturn Return]]## may only be used to return a value when ##[[KeyPgOptiongosub Option Gosub]]## is off.  In //[[CompilerOptlang -lang qb]]//, this must be done explicitly using the ##[[KeyPgOptionnogosub Option Nogosub]]## statement.
+	- Dans le dialecte //[[CompilerOptlang -lang fb]]// dialect, ##**ByVal**## est la convention par défaut de passage de paramètre pour tous les types intégrés sauf ##[[KeyPgString String]]##; ##**String**## et les ##[[KeyPgType Type]]##s définis par l'utilisateur sont passés ##[[KeyPgByref ByRef]]## par défaut.
+	- Dans les dialectes //[[CompilerOptlang -lang qb]]// et //[[CompilerOptlang -lang fblite]]//, ##**ByRef**## est la convention par défaut de passage de paramètre.
+	- Dans le dialecte //[[CompilerOptlang -lang qb]]//, le nom de la fonction doit être utilisé dans une affectation pour spécifier la valeur de retour.  Utiliser ##**Function** = ...##" pour spécifier que la valeur de retour ne peut être utilisée.
+	- Dans les dialectes //[[CompilerOptlang -lang qb]]// et //[[CompilerOptlang -lang fblite]]//, ##[[KeyPgReturn Return]]## peut être utilisé pour retourner une valeur lorsque ##[[KeyPgOptiongosub Option Gosub]]## n'est pas valide.  Dans //[[CompilerOptlang -lang qb]]//, cela doit être fait en utilisant explicitement l'instruction ##[[KeyPgOptionnogosub Option Nogosub]]##.
 
 {{fbdoc item="diff"}}
-	- Parameters can be optional in ""FreeBASIC"".
-	- In QBASIC, the return type could only specified with a suffix, not with ##AS TYPE##, and only allowed functions to return a built-in type.
-	- Return value can now be specified by a ##[[KeyPgReturn Return]]## statement.
-	- Function ##[[KeyPgOverload Overload]]##ing is supported in ""FreeBASIC"".
-	- The return value of ##[[KeyPgInteger Integer]]## functions (all integer types) can be ignored in the calling code.
+	- Les paramètres peuvent être optionnels en ""FreeBASIC"".
+	- En QBASIC, le type de retour peut être spécifié seulement avec un suffixe, pas avec ##AS TYPE##, et autoriser seulement les fonctions à retourner un type intégré.
+	- La valeur de retour peut maintenant être précisée par une instruction ##[[KeyPgReturn Return]]##.
+	- La fonction ##[[KeyPgOverload Overload]]## est supportée en FreeBASIC.
+	- La valeur de retour de fonctions ##[[KeyPgInteger Integer]]## peut être ignorée dans le code appelant.
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgSub Sub]]##

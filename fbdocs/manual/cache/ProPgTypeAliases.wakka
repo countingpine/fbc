@@ -1,20 +1,20 @@
 {{fbdoc item="title" value="Type Aliases"}}----
-Additional names for variable or object types
+D'autres noms pour les types de variable ou d'objet
 
-**{{anchor name="OVERVIEW|Overview"}}**
-**{{anchor name="DECL|Declaration"}}**
-**{{anchor name="OVERLOAD|Overload resolution"}}**
-**{{anchor name="PROCPTRPTR|Pointers to procedure pointers"}}**
-**{{anchor name="TYPEFORWARD|Type forwarding"}}**
-**{{anchor name="INCTYPES|Incomplete types"}}**
+**{{anchor name="OVERVIEW|Vue d'ensemble"}}**
+**{{anchor name="DECL|Déclaration"}}**
+**{{anchor name="OVERLOAD|Résolution de la surcharge"}}**
+**{{anchor name="PROCPTRPTR|Pointeurs de pointeurs de procédure"}}**
+**{{anchor name="TYPEFORWARD|Transmission de type"}}**
+**{{anchor name="INCTYPES|Types incomplets"}}**
 
-{{anchor name="OVERVIEW"}}{{fbdoc item="section" value="Overview"}}
-	Type aliases are alternative names for a type. They can be used to facilitate a mass change from one type to another, save typing, or make circular dependency possible.
+{{anchor name="OVERVIEW"}}{{fbdoc item="section" value="Vue d'ensemble"}}
+	Les alias de type sont d'autres noms pour un type. Ils peuvent être utilisés pour faciliter un changement en masse d'un type à un autre, en diminuant la frappe ou rendre possible une dépendance circulaire.
 
-{{anchor name="DECL"}}{{fbdoc item="section" value="Declaration"}}
-	Type aliases are declared using the ##[[KeyPgTypeAlias Type]]## keyword much like declaring variables or objects with [[KeyPgExtern Extern]] or [[KeyPgDim Dim]].
+{{anchor name="DECL"}}{{fbdoc item="section" value="Déclaration"}}
+	Les alias de type sont déclarés en utilisant le mot-clé ##[[KeyPgTypeAlias Type]]## un peu comme la déclaration de variables ou d'objects avec [[KeyPgExtern Extern]] ou [[KeyPgDim Dim]].
 
-	The following example declares a type alias to ##[[KeyPgSingle Single]]## called "##//float//##", a procedure, and defines and initializes two variables of that type:
+	L'exemple suivant déclare un alias de type ##[[KeyPgSingle Single]]## appelé "##//float//##", une procédure et définit et initialise deux variables de ce type:
 
 	{{fbdoc item="filename" value="examples/manual/proguide/typalias/builtin.bas"}}%%(freebasic)
 type float as single
@@ -25,7 +25,7 @@ dim foo as float = 1.23
 dim bar as float = -4.56
 		%%
 
-	Procedure pointer type aliases are declared in the same fashion, as shown in the following example:
+	Les alias de type de pointeur de procédure sont déclarés de la même façon, comme le montre l'exemple suivant:
 
 	{{fbdoc item="filename" value="examples/manual/proguide/typalias/procptr_1.bas"}}%%(freebasic)
 Declare Function f (ByRef As String) As Integer
@@ -39,10 +39,10 @@ Function f (Byref arg as String) as Integer
 End Function
 %%
 
-{{anchor name="OVERLOAD"}}{{fbdoc item="section" value="Overload resolution"}}
-	Type aliases are just that - aliases. For all intents and purposes, a type alias **is** the type it aliases. So as far as procedure overload resolution is concerned, a procedure declared with a parameter of type "##//alias_to_T//##" is the same as a procedure declared with a parameter of type "##//T//##" (the same applies to overloading member procedures as well).
+{{anchor name="OVERLOAD"}}{{fbdoc item="section" value="Résolution de la surcharge"}}
+	Les alias de type ne sont que cela - des alias. A toutes fins utiles, un alias de type **est** du type qu'il remplace. Ainsi dans le cas où la résolution de la surcharge de procédure est concernée, une procédure déclarée avec un paramètre de type "##//alias_vers_T//##" est la même qu'une procédure déclarée avec un paramètre de type "##//T//##" (la même chose s'applique ainsi à la surcharge membres des procédures).
 
-	In other words, it is an error - duplicated definition - to declare a procedure where parameters differ only in a type and its alias, as the following example shows:
+	En d'autres termes, c'est une erreur -double définition- de déclarer une procédure où les paramètres ne diffèrent que par un type et son alias, comme l'exemple suivant le montre:
 
 	{{fbdoc item="filename" value="examples/manual/proguide/typalias/overload.bas"}}%%(freebasic)
 Type float As Single
@@ -53,10 +53,10 @@ Declare Sub f Overload (a As Single)
 '' Declare Sub f (a As float)
 %%
 
-{{anchor name="PROCPTRPTR"}}{{fbdoc item="section" value="Pointers to procedure pointers"}}
-	Pointers to procedure pointers are just like any other pointer type, except they point to procedure pointers. Because the syntax for declaring procedure pointers doesn't allow directly creating a pointer to procedure pointer, a type alias is used.
+{{anchor name="PROCPTRPTR"}}{{fbdoc item="section" value="Pointeurs de pointeurs de procédure"}}
+	Les pointeurs de pointeurs de procédure sont comme n'importe quel autre type de pointeur, sauf qu'ils pointent vers des pointeurs de procédure. Parce que la syntaxe pour déclarer des pointeurs de procédure ne permet pas de créer directement un pointeur sur pointeur de procédure, un alias de type est utilisé.
 
-	The following example declares a pointer to a procedure returning an integer pointer, and then a pointer to a pointer to a procedure returning an integer:
+	L'exemple suivant déclare un pointeur vers une de procédure retournant un pointeur d'entier, puis un pointeur vers un pointeur vers une de procédure retournant un entier:
 
 	{{fbdoc item="filename" value="examples/manual/proguide/typalias/procptr_2.bas"}}%%(freebasic)
 dim pf as function() as integer ptr
@@ -65,8 +65,8 @@ type pf_t as function() as integer
 dim ppf as pf_t ptr
 	%%
 
-{{anchor name="TYPEFORWARD"}}{{fbdoc item="section" value="Type forwarding"}}
-	Type aliases can be forward referencing: an alias can refer to some other type not yet fully defined.
+{{anchor name="TYPEFORWARD"}}{{fbdoc item="section" value="Transmission de type"}}
+	Des alias de type peuvent être avant le référencement: un alias peut faire référence à un autre type qui n'est pas encore entièrement défini.
 
 	{{fbdoc item="filename" value="examples/manual/proguide/typalias/fwd_1.bas"}}%%(freebasic)
 TYPE foo AS bar
@@ -81,7 +81,7 @@ TYPE bar
 END TYPE
 	%%
 
-	Using a type alias and forward referencing allows circular dependencies between types.
+	En utilisant un alias de type et un référencement précoce permet des dépendances circulaires entre les types.
 
 	{{fbdoc item="filename" value="examples/manual/proguide/typalias/fwd_2.bas"}}%%(freebasic)
 TYPE list as list_
@@ -97,10 +97,10 @@ TYPE list_
 END TYPE
 	%%
 
-{{anchor name="INCTYPES"}}{{fbdoc item="section" value="Incomplete types"}}
-	 A type is considered incomplete until the size of it, that is the number of bytes it would need to occupy in memory is known, and the offsets of all of its fields are known.  It is not possible to allocate space for an incomplete type.  It is not possible to declare a variable having the data type of an incomplete type, pass an incomplete type as a parameter, or access the members of an incomplete type.
+{{anchor name="INCTYPES"}}{{fbdoc item="section" value="Types incomplets"}}
+	 Un type est considéré comme incomplet jusqu'à ce que la taille de celui-ci (c'est le nombre d'octets qui lui sont nécessaires en mémoire) soit connue ainsi que les positions de tous ses champs.  Il n'est pas possible d'allouer de l'espace mémoire pour un type incomplet.  Il n'est pas possible de déclarer une variable ayant un type de données incomplet, de passer un type incomplet comme paramètre ou d'accéder aux membres d'un type incomplet.
 	
-	However, pointers to incomplete types may be allocated, declared as members in other types, or passed as parameters to a procedures since the size of a pointer is known.
+	Toutefois, des pointeurs vers des types incomplets peuvent être attribués, déclarés comme membres dans d'autres types ou passés comme paramètres à une procédure, dès lors que la taille d'un pointeur est connue.
 
 	{{fbdoc item="filename" value="examples/manual/proguide/typalias/incomp.bas"}}%%(freebasic)
 TYPE sometype AS sometype_

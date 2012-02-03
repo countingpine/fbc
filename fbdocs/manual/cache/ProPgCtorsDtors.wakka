@@ -1,34 +1,34 @@
 {{fbdoc item="title" value="Constructors and Destructors"}}----
-In charge of the creation and destruction of objects.
+En charge de la création et la destruction d'objets.
 
-**{{anchor name="OVERVIEW|Overview"}}**
-**{{anchor name="DECLARATION|Declaration"}}**
-**{{anchor name="DEFCTOR|Default constructors"}}**
-**{{anchor name="COPYCTOR|Copy constructors"}}**
-**{{anchor name="CALLCTOR|Calling constructors"}}**
+**{{anchor name="OVERVIEW|Vue d'ensemble"}}**
+**{{anchor name="DECLARATION|Déclaration"}}**
+**{{anchor name="DEFCTOR|Les constructeurs par défaut"}}**
+**{{anchor name="COPYCTOR|Constructeurs de copie"}}**
+**{{anchor name="CALLCTOR|Appel des constructeurs"}}**
 
-{{anchor name="OVERVIEW"}}{{fbdoc item="section" value="Overview"}}
-	Constructors and destructors are responsible for creating and destroying objects, respectively. In general, constructors give objects their initial state, that is, they give meaningful values to their objects' member data. Destructors perform the opposite function; they make sure any resources owned by their objects are properly freed.
+{{anchor name="OVERVIEW"}}{{fbdoc item="section" value="Vue d'ensemble"}}
+	Les constructeurs et les destructeurs sont responsables, respectivement, de la création et de la destruction d'objets. En général, les constructeurs donnent aux objets leur état initial, c'est à dire qu'ils donnent des valeurs significatives aux données membres de leurs objets. Les destructeurs accomplissent la fonction inverse; ils s'assurent que les ressources qui appartiennent aux objets sont correctement libérées.
 
-	Simply, constructors are special member procedures that are called when an object is created, and destructors are special member procedures called when an object is destroyed. Both constructors and destructors are called automatically by the compiler whenever an object is created or destroyed, whether explicitly with the use of the ##[[KeyPgDim Dim]]## or ##[[KeyPgOpNew New]]## keywords, or implicitly by passing an object to a procedure by value or through an object going out of scope.
+	Simplement, les constructeurs sont des membres spéciaux des procédures qui sont appelés lorsqu'un objet est créé et les destructeurs sont des membres spéciaux des procédures qui sont appelés lorsqu'un objet est détruit. Les constructeurs et destructeurs sont appelés automatiquement par le compilateur chaque fois qu'un objet est créé ou détruit, ou détruit explicitement lors de l'utilisation des mots-clés ##[[KeyPgDim Dim]]## ou ##[[KeyPgOpNew New]]## ou ou implicitement par le passage d'un objet par valeur à une procédure ou via un objet sortant du champ d'application.
 
-{{anchor name="DECLARATION"}}{{fbdoc item="section" value="Declaration"}}
-	Constructors and destructors are declared like member procedures but with the ##[[KeyPgConstructor Constructor]]## keyword instead of ##[[KeyPgMemberSub Sub]]## or ##[[KeyPgMemberFunction Function]]##, and without a name. Similarly, they are defined with only the name of the ##[[KeyPgType Type]]## or ##[[KeyPgClass Class]]## they are declared in.
+{{anchor name="DECLARATION"}}{{fbdoc item="section" value="Déclaration"}}
+	Les constructeurs et les destructeurs sont déclarés comme membres de procédures, mais avec les mots-clefs ##[[KeyPgConstructor Constructor]]## ou ##[[KeyPgDestructor Destructor]]## à la place de ##[[KeyPgMemberSub Sub]]## ou ##[[KeyPgMemberFunction Function]]## et sans nom. De même, ils sont définis avec seulement le nom du ##[[KeyPgType Type]]## ou de la ##[[KeyPgClass Class]]## dans le(la)quel(le) ils sont déclarés.
 
-	A ##[[KeyPgType Type]]## or ##[[KeyPgClass Class]]## can have multiple constructors, but only one destructor.
+	Un ##[[KeyPgType Type]]## ou une ##[[KeyPgClass Class]]## peuvent avoir plusieurs constructeurs, mais seulement un destructeur.
 
-{{anchor name="DEFCTOR"}}{{fbdoc item="section" value="Default constructors"}}
-	Default constructors are constructors that either have no parameters, or all of their parameters have a default value. They are called when an object is defined but not initialized, or is created as part of an array, with the ##[[KeyPgDim Dim]]##, ##[[KeyPgRedim Redim]]## or ##[[KeyPgOpNew New]]##[] keywords. The first constructor declared in the example below is a default constructor.
+{{anchor name="DEFCTOR"}}{{fbdoc item="section" value="Les constructeurs par défaut"}}
+	Les constructeurs par défaut sont des constructeurs qui soit n'ont pas de paramètres, soit la totalité de leurs paramètres ont une valeur par défaut. Ils sont appelés quand un objet est défini, mais pas initialisé, ou créés dans le cadre d'un tableau, avec les mots-clefs ##[[KeyPgDim Dim]]##, ##[[KeyPgRedim Redim]]## ou ##[[KeyPgOpNew New]]##[]. Le premier constructeur déclaré dans l'exemple ci-dessous est un constructeur par défaut.
 
-{{anchor name="COPYCTOR"}}{{fbdoc item="section" value="Copy constructors"}}
-	Copy constructors are constructors called when an object is created, or cloned, from another object of the same type (or an object that can be converted to that type). This happens explicitly when initializing an object with another object, or implicitly by passing an object to a procedure by value. Copy constructors are declared having one parameter: an object of the same type passed by reference.
+{{anchor name="COPYCTOR"}}{{fbdoc item="section" value="Constructeurs de copie"}}
+	Les constructeurs de copie sont des constructeurs appelés quand un objet est créé, ou cloné, à partir d'un autre objet du même type (ou d'un objet qui peut être converti dans ce type). Cela se produit explicitement lors de l'initialisation d'un objet avec un autre objet ou implicitement en passant par valeur un objet à une procédure. Les constructeurs de copie sont déclarés comme ayant un paramètre: un objet du même type passé par référence.
 
-	Copy constructors are only called when creating and initializing object instances. Assignment to objects is handled by the ##[[KeyPgOperator member operator let]]##.
+	Les constructeurs de copie ne sont appelés que lors de la création et l'initialisation d'instances d'objets. L'affectation à des objets est assurée par ##[[KeyPgOperator member operator let]]##.
 
-{{anchor name="CALLCTOR"}}{{fbdoc item="section" value="Calling constructors"}}
-	Unlike other member procedures, constructors cannot be called directly from an object instance. Instead, a constructor is specified in a ##[[KeyPgDim Dim]]## statement either with an initializer or without one, or in a ##[[KeyPgOpNew New]]## statement with or without arguments.
+{{anchor name="CALLCTOR"}}{{fbdoc item="section" value="Appel des constructeurs"}}
+	Contrairement aux autres membres des procédures, les constructeurs ne peuvent pas être appelés directement à partir d'une instance d'objet. Au lieu de cela, un constructeur est précisé dans une instruction ##[[KeyPgDim Dim]]## avec un initialiseur ou sans ou dans une instruction ##[[KeyPgOpNew New]]## avec ou sans arguments.
 
-	When specifying an initializer for an object, the name of the type followed by any arguments it requires is used.
+	Lorsque vous spécifiez un initialiseur pour un objet, le nom du type suivi par tous les arguments qu'il exige est utilisé.
 
 {{fbdoc item="filename" value="examples/manual/proguide/udt/ctordtor.bas"}}%%(freebasic)
 type foo
@@ -87,13 +87,13 @@ scope
 end scope '' <- a, b and c are destroyed here as well
 %%
 
-{{anchor name="COMPCTORDTOR"}}{{fbdoc item="section" value="Compiler-provided constructors and destructors"}}
-	If no copy constructor is declared for a ##[[KeyPgType Type]]## or ##[[KeyPgClass Class]]##, the compiler provides one. If no constructor has been declared, the compiler also provides a default constructor.
+{{anchor name="COMPCTORDTOR"}}{{fbdoc item="section" value="Constructeurs et destructeurs fournis par le compilateur"}}
+	Si aucun constructeur de copie n'est déclaré pour un ##[[KeyPgType Type]]## ou une ##[[KeyPgClass Class]]##, le compilateur en fournit un. Si aucun constructeur n'a été déclaré, le compilateur en fournit également un par défaut.
 
-	The compiler-provided default constructor initializes member data to default values, that is, numeric and pointer members are set to zero (0), and object members are default-constructed. The copy constructor that the compiler declares shallow-copies all member data from one type to another: numeric and pointer types are initialized with the corresponding data members in the object that is copied, and object members are copy-constructed from their corresponding object members. This means that dynamic resources, such as memory pointed to by a pointer data member, is not copied; only the address is copied. So if an object owns a resource, meaning it is responsible for it's creation and destruction, then the compiler-generated copy constructor will not be sufficient.
+	Le constructeur par défaut fourni par le compilateur initialise les données des membres à des valeurs par défaut, c'est à dire, que les membres numériques et pointeurs sont mis à zéro (0) et les membres object sont construits par défaut. Le constructeur de copie déclaré par le compilateur fait des copies rapides de toutes les données membres d'un type à un autre: les types numériques et pointeur sont initialisés avec les membres de données correspondant à l'objet qui est copié, et les membres objet sont construits à partir de la copie de leurs membres objet correspondants. Cela signifie que les ressources dynamiques, telle que la mémoire pointée par un membre de données pointeur, ne sont pas copiées; seule l'adresse est copiée. Donc, si un objet possède une ressource, cela signifie qu'il est responsable de sa création et de sa destruction, le constructeur de copie généré par le compilateur ne sera pas suffisant.
 
-	If a destructor is not declared, the compiler generates one. This destructor calls object members' destructors and does nothing for numeric and pointer types. Again, if an object owns a dynamic resource, then the compiler-generated destructor will not be sufficient, as the resource will not be freed when the object is destroyed.
+	Si un destructeur n'est pas déclaré, le compilateur en génère un. Ce destructeur appelle les destructeurs des membres de l'objet et ne fait rien pour les types numériques et pointeurs. Encore une fois, si un objet possède une ressource dynamique, alors le destructeur généré par le compilateur ne sera pas suffisant, car la ressource ne sera pas libérée lorsque l'objet sera détruit.
 
-	This is commonly referred to as the "Rule of 3": If an object needs a custom copy constructor, assignment operator or destructor, chances are it needs all three.
+	Ceci est communément appelé la "règle des 3": Si un objet a besoin d'un constructeur de copie personnalisé, opérateur d'affectation ou destructeur, il y a des chances qu'il ait besoin des trois.
 
 {{fbdoc item="back" value="CatPgProgrammer|Programmer's Guide"}}

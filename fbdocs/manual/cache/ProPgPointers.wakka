@@ -1,11 +1,11 @@
 {{fbdoc item="title" value="Pointers"}}----
-Data types whose values are addresses in memory.
+Des types de données dont les valeurs sont des adresses en mémoire.
 
-{{fbdoc item="section" value="Declaration"}}
-	Pointers are [[ProPgVariables Variables]] whose values are addresses in memory, and they are said to 'point' to this memory. The type of data that is pointed to depends on the type of pointer (an ##[[KeyPgInteger Integer]] [[KeyPgPointer Pointer]]## points to ##[[KeyPgInteger Integer]]## data). Pointers are declared like any other variable, with the suffix "##pointer##" or "##ptr##" following the type name.
+{{fbdoc item="section" value="Déclaration"}}
+	Les pointeurs sont des [[ProPgVariables Variables]] dont les valeurs sont des adresses en mémoire et on dit qu'ils "pointent" vers cette mémoire. Le type de donnée qui est pointé dépend du type de pointeur (un ##[[KeyPgInteger Integer]] [[KeyPgPointer Pointer]]## pointe vers une donnée ##[[KeyPgInteger Integer]]##). Les pointeurs sont déclarés comme toute autre variable, avec le suffixe "##pointer##" ou "##ptr##" suivant le nom du type.
 
-{{fbdoc item="section" value="Accessing pointed to data"}}
-	The data pointed to by a pointer can be accessed with ##[[KeyPgOpValueOf Operator *]]## (Value of). This operator returns a reference to the data that its operand points to. The following,
+{{fbdoc item="section" value="Accès aux données pointées"}}
+	Les données pointées par un pointeur peuvent être consultées avec ##[[KeyPgOpValueOf Operator *]]## (Valeur de). Cet opérateur renvoie une référence aux données que pointe son opérande. Ce qui suit,
 
 {{fbdoc item="filename" value="examples/manual/proguide/pointers/builtin.bas"}}%%(freebasic)
 Dim myInteger As Integer = 10
@@ -13,10 +13,10 @@ Dim myPointer As Integer Pointer = @myInteger
 *myPointer = 20
 Print myInteger
 %%
-	defines an ##[[KeyPgInteger Integer]]## variable called ##myInteger## and an ##[[KeyPgInteger Integer]]## pointer called ##myPointer## that points to the location in memory where ##myInteger## is stored. ##[[KeyPgOpAt Operator @]]## (Address of) is used to retrieve the address of ##myInteger##. The value of ##20## is assigned to the location at which ##myPointer## points - the address of ##myInteger##, or ##@myInteger##. Changes to ##*myPointer## directly affect the value of ##myInteger## (the expression "##*myPointer##" is the same thing as "##myInteger##").
+	définit une variable ##[[KeyPgInteger Integer]]## appelée ##//myInteger//## et un pointeur d'##[[KeyPgInteger Integer]]## appelé ##//myPointer//## qui pointe vers l'emplacement de la mémoire où est stocké ##//myInteger//##. L'##[[KeyPgOpAt Operator @]]## (Adresse de) est utilisé pour récupérer l'adresse de ##//myInteger//##. La valeur de ##//20//## est attribuée à l'emplacement vers laquel pointe ##//myPointer//## - l'adresse de ##//myInteger//##, ou ##//@myInteger//##. Les modifications apportées à ##//*myPointer//## affectent directement la valeur de ##//myInteger//## (l'expression "##//*myPointer//##" est équivalente à "##//myInteger//##").
 
-{{fbdoc item="section" value="Pointers to user-defined types"}}
-	Pointers to user-defined types are defined and used like all other pointers. Accessing a member of a [[KeyPgType Type]] or [[KeyPgClass Class]] requires one of the following two methods:
+{{fbdoc item="section" value="Pointeurs vers des types définis par l'utilisateur"}}
+	Les pointeurs vers des types définis par l'utilisateur sont définis et utilisés comme tous les autres pointeurs. L'accès à un membre d'un [[KeyPgType Type]] ou d'une [[KeyPgClass Class]] requiert l'une des deux méthodes suivantes:
 
 {{fbdoc item="filename" value="examples/manual/proguide/pointers/udt.bas"}}%%(freebasic)
 Type myType
@@ -35,15 +35,15 @@ Dim p As myType Pointer = @x
 Print p->a
 Print p->b
 %%
-	The first method uses ##[[KeyPgOpMemberAccess Operator . (Member access)]]##. This operator accesses members from references, so the pointer is dereferenced first. The member access operator has higher priority over the dereference operator, so parenthesis are needed to dereference the pointer before using it with the member access operator.
+	La première méthode utilise ##[[KeyPgOpMemberAccess Operator . (Accès membre)]]##. Cet opérateur accède aux membres à partir de références, par conséquent, en premier, le pointeur est déréférencé. L'opérateur d'accès membre a une plus grande priorité que l'opérateur de déréférencement, donc des parenthèses sont nécessaires pour déréférencer le pointeur avant de l'utiliser avec l'opérateur d'accès membre.
 
-	The second method uses ##[[KeyPgOpPtrMemberAccess Operator -> (Pointer to member access)]]##. This operator accesses members from pointers, which are automatically dereferenced. This can make code a little clearer, although both forms produce identical results.
+	La deuxième méthode utilise ##[[KeyPgOpPtrMemberAccess Operator -> (Accès membre par pointeur)]]##. Cet opérateur accède aux membres à partir de pointeurs qui sont automatiquement déréférencés. Cela peut rendre le code un peu plus clair, bien que les deux formes produisent des résultats identiques.
 
 {{fbdoc item="see"}}
-	- ##[[KeyPgOpAt Operator @ (Address of)]]##
-	- ##[[KeyPgOpValueOf Operator * (Value of)]]##
-	- ##[[KeyPgOpMemberAccess Operator . (Member access)]]##
-	- ##[[KeyPgOpPtrMemberAccess Operator -> (Pointer to member access)]]##
+	- ##[[KeyPgOpAt Operator @ (Adresse de)]]##
+	- ##[[KeyPgOpValueOf Operator * (Valeur de)]]##
+	- ##[[KeyPgOpMemberAccess Operator . (Accès membre)]]##
+	- ##[[KeyPgOpPtrMemberAccess Operator -> (Accès membre par pointeur)]]##
 	- ##[[KeyPgOpVarptr Varptr]]##
 	- ##[[KeyPgOpStrptr Strptr]]##
 	- ##[[KeyPgOpProcptr Procptr]]##

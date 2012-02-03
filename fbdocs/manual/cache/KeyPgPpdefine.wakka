@@ -1,31 +1,31 @@
 {{fbdoc item="title" value="#DEFINE"}}----
-Preprocessor directive to define a macro
+Directive du préprocesseur pour définir une macro
 
 {{fbdoc item="syntax"}}##
 	#define //identifier// //text//
 	#define //identifier//( [ //parameters// ] ) //macro_text//
 	#define //identifier//( [ //parameters//, ] //variadic_parameter//[[KeyPgDots ...]] ) //macro_text//
-##
+	##
 {{fbdoc item="desc"}}
-	Preprocessor keyword that defines an identifier with a custom meaning:
-		- Non-empty defines (with ##//text//##) are substituted by its ##//text//## when the source is parsed, allowing a sort of "shorthand".  ##//text//## may be empty, which is useful for making defines that are just designed for checking with ##[[KeyPgPpifdef #ifdef]]## and ##[[KeyPgPpifndef #ifndef]]##.
-		- Defines with parameters are substituted by the ##//macro_text//##, that will contain all the arguments passed replaced.  **Note:** The open parentheses character ("##(##") must immediately follow the ##//identifier//##, there should be no white-spaces between them, otherwise the parentheses will be taken as part of ##//text//##.
-		- Defines are visible only in the scope where they are defined.  If defined at module level, the define is visible throughout the module.  If the ##//identifier//## is defined inside a compound statement having scope (##[[KeyPgSub Sub]]##, ##[[KeyPgFornext For..Next]]##, ##[[KeyPgWhilewend While..Wend]]##, ##[[KeyPgDoloop Do..Loop]]##, ##[[KeyPgScope Scope..End Scope]]##, etc), the ##//identifier//## is visible only within that scope.
-		- Namespaces do not have any effect on the visibility of a define.
+	Mot-clé du préprocesseur qui définit un identifiant avec un sens personnalisé:
+		- Des ##//define//## non-vides (avec ##//texte//##) sont remplacés par leur ##//texte//## lorsque le source est analysé, permettant une sorte de "raccourci".  ##//text//## peut être vide, ce qui est utile pour faire des ##//define//## conçus pour le contrôle des ##[[KeyPgPpifdef #ifdef]]## et ##[[KeyPgPpifndef #ifndef]]##.
+		- Des ##//define//## avec des paramètres sont remplacés par le ##//macro_text//##, qui contiendra tous les arguments passés remis à leur place.  **Note:** Le caractère ouverture des parenthèses ("##(##") doit suivre immédiatement l' ##//identifier//##, il ne doit y avoir aucun espace-blanc entre eux, sinon les parenthèses seront prises comme faisant partie du ##//text//##.
+		- Les ##//define//## ne sont visibles que dans la portée où ils sont définis.  S'il est défini au niveau du module, ##//define//## est visible tout au long du module.  Si l'##//identifier//## est défini dans une instruction à portée composée (##[[KeyPgSub Sub]]##, ##[[KeyPgFornext For..Next]]##, ##[[KeyPgWhilewend While..Wend]]##, ##[[KeyPgDoloop Do..Loop]]##, ##[[KeyPgScope Scope..End Scope]]##, etc), l'##//identifier//## n'est visible que dans cette portée.
+		- Les espaces de noms n'ont aucun effet sur la visibilité d'un ##//define//##.
 
-	##//Identifier//##s can be checked to see whether they have been defined with ##[[KeyPgPpifdef #ifdef]]## and ##[[KeyPgPpifndef #ifndef]]##, which can be used to hide parts of code to the compiler (conditional compiling).
+	Les ##//Identifier//## peuvent être examinés pour voir si ils ont été définis avec ##[[KeyPgPpifdef #ifdef]]## et ##[[KeyPgPpifndef #ifndef]]##, ce qui peut être utilisé pour cacher des parties du code pour le compilateur (compilation conditionnelle).
 
-	For defining identifiers with constant values associated with them ##[[KeyPgConst Const]]## may be used as a more powerful method.
+	Pour définir des identificateurs avec des valeurs constantes qui leur sont associées, ##[[KeyPgConst Const]]## peut être utilisé comme une méthode plus puissante.
+
+	Utiliser ##[[KeyPgDots ...]]## (une ellipse) derrière le dernier paramètre d'une macro permet de créer une macro variadique. Cela signifie qu'il est possible de passer n'importe quel nombre d'arguments à //variadic_parameter//, qui peuvent être utilisés dans //macro_text//, tout comme un paramètre macro normal. Le //variadic_parameter// sera étendu à la liste complète des arguments passés, y compris les virgules et peut également être complètement vide.
 	
-	Using ##[[KeyPgDots ...]]## (an ellipsis) behind the last parameter of a macro allows to create a variadic macro. This means it is possible to pass any number of arguments to the //variadic_parameter//, which can be used in the //macro_text//, just like a normal macro parameter. The //variadic_parameter// will expand to the full list of arguments passed to it, including commas, and can also be completely empty.
-
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/prepro/define.bas"}}%%(freebasic)
 '' Definition and check
 #define DEBUGGING
 #ifdef DEBUGGING
-  ' ... statements
-#endif
+' ... statements
+  #endif
 
 '' Simple definition/text replacement
 #define FALSE 0
@@ -41,16 +41,16 @@ print hex( MyRGB(&hff, &h00, &hff) )
 
 '' #defines are visible only in the scope where they are defined
 scope
-	#define LOCALDEF 1
+#define LOCALDEF 1
 end scope
 
 #ifndef LOCALDEF
-#	print LOCALDEF is not defined
+#    print LOCALDEF is not defined
 #endif
 
 '' namespaces have no effect on the visibility of a define
 namespace foo
-#	define NSDEF
+#    define NSDEF
 end namespace
 
 #ifdef NSDEF
@@ -70,7 +70,7 @@ eprintf(!"Hello from printf: %i %s %i\n", 5, "test", 123)
 %%
 
 {{fbdoc item="diff"}}
-	- New to ""FreeBASIC""
+	- Nouveau pour ""FreeBASIC""
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgPpmacro #macro]]##

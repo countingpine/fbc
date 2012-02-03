@@ -1,5 +1,5 @@
 {{fbdoc item="title" value="FILEATTR"}}----
-Returns information about an open file number
+Retourne des informations sur un numéro de fichier ouvert
 
 {{fbdoc item="syntax"}}##
 	[[KeyPgDeclare declare]] [[KeyPgFunction function]] **""FileAttr""** ( [[KeyPgByval byval]] //filenum// [[KeyPgAs as]] [[KeyPgInteger integer]], [[KeyPgByval byval]] //returntype// [[KeyPgAs as]] [[KeyPgInteger integer]] = 1 ) [[KeyPgAs as]] [[KeyPgInteger integer]]
@@ -8,35 +8,35 @@ Returns information about an open file number
 	#include "file.bi"
 	//result// = **""FileAttr""**( //filenum//, [ //returntype// ] )
 ##
-//or//
+//ou//
 ##
 	#include "vbcompat.bi"
 	//result// = **""FileAttr""**( //filenum//, [ //returntype// ] )
 ##
 {{fbdoc item="param"}}
 	##//filenum//##
-		The file number of a file or device opened with ##[[KeyPgOpen Open]]##
+		Le numéro de fichier ou périphérique ouvert avec ##[[KeyPgOpen Open]]##
 	##//returntype//##
-		An ##[[KeyPgInteger integer]]## indicating the type of information to return.
+		Un nombre ##[[KeyPgInteger Integer (Entier)]]## indiquant le type d'information à renvoyer.
 
 {{fbdoc item="ret"}}
-	A value associated with the return type, otherwise 0 on error.
+	Une valeur associée au type de retour, sinon 0 en cas d'erreur.
 
 {{fbdoc item="desc"}}
-	Information about the file number is returned based on the supplied ##//returntype//##
-		{{table columns="3" cellpadding="1" cells="Value;Description;constant;1;File Mode;fbFileAttrMode;2;File Handle;fbFileAttrHandle;3;Encoding;fbFileAttrEncoding"}}
+	Information sur le numéro de fichier est retourné sur la base du ##//returntype//## fourni
+		{{table columns="3" cellpadding="1" cells="Valeur;Description;constante;1;File Mode;fbFileAttrMode;2;File Handle;fbFileAttrHandle;3;Encoding;fbFileAttrEncoding"}}
 
-	For File Mode, ##//returntype//## = 1 (##fbFileAttrMode##) the return value is the sum of one or more of the following values: 
-		{{table columns="3" cellpadding="1" cells="Value;File Mode;Constant;1;Input;fbFileModeInput;2;Output;fbFileModeOutput;4;Random;fbFileModeRandom;8;Append;fbFileModeAppend;32;Binary;fbFileModeBinary"}}
+	Pour "File Mode", ##//returntype//## = 1 (##fbFileAttrMode##) la valeur retournée est la somme d'une ou plusieurs des valeurs suivantes: 
+		{{table columns="3" cellpadding="1" cells="Valeur;Mode fichier;Constante;1;Input;fbFileModeInput;2;Output;fbFileModeOutput;4;Random;fbFileModeRandom;8;Append;fbFileModeAppend;32;Binary;fbFileModeBinary"}}
 
-	For File Handle, ##//returntype//## = 2 (##fbFileAttrHandle##), the return value is the file handle as supplied by the C Runtime for file-type devices.  
+	Pour "File Handle", ##//returntype//## = 2 (##fbFileAttrHandle##), la valeur de retour est le descripteur de fichier fourni par le "C Runtime" pour les dispositifs de type de fichier.  
 
-	On Windows only: For File Handle, ##//returntype//## = 2 (##fbFileAttrHandle##), the value returned for COM devices is the handle returned by ##""CreateFile""()## when the device was first opened.  The value returned for LPT devices is the handle returned by ##""OpenPrinter""()## when the device was first opened.  This handle value can be passed to other Windows API functions.
+	Sous Windows seulement: Pour "File Handle", ##//returntype//## = 2 (##fbFileAttrHandle##), la valeur retournée pour les périphériques COM est le "handle" retourné par ##""CreateFile""()## quand le périphérique a été ouvert.  La valeur retournée pour les périphériques LPT est le "handle" retourné par ##""OpenPrinter""()## quand le périphérique a été ouvert.  Cette valeur "handle" peut être transmise à d'autres fonctions API de Windows.
 
-	On Linux only: For File Handle, ##//returntype//## = 2 (##fbFileAttrHandle##), the value returned for COM devices is the file descriptor returned by open() when the device was first opened.
+	Sous Linux seulement: Pour "File Handle", ##//returntype//## = 2 (##fbFileAttrHandle##), la valeur retournée pour les périphériques COM est le descripteur de fichier retourné par open() quand le périphérique a été ouvert.
 
-	For Encoding, ##//returntype//## = 3 (##fbFileAttrEncoding##), the return value is one of the following values:
-		{{table columns="3" cellpadding="1" cells="Value;Encoding;Constant;0;Ascii;fbFileEncodASCII;1;UTF-8;fbFileEncodUTF8;2;UTF-16;fbFileEncodUTF16;3;UTF-32;fbFileEncodUTF32"}}
+	Pour Encoding, ##//returntype//## = 3 (##fbFileAttrEncoding##), la valeur de retour est l'une des valeurs suivantes:
+		{{table columns="3" cellpadding="1" cells="Valeur;Encoding;Constante;0;Ascii;fbFileEncodASCII;1;UTF-8;fbFileEncodUTF8;2;UTF-16;fbFileEncodUTF16;3;UTF-32;fbFileEncodUTF32"}}
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/system/fileattr.bas"}}%%(freebasic)
@@ -66,9 +66,9 @@ close #1
 %%
 
 {{fbdoc item="diff"}}
-	- None for ##//returntype//## = 1
-	- QBasic and 16-bit Visual Basic returned DOS file handle for ##//returntype//## = 2
-	- ##//returntype//## = 3 is new to ""FreeBASIC""
+	- Aucune pour ##//returntype//## = 1
+	- ""QBasic"" et Visual Basic 16-bit retourne le "handle" fichier DOS pour ##//returntype//## = 2
+	- ##//returntype//## = 3 nouveau pour ""FreeBASIC""
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgOpen Open]]##

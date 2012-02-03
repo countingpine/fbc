@@ -1,5 +1,5 @@
 {{fbdoc item="title" value="MUTEXCREATE"}}----
-Creates a mutex used for synchronizing the execution of threads
+Crée un "mutex" utilisé pour synchroniser l'exécution des "threads"
 
 {{fbdoc item="syntax"}}##
 	[[KeyPgDeclare declare]] [[KeyPgFunction function]] **Mutexcreate** ( ) [[KeyPgAs as]] [[KeyPgAny any]] [[KeyPgPtr ptr]]
@@ -8,17 +8,17 @@ Creates a mutex used for synchronizing the execution of threads
 	//result// = **Mutexcreate**
 ##
 {{fbdoc item="ret"}}
-	The ##[[KeyPgAny any]] [[KeyPgPtr ptr]]## handle of the mutex created, or the null pointer (0) on failure.
+	Le ##[[KeyPgAny any]] [[KeyPgPtr ptr]]## "handle" du "mutex" créé, ou le pointeur nul (0) en cas d'échec.
 
 {{fbdoc item="desc"}}
-	Mutexes, short for "Mutually Exclusive", are a way of synchronizing shared data within threads.  If there is a global variable used by multiple threads (or a local variable used by a single thread, called multiple times), it should be "locked" during its use with a mutex.  This halts all threads using ##[[KeyPgMutexLock Mutexlock]]## with that mutex, until it is unlocked with ##[[KeyPgMutexUnlock Mutexunlock]]##.
+	Les "Mutex", abréviation de "Mutually Exclusive" (Mutuellement exclusive), sont un moyen de synchroniser les données partagées dans les "threads".  S'il y a une variable globale utilisée par plusieurs "threads" (ou une variable locale utilisée par un "thread" unique, appelée plusieurs fois), elle devrait être "verrouillée" lors de son utilisation avec un "mutex".  Ceci arrête tous les "threads" en utilisant ##[[KeyPgMutexLock Mutexlock]]## avec ce "mutex", jusqu'à ce qu'il soit déverrouillé avec ##[[KeyPgMutexUnlock Mutexunlock]]##.
 
-	##Mutexcreate## creates a mutex, returning a handle which is to be referred to when locking, unlocking, or destroying the mutex.  Mutexes created with ##Mutexcreate## should be destroyed when no longer needed or before the end of the program with ##[[KeyPgMutexDestroy Mutexdestroy]]##.
+	##Mutexcreate## crée un "mutex", et retourne un "handle" qui sert de référence lors du verrouillage, du déverrouillage ou de la destruction du "mutex".  Les "mutex" créés avec ##Mutexcreate## doivent être détruits lorsqu'ils ne sont plus nécessaires ou avant la fin du programme avec ##[[KeyPgMutexDestroy Mutexdestroy]]##.
 	
-	A  mutex is a lock that guarantees three things:
-	1. Atomicity - Locking a mutex is an atomic operation, meaning that the operating system (or threads library) assures you that if you locked a mutex, no other thread succeeded in locking this mutex at the same time.
-	2. Singularity - If a thread managed to lock a mutex, it is assured that no other thread will be able to lock the thread until the original thread releases the lock.
-	3. Non-Busy Wait - If a thread attempts to lock a thread that was locked by a second thread, the first thread will be suspended (and will not consume any CPU resources) until the lock is freed by the second thread. At this time, the first thread will wake up and continue execution, having the mutex locked by it. 
+	Un "mutex" est un verrou qui garantit trois choses:
+	1. Atomicité - Le verrouillage d'un "mutex" est une opération atomique, ce qui signifie que le système d'exploitation (ou la bibliothèque "threads") vous assure que si vous avez verrouillé un "mutex", aucun autre "thread" réussira à verrouiller ce "mutex" en même temps.
+	2. Singularité - Si un "thread" a réussi à verrouiller un "mutex", il est assuré qu'aucun autre "thread" ne sera en mesure de bloquer le "thread" jusqu'à ce que le "thread" d'origine ne libère le verrou.
+	3. Attente non-occupée - Si un "thread" tente de verrouiller un "thread" qui a été verrouillé par un second "thread", le premier "thread" sera suspendu (et ne consommera aucune ressource CPU) jusqu'à ce que le verrou soit libéré par le second "thread". A ce moment-là, le premier "thread" va se réveiller et poursuivre l'exécution, après avoir lui-même verrouillé le "mutex".
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/threads/mutexcreate.bas"}}%%(freebasic)
@@ -90,14 +90,14 @@ END SUB
 %%
 
 {{fbdoc item="lang"}}
-	- Threading is not allowed in the //[[CompilerOptlang -lang qb]]// dialect.
+	- Les "Thread" n'existent pas dans le dialecte //[[CompilerOptlang -lang qb]]//.
 
 {{fbdoc item="target"}}
-	- The DOS version of FreeBASIC does not allow for threads, as the OS does not support them.
-	- In Linux the threads are always started in the order they are created, this can't be assumed in Win32. It's an OS, not a FreeBASIC issue. 
+	- La version DOS de ""FreeBASIC"" ne permet pas les "threads", car l'OS ne les supporte pas.
+	- Dans Linux les "threads" sont toujours démarrés dans l'ordre de leur création, ceci n'est pas possible sous ""Win32"". Il s'agit de l'OS, pas une question ""FreeBASIC"".
 
 {{fbdoc item="diff"}}
-	- New to ""FreeBASIC""
+	- Nouveau pour ""FreeBASIC""
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgMutexDestroy Mutexdestroy]]##

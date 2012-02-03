@@ -1,11 +1,11 @@
 {{fbdoc item="title" value="IF...THEN"}}----
-Control flow statement for conditional branching
+Déclaration de contrôle de flux pour le branchement conditionnel
 
 {{fbdoc item="syntax"}}##
 	**If** //expression// **Then** [//statement(s)//] [**Else** [//statement(s)//]] [**End If**]
-//or//
+//ou//
 	**If** //expression// **Then** : [//statement(s)//] [**Else** [//statement(s)//]] : **End If**
-//or//
+//ou//
 	**If** //expression// **Then**
 		[//statement(s)//]
 	[ **Elseif** //expression// **Then** ]
@@ -15,21 +15,21 @@ Control flow statement for conditional branching
 	**End If**
 ##
 {{fbdoc item="desc"}}
-	##**If...Then**## is a way to make decisions. It is a mechanism to execute code only if a condition is true, and can provide alternative code to execute based on more conditions.
+	##**If...Then**## est une méthode pour prendre des décisions. C'est un mécanisme qui permet d'exécuter du code que si une condition est vraie, et peut fournir une alternative de programmation de code à exécuter sur la base de plusieurs conditions.
 	
-	##//expression//## can be one of several forms:
-		- a conditional expression, for example:
+	##//expression//## peut avoir une ces formes:
+		- une expression conditionnelle, par exemple:
 			##x = 5##
-		- multiple conditions separated by logical bit-wise operators, for example:
+		- conditions multiples séparées par des opérateurs logiques bit à bit, par exemple:
 			##x >= 5 [[KeyPgOpAnd And]] x <= 10##
-		- multiple conditions separated by logical short-circuit operators, for example:
+		- conditions multiples séparées par des opérateurs de court-circuit logique, par exemple:
 			##y <> 0 [[KeyPgOpAndAlso AndAlso]] x \ y = 1##
-			(in this case, "##x \ y = 1##" will only be evaluated if "##y <> 0##" is True)
-		- any numerical expression, in which case a value of zero (##0##) represents False, and a non-zero value represents True
+			(dans ce cas, "##x \ y = 1##" sera évalué seulement si "##y <> 0##" est Vrai (True))
+		- toute expression numérique, dans ce cas une valeur de zéro (##0##) représente False (Faux) et une valeur non-nulle représente True (Vrai)
 
-	Both multi-line and single-line ##**If**##s can be nested.  In the latter case, the optional ##**End If**##s can be useful to control where nested ##**If**##s begin and end.
+	Les ##**If**## multi/simple ligne peuvent être imbriqués.  Dans ce dernier cas, les ##**End If**## facultatifs peuvent être utiles pour contrôler où les ##**If**## imbriqués commencent et finissent.
 
-	In the //[[CompilerOptlang -lang fb]]// and //[[CompilerOptlang -lang fblite]]// dialects, colons (##:##) can be used instead of newlines to construct multi-line ##**If**## blocks on a single line.
+	Dans les dialectes //[[CompilerOptlang -lang fb]]// et //[[CompilerOptlang -lang fblite]]//, deux-points (##:##) peuvent remplacer des lignes nouvelles pour construire des blocs ##**If**## multi-lignes sur une seule ligne.
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/control/if-then.bas"}}%%(freebasic)
@@ -61,11 +61,11 @@ loop 'Go back to the start of the loop
 %%
 
 {{fbdoc item="lang"}}
-	In the //[[CompilerOptlang -lang fb]]// and //[[CompilerOptlang -lang fblite]]// dialects, if there is a new line, a single-line comment (##'##), a colon (##:##), or a ##[[KeyPgRem Rem]]## statement directly after THEN, then the IF will be multi-line.  Any other statement will result in a single-line IF.
-	In the //[[CompilerOptlang -lang qb]]// dialect, if there is a new line or a single-line comment (##'##) directly after THEN, then the IF will be multi-line.  A colon, a ##[[KeyPgRem Rem]]## or any other statement will result in a single-line IF.
+	Dans les dialectes //[[CompilerOptlang -lang fb]]// et //[[CompilerOptlang -lang fblite]]//, s'il y a une nouvelle ligne, un commentaire sur une seule ligne (##'##), deux-points (##:##), ou une déclaration ##[[KeyPgRem Rem]]## directement après THEN, le IF sera multi-ligne.  Toute autre déclaration donnera lieu à une seule ligne IF.
+	Dans le dialecte //[[CompilerOptlang -lang qb]]//, s'il y a une nouvelle ligne ou un commentaire sur une seule ligne (##'##) directement après THEN, le IF sera multi-lignes.  Deux-points (##:##), un ##[[KeyPgRem Rem]]## ou toute autre déclaration donnera lieu à une seule ligne IF.
 
 {{fbdoc item="diff"}}
-	- END IF was not supported in single-line IFs in QBASIC.
+	- END IF n'était pas supporté dans les IF sur une seule ligne dans QBASIC.
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgDoloop Do...Loop]]##

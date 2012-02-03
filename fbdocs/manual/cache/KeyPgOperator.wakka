@@ -1,5 +1,5 @@
 {{fbdoc item="title" value="OPERATOR"}}----
-Declares or defines an overloaded operator.
+Déclare ou définit un opérateur surchargé.
 
 {{fbdoc item="syntax"}}##
 	{ [[KeyPgType Type]] | [[KeyPgClass Class]] | [[KeyPgUnion Union]] | [[KeyPgEnum Enum]] } //typename//
@@ -34,7 +34,7 @@ Declares or defines an overloaded operator.
 ##
 {{fbdoc item="param"}}
 	##//typename//## 
-		Name of the ##[[KeyPgType Type]]##, ##[[KeyPgClass Class]]##, ##[[KeyPgUnion Union]]##, or ##[[KeyPgEnum Enum]]##.
+		Nom de ##[[KeyPgType Type]]##, ##[[KeyPgClass Class]]##, ##[[KeyPgUnion Union]]## ou ##[[KeyPgEnum Enum]]##.
 	##//assignment_op//## 
 		##let += -= *= /= \= mod= shl= shr= and= or= xor= imp= eqv= ^=##
 	##//unary_op//##
@@ -43,21 +43,21 @@ Declares or defines an overloaded operator.
 		##+ - * / \ mod shl shr and or xor imp eqv ^ = <> < > <= >= andalso orelse##
 
 {{fbdoc item="desc"}}
-	The built in operators like ##=##, ##+##, and ##cast## have predefined behaviors when used in expressions.  These operators can be overloaded to do something other than predefined operations when at least one of the arguments to the operator is a ##[[KeyPgType Type]]##, ##[[KeyPgClass Class]]##, ##[[KeyPgEnum Enum]]##, or ##[[KeyPgUnion Union]]## data type.
+	Les opérateurs intégrés comme ##=##, ##+## et ##cast## ont des comportements prédéfinis lorsqu'ils sont utilisés dans des expressions.  Ces opérateurs peuvent être surchargés pour faire autre chose que ces opérations prédéfinies lorsqu'au moins l'un des arguments de l'opérateur est un type de données ##[[KeyPgType Type]]##, ##[[KeyPgClass Class]]##, ##[[KeyPgEnum Enum]]## ou ##[[KeyPgUnion Union]]##.
 
-	Operators are just functions.  The operator '+' has functionality like ##Function Plus( A as DataType, B as DataType ) as DataType##.  See //[[ProPgOperatorOverloading Operator Overloading]]// for more information.  Operators can be overloaded to accept different data types as parameters.  Only the ##[[KeyPgCast Cast]]## Operator can be overloaded to return different types.
+	Les opérateurs sont juste des fonctions.  L'opérateur '+' a les fonctionnalités de la fonction ##Function Plus( A as DataType, B as DataType ) as DataType##.  Voir //[[ProPgOperatorOverloading Surcharge d'opérateur]]// pour plus d'informations.  Les opérateurs peuvent être surchargés  pour accepter différents types de données en tant que paramètres.  Seul l'opérateur ##[[KeyPgCast Cast]]## peut être surchargé pour retourner différents types.
 
-	Non-static operator members are declared inside the ##[[KeyPgType Type]]## or ##[[KeyPgClass Class]]##.  Global operators are declared outside.  All operator definitions (procedure bodies) must appear outside.
+	Les membres opérateur non-statiques sont déclarés à l'intérieur de ##[[KeyPgType Type]]## ou ##[[KeyPgClass Class]]##.  Les opérateurs globaux sont déclarés en dehors.  Toutes les définitions de l'opérateur (corps de procédure) doivent apparaître en dehors.
 
-	##**Let**##, ##**Cast**##, and other assignment operators must be declared inside the ##[[KeyPgType Type]]## or ##[[KeyPgClass Class]]##.  They are passed a hidden ##[[KeyPgThis this]]## parameter and have a return data type same as the ##[[KeyPgType Type]]## or ##[[KeyPgClass Class]]## they are declared in.
+	##**Let**##, ##**Cast**## et autres opérateurs d'affectation doivent être déclarés à l'intérieur de ##[[KeyPgType Type]]## ou ##[[KeyPgClass Class]]##.  Ils transmettent un paramètre caché ##[[KeyPgThis this]]## et ont une valeur de retour du même type de données que le ##[[KeyPgType Type]]## ou la ##[[KeyPgClass Class]]## où ils ont été déclarés.
 
-	Unary operators must be declared outside the ##[[KeyPgType Type]]##, ##[[KeyPgClass Class]]##, or ##[[KeyPgEnum Enum]]## and have a return data type explicitly declared.  Unary operators can be overloaded to return any valid data type, except for ##[[KeyPgOpPtrMemberAccess Operator -> (Pointer to member access)]]## which must return a ##[[KeyPgType Type]]## or ##[[KeyPgClass Class]]## data type.
+	Les opérateurs unaires doit être déclarés en dehors de ##[[KeyPgType Type]]##, ##[[KeyPgClass Class]]## ou ##[[KeyPgEnum Enum]]## et ont un type de données de retour déclaré explicitement.  Les opérateurs unaires peuvent être surchargés pour retourner tout type valide de données, sauf pour ##[[KeyPgOpPtrMemberAccess Operator -> (Pointeur vers Accès membre)]]## qui doit retourner un type de données ##[[KeyPgType Type]]## ou ##[[KeyPgClass Class]]##.
 
-	Binary operators must be declared outside the ##[[KeyPgType Type]]##, ##[[KeyPgClass Class]]##, or ##[[KeyPgEnum Enum]]## and have a return data type explicitly declared.  Binary operators can be overloaded with valid data types, except for relational operators, which must return ##[[KeyPgInteger Integer]]##.
+	Les opérateurs binaires doivent être déclarés en dehors de ##[[KeyPgType Type]]##, ##[[KeyPgClass Class]]## ou ##[[KeyPgEnum Enum]]## et ont un type de données de retour explicitement déclaré.  Les opérateurs binaires peuvent être surchargés avec des types valides de données, sauf pour les opérateurs relationnels, qui doivent retourner ##[[KeyPgInteger Integer]]##.
 
-	##[[KeyPgLet Let]]## refers to the assignment operator, as in ##LET a=b##. The ##[[KeyPgLet Let]]## keyword is omitted in common practice, and is not allowed in the //[[CompilerOptlang -lang fb]]// dialect.  However, ##[[KeyPgOpLetlist Let()]]## can be used to assign the fields of a UDT to multiple variables.
+	##[[KeyPgLet Let]]## se réfère à l'opérateur d'affectation, comme dans ##LET a=b##. Le mot-clé ##[[KeyPgLet Let]]## est omis dans la pratique courante et n'est pas autorisé en dialecte //[[CompilerOptlang -lang fb]]//.  Toutefois, ##[[KeyPgOpLetlist Let()]]## peut être utilisé pour affecter des champs d'un type de données utilisateur à des variables multiples.
 
-	See ##[[KeyPgOpFor For]]##, ##[[KeyPgOpStep Step]]##, and ##[[KeyPgOpNext Next]]## for more information on overloading the ##[[KeyPgFornext For..Next]]## statement for use with user defined types.
+	Voir ##[[KeyPgOpFor For]]##, ##[[KeyPgOpStep Step]]## et ##[[KeyPgOpNext Next]]## pour plus d'informations sur la surcharge de la déclaration ##[[KeyPgFornext For..Next]]## pour une utilisation avec des types définis par l'utilisateur.
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/udt/operator.bas"}}%%(freebasic)
@@ -87,7 +87,7 @@ Print "b = "; b
 Print "a + b = "; a + b
 %%
 {{fbdoc item="lang"}}
-	- Only available in the //[[CompilerOptlang -lang fb]]// dialect.
+	- Disponible seulement dans le dialecte //[[CompilerOptlang -lang fb]]//.
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgClass Class]]##

@@ -1,37 +1,37 @@
 {{fbdoc item="title" value="Coercion and Conversion"}}----
-Coercion of Numeric Data Types in Expressions.
+Promotion de types de données numériques dans des expressions.
 
-When two different data types are used in a binary operation, like ##//+//## (Addition) or ##//=//## (Assignment), the smaller data type is automatically promoted to the larger data type regardless of the order in which the arguments are given.  
+Lorsque deux types de données différents sont utilisés dans une opération binaire, comme ##//+//## (Addition) ou ##//=//## (Affectation), le type de données le plus faible est automatiquement promu vers le type de données le plus fort quel que soit l'ordre dans lequel arguments sont donnés.  
 
-Promotions are as follows:
-	- where both arguments are each one of byte, ubyte, short, ushort, or integer: the smaller sized argument is promoted to have the same size as the larger sized argument.
-	- where one of the arguments is longint or ulongint, and the other argument is of any integer type, the smaller sized argument is promoted to have the same size as the larger sized argument.
-	- where one of the arguments is a single or a double, both arguments are converted and/or promoted to double
+Les promotions sont comme suit:
+	- si les deux arguments sont de type byte, ubyte, short, ushort ou integer: plus petit argument (en type de taille) est promu pour avoir la même taille (en type de taille) que le plus grand argument (en type de taille).
+	- si un des arguments est de type longint ou ulongint, et l'autre argument est d'un type entier (integer), plus petit argument (en type de taille) est promu pour avoir la même taille (en type de taille) que le plus grand argument (en type de taille).
+	- si un des arguments est de type single ou double, les deux arguments sont convertis et/ou promus vers double
 
-All unsigned integer types are handling like signed integer types for the purpose of promotion, and the most significant bit is extended (sign extension).
+Tous les types entiers non signés sont manipulés comme des types entiers signés aux fins de promotion et bit le plus significatif est étendu (extension de signe).
 
-==Conversion of Numeric Data Types==
+==Conversion de types de données numériques==
 
-A type conversion will occur implicitly when an expression or variable is assigned, passed as a parameter to a procedure, or returned as a result from a procedure. Conversions may also be explicit when using CAST or one of the built-in conversion functions.
+Une conversion de type se produit implicitement lorsqu'une expression ou une variable est affectée, passée comme paramètre d'une procédure ou returnée comme résultat d'une procédure. Les conversions peuvent aussi être explicites lorsque vous utilisez CAST ou l'une des fonctions intégrées de conversion.
 
-__Integer To Integer, any combination of Signed and Unsigned__
-	- Any integer type to a smaller integer type: least significant bits are retained
-	- Any integer type to a larger integer type: sign extended to fill most significant bits
+__Integer (entier) vers Integer (entier), n'importe quelle combinaison de nombres signés et non-signés__
+	- Tout type d'entier vers un type d'entier plus faible: les bits les moins significatifs sont conservés
+	- Tout type d'entier vers un type d'entier plus fort: extension de signe pour remplir bits les plus significatifs
 
-__Integer to Single or Double__
-	- Possible loss of precision
+__Integer vers Single ou Double__
+	- Perte possible de précision
 
-__Double to Single__
-	- Possible loss of precision
-	- If the value of the Double exceeds the range of a Single result is +/- INF
+__Double vers Single__
+	- Perte possible de précision
+	- Si la valeur du Double dépasse le champ d'un Single le résultat est +/- INF
 
-__Double or Single to Integer__
-	- Possible loss of precision
-	- If the value of the floating point number exceeds the range of the target type are results are undefined.  A run-time error is not raised.
+__Double ou Single vers Integer__
+	- Perte possible de précision
+	- Si la valeur du nombre à virgule flottante dépasse la plage du type de la cible les résultats sont indéfinis. Pas d'erreur d'exécution d'affichée.
 
 {{fbdoc item="see"}}
-	- [[CatPgStdDataTypes Standard Data Types]]
-	- [[TblVarTypes Variable Types]]
-	- [[CatPgCasting Casting and Conversion Functions]]
+	- [[CatPgStdDataTypes Types de données standard]]
+	- [[TblVarTypes Types de variables]]
+	- [[CatPgCasting Conversion entre types de données]]
 
 {{fbdoc item="back" value="CatPgProgrammer|Programmer's Guide"}}

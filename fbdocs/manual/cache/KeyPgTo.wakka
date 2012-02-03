@@ -1,5 +1,5 @@
 {{fbdoc item="title" value="TO"}}----
-Statement modifier to specify a range.
+Déclaration de modification de déclaration d'une plage.
 
 {{fbdoc item="syntax"}}##
 	FOR //iterator// //intial_value// TO //ending_value//
@@ -14,27 +14,27 @@ Statement modifier to specify a range.
 	DIM //variable_identifier//( //lower_bound// TO //upper_bound// ) AS //type_specifier//
 ##
 {{fbdoc item="desc"}}
-	The TO keyword is used to define a certain numerical range. This keyword is valid only if used with [[KeyPgFornext FOR ... NEXT]], [[KeyPgSelectcase SELECT / CASE]] and [[KeyPgDim DIM]] statements.
+	Le mot-clef TO est utilisé pour définir une certaine plage numérique. Il est valide seulement s'il est utilisé avec [[KeyPgFornext FOR ... NEXT]], [[KeyPgSelectcase SELECT / CASE]] et [[KeyPgDim DIM]].
 
-	In the first syntax, the TO keyword defines the initial and ending values of the iterator in a FOR statement.
+	Dans la première syntaxe, le mot-clef TO définit les valeurs initiales et finales de l'itérateur dans une déclaration FOR.
 
-	In the second syntax, the TO keyword defines lower and upper bounds for CASE comparisons.
+	Dans la deuxième syntaxe, le mot-clef TO définit les bornes inférieures et supérieures de comparaisons CASE.
 
-	In the third syntax, the TO keyword defines the array bounds in a DIM statement
+	Dans la troisième syntaxe, le mot-clef TO définit les bornes inférieures et supérieures d'une déclaration DIM
 
-	For more information, see [[KeyPgFornext FOR...NEXT]], [[KeyPgDim DIM]] and [[KeyPgSelectcase SELECT CASE]].
+	Pour plus d'informations, voir [[KeyPgFornext FOR...NEXT]], [[KeyPgDim DIM]] et [[KeyPgSelectcase SELECT CASE]].
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/misc/to.bas"}}%%(freebasic)
-'' this program uses bound variables along with the TO keyword to create an array, store random
-'' temperatures inside the array, and to determine output based upon the value of the temperatures
+'' ce programme utilise variables bornes avec le mot-clef TO pour creer un tableau, stocke temperatures aleatoires
+'' dans le tableau, et determine sortie basee sur la valeur des temperatures
 Randomize Timer
 
-'' define minimum and maximum number of temperatures we will create
+'' definit nombre minimum et maximum de temperatures a creer
 Const minimum_temp_count As Integer = 1
 Const maximum_temp_count As Integer = 10
 
-'' define the range of temperatures zones in which bacteria breed rapidly (in degrees)
+'' definit plage des zones temperatures dans lesquelles bacteries se reproduisent rapidement (en degres)
 Const min_low_danger As Integer = 40
 Const max_low_danger As Integer = 69
 Const min_medium_danger As Integer = 70
@@ -42,16 +42,16 @@ Const max_medium_danger As Integer = 99
 Const min_high_danger As Integer = 100
 Const max_high_danger As Integer = 130
 
-'' define array to hold temperatures using our min/max temp count bounds
+'' definit tableau pour stocker temperatures en utilisant notre min/max compteur
 Dim As Integer array( minimum_temp_count To maximum_temp_count )
 
-'' declare a for loop that iterates from minimum to maximum temp count
+'' declare une boucle FOR de mimni a maxi
 Dim As Integer it
 For it = minimum_temp_count To maximum_temp_count
 
    array( it ) = Int( Rnd( 1 ) * 200 ) + 1
 
-   '' display a message based on temperature using our min/max danger zone bounds
+   '' affiche un message base sur temperatures utilisant min max
    Select Case array( it )
 	  Case min_low_danger To max_low_danger
 	     Color 11
@@ -73,7 +73,7 @@ Sleep
 %%
 
 {{fbdoc item="diff"}}
-	- none
+	- Aucune
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgFornext For...Next]]##

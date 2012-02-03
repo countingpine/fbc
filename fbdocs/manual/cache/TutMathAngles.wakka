@@ -1,23 +1,23 @@
 {{fbdoc item="title" value="Different ways angles are measured"}}----
-//Written by RandyKeeling//
+//Ecrit par RandyKeeling//
 
-This very simple tutorial assumes that you know what an angle is.
+Ce tutoriel très simple suppose que vous savez ce qu'est un angle.
 
-There are three commonly used ways to measure the size of an angle:
+Il ya trois façons couramment utilisés pour mesurer la taille d'un angle:
 
-	- Degrees (deg)
+	- Degrées (deg)
 	- Radians (rad)
-	- Gradients (grad)
+	- Grades (grad)
 
-**Degrees**
+**Degrés**
 
-Most people are familiar with angles measured in degrees. A full circle measures 360?. Parts of a degree are often measured two different ways, degrees decimal and DMS (degree, minute, second).
+La plupart des gens sont familiarisés avec les angles mesurés en degrés. Un cercle complet mesure 360§. Les divisions d'un dégré sont souvent mesurées de deux façons différentes, en degrés décimaux et DMS (degrés, minutes, secondes).
  
-We can always show a degree as we would any decimal number by showing its whole units followed by its fractional portion. For example, 75.23? means that we have 75 degrees and twenty-three hundredths of a degree.
+Nous pouvons toujours présenter un degré par un nombre décimal en montrant toutes ses unités suivies par sa partie fractionnaire. Par exemple, 75,23§ signifie que nous avons 75 degrés et vingt-trois centièmes de degré.
 
-In the DMS system, each degree is made up of 60 minutes (or arcminutes) and is marked with a ` . Each minute is made up of 60 seconds (or arcseconds) and is marked with a `` . So a degree measure might look like this 36? 14` 52``. This is read as 36 degrees, 14 minutes, 52 seconds. 
+Dans le système DMS, chaque degré se compose de 60 minutes (ou minutes d'arc) et est marqué par un '. Chaque minute est composée de 60 secondes (ou secondes d'arc) et est marqué par un ''. Ainsi, une mesure en degrés pourrait ressembler à ceci 36§ 14' 52''. Ce qui se lit 36 degrés, 14 minutes, 52 secondes. 
 
-To convert DMS to decimal degrees you can use the following code.
+Pour convertir les DMS en degrés décimaux vous pouvez utiliser le code suivant.
 
 ##%%(freebasic)
 DIM D AS INTEGER
@@ -26,20 +26,20 @@ DIM S AS INTEGER
 DIM DD AS SINGLE
 
 '' Convert to degree decimal
-DD = D + M / 60 + S / 3600	'' 3600 comes from 1/60 * 1/60
+DD = D + M / 60 + S / 3600    '' 3600 comes from 1/60 * 1/60
 %%##
 
 **Radians**
 
-Radians are more common in computer programming and mathematics. To understand radians, you must understand the constant Pi (often given the symbol of the lowercase Greek letter pi). Pi is an irrational and transcendental number (its decimal notation never ends) and is the circumference of any circle divided by that circle's diameter. An approximate value (to 20 decimal places) is Pi = 3.1415926535897932385. The value of Pi can also be found using this code.
+Les Radians sont plus communs dans la programmation informatique et en mathématiques. Pour comprendre les radians, vous devez comprendre la constante Pi (souvent représentée le symbole de la lettre grecque pi minuscule). Pi est un nombre irrationnel et transcendant (sa notation décimale ne se termine jamais) et correspond à la circonférence d'un cercle divisée par le diamètre de ce cercle. Une valeur approximative (à 20 décimales) est Pi = 3,1415926535897932385. La valeur de Pi peut également être déterminée en utilisant ce code.
 
 ##%%(freebasic)
 Pi = 4 * ATN ( 1 )
 %%##
 
-With the radian system, a full circle has 2*Pi (6.2831853071795864770) radians. Unlike degrees, radians are ****not**** marked with any form of a symbol. FreeBASIC, like most programming languages, accepts angle measurements in radians and ****not**** degrees.
+Avec le système en radians, un cercle complet a 2 * Pi (6,2831853071795864770) radians. Contrairement aux degrés, les radians **//ne sont pas//** indiqués par une forme de symbole. FreeBASIC, comme la plupart des langages de programmation, accepte des mesures d'angle en radians et **//non//** en degrés.
 
-To convert between radians and degrees (decimal) you can use the following code.
+Pour une conversion entre radians et degrés (décimal), vous pouvez utiliser le code suivant.
 
 ##%%(freebasic)
 CONST PI AS DOUBLE = 3.1415926535897932
@@ -47,20 +47,20 @@ CONST PI AS DOUBLE = 3.1415926535897932
 DIM D AS DOUBLE
 DIM R AS DOUBLE
 
-R = D * PI / 180	'' A full circle has 360 degrees, and a full circle has 2*PI Radians
+R = D * PI / 180    '' A full circle has 360 degrees, and a full circle has 2*PI Radians
 D = R * 180 / PI
 %%##
 
-The value of PI is used so often, it is not uncommon to find it defined in libraries and commonly used routines. The following are useful constants.
+La valeur de PI est très souvent utilisée, donc il n'est pas rare de la trouver définie dans les bibliothèques et les routines couramment utilisées. Les éléments suivants sont des constantes utiles.
 
 ##%%(freebasic)
 CONST PI AS DOUBLE = 3.1415926535897932
 CONST TWO_PI AS DOUBLE = 6.283185307179586
 CONST HALF_PI AS DOUBLE = 1.570796326794896
-CONST DegToRAD AS DOUBLE = 0.01745329251994330	'' PI/180
-CONST RADToDeg AS DOUBLE = 57.29577951308233	  '' 180/PI
+Const DegToRAD As Double = 0.01745329251994330    '' PI/180
+Const RADToDeg As Double = 57.29577951308233      '' 180/PI
 %%##
 
-**Gradients**
+**Grades**
 
-Gradients are used mainly in some forms of engineering. Within the gradient system a circle has 400 grads.
+Les Grades sont principalement utilisés dans certaines formes d'ingénierie. Dans ce système un cercle correspond à 400 grades.

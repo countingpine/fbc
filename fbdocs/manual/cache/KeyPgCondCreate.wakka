@@ -1,5 +1,5 @@
 {{fbdoc item="title" value="CONDCREATE"}}----
-Creates a conditional variable to be used in synchronizing threads
+Crée une variable conditionnelle pour l'utiliser dans la synchronisation des "threads"
 
 {{fbdoc item="syntax"}}##
 	[[KeyPgDeclare declare]] [[KeyPgFunction function]] **Condcreate** ( ) [[KeyPgAs as]] [[KeyPgAny any]] [[KeyPgPtr ptr]]
@@ -8,10 +8,10 @@ Creates a conditional variable to be used in synchronizing threads
 	//result// = **Condcreate**
 ##
 {{fbdoc item="ret"}}
-	A handle to a newly created conditional variable, or the null pointer (0) on failure.
+	Un "handle" vers une nouvelle variable conditionnelle, ou le pointeur nul (0) en cas d'échec.
 
 {{fbdoc item="desc"}}
-	Once the conditional is ##**KeyPgCondCreate Condcreate**##d and the threads are started, one or more of them can be set to ##[[KeyPgCondWait Condwait]]## for the conditional, they will be stopped until some other thread ##[[KeyPgCondSignal Condsignal]]##s that the waiting thread can restart. ##[[KeyPgCondBroadcast Condbroadcast]]## can be used to restart all threads waiting for the conditional. At the end of the program ##[[KeyPgCondDestroy Conddestroy]]## must be used to avoid leaking resources in the OS.
+	Une fois que le conditionnel est ##[[KeyPgCondCreate CondCreate]]## et les "threads" démarrés, l'un (ou plusieurs) d'entre eux peut être fixé à ##[[KeyPgCondWait Condwait]]## pour le conditionnel, ils seront arrêtés jusqu'à un autre "thread" ##[[KeyPgCondSignal Condsignal]]## que le "thread" en attente puisse redémarrer. ##[[KeyPgCondBroadcast Condbroadcast]]## peut être utilisé pour redémarrer tous les "threads" qui attendent le conditionnel. A la fin du programme ##[[KeyPgCondDestroy Conddestroy]]## doit être utilisé pour éviter les fuites de ressources dans le système d'exploitation.
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/threads/condcreate.bas"}}%%(freebasic)
@@ -102,13 +102,13 @@ conddestroy hcondstart
 %%
 
 {{fbdoc item="target"}}
-	- **Condcreate** is not available with the DOS version / target of FreeBASIC, because multithreading is not supported by DOS kernel nor the used extender.
+	- **Condcreate** n'est pas utilisable avec la version/cible DOStarget de FreeBASIC, parce que le "multithreading" n'est pas supporté par le noyau DOS, ni l'extension utilisée.
 
 {{fbdoc item="lang"}}
-	- Threading is not allowed in //[[CompilerOptlang -lang qb]]//
+	- "Threading" n'est pas utilisable dans le dialecte //[[CompilerOptlang -lang qb]]//
 
 {{fbdoc item="diff"}}
-	- New to ""FreeBASIC""
+	- Nouveau pour ""FreeBASIC""
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgCondBroadcast Condbroadcast]]##

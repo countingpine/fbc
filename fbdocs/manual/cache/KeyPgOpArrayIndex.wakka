@@ -1,26 +1,26 @@
 {{fbdoc item="title" value="Operator () (Array index)"}}----
-Returns a reference to an element in an array
+Retourne une référence à un élément d'un tableau
 
 {{fbdoc item="syntax"}}##
 	[[KeyPgDeclare declare]] [[KeyPgOperator operator]] **()** ( //lhs//() [[KeyPgAs as]] //T//, [[KeyPgByref byref]] //rhs// [[KeyPgAs as]] [[KeyPgInteger integer]], ... ) [[KeyPgAs as]] //T//
 ##
-~&//Note that **##Operator ()## (Array index)** returns a reference. See [[CompilerFAQ Compiler FAQ]].//
+~&//Notez que **##Opérateur ()## (Indice de tableau)** retourne une référence. Voir [[CompilerFAQ FAQ du compilateur]].//
 
 {{fbdoc item="usage"}}##
 	//result// = //lhs// **(** //rhs// [, ...] **)**
 ##
 {{fbdoc item="param"}}
 	##//lhs//##
-		An array.
+		Un tableau.
 	##//rhs//##
-		An index of an element in the array.
+		L'indice d'un élément du tableau.
 	##//T//##
-		Any data type.
+		N'importe quel type de donnée.
 
 {{fbdoc item="desc"}}
-	This operator returns a reference to an element in an array. For multidimensional arrays, multiple indexes must be specified (up to the total number of dimensions of the array).
+	Cet opérateur retourne une référence à un élément d'un tableau. Pour les tableaux multi-dimensionnels, des indices multiples seront spécifiés (au maximum égal au nombre total des dimensions du tableau).
 
-	For any one dimension //d// in array //a//, any index outside of the range (##[[KeyPgLbound Lbound]](//a//(), //d//), [[KeyPgUbound Ubound]](//a//(), //d//)##) will result in a runtime error.
+	Pour toute dimension ##//d//## dans un tableau ##//a//##, tout indice en dehors de la plage (##[[KeyPgLbound Lbound]](//a//, //d//)##, ##[[KeyPgUbound Ubound]](//a//, //d//)##) donnera une erreur de fonctionnement.
 
 {{fbdoc item="ex"}}
 
@@ -31,14 +31,14 @@ for index as integer = 0 to 4
 	print array(index)
 next
 %%
-	will produce the output:
+	produira l'affichage:
 
 %%
 	0 1 2 3 4
 %%
 
 {{fbdoc item="diff"}}
-	- None
+	- Aucune
 
 {{fbdoc item="see"}}
 

@@ -1,5 +1,5 @@
 {{fbdoc item="title" value="CALLOCATE"}}----
-Allocates memory for a certain number of elements from the free store and clears the contents
+Alloue de la mémoire pour un certain nombre d'éléments du "tas" de mémoire libre et efface leur contenu
 
 {{fbdoc item="syntax"}}##
 	[[KeyPgDeclare declare]] [[KeyPgFunction function]] **Callocate** [[KeyPgCdecl cdecl]] ( [[KeyPgByval byval]] //num_elements// [[KeyPgAs as]] [[KeyPgInteger integer]], [[KeyPgByval byval]] //size// [[KeyPgAs as]] [[KeyPgInteger integer]] = 1 ) [[KeyPgAs as]] [[KeyPgAny any]] [[KeyPgPtr ptr]]
@@ -9,15 +9,15 @@ Allocates memory for a certain number of elements from the free store and clears
 ##
 {{fbdoc item="param"}}
 	##//num_elements//##
-		The number of elements to allocate memory for.
+		Le nombre d'éléments de mémoire à allouer.
 	##//size//##
-		The size, in bytes, of each element.
+		La taille, en octets, de chaque élément.
 
 {{fbdoc item="ret"}}
-	If successful, the address of the start of the allocated memory is returned. Otherwise, the null pointer (##0##) is returned.
+	En cas de succès, l'adresse du début de la mémoire allouée est retourné. Sinon, le pointeur nul (##0##) est retourné.
 
 {{fbdoc item="desc"}}
-	##**Callocate**## initializes the allocated memory with zeros.
+	##**Callocate**## initialise la mémoire allouée avec des zéros.
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/memory/callocate.bas"}}%%(freebasic)
@@ -37,17 +37,17 @@ next
 ' Free the memory.
 deallocate(p)
 %%
-Outputs:
+Affiche:
 %% 10 20 30 40 50 60 70 80 90 100%%
 
 {{fbdoc item="target"}}
-	- This procedure is not guaranteed to be thread-safe.
+	- Cette procédure n'est pas garantie d'être "thread-safe".
 
 {{fbdoc item="lang"}}
-	- Not available in the //[[CompilerOptlang -lang qb]]// dialect unless referenced with the alias ##**""__Callocate""**##.
+	- Non disponible dans le dialecte //[[CompilerOptlang -lang qb]]// sauf si référencé avec l'alias ##**""__Callocate""**##.
 
 {{fbdoc item="diff"}}
-	- New to ""FreeBASIC""
+	- Nouveau pour ""FreeBASIC""
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgAllocate Allocate]]##

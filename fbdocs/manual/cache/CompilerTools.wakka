@@ -1,45 +1,45 @@
 {{fbdoc item="title" value="Tools used by fbc"}}----
-External tools the FreeBASIC compiler (fbc) may invoke during the compilation process.
+Les outils externes dont le compilateur FreeBASIC (fbc) peut se prévaloir au cours du processus de compilation.
 
 {{fbdoc item="desc"}}
-	FreeBASIC uses several tools for compiling source code in addition to the ##fbc## compiler.  The exact tools used by ##fbc## and how they are invoked depends on how ##fbc## was configured, the host platform (where fbc is running), the target platform (where the produced executable will be run), and other options (like environment variables and command line options).
+	FreeBASIC utilise plusieurs outils pour la compilation du code source en plus le compilateur ##fbc##.  Les outils exact utilisé par ##fbc## et comment ils sont invoqués dépend de la façon ##fbc## a été configuré, la plate-forme d'accueil (où fbc est en cours d'exécution), la plate-forme cible (où le fichier exécutable sera exécuté) et d'autres options (comme les variables d'environnement et les options de ligne de commande).
 
-	FreeBASIC (##fbc##) may have been configured in one of two ways: either as standalone or prefixed.  The standalone version searches directories relative to where the executable is located.  The prefixed version has a hardcoded path configured in to the compiler indicating where it expects to find additional tools and libraries.  For more information on configuring FreeBASIC, see the ##INSTALL## text file located in the src/compiler directory of the FreeBASIC sources.
+	FreeBASIC (##fbc##) peut être configuré de l'une des deux manières: en mode autonome ou préfixé.  La version autonome recherche les répertoires par rapport où se trouve l'exécutable.  La version préfixée a un chemin codé en dur configuré pour le compilateur indiquant où il s'attend à trouver d'autres outils et bibliothèques.  Pour plus d'informations sur la configuration de FreeBASIC, voir le fichier texte ##INSTALL## situé dans le répertoire src/compiler des sources  FreeBASIC.
 
-	You can check if your installed version of ##fbc## is "standalone" or "prefixed" by invoking ##fbc## with the //[[CompilerOptversion -version]]// command line option.
+	Vous pouvez vérifier si votre version installée de ##fbc## est "autonome" ou "préfixée" en appelant ##fbc## avec l'option //[[CompilerOptversion -version]]// en ligne de commande.
 
-{{fbdoc item="section" value="Standalone"}}
-	If ##fbc## was configured as "standalone", it will search for files relative to where the ##fbc## executable is located.  ##fbc## is at the "top" of the directory tree and searches sub-directories below it.  The "top" directory (which defaults to the location where ##fbc## is located) can be overridden with the //[[CompilerOptprefix -prefix]]// command line option.  "topdir" shown in the directories below represents the directory where the ##fbc## executable is located, or the directory specified with the //[[CompilerOptprefix -prefix]]// command line option (if it was given). "<target>" refers to the target platform having the same name as specified by the //[[CompilerOpttarget -target]]// option.
+{{fbdoc item="section" value="Standalone = Autonome"}}
+	Si ##fbc## a été configuré comme "standalone = autonome", il va rechercher les fichiers par rapport à l'endroit où se trouve l'exécutable ##fbc##.  ##fbc## est au "sommet" de l'arborescence des répertoires et recherche les sous-répertoires en-dessous de lui.  Le répertoire "sommet" (par défaut, à l'endroit où est situé ##fbc##) peut être modifié avec l'option en ligne de commande //[[CompilerOptprefix -prefix]]//.  "topdir" des répertoires ci-dessous représente le répertoire où l'exécutable ##fbc## se trouve u le répertoire spécifié avec l'option en ligne de commande //[[CompilerOptprefix -prefix]]// (si elle a été utilisée). "<target>" se réfère à la plate-forme cible ayant le même nom que celui spécifié par l'option //[[CompilerOpttarget -target]]//.
 
-	If not cross compiling, ##fbc## looks in these locations: 
+	S'il n'y a pas de compilation croisée, ##fbc## cherche dans ces emplacements: 
 		- ##/topdir/inc##
 		- ##/topdir/lib/<target>##
 		- ##/topdir/bin/<target>##
-		- gcc is queried for missing libraries (currently on linux/freebsd only) 
+		- gcc est demandé pour les bibliothèques manquantes (actuellement sur Linux/FreeBSD seulement) 
 
-	If cross compiling, ##fbc## looks in the these locations: 
+	S'il y a compilation croisée, ##fbc## cherche dans ces emplacements: 
 		- ##/topdir/inc##
 		- ##/topdir/lib/<target>##
 		- ##/topdir/bin/<target>##
-		- gcc is not queried (only target library directory is used)
+		- gcc n'est pas demandé (seulement le répertoire de la bibliothèque cible est utilisé)
 
-{{fbdoc item="section" value="Prefixed"}}
-	If ##fbc## was configured as "prefixed", it will search for files relative to the configured prefix (hardcoded in the ##fbc## executable).  "prefix" shown in the directories below represents the configured prefix, or the directory specified with the //[[CompilerOptprefix -prefix]]// command line option (if it was given).  "##<target>##" refers to the target platform having the same name as specified by the //[[CompilerOpttarget -target]]// option.
+{{fbdoc item="section" value="Prefixed  = Préfixé"}}
+	Si ##fbc## a été configuré comme "prefixed = préfixé", il va rechercher les fichiers par rapport au préfixe configuré (en dur dans l'exécutable ##fbc##).  "prefix" dans les répertoires ci-dessous représente le préfixe configuré ou le répertoire spécifié avec l'option de ligne de commande //[[CompilerOptprefix -prefix]]// (si elle a été donnée).  "##<target>##" se réfère à la plate-forme cible ayant le même nom que celui spécifié par l'option //[[CompilerOpttarget -target]]//.
 
-	If not cross compiling, ##fbc## looks in these locations: 
+	S'il n'y a pas de compilation croisée, ##fbc## cherche dans ces emplacements: 
 		- ##/prefix/include/freebasic##
 		- ##/prefix/lib/freebasic/<target>##
 		- ##/prefix/bin/freebasic/<target>##
-		- gcc is queried for missing libraries (currently on linux/freebsd only) 
+		- gcc est demandé pour les bibliothèques manquantes (actuellement sur Linux/FreeBSD seulement) 
 
-	If cross compiling, ##fbc## looks in the these locations: 
+	S'il y a compilation croisée, ##fbc## cherche dans ces emplacements: 
 		- ##/prefix/include/freebasic##
 		- ##/prefix/lib/freebasic/<target>##
 		- ##/prefix/bin/freebasic/<target>##
-		- gcc is not queried (only target library directory is used)
+		- gcc n'est pas demandé (seulement le répertoire de la bibliothèque cible est utilisé)
 
-{{fbdoc item="section" value="GCC Queries"}}
-	If ##fbc## is unable to locate a file, it may invoke ##gcc -print-file-name=<file>## to query the location of the file.  The following are files that may be located using gcc:
+{{fbdoc item="section" value="Requêtes GCC"}}
+	Si ##fbc## est incapable de localiser un fichier, il peut invoquer ##gcc -print-file-name=<file>## pour interroger l'emplacement du fichier.  Les fichiers suivants sont susceptibles d'être localisés en utilisant gcc:
 		- ##crt1.o##
 		- ##crtbegin.o##
 		- ##crtend.o##
@@ -48,10 +48,10 @@ External tools the FreeBASIC compiler (fbc) may invoke during the compilation pr
 		- ##gcrt1.o##
 		- ##libgcc.a##
 		- ##""libsupc+""+.a##
-		- ##libc.so (Linux only)##
+		- ##libc.so (Linux seulement)##
 
-{{fbdoc item="section" value="Finding Binaries"}}
-	##fbc## will invoke additional tools (binary executables) as part of the compiling and linking process.  The following is a list of tools (executables) that may be invoked by ##fbc## depending on the host platform, target, or type of executable or library to be produced:
+{{fbdoc item="section" value="Trouver les binaires"}}
+	##fbc## appellera d'autres outils (exécutables) dans le cadre du processus de compilation et de liaison.  Ce qui suit est une liste d'outils (exécutables) qui peuvent être invoqués par ##fbc## en fonction de la plate-forme d'accueil, la cible ou le type d'exécutable ou de bibliothèque à produire:
 		- ##as##
 		- ##ar##
 		- ##ld##
@@ -61,16 +61,16 @@ External tools the FreeBASIC compiler (fbc) may invoke during the compilation pr
 		- ##pexports##
 		- ##cxbe##
 
-	##fbc## will search for these tools in the following manner:
-		- If an environment variable (having same name as the tool without any extension, all in uppercase) has been set, it explicitly indicates the path and name of the executable to be invoked.
-		- If the file (or a symlink) exists in ##prefix/bin/freebasic/<target>##, or ##./bin/<target>## for the standalone version, then use it.
-		- On Linux, if the tool could not be found in ##prefix/bin/freebasic/<target>##, or ##./bin/<target>## for the standalone version, ##fbc## tries to invoke it anyway as it may be installed on the system and located on the PATH.
+	##fbc## va chercher ces outils de la manière suivante:
+		- Si une variable d'environnement (ayant le même nom que l'outil sans aucune extension, tout en majuscule) a été créée, il indique explicitement le chemin et le nom de l'exécutable à appeler.
+		- Si le fichier (ou un lien symbolique) existe dans ##prefix/bin/freebasic/<target>## ou ##./bin/<target>## pour la version autonome, alors il l'utilise.
+		- Sous Linux, si l'outil n'a pas pu être trouvé dans ##prefix/bin/freebasic/<target>## ou ##./bin/<target>## pour la version autonome, ##fbc## essaie de l'appeler de toute façon car il peut être installé sur le système et situé sur le chemin PATH.
 
 	"##<target>##" refers to the target platform having the same name as specified by the //[[CompilerOpttarget -target]]// option.
 
 {{fbdoc item="see"}}
-	- [[CompilerRunning Running FreeBASIC]]
-	- [[CompilerCmdLine Compiler Command Line Options]]
-	- [[CompilerFAQ Compiler FAQ]]
+	- [[CompilerRunning Utilisation du compilateur FreeBASIC]]
+	- [[CompilerCmdLine Options de ligne de commande du compilateur]]
+	- [[CompilerFAQ FAQ du compilateur]]
 
 {{fbdoc item="back" value="DocToc|Table of Contents"}}

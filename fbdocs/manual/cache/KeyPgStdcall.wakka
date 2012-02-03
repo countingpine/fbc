@@ -1,5 +1,5 @@
 {{fbdoc item="title" value="STDCALL"}}----
-Specifies a //stdcall//-style calling convention in a procedure declaration
+Spécifie une convention d'appel de style-//stdcall// dans une déclaration de procédure
 
 {{fbdoc item="syntax"}}##
 	[[KeyPgDeclare Declare]] [[[KeyPgStatic Static]]] [[KeyPgSub Sub]] //procedure_name// [[[KeyPgOverload Overload]]] **Stdcall** [[[KeyPgAlias Alias]] //"""external_name"""//] [([//parameter_list//])] [[[KeyPgModuleConstructor Constructor]] [//priority//]] [[[KeyPgStatic Static]]] [[[KeyPgExport Export]]]
@@ -15,24 +15,24 @@ Specifies a //stdcall//-style calling convention in a procedure declaration
 	[[KeyPgEnd End]] [[KeyPgFunction Function]]
 ##
 {{fbdoc item="desc"}}
-	In procedure declarations, ##**Stdcall**## specifies that a procedure will use the //stdcall// calling convention. In the //stdcall// calling convention, any parameters are to be passed (pushed onto the stack) in the reverse order in which they are listed, that is, from right to left. The procedures need not preserve the ##EAX##, ##ECX## or ##EDX## registers, and must clean up the stack (pop any parameters) before it returns.
+	Dans une déclaration de procédure, ##**stdcall**## précise que la procédure va utiliser la convention d'appel //stdcall//. Dans la convention d'appel //stdcall//, tous les paramètres doivent être passés (push = pousser sur la pile) dans l'ordre inverse de celui où ils ont été listés, c'est à dire, de la droite vers la gauche. Les procédures n'ont pas besoin de préserver les registres ##EAX##, ##ECX## ou ##EDX## et doivent nettoyer la pile (pop = sortir tous les paramètres) avant le retour.
 	
-	##**Stdcall**## is not allowed to be used with variadic procedure declarations (those with the last parameter listed as "##[[KeyPgDots ...]]##").
+	##**stdcall**## n'est pas autorisé à être utilisé avec les déclarations de procédures "à variations" (variadic) (celles qui ont le dernier paramètre répertorié par "##[[KeyPgDots ...]]##").
 
-	//stdcall// is the default calling convention on Windows, unless another calling convention is explicitly specified or implied by one of the [[KeyPgExternBlock EXTERN blocks]]. //stdcall// is also the standard (or most common) calling convention used in BASIC languages, and the Windows API.
+	//stdcall// est la convention d'appel par défaut sous Windows, è moins qu'une autre convention d'appel ne soit explicitement spécifiée ou implicitement par [[KeyPgExternBlock EXTERN blocks]]. //stdcall// est aussi la convention standard (ou la plus commune) utilisée par les langages BASIC et de l'API Windows.
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/procs/stdcall.bas"}}%%(freebasic)
-Declare Function Example stdcall (param1 As Integer, param2 As Integer) As Integer
-Declare Function Example2 cdecl (param1 As Integer, param2 As Integer) As Integer
+Declare Function Exemple stdcall (param1 As Integer, param2 As Integer) As Integer
+Declare Function Exemple2 cdecl (param1 As Integer, param2 As Integer) As Integer
 
-Function Example stdcall (param1 As Integer, param2 As Integer) As Integer
+Function Exemple stdcall (param1 As Integer, param2 As Integer) As Integer
 	' This is an STDCALL function, the first parameter on the stack is param2, since it was pushed last.
 	Print param1, param2
 	Return param1 Mod param2
 End Function
 
-Function Example2 cdecl (param1 As Integer, param2 As Integer) As Integer
+Function Exemple2 cdecl (param1 As Integer, param2 As Integer) As Integer
 	' This is a CDECL function, the first parameter on the stack is param1, since it was pushed last.
 	Print param1, param2
 	Return param1 Mod param2
@@ -40,10 +40,10 @@ End Function
 %%
 
 {{fbdoc item="target"}}
-	- On Windows systems, //stdcall// procedures have an "@//N//" decoration added to their internal/external name, where //N// is the size of the parameter list, in bytes.
+	- Sur les systèmes Windows, les procédures //stdcall// ont un "@ N" décoration ajouté à leur nom interne / externe, où N est la taille de la liste des paramètres, en octets.
 
 {{fbdoc item="diff"}}
-	- New to ""FreeBASIC""
+	- Nouveau pour ""FreeBASIC""
 
 {{fbdoc item="see"}}
 	- [[KeyPgPascal Pascal]], [[KeyPgCdecl Cdecl]]

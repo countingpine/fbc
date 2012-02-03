@@ -1,5 +1,5 @@
 {{fbdoc item="title" value="SHELL"}}----
-Sends a command to the system command interpreter
+Envoie une commande à l'interpréteur de commandes du système
 
 {{fbdoc item="syntax"}}##
 	[[KeyPgDeclare declare]] [[KeyPgFunction function]] **Shell** ( [[KeyPgByref byref]] //command// [[KeyPgAs as]] [[KeyPgConstQualifier const]] [[KeyPgString string]] ) [[KeyPgAs as]] [[KeyPgInteger integer]]
@@ -9,13 +9,13 @@ Sends a command to the system command interpreter
 ##
 {{fbdoc item="param"}}
 	##//command//##
-		A string specifying the command to send to the command interpreter.
+		Une chaîne spécifiant la commande à envoyer à l'interpréteur de commandes.
 
 {{fbdoc item="ret"}}
-	If ##//command// = ""##, or else the command could not be executed, -1 is returned. Otherwise, the command is executed and its exit code is returned.
+	Si ##//command// = ""##, ou encore la commande n'a pas pu être exécutée, -1 est renvoyé. Sinon, la commande est exécutée et son code de sortie est renvoyé.
 
 {{fbdoc item="desc"}}
-	Program execution will be suspended until the command interpreter exits.
+	L'exécution du programme sera suspendu jusqu'à ce que l'interpréteur de commandes s'arrête.
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/system/shell.bas"}}%%(freebasic)
@@ -27,12 +27,12 @@ shell "ls"
 %%
 
 {{fbdoc item="target"}}
-	- Linux requires the //command// case matches the real name of the command. Windows and DOS  are case insensitive. The program being shelled may be case sensitive for its command line parameters. 
-	- Path separators in Linux are forward slashes / . Windows uses backward slashes \ but it allows for forward slashes .  DOS uses backward  \ slashes. 
+	- Linux nécessite que la casse de ##//command//## corresponde au nom réel de la commande. Windows et DOS ne sont pas sensibles à la casse. Le programme exécuté dans le "shell" peut être sensible à la casse pour ses paramètres de ligne de commande.
+	- Les séparateurs de chemin de Linux sont des barres obliques ##/##. Windows utilise des barres obliques vers l'arrière ##\## mais il admet des barres obliques .  DOS utilise des barres obliques en arrière ##\##. 
 
 
-{{fbdoc item="diff"}}
-	- QB allowed SHELL on its own without a "command" argument which caused a default command shell to be started.  Execution in the main program would suspend until exit from the command shell.
+{{fbdoc item="diff"}} 
+	- QB permet SHELL de sa propre initiative, sans un argument "commande" qui démarre une commande "shell", par défaut.  L'exécution dans le programme principal sera suspendue jusqu'à la sortie de l'interpréteur de commandes.
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgExec Exec]]##

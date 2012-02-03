@@ -1,23 +1,23 @@
 {{fbdoc item="title" value="Using FreeBASIC Built Libraries with GCC"}}----
-//by Jeff Marshall//
+//par Jeff Marshall//
 
-Shows how to create a static library with FreeBASIC and then call it from a C program using GCC as the compiler.
+Montre comment créer une bibliothèque statique avec FreeBASIC puis l'appeler à partir d'un programme C en utilisant GCC comme compilateur.
 
-	& //Minimum fbc version tested is v0.18.2b//
+	& //Testé avec la version mimimum fbc v0.18.2b//
 
-This article shows Windows usage throughout, but application to FreeBASIC on other platforms is similiar.
+Cet article montre l'utilisation sous Windows, mais l'application à FreeBASIC sur d'autres plates-formes est similaire.
 
-{{fbdoc item="section" value="In this tutorial:"}}
-	{{anchor name="S1|A Simple Test"}}
-	{{anchor name="S2|FreeBASIC Library With Dependencies"}}
-	{{anchor name="S3|Using FreeBASIC as a Smart Linker"}}
+{{fbdoc item="section" value="Dans ce tutoriel:"}}
+	{{anchor name="S1|Un simple test"}}
+	{{anchor name="S2|Bibliothèque FreeBASIC avec dépendances"}}
+	{{anchor name="S3|Utiliser FreeBASIC comme un "Linker" intelligent"}}
 
 
-{{anchor name="S1"}}{{fbdoc item="section" value="A Simple Test"}}
+{{anchor name="S1"}}{{fbdoc item="section" value="Un simple test"}}
 
-For this simple test we are going to create a FreeBASIC static library, one without any dependencies.  This will make it easier the first time around, and will allow us to check that the basics are working:
+Pour ce test simple, nous allons créer une bibliothèque statique FreeBASIC, une sans aucune dépendance. Pour la première fois cela rendra les choses plus faciles et va nous permettre de vérifier que les bases sont fonctionnelles:
 
-First we need a library, and for for this it will be just a single trivial function that will add two integers together and return the result.  Notice the use of ##**cdecl**## and ##Alias## in our procedure definition.  By default, C uses the ##**cdecl**## calling convention.  Using ##**alias**## in the FreeBASIC declaration makes matching case sensitivity between FreeBASIC and C easier.  //C is case sensitive, whereas FreeBASIC normally is not.//
+Nous avons d'abord besoin d'une bibliothèque et ce sera juste une seule fonction triviale qui va ajouter deux entiers ensemble et retourner le résultat. Notez l'utilisation de ##**cdecl**## et ##**Alias**## dans notre définition de la procédure. Par défaut, C utilise la convention d'appel ##**cdecl**##. Utiliser ##**Alias**## dans la déclaration FreeBASIC rend plus facile la correspondance de sensibilité à la casse entre FreeBASIC et C. //C est sensible à la casse, alors que FreeBASIC ne l'est normalement pas.//
 
 %%(freebasic)
 '' mylib1.bas
@@ -33,11 +33,11 @@ function Add2Numbers cdecl alias "Add2Numbers" _
 end function
 %%
 
-Create a file called ##mylib1.bas## as above and compile it with:
+Créer un fichier appelé ##mylib1.bas## comme ci-dessus et le compiler avec:
 
 	##fbc -lib mylib1.bas##.  
 
-This will create our static library ##libmylib1.a##.  Next we need a C program that is going to call the library we just made.  We must add a prototype that exactly matches the function we have in the FreeBASIC library.  The C listing below is our main entry point, will set up a couple of variables to call ##""Add2Numbers()""##, and print the results.
+Cela va créer notre bibliothèque statique ##libmylib1.a##. Ensuite nous avons besoin d'un programme C qui va appeler la bibliothèque que nous venons de créer. Nous devons ajouter un prototype qui correspond exactement à la fonction que nous avons dans la bibliothèque FreeBASIC. Le listing C ci-dessous est notre principal point d'entrée, il met en place un couple de variables pour appeler ##""Add2Numbers()""## et afficher les résultats.
 
 %%(c)
 /* test1.c */
@@ -61,16 +61,16 @@ int main ()
 }
 %%
 
-To compile this C program using the FreeBASIC library we just made we need to compile ##test1.c## as we normally would but also tell it which libraries are needed.  In our case, it is ##libmylib1.a##.
+Pour compiler ce programme C utilisant la bibliothèque FreeBASIC que nous venons juste de créer, nous devons compiler ##test1.c## comme nous l'aurions fait normalement, mais il faut aussi lui dire quelles bibliothèques sont nécessaires.  Dans notre cas c'est ##libmylib1.a##.
 
 	##gcc test1.c -L . -l mylib1 -o test1.exe##
 
-The '-L .' option tells the linker to search in the current directory for libraries, and the '-l mylib1' indicates that we want to link with the library we just created.  This is the simplest case becase the libmylib1.a library has no dependencies.  If mylib1.bas needed other libraries, for example the FreeBASIC run-time library libfb.a, we would need to specify that as well to gcc.
+L'option '-L .' indique à l'éditeur de liens de chercher les bibliothèques dans le répertoire courant, et '-l mylib1' indique que nous voulons lier avec la bibliothèque que nous avons céée. C'est la cas le plus simple car la bibliothèque libmylib1.a n'a pas de dépendances. Si mylib1.bas nécessite d'autres bibliothèques, par exemple la bibliothèque FreeBASIC d'exécution libfb.a, nous devrions le spécifier aussi à gcc.
 
 
-{{anchor name="S2"}}{{fbdoc item="section" value="FreeBASIC Library With Dependencies"}}
+{{anchor name="S2"}}{{fbdoc item="section" value="Bibliothèque FreeBASIC avec dépendances"}}
 
-Here we create a FreeBASIC library that uses some features from the FreeBASIC runtime and graphics library.  In this case we will have to specify any additional needed libraries to GCC.
+Ici, nous créons une bibliothèque FreeBASIC qui utilise certaines fonctionnalités des bibliothèques d'exécution et graphique de FreeBASIC. Dans ce cas, nous aurons à préciser toutes les bibliothèques supplémentaires nécessaires pour GCC.
 
 %%(freebasic)
 '' mylib2.bas
@@ -86,11 +86,11 @@ sub TestGfx cdecl alias "TestGfx" ()
 end sub
 %%
 
-Create a file called ##mylib2.bas## with the listing above and compile it with:
+Créez un fichier appelé ##mylib2.bas## avec le listing ci-dessus et le compiler avec:
 
 	##fbc -lib mylib2.bas##.
 
-This will create our static library ##libmylib2.a##.  Next we need a C program that is going to call the library we just made.  We must add a prototype that exactly matches the function we have in the FreeBASIC library.  This C listing will provide our entry point and just call ##TestGfx()## before terminating.
+Cela va créer notre bibliothèque statique ##libmylib2.a##.  Ensuite nous avons besoin d'un programme C qui va appeler la bibliothèque que nous venons de créer. Nous devons ajouter un prototype qui correspondra exactement à la fonction que nous avons dans la bibliothèque FreeBASIC. Ce listing C fournira notre point d'entrée et il suffit d'appeler ##TestGfx()## avant de terminer.
 
 %%(c)
 /* test2.c */
@@ -107,34 +107,34 @@ int main()
 }
 %%
 
-To compile and link ##test2.c## directly with ##gcc##, not only do we need to tell ##gcc## that we want to link with ##libmylib2.a##, but also every other library that ##libmylib2.a## needs.
+Pour compiler et lier ##test2.c## directement avec ##GCC##, non seulement nous avons besoin de dire à ##GCC## que nous voulons le lier avec ##libmylib2.a##, mais aussi toutes les autres bibliothèques que ##libmylib2.a## nécessite.
 
 	##gcc test2.c -L. -lmylib2 -L"C:\FreeBASIC\lib\win32" "C:\FreeBASIC\lib\win32\fbrt0.o" -lfbgfx -lfb -lgdi32 -o test2.exe##
 
-Depending on what our FreeBASIC library uses, it we may use several additional libraries, we must specify all the names of the libraries on the ##gcc## command line.  In this example, FreeBASIC is located in "C:\FreeBASIC", but you should specify whatever directory you installed FreeBASIC to.  "C:\FreeBASIC\lib\win32\fbrt0.o" is a special startup file that will initialize the FreeBASIC runtime library.  More specifically, it is initialized after the C runtime library, but before any of our program code is called.  The additional ##-lfbgfx##, ##-lfb##, ##-lgdi32##, are the additional libraries needed to complete linking.  The actual libraries will vary depending on which FreeBASIC runtime functions are used, and which platform, for DOS or Linux, the program is being compiled for.
+Selon ce que notre bibliothèque FreeBASIC utilise, elle peut utiliser plusieurs bibliothèques supplémentaires, nous devons spécifier tous les noms de ces bibliothèques sur la ligne de commande de CCG. Dans cet exemple, FreeBASIC est situé dans "C:\FreeBASIC", mais vous pouvez spécifier n'importe quel autre répertoire où vous avez installé FreeBASIC. "C:\FreeBASIC\lib\win32\fbrt0.o" est un fichier spécial de démarrage qui va initialiser la bibliothèque d'exécution FreeBASIC. Plus précisément, il est initialisé après la bibliothèque d'exécution C, mais avant que tout code de notre programme ne soit appelé. ##-lfbgfx##, ##-lfb##, ##-lgdi32##, sont les bibliothèques supplémentaires nécessaires pour compléter la liaison. Les bibliothèques réelles peuvent varier en fonction des fonctions d'exécution FreeBASIC qui sont utilisées, et de la plate-forme, DOS ou Linux, pour laquelle le programme est compilé.
 
 
-{{anchor name="S3"}}{{fbdoc item="section" value="Using FreeBASIC as a Smart Linker"}}
+{{anchor name="S3"}}{{fbdoc item="section" value="Utiliser FreeBASIC comme un "Linker" intelligent"}}
 
-FreeBASIC has a neat built-in feature that stores a little bit of extra information in the library indicating what compile time options were used, and which dependent libraries are needed.  This is a FreeBASIC only feature, so this kind of capability won't be found when using ##gcc## as the main compiler and linker.
+FreeBASIC a une fonctionnalité intégrée intéressante qui stocke un peu d'informations supplémentaires dans la bibliothèque indiquant quelles options de compilation ont été utilisées et quelles bibliothèques dépendantes sont nécessaires. C'est une fonctionnalité propre à FreeBASIC, donc ce genre de capacité n'existera pas lors de l'utilisation de ## CCG ## comme compilateur principal et "linker".
 
-If we reuse the examples from the previous section, ##mylib2.bas## and ##test2.c##, but just go about compiling and linking them differently, we can save ourselves a bunch of typing.  Plus we usually won't have to know or remember what our FreeBASIC built library's dependencies are.  Compile ##mylib2.bas## as before in to a static library.
+Si nous réutilisons les exemples de la section précédente, ## mylib2.bas ## et ## test2.c ##, mais juste pour les compiler et les lier différemment, nous pouvons nous épargner un tas d'écriture. Avantage: nous n'avons normalement pas à savoir ou à se rappeler avec quelles dépendances notre bibliothèque FreeBASIC a été construite. Compiler ##mylib2.bas## comme avant en une bibliothèque statique.
 
 	##fbc -lib mytest2.bas##
 
-Next we compile our C test program.  Notice the '-c' option for the ##gcc## command line.  This indicates that we are just going to compile the C source, but not link it yet.  ##test2.o## will still have the entry point, but we are going to put it in an object file instead of trying to create an executable right away.
+Ensuite, nous compilons notre programme de test en C. Notez l'option '-c' de la commande en ligne de ##GCC##. Cela indique que nous allons nous contenter de compiler le code source en C, mais sans le lier. ##test2.o## aura encore le point d'entrée, mais nous allons le mettre dans un fichier objet au lieu d'essayer de créer un exécutable immédiatement.
 
 	##gcc -c test2.c -o test2.o##
 
-Lastly, we use ##fbc## to perform the link step.  We are not compiling any basic source files here, but we are going to use the smart linking capabilities of FreeBASIC such that the command line is fairly simple:
+Enfin, nous utilisons ##fbc## pour réaliser l'étape lien. Nous ne compilerons pas des fichiers source basiques ici, mais nous allons utiliser les fonctionnalités intelligentes de lien de FreeBASIC de telle sorte que la ligne de commande est assez simple:
 
 	##fbc test2.o -l mylib2##
 
-This will create an executable named ##test2.exe## because ##test2.o## was specified first on the command line.  FreeBASIC will read the extra information stored in ##libmylib2.a## and automatically know which additional libraries to link with.  That's loads easier than using ##gcc## directly, especially when many extra FreeBASIC built libraries are needed.
+Cela créera un exécutable nommé ##test2.exe## car ##test2.o## a été spécifié en premier sur la ligne de commande.  FreeBASIC lira les informations supplémentaires stockées dans ##libmylib2.a## et connaîtra automatiquement les bibliothèques supplémentaires à lier.  C'est plus facile que les charger directement à l'aide de ##gcc##, surtout lorsque de nombreuses bibliothèques supplémentaires FreeBASIC sont nécessaires.
 
 
 {{fbdoc item="see"}}
-	- ##[[http://www.freebasic.net/wiki/wikka.php?wakka=ProPgStaticLibraries Static Libraries]]##
+	- ##[[ProPgStaticLibraries Les bibliothèques statiques]]##
 
 
 {{fbdoc item="back" value="CommunityTutorials|Community Tutorials"}}

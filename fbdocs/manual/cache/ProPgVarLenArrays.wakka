@@ -1,11 +1,11 @@
 {{fbdoc item="title" value="Variable-length Arrays"}}----
-Resizable homogeneous data structures.
+Structures redimensionnables de données homogènes.
 
-{{fbdoc item="section" value="Overview"}}
-	Variable-length arrays are [[ProPgArrays arrays]] that can, during program execution, either be resized to hold more or less elements, or have their dimension[s] use a different subscript range. The memory used by a variable-length array to store its elements is allocated at runtime, in the free store (the heap), as opposed to fixed-length arrays whose data is either allocated on the program stack or in the ##.BSS## or ##.DATA## sections of the executable, depending on whether they were defined with ##[[KeyPgStatic Static]]##.
+{{fbdoc item="section" value="Vue d'ensemble"}}
+	Les tableaux de longueur variable sont des [[ProPgArrays tableaux]] qui peuvent, au cours de l'exécution du programme, être redimensionnés pour contenir plus ou moins d'éléments, ou voir leur(s) dimension(s) utiliser une plage d'indices différente. La mémoire utilisée par un tableau de longueur variable pour stocker ses éléments est attribuée à l'exécution, dans le stock libre (le tas), par opposition aux tableaux de longueur fixe dont les données sont soit stockées sur la pile du programme ou dans les sections ##.BSS## ou ##.DATA## de l'exécutable, selon qu'ils ont été définis ou non avec ##[[KeyPgStatic Static]]##.
 
-{{fbdoc item="section" value="Declaration and definition"}}
-	A variable-length array is declared with the ##[[KeyPgExtern Extern]]## keyword, followed by a variable identifier, a parenthesized list of zero (0) or more subscript ranges and an element [[CatPgStdDataTypes datatype]]. For an array to be declared variable-length, either an empty subscript range list can be used, or one or more of the subscript ranges must have non-constant values - that is, the ranges must be specified by variables or objects convertible to ##[[KeyPgInteger Integer]]##.
+{{fbdoc item="section" value="Déclaration et définition"}}
+	Un tableau de longueur variable est déclaré avec le mot-clé ##[[KeyPgExtern Extern]]##, suivi par un identifiant de variable, une liste entre parenthèses de zéro (0) ou plusieurs plages d'indices un élément d'un certain [[CatPgStdDataTypes type de donnée]]. Pour déclarer un tableau de longueur variable, soit on peut utiliser une liste de plage avec des indices vides, soit un ou plusieurs indices doivent avoir des valeurs non-constantes - c'est à dire, que les plages doivent être spécifiées par des variables ou des objects convertibles en ##[[KeyPgInteger Integer]]##.
 
 {{fbdoc item="filename" value="examples/manual/proguide/arrays/varlen_1.bas"}}%%(freebasic)
 dim maxLowerBound as integer = -5
@@ -17,17 +17,17 @@ extern arrayOfStrings(maxLowerBound to maxUpperBound, 20) as string
 '' Declares a one-dimensional variable-length array of elements of type BYTE..
 extern arrayOfBytes() as byte
 %%
-	A variable-length array is defined with either the ##[[KeyPgDim Dim]]## or ##[[KeyPgRedim Redim]]## keywords, following the same form as declaration. The ##[[KeyPgRedim Redim]]## keyword always defines variable-length arrays, whether the subscript ranges are constant or not. Variable-length arrays cannot be defined with static storage using ##[[KeyPgStatic Static]]##.
+	Un tableau de longueur variable est défini avec l'un ou l'autre des mots-clefs ##[[KeyPgDim Dim]]## ou ##[[KeyPgRedim Redim]]##, en suivant la même forme de déclaration. Le mot-clef ##[[KeyPgRedim Redim]]## définit toujours un tableau de longueur variable,que l'intervalle des indices soit constant ou non. Les tableaux de longueur variable ne peuvent pas être définis avec un stockage statique en utilisant ##[[KeyPgStatic Static]]##.
 
 {{fbdoc item="filename" value="examples/manual/proguide/arrays/varlen_2.bas"}}%%(freebasic)
 '' Defines one-dimensional variable-length arrays of type SHORT and INTEGER..
 dim arrayOfShorts() as short
 redim arrayOfIntegers(9) as integer
 %%
-	Since the memory for variable-length arrays is allocated at runtime, when they are defined, the elements of variable-length arrays declared with ##[[KeyPgExtern EXTERN]]## cannot be accessed until the array is defined. Similarly, variable-length arrays defined with empty subscript range lists have zero size - they hold zero elements - so they too must be resized before any elements can be accessed.
+	Comme la mémoire des tableaux de longueur variable est allouée lors de l'exécution, quand ils sont définis, les éléments de tableaux de longueur variable déclarés avec ##[[KeyPgExtern EXTERN]]## ne sont pas accessibles jusqu'à ce que le tableau soit défini. De même, les tableaux de longueur variable définis avec une liste de plage avec des indices vides ont une taille de zéro - ils ont zéro éléments - de sorte qu'eux aussi doivent être redimensionnées avant que les éléments puissent être consultés.
 
-{{fbdoc item="section" value="Resizing"}}
-	Resizing a variable-length array refers to "redefining" the array with different values for its subscript range[s], allowing the array to grow or shrink. Elements outside the new subscript range[s] are erased; object elements will be destroyed. If the array is resized to a larger size, new elements are added initialized with a zero or //null// value; object elements are default-constructed. Variable-length arrays are resized using the ##[[KeyPgRedim Redim]]## keyword following the same form as definition.
+{{fbdoc item="section" value="Redimensionnement"}}
+	Redimensionner un tableau de longueur variable se réfère à "redéfinir" le tableau avec des valeurs différentes pour sa plage d'indice(s), permettant au tableau d' augmenter ou de diminuer. Les éléments en dehors de la nouvelle gamme d'indice(s) sont effacés; les éléments objets seront détruits. Si le tableau est redimensionné à une taille plus grande, de nouveaux éléments sont ajoutés initialisés avec un zéro ou une valeur //nulle//; les éléments objets auront leur valeur de construction par défaut. Les tableaux de longueur variable sont redimensionnés à l'aide du mot-clef ##[[KeyPgRedim Redim]]## en suivant la même forme que la définition.
 
 {{fbdoc item="filename" value="examples/manual/proguide/arrays/varlen_3.bas"}}%%(freebasic)
 '' Define an empty variable-length array of SINGLE elements..
@@ -36,6 +36,6 @@ dim array() as single
 '' Resize the array to hold ten (10) SINGLE elements..
 redim array(9) as single
 %%
-	By default, element values of a variable-length array are lost when resized - the array will contain zero or more elements initialized to a zero or //null// value, or if the elements are objects, they will be default-constructed. To retain the previous element values during a resize, use the ##[[KeyPgPreserve Preserve]]## keyword.
+	Par défaut, Par défaut, les valeurs des éléments d'un tableau de longueur variable sont perdus lors d'un redimensionnement - e tableau contiendra zéro ou plusieurs éléments initialisés à une valeur zéro ou //nulle//, ou si les éléments sont des objets, ils auront leur valeur de construction par défaut. Pour conserver les valeurs précédentes des éléments au cours d'un redimensionnement, utilisez le mot-clef ##[[KeyPgPreserve Preserve]]##.
 
 {{fbdoc item="back" value="CatPgProgrammer|Programmer's Guide"}}

@@ -1,44 +1,44 @@
 {{fbdoc item="title" value="PRESET"}}----
-Plots a single pixel
+Place un seul pixel
 
 {{fbdoc item="syntax"}}##
 	**PReset** [//target// ,] [STEP] (//x//, //y//) [,//color//]
 ##
 {{fbdoc item="param"}}
 	##//target//##
-		specifies buffer to draw on.  
+		spécifie le tampon sur lequel on travaille.  
 	##STEP##
-		indicates that coordinates are relative
+		indique que les coordonnées sont relatives
 	##(//x, y//)##
-		coordinates of the pixel.
+		coordonnées du pixel.
 	##//color//##
-		the color attribute.
+		L'attribut de couleur.
 
 {{fbdoc item="desc"}}
 
-	##//target//## specifies buffer to draw on.  ##//target//## may be an image created with ##[[KeyPgImagecreate ImageCreate]]## or ##[[KeyPgGetgraphics Get (Graphics)]]##.  If omitted, //target// defaults to the screen's current work page.
+	##//target//## spécifie le tampon sur lequel on travaille.  ##//target//## peut être une image créée avec ##[[KeyPgImagecreate ImageCreate]]## ou ##[[KeyPgGetgraphics Get (Graphics)]]##.  Si omis, //target// est par défaut la page de travail courante de l'écran.
 
-	##(//x, y//)## are the coordinates of the pixel.  STEP if present, indicates that ##(//x, y//)## coordinates are relative to the graphics cursor position.  If omitted, ##(//x, y//)## are relative to the upper left-hand corner of ##//target//##.  The x and y coordinates are affected by the last call to the ##[[KeyPgViewgraphics View (Graphics)]]## and ##[[KeyPgWindow Window]]## statements, and respect the current clipping region as set by the ##[[KeyPgViewgraphics View (Graphics)]]## statement.
+	##(//x, y//)## sont les coordonnées du pixel.  Si STEP est présent, il indique que les coordonnées ##(//x, y//)## sont relatives à la position du curseur graphique.  Si omis, ##(//x, y//)## sont relatifs au coin en haut à gauche de ##//target//##.  Les coordonnées x et y sont affectées par le dernier appel à ##[[KeyPgViewgraphics View (Graphics)]]## et ##[[KeyPgWindow Window]]## et respectent la région de découpage (clipping region) validée par ##[[KeyPgViewgraphics View (Graphics)]]##.
 
-	##//color//## specifies the color attribute.  If omitted, ##//color//## defaults to the current background color.  See ##[[KeyPgColor Color]]##.  ##//color//## is graphics mode specific, see ##[[KeyPgColor Color]]## and ##[[KeyPgScreengraphics Screen (Graphics)]]## for details.
+	##//color//## spécifie l'attribut de couleur.  Si omis, ##//color//## est par défaut la couleur courante d'arrière-plan.  Voir ##[[KeyPgColor Color]]##.  ##//color//## dépend du mode graphique courant, voir ##[[KeyPgColor Color]]## et ##[[KeyPgScreengraphics Screen (Graphique)]]## pour plus de détails.
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/gfx/preset.bas"}}%%(freebasic)
 SCREEN 13
 
-'Set background color to 15
+'Couleur arriere-plan a 15
 COLOR , 15
 
-'Draw a pixel with the background color at 10, 10
+'Dessine un pixel avec la couleur d'arriere-plan a 10, 10
 PRESET (10,10)
 
-'Draw a pixel with the background color at Last x cord +10, Last y cord +10
+'Dessine un pixel avec la couleur d'arriere-plan a dernier x cord +10, dernier y cord +10
 PRESET Step (10,10)
 SLEEP
 %%
 
 {{fbdoc item="diff"}}
-	- ##//target//## is new to ""FreeBASIC""
+	- ##//target//## Nouveau pour ""FreeBASIC""
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgPset PSet]]##

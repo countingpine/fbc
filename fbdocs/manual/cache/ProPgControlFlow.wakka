@@ -1,45 +1,45 @@
 {{fbdoc item="title" value="Control Flow Statements"}}----
-Statements that direct the flow of execution.
+Des instructions qui dirigent le flux d'exécution.
 
 {{fbdoc item="desc"}}
-	Control flow statements control program execution from one statement to the next; they determine what statements get executed and when, based on some kind of condition. The condition is always some expression that evaluates to true or false. Most control flow statements check for some kind of condition, and direct code flow accordingly, that is, they do or do not execute a block of code (except for the transferring control flow statements and ##[[KeyPgDoloop DO..LOOP]]##, which has an optional condition). Additionally, all control flow statements can be nested, that is, they can have other control flow statements within the statement block.
+	Les instructions de contrôle de flux contrôlent l'exécution du programme d'une instruction à la suivante;  elles déterminent quelles déclarations sont exécutées et quand, en se basant sur une certaine condition. La condition est toujours une expression qui renvoie vrai = true ou faux = false. La plupart des instructions de contrôle de flux vérifient un certain genre de condition et dirigent le flux du code en fonction, c'est à dire qu'elles exécutent ou non un bloc de code (à l'exception des instructions de transfert d'exécution de flux et ##[[KeyPgDoloop DO..LOOP]]##, qui a une condition facultative). En outre, toutes les instructions de contrôle de flux peuvent être imbriquées, c'est à dire qu'elles peuvent avoir d'autres instructions de contrôle de flux à l'intérieur de leur propre bloc d'instructions.
 
-	Control flow statements come in three flavors: transferring, branching and looping. Transferring control flow statements transfer execution to different parts of code. Branching control flow statements execute certain statements blocks based on a condition, while looping control flow statements execute code repeatedly while or until a condition is met.
+	Les instructions de contrôle de flux se déclinent de trois manières: transfert, branchement et boucle. Les instructions de transfert de contrôle de flux transfèrent l'exécution à des parties du code différentes. Les instructions de contrôle de branchement du flux exécutent un certain bloc d'instructions en se basant sur une condition, alors que les instructions de contrôle de boucle exécuter du code à plusieurs reprises tant que/jusqu'à ce qu'une condition soit remplie.
 
-{{fbdoc item="section" value="Transferring Statements"}}
-	These statements are used for either unconditional or conditional, temporary or permanent transfer of execution. The "ON" variants conditionally select a point of transfer from a list of text labels.  Execution may be transferred between different scopes provided that the branching does not cross any local array, variable length string or object definition.
+{{fbdoc item="section" value="Instructions de transfert d'exécution de flux"}}
+	Ces instructions sont utilisées pour le transfert inconditionnel ou conditionnel, temporaire ou définitif de l'exécution. Les variantes avec "ON" sélectionnent conditionnellement un point de transfert dans une liste d'étiquettes texte.  L'exécution peut être transférée entre différents champs d'application à condition que le branchement ne traverse aucune définition de tableau local, de chaîne de longueur variable ou d'objet.
 
 	=={{fbdoc item="keyword" value="KeyPgGoto|GOTO"}}==
-		Unconditionally transfers execution to another point in code defined by a text label. Execution resumes with the first statement after the label.
+		Transfère sans condition l'exécution à un autre point du code défini par un label texte. L'exécution reprend à la première instruction suivant cette étiquette.
 
 	=={{fbdoc item="keyword" value="KeyPgGosub|GOSUB"}}==
-		Unconditionally and temporarily transfers execution to another point in code, defined by a text label. Execution resumes with the first statement after the label. Execution is then brought back to its original location with the ##[[KeyPgReturn RETURN]]## keyword. Yes, ##[[KeyPgGosub GOSUB]]## statements can be nested, that is, multiple ##[[KeyPgGosub GOSUB]]## statements can be executed before the first corresponding ##[[KeyPgReturn RETURN]]##, but there must always be a corresponding ##[[KeyPgReturn RETURN]]## throughout the course of an application.
+		Transfère sans condition et temporairement l'exécution à un autre point du code défini par un label texte. L'exécution reprend à la première déclaration après cette étiquette. L'exécution est alors ramenée à son emplacement d'origine avec le mot-clé ##[[KeyPgReturn RETURN]]##. Oui, des déclarations ##[[KeyPgGosub GOSUB]]## peuvent être imbriquées, ce qui signifie que plusieurs déclarations ##[[KeyPgGosub GOSUB]]## peuvent être exécutées le premier ##[[KeyPgReturn RETURN]]## correspondant, mais il doit toujours y avoir un ##[[KeyPgReturn RETURN]]## correspondant dans le déroulement de l'application.
 
 	=={{fbdoc item="keyword" value="KeyPgOngoto|ON GOTO"}}==
-		Transfers execution to one of a number of points in code defined by text labels, based on the value of an expression.
+		Transfère l'exécution vers un point d'une série de points du code définis par des labels texte, en se basant sur la valeur d'une expression.
 
 	=={{fbdoc item="keyword" value="KeyPgOngosub|ON GOSUB"}}==
-		Temporarily transfers execution to one of a number of points in code defined by text labels, based on the value of an expression.
+		Transfère temporairement l'exécution vers un point d'une série de points du code définis par des labels texte, en se basant sur la valeur d'une expression.
 
-{{fbdoc item="section" value="Branching Statements"}}
-	These statements are used for executing one of a number of statement blocks.
+{{fbdoc item="section" value="Instructions de branchement"}}
+	Ces instructions sont utilisées pour exécuter un bloc d'un certain nombre de blocs d'instructions.
 
 	=={{fbdoc item="keyword" value="KeyPgIfthen|IF..END IF"}}==
-		Executes a block of statements if an expression evaluates to true (the condition). If and only if the expression evaluates to false, another statement block can be executed if yet another expression evaluates to true using the ##[[KeyPgElseif ELSEIF]]## keyword. If and only if all of those expressions evaluate to false, a statement block can be execute using the ##[[KeyPgElse ELSE]]## keyword.
+		Exécute un bloc d'instructions si une expression est évaluée comme "true" = vrai (la condition). Si et seulement si l'expression est évaluée à "false" = faux, un autre bloc d'instructions peut être exécuté si une autre expression est évaluée à "true" = vrai en utilisant le mot-clé ##[[KeyPgElseif ELSEIF]]##. Si et seulement si toutes ces expressions sont évaluées à faux, un bloc d'instructions peut être exécuté en utilisant le mot-clé ##[[KeyPgElse ELSE]]##.
 
 	=={{fbdoc item="keyword" value="KeyPgSelectcase|SELECT..END SELECT"}}==
-		Executes one of a number of statement blocks. This branching statement tries to meet a condition of an expression and one of a number of case expressions. The case expressions are checked in the order in which they are given, and the first case expression that is met has its associated statement block executed. Like ##[[KeyPgIfthen IF..END IF]]##, a default case can be defined when no other case expression meets the condition, and, as with the looping control flow statements, a case's statement block can be prematurely broken out of with the ##[[KeyPgExit EXIT]]## keyword.
+		Exécute un bloc d'une série de blocs d'instructions. Cette instruction de branchement tente de répondre à une condition par rapport à une expression en choisissant un cas parmi un certain nombre de cas possibles relatifs à cette expression. Les différents cas sont vérifiés dans l'ordre dans lequel ils sont donnés et le premier cas qui correspondra (vrai) forcera l'exécution du bloc d'instructions correspondant. Comme pour ##[[KeyPgIfthen IF..END IF]]##, un cas par défaut peut être défini quand aucun des cas définis ne correspond à la condition, et, comme avec les instructions de contrôle de boucle, on peut sortir prématurément d'un bloc d'instructions de vérification de cas avec le mot-clé ##[[KeyPgExit EXIT]]##.
 
-{{fbdoc item="section" value="Looping Statements"}}
-	These statements are used for executing a block of statements repeatedly. Within a statement block, the loop can be prematurely re-executed using the ##[[KeyPgContinue CONTINUE]]## keyword, or broken out of using the ##[[KeyPgExit EXIT]]## keyword. Whether the loop is terminated by the condition or with the ##[[KeyPgExit EXIT]]## keyword, execution always begins at the first statement after the block.
+{{fbdoc item="section" value="Instructions de bouclage"}}
+	Ces déclarations sont utilisées pour l'exécution d'un bloc d'instructions à plusieurs reprises. Dans un bloc d'instructions, la boucle peut être prématurément réexécutée en utilisant le mot-clé ##[[KeyPgContinue CONTINUE]]## ou abandonné en utilisant le mot-clé ##[[KeyPgExit EXIT]]##. Que la boucle se termine par la condition ou avec le mot-clé ##[[KeyPgExit EXIT]]##, l'exécution commence toujours à la première instruction après le bloc.
 
 	=={{fbdoc item="keyword" value="KeyPgWhilewend|WHILE..WEND"}}==
-		Executes a block of statements while some expression evaluates to true (the condition). The expression is evaluated and checked before the block of statements is executed.
+		Exécute un bloc d'instructions tant qu'une expression est évaluée à "true" = vrai (la condition). L'expression est évaluée et vérifiée avant que le bloc d'instructions ne soit exécuté.
 
 	=={{fbdoc item="keyword" value="KeyPgFornext|FOR..NEXT"}}==
-		Like ##[[KeyPgWhilewend WHILE..WEND]]##, but more suited to loop a certain number of times. This loop initializes a so-called iterator with an initial value that is checked against a test expression. If the iterator compares less than or equal to the test expression (the condition), the block of statements is executed and the iterator gets incremented. The loop can also be setup so that the iterator gets decremented after every loop, in which case it is compared greater than or equal to the test expression. Iterators can be numeric data types like ##[[KeyPgInteger INTEGER]]## or ##[[KeyPgSingle DOUBLE]]##, or user-defined types. User-defined types must implement ##[[KeyPgOpFor operator for]]##.
+		Comme ##[[KeyPgWhilewend WHILE..WEND]]##, mais plus adapté pour boucler un certain nombre fois. Cette boucle initialise un itérateur avec une valeur initiale qui est comparée à une expression de test. Si la comparaison de l'itérateur donne un résultat inférieur ou égal à l'expression de test (la condition), le bloc d'instructions est exécuté et l'itérateur est alors incrémenté. La boucle peut également être configurée de telle sorte que l'itérateur soit décrémenté après chaque boucle, auquel cas il est comparé si supérieur ou égal à l'expression de test. Les itérateurs peuvent être des types de données numériques comme ##[[KeyPgInteger INTEGER]]## ou ##[[KeyPgSingle DOUBLE]]##, ou des types définis par l'utilisateur. Types définis par l'utilisateur doivent mettre en oeuvre l'##[[KeyPgOpFor Opérateur For]]##.
 	
 	=={{fbdoc item="keyword" value="KeyPgDoloop|DO..LOOP"}}==
-		The most versatile of the looping control flow statements, this loop can execute a block of statements while or until an expression evaluates to true (the condition). It can also delay the checking of the expression until after the block has executed the first time, useful when a block of statements needs to be executed //at least once//. Finally, this loop can have no condition at all, and merely loop indefinitely.
+		La plus polyvalente des instructions de bouclage, cette boucle peut exécuter un bloc d'instructions tant que/jusqu'à ce que l'expression soit évaluée à "true" = vrai (la condition). Elle peut aussi retarder le contrôle de l'expression jusqu'à ce que le bloc soit exécuté une première fois, utile quand un bloc d'instructions doit être exécuté //au moins une fois//. Enfin, cette boucle peut n'avoir aucune condition et simplement boucler indéfiniment.
 
 {{fbdoc item="back" value="CatPgProgrammer|Programmer's Guide"}}

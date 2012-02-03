@@ -1,33 +1,33 @@
 {{fbdoc item="title" value="SCREENGLPROC"}}----
-Gets the address of an OpenGL procedure
+Obtient l'adresse d'une procédure [[OpenGL]]
 
 {{fbdoc item="syntax"}}##
 	[[KeyPgDeclare declare]] [[KeyPgFunction function]] **""ScreenGLProc""** ( [[KeyPgByref byref]] procname [[KeyPgAs as]] [[KeyPgConstQualifier const]] [[KeyPgString string]] ) [[KeyPgAs as]] [[KeyPgAny any]] [[KeyPgPtr ptr]]
 ##
 {{fbdoc item="param"}}
 	##//procname//##
-		name of the procedure to retrieve the address of
+		nom de la procédure dont on cherche à déterminer l'adresse
 
 {{fbdoc item="desc"}}
-	This function can be used to get the address of any OpenGL procedure, to be used to retrieve the pointers to new functions associated with OpenGL extensions. If given procedure named ##//procname//## cannot be found, ##**screenglproc**## will return NULL (0).
+	Cette fonction peut être utilisée pour obtenir l'adresse de n'importe quelle procédure OpenGL, pour déterminer les pointeurs de nouvelles fonctions associées avec des extensions OpenGL. Si la procédure nommée ##//procname//## ne peut être trouvée, ##**ScreenGLProc**## retournera NULL (0).
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/gfx/screenglproc.bas"}}%%(freebasic)
-'' include fbgfx.bi for some useful definitions
+'' include fbgfx.bi pour des definitions utiles
 #include "fbgfx.bi"
 
 dim SwapInterval as function(byval interval as integer) as integer
 dim extensions as string
 
-'' Setup OpenGL and retrieve supported extensions
+'' Initialise OpenGL et determine extensions supportees
 ScreenRes 640, 480, 32,, FB.GFX_OPENGL
 ScreenControl FB.GET_GL_EXTENSIONS, extensions
 
 if (instr(extensions, "WGL_EXT_swap_control") <> 0) then
-	'' extension supported, retrieve proc address
+	'' extension supportees, determine adresse procedure
 	SwapInterval = ScreenGLProc("wglSwapIntervalEXT")
 	if (SwapInterval <> 0) then
-		'' Ok, we got it. Set OpenGL to wait for vertical sync on buffer swaps
+		'' Ok, nous l'avons recupere. Valide OpenGL pour attendre for syncro verticale pour buffer swaps
 		SwapInterval(1)
 	end if
 end if
@@ -35,13 +35,13 @@ end if
 
 
 {{fbdoc item="lang"}}
-	- Not available in the //[[CompilerOptlang -lang qb]]// dialect unless referenced with the alias ##**""__Screenglproc""**##.
+	- Non disponible dans le dialecte //[[CompilerOptlang -lang qb]]// sauf si référencé avec l'alias ##**""__Screenglproc""**##.
 
 {{fbdoc item="target"}}
-	- Not available for DOS target.
+	- Non disponible pour cible DOS.
 
 {{fbdoc item="diff"}}
-	- New to ""FreeBASIC""
+	- Nouveau pour ""FreeBASIC""
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgScreengraphics Screen (Graphics)]]##

@@ -1,5 +1,5 @@
 {{fbdoc item="title" value="TRIM"}}----
-Removes surrounding substrings or characters on the left and right side of a string
+Enlève les sous-chaînes qui entourent ou les caractères sur les côtés gauche et droit d'une chaîne.
 
 {{fbdoc item="syntax"}}##
 	[[KeyPgDeclare declare]] [[KeyPgFunction function]] **Trim** [[KeyPgOverload overload]] ( [[KeyPgByref byref]] //str// [[KeyPgAs as]] [[KeyPgConstQualifier const]] [[KeyPgString string]], [ **Any** ] [[KeyPgByref byref]] //trimset// [[KeyPgAs as]] [[KeyPgConstQualifier const]] [[KeyPgString string]] = " " ) [[KeyPgAs as]] [[KeyPgString string]]
@@ -10,19 +10,19 @@ Removes surrounding substrings or characters on the left and right side of a str
 ##
 {{fbdoc item="param"}}
 	##//str//##
-		The source string.
+		La chaîne source.
 	##//trimset//##
-		The substring to trim.
+		La sous-chaîne à enlever.
 
 {{fbdoc item="ret"}}
-	Returns the trimmed string.
+	Retourne la chaîne "nettoyée" à gauche et à droite.
 
 {{fbdoc item="desc"}}
-	This procedure trims surrounding characters from the left (beginning) and right (end) of a source string. Substrings matching ##//trimset//## will be trimmed if specified, otherwise spaces ([[CptAscii ASCII]] code 32) are trimmed.
+	Cette procédure élimine les caractères entourant à gauche (début) et à droite (fin) de la chaîne source. Les sous-chaînes correspondant à ##//trimset//## seront éliminées si spécifiées, autrement les espaces ([[CptAscii ASCII]] code 32) sont éliminés.
 
-	If the ##**Any**## keyword is used, any character matching a character in ##//trimset//## will be trimmed.
+	Si le mot-clef ##**Any**## est utilisé, chaque caractère correspondant à un caractère dans ##//trimset//## sera éliminé.
 	
-	All comparisons are case-sensitive.
+	Toutes les comparaisons sont sensibles à la casse.
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/strings/trim.bas"}}%%(freebasic)
@@ -34,7 +34,7 @@ dim s2 as string = "BaaBaaaaB With You aaBBaaBaa"
 Print "'" + trim(s2, "Baa") + "'"
 Print "'" + trim(s2, any "Ba") + "'"
 %%
-	will produce the output:
+	produira la sortie:
 
 %%
 '... Stuck in the middle ...'
@@ -44,15 +44,15 @@ Print "'" + trim(s2, any "Ba") + "'"
 %%
 
 {{fbdoc item="target"}}
-	- DOS version/target of ""FreeBASIC"" does not support the wide-character version of ##**Trim**##.
+	- DOS version/cible de ""FreeBASIC"" ne supporte pas la version larges-caractères de ##**Trim**##.
 
 {{fbdoc item="lang"}}
-	- Not available in the //[[CompilerOptlang -lang qb]]// dialect unless referenced with the alias ##**""__Trim""**##.
-	- The string type suffix "$" is obligatory in the //[[CompilerOptlang -lang qb]]// dialect.
-	- The string type suffix "$" is optional in the //[[CompilerOptlang -lang fblite]]// and //[[CompilerOptlang -lang fb]]// dialects.
+	- Non disponible dans le dialecte //[[CompilerOptlang -lang qb]]// sauf si référencé avec l'alias ##**""__Trim""**##.
+	- Le suffixe de type de chaîne "$" est obligatoire dans le dialecte //[[CompilerOptlang -lang qb]]//.
+	- Le suffixe de type de chaîne "$" est facultatif dans les dialectes //[[CompilerOptlang -lang fblite]]// et //[[CompilerOptlang -lang fb]]//.
 
 {{fbdoc item="diff"}}
-	- New to ""FreeBASIC""
+	- Nouveau pour ""FreeBASIC""
 
 {{fbdoc item="see"}}
 	- [[KeyPgLtrim Ltrim]] 

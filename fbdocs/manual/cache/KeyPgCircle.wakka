@@ -1,65 +1,65 @@
 {{fbdoc item="title" value="CIRCLE"}}----
-Graphics statement to draw a circle
+Instruction graphique pour tracer un cercle
 
 {{fbdoc item="syntax"}}##
-	**Circle** [//target//,] [STEP] (x,y), radius[, [color][, [start][, [end][, [aspect][, F]]]]]
+	**Circle** [//target//,] [STEP] (x,y), radius[, [color][,[start][, [end][, [aspect][, F]]]]]
 ##
 {{fbdoc item="param"}}
 	##//target//##
-		specifies buffer to draw on.  
+		spécifie le tampon sur lequel on dessine.  
 	##STEP##
-		indicates that coordinates are relative
+		indique que les coordonnées sont relatives
 	##(//x, y//)##
-		coordinates of the circle's center.
+		coordonnées du centre du cercle.
 	##//radius//##
-		radius	
+		rayon	
 	##//color//##
-		the color attribute.
+		l'attribut de couleur.
 	##//start//##
-		starting angle
+		l'angle de départ
 	##//end//##
-		ending angle
+		l'angle de fin
 	##//aspect//##
 		aspect ratio
 	##F##
-		fill mode indicator
+		indicateur de mode de remplissage
 
 {{fbdoc item="desc"}}
-	##**Circle**## will draw a circle, ellipse, or arc based on the parameters given to it. 
+	##**Circle**## trace un cercle, une ellipse ou un arc de cercled'après les paramètres fournis. 
 
-	##//target//## specifies buffer to draw on.  ##//target//## may be an image created with ##[[KeyPgImagecreate Imagecreate]]## or ##[[KeyPgGetgraphics Get (Graphics)]]##.  If omitted, ##//target//## defaults to the screen's current work page.  (See ##[[KeyPgScreenset Screenset]]##)
+	##//target//## spécifie le buffer oùl'on dessine. ##//target//## peut être une imagecréée avec ##<a href="KeyPgImagecreate.html">ImageCreate</a>## ou ##<a href="KeyPgGetgraphics.html">Get (Graphics)</a>##. Si omis, ##//target//##est par défaut la page valide de l'écran detravail. (Voir ##[[KeyPgScreenset Screenset]]##)<br \=""
 
-	The center of the shape will be placed on the destination surface at ##(//X//,//Y//)##. 
+	Le centre de la figure est placé sur la surfacedestination en ##(//X//,//Y//)##. 
 	
-	##//Radius//## denotes the radius of the shape. If aspect ratio is used, the biggest radius must be given here.
+	##//Radius//## donne le rayon de la figure. Si ##//aspectratio//## est utilisé, le plus grand rayon doitêtre indiqué ici.
 
-	##//Color//## denotes the color attribute, which is mode specific (see ##[[KeyPgColor Color]]## and ##[[KeyPgScreengraphics Screen (Graphics)]]## for details). If omitted, the current foreground color as set by the ##[[KeyPgColor Color]]## statement is used.
+	##//Color//## correspond à l'attribut de couleur,qui est spécifique au mode (voir ##<a href="KeyPgColor.html">Color</a>## et ##<a href="KeyPgScreengraphics.html">Screen (Graphics)</a>## pour desdétails). Si omis, la couleur de premier-plandéfinie par ##[[KeyPgColor Color]]##est utilisée.
 
-	The ##STEP## option specifies that ##//X//## and ##//Y//## are offsets relative to the current graphics cursor position.
+	L'option ##STEP## spécifie que ##//X//## et##//Y//## sont relatifs à la position du curseurgraphique.
 
-	##//start//## and ##//end//## are angles are in ##[[ProPgRadians radians]]##. These can range -2PI to 2PI; if you specify a negative angle, its value is changed sign and a line is drawn from the center up to that point in the arc. End angle can be less than start angle. If you do not specify start and end, a full circle/ellipse is drawn; if you you specify start but not end, end is assumed to be 2PI; if you specify end but not start, start is assumed to be 0.
+	##//start//## et ##//end//## sont des angles en ##<a href="ProPgRadians.html">radians</a>##.Valeurs de -2PI à 2PI; si vous spécifiez unangle négatif, savaleur change de signe et une ligne est tracée du centrejusqu'aupoint de l'arc de cercle. ##//end//## angle peutêtre inférieur à ##//start//##angle. Si vous omettez ##//start//## et ##//end//##,un cercle/ellipse complet est tracé; si vousspécifiez ##//start//## mais pas ##//end//##,##//end//## prend la valeur 2PI; si vous spécifiez##//end//## mais pas ##//start//##, ##//start//##prend la valeur 0.
 
-	##//aspect//## is the aspect ratio, or the ratio of the y radius over the x radius. The default value is the value required to draw a perfect circle on the screen, keeping pixel aspect ratio in mind. This value can be calculated as follows:
+	##//aspect//## est le ratio d'aspect, ou le ratio du y sur le xdu rayon. La valeur par défaut est la valeur requise pour tracerun cercle parfait à l'écran, en gardant le ratio d'aspectdes pixels. Cette valeur peut être calculée comme ceci:<br \=""
 	
 	##ratio = (y_radius / x_radius) * pixel_aspect_ratio##
 	
-	Where pixel_aspect_ratio is the ratio of the current mode width over the current mode height, assuming a 4:3 standard monitor. If aspect ratio is less than 1, radius is the x radius; if aspect is more or equal to 1, radius is the y radius.
-	'f' is the fill flag. If you specify this flag, the circle/ellipse will be filled with the selected color. This has no effect if you're drawing an arc.
+	Où ##//pixel_aspect_ratio//## est le ratio de la largeur sur la hauteur dans le mode courant, correspondant à un moniteur 4:3 standard. Si le ratio d'aspect est inférieur à 1, le rayon est le rayon x; s'il est supérieur ou égal à 1,le rayon est le rayon y.
+	F est l'indicateur de remplissage. Si vous le spécifiez, le cercle/ellipse serarempli avec la couleur sélectionnée. Ceci est sans effet dans le cas d'un arc decercle.
 	
-	Custom coordinates system set up by ##[[KeyPgWindow Window]]## and/or ##[[KeyPgViewgraphics View (Graphics)]]## affect the drawing operation; clipping set by ##[[KeyPgViewgraphics View]]## also applies. When ##**Circle**## finishes drawing, the current graphics cursor position is set to the supplied center.
+	Le système de coordonnées mis en place par ##[[KeyPgWindow Window]]##et/ou ##[[KeyPgViewgraphics View (Graphics)]]##modifie l'opération de dessin; le découpage (clipping) mis en place par ##<a href="KeyPgViewgraphics.html">View</a>## s'applique aussi. Quand ##**Circle**##termine le tracé, le curseur graphique courant est positionné sur le centre donné.
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/gfx/circle.bas"}}%%(freebasic)
-' Set 640x480 mode, 256 colors
+' Valide mode 640x480, 256 couleurs
 screen 18
 
-' Draws a circle in the center
+' Trace un cercle au centre
 circle (320, 240), 200, 15
 
-' Draws a filled ellipse
+' Trace une ellipse pleine
 circle (320, 240), 200, 2, , , 0.2, F
 
-' Draws a small arc
+' Trace un petit arc
 circle (320, 240), 200, 4, 0.83, 1.67, 3
 
 sleep
@@ -68,9 +68,9 @@ sleep
 {{image class="center" title="Circle example output" url="/images/circle.png"}}
 
 {{fbdoc item="diff"}}
-	- ##//target//## is new to ""FreeBASIC""
-	- The ""FreeBASIC"" implementation uses a different algorithm for ellipse/arc drawing than QB, so the result may not be equal to QB for every pixel.
-	- The F flag to draw filled circles/ellipses is new to ""FreeBASIC"".
+	- ##//target//## est nouveau pour ""FreeBASIC""
+	- ""FreeBASIC"" utilisant un algorithme différent de QB pour le tracé ellipse/arc,le résultat peut être légèrement différent pour chaque pixel.
+	- L'indicateur F pour remplir les cercles/ellipses est nouveau dans ""FreeBASIC"".<br \="">     ##//target//## Nouveau pour FreeBASIC
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgScreengraphics Screen (Graphics)]]##

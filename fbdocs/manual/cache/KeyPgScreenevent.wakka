@@ -1,5 +1,5 @@
 {{fbdoc item="title" value="SCREENEVENT"}}----
-Queries for and retrieves system events.
+Recherche et récupère les événements du système.
 
 {{fbdoc item="syntax"}}##
 	[[KeyPgDeclare declare]] [[KeyPgFunction function]] **""ScreenEvent""** ( [[KeyPgByval byval]] event [[KeyPgAs as]] [[KeyPgAny any]] [[KeyPgPtr ptr]] = 0 ) [[KeyPgAs as]] [[KeyPgInteger integer]]
@@ -9,29 +9,29 @@ Queries for and retrieves system events.
 ##
 {{fbdoc item="param"}}
 	##//event//##
-		Specifies the buffer where the function should store the event data.
+		Spécifie le tampon où la fonction stockera les données événements.
 
 {{fbdoc item="ret"}}
-	Returns ##-1## if there are pending events to be retrieved, ##0## otherwise.
+	Retourne ##-1## s'il existe des événements en attente d'être récupérés, ##0## autrement.
 
 {{fbdoc item="desc"}}
-	This function returns the latest available system event from the internal ""GfxLib"" events queue. By "event" we mean any mouse or keyboard activity, for example.
+	Cette fonction retourne le dernier événement système disponible dans la file d'attente interne des événements ""GfxLib"". Par "événement" on désigne une activité clavier ou souris quelconque.
 
-	The event data (if available) will be copied into the buffer pointed That should be declared as an  ##[[KeyPgEvent Event]]##
+	Les données événement (si disponibles) seront copiées dans le tampon pointé par le paramètre "event" pointed et seront déclarées comme un ##[[KeyPgEvent Evénement]]##
 	
-	__Querying for events__
-		The function returns ##-1## if there are pending events to be retrieved, ##0## otherwise. If the ##//event//## parameter is set to ##0## (the default if omitted) ##[[KeyPgScreenevent ScreenEvent]]## will not be able to copy the event data and it will not dequeue it from the internal events queue. Calling the function this way can be useful to check if there are pending events without actually fetching them.
+	__Interrogation des événements__
+		La fonction retourne ##-1## s'il y a des événements en attente de récupération, ##0## autrement. Si le paramètre ##//event//## est mis à ##0## (valeur par défaut si omis) ##[[KeyPgScreenevent ScreenEvent]]## ne sera pas en mesure de copier les données d'événement et ne va pas les sortir de la file d'attente interne des événements. L'appel de la fonction de cette façon peut être utile pour vérifier s'il y a des événements disponibles sans les aller chercher.
 
 	__Note__
-		If you receive a KEY_PRESS, KEY_RELEASE or KEY_REPEAT event, it does not clear the keyboard buffer.  If you need the buffer to be clear after you receive the event, you will need to clear it manually.  See ##[[KeyPgInkey Inkey]]##.
+		Si vous recevez un événement KEY_PRESS, KEY_RELEASE ou KEY_REPEAT, il n'effacera pas le tampon clavier.  Si vous désirez effacer le tampon clavier après réception d'un événement, vous devrez le faire manuellement.  Voir ##[[KeyPgInkey Inkey]]##.
 
 		
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/gfx/screenevent.bas"}}%%(freebasic)
-'' include fbgfx.bi for some useful definitions
+'' include fbgfx.bi pour des definitions utiles
 #include "fbgfx.bi"
 #if __FB_LANG__ = "fb"
-using fb '' constants and structures are stored in the FB namespace in lang fb
+using fb '' constantes et structures sont chargées dans l'espace de nom FB en langue fb
 #endif
 
 dim e as EVENT
@@ -113,13 +113,13 @@ loop
 %%
 
 {{fbdoc item="target"}}
-	- ##**Screenevent**## does not return window related events in the DOS version, but does return input events.
+	- ##**ScreenEvent**## ne retourne pas les événements liés à la fenêtre dans la version DOS, mais retourne les événements d'entrée.
 
 {{fbdoc item="lang"}}
-	- Not available in the //[[CompilerOptlang -lang qb]]// dialect.
+	- Non disponible dans le dialecte //[[CompilerOptlang -lang qb]]//.
 
 {{fbdoc item="diff"}}
-	- New to ""FreeBASIC""
+	- Nouveau pour ""FreeBASIC""
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgEvent Event]]##

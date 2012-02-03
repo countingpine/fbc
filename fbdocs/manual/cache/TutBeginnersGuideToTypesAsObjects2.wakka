@@ -3,12 +3,12 @@
 **Introduction.**
 ----
 
-Welcome to the second part of the tutorial, In this part I assume that you have read through Part 1, tried the examples, and experimented with some tests of your own.  I'll now cover some topics that I didn't include in Part 1.
+Bienvenue dans la deuxième partie du tutoriel. Dans cette partie je suppose que vous avez lu la Partie 1, essayé les exemples et expérimenté avec des tests de votre choix.  Je vais maintenant couvrir certains sujets que je n'ai pas inclus dans la Partie 1.
 
-**Indexed property.**
+**Property indexée.**
 ----
 
-An indexed property is a property that behaves like an array, except that like in the case of a regular property, a function gets called when you access it.  I'll start with a very short example just to show the syntax.
+Une ##**Property**## indexée est une ##**Property**## qui se comporte comme un tableau, sauf que comme dans le cas d'une ##**Property**## ordinaire, une fonction est appelée lorsque vous y accédez.  Je vais commencer par un exemple très court juste pour vous montrer la syntaxe.
 
 %%(freebasic)
 Type foo
@@ -32,7 +32,7 @@ baz.bar(0) = 42
 Print baz.bar(0)
 %%
 
-As you can see, the declaration for our indexed property is very similar to a regular one, except this time we add an argument for the index.  I include a dummy integer member, because a type must have at least one data member.  As you can see, the property is then used with (0), to denote we want to get/set the zeroth index, just the same as we would for an ordinary array.  Now I'll show you a slightly more useful example, and I will describe it:
+Comme vous pouvez le voir la déclaration de notre ##**Property**## indexée est très similaire à une ##**Property**## ordinaire, sauf que cette fois on ajoute un argument pour l'indice.  J'inclus un membre entier factice parce qu'un type doit avoir au moins un membre de données.  Comme vous pouvez le voir la ##**Property**## est alors utilisé avec (0), pour indiquer que nous voulons obtenir/définir l'indice "zéroième", exactement comme on le ferait pour un tableau ordinaire.  Maintenant, je vais vous montrer un exemple un peu plus utile et je vais le décrire:
 
 %%(freebasic)
 Type foo
@@ -76,12 +76,12 @@ baz.bar(1) = 42
 Print baz.bar(1)
 %%
 
-This time, I've added a constructor and destructor, which will allocate and deallocate a dynamic memory array, x, with the number of elements specified in the constructor.  Then when the property functions are invoked, I check if the index is within the bounds of the array, if it is then I perform the requested get or set.  If the index specified is out of bounds, then 'Error 6' occurs, which is a way to abort the program with FB's 'out of bounds error', you could replace this with your own error handling routines.  Try this out, by changing the code 'baz.bar(1) = 42' to 'baz.bar(10) = 42', and you'll see it in action, as we specified only 10 elements (index 0-9)
+Cette fois j'ai ajouté un ##**Constructor**## et un ##**Destructor**##, qui allouer et désallouer un tableau dynamique dans la mémoire, ##**x**##, avec le nombre d'éléments spécifiés dans le ##**Constructor**##.  Puis, quand les fonctions de ##**Property**## sont invoquées, Je vérifie si l'indice est dans les limites du tableau, s'il l'est alors j'effectue la demande obtenir/définir.  Si l'index spécifié est hors limites, alors ##**'Error 6'**## se produit, qui est un moyen d'interrompre le programme avec ##**'out of bounds error'**## de FB, vous pouvez remplacer ceci par votre propre routine de traitement des erreurs.  Essayez ceci en modifiant le code ##**'baz.bar(1) = 42'**## par ##**'baz.bar(10) = 42'**##, et vous verrez ceci en action, car nous n'avons précisé que 10 éléments (indice 0-9)
 
-**Copy constructor.**
+**"Constructor" de copie.**
 ----
 
-A copy constructor is a special type of constructor, that is used to make a copy from an existing object.  When you write code like this:
+Un ##**Constructor**## de copie est un type spécial de ##**Constructor**##, qui est utilisé pour faire une copie d'un objet existant.  Lorsque vous écrivez du code comme celui-ci:
 
 %%(freebasic)
 Type foo
@@ -92,7 +92,7 @@ Dim As foo a
 Dim As foo b = a
 %%
 
-What happens is FreeBASIC automatically generates hidden code to construct b, by making a copy of a, this is the default copy constructor, and simply copies the data fields (members) across.  We can define our own copy constructor, here's just a brief snippet to show how we declare it.
+Ce qui se passe c'est que FreeBASIC génère automatiquement du code caché pour construire **b**, en faisant une copie de **a**, c'est le ##**Constructor**## de copie par défaut, et il recopie simplement les champs de données (membres).  Nous pouvons définir notre propre ##**Constructor**## de copie; voici juste un bref extrait pour montrer comment on le déclare.
 
 %%(freebasic)
 Type foo
@@ -101,12 +101,12 @@ Type foo
 End Type
 %%
 
-This will come in very useful for a reason I will now explain.
+Ce sera très utile pour une raison que je vais maintenant vous expliquer.
 
-**Deep/Shallow copy.**
+**Copie profonde/superficielle.**
 ----
 
-In that previous example, where we did the code 'Dim As foo b = a', that was what is known a shallow copy, it just simply copied the data fields across, however sometimes this is not desirable, imagine that one of the members is a pointer, what will happen is that the address that pointer points to will be copied across, so both objects will point to the same memory.  An example of this follows:
+Dans l'exemple précédent où nous avions le code ##**'Dim As foo b = a'**##, c'est ce qu'on appelle une copie superficielle, une simple recopie des champs de données a été effectuée, mais parfois ce n'est pas souhaitable, imaginez que l'un des membres soit un pointeur, ce qui va arriver, c'est que l'adresse vers laquelle pointe le pointeur sera recopiée, ainsi les deux objets pointeront vers la même zone mémoire.  L'exemple suivant illustre cela:
 
 %%(freebasic)
 Type foo
@@ -129,7 +129,7 @@ Print *a.x, *b.x
 DeAllocate(a.x)
 %%
 
-As you see, because they both point to the same memory, changing one affects the other.  As explained in the previous section on the copy constructor, FreeBASIC creates the code to do shallow copies by default.  This is also true if we do an assignment like:
+Comme vous le voyez,  parce qu'ils pointent tous deux vers la même mémoire, changer l'un affecte l'autre.  Comme expliqué dans la section précédente sur le ##**Constructor**## de copie, FreeBASIC crée le code pour faire des copies superficielles par défaut. Cela est également vrai si nous faisons une affectation comme:
 
 %%(freebasic)
 Dim As foo a, b
@@ -137,7 +137,7 @@ Dim As foo a, b
 b = a
 %%
 
-In this case also, FreeBASIC creates a default assignment operator (Let) to perform a shallow copy.  In order to do deep copies, we need to define a copy constructor, and an assignment operator, that is overloaded to accept our type.  Here's an example using them.
+Dans ce cas également FreeBASIC crée un opérateur d'affectation par défaut (Let) pour effectuer une copie superficielle.  Afin de faire des copies complètes nous avons besoin de définir un ##**Constructor**## de copie et un opérateur d'assignation qui est surchargé pour accepter notre ##**Type**##.  Voici un exemple qui les utilise.
 
 %%(freebasic)
 Type foo
@@ -182,7 +182,7 @@ Print *a.x, *b.x
 Print *a.x, *b.x
 %%
 
-As you can see, the copy constructor gets called on the line 'Dim As foo b = a' and this time, we allocate some memory, and copy the data in the new copy constructor, so that we can adjust x in one object without it affecting the other.  If we change the main code as follows:
+Comme vous pouvez le voir le ##**Constructor**## de copie est appelé sur la ligne '##**Dim As foo b = a**##' et cette fois, nous avons alloué de la mémoire, et copié les données dans le nouveau ##**Constructor**## de copie, de sorte que nous pouvons ajuster **x** dans un objet sans que cela affecte les autres.  Si nous modifions le code principal comme suit:
 
 %%(freebasic)
 Dim As foo a, b
@@ -197,7 +197,7 @@ Print *a.x, *b.x
 Print *a.x, *b.x
 %%
 
-Then this time the assignment operator is used. Note that in the assignment operator code, we don't need to allocate any memory because it has already been allocated in the default constructor, we just need to copy the data across.  The line '*x = *obj.x' performs this copy.  If we had something more advanced, like a dynamic memory array, then we would need to reallocate the memory to be the correct size to fit the data being copied.  Here's a more advanced version just to show that.
+Alors, à ce moment-là, l'opérateur d'affectation est utilisé. Notez que dans le code de l'opérateur d'affectation nous n'avons pas besoin d'allouer de la mémoire car elle a déjà été allouée dans le ##**Constructor**## par défaut, il suffit de copier les données dedans.  La ligne '##***x = *obj.x**##' effectue cette copie.  Si nous avions quelque chose de plus avancé comme un tableau dynamique en mémoire, nous aurions besoin de réallouer de la mémoire, pour avoir la bonne taille en fonction des données qui sont copiées.  Voici une version plus avancée juste pour montrer cela.
 
 %%(freebasic)
 Type foo
@@ -257,19 +257,19 @@ b = a ' Now using the assignment operator
 Print a.x[0], a.x[1], b.x[0], b.x[1]
 %%
 
-This may seem quite complex at first, it's worth just reading through it again, and experimenting with the examples, it's not too tricky once you're used to it.
+Cela peut paraître assez complexe au premier abord, mais cela vaut la peine d'une relecture, et d'expérimenter avec les exemples, ce n'est pas trop compliqué une fois qu'on a l'habitude de l'utiliser.
 
-**Passing objects to functions ByVal**
+**Passage d'objets aux fonctions par valeur (ByVal)**
 ----
 
-The idea of deep and shallow copies also applies to passing an object to a function by value.  When you pass a reference to an object (ByRef), you can modify the object, and these modifications will persist, however you can also pass by value, which will mean you can modify it without the changes persisting outside of the function.  When an object is passed by value to a function, a new copy is created, and if that object has a copy constructor, then this is invoked, if it doesn't, then the hidden shallow copy is performed.  Once the function ends, the objects destructor is called.
+L'idée de copies profondes et peu profondes s'applique également au passage par valeur d'un objet à une fonction.  Lorsque vous transmettez une référence à un objet (ByRef), vous pouvez modifier l'objet, et ces modifications persisteront, mais vous pouvez également le passer par la valeur, ce qui signifie que vous pouvez le modifier sans que les changements persistent en dehors de la fonction.  Quand un objet est passé par valeur à une fonction, une nouvelle copie est créée et si cet objet a un ##**Constructor**## de copie, alors celui-ci est invoqué, s'il n'en a pas, alors une copie cachée superficielle est effectuée.  Une fois que la fonction se termine, le ##**Destructor**## des objets est appelé.
 
 **New/Delete**
 ----
 
-New and delete are special operators for dynamically allocating memory, then destroying it.  Because it is used with dynamic memory, it is used with pointers.  In all the examples up until now, we just used Dim to create our objects, this will create them on the stack, but by using new we can create them dynamically, which can allow more flexibility, just like using Allocate/DeAllocate with normal memory.  Another important thing about new, is that you don't need to check if the pointer is NULL after new, like you would if you did allocate.  If new fails, it causes an exception, which will end the program.  In later versions of FreeBASIC, it is likely that some kind of try..catch mechanism will be created to allow better exception handling, but as of the time of writing, this is not yet implemented.  
+##**New**## et ##**Delete**## sont des opérateurs spéciaux d'allocation dynamique de mémoire, puis ils la détruisent.  Parce qu'ils sont utilisés avec de la mémoire dynamique, ils sont utilisés avec des pointeurs.  Dans tous les exemples jusqu'à présent, nous avons juste utilisé ##**Dim**## pour créer nos objets, cela va les créer sur la pile, mais en utilisant ##**New**## nous pouvons les créer dynamiquement, ce qui peut permettre plus de flexibilité, tout comme l'utilisation de ##**Allocate/DeAllocate**## avec la mémoire normale.  Une autre chose importante à propos de ##**New**##, est que vous n'avez pas besoin de vérifier si le pointeur est NULL après ##**New**##, comme vous le feriez si vous aviez utilisé ##**Allocate**##.  Si ##**New**## échoue, il provoque une exception, ce qui terminera le programme.  Dans les versions ultérieures de FreeBASIC, il est probable qu'un certain type de mécanisme ##**try..catch**## sera créé afin de permettre une meilleure gestion des exceptions, mais au moment où j'écris, ce n'est pas encore mis en oeuvre.  
 
-There are two different varieties of the new/delete.  The first type, creates just a single element or object, for example:
+Il existe deux variantes différentes de ##**New**##/##**Delete**##.  Le premier type, crée seulement un seul élément ou objet, par exemple:
 
 %%(freebasic)
 Dim As Integer ptr foo = new Integer
@@ -280,7 +280,7 @@ Print *foo
 Delete foo
 %%
 
-This will create a new Integer, then destroy it when we call delete.  Remember I used ptr, because it is dynamic memory.  For simple data types you can also specify a default value, by placing it in parenthesis after the data type, ie:
+Cela va créer un ##**New Integer**##, puis le détruire quand nous appelons ##**Delete**##.  Souvenez-vous j'ai utilisé ##**Ptr**##, parce que c'est de la mémoire dynamique.  Pour les types de données simples vous pouvez également spécifier une valeur par défaut, en la plaçant entre parenthèses après le type de données, à savoir:
 
 %%(freebasic)
 Dim As Integer ptr foo = new Integer(42)
@@ -290,7 +290,7 @@ Print *foo
 Delete foo
 %%
 
-This also works for UDT's with just simple data fields:
+Cela fonctionne également pour les types de données utilisateur avec seulement de simples champs de données:
 
 %%(freebasic)
 Type foo
@@ -305,7 +305,7 @@ Print bar->x, bar->y
 Delete bar
 %%
 
-This initialization won't work for more complex types involving constructors/destructors etc., however a useful feature is that when using new/delete with objects, it also calls the constructor and destructor, try the following example:
+Cette initialisation ne fonctionne pas pour les types plus complexes impliquant des ##**Constructor**##s/##**Destructor**##s etc, cependant il y a une fonctionnalité utile, c'est que lors de l'utilisation ##**New**##/##**Delete**## avec des objets, il appelle également ##**Constructor**## et ##**Destructor**##, essayez l'exemple suivant:
 
 %%(freebasic)
 Type foo
@@ -328,9 +328,9 @@ Dim As foo ptr bar = new foo
 Delete bar
 %%
 
-You will see that the constructor and destructor for the object are called.
+Vous verrez que le ##**Constructor**## et le ##**Destructor**## de l'objet sont appelés.
 
-The second type of new/delete is for creating arrays, this time the number of elements is placed after the dataype in square brackets '[]'.  When using the array version, you must also use 'delete[]' instead of 'delete', so that FreeBASIC knows you are deleting an array, here is a simple example using the Integer type:
+Le deuxième type de ##**New**##/##**Delete**## est pour la création de tableaux, cette fois le nombre d'éléments est placé entre crochets '[]', après le type de donnée.  Lorsque vous utilisez la version tableau, vous devez également utiliser '##**delete[]**##' au lieu de '##**delete**##', de sorte que FreeBASIC sait que vous supprimez un tableau, voici un exemple simple utilisant le type ##**Integer**##:
 
 %%(freebasic)
 Dim As Integer ptr foo = new Integer[20]
@@ -341,7 +341,7 @@ Print foo[1]
 Delete[] foo
 %%
 
-This will create a dynamic array, with 20 Integer elements.  It should be noted this is different from Allocate, which takes the number of bytes as its argument; using new, you should specify the number of elements.  The array method works just the same for objects:
+Cela va créer un tableau dynamique, avec 20 éléments entiers.  Il convient de noter que ceci est différent de ##**Allocate**##, qui nécessite le nombre d'octets comme argument; en utilisant ##**New**##, vous devez spécifier le nombre d'éléments.  La méthode tableau fonctionne de la même façon pour les objets:
 
 %%(freebasic)
 Type foo
@@ -364,14 +364,14 @@ Dim As foo ptr bar = new foo[3]
 Delete[] bar
 %%
 
-When you run this code, you will see that three constructor/destructor pairs are called, because we created an array of three instances of foo.
+Lorsque vous exécuterez ce code, vous verrez que trois paires de ##**Constructor**##/##**Destructor**## sont appelés, parce que nous avons créé une gamme de trois instances de "foo".
 
-You must remember to call Delete, or Delete[] for any memory allocated with New, or you will cause a memory leak, just like the way you must rememeber to call DeAllocate for any memory you allocate with the Allocate function.
+Vous devez vous souvenir d'appeler ##**Delete**## ou ##**Delete[]**## pour toute mémoire allouée avec ##**New**##, ou vous provoquerez une perte de mémoire, tout comme vous devez vous souvenir d'appeler ##**DeAllocate**## pour toute mémoire que vous allouez avec la fonction ##**Allocate**##.
 
 **Name Mangling**
 ----
 
-Name mangling, also known as name decoration, is something that happens behind the scenes, at a lower level, and as such is not essential to know about.  The reason for name mangling is to resolve problems that are involved with more than one function sharing the same name, which happens when functions are overloaded, or are part of a type.  Take for example the overloaded subs shown below:
+##**Name mangling**##, aussi appelé ##**name decoration**##, est quelque chose qui se passe en coulisses, à un niveau inférieur, et en tant que tel n'est pas essentiel à connaître.  La raison du ##**Name mangling**## est de résoudre les problèmes provoqués par le fait que plusieurs fonctions ont le même nom, ce qui arrive lorsque des fonctions sont surchargées ou font partie d'un type.  Prenez par exemple les ##**sub**##s surchargées ci-dessous:
 
 %%(freebasic)
 Sub foo overload ()
@@ -383,12 +383,12 @@ Sub foo(ByVal i As Integer)
 End Sub
 %%
 
-If we didn't have name mangling, then both might be known at a lower level as FOO, which would cause a name clash, so they have to be decorated in order to know which one should be called when they are used.  For the first sub, the compiler actually creates a sub called _Z3FOOv, and for the second it creates a sub called _Z3FOOi.  The compiler then remembers these, and chooses the appropriate sub to call, depending on how you call it, for example 'foo()' will actually call _Z3FOOv, and 'foo(1)' will actually call _Z3FOOi.  We can spot something from this, that the 'v' stands for void (no argument), and 'i' stands for integer.  The full details of name mangling are quite complex, and vary between compilers, the Microsoft compilers use a different name mangling scheme to GNU compilers, and other compilers may use different schemes as well.  The main thing we need to know, is that FreeBASIC follows the GCC 3.x ABI (Application binary interface), meaning that any overloaded functions, or complex types will only be compatible with other compilers using the same scheme.  This is an unfortunate limitation, but it is not really a FreeBASIC problem, it is common of all the compilers that use advanced features, and even if all the compiler authors agreed on a common name mangling scheme, there are still other issues that would cause incompatability.
+Si nous n'avions pas le ##**name mangling**##, alors les deux pourraient être connues à un niveau inférieur sous le nom de FOO, ce qui provoquerait un conflit de nom, elles doivent donc être "décorées" pour savoir laquelle doit être appelée quand ils sont utilisées.  Pour la première ##**sub**##, le compilateur crée en fait une ##**sub**## appelée _Z3FOOv et pour la seconde, il crée une ##**sub**## appelée _Z3FOOi.  Le compilateur se souvient alors de cela et choisit la ##**sub**## appropriée à appeler, selon la façon dont vous l'appelez, par exemple 'foo()' appellera effectivement _Z3FOOv, et 'foo(1)' appellera _Z3FOOi.  Nous pouvons deviner quelque chose, que 'v' est utilisé pour "void" (pas d'argument), et 'i' pour "integer".  Les détails complets de ##**name mangling**## sont assez complexes et varient entre les compilateurs, les compilateurs Microsoft utilisent un schéma de ##**name mangling**## différent de celui des compilateurs GNU et d'autres compilateurs peuvent utiliser des systèmes différents, eux aussi.  La principale chose que nous devons savoir, La principale chose que nous devons savoir, c'est que FreeBASIC suit GCC 3.x ABI (Application binary interface), ce qui signifie que toutes les fonctions surchargées, ou des types complexes ne seront compatibles qu'avec d'autres compilateurs utilisant le même schéma.  Il s'agit d'une limitation malheureuse, mais ce n'est pas vraiment un problème FreeBASIC, il est commun à tous les compilateurs qui utilisent des fonctionnalités avancées, et même si tous les auteurs compilateur étaient sur un schéma commun de ##**name mangling**##, il y aurait d'autres questions qui seraient cause d'incompatibilité.
 
-**Implicit this**
+**"this" implicite**
 ----
 
-This again is not necessary to know about mostly, its something that happens behind the scenes at a lower level.  When you call a member function of an object, what actually happens is a hidden first parameter is passed, so that the function knows which instance of the object is being refered to.  This is also true for the property/constructor/destructor/operator members.  If we look at a very simple example:
+De nouveau, il n'est pas impératif de tout connaître sur ce sujet, c'est quelque chose qui se passe en coulisses à un niveau inférieur.  Lorsque vous appelez une fonction membre d'un objet, ce qui se passe c'est qu'un paramètre caché est passé, de sorte que la fonction sait quelle instance de l'objet est visée.  Cela est également vrai pour les membres ##**property/constructor/destructor/operator**##.  Si nous regardons un exemple très simple:
 
 %%(freebasic)
 Type foo
@@ -404,7 +404,7 @@ Dim baz As foo
 baz.bar(5)
 %%
 
-What actually happens behind the scenes is something essentially equivalent to this:
+Ce qui se passe réellement dans les coulisses est quelque chose d'essentiellement équivalent à cela:
 
 %%(freebasic)
 Type foo
@@ -419,12 +419,12 @@ Dim baz As foo
 foo_bar(baz, 5)
 %%
 
-This method using an explicit 'this' is often used in languages that do not have facilities to make it easier.  OOP is really just a set of concepts, that can be mostly coded in almost any language, some things are more difficult to implement, such as constructors, you would have to explicitly call a 'create', or 'init' function.  For some things such as private/public distinction, it is even more difficult or impossible because the compiler does not know to enforce them.  The reason for adding OOP features to a language is to hide a lot of this, and add syntactic sugar to make it simpler to do, or more transparent in use, such as the way we can use properties as if they were ordinary data members, rather than functions, which is what they really are.
+Cette méthode utilisant un '##**this**##' explicite est souvent utilisée dans des langues qui ne disposent pas de moyens pour rendre cela plus facile.  OOP (Programmation Orientée Objet) est tout simplement un ensemble de concepts, qui peuvent être codés dans la plupart des langages, certaines choses sont plus difficiles à mettre en œuvre, comme les constructeurs, vous auriez à  appeler explicitement une fonction 'create' ou 'init'.  Pour certaines choses telles que la distinction public / privé, c'est encore plus difficile, voire impossible, parce que le compilateur ne sait pas les faire respecter.  La raison de l'ajout de fonctionnalités à un langage orienté objet est de cacher beaucoup de cela, et d'ajouter le sucre syntaxique pour rendre cela plus simple à faire, ou plus transparent dans l'utilisation, comme la façon dont nous pouvons utiliser les propriétés comme si elles étaient membres ordinaires de données, plutôt que des fonctions, qui est ce qu'elles sont vraiment.
 
-**Hints for debugging/profiling**
+**Conseils pour le débogage/profilage**
 ----
 
-When using GDB or other debuggers, and the gprof profiling tool, the information shown is in the ""C++"" syntax, and all your variable names and other symbols are shown in upper case, here is just a very short overview to help you understand how these are shown:
+Lorsque vous utilisez ##**GDB**## ou autres débogueurs, et l'outil de profilage ##**gprof**##, l'information est présentée dans la syntaxe ""C++"" et tous vos noms de variables et autres symboles sont affichés en majuscules, voici juste un très bref tour d'horizon pour vous aider à comprendre comment ils sont affichés:
 
 Here's an example type:
 
@@ -442,20 +442,20 @@ Type bar
 End Type
 %%
 
-When using GDB, these will be shown as follows (note in ""C++"" they use :: where we would use . (dot), '::' is known as the scope resolution operator):
+Si vous utilisez ##**GDB**##, ils seront affichés comme suit (notez qu'en ""C++"" on utilise :: où on devrait utiliser . (dot), '::' est connu comme l'opérateur de résolution de portée):
 
-  BAR::BAR()            - The default constructor
-  BAR::BAR(BAR&)        - The copy constructor (& in ""C++"" means a reference, like byref)
-  BAR::BAR(int)         - The constructor taking an integer argument (note there is no special symbol to denote ByVal, as this is the default passing method in C/""C++"")
-  BAR::~BAR()           - The destructor
-  BAR::operator void*() - A cast to Any ptr (void is similar to Any, * means pointer)
-  BAR::operator=(int)   - The assignment operator (Let), dentoted by '=', in C/""C++"" '=' is assignment, '""==""' is equality testing.
-  BAR::FOO(int)         - Property foo setter, taking an integer argument
-  BAR::FOO()            - Property foo getter
+  BAR::BAR()            - Le constructeur par défaut
+  BAR::BAR(BAR&)        - Le constructeur de copie (& en ""C++"" signifie une référence, comme byref)
+  BAR::BAR(int)         - Le constructeur prenant un argument entier (notez qu'il n'y a aucun symbole spécial pour désigner ByVal, car c'est la valeur de passage par défaut dans les méthodes C/""C++"")
+  BAR::~BAR()           - Le destructeur
+  BAR::operator void*() - Un "cast" vers "Any ptr" (void est similaire à Any, * signifie pointeur)
+  BAR::operator=(int)   - L'opérateur d'affectation (Let), désigné par '=', en C/""C++"" '=' est une affectation, '""==""' teste l'égalité.
+  BAR::FOO(int)         - Validateur de Property foo, prenant un argument entier
+  BAR::FOO()            - Récupérateur de Property foo
 
-Member sub/functions are shown in the same way as properties, indexed properties are shown the same also, just with the extra argument for the index.
+Les sub/functions membres sont présentés de la même manière que les propriétés, les propriétés indexées sont indiquées aussi de même, juste avec un argument supplémentaire pour l'indice.
 
-Here is how the FB data types will be shown:
+Voici comment les types de données FB seront affichés:
 
 Any ptr     - void *
 ZString ptr - char *
@@ -469,9 +469,9 @@ uinteger    - unsigned int
 longint     - long long
 ulongint    - unsigned long long
 
-I hope that helps you get started with understanding how things are displayed in GDB/gprof, a little experimentation will always help.
+J'espère que ceci vous aura aidé à comprendre comment les choses sont affichées dans GDB / gprof, un peu d'expérimentation facilitera les choses.
 
-**More reading**
+**Autres lectures**
 ----
 
 http://www.freebasic.net/wiki/wikka.php?wakka=KeyPgOpNew

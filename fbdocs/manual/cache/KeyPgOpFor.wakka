@@ -1,5 +1,5 @@
 {{fbdoc item="title" value="Operator For (iteration)"}}----
-Declares or defines operators used by a ##[[KeyPgFornext For...Next]]## loop with user defined type variables
+Déclare ou définit les opérateurs utilisés par une boucle ##[[KeyPgFornext For...Next]]## avec des variables de type défini par l'utilisateur
 
 {{fbdoc item="syntax"}}##
 	{ [[KeyPgType Type]] | [[KeyPgClass Class]] | [[KeyPgUnion Union]] } //typename//
@@ -15,28 +15,28 @@ Declares or defines operators used by a ##[[KeyPgFornext For...Next]]## loop wit
 ##
 {{fbdoc item="param"}}
 	##//typename//##
-		name of the ##[[KeyPgType Type]]##, ##[[KeyPgClass Class]]##, or ##[[KeyPgUnion Union]]##
+		nom du ##[[KeyPgType Type]]##, de la ##[[KeyPgClass Class]]## ou de l'##[[KeyPgUnion Union]]##
 	##//stp//##, ##//step_value//##
-		a ##//typename//## object used as an incremental value
+		un objet ##//typename//## utilisé comme valeur pour l'incrémentation
 	##//iterator//##
-		a ##//typename//## object used as an iterator
+		un objet ##//typename//## utilisé comme itérateur
 	##//end_value//##
-		a ##//typename//## object used as a loop-terminating value
+		un objet ##//typename//## utilisé comme valeur déterminant la fin de la boule
 	##//start_value//##
-		a ##//typename//## object used to copy construct or assign to the iterator initially
+		un objet ##//typename//## utilisé pour la copie de construction ou à assigner à l'itérateur initial
 
 {{fbdoc item="desc"}}
-	##**Operator For**##, ##[[KeyPgOpNext Operator Next]]## and ##[[KeyPgOpStep Operator Step]]## can be overloaded in user-defined type definitions to allow objects of that type to be used as iterators and step values in ##[[KeyPgFornext For...Next]]## loops.
+	##**Operator For**##, ##[[KeyPgOpNext Operator Next]]## et ##[[KeyPgOpStep Operator Step]]## peuvent être surchargés dans des définitions de type par l'utilisateur pour allouer des objets de ce type comme itérateur ou valeur d'incrémentation, dans les boucles ##[[KeyPgFornext For...Next]]##.
 
-	##**Operator For**## is called immediately after copy constructing or assigning to the iterator object, and allows the object to perform any additional initialization needed in preparation for the loop.
+	##**Operator For**## est appelé immédiatement après la copie de construction ou assigné à l'objet itérateur et permet à l'objet d'effectuer toute initialisation supplémentaire nécessaire à la préparation de la boucle.
 
-	The first version of ##**Operator For**## is used if no step value is given in the ##[[KeyPgFornext For...Next]]## statement. If a step value is given, the second version is used and is passed the step value.
+	La première version de ##**Operator For**## est utilisée si aucune valeur d'incrémentation n'est donné dans la déclaration ##[[KeyPgFornext For...Next]]##. Si une valeur d'incrémentation est donnée, la seconde version est utilisée et une valeur d'incrémentation est passée.
 
 {{fbdoc item="ex"}}
-	See the [[KeyPgOpStep Operator Step]] examples.
+	Voir les exemples de [[KeyPgOpStep Operator Step]].
 
 {{fbdoc item="lang"}}
-	- Only available in the //[[CompilerOptlang -lang fb]]// dialect.
+	- Disponible seulement dans le dialecte //[[CompilerOptlang -lang fb]]//.
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgOpNext Operator Next]]##

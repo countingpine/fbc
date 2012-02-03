@@ -1,34 +1,34 @@
 {{fbdoc item="title" value="Implicit Declarations"}}----
-Lazy declaration of variables.
+Déclarations "rapides" de variables.
 
-	The //[[CompilerOptlang qb]]// and //[[CompilerOptlang fblite]]// ""FreeBASIC"" language dialects allow variable names to be used without declaring them first. This is called implicit or lazy declaration since the actual declaration is inferred from how the name is first used.
+	Les dialectes //[[CompilerOptlang qb]]// et //[[CompilerOptlang fblite]]// du langage ""FreeBASIC"" permettent aux noms des variables d'être utilisés sans les déclarer au préalable. C'est ce qu'on appelle une déclaration implicite ou "lazy" puisque la déclaration réelle est déduite de la façon dont le nom est d'abord utilisé.
 
-{{fbdoc item="section" value="Variable Type"}}
+{{fbdoc item="section" value="Type de variable"}}
 
-	When a variable is implicitly declared, its type depends on one of two things: the most recent default implicit type directive, if any, or the variable type suffix symbol used, if any.
+	Quand une variable est implicitement déclarée, son type dépend de deux choses: la directive de type implicite par défaut, s'il y en a une, ou le suffixe de type de variable utilisé, s'il existe.
 
-	{{fbdoc item="subsect" value="Default type"}}
+	{{fbdoc item="section" value="Type par défaut"}}
 
-		In the //[[CompilerOptlang qb]]// dialect, implicitly declared variables default to ##[[KeyPgSingle Single]]## type, while in the //[[CompilerOptlang fblite]]// dialect they default to ##[[KeyPgInteger Integer]]## type.
+		Dans le dialecte //[[CompilerOptlang qb]]//, les variables déclarées implicitement sont par défaut de type ##[[KeyPgSingle Single]]##, alors que dans le dialecte //[[CompilerOptlang fblite]]// elles prennent par défaut le type ##[[KeyPgInteger Integer]]##.
 
-	{{fbdoc item="subsect" value="Default implicit type directives"}}
+	{{fbdoc item="section" value="Directives implicites de type par défaut"}}
 		
-		"##DEFxxx##" directives dictate the new default type for any following implicit variable declarations. These directives are: ##[[KeyPgDefbyte DefByte]]##, ##[[KeyPgDefubyte DefUByte]]##, ##[[KeyPgDefshort DefShort]]##, ##[[KeyPgDefushort DefUShort]]##, ##[[KeyPgDefint DefInt]]##, ##[[KeyPgDefuint DefUInt]]##, ##[[KeyPgDeflng DefLng]]##, ##[[KeyPgDefsng DefSng]]##, ##[[KeyPgDefdbl DefDbl]]## and ##[[KeyPgDefstr DefStr]]##.
+		Les directives "##DEFxxx##" dictent le nouveau type par défaut pour toutes les déclarations implicites de variables qui les suivent. Ces directives sont: ##[[KeyPgDefbyte DefByte]]##, ##[[KeyPgDefubyte DefUByte]]##, ##[[KeyPgDefshort DefShort]]##, ##[[KeyPgDefushort DefUShort]]##, ##[[KeyPgDefint DefInt]]##, ##[[KeyPgDefuint DefUInt]]##, ##[[KeyPgDeflng DefLng]]##, ##[[KeyPgDefsng DefSng]]##, ##[[KeyPgDefdbl DefDbl]]## et ##[[KeyPgDefstr DefStr]]##.
 
-	{{fbdoc item="subsect" value="Variable type suffix symbols"}}
+	{{fbdoc item="section" value="Suffixes symboles de types de variables"}}
 
-		Variable names suffixed with one of a certain set of symbols will be implicitly declared of a certain type. These symbols are: ##'%'## for ##[[KeyPgInteger Integer]]##, ##'&'## for ##[[KeyPgLong Long]]##, ##'!'## for ##[[KeyPgSingle Single]]##, ##'#'## for ##[[KeyPgDouble Double]]## and ##'$'## for ##[[KeyPgString String]]##. These symbols override previous "##DEFxxx##" directives, if any.
+		Les variables dont le nom a un suffixe (d'un certain ensemble de symboles) seront implicitement déclarées d'un certain type. Ces symboles sont: ##'%'## pour ##[[KeyPgInteger Integer]]##, ##'&'## pour ##[[KeyPgLong Long]]##, ##'!'## pour ##[[KeyPgSingle Single]]##, ##'#'## pour ##[[KeyPgDouble Double]]## et ##'$'## pour ##[[KeyPgString String]]##. Ces de symboles remplacent les directives "##DEFxxx##" précédentes, s'il y en avait.
 
-{{fbdoc item="section" value="Implicit Array Declaration"}}
+{{fbdoc item="section" value="Déclaration implicite de tableau"}}
 
-	Currently, ""FreeBASIC"" does not support implicit declaration of arrays.
+	Actuellement, ""FreeBASIC"" ne supporte pas les déclarations implicites de tableaux.
 
-{{fbdoc item="section" value="Debugging"}}
+{{fbdoc item="section" value="Débogage"}}
 
-	For full debugging support, all variables must be explicitly declared and suffixes should not be used. The use of ##[[KeyPgOptionexplicit Option Explicit]]## is recommended to turn of support for implicit declarations, so that mistyped variable names are caught at compile time by the compiler.
+	Pour le support complet du débogage, toutes les variables doivent être explicitement déclarées et les suffixes ne doivent pas être utilisés. L'utilisation de ##[[KeyPgOptionexplicit Option Explicit]]## est recommandée pour désactiver le support des déclarations implicites, de sorte que les noms de variables mal écrits sont pris au moment de la compilation.
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgOptionexplicit Option Explicit]]##
-	- [[CompilerOptlang FreeBASIC Language Dialects]]
+	- [[CompilerOptlang Les dialectes du langage FreeBASIC]]
 
 {{fbdoc item="back" value="CatPgProgrammer|Programmer's Guide"}} 

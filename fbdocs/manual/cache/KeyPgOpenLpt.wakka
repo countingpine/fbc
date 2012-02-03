@@ -1,54 +1,54 @@
 {{fbdoc item="title" value="OPEN LPT"}}----
-Open a printer device
+Ouvre un périphérique imprimante
 
 {{fbdoc item="syntax"}}##
 	**Open Lpt** ["[LPT[x]:][//Printer_Name//][,//TITLE=Doc_Title//][,//EMU=TTY//]"] [For Input|Output] [[KeyPgAs as]] #//filenum//
 ##
 {{fbdoc item="usage"}}##
 	**Open Lpt** "LPT..." [[KeyPgAs as]] [#]//filenum//
-		//or//
+		//ou//
 	//result// = **Open Lpt**( "LPT..." [[KeyPgAs as]] [#]//filenum// )
 ##
 {{fbdoc item="param"}}
 	##//x//##
-		Specifies a port number.  If omitted, output is sent to the system print spooler.
+		Spécifie un numéro de port. S'il est omis, la sortie est envoyée de spooleur d'impression du système.
 	##//Printer_Name//##
-		Name of printer to open.  This parameter is ignored on DOS.
+		Nom de l'imprimante à ouvrir. Ce paramètre est ignoré sous DOS.
 	##//TITLE=Doc_Title//##
-		Title of the print job as seen by the printer spooler.  This parameter is ignored on DOS.
+		Titre de l'impression comme on le voit sur le spooler d'imprimante. Ce paramètre est ignoré sous DOS.
 	##//EMU=TTY//##
-		Emulation of TTY output on a windows GDI printer, using driver text imaging.  This parameter is ignored on DOS and Linux.
+		Emulation de sortie TTY sur une imprimante GDI pour Windows, en utilisant un pilote d'imagerie de texte. Ce paramètre est ignoré sous DOS et Linux.
 	##For Input|Output##
-		clause is allowed for compatibility, but it is ignored.
+		clause pour la compatibilité, mais ignorée.
 	##//filenum//##
-		An unused file number to assign to the device.
+		Un numéro de fichier utilisé pour l'attribuer à l'appareil.
 
 {{fbdoc item="ret"}}
-	Zero is returned if **Open Lpt** completed successfully, otherwise a non-zero value is returned to indicate failure.
+	Zéro si succès complet de **Open Lpt**, autrement une valeur différente de zéro pour indiquer un échec.
 
 {{fbdoc item="desc"}}
-	**Open Lpt** opens a connection to a printer device.  The connection is treated like a file, so data may be written to the printer using ##[[KeyPgPrint Print]]## and ##[[KeyPgPutfileio Put #]]## commands.  
+	**Open Lpt** ouvre une connexion avec un périphérique d'impression.  La connexion est traitée comme un fichier, afin que les données puissent être écrites à l'imprimante à l'aide des commandes ##[[KeyPgPrint Print]]## et ##[[KeyPgPutfileio Put #]]##.  
 
-	Any printer attached to the system may be opened with **Open Lpt**
+	Toute imprimante reliée au système peut être ouverte avec **Open Lpt**
 
-	##**Open Lpt** "LPT:" ...## will try to open the default printer on Windows and Linux, and "LPT1:" on DOS.
+	##**Open Lpt** "LPT:" ...## va essayer d'ouvrir l'imprimante par défaut sur Windows et Linux, et "LPT1:" sous DOS.
 
-	##[[KeyPgLprint Lprint]]## will automatically try to open the default printer on Windows and Linux, and ##"LPT1:"## on DOS.
+	##[[KeyPgLprint Lprint]]## va automatiquement essayez d'ouvrir l'imprimante par défaut sur Windows et Linux, et "LPT1:" sous DOS.
 
-Platform specific notes:
+Notes spécifiques aux plates-formes:
 
 	==Windows==
-		The argument EMU=TTY assumes printable ASCII or Unicode text, and applies printer driver text imaging to the input.  EMU=TTY also allows the usage of CR, LF, BS, TAB, FF, etc., for virtual print-head movement...even when the printer is a GDI printer and therefore doesn't itself understand these special characters.  If ",EMU=TTY" is omitted, the data must be sent in the printer's language (ESC/P, HPGL, PostScript, etc...).  Other useful emulation modes aren't supported yet.
+		L'argument EMU=TTY suppose imprimables les textes ASCII ou Unicode, et applique un pilote d'imagerie de texte à l'imprimante pour la sortie.  EMU=TTY permet aussi l'usage de CR, LF, BS, TAB, FF, etc., pour le mouvement de tête d'impression virtuelle...même si l'imprimante est une imprimante GDI et par conséquent ne comprend pas ces caractères spéciaux.  Si ",EMU=TTY" est omis, les données doivent être envoyées dans le langage de l'imprimante (ESC/P, HPGL, PostScript, etc...).  Les autres modes d'émulation utiles ne sont pas encore pris en charge.
 
-	==Linux==
-		A printer spooler available through ##lp## must be installed to access printers by name or a default printer.  Spooler access was tested only with CUPS, but other spoolers may work that are invoked through ##lp##.  Port are zero based on linux. ##"LPT1:"## corresponds with ##"/dev/lp0"##.
+	{{fbdoc item="subsect" value="Linux"}}
+		Un spooleur d'imprimante disponible par le biais de ##lp## doit être installé pour accéder aux imprimantes par leur nom ou à une imprimante par défaut.  L'accès au spooleur a été testé uniquement avec CUPS, mais d'autres spoolers peuvent travailler s'ils sont invoqués par ##lp##.  Les ports sont basés sur zéro sous Linux. ##"LPT1:"## correspond à ##"/dev/lp0"##.
 
-		The data must be sent in the printer's language (ESC/P, HPGL, PostScript, etc...). Emulation modes aren't supported yet.
+		Les données doivent être envoyées dans le langage de l'imprimante (ESC/P, HPGL, PostScript, etc...). Les modes d'émulation ne sont pas encore pris en charge.
 
-	==DOS==
-		FreeBASIC does not support print spoolers on DOS.  Printers must be accessible through ##"LPTx:"##.
+	{{fbdoc item="subsect" value="DOS"}}
+		FreeBASIC ne supporte pas les spooleurs d'impression sous DOS.  Les imprimantes sont accessible par le biais de ##"LPTx:"##.
 
-		The data must be sent in the printer's language (ESC/P, HPGL, PostScript, etc...).  Emulation modes aren't supported yet.
+		Les données doivent être envoyées dans le langage de l'imprimante (ESC/P, HPGL, PostScript, etc...).  Les modes d'émulation ne sont pas encore pris en charge.
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/fileio/openlpt1.bas"}}%%(freebasic)
@@ -105,7 +105,7 @@ Print "Printing Completed!"
 %%
 
 {{fbdoc item="lang"}}
-	- In the //[[CompilerOptlang -lang qb]]// dialect the old syntax is supported OPEN "LPT:..." . This syntax used in the other dialects will open a regular file.
+	- Dans le dialecte //[[CompilerOptlang -lang qb]]// l'ancienne syntaxe est supportée OPEN "LPT:..." . Cette syntaxe utilisée dans les autres dialectes ouvrira un fichier régulier.
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgLprint Lprint]]##

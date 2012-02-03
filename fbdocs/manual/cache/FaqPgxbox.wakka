@@ -1,141 +1,141 @@
 {{fbdoc item="title" value="Frequently Asked Questions"}}----
 
 
-**FreeBASIC on Xbox general questions**
-	==- {{anchor name="item1|Can FreeBASIC really make Xbox games?"}}==
-	==- {{anchor name="item2|How was the FreeBASIC Xbox port made?"}}==
-	==- {{anchor name="item3|How about a port for Xbox 360?"}}==
-	==- {{anchor name="item4|How about a port for PlayStation or another console?"}}==
-	==- {{anchor name="item5|Why don't you use an emulator until a developer gets a modded Xbox?"}}==
-	==- {{anchor name="item6|Why don't you use the Microsoft XDK?"}}==
-	==- {{anchor name="item7|Why don't you use the Microsoft debugger to fix it?"}}==
-	==- {{anchor name="item8|Isn't this illegal? Can't Microsoft sue you?"}}==
+**Questions générales sur FreeBASIC et la Xbox**
+	==- {{anchor name="item1|Peut-on vraiment faire des jeux pour la Xbox avec FreeBASIC?"}}==
+	==- {{anchor name="item2|Comment a été fait le portage de la Xbox sous FreeBASIC?"}}==
+	==- {{anchor name="item3|Que diriez-vous d'un port pour la Xbox 360?"}}==
+	==- {{anchor name="item4|Que diriez-vous d'un portage pour la PlayStation ou une autre console?"}}==
+	==- {{anchor name="item5|Pourquoi n'utilisez-vous pas un émulateur jusqu'à ce qu'un développeur obtienne une "modded Xbox"?"}}==
+	==- {{anchor name="item6|Pourquoi n'utilisez-vous pas XDK de Microsoft?"}}==
+	==- {{anchor name="item7|Pourquoi ne pas utiliser le débogueur de Microsoft pour résoudre ce problème?"}}==
+	==- {{anchor name="item8|N'est-ce pas illégal? Microsoft ne peut pas vous poursuivre?"}}==
 
-**Getting Started with FreeBASIC on Xbox questions**
-	==- {{anchor name="item21|What do I need to compile Xbox games with FreeBASIC?"}}==
-	==- {{anchor name="item22|How would you get input?"}}==
-	==- {{anchor name="item23|Does it only run on certain Xboxes?"}}==
-	==- {{anchor name="item24|Is another language (eg C or ASM) needed for the job?"}}==
-	==- {{anchor name="item25|Do you need a special lib?"}}==
-	==- {{anchor name="item26|Can you use premade functions (inkey, line etc)?"}}==
-	==- {{anchor name="item27|What else should I know?"}}==
+{{fbdoc item="subsect" value="Questions sur comment débuter avec FreeBASIC sur Xbox"}}
+	==- {{anchor name="item21|De quoi ai-je besoin pour compiler les jeux Xbox avec FreeBASIC?"}}==
+	==- {{anchor name="item22|Comment voulez-vous obtenir ??input??"}}==
+	==- {{anchor name="item23|Ne fonctionnera-t-il que sur certaines Xbox?"}}==
+	==- {{anchor name="item24|Un autre langage (par exemple C ou ASM) est-il nécessaire?"}}==
+	==- {{anchor name="item25|Avez-vous besoin d'une lib spéciale?"}}==
+	==- {{anchor name="item26|Pouvez-vous utiliser des fonctions préfabriquées (inkey, line etc)?"}}==
+	==- {{anchor name="item27|Que dois-je savoir?"}}==
 
 {{fbdoc item="back" value="DocToc|Table of Contents"}}
 ----
-@@**FreeBASIC on Xbox general questions**@@
+@@**Questions générales sur FreeBASIC et la Xbox**@@
 
 
-{{anchor name="item1"}}==Can FreeBASIC really make Xbox games?==
+{{anchor name="item1"}}==Peut-on vraiment faire des jeux pour la Xbox avec FreeBASIC?==
 
-In theory, yes. A copy of FreeBASIC 0.13 was ported to the Xbox in July 2005, and produced working executables. However, changes to the compiler for the 0.14 release broke compatiblity. 
+En théorie, oui. Une copie de FreeBASIC 0.13 a été portée sur la Xbox en Juillet 2005, et a produit des exécutables qui fonctionnaient. Toutefois, les modifications du compilateur pour la version 0,14 ont cassé la compatibilité. 
 
-The Xbox port is currently in zombie mode; nobody in the project team has the console at the moment - the original port was done by SJ Zero, but it got broken with the runtime library modifications done in v0.14.
+Le portage Xbox est actuellement en mode "zombie"; personne dans l'équipe du projet n'a la console pour le moment - le portage d'origine a été fait par SJ Zero, mais il a été cassé avec les modifications de bibliothèque d'exécution apportées dans la version 0.14.
 
-The port is on hold until the GCC backend port is complete, because it is believed that this port will fix the Xbox port.
-
-
-{{anchor name="item2"}}==How was the FreeBASIC Xbox port made?==
-
-FreeBASIC for Xbox is possible because of the efforts of Open Source developers who created OpenXDK, the legal software development kit for Xbox. OpenXDK is created for a unixish environment, which is quite compatible with the FreeBASIC source.
-
-The port was created by forcing the FreeBASIC runtime library to use the OpenXDK version of Glibc instead of the mingw32 version. When compiled with the correct flags, this creates what looks like a standard EXE file. CXBE then strips the Windows PE header on this executable file and replaces it with an Xbox header.
-
-In effect, all the port really does is change the runtime library and link in a certain way to allow the CXBE utility to create an Xbox executable.
+Le portage est en attente jusqu'à ce que le portage principal de GCC soit complet, parce qu'on estime que ce portage corrigera celui de la Xbox.
 
 
-{{anchor name="item3"}}==How about a port for Xbox 360?==
+{{anchor name="item2"}}==Comment a été fait le portage de la Xbox sous FreeBASIC?==
 
-The Xbox is an Intel Pentium 3 running a derivative of the NVIDIA nForce chipset, with an NVIDIA video chip and an NVIDIA ""SoundStorm"" sound card. This is why the Xbox port was possible and relatively straightforward to do. 
+FreeBASIC pour la Xbox, c'est possible grâce aux efforts des développeurs Open Source qui ont créé OpenXDK, le kit logiciel légal de développement pour la Xbox. OpenXDK est créé pour un environnement de type Unix, qui est tout à fait compatible avec les sources FreeBASIC.
 
-The Xbox 360, on the other hand, uses an alien CPU, and similarly alien hardware. FreeBASIC cannot presently be made to produce executables for the Xbox 360. 
+Le portage a été créé en forçant la bibliothèque d'exécution FreeBASIC à utiliser la version OpenXDK de Glibc au lieu de la version mingw32. Lors d'une compilation avec les options correctes, ce qui est créé ressemble à un fichier .EXE standard. CXBE enlève l'en-tête Windows PE sur ce fichier exécutable et la remplace par une en-tête de Xbox.
 
-Another problem is the lack of an equivilent to OpenXDK for the Xbox 360. This would force any port to use the Xbox 360 XDK, a copyrighted piece of software created by Microsoft. This would be illegal, immoral, and would put FreeBASIC in legal jeparody. 
+En réalité, ce que tous les portages font réellement, c'est de changer de la bibliothèque d'exécution et de lier d'une certaine manière pour permettre à l'utilitaire CXBE de créer un exécutable Xbox.
 
-Therefore, a port to the Xbox 360 is to be considered impossible at this time.
 
-	
-{{anchor name="item4"}}==How about a port for ""PlayStation"" or another console?==
+{{anchor name="item3"}}==Que diriez-vous d'un portage pour la Xbox 360?==
 
-The Xbox is an Intel Pentium 3 running a derivative of the NVIDIA nForce chipset, with an NVIDIA video chip and an NVIDIA ""SoundStorm"" sound card. This is why the Xbox port was possible and relatively straightforward to do. 
+La Xbox est un Intel Pentium 3 éxécutant un dérvé du chipset NVIDIA nForce, avec une puce vidéo NVIDIA et une carte sonore NVIDIA ""SoundStorm"". C'est pourquoi le portage Xbox était possible et relativement simple à faire. 
 
-The ""PlayStation"", on the other hand, uses a RISC chip, which FreeBASIC cannot currently produce code for. Almost all consoles utilize non x86 processors, stopping development using FreeBASIC from being possible.
+La Xbox 360, d'autre part, utilise un CPU exotique et il en est de même pour le matériel. FreeBASIC ne peut actuellement produire des exécutables pour la Xbox 360. 
 
-Another problem is the lack of an equivilent to OpenXDK for many consoles. This would force any port to use the commercial software development kit, a copyrighted piece of software created by the console manufacturer. This would be illegal, immoral, and would put FreeBASIC in legal jeparody. 
+Un autre problème est l'absence d'un équivalent à OpenXDK pour la Xbox 360. Cela forcerait n'importe quel portage à utiliser XDK Xbox 360, un morceau de logiciel sous copyright créé par Microsoft. Ce serait illégal, immoral et mettrait FreeBASIC en danger légal. 
 
-Therefore, a port to other consoles are to be considered impossible at this time. However, many ports to consoles and other platforms with legally available development kits will be possible when the GCC backend port is complete.
-	
-{{anchor name="item5"}}==Why don't you use an emulator until a developer gets a modded Xbox?==
-
-No known Xbox emulator is capable of running FreeBASIC code. A legitimate hardware console is required to run the programs made. This makes an emulator completely useless for development. 
-	
-	
-{{anchor name="item6"}}==Why don't you use the Microsoft XDK?==
-
-There are two main reasons not to use the Microsoft XDK.
-
-1) Microsoft's XDK is a piece of copyrighted software, and utilizing it would be illegal and immoral, putting FreeBASIC at risk of legal action. Furthermore, no member of the FreeBASIC team has ever had any access to the Microsoft XDK, to prevent "tainting" FreeBASIC legally.
-
-2) OpenXDK is developed around gcc and UNIX-style systems such as MinGW or Cygwin. This means that it can be integrated into FreeBASIC with very little effort. Microsoft's XDK, on the other hand, is developed around Microsoft based compilers, and thus would not easily integate into the source code of FreeBASIC.
-
-__NOTE: PROTECTION OF MICROSOFT'S COPYRIGHT, AND BY PROXY OF FREEBASIC, IS OF PRIMARY IMPORTANCE IN THIS PROJECT. WE DO NOT WANT HELP FROM ANYONE WITH THE XDK, NOR DO WE WANT HELP FROM ANYONE WITH A DEBUGGER XBOX. ANY ATTEMPT TO OFFER THE XDK OR XDK RELATED HELP SHALL BE FORWARDED TO THE PROPER LAW ENFORCEMENT AGENCIES.__
+Par conséquent, un portage pour la Xbox 360 doit être considéré comme impossible à l'heure actuelle.
 
 	
-{{anchor name="item7"}}==Why don't you use the Microsoft debugger to fix it?==
+{{anchor name="item4"}}==Que diriez-vous d'un portage pour la ""PlayStation"" ou une autre console?==
 
-There are two very good reasons not to use the Microsoft debugger. 
+La Xbox est un Intel Pentium 3 éxécutant un dérvé du chipset NVIDIA nForce, avec une puce vidéo NVIDIA et une carte sonore NVIDIA ""SoundStorm"". C'est pourquoi le portage Xbox était possible et relativement simple à faire. 
 
-1) Microsoft's XDK is a piece of copyrighted software, and utilizing it would be illegal and immoral, putting FreeBASIC at risk of legal action. Furthermore, no member of the FreeBASIC team has ever had any access to the Microsoft XDK, to prevent "tainting" FreeBASIC legally.
+La ""PlayStation"", en revanche, utilise une puce RISC, pour laquelle FreeBASIC ne actuellement produire de code. Presque toutes les consoles utilisent des processeurs non x86, interdisant un développement à l'aide de FreeBASIC.
 
-2) Microsoft's debugger requires a specially modified Xbox which neither SJ Zero nor any development team member has, and frankly, nobody who has worked on the port believes the debugger would work with FreeBASIC executables -- just as Microsoft's debugger can't read FreeBASIC debugger files, we doubt the Xbox debugger could read FreeBASIC debugger files. Regardless, point #1 trumps any attempt.
+Un autre problème est l'absence d'un équivalent à  OpenXDK pour de nombreuses consoles. Cela forcerait n'importe quel portage à utiliser un kit commercial de développement de logiciels, un morceau de logiciel sous copyright créé par le fabricant de la console. Ce serait illégal, immoral et mettrait FreeBASIC en danger légal. 
 
-__NOTE: PROTECTION OF MICROSOFT'S COPYRIGHT, AND BY PROXY OF FREEBASIC, IS OF PRIMARY IMPORTANCE IN THIS PROJECT. WE DO NOT WANT HELP FROM ANYONE WITH THE XDK, NOR DO WE WANT HELP FROM ANYONE WITH A DEBUGGER XBOX. ANY ATTEMPT TO OFFER THE XDK OR XDK RELATED HELP SHALL BE FORWARDED TO THE PROPER LAW ENFORCEMENT AGENCIES.__
+Par conséquent, des portages pour les autres consoles doivent être considérés comme impossibles à l'heure actuelle. Toutefois, de nombreux portages de consoles et autres plates-formes avec des kits de développement légalement disponibles seront possibles quand le portage principal de GCC backend sera complet.
+	
+{{anchor name="item5"}}==Pourquoi n'utilisez-vous pas un émulateur jusqu'à ce qu'un développeur obtienne une "modded Xbox"?==
+
+Aucun émulateur Xbox connu n'est capable de faire fonctionner du code FreeBASIC. Une console de matériel légitime est nécessaire pour exécuter les programmes réalisés. Cela rend un émulateur complètement inutile pour le développement. 
+	
+	
+{{anchor name="item6"}}==Pourquoi n'utilisez-vous pas XDK de Microsoft?==
+
+Il y a deux raisons principales de ne pas utiliser XDK de Microsoft.
+
+1) XDK de Microsoft est un morceau de logiciel sous copyrightet il l'utiliser serait illégal et immoral, avec le risque d'une action judiciaire contre FreeBASIC. En outre, aucun membre de l'équipe FreeBASIC n'a jamais eu aucun accès à l'XDK Microsoft, afin d'éviter "une contamination" légale de FreeBASIC.
+
+2) OpenXDK est développé autour de gcc et les systèmes de type UNIX tels que MinGW ou Cygwin. Cela signifie qu'il peut être intégré dans FreeBASIC avec très peu d'effort. XDK de Microsoft, d'autre part, est développé autour de compilateurs basés sur Microsoft, et ne serait donc pas facile à intégrer dans le code source de FreeBASIC.
+
+__REMARQUE: LA PROTECTION DES DROITS D'AUTEUR DE MICROSOFT, ET PAR LA MEME DE FREEBASIC, EST DE PREMIERE IMPORTANCE DANS CE PROJET, NOUS NE VOULONS AUCUNE AIDE, DE QUICONQUE, SUR LE XDK; PAS PLUS D'UNE AIDE, DE QUICONQUE, SUR LE DEBOGUEUR XBOX. TOUTE TENTATIVE DE PROCURER LE XDK OU DE L'AIDE RELATIVE A CELUI-CI SERA ENVOYEE AUX ORGANISMES DE BONNE APPLICATION DE LA LOI.__
+
+	
+{{anchor name="item7"}}==Pourquoi ne pas utiliser le débogueur de Microsoft pour résoudre ce problème?==
+
+Il y a deux très bonnes raisons de ne pas utiliser le débogueur de Microsoft. 
+
+1) XDK de Microsoft est un morceau de logiciel sous copyrightet il l'utiliser serait illégal et immoral, avec le risque d'une action judiciaire contre FreeBASIC. En outre, aucun membre de l'équipe FreeBASIC n'a jamais eu aucun accès à l'XDK Microsoft, afin d'éviter "une contamination" légale de FreeBASIC.
+
+2) Le débogueur de Microsoft nécessite une Xbox spécialement modifiée que ni SJ Zero ni aucun membre de lééquipe de développement n'a, et franchement, personne qui a travaillé sur le portage estime que le débogueur fonctionnera avec des exécutables FreeBASIC -- tout comme le débogueur de Microsoft ne peut pas lire les fichiers du débogueur FreeBASIC, nous doutons que le débogueur Xbox puisse lire des fichiers du débogueur FreeBASIC. Peu importe, le point 1) l'emporte sur toute tentative.
+
+__REMARQUE: LA PROTECTION DES DROITS D'AUTEUR DE MICROSOFT, ET PAR LA MEME DE FREEBASIC, EST DE PREMIERE IMPORTANCE DANS CE PROJET, NOUS NE VOULONS AUCUNE AIDE, DE QUICONQUE, SUR LE XDK; PAS PLUS D'UNE AIDE, DE QUICONQUE, SUR LE DEBOGUEUR XBOX. TOUTE TENTATIVE DE PROCURER LE XDK OU DE L'AIDE RELATIVE A CELUI-CI SERA ENVOYEE AUX ORGANISMES DE BONNE APPLICATION DE LA LOI.__
 
 
 
-{{anchor name="item8"}}==Isn't this illegal? Can't Microsoft sue you?==
+{{anchor name="item8"}}==N'est-ce pas illégal? Microsoft ne peut pas vous poursuivre?==
 
-Copyright is important for the protection of both commercial firms like Microsoft, and for small projects such as FreeBASIC. Without copyright, neither could enforce any rights over the code (In our case, such as the GPL). Generally speaking, it is copyright issues which are most often the cause of problems for open source projects attempting to do things like this.
+Les droit d'auteur (copyright) sont importants aussi bien pour la protection des firmes commerciales comme Microsoft et que pour celle des petits projets tels que FreeBASIC. Sans droits d'auteur, nous ne pouvons faire valoir aucun droit sur notre code (Dans notre cas, comme la GPL). De manière générale, il est des questions de copyright qui sont le plus souvent la cause des problèmes pour les projets open source qui tentent de faire des choses comme ça.
 
-Because the FreeBASIC Xbox port is created using software tools whose legality has already been established, themselves often derived from other sources whose legality has been established, FreeBASIC for Xbox is not illegal. Careful care has been taken to protect FreeBASIC from using any Microsoft copyrighted code, and diligence is and will be followed to prevent access to copyrighted code.
+Parce que le portage de la Xbox FreeBASIC est créé en utilisant des outils logiciels dont la légalité a déjà été établie, souvent eux-mêmes provenant d'autres sources dont la légalité a été établie, FreeBASIC pour Xbox n'est pas illégal.Because the FreeBASIC Xbox port is created using software tools whose legality has already been established, themselves often derived from other sources whose legality has been established, FreeBASIC for Xbox is not illegal. Un soin attentif a été pris pour empêcher FreeBASIC d'utiliser n'importe quel code Microsoft sous copyright et on est et on sera vigilants pour empêcher l'accès à du code sous copyright.
 
 ----
-@@**Getting Started with FreeBASIC on Xbox questions**@@
+@@**Questions sur comment débuter avec FreeBASIC sur Xbox**@@
 
 
-{{anchor name="item21"}}==What do I need to compile Xbox games with FreeBASIC?==
+{{anchor name="item21"}}==De quoi ai-je besoin pour compiler les jeux Xbox avec FreeBASIC?==
 
-The port isn't currently working, but when it is ready, you will only need a copy of FreeBASIC for Xbox.
-
-
-{{anchor name="item22"}}==How would you get input?==
-
-Initially, input will be acquired through SDL, as a gfxlib port is not yet complete. One of the developers is working on a generic SDL version of gfxlib, however, and it will provide full gfxlib functionality to the Xbox port.
+Le portage ne fonctionne pas actuellement, mais quand il sera prêt, vous aurez seulement besoin d'une copie de FreeBASIC pour Xbox.
 
 
-{{anchor name="item23"}}==Does it only run on certain Xboxes?==
+{{anchor name="item22"}}==Comment voulez-vous obtenir ??input??==
 
-FreeBASIC for Xbox executables will only run on modded Xboxes. However, modding an Xbox is often as simple as loading a savegame in a certain game. More information is available on the [[http://www.xbox-linux.org/wiki/Main_Page Xbox-Linux]] website.
-
-
-{{anchor name="item24"}}==Is another language (eg C or ASM) needed for the job?==
-
-No. FreeBASIC for Xbox is the only thing needed.
+Initialement, ??input?? sera acquise par SDL, tant que portage de la gfxlib n'est pas encore terminé. Cependant, l'un des développeurs travaille sur une version SDL générique de gfxlib, et cela fournira la fonctionnalité complète de la gfxlib au portage Xbox.
 
 
-{{anchor name="item25"}}==Do you need a special lib?==
+{{anchor name="item23"}}==Ne fonctionnera-t-il que sur certaines Xbox?==
 
-No. FreeBASIC for Xbox will come with all supported libraries.
-
-
-{{anchor name="item26"}}==Can you use premade functions (inkey, line etc)?==
-
-Currently, input and output commands such as inkey and line aren't available, but all other functions, including file I/O, are. One of the developers is working on a generic SDL version of gfxlib, however, and if it functions, it will provide full gfxlib functionality to the xbox port.
+FreeBASIC pour les exécutables Xbox ne fonctionnera que sur Xbox "modded". Cependant, "modder" une Xbox  est souvent aussi simple que de charger un "savegame" dans certains jeu. Plus d'informations sont disponibles sur le site [[http://www.xbox-linux.org/wiki/Main_Page Xbox-Linux]].
 
 
-{{anchor name="item27"}}==What else should I know?==
+{{anchor name="item24"}}==Un autre langage (par exemple C ou ASM) est-il nécessaire?==
 
-Executables created by FreeBASIC for Xbox are free of copyrighted Microsoft code, making them legal for distribution.
+Non. FreeBASIC pour Xbox est la seule chose nécessaire
 
-Windows and Linux source files which are designed to use SDL and rtlib will be capable of compiling for Xbox out of the box. While the Xbox does have keyboard support through the gamepad ports (proprietary USB connection), the input scheme will have to be altered to account for a gamepad.
+
+{{anchor name="item25"}}==Avez-vous besoin d'une lib spéciale?==
+
+Non. FreeBASIC pour Xbox est fourni avec toutes les bibliothèques supportées.
+
+
+{{anchor name="item26"}}==Pouvez-vous utiliser des fonctions préfabriquées (inkey, line etc)?==
+
+Actuellement, les commandes d'entrée et de sortie comme "inkey" et "line" ne sont pas disponibles, mais toutes les autres fonctions, y compris les E/S fichiers, le sont. L'un des développeurs travaille sur une version générique de SDL gfxlib, cependant, et si elle fonctionne, elle fournira la fonctionnalité complète gfxlib au portage xbox.
+
+
+{{anchor name="item27"}}==Que dois-je savoir?==
+
+Les exécutables créés par FreeBASIC pour la Xbox sont exempts de droits d'auteur de code Microsoft, ce qui les rend légaux pour la distribution.
+
+Les fichiers source Windows et Linux qui sont conçus pour utiliser SDL et rtlib seront compilables pour Xbox hors de la "box". Tandis que la Xbox doit supporter le clavier à travers les ports du "gamepad" (connexion USB propriétaire), le schéma d'entrée devra être modifié pour tenir compte d'un "gamepad".
 
 {{fbdoc item="back" value="DocToc|Table of Contents"}}

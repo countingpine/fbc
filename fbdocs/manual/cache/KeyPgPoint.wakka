@@ -1,39 +1,39 @@
 {{fbdoc item="title" value="POINT"}}----
-Returns the color attribute of a specified pixel coordinate
+Retourne l'attribut de couleur d'un pixel dont on spécifie les coordonnées
 
 {{fbdoc item="syntax"}}##
 	//result// = **Point**( //coord_x//, //coord_y// [,//buffer//] )
-	or 
+	ou 
 	//result// = **Point**( //function_index// )
 
 ##
 {{fbdoc item="usage"}}
 	##//coord_x//##
-		x coordinate of the pixel
+		coordonnée x du pixel
 	##//coord_y//##
-		y coordinate of the pixel
+		coordonnée y du pixel
 	##//buffer//##
-		the image buffer to read from
+		le tampon image à lire
 	##//function_index//##
-		the type of screen coordinate to return: one of the values ##0##, ##1##, ##2##, ##3##
+		le type de coordonnée écran à retourner: une des valeurs ##0##, ##1##, ##2##, ##3##
 
-{{fbdoc item="ret"}}
-	If the ##//x//, //y//## coordinates of a pixel are provided **##Point##** returns the color attribute at the specified coordinates.
-	If the argument is a function index, **##Point##** returns one of the graphics cursor coordinates set by the last graphics command. 
+{{fbdoc item="section" value="Valeur renvoyée"}}
+	Si les  coordonnées ##//x//, //y//## d'un pixel sont fournies **##Point##** retourne l'attribut de couleur aux coordonnées spécifiées.
+	Si l'argument est un indice de fonction, **##Point##** retourne une des coordonnées du curseur graphique validée par la dernière commnde graphique. 
  
-	{{table columns="2" cellpadding="1" cells="Argument; Value Returned ; 0;The current physical x coordinate.;1;The current physical y coordinate.; 2;The current view x coordinate. This returns the same value as the POINT(0) function if the WINDOW statement has not been used.;3;The current view y coordinate. This returns the same value as the POINT(1) function if the WINDOW statement has not been used."}}
+	{{table columns="2" cellpadding="1" cells="Argument; Valeur Retournée ; 0;La coordonnée physique x courante.;1;La coordonnée physique y courante.; 2;La coordonnée vue x courante. Ceci retourne la même valeur que la fonction POINT(0) si la éclaration WINDOW n'a pas été utilisée.;3;La coordonnée vue y courante. Ceci retourne la même valeur que la fonction POINT(1) si la éclaration WINDOW n'a pas été utilisée."}}
 
 
 {{fbdoc item="desc"}}
-	""GfxLib"" Function with two different uses. 
-	If supplied with two coordinates it reads the color of the pixel at the coordinate ##//coord_x//##, ##//coord_y//## of the screen, or of the ##//buffer//##, if supplied. 
-	The value return is a color index in a 256 or less color ##[[KeyPgScreengraphics Screen]]##, and an ##[[KeyPgRgb RGB]]## value in true color modes. If the coordinates are off-screen or off-buffer, ##-1## is returned
+	Fonction ""GfxLib"" avec deux utilisations différentes. 
+	Si appelée avec deux coordonnées, elle lit la couleur du pixel aux coordonnées ##//coord_x//##, ##//coord_y//## de l'écran ou du tampon ##//buffer//##, s'il est précisé. 
+	La valeur retournée est un indice de couleur dans un espace de couleurs ##[[KeyPgScreengraphics Screen]]## de 256 ou moins et une valeur ##[[KeyPgRgb RGB]]## en mode "true color". Si les coordonnées sont hors écran ou hors tampon, ##-1## est retourné.
 	
-	If supplied with a single value it returns the one of the coordinates of the graphics cursor as set by the last graphics command executed. If the last command was executed in a buffer, the values returned will be coordinates in the buffer. Arguments out of the range ##0##-##3## will return ##0##.
+	Si appelée avec une seule valeur, elle retourne une des coordonnées du curseur graphique qui a été validée par la dernière commande graphique exécutée. Si la dernière commande a été exécutée dans un tampon, les valeurs retournées seront les coordonnées dans le tampon. Les arguments en-dehors de ##0##-##3## retourneront ##0##.
 
-	The function ##**Point**## does not work in text modes. 
+	La fonction ##**Point**## ne fonctionne pas en modes texte. 
 
-	Optimization note: while **Point** and the opposite ##[[KeyPgPset Pset]]## provide valid results, they are very slow. Much better performance can be achieved by using ##[[KeyPgPeek Peek]]## after calculating the address yourself from values obtained from ##[[KeyPgImageinfo Imageinfo]]## and ##[[KeyPgScreeninfo Screeninfo]]##, or even more usig inline ASM.
+	Note d'optimisation: bien que **Point** et son opposé ##[[KeyPgPset Pset]]## fournissent des résultats valides, ils sont très lents. De meilleures performances sont obtenues avec ##[[KeyPgPeek Peek]]## après avoir calculé l'adresse vous-mème à partir des valeurs données par ##[[KeyPgImageinfo Imageinfo]]## et ##[[KeyPgScreeninfo Screeninfo]]##, ou en utilisant le langage machine avec "inline ASM".
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/gfx/point.bas"}}%%(freebasic)
@@ -41,19 +41,19 @@ screen 13
 line (10,10)-(100,100),12
 print point(20,20)
 %%
-**Output:**
+**Affichage:**
 %%
 12
 %%
 {{fbdoc item="diff"}}
-	- ##//buffer//## is new to ""FreeBASIC""
-	- In SVGA modes, a 32-bit RGB value is returned
+	- ##//buffer//## nouveau pour ""FreeBASIC""
+	- En modes SVGA, une valeur RGB 32-bit est retournée
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgPset Pset]]##
 	- ##[[KeyPgPmap Pmap]]##
 	- ##[[KeyPgColor Color]]##
-	- ##[[KeyPgViewgraphics View (Graphics)]]##
+	- ##[[KeyPgViewgraphics View (Grpahique)]]##
 	- ##[[KeyPgWindow Window]]##
 
 {{fbdoc item="back" value="CatPgGfx2D|2D Drawing Functions"}}

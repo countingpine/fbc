@@ -1,10 +1,10 @@
 {{fbdoc item="title" value="Passing Arguments to Procedures"}}----
-Passing information to procedures.
+Transmettre des informations à des procédures.
 
-{{fbdoc item="section" value="Declaring parameters"}}
-	Procedures can get passed information in the form of variables and objects when they are called. In the context of a procedure call, these variables and objects are called arguments. These arguments are then represented as so-called parameters inside the procedure body. Parameters can be used just like any other variable or object.
+{{fbdoc item="section" value="Déclarer des paramètres"}}
+	On peut passer des informations sous forme de variables et d'objets, aux procédures lorsqu'elles sont appelées. Dans le cadre d'un appel de procédure, ces variables et d'objets sont appelées arguments. Ces arguments sont alors représentés en tant que paramètres à l'intérieur du corps de procédure. Les paramètres peuvent être utilisée comme n'importe quelle autre variable ou objet.
 
-	To specify that a procedure should get passed arguments when called, declare the procedure with a parameter list. A parameter list is a list of one or more names and types that the procedure will use when referring to the arguments that are passed to it. Parameter lists are surrounded by parenthesis.
+	Pour spécifier qu'une procédure devrait passer des arguments lorsqu'on l'appelle, il faut déclarer la procédure avec une liste de paramètres. Une liste de paramètres est une liste d'un ou plusieurs noms et types que la procédure utilisera lorsqu'elle se réfèrera aux arguments qui lui sont passés. Les listes de paramètres sont entourées de parenthèses.
 
 {{fbdoc item="filename" value="examples/manual/proguide/procs/passargs.bas"}}%%(freebasic)
 sub Procedure (s as string, n as integer)
@@ -13,19 +13,19 @@ end sub
 
 Procedure "abc", 123
 %%
-	will produce the following output:
+	produira le résultat suivant:
 
 %%
 The parameters have the values: abc and 123
 %%
-	There are two ways to pass arguments to procedures: by value and by reference. By default, arguments are passed by value unless otherwise specified.
+	Il y a deux façons de passer des arguments aux procédures: par valeur et par référence. Par défaut, les arguments sont passés par valeur, sauf indication contraire.
 
-{{fbdoc item="section" value="Passing arguments by value"}}
-	Arguments that are passed by value are not actually passed to procedures; a copy of the argument is made and passed instead. This allows the procedure to modify the copy, and the original variable or object remains unchanged.
+{{fbdoc item="section" value="Passage d'arguments par valeur"}}
+	Les arguments qui sont passés par valeur ne sont pas réellement passés aux procédures; au lieu de cela une copie de l'argument est faite et passée. Cela permet à la procédure de modifier la copie et la variable ou l'objet d'origine restent inchangés.
 
-	When passing objects to procedures by value, the copy is made by calling the copy constructor of the ##[[KeyPgType Type]]## or ##[[KeyPgClass Class]]##.
+	Lors du passage d'objets aux procédures par valeur, la copie est faite en appelant le constructeur de copie du ##[[KeyPgType Type]]## ou de la ##[[KeyPgClass Class]]##.
 
-	To specify that an argument should be passed by value, precede the parameter name in the procedure declaration with the ##[[KeyPgByval Byval]]## keyword:
+	Pour spécifier qu'un argument doit être passé par valeur, faire précéder le nom du paramètre de la déclaration de procédure du mot-clé ##[[KeyPgByval Byval]]##:
 
 {{fbdoc item="filename" value="examples/manual/proguide/procs/passbyval.bas"}}%%(freebasic)
 sub Procedure (byval param as integer)
@@ -38,21 +38,21 @@ print "The variable 'arg' before the call = " & arg
 Procedure(arg)
 print "The variable 'arg' after the call = " & arg
 %%
-	will produce the following output:
+	produira le résultat suivant:
 
 %%
 The variable 'arg' before the call = 10
 The parameter 'param' = 20
 The variable 'arg' after the call = 10
 %%
-	Notice how parenthesis surround the arguments - in this case only one, ##//arg//## - in the procedure call. These parenthesis are optional, but are a common convention to signify a procedure call.
+	Remarquez comment les parenthèses entourent les arguments - dans ce cas, un seul, ##//arg//## - dans l'appel de procédure. Ces parenthèses sont facultatives, mais sont une convention commune pour signifier un appel de procédure.
 
-{{fbdoc item="section" value="Passing arguments by reference"}}
-	Unlike arguments that are passed by value, arguments that are passed to procedures by reference really do get passed; no copy is made. This allows the procedure to modify the original variable or object that was passed to it.
+{{fbdoc item="section" value="Passage d'arguments par référence"}}
+	Contrairement aux arguments qui sont passés par valeur, les arguments qui sont passés aux procédures par référence sont vraiment passés; aucune copie n'est faite. Cela permet à la procédure de modifier la variable ou objet d'origine qui lui a été passé.
 
-	A reference is like an alias for a variable or object. Whenever you refer to a reference, you're referring to the actual variable or object that it aliases. In other words, you can think of a reference parameter of a procedure as the argument that is passed to it; any changes made to the reference parameter are actually changes to the argument it represents.
+	Une référence est comme un alias pour une variable ou un objet. Chaque fois que vous faites appel à une référence, vous faites allusion à la variable ou à l'objet réel(le) dont elle est l'alias. En d'autres termes, vous pouvez imaginer une référence à un paramètre d'une procédure comme étant l'argument qui lui est passé; les modifications apportées à la référence du paramètre sont en fait des changements à l'argument qu'il représente.
 
-	To specify that an argument should be passed by reference, precede the parameter name in the procedure declaration with the ##[[KeyPgByref Byref]]## keyword:
+	Pour spécifier qu'un argument doit être passé par référence, faire précéder le nom du paramètre dans la déclaration de procédure avec le mot-clé ##[[KeyPgByref Byref]]##:
 
 {{fbdoc item="filename" value="examples/manual/proguide/procs/passbyref.bas"}}%%(freebasic)
 sub Procedure (byref param as integer)
@@ -65,7 +65,7 @@ print "The variable 'arg' before the call = " & arg
 Procedure(arg)
 print "The variable 'arg' after the call = " & arg
 %%
-	will produce the following output:
+	produira le résultat suivant::
 
 %%
 The variable 'arg' before the call = 10
@@ -74,8 +74,8 @@ The variable 'arg' after the call = 20
 %%
 
 {{fbdoc item="see"}}
-	- [[ProPgProcedures Procedures Overview]]
-	- [[ProPgReturnValue Returning a Value]]
+	- [[ProPgProcedures Vue d'ensemble des procédures]]
+	- [[ProPgReturnValue Retourner une valeur]]
 	- ##[[KeyPgDeclare Declare]]##
 	- ##[[KeyPgSub Sub]]##
 	- ##[[KeyPgFunction Function]]##

@@ -1,10 +1,10 @@
 {{fbdoc item="title" value="Conditional Compilation And You"}}----
 
-//Written by aetherFox for [[http://petesqbsite.com/sections/express/issue9/index.html#compilation QB Express Issue #9]]//
+//Ecrit par aetherFox pour [[http://petesqbsite.com/sections/express/issue9/index.html#compilation QB Express Issue #9]]//
 
-Conditional Compilation is one of those parts of programming that sit in the dusty corners of the knowledge banks of programmers world-over, yet is one of the most ingenious additions to any language. Usually something that was reserved for C programmers, with the power of freeBASIC's new preprocessor, you can now use conditional compilation to help your program. 
+La compilation conditionnelle est une de ces parties de la programmation qui sont oubliées dans les coins poussiéreux des banques de connaissances des programmeurs du monde fini, mais c'est encore l'un des ajouts les plus ingénieux pour n'importe quelle langage. Habituellement réservée aux programmeurs C, avec la puissance du nouveau préprocesseur FreeBASIC, vous pouvez maintenant utiliser la compilation conditionnelle pour améliorer votre programme. 
 
-The preprocessor allows you flexibility in changing the way code is generated through the use of conditional compilation. Take this scenario: you are debugging the code in your program, and you want to add some extra code to output a few variables, but remove them in the final version. The code would be something like this: 
+Le préprocesseur permet de la flexibilité en changeant la façon dont le code est généré par l'utilisation de la compilation conditionnelle. Prenez ce scénario: vous débogguez du code dans votre programme et vous voulez ajouter du code supplémentaire pour afficher quelques variables, mais celles-ci seront supprimées dans la version finale. Le code ressemblerait à ceci: 
 
 ##%%(freebasic)
 	#define DEBUG
@@ -14,9 +14,9 @@ The preprocessor allows you flexibility in changing the way code is generated th
 	#endif 'DEBUG
 %%##
 
-**Note** you do not need the comment after the ##[[KeyPgEndif #endif]]##, but is it good practice.
+**Notez** que le commentaire après ##[[KeyPgEndif #endif]]## n'est pas obligatoire, mais c'est une bonne habitude.
 
-Basically, the above code checks to see whether ##DEBUG## has been defined, and if it has, then the code between the ##[[KeyPgPpifdef #ifdef]]...[[KeyPgPpendif #endif]]## will be executed. While this may seem silly, the uses this has are amazing. If you simply remove one line at the top of your program (##[[KeyPgPpdefine #define]] DEBUG##), then all the 'debug code' that you've added won't be sent to the compiler -- the preprocessor removes it, reducing the bloat of the final executable.
+Fondamentalement, le code ci-dessus vérifie si ##DEBUG## a été défini, et si c'est le cas, alors le code entre les ##[[KeyPgPpifdef #ifdef]]...[[KeyPgPpendif #endif]]## sera exécuté. Même si cela peut sembler idiot, les utilisations de ceci sont étonnantes. Si vous enlevez simplement une ligne en haut de votre programme (##[[KeyPgPpdefine #define]] DEBUG##), alors tout le code de déboggage que vous avez ajouté ne sera pas envoyé au compilateur -- le préprocesseur le supprimera --, réduisant ainsi l'expansion exagérée de l'exécutable final.
 
 ##%%(freebasic)
 	'Turn on debugging
@@ -26,7 +26,7 @@ Basically, the above code checks to see whether ##DEBUG## has been defined, and 
 	#undef DEBUG
 %%##
 
-The ##[[KeyPgPpundef #undef]]## directive is a way of 'undefining' something, in this case ##DEBUG##. While it is strictly not needed (just commenting out the line '##[[KeyPgPpdefine #define]] DEBUG##' is enough), it makes the code much clearer, and has other uses:
+La directive ##[[KeyPgPpundef #undef]]## est une façon de "dé-définir" quelque chose, dans ce cas, DEBUG. Alors qu'elle est strictement inutile (il suffit de commenter la ligne ##[[KeyPgPpdefine #define]] DEBUG##), elle rend le code plus clair, et a d'autres usages:
 
 ##%%(freebasic)
 	#ifndef DEBUG
@@ -34,9 +34,9 @@ The ##[[KeyPgPpundef #undef]]## directive is a way of 'undefining' something, in
 	#endif 'DEBUG
 %%##
 
-While not the most useful example, this demonstrates the use of another directive: ##[[KeyPgPpifndef #ifndef]]##. This directive will cause the code to be compiled if the symbol is not defined. 
+Bien que n'étant pas l'exemple le plus utile, ceci démontre l'utilisation d'une autre directive: ##[[KeyPgPpifndef #ifndef]]##. Cette directive va provoquer la compilation du code si le symbole n'est pas défini. 
 
-Much like a normal programming language, the sense of the conditional can be reversed using a variant of else, ##[[KeyPgElse #else]]##:
+Tout comme dans un langage de programmation normale, le sens du conditionnel peut être inversé en utilisant une variante de "else", ##[[KeyPgElse #else]]##:
 
 ##%%(freebasic)
 	#ifdef DEBUG
@@ -46,7 +46,7 @@ Much like a normal programming language, the sense of the conditional can be rev
 	#endif 'DEBUG 
 %%##
 
-Of course, there are many applications to this. Who says you need to do this on debug code only? You could actually check the effect of a new piece of code, or some test routines by simply defining a name like ##TESTCODE## and using the preprocessor directives to encompass your code for conditional compilation:
+Bien sûr, il existe de nombreuses applications à cela. Qui a dit que vous avez besoin pour ce faire sur le code de débogage uniquement? Vous pouvez effectivement vérifier l'effet d'un nouveau morceau de code ou de quelques routines de test en définissant simplement un nom comme ##TESTCODE## et l'utilisation des directives du préprocesseur pour inclure votre code pour la compilation conditionnelle:
 
 ##%%(freebasic)
 	#define TESTCODE
@@ -57,7 +57,7 @@ Of course, there are many applications to this. Who says you need to do this on 
 	#endif 
 %%##
 
-The scope of this tutorial is a limited one, but this method is used by professionals. It makes life easy when programming. I have used this method in my own code. To see this code in action, view the source [[http://avinash.apeshell.net/stuff/ship/flyaround.bas here]].
+La portée de ce tutoriel est limitée, mais cette méthode est utilisée par les professionnels. Elle rend la vie plus facile lors de la programmation. J'ai utilisé cette méthode dans mon propre code. Pour voir ce code en action, afficher la source [[http://avinash.apeshell.net/stuff/ship/flyaround.bas ici]].
 
 Avinash 'aetherFox' Vora 
 **avinashvora** [at] **gmail** [dot] **com**.

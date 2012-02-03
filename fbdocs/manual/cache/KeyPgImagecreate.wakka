@@ -1,5 +1,5 @@
 {{fbdoc item="title" value="IMAGECREATE"}}----
-Allocates and initializes storage for an image
+Alloue et initialise une image (stockage en mémoire)
 
 {{fbdoc item="syntax"}}##
 	[[KeyPgDeclare declare]] [[KeyPgFunction function]] **""ImageCreate""** [[KeyPgOverload overload]] ( [[KeyPgByval byval]] //width// [[KeyPgAs as]] [[KeyPgInteger integer]], [[KeyPgByval byval]] //height// [[KeyPgAs as]] [[KeyPgInteger integer]], [[KeyPgByval byval]] //color// [[KeyPgAs as]] [[KeyPgUinteger uinteger]] = **transparent_color** ) [[KeyPgAs as]] [[KeyPgAny any]] [[KeyPgPtr ptr]]
@@ -10,32 +10,33 @@ Allocates and initializes storage for an image
 ##
 {{fbdoc item="param"}}
 	##//width//##
-		The desired width, in number of pixels.
+		La largeur désirée, en nombre de pixels.
 	##//height//##
-		The desired height, in number of pixels.
+		La hauteur désirée, en nombre de pixels.
 	##//color//##
-		The pixel value to fill the area of the image.
+		Valeur du pixel pour remplir l'image.
 	##//depth//##
-		The desired color depth, in bits per pixel.
+		La profondeur de couleur, en bits par pixel.
 
 {{fbdoc item="ret"}}
-	If the image could not be created, NULL (##0##) is returned. Otherwise, the address of the image is returned.
+	Si l'image ne peut être créée NULL (##0##) est renvoyé. Sinon, c'est l'adresse de l'image qui est renvoyée.
 
 {{fbdoc item="desc"}}
-	Both procedures attempt to allocate memory for an image of the specified ##//width//## and ##//height//##. If not successful, NULL (##0##) is returned. Otherwise, an image of that size is created and initialized by filling the entire area of pixels with the value ##//color//##. If not specified, ##//color//## assumes the value of the transparent color for the current graphics screen, which can be found by calling ##[[KeyPgScreencontrol ScreenControl]]##. In any case, the address of the image is returned, which is then controlled by the user, and must be destroyed using ##[[KeyPgImageDestroy ImageDestroy]]##.
+	Les deux procédures essaient d'allouer de la mémoire pour une image de dimensions: ##//width (largeur)//## et ##//height(hauteur)//##. Si échec, un NULL (##0##) est renvoyé. Sinon, une image est créée et initialisée en la remplissant entièrement avec des pixels de valeur ##//color//##. Si  omis, ##//color//## prend la valeur de la couleur transparente pour l'écran graphique courant, qui peut être déterminée en appelant ##[[KeyPgScreencontrol ScreenControl]]##. Dans tous les cas, l'adresse de l'image est retournée, qui est ensuite contrôlée par l'utilisateur, et peut être détruite en utilisant ##[[KeyPgImageDestroy ImageDestroy]]##.</a>##.
 
-	The first procedure creates an image with a color depth matching that of the current graphics screen, which can be found by calling ##[[KeyPgScreencontrol ScreenControl]]##. The second procedure creates an image with a color depth of ##//depth//##, in bits per pixel. For both procedures, the resulting image can be used in drawing procedures while in any screen mode -- and across mode changes -- as long as the color depth of the image matches that of the graphics screen.
+	La première procédure crée une image avec une profondeur de couleur correspondant à celle de l'écran graphique courant, qui peut être déterminée en appelant ##[[KeyPgScreencontrol ScreenControl]]##. La seconde procédure crée une image avec une profondeur de couleur ##//depth//##, en bits par pixel. Pour chaque procédure, l'image obtenue peut être utilisée dans l'élaboration de procédures dans n'importe quel mode écran - et à travers les changements de mode - tant que la profondeur de couleur de l'image correspond à celle de l'écran graphique.
 
-	##**""ImageCreate""**## is the recommended way to allocate memory for new images. The memory layout -- size, structure, etc. -- while documented, may change from version to version, making manual calculation of the sizes involved error-prone. However, ##[[KeyPgImageInfo ImageInfo]]## can be used to retrieve, among other things, the size, in bytes, of an existing image, allowing memory to be manually allocated for a copy of an image, or to be read from or written to a file or device.
+	Les images inutiles seront détruites avec ##[[KeyPgImageDestroy ImageDestroy]]##, pour éviter des problèmes de mémoire.
 
-	##[[KeyPgGetgraphics Get (Graphics)]]## can be used to initialize an image using pre-allocated memory.
+	##**ImageCreate**## est la méthode recommandée pour allouer de la mémoire pour de nouvelles images. La disposition de la mémoire - la taille, structure, etc - bien que documentée, peut changer d'une version à une autre, rendant le calcul manuel des tailles difficile et sujet à erreurs. Cependant, ##[[KeyPgImageInfo ImageInfo]]## peut être utilisé pour déterminer, entre autres, la taille, en octets, d'une image existant, permettant ainsi d'allouer de la mémoire manuellement pour une copie d'image, ou pour une lecture ou une écriture à partir d'un fichier ou d'un "device".
 
+##[[KeyPgGetgraphics Get (Graphique)]]## peut être utilisé pour initialiser une image en utilisant la mémoire pré-allouée.
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/gfx/imagecreate.bas"}}%%(freebasic)
-'' Create a graphics screen.
+'' Cree un ecran graphique.
 screenres 320, 200, 32
 
-'' Create a 64x64 pixel image with a darkish green background.
+'' Cree une image 64x64 pixels avec un arriere-plan vert fonce.
 dim image as any ptr = imagecreate( 64, 64, rgb(0, 128, 0) )
 
 if image = 0 then
@@ -44,31 +45,30 @@ if image = 0 then
 	end -1
 end if
 
-'' Draw a semi-transparent, red circle in the center of the image.
+'' Dessine un cercle rouge semi-transparent, au centre de l'image.
 circle image, (32, 32), 28, rgba(255, 0, 0, 128),,, 1.0, f
 
-'' Draw the image onto the screen using various blitting methods.
+'' Dessine l'image sur l'ecran en utilisant differentes methodes.
 put (120, 60), image, pset
 put (140, 80), image, alpha
 
-'' Destroy the image.
+'' Detruit l'image.
 imagedestroy image
 
 sleep
 %%
 {{image class="center" title="Imagecreate example output" url="/images/imagecreate.png"}}
 
-
 {{fbdoc item="lang"}}
-	- Not available in the //[[CompilerOptlang -lang qb]]// dialect unless referenced with the alias ##**""__Imagecreate""**##.
+	- Non disponible dans le dialecte //[[CompilerOptlang -lang qb]]// sauf référencé avec l'alias ##**__Imagecreate**##.
 
 {{fbdoc item="diff"}}
-	- New to ""FreeBASIC""
+	- Nouveau pour ""FreeBASIC""
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgImageDestroy ImageDestroy]]##
 	- ##[[KeyPgImageInfo ImageInfo]]##
-	- ##[[KeyPgGetgraphics Get (Graphics)]]##
-	- [[GfxInternalFormats Internal pixel formats]]
+	- ##[[KeyPgGetgraphics Get (Graphique)]]##
+	- [[GfxInternalFormats Formats graphiques internes]]
 
 {{fbdoc item="back" value="CatPgGfx2D|2D Drawing Functions"}}

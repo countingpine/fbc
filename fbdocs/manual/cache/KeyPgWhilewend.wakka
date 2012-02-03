@@ -1,5 +1,5 @@
 {{fbdoc item="title" value="WHILE"}}----
-Control flow statement for looping
+Déclaration de contrôle de flux pour une boucle.
 
 {{fbdoc item="syntax"}}##
 	**While** [//condition//]
@@ -7,18 +7,18 @@ Control flow statement for looping
 	**Wend**
 ##
 {{fbdoc item="desc"}}
-	The ##**While**## statement will cause the following set of statements in the //statement block// to execute repeatedly if and while the expression //condition// evaluates to true.
+	La déclaration ##**While**## entraînera l'ensemble suivant des instructions de //statement block// à s'exécuter répétitivement tant que l'expression //condition// est vraie (true).
 
-	If //condition// evaluates to false when the WHILE statement is first executed, then the //statement block// is skipped and execution resumes immediately following the enclosing ##**Wend**## statement.
+	Si //condition// est évaluée à faux (false) quand l'instruction WHILE est exécutée la première fois, le //statement block// est sauté et l'exécution reprend immédiatement après le ##**Wend**## de fin de structure.
 
-	If an ##[[KeyPgExit Exit]]## ##**While**## statement is encountered inside the //statement block//, the loop is terminated, and execution resumes immediately following the enclosing ##**Wend**## statement. If a ##[[KeyPgContinue Continue]]## ##**While**## statement is encountered, the rest of the //statement block// is skipped and execution resumes at the ##**While**## statement.
+	Si une déclaration ##[[KeyPgExit Exit]]## ##**While**## est rencontrée dans le //statement block//, la boucle se termine et l'exécution reprend immédiatement après le ##**Wend**## de fin de structure. Si une déclaration ##[[KeyPgContinue Continue]]## ##**While**## est rencontrée, le reste du //statement block// est ignorée et l'exécution reprend à la déclaration ##**While**##.
 
-	Like all control flow statements, the ##**While**## statement can be nested, that is, it can be used in a statement block of another ##[[KeyPgWhile While]]## statement.
+	Comme toutes les déclaration de contrôle de flux, l'instruction ##**While**## peut être imbriquée, c'est à dire qu'elle peut être utilisée dans un bloc d'instructions d'une autre déclaration ##[[KeyPgWhile While]]##.
 
-	//**note**: the ##**While**## //keyword// is also used in the ##[[KeyPgDoloop Do...Loop]]## statement to indicate the type of comparison. Used in this way, the DO statement becomes functionally equivalent to the WHILE statement, so do not confuse their enclosing keywords ##Loop## and ##**Wend**##, respectively.//
+	//**Note**: le //mot-clef// ##**While**## est aussi utilisé dans la déclaration ##[[KeyPgDoloop Do...Loop]]## pour indiquer le type de comparaison. Utilisée de cette façon, la déclaration DO devient fonctionnellement équivalente à l'instruction WHILE, donc il ne faut pas confondre les mots-clés entourant ##**Loop**## et ##**Wend**##, respectivement.//
 
 {{fbdoc item="ex"}}
-	In this example, a ##**While**## loop is used to reverse a string by iterating through it backward. The loop stops if index is less than 0 //(0 being the first index in the string)//.
+	Dans cet exemple, une boucle ##**While**## est utilisée pour inverser une chaîne par itération à travers elle en arrière. La boucle s'arrête si l'indice est inférieur à 0 //(0 étant le premier indice de la chaîne)//.
 {{fbdoc item="filename" value="examples/manual/control/while-wend.bas"}}%%(freebasic)
 dim as string sentence                          '' string to reverse
 sentence = "The quick brown fox jumps over the lazy dog."
@@ -38,11 +38,11 @@ end 0
 %%
 
 {{fbdoc item="lang"}}
-	- In the //[[CompilerOptlang -lang qb]]// and //[[CompilerOptlang -lang fblite]]// dialects, variables declared inside a WHILE..WEND loop have a function-wide [[ProPgVariableScope scope]] as in QB 
-	- In the //[[CompilerOptlang -lang fb]]// and //[[CompilerOptlang -lang deprecated]]// dialects, variables declared inside a ##**While**##..##**Wend**## block are visible only inside the block, and can't be accessed outside it.
+	- Dans les dialectes //[[CompilerOptlang -lang qb]]// et //[[CompilerOptlang -lang fblite]]//, les variables déclarées dans une boucle WHILE..WEND ont une [[ProPgVariableScope portée]] fonction comme dans QB. 
+	- Dans les dialectes //[[CompilerOptlang -lang fb]]// et //[[CompilerOptlang -lang deprecated]]//, les variables déclarées dans une boucle ##**While**##..##**Wend**## ne sont visibles que dans ce bloc et inaccessibles en-dehors.
 
 {{fbdoc item="diff"}}
-	- None
+	- Aucune
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgExit Exit]]##

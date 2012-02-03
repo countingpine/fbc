@@ -1,32 +1,33 @@
 {{fbdoc item="title" value="ANY"}}----
-##**Any**## is not a real type, but it's used as a placeholder in various ways.
+##**Any**## n'est pas un type réel, mais il est utilisé comme un espace réservé de diverses manières.
 
 {{fbdoc item="syntax"}}##
 	//identifier// [[KeyPgAs as]] **Any** [[KeyPgPointer Pointer]]|[[KeyPgPtr ptr]]
-//or//
+//ou//
 	[[KeyPgDeclare declare]] { [[KeyPgSub sub]] | [[KeyPgFunction function]] } //identifier// ( [ ..., ] [[KeyPgByref byref]] //identifier// [[KeyPgAs as]] **Any** [ , ... ] )
-//or//
+//ou//
 	[[KeyPgDim Dim]] //identifier// [[KeyPgAs as]] [[DataType datatype]] = **Any**
 ##
 {{fbdoc item="usage"}}##
 	**##1)**## Dim //identifier// as **Any** ptr
-//or//
+//ou//
 	**##1)**## Declare Sub //identifier// ( [ byval | byref ] //identifier// as **Any** ptr )
-//or//
+//ou//
 	**##2)**## Dim //identifier// As //datatype// = **Any**
-//or//
+//ou//
 	**##3)**## Declare Sub //identifier// ( byref //identifier// as **Any** )
 ##
 {{fbdoc item="desc"}}
-	##**1)**## A special pointer type called the ##**Any [[KeyPgPtr Pointer]]**## allows pointing to any variable type. If you cast it to an ##[[KeyPgInteger Integer]] [[KeyPgPtr Pointer]]##, it will operate on the subject as though it were an ##[[KeyPgInteger Integer]]##, etc.
+	##**Any**## peut être utilisé dans trois contextes: pointeurs, initialiseur de variable, arguments pointeur de fonctions et déclarations de fonction pour indiquer un type de données inconnu.
+	##**1)**## Un type pointeur spécial appelé le ##**Any** [[KeyPgPtr Pointer]]**## permet de pointer vers n'importe quel type de variable. Si vous le convertissez (cast) en un ##[[KeyPgInteger Integer]] [[KeyPgPtr Pointer]]##, il fonctionnera sur le sujet comme s'il s'agissait d'un ##[[KeyPgInteger Integer]]##, etc.
 
-	You may not create variables of the type ##**Any**##. It is illegal to dereference an ##**Any Pointer**##, but an ##**Any Pointer Pointer**## may be dereferenced, because doing so will result in an ##**Any Pointer**##. Trying to dereference that resulting ##**Any Pointer**## would be illegal.
+	Vous ne pouvez pas créer des variables de type ##**Any**##. Il est illégal de déréférencer un ##**Any Pointer**##, mais un ##**Any Pointer Pointer**## peut être déréférencé, parce que cela se traduira par un ##**Any Pointer**##. Essayer de déréférencer ce ##**Any Pointer**## qui en résulte serait illégal.
+	
+	Cela ne doit pas être confondu avec ##//Variant//##, un type de données Visual Basic qui peut contenir tout type de variable. ""FreeBASIC"" ne supporte pas nativement le type ##//Variant//##.
+	
+	##**2) **## ##**Any**## peut être utilisé comme un faux initialiseur pour désactiver l'initialisation par défaut à ##0## des variables. Cela peut faire gagner du temps dans les sections critiques des programmes. Il appartient au programme de remplir les variables avec des données significatives. Vous pouvez reconnaître que c'est le comportement par défaut du langage C.
 
-	This should not be confused with ##Variant##, a Visual Basic data type which can contain any type of variable. ""FreeBASIC"" does not natively support the ##Variant## type.
-	
-	##**2) **## ##**Any**## can be used as a fake initializer to disable the default initialization to ##0## of the variables. This may save time in critical sections of the programs. It is up to the program to fill the variables with significant data. You may recognize this as the default behavior of C.
-	
-	##**3) **## **##Any##** can be used  in function prototypes (in a ##[[KeyPgDeclare Declare]]## statement) with ##[[KeyPgByref ByRef]]## arguments to disable the compiler checking for the correct type of the variable passed. This use of ##**Any**## is deprecated and it is only there for compatibility with QB, where it was the only way of passing arrays as arguments.
+	##**3) **## **##Any##** peut être utilisé dans les prototypes de fonctions (dans une déclaration ##[[KeyPgDeclare Declare]]##) avec des arguments ##[[KeyPgByref ByRef]]## pour désactiver la vérification du compilateur du bon type de variable passée. Cette utilisation de ##**Any**## est obsolète et n'est là que pour la compatibilité avec QB, où c'était le seul moyen de passer des tableaux comme arguments.
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/misc/any.bas"}}%%(freebasic)
@@ -46,17 +47,17 @@ Print "Initialized ";
 echo pd       '' pass to echo a pointer to double
 
 p = pa     '' assign to p a pointer to integer
-p = pd     '' assign to p a pointer to double      
+p = pd     '' assign to p a pointer to double
 
 Sleep
 
-Sub echo (ByVal x As Any Ptr)
+	Sub echo (ByVal x As Any Ptr)
 	Dim As Integer i
-	For i = 0 To 39
+	    For i = 0 To 39
 	    'echo interprets the data in the pointer as bytes
-	    Print Cast(UByte Ptr, x)[i] & " ";
+	Print Cast(UByte Ptr, x)[i] & " ";
 	Next
-	Print
+Print
 End Sub
 %%
 
@@ -65,21 +66,21 @@ End Sub
 Declare Sub echo (ByRef a As Any) '' ANY disables the checking for the type of data passed to the function
 
 Dim x As Single
-x = -15
-echo x                  '' Passing a single to a function that expects an integer. The compiler does not complain!!             
+x = -15             
+echo x                  '' Passing a single to a function that expects an integer. The compiler does not complain!!
 Sleep
 
-Sub echo (ByRef a As Integer)
-  Print Hex(a)         
+  Sub echo (ByRef a As Integer)         
+Print Hex(a)
 End Sub
 
 %%
 
 {{fbdoc item="lang"}}
-	- Not available in the //[[CompilerOptlang -lang qb]]// dialect.
+	- Non disponible dans le dialecte //[[CompilerOptlang -lang qb]]//.
 
 {{fbdoc item="diff"}}
-	- Pointers and initializers are new to ""FreeBASIC"".
+	- Pointeurs et initialiseurs sont nouveaux pour FreeBASIC.
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgDim Dim]]##

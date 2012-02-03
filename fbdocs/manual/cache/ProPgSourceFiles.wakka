@@ -1,24 +1,24 @@
 {{fbdoc item="title" value="Source Files (.bas)"}}----
-Text files read by FreeBASIC and compiled into executable code.
+Fichiers texte lus par FreeBASIC et compilés en code exécutable.
 
-A source file is a text file that contains FreeBASIC language statements.  A program might be made from just one source file or possibly hundreds.  Source files are read by the compiler and compiled into object code.  Object code is then linked to create an executable or can be stored for later use as a library.
+Un fichier source est un fichier texte qui contient des instructions en langage FreeBASIC.  Un programme peut être constitué d'un seul fichier source ou, éventuellement, de centaines.  Les fichiers source sont lus par le compilateur et compilés en code objet.  Le code objet est alors lié pour créer un exécutable ou peut être stocké pour une utilisation ultérieure comme une bibliothèque.
 
-FreeBASIC by default, automatically takes care of compiling sources and linking object modules in to executables, so normally it is possible to make an executable program by just passing the names of the source files on the ##fbc## command line.  For example, assuming we had three source files that together made a program, we could create an executable for the program by running ##fbc##, the FreeBASIC compiler on a command line as follows:
+FreeBASIC par défaut, se charge automatiquement de compiler les sources et de relier les modules objet dans des exécutables, donc normalement il est possible de faire un programme exécutable en passant simplement le nom des fichiers sources sur la ligne de commande de ##fbc##.  Par exemple, en supposant que nous avons trois fichiers sources qui, ensemble, constituent un programme, nous pouvons créer un exécutable pour le programme en exécutant ##fbc##, le compilateur FreeBASIC sur une ligne de commande comme suit:
 ##
 	fbc myprog.bas tools.bas funcs.bas
 ##
-{{fbdoc item="section" value="Unicode support"}}
-	- Besides ASCII files with Unicode escape sequences (\u), FreeBASIC can parse UTF-8, UTF-16LE, UTF-16BE, UTF-32LE and UTF-32BE source (.bas) or header (.bi) files, they can be freely mixed with other sources/headers in the same project (also with other ASCII files).
+{{fbdoc item="section" value="Support de l'Unicode"}}
+	- En plus des fichiers ASCII avec des séquences d'échappement Unicode (\u), FreeBASIC peut analyser des fichiers source (.bas) ou en-têtes (.bi) UTF-8, UTF-16LE, UTF-16BE, UTF-32LE and UTF-32BE, ils peut être librement mélangés avec d'autres sources/en-têtes dans le même projet (également avec d'autres fichiers ASCII).
 
-	- Literal strings can be typed in the original non-Latin alphabet, just use a text-editor that supports one of the Unicode formats listed above.
+	- Les chaînes littérales peuvent être tapées dans l'alphabet d'origine non-latin, il suffit d'utiliser un éditeur de texte qui prend en charge l'un des formats Unicode énumérés ci-dessus.
 
-{{fbdoc item="section" value="Implicit main()"}}
-	Some languages require a special ##main()## procedure be defined as an entry point to the program which define the first statements that will be executed when the program starts.  FreeBASIC allows executable statements in module level code and normally the first source file passed to fbc on the command line will be used as the "main" module.  The main module can be explicitly names by passing //-m filename// on the command line, where //filename// is the name of the main module without the .bas extension.
+{{fbdoc item="section" value="main() implicite"}}
+	Certaines langues nécessitent une procédure spéciale ##main()## définie comme point d'entrée pour le programme définissant les premières instructions qui seront exécutées au lancement du programme.  FreeBASIC considère que les instructions exécutables du code au niveau module et situées, normalement, dans le premier fichier source passé sur la ligne de commande de fbc, constitueront le module principal ("main()).  Le module principal peut être explicitement nommé en passant //-m filename// sur la ligne de commande, où //filename// est le nom du module principal sans l'extension .bas .
 {{fbdoc item="filename" value="examples/manual/proguide/sourcefiles.bas"}}%%(freebasic)
 	'' sample.bas
 	declare sub ShowHelp()
 
-	'' This next line is the first executable statement in the program
+	'' La ligne suivante est la premiere instruction executable dans le programme
 	if command(1) = "" then
 		ShowHelp
 		end 0
@@ -29,11 +29,11 @@ FreeBASIC by default, automatically takes care of compiling sources and linking 
 	end sub
 %%
 
-{{fbdoc item="section" value="Header Files"}}
-	A header file is a special kind of source file that typically only contains declarations and has a ##.bi## extension. See [[ProPgHeaderFiles Header Files (.bi)]].
+{{fbdoc item="section" value="Fichiers en-tête"}}
+	Un fichier d'en-tête est un type spécial de fichier source qui généralement ne contient que des déclarations et une extension ##.bi##. Voir [[ProPgHeaderFiles Les fichiers d'en-tête (.bi)]].
 
 {{fbdoc item="see"}}
-	- [[CompilerCmdLine fbc command-line]]
-	- [[ProPgHeaderFiles Header Files (.bi)]]
+	- [[CompilerCmdLine La ligne de commande de fbc]]
+	- [[ProPgHeaderFiles Les fichiers d'en-tête (.bi)]]
 
 {{fbdoc item="back" value="CatPgProgrammer|Programmer's Guide"}}

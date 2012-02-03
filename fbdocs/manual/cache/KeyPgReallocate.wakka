@@ -1,5 +1,5 @@
 {{fbdoc item="title" value="REALLOCATE"}}----
-Reallocates storage for an existing reserved block of memory
+Réaffecte au stockage un bloc existant et réservé de la mémoire
 
 {{fbdoc item="syntax"}}##
 	[[KeyPgDeclare declare]] [[KeyPgFunction function]] **Reallocate** [[KeyPgCdecl cdecl]] ( [[KeyPgByval byval]] //pointer// [[KeyPgAs as]] [[KeyPgAny any]] [[KeyPgPtr ptr]], [[KeyPgByval byval]] //count// [[KeyPgAs as]] [[KeyPgInteger integer]] ) [[KeyPgAs as]] [[KeyPgAny any]] [[KeyPgPtr ptr]]
@@ -9,23 +9,23 @@ Reallocates storage for an existing reserved block of memory
 ##
 {{fbdoc item="param"}}
 	##//pointer//##
-		The address of allocated memory to be reallocated.
+		L'adresse de mémoire allouée qui doit être réaffectée.
 	##//count//##
-		The number of bytes, in total, to be reallocated.
+		Le nombre total d'octets qui doivent être réaffectés.
 
 {{fbdoc item="ret"}}
-	The address of the reallocated memory. A null (##0##) pointer is returned if reallocation was unsuccessful, and the original memory pointed to by ##//pointer//## remains unchanged.
+	L'adresse de la mémoire réaffectée. Un pointeur nul (##0##) est retourné si la réallocation a échoué et la mémoire d'origine pointée par ##//pointer//## reste inchangée.
 
 {{fbdoc item="desc"}}
-	Attempts to reallocate, or resize, memory previously allocated with ##[[KeyPgAllocate Allocate]]##. The contents of the buffer are preserved, although if ##//count//## is less than the original size of the memory block, the buffer will be truncated.
+	Essaye de réaffecter ou de redimensionner, la mémoire précédemment réservée avec ##[[KeyPgAllocate Allocate]]##. Le contenu de la mémoire tampon est conservé, mais si ##//count//## est inférieur à la taille d'origine du bloc de mémoire, la mémoire tampon sera tronquée.
 
-	If ##//pointer//## is null (##0##), then ##""ReAllocate""## behaves identically to ##[[KeyPgAllocate Allocate]]##.
+	Si ##//pointer//## est nul (##0##), alors le comportement de ##""ReAllocate""## est identique à celui de ##[[KeyPgAllocate Allocate]]##.
 
-	Reallocated memory must be deallocated, or freed, with ##[[KeyPgDeallocate Deallocate]]## when no longer needed.
+	La mémoire réallouée doit être désallouée ou libérée, avec ##[[KeyPgDeallocate Deallocate]]## quand elle n'est plus utilisée.
 
-	This function is not part of the FreeBASIC runtime library, it is an alias for the C runtime library's ##//realloc//##, so it's not guaranteed to be thread safe in all platforms.
+	Cette fonction ne fait pas partie de la bibliothèque d'exécution de FreeBASIC, c'est un alias pour ##//realloc//## de la bibliothèque d'exécution du langage C, ce n'est donc pas garanti d'être "thread-safe" sur toutes les plates-formes.
 	
-	**NOTE**: Reallocating a pointer inside an object function, when that pointer contains the parent object of the function, is undefined, and will likely result in horrible crashes.
+	**NOTE**: La réaffectation d'un pointeur dans une fonction d'objet, quand ce pointeur contient l'objet parent de la fonction, est indéfinie et entraînera probablement dans des accidents horribles.
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/memory/reallocate.bas"}}%%(freebasic)
@@ -69,10 +69,10 @@ Deallocate a   ' Clean up
 %%
 
 {{fbdoc item="lang"}}
-	- Not available in the //[[CompilerOptlang -lang qb]]// dialect unless referenced with the alias ##**""__Reallocate""**##.
+	- Non disponible dans le dialecte //[[CompilerOptlang -lang qb]]// sauf si référencé avec l'alias ##**""__Reallocate""**##.
 
 {{fbdoc item="diff"}}
-	- New to ""FreeBASIC""
+	- Nouveau pour ""FreeBASIC""
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgAllocate Allocate]]##

@@ -1,5 +1,5 @@
 {{fbdoc item="title" value="ASC"}}----
-Returns the corresponding ASCII or Unicode integer representation of a character
+Retourne l'entier correspondant à la représentation ASCII ou Unicode d'un caractère
 
 {{fbdoc item="syntax"}}##
 	[[KeyPgDeclare declare]] [[KeyPgFunction function]] **Asc** [[KeyPgOverload overload]] ( [[KeyPgByref byref]] //str// [[KeyPgAs as]] [[KeyPgConstQualifier const]] [[KeyPgString string]], [[KeyPgByval byval]] //position// [[KeyPgAs as]] [[KeyPgInteger integer]] = 1 ) [[KeyPgAs as]] [[KeyPgUinteger uinteger]]
@@ -11,50 +11,47 @@ Returns the corresponding ASCII or Unicode integer representation of a character
 ##
 {{fbdoc item="param"}}
 	##//str//##
-		The source string.
+		La chaîne source.
 	##//position//##
-		The position in the string of a character.
+		La position d'un caractère dans une chaîne.
 
 {{fbdoc item="ret"}}
-	The ASCII or Unicode integer representation of the character at ##//position//## in ##//str//##.
+	L'entier correspondant à la représentation ASCII ou Unicode d'un caractère situé à ##//position//## dans ##//str//##.
 
 {{fbdoc item="desc"}}
-	If ##//str//## is a ##[[KeyPgString String]]## or a ##[[KeyPgZstring ZString]]##, an [[CptAscii ASCII]] code value is returned.
+	Si ##//str//## est une ##[[KeyPgString String]]## ou une ##[[KeyPgZstring ZString]]##, un code [[CptAscii ASCII]] est retourné.
 
-	If ##//str//## is a ##[[KeyPgWstring WString]]##, a [[CptAscii Unicode]] code value is returned.
+	Si ##//str//## est une ##[[KeyPgWstring WString]]##, un code [[CptAscii Unicode]] est retourné.
 	
-	The function returns zero (0) if the string is a zero length string, ##//position//## is less than one (1), or ##//position//## is greater than the number of characters in ##//str//##.
+	La fonction retourne zéro (0) si la chaîne a une longueur nulle, si ##//position//## est inférieure à (1), ou si ##//position//## est supérieure au nombre de caractères dans ##//str//##.
 	
-	##[[KeyPgChr Chr]]## performs the opposite function for ASCII strings, while ##[[KeyPgWchr WChr]]## is the opposite for Unicode strings, returning a string containing the character represented by the code passed as an argument.
+	##[[KeyPgChr Chr]]## exécute l'opération inverse pour les chaînes de caractères ASCII, alors que ##[[KeyPgWchr WChr]]## est l'opposé pour les chaînes Unicode, retournant une chaîne de caractères contenant le caractère représenté par le code passé en argument.
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/strings/asc.bas"}}%%(freebasic)
 print "the ascii code of 'a' is:"; asc("a")
 print "the ascii code of 'b' is:"; asc("abc", 2)
 %%
-	will produce the output:
+	produira la sortie:
 
 %%the ascii code of 'a' is: 97
 the ascii code of 'b' is: 98
 %%
 
-Unicode example (Note to documentation editors: don't put inside ""%%(qbasic)"" markers or the Russian text will disappear!)
+Exemple Unicode (Note aux rédacteurs de documentation: ne mettez pas dans ""%%(qbasic)"" marqueurs ou le texte russe va disparaître!)
 
 <<##dim a as wstring * 11
 a = "&#1055;&#1088;&#1080;&#1074;&#1077;&#1090;, &#1084;&#1080;&#1088;"
 print "the Unicode of the second char of " & a & " is: " & asc(a)
-##<<::c::	will produce the output:
+##<<::c::<<	produira la sortie:
 <<##the Unicode of the second char of &#1055;&#1088;&#1080;&#1074;&#1077;&#1090;, &#1084;&#1080;&#1088; is: 1088
 ##<<::c::
 {{fbdoc item="target"}}
-	- DOS does not support the wide-character string version of ##**ASC**##.
-
-{{fbdoc item="diff"}}
-	- The optional ##//position//## argument is new to ""FreeBASIC"".
-	- QB does not support the wide-character string version of ##**ASC**##
-
+	- DOS ne supporte pas la version chaîne avec larges caractères de ##**Asc**##.{{fbdoc item="diff"}}
+	- L'argument optionnel ##//position//## est nouveau pour FreeBASIC.
+	- QB ne supporte pas la version chaîne avec larges caractères de ##**Asc**##
 {{fbdoc item="see"}}
-	- [[CptAscii ASCII Character Codes]]
+	- [[CptAscii Codes ASCII des caractères]]
 	- ##[[KeyPgChr Chr]]##
 	- ##[[KeyPgStr Str]]##
 	- ##[[KeyPgVal Val]]##

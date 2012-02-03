@@ -1,5 +1,5 @@
 {{fbdoc item="title" value="BYVAL"}}----
-Declaration specifier to explicitly pass a parameter by value
+Spécificateur de déclaration pour passer explicitement un paramètre par valeur
 
 {{fbdoc item="syntax"}}##
 	**Byval** //param// [[KeyPgAs as]] [[DataType datatype]]
@@ -8,13 +8,13 @@ Declaration specifier to explicitly pass a parameter by value
 	[ [[KeyPgDeclare declare]] ] { [[KeyPgSub sub]] | [[KeyPgFunction function]] } //proc_name// ( **Byval** //param// [[KeyPgAs as]] [[DataType datatype]]  )
 ##
 {{fbdoc item="desc"}}
-	##**Byval**## in a parameter list of a declare statement causes a copy of the variable to be passed to the procedure (for example, a sub or function) by its value.
+	##**ByVal**## dans une liste de paramètres d'une instruction de déclaration provoque une copie de la variable à passer par sa valeur à la procédure (par exemple, un sous-programme ou une fonction).
 
-	This means that if the value of the variable //##x##// is passed, then the original variable //##x##// will not be modified in any way; however, if the variable were passed ##[[KeyPgByref Byref]]##, the value of the original variable //##x##// could be modified by the called function.
+	Cela signifie que si la valeur de la variable //##x##// est passée, alors la variable d'origine //##x##// ne sera en aucune façon modifiée; toutefois, si la variable a été passée ##[[KeyPgByref Byref]]##, la valeur de la variable d'origine //##x##// peut être modifiée par la fonction appelée.
 
-	Note: For string arguments, ##**Byval**## currently has a different meaning: instead of passing a copy of the string, it passes a ##[[KeyPgZstring zstring]]## pointer to the string data, while ##[[KeyPgByref Byref]]## passes a pointer to the FreeBASIC string descriptor. This behavior allows passing a ##**Byval**## ##[[KeyPgString String]]## directly to C procedures. The string passed this way should not be changed by the ##[[KeyPgSub Sub]]##/##[[KeyPgFunction Function]]##, as the string descriptor would not be updated. The meaning of passing a ##[[KeyPgString String]]## ##**Byval**## might change in the future; therefore, passing a ##[[KeyPgString String]]## ##**Byval**## should be avoided.  ##[[KeyPgZstring Zstring]]## is more suited for the purpose of passing zero-terminated strings to C functions.
+	Note: Pour arguments de chaîne, ##**ByVal**## a actuellement un sens différent: au lieu de passer une copie de la chaîne, il passe un pointeur ##[[KeyPgZstring zstring]]## vers la chaîne de données, alors que ##[[KeyPgByref Byref]]## passe un pointeur vers le descripteur de chaîne ""FreeBASIC"". Ce comportement permet de passer ##**ByVal**## ##[[KeyPgString String]]## directement aux procédures C. La chaîne passée de cette manière ne sera pas changée par ##[[KeyPgSub Sub]]##/##[[KeyPgFunction Function]]##, et le descripteur de chaîne ne sera pas mis à jour. La signification du passage d'une ##[[KeyPgString String]]## ##**ByVal**## pourrait changer dans le futur; par conséquent, passer ##[[KeyPgString String]]## ##**ByVal**## doit être évité.  ##[[KeyPgZstring Zstring]]## est plus adapté dans le but de passer des "chaînes terminées par zéro" (ZString) aux fonctions C.
 
-	Opposite of ##[[KeyPgByref ByRef]]##.
+	L'opposé de ##[[KeyPgByref ByRef]]##.
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/procs/byval.bas"}}%%(freebasic)
@@ -33,14 +33,14 @@ End
 %%
 
 {{fbdoc item="lang"}}
-	- In the //[[CompilerOptlang -lang fb]]// dialect, ##**Byval**## is the default parameter passing convention for all built-in types except ##[[KeyPgString String]]##; String and user-defined ##[[KeyPgType Type]]##s are passed ##[[KeyPgByref Byref]]## by default.
-	- In //[[CompilerOptlang -lang qb]]// and //[[CompilerOptlang -lang fblite]]// dialects, ##**Byref**## is the default parameter passing convention.
+	- Dans le dialecte //[[CompilerOptlang -lang fb]]//, ##**ByVal**## est la convention de passage de paramètre par défaut pour tous les types intégrés à l'exception de ##[[KeyPgString String]]##; Chaîne (String) et les ##[[KeyPgType Type]]##s définis par l'utilisateur sont passés ##[[KeyPgByref Byref]]## par défaut.
+	- Dans les dialectes //[[CompilerOptlang -lang qb]]// et //[[CompilerOptlang -lang fblite]]//, ##**ByRef**## est la convention de passage des paramètres.
 
 {{fbdoc item="diff"}}
-	- QB only used ##**Byval**## in declarations to non-Basic subroutines
+	- QB utilise seulement ##**ByVal**## dans les déclarations aux sous-routines non-Basic
 
 {{fbdoc item="see"}}
-	- [[ProPgPassingArguments Passing Arguments to Procedures]]
+	- [[ProPgPassingArguments Passer des arguments aux procédures]]
 	- ##[[KeyPgDeclare Declare]]##
 	- ##[[KeyPgByref ByRef]]##
 

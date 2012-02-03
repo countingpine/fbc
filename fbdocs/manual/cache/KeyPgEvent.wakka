@@ -1,11 +1,11 @@
 {{fbdoc item="title" value="EVENT"}}----
-Pre-defined structure(UDT) used by [[KeyPgScreenevent Screenevent]] to return event data 
+Structure prédéfinie (UDT) utilisée par [[KeyPgScreenevent Screenevent]] pour retourner les données d'événements 
 
 {{fbdoc item="syntax"}}##
 	[[KeyPgDim dim]] //variable// [[KeyPgAs as]] **Event**
 ##
 {{fbdoc item="desc"}}
- Here we report the ##EVENT## structure for clarity:
+ Ici, nous décrivons la structure ##EVENT## pour plus de clarté:
 		
 	{{fbdoc item="filename" value="examples/manual/check/KeyPgScreenevent_1.bas"}}%%(freebasic)
 Type EVENT Field = 1
@@ -28,35 +28,35 @@ Type EVENT Field = 1
 End Type
 %%
 
-The ##Type Field## will contain the event type ID, while the remaining 4 integers will hold sensitive data to the event type. 
+##Type Field## contiendra l'ID de type d'événement, tandis que les 4 entiers restants stockeront les données sensibles du type d'événement. 
 
-	__Event types__
-		The event type is identified by an ID number returned into the first integer of the ##//event//## buffer (the ##.type## field in the ##EVENT## structure). Known event type IDs - and their values at time of writing - are:
+	__Les types d'événements__
+		Le type d'événement est identifié par un numéro d'identification (ID) retourné dans le premier entier de la mémoire tampon des événements (le champ ##.type## de la structure ##EVENT##). Les ID de type d'événement connus - et leurs valeurs au moment de l'écriture - sont les suivants:
 
-	- ##EVENT_KEY_PRESS## (##1##) A key was pressed on the keyboard. The ##.scancode## field contains the platform independent scancode value for the key; if the key has an ascii representation, it is held into the ##.ascii## field, which otherwise has a value of 0.
-	- ##EVENT_KEY_RELEASE## (##2##) A key was released on the keyboard. The ##.scancode## and ##.ascii## fields have the same meaning as with the ##EVENT_KEY_PRESS## event.
-	- ##EVENT_KEY_REPEAT## (##3##) A key is being held down repeatedly. The ##.scancode## and ##.ascii## fields have the same meaning as with the ##EVENT_KEY_PRESS## event.
-	- ##EVENT_MOUSE_MOVE## (##4##) The mouse was moved while it was on the program window. The ##.x## and ##.y## fields contain the new mouse position relative to the upper-left corner of the screen, while the ##.dx## and ##.dy## fields contain the motion deltas.
-	- ##EVENT_MOUSE_BUTTON_PRESS## (##5##) One of the mouse buttons was pressed. The ##.button## field has one bit set identifying the button that was pressed; bit 0 identifies the left mouse button, bit 1 the right mouse button and bit 2 the middle mouse button.
-	- ##EVENT_MOUSE_BUTTON_RELEASE## (##6##) One of the mouse buttons was released. The ##.button## field has the same meaning as with the ##EVENT_MOUSE_BUTTON_PRESS## event.
-	- ##EVENT_MOUSE_DOUBLE_CLICK## (##7##)  One of the mouse buttons was double clicked. The ##.button## field has the same meaning as with the ##EVENT_MOUSE_BUTTON_PRESS## event.
-	- ##EVENT_MOUSE_WHEEL## (##8##) The mouse wheel was used; the new wheel position is returned into the ##.z## field.
-	- ##EVENT_MOUSE_ENTER## (##9##) The mouse was moved into the program window.
-	- ##EVENT_MOUSE_EXIT## (##10##) The mouse was moved out of the program window.
-	- ##EVENT_WINDOW_GOT_FOCUS## (##11##) The program window has got focus.
-	- ##EVENT_WINDOW_LOST_FOCUS## (##12##) The program window has lost focus.
-	- ##EVENT_WINDOW_CLOSE## (##13##) The user attempted to close the program window.
-	- ##EVENT_MOUSE_HWHEEL## (##14##) The horizontal mouse wheel was used; the new horizontal wheel position is returned into the ##.w## field. (Note: currently implemented on Windows only)
+	- ##EVENT_KEY_PRESS## (##1##) Une touche du clavier a été appuyée. Le champ ##.scancode## contient la valeur du "scancode" indépendante de la plate-forme pour la touche; si la touche a une représentation ascii, elle est stockée dans le champ ##.ascii##, qui sinon a une valeur de 0.
+	- ##EVENT_KEY_RELEASE## (##2##) Une touche du clavier a été relachée. Les champs ##.scancode## et ##.ascii## ont la même signification que pour l'événement ##EVENT_KEY_PRESS##.
+	- ##EVENT_KEY_REPEAT## (##3##) Une touche est appuyée répétitivement. Les champs ##.scancode## et ##.ascii## ont la même signification que pour l'événement ##EVENT_KEY_PRESS##.
+	- ##EVENT_MOUSE_MOVE## (##4##) La souris a été déplacée alors qu'elle était sur la fenêtre du programme. Les champs ##.x## et ##.y## contiennent la nouvelle position de la souris par rapport au coin supérieur gauche de l'écran, tandis que les champs ##.dx## et ##.dy## contiennent les valeurs (deltas) des déplacements.
+	- ##EVENT_MOUSE_BUTTON_PRESS## (##5##) L'un des boutons de la souris a été appuyé. Le champ ##.button## voit un de ses bits passer à 1, identifiant ainsi le bouton appuyé; le bit 0 identifie le bouton gauche de la souris, le bit 1 le bouton droit et le bit 2 le bouton du milieu.
+	- ##EVENT_MOUSE_BUTTON_RELEASE## (##6##) L'un des boutons de la souris a été relaché. Le champ ##.button## a la même signification que pour l'événement ##EVENT_MOUSE_BUTTON_PRESS##.
+	- ##EVENT_MOUSE_DOUBLE_CLICK## (##7##)  L'un des boutons de la souris a été double-cliqué. Le champ ##.button## a la même signification que pour l'événement ##EVENT_MOUSE_BUTTON_PRESS##.
+	- ##EVENT_MOUSE_WHEEL## (##8##) La molette de la souris a été utilisée; la nouvelle position de la molette est retournée dans le champ ##.z##.
+	- ##EVENT_MOUSE_ENTER## (##9##) La souris a été déplacée dans la fenêtre du programme.
+	- ##EVENT_MOUSE_EXIT## (##10##) La souris a été déplacée en dehors de la fenêtre du programme.
+	- ##EVENT_WINDOW_GOT_FOCUS## (##11##) La fenêtre du programme a eu le "focus" (le curseur est sur la fenêtre)
+	- ##EVENT_WINDOW_LOST_FOCUS## (##12##) La fenêtre du programme a perdu le "focus" (le curseur est sorti de la fenêtre)
+	- ##EVENT_WINDOW_CLOSE## (##13##) L'utilisateur a tenté de fermer la fenêtre du programme.
+	- ##EVENT_MOUSE_HWHEEL## (##14##) La molette horizontale de la souris a été utilisée; la nouvelle position horizontale de la molette est stockée dans le champ ##.w##. (Note: actuellement mis en oeuvre uniquement sous Windows)
 
 
-The ##fbgfx.bi## header file contains a definition of the ##EVENT## user data type.
+Le fichier en-tête ##fbgfx.bi## contient une définition du type de donnée utilisateur ##EVENT##.
 		
 {{fbdoc item="lang"}}
-	- In //[[CompilerDialects lang fb]]//, the structure and constants are stored in the ##FB## ##[[KeyPgNamespace Namespace]]##.
+	- Dans //[[CompilerDialects lang fb]]//, la structure et les constantes sont stockées dans le ##[[KeyPgNamespace Namespace]]## ##FB##.
 
 
-{{fbdoc item="diff"}}
-	- New to ""FreeBASIC""
+{{fbdoc item="section" value="Différences pour QB"}}
+	- Nouveau pour ""FreeBASIC""
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgScreenEvent ScreenEvent]]##

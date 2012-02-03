@@ -1,5 +1,5 @@
 {{fbdoc item="title" value="VALULNG"}}----
-Converts a string to a unsigned long integer
+Conversion d'une chaîne en nombre entier long non-signé
 
 {{fbdoc item="syntax"}}##
 	[[KeyPgDeclare declare]] [[KeyPgFunction function]] **Valulng** [[KeyPgOverload overload]] ( [[KeyPgByref byref]] //strnum// [[KeyPgAs as]] [[KeyPgConstQualifier const]] [[KeyPgString string]] ) [[KeyPgAs as]] [[KeyPgUlongint ulongint]]
@@ -10,19 +10,19 @@ Converts a string to a unsigned long integer
 ##
 {{fbdoc item="param"}}
 	##//strnum//##
-		the string to convert
+		la chaîne à convertir
 
 {{fbdoc item="ret"}}
-	Returns a ##[[KeyPgUlongint ulongint]]## of the converted string
+	Retourne un ##[[KeyPgUlongint ulongint (entier long non-signé)]]## de la chaîne convertie
 
-	If the first character of the string is invalid, ##**Valulng**## will return ##0##.
+	Si le premier caractère de la chaîne n'est pas valide, ##**Valulng**## retournera ##0##.
 
 {{fbdoc item="desc"}}
-	For example, ##**Valulng**("10")## will return ##10##, and ##**Valulng**("10.60")## will return ##10## as well. The function parses the string from the left, skipping any white space, and returns the longest number it can read, stopping at the first non-suitable character it finds.  Any non-numeric characters, including decimal points and exponent specifiers, are considered non-suitable, for example, ##**Valulng**("23.1E+6")## will just return ##23##.
+	Par exemple, ##**Valulng**("10")## retournera ##10##, et ##**Valulng**("10.60")## retournera ##10##. La fonction analyse la chaîne à partir de la gauche, en sautant tout espace blanc, et retourne le plus long nombre qu'elle peut lire, s'arrêtant au premier caractère non-approprié, qu'elle trouve.  Tout caractère non-numérique, inclus les points décimaux et les spécificateurs d'exposant, sont considérés comme non-appropriés. Par exemple, ##**Valulng**("23.1E+6")## retournera seulement ##23##.
 
-	##**Valulng**## can be used to convert integer numbers in [[KeyPgBin binary]] / [[KeyPgOct octal]] / [[KeyPgHex hexadecimal]] format, if they have the relevant identifier (##"&B"## / ##"&O"## / ##"&H"##) prefixed, for example: ##**Valulng**("&HFF")## returns ##255##.
+	##**Valulng**## peut convertir des nombres entiers en format [[KeyPgBin Binaire]] / [[KeyPgOct octal]] / [[KeyPgHex Hexadécimal]], s'il y a devant l'identificateur pertinent (##"&B"## / ##"&O"## / ##"&H"##), par exemple: ##**ValULng**("&HFF")## retourne ##255##.
 
-	If you want to convert a number into string format, use the ##[[KeyPgStr Str]]## function.
+	Si vous voulez convertir un nombre en une chaîne, utilisez la fonction ##[[KeyPgStr Str]]##.
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/strings/valulng.bas"}}%%(freebasic)
@@ -38,10 +38,10 @@ print a, b
 
 
 {{fbdoc item="lang"}}
-	- Not available in the //[[CompilerOptlang -lang qb]]// dialect unless referenced with the alias ##**""__Valulng""**##.
+	- Non disponible dans le dialecte //[[CompilerOptlang -lang qb]]// sauf si référencé avec l'alias ##**""__Valulng""**##.
 
 {{fbdoc item="diff"}}
-	- New to ""FreeBASIC""
+	- Nouveau pour ""FreeBASIC""
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgCulngint Culngint]]##

@@ -1,5 +1,5 @@
 {{fbdoc item="title" value="SETMOUSE"}}----
-Sets the position and visibility of the mouse cursor
+Gère la position et la visibilité du curseur de la souris
 
 {{fbdoc item="syntax"}}##
 	[[KeyPgDeclare declare]] [[KeyPgFunction function]] **Setmouse** ( [[KeyPgByval byval]] //x// [[KeyPgAs as]] [[KeyPgInteger integer]] = -1, [[KeyPgByval byval]] //y// [[KeyPgAs as]] [[KeyPgInteger integer]] = -1, [[KeyPgByval byval]] //visibility// [[KeyPgAs as]] [[KeyPgInteger integer]] = -1, [[KeyPgByval byval]] //clip// [[KeyPgAs as]] [[KeyPgInteger integer]] = -1 ) [[KeyPgAs as]] [[KeyPgInteger integer]]
@@ -8,49 +8,49 @@ Sets the position and visibility of the mouse cursor
 	//result// = **Setmouse**([ //x// ] [, [ //y// ] [, [ //visibility// ] [, [ //clip// ]]]])
 ##
 {{fbdoc item="param"}}
-	(For each parameter, ##-1## is a special value indicating "no changes.")
+	(Pour chaque paramètre, ##-1## est une valeur spéciale indiquant "pas de changements".)
 	##//x//##
-		optional - set x coordinate
+		facultatif - coordonnée x
 	##//y//##
-		optional - set y coordinate
+		facultatif - coordonnée y
 	##//visibility//##
-		optional - set visibility: ##1## indicates visible, ##0## indicates hidden
+		facultatif - visibilité: ##1## signifie visible, ##0## signifie invisible
 	##//clip//##
-		optional - set clipping: ##1## indicates mouse is clipped to graphics window, ##0## indicates no clipping
+		facultatif - limitation fenêtre: ##1## souris limitée par rapport à la fenêtre graphique, ##0## signifie pas de limitation
 
 {{fbdoc item="ret"}}
-	Zero (##0##) on success, non-zero to indicate failure.
+	Zéro (##0##) si succès, non-zéro pour indiquer un échec.
 
 {{fbdoc item="desc"}}
-	##**Setmouse**## will set the (##//x//##, ##//y//##) coordinates of the mouse pointer, as well as setting its visibility.  THe mouse position is set using the ##//x//## and ##//y//## parameters.  The mouse will be visible if visibility is set to ##1##, and invisible if visibility is set to ##0##.  ##**Setmouse**## is intended for graphics modes initiated using the ##[[KeyPgScreengraphics Screen (Graphics)]]## statement only.
+	##**SetMouse**## validera les coordonnées (##//x//##, ##//y//##) du pointeur de la souris, ainsi que la visibilité de celui-ci.  La position de la souris est validée en utilisant les paramètres ##//x//## et ##//y//##.  La souris sera visible si ##//visibility//## est mise à ##1##, et invisible si mise à ##0##.  ##**SetMouse**## est destiné aux modes graphiques initialisés seulement avec ##[[KeyPgScreengraphics Screen (Graphics)]]##.
 
 {{fbdoc item="ex"}}
 {{fbdoc item="filename" value="examples/manual/input/setmouse.bas"}}%%(freebasic)
 Dim As Integer x, y, buttons
 
-' create a screen 640*480
+' cree un ecran 640*480
 ScreenRes 640, 480
 Print "Click the mouse button to center the mouse"
 
 Do
-	' get mouse x, y and button state (wait until mouse is onscreen)
+	' recupere etat x, y et bouton (attend tant que souris est sur ecran)
 	Do: Sleep 1: Loop While GetMouse( x, y , , buttons) <> 0
 
 	If buttons And 1 Then
-	    ' on left mouse click, center mouse
+	    ' si clique bouton gauche, souris centre
 	    SetMouse 320, 240
 	End If
 
-	' run loop until Escape is pressed
+	' boucle jusqu'a Escape est appuyé
 Loop Until Inkey = Chr(27)
 %%
 
 
 {{fbdoc item="lang"}}
-	- Not available in the //[[CompilerOptlang -lang qb]]// dialect unless referenced with the alias ##**""__Setmouse""**##.
+	- Non disponible en dialecte //[[CompilerOptlang -lang qb]]// sauf si référencé avec l'alias ##**""__Setmouse""t**##.
 
 {{fbdoc item="diff"}}
-	- New to ""FreeBASIC""
+	- Nouveau pour ""FreeBASIC""
 
 {{fbdoc item="see"}}
 	- ##[[KeyPgGetmouse Getmouse]]##

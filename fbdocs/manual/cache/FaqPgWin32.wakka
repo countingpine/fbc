@@ -3,94 +3,94 @@
 {{anchor name="item0"}}
 **Windows:**
 
-	==- {{anchor name="item01|Which IDEs are available for Windows?"}}==
-	==- {{anchor name="item02|Can I get rid of the console / 'DOS' screen in a graphics application?"}}==
-	==- {{anchor name="item03|My GUI program does nothing when run / The program compiles but I get a permission denied error in the linker"}}==
-	==- {{anchor name="item04|How to debug ?"}}==
-	==- {{anchor name="item05|Why Windows refuses to run my code using OUT and/or INP?"}}==
-	==- {{anchor name="item06|I get the error 'Cannot start blah.exe because xxxx.dll was not found.' or similar. What is missing?"}}==
-	==- {{anchor name="item07|Does FreeBASIC work with Windows Vista ?"}}==
-	==- {{anchor name="item08|Where can I find some tutorials on programming the Windows GUI ?"}}==
-	==- {{anchor name="item09|Are there Windows GUI code builders for FB?"}}==	
+	==- {{anchor name="item01|Quel IDE est disponible pour Windows?"}}==
+	==- {{anchor name="item02|Puis-je me débarrasser de l'écran console/DOS dans une application graphique?"}}==
+	==- {{anchor name="item03|Mon programme de GUI ne fait rien lorsque je lance/compile le programme mais je reçois une erreur de permission refusée dans le linkeur"}}==
+	==- {{anchor name="item04|Comment faire pour déboguer?"}}==
+	==- {{anchor name="item05|Pourquoi Windows refuse d'exécuter mon code en utilisant OUT et/ou INP?"}}==
+	==- {{anchor name="item06|J'obtiens l'erreur 'Cannot start blah.exe because xxxx.dll was not found.' ou similaire. Qu'est-ce qui manque?"}}==
+	==- {{anchor name="item07|FreeBASIC fonctionne-t-il sous Windows Vista?"}}==
+	==- {{anchor name="item08|Où puis-je trouver des tutoriaux sur la programmation GUI sous Windows?"}}==
+	==- {{anchor name="item09|Y a-t-il des constructeurs de code Windows GUI pour FB?"}}==	
 
 {{fbdoc item="back" value="DocToc|Table of Contents"}}
 
 ----
 
-@@**""FreeBASIC"" Windows questions**@@
+@@**Questions ""FreeBASIC"" et Windows **@@
 
-{{anchor name="item01"}}==Which IDEs are available for Windows?==
+{{anchor name="item01"}}==Quel IDE est disponible pour Windows?==
 
-	At the moment three full featured IDEs have been developed specifically for FB: [[http://fbide.freebasic.net/ FBIde]] (not being updated, avoid using of old versions of FBC bundled with it), [[http://fbedit.freebasic.net/ FbEdit]] and [[http://www.planetsquires.com/jellyfishpro_freebasic.htm JellyFishPro]]. These IDEs require a minimum configuration -as path to the compiler- to work. 
-	You can also download  [[http://fbide.freebasic.net/ FBIde]] and [[http://fbedit.freebasic.net/ FbEdit]] as bundles  (Editor + Compiler) that install in a single operation. But the bundled version of the compiler may be out of date.
-	Commercial "general use" IDEs can be used with ""FreeBASIC"" but may require an extensive setup. They are handy for multi language programming, as they provide a unified user interface.
-	Instructions for installing FB JFish Pro, FBIde, and ""FbEdit"" can be found here:
-	   - [[http://www.freebasic.net/forum/viewtopic.php?t=10350 IDE Installation guide for Windows]]
+	A l'heure actuelle, trois IDE complets en vogue ont été développés spécifiquement pour FB: [[http://fbide.freebasic.net/ FBIde]] (pas mis à jour, éviter d'utiliser d'anciennes versions de FBC livrées avec lui), [[http://fbedit.freebasic.net/ FbEdit]] et [[http://www.planetsquires.com/jellyfishpro_freebasic.htm JellyFishPro]].Ces IDE nécessitent une configuration minimale -comme le chemin vers le compilateur- pour travailler. 
+	Vous pouvez également télécharger [[http://fbide.freebasic.net/ FBIde]] et [[http://fbedit.freebasic.net/ FbEdit]] dans un ensemble (Editeur + Compilateur) qui installe tout en une seule opération. Mais la version embarquée du compilateur peut être périmée.
+	Des IDE commerciaux d'"utilisation générale" peuvent être utilisés avec ""FreeBASIC"" mais peuvent nécessiter une extension de configuration. Ils sont pratiques pour la programmation multi-langage, car ils fournissent une interface utilisateur unifiée.
+	Les instructions d'installation de FB JFish Pro, FBIde et ""FbEdit"" sont disponibles:
+	   - [[http://www.freebasic.net/forum/viewtopic.php?t=10350 Guide d'installation d'un IDE pour Windows]]
 
-{{anchor name="item0|Back to top"}}	
+{{anchor name="item0|Retour en haut de la page"}}	
 
-{{anchor name="item02"}}==Can I get rid of the console / 'DOS' screen in a graphics application?==
-	Yes. You have to give ""FreeBASIC"" the right command for it when you compile your program.
-	- If you compile from a command prompt, simply add ##"-s gui"## to the end, like ##"fbc myprg.bas -s gui"##
-	- If you compile in a specific IDE, you have to edit the "Compiler Defaults". 
-		- In Jelly-Fish Pro, its "Compiler->Set Compiler Defaults->Compiler Options". Add "-s gui" (NO QUOTES) in that box.
-		- In ""FbEdit"" select Windows GUI in the targets dropdown list in the right of the tool bar.
+{{anchor name="item02"}}==Puis-je me débarrasser de l'écran console/DOS dans une application graphique?==
+	Oui. Vous devez fournir à ""FreeBASIC"" la bonne commande lorsque vous compilez votre programme.
+	- Si vous compilez à partir d'une invite de commande, il suffit d'ajouter ##"-s gui"## à la fin, comme ceci ##"fbc myprg.bas -s gui"##
+	- Si vous compilez dans un IDE spécifique, vous devez modifier "Compiler Defaults" (valeurs par défaut du compilateur). 
+		- Dans Jelly-Fish Pro, "Compiler->Set Compiler Defaults->Compiler Options". Add "-s gui" (NO QUOTES).
+		- Dans ""FbEdit"" sélectionnez Windows GUI dans la liste déroulante des objectifs à droite de la barre d'outils.
 
-{{anchor name="item0|Back to top"}}
+{{anchor name="item0|Retour en haut de la page"}}
 
-{{anchor name="item03"}}==My GUI program does nothing when run / The program compiles but I get a permission denied error in the linker==
-	The problem may be related with the previous question. If a program tries to PRINT and it was compiled with ##"-s gui"## it will freeze because no console is available. If the PRINT is issued before the first window is registered/opened, nothing will show in the screen or in the taskbar. The running program can only be seen in (and killed from) the task manager's processes tab. If a new compilation is tried  before killing the process it will give a "Permission denied" error when the compiler tries to modify a still running .exe.
-	In Windows GUI programs do not use console commands. Use ""MessageBox"" or print to a log file to issue any error message to the user. Be sure any PRINT to console you used for debugging is not compiled in the final version. 
+{{anchor name="item03"}}==Mon programme de GUI ne fait rien lorsque je lance/compile le programme mais je reçois une erreur de permission refusée dans le linkeur==
+	Le problème peut être lié à la question précédente. Si un programme tente un PRINT et qu'il a été compilé avec ##"-s gui"## il se bloquera, car aucune console n'est disponible. Si le PRINT est émis avant que la première fenêtre ne soit enregistrée/ouverte, rien n'apparaîtra à l'écran ou dans la barre des tâches. Le programme en cours ne peut qu'être vu dans (et tué à partir du) le gestionnaire des tâches de l'onglet du processus. Si une nouvelle compilation est essayée avant de tuer le processus, vous aurez "Permission denied" car le compilateur tente de modifier un "programme .exe" en cours d'exécution.
+	Dans les programmes GUI Windows n' utilisez pas les commandes de la console. Utilisez """MessageBox""" ou "print" vers un fichier "log" pour émettre un message d'erreur vers l'utilisateur. Vérifiez qu'aucun PRINT vers la console, utilisé pour le débogage, n'est pas compilé dans la version finale. 
 
-{{anchor name="item0|Back to top"}}
+{{anchor name="item0|Retour en haut de la page"}}
 
-{{anchor name="item04"}}==How to debug ?==
-	""FreeBASIC"" can use any debugger compatible with GNU GDB. Insight ""Win32"" debugger is an user friendly wrapper for GDB. 
-	- Get Insight from [[http://prdownloads.sourceforge.net/dev-cpp/Insight_Binary.DevPak?download Dev-C++]]
-	- Rename the file to Insight.tar.bz2, and decompress it to an empty folder
-	- Compile your program with the -g switch
-	- Run <Your_Insight_Dir>\bin\usr\bin\Insight.exe
-	- Do File>Open to load your program into Insight
-	- From there you can watch, set breakpoints, step, examine memory and registers. Check Insight's help
+{{anchor name="item04"}}==Comment faire pour déboguer?==
+	""FreeBASIC"" peut utiliser n'importe quel débogueur compatible avec GNU GDB. Le débogueur Insight ""Win32"" est un "wrapper" convivial pour GDB. 
+	- Téléchargez Insight à partir de [[http://prdownloads.sourceforge.net/dev-cpp/Insight_Binary.DevPak?download Dev-C++]]
+	- Renommez le fichier Insight.tar.bz2 et décompressez-le dans un dossier vide.
+	- Compilez votre programme avec l'optio -g
+	- Lancez <Your_Insight_Dir>\bin\usr\bin\Insight.exe
+	- Utilisez File>Open pour charger votre programme dans Insight
+	- A partir de là, vous pouvez "watch" = examiner, "set breakpoints" = placer des points d'arrêt, "step" = avancer pas à pas, examiner la mémoire et les registres. Lisez l'aide d'Insight.
 
-{{anchor name="item0|Back to top"}}
+{{anchor name="item0|Retour en haut de la page"}}
 
-{{anchor name="item05"}}==Why Windows refuses to run my code using OUT and/or INP?==
-	Windows requires a driver to be installed to access the hardware ports. ""FB-Win32"" programs using INP and OUT include a built-in driver that installs temporarily for a session. Windows allows only users with Admin rights to run driver installations. This means if you usually run your windows sessions without Admin rights, you will have to use the windows command line command RUNAS to run your program for the first time in each session so Windows allows it to install the driver.
-	If this behavior is not acceptable you can use an external library as [[http://www.winfordeng.com/products/portio32/ PortIO32]] that installs a permanent port driver.
+{{anchor name="item05"}}==Pourquoi Windows refuse d'exécuter mon code en utilisant OUT et/ou INP?==
+	Windows requiert qu'un pilote soit installé pour accéder aux ports matériels. Les programmes ""FB-Win32"" qui utilisent INP et OUT incluent un pilote interne qui s'installe temporairement pour la session. Windows ne permet uniquement qu'aux utilisateurs avec des droits administrateur d'exécuter des installations de pilote. Cela signifie que si habituellement vous exécutez vos sessions Windows sans droits d'administrateur, vous aurez à utiliser la commande Windows RUNAS, sur la ligne de commande, pour exécuter votre programme pour la première fois, lors de chaque session afin que Windows permette l'installation du pilote.
+	Si ce comportement n'est pas acceptable, vous pouvez utiliser une bibliothèque externe [[http://www.winfordeng.com/products/portio32/ PortIO32]] qui installe un pilote de port permanent.
 
-{{anchor name="item0|Back to top"}}
+{{anchor name="item0|Retour en haut de la page"}}
 
-{{anchor name="item06"}}==I get the error 'Cannot start blah.exe because xxxx.dll was not found.' or similar. What is missing?==
-	You are trying to run a program using a third party library that resides in a dll not installed in your system.
-	""FreeBASIC"" comes with headers and wrappers required to code for a lot of third party libraries but does not provide the actual runtime dll files.
-	You have to download and install these from their home page. Find in [[http://www.freebasic.net/forum/viewtopic.php?t=788 the Links thread in the Libraries subforum]] the URL's of the home pages of the libraries provided. You need the binaries for ""Win32"" of the libraries. If you want to develop programs with the libs you will need the documentation too.
-	When releasing compiled code it's good etiquette to provide the third party dll's required to run it.
+{{anchor name="item06"}}==J'obtiens l'erreur 'Cannot start blah.exe because xxxx.dll was not found.' ou similaire. Qu'est-ce qui manque?==
+	Vous essayez d'exécuter un programme utilisant une bibliothèque tierce partie qui réside dans une DLL qui n'est pas installée sur votre système.
+	""FreeBASIC"" est livré avec les en-têtes et les "wrappers" nécessaires pour coder pour un grand nombre de librairies tierces, mais ne fournit pas les fichiers réels des dll d'exécution.
+	Vous devez les télécharger et installer à partir de leur page d'accueil. Rechercher dans [[http://www.freebasic.net/forum/viewtopic.php?t=788 le sous-forum des bibliothèques]] l'URL des pages d'accueil des bibliothèques fournies. Vous avez besoin des binaires pour les bibliothèques ""Win32"". Si vous voulez développer des programmes avec les "libs" vous aurez aussi besoin des la documentation.
+	Lors de la publication du code compilé c'est une bonne pratique que de fournir les dll tierce partie nécessaires à son fonctionnement.
 
-{{anchor name="item0|Back to top"}}
+{{anchor name="item0|Retour en haut de la page"}}
 
-{{anchor name="item07"}}==Does ""FreeBASIC"" work with Windows Vista ?==
-	Yes. (Write me!!!)
+{{anchor name="item07"}}==""FreeBASIC"" fonctionne-t-il sous Windows Vista?==
+	Oui. (Ecrivez-moi!!!)
 
-{{anchor name="item0|Back to top"}}
+{{anchor name="item0|Retour en haut de la page"}}
 
-{{anchor name="item08"}}==Where can I find some tutorials on programming the Windows GUI ?==
-	See the answers to this question in this [[http://www.freebasic.net/forum/viewtopic.php?p=89225 thread in the forum]]
-	More advanced use requires a frequent consultation of the reference at the [[http://msdn2.microsoft.com/en-us/library/aa139672.aspx Microsoft Developers Network]]. A local install of the API reference is possible, search Microsoft for the Platform SDK (a huge download) and install just the documentation.
+{{anchor name="item08"}}==Où puis-je trouver des tutoriaux sur la programmation GUI sous Windows?==
+	Voir les réponses à cette question dans ce [[http://www.freebasic.net/forum/viewtopic.php?p=89225 thread du forum]]
+	Une utilisation plus avancée requiert une consultation fréquente de [[http://msdn2.microsoft.com/en-us/library/aa139672.aspx Microsoft Developers Network]]. Une installation locale de la référence de l'API est possible, recherche de Microsoft pour la "Platform SDK" (un téléchargement énorme) et installez simplement la documentation.
 
-{{anchor name="item0|Back to top"}}
+{{anchor name="item0|Retour en haut de la page"}}
 
-{{anchor name="item09"}}==Are there Windows GUI code builders for FB?==	
-	Yes there are some 3rd party developments generating Windows API code  from a windows designer à la Visual Basic. None of them is Open source:
-	    [[http://www.freewebs.com/fielden/ Jerry Fielden' Ezeegui]] uses a "graphical" textmode interface to let you build your code.
-	[[http://mrhx.ucoz.com/load/ mrhx Software's VISG]] has a more classical user interface.
-	Less helpful may be the graphical resource editors generating scripts for the resource compiler. Any editor generating scripts compatible with ""GoRC"" can be used, as the  one included with [[http://fbedit.freebasic.net/index.php FbEdit]]. Graphical resource editors are a great help in designing dialogs and menus, but they leave to you the task of writing the window procedures required to make them active.
+{{anchor name="item09"}}==Y a-t-il des constructeurs de code Windows GUI pour FB? ==	
+	Oui, il y a des développements 3ème partie générant le code API Windows à partir d'un concepteur de fenêtres Visual Basic. Aucun d'entre eux n'est Open source:
+	    [[http://www.freewebs.com/fielden/ Jerry Fielden' Ezeegui]] utilise une interface "graphique" en mode texte pour vous permettre de construire votre code.
+	[[http://mrhx.ucoz.com/load/ mrhx Software's VISG]] a une interface utilisateur plus classique.
+	Moins utile peut être les éditeurs de ressources graphiques générant des scripts pour le compilateur de ressources. N'importe quel éditeur de générant des scripts compatible avec ""GoRC"" peut être utilisé, comme celui fourni avec [[http://fbedit.freebasic.net/index.php FbEdit]]. Les éditeurs de ressources graphiques sont d'une grande aide dans la conception de dialogues et de menus, mais ils vous laissent le soin d'écrire les procédures fenêtres nécessaires pour les rendre actifs.
 	
 	
-{{anchor name="item0|Back to top"}}
+{{anchor name="item0|Retour en haut de la page"}}
 
 {{fbdoc item="see"}}
-	[[CompilerFAQ Compiler FAQ]].
-	[[FaqPgrtlib FB Runtime Library FAQ]].
+	[[CompilerFAQ FAQ du compilateur]].
+	[[FaqPgrtlib FAQ de la bibliothèque d'exécution de FB]].
 
 {{fbdoc item="back" value="DocToc|Table of Contents"}}

@@ -1,13 +1,13 @@
 {{fbdoc item="title" value="Introduction to the Type Def"}}----
-//Written by [[WikiRick rdc]]//
+//Ecrit par [[WikiRick rdc]]//
 
-There are times when creating a program that you may want to define an aggregate structure such as a personnel record, or an enemy in a game. While you can do this using individual data types, it is hard to manage within  a program. Composite data types allow you to group together related data items into a single structure that can be manipulated as a single entity. FreeBasic offers two composite data types, the Type and Union. 
+Il y a des moments, lors de la crÈation d'un programme, o˘ l'on souhaite dÈfinir une structure globale comme un enregistrement personnel ou un ennemi dans un jeu. Alors que vous pouvez faire cela en utilisant des types de donnÈes individuelles, cela est difficile ‡ gÈrer dans un programme. Les types de donnÈes composites vous permettent de grouper des ÈlÈments de donnÈes connexes dans une structure unique qui peut Ítre manipulÈe comme une seule entitÈ. FreeBASIC offre deux types de donnÈes composites, ##**Type**## et ##**Union**##. 
 
-==== Types ====
+=== Types ===
 
-FreeBasic allows you to group several data types into a unified structure called a Type definition which you can use to describe these aggregate data structures.
+FreeBASIC vous permet de grouper plusieurs types de donnÈes dans une structure unifiÈe appelÈe une dÈfinition de ##**Type**## que vous pouvez utiliser pour dÈcrire ces structures de donnÈes agrÈgÈes.
 
-The basic structure of a type definition is:
+La structure de base d'une dÈfinition de ##**Type**## est:
 
 %%(freebasic)
 Type typename
@@ -17,7 +17,7 @@ Type typename
 End Type
 %%
 
-The Type-End Type block defines the scope of the definition. You define the elements of the type structure in the same manner as using the Dim keyword, without using Dim. The following code snippet shows how to build an employee type.
+Le bloc ##**Type ... Type-End**## dÈfinit la portÈe de la dÈfinition. Vous dÈfinissez les ÈlÈments de la structure ##**Type**## de la mÍme maniËre que vous utilisez le mot clÈ ##**Dim**##, sans utiliser ##**Dim**##. L'extrait de code suivant montre comment construire un ##**Type**## d'##//Employee//##.
 
 %%(freebasic)
 Type EmployeeType
@@ -28,23 +28,23 @@ Type EmployeeType
 End Type	
 %%
 
-You can use any of the supported data types as data elements, including pointers and other type definitions. When you create the type definition, such as in the example above, you are just creating a template for the compiler. In order to use the type definition, you need to create a variable of the type, as the following code snippet illustrates.
+Vous pouvez utiliser n'importe quel type de donnÈes comme ÈlÈment de donnÈes, y compris des pointeurs et d'autres dÈfinitions de ##**Type**##. Lorsque vous crÈez la dÈfinition d'un ##**Type**##, comme dans l'exemple ci-dessus, vous Ítes juste en train de crÈer un modËle pour le compilateur. Afin d'utiliser la dÈfinition du ##**Type**##, vous devez crÈer une variable de ce ##**Type**##, comme le montre l'extrait de code suivant.
 
 %%(freebasic)
 Dim Employee As EmployeeType
 %%
 
-Once you have created a variable of the type, you can access each element within the type using the dot notation //var_name.field_name//.  
+Lorsque vous avez crÈÈ une variable de ce ##**Type**##, vous pouvez accÈder ‡ chaque ÈlÈment dans le ##**Type**## l'aide de la notation pointÈe  ##//var_name.field_name//##.  
 
-Using the above example, to access the fname field you would use: 
+En utilisant l'exemple ci-dessus, pour accÈder au champ ##//fname//## vous pouvez utiliser: 
 
 %%(freebasic)
-Employee.fname = ìSusanî
+Employee.fname = "Susan"
 %%
 
-=== Using With ===
+=== Utiliser With ===
 
-To access multiple fields at a time, you can use the With-End With block. The following code snippet shows how to use the With block with the above example.
+Pour accÈder ‡ des champs multiples au mÍme moment, vous pouvez utiliser le bloc ##**With-End With**##. Le code suivant montre comment utiliser le bloc ##**With**## avec l'exemple ci-dessus.
 
 %%(freebasic)
 With Employee
@@ -55,11 +55,11 @@ With Employee
 End With	
 %%
 
-The compiler will automatically bind the variable Employee to the individual data elements within the With block. Not only does mean that you don't have as much typing, but the structure is optimized and is a bit faster than using the full dot notation.
+Le compilateur lie automatiquement la variable ##//Employee//## avec les ÈlÈments de donnÈes individuels du bloc. Non seulement cela signifie que vous n'avez pas ‡ Ècrire beaucoup plus, mais la structure est optimisÈe et un peu plus rapide que l'utilisation de la notation pointÈe complËte.
 
-=== Passing Types to Subroutines and Functions ===
+=== Transmission de Types aux sous-routines et fonctions ===
 
-One advantage to using types in your program is that you can pass the structure to a subroutine or function and operate on the structure as a whole. The following code fragment shows a partial subroutine definition.
+Un avantage de l'utilisation de ##**Type**## dans votre programme est que vous pouvez passer la structure ‡ un sous-programme ou une fonction et opÈrer sur la structure dans son ensemble. Le fragment de code suivant montre une dÈfinition partielle de sous-routine.
 
 %%(freebasic)
 Sub UpdateEmployeeDept(Byref Emp as EmployeeType)
@@ -69,17 +69,17 @@ Sub UpdateEmployeeDept(Byref Emp as EmployeeType)
 End Sub
 %%
 
-Notice that the parameter is qualified with Byref. This is important since you want to update the type within the subroutine. There are two parameter passing modes in FreeBasic: ByRef and Byval. 
+Notez que le paramËtre est qualifiÈ avec ##**Byref**##. Ceci est important puisque vous voulez mettre ‡ jour ce ##**Type**## dans la sous-routine. Il existe deux modes de passage de paramËtres en FreeBASIC: ##**ByRef**## et ##**Byval**##. 
 
-== Byref and Byval: A Quick Introduction ==
+== Byref et Byval: PrÈsentation rapide ==
 
-Byref and Byval tell the compiler how to pass a reference to the subroutine or function. When you use Byref, or //By Reference//, you are passing a pointer reference to the parameter, and any changes you make to the parameter inside the sub or func will be reflected in the actual variable that was passed. In other words, the Byref parameter points to the actual variable in memory.
+##**ByRef**## et ##**Byval**## indiquent au compilateur comment passer une rÈfÈrence ‡ une sous-routine ou une fonction. Lorsque vous utilisez ##**ByRef**##, ou //Par RÈfÈrence//, vous passez un pointeur de rÈfÈrence au paramËtre et toutes les modifications que vous apportez au paramËtre ‡ l'intÈrieur de ##**Sub**## ou ##**Function**## sera reflÈtÈe dans la variable rÈelle qui a ÈtÈ passÈe. En d'autres termes, le paramËtre ##**ByRef**## pointe sur la variable rÈelle dans la mÈmoire.
 
-Byval, or //By Value//, on the other hand makes a copy of the parameter, and any changes you make inside the sub or func are local and will not be reflected in the actual variable that was passed. The Byval parameter points to a copy of the variable not the actual variable itself.
+##**Byval**##, ou //Par Valeur//, d'autre part fait une copie du paramËtre et toutes les modifications apportÈes ‡ l'intÈrieur de ##**Sub**## ou ##**Function**## sont locales et ne seront pas reflÈtÈes dans la variable rÈelle qui a ÈtÈ passÈe. Le paramËtre ##**Byval**## pointe sur une copie de la variable et non sur la variable rÈelle, elle-mÍme.
 
-The default for FreeBasic .17 is to pass parameters using Byval. In order to change a passed parameter, you need to specify the Byref qualifier. In this example, the subroutine updates the the department id of the employee type, so the parameter is qualified as Byref so that the subroutine can update the dept field of the type variable.
+Par dÈfaut FreeBASIC .17 passe les paramËtres en utilisant ##**Byval**##. Pour modifier un paramËtre passÈ, vous devez ‡ spÈcifier le qualificatif ##**ByRef**##. Dans cet exemple, la sous-routine met ‡ jour le //department id// du //Type employee//, donc le paramËtre est qualifiÈ par ##**ByRef**## pour que la sous-routine puisse mettre ‡ jour le champ //dept// de la variable.
 
-On the other hand you may not need to update the type as in the following code fragment.
+En revanche vous n'avez pas besoin de mettre ‡ jour le ##**Type**## comme dans le fragment de code suivant.
 
 %%(freebasic)
 Sub PrintEmployeeRecord(Emp as EmployeeType)
@@ -89,17 +89,17 @@ Sub PrintEmployeeRecord(Emp as EmployeeType)
 End Sub
 %%
 
-In this sub you are just printing the employee record to the screen or a printer and do not need to change anything in the type variable. Here the default Byval is used which passes a copy  of the employee record to the sub rather than a reference to the variable. By using Byval in this case, you won't accidentally change something in the type variable that you didn't intend to change.
+Dans cette sous-routine on affiche seulement l'enregistrement de //employee// ‡ l'Ècran ou on l'envoie vers l'imprimante et on n'a pas a changÈ quoi que ce soit dans la variable ##**Type**##. Ici c'est ##**Byval**## par dÈfaut qui est utilisÈ pour passer une copie de l'enregistrement de //employee// ‡ la sous-routine au lieu d'une rÈfÈrence vers la variable. En utilisant ##**Byval**##, dans ce cas, vous Èvitez de changer quelque chose accidentellement dans la variable ##**Type**##, ce que vous ne dÈsiriez pas.
 
-You should only use Byref if you intend to change the parameter data. It is much safer to use Byval in cases where you need to have the parameter data, but want to prevent accidental changes to the data. These accidental changes generate hard-to-find bugs in your program.
+Vous ne devez utiliser ##**Byref**## que si vous avez l'intention de modifier les donnÈes des paramËtres. Il est beaucoup plus plus s˚r d'utiliser ##**Byval**## dans les cas o˘ vous devez avoir les donnÈes des paramËtres, mais que vous souhaitez Èviter toute modification accidentelle de ces donnÈes. Ces modifications accidentelles gÈnËrent des bugs difficiles ‡ trouver dans les programmes.
 
-=== Types Within Types ===
+=== Types dans les Types ===
 
-In addition to the intrinsic data types, type fields can also be based on a type definition. Why would you want to do this? One reason is data abstraction. The more general your data structures, the more you can reuse the code in other parts of your program. The less code you have to write, the less chance of errors finding their way into your program. 
+En plus des types de donnÈes intrinsËques, un champ de Type peut Ègalement Ítre basÈ sur une dÈfinition de Type. Pourquoi vouloir faire cela? Une des raisons est l'abstraction de donnÈes. Plus vos structures de donnÈes seront gÈnÈrales, plus vous pourrez en rÈutiliser le code dans d'autres parties de votre programme. Moins vous avez ‡ Ècrire de code, moins les erreurs auront de chance de trouver le chemin de vos programmes. 
 
-Using the Employee example, suppose for a moment that you needed to track more dept information than just the department id. You might need to keep track of the department manager, the location of the department, such as the floor or the building, or the main telephone number of the department. By putting this information into a separate type definition, you could use this information by itself, or as part of another type definition such as the Employee type. By generalizing your data structures, your program will be smaller, and much more robust.
+En utilisant l'exemple d'##//Employee//##, supposons un instant que vous ayez besoin de plus d'informations ##//dept//## que seulement ##//department id//##. Vous pourriez avoir besoin de garder une trace de ##//department manager//##, l'emplacement du dÈpartement, comme le ##//floor//## (Ètage) ou le b√¢timent ou le numÈro de tÈlÈphone principal du dÈpartement. En mettant ces informations dans une dÈfinition de ##**Type**## distincte, vous pouvez utiliser cette information par elle-mÍme ou comme partie d'une autre dÈfinition de ##**Type**## comme ##//Employee//##. En gÈnÈralisant vos structures de donnÈes, votre programme sera plus petit et beaucoup plus robuste.
 
-Using a type within a type is the same as using one of the intrinsic data types. The following code snippets illustrates an expanded department type and an updated employee type.
+L'utilisation d'un ##**Type**## dans un ##**Type**## est identique ‡ celle de l'un des types de donnÈes intrinsËques. Les extraits de code suivant illustrent un ##**Type**## ##//department//## Ètendu et un ##**Type**## ##//employee//## mis ‡ jour.
 
 %%(freebasic)
 Type DepartmentType
@@ -118,7 +118,7 @@ End Type
 Dim Employee As EmployeeType
 %%
 
-Notice that in the Employee definition the dept field is defined as DepartmentType rather than as one of the intrinsic data types. To access the department information within the Employee type, you use the compound dot notation to access the dept fields.
+Notez que dans la dÈfinition de ##//Employee//## le champ ##//dept//## est dÈfini comme ##//DepartmentType//## au lieu d'un des types de donnÈes intrinsËques. Pour accÈder ‡ l'information ##//department//## dans le ##**Type**## ##//Employee//##, on utilise la notation pointÈe composÈe pour accÈder aux champs de ##//dept//##:
 
 %%(freebasic)
 Employee.dept.id = 24
@@ -126,13 +126,13 @@ Employee.dept.managerid = 1012
 Employee.dept.floor = 13
 %%
 
-The top level of the type definition is Employee, so that reference comes first. Since dept is now a type definition as well, you need to use the dept  identifier to access the individual fields within the DepartmentType. Employee refers to the employee type, dept refers to the department type and id, managerid and floor are fields within the department type.
+Le plus haut niveau de la dÈfinition du ##**Type**## est ##//Employee//##, donc sa rÈfÈrence vient en premier. Comme ##//dept//## est maintenant une dÈfinition de ##**Type**##, vous devez utiliser l'identifieur de ##//dept//## pour accÈder aux champs individuels de ##//DepartmentType//##. ##//Employee//## se rÈfËre au ##**Type**## ##//employee//##, ##//dept//## se rÈfËre au ##**Type**## ##//department//## et ##//id//##, ##//managerid//## et ##//floor//## sont des champs du ##**Type**## ##//department//##.
 
-You can even carry this further, by including a type within a type within a type. You would simply use the dot notation of the additional type level as needed. While there is no limit on the levels of nested type definitions, it gets to be a bit unwieldy when used with several levels.
+Vous pouvez mÍme faire davantage, notamment avec un ##**Type**## dans un ##**Type**## dans un ##**Type**##. Vous utiliserez simplement la notation pointÈe du niveau de type supplÈmentaires au besoin. Bien qu'il n'y ait pas de limite au niveau des dÈfinitions de types imbriquÈs, cela devient un peu lourd lors de l'utilisation de nombreux niveaux.
 
-=== With and Nested Types ===
+=== With et les Types imbriquÈs ===
 
-You can also use the With-End With block with nested types, by nesting the With block, as illustrated in the following code snippet.
+Vous pouvez aussi utiliser un bloc ##**With-End With**## avec des ##**Type**##s imbriquÈs, en imbriquant le bloc ##**With**##, comme illustrÈ dans l'exemple ci-dessous.
 
 %%(freebasic)
 With Employee
@@ -147,15 +147,15 @@ With Employee
 End With
 %%
 
-Notice that the second With uses the dot notation, .dept, to specify the next level of type definitions. When using nested With blocks, be sure that you match all the End With statements with their correct With statements to avoid a compile error.
+Notez que le second ##**With**## utilise la notation pointÈe, ##//.dept//##, pour spÈcifier le niveau suivant de dÈfinition de ##**Type**##. Quand vous utilisez des blocs ##**With**## imbriquÈs, assurez-vous que toutes les dÈclarations ##**End With**## correspondent correctement ‡ une dÈclaration ##**With**## sinon il y aura un message d'erreur lors de la compilation.
 
-=== Type Assignments ===
+=== Affectations de Type ===
 
-Extending the idea of data abstraction further, it would be nice to be able to separate the initialization of the department type from the initialization of the employee type. By separating the two functions, you can easily add additional department information as needed. This is where you can use type assignments. 
+Pour aller plus loin dans l'extension de l'idÈe d'abstraction des donnÈes, il serait intÈressant de sÈparer l'initialisation du ##**Type**## ##//department//## de celle du ##**Type**## ##//employee//##. En sÈparant les deux fonctions, vous pouvez facilement ajouter des informations supplÈmentaires ‡ ##//department//## en fonction de vos besoins. C'est l‡ que vous pouvez utiliser des assignations de ##**Type**##. 
 
-Just as you can assign one intrinsic data type to another, you can assign one type variable to another type variable, providing they share the same type definition.
+Tout comme vous pouvez affecter un type intrinsËque des donnÈes ‡ un autre, vous pouvez affecter une variable de ##**Type**## ‡ une autre variable de ##**Type**##, ‡ condition qu'elles aient la mÍme dÈfinition de ##**Type**##.
 
-The following code snippet abstracts the department initialization function and assigns the result to the department type within the Employee type.
+Les extraits de code suivants rÈsument la fonction d'initialisation de ##//department//## et attribue le rÈsultat au ##**Type**## ##//department//## dans le ##**Type**## ##//Employee//##.
 
 %%(freebasic)
 'This function will init the dept type and return it to caller
@@ -199,15 +199,15 @@ With Employee
 End With
 %%
 
-As you can see in the snippet, the dept field of the employee type is initialized with a function call. The InitDept function returns a DepartmentType and the compiler will assign that type to the dept field of the Employee record. 
+Comme vous pouvez le voir dans l'extrait ci-dessus, le champ ##//dept//## du ##**Type**## ##//employee//## est initialisÈ par un appel ‡ une fonction. La fonction ##//InitDept//## retourne un ##//DepartmentType//## et le compilateur affectera ce ##**Type**## au champ de l'enregistrement ##//Employee//##. 
 
-By just adding a simple function to the program, you have made the program easier to maintain. If a new department is created, you can simply update the InitDept function with the new department information, recompile and the program is ready to go.
+Par le simple ajout d'une fonction au programme, vous avez rendu le programme plus facile ‡ maintenir. Si un nouveau ##//department//## est crÈÈ, vous pouvez simplement mettre ‡ jour la fonction ##//InitDept//## avec le nouveeau ##//department//##, recompiler et le programme est prÍt ‡ redÈmarrer.
 
-=== Bit Fields ===
+=== Champs de bits ===
 
-There is yet another data type that can be used in type definitions, the bit field. Bit fields are defined as //variable_name: bits As DataType//. The variable name must be followed with a colon, the number of bits, followed by the data type. Only integer data types are allowed within a bit field. Bit fields are useful when you need to keep track of boolean type information. A bit can be either 0 or 1, which may represent Yes or No, On or Off or even Black and White. 
+Il y a encore un autre ##**Type**## de donnÈes qui peuvent Ítre utilisÈs dans les dÈfinitions de ##**Type**##, le champ de bits. Les champs de bits sont dÈfinis ainsi ##//variable_name: bits As DataType//##.Le nom de la variable doit Ítre suivi de deux-points (:), le nombre de bits, suivi par le type de donnÈes. Seuls les donnÈes de ##**Type**## entier sont autorisÈes dans un champ de bits. Les champs de bits sont utiles lorsque vous avez besoin de garder une trace d'informations de type boolÈen. Un bit peut avoir les valeurs 0 ou 1, ce qui peut reprÈsenter Oui ou Non, Marche ou ArrÍt ou mÍme Noir et Blanc. 
 
-The following code snippet illustrates a bit field definition.
+L'extrait de code suivant illustre la dÈfinition d'un champ de bits.
 
 %%(freebasic)
 Type BitType
@@ -216,20 +216,20 @@ Type BitType
 End Type
 %%
 
-b1 is defined as a single bit, and b2 is defined as four bits. You initialize the bitfields by passing the individual bits to the type fields.
+b1 est dÈfini comme bit unique et b2 comme ayant quatre bits. Vous initialisez les champs de bits en passant les bits individuels aux champs du ##**Type**##.
 
 %%(freebasic)
 myBitType.b1 = 1
 myBitType.b2 = 1101
 %%
 
-The data type of the bit field determines how many bits you can declare in a bit field. Since an integer is 32 bits long, you could declare up to 32 bits in the field. However, in most cases you would declare a single bit for each field, and use a number of fields to define the bit masking that you wish to use. Using a single bit simplifies the coding you need to do to determine if a bit is set or cleared and allows you to easily identify what a bit means within the type definition.
+Le type de donnÈes du champ de bits dÈtermine le nombre de bits que vous pouvez dÈclarer, dans un champ de bits. Puisqu' un entier ‡ une longueur de 32 bits, vous pouvez dÈclarer jusqu'‡ 32 bits dans le champ. Cependant, dans la plupart des cas, vous allez dÈclarer un seul bit pour chaque champ et utiliser un certain nombre de champs afin de dÈfinir le masque de bits que vous souhaitez utiliser. Utiliser un bit unique simplifie le codage que vous devez ÈlÈborer pour dÈterminer si un bit est activÈ ou dÈsactivÈ et vous permet d'identifier facilement ce qu'un bit signifie dans la dÈfinition du ##**Type**##.
 
-=== The Field Property ===
+=== La propriÈtÈ Field ===
 
-When you create a variable of a type definition, the type is padded in memory. The padding allows for faster access of the type members since the type fields are aligned on a 4 byte or Word boundary. However, this can cause problems when trying to read a type record from a file that is not padded. You can use the use field property to change the padding of a type definition. 
+Lorsque vous crÈez une variable d'un ##**Type**## dÈfini, le ##**Type**## est ##//bourrÈ//## en mÈmoire. Le ##//bourrage//## permet un accËs plus rapide des membres de ##**Type**## puisque ses champs sont alignÈs dans les limites d'un ##//Word//## de 4 octets. Cependant, cela peut causer des problËmes lorsque vous essayez de lire un enregistrement de ##**Type**## ‡ partir d'un fichier qui n'est pas ##//bourrÈ//##. Vous pouvez utiliser la propriÈtÈ ##**Field**## d'un champ pour changer le stockage en mÈmoire de la dÈfinition du ##**Type**##. 
 
-The field keyword is used right after the type name and can have the values 1, for 1 byte alignment (no padding), 2 for 2 byte alignment and 4 for 4 byte alignment. To define a type with no padding you would use the following syntax.
+Le mot-clef ##**Field**## est utilisÈ juste ‡ droite du nom du ##**Type**## et peut avoir les valeurs 1, pour un alignement sur 1 octet (sans bourrage), 2 un alignement sur 2 octets et 4 un alignement sur 4 octets. Pour dÈfinir un ##**Type**## sans ##//bourrage//## vous utiliserez la syntaxe suivante.
 
 %%(freebasic)
 Type myType field = 1
@@ -238,13 +238,13 @@ Type myType field = 1
 End Type
 %%
 
-For 2 byte alignment you would use field = 2. If no field = property is assigned, then the padding will be 4 bytes. If you are reading a type definition created by FreeBasic using the default alignment, then you do not need to use the field property.
+Pour un alignement sur 2 octets utilisez ##**Field**## = 2. Si aucune propriÈtÈ ##**Field =**## n'est attribuÈe, le ##//bourrage//## est alors de 4 octets. Si vous lisez une dÈfinition de ##**Type**## crÈÈe sous FreeBASIC en utilisant l'alignement par dÈfaut, vous n'avez pas besoin, dans ce cas, d'utiliser la propriÈtÈ ##**Field**##.
 
-{{table columns="1" cellpadding="2" cells=" If you are reading a Quick Basic type record, then you will need to use field = 1, as QB used byte alignment by default."}}
+{{table columns="1" cellpadding="2" cells="Si vous lisez un enregistrement Quick Basic d'un ##**Type**##, alors vous devez utiliser ##**Field**## = 1, car QB utilisait l'alignement des octets par dÈfaut."}}
 
-=== Type Initialization ===
+=== Initialisation de Type ===
 
-You can initialize a type definition when you dimension the type just as you can any of the intrinsic variables. The following code snippet illustrates the syntax.
+Vous pouvez initialiser une dÈfinition de ##**Type**## lorsque vous dimensionnez le ##**Type**## comme vous le feriez avec une variable intrinsËque. L'extrait de code suivant illustre la syntaxe.
 
 %%(freebasic)
 Type aType
@@ -256,15 +256,15 @@ End Type
 Dim myType As aType => (12345, 12, "Hello")
 %%
 
-In the Dim statement, the arrow operator //+>// is used to tell the compiler that you are initializing the type variable. The type element values must be enclosed in parenthesis, and separated by commas. The order of the value list corresponds to the order of the type elements, where a will be set to 12345, b to 12 and c to ìHelloî. 
+Dans l'instruction ##**Dim**##, l'opÈrateur flËche //+>// est utilisÈ pour indiquer au compilateur que vous initialisez la variable ##**Type**##. Les valeurs des ÈlÈments de ##**Type**## doivent Ítre placÈs entre parenthËses et sÈparÈs par des virgules. L'ordre de la liste de valeurs correspond ‡ l'ordre des ÈlÈments de ##**Type**##, o˘ ##**a**## sera mis ‡ 12345, ##**b**## ‡ 12 et ##**c**## ‡ ‚ÄúHello‚Äù. 
 
-{{table columns="1" cellpadding="2" cells=" You cannot initialize a dynamic string within a type definition using this method. The string must be fixed length."}}
+{{table columns="1" cellpadding="2" cells="Vous ne pouvez pas initialiser une chaÓne dynamique au sein d'une dÈfinition de ##**Type**## en utilisant cette mÈthode. La chaÓne doit Ítre de longueur fixe."}}
 
-Initializing a type definition in a Dim statement is useful when you need to have a set of initial values for a type, or values that will not change during program execution. Since the values are known at compile time, the compiler can doesn't have to spend cycles loading the values during runtime.
+L'initialisation d'une dÈfinition de ##**Type**## dans une instruction ##**Dim**## est utile lorsque vous devez disposer d'un ensemble de valeurs initiales pour un ##**Type**##, ou de valeurs qui ne changent pas au cours de l'exÈcution du programme. Comme les valeurs sont connues au moment de la compilation, le compilateur n'a pas ‡ perdre des cycles de chargement des valeurs pendant l'exÈcution.
 
-==== Unions ====
+=== Unions ===
 
-Unions look similar to Types in their definition.
+Les ##**Union**##s sont similaires aux ##**Type**##s dans leur dÈfinition.
 
 %%(freebasic)
 Union aUnion
@@ -274,13 +274,13 @@ Union aUnion
 End Union
 %%
 
-If this were a Type, you could access each field within the definition. For a Union however, you can only access one field at any given time; all the fields within a Union occupy the same memory segment, and the size of the Union is the size of the largest member. 
+S'il s'agissait d'un ##**Type**##, vous pourriez accÈder ‡ chaque champ de la dÈfinition. Pour une ##**Union**## cependant, vous ne pouvez accÈder qu'‡ un seul champ ‡ un moment donnÈ; tous les champs au sein d'une ##**Union**## occupent le mÍme segment de mÈmoire et la taille de l'##**Union**## est la taille du membre le plus important. 
 
-In this case, the Union would occupy four bytes, the size of an Integer, with the //b// field occupying 1 byte, the //s// field occupying 2 bytes, and the //i// occupying the full 4 bytes. Each field starts at the first byte, so the //s// field would include the //b// field, and the //i// field would include both the //b// and //s// fields.
+Dans ce cas, l'Union occupe quatre octets, la taille d'un ##**Integer**##, avec le champ //b// occupant 1 octet, le champ //s// occupant 2 octets et le champ //i// occupant complËtement les 4 octets. Chaque champ commence au premier octet, de sorte que le champ //s// inclurait les champs //b//, et le champ //i// inclurait les deux champs //b// et //s//.
 
-=== Types in Unions ===
+=== Des Types dans des Unions ===
 
-A good example of using a type definition in a union is the Large_Integer definition found in winnt.bi. The Large_Integer data type is used in a number of Windows functions within the C Runtime Library. The following code snippet shows the Large_Integer definition.
+Un bon exemple d'utilisation d'une dÈfinition de ##**Type**## dans une ##**Union**## est la dÈfinition de ##//Large_Integer//## dans ##//winnt.bi//##. Le type de donnÈe ##//Large_Integer//## est utilisÈ dans de nombreuses fonctions Windows au sein de la bibliothËque C Runtime. L'extrait de code suivant montre la dÈfinition de ##//Large_Integer//##.
 
 %%(freebasic)
 union LARGE_INTEGER
@@ -292,21 +292,21 @@ union LARGE_INTEGER
 end union
 %%
 
-The Dword data type is defined in windef.bi as a FreeBasic Uinteger, and the Longlong type is defined as a Longint. A Long is just an alias for the integer data type. Remember that a type occupies contiguous memory locations, so the HighPart field follows the LowPart part field in memory. Since this is a union, the type occupies the same memory segment as the QuadPart field. 
+Le type de donnÈes ##//Dword//## est dÈfini dans ##//windef.bi//## comme un ##//Uinteger//## FreeBASIC et le type ##//Longlong//## est dÈfini comme un ##//Longint//##. Un ##//Long//## est seulement un alias pour le type de donnÈes ##//Integer//##. Souvenez-vous qu'un type occupe des emplacements de mÈmoire contigus, de sorte que le champ ##//HighPart//## suit le champ ##//LowPart//## en mÈmoire. Comme il s'agit d'une ##**Union**##, le type occupe le mÍme segment de mÈmoire mÍme que le champ. 
 
-When you set QuardPart to a large integer value, you are also setting the values of the type fields, which you can then extract as the LowPart and HighPart. You can also do the reverse; that is by setting the LowPart and HighPart of the type, you are setting the value of the QuadPart field.
+Lorsque vous mettez une grande valeur entiËre dans ##//QuardPart//##, vous dÈfinissez aussi en mÍme temps les valeurs des champs du ##**Type**##, que vous pouvez ensuite extraire comme ##//LowPart//## et ##//HighPart//##. Vous pouvez aussi faire l'inverse; en dÈfinissant ##//LowPart//## et ##//HighPart//## du ##**Type**##, vous dÈfinissez aussi la valeur du champ ##//QuardPart//##.
 
-As you can see, using a type within a union is an easy way to set or retrieve individual values of a component data type without resorting to a lot of conversion code. The layout of the memory segments does the conversion for you, providing that the memory segments make sense within the context of the component type. 
+Comme vous pouvez le voir, utiliser un ##**Type**## dans une ##**Union**## est un moyen facile de dÈfinir ou de rÈcupÈrer des valeurs individuelles d'un composant ##**Type**## de donnÈes sans avoir recours ‡ beaucoup de code de conversion. La disposition des segments de mÈmoire effectue la conversion pour vous, ‡ condition que les segments de mÈmoire aient un sens dans le contexte du composant ##**Type**##. 
 
-In the Large_Integer case, the LowPart and HighPart have been defined to return the appropriate component values. Using values other than Dword and Long would not return correct values for LowPart and HighPart. You need to make sure when defining a type within a union, you are segmenting the union memory segment correctly within the type definition.
+Dans le cas de ##//Large_Integer//##, ##//LowPart//## et ##//HighPart//## ont ÈtÈ dÈfinis pour renvoyer les valeurs appropriÈes du composant. L'utilisation de valeurs autres que ##//Dword//## et ##//Long//## ne retournera pas de valeurs correctes pour ##//LowPart//## et ##//HighPart//##. Vous devez vous assurer que lorsque vous dÈfinissez un ##**Type**## dans une ##**Union**## que vous segmentez correctement la mÈmoire du segment ##**Union**## dans la dÈfinition du ##**Type**##.
 
-=== Unions in Types ===
+=== Unions dans les Types ===
 
-A union within a type definition is an efficient way to manage data when one field within a type can only one of several values. The most common example of this is the Variant data type found in other programing languages.
+Une ##**Union**## dans une dÈfinition de ##**Type**##  est un moyen efficace pour gÈrer les donnÈes quand un champ dans un ##**Type**## ne peut avoir qu'une seule de plusieurs valeurs. L'exemple le plus courant est le type de donnÈes ##//Variant//## dans d'autres langages de programmation.
 
-{{table columns="1" cellpadding="2" cells=" FreeBasic does not have a native Variant data type at this time. However, by using the extended Type syntax, you could create a Variant data type for use in your program."}}
+{{table columns="1" cellpadding="2" cells="FreeBASIC n'a pas de type de donnÈes Variant natif pour le moment. Cependant, en utilisant la syntaxe Ètendue de Type, vous pouvez crÈer un type de donnÈes Variant pour l'utiliser dans vos programmes."}}
 
-When using a Union within a type it is common practice to create an id field within the type that indicates what the union contains at any given moment. The following code snippet illustrates this concept.
+Lorsque vous utilisez une ##**Union**## dans un ##**Type**##, une pratique courante est de crÈer un champ ##//id//## dans le ##**Type**## qui indique ce que l'##**Union**## contient ‡ un moment donnÈ. L'extrait de code suivant illustre ce concept.
 
 %%(freebasic)
 'Union field ids
@@ -323,7 +323,7 @@ Type vType
 End Type
 %%
 
-The union definition here is called an anonymous union since it isn't defined with a name. The //vt_id// field of the type definition indicates the value of the union. To initialize the type you would use code like the following.
+La dÈfinition de l'##**Union**## ici est appelÈe une ##**Union**## anonyme car elle n'est pas dÈfinie avec un nom. Le champ //vt_id// de la dÈfinition du ##**Type**## indique la valeur de l'##**Union**##. Pour initialiser le type vous devez utiliser le code suivant:
 
 %%(freebasic)
 Dim myVarianti As vType
@@ -336,8 +336,8 @@ myVariantd.vt_id = vDouble
 myVariantd.d = 356.56
 %%
 
-//myVarianti// contains an integer value so the id is set to vInteger. //myVariantd// contains a double so the id is set to vDouble. If you were to create a subroutine that had a vType parameter, you could examine the //vt_type// field to determine whether an integer or double had been passed to the subroutine.
+//myVarianti// contient une valeur entiËre donc l'//id// est mis ‡ //vInteger//. //myVariantd// contient une valeur //double// donc l'//id// est mis ‡ //vDouble//. Si vous crÈez une sous-routine qui a un paramËtre //vType//, vous pouvez examiner le champ //vt_type// pour dÈterminer si c'est un nombre entier ou double qui a ÈtÈ passÈ ‡ la sous-routine.
 
-{{table columns="1" cellpadding="2" cells=" You cannot use dynamic strings within a union."}}
+{{table columns="1" cellpadding="2" cells="Vous ne pouvez pas utiliser des chaÓnes de dynamiques au sein d'une Union."}}
 
-Using a combination of unions and types within a program allows you to design custom data types that have a lot of flexibility, but care must be taken to ensure that you are using the data constructs correctly. Improper use of these data types can lead to hard-to-find bugs. The benefits however, out-weigh the risks and once mastered, are a powerful programming tool.
+Utiliser une combinaison d'##**Union**##s et de ##**Type**##s dans un programme vous permet de concevoir des types de donnÈes qui ont beaucoup de souplesse, mais il faut veiller ‡ utiliser correctement les donnÈes construites. Une mauvaise utilisation de ces types de donnÈes peut entraÓner des bogues trËs difficiles ‡ trouver. Les avantages toutefois, l'emportent sur les risques et une fois maÓtrisÈs, ce sont des outils de programmation puissants.
