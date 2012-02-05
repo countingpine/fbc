@@ -116,19 +116,19 @@ function WinMain ( byval hInstance as HINSTANCE, _
 	               byval hPrevInstance as HINSTANCE, _
 	               szCmdLine as string, _
 	               byval iCmdShow as integer ) as integer    
-	 
+
 	dim wMsg as MSG
 	dim wcls as WNDCLASS     
 	dim szAppName as string
 	dim hWnd as HWND
-	 
+
 	function = 0
-	 
+
 	''
 	'' Setup window class
 	''
 	szAppName = "HelloWin"
-	 
+
 	with wcls
 		.style         = CS_HREDRAW Or CS_VREDRAW
 		.lpfnWndProc   = @WndProc
@@ -169,7 +169,7 @@ function WinMain ( byval hInstance as HINSTANCE, _
 
 	ShowWindow( hWnd, iCmdShow )
 	UpdateWindow( hWnd )
-	 
+
 	''
 	'' Process windows messages
 	''
@@ -274,3 +274,4 @@ Message-based programming requires a different mind-set than procedural programm
 When you design a GUI program, you have to ask yourself, "How do I want my program to respond to the user?" For example, when the application is minimized, should the program ignore the event, or should it do something like put itself in the system tray? This is the essence of message-based programming. Defining what events are important, and then writing individual routines that handle each event. A message-based program is simply a collection of specific routines written in response to specific messages. 
 
 Despite the reputation of the SDK, the basic concept of message-based programming is quite simple. You are writing a collection of routines to handle messages. This is the core task. All the other stuff like creating a window, or when to repaint the window is done by the operating system. It is the scope of the SDK that gets to most people. There is a lot in there. However, like the cliché says, the best way to eat an elephant is one bite and a time. The best way to master the SDK is to simply understand the concept of message-based programming and learn the boilerplate code. Once that is done, creating sophisticated Windows programs isn't all that hard.
+
