@@ -281,7 +281,7 @@ end enum
 	end if
 
 	'' Load language options
-	sLangFile = ManualDir + "templates/default/lang/en/common.ini"
+	sLangFile = ManualDir + "templates/default/lang/fr/common.ini"
 	if( Lang.LoadOptions( sLangFile ) = FALSE ) then
 		print "Unable to load language file '" + sLangFile + "'"
 		end 1
