@@ -23,7 +23,7 @@ function astNewCONSTstr _
     	exit function
     end if
 
-	function = astNewVAR( tc, 0, FB_DATATYPE_CHAR )
+	function = astNewVAR( tc, 0, typeSetIsConst( FB_DATATYPE_CHAR ) )
 
 end function
 
@@ -41,7 +41,7 @@ function astNewCONSTwstr _
     	exit function
     end if
 
-	function = astNewVAR( tc, 0, FB_DATATYPE_WCHAR )
+	function = astNewVAR( tc, 0, typeSetIsConst( FB_DATATYPE_WCHAR ) )
 
 end function
 

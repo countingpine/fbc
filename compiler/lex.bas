@@ -1345,7 +1345,7 @@ private sub hReadString _
 	'' null-term
 	*ps = 0
 
-	tk->dtype = FB_DATATYPE_CHAR
+	tk->dtype = typeSetIsConst( FB_DATATYPE_CHAR )
 	tk->len = lgt
 	tk->hasesc = hasesc
 
@@ -1470,7 +1470,7 @@ private sub hReadWStr _
 	'' null-term
 	*ps = 0
 
-	tk->dtype = FB_DATATYPE_WCHAR
+	tk->dtype = typeSetIsConst( FB_DATATYPE_WCHAR )
 	tk->len = lgt
 	tk->hasesc = hasesc
 
