@@ -137,7 +137,7 @@ end function
 '':::::
 private function hDefDateISO_cb( ) as string static
 
-	function = format( now( ), "yyyy-mm-dd" )
+	function = format( now( ), trim("yyyy-mm-dd") )
 
 end function
 

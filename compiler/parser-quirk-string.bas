@@ -249,7 +249,7 @@ private function cStrCHR(byval is_wstr as integer) as ASTNODE ptr
 
 			else
 				if( (v < CHAR_SPACE) or (v > 127) ) then
-					ws += ESCCHAR
+					ws += wstr( ESCCHAR )
 					o = oct( v )
 					ws += wchr( len( o ) )
 					ws += o

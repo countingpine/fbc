@@ -288,7 +288,7 @@ end type
 '':::::
 private sub dbg_astOutput _
 	( _
-		byref s as string, _
+		byref s as const string, _
 		byval col as integer, _
 		byval just as integer, _
 		byval depth as integer = -1 _

@@ -894,7 +894,7 @@ end function
 
 private sub hWriteFTOI _
 	( _
-		byref fname as string, _
+		byref fname as const string, _
 		byval rtype as integer, _
 		byval ptype as integer _
 	)
@@ -1738,7 +1738,7 @@ private function hVregToStr _
 		return hEmitOffset( vreg->sym, vreg->ofs )
 
 	case IR_VREGTYPE_IMM
-        var s = "(" & *hDtypeToStr( vreg->dtype, vreg->subtype ) & ")"
+        dim as string s = "(" & *hDtypeToStr( vreg->dtype, vreg->subtype ) & ")"
 
 		select case as const vreg->dtype
 		case FB_DATATYPE_LONGINT
@@ -1840,7 +1840,7 @@ end sub
 private sub hEmitVregExpr _
 	( _
 		byval vr as IRVREG ptr, _
-		byref expr as string, _
+		byref expr as const string, _
 		byval is_call as integer = FALSE, _
 		byval add_cast as integer = TRUE _
 	)
@@ -2047,7 +2047,7 @@ end sub
 '':::::
 private sub hWriteUOP _
 	( _
-		byref op as string, _
+		byref op as const string, _
 		byval vr as IRVREG ptr, _
 		byval v1 as IRVREG ptr _
 	)

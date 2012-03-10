@@ -194,7 +194,7 @@ private sub hAddRTTI _
 	end if
 
 	'' create a virtual-table struct (extends $fb_BaseVT)
-	var sname = "_ZTV" + mname + "_type"
+	dim as string sname = "_ZTV" + mname + "_type"
 	var vtableType = symbStructBegin( NULL, sname, sname, FALSE, 0, symb.rtti.fb_baseVT )
 		
 	'' TODO: add this symbol's virtual methods as function pointers with "this" as the first param

@@ -201,7 +201,7 @@ private function archiveFiles() as integer
 	return fbcRunBin("archiving", fbcFindBin("ar"), ln)
 end function
 
-function fbcFindGccLib(byref file as string) as string
+function fbcFindGccLib(byref file as const string) as string
 	dim as string found
 
 	'' Files in our lib/ directory have precedence, and are in fact
@@ -254,11 +254,11 @@ function fbcFindGccLib(byref file as string) as string
 
 end function
 
-private sub fbcAddDefLibPath(byref path as string)
+private sub fbcAddDefLibPath(byref path as const string)
 	strsetAdd(@fbc.finallibpaths, path, TRUE)
 end sub
 
-sub fbcAddLibPathFor(byref libname as string)
+sub fbcAddLibPathFor(byref libname as const string)
 	dim as string path = _
 		pathStripDiv(hStripFilename( _
 			fbcFindGccLib("lib" + libname + ".a")))
