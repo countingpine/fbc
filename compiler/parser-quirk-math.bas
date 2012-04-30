@@ -60,12 +60,20 @@ private function hLenSizeof _
 
 	hMatchLPRNT( )
 
-	'' token after next is operator or '['? 
-	if( (lexGetLookAheadClass( 1 ) = FB_TKCLASS_OPERATOR andalso lexGetLookAhead( 1 ) <> CHAR_TIMES) _
+
+	'' next token is TYPEOF?
+	'' (We need this to prevent the '(' after it from making it look like an expression)
+	if( lexGetToken( ) = FK_TK_TYPEOF ) then
+		is_type = cSymbolType( dtype, subtype, lgt, FB_SYMBTYPEOPT_NONE )
+	
+	'' token after next is operator or '('/'['?
+	elseif( (lexGetLookAheadClass( 1 ) = FB_TKCLASS_OPERATOR andalso lexGetLookAhead( 1 ) <> CHAR_TIMES) _
+		orelse lexGetLookAhead( 1 ) = CHAR_LPRNT ) then
 		orelse lexGetLookAhead( 1 ) = CHAR_LBRACKET ) then
 		'' disambiguation: types can't be followed by an operator
 		'' (note: can't check periods here, because it could be a namespace resolution, or '*' because it could be STRING * n)
 		is_type = FALSE
+
 	elseif( fbLangIsSet( FB_LANG_QB ) ) then
 		'' QB quirk: LEN() only takes expressions
 		if( is_len ) then
@@ -74,6 +82,7 @@ private function hLenSizeof _
 			'' SIZEOF()
 			is_type = cSymbolType( dtype, subtype, lgt, FB_SYMBTYPEOPT_NONE )
 		end if
+
 	else
 		is_type = cSymbolType( dtype, subtype, lgt, FB_SYMBTYPEOPT_NONE )
 	end if
