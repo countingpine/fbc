@@ -14,7 +14,7 @@ sub lenString cdecl()
 
 	CU_ASSERT(len("123") = 3)
 
-	''CU_ASSERT(len(string(3, "a")) = 3) '' Conflicts with len(string). TODO: could be allowed by checking for '('
+	CU_ASSERT(len(string(3, "a")) = 3) '' Conflicted with len(string)
 	CU_ASSERT(len((string(3, "a"))) = 3) '' This works, with extra parentheses which can't be used around types
 end sub
 
