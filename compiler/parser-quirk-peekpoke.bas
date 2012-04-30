@@ -30,7 +30,7 @@ function cPokeStmt _
 	'' next token is TYPEOF?
 	'' (We need this to prevent the '(' after it from making it look like an expression)
 	if( lexGetToken( ) = FK_TK_TYPEOF ) then
-		is_type = cSymbolType( dtype, subtype, lgt, FB_SYMBTYPEOPT_NONE )
+		is_type = cSymbolType( dtype, subtype, lgt )
 	
 	'' token after next is operator or '('/'['?
 	elseif( (lexGetLookAheadClass( 1 ) = FB_TKCLASS_OPERATOR andalso lexGetLookAhead( 1 ) <> CHAR_TIMES) _
@@ -45,7 +45,7 @@ function cPokeStmt _
 			is_type = FALSE
 	
 	else
-		is_type = cSymbolType( dtype, subtype, lgt, FB_SYMBTYPEOPT_NONE )
+		is_type = cSymbolType( dtype, subtype, lgt )
 	end if
 
 	if( is_type ) then
@@ -126,7 +126,7 @@ function cPeekFunct() as ASTNODE ptr
 	'' next token is TYPEOF?
 	'' (We need this to prevent the '(' after it from making it look like an expression)
 	if( lexGetToken( ) = FK_TK_TYPEOF ) then
-		is_type = cSymbolType( dtype, subtype, lgt, FB_SYMBTYPEOPT_NONE )
+		is_type = cSymbolType( dtype, subtype, lgt )
 	
 	'' token after next is operator or '('/'['?
 	elseif( (lexGetLookAheadClass( 1 ) = FB_TKCLASS_OPERATOR andalso lexGetLookAhead( 1 ) <> CHAR_TIMES) _
@@ -137,11 +137,11 @@ function cPeekFunct() as ASTNODE ptr
 		is_type = FALSE
 	
 	elseif( fbLangIsSet( FB_LANG_QB ) ) then
-		'' QB quirk: POKE only takes expressions
+		'' QB quirk: PEEK only takes expressions
 			is_type = FALSE
 	
 	else
-		is_type = cSymbolType( dtype, subtype, lgt, FB_SYMBTYPEOPT_NONE )
+		is_type = cSymbolType( dtype, subtype, lgt )
 	end if
 
 	if( is_type ) then
