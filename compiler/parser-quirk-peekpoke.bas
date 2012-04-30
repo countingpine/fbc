@@ -17,7 +17,7 @@ function cPokeStmt _
 	) as integer
 
 	dim as ASTNODE ptr expr1 = any, expr2 = any
-	dim as integer poketype = any, lgt = any
+	dim as integer poketype = any, lgt = any, is_type = any
 	dim as FBSYMBOL ptr subtype = any
 
 	function = FALSE
@@ -26,7 +26,29 @@ function cPokeStmt _
 	lexSkipToken( )
 
 	'' (SymbolType ',')?
-	if( cSymbolType( poketype, subtype, lgt ) ) then
+
+	'' next token is TYPEOF?
+	'' (We need this to prevent the '(' after it from making it look like an expression)
+	if( lexGetToken( ) = FK_TK_TYPEOF ) then
+		is_type = cSymbolType( dtype, subtype, lgt, FB_SYMBTYPEOPT_NONE )
+	
+	'' token after next is operator or '('/'['?
+	elseif( (lexGetLookAheadClass( 1 ) = FB_TKCLASS_OPERATOR andalso lexGetLookAhead( 1 ) <> CHAR_TIMES) _
+		orelse lexGetLookAhead( 1 ) = CHAR_LPRNT ) then
+		orelse lexGetLookAhead( 1 ) = CHAR_LBRACKET ) then
+		'' disambiguation: types can't be followed by an operator
+		'' (note: can't check periods here, because it could be a namespace resolution, or '*' because it could be STRING * n)
+		is_type = FALSE
+	
+	elseif( fbLangIsSet( FB_LANG_QB ) ) then
+		'' QB quirk: POKE only takes expressions
+			is_type = FALSE
+	
+	else
+		is_type = cSymbolType( dtype, subtype, lgt, FB_SYMBTYPEOPT_NONE )
+	end if
+
+	if( is_type ) then
 
 		'' check for invalid types
 		select case poketype
@@ -88,7 +110,7 @@ end function
 ''
 function cPeekFunct() as ASTNODE ptr
 	dim as ASTNODE ptr expr = any
-	dim as integer dtype = any, lgt = any
+	dim as integer dtype = any, lgt = any, is_type = any
 	dim as FBSYMBOL ptr subtype = any
 
 	function = NULL
@@ -100,7 +122,29 @@ function cPeekFunct() as ASTNODE ptr
 	hMatchLPRNT( )
 
 	'' (SymbolType ',')?
-	if( cSymbolType( dtype, subtype, lgt ) ) then
+
+	'' next token is TYPEOF?
+	'' (We need this to prevent the '(' after it from making it look like an expression)
+	if( lexGetToken( ) = FK_TK_TYPEOF ) then
+		is_type = cSymbolType( dtype, subtype, lgt, FB_SYMBTYPEOPT_NONE )
+	
+	'' token after next is operator or '('/'['?
+	elseif( (lexGetLookAheadClass( 1 ) = FB_TKCLASS_OPERATOR andalso lexGetLookAhead( 1 ) <> CHAR_TIMES) _
+		orelse lexGetLookAhead( 1 ) = CHAR_LPRNT ) then
+		orelse lexGetLookAhead( 1 ) = CHAR_LBRACKET ) then
+		'' disambiguation: types can't be followed by an operator
+		'' (note: can't check periods here, because it could be a namespace resolution, or '*' because it could be STRING * n)
+		is_type = FALSE
+	
+	elseif( fbLangIsSet( FB_LANG_QB ) ) then
+		'' QB quirk: POKE only takes expressions
+			is_type = FALSE
+	
+	else
+		is_type = cSymbolType( dtype, subtype, lgt, FB_SYMBTYPEOPT_NONE )
+	end if
+
+	if( is_type ) then
 		'' check for invalid types
 		select case typeGet( dtype )
 		case FB_DATATYPE_VOID, FB_DATATYPE_FIXSTR
