@@ -1959,6 +1959,19 @@ function symbCheckConstAssign _
 	if( (typeGetConstMask( ldtype ) or typeGetConstMask( rdtype )) = 0 ) then
 		return TRUE
 	end if
+	
+	'' short-circuit on string conversions
+	select case typeGetDtAndPtrOnly( ldtype )
+	case FB_DATATYPE_WCHAR
+		'' all non-WStrings will be cast
+		if( typeGetDtAndPtrOnly( rdtype ) <> FB_DATATYPE_WCHAR ) then return TRUE
+	case FB_DATATYPE_CHAR
+		'' only WStrings will be cast
+		if( typeGetDtAndPtrOnly( rdtype ) = FB_DATATYPE_WCHAR ) then return TRUE
+	case FB_DATATYPE_STRING
+		'' all non-Strings will be cast
+		if( typeGetDtAndPtrOnly( rdtype ) <> FB_DATATYPE_STRING ) then return TRUE
+	end select
 
 	'' vararg? they aren't type safe anyway
 	if( mode = FB_PARAMMODE_VARARG ) then
