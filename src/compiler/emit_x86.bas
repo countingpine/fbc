@@ -83,6 +83,7 @@ declare function _init_opFnTB_SSE _
 		byval _opFnTB_SSE as any ptr ptr _
 	) as integer
 
+declare sub hEmitFloatFunc( byval func as integer )
 
 ''globals
 
@@ -2311,8 +2312,7 @@ private sub _emitLOADF2L _
 	hPrepOperand64( dvreg, dst, aux )
 
 	'' signed?
-	'' (handle ULONGINT here too - workaround for #2082801)
-	if( typeIsSigned( dvreg->dtype ) orelse (dvreg->dtype = FB_DATATYPE_ULONGINT) ) then
+	if( typeIsSigned( dvreg->dtype ) ) then
 
 		outp "sub esp, 8"
 
@@ -2322,16 +2322,30 @@ private sub _emitLOADF2L _
 	'' unsigned.. try a bigger type
 	else
 		outp "fld st(0)"
+
 		'' UWtype hi = (UWtype)(a / Wtype_MAXp1_F)
-		outp "push 0x4f800000"
-		outp "fdiv dword ptr [esp]"
-		outp "fistp dword ptr [esp]"
+		outp "push 0x2f800000"
+		outp "fmul dword ptr [esp]"
+		hEmitFloatFunc( 1 )
+
+		outp "sub esp, 4" '' TODO: make more efficient (follows an 'add esp, 4')
+		outp "fistp qword ptr [esp]" '' Stack = hi __
+
 		'' UWtype lo = (UWtype)(a - ((DFtype)hi) * Wtype_MAXp1_F)
-		outp "fild dword ptr [esp]"
+		outp "fild qword ptr [esp]"
 		outp "push 0x4f800000"
 		outp "fmul dword ptr [esp]"
 		outp "fsubp"
-		outp "fistp dword ptr [esp]"
+		outp "sub esp, 4"
+		outp "fistp qword ptr [esp]" '' Stack = lo c_ hi __ (c_ is carry of lo)
+
+		outp "xchg eax, [esp]"       '' Stack = eax c_ hi __ (eax = lo)
+		outp "xchg eax, [esp+8]"     '' Stack = eax c_ lo __ (eax = hc)
+		outp "add eax, [esp+4]"      '' Stack = eax c_ lo __ (eax = hc)
+		outp "mov [esp+12], eax"     '' Stack = eax c_ lo hc (eax = __)
+		outp "pop eax"               '' Stack = c_ lo hi     (eax = eax)
+		outp "add esp, 4"            '' Stack = lo hi
+
 		'' ((UDWtype) hi << W_TYPE_SIZE) | lo
 	end if
 
@@ -5410,12 +5424,12 @@ private sub hEmitFloatFunc( byval func as integer )
 		hFpuChangeRC( regname, "01" )
 		outp( "frndint" )
 	case 2
-		'' st(0) = floor( abs( st(0) ) ) * sng( st(0) )
+		'' st(0) = fix( st(0) ) = floor( abs( st(0) ) ) * sng( st(0) )
 		'' chop truncating toward 0
 		hFpuChangeRC( regname, "11" )
 		outp( "frndint" )
 	case 3
-		'' st(0) = st(0) - floor( st(0) )
+		'' st(0) = st(0) - fix( st(0) )
 		'' chop truncating toward 0
 		hFpuChangeRC( regname, "11" )
 		outp( "fld st(0)" )
