@@ -2321,14 +2321,16 @@ private sub _emitLOADF2L _
 
 	'' unsigned.. try a bigger type
 	else
+		dim as integer tmpreg = any
+		dim as string tmpregname
+
 		outp "fld st(0)"
 
 		'' UWtype hi = (UWtype)(a / Wtype_MAXp1_F)
 		outp "push 0x2f800000"
 		outp "fmul dword ptr [esp]"
-		hEmitFloatFunc( 1 )
 
-		outp "sub esp, 4" '' TODO: make more efficient (follows an 'add esp, 4')
+		outp "sub esp, 4"
 		outp "fistp qword ptr [esp]" '' Stack = hi __
 
 		'' UWtype lo = (UWtype)(a - ((DFtype)hi) * Wtype_MAXp1_F)
@@ -2339,12 +2341,24 @@ private sub _emitLOADF2L _
 		outp "sub esp, 4"
 		outp "fistp qword ptr [esp]" '' Stack = lo c_ hi __ (c_ is carry of lo)
 
-		outp "xchg eax, [esp]"       '' Stack = eax c_ hi __ (eax = lo)
-		outp "xchg eax, [esp+8]"     '' Stack = eax c_ lo __ (eax = hc)
-		outp "add eax, [esp+4]"      '' Stack = eax c_ lo __ (eax = hc)
-		outp "mov [esp+12], eax"     '' Stack = eax c_ lo hc (eax = __)
-		outp "pop eax"               '' Stack = c_ lo hi     (eax = eax)
-		outp "add esp, 4"            '' Stack = lo hi
+		tmpreg = hFindFreeReg( FB_DATACLASS_INTEGER )
+		if( tmpreg = INVALID ) then
+			'' no free registers - use eax
+			outp "xchg eax, [esp]"       '' Stack = eax c_ hi __ (eax = lo)
+			outp "xchg eax, [esp+8]"     '' Stack = eax c_ lo __ (eax = hi)
+			outp "add eax, [esp+4]"      '' Stack = eax c_ lo __ (eax = hc)
+			outp "mov [esp+12], eax"     '' Stack = eax c_ lo hc (eax = __)
+			outp "pop eax"               '' Stack = c_ lo hc     (eax = eax)
+			outp "add esp, 4"            '' Stack = lo hc
+		else
+			tmpregname = *hGetRegName( FB_DATATYPE_INTEGER, tmpreg )
+			outp "mov " + tmpregname + ", [esp]"    '' Stack = lo c_ hi __ (reg=lo)
+			outp "xchg " + tmpregname + ", [esp+8]" '' Stack = lo c_ lo __ (reg=hi)
+			outp "add " + tmpregname + ", [esp+4]"  '' Stack = lo c_ lo __ (reg=hc)
+			outp "mov [esp+12], " + tmpregname      '' Stack = lo c_ lo hc
+			outp "add esp, 8"                       '' Stack = lo hc
+		end if
+	end if
 
 		'' ((UDWtype) hi << W_TYPE_SIZE) | lo
 	end if
