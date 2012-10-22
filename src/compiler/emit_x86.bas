@@ -126,7 +126,7 @@ declare sub hEmitFloatFunc( byval func as integer )
 		( FB_DATACLASS_INTEGER, FB_INTEGERSIZE  , 2, "dword ptr" ), _	'' function
 		( FB_DATACLASS_INTEGER, 1			    , 0, "byte ptr"  ), _	'' fwd-ref
 		( FB_DATACLASS_INTEGER, FB_POINTERSIZE  , 2, "dword ptr" ), _	'' pointer
-		( FB_DATACLASS_INTEGER, 16              , 3, "xmmword ptr" ) _	'' 128-bit 
+		( FB_DATACLASS_INTEGER, 16              , 3, "xmmword ptr" ) _	'' 128-bit
 	}
 
 const EMIT_MAXKEYWORDS = 600
@@ -2319,52 +2319,56 @@ private sub _emitLOADF2L _
 		ostr = "fistp " + dtypeTB(dvreg->dtype).mname + " [esp]"
 		outp ostr
 
+		hPOP( dst )
+		hPOP( aux )
+
 	'' unsigned.. try a bigger type
 	else
-		dim as integer tmpreg = any
-		dim as string tmpregname
+		dim as string label_geq, label_done
+		dim as integer iseaxfree = any
 
-		outp "fld st(0)"
+		label_geq = *symbUniqueLabel( )
+		label_done = *symbUniqueLabel( )
 
-		'' UWtype hi = (UWtype)(a / Wtype_MAXp1_F)
-		outp "push 0x2f800000"
-		outp "fmul dword ptr [esp]"
+		'' eax free, or only used in dest?
+		iseaxfree = hIsRegFree( FB_DATACLASS_INTEGER, EMIT_REG_EAX )
+		iseaxfree orelse= hIsRegInVreg( dvreg, EMIT_REG_EAX )
 
-		outp "sub esp, 4"
-		outp "fistp qword ptr [esp]" '' Stack = hi __
+		outp "sub esp, 8"
+        outp "mov dword ptr [esp], 0x5F000000" '' 2^63
+        outp "fcom dword ptr [esp]"
 
-		'' UWtype lo = (UWtype)(a - ((DFtype)hi) * Wtype_MAXp1_F)
-		outp "fild qword ptr [esp]"
-		outp "push 0x4f800000"
-		outp "fmul dword ptr [esp]"
-		outp "fsubp"
-		outp "sub esp, 4"
-		outp "fistp qword ptr [esp]" '' Stack = lo c_ hi __ (c_ is carry of lo)
-
-		tmpreg = hFindFreeReg( FB_DATACLASS_INTEGER )
-		if( tmpreg = INVALID ) then
-			'' no free registers - use eax
-			outp "xchg eax, [esp]"       '' Stack = eax c_ hi __ (eax = lo)
-			outp "xchg eax, [esp+8]"     '' Stack = eax c_ lo __ (eax = hi)
-			outp "add eax, [esp+4]"      '' Stack = eax c_ lo __ (eax = hc)
-			outp "mov [esp+12], eax"     '' Stack = eax c_ lo hc (eax = __)
-			outp "pop eax"               '' Stack = c_ lo hc     (eax = eax)
-			outp "add esp, 4"            '' Stack = lo hc
+		if( iseaxfree ) then
+			outp "fnstsw ax"
+			outp "test ah, 1"
 		else
-			tmpregname = *hGetRegName( FB_DATATYPE_INTEGER, tmpreg )
-			outp "mov " + tmpregname + ", [esp]"    '' Stack = lo c_ hi __ (reg=lo)
-			outp "xchg " + tmpregname + ", [esp+8]" '' Stack = lo c_ lo __ (reg=hi)
-			outp "add " + tmpregname + ", [esp+4]"  '' Stack = lo c_ lo __ (reg=hc)
-			outp "mov [esp+12], " + tmpregname      '' Stack = lo c_ lo hc
-			outp "add esp, 8"                       '' Stack = lo hc
+			hPUSH( "eax" )
+			outp "fnstsw ax"
+			outp "test ah, 1"
+			hPOP( "eax" )
 		end if
-	end if
 
-		'' ((UDWtype) hi << W_TYPE_SIZE) | lo
-	end if
+		hBRANCH( "jz", label_geq )
 
-	hPOP( dst )
-	hPOP( aux )
+		'' if x < 2^63
+        outp "fistp qword ptr [esp]"
+		hPOP( dst )
+		hPOP( aux )
+
+		'' elseif x >= 2^63
+		hBRANCH( "jmp", label_done )
+		hLABEL( label_geq )
+
+        outp "fsub dword ptr [esp]"
+        outp "fistp qword ptr [esp]"
+		hPOP( dst )
+		hPOP( aux )
+        outp "xor " + aux + ", 0x80000000"
+
+		'' endif
+		hLABEL( label_done )
+
+	end if
 
 end sub
 
