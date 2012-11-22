@@ -47,12 +47,14 @@ type FB_CMPSTMT_FOR
 	end            	as FB_CMPSTMT_FORELM
 	stp				as FB_CMPSTMT_FORELM
 	ispos			as FB_CMPSTMT_FORELM
+	cmpop			as AST_OP
 	testlabel		as FBSYMBOL ptr
 	inilabel		as FBSYMBOL ptr
 	cmplabel		as FBSYMBOL ptr
 	endlabel		as FBSYMBOL ptr
 	last			as FB_CMPSTMTSTK_ ptr
 	explicit_step   as integer
+	explicit_cmp    as integer
 end type
 
 type FB_CMPSTMT_IF

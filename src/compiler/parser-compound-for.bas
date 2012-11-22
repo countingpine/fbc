@@ -161,8 +161,16 @@ private sub hScalarNext _
 		byval stk as FB_CMPSTMTSTK ptr _
 	)
 
+    '' is compare op known?
+    if( stk->for.explicit_cmp ) then
+    	'' counter <= or >= end cond?
+		hFlushBOP( stk->for.cmpop, _
+			   	   @stk->for.cnt, _
+			   	   @stk->for.end, _
+			   	   stk->for.inilabel )
+
     '' is STEP known? (ie: an constant expression)
-    if( stk->for.ispos.sym = NULL ) then
+    elseif( stk->for.ispos.sym = NULL ) then
     	'' counter <= or >= end cond?
 		hFlushBOP( iif( stk->for.ispos.value.int, AST_OP_LE, AST_OP_GE ), _
 			   	   @stk->for.cnt, _
@@ -479,6 +487,8 @@ private sub hForTo _
 		byval flags as FOR_FLAGS _
 	)
 
+	dim tk as integer = any
+
     '' This function handles the 'TO EndCondition'
     '' expression of a FOR block.
 
@@ -487,6 +497,18 @@ private sub hForTo _
 		errReport( FB_ERRMSG_EXPECTEDTO )
 	else
 		lexSkipToken( )
+	end if
+
+	stk->for.explicit_cmp = FALSE
+	if( (flags and FOR_ISUDT) = 0 ) then
+		'' '>' | '<' | '>=' | '<='
+		tk = lexGetToken( )
+		select case as const tk
+		case FB_TK_GT, FB_TK_LT, FB_TK_LE, FB_TK_GE
+			stk->for.explicit_cmp = TRUE
+			stk->for.cmpop = hFBrelop2IRrelop( tk )
+			lexSkipToken( )
+		end select
 	end if
 
 	'' EndCondition
@@ -603,18 +625,16 @@ private sub hForStep _
 				expr = astNewCONSTi( 1, FB_DATATYPE_INTEGER )
 			end if
 		else
-			'' no STEP was specified, so it's 1
+			'' no STEP was specified, so it's +/-1
 			'' (the step's type will be converted below)
-			expr = astNewCONSTi( 1, FB_DATATYPE_INTEGER )
-		end if
-
-		if( (flags and FOR_ISUDT) = 0) then
-			'' keep signed-ness of expr type, so negative steps will work properly
-			if( typeIsSigned( astGetFullType( expr ) ) ) then
-				dtype = typeToSigned( dtype )
-			else
-				dtype = typeToUnsigned( dtype )
+			dim as integer stepval = 1
+			if( stk->for.explicit_cmp ) then
+				select case stk->for.cmpop
+				case AST_OP_GT, AST_OP_GE
+					stepval = -1
+				end select
 			end if
+			expr = astNewCONSTi( stepval, FB_DATATYPE_INTEGER )
 		end if
 
 		'' store step into a temp var
@@ -629,7 +649,16 @@ private sub hForStep _
 			end if
 
 			'' get step's positivity
-			stk->for.ispos.value.int = hStepIsNonNegative( dtype, expr )
+			if( stk->for.explicit_cmp ) then
+				select case stk->for.cmpop
+				case AST_OP_GT, AST_OP_GE
+					stk->for.ispos.value.int = FALSE
+				case else
+					stk->for.ispos.value.int = TRUE
+				end select
+			else
+				stk->for.ispos.value.int = hStepIsNonNegative( dtype, expr )
+			end if
 
 			'' get constant step
 			stk->for.stp.sym = NULL
@@ -679,16 +708,20 @@ private sub hForStep _
 		end if
 	end if
 
-	if( typeIsSigned( dtype ) = FALSE and ((flags and FOR_ISUDT) = 0) ) then
+	if( iscomplex and ((flags and FOR_ISUDT) = 0) ) then
 
 		'' step is unsigned, so non-negative
 		stk->for.ispos.sym = NULL
 		stk->for.ispos.dtype = FB_DATATYPE_INTEGER
-		stk->for.ispos.value.int = TRUE
+		select case stk->for.cmpop
+		case AST_OP_GT, AST_OP_GE
+			stk->for.ispos.value.int = FALSE
+		case else
+			stk->for.ispos.value.int = TRUE
+		end select
 
     '' if STEP's sign is unknown, we have to check for that
-    elseif( iscomplex and ((flags and FOR_ISUDT) = 0) ) then
-
+    elseif( iscomplex and ((flags and FOR_ISUDT) = 0) and stk->for.explicit_cmp = FALSE ) then
 
 		dim as FB_CMPSTMT_FORELM cmp = any
 
