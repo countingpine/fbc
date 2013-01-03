@@ -517,4 +517,7 @@ declare function VarCmp alias "VarCmp" (byval as LPVARIANT, byval as LPVARIANT, 
 declare function VarBstrCmp alias "VarBstrCmp" (byval as BSTR, byval as BSTR, byval as LCID, byval as ULONG) as HRESULT
 declare function VarBstrCat alias "VarBstrCat" (byval as BSTR, byval as BSTR, byval as BSTR ptr) as HRESULT
 
+declare function  GetRecordInfoFromTypeInfo (byval As ITypeInfo ptr,byval As IRecordInfo Ptr Ptr) As HRESULT
+declare function  GetRecordInfoFromGuids (byval As REFGUID,byval As ULong,byval As ULong,byval As LCID,byval As REFGUID,byval As IRecordInfo Ptr Ptr)  as HRESULT
+
 #endif

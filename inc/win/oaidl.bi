@@ -860,4 +860,302 @@ type ITypeMarshalVtbl
 	Free as function (byval as ITypeMarshal ptr, byval as PVOID) as HRESULT
 end type
 
+#Define ITypeMarshal_QueryInterface(This,riid,ppvObject) (This)->lpVtbl->QueryInterface(This,riid,ppvObject)
+#Define ITypeMarshal_AddRef(This) (This)->lpVtbl->AddRef(This)
+#Define ITypeMarshal_Release(This) (This)->lpVtbl->Release(This)
+#Define ITypeMarshal_Size(This,pvType,dwDestContext,pvDestContext,pSize) (This)->lpVtbl->Size(This,pvType,dwDestContext,pvDestContext,pSize)
+#Define ITypeMarshal_Marshal(This,pvType,dwDestContext,pvDestContext,cbBufferLength,pBuffer,pcbWritten) (This)->lpVtbl->Marshal(This,pvType,dwDestContext,pvDestContext,cbBufferLength,pBuffer,pcbWritten)
+#Define ITypeMarshal_Unmarshal(This,pvType,dwFlags,cbBufferLength,pBuffer,pcbRead) (This)->lpVtbl->Unmarshal(This,pvType,dwFlags,cbBufferLength,pBuffer,pcbRead)
+#Define ITypeMarshal_Free(This,pvType) (This)->lpVtbl->Free(This,pvType)
+ 
+
+Type ICreateTypeInfoVtbl_ As ICreateTypeInfoVtbl 
+type ICreateTypeInfo 
+     lpVtbl As ICreateTypeInfoVtbl_ ptr   
+end Type
+
+Type ICreateTypeInfoVtbl
+     QueryInterface as function(ByVal  As  ICreateTypeInfo ptr,As REFIID,As pvoid Ptr)As HRESULT
+     AddRef as function(ByVal  As  ICreateTypeInfo Ptr)As ULong
+      Release as function(ByVal  As  ICreateTypeInfo Ptr)As ULong
+     SetGuid as function (ByVal  As ICreateTypeInfo Ptr, As REFGUID)As HRESULT
+     SetTypeFlags as function(ByVal  As  ICreateTypeInfo Ptr, As UINT)As HRESULT
+     SetDocString as function (ByVal  As ICreateTypeInfo Ptr, As LPOLESTR)As HRESULT
+     SetHelpContext as function(ByVal  As  ICreateTypeInfo Ptr, As DWORD)As HRESULT
+     SetVersion as function(ByVal  As  ICreateTypeInfo Ptr,As WORD, As WORD)As HRESULT
+     AddRefTypeInfo as function(ByVal  As  ICreateTypeInfo ptr, As ITypeInfo ptr, As HREFTYPE Ptr)As HRESULT
+     AddFuncDesc as function(ByVal  As  ICreateTypeInfo ptr, As Integer, As FUNCDESC Ptr)As HRESULT
+     AddImplType as function (ByVal  As ICreateTypeInfo Ptr, As UINT, As HREFTYPE)As HRESULT
+     SetImplTypeFlags as function(ByVal  As  ICreateTypeInfo Ptr, As UINT, As Integer)As HRESULT
+     SetAlignment as function(ByVal  As  ICreateTypeInfo Ptr, As WORD)As HRESULT
+     SetSchema as function(ByVal  As  ICreateTypeInfo Ptr, As LPOLESTR)As HRESULT
+     AddVarDesc as function(ByVal  As  ICreateTypeInfo ptr, As UINT, As VARDESC Ptr)As HRESULT
+     SetFuncAndParamNames as function(ByVal  As  ICreateTypeInfo ptr, As UINT, As LPOLESTR Ptr, As UINT)As HRESULT
+     SetVarName as function(ByVal  As  ICreateTypeInfo Ptr, As UINT, As LPOLESTR)As HRESULT
+     SetTypeDescAlias as function(ByVal  As  ICreateTypeInfo ptr, As TYPEDESC Ptr)As HRESULT
+     DefineFuncAsDllEntry as function(ByVal  As  ICreateTypeInfo Ptr, As UINT, As LPOLESTR, As LPOLESTR)As HRESULT
+     SetFuncDocString as function(ByVal  As  ICreateTypeInfo Ptr, As UINT, As LPOLESTR)As HRESULT
+     SetVarDocString as function(ByVal  As  ICreateTypeInfo Ptr, As UINT, As LPOLESTR)As HRESULT
+     SetFuncHelpContext as function(ByVal  As  ICreateTypeInfo Ptr, As UINT, As DWORD)As HRESULT
+     SetVarHelpContext as function(ByVal  As  ICreateTypeInfo Ptr, As UINT, As DWORD)As HRESULT
+     SetMops as function(ByVal  As  ICreateTypeInfo Ptr, As UINT, As BSTR)As HRESULT
+     SetTypeIdldesc as function (ByVal  As ICreateTypeInfo ptr, As IDLDESC Ptr)As HRESULT
+     LayOut as function (ByVal  As ICreateTypeInfo Ptr)As HRESULT
+    
+End Type
+
+
+
+ 
+#Define ICreateTypeInfo_QueryInterface(This,riid,ppvObject) (This)->lpVtbl->QueryInterface(This,riid,ppvObject)
+#Define ICreateTypeInfo_AddRef(This) (This)->lpVtbl->AddRef(This)
+#Define ICreateTypeInfo_Release(This) (This)->lpVtbl->Release(This)
+#Define ICreateTypeInfo_SetGuid(This,guid) (This)->lpVtbl->SetGuid(This,guid)
+#Define ICreateTypeInfo_SetTypeFlags(This,uTypeFlags) (This)->lpVtbl->SetTypeFlags(This,uTypeFlags)
+#Define ICreateTypeInfo_SetDocString(This,pStrDoc) (This)->lpVtbl->SetDocString(This,pStrDoc)
+#Define ICreateTypeInfo_SetHelpContext(This,dwHelpContext) (This)->lpVtbl->SetHelpContext(This,dwHelpContext)
+#Define ICreateTypeInfo_SetVersion(This,wMajorVerNum,wMinorVerNum) (This)->lpVtbl->SetVersion(This,wMajorVerNum,wMinorVerNum)
+#Define ICreateTypeInfo_AddRefTypeInfo(This,pTInfo,phRefType) (This)->lpVtbl->AddRefTypeInfo(This,pTInfo,phRefType)
+#Define ICreateTypeInfo_AddFuncDesc(This,index,pFuncDesc) (This)->lpVtbl->AddFuncDesc(This,index,pFuncDesc)
+#Define ICreateTypeInfo_AddImplType(This,index,hRefType) (This)->lpVtbl->AddImplType(This,index,hRefType)
+#Define ICreateTypeInfo_SetImplTypeFlags(This,index,implTypeFlags) (This)->lpVtbl->SetImplTypeFlags(This,index,implTypeFlags)
+#Define ICreateTypeInfo_SetAlignment(This,cbAlignment) (This)->lpVtbl->SetAlignment(This,cbAlignment)
+#Define ICreateTypeInfo_SetSchema(This,pStrSchema) (This)->lpVtbl->SetSchema(This,pStrSchema)
+#Define ICreateTypeInfo_AddVarDesc(This,index,pVarDesc) (This)->lpVtbl->AddVarDesc(This,index,pVarDesc)
+#Define ICreateTypeInfo_SetFuncAndParamNames(This,index,rgszNames,cNames) (This)->lpVtbl->SetFuncAndParamNames(This,index,rgszNames,cNames)
+#Define ICreateTypeInfo_SetVarName(This,index,szName) (This)->lpVtbl->SetVarName(This,index,szName)
+#Define ICreateTypeInfo_SetTypeDescAlias(This,pTDescAlias) (This)->lpVtbl->SetTypeDescAlias(This,pTDescAlias)
+#Define ICreateTypeInfo_DefineFuncAsDllEntry(This,index,szDllName,szProcName) (This)->lpVtbl->DefineFuncAsDllEntry(This,index,szDllName,szProcName)
+#Define ICreateTypeInfo_SetFuncDocString(This,index,szDocString) (This)->lpVtbl->SetFuncDocString(This,index,szDocString)
+#Define ICreateTypeInfo_SetVarDocString(This,index,szDocString) (This)->lpVtbl->SetVarDocString(This,index,szDocString)
+#Define ICreateTypeInfo_SetFuncHelpContext(This,index,dwHelpContext) (This)->lpVtbl->SetFuncHelpContext(This,index,dwHelpContext)
+#Define ICreateTypeInfo_SetVarHelpContext(This,index,dwHelpContext) (This)->lpVtbl->SetVarHelpContext(This,index,dwHelpContext)
+#Define ICreateTypeInfo_SetMops(This,index,bstrMops) (This)->lpVtbl->SetMops(This,index,bstrMops)
+#Define ICreateTypeInfo_SetTypeIdldesc(This,pIdlDesc) (This)->lpVtbl->SetTypeIdldesc(This,pIdlDesc)
+#Define ICreateTypeInfo_LayOut(This) (This)->lpVtbl->LayOut(This)
+ 
+
+ 
+
+type ICreateTypeInfo2Vtbl_ As ICreateTypeInfo2Vtbl  
+
+Type ICreateTypeInfo2 
+	 lpVtbl As ICreateTypeInfo2Vtbl_ Ptr
+End Type
+type  ICreateTypeInfo2Vtbl 
+	 QueryInterface As function(As ICreateTypeInfo2 Ptr,As REFIID,As lpvoid Ptr)As HRESULT
+	 AddRef As function(As ICreateTypeInfo2 Ptr)As ULong
+	 Release As function(As ICreateTypeInfo2 Ptr)As ULong
+	 SetGuid As Function (As ICreateTypeInfo2 Ptr,as REFGUID )As HRESULT
+	 SetTypeFlags As function(As ICreateTypeInfo2 Ptr,As UINT)As HRESULT
+	 SetDocString As function(As ICreateTypeInfo2 Ptr,As LPOLESTR)As HRESULT
+	 SetHelpContext As function(As ICreateTypeInfo2 Ptr,As DWORD)As HRESULT
+	 SetVersion As function(As ICreateTypeInfo2 Ptr,As WORD,As WORD)As HRESULT
+	 AddRefTypeInfo As function(As ICreateTypeInfo2 Ptr,As ITypeInfo PTR,As HREFTYPE Ptr)As HRESULT
+	 AddFuncDesc As function(As ICreateTypeInfo2 Ptr,As UINT,As FUNCDESC Ptr)As HRESULT
+	 AddImplType As function(As ICreateTypeInfo2 Ptr,As UINT,As HREFTYPE)As HRESULT
+	 SetImplTypeFlags As function(As ICreateTypeInfo2 Ptr,As UINT,As Integer)As HRESULT
+	 SetAlignment As function(As ICreateTypeInfo2 Ptr,As WORD)As HRESULT
+	 SetSchema As function(As ICreateTypeInfo2 Ptr,As LPOLESTR)As HRESULT
+	 AddVarDesc As function(As ICreateTypeInfo2 Ptr,As UINT,As VARDESC Ptr)As HRESULT
+	 SetFuncAndParamNames As function(As ICreateTypeInfo2 Ptr,As UINT,As LPOLESTR Ptr,As UINT)As HRESULT
+	 SetVarName As function(As ICreateTypeInfo2 Ptr,As UINT,As LPOLESTR)As HRESULT
+	 SetTypeDescAlias As function(As ICreateTypeInfo2 Ptr,As TYPEDESC Ptr)As HRESULT
+	 DefineFuncAsDllEntry As function(As ICreateTypeInfo2 Ptr,As UINT,As LPOLESTR,As LPOLESTR)As HRESULT
+	 SetFuncDocString As function(As ICreateTypeInfo2 Ptr,As UINT,As LPOLESTR)As HRESULT
+	 SetVarDocString As function(As ICreateTypeInfo2 Ptr,As UINT,As LPOLESTR)As HRESULT
+	 SetFuncHelpContext As function(As ICreateTypeInfo2 Ptr,As UINT,As DWORD)As HRESULT
+	 SetVarHelpContext As function(As ICreateTypeInfo2 Ptr,As UINT,As DWORD)As HRESULT
+	 SetMops As function(As ICreateTypeInfo2 Ptr,As UINT,As BSTR)As HRESULT
+	 SetTypeIdldesc As function(As ICreateTypeInfo2 Ptr,As IDLDESC Ptr)As HRESULT
+	 LayOut As function(As ICreateTypeInfo2 Ptr)As HRESULT
+	 DeleteFuncDesc As function(As ICreateTypeInfo2 Ptr,As UINT)As HRESULT
+	 DeleteFuncDescByMemId As function(As ICreateTypeInfo2 Ptr,As MEMBERID,As INVOKEKIND)As HRESULT
+	 DeleteVarDesc As function(As ICreateTypeInfo2 Ptr,As UINT)As HRESULT
+	 DeleteVarDescByMemId As function(As ICreateTypeInfo2 Ptr,As MEMBERID)As HRESULT
+	 DeleteImplType As function(As ICreateTypeInfo2 Ptr,As UINT)As HRESULT
+	 SetCustData As function(As ICreateTypeInfo2 Ptr,As REFGUID,As VARIANT Ptr)As HRESULT
+	 SetFuncCustData As function(As ICreateTypeInfo2 Ptr,As UINT,As REFGUID,As VARIANT Ptr)As HRESULT
+	 SetParamCustData As function(As ICreateTypeInfo2 Ptr,As UINT,As UINT,As REFGUID,As VARIANT Ptr)As HRESULT
+	 SetVarCustData As function(As ICreateTypeInfo2 Ptr,As UINT,As REFGUID,As VARIANT Ptr)As HRESULT
+	 SetImplTypeCustData As function(As ICreateTypeInfo2 Ptr,As UINT,As REFGUID,As VARIANT Ptr)As HRESULT
+	 SetHelpStringContext As function(As ICreateTypeInfo2 Ptr,As ULong)As HRESULT
+	 SetFuncHelpStringContext As function(As ICreateTypeInfo2 Ptr,As UINT,As ULong)As HRESULT
+	 SetVarHelpStringContext As function(As ICreateTypeInfo2 Ptr,As UINT,As ULong)As HRESULT
+	 Invalidate As function(As ICreateTypeInfo2 Ptr)As HRESULT
+	 SetName As function(As ICreateTypeInfo2 Ptr,As LPOLESTR)As HRESULT
+End Type
+
+
+#define ICreateTypeInfo2_QueryInterface(A,B,C) (A)->lpVtbl->QueryInterface(A,B,C)
+#define ICreateTypeInfo2_AddRef(A) (A)->lpVtbl->AddRef(A)
+#define ICreateTypeInfo2_Release(A) (A)->lpVtbl->Release(A)
+#define ICreateTypeInfo2_SetGuid(A,B) (A)->lpVtbl->SetGuid(A,B)
+#define ICreateTypeInfo2_SetTypeFlags(A,B) (A)->lpVtbl->SetTypeFlags(A,B)
+#define ICreateTypeInfo2_SetDocString(A,B) (A)->lpVtbl->SetDocString(A,B)
+#define ICreateTypeInfo2_SetHelpContext(A,B) (A)->lpVtbl->SetHelpContext(A,B)
+#define ICreateTypeInfo2_SetVersion(A,B,C) (A)->lpVtbl->SetVersion(A,B,C)
+#define ICreateTypeInfo2_AddRefTypeInfo(A,B,C) (A)->lpVtbl->AddRefTypeInfo(A,B,C)
+#define ICreateTypeInfo2_AddFuncDesc(A,B,C) (A)->lpVtbl->AddFuncDesc(A,B,C)
+#define ICreateTypeInfo2_AddImplType(A,B,C) (A)->lpVtbl->AddImplType(A,B,C)
+#define ICreateTypeInfo2_SetImplTypeFlags(A,B,C) (A)->lpVtbl->SetImplTypeFlags(A,B,C)
+#define ICreateTypeInfo2_SetAlignment(A,B) (A)->lpVtbl->SetAlignment(A,B)
+#define ICreateTypeInfo2_SetSchema(A,B) (A)->lpVtbl->SetSchema(A,B)
+#define ICreateTypeInfo2_AddVarDesc(A,B,C) (A)->lpVtbl->AddVarDesc(A,B,C)
+#define ICreateTypeInfo2_SetFuncAndParamNames(A,B,C,D) (A)->lpVtbl->SetFuncAndParamNames(A,B,C,D)
+#define ICreateTypeInfo2_SetVarName(A,B,C) (A)->lpVtbl->SetVarName(A,B,C)
+#define ICreateTypeInfo2_SetTypeDescAlias(A,B) (A)->lpVtbl->SetTypeDescAlias(A,B)
+#define ICreateTypeInfo2_DefineFuncAsDllEntry(A,B,C,D) (A)->lpVtbl->DefineFuncAsDllEntry(A,B,C,D)
+#define ICreateTypeInfo2_SetFuncDocString(A,B,C) (A)->lpVtbl->SetFuncDocString(A,B,C)
+#define ICreateTypeInfo2_SetVarDocString(A,B,C) (A)->lpVtbl->SetVarDocString(A,B,C)
+#define ICreateTypeInfo2_SetFuncHelpContext(A,B,C) (A)->lpVtbl->SetFuncHelpContext(A,B,C)
+#define ICreateTypeInfo2_SetVarHelpContext(A,B,C) (A)->lpVtbl->SetVarHelpContext(A,B,C)
+#define ICreateTypeInfo2_SetMops(A,B,C) (A)->lpVtbl->SetMops(A,B,C)
+#define ICreateTypeInfo2_SetTypeIdldesc(A,B) (A)->lpVtbl->SetTypeIdldesc(A,B)
+#define ICreateTypeInfo2_LayOut(A) (A)->lpVtbl->LayOut(A)
+#define ICreateTypeInfo2_DeleteFuncDesc(A,B) (A)->lpVtbl->DeleteFuncDesc(A,B)
+#define ICreateTypeInfo2_DeleteFuncDescByMemId(A,B,C) (A)->lpVtbl->DeleteFuncDescByMemId(A,B,C)
+#define ICreateTypeInfo2_DeleteVarDesc(A,B) (A)->lpVtbl->DeleteVarDesc(A,B)
+#define ICreateTypeInfo2_DeleteVarDescByMemId(A,B) (A)->lpVtbl->DeleteVarDescByMemId(A,B)
+#define ICreateTypeInfo2_DeleteImplType(A,B) (A)->lpVtbl->DeleteImplType(A,B)
+#define ICreateTypeInfo2_SetCustData(A,B,C) (A)->lpVtbl->SetCustData(A,B,C)
+#define ICreateTypeInfo2_SetFuncCustData(A,B,C,D) (A)->lpVtbl->SetFuncCustData(A,B,C,D)
+#define ICreateTypeInfo2_SetParamCustData(A,B,C,D,E) (A)->lpVtbl->SetParamCustData(A,B,C,D,E)
+#define ICreateTypeInfo2_SetVarCustData(A,B,C,D) (A)->lpVtbl->SetVarCustData(A,B,C,D)
+#define ICreateTypeInfo2_SetImplTypeCustData(A,B,C,D) (A)->lpVtbl->SetImplTypeCustData(A,B,C,D)
+#define ICreateTypeInfo2_SetHelpStringContext(A,B) (A)->lpVtbl->SetHelpStringContext(A,B)
+#define ICreateTypeInfo2_SetFuncHelpStringContext(A,B,C) (A)->lpVtbl->SetFuncHelpStringContext(A,B,C)
+#define ICreateTypeInfo2_SetVarHelpStringContext(A,B,C) (A)->lpVtbl->SetVarHelpStringContext(A,B,C)
+#define ICreateTypeInfo2_Invalidate(A) (A)->lpVtbl->Invalidate(A)
+#define ICreateTypeInfo2_SetName(T,s) (T)->lpVtbl->SetName(T,s)
+
+DECLARE FUNCTION ICreateTypeInfo2_DeleteFuncDesc_Proxy(As ICreateTypeInfo2 Ptr,As UINT)As HRESULT
+DECLARE Sub ICreateTypeInfo2_DeleteFuncDesc_Stub(As IRpcStubBuffer PTR,As IRpcChannelBuffer PTR,As PRPC_MESSAGE,As DWORD Ptr)
+DECLARE Function ICreateTypeInfo2_DeleteFuncDescByMemId_Proxy(As ICreateTypeInfo2 Ptr,As MEMBERID,As INVOKEKIND)As HRESULT
+DECLARE Sub ICreateTypeInfo2_DeleteFuncDescByMemId_Stub(As IRpcStubBuffer PTR,As IRpcChannelBuffer PTR,As PRPC_MESSAGE,As DWORD Ptr)
+DECLARE Function ICreateTypeInfo2_DeleteVarDesc_Proxy(As ICreateTypeInfo2 Ptr,As UINT)As HRESULT
+DECLARE Sub ICreateTypeInfo2_DeleteVarDesc_Stub(As IRpcStubBuffer PTR,As IRpcChannelBuffer PTR,As PRPC_MESSAGE,As DWORD Ptr)
+DECLARE Function ICreateTypeInfo2_DeleteVarDescByMemId_Proxy(As ICreateTypeInfo2 Ptr,As MEMBERID)As HRESULT
+DECLARE SUB ICreateTypeInfo2_DeleteVarDescByMemId_Stub(As IRpcStubBuffer PTR,As IRpcChannelBuffer PTR,As PRPC_MESSAGE,As DWORD Ptr)
+DECLARE Function ICreateTypeInfo2_DeleteImplType_Proxy(As ICreateTypeInfo2 Ptr,As UINT)As HRESULT
+DECLARE Sub ICreateTypeInfo2_DeleteImplType_Stub(As IRpcStubBuffer PTR,As IRpcChannelBuffer PTR,As PRPC_MESSAGE,As DWORD Ptr)
+DECLARE Function ICreateTypeInfo2_SetCustData_Proxy(As ICreateTypeInfo2 Ptr,As REFGUID,As VARIANT Ptr)As HRESULT
+DECLARE Sub ICreateTypeInfo2_SetCustData_Stub(As IRpcStubBuffer PTR,As IRpcChannelBuffer PTR,As PRPC_MESSAGE,As DWORD Ptr)
+DECLARE Function ICreateTypeInfo2_SetFuncCustData_Proxy(As ICreateTypeInfo2 Ptr,As UINT,As REFGUID,As VARIANT Ptr)As HRESULT
+DECLARE Sub ICreateTypeInfo2_SetFuncCustData_Stub(As IRpcStubBuffer PTR,As IRpcChannelBuffer PTR,As PRPC_MESSAGE,As DWORD Ptr)
+DECLARE Function ICreateTypeInfo2_SetParamCustData_Proxy(As ICreateTypeInfo2 Ptr,As UINT,As UINT,As REFGUID,As VARIANT Ptr)As HRESULT
+DECLARE Sub ICreateTypeInfo2_SetParamCustData_Stub(As IRpcStubBuffer PTR,As IRpcChannelBuffer PTR,As PRPC_MESSAGE,As DWORD Ptr)
+DECLARE Function ICreateTypeInfo2_SetVarCustData_Proxy(As ICreateTypeInfo2 Ptr,As UINT,As REFGUID,As VARIANT Ptr)As HRESULT
+DECLARE Sub ICreateTypeInfo2_SetVarCustData_Stub(As IRpcStubBuffer PTR,As IRpcChannelBuffer PTR,As PRPC_MESSAGE,As DWORD Ptr)
+DECLARE Function ICreateTypeInfo2_SetImplTypeCustData_Proxy(As ICreateTypeInfo2 Ptr,As UINT,As REFGUID,As VARIANT Ptr)As HRESULT
+DECLARE Sub ICreateTypeInfo2_SetImplTypeCustData_Stub(As IRpcStubBuffer PTR,As IRpcChannelBuffer PTR,As PRPC_MESSAGE,As DWORD Ptr)
+DECLARE Function ICreateTypeInfo2_SetHelpStringContext_Proxy(As ICreateTypeInfo2 Ptr,As ULong)As HRESULT
+DECLARE Sub ICreateTypeInfo2_SetHelpStringContext_Stub(As IRpcStubBuffer PTR,As IRpcChannelBuffer PTR,As PRPC_MESSAGE,As DWORD Ptr)
+DECLARE Function ICreateTypeInfo2_SetFuncHelpStringContext_Proxy(As ICreateTypeInfo2 Ptr,As UINT,As ULong)As HRESULT
+DECLARE Sub ICreateTypeInfo2_SetFuncHelpStringContext_Stub(As IRpcStubBuffer PTR,As IRpcChannelBuffer PTR,As PRPC_MESSAGE,As DWORD Ptr)
+DECLARE Function ICreateTypeInfo2_SetVarHelpStringContext_Proxy(As ICreateTypeInfo2 Ptr,As UINT,As ULong)As HRESULT
+DECLARE Sub ICreateTypeInfo2_SetVarHelpStringContext_Stub(As IRpcStubBuffer PTR,As IRpcChannelBuffer PTR,As PRPC_MESSAGE,As DWORD Ptr)
+DECLARE Function ICreateTypeInfo2_Invalidate_Proxy(As ICreateTypeInfo2 Ptr)As HRESULT
+DECLARE Sub ICreateTypeInfo2_Invalidate_Stub(As IRpcStubBuffer PTR,As IRpcChannelBuffer PTR,As PRPC_MESSAGE,As DWORD Ptr)
+DECLARE FUNCTION ICreateTypeInfo2_SetName_Proxy(As ICreateTypeInfo2 Ptr,As LPOLESTR)As HRESULT
+DECLARE SUB ICreateTypeInfo2_SetName_Stub(As IRpcStubBuffer PTR,As IRpcChannelBuffer PTR,As PRPC_MESSAGE,As DWORD PTR)
+ 
+ 
+ 
+ 
+ 
+Type ICreateTypeLibVtbl_ As ICreateTypeLibVtbl
+Type ICreateTypeLib  
+     lpVtbl As  ICreateTypeLibVtbl_ Ptr   
+end Type
+Type ICreateTypeLibVtbl
+    
+     QueryInterface as function(ByVal As ICreateTypeLib Ptr,As REFIID,as pvoid Ptr)As HRESULT
+     AddRef as function(ByVal As ICreateTypeLib Ptr)As ULong
+     Release as function(ByVal As ICreateTypeLib Ptr)As ULong
+     CreateTypeInfo as function(ByVal As ICreateTypeLib ptr,As LPOLESTR,As TYPEKIND,As ICreateTypeInfo ptr Ptr)As HRESULT
+     SetName as function(ByVal As ICreateTypeLib Ptr,As LPOLESTR)As HRESULT
+     SetVersion as function(ByVal As ICreateTypeLib Ptr,As WORD,As WORD)As HRESULT
+     SetGuid as function(ByVal As ICreateTypeLib Ptr,As REFGUID)As HRESULT
+     SetDocString as function(ByVal As ICreateTypeLib Ptr,As LPOLESTR)As HRESULT
+     SetHelpFileName as function(ByVal As ICreateTypeLib Ptr,As LPOLESTR)As HRESULT
+     SetHelpContext as function(ByVal As ICreateTypeLib Ptr,As DWORD)As HRESULT
+     SetLcid as function(ByVal As ICreateTypeLib Ptr,As LCID)As HRESULT
+     SetLibFlags as function(ByVal As ICreateTypeLib Ptr,As UINT)As HRESULT
+     SaveAllChanges as function(ByVal As ICreateTypeLib Ptr)As HRESULT
+    
+End Type
+
+
+ 
+#Define ICreateTypeLib_QueryInterface(This,riid,ppvObject) (This)->lpVtbl->QueryInterface(This,riid,ppvObject)
+#Define ICreateTypeLib_AddRef(This) (This)->lpVtbl->AddRef(This)
+#Define ICreateTypeLib_Release(This) (This)->lpVtbl->Release(This)
+#Define ICreateTypeLib_CreateTypeInfo(This,szName,tkind,ppCTInfo) (This)->lpVtbl->CreateTypeInfo(This,szName,tkind,ppCTInfo)
+#Define ICreateTypeLib_SetName(This,szName) (This)->lpVtbl->SetName(This,szName)
+#Define ICreateTypeLib_SetVersion(This,wMajorVerNum,wMinorVerNum) (This)->lpVtbl->SetVersion(This,wMajorVerNum,wMinorVerNum)
+#Define ICreateTypeLib_SetGuid(This,guid) (This)->lpVtbl->SetGuid(This,guid)
+#Define ICreateTypeLib_SetDocString(This,szDoc) (This)->lpVtbl->SetDocString(This,szDoc)
+#Define ICreateTypeLib_SetHelpFileName(This,szHelpFileName) (This)->lpVtbl->SetHelpFileName(This,szHelpFileName)
+#Define ICreateTypeLib_SetHelpContext(This,dwHelpContext) (This)->lpVtbl->SetHelpContext(This,dwHelpContext)
+#Define ICreateTypeLib_SetLcid(This,lcid) (This)->lpVtbl->SetLcid(This,lcid)
+#Define ICreateTypeLib_SetLibFlags(This,uLibFlags) (This)->lpVtbl->SetLibFlags(This,uLibFlags)
+#Define ICreateTypeLib_SaveAllChanges(This) (This)->lpVtbl->SaveAllChanges(This)
+ 
+
+
+
+Type ICreateTypeLib2Vtbl_ As ICreateTypeLib2Vtbl
+ type ICreateTypeLib2 
+	lpVtbl As ICreateTypeLib2Vtbl_ Ptr  
+End Type
+type  ICreateTypeLib2Vtbl
+	BEGIN_INTERFACE
+	 QueryInterface As Function(As ICreateTypeLib2 Ptr,As REFIID,As LPVOID PTR) As HRESULT
+	 AddRef As Function(As ICreateTypeLib2 Ptr) As ULONG
+	 Release As Function(As ICreateTypeLib2 Ptr) As ULong
+	 CreateTypeInfo As Function(As ICreateTypeLib2 Ptr,As LPOLESTR,As TYPEKIND,As ICreateTypeInfo Ptr Ptr) As HRESULT
+	 SetName As Function(As ICreateTypeLib2 Ptr,As LPOLESTR) As HRESULT
+	 SetVersion As Function(As ICreateTypeLib2 Ptr,As WORD,As WORD) As HRESULT
+	 SetGuid As Function(As ICreateTypeLib2 Ptr,As REFGUID) As HRESULT
+	 SetDocString As Function(As ICreateTypeLib2 Ptr,As LPOLESTR) As HRESULT
+	 SetHelpFileName As Function(As ICreateTypeLib2 Ptr,As LPOLESTR )As HRESULT
+	 SetHelpContext As Function(As ICreateTypeLib2 Ptr,As DWORD) As HRESULT
+	 SetLcid As Function(As ICreateTypeLib2 Ptr,As LCID) As HRESULT
+	 SetLibFlags As Function(As ICreateTypeLib2 Ptr,As UINT) As HRESULT
+	 SaveAllChanges As Function(As ICreateTypeLib2 Ptr) As HRESULT
+	 DeleteTypeInfo As Function(As ICreateTypeLib2 Ptr,As LPOLESTR) As HRESULT
+	 SetCustData As Function(As ICreateTypeLib2 Ptr,As REFGUID,As VARIANT Ptr) As HRESULT
+	 SetHelpStringContext As Function(As ICreateTypeLib2 Ptr,As ULong) As HRESULT
+	 SetHelpStringDll As Function(As ICreateTypeLib2 Ptr,As LPOLESTR) As HRESULT
+	END_INTERFACE
+End Type
+
+#define ICreateTypeLib2_QueryInterface(A,B,C) (A)->lpVtbl->QueryInterface(A,B,C)
+#define ICreateTypeLib2_AddRef(A) (A)->lpVtbl->AddRef(A)
+#define ICreateTypeLib2_Release(A) (A)->lpVtbl->Release(A)
+#define ICreateTypeLib2_CreateTypeInfo(A,B,C,D) (A)->lpVtbl->CreateTypeInfo(A,B,C,D)
+#define ICreateTypeLib2_SetName(A,B) (A)->lpVtbl->SetName(A,B)
+#define ICreateTypeLib2_SetVersion(A,B,C) (A)->lpVtbl->SetVersion(A,B,C)
+#define ICreateTypeLib2_SetGuid(A,B) (A)->lpVtbl->SetGuid(A,B)
+#define ICreateTypeLib2_SetDocString(A,B) (A)->lpVtbl->SetDocString(A,B)
+#define ICreateTypeLib2_SetHelpFileName(A,B) (A)->lpVtbl->SetHelpFileName(A,B)
+#define ICreateTypeLib2_SetHelpContext(A,B) (A)->lpVtbl->SetHelpContext(A,B)
+#define ICreateTypeLib2_SetLcid(A,B) (A)->lpVtbl->SetLcid(A,B)
+#define ICreateTypeLib2_SetLibFlags(A,B) (A)->lpVtbl->SetLibFlags(A,B)
+#define ICreateTypeLib2_SaveAllChanges(A) (A)->lpVtbl->SaveAllChanges(A)
+#define ICreateTypeLib2_DeleteTypeInfo(A,B) (A)->lpVtbl->DeleteTypeInfo(A,B)
+#define ICreateTypeLib2_SetCustData(A,B,C) (A)->lpVtbl->SetCustData(A,B,C)
+#define ICreateTypeLib2_SetHelpStringContext(A,B) (A)->lpVtbl->SetHelpStringContext(A,B)
+#define ICreateTypeLib2_SetHelpStringDll(A,B) (A)->lpVtbl->SetHelpStringDll(A,B)
+
+Declare Function ICreateTypeLib2_DeleteTypeInfo_Proxy(As ICreateTypeLib2 Ptr,As LPOLESTR) As HRESULT
+Declare Sub ICreateTypeLib2_DeleteTypeInfo_Stub(As IRpcStubBuffer Ptr,As IRpcChannelBuffer Ptr,As PRPC_MESSAGE,As DWORD Ptr) 
+Declare Function  ICreateTypeLib2_SetCustData_Proxy(As ICreateTypeLib2 Ptr,As REFGUID,As VARIANT Ptr) As HRESULT
+Declare Sub ICreateTypeLib2_SetCustData_Stub(As IRpcStubBuffer Ptr,As IRpcChannelBuffer Ptr,As PRPC_MESSAGE,As DWORD Ptr) 
+Declare Function  ICreateTypeLib2_SetHelpStringContext_Proxy(As ICreateTypeLib2 Ptr,As ULong)As HRESULT
+Declare Sub ICreateTypeLib2_SetHelpStringContext_Stub(As IRpcStubBuffer Ptr,As IRpcChannelBuffer Ptr,As PRPC_MESSAGE,As DWORD Ptr) 
+Declare Function  ICreateTypeLib2_SetHelpStringDll_Proxy(As ICreateTypeLib2 Ptr,As LPOLESTR) As HRESULT
+Declare Sub ICreateTypeLib2_SetHelpStringDll_Stub(As IRpcStubBuffer Ptr,As IRpcChannelBuffer Ptr,As PRPC_MESSAGE,As DWORD Ptr) 
+
 #endif

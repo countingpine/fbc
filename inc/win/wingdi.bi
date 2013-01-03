@@ -3505,6 +3505,15 @@ declare function wglUseFontBitmaps alias "wglUseFontBitmapsA" (byval as HDC, byv
 declare function wglUseFontOutlines alias "wglUseFontOutlinesA" (byval as HDC, byval as DWORD, byval as DWORD, byval as DWORD, byval as FLOAT, byval as FLOAT, byval as integer, byval as LPGLYPHMETRICSFLOAT) as BOOL
 declare function GetGlyphIndices alias "GetGlyphIndicesA" (byval as HDC, byval as LPCSTR, byval as integer, byval as LPWORD, byval as DWORD) as DWORD
 
+#inclib  "msimg32" 
+
+#Define GRADIENT_FILL_RECT_H  &h00000000
+#define GRADIENT_FILL_RECT_V  &h00000001
+#define GRADIENT_FILL_TRIANGLE  &h00000002
+#define GRADIENT_FILL_OP_FLAG  &h000000ff
+
+Declare Function GradientFill   ( byval  hdc As HDC , byval pVertex as PTRIVERTEX , byval  dwNumVertex as DWORD , byval  pMesh as CONST PVOID , byval   dwNumMesh as DWORD, byval dwMode As DWORD ) As BOOL
+
 #endif '' UNICODE
 
 #define GetCValue(cmyk) cubyte(cmyk)
