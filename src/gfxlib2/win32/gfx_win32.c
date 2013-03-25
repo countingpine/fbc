@@ -133,6 +133,11 @@ static BOOL WINAPI fb_hTrackMouseEvent(TRACKMOUSEEVENT *e)
 	return FALSE;
 }
 
+
+/* callback to be implemented by programmer */
+extern FBCALL void (*fb_hWin32ExtWinProc)(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
+FBCALL void (*fb_hWin32ExtWinProc)(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) = 0;
+
 LRESULT CALLBACK fb_hWin32WinProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
 	BYTE key_state[256];
@@ -142,6 +147,11 @@ LRESULT CALLBACK fb_hWin32WinProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM
 	PAINTSTRUCT ps;
 	EVENT e;
 	BOOL is_minimized;
+
+	if (fb_hWin32ExtWinProc != 0)
+	{
+		fb_hWin32ExtWinProc(hWnd, message, wParam, lParam);
+	}
 
 	e.type = 0;
 
