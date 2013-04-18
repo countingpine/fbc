@@ -61,7 +61,7 @@ function cParentExpression _
 	) as ASTNODE ptr
 
 	dim as ASTNODE ptr parexpr = any
-	dim as integer eqinparensonly = any, gtinparensonly = any
+	dim as integer eqinparensonly = any, gtinparensonly = any, warneqafterparens = any
 
   	'' '('
   	if( lexGetToken( ) <> CHAR_LPRNT ) then
@@ -79,13 +79,16 @@ function cParentExpression _
 
 	eqinparensonly = fbGetEqInParensOnly( )
 	gtinparensonly = fbGetGtInParensOnly( )
+	warneqafterparens = fbGetWarnEqAfterParens( )
 	fbSetEqInParensOnly( FALSE )
 	fbSetGtInParensOnly( FALSE )
+	fbSetWarnEqAfterParens( FALSE )
 	
   	parexpr = cExpression(  )
 
 	fbSetEqInParensOnly( eqinparensonly )
 	fbSetGtInParensOnly( gtinparensonly )
+	fbSetWarnEqAfterParens( warneqafterparens )
 
   	if( parexpr = NULL ) then
   		'' calling a SUB? it could be a BYVAL or nothing due the optional ()'s
@@ -105,6 +108,13 @@ function cParentExpression _
   		'' --parent cnt
   		parser.prntcnt -= 1
 
+		if( warneqafterparens ) then
+			'' not ')' '='? Can clear this flag
+			if( lexGetToken( ) <> FB_TK_EQ ) then
+				fbSetWarnEqAfterParens( FALSE )
+			end if
+		end if
+		
   	else
   		'' not calling a SUB or parent cnt = 0?
   		if( (is_opt = FALSE) or (parser.prntcnt = 0) ) then

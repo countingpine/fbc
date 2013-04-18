@@ -58,8 +58,13 @@ private function hProcArg _
 	'' Expression
 	expr = cExpression( )
 
-	'' disable optional opening '{' after first parameter
+	'' disable optional opening '(' after first parameter
 	fbSetPrntOptional( FALSE )
+
+	if( lexGetToken( ) = CHAR_COMMA ) then
+		'' disable warning for '=' after ')' on second parameter (ambiguity is only with one parameter)
+		fbSetWarnEqAfterParens( FALSE )
+	end if
 
 	if( expr = NULL ) then
 		if( (options and FB_PARSEROPT_ISFUNC) <> 0 ) then

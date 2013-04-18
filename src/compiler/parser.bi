@@ -162,6 +162,7 @@ enum FB_PARSEROPT
 	FB_PARSEROPT_EQINPARENSONLY	= &h00000100	'' only check for '=' if inside parentheses
 	FB_PARSEROPT_GTINPARENSONLY	= &h00000200	'' only check for '>' if inside parentheses
 	FB_PARSEROPT_ISPP               = &h00000400  '' PP expression? (e.g. #if condition)
+	FB_PARSEROPT_WARNEQAFTERPARENS  = &h00000800  '' warn on equality op directly after ')' in sole param of byref function
 end enum
 
 type PARSERCTX
@@ -1018,6 +1019,17 @@ declare function hIntegerTypeFromBitSize _
 		parser.options and= not FB_PARSEROPT_ISPP
 	end if
 #endmacro
+
+'' Whether to warn on '=' following ')', e.g. in "foo_byref (a)=b"
+#define fbGetWarnEqAfterParens( ) ((parser.options and FB_PARSEROPT_WARNEQAFTERPARENS) <> 0)
+#macro fbSetWarnEqAfterParens( _bool )
+	if( _bool ) then
+		parser.options or= FB_PARSEROPT_WARNEQAFTERPARENS
+	else
+		parser.options and= not FB_PARSEROPT_WARNEQAFTERPARENS
+	end if
+#endmacro
+
 
 ''
 '' inter-module globals

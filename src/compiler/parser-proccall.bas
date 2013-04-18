@@ -291,6 +291,10 @@ function cProcCall _
 		if( hMatch( CHAR_LPRNT ) = FALSE ) then
 			errReport( FB_ERRMSG_EXPECTEDLPRNT )
 		end if
+	else '' optional '('
+		if( lexGetToken( ) = CHAR_LPRNT ) then
+			fbSetWarnEqAfterParens( TRUE )
+		end if
 	end if
 
 	parser.prntcnt = 0
@@ -301,6 +305,13 @@ function cProcCall _
 	if( procexpr = NULL ) then
 		hSkipUntil( CHAR_RPRNT )
 		exit function
+	end if
+
+	if( fbGetWarnEqAfterParens( ) ) then
+		'if( astIsByrefResultDeref( procexpr ) ) then
+		if( symbProcReturnsByref( sym ) ) then
+			errReportWarn( FB_WARNINGMSG_BYREFEQAFTERPARENS )
+		end if
 	end if
 
 	'' ')'
