@@ -58,8 +58,11 @@ private function hProcArg _
 	'' Expression
 	expr = cExpression( )
 
-	'' disable optional opening '{' after first parameter
+	'' disable optional opening '(' after first parameter
 	fbSetPrntOptional( FALSE )
+	
+	'' reenable equality op following outer ')' after first parameter
+	fbSetNoEqAfterParens( FALSE )
 
 	if( expr = NULL ) then
 		if( (options and FB_PARSEROPT_ISFUNC) <> 0 ) then

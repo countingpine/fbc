@@ -264,7 +264,7 @@ function cRelExpression _
     	select case as const lexGetToken( )
     	case FB_TK_EQ
 			'' eq only inside parentheses?
-			if( fbGetEqInParensOnly( ) ) then
+			if( fbGetEqInParensOnly( ) orelse fbGetNoEqAfterParens( ) ) then
 				exit do
 			end if
     		op = AST_OP_EQ

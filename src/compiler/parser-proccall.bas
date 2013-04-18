@@ -291,10 +291,16 @@ function cProcCall _
 		if( hMatch( CHAR_LPRNT ) = FALSE ) then
 			errReport( FB_ERRMSG_EXPECTEDLPRNT )
 		end if
+	else '' optional '('?
+		if( lexGetToken( ) = CHAR_LPRNT ) then
+			if( symbProcReturnsByref( sym ) ) then
+				fbSetNoEqAfterParens( TRUE )
+			end if
+			fbSetPrntOptional( TRUE )
+		end if
 	end if
 
 	parser.prntcnt = 0
-	fbSetPrntOptional( not checkprnts )
 
 	'' ProcArgList
 	procexpr = cProcArgList( base_parent, sym, ptrexpr, @arg_list, options )

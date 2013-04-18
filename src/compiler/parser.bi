@@ -162,6 +162,7 @@ enum FB_PARSEROPT
 	FB_PARSEROPT_EQINPARENSONLY	= &h00000100	'' only check for '=' if inside parentheses
 	FB_PARSEROPT_GTINPARENSONLY	= &h00000200	'' only check for '>' if inside parentheses
 	FB_PARSEROPT_ISPP               = &h00000400  '' PP expression? (e.g. #if condition)
+	FB_PARSEROPT_NOEQAFTERPARENS    = &h00000800 '' disallow equality op directly after (...)
 end enum
 
 type PARSERCTX
@@ -1018,6 +1019,17 @@ declare function hIntegerTypeFromBitSize _
 		parser.options and= not FB_PARSEROPT_ISPP
 	end if
 #endmacro
+
+'' Whether an expression ending with ')' can be the lhs of an equality op, or whether we want to use the '=' as an assignment
+#define fbGetNoEqAfterParens( ) ((parser.options and FB_PARSEROPT_NOEQAFTERPARENS) <> 0)
+#macro fbSetNoEqAfterParens( _bool )
+	if( _bool ) then
+		parser.options or= FB_PARSEROPT_NOEQAFTERPARENS
+	else
+		parser.options and= not FB_PARSEROPT_NOEQAFTERPARENS
+	end if
+#endmacro
+
 
 ''
 '' inter-module globals
