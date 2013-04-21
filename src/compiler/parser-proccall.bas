@@ -425,7 +425,7 @@ private function hProcSymbol _
 	dim as integer do_call = lexGetToken( ) <> FB_TK_ASSIGN
 
 	if( do_call = FALSE ) then
-		'' special case: property
+		'' special case: property or byref function
 	    if( symbIsProperty( sym ) ) then
 	      	do_call = TRUE
 
@@ -437,6 +437,8 @@ private function hProcSymbol _
 	                end if
 				end if
 			end if
+		elseif( symbProcReturnsByref( sym ) ) then
+			do_call = TRUE
 		end if
 	end if
 
