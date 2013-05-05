@@ -283,13 +283,23 @@ function cProcCall _
 		elseif( ptrexpr <> NULL ) then
 			checkprnts = TRUE
 
+		'' if it returns byref, prnts are (almost) obligatory
+		elseif( symbProcReturnsByref( sym ) ) then
+			checkprnts = TRUE
+
 		end if
 	end if
 
 	if( checkprnts ) then
 		'' '('
 		if( hMatch( CHAR_LPRNT ) = FALSE ) then
-			errReport( FB_ERRMSG_EXPECTEDLPRNT )
+			'' missing '('
+			if( symbProcReturnsByref( sym ) ) then
+				'' byref functions: make prnts optional rather than showing an error
+				checkprnts = FALSE
+			else
+				errReport( FB_ERRMSG_EXPECTEDLPRNT )
+			end if
 		end if
 	end if
 
