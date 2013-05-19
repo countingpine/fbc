@@ -308,9 +308,26 @@ function cProcCall _
 	end if
 
 	if( fbGetWarnEqAfterParens( ) ) then
-		'if( astIsByrefResultDeref( procexpr ) ) then
+		'' function returns BYREF (or has BYREF overload)? Warn about "foo (a)=b" ambiguity
 		if( symbProcReturnsByref( sym ) ) then
+
 			errReportWarn( FB_WARNINGMSG_BYREFEQAFTERPARENS )
+
+		elseif( symbGetProcIsOverloaded( sym ) ) then
+
+			var ovl = symbGetProcOvlNext( sym )
+			do while( ovl <> NULL )
+				if( symbProcReturnsByref( ovl ) ) then
+					exit do
+				end if
+
+				ovl = symbGetProcOvlNext( ovl )
+			loop
+
+			if( ovl <> NULL ) then
+				errReportWarn( FB_WARNINGMSG_BYREFEQAFTERPARENS )
+			end if
+
 		end if
 	end if
 
