@@ -1601,7 +1601,7 @@ private function hCalcTypesDiff _
 				return 0
 			end if
 
-			return FB_OVLPROC_HALFMATCH - abs( typeGet( param_dtype ) - typeGet( arg_dtype ) )
+			return FB_OVLPROC_HALFMATCH - symb_dtypeMatchTB( arg_dtype, param_dtype )
 
 		'' float? (ok due the auto-coercion, unless it's a pointer)
 		case FB_DATACLASS_FPOINT
@@ -1609,7 +1609,7 @@ private function hCalcTypesDiff _
 				return 0
 			end if
 
-			return FB_OVLPROC_HALFMATCH - abs( typeGet( param_dtype ) - typeGet( arg_dtype ) )
+			return FB_OVLPROC_HALFMATCH - symb_dtypeMatchTB( typeGet( param_dtype ), typeGet( arg_dtype ) )
 
 		'' string? only if it's a w|zstring ptr arg
 		case FB_DATACLASS_STRING
@@ -1644,11 +1644,11 @@ private function hCalcTypesDiff _
 				arg_dtype = typeRemap( arg_dtype, arg_subtype )
 			end select
 
-			return FB_OVLPROC_HALFMATCH - abs( typeGet( param_dtype ) - typeGet( arg_dtype ) )
+			return FB_OVLPROC_HALFMATCH - symb_dtypeMatchTB( typeGet( arg_dtype ), typeGet( param_dtype ) )
 
 		'' or if another float..
 		case FB_DATACLASS_FPOINT
-			return FB_OVLPROC_HALFMATCH - abs( typeGet( param_dtype ) - typeGet( arg_dtype ) )
+			return FB_OVLPROC_HALFMATCH - symb_dtypeMatchTB( typeGet( arg_dtype ), typeGet( param_dtype ) )
 
 		'' refuse anything else
 		case else
