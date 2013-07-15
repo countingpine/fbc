@@ -684,12 +684,19 @@ void fb_hWin32SetMouse(int x, int y, int cursor, int clip)
 {
 	POINT point;
 
-	if (x >= 0) {
+	if ( (x >= 0) || (y >= 0) ) {
+		if (x <= 0) {
+			x = mouse_x;
+		}
+		else if (y <= 0) {
+			y = mouse_y;
+		}
 		point.x = MID(0, x, fb_win32.w - 1);
 		point.y = MID(0, y, fb_win32.h - 1);
 		if (!(fb_win32.flags & DRIVER_FULLSCREEN))
 			ClientToScreen(fb_win32.wnd, &point);
 		SetCursorPos(point.x, point.y);
+		mouse_on = TRUE;
 		mouse_x = x;
 		mouse_y = y;
 	}

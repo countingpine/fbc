@@ -698,8 +698,14 @@ int fb_hX11GetMouse(int *x, int *y, int *z, int *buttons, int *clip)
 
 void fb_hX11SetMouse(int x, int y, int show, int clip)
 {
-	if ((x >= 0) && (has_focus)) {
+	if (((x >= 0) || (y >= 0)) && (has_focus)) {
 		mouse_on = TRUE;
+		if (x <= 0) {
+			x = mouse_x;
+		}
+		else if (y <= 0) {
+			y = mouse_y;
+		}
 		mouse_x = MID(0, x, fb_x11.w - 1);
 		mouse_y = MID(0, y, fb_x11.h - 1) + fb_x11.display_offset;
 		XWarpPointer(fb_x11.display, None, fb_x11.window, 0, 0, 0, 0, mouse_x, mouse_y);
