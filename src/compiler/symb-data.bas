@@ -55,12 +55,6 @@ dim shared symb_dtypeTB( 0 to FB_DATATYPES-1 ) as SYMB_DATATYPE => _
 
 dim shared symb_dtypeMatchTB( FB_DATATYPE_BYTE to FB_DATATYPE_DOUBLE, FB_DATATYPE_BYTE to FB_DATATYPE_DOUBLE ) as integer
 
-declare function isWider _
-	( _
-		byval to_dtype as FB_DATATYPE, _
-		byval from_dtype as FB_DATATYPE _
-	) as integer
-
 declare function closestType _
 	( _
 		byval dtype as FB_DATATYPE, _
@@ -360,49 +354,6 @@ function typeMerge _
 	function = dtype1
 end function
 
-'' Return whether a cast is "widening", i.e. vars of to_dtype can store
-'' any value of the from_dtype
-function isWider _
-	( _
-		byval to_dtype as FB_DATATYPE, _
-		byval from_dtype as FB_DATATYPE _
-	) as integer
-
-	'' float->nonfloat is not widening
-	if( typeGetClass( from_dtype ) = FB_DATACLASS_FPOINT ) then
-		if( typeGetClass( to_dtype ) <> FB_DATACLASS_FPOINT ) then
-			return FALSE
-		end if
-	end if
-
-	'' int->float is widening (number is preserved exactly) when float is bigger
-	if( typeGetClass( from_dtype ) = FB_DATACLASS_INTEGER ) then
-		if( typeGetClass( to_dtype ) = FB_DATACLASS_FPOINT ) then
-			return (typeGetSize( to_dtype ) > typeGetSize( from_dtype ))
-		end if
-	end if
-
-	'' signed->unsigned is not widening
-	if( typeIsSigned( from_dtype ) ) then
-		if( typeIsSigned( to_dtype ) = FALSE) then
-			return FALSE
-		end if
-	end if
-
-	select case typeGetSize(to_dtype) - typeGetSize(from_dtype)
-	case is < 0
-		'' larger->smaller is not widening
-		return FALSE
-	case is > 0
-		'' smaller->larger is widening (not signed->unsigned)
-		return TRUE
-	case else
-		'' same size/signedness is "widening" (number is preserved)
-		return (typeIsSigned(to_dtype) = typeIsSigned(from_dtype))
-	end select
-
-end function
-
 '' Return the closest (most "compatible") type to dtype,
 '' out of dtype1 and dtype2
 function closestType _
@@ -426,19 +377,6 @@ function closestType _
 	if( dtype2 <> FB_DATATYPE_WCHAR and dtype1 = FB_DATATYPE_WCHAR ) then return dtype2
 
 
-	'' prefer exact type
-	if dtype1 = dtype then return dtype1
-	if dtype2 = dtype then return dtype2
-
-
-	'' prefer widening type
-	dim as integer wide1 = isWider(dtype1, dtype)
-	dim as integer wide2 = isWider(dtype2, dtype)
-
-	if( wide1 and not wide2 ) then return dtype1
-	if( wide2 and not wide1 ) then return dtype2
-
-
 	'' prefer same dataclass (integer / floating-point)
 	dim as integer sameclass1 = (typeGetClass(dtype1) = typeGetClass(dtype))
 	dim as integer sameclass2 = (typeGetClass(dtype2) = typeGetClass(dtype))
@@ -447,20 +385,28 @@ function closestType _
 	if ( sameclass2 and not sameclass1 ) then return dtype2
 
 
-	'' prefer same type (but with different signedness)
-	dim as integer samekind1 = (typeToSigned( dtype1 ) = typeToSigned( dtype ))
-	dim as integer samekind2 = (typeToSigned( dtype2 ) = typeToSigned( dtype ))
+	'' prefer a type that's at least as large as dtype
+	dim as integer larger1 = (typeGetSize( dtype1 ) >= typeGetSize( dtype ))
+	dim as integer larger2 = (typeGetSize( dtype1 ) >= typeGetSize( dtype ))
 
-	if( samekind1 and not samekind2 ) then return dtype1
-	if( samekind2 and not samekind1 ) then return dtype2
+	if( larger1 and not larger2 ) then return dtype1
+	if( larger2 and not larger1 ) then return dtype2
 
 
-	'' prefer closer size (logarithmically: longint and short equidistant from long)
-	dim as integer sizediff1 = abs( hToPow2( typeGetSize( dtype1 ) ) - hToPow2( typeGetSize( dtype ) ) )
-	dim as integer sizediff2 = abs( hToPow2( typeGetSize( dtype2 ) ) - hToPow2( typeGetSize( dtype ) ) )
+	'' prefer closer size (if larger, then the smallest; if smaller, then the largest)
+	dim as integer sizediff1 = abs( typeGetSize( dtype1 ) - typeGetSize( dtype ) )
+	dim as integer sizediff2 = abs( typeGetSize( dtype2 ) - typeGetSize( dtype ) )
 
 	if( sizediff1 < sizediff2 ) then return dtype1
 	if( sizediff2 < sizediff1 ) then return dtype2
+
+
+	'' prefer [U]Integer type if both same size
+	dim as integer isint1 = (typeToSigned( dtype1 ) = FB_DATATYPE_INTEGER)
+	dim as integer isint2 = (typeToSigned( dtype2 ) = FB_DATATYPE_INTEGER)
+
+	if( isint1 and not isint2 ) then return dtype1
+	if( isint2 and not isint1 ) then return dtype2
 
 
 	'' prefer same signedness
@@ -471,21 +417,8 @@ function closestType _
 	if( samesign2 and not samesign1 ) then return dtype2
 
 
-	'' prefer [U]Integer type
-	dim as integer isint1 = (typeToSigned( dtype1 ) = FB_DATATYPE_INTEGER)
-	dim as integer isint2 = (typeToSigned( dtype2 ) = FB_DATATYPE_INTEGER)
-
-	if( isint1 and not isint2 ) then return dtype1
-	if( isint2 and not isint1 ) then return dtype2
-
-
-	'' prefer larger type
-	if( typeGetSize( dtype1 ) > typeGetSize( dtype2 ) ) then return dtype1
-	if( typeGetSize( dtype2 ) > typeGetSize( dtype1 ) ) then return dtype2
-
-
 	'' should be no other differences
-	'' assert( dtype1 = dtype2 )
+	assert( dtype1 = dtype2 )
 	return dtype1
 
 end function
