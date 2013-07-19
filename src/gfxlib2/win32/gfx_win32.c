@@ -684,7 +684,7 @@ void fb_hWin32SetMouse(int x, int y, int cursor, int clip)
 {
 	POINT point;
 
-	if ( (x >= 0) || (y >= 0) ) {
+	if ((x >= 0) || (y >= 0)) {
 		if (x <= 0) {
 			x = mouse_x;
 		}

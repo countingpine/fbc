@@ -602,10 +602,20 @@ static int driver_get_mouse(int *x, int *y, int *z, int *buttons, int *clip)
 
 static void driver_set_mouse(int x, int y, int cursor, int clip)
 {
-	if ((x >= 0) && (x < __fb_gfx->w))
+	if (((x >= 0) || (y >= 0)) {
+		if (x < 0) {
+			x = mouse_x;
+		}
+		else if (y < 0) {
+			y = mouse_y;
+		}
+
+		x = MID(0, x, __fb_gfx->w - 1);
+		y = MID(0, y, __fb_gfx->h - 1);
+
 		mouse_x = x;
-	if ((y >= 0) && (y < __fb_gfx->h))
 		mouse_y = y;
+	}
 	mouse_shown = (cursor != 0);
 	if (clip == 0)
 		mouse_clip = FALSE;
