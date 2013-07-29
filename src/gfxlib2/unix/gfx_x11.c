@@ -698,11 +698,11 @@ int fb_hX11GetMouse(int *x, int *y, int *z, int *buttons, int *clip)
 
 void fb_hX11SetMouse(int x, int y, int show, int clip)
 {
-	if (((x >= 0) || (y >= 0)) && (has_focus)) {
-		if (x < 0) {
+	if (((x > 0x80000000) || (y > 0x80000000)) && (has_focus)) {
+		if (x == 0x80000000) {
 			x = mouse_x;
 		}
-		else if (y < 0) {
+		else if (y == 0x80000000) {
 			y = mouse_y;
 		}
 		mouse_on = TRUE;

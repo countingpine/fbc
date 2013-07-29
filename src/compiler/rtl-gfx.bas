@@ -850,7 +850,7 @@ declare function hPorts_cb _
 				) _
 	 		} _
 		), _
-		/' fb_GfxSetMouse ( byval x as integer = -1, byval y as integer = -1, byval cursor as integer = -1, byval clip as integer = -1 ) as integer '/ _
+		/' fb_GfxSetMouse ( byval x as integer = &h80000000, byval y as integer = &h80000000, byval cursor as integer = -1, byval clip as integer = -1 ) as integer '/ _
 		( _
 			@"setmouse", @"fb_SetMouse", _
 			FB_DATATYPE_INTEGER, FB_USE_FUNCMODE_FBCALL, _
@@ -858,10 +858,10 @@ declare function hPorts_cb _
 			4, _
 			{ _
 				( _
-					FB_DATATYPE_INTEGER, FB_PARAMMODE_BYVAL, TRUE, -1 _
+					FB_DATATYPE_INTEGER, FB_PARAMMODE_BYVAL, TRUE, &h80000000 _
 				), _
 				( _
-					FB_DATATYPE_INTEGER, FB_PARAMMODE_BYVAL, TRUE, -1 _
+					FB_DATATYPE_INTEGER, FB_PARAMMODE_BYVAL, TRUE, &h80000000 _
 				), _
 				( _
 					FB_DATATYPE_INTEGER, FB_PARAMMODE_BYVAL, TRUE, -1 _
