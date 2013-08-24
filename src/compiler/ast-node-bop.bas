@@ -1231,33 +1231,37 @@ function astNewBOP _
 
 		return l
 
+	'' swap "const op var" to "var op' const" where possible
 	elseif( astIsCONST( l ) and ldtype = rdtype ) then
+
+		dim as integer do_swap = FALSE
+
 		select case op
 		case AST_OP_ADD, AST_OP_MUL, _
 		     AST_OP_AND, AST_OP_OR, AST_OP_XOR, AST_OP_EQV, _
 		     AST_OP_EQ, AST_OP_NE
 			'' ? OP c = c OP ?
-			astSwap( r, l )
+			do_swap = TRUE
 
 		case AST_OP_GE
 			'' c >= ?  =  ? <= c
 			op = AST_OP_LE
-			astSwap( r, l )
+			do_swap = TRUE
 
 		case AST_OP_GT
 			'' c > ?  =  ? < c
 			op = AST_OP_LT
-			astSwap( r, l )
+			do_swap = TRUE
 
 		case AST_OP_LE
 			'' c <= ?  =  ? >= c
 			op = AST_OP_GE
-			astSwap( r, l )
+			do_swap = TRUE
 
 		case AST_OP_LT
 			'' c < ?  =  ? > c
 			op = AST_OP_GT
-			astSwap( r, l )
+			do_swap = TRUE
 
 		case AST_OP_SUB
 			'' c - ? = -? + c (this will removed later if no const folding can be done)
@@ -1265,9 +1269,16 @@ function astNewBOP _
 			if( r = NULL ) then
 				return NULL
 			end if
-			astSwap( r, l )
+			do_swap = TRUE
 			op = AST_OP_ADD
 		end select
+
+		if( do_swap ) then
+			astSwap( r, l )
+			swap ldtype, rdtype
+			swap ldclass, rdclass
+			swap ldtype0, rdtype0
+		end if
 
 	elseif( astIsCONST( r ) ) then
 		select case op
@@ -1337,6 +1348,39 @@ function astNewBOP _
 				end select
 			end if
 		end select
+	end if
+
+	'' warn if l relop r always returns true/false based on l's dtype and r's value
+	'' e.g. 'unsigned_var < 0'
+	if( astIsCONST( r ) and ldtype = rdtype) then
+
+		'' warn when comparing an unsigned var against 0
+		select case op
+			case AST_OP_GE, AST_OP_LT
+
+				if( ldclass = FB_DATACLASS_INTEGER ) then
+
+					if( r->val.i = 0 ) then
+
+						'' ldtype is unsigned?
+						dim as integer isunsigned = (typeIsSigned( ldtype ) = FALSE)
+						'' ldtype was unsigned, but cast to a bigger signed type?
+						isunsigned orelse= (typeIsSigned( ldtype0 ) = FALSE andalso typeGetSize( ldtype0 ) < typeGetSize( ldtype ))
+
+						if( isunsigned ) then
+							if( op = AST_OP_GE ) then
+								errReportWarn( FB_WARNINGMSG_COMPARISONALWAYSTRUE )
+							else
+								errReportWarn( FB_WARNINGMSG_COMPARISONALWAYSFALSE )
+							end if
+						end if
+
+					end if
+
+				end if
+
+		end select
+
 	end if
 
 	''::::::
