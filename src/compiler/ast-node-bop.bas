@@ -1152,7 +1152,7 @@ function astNewBOP _
 	case AST_OP_EQ, AST_OP_GT, AST_OP_LT, AST_OP_NE, AST_OP_LE, AST_OP_GE, _
 	     AST_OP_INTDIV, AST_OP_MOD, AST_OP_SHR
 
-	    dim as integer warn = FALSE
+		dim as integer warn = FALSE
 
 		'' lhs signed->unsigned?
 		if( typeIsSigned( ldtype0 ) ) then
@@ -1165,7 +1165,10 @@ function astNewBOP _
 					end if
 				else
 					'' lhs var may have been negative
-					warn = TRUE
+					'' (only a pedantic warning)
+					if( fbPdCheckIsSet( FB_PDCHECK_SIGNEDNESS ) ) then
+						warn = TRUE
+					end if
 				end if
 			end if
 		end if
@@ -1180,7 +1183,10 @@ function astNewBOP _
 					end if
 				else
 					'' rhs var may have been negative
-					warn = TRUE
+					'' (only a pedantic warning)
+					if( fbPdCheckIsSet( FB_PDCHECK_SIGNEDNESS ) ) then
+						warn = TRUE
+					end if
 				end if
 			end if
 		end if
