@@ -259,8 +259,8 @@ FBCALL void fb_GfxDraw(void *target, FBSTRING *command)
 			{
 				x2 = dx;
 				y2 = dy;
-				dx = x2 - y2;
-				dy = y2 + x2;
+				dx = x2 + y2;
+				dy = y2 - x2;
 			}
 			dx += x;
 			dy += y;
