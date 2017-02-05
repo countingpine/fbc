@@ -20,6 +20,7 @@ file \
 functions \
 gfx \
 interactive \
+math \
 namespace \
 numbers \
 optimizations \
