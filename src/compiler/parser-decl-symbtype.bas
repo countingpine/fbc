@@ -380,6 +380,10 @@ function cSymbolType _
 			lexSkipToken( )
 			dtype = FB_DATATYPE_USHORT
 
+		case FB_TK_VA_LIST
+			lexSkipToken( )
+			dtype = FB_DATATYPE_VA_LIST
+
 		case FB_TK_INTEGER
 			lexSkipToken( )
 
