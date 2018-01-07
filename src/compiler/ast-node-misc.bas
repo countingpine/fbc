@@ -874,35 +874,49 @@ private function hSymbToStr _
 end function
 
 '':::::
+private function hAstNodeTypeToStr _
+	( _
+		byval n as ASTNODE ptr _
+	) as string
+
+	if( n = NULL ) then return ""
+
+	return symbTypeToStr( n->dtype, n->subtype )
+
+end function
+
+'':::::
 private function hAstNodeToStr _
 	( _
 		byval n as ASTNODE ptr _
 	) as string
 
+	#define NODE_TYPE ( " (" & hAstNodeTypeToStr( n ) & ")" )
+
 	select case as const n->class
 	case AST_NODECLASS_BOP
-		return astDumpOp( n->op.op ) & " =-= " & hSymbToStr( n->op.ex )
+		return astDumpOp( n->op.op ) & " =-= " & hSymbToStr( n->op.ex ) & NODE_TYPE
 
 	case AST_NODECLASS_UOP
-		return astDumpOp( n->op.op )
+		return astDumpOp( n->op.op ) & NODE_TYPE
 
 	case AST_NODECLASS_CONST
 		if( typeGetClass( n->dtype ) = FB_DATACLASS_FPOINT ) then
-			return str( astConstGetFloat( n ) )
+			return str( astConstGetFloat( n ) ) & NODE_TYPE
 		end if
-		return str( astConstGetInt( n ) )
+		return str( astConstGetInt( n ) ) & NODE_TYPE
 
 	case AST_NODECLASS_VAR
-		return "VAR( " & *iif( n->sym, symbGetName( n->sym ), @"<NULL>" ) & " )"
+		return "VAR( " & *iif( n->sym, symbGetName( n->sym ), @"<NULL>" ) & " )" & NODE_TYPE
 
 	case AST_NODECLASS_FIELD
-		return "FIELD( " & *symbGetName( n->sym ) & " )"
+		return "FIELD( " & *symbGetName( n->sym ) & " )" & NODE_TYPE
 
 	case AST_NODECLASS_DECL
 		if( n->sym ) then
 			return "DECL( " & *symbGetName( n->sym ) & " )"
 		end if
-		return "DECL"
+		return "DECL" & NODE_TYPE
 
 	case AST_NODECLASS_CALL
 		return "CALL( " & *symbGetName( n->sym ) & " )"
@@ -920,7 +934,7 @@ private function hAstNodeToStr _
 		return "TYPEINI_ASSIGN( offset=" & n->typeini.ofs & " )"
 
 	case else
-		return hAstNodeClassToStr( n->class )
+		return hAstNodeClassToStr( n->class ) & NODE_TYPE
 	end select
 
 end function
